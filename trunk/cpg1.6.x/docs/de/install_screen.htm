@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Install screen - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="The install screen" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="robots" content="noindex" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<div id="doc_en_only">No translation available</div>
+
+<a name="install_screen_start"></a><h1>The install screen<a href="#install_screen_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<table border="0" cellpadding="5" cellspacing="0">
+ <tr>
+  <td style="border-top:1px solid #0E72A4;border-left:1px solid #0E72A4;border-right:1px solid #0E72A4;" colspan="2"><strong>Your admin account</strong>
+  </td>
+  <td></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;border-right:1px solid #0E72A4;" colspan="2"> <span class="small">This section requires information to create your administration account. Use only alphanumeric characters. Enter the data carefully !</span>
+  </td>
+  <td><span class="small">Input an original admin username and password here. Make sure to either memorize it well, or note it down somewhere safe; you won't be able to administer your site if you lose this data. </span><hr /></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;" width="20%"><strong>Username</strong>
+  </td>
+  <td style="border-right:1px solid #0E72A4;" width="20%">
+          <input type="text" style="width:100%" readonly="readonly" name="admin_username" value="" />
+  </td>
+  <td valign="top" width="60%"><span class="small">This will be the username for your everyday administration of coppermine - choose one that you can memorize and enter easily. This entry is case sensitive so give special consideration when creating a username. Pics that you upload later under this admin account will display the name shown in the uploader field. Comments you make will also display this name, as well, for others to see.</span><hr /></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;"><strong>Password</strong>
+  </td>
+  <td style="border-right:1px solid #0E72A4;">
+          <input type="text" style="width:100%" readonly="readonly" name="admin_password" value="" />
+  </td>
+  <td><span class="small">This will be your admin password to your coppermine install. Don't use trivial, overly abused passwords - if an attacker figures out your password, s/he will be able to hack your entire site! Use a combination of upper and lower case letters and numbers like "<tt class="code">j3e4N5n6yG</tt>". Remember, passwords like your admin username are case sensitive. Be careful when creating your password. Write it down and keep it safe, preferably somewhere away from your computer.</span><hr /></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;"><strong>Email address</strong>
+  </td>
+  <td style="border-right:1px solid #0E72A4;">
+          <input type="text" style="width:100%" readonly="readonly" name="admin_email" value="" />
+  </td>
+  <td><span class="small">This email address will be used to send emails from the webserver (e.g. the registration email, notifications and ecards). Make sure that it is a valid email address.</span><hr /></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;border-right:1px solid #0E72A4;" colspan="2"><strong>Your MySQL configuration</strong>
+  </td>
+  <td rowspan="2"><span class="small">MySQL is the type of database service that is available on most webservers. If you don't have it, you cannot install it. That is, unless the server is yours to administer. If you are webhosted, you are probably out of luck. It's mandatory to have a mySQL database to run Coppermine or any other PHP-based script. You can not fake the mySQL information during install, you must <strong>know</strong> it before hand, and enter the information as required. If you're not sure about the information required, ask your webhost.</span><hr /></td>
+ </tr>
+ <tr>
+<td style="border-left:1px solid #0E72A4;border-right:1px solid #0E72A4;" colspan="2"><span class="small">This section requires information on how to access your MySQL database. If you don't know how to fill them, check with your webhost support.</span>
+    </td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;"><strong>MySQL Host</strong><br /><span class="small">(localhost is usually OK)</span>
+  </td>
+  <td style="border-right:1px solid #0E72A4;" valign="top">
+          <input type="text" style="width:100%" readonly="readonly" name="dbserver" value="localhost" />
+  </td>
+  <td><span class="small"></span></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;"><strong>MySQL Database Name</strong>
+  </td>
+  <td style="border-right:1px solid #0E72A4;">
+          <input type="text" style="width:100%" readonly="readonly" name="dbname" value="" />
+  </td>
+  <td><span class="small">Coppermine will <strong>not</strong> create this database for you - it must exist prior to any attempt at installing coppermine. (If you do not have a pre-designated database, you will have to create one, provided you have the authority on your site to do so).</span><hr /></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;"><strong>MySQL Username</strong>
+  </td>
+  <td style="border-right:1px solid #0E72A4;">
+          <input type="text" style="width:100%" readonly="readonly" name="dbuser" value="" />
+  </td>
+  <td><span class="small">The mySQL user name does <strong>not</strong> have to be your coppermine admin username, nor is it the necessarily the same as your FTP username (although this <em>can</em> be the case for some users, but only by sheer coincidence or deliberate intention, to simplify site administration).<br />
+  The mySQL user needs the permissions CREATE TABLE, INSERT, ALTER, REPLACE, UPDATE, DELETE, SELECT.</span><hr /></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;"><strong>MySQL Password</strong>
+  </td>
+  <td style="border-right:1px solid #0E72A4;">
+          <input type="text" style="width:100%" readonly="readonly" name="dbpass" value="" />
+  </td>
+  <td><span class="small">The password that goes with your mySQL username.</span><hr /></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;"><strong>MySQL table prefix</strong><br /><span class="small">(the default value is OK; do not use dots!)</span>
+  </td>
+  <td style="border-right:1px solid #0E72A4;" valign="top">
+          <input type="text" style="width:100%" readonly="readonly" name="table_prefix" value="cpg140_" />
+  </td>
+  <td><span class="small">Coppermine's tables can co-exist in an existing database which has tables used by other applications. All coppermine tables will be using a different prefix from these, as specified here. You can even have several coppermine installs using one database - only the table prefixes have to differ in each case. Unless you know what you are doing, don't change the default value.</span><hr /></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;border-right:1px solid #0E72A4;" colspan="2"><strong>ImageMagick</strong>
+  </td>
+  <td rowspan="3" valign="top"><span class="small">You can not fake an ImageMagick path, you have to <em>know</em> it. If you're not sure, leave this field empty - Coppermine will then try to use GD by default. You can edit the path later as well in the <a href="#admin_picture_thumb_advanced">config screen</a>. You can only install ImageMagick or GD if the server is yours to administer - if you're webhosted, you probably can't. The user of the webserver, who wishes to use ImageMagick, will need read/write/execute permissions in the folder where ImageMagick's convert executable resides in.</span><hr /></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;border-right:1px solid #0E72A4;" colspan="2" valign="top"><span class="small">Coppermine can use the <a href="http://www.imagemagick.org/" rel="external" class="external">ImageMagick</a> 'convert' program to create thumbnails. Quality of images produced by ImageMagick is superior to GD1 but equivalent to GD2.<br /><br />
+  If ImageMagick is installed on your system and you want to use it, you need to input the full path to the 'convert' program below. On Windows the path should look like 'c:/ImageMagick/' (use / not \ in the path) and should not contain any space, on Unix is it something like '/usr/bin/X11/'.</span>
+  </td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;" valign="top"><strong>ImageMagick path</strong>
+  </td>
+  <td style="border-right:1px solid #0E72A4;" valign="top">
+          <input type="text" style="width:100%" readonly="readonly" name="impath" value="" />
+  </td>
+ </tr>
+ <tr>
+  <td colspan="2" align="center" style="border-left:1px solid #0E72A4;border-right:1px solid #0E72A4;border-bottom:1px solid #0E72A4;"><br />
+   <input type="submit" value="Let's Go !" /><br /><br />
+  </td>
+  <td><span class="small">After having entered all required data, click this button to submit the form</span></td>
+ </tr>
+</table>
+<a name="install_screen_end"></a>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

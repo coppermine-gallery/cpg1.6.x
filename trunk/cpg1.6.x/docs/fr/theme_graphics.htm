@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Graphic resources in themes - Coppermine Photo Gallery - Documentation &amp; Manuel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="fr" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Les ressources graphiques comme les icones de menu, les barres de navigation, les images de notation etc... peuvent être personnalisées et sont entièrement inclues dans un thème." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+  $Date$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation et Manuel</h1>
+<div id="toc">
+<a href="toc.htm">Table des matières</a>
+</div>
+
+
+
+
+<a name="theme_graphics"></a><h1>Ressources graphiques dans les thèmes<a href="#theme_graphics" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>Les resources graphiques à l'intérieur des thèmes peuvent être personnalisées et configurées. Les standards suivants sont utilisés pour changer ou modifier l'aspect de <a href="theme_create.htm">votre thème personnalisé</a>:</p>
+<ul>
+	<li><a href="#theme_graphics_menu_icons">Icones de Menu</a></li>
+  	<li><a href="#theme_graphics_nav_bar">Barre Graphique de Navigation</a></li>
+  	<li><a href="#theme_graphics_rating">Images de Notation</a></li>
+</ul>
+
+<a name="theme_graphics_menu_icons"></a><h2>Icones de Menu<a href="#theme_graphics_menu_icons" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Le terme <em>icones de menu</em> peut être un peu trompeur: il dépend de l'option de configuration correspondante &quot;<a href="configuration.htm#admin_enable_menu_icons">Activer les icones de menu</a>&quot;. Il n'y a pas que les icones du menu administrateur qui peuvent être prisent en compte, mais toutes les icones au travers de toutes les pages Coppermine, aussi bien pour les administrateurs que pour les autres visiteurs pour être relevée ou pas avec une petite icone représentant l'action qui peut être faite ou qui a été faite.</p>
+<p>Un thème Coppermine <em>peut</em> contenir son propre jeu d'icones. S'il ne contient pas son propre jeu d'icones, c'est le jeu d'icones par défaut se trouvant dans le répertoire <tt class="code">./votre_repertoire_coppermine/images/icons/</tt> qui est utilisé. Si un thème contient son propre jeu d'icones, les icones se trouvent dans le répertoire <tt class="code">./votre_repertoire_coppermine/themes/votre_theme_personnalise_theme/images/icons/</tt>. Vous devez explicitement spécifier qu'un thème personnalisé à son propre jeu d'icones. Pour cela, vous devez ouvrir <tt class="code">./votre_repertoire_coppermine/themes/votre_theme_personnalise_theme/theme.php</tt> avec un éditeur de texte <a href="dev_tools.htm#dev_tools_editor"></a> et ajouter/dé-commenter une ligne comme ceci:</p>
+<pre class="code">define('THEME_HAS_MENU_ICONS',16);</pre>
+<p>Si une telle ligne est présente, Coppermine cherchera les icones de menu dans <tt class="code">./votre_repertoire_coppermine/themes/votre_theme_personnalise_theme/images/icons/</tt>. Si une telle ligne n'est pas présente, le jeu d'icones par défaut sera utilisé. Le code que vous devez ajouter doit se trouver dans une ligne propre. Elle défini une constante et remplis celle ci avec la valeur "16", qui sera la valeur pour la taille (en pixels) du côté de l'icone de menu.</p>
+<p>La fonction icones de menu est relativement nouvelle, donc, avec la publication initile de  cpg1.5.x, il n'y aura vraissemblablement pas beaucoup de choix dans les icones de menu. Mais cela peut changer et le nombre de jeux d'icones augmenter. Il est recommandé de vérifier sur le site officile de temps en temps pour de nouveaux jeux d'icones.</p>
+<a name="theme_graphics_menu_icons_end"></a>
+
+<a name="theme_graphics_nav_bar"></a><h2>Barre Graphique de Navigation<a href="#theme_graphics_nav_bar" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Un thème Coppermine <em>peut</em> contenir un jeu d'images utilisé pour la barre de navigation. La barre de navigation graphique est la ligne au dessus des images intermédiaires qui permets aux visiteurs de passer à l'image précédente, à la suivante d'un album et (si disponible) d'afficher ou de cacher la section des informations de l'image, et permets aux utilisateurs de poster des commentaire et de lancer le diaporama. Si le thème n'a pas de fichiers graphiques propres pour la barre graphique de navigation, c'est le jeu d'images par défaut se trouvant dans le répertoire <tt class="code">./votre_repertoire_coppermine/images/navbar/</tt> qui est utilisé. Si un thème contient un jeu d'images pour la barre de navigation, ces images se trouvent dans le dossier <tt class="code">./votre_repertoire_coppermine/themes/votre_theme_personnalise_theme/images/navbar/</tt>. Vous devez spécifier explicitement que votre thème personnalisé a son propre jeu d'images. Pour cela, vous devez ouvrir <tt class="code">./votre_repertoire_coppermine/themes/votre_theme_personnalise/theme.php</tt> avec un <a href="dev_tools.htm#dev_tools_editor">éditeur de texte</a> et ajouter/dé-commenter une ligne comme ceci:</p>
+<pre class="code">define('THEME_HAS_NAVBAR_GRAPHICS',1);</pre>
+<p>Si une telle ligne est présente , Coppermine va cherche les images pour la barre de navigation dans <tt class="code">./votre_repertoire_coppermine/themes/votre_theme_personnalise/images/navbar/</tt>. Si une telle ligne n'existe pas, les images par défaut de Coppermine seront utilisées. Le code que vous devez ajouter doit être placé dans une ligne propre. Elle défini une connstante et la remplie avec la valeur "1", valeur qui n'a pas de signification particulière.</p>
+<p>Si vous décidez de créer vos propre images pour la barre de navigation de votre thème personnalisé, les images suivantes doivent se trouver dans le répertoire de votre barre de navigation personnalisée (<tt class="code">./votre repertoire_coppermine/themes/votre_theme_personnalise/images/navbar/</tt>):</p>
+<ul>
+	<li>ecard.png</li>
+	<li>info.png</li>
+	<li>next.png</li>
+	<li>prev.png</li>
+	<li>report.png</li>
+	<li>slideshow.png</li>
+	<li>thumbnails.png</li>
+</ul>
+<a name="theme_graphics_nav_bar_end"></a>
+
+<a name="theme_graphics_rating"></a><h2>Images de notation<a href="#theme_graphics_rating" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Un thème Coppermine <em>peut</em> contenir des images pour la notation. La possibilité de permettre aux visiteurs d'évaluer les images n'est pas lié à la présence des images de notation - c'est un paramètre qui dépend des permissions des groupes de visiteurs dans (&rarr; <a href="groups.htm#group_cp">Panneau de controle des Groupes</a>) et des propriétés des albums (&rarr; <a href="albums.htm#album_prop">Propriétés de l'Album</a>). Si un thème n'a pas d'images de notation propre, c'est le jeu d'images par défaut qui se trouve dans le dossier <tt class="code">./votre_repertoire_coppermine/images/</tt>. Si un thème a ses propres images de notation, elles se trouvent dans le dossier <tt class="code">./votre_repertoire_coppermine/themes/votre_theme_personnalise/images/</tt>. Vous devez explicitement définir qu'un thème personnalisé a ses propres images de notation. Pour cela, vous devez ouvrir <tt class="code">./votre_repertoire_coppermine/themes/votre_theme_personnalise/theme.php</tt> avec  <a href="dev_tools.htm#dev_tools_editor">un éditeur de texte</a> et ajouter/dé-commenter une ligne comme ceci:</p>
+<pre class="code">define('THEME_HAS_RATING_GRAPHICS',1);</pre>
+<p>Le code que vous devez ajouter doit être placé dans une ligne propre. Elle défini une connstante et la remplie avec la valeur "1", valeur qui n'a pas de signification particulière..</p>
+<p>Si défini, les fichiers suivants doivent se trouver dans le répertoire images du thème:</p>
+<ul>
+	<li><tt class="code">rate_empty.png</tt></li>
+	<li><tt class="code">rate_full.png</tt></li>
+	<li><tt class="code">rate_new.png</tt></li>
+	<li><tt class="code">rating.png</tt></li>
+</ul>
+<a name="theme_graphics_rating_end"></a>
+
+<a name="theme_graphics_film_strip"></a><h2>Images du négatif de film<a href="#theme_graphics_film_strip" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Un thème Coppermine <em>peut</em> contenir un jeu d'images utilisées pour composer le <a href="configuration.htm#admin_image_comment_filmstrip_toggle">négatif de film</a>. Si un thème n'a pas ses propres images de négatif de film, ce sont les images par défaut qui se trouvent dans le dossier <tt class="code">./votre_repertoire_coppermine/images/</tt> qui sont utilisées. Si un thème a son propre jeu d'images pour le négatif de film, les images se trouvent dans le dossier <tt class="code">./votre_repertoire_coppermine/themes/votre_theme_personnalise/images/</tt>. Par défaut, l'image utilisée à pour nom <tt class="code">tile.gif</tt>.</p>
+<p>Vous devez explicitement spécifier qu'un thème a son propre jeu d'images pour le négatif de film. Pour celà, vous devez ouvrir <tt class="code">./votre_repertoire_coppermine/themes/votre_theme_personnalise/theme.php</tt> avec un  <a href="dev_tools.htm#dev_tools_editor">éditeur de texte</a> et ajouter/dé-commenter une ligne comme ceci:</p>
+<pre class="code">define('THEME_HAS_FILM_STRIP_GRAPHIC',1);</pre>
+<p>Le code que vous devez ajouter doit être placé dans une ligne propre. Elle défini une connstante et la remplie avec la valeur "1", valeur qui n'a pas de signification particulière..</p>
+<a name="theme_graphics_rating_end"></a>
+
+<a name="theme_graphics_end"></a>
+
+
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

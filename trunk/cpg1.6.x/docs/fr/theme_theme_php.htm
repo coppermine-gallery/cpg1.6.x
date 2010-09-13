@@ -1,0 +1,569 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>theme.php - Coppermine Photo Gallery - Documentation &amp; Manuel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="fr" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Coppermine inclue un moteur de thème très puissant qui vous permets de créer votre propre thème, donnant à votre galerie un aspect unique correspondant à l'ensemble de votre site. Pour être sur que votre thème personnalisé ne soit pas remplacé lors des mises à jour, vous devrez commencer avec un nom de thème personnalisé." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+  $Date$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation et Manuel</h1>
+<div id="toc">
+<a href="toc.htm">Table Matières</a>
+</div>
+
+
+<a name="theme_php"></a><h1>Modifier theme.php<a href="#theme_php" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>Chaque thème contient un fichier theme.php. Toutefois, pour la plupart des thèmes, ce fichier est presque vide. La raison en est qye seules les choses qui <strong>diffèrent</strong> du comportement par défaut de Coppermine doivent être définis dans theme.php. Les éléments supposés fonctionner "de la manière normale à Coppermine" sont définis dans le code du noyau central de Coppermine - le fichier theme.php de votre thème personnalisé contient les définitions de variables et de fonctions qui forcent les éléments identiques du code général.</p>
+<p>Le fichier &quot;<strong>theme.php</strong>&quot; contient tous les gabarits HTML utilisés par le script. Vous pouvez les modifier à souhait. Lorsque vous faites des modifications de ces gabarits, soyez attentifs à ne pas modifier les lignes commençant par <tt class="code">&lt;!-- BEGIN xxx --&gt;</tt> et <tt class="code">&lt;!-- END xxx --&gt;</tt>. Ces lignes sont souvent utilisées pour identifier le début et la fin d'un bloc de code code spécifique que le script utilise pour afficher la galerie.</p>
+
+<a name="theme_php_types"></a><h2>Types d'éléments<a href="#theme_php_types" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>A la basen il peut y avoir trois sortes de types de contenus dans theme.php (du point de vue du programmeur PHP). Pas de panique, vous n'avez pas besoin d'être programmeur pour pouvoir être capable de modifier votre thème.</p>
+<ul>
+  <li><strong>Définitions des constantes</strong><br />
+  Pensez aux constantes comme commutateur généraux qui peuvent être définis lors de l'execution du script.
+  <div class="cpg_example">
+  <tt class="code">define('THEME_HAS_RATING_GRAPHICS',1);</tt></div>
+  La définition de constante utilise toujours la commande PHP <a href="http://www.php.net/manual/en/function.define.php" rel="external" class="phpnet"><tt class="code">define(...)</tt></a> et est de ce fait facile à trouver. Comme convention de codage, le nom des constantes utilisées dans Coppermine sont toujours écrites en majuscules.</li>
+  <li><strong>Définition des variables</strong><br />
+  Les variables peuvent être manipulées (changées) pendant l'éxecution. La plus grande majorité des éléments qui peuventse trouver dans theme.php sont des variables. Les noms de variables commencent toujours par le signe $.
+  <div class="cpg_example">
+  <tt class="code">$template_sys_menu = &lt;&lt;&lt;EOT<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{BUTTONS}<br />EOT;</tt></div></li>
+  <li><strong>Définition des fonctions</strong><br />
+  Les fonctions sont des mécanismes très puissants qui se trouvent dans theme.php, puisqu'elles permettent une grande felxibilité et peuvent être réutilisées. Elles commencent par le mot <tt class="code">function</tt>, suivi par le nom de la fonction et les paramètres entre parenthèses et accolades qui définissent le début de la fonction. La définition de la fonction contient généralement plusieurs lignes de codes qui sont terminées par une accolade.
+  <div class="cpg_example">
+  <tt class="code">function endtable()<br />
+{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;echo &lt;&lt;&lt;EOT<br />
+&lt;/table&gt;<br />
+&lt;!-- End standard table --&gt;<br />
+<br />
+EOT;<br />
+}</tt></div></li>
+</ul>
+<a name="theme_php_types_end"></a>
+
+<a name="theme_sample"></a><h2>Le thème sample - un thème pour copier/coller<a href="#theme_sample" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Votre installation Coppermine inclue aussi un répertoire de thème &quot;sample&quot;. Le thème &quot;sample&quot; inclue chacun de ces fichiers mais ne s'affiche pas dans la liste des thèmes sélectionnables dans l'affichage de votre galerie Coppermine. Le fichier theme.php du thème sample contient une copie de chaque fonction et gabarits utilisables, comme référence. Si vous optez d'utiliser le thème &quot;sample&quot; pour commencer à créer votre propre thème, vous devrez suivre les instructions concernant theme.php dans la section &quot;<a href="theme_upgrade_14x-15x.htm">mise à jour d'un thème de la documentation</a>&quot; et commencer par un fichier theme.php vide.</p>
+<p class="cpg_message_error">Pour être clair: vous <strong>ne devez pas</strong> modifier le thème sample (comme il n'est pas affiché), mais copiez les sections que vous souhaitez changer vers votre thème personnalisé. Ne copiez <strong>pas</strong> l'ensemble du contenu du fichier themes/sample/theme.php dans votre thème personnalisé, il ne fera qu'encombrer votre thème et rendra sa mise à jour très difficile par la suite. A la place, ne copiez que les sections que vous souhaitez modifier depuis <tt class="code">themes/sample/theme.php</tt> dans <tt class="code">themes/yourtheme/theme.php</tt>.</p>
+<p>Ceci dit: vous ne devez pas commencer votre propre thème en copiant le thème sample - commencez par un fichier theme.php vide. N'utilisez themes/sample/theme.php que pour copier des sections individuelles que vous voulez modifier dans votre thèmes personnalisé et ensuite moidifiez les.</p>
+<p>Les débutants ont souvent des problèmes pour comprendre ce qu'est une section ce ce qu'ils doivent copier depuis le thème sample - si vous n'avez pas assez de connaissances en PHP, il est parfois difficiles de comprendre  ou commence une définition de focntion et ou elle se termine. C'est pourquoi nous avons &quot;habillé&quot; les sections individuelles qui contiennent plus qu'une ligne par des blocs de commentaires qui essayent d'attirer votre attention: une section commence par le bloc
+<pre>/******************************************************************************
+** Section &lt;&lt;&lt;nom_de_section&gt;&gt;&gt; - START
+******************************************************************************/</pre>
+et se termine par
+<pre>/******************************************************************************
+** Section &lt;&lt;&lt;nom_de_section&gt;&gt;&gt; - END
+******************************************************************************/</pre>
+ou le nom de la section (<tt class="code">nom_de_section</tt> dans l'exemple ci dessus) est identique dans le bloc de début et dans le bloc de fin.</p>
+<p>L'emplacement ou vous insérez la section que vous copiez depuis le thème sample n'a aucune importance, tant que vous faites attention à ne pas les coller dans une autr esection, mais avant ou après une section existante dans votre thème personnalisé. Comme règle, vous pouvez sans risques coller une section dans une nouvelle ligne juste avant  <tt class="code">?&gt;</tt> dans votre thème personnalisé (<tt class="code">themes/votretheme/theme.php</tt>)</p>
+<a name="theme_sample_end"></a>
+
+<a name="theme_php_method"></a><h2>Méthode<a href="#theme_php_method" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>La methode pour modifer tout fichier theme.php est réellement facile - suivez simplement ces simples étapes:</p>
+<ul>
+	<li><strong>Déterminez quelles sections doivent être modifieés</strong><br />
+		Il y a plusieurs différentes manières de le définir:
+		<ul>
+			<li>Vous avez trouvé un message correspondant sur le forum d'aide de Coppermine</li>
+			<li>Vous avez trouvé en regardant la table &quot;<a href="theme_php_list">Liste des éléments dans theme.php</a>&quot;</li>
+			<li>Une autre partie de la documentation vous l'indique</li>
+			<li>Un ami vous l'a indiqué</li>
+			<li>...</li>
+		</ul>
+	</li>
+	<li><strong>Trouvez quelles sections existent déjà dans votre thème personnalisé:</strong><br />
+		(Votre <a href="dev_tools.htm#dev_tools_editor">éditeur de texte</a> favori doit avoir une fonction de recherche. Notepad.exe en a une)
+		<ul>
+			<li>Si oui, modifiez themes/votretheme/theme.php. Il n'est pas nécesaire de copier depuis le thème sample</li>
+			<li>Si non, ouvrez themes/sample/theme.php avec un <a href="dev_tools.htm#dev_tools_editor">éditeur de texte</a>, trouvez la section que vous voulez modifier, sélectionnez là et copiez la, pusi collez là dans une nouvelle ligne avant <tt class="code">?&gt;</tt> de <tt class="code">themes/votretheme/theme.php</tt>. Puis modifiez le contenu que vous avez collé et regardez si ça fonctionne.</li>
+		</ul>
+	</li>
+</ul>
+
+<a name="theme_php_scope"></a><h2>Portée<a href="#theme_php_scope" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Bien, qu'est ce qui peut être fait en modifiant theme.php? Seul le ciel est votre limite: seule votre imagination peut être une limite, mais la portée des modifications possibles dans le fichier theme.php est infinie. Néanmoins, les utilisateurs demandent généralement les cinq ou six fonctions ou changent tout le temps. C'est pourquoi nous avons créer une page avec <a href="theme_examples.htm#theme_examples">des exemples de thèmes</a> ou les modifications les plus courantes du fichier theme.php sont expliquées - asurez vous de lire attentivement ces exemples avant de commencer à poser une nouvelle question sur le forum d'aide de Coppermine, vous risquerez sinon de vous voir renvoyer vers un "lisez la documentation..."</p>
+<p class="cpg_message_success">Nous essayons vraiment d'attirer votre attention sur ce bloc; merci de lire les pages <a href="theme_examples.htm#theme_examples">d'exemples de thèmes</a> après avoir lu cette page.</p>
+
+<a name="theme_php_list"></a><h2>Liste des éléments de theme.php<a href="#theme_php_list" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra">
+  <tr>
+    <th valign="top" align="left">Elément</th>
+    <th valign="top" align="left">Type</th>
+    <th valign="top" align="left">Déscription</th>
+    <th valign="top" align="left">Dépendances</th>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_progress"></a>define('<strong>THEME_HAS_PROGRESS_GRAPHICS</strong>',1);<a href="#theme_create_theme_progress" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">constante</td>
+    <td valign="top">Coppermine affiche une icone "chargement en cours" lorsqe le formulaire de téléchargement est soumis pour signaler qu'il ne doit pas y avoir d'intercation de l'utilisateur pendant que le script est occupé par le téléchargement. Morsque cette constante est définie, le script va chercher l'icone "téléchargement en cours" dans le répertoire images du thème (themes/votretheme/images/loader.gif). Si cette constante n'est pas définie, l'image de chargement par défaut sera utilisée, prise dans le répertoire générique des images. Lors de la création de votre propre thème, assurez vous que l'image de chargement existe lorsque vous définissez la constante.</td>
+    <td valign="top">Si défini, un fichier nommé <tt class="code">loader.gif</tt> doit se trouver dans le répertoire images du thème.</td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_rating_graphic"></a>define('<strong>THEME_HAS_RATING_GRAPHICS</strong>',1);<a href="#theme_create_theme_rating_graphic" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">constante</td>
+    <td valign="top">L'emplacement des images d'évaluation. Si cette constante est définie, le script sera dirigé vers le répertoire images du thème (themes/votretheme/images/) et y cherchera les images d'évaluation. Si pas définie (defaut), les images d'valuation seront prises dans le répertoire images qui se trouve dans le répertoire racine de Coppermine.</td>
+    <td valign="top">
+		<a href="theme_graphics.htm#theme_graphics_rating">Ressources graphiques des thèmes &rarr; Images d'évaluation</a>    
+    </td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_menu_icon"></a>define('<strong>THEME_HAS_MENU_ICONS</strong>',16);<a href="#theme_create_theme_menu_icon" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">constante</td>
+    <td valign="top">L'emplacement pour les icones des menus qui sont affichées si l'option de configuration "<a href="configuration.htm#admin_enable_menu_icons">Activer les icones de menu</a>" est activée. Si cette constante est définie, le script sera dirigé vers le répertoire images du thème, sous-répertoire 'icons', (<tt class="code">themes/votretheme/images/icons/</tt>) et y cherche les icones de menu. Si non définie (défaut), les icones de menu seront prises dans <tt class="code">images/icons/</tt>. A l'inverse de la plupart des autres constantes de thème, la valeur  que vous asignez à cette constante <em>a une importance</em>: définissez la à la taille (en pixels) de vos icones personnalisées. Les icones personnalisées ( comme les icones par défaut) doivent être carrées.<br />Si vous décidez d'utiliser votre propre jeu d'icones pour les menus de votre thème personnalisé, il est cpnseillé de copier le répertoire <tt class="code">images/icons/</tt> dans <tt class="code">themes/votretheme/images/</tt> pour avoir un jeu par défaut, puis commencez à les modifier une à une.</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_navbar_graphic"></a>define('<strong>THEME_HAS_NAVBAR_GRAPHICS</strong>',1);<a href="#theme_create_theme_navbar_graphic" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">constante</td>
+    <td valign="top">L'emplacement des barres de navigations graphiques (&quot;ecard&quot;, &quot;slideshow&quot;, &quot;previous&quot;/&quot;next&quot;). Lorsque cette constante est définie, le script sera dirigé vers le répertoire images de votre thème (themes/votretheme/images/) et y cherchera les images de la barre de navigation. Si non définie (défaut) les images des barres graphiques seront prises dans le répertoire images à la racine de Coppermine.</td>
+    <td valign="top">
+    	<a href="theme_graphics.htm#theme_graphics_nav_bar">Ressources graphiques des thèmes &rarr; Images de barre de Navigation</a>        
+    </td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_filmstrip_graphic"></a>define('<strong>THEME_HAS_FILM_STRIP_GRAPHIC</strong>',1);<a href="#theme_create_theme_filmstrip_graphic" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">constante</td>
+    <td valign="top">L'emplacement pour les images du négatif de film. Lorsque cette constante est définie, le script sera dirigé vers le répertoire images de votre thème (themes/votretheme/images/) et y cherchera les images du négatif de film. Si non définie (défaut) les images du négartif de film seront prises dans le répertoire images à la racine de Coppermine.</td>
+    <td valign="top">
+    	Si définie, un fichier nommé <tt class="code">tile.gif</tt> doit se trouver dans le répertoire images du thème. [<a href="theme_graphics.htm#theme_graphics_film_strip">Détails</a>]
+    </td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_no_sysmenu"></a>define('<strong>THEME_HAS_NO_SYS_MENU_BUTTONS</strong>',1);<a href="#theme_create_theme_no_sysmenu" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">constante</td>
+    <td valign="top">Si présent, le système ne cherchera pas à remplacer {BUTTONS} dans le gabarit SYS_MENU</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_no_submenu"></a>define('<strong>THEME_HAS_NO_SUB_MENU_BUTTONS</strong>',1);<a href="#theme_create_theme_no_submenu" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">constante</td>
+    <td valign="top">Si présent, le système ne cherchera pas à remplacer {BUTTONS} dans le gabarit SUB_MENU</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_assemble_button"></a>function <strong>assemble_template_buttons</strong>(<em>$template_buttons,$buttons</em>)<a href="#theme_create_theme_assemble_button" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Créer les boutons d'un gabarit en utilisant un tableau de conteneurs. Si cette fonction est utilisée dans ce fichier, elle doit être déclarée avant d'être appelée.</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_addbutton"></a>function <strong>addbutton</strong>(<em>&$menu,$href_lnk,$href_title,$href_tgt,$block_id,$spacer</em>)<a href="#theme_create_theme_addbutton" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Créer un tableau de conteneurs utilisé par la fonction assemble_template_buttons. Si cette focntion est utilisée dans ce fichier, elle doit être définie avant d'être appelée.</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_pageheader"></a>function <strong>pageheader</strong>(<em>$section, $meta = ''</em>)<a href="#theme_create_theme_pageheader" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Fonction d'écriture de l'entête de page. Le premier paramètre <em>$section</em> ne doit pas être touché. Le secont paramètre <em>$meta</em> peut être utilisé pour y ajouter vos métas balises personnalisées. Pour ajouter des méta-balises statiques, modifiez <a href="theme_template.htm#theme_template_html">template.html</a></td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_pagefooter"></a>function <strong>pagefooter</strong>()<a href="#theme_create_theme_pagefooter" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Fonction d'écriture du pied de page</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_javascript_head"></a>function <strong>theme_javascript_head</strong>()<a href="#theme_create_theme_javascript_head" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Fonction pour le JavaScript dans la section <tt class="code">&lt;head&gt;</tt></td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_credits"></a>function <strong>theme_credits</strong>()<a href="#theme_create_theme_credits" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Fonction pour la section <a href="theme_copyright.htm#theme_copyright">credits</a></td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_starttable"></a>function <strong>starttable</strong>($width = '-1', $title = '', $title_colspan = '1')<a href="#theme_create_theme_starttable" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Fonction pour commencer une table 'standart'</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_endtable"></a>function <strong>endtable</strong>()<a href="#theme_create_theme_endtable" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Fin d'une table standart</td>
+    <td valign="top"><a href="#theme_create_theme_starttable">fonction starttable()</a></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_mainmenu"></a>function <strong>theme_main_menu</strong>(<em>$which</em>)<a href="#theme_create_theme_mainmenu" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_admin_menu"></a>function <strong>theme_admin_mode_menu</strong>()<a href="#theme_create_theme_admin_menu" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_display_message_block"></a>function <strong>theme_display_message_block</strong>()<a href="#theme_create_theme_display_message_block" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Fonction pour le bloc theme_display_message_block. Le bloc de messages ( à ne pas confondre avec le menu administrateur) affiche un message sur toutes les pages et un flux RSS depuis la page du projet Coppermine pour l'administrateur. Il est conseillé de ne pas la modifier sans savoir ce que vous faites. Cette fonction génère les sections individuelles du bloc.</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_display_cat_list"></a>function <strong>theme_display_cat_list</strong>(<em>$breadcrumb, &$cat_data, $statistics</em>)<a href="#theme_create_theme_display_cat_list" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Fonction d'affichage de la liste des catégories sur les page d'index. Contient une partie de la logique du noyaux et ne doit être modifiée que très rarement.</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_display_breadcrumb"></a>function <strong>theme_display_breadcrumb</strong>(<em>$breadcrumb, &$cat_data</em>)<a href="#theme_create_theme_display_breadcrumb" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Fonction d'affichage de la barre de navigation (généralement pris comme &quot;ligne de menu de base&quot;) qui indique dans quel sous-structure se trouve le visiteur (racine de la galerie &rarr; catégorie &rarr; sous-catégorie &rarr; album).</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_display_album_list"></a>function <strong>theme_display_album_list</strong>(<em>&$alb_list, $nbAlb, $cat, $page, $total_pages</em>)<a href="#theme_create_theme_display_album_list" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Fonction qui affiche la liste des albums sur la page d'index. Contient une part de la logique du noyaux qui n'a qu erarement besin d'être modifiée.</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_display_album_list_cat"></a>function <strong>theme_display_album_list_cat</strong>(<em>&$alb_list, $nbAlb, $cat, $page, $total_pages</em>)<a href="#theme_create_theme_display_album_list_cat" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Fonction qui affiche l'album de premier niveau d'une catégorie</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_display_thumbnails"></a>function <strong>theme_display_thumbnails</strong>(<em>&$thumb_list, $nbThumb, $album_name, $aid, $cat, $page, $total_pages, $sort_options, $display_tabs, $mode = 'thumb', $date=''</em>)<a href="#theme_create_theme_display_thumbnails" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Fonction qui affiche les vignettes aussi bien dans la vue des albums que des catégories ou des méta albums</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_display_film_strip"></a>function <strong>theme_display_film_strip</strong>(<em>&$thumb_list, $nbThumb, $album_name, $aid, $cat, $pos, $sort_options, $mode = 'thumb', $date=''</em>)<a href="#theme_create_theme_display_film_strip" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Affiche le négatif de film</td>
+    <td valign="top">Uniquement pris en compte si <a href="configuration.htm#admin_image_comment_filmstrip_toggle">Affiche le négatif de film</a> est activé dans la configuration.</td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_function_no_img_to_display"></a>function <strong>theme_no_img_to_display</strong>(<em>$album_name</em>)<a href="#theme_create_theme_function_no_img_to_display" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Fonction qui génrère l'affichage si un album est vide ou si un élément particulier est innaccesible quelque soit la raison (n'existe pas ou droits manquants)</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_display_image"></a>function <strong>theme_display_image</strong>(<em>$nav_menu, $picture, $votes, $pic_info, $comments, $film_strip</em>)<a href="#theme_create_theme_display_image" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Gabarit général de l'affichage de l'écran des images intermédiaires (displayimage.php).</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_html_picinfo"></a>function <strong>theme_html_picinfo</strong>(<em>&$info</em>)<a href="#theme_create_theme_html_picinfo" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Gabarit  qui génère les lignes individuelles de la tables des informations des images sous les images intermédiaires</td>
+    <td valign="top">La section information des images doit être déployée</td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_html_picture"></a>function <strong>theme_html_picture</strong>()<a href="#theme_create_theme_html_picture" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Affiche une image ou tout autre enregistrement se trouvant dans la base de donnée de Coppermine pour une vue individuelle.</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_html_img_nav_menu"></a>function <strong>theme_html_img_nav_menu</strong>()<a href="#theme_create_theme_html_img_nav_menu" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_html_rating_box"></a>function <strong>theme_html_rating_box</strong>()<a href="#theme_create_theme_html_rating_box" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_html_comments"></a>function <strong>theme_html_comments</strong>(<em>$pid</em>)<a href="#theme_create_theme_html_comments" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Affichage des commentaires pour une image spécifique</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_slideshow"></a>function <strong>theme_slideshow</strong>()<a href="#theme_create_theme_slideshow" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_function_display_fullsize_pic"></a>function <strong>theme_display_fullsize_pic</strong>()<a href="#theme_create_theme_function_display_fullsize_pic" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Affichage de l'image de grande taille</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_vanity"></a>function <strong>theme_vanity</strong>()<a href="#theme_create_theme_vanity" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_display_bar"></a>function <strong>theme_display_bar</strong>(<em>$actualValue = 0, maxValue = '100', maxBarSizeInPixels = '400', textColor = 'black', textShadowColor = '', textUnit = '', leftBar = 'red', rightBar = ''</em>)<a href="#theme_create_theme_display_bar" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Affiche une barre graphique</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_page_title"></a>function <strong>theme_page_title</strong>(<em>$section</em>)<a href="#theme_create_theme_page_title" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">fonction</td>
+    <td valign="top">Créer le sbalises titres pour chaque page. Pour une bonne compatibilité avec les moteurs de recherche, la partie dynamique $section doit venir en premier</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_sys_menu"></a><strong>$template_sys_menu</strong><a href="#theme_create_theme_var_sys_menu" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit pour sys_menu</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_sub_menu"></a><strong>$template_sub_menu</strong><a href="#theme_create_theme_var_sub_menu" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit pour sub_menu</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_sys_menu_spacer"></a><strong>$template_sys_menu_spacer</strong><a href="#theme_create_theme_sys_menu_spacer" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Séparateur entre les élements du sys menu (dans beaucoup de thèmes, <tt class="code">::</tt> est utilisé)</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_sys_menu_button"></a><strong>$template_sys_menu_button</strong><a href="#theme_create_theme_sys_menu_button" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Modifez celle ci pour ajouter/changer les classes CSS pour les liens du sys-menu.<br />
+    Le contenu par défaut est<pre class="quote">  &lt;!-- BEGIN {BLOCK_ID} --&gt;
+        &lt;a href=&quot;{HREF_TGT}&quot; title=&quot;{HREF_TITLE}&quot;&gt;{HREF_LNK}&lt;/a&gt;
+		{SPACER}
+  &lt;!-- END {BLOCK_ID} --&gt;</pre></td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_sub_menu_spacer"></a><strong>$template_sub_menu_spacer</strong><a href="#theme_create_theme_sub_menu_spacer" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Séparateur entre les éléments du sous menu. Par défaut, c'est le même séparateur qe celui utilisé pour le sys menu.</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_sub_menu_button"></a><strong>$template_sub_menu_button</strong><a href="#theme_create_theme_sub_menu_button" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Modifiez la pour ajouter/Changer les classes CSS pour les liens menu-menu. Par défaut, la définition pour le sys-menu est pris en compte.</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_gallery_admin_menu"></a><strong>$template_gallery_admin_menu</strong><a href="#theme_create_theme_gallery_admin_menu" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour le menu administrateur de la galerie</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_user_admin_menu"></a><strong>$template_user_admin_menu</strong><a href="#theme_create_theme_user_admin_menu" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour le menu administrateur de l'utilisateur (le menu aditionnel que l'utilisateur non administrateur verra une fois identifié et ayant le droit d'avoir sa galerie personnelle (les droits pour celà sont définis dans <a href="groups.htm#group_cp">le panneau de gestion des groupes</a>)).</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_cat_list"></a><strong>$template_cat_list</strong><a href="#theme_create_theme_var_cat_list" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour la liste des catégories</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_breadcrumb"></a><strong>$template_breadcrumb</strong><a href="#theme_create_theme_breadcrumb" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour le menu de navigation (le chemin qui indique au visiteur ou il se trouve en terme de structure logique des catégories/albums)</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_album_list"></a><strong>$template_album_list</strong><a href="#theme_create_theme_var_album_list" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour la liste des albums</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_film_strip"></a><strong>$template_film_strip</strong><a href="#theme_create_theme_var_film_strip" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour l'affichage du négatif de film sur la page des images intermédiaires (displayimage.php)</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_album_list_cat"></a><strong>$template_album_list_cat</strong><a href="#theme_create_theme_var_album_list_cat" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour la liste des albums</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_album_admin_menu"></a><strong>$template_album_admin_menu</strong><a href="#theme_create_theme_album_admin_menu" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour le menu administrateur ALBUM affiché dans la liste des albums (les éléments de menu (boutons) qui sont affichés à coté de chaque vignette d'album si l'utilisateur identifié est le propriétaire de cet album. Généralement le cas pour l'administrateur.</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_thumb_view_title_row"></a><strong>$template_thumb_view_title_row</strong><a href="#theme_create_theme_thumb_view_title_row" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour la ligne du titre de la vue des vignettes (titre de l'album + options de tri). C'est l'endroit pour effacer les options de tri si vous ne voulez pas les afficher.</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_fav_thumb_view_title_row"></a><strong>$template_fav_thumb_view_title_row</strong><a href="#theme_create_theme_fav_thumb_view_title_row" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour la ligne de titre de la vue des vignettes favorites (titr ede l'album + téléchargement).</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_thumbnail_view"></a><strong>$template_thumbnail_view</strong><a href="#theme_create_theme_thumbnail_view" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour l'affichage des vignettes</td>
+    <td valign="top">la fonction <a href="#theme_create_theme_display_thumbnails">theme_display_thumbnails</a> utilise les variables et définition des conteneurs <tt class="code">{THUMB}</tt>, <tt class="code">{CAPTION}</tt>, <tt class="code">{ADMIN_MENU}</tt> and <tt class="code">{TABS}</tt></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_no_img_to_display"></a><strong>$template_no_img_to_display</strong><a href="#theme_create_theme_var_no_img_to_display" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour la vue des vignettes si il n'y a pas d'images à montrer. Si votre galerie <a href="configuration.htm#admin_allow_unlogged_access">nécessite l'enregistrement des visiteurs</a> pour voir les images, vous devrez les encourager à le faire en modifiant le contenu de cette section du thème.</td>
+    <td valign="top">Le conteneur <tt class="code">{TEXT}</tt> est completé et la variable est utilisée dans la fonction <a href="#theme_create_theme_function_no_img_to_display">theme_no_img_to_display</a></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_user_list_info_box"></a><strong>$template_user_list_info_box</strong><a href="#theme_create_theme_user_list_info_box" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour la boite d'informations de l'utilisateur dans la liste des utilisateurs</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_img_navbar"></a><strong>$template_img_navbar</strong><a href="#theme_create_theme_var_img_navbar" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour les images de la barre de navigation: La navigation en haut des images intermédiaires vous permet  d'aller à la page des vignettes, de déployer/cacher la section des information des images, démarer le diaporama, contient le lien vers les E cartes, vou spermets de rapporter un fichier à l'administrateur et affiche le lien vers l'image précédente ou suivante de l'album dans lequel se trouve le visiteur.</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_display_media"></a><strong>$template_display_media</strong><a href="#theme_create_theme_var_display_media" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour l'affichage des images intermédiaires. C'est l'endroit ou les modifications d'aspect des images intermédiaires en relation avec le titre et la description doivent être ajoutés.</td>
+    <td valign="top">la fonction theme_html_picture remplis les conteneurs <tt class="code">{IMAGE}</tt>, <tt class="code">{ADMIN_MENU}</tt>, <tt class="code">{TITLE}</tt> et <tt class="code">{CAPTION}</tt> et utilise cette variable</td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_image_rating"></a><strong>$template_image_rating</strong><a href="#theme_create_theme_var_image_rating" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour la section d'évaluation des images</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_image_comments"></a><strong>$template_image_comments</strong><a href="#theme_create_theme_var_image_comments" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour l'affichage des commentaires</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_add_your_comment"></a><strong>$template_add_your_comment</strong><a href="#theme_create_theme_add_your_comment" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour l'affichage du formulaire pour les commentaires</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_cpg_die"></a><strong>$template_cpg_die</strong><a href="#theme_create_theme_var_cpg_die" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML utilisé par la fonction cpg_die, utilisée pour l'affichage des mesages d'erreurs de toutes sortes au visiteur</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_msg_box"></a><strong>$template_msg_box</strong><a href="#theme_create_theme_var_msg_box" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML utilisé par la fonction msg_box qui affiche les messages aux visiteurs en haut de la page ( généralement pour donner le résultat des actions faites par l'utilisateur à l'écranprécédant).</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_ecard"></a><strong>$template_ecard</strong><a href="#theme_create_theme_var_ecard" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour les e-cartes</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_ecard_plaintext"></a><strong>$template_ecard_plaintext</strong><a href="#theme_create_theme_var_ecard_plaintext" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit plein texte pour les E-Cartes (en remplacement des clienst ne pouvant pas afficher de mails formatés en HTML)</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_report"></a><strong>$template_report</strong><a href="#theme_create_theme_var_report" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour les rapports</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_report_plaintext"></a><strong>$template_report_plaintext</strong><a href="#theme_create_theme_var_report_plaintext" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit plein texte pour les rapports ( pour les clienst qui ne peuvent pas afficher les mails formatés en HTML)</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_report_comment"></a><strong>$template_report_comment</strong><a href="#theme_create_theme_var_report_comment" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour afficher les rapports de comentaires</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_report_comment_email"></a><strong>$template_report_comment_email</strong><a href="#theme_create_theme_var_report_comment_email" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit plein texte pour les rapports ( pour les clienst qui ne peuvent pas afficher les mails formatés en HTML)</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_tab_display"></a><strong>$template_tab_display</strong><a href="#theme_create_theme_tab_display" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarits utilisés pour l'affichage des tabulations</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_vanity"></a><strong>$template_vanity</strong><a href="#theme_create_theme_var_vanity" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit utilisé pour <a href="configuration.htm#vanity_block">le pied de page de courtoisie (Vanity)</a></td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_sidebar"></a><strong>$template_sidebar</strong><a href="#theme_create_theme_var_sidebar" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit HTML pour la barre latéralle</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_var_zipfile_plaintext"></a><strong>$template_zipfile_plaintext</strong><a href="#theme_create_theme_var_zipfile_plaintext" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">variable</td>
+    <td valign="top">Gabarit plein texte pour le fichier lisez-moi optionnel à ajouter à l'archive lors de l'utilisation du téléchargement compressé des favoris</td>
+    <td valign="top"></td>
+  </tr>
+</table>
+
+
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

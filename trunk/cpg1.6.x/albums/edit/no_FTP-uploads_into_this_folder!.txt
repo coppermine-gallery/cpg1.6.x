@@ -1,0 +1,5 @@
+This file directory must not be altered.  Do not add files to it.
+
+This directory and all subdirectories are used by CPG for image manipulation.
+
+Woe unto he that stores his data here, for it shalt surely perish.

@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="{LANG_DIR}">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={CHARSET}" />
+<meta http-equiv="Pragma" content="no-cache" />
+<title>{TITLE}</title>
+{META}
+<link rel="stylesheet" href="css/coppermine.css" type="text/css" />
+<link rel="stylesheet" href="themes/curve/style.css" type="text/css" />
+<link rel="shortcut icon" href="favicon.ico" />
+<!-- Begin IE6 support -->
+<!--[if lt IE 7]>
+<style>
+body {behavior: url(themes/curve/csshover3.htc );}
+.dropmenu li {width: 1px;} .dropmenu li a.firstlevel span.firstlevel {white-space: nowrap;} .main_menu {overflow: auto;}
+</style>
+<![endif]-->
+<!-- End IE6 support -->
+{JAVASCRIPT}
+<!--
+  SVN version info:
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+-->
+</head>
+<body>
+    {CUSTOM_HEADER}
+    <div id="cpg_logo_block_outer">
+        <div class="cpg_logo_block_inner">
+            <div id="cpg_logo_block_logo">
+                <a href="index.php">
+                    <img src="themes/curve/images/coppermine-logo.png" border="0" width="260" height="60" alt="" />
+                </a>
+            </div>
+            <div id="cpg_logo_block_name">
+                <h1>{GAL_NAME}</h1>
+                <h3>{GAL_DESCRIPTION}</h3>
+            </div>
+            <div class="clearer"></div>
+        </div>
+    </div>
+    <div id="cpg_header_block_outer">
+        <div class="cpg_header_block_inner">
+            <div id="main_menu">
+                    {SYS_MENU}
+                    {SUB_MENU}
+                    {ADMIN_MENU}
+            </div><!-- Begin IE7 support --><img src="images/spacer.gif" class="menuheight" alt="" /><!-- End IE7 support -->
+            <div class="clearer"></div>
+            {MESSAGE_BLOCK}
+        </div>
+    </div>
+    <div id="cpg_main_block_outer">
+        <div class="cpg_main_block_inner">
+            {GALLERY}
+            <br /> <!-- workaround for issue 64492 - do not remove the line break! -->
+        </div>
+    </div>
+    <div id="cpg_footer_block_outer">
+        <div class="cpg_footer_block_inner">
+            {CUSTOM_FOOTER}
+            {CREDITS}
+        </div>
+    </div>
+</body>
+</html>

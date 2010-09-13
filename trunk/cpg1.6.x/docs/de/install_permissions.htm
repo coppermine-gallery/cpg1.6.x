@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Permissions - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Any PHP script that is supposed to be run on a webserver needs read and execute permissions on the server. Subsequently, all Coppermine-files need this permission" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="robots" content="noindex" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<div id="doc_en_only">No translation available</div>
+
+<a name="permissions"></a><h1>Setting permissions<a href="#permissions" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>Any PHP script that is supposed to be run on a webserver needs <em>read</em> and <em>execute</em> permissions on the server. Subsequently, all Coppermine-files need this permission.<br />
+Additionally, Coppermine needs <em>write access</em> to a number of files and folders on the webserver in order to accomplish the following:</p>
+<ul>
+<li>during install, coppermine needs to create and write to the file "config.inc.php" in the "include" folder in order to store the necessary mySQL access data to run coppermine and to prevent the installer from being run a second time after a successful install.</li>
+<li>when using http uploads, coppermine needs to write the files that are being uploaded into the subfolders that you or your users create in the coppermine <em>albums</em> folder</li>
+<li>regardless of the upload method, coppermine will create a thumbnail file and an intermediate file (if you have configured coppermine accordingly) and store it in a sub-folder in the "albums" directory, as well</li>
+<li>If you are going to enable <a href="configuration.htm#admin_logging">logging</a> at some stage, the script needs write access on the folder "logs"</li>
+<li>The "plugin" folder needs to be set to write access as well if you want to use the zip upload capabilities of the <a href="plugins.htm#plugin_manager_upload">plugin manager</a></li>
+</ul>
+<p>By default, files and folders on a webserver are usually not writable, so you will probably have to change permissions before installation, for the reasons mentioned above. It's really mandatory that you set/change (CHMOD) permissions - or you will run into issues sooner or later.</p>
+<p>To be able to set permissions correctly, you have to understand how they work: there are <em><strong>r</strong>ead</em>, <em><strong>w</strong>rite</em> and <em>e<strong>x</strong>ecute</em> permissions (abbreviated with <strong>rwx</strong>) for each folder and file. Permissions on a parent folder can propagate to a child folder or the files within it, but it's possible to tweak your setup so that unwanted permissions will not propagate to child folders and resident files.</p>
+<p class="cpg_message_validation"><strong>If you can't figure how to set permissions properly, ask your webhost for support.</strong> It doesn't make sense to ask for support on this aspect on the coppermine support board - we can't tell you what level of permissions needs to be applied on your particular webserver. Only your webhost can answer that question.</p>
+
+<a name="permissions_webserver"></a><h2>Permissions on different webserver types<a href="#permissions_webserver" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>There are differences between the different operating systems that are used as webservers. As a result, there are a number of different approaches. As coppermine is designed to run on many different setups, we've included some basic instructions. Those who know their way around may find these instructions somewhat generalized and lacking in details.</p>
+
+<p class="cpg_message_info">Note: it is not your local, client computer that matters, permission-wise, but, rather, the operating system used by your webserver. If you're not sure what OS your server is running on, try the CHMOD instructions first - most webservers run a version of Unix/Linux.</p>
+
+<p>Therefore, here's a summary how permissions work on some webserver setups:</p>
+
+<div class="indent">
+
+    <a name="chmod"></a><h3>Apache on Unix/Linux (CHMOD)<a href="#chmod" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <ul>
+        <li>
+            <a name="chmod_basics"></a><h4>Basics<a href="#chmod_basics" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+            There are different flavors of Unix/Linux - all of them share a similar, somewhat common approach. In referring to this architecture, the word "Lunix" is used for both Unix and Linux derivates. "Read" permissions apply to files that are not actively run, but only being served, e.g text or plain html files. "Write" permissions are needed to dynamically create files, modify or delete them. "Execute" permissions are needed to run executable files, for example, script files like PHP. To serve web pages that are php-powered properly, the most basic permissions that are needed, therefore, are "read" and "execute" (abbreviated as r-x).<br />
+            Possible permissions settings are:
+              <ul>
+              <li><tt class="code">r--</tt> ... read only</li>
+              <li><tt class="code">r-x</tt> ... read and execute</li>
+              <li><tt class="code">rwx</tt> ... read, write and execute</li>
+              </ul>
+            Needless to say, other combinations are technically possible (such as -wx, --x or -w-), but they make little sense in webserver setups and will be ignored in this document.
+        </li>
+        <li>
+            <a name="chmod_groups"></a><h4>Groups in <abbr title="Unix or Linux derivates">Lunix</abbr><a href="#chmod_groups" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+            <abbr title="Unix or Linux derivates">Lunix</abbr> uses a set of three-group permissions, each of which can be applied independently. These are: <em>owner</em>, <em>group</em> and <em>world</em>. Using this set, you can dictate if a user who owns a file has permission to modify or delete it (write permission) while other users will only be able to read/view and possibly execute the file. On your server, these permission settings for the three possible groups are written in as a single line entry (in the order "owner", "group", "world"). <br />
+            <div class="cpg_example">
+              <ul>
+                  <li><tt class="code">rwxrwxrwx</tt> ... read, write and execute (rwx) permissions for all three groups</li>
+                  <li><tt class="code">rwxr-xr-x</tt> ... rwx permissions for the owner, r-x permissions for all others</li>
+                  <li><tt class="code">r-xr-xr-x</tt> ... read and execute permissions for all groups, only</li>
+              </ul>
+            </div>
+        </li>
+        <li>
+            <a name="chmod_daemon"></a><h4>Webserver daemon<a href="#chmod_daemon" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+            Even though you (the user who owns the files on your server and who has control over the permissions) may be able to access a file (e.g. using your <abbr title="File Transfer Protocol">FTP</abbr> <abbr title="application = program = software">app</abbr>), the coppermine script may not be able to do so. This is often caused by a particular setup option for servers: services (in <abbr title="Unix or Linux derivates">Lunix</abbr> often called "daemons") may run in the context of a specific user that is different from the user who is allowed to access the files. On many such servers, the webserver (apache) service runs as user "nobody". This way, the server can be protected against hacker attacks. Therefore, setting permissions on a server for the "owner" only does not work on these particular setups, you must set permissions for both "group" and "world" (at least for the group the webserver daemon is in).
+        </li>
+        <li>
+            <a name="chmod_binary_arithmetics"></a><h4>Binary arithmetics<a href="#chmod_binary_arithmetics" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+            As you can see, permissions can be either "on" or "off" - this is the equivalent to the two different states that a bit of data can have in binary arithmetics (and therefore, also in the whole world of computing).
+            As we have three types of different permissions (read, write, execute), we will need three bits to assign a set of permissions. The highest bit is the "<em><strong>r</strong>ead</em>" bit - decimal "4" is used to represent it. The middle bit "<em><strong>w</strong>rite</em>" is assigned to decimal "2", the lowest bit "<em>e<strong>x</strong>ecute</em>" is represented by decimal "1".
+            This may be a bit hard to understand or follow at first, especially if you haven't dealt with binary arithmetics before. If you would like to learn more, google for it. It's easier to understand if you look at some examples:
+            <div class="cpg_example">
+            	<div class="floatleft">
+                	<table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra">
+                    	<tr>
+                    	    <th>permission</th>
+                    	    <th>bit value</th>
+                    	    <th>set?</th>
+                    	    <th>value</th>
+                    	</tr>
+                    	<tr>
+                    	    <td>read</td>
+                    	    <td>4</td>
+                    	    <td><input type="checkbox" checked="checked" onclick="javascript:this.checked=true"/></td>
+                    	    <td>4</td>
+                    	</tr>
+                    	<tr>
+                    	    <td>write</td>
+                    	    <td>2</td>
+                    	    <td><input type="checkbox" checked="checked" onclick="javascript:this.checked=true" /></td>
+                    	    <td>2</td>
+                    	</tr>
+                    	<tr>
+                    	    <td>execute</td>
+                    	    <td>1</td>
+                    	    <td><input type="checkbox" checked="checked" onclick="javascript:this.checked=true" /></td>
+                    	    <td>1</td>
+                    	</tr>
+                    	<tr>
+                    	    <td colspan="3" class="tablef">sum (resulting byte value)</td>
+                    	    <td class="tablef">7</td>
+                    	</tr>
+                	</table>
+                	</div>
+                	<div class="floatleft">
+                    	<table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra">
+                        	<tr>
+                        	    <th>permission</th>
+                        	    <th>bit value</th>
+                        	    <th>set?</th>
+                        	    <th>value</th>
+                        	</tr>
+                        	<tr>
+                        	    <td>read</td>
+                        	    <td>4</td>
+                        	    <td><input type="checkbox" checked="checked" onclick="javascript:this.checked=true" /></td>
+                        	    <td>4</td>
+                        	</tr>
+                        	<tr>
+                        	    <td>write</td>
+                        	    <td>2</td>
+                        	    <td><input type="checkbox" onclick="javascript:this.checked=false" /></td>
+                        	    <td>-</td>
+                        	</tr>
+                        	<tr>
+                        	    <td>execute</td>
+                        	    <td>1</td>
+                        	    <td><input type="checkbox" checked="checked" onclick="javascript:this.checked=true" /></td>
+                        	    <td>1</td>
+                        	</tr>
+                        	<tr>
+                        	    <td colspan="3" class="tablef">sum (resulting byte value)</td>
+                        	    <td class="tablef">5</td>
+                        	</tr>
+                    	</table>
+                	</div>
+                	<div class="floatleft">
+                    	<table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra">
+                        	<tr>
+                        	    <th>permission</th>
+                        	    <th>bit value</th>
+                        	    <th>set?</th>
+                        	    <th>value</th>
+                        	</tr>
+                        	<tr>
+                        	    <td>read</td>
+                        	    <td>4</td>
+                        	    <td><input type="checkbox" checked="checked" onclick="javascript:this.checked=true" /></td>
+                        	    <td>4</td>
+                        	</tr>
+                        	<tr>
+                        	    <td>write</td>
+                        	    <td>2</td>
+                        	    <td><input type="checkbox" checked="checked" onclick="javascript:this.checked=true" /></td>
+                        	    <td>2</td>
+                        	</tr>
+                        	<tr>
+                        	    <td>execute</td>
+                        	    <td>1</td>
+                        	    <td><input type="checkbox" onclick="javascript:this.checked=false" /></td>
+                        	    <td>-</td>
+                        	</tr>
+                        	<tr>
+                        	    <td colspan="3" class="tablef">sum (resulting byte value)</td>
+                        	    <td class="tablef">6</td>
+                        	</tr>
+                    	</table>
+            	</div>
+            	<div style="clear:left"></div>
+            </div>
+        </li>
+        <li>
+            <a name="chmod_benefit"></a><h4>What good is all of this?<a href="#chmod_benefit" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+            Instead of having to remember and write <tt class="code">rwxrwxrwx</tt> for each file or folder in your setup, you can now write <tt class="code">777</tt> in its place. The same applies for <tt class="code">rwxr-xr-x</tt>, you can write <tt class="code">755</tt>, instead.
+        </li>
+        <li>
+            <a name="chmod_ftp"></a><h4>FTP application<a href="#chmod_ftp" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+            Setting the permissions using your FTP application will be the option available for most users who are webhosted. Depending on the FTP app you use, the user interface will slightly differ: some apps will allow you to enter the CHMOD command by entering the numbers (777 or 755), others will provide you with checkboxes where you can tick the permissions separately for each group. More advanced FTP apps may even provide you with both mechanisms. As this documentation can't cover all individual FTP apps that are available, the exact method might differ a bit from what you have.<br />
+            Your FTP app will probably have two windows, one showing your local files, the other one showing the files on your server. In the window that shows the remote files on the server, navigate to the folder your coppermine files reside in. Highlight the "albums" folder that resides within the coppermine folder. From the context menu (right-click!), choose "properties" (might be named "chmod" or similar as well). The permissions dialog will then pop up. Choose the proper permissions as suggested above (777 or 755, depending on your server setup). If you have a checkbox that enables the permissions to propagate for all sub-folders and files, tick it. If you don't have it, nevermind. Then click "OK" on the dialog box to apply the permissions. Keep in mind that your FTP app might not have the power to actually find out about the current permissions that <strong>are</strong> applied, so you mustn't trust the information displayed in the dialog box: even if it appears that the permissions are already set as needed, this may not be the case, so you should re-apply the permissions no matter what.<br />
+            After having applied the permissions for the albums folder, do the same thing for the include folder that resides within your coppermine folder.<br />
+            For a list of recommended FTP applications, see <a href="dev.htm#dev">Developer documentation</a> &rarr; <a href="dev_tools.htm#dev_tools">Tools recommended by the devs</a> &rarr; <a href="dev_tools.htm#dev_tools_ftp_client">FTP clients</a>.
+        </li>
+        <li>
+            <a name="chmod_website_control_panel"></a><h4>Website control panel<a href="#chmod_website_control_panel" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+            Some webhosts may not give you the option to access your site using FTP, or they may not allow your FTP client to execute the CHMOD command. If this is the case, you probably have a server setup interface (e.g. cpanel) to apply permission to folders and files. In fact, this doesn't matter, the method for applying permissions doesn't differ from the one described above in the section "FTP application": navigate to the albums folder and apply the permissions needed to give your webserver write access to all files and folders within the albums folder. Do the same thing for the include folder as well.
+        </li>
+        <li>
+            <a name="chmod_shell_access"></a><h4>Shell access<a href="#chmod_shell_access" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+            If you have shell access to your server, you can apply the native <a href="http://www.die.net/doc/linux/man/man1/chmod.1.html" rel="external" class="external">CHMOD</a> command on your files and folders. Go to your coppermine folder using your shell access, then apply the permissions to the albums and include folder and everything within it. As explained above, the user the apache daemon runs under needs write access, so you should CHMOD to 777 or 755, depending on your server setup.
+        </li>
+        <li>
+            <a name="chmod_chown"></a><h4>Ownership (CHOWN)<a href="#chmod_chown" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+            In rare cases you might run into permission issues that can't be solved by setting permissions using the CHMOD command - instead, you need to change the ownership of folder/files using the CHOWN command that only applies on Posix-compliant operating systems. Issues related to ownership usually happen if the user the FTP upload runs under differs from the user the webserver runs under. The tricky thing is that there is no control built into your FTP application to review or change ownership. Therefore, if the server isn't yours to administer and you don't have shell access, you're stuck and will have to ask your webhost for support.
+        </li>
+    </ul>
+    <a name="chmod_end"></a>
+    
+    
+    
+    <a name="apache_windows"></a><h3>Apache on Windows<a href="#apache_windows" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <p>You have to understand that there is no such thing as CHMOD on Windows operating systems - this command is available on Unix/Linux only, even if your FTP application displays a CHMOD option. If you try to apply CHMOD on Windows, the command will simply be ignored and do nothing. However, there are permissions on Windows as well.</p>
+    <p>The apache webserver service runs under a particular user - if you have full access to the server, check the services control to find out which one it is. If you can't do this, ask your webhost.</p>
+    <p>As a temporary workaround, set permissions on folder and file level as suggested in the section <a href="#iis">IIS on Windows</a>, but not for the IUSR (which only exists on IIS), but for "everyone". However, allowing "everyone" to have read, write and execute permissions might be a security risk and is not recommended at all.</p>
+    <a name="apache_windows_end"></a>
+    
+    
+    
+    <a name="iis"></a><h3>IIS on Windows<a href="#iis" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <p>Pre-requisites: you will need full admin privileges over your server to execute this process. If you do not run the webserver yourself, your webhost has probably set up a web-based interface to let you change permissions. If you're not sure, contact your webhost.</p>
+    <p>The dialogs may differ slightly depending on the Windows version you have:</p>
+    <ul>
+    <li>Start Windows Explorer on your webserver and navigate to your coppermine folder</li>
+    <li>right-click on the folder you want to change permissions for</li>
+    <li>Choose "Properties"</li>
+    <li>On the properties dialog, click on the "Security" tab</li>
+    <li>Highlight the user "Internet guest account (hostname\IUSR_hostname). If it's not there already, use the "Add..." dialog to add this particular user</li>
+    <li>Tick the "Allow"-checkbox for "Write"-access</li>
+    <li>Click the "Advanced" button</li>
+    <li>Just to make sure the write access propagates to all folders and files within the folder you're currently editing, tick the checkbox "Reset permissions on all child objects and enable propagation of inheritable permissions"</li>
+    <li>click "OK"</li>
+    <li>answer the confirmation dialog box that asks you if all permissions should be replaced with "Yes"</li>
+    <li>depending on the number of child objects and your system's speed, wait until the permissions of all objects have been changed and the status window goes away.</li>
+    <li>Click "OK" to close the permissions dialog</li>
+    </ul>
+    <p>You have to understand that there is no such thing as CHMOD on Windows operating systems - this command is available on Unix/Linux only, even if your FTP application displays a CHMOD option. If you try to apply CHMOD on Windows, the command will simply be ignored and do nothing. However, there are permissions on Windows as well.</p>
+    <a name="iis_end"></a>
+
+</div>
+
+<a name="support"></a><h2>Asking for support on permissions issues<a href="#support" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p class="cpg_message_info">Most users who come from a Windows-background (or who have no idea about how permissions work at all) frequently ask on the Coppermine support board &quot;<em>Why does this have to be so complicated? Why don't you just create a script that handles all those complicated permission issues for me?</em>&quot;. The answer is pretty straightforward: <strong>because we can't</strong>.</p>
+<p>Coppermine has been built to work on a number of platforms and operating systems. The permissions that you need to set are part of how the operating system of your webserver works - they are not related to Coppermine in itself. A script can't assign permissions to itself if it doesn't have the privilege to do so.</p>
+<p class="cpg_example">Think of it as if it was the structure of an army: a soldier who is low in rank can not promote himself to be a general; only officers who actually have higher privileges can promote regular soldiers to a higher rank. They wouldn't make them a general in the first place though, but just give them the rank they need to do their job (i.e. they would promote a private to corporal).</p>
+<p>As the setup of webservers differs, we can't give you a simple, straightforward instruction like &quot;CHMOD everything to 755 and you'll be done&quot;. Although this may be the case for many on shared webhosting, it might not apply to you. On some server setups, it might not be enough. On others, it might be a security risk. Yet on another machine, it may not apply at all because there is no such command.</p>
+<p>Supporters are reluctant to answer the same questions on permissions over and over gain, as they are not related to Coppermine in the first place. If you ask a permissions-related question on the Coppermine support board that clearly shows that you haven't read the documentation (at least the part that covers permissions), then you will probably get a harsh answer, or no answer at all. Please think twice, read the permissions section carefully. There's little others could do to help you on this. If you're really stuck, you better ask your webhost for support.</p>
+<a name="support_end"></a>
+
+<a name="permissions_folders"></a><h2>Permissions on folder level<a href="#permissions_folders" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>As suggested above, Coppermine needs different levels of permissions on some of it's subfolders. All folders and files within the coppermine folder need to be readable and usually need execution permissions as well. </p>
+<p>Additionally, <strong>write</strong> permissions are needed for:</p>
+<ul>
+    <li>The <tt class="code">albums</tt>-folder and everything within it. <br />
+    Do not confuse the folder (on file system level) named <tt class="code">albums</tt> with the logical, organisational term &quot;album&quot; on database level: although those two terms sound the same and although there <em>can</em> be a correlation between files on file system level and files on database level, those terms must not be mixed nor confused. <a href="albums.htm">Albums</a> on database level are logical containers. The <tt class="code">albums</tt> folder on file system level is a physical container.</li>
+    <li>The folder <tt class="code">include</tt> needs to be writable during the install stage of coppermine; the coppermine installer will attempt to write a file named <tt class="code">config.inc.php</tt> into the folder <tt class="code">include</tt> where all the information is stored that is needed for the gallery script to establish a connection to the database. That piece of information needs to be stored on file system level - all other coppermine settings are being stored on database level once the connect of the script to the database has been established successfully</li>
+    <li>The folder <tt class="code">logs</tt> must be writable if you enable <a href="configuration.htm#admin_logging">logging in coppermine's config</a>.</li>
+    <li>The folder <tt class="code">plugins</tt> must be writable if you want to use <a href="plugins.htm">plugins</a> and if you want to upload them using the http upload feature that is built into the <a href="plugins.htm#plugin_manager">plugin manager</a>.</li>
+</ul>
+
+<!--
+<a name="permissions_faq"></a><h3>Permission FAQ<a href="#permissions_faq" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+tbc
+-->
+<a href="permissions_end"></a>
+
+
+
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

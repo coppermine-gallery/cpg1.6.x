@@ -1,0 +1,256 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Translation Guide - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="One of the major features of a Coppermine photo gallery is the fact that all page content can be displayed in different languages, with translations being contained in one file (located inside of the coppermine lang directory ). If you use Coppermine and feel that you would like to give something back to the community, why not start a translation of coppermine for your language?" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+  $Date$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Inhoudstafel</a>
+</div>
+<div id="doc_en_only">No translation available</div>
+
+<a name="translation"></a><h1>Translation Guide<a href="#translation" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+
+<a name="translation_translators_wanted"></a><h2>Translators wanted!<a href="#translation_translators_wanted" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>One of the major features of a Coppermine photo gallery is the fact that all page content can be displayed in different languages, with translations being contained in one file (located inside of the coppermine <em>lang</em> directory ). If you use Coppermine and feel that you would like to give something back to the community, why not start a translation of coppermine for your language?</p>
+<p>These are the rules and guidelines for translation to help you get started.</p>
+
+<a name="translation_why_translate"></a><h2>Why translate?<a href="#translation_why_translate" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<ul>
+<li>To give something back to the community</li>
+<li>Because you needed the translation anyway...</li>
+<li>To see your name on the <a href="credits.htm#translators">credits list</a></li>
+<li>To promote your services (being linked from a relevant page like the Coppermine team/credits page will increase your page rank as well)</li>
+<li>Because you're a nice person</li>
+</ul>
+
+<a name="translation_which_languages"></a><h2>Translations for which languages are needed?<a href="#translation_which_languages" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>There are already several languages supported by coppermine; as the number of language-files for coppermine grows, there may be translations available that were not included into the package you downloaded. Before you actually start to work on a translation, look here:
+<ul>
+<li>Is the language you're looking for already included in the lang-folder of the coppermine package you downloaded?</li>
+<li>Is the language file already available in the <a href="dev_subversion.htm">subversion repository</a>? Visit <a href="http://coppermine.svn.sourceforge.net/viewvc/coppermine/trunk/cpg1.5.x/lang/" rel="external" class="external">http://coppermine.svn.sourceforge.net/viewvc/coppermine/trunk/cpg1.5.x/lang/</a></li>
+<li>Has someone volunteered to do the translation recently on the Coppermine board thread &quot;<a href="http://coppermine-gallery.net/forum/index.php?topic=44308.0">[Help wanted]: Translations for CPG1.5.x</a>&quot;? Please read the thread carefully to check if the translation has already been done or is in the works. We appreciate your intent, and we also value your time, so it'd be a pity if you and another translators went through all the work to submit two versions of the same language.<br />
+You may find also find additional information there that didn't make it into this document ...</li>
+</ul>
+</p>
+<a name="translation_who"></a><h2>Who can translate?<a href="#translation_who" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Anyone with a good grasp of a language can, but when a new version of coppermine is being prepped for released, the dev team will contact the translators of previous versions and ask them to translate for the new version, as well. These &quot;original&quot; translators are requested to advise the development team if they are willing and able to do the translation (before actual work on the translation starts). Languages previously assigned to those who respond that they're unable to do the &quot;new&quot; translation or those assigned to translators that fail to reply, over a prescribed time, will be placed on a list on &quot;<a href="http://coppermine-gallery.net/forum/index.php?topic=44308.0">[Help wanted]: Translations for CPG1.5.x</a>&quot;.  Anyone who is interested and ready to help with the translation for these &quot;orphaned&quot; languages should reply to the thread and assign the translation to him/herself.</p>
+<p>If you are fluent in a language that hasn't been translated yet and hasn't been assigned to anyone, please assign it to yourself.</p>
+
+<a name="translation_char_encoding"></a><h2>Character encoding<a href="#translation_char_encoding" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Many languages have special alphabets other than the latin set, or have additional characters (like ä ß &agrave; &aacute; &acirc; &atilde; &aring; &aelig; &ccedil; &thorn; &eth; &oslash;). Many of these special chars have what are called <em>html equivalents</em> (e.g. <em>&amp;auml;</em> for <em>ä</em>), but you <strong>must not use</strong> these html equivalents of your special language characters when doing your translations, as unwanted side-effects may appear with the usage of JavaScript!</p>
+<p>No matter what encoding you use to contribute your translation, the encoding with which your translation contribution will be added to the package will be utf-8. In other words: some coppermine developer will have to transform your proprietary encoding to utf-8 before it can be used, so if you can you should use utf-8 in the first place.</p>
+
+<p>Coppermine adds a charset meta tag to the header of each ouput file to instruct the browser how to render special chars. You should add the name of the charset you're using for your translation at the very start of the language file, e.g.<pre>$lang_charset = 'iso-8859-1';</pre>. You can find a list of charsets at <a href="http://www.w3.org/International/O-charset-lang.html">http://www.w3.org/International/O-charset-lang.html</a>. Whenever possible, you shouldn't choose platform-dependant charset (e.g. <em>windows-1252</em>), but cross-platform ones (e.g. <em>iso-8859-1</em>).</p>
+<p>You'll have noticed that coppermine language files come in utf-8 encoding. You do not have to concern yourself with the creation of the utf-8 version if you have no idea how to accomplish this - the dev team will take care of that. However, your language file will finally go into the package as UTF-8 file. Subsequently, if you want to create a perfect language file, create it in utf-8 in the first place.</p>
+
+<a name="translation_editors"></a><h2>Editors &amp; Tools<a href="#translation_editors" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>In fact you can use nearly any <strong>text</strong> editor you feel comfortable with that will allow you to save your text in the ANSI format - Windows Notepad (also known as &quot;Editor&quot; in Windows 2000/XP) will do just fine.</p>
+<p>Of course, you're welcome to use a more powerfull editor and use (if you can) utf-8 as encoding.</p>
+<p>To determine whether or not your favorite text editor can correctly handle the necessary encoding, start the translation by translating only a few lines (preferrably some that contain special chars from you language), save the translation file and close it. Then try to open it with a plain text editor on your system (e.g. Notepad) - if everything displays as expected, your editor should work fine.</p>
+<p>Recommended Tools: to see what has changed between the language files of cpg1.4.x and cpg1.5.x, we recommend using a diff viewer that can highlight the differences in both files. Windows users should opt for the great, changes in file viewer <a href="http://winmerge.org/" rel="external" class="external">WinMerge</a> (available as freeware; 3 MB, localizations available as well): You can even edit the files with this tool (352 of 1152 lines have been added or changed). All new/changed lines have a comment at the end like this one: <tt class="code">//cpg1.5.x</tt>.<br />
+If you need a powerfull, free editor for Windows, the dev team recommends using <a href="http://notepad-plus.sourceforge.net/" rel="external" class="external">Notepad++</a>.</p>
+<p>For a full list of suggestions, please review &quot;<a href="dev_tools.htm">Tools recommended by the devs</a>&quot;</p>
+
+<a name="translation_full_translation"></a><h2>Full translations only<a href="#translation_full_translation" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Up until version 1.2 of coppermine we only sent out the lines that had changed in the language files from previous versions to the translators. Although this seemed to be a very easy solution and approach, we soon discovered that this method had severe drawbacks:
+<ul>
+<li>The translators couldn't test their code immediately - if a single quote is missing from the language file, the entire file won't work</li>
+<li>Too often, corrections had to be sent back and forth between the dev team and the translators</li>
+<li>The dev team had to merge the previous language files with the bits that were newly translated - this resulted in an additional heavy workload for the dev team, slowing down the new release and keeping them from what they do best</li>
+<li>The translators didn't know the exact context that some lines appeared in, making it impossible to provide the proper translations</li>
+</ul>
+</p>
+<p>For these reasons we now provide the translators with the most recent english language file along with all existing language files of previous versions as references. Additionally we provide this guide that you are currently reading, asking them (the translators: <em>you</em> in this particular case) to translate the file in its entirety. Of course, you can (and are even encouraged to) take a look at the language files from older versions and adopt (port) the contents that are already in the old version whenever they apply.</p>
+
+<a name="translation_step_by_step"></a><h2>Step by step<a href="#translation_step_by_step" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Here are the detailed steps for translating coppermine language files:</p>
+<ol>
+<li>open english.php with your text editor</li>
+<li>Save the file immediately after opening under a different filename (to make sure you always have an unmodified english language file that can be used as a reference) - the filenames of the language files will decide how the language name will look in the dropdown list of the coppermine backend - use the english (roman characters) name of your language as the final filename, using lowercase in the name with no spaces or special chars (except &quot;-&quot; and &quot;_&quot; and the dot to mark the extension. If the language name itself isn't self-explanatory, add info with an underscore.<br />
+<strong>Examples</strong>: german.php, italian.php, greek.php, brazilian_portuguese.php</li>
+<li>Edit the header info (example content is <span class="important">highlighted</span>):<br />
+<tt class="code">// info about translators and translated language</tt><br />
+<tt class="code">$lang_translation_info['lang_name_english'] = '<span class="important">German</span>';</tt>The name of your language in English<br />
+<tt class="code">$lang_translation_info['lang_name_native'] = '<span class="important">Deutsch</span>';</tt>The name of your language in your mother tongue<br />
+<tt class="code">$lang_translation_info['lang_country_code'] = '<span class="important">de</span>';</tt>The country code representing your language. If your language is spoken in several countries, choose the one most people will relate to your language<br />
+<tt class="code">$lang_translation_info['trans_name'] = '<span class="important">GauGau</span>';</tt>Your name (or rather the name you would like to appear on the credits page)<br />
+<tt class="code">$lang_translation_info['trans_email'] = '';</tt>If you prefer, your email address, which would normally appear on the credits page, can be left blank<br />
+<tt class="code">$lang_translation_info['trans_website'] = '<span class="important">http://gaugau.de/</span>';</tt>Your website (goes to credit page). If you specify none, your profile page will be displayed instead<br />
+<tt class="code">$lang_translation_info['trans_date'] = '<span class="important">2009-01-27</span>';</tt>The date you translated/last changed the language file<br />
+<tt class="code">);</tt><br />
+Fill in the data you want to appear on the credits page as shown in the example above.</li>
+<li>The coppermine language file is used to dynamically replace php variables/arrays with the correct content. There are different ways those arrays are being filled - as shown in these examples (stuff that needs to be translated is <span class="important">highlighted</span>):<br />
+  <ul style="list-style-type:square" type="square">
+  <li>
+  <tt class="code">$lang_day_of_week = array('<strong>Sun</strong>', '<strong>Mon</strong>', '<strong>Tue</strong>', '<strong>Wed</strong>', '<strong>Thu</strong>', '<strong>Fri</strong>', '<strong>Sat</strong>');</tt>A plain list of values in an array. Translate each word inside the quotes.</li>
+  <li><tt class="code">$lang_yes = '<strong>Yes</strong>';</tt> A value is assigned to a variable. Translate everything inside the single quotes.</li>
+  <li><tt class="code">$lang_common['keyword_separators'] = array(' '=&gt;'<strong>space</strong>', ','=&gt;'<strong>comma</strong>', ';'=&gt;'<strong>semicolon</strong>');</tt> An array with key =&gt; value pairs. Only translate the value, the key <strong>must</strong> be left alone!<br /><tt class="code">
+        'albums' => '<strong>Albums</strong>',<br />
+        'pictures' => '<strong>Files</strong>',<br />
+);</tt></li>
+  <li>Cascaded/multi-dimensional arrays have been dropped from cpg1.4.x to cpg1.5.x, so you don't have to worry about them any longer.</li>
+        <li><tt class="code">$lang_forgot_passwd_php['account_verify_email'] = &lt;&lt;&lt; EOT
+<strong>You have requested a new password. If you would like to proceed with having a new password sent to you, click on the following link:</strong><br />
+<a href="{VERIFY_LINK}">{VERIFY_LINK}</a><br />
+<strong>Regards,<br />
+The management of</strong> {SITE_NAME}<br />
+EOT;</tt> Var definitions using the <a href="http://www.php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc" rel="external" class="phpnet">heredoc</a> syntax: make sure to only translate the plain text, leaving everything in curled braces and all html tags intact</li>
+  </ul>
+<p>Translate the entire language file as described - you'll find your way around in no time, even if you're not a seasoned PHP coder.</p>
+</li>
+<li>Test your translation: upload your language file to your server and browse your gallery, adding an additional parameter <tt class="code">lang=your_language_name</tt> to the URL (e.g. <tt class="code">http://yoursite.tld/coppermine/?lang=german)</tt>. Make sure to test as many aspects as possible from the file you creaeted, especially in the creation, renaming and deleting of users,categories, albums, pictures and comments.</li>
+<li>Proof-reading: if you can, let someone else (preferably non-tech user) test your translation as well. You might be surprised as to what they will discover...</li>
+<li>Post your language as a zipped attachment of the thread &quot;<a href="http://coppermine-gallery.net/forum/index.php?topic=44308.0">[Help wanted]: Translations for CPG1.5.x</a>&quot;.<br />
+You can post the attachment as a txt file or you can put it inside of a .zip archive, but please don't use other exotic archival formats such as .rar, .ace, etc. </li>
+</ol>
+
+<a name="translation_special_issues"></a><h2>Special issues<a href="#translation_special_issues" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<a name="translation_escaping"></a><h3>Escaping single quotes<a href="#translation_escaping" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>As you may have already noticed, all translation strings are contained between a pair of  single quotes or apostrophes - this is the proper method used in PHP. Therefore, if you want your translation to actually contain a single quote (apostrophe), you must &quot;instruct&quot; PHP that the apostrophe (single quote) contained in a text string is part of the string and not the end of the string. For this purpose, a backslash (<span class="important">\</span>) is used to instruct PHP that the character immediately following it is a "string" character and not part of the PHP code, itself. This is called <em>escaping</em> a character in programing languages. PHP uses the backslash (<span class="important">\</span>) to escape characters, that's why care must be taken to <strong>not</strong> do this:
+<p class="cpg_example">
+<tt class="code">$lang_errors['access_denied'] = 'You don't have permission to access this page.';</tt><br />
+but, to do this, instead:<br />
+<tt class="code">$lang_errors['access_denied'] = 'You don\'t have permission to access this page.';</tt>
+</p>
+<a name="translation_quotes_javascript"></a><h3>Single quotes in JavaScript (//js-alert)<a href="#translation_quotes_javascript" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Things are a bit more complicated if the output is to be used not only in plain HTML, but in JavaScript, as well.  Single quotes that appear in the HTML output of the language file must also be escaped for use in any JavaScript routine with a backslash as well.  That's why specific lines in the language file that will be used as JavaScript in Coppermine's output have been tagged with a comment at the end of the line, which reads: <tt class="code">//js-alert</tt>. If you intend to have a single quote in the final output, you'll have to add 3 backslashes in front of the single quote, as in this example: <pre>'no_change' => 'Vous n\\\'avez effectué aucun changement !', //js-alert</pre></p>
+
+<a name="translation_placeholders"></a><h3>Placeholders with " % "<a href="#translation_placeholders" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>You'll also notice that in several places of the language file, there are text that contain a percent-sign (<span class="important">%</span>), followed immediately by a letter. Those combinations must not be translated or separated - they are there intentionally and are used later as specifier arguments, or calls, for variable replacement and/or formating that needs to take place.</p>
+<p class="cpg_example">
+<tt class="code">$lang_rate_pic['rating'] = '(Current rating : %s / %s with %s votes)';</tt></p>
+<p>What actually happens is that in the code (usually using the PHP command <a href="http://www.php.net/manual/en/function.sprintf.php" rel="external" class="phpnet">sprintf</a>; refer to the <em>type specifier</em> specifications for details) there is a replacement, where the placeholder (usually <tt class="code">%s</tt>) is being replaced with some content dynamically.</p>
+
+<a name="translation_versions"></a><h2>Language versions<a href="#translation_versions" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<a name="translation_typo"></a><h3>Found a typo/spelling error?<a href="#translation_typo" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Maybe a translation for your language has already been done, but you're not happy with it: if there are bugs (spelling errors etc.), first check the <a href="http://sourceforge.net/project/showfiles.php?group_id=89658&package_id=98540">download section</a> to see if a fixed (updated) version has already been submitted. If not, report your finding(s) on the board along with your suggestion for a fix, like this:</p>
+<p class="cpg_example">
+<em>in lang/yourlanguage.php search for</em><br />
+<tt class="code">  $lang_example['some_definition'] = 'bar foo';</tt><br />
+<em>and replace with</em><br />
+<tt class="code">  $lang_example['some_definition'] = 'foo bar',</tt><br />
+</p>
+<a name="translation_another_translation"></a><h3>Another translation?<a href="#translation_another_translation" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Everybody who knows languages knows that there is no such thing as &quot;one correct translation&quot; - there are always differences in the way we to translate expressions, or whole sentences. Maybe you feel that an existing version of your language file doesn't suit your purpose; perhaps the translator had another audience/target group in mind, or you want a more formal translation (in many languages there are signifcant difference in grammar and expression between formal and casual speech or text).<br />
+Please do not flame (berate) the original translator on the board, but provide an alternative translation along with details on what you changed and for what target audience your version is intended.</p>
+
+<a name="translation_work_in_progress"></a><h2>Work in progress<a href="#translation_work_in_progress" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Coppermine, like everything else online, is a work in progress. Your copy of the english.php (that should always be used as the base reference file for your translation) may already be outdated. That's why it is critical that you always refer to the <a href="http://coppermine.svn.sourceforge.net/viewvc/coppermine/trunk/cpg1.5.x/lang/"> Subversion-Repository Language Section</a> to make sure that you have the most recent english language file (translator version) on hand before starting your translation (and maybe even the most updated version of this document, as well, as there may be many questions along the way that need to be addressed in this document after the initial release of this document). Remember: if an option/replacement string is not translated, it will not be visible in your language at all.</p>
+
+<a name="translation_initial_translation"></a><h2>Initial translation for release<a href="#translation_initial_translation" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>When preparing for a release, the dev team sets up a feature freeze to allow the translators to submit their translations, halting the coppermine development during that period. If you're willing to translate, do so as soon as possible and send your translation back immediately to ensure that the new version of coppermine can be released <strong>with</strong> your language file.</p>
+
+<a name="translation_older_language_files"></a><h2>Using older language files<a href="#translation_older_language_files" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>We understand that coming up with a full translation can be quite a difficult task to accomplish, so you might be tenpted to skip the hard work and go for a solution that may seem to be easier at first sight: you might want to use a language file that was created for a previous version of coppermine (e.g. cpg1.4.x) and built on that file (instead of doing as suggested in this section of the docs and starting your work based on the current version of <tt class="code">lang/english.php</tt>).</p>
+<p>Although the &quot;lazy&quot; method may seem to be attractive, you can't use it for various reasons. To mention only a few of them:</p>
+<ul>
+    <li>The way the language file arrays are defined has changed from<pre class="cpg_code code">$lang_meta_album_names = array(
+  'random' => 'Random files',
+  'lastup' => 'Last additions',
+  'lastalb'=> 'Last updated albums',
+  'lastcom' => 'Last comments',
+  'topn' => 'Most viewed',
+  'toprated' => 'Top rated',
+  'lasthits' => 'Last viewed',
+  'search' => 'Search results',
+  'favpics'=> 'Favorite Files',  //cpg1.4
+);</pre>to<pre class="cpg_code code">$lang_meta_album_names['random'] = 'Random files';
+$lang_meta_album_names['lastup'] = 'Last additions';
+$lang_meta_album_names['lastalb'] = 'Last updated albums';
+$lang_meta_album_names['lastcom'] = 'Last comments';
+$lang_meta_album_names['topn'] = 'Most viewed';
+$lang_meta_album_names['toprated'] = 'Top rated';
+$lang_meta_album_names['lasthits'] = 'Last viewed';
+$lang_meta_album_names['search'] = 'Image search results';
+$lang_meta_album_names['album_search'] = 'Album search results';
+$lang_meta_album_names['category_search'] = 'Category search results';
+$lang_meta_album_names['favpics'] = 'Favorite files';
+$lang_meta_album_names['datebrowse'] = 'Browse by date'; //cpg1.5</pre></li>
+<li>varaibles names have changed (i.e. <tt class="code">$album_date_fmt =    '%B %d, %Y';</tt> was changed to <tt class="code">$lang_date['album'] = '%B %d, %Y';</tt></li>
+<li>The entire definition of array for the config section was changed completely.</li>
+</ul>
+<p>This should make clear that you should not start editing a language file for cpg1.4.x and try to port that for cpg1.5.x - you'd have to perform edits for each and every line.</p>
+<p>Instead, we recommend doing as suggested and using a copy of english.php from cpg1.5.x and use that as a base for your new translation. We recommend to open a copy of the outdated language file as well in your editor and just copy individual strings from the outdated language file to your fresh copy.</p>
+
+<a name="translation_documentation"></a><h2>Translating the documentation<a href="#translation_documentation" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>As suggested above, all contributions are welcome. While it already is a huge task to come up with a coppermine language file, it's even a greater task to come up with a full translation of the coppermine documentation. That's one of the reasons why the documentation that used to be one monolithic block (one huge HTML page) has been split up into separate files starting with cpg1.5.x.</p>
+<p>For the benfit of your community, you're asked to translate part of the documentation (or maybe even all of it) as well. To accomplish this, do the same as suggested above: make sure that your translation doesn't already exist by checking the SVN repository and if there already is a discussion on the forums going on. If there is no such activity, go ahead and start your translation.</p>
+
+<a name="translation_documentation_steps"></a><h3>Steps for translating the docs into your language<a href="#translation_documentation_steps" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<ul>
+    <li><a name="translation_documentation_steps_not_exist"></a><h4>Make sure that the translation doesn't already exist<a href="#translation_documentation_steps_not_exist" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    As suggested above, make sure that you don't have to spend double effort on this - always check the SVN repository and the corresponding board sections before starting</li>
+    <li><a name="translation_documentation_steps_structure"></a><h4>Create the structure<a href="#translation_documentation_steps_structure" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    Your translation will later go into a sub-folder (that represents the language code) of the docs folder, so you should create a folder within your local copy of coppermine (inside the docs folder) if this doesn't already exist - there might be a partial translation already, so you'll only need to create the sub-folder if it doesn't already exist). If you're for example about to create an hungarian translation, create a sub-folder in the docs folder that is named <tt class="code">hu</tt>. Within this new folder, create a sub-folder named <tt class="code">images</tt> (no matter if the word for &quot;images&quot; differs in your language - after all, it's just a folder name that won't matter much to others). The images-folder will later contain your screenshots.</li>
+    <li><a name="translation_documentation_steps_copy_core"></a><h4>Copy the core language files<a href="#translation_documentation_steps_copy_core" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    Copy the basic files from the english documents folder (<tt class="code">your_local_coppermine_folder/docs/en/</tt>) into your newly-created language folder (in above example for hungarian, this would be <tt class="code">your_local_coppermine_folder/docs/hu/</tt>). The files you absolutely need to copy and edit later are <tt class="code">index.htm</tt>, <tt class="code">script.js</tt> and <tt class="code">toc.htm</tt>, but if you plan to do a full translation, you might as well copy all files from the <tt class="code">en</tt>-folder. Of course this step only applies if there is no partial translation existing. If there already are files in your language folder, don't copy the files from the english folder, but use the existing ones (as suggested later).</li>
+    <li><a name="translation_documentation_steps_start_translating"></a><h4>Start translating<a href="#translation_documentation_steps_start_translating" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    You should first start translating the very first page of the docs (<tt class="code">index.htm</tt>) using a plain text editor. Alternatively, you could use a diff-viewer, so you always have the English original and your translation side-by-side.</li>
+    <li><a name="translation_documentation_steps_attention"></a><h4>Areas to pay attention to<a href="#translation_documentation_steps_attention" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    <ul>
+        <li>Leave the line <tt class="code">&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr"&gt;</tt> alone! Do not make it match your language - this is a part of the XHTML-specification, not some meta-information on your document language</li>
+        <li>However, <strong>do</strong> translate the title-tag (something like <tt class="code">&lt;title&gt;Section or chapter name - Coppermine Photo Gallery - Documentation &amp; Manual&lt;/title&gt;</tt>)</li>
+        <li>For search engine friendliness, you should edit the line <tt class="code">&lt;meta name="language"    content="en" /&gt;</tt> - the content (&quot;en&quot;) should be replaced with the language code for your language. If you're not sure, leave it as-is (a coppermine dev will take care of this after you have contributed).</li>
+        <li>Edit the meta description (<tt class="">&lt;meta name="description" content="..."&gt;</tt>) as well to come up with a short summary what the page is about (in your language).</li>
+        <li>Leave the file names alone: do not translate the files names!</li>
+        <li>Leave the anchor names alone: don't edit anchor names (like <tt class="code">&lt;a name="copyright"&gt;&lt;/a&gt;</tt>), even if the word "copyright" in this example doesn't mean the same thing (or anything at all) in your language.<br />This is meant to make sure that supporters and users can easily refer to doc sections they don't even understand.</li>
+        <li>Leave the JavaScript-sections alone: they are used to provide the navigation later - don't touch them. Especially the line <tt class="code">dateRevision(' $LastChangedDate$ ', ' $Revision$ ');</tt> or similar is <strong>not</strong> meant to be edited by you: it will be updated when your contribution is being added to the package.</li>
+        <li>Do <strong>not</strong> edit the SVN version info section at the top of the page (commented out) - it will be used for internal purposes (again: <a href="dev_subversion.htm">subversion repository</a>) later.</li>
+        <li>Don't improve your localized version/translation only: you might find that the English part of the documentation is lacking some explanations or that it is inacurate or missing important bits, so you might be tempted to add sections to your translation of the docs that don't exist in the original, English section of the docs. However, we don't think that this is a good idea: if you have suggestions to make how to improve the docs, we'd love to see your suggestion for the benefit of all users. This being said: please don't just add sections to your local copy of the translation - post your suggestion publicly instead in order to see your proposed improvement go into both the English version of the docs as well as your version.</li>
+        <li>Translate examples if applicable: you are welcome to translate examples into your language as well: the English sample user name "John Doe" can of course be changed into the typical German sample user "Max Mustermann" for example. The sample URL <tt class="code">http://yoursite.tld/your_coppermine_folder/</tt> can of course be translated into <tt class="code">http://deine-seite.tld/dein_coppermine_verzeichnis/</tt> in a German localization of the docs.</li>
+    </ul>
+    </li>
+    <li><a name="translation_documentation_steps_toc"></a><h4>Take care of the table of contents<a href="#translation_documentation_steps_toc" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    Once you have completed translating the files you want to translate (in an ideal world: all files), take a look at the files <tt class="code">script.js</tt> and <tt class="code">toc.htm</tt>. The former file is the JavaScript file that will later compose the menu/navigation on all pages, the later file will be the plain HTML equivalent (for those who have JavaScript disabled).<br />
+    In script.js, scroll a bit down until you find the navigational structure (starting with the line <tt class="code">var doc_toc = '';</tt> - each of the following lines is representing a navigation item. You should translate this as well (at least the stuff you have come up with). Of course, you don't have to edit the file names (they should remain in English), but only the textual representation. If you're not sure what to do, take a look at an existing translation and see how this has been done there.<br />
+    The similar thing applies to toc.htm, which is the HTML-driven "table of contents"; again, you should translate the labels, but not the file names nor the anchor names.</li>
+    <li>There are some strings inside script.js that need to be translated as well: search for
+    	<ul>
+    		<li><tt class="code">$('#docheader').text('Coppermine Photo Gallery v1.5.1: Documentation and Manual');</tt> and replace the actual text in that line (<tt class="code">Documentation and Manual</tt>) with the translation into your language</li>
+    		<li><tt class="code">overall_doc_footer += '&lt;a href="#top"&gt;Back to Top&lt;/a&gt;';</tt> and replace the actual text in that line (<tt class="code">Back to Top</tt>) with the translation into your language</li>
+    		<li><tt class="code">$('#doc_last_changed').text('About this document: ' + 'last changed on ' + lastChangeDate);</tt> and replace the actual text in that line (<tt class="code">About this document</tt> and <tt class="code">last changed on</tt>, but not <tt class="code">lastChangeDate</tt>) with the translation into your language</li>
+    		<li><tt class="code">$('#doc_revision').text(', SVN revision ' + revisionNumber);</tt> and replace the actual text in that line (<tt class="code">SVN revision</tt>) with the translation into your language. If you're not sure what a SVN revision is, leave that line alone!</li>
+    	</ul>
+    </li>
+    <li><a name="translation_documentation_steps_zip"></a><h4>Zip your translation<a href="#translation_documentation_steps_zip" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    Finally, when you're done translating, zip your custom language folder and attach the zip to a posting on the corresponding coppermine board. Of course, there will be a credit list where your name and site address will be mentioned, so make sure to provide the details you want to see go into that credit list within your posting.</li>
+</ul>
+
+<a name="translation_links"></a><h2>Further reading<a href="#translation_links" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<ul>
+	<li><a href="http://www.joelonsoftware.com/articles/Unicode.html" rel="external" class="external">The absolute minimum every software developer absolutely, positively must know about unicode and character sets</a> by Joel Spolsky</li>
+</ul>
+
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

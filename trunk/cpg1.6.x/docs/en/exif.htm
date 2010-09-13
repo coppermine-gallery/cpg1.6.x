@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>EXIF data - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="The Exchangeable image file format (Exif) is a specification for the image file format used by digital cameras with the addition of specific metadata tags. The meta data are written by the camera and can be post-processed using certain desktop applications. Coppermine is capable of displaying some of the EXIF data within the pic info section, like date and time information, camera settings, location information, descriptions and copyright information." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<a name="exif"></a><h1>EXIF data<a href="#exif" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+
+<a name="exif_what"></a><h2>What is EXIF<a href="#exif_what" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p><img src="images/exif_data_cpg1.4.x.jpg" width="400" height="202" border="0" alt="Exif data in pic info section" align="right" style="padding-left:5px" />
+The &quot;Exchangeable image file&quot; format (Exif) is a specification for the image file format used by digital cameras with the addition of specific metadata tags. The meta data are written by the camera and can be post-processed using certain desktop applications. Coppermine is capable of displaying <em>some</em> of the EXIF data within the pic info section, like date and time information, camera settings, location information, descriptions and copyright information.</p>
+
+<a name="exif_makers"></a><h2>Different flavors<a href="#exif_makers" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Please note that EXIF is far from being a standard: each camera vendor uses his own "flavor" of EXIF - therefore, the EXIF meta data will differ from camera to camera. Coppermine tries to circumvent this by using different libraries for the most common camera brands and only displaying the exif data that are most common for all brands.</p>
+<p>Exif data from the following Camera brands are currently supported:</p>
+<ul>
+    <li>Canon</li>
+    <li>Fuji</li>
+    <li>Nikon</li>
+    <li>Olympus</li>
+    <li>Panasonic</li>
+    <li>Sanyo</li>
+</ul>
+<p>The exif libraries reside in the folder <tt class="code">http://yoursite.tld/your_coppermine_folder/include/makers/</tt>, but usually those files should be left alone and don't need editing.</p>
+
+<a name="exif_how_it_works"></a><h2>How it works<a href="#exif_how_it_works" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>It would be very time-consuming if an application would process an image each time it gets displayed to extract the exif data embedded into the image. That's why Coppermine populates a separate exif database table only once per image, during the upload stage of the image when that image get's resized as well (using the exif data embedded into the image). That exif data is being written into the table that works as a sort of cache. Each time the image get's accessed (i.e. when it get's displayed embedded into Coppermine) the exif data stored in the database is being read to populate the exif meta data. This is much faster and less ressources-consuming. The processing of exif data is only being performed if the corresponding config option &quot;<a href="configuration.htm#admin_picture_thumb_advanced_exif">Read EXIF data from JPEG files</a>&quot; is enabled.</p>
+
+<a name="exif_image_libraries"></a><h2>No exif support on the server<a href="#exif_image_libraries" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>There are two image libraries Coppermine can use: GD or ImageMagick. If files get edited on the server using one of those image libraries (i.e. if the images get resized, cropped or rotated), all meta information (Exif or IPTC) get <strong>lost</strong> in the resulting image, as the image libraries simply both don't support the preservation of exif tags. Therefor, if you resize your pics (this includes creation of intermediate sized images and thumbnails), the exif data embedded into the original will be lost - it will not remain inside the resized image. It will remain though within the exif database table and will be displayed inside the file information section. It's not the fault of coppermine that the exif data get's lost in the image, but the fault of the image libraries that coppermine is using. As a workaround, you can resize your images on your client (that includes the intermediate and thumbnail, respecting the prefixes set in in coppermine's config) with a client application that is capable to preserve exif information (like IrfanView and several other apps). Then upload the whole bunch of files using your favorite FTP app and finally just perform a batch-add. This will result in all of your images containing your exif data, as Coppermine (or rather: the image libraries used by coppermine) did not touch them.<br />
+Perform your edits on the client (before you upload them) if you do stuff like crop & rotate.</p>
+
+<a name="exif_limitations"></a><h2>Limitations<a href="#exif_limitations" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>As suggested above, the implementation of Exif in Coppermine is limited. Coppermine is mainly not designed with professional photographers in mind, so the impact of the missing Exif capabilities should be neglible for the majority of coppermine users.</p>
+<p>Geotagging meta data are not supported by coppermine yet.</p>
+
+
+<a name="exif_manager"></a><h2>EXIF manager<a href="#exif_manager" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Coppermine comes with an EXIF manager that let's the coppermine admin decide what EXIF data should be displayed within coppermine. Please note: if the exif data doesn't exist within a particular image, coppermine will of course not be able to display them. Coppermine is <em>not</em> an editor for exif data - it just displays the exif data that exists in your pics.<br />
+To access the exif manager, go to coppermine's config and click within the section <a href="configuration.htm#admin_picture_thumbnail">File settings </a> at &quot;Manage exif display&quot; next to the line &quot;<a href="configuration.htm#admin_picture_thumb_advanced_exif">Read EXIF data in JPEG files</a>&quot; or choose the corresponding <a href="admin_menu.htm#admin_menu">admin menu</a> entry.</p>
+<p>Tick the checkboxes in the exif manager that you want to show up in coppermine's pic info section (if the image file actually holds this particular set of information). Remember though that there is no guarantee that a particular field will be populated or displayed - as explained above, each camera vendor supplies a set of supported exif fields that differ from other vendors.</p>
+
+<p>The following exif parameters are currently supported:</p>
+<ul>
+    <li>AF Focus Position</li> 	
+    <li>Adapter</li></li> 	
+    <li>Color Mode</li> 	
+    <li>Color Space</li> 	
+    <li>Components Configuration</li> 	
+    <li>Compressed Bits Per Pixel</li> 	
+    <li>Contrast</li> 	
+    <li>Customer Render</li> 	
+    <li>DateTime Original</li> 	
+    <li>DateTime digitized</li> 	
+    <li>Digital Zoom</li> 	
+    <li>Digital Zoom Ratio</li> 	
+    <li>EXIF Image Height</li> 	
+    <li>EXIF Image Width</li> 	
+    <li>EXIF Interoperability Offset</li> 	
+    <li>EXIF Offset</li> 	
+    <li>EXIF Version</li> 	
+    <li>Exposure Bias</li> 	
+    <li>Exposure Mode</li> 	
+    <li>Exposure Program</li> 	
+    <li>Exposure Time</li> 	
+    <li>FNumber</li> 	
+    <li>File Source</li> 	
+    <li>Flash</li> 	
+    <li>Flash Pix Version</li> 	
+    <li>Flash Setting</li> 	
+    <li>Focal length</li> 	
+    <li>Focus Mode</li> 	
+    <li>Gain Control</li> 	
+    <li>IFD1 Offset</li> 	
+    <li>ISO Selection</li> 	
+    <li>ISO Setting</li> 	
+    <li>ISO</li> 	
+    <li>Image Adjustment</li> 	
+    <li>Image Description</li> 	
+    <li>Image Sharpening</li> 	
+    <li>Light Source</li> 	
+    <li>Make</li> 	
+    <li>Manual Focus Distance</li> 	
+    <li>Max Aperture</li> 	
+    <li>Metering Mode</li> 	
+    <li>Model</li> 	
+    <li>Noise Reduction</li> 	
+    <li>Orientation</li> 	
+    <li>Quality</li> 	
+    <li>Resolution Unit</li> 	
+    <li>Saturation</li> 	
+    <li>Scene Capture Mode</li> 	
+    <li>Scene Type</li> 	
+    <li>Sharpness</li> 	
+    <li>Software</li> 	
+    <li>White Balance</li> 	
+    <li>YCbCrPositioning</li> 	
+    <li>X Resolution</li> 	
+    <li>Y Resolution</li>
+</ul>
+
+
+<a name="exif_end"></a>
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

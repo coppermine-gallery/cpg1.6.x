@@ -1,0 +1,248 @@
+/*************************
+  Coppermine Photo Gallery
+  ************************
+  Copyright (c) 2003-2010 Coppermine Dev Team
+  v1.0 originally written by Gregory Demar
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License version 3
+  as published by the Free Software Foundation.
+  
+  ********************************************
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+**********************************************/
+
+body {
+	font-family : Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background : #F7F7F7;
+	color : Black;
+	margin: 0px;
+}
+h1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-weight: normal;
+	padding: 5px;
+}
+h2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	margin: 0px;
+}
+p {
+	margin: 2px 0px;
+}
+td {
+	font-size: 12px;
+}
+hr {
+	color : #000000;
+	height: 1px;
+}
+.textinput {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 100%;
+	border: 1px solid #D1D7DC;
+	padding-right: 3px;
+	padding-left: 3px;
+}
+.listbox {
+	border: groove 1px;
+}
+.button {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 100%;
+	border: 1px solid #005D8C;
+	background-image : url(../images/button_bg.gif);
+	background-position : bottom;
+}
+a {
+	color: #0033CC;
+	text-decoration: none;
+}
+a:hover {
+	color: #0033CC;
+	text-decoration: underline;
+}
+.tableh1 {
+	background : #0E72A4;
+	color : #FFFFFF;
+	padding-top: 3px;
+	padding-right: 10px;
+	padding-bottom: 3px;
+	padding-left: 10px;
+	font-weight:bold;
+}
+.tableh2 {
+	background: #D1D7DC;
+	color : #000000;
+	padding-top: 3px;
+	padding-right: 10px;
+	padding-bottom: 3px;
+	padding-left: 10px;
+}
+.tableb {
+	background: #EFEFEF;
+	padding-top: 3px;
+	padding-right: 10px;
+	padding-bottom: 3px;
+	padding-left: 10px;
+}
+.tableb_alternate {
+	background: #E4E4E4;
+}
+.tablef {
+	background: #D1D7DC;
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+}
+.updatesOK {
+	font-weight: bold;
+	color: green;
+}
+.updatesFail {
+}
+.maintable {
+	border: 1px solid #0E72A4;
+	background-color: #EFEFEF;
+	margin-top: 1px;
+	margin-bottom: 1px;
+}
+.charsetchecktable {
+}
+.charsetchecktable td, .charsetchecktable th {
+	padding: 2px;
+	border: 1px solid gray;
+}
+.charsetchecktable td {
+	font-size: 10px;
+}
+.charsetchecktable td.check {
+	font-size: 12px;
+}
+.error, .bigwarning {
+	color : Red;
+	font-weight : bold;
+}
+h2.error {
+	text-align: center;
+	background-color: #EFEFEF;
+}
+img.logo {
+	background-color: #EFEFEF;
+	text-align: left;
+}
+.bigwarning, .warning, .failed {
+	color: red;
+}
+td.warning {
+	background-color: red;
+	color: white;
+}
+p, div.warning {
+	margin: 10px;
+	padding: 5px;
+}
+table.maintable td {
+	padding: 2px;
+}
+p.warning, div.warning {
+	color: black;
+	font-size: 120%;
+	border: 1px solid black;
+	background: #fdd;
+}
+form {
+	margin-top:0px;
+	margin-bottom:0px;
+}
+.check {
+	background-color: white;
+	font-weight: bold;
+	color: blue;
+}
+.nocheck {
+	color: gray;
+}
+.done {
+	background-color: green;
+	color: white;
+	text-align: center;
+}
+fieldset {
+	width: 90ex;
+	margin: 5px auto;
+}
+fieldset form {
+	margin: auto 10px;
+}
+
+/*stepper*/
+.stepper_table {
+	width:100%;
+	margin-top:-30px;
+}
+.stepper_c, .stepper_d, .stepper_do, .stepper_n {
+	height:21px;
+	width:21px;
+	margin:2px;
+	text-align:center;
+	color: #FFFFFF;
+}
+.stepper_c {
+	background:url(../images/install/current.gif);
+	background-repeat:no-repeat;
+}
+.stepper_n {
+	background:url(../images/install/notyet.gif);
+	background-repeat:no-repeat;
+}
+.stepper_d, .stepper_do {
+	background:url(../images/install/done.gif);
+	background-repeat:no-repeat;
+	cursor:pointer;
+}
+.stepper_d {
+	background-position: top left;
+}
+.stepper_do {
+	background-position: 0 -21px;
+}
+
+.cpg_message_info, .cpg_message_success, .cpg_message_warning, .cpg_message_error, .cpg_message_validation {
+    border: 1px solid;
+    margin: 10px 0px;
+    padding:15px 10px 15px 50px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+.cpg_message_info {
+    color: #00529B;
+    background-color: #BDE5F8;
+    background-image: url('../images/message/info.png');
+}
+.cpg_message_success {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+    background-image: url('../images/message/ok.png');
+}
+.cpg_message_warning {
+    color: #9F6000;
+    background-color: #FEEFB3;
+    background-image: url('../images/message/warning.png');
+}
+.cpg_message_error {
+    color: #D8000C;
+    background-color: #FFBABA;
+    background-image: url('../images/message/stop.png');
+}
+.cpg_message_validation {
+    color: #D63301;
+    background-color: #FFCCBA;
+    background-image: url('../images/message/error.png');
+}

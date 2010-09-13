@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Known Issues - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Known Issues" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<a name="known_issues"></a><h1>Known Issues<a href="#known_issues" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>The following slight quirks and tiny issues are known and will hopefully be fixed in future releases.</p>
+<ul>
+    <li>The <a href="http://coppermine-gallery.net/forum/index.php?topic=1866.0">arrows used for navigation</a> from one pic to the other display in the wrong order for rtl-languages</li>
+    <li>Keyword list returns incorrect result for asian characters</li>
+    <li>Browser bug: IE displays 100%-width values incorrectly</li>
+    <li>New batch-add interface doesn't work on all server setups. Users who have issues with it should use the classic interface instead.</li>
+    <li>Page tabs in user manager don't behave in the same way as other tabs</li>
+    <li>Resizing gif/png with transparent background doesn't preserve alpha info</li>
+    <li>Wrong charset in emails sent from coppermine</li>
+    <li>Thumbnail sizes over 120px causes edit fields to run over its edge</li>
+    <li>No album thumbnails for albums that contain only pics linked by keyword</li>
+    <li>Crop/rotate doesn't work with GD1</li>
+    <li>Rotate causing distorted image for large files</li>
+    <li><tt class="code">&lt;object&gt;&lt;param&gt;&lt;/param&gt;&lt;/object&gt;</tt> construct for multimedia files doesn't validate but is needed for backwards compatibility</li>
+    <li>EXIF and IPTC information are lost when rotating</li>
+    <li>Discrepancy between Coppermine internally using utf-8 and IPTC currently one supporting iso-8859-1. Subsequently, non latin characters like accented chars or Umlauts get distorted</li>
+    <li>Album created using XP publisher despite upload failure</li>
+    <li>No category thumbnail for user galleries and categories that don't contain albums with pics in it, but only sub-categories</li>
+    <li>Film strip may change its height when navigating if thumb dimension is set to 'width'</li>
+    <li>Flash uploader (swfupload) won't work if the gallery is located in a <a href="http://forum.coppermine-gallery.net/index.php/topic,62770.0.html">password protected directory</a></li>
+    <li>Some rounded corner effects of the curve theme won't work across-browsers, but are browser-specific. They will not work in IE mainly. The browsers that can't display rounded corners will display "normal" corners.</li>
+    <li>Album moderator feature not clearly documented and therefore disabled (<a href="http://forum.coppermine-gallery.net/index.php/topic,64408.0.html">thread</a>)</li>
+    <li>Category thumbnails appear larger than expected if thumb aspect is set to "exact" for the thumbnail setting &quot;<a href="configuration.htm#admin_picture_thumbnail_use-dimension">Use dimension</a>&quot; (<a href="http://forum.coppermine-gallery.net/index.php/topic,56147.0.html">thread</a>)</li>
+    <li>If you allow guests to upload files to your gallery, they won't be able to add file details. This feature has been disabled as it's not possible to identify the user without fail (see <a href="http://forum.coppermine-gallery.net/index.php/topic,62522.msg323512.html#msg323512">thread</a>). Additionally it may attract spammers to add textual content to your gallery. If you want to enable that feature anyway, find Coppermine's configuration table in the database and change the value of <tt class="code">allow_guests_enter_file_details</tt> to '1'.</li>
+</ul>
+
+<div id="doc_footer">
+    <div class="doc_info_wrapper">
+        <span id="doc_last_changed">$LastChangedDate$</span>
+        <span id="doc_revision">$Revision$</span>
+    </div>
+</div>
+</body>
+</html>

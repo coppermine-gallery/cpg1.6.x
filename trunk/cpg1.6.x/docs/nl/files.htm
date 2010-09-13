@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Files - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Here, you can modify the title, description, keywords, and custom fields (if they are used) of your video files." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+  $Date$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Inhoudstafel</a>
+</div>
+<div id="doc_en_only">No translation available</div>
+
+<a name="files"></a><h1>Files<a href="#files" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>In Coppermine, uploaded files go into <a href="albums.htm">albums</a>. Albums can contain files, but not sub-albums. Albums can go into <a href="categories.htm">categories</a>. Categories can contain sub-categories and albums, but they can <strong>not</strong> contain files.</p>
+<p>Coppermine (in version 1.0) was designed in the first place to display images. Later in the development process came multimedia files (audio and video files as well as documents), that's why the term "images" was dropped in favor of "files". In some places (e.g. in table names or some places of the documentation), the term "image" might shine through through although "files" are actually meant.</p>
+<p>You might be tempted to believe that Coppermine was actually a file editor because it has the capabilities to edit (resize) and create images. However, that is only the case to a limited extent: Coppermine is not an image editor and can't be used as a replacement for such a desktop app. Instead, it's a web gallery that works good to display your files on the www.</p>
+
+
+<a name="edit_pics"></a><h2>Editing files<a href="#edit_pics" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<img src="images/edit_picture.gif" border="0" alt="" />
+<p>Use this link to modify your file's title, description, keywords, and custom fields (if they are used).</p>
+<p>Use the album drop down menu in the panel to move the file between albums.
+Use keywords to link files to other albums (see description in the albums section above).</p>
+
+
+
+<a name="edit_vids"></a><h2>Editing videos<a href="#edit_vids" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p><img src="images/edit_video.gif" border="0" alt="" /></p>
+<p>Here, you can modify the title, description, keywords, and custom fields (if they are used) of your video files.</p>
+<p>Use the album drop down menu to move the video to another album.</p>
+<p>Use the height and width fields to set the size of the video.</p>
+<p>Video uploads are possible beginning with cpg1.3.0 (or latter) and are included as part of the distribution package.</p>
+
+
+<a name="cust_thmb"></a><h2>Custom Thumbnails<a href="#cust_thmb" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p><img src="images/cust_thmb.gif" border="1" alt="" /></p>
+<a name="cust_thmb_order"></a><h3>Order of thumbnails<a href="#cust_thmb_order" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p class="cpg_message_info">Thumbnails are defined by different levels (these are: user-defined, theme-defined, global) then in the order of their type (file-specific, extension-specific, media-specific).</p>
+<p>User-defined thumbnails are stored in the folder where the parent file is located. Theme-defined thumbnails are stored in the themes 'images' folder. Global thumbnails are stored within the 'images' folder of the Coppermine root.</p>
+<p class="cpg_message_info">Thumbnails can be one of the following file types: 'gif', 'png', or 'jpg'.</p>
+
+<a name="cust_thmb_types"></a><h3>Types of thumbnails<a href="#cust_thmb_types" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p class="cpg_message_info">File-specific thumbnails must have the same base name as the file.</p>
+<p>Using the above screenshot of a video file as an example, the thumbnails for this file could be 'thumb_<strong>thailand_waterfall</strong>.gif', 'thumb_<strong>thailand_waterfall</strong>.png', or 'thumb_<strong>thailand_waterfall</strong>.jpg', and searched for by cpg in that order.</p>
+<p><span class="important">Extension-specific thumbnails are named after the extension of the file.</span> (Examples: 'thumb_wmv.jpg', 'thumb_wav.jpg'.)</p>
+<p><span class="important">The base name for media-specific thumbnails are 'thumb_movie', 'thumb_document', and 'thumb_audio'.</span> Images use file-specific thumbnails by default.</p>
+
+<a name="cust_thmb_upload"></a><h3>Uploading custom thumbs<a href="#cust_thmb_upload" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>There are 2 ways to upload custom thumbnails:</p>
+<ul>
+	<li><img src="images/cust_thmb_3.gif" border="1" alt="" align="right" />Have an image already uploaded then upload a video via the upload page. (or vice versa) The video will share the thumbnail of the image.<br clear="all" /></li>
+	<li><img src="images/cust_thmb_final.gif" border="1" alt="" title="Final result" align="right" />FTP upload both the video and (thumbnail or image) then <a href="uploading_batch-add.htm#batch_add_pics">batch-add</a>. If you FTP upload the thumbnail, the thumbnail will be display in the batch add page instead of the default Coppermine thumbnail. If you upload an image it will look like the above screenshot. However, when the both files are added to the database, the thumbnail of the image will be used by the video.<br clear="all" /></li>
+</ul>
+<p>Note: If the first method is used and the image later deleted, the thumbnail will also be deleted and the default Coppermine thumbnails will be displayed, instead.</p>
+<p>If a previously uploaded video is to be uploaded again, via FTP, the accompanying thumbnail must also be uploaded, via FTP, to the same folder.</p>
+<p class="cpg_message_success">Using the above instructions, a custom thumbnail can be applied to <em>any</em> file, not just videos.</p>
+
+<a name="cust_thmb_how"></a><h3>How it works<a href="#cust_thmb_how" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>As suggested above, there are different types of thumbnails. Most users don't care for the generic thumbnail that represents a particular file type (like movies with the extension <tt class="code">.mov</tt>) - they don't want to see that generic thumbnail at all, but just a nicely looking thumbnail that blends into the generated ones for image uploads. To understand how this works, you just have to take a look at how coppermine works: file uploads go into particular folders. Coppermine "looks" into the folder where your file actually is stored in to see if there is a thumbnail that "fits" to the file, respecting the naming scheme. If it finds such a thumbnail, it will use it. If it doesn't, it will use the generic one that was designed to represent the media type.</p>
+
+<a name="cust_thmb_how_naming"></a><h3>Naming scheme<a href="#cust_thmb_how_naming" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>The naming scheme is pretty straightforward: you can specify a <a href="configuration.htm#admin_picture_thumb_advanced_thumbs_prefix">prefix for the thumbnails</a> in coppermine's config. Out of the box, this prefix is set to <tt cass="code">thumbs_</tt>, and that's fine - don't change that setting unless you really, really know what you're doing. So for now, let's assume that you haven't changed it, it is the default prefix <tt cass="code">thumbs_</tt>.</p>
+<p>Now, let's assume that you're trying to create a custom thumbnail for the file <tt class="code">myvideo.avi</tt> that resides in the folder <tt class="code">/albums/userpics/10235/</tt>. Subsequently, coppermine would look into that folder and see if there is a file named <tt class="code">thumb_myvideo.jpg</tt>. If this thumbnail file exists, it will be used as a thumbnail to represent the video. If it doesn't exist, Coppermine would use the generic one.</p>
+<p>Therefore, the naming scheme is the thumbnail prefix plus the file name of the video (without the extension) plus a dot (to separate the actual filename from the extension) plus the extension <tt class="code">jpg</tt>.</p>
+<p><strong>Capitalization matters</strong>: many users are not aware that there <em>is</em> a difference on Unix/Linux-driven computers between lower case and upper case, simply because on Windows there is no such difference. You have to keep this aspect in mind: since most webservers are Unix/Linux-driven, capitalization matters! That's why <tt class="code">thumb_myvideo.jpg</tt> and <tt class="code">thumb_myvideo.JPG</tt> are two entirely different animals. It <em>does</em> matter how you name your custom thumbnail. If the file you're trying to represent with a custom thumbnail is named <tt class="code">myVideo.avi</tt>, the custom thumbnail needs to be named <tt class="code">thumb_myVideo.jpg</tt>! Other variants with different capitalization (like <tt class="code">thumb_myVideo.JPG</tt>, <tt class="code">thumb_myvideo.jpg</tt>, <tt class="code">Thumb_myVideo.jpg</tt>, <tt class="code">thumb_myVideo.Jpg</tt> or similar) will <strong>not</strong> work as expected!</p>
+
+<a name="cust_thmb_why"></a><h3>Why can't coppermine create thumbnails for my videos?<a href="#cust_thmb_why" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>All this custom thumbnail business might appear very complicated to newbies, and in fact you're right: this is a complicated process. Therefore, many users ask why this has to be so complicated. Coppermine can create thumbnails for images, so why can't it create thumbnails for videos? The reason is pretty simple: because the image libraries that Coppermine is relying on (GD or ImageMagick, see "<a href="requirements.htm#what">Minimum requirements</a>") to create thumbnails from images don't support videos. It's not that the Coppermine developers have been reluctant to come up with code that auto-creates thumbnails for videos - it's just that they <em>can't</em> because the technology that is available on your webserver can't.</p>
+
+<a name="cust_thmb_step"></a><h3>Step-by-step instructions<a href="#cust_thmb_step" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Here is a step-by-step tutorial to get you going:</p>
+<ul>
+	<li><strong>Create the custom thumbnail on your desktop</strong><br />
+	Take a screenshot of the movie using your favorite desktop app that is capable to accomplish this, use a picture that represents the content of your video or doodle something in MS Paint: you have to create the custom thumbnail first on your desktop. We really can't help you with that, since there are so many different desktop apps available.
+	<br />Pay attention that the custom thumbnail you come up with has got the same dimensions your other thumbails have (according to the dimensions you have set for your thumbnails in coppermine's config).<br />
+	Once you're done with this, you should have a thumbnail file (as a jpg) on your desktop that has the proper dimensions. Don't upload it yet - let's do some checks first.
+	</li>
+	<li><strong>Figure out the exact location and name of the video that you're trying to come up with a thumbnail for it</strong><br />
+	Now, this can be the most tricky part for newbies: let's assume that the video has already been uploaded to coppermine. If it was you who uploaded the movie using FTP upload plus batch-add in the first place, you should know the exact folder and file name, but for this example let's assume that one of your users has used http uploads to upload the video, so you have no idea where the actual file went to.<br />
+	Don't panic, start your browser, go to your gallery and start browsing it. Navigate to the page that embedds the video, so you can see the actual video being played within the Coppermine user interface. Now, do a right-click, show source somewhere inside the browser window. Don't do the right-click on the actual video, but into some blank space next to it. The HTML output of the page you're looking at should show up. Now search the HTML output for the term <tt class="code">class="imageborder"</tt> - this should bring you right in front of the block that we're actually looking for, so carefully scroll down a bit more (4 or 5 lines). We're looking for a block of code that looks like this:
+	<pre class="cpg_code code">&lt;param name="src" value="albums/userpics/10235/myvideo.avi" /&gt;</pre>
+	The value that is given for that parameter (<tt class="code">albums/userpics/10235/myvideo.avi</tt> in this example) is what we're looking for. It indicates in which folder the file actually resides (<tt class="code">albums/userpics/10235/</tt> in this example) and what the file name is (<tt class="code">myvideo.avi</tt> in this example). Memorize this piece of information (or just keep the source view window open, with the section we just found out highlighted) - we'll need the information in the next two steps.</li>
+	<li><strong>Rename your custom thumbnail on your desktop</strong><br />
+	Back to your desktop, we have to name our custom to match the <a href="files.htm#cust_thmb_how_naming">naming conventions</a>. For above example (and assuming that you haven't changed the thumbnail prefix in config), you have to rename the custom thumbnail on your desktop to <tt class="code">thumb_myvideo.jpg</tt>. Keep in mind that capitalization matters!</li>
+	<li><strong>Upload the custom thumb</strong><br />
+	Finally, the custom thumb is ready to be uploaded - we just have to make sure that it goes into the folder where your original video resides in. In above example, the relative folder (seen from coppermine's root folder) would be <tt class="code">albums/userpics/10235/</tt>.<br />
+	Start your favorite FTP application (like Filezilla or similar), connect to your webserver and upload your custom thumbnail from your desktop into the folder that represents the URL <tt class="code">http://yoursite.tld/your_coppermine_folder/albums/userpics/10235/</tt></li>
+	<li><strong>Done</strong><br />
+	If everything works as expected, you should be done. Make sure that it does by starting your browser once more, browse your gallery and navigate to the album view that contains the video we just created a custom thumbnail for. You should by now see the custom thumbnail instead of the generic one. If this is not the case for you immediately, make sure that you're not looking at a cached copy of the page - you better force-refresh your browser ([Ctrl]+[F5]) when looking at the thumbail page.</li>
+	<li><strong>Things that you should <em>not</em> do</strong><br />
+	If a custom thumbnail that corresponds to a video file according to the naming scheme exists within the same folder, it will be used. Therefore, you shouldn't (and mustn't) use the http upload mechanism built into coppermine to upload the custom thumbnail, nor are you supposed to batch-add the custom thumbnail. You just FTP-upload it and that's it! We don't want it to reside in the database.</li>
+</ul>
+
+<a name="cust_thmb_faq"></a><h3>Custom thumbnails FAQ<a href="#cust_thmb_faq" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<ul>
+<li>
+	<a name="cust_thmb_faq_multiple_videos"></a><h4>I have a video named <tt class="code">movie.wmv</tt>, when I upload a thumbnail for it <tt class="code">thumb_movie.jpg</tt> it replaces the thumbnails for multiple videos!<a href="#cust_thmb_faq_multiple_videos" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+	Duhh. <tt class="code">thumb_movie.jpg</tt> is a <em>media-specific</em> thumbnail. Rename the video and the thumbnail with something other than just <strong>'movie'</strong>.
+</li>
+<li>
+	<a name="cust_thmb_faq_user_folder"></a><h4>I can't find my user's folder!<a href="#cust_thmb_faq_user_folder" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+	From within Coppermine, browse to the user's album. Look in the url of your browser and you should see the folder's name. (See screenshot for an example.)<br />
+	<img src="images/user_folder_link.gif" border="0" width="387" height="152" alt="" /><br />
+	Your users can upload their own thumbnails by using this trick: Create an album. Change the permissions on it so no one can view it except that specific user. Then upload the fullsized images of the thumbnails to this folder. Files outside this album will be able to use the thumbnails of these images. (See above for naming.)
+</li>
+<li>
+	<a name="cust_thmb_faq_stop_users"></a><h4>How do I stop my users from creating their own custom thumbnails?<a href="#cust_thmb_faq_stop_users" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+	Currently, this is not possible.
+</li>
+</ul>
+
+<a name="edit_pics_end"></a>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

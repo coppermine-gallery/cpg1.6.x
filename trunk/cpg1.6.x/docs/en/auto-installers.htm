@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Auto-Installers - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="There are many webhosting packages that offer pre-made scripts like Coppermine to be installed just with a single click in the webhosting control panel (usually cPanel). We can see that this is an easy and comfortable install method for newbies who have no experience in running and maintaining a website. However, the only supported install method is the one we describe in this documentation. Auto-Installers like Fantastico go unsupported." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<a name="auto-installers"></a><h1>Auto-Installers<a href="#auto-installers" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<a name="definition"></a><h2>What are auto-installers?<a href="#definition" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>There are many webhosting packages that offer pre-made scripts like Coppermine to be installed just with a single click in the webhosting control panel (usually cPanel). We can see that this is an easy and comfortable install method for newbies who have no experience in running and maintaining a website. In an ideal world, this would be the best method - end users wouldn't have to worry about database issues, FTP apps etc.</p>
+
+<a name="sad_story"></a><h2>The sad story<a href="#sad_story" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>The Coppermine team has made bad experiences with auto-installers in the past. The creators of the auto-installers have to adapt the original packages to make them work with their installers. In the past, the creators of <a href="http://netenberg.com/fantastico.php" rel="external" class="external">Fantastico</a> did so as well, but they introduced bugs into their re-made flavor of Coppermine, which resulted in strange behaviour. Sadly, the end users who encountered those flaws did not turn to Fantastico for help, but turned up on the Coppermine support board. The developers of those auto-installers are only human, and humans can make mistakes, so there's nothing wrong with the bug in itself. Subsequently, the Coppermine developers made the Fantastico staff aware of the bugs that <strong>they</strong> had introduced in the first place, asking them to fix them as soon as possible. However, they ignored the bugs for more than 18 months, during which the bug spread through the internet, resulting in even more frustrated end users seeking support from the coppermine staff on an issue that they have not been responsible for and that they could not fix themselves.</p>
+
+<a name="why_not"></a><h2>Why not use auto-installers<a href="#why_not" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Using auto-installers of course has advantages. However, there are serious disadvantages as well:</p>
+<div class="indent">
+  <h3>Bugs can exist in auto-installers that don't reside in the Coppermine package that is provided by the Coppermine team</h3>
+  As suggested above, the creators of auto-installers have to modify the Coppermine package to make it work with their installers. It is not unlikely that they introduce bugs, as they don't understand the app as well as the original dev team does.
+  <h3>Auto-installers usually lag behind in version count</h3>
+  The Coppermine dev team creates maintenance releases to fix bugs as soon as they are discovered and fixed. The creators of auto-installers update their package less frequently. Webhosts don't apply fixes in auto-installers right when they get released. Subsequently, auto-installers often lag behind in version count, often resulting in vulnerable installs in terms of security.
+  <h3>End users don't read the documentation</h3>
+  It is understandable that you don't read the entire documentation for an app that you can install with the click on a single button. This is OK - everybody likes &quot;easy&quot;. However, if you're not forced to read the documentation, you might miss important notes.
+</div>
+
+<a name="no_support"></a><h2>No support<a href="#no_support" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>As a result of the <a href="#sad_story">sad story with Fantastico</a> and taking into account the <a href="#why_not">disadvantages of auto-installers</a>, the Coppermine dev team has chosen not to support issues related to the fact that users have been using an auto-installer like Fantastico.</p>
+<p class="cpg_message_warning">This means that <strong>the only supported install method</strong> is the one <strong>we</strong> describe in this documentation.</p>
+<p>But do not worry: we won't leave you unsupported. Usually, you don't have to un-install your auto-installed Coppermine gallery and re-install our version; just perform an upgrade as suggested in the <a href="upgrading.htm">upgrade section</a> of the documentation (even though the version number of your auto-installed gallery appears to be the same as they most recent &quot;original&quot; Coppermine package) and you should be fine.</p>
+<p>This means that you can easily "convert" your auto-installed gallery into a "genuine" Coppermine-gallery just by performing the <a href="upgrading.htm#upgrade">update/upgrade</a> as suggested in our documentation. We will even support you performing that update in case you have issues. However, the Coppermine dev team is not ready to support you if you run a gallery that has been set up using an auto-installer. In case you're not happy with this policy, please seek support from your webhost of whoever provided the auto-installer to you.</p>
+
+
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

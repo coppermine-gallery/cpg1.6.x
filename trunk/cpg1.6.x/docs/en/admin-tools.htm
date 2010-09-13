@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Admin Tools - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Coppermine Photo Gallery project - Coppermine is an easily set-up, fast, feature-rich photo gallery script with mySQL database, user management, private galleries, automatic thumbnail creation, ecard feature and a template system for easy customization to match the rest of a site." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<a name="admin_tools"></a><h1>Admin Tools<a href="#admin_tools" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p><img src="images/admin-tools.png" border="0" width="350" height="194" alt="" align="right" />With the admin tools, you can perform operations based on individual albums (or for all albums in your gallery). The admin tools contain various small tools - most of them being used to control pictures in albums.</p>
+
+<a name="admin_tools_options"></a><h2>Available Tools<a href="#admin_tools_options" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>A collection of utilities to:</p>
+<ul>
+	<li><a href="#admin_tools_options_rebuild">Update thumbs and/or resized photos</a></li>
+	<li><a href="#admin_tools_options_filename_filetitle">Filename &rarr; File title</a></li>
+	<li><a href="#admin_tools_options_delete_titles">Delete file titles</a></li>
+	<li><a href="#admin_tools_options_delete_original">Delete original size photos</a></li>
+	<li><a href="#admin_tools_options_intermediate">Delete intermediate pictures</a></li>
+	<li><a href="#admin_tools_options_delete_older_files">Delete files that are older than a set number of days</a></li>
+	<li><a href="#admin_tools_options_delete_comments">Delete comments on missing files</a></li>
+	<li><a href="#admin_tools_options_delete_original_backup">Delete original image backup (watermark mod)</a></li>
+	<li><a href="#admin_tools_options_reload_dimensions">Reload file dimensions and size information</a></li>
+	<li><a href="#admin_tools_options_reset_views">Reset view counters</a></li>
+	<li><a href="#admin_tools_options_keyword_convert">Convert keyword separator</a></li>
+</ul>
+<hr />
+
+<a name="admin_tools_options_rebuild"></a><h3>Update thumbs and/or resized photos<a href="#admin_tools_options_rebuild" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p><img src="images/admin-tools_resize.png" border="0" width="350" height="113" alt="" border="0" align="left" />Use this if you have changed the settings for thumbnail or intermediate images in config, or if you have to replace corrupt versions.</p>
+<p>Select the radio button for this action, then choose to rebuild the thumbnails, intermediates, or both.</p>
+<p>This uses a lot of server resources, so if you experience timeout issues, try setting it to process smaller batches (25 is the current default).</p>
+  
+<a name="admin_tools_options_filename_filetitle"></a><h3>Filename &rarr; File title<a href="#admin_tools_options_filename_filetitle" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p><img src="images/admin-tools_filename.png" border="0" width="350" height="" alt="" align="left" />Mass-create file titles based on the file name or the upload date. First choose how the file name should be used as file title. Tick the option &quot;Apply only for files with empty titles&quot; (ticked by default) to make sure not to overwrite existing file titles. File titles are important in terms of seach engine friendliness, so you should apply names manually if you can (using the &quot;edit files&quot; option for particular albums) and only use the semi-automatic option from the admin tools if there is no other way to assign titles to the files in your gallery.</p>
+
+<a name="admin_tools_options_delete_titles"></a><h3>Delete file titles<a href="#admin_tools_options_delete_titles" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Use this to clear the file titles from one or more albums. There will be no more additional confirmation checks, so use carefully.</p>
+
+<a name="admin_tools_options_delete_original"></a><h3>Delete original size photos<a href="#admin_tools_options_delete_original" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Use this to save space on your webspace.<br />
+When selected, Coppermine checks to see if an intermediate copy exists, and if it does, it deletes the original sized picture, then re-names the intermediate. If no intermediate exists, Coppermine leaves the original in place.</p>
+<p>This option only makes sense if you originally had set the intermediate and full-size resolution to different values and the creation of intermediate images to &quot;yes&quot;. If you then changed your mind later and decided not to keep the full-sized orginal and only keep the resized intermediate copy, this option is for you to loop through your files and batch-delete the originals.</p>
+<p>For a detailed explanation about the concepts of keeping various resolutions, please refer to &quot;<a href="start.htm#getting_resizing">getting started &rarr; start.htm#getting_resizing</a>&quot; section of the docs.</p>
+
+<a name="admin_tools_options_intermediate"></a><h3>Delete intermediate pictures<a href="#admin_tools_options_intermediate" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>This will delete intermediate (normal) pictures.<br />
+Use this to free up disk space if you have disabled 'Create intermediate pictures' in config after adding pictures.</p>
+
+<a name="admin_tools_options_delete_older_files"></a><h3>Delete files that are older than a set number of days<a href="#admin_tools_options_delete_older_files" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p><img src="images/admin-tools_delete-older.png" border="0" width="350" height="51" alt="" align="left" />This will delete files that are older than the number of days you specify (normal, intermediate, thumbnails). Use this feature to free up disk space. Warning: the files you specify will be deleted for good without further warnings!</p>
+
+<a name="admin_tools_options_delete_comments"></a><h3>Delete comments on missing files<a href="#admin_tools_options_delete_comments" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Sometimes, when pictures have been deleted, any comments associated with them remain in the database. Use this to remove them from the database entirely.</p>
+<p>Checks all albums, no matter what you select from the albums dropdown list.</p>
+
+<a name="admin_tools_options_delete_original_backup"></a><h3>Delete original image backup (watermark mod)<a href="#admin_tools_options_delete_original_backup" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Only applies if you have enabled watermarking. This will delete the backup image. You will save some disk space but will no longer be able  to undo the watermark!!! After that the watermark will be permanent.</p>
+
+<a name="admin_tools_options_reload_dimensions"></a><h3>Reload file dimensions and size information<a href="#admin_tools_options_reload_dimensions" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p><img src="images/admin-tools_reload-dimensions.png" border="0" width="350" height="69" alt="" align="left" />This option is usefull if you have replaced a particular image manually (using your FTP app or a plugin) and need to change the dimensions stored in the database from the settings for the old one to the new one.</p>
+<p>You can specify the number of processed images - reduce that value if you run into timeouts.</p>
+
+<a name="admin_tools_options_reset_views"></a><h3>Reset view counters<a href="#admin_tools_options_reset_views" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Sets all file view counts to zero in the album specified.</p>
+
+<a name="admin_tools_options_keyword_convert"></a><h3>Convert keyword separator<a href="#admin_tools_options_keyword_convert" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p><img src="images/admin-tools_convert-keyword-separator.png" border="0" width="350" height="82" alt="" align="left" />This will convert the <a href="configuration.htm#admin_general_keyword_separator_start">keyword separator</a> for all your files from one value to another value.  You should also check &quot;Set gallery keyword separator to new value&quot; so that the gallery will work properly after the keyword separator conversion.  Before conversion, you can replace the soon-to-be new keyword separator with another character so that your current keywords remain intact.  You can also replace a character after the conversion.  This is useful if you used underscores in Coppermine 1.4 and earlier and want to convert these to spaces after you convert your keyword separator to a semicolon.  As an example for a before-conversion replacement, "South Dakota;mountain" has 2 keywords with a semicolon as the separator.  Converting the semicolon to a space would produce "South Dakota mountain" which has 3 keywords.  If you convert the spaces to underscores first, you get "South_Dakota mountain" which keeps your original 2 keywords intact.</p>
+
+<hr />
+
+<a name="admin_tools_usage"></a><h2>Usage<a href="#admin_tools_usage" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>On the first screen of the admin tools, you can select what tool you want to use and what album it should be applied to. After submitting the form, the actual tool is being run.</p>
+<ol>
+	<li>(1) Select the action you want to perform by clicking on the radio button next to the corresponding table heading</li>
+	<li>(2) Select an option that applies to the action you have chosen</li>
+	<li>(3) Select the album at the bottom of the screen that should be taken into account for the action you selected in step 1. You can specify &quot;all albums&quot; there as well</li>
+	<li>(4) Submit the form</li>
+</ol>
+<a name="admin_tools_usage_end"></a>
+
+<a name="admin_tools_end"></a>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

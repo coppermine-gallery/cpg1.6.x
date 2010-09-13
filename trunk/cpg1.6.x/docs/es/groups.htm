@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Groups - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="The group control panel is where you define what members of a user group can and can't do. In Coppermine, you don't assign privileges to individual users, but to groups. Users can be in various groups, so you can determine granular levels of permissions." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+  $Date$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<div id="doc_en_only">No translation available</div>
+
+<a name="groups"></a><h1>Groups<a href="#groups" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>Each visitor of your gallery is a member of at least one group. In Coppermine, you don't assign individual permissions per user, but per group membership. There is a number of built-in groups that can't be deleted, and an infinite number of custom groups that can be defined by the admin.</p>
+
+<a name="group_cp"></a><h2>The group control panel<a href="#group_cp" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p><img src="images/group_cp.png" width="600" height="211" border="0" alt="" align="right" /></p>
+<p>This is where you define what members of a user <em>group</em> can and can't do. In Coppermine, you don't assign privileges to individual users, but to groups. Users can be in various groups, so you can determine granular levels of permissions.</p>
+
+<div class="indent">
+	<a name="group_cp_names"></a><h3>Group names<a href="#group_cp_names" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>Out of the box there are four groups in Coppermine. You can rename them just as well as you can rename custom groups, but it's recommended to leave them they way they are by default. This will make upgrades easier and help you administer and maintain your gallery. End users usually don't see the name of the group they are in, so you don't have to provide other group names.</p>
+	<p>However, if you choose to rename a group, just change the name and submit the group control panel form by clicking on &quot;Apply modifications&quot;.</p>
+	<a name="group_cp_names_end"></a>
+
+	<a name="group_cp_types"></a><h3>Group types<a href="#group_cp_types" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>There are two types of groups in Coppermine: those that come with it out of the box (default groups) and custom user groups. The ones that come with Coppermine by default (&quot;Administrators&quot;, &quot;Registered&quot;, &quot;Guests&quot;) can not be deleted.<br />
+	Users can be member of several groups - privileges inherited from the group accumulate. This means that the least restrictive permission/setting is being taken into account.</p>
+	<p class="cpg_example">User "Linus" is member of the "registered" group as primary group and additionally member of the custom user groups "Cartoonists" and "Photographers". Members of the group "registered" are allowed to send ecards, but are not allowed to rate nor to post comments. They are not allowed to have a personal gallery neither. Members of the "Cartoonists" group are allowed to comment, send ecards and rate. Members of the group "Photographers" are not allowed to comment, to send ecards nor to rate, but they are allowed to have personal galleries. Subsequently, the user "Linus" would have the privilege to send ecards (inherited from membership in the group "registered"); he would be allowed to post comments and rate files (inherited from membership in the group "Cartoonists"). Additionally, "Linus" would have the privilege to have a personal gallery (inherited from membership int the group "Photographers"). The fact that members of the group "Photographers" are not allowed to rate, send ecards or post comments would not be taken into account, since membership inside the other two groups that grant those privileges would override the more restrictive settings for the group "Photographers".</p>
+
+	<div class="indent">
+		<a name="group_cp_administrators"></a><h4>Administrators<a href="#group_cp_administrators" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<p>By default (after initial installation), there is only one user who resides in the Administrators group: the admin account you set up during initial install. You can later add other users to the administrators group (using the user control panel), but you have to keep in mind that all other members of this group have exactly the same privileges the original admin has: they could ruin your entire gallery in a couple of mouse clicks. It's strongly recommended to only assign others admin privileges that you fully trust.</p>
+		<a name="group_cp_administrators_end"></a>
+
+		<a name="group_cp_registered"></a><h4>Registered<a href="#group_cp_registered" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<p>By default, there is no user inside the "Registered" group. This will change as soon as you allow registration and members come in. All new users who get created (either by completing the login form or when they are created by an admin) reside in the "Registered" group (as primary group) no matter what.</p>
+		<a name="group_cp_registered_end"></a>
+
+		<a name="group_cp_anonymous"></a><h4>Anonymous/Guests<a href="#group_cp_anonymous" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<p>Use the <strong>anonymous</strong> group to define what non-registered users can and can't do. Quota and &quot;<em>Personal gallery</em>&quot; are meaningless for anonymous users. You can not (and mustn't try) to assign existing users to the &quot;anonymous&quot; group - being a registered user automatically keeps them from being a member of the "Anonymous" group.</p>
+		<a name="group_cp_anonymous_end"></a>
+
+		<a name="group_cp_custom"></a><h4>Custom groups<a href="#group_cp_custom" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<p>You can <a href="#group_cp_create">create groups</a> as you see fit. Make sure to come up with a naming scheme that makes sense in the first place. It's advisable to start with a minimum set of custom groups and only add them later if you must.</p>
+		<p>Users can be <a href="#group_cp_more_than_one_group">members of several groups</a>.</p>
+		<a name="group_cp_custom_end"></a>
+	</div>
+
+	<a name="group_cp_types_end"></a>
+
+	<a name="group_cp_quota"></a><h3>Quota<a href="#group_cp_quota" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<div class="indent">
+		<a name="group_cp_quota_scope"></a><h4>Scope<a href="#group_cp_quota_scope" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<p>Specify the maximum web space usage that the images (or other files if you allow them) uploaded by a user who is member of that particular group you assign the quota for is allowed to consume. The quota is set in kilobytes (KB) and only applies for the files uploaded into a personal gallery of a user. Uploads of that user that go into public albums are <strong>not</strong> being taken into account and don't add to the quota of that user.</p>
+		<p>The disk quota applies only for groups where &quot;<em>Personal gallery</em>&quot; has been set to &quot;<strong>Allowed</strong>&quot;. Both files uploaded by a user into his personal gallery as well as files uploaded to public galleries are included in the quota. The quota applies to each member of the group. Set the quota to a value that actually makes sense - setting it to several terrabytes does not make sense and may lead to funny side-effects.</p>
+		<a name="group_cp_quota_zero"></a><h4>Zero means unlimited<a href="#group_cp_quota_zero" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<p>Keep in mind that setting a quota to zero actually means "unlimited quota". If you want to disallow uploading, set the corresponding option that allows group members to have a personal gallery and upload to it in the column <a href="#group_cp_personal">personal gallery</a> by setting &quot;Allowed&quot; to &quot;no&quot; instead of setting the quota value to zero.</p>
+		<a name="group_cp_quota_calculation"></a><h4>Calculation<a href="#group_cp_quota_calculation" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<p>If a user is member in different groups, the quotas from the groups don't get added. Instead, the least restrictive quota applies.</p>
+		<div class="cpg_example">User "Linus" is member of the "registered" group as primary group and additionally member of the custom user groups "Cartoonists" and "Photographers". Members of the group "registered" are not allowed to have personal galleries at all, but members of the group "Cartoonists" are allowed to have a personal gallery and their quota is set to 20480 KB (i.e. roughly 20 MB) and members of the group "Photographers" are allowed a personal gallery with a quota of 40960 KB (i.e. roughly 40 MB). Subsequently, Linus will be able to upload files to his personal gallery up to a total of 40 MB, as the quota he inherits from group membership in the "Photographers" group is the least restrictive one.</div>
+	</div>
+	<a name="group_cp_quota_end"></a>
+
+	<a name="group_cp_permissions"></a><h3>Group permissions (Rating/Ecards/Comments)<a href="#group_cp_permissions" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p><em>Permissions</em> control what the user is allowed to do in the gallery (Rating/Sending Ecards/Posting Comments).</p>
+	<p>Bear in mind that if a user is a member of a group where &quot;<em>Rating</em>&quot;, &quot;<em>Comments</em>&quot; or &quot;<em>Public albums upload</em>&quot; is set &quot;<em>YES</em>&quot;, s/he will have the right to perform these operations only in albums where they are allowed. ( ie. uploading files will only be possible in albums where &quot;<em>Visitors can upload files</em>&quot; has been set to <em>YES</em> using the album properties screen of particular albums.)</p>
+	<a name="group_cp_permissions_end"></a>
+
+	<a name="group_cp_public"></a><h3>Public albums upload<a href="#group_cp_public" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>Think of the setting &quot;Public albums upload&quot; as a general switch that determines if members of a particular group are allowed to upload to public albums (i.e. albums that the admin created) at all. Setting this to &quot;Yes&quot; will not immediately grant users access to upload to all public albums, but only to the albums that you explicitely specified upload permissions using the <a href="albums.htm#album_prop">album properties</a> dialog of a particular public album you want to allow user uploads to.</p>
+	<a name="group_cp_public_end"></a>
+
+	<a name="group_cp_personal"></a><h3>Personal gallery<a href="#group_cp_personal" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>If &quot;<em>Personal gallery</em>&quot; is set to <em>Allowed</em>, the members of the group will be able to have their own gallery in the &quot;<em>User galleries</em>&quot; category where they will be able to create their own albums.</p>
+	<p>If &quot;<em>Approval</em>&quot; is set to <em>NO</em>, files uploaded by members of the group in albums created in their own gallery won't need to be approved by the admin. If &quot;<em>Approval</em>&quot; is set to <em>YES</em>, the users in the particular group will be able to upload, however the uploaded files will only be shown after the admin (you) has approved them.</p>
+	<a name="group_cp_personal_end"></a>
+
+	<a name="group_cp_access_level"></a><h3>Access Level<a href="#group_cp_access_level" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>For each group, you can set the group's access level to:</p>
+	<ul>
+	  <li><strong>None</strong><br />
+	  Users cannot view any images at all, except for the one thumbnail shown for an album or category.  This option is only recommended for the guest/anonymous group if you want to force people to log in to view thumbnails and the rest.  For other groups, this option usually doesn't make sense since your logged-in users will wonder why they logged in if they cannot see anything; the option is provided here in case some administrators find it useful.  If you are going to set a group's access to 'none', make sure the guest/anonymous group is also set to 'none'.  Otherwise, logged-in users will find that logging out gives them <em>more</em> access!</li>
+	  <li><strong>Thumbnail only</strong><br />
+	  Users can view the thumbnails only. If they click on them, they will be shown a little dialog box that they are not allowed to view larger images.</li>
+	  <li><strong>Thumbnail and intermediate image</strong><br />
+	  Users can see everything but the full-sized image pop-ups (if you have any)</li>
+	  <li><strong>Thumbnail, intermediate and full-size image</strong><br />
+	  Users can access all sizes of images.</li>
+	</ul>
+	<p>The setting here for the guest/anonymous group is the same as the setting "Allow unlogged users access" on the Gallery Configuration page under "User Settings".  If you update the option here, it will update the configuration setting and vice versa.</p>
+	<a name="group_cp_access_level_end"></a>
+
+	<a name="group_cp_assigned"></a><h3>Assigned albums<a href="#group_cp_assigned" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>The link "Assigned album(s)" will let you <strong>display</strong> what albums are assigned exclusively to members of a particular group. To make this absolutely clear: this feature does <strong>not</strong> allow you to actually assign albums to groups, it just <strong>displays</strong> those assignements. To actually assign albums to particular groups, use the <a href="albums.htm#album_prop">album properties</a> dialog of individual albums.</p>
+	<a name="group_cp_assigned_end"></a>
+
+
+	<a name="group_cp_create"></a><h3>Creating custom groups<a href="#group_cp_create" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>To create a custom user group, click on the &quot;Create new group&quot; button located at the bottom of the &quot;Groups&quot; control panel. A new table row will appear at the bottom of the table with a blank name. It has not been saved yet - you will have to at least assign a unique name for it. Change any of the other properties of your new group and finally click the &quot;Apply modifications&quot; button.<br />It is recommended to only use web-safe alpha-numeric characters for group names (plus underscore and minus).</p>
+	<p class="cpg_message_info">When being <a href="bridging.htm#integrating">bridged</a> you can't create new groups in Coppermine's groups control panel, as Coppermine then no longer controls the groups. Therefore, you have to create new custom groups inside the app you have bridged with.</p>
+	<a name="group_cp_create_end"></a>
+
+	<a name="group_cp_delete"></a><h3>Deleting custom groups<a href="#group_cp_delete" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>You can not delete the four pre-defined groups (&quot;Administrators&quot;, &quot;Registered&quot;, &quot;Guests&quot;). All other (custom) groups can be deleted by going to Coppermine's groups control panel, checking the tickbox in front of the group you want to delete and finally clicking on the &quot;Delete selected groups&quot; button at the bottom of the screen. Deleting groups can not be undone. Deleting a group does not delete the members within that particular group.<br />
+	When <a href="bridging.htm#integrating">bridged</a>, a similar thing that applies for the creation of groups applies to deleting them as well: Coppermine doesn't control groups any longer when being bridged, so you have to delete user groups in the app that you have bridged Coppermine with.</p>
+	<a name="group_cp_delete_end"></a>
+
+	<a name="group_cp_sync"></a><h3>Triggering synchronisation (bridged only)<a href="#group_cp_sync" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>When Coppermine is being <a href="bridging.htm#integrating">bridged</a>, you create and delete custom groups using the application that you have bridged Coppermine with. However, each time you edit groups inside the app that you have bridged with, you should go to Coppermine's group control panel once to trigger a syncronisation between Coppermine and the app you have bridged with in terms of groups. In other words: you have to make Coppermine aware of the changes that have taken place in the other app.</p>
+	<p class="cpg_message_info">Keep in mind that the entire set of group names from your bridging app that shows in Coppermine's groups control panel after bridging is just a set of names for Coppermine. Coppermine is not &quot;aware&quot; of permissions on the level of your bridging app, so a group of moderators or otherwise privileged members doesn't mean that the group will have any special permissions in Coppermine right after bridging.</p>
+	<a name="group_cp_sync_end"></a>
+	
+	<a name="group_cp_more_than_one_group"></a><h3>Membership in more than one group<a href="#group_cp_more_than_one_group" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>A user can be member of several groups, where one group is the primary group and all subsequent memberships are secondary group memberships. All registered users are members of the built-in group &quot;<a href="#group_cp_registered">Registered</a>&quot; no matter what - you can't change that.</p>
+	<p>There is no limit in the number of groups that a user can be a member of (at least there is no such limit built into Coppermine), but the administration effort increases if you have too many groups, so you need to find a level of permission that works for your puposes.</p>
+	<div class="indent">
+		<a name="group_cp_more_than_one_group_limitations"></a><h4>Limitations in Coppermine group architecture<a href="#group_cp_more_than_one_group_limitations" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<p>There are some things that other applications are capable to do that Coppermine currently can not do:</p>
+		<ul>
+			<li>Coppermine doesn't have moderator features, so you are welcome to name a <a href="#group_cp_create">custom group</a> that way, but this won't help permissions-wise, nor can this feature easily be implemented, as the black/white toggle <tt class="code">is-admin/is-not-an-admin</tt> can be found all over Coppermine's core code.</li>
+			<li>A user account can be member in several groups, but you can not nest groups, i.e. groups can not be members of other groups. In this aspect, Coppermine differs to other permission models (like LDAP or similar).</li>
+			<li>Some permission levels (i.e. the right to view a particular album that can be assigned on the <a href="albums.htm#album_prop">album properties</a> dialog) are being assigned per group, but you can only specify one group and not several of them in those dialogs. Again, it wouldn't be easy to circumvent that.</li>
+		</ul>
+	</div>
+
+	<a name="group_cp_end"></a>
+</div>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

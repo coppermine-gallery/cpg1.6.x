@@ -1,0 +1,354 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Getting Started - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Getting started" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+  $Date$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<div id="doc_en_only">No translation available</div>
+
+<a name="getting"></a><h1>Getting started<a href="#getting" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>Here's a list of issues that beginners often have issues with, so please just read this list one by one:</p>
+<ul>
+	<li>Use the &quot;<strong><a href="albums.htm#albmgr">Album Manager</a></strong>&quot; (&quot;Albums&quot; link in the <a href="admin_menu.htm">admin menu</a>) to create and order your albums. You will need <strong>at least one album</strong> in which your files can go.</li>
+	<li>Use the <strong>anonymous/guest</strong> group to define what non-registered users (<abbr title="also known as">aka</abbr> <em>guests</em>) can and cannot do (in the <a href="groups.htm#group_cp">groups</a> panel).</li>
+	<li>Use the <strong><a href="albums.htm#modif_alb_pics">properties</a></strong> of an album to modify its description and permissions.	The album properties dialog is accessible by clicking on the "Porperties"-button next to a thumbnail that represents an album.</li>
+	<li>In order for a user to be allowed to upload a file into an album, <strong>two</strong> conditions must be met:
+		<ul>
+		  <li> The user must be part of a <a href="groups.htm#group_cp">group</a> that can upload files.</li>
+		  <li>There needs to be at least one album where the file can be uploaded to permissions-wise. This is the case if
+		  	<ul>
+		  		<li>There is at least one album within a public category (this can be the root category as well) where &quot;<strong>Visitors can upload files</strong>&quot; has been set to &quot;<strong>Yes</strong>&quot;,<br /> <strong>OR</strong></li>
+		  		<li>The user has created an album in the 'user galleries', if he's allowed to do so.</li>
+		  	</ul>
+		  </li>
+		</ul>
+	</li>
+	<li>The same applies to <strong>picture rating</strong> and <strong>comment posting</strong>: the group the user is in must have the general permission to rate / post comments <strong>and</strong> there needs to be at least one album where the corresponding permission-by-album has been turned to yes. Permissions by album can be set using the album properties dialog.</li>
+	<li>If you have installed the gallery script successfully but are having trouble getting it working properly you can enable the &quot;<strong><a href="configuration.htm#debug_mode">debug mode</a></strong>&quot; on the <strong>Config page</strong>. In this mode, the script outputs most of the warning/error messages produced by PHP in addition to some debug information. This can provide valuable information to understand what is wrong.</li>
+	<li>Throughout the documentations, the word "visitor" is being used for <em>any</em> person accessing a page (logged in or not logged in). "Visitor" does not equal "guest". Guests as well as registered users are visitors.</li>
+</ul>
+
+
+
+<a name="getting_concepts"></a><h2>Basic concepts<a href="#getting_concepts" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Of course you're excited about Coppermine and want to get started with it right now. However, there are some basic considerations you should make up your mind about first, as some settings cannot be changed easily once your gallery has been populated with content.</p>
+<p>This section is meant as a guide once you have finished <a href="install.htm#installation">installing</a> Coppermine. Go through it carefully to avoid issues that may turn up later.</p>
+<ul>
+        <li><strong><a href="#getting_initial_configuration">Initial configuration</a></strong><br />
+        Settings you should edit immediately after finishing the install</li>
+        <li><strong><a href="#getting_structure">Category/album/file structure</a></strong><br />
+        Understand how Coppermine organizes navigation and storage of individual files</li>
+        <li><strong><a href="#getting_resizing">Resized images</a></strong><br />
+        Resized versions of your uploaded originals are being created based on the config settings</li>
+        <li><strong><a href="#getting_admin_account">Your admin account</a></strong><br />
+        Make sure to properly populate all admin details</li>
+		<li><strong><a href="#getting_upload_permissions">Uploading permissions</a></strong><br />
+        You can allow or disallow your users to upload</li>
+        <li><strong><a href="#getting_check_uploads">Check uploads</a></strong><br />
+        Make sure uploading works as expected before letting in visitors</li>
+        <li><strong><a href="#getting_consider_bridging">Consider bridging</a></strong><br />
+        Bridging after you already have users might be difficult</li>
+        <li><strong><a href="#getting_interaction">What are your visitors allowed to do?</a></strong><br />
+        What level of user interaction are you going to allow?</li>
+        <li><strong><a href="#getting_design">Change your coppermine's design</a></strong><br />
+        Make your gallery blend nicely into your overall site layout</li>
+        <li><strong><a href="#getting_typical">Typical setups</a></strong><br />
+        The level of visitor interaction you plan to allow</li>
+</ul>
+
+
+<a name="getting_initial_configuration"></a><h2>Initial configuration<a href="#getting_initial_configuration" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>There are some settings in Coppermine's config that you should edit right after finishing install.</p>
+<p>Log in with the admin username and password you set up during install, click on the &quot;Show admin controls&quot; link if it is visible, go to the <strong>Config</strong> page and start to configure your gallery. Note that even if you are a member of the administrator group, you need to have &quot;Show admin controls&quot; enabled. In previous versions, this used to be named &quot;admin mode&quot;, but was renamed because some people thought that switching from admin mode to user mode showed them what regular users can see (which is not the case).</p>
+<ul>
+  <li><a href="configuration.htm#admin_general_email">Gallery administrator email</a></li>
+  <li><a href="configuration.htm#admin_general_coppermine-url">URL of your coppermine gallery folder</a></li>
+</ul>
+<p>There are some settings in config that cannot be changed later (if there are already files in the database) - make sure to set them up correctly in the first place. Although you might want to start using coppermine immediately it is advisable to configure those settings (marked with an asterisk &quot;*&quot;) properly at the very beginning.</p>
+<p>Some settings have a serious <a href="performance.htm">performance</a> impact as well and should be considered thoroughly, especially when you're on cheap shared hosting or even free hosting.</p>
+
+<a name="getting_structure"></a><h2>Category, albums and file structure<a href="#getting_structure" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>The Coppermine Photo Gallery works in the following way:</p>
+<ul>
+  <li>Files are stored in albums</li>
+  <li>Albums are organised in categories</li>
+  <li>Categories can be nested (into subcategories)</li>
+</ul>
+
+<p>If you do not plan to have many albums, you likely would not need to use the categories feature. If this applies to you, simply do not create any categories and all your albums will automatically appear on the main page of the gallery.</p>
+<p>There is, however, a special category named &quot;<strong>User galleries</strong>&quot;. This category cannot be deleted. If a user belongs to the group &quot;can have a personal gallery&quot; and this is set to YES, he will have the right to create his own albums and his gallery will be a sub-category of &quot;User galleries&quot;. This link is not visible to visitors of your site, however, if you do not allow users to upload pics and have their own albums. </p>
+<p>The administrator can create albums in any category. Non-administrative users can only create albums in the &quot;User galleries/Their_username&quot;.</p>
+<p>You can, however rename the &quot;User Galleries&quot;. To rename the &quot;<strong>User galleries</strong>&quot; category and description, simply go to your <a href="#cat_cp">category control panel</a> and change the name there (e.g. to translate the words &quot;User galleries&quot; into your language).</p>
+
+<a name="getting_resizing"></a><h2>Resized images<a href="#getting_resizing" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>One of the key benefits of Coppermine is the fact that it creates thumbnails and intermediate-sized images for the original images uploaded. This happens once per image (on upload), however the process of creating resized images can be re-triggered using the <a href="admin-tools.htm#admin_tools">admin tools</a>. The resized copies of your originals are being stored in the same folder in which your original resides in - they just differ in terms of prefixes.</p>
+<p>The following resized files are generated when uploading an image:</p>
+<ul>
+	<li>
+	<a name="getting_resizing_thumbnails"></a><h3>Thumbnails<a href="#getting_resizing_thumbnails" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	The thumbnail is being created depending on the corresponding options "<a href="configuration.htm#admin_thumb_start">Thumbnail settings</a>" in config if the file uploaded is larger in terms of dimensions than the dimensions set for the thumbnail. The thumbnails are mainly being used on the actual album thumbnail page, but as well in some other places (e.g. on the profile page or as thumbnail representation of albums and categories). The creation of thumbnails greatly improves the loading speed of your gallery - if Coppermine did not create the thumbnail and displayed the originals instead (using HTML attributes to display them in a smaller size), the thumbnail page would be terribly slow to load.<br />
+	For the dimensions of your thumbnails you have to find a good compromise: thumbnails with smaller dimensions result in smaller files sizes and therefore the thumbnail page loads very fast. The drawback of small dimensions are obvious: if you pick numbers that are too small, your visitors cannot figure out what will be shown and therefore would not care to click on the thumbnail to see the full picture. There is no ideal setting for the thumbnail size, as it greatly depends on the subject of your gallery, however you should use between 50 and 250 pixels as a rule of thumb.<br />
+	If you upload a file that is smaller in terms of dimensions than the width/height you have set up for the thumbnails in Coppermine's config, the creation of a thumbnail will be skipped and the original will be used as thumbnail representation instead. </li>
+	<li>
+	<a name="getting_resizing_intermediate"></a><h3>Intermediates<a href="#getting_resizing_intermediate" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	The intermediate image is being created unless you have turned the option "<a href="configuration.htm#admin_picture_thumbnail_intermediate_toggle">Create intermediate pictures</a>" off or if the uploaded image is smaller or equal in terms of dimensions than the width/height you have specified for the <a href="configuration.htm#admin_picture_thumbnail_intermediate_dimension">Max width or height of an intermediate picture</a>. The intermediate image is being used mainly to be displayed on the intermediate image page (displayimage.php) that the user sees when clicking on a thumbnail. The intermediate image page can contain all types of additional information about the picture (like the uploader name, title, description, meta data etc.) and has navigation controls to allow the visitor to directly jump to the previous/next image within an album without having to go back to the thumbnail page first. Additionally, the intermediate image page contains controls for user interaction (like voting and comments if you allow this level of interaction).<br />
+	The main benefit of having an intermediate image is the fact that it is designed to fit on the screen of all  visitors, no matter what resolution they have. This will result in a seamless browsing experience for your users. It is advisable to use a "safe" value for <a href="configuration.htm#admin_picture_thumbnail_intermediate_dimension">Max width or height of an intermediate picture</a> that ensures it will fit on the screen (even with all the additional controls on that page). As the amount of space the controls need depends on the <a href="theme.htm#theme">theme</a> you use and you cannot actually be sure of the screen resolutions of your visitors, it is advisable to use dimensions for the intermediate image that are between 400 and 800 pixels.<br />
+	The creation of intermediates will also speed up the page load, especially for users with slow connections, but of course the additional intermediate images take up webspace as well. Turn the creation of intermediate images off <em>only</em> if you are short on webspace. The intermediate image is being stored in the same folder where your uploaded original resides in and is being prefixed with "normal_" out of the box.
+	<div class="cpg_example">
+		Let's say you have set the max. dimensions for intermediates to 400 pixels. You (or one of your users if you allow them to upload) then uploads an image named "mypic.jpg" that is 800 pixels wide and 600 pixels high. An intermediate image will then be created during the upload stage that is named "normal_mypic.jpg" with resolutions 400 x 300. Another image is then being uploaded named "foobar.jpg" that is 1024 by 768 pixels: again, an intermediate image will be created named "normal_foobar.jpg" that will again be 400 by 300 pixels in dimensions. A third image is being uploaded named "hugepic.jpg" with the dimensions 1280 by 800 pixels. The resulting intermediate image ("normal_hugepic.jpg") will be 400 by 250 pixels. You'll note that the dimensions of the third intermediate image in this example differs from the other two. The reason is that the creation of intermediates respects the aspect ratio of the original. However, your visitors will, when browsing the album that contains our three example pics always see an image embedded into the page that is 400 pixels wide, so the page controls will always remain visible no matter what, without a horizontal scrollbar appearing in the browser window that forces the visitor to scroll a lot.
+	</div>
+	</li>
+	<li>
+	<a name="getting_resizing_original"></a><h3>Originals<a href="#getting_resizing_original" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	The original picture will be displayed in a pop-up when a user clicks on the intermediate image if the original was actually larger in terms of dimensions than the intermediate image.
+	  <div class="cpg_example">
+	Let's say you have set max intermediate dimension to 400 pixels and that you allow larger files to be uploaded. Two files then get uploaded: file "first_pic.jpg" is 800 by 600 pixels, file "second_pic.jpg" is 400 by 300 pixels. If a visitor is then looking at the intermediate image display for file "first_pic.jpg", he/she can click on the intermediate image and a full-size will pop up. When he/she looks at "second_pic.jpg" embedded into the intermediate image page, clicking on the intermediate image will have no result, as showing the original in a pop-up would not make sense: the intermediate image display already displays the image in the greatest resolution that is available.
+	</div>
+	You <em>can</em> instruct Coppermine never to resize the original-sized image that gets uploaded initially and therefore (at least in theory) preserve the originals in an unmodified manner, however this has serious drawbacks: with modern digital cameras being capable to create pics that are larger in terms of dimensions than what will fit on your visitors' screens, the full-size pop-ups will not fit on the screens of your visitors, forcing visitors to scroll a lot. Additionally, huge pics will eat up a lot of webspace and will result in slow loading for visitors with small bandwidth connections.<br />
+	Therefore, Coppermine comes with the option to resize the original images as well on upload to a certain maximum resolution - it is strongly recommended to use this option both for admin uploads as well as regular user uploads. The option resides in Coppermine's config and is named <a href="configuration.htm#admin_picture_thumbnail_auto-resize">Auto resize images that are larger than max width or height</a>. Recommended values range between 800 and 1200 pixels. In this documentation, we will refer to those images as "originals" as well even if coppermine has initially resized them as well during upload. Technically speaking, they are no longer originals, but resized copies, but as this option was added way after the initial release of the first coppermine version, the documentation will refer to those files as originals. The originals are being stored without a prefix, using the file name that was used by the uploader. The file name is only being changed if it contains forbidden, non-websafe characters specified in coppermine's config option <a href="configuration.htm#admin_picture_thumb_advanced_filename_forbidden_chars">Characters forbidden in filenames</a>.<br />
+	<!--With watermarking becoming a core feature in cpg1.5.x, there is another possible file that can be created: if you choose to enable server-sided watermarking, the unmarked original of the file can be kept as a safe copy - if you enable the corresponding watermarking option.-->
+	</li>
+</ul>
+<p>Coppermine uses image libraries (either GD or ImageMagick) that need to exist on your webserver already to actually create the resized images (see "<a href="requirements.htm#what">minimum requirements</a>"). Those libraries are not able to resize videos nor will they preserve meta data like EXIF or IPTC. That is why thumbnails and intermediate images can only be created for the image types supported by the image library you use.</p>
+<p>There can be issues with resizing huge pics, as resizing consumes resources on your webserver. Refer to the section "<a href="upload_troubleshooting.htm#upload_trouble">Upload troubleshooting</a>" of the docs if you have issues with larger files (or with getting uploads to work in the first place).</p>
+
+<a name="getting_resizing_recommended"></a><h3>Recommended resizing setups<a href="#getting_resizing_recommended" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<div class="cpg_message_success">You need to understand that changing the resizing settings will only have an impact for the images added from that point on. Images that already existed when you changed the config sections will <strong>not</strong> automatically be resized accordingly - instead, you have to trigger a re-resizing process using the corresponding option &quot;<a href="admin-tools.htm#admin_tools_options_rebuild">Update thumbs and/or resized photos</a>&quot; from the <a href="admin-tools.htm#admin_tools">admin tools</a> and loop through all albums with the new settings in place.</div>
+
+<a name="getting_resizing_recommended_nofullsize"></a><h4>No full-size pop-ups<a href="#getting_resizing_recommended_nofullsize" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<p>If you don't plan to use full-size pop-ups at all, i.e. if the images should always be displayed embedded into your Coppermine output, you can set up coppermine to save webspace with a setup like this.</p>
+<p>You have to understand that you need to catter for the visitors with the smallest resolution. If you expect your visitors to have a resolution of 1024 x 768 pixels or better, you should set the width of the embedded images to 800, as you will need room for whitespace and page controls as well.</p>
+<p class="cpg_example">Let's assume for this example that the max size your visitor should be able to see is 800 pixels.</p>
+<p>Go to coppermine's config and <strong>set</strong>:</p>
+<ul>
+	<li>&quot;<a href="configuration.htm#admin_picture_thumbnail_intermediate_toggle">Create intermediate pictures</a>&quot; to "no"<br />
+	This way, the full-size image will be used on the displayimage screen as well</li>
+    <li>&quot;<a href="configuration.htm#admin_picture_thumbnail_intermediate_dimension">Max width or height of an intermediate picture/video</a>&quot; to "800"<br />
+	This will take care of the resolution you will see of the embedded pic on the displayimage screen</li>
+    <li>&quot;<a href="configuration.htm#admin_picture_thumbnail_max_upload_dimension">Max width or height for uploaded pictures/videos</a>&quot; to "800"<br />
+	This would result in an error message if your users tried to upload images with a bigger resolution if you disabled the next option "Auto resize images that are larger than max width or height" to "No". However, if you set "Auto resize images that are larger than max width or height" to yes, all uploads will be resized to what you have set in "Max width or height for uploaded pictures/videos (pixels)"</li>
+    <li>&quot;<a href="configuration.htm#admin_picture_thumbnail_auto-resize">Auto resize images that are larger than max width or height</a>&quot; to "Yes:Everyone"<br />
+	As suggested above, you need to set this to "Yes" to make sure that users don't get an error message when uploading bigger pics than they're suppossed to. Coppermine will then resize the images on the server if needed</li>
+</ul>
+<p>Above mentioned settings are the most efficient ones if you plan to disallow full-size pop-ups, as they safe as much file space as possible and make it impossible for visitors to get the full-sized images in larger resolutions.</p>
+
+<a name="getting_resizing_recommended_nointermediate"></a><h4>Allow full-size pop-ups with maximum space saving<a href="#getting_resizing_recommended_nointermediate" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<p>&quot;<a href="configuration.htm#admin_picture_thumbnail_intermediate_toggle">Create intermediate pictures</a>&quot; to "no" in config will not result in a gallery where you don't have intermediate-sized images at all that are embedded into the output; instead, the full-size pic will be displayed and re-sized by HTML mechanisms instead. This option is recommended if the majority of your pics will be viewed in full-size resolution anyway: this way, the browser will already cache the image and the full-size pop-ups will open very fast.</p>
+<p>Not creating intermediate images will of course have an impact on the webspace saved: no intermediate image created will of course safe some space. However, if you're concerned about webspace consumption, you better consider limiting the &quot;<a href="configuration.htm#admin_picture_thumbnail_max_upload_dimension">Max width or height for uploaded pictures/videos</a>&quot; and enabling the resizing of images to those dimensions (option &quot;<a href="configuration.htm#admin_picture_thumbnail_auto-resize">Auto resize images that are larger than max width or height</a>&quot;) - modern digital cameras create images with enourmous dimensions and therefore huge storage space usage. Resizing those images to dimensions that make sense on the web makes sense for nearly all gallery purposes.</p>
+<div class="cpg_example">
+Example setup:
+<ul>
+	<li>Config setting &quot;<a href="configuration.htm#admin_picture_thumbnail_intermediate_toggle">Create intermediate pictures</a>&quot; &rarr; "no"</li>
+    <li>Config setting &quot;<a href="configuration.htm#admin_picture_thumbnail_intermediate_dimension">Max width or height of an intermediate picture/video</a>&quot; &rarr; "600"</li>
+    <li>Config setting &quot;<a href="configuration.htm#admin_picture_thumbnail_max_upload_dimension">Max width or height for uploaded pictures/videos</a>&quot; &rarr; "1280"</li>
+    <li>Config setting &quot;<a href="configuration.htm#admin_picture_thumbnail_auto-resize">Auto resize images that are larger than max width or height</a>&quot; &rarr; "Yes:Everyone"</li>
+</ul>
+</div>
+
+<a name="getting_resizing_recommended_regular"></a><h4>&quot;Regular&quot; setup with moderate file space consumption<a href="#getting_resizing_recommended_regular" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<p>If you have enough web space and bandwidth and your visitors have decent bandwidth, it's recommended to enable the creation of intermediate images and allow full-size pop-ups for those users who want to see the detail.</p>
+<div class="cpg_example">
+Example setup:
+<ul>
+	<li>Config setting &quot;<a href="configuration.htm#admin_picture_thumbnail_intermediate_toggle">Create intermediate pictures</a>&quot; &rarr; "yes"</li>
+    <li>Config setting &quot;<a href="configuration.htm#admin_picture_thumbnail_intermediate_dimension">Max width or height of an intermediate picture/video</a>&quot; &rarr; "800"</li>
+    <li>Config setting &quot;<a href="configuration.htm#admin_picture_thumbnail_max_upload_dimension">Max width or height for uploaded pictures/videos</a>&quot; &rarr; "1600"</li>
+    <li>Config setting &quot;<a href="configuration.htm#admin_picture_thumbnail_auto-resize">Auto resize images that are larger than max width or height</a>&quot; &rarr; "Yes:Everyone"</li>
+</ul>
+</div>
+
+<a name="getting_admin_account"></a><h2>Your admin account<a href="#getting_admin_account" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>It is mandatory to have your admin account configured properly and to memorize the admin account data. Coppermine even provides you with the option to retrieve a lost password, but for this, you have to configure an email address for every account. When users sign up, they have to enter an email address, so this should not be a problem. However, the admin account that you created during setup does not have an email account yet. You should go to your profile when logged in as admin and specify a valid email address for the admin there - this way, you can later request a new password if you forget it.</p>
+<p>To make this absolutely clear: there are at least two places where you must specify an email address in Coppermine:</p>
+<ul>
+    <li>the first place is the config option &quot;<a href="configuration.htm#admin_general_email">Gallery administrator email</a>&quot;. Coppermine will use this address as "from"-address when sending emails (e.g. during registration). It is mandatory to have this email address populated properly. If you have your own domain, it might be a good idea to use an email account that correlates to your domain name.</br>
+    <div class="cpg_example">If your domain name is &quot;example.com&quot;, you should create an email address named gallery@example.com and use that email address in Coppermine's config. Coppermine does <strong>not</strong> create that email address for you!</div></li>
+    <li>the second place is the profile of your admin account: you should set up an email address for that account as well. This could be any sort of email address - provided it is one that you actually  monitor.</li>
+</ul>
+<p>It would not hurt if those two email addresses were the same: they can be the same or they can differ. Just make sure to populate both.</p>
+
+<a name="getting_upload_permissions"></a><h2>Uploading permissions<a href="#getting_upload_permissions" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>In Coppermine, the permission to upload files is being determined on group membership level. Therefor, you assign the privilege to upload on the <a href="groups.htm#group_cp">group control panel</a> per group the visitor is in. Generally speaking, there are the following possible setups (per group):</p>
+<ul>
+	<li>
+		<a name="getting_upload_permissions_no"></a><h3>No uploads possible at all<a href="#getting_upload_permissions_no" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+		<ul>
+			<li>
+				Turn off all kinds of uploads on the <a href="groups.htm#group_cp">group control panel</a> for the group in question
+				<ul>
+					<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row corresponding to the group &rarr; Personal gallery &rarr; Allowed = no</span></li>
+					<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row corresponding to the group &rarr; Public albums upload &rarr; Allowed = no</span></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li>
+		<a name="getting_upload_permissions_public_nocreate"></a><h3>User can upload to particular albums in admin-created categories only, but can not create albums<a href="#getting_upload_permissions_public_nocreate" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+		<ul>
+			<li>
+				Enable public album upload on the <a href="groups.htm#group_cp">group control panel</a> for the group in question
+				<ul>
+					<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row corresponding to the group &rarr; Personal gallery &rarr; Allowed = no</span></li>
+					<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row corresponding to the group &rarr; Public albums upload &rarr; Allowed = yes</span></li>
+				</ul>
+			</li>
+			<li>
+				You will need at least one album where uploads have been allowed. Go to the <a href="albums.htm#album_prop">album properties</a> of the album in a public category that the user is meant to upload to.
+				<ul>
+					<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Album properties &rarr; Visitor can upload files = Yes</span></li>
+				</ul>
+				Repeat this if you want to allow uploads to several albums out of the box.
+			</li>
+		</ul>
+	</li>
+	<li>
+		<a name="getting_upload_permissions_public_yescreate"></a><h3>User can upload to particular albums in admin-created categories and can create albums inside particular categories<a href="#getting_upload_permissions_public_yescreate" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+		<ul>
+			<li>
+				Enable public album upload on the <a href="groups.htm#group_cp">group control panel</a> for the group in question
+				<ul>
+					<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row corresponding to the group &rarr; Personal gallery &rarr; Allowed = no</span></li>
+					<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row corresponding to the group &rarr; Public albums upload &rarr; Allowed = yes</span></li>
+				</ul>
+			</li>
+			<li>
+				Go to the <a href="categories.htm#cat_cp">categories control panel</a> and determine the category (or categories) in which the user is suppossed to be able to create albums in
+				<ul>
+					<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Categories &rarr; Edit icon in the row that corresponds to the category you want to allow album creation in &rarr; Group(s) allowed to create albums in this category &rarr; Select the groups (to select multiple groups, press and hold the [Ctrl]-key)</span></li>
+				</ul>
+				By default, non-admins are not allowed to create albums in public categories, so you have to explicitely allow particular groups to create albums in a particular category.
+			</li>
+		</ul>
+	</li>
+	<li>
+		<a name="getting_upload_permissions_personal"></a><h3>User can create personal albums within his user gallery and can upload to those albums he created<a href="#getting_upload_permissions_personal" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+		When the user is allowed to upload to personal galleries, the following settings need to be applied.
+		<ul>
+			<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row corresponding to the group &rarr; Personal gallery &rarr; Allowed = yes</span></li>
+			<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row corresponding to the group &rarr; Public albums upload &rarr; Allowed = no</span></li>
+		</ul>
+		The user will then have an <a href="admin_menu.htm#user_menu_items">additional menu</a> item labelled &quot;Create / order my albums&quot; where he needs to create one album first before being able to upload (unless the config option <span class="navlocator" style="text-align:right;color:#0E72A4;">Configuration &rarr; Registration &rarr; Create user album in personal gallery on registration</span> is enabled).
+	</li>
+	<li>
+		<a name="getting_upload_permissions_combination"></a><h3>User can upload both to public and personal albums<a href="#getting_upload_permissions_combination" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+		A combination both of public as well as personal album uploads is possible as well: you can determine that a user can upload both to albums in public categories as well as personal albums within his user gallery section. Subsequently, on the groups control panel the following options need to be set:
+		<ul>
+			<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row corresponding to the group &rarr; Personal gallery &rarr; Allowed = yes</span></li>
+			<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row corresponding to the group &rarr; Public albums upload &rarr; Allowed = yes</span></li>
+		</ul>
+		The methods suggested above to allow uploads to particular albums using the album properties dialog as well as the discussed setting on the category control panel of course needs to be applied as well as suggested above.
+	</li>
+</ul>
+
+<a name="getting_check_uploads"></a><h2>Check uploads<a href="#getting_check_uploads" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Before  promoting your Coppermine gallery publicly, you should make sure that uploads work as expected, as they are the most common issues users have, caused by a huge amount of factors that have to be taken into account. Review the <a href="upload_troubleshooting.htm">upload troubleshooting section</a> if you have issues. Don't take for granted that uploads will work as expected - test thoroughly, especially if you allow your users to upload.</p>
+
+
+<a name="getting_consider_bridging"></a><h2>Consider bridging<a href="#getting_consider_bridging" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Coppermine was designed to be used as a standalone application. However, many people wanted to integrate it with another <abbr title="application">app</abbr>, so starting with cpg1.1.x Coppermine came with a mechanism that allowed users to bridge Coppermine with another app in terms of user management. The main advantage is giving your site visitors a single sign-on for your overall site (e.g. both in your gallery and your forum), so they do not have to sign in twice and memorize two different logons.</p>
+<p class="cpg_message_success">Bridging does <strong>not</strong> integrate Coppermine visually into your home page (you have to <a href="theme.htm#creating">create a custom theme</a> to accomplish this instead). All that bridging does is integrating Coppermine and the bridging app logically as far as user management and the sign-on process are concerned.</p>
+<p>You can enable (or disable) bridging at any time, but you should make up your mind on bridging when installing Coppermine in the first place, because there are some issues that have to be taken into account: if you already have users inside your coppermine database when enabling bridging, the correlation between those initial coppermine users and the "new" users from the app you bridge with gets lost. As a consequence, there will be no more correlation between things your "old" users did (uploading pic, posting comments etc.) and the "new" users from the bridge.</p>
+<p>To circumvent those future issues, you should make up your mind when installing Coppermine: do you want to allow user interaction? Do you plan to offer a bulletin board later (or any other application that keeps track of users)? If your answer is "yes", or "maybe", then it is advisable to enable bridging before actually promoting your site publicly and starting to let users in.</p>
+<p>Read up details in the <a href="bridging.htm#integrating">bridging section</a> of the docs.</p>
+
+
+
+<a name="getting_interaction"></a><h2>What are your visitors allowed to do?<a href="#getting_interaction" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Coppermine can be used for a variety or purposes: some use it to display their personal files to everyone on the internet, others want only a limited number of users to be able to access the site for viewing only and no interaction at all. A large number of webmasters want to create a community site, where users can participate by uploading files, comment on others' files and rate them.</p>
+<p>You can use Coppermine in all those setups (and a mixture of it), but you should be aware of the possibilities and limitations first:</p>
+<p>Users &quot;inherit&quot; their permissions from the group they are in. That is why many settings in Coppermine are set per group. This way, you can have several levels of permissions. Set permissions by group using the <a href="groups.htm#group_cp">group control panel</a></p>
+
+
+
+<a name="getting_design"></a><h2>Change your Coppermine gallery's design<a href="#getting_design" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>You can change some layout and design aspects (e.g. <a href="configuration.htm#admin_album_list_content">displaying random thumbnails on the index page</a>) in the corresponding <a href="configuration.htm">config</a> section. Coppermine comes with a <a href="theme.htm#theme_engine">theme engine</a> that allows you to customize the look of your gallery. You can choose one of the themes that come with Coppermine or you can download <a href="theme_user-contributions.htm#theme_user-contributions">user-contributed themes</a> from the downloads section of the Coppermine homepage. Based on the available themes you can <a href="theme_create.htm#theme_create">customize your individual theme</a> to make your site look unique and make your gallery match the overall look of your site.</p>
+
+<a name="getting_typical"></a><h2>Typical setups<a href="#getting_typical" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>There are a lot of configuration options built into Coppermine - use them wisely. As many users ask for a <em>typical</em> setup (although there is no such thing as <em>the</em> typical setup that fits for anybody), here are just a couple of them:</p>
+
+<a name="getting_typical_monolithic"></a><h3>Single uploader <em>without</em> user interaction (Monolithic gallery)<a href="#getting_typical_monolithic" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p><em>Only one uploader (you, the admin) and little or no user interaction</em><br />
+If you are going to be the only uploader and want little or no user interaction at all, disallow your site's visitors anything you do not want them to do. This is usually the case if you are an artist or photographer: there is no community-building behind your gallery - you just show to the public what content you have.</p>
+<ul>
+    <li>Disable new user registration in Coppermine's config (<span class="navlocator" style="text-align:right;color:#0E72A4;">Configuration &rarr; Registration &rarr; Allow new user registrations</span>). This will disable the "register" link in the navigation. Users manually going to the registration page will see a message telling them that they are not allowed to perform this operation</li>
+    <li>Disable creation of new albums for users (<span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row &quot;Registered&quot; &rarr; Personal gallery &rarr; Allowed = no</span>) in case you have not disabled the registration from the start and there are some leftover users registered.</li>
+    <li>Disallow visitors to upload by going to the groups control panel and setting &quot;Public albums upload&quot; to be not allowed: <span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row &quot;Guests&quot; &rarr; Public albums upload &rarr; Allowed = no</span>. If guests (or any user group) is disallowed to have personal galleries and to upload to public albums, the &quot;upload file&quot; link in the navigation will no longer be displayed.
+    <li>If you do not want your visitors to interact by <strong>rating</strong>, turn rating off on the groups control panel for the guests/anonymous group: <span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row &quot;Guests&quot; &rarr; Permissions &rarr; Rating = no</span>. If rating is disabled, users will not see the rating stars where they could vote.</li>
+    <li>If you do not want your visitors to post comments, turn comments off for guests: <span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row &quot;Guests&quot; &rarr; Permissions &rarr; Comments = no</span>.</li>
+    <li>If you do not want your visitors to <strong>send ecards</strong>, disable the sending of ecards in the groups control panel as suggested above: <span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row &quot;Guests&quot; &rarr; Permissions &rarr; Ecards = no</span></li>
+    <ul>
+
+<a name="getting_typical_single_uploader_community"></a><h3>Single uploader <em>with</em> user interaction<a href="#getting_typical_single_uploader_community" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>If you are going to be the only uploader, but you want to build a community around your site, with visitor registering, posting comments etc., just turn off uploads for your users, but turn on all the other feature that you want to allow:</p>
+<ul>
+    <li>
+        Turn off all kinds of uploads for guests as well as registered users: 
+        <ul>
+            <li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row &quot;Guests&quot; &rarr; Personal gallery &rarr; Allowed = no</span></li>
+            <li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row &quot;Registered&quot; &rarr; Personal gallery &rarr; Allowed = no</span></li>
+            <li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row &quot;Guests&quot; &rarr; Public albums upload &rarr; Allowed = no</span></li>
+            <li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row &quot;Registered&quot; &rarr; Public albums upload &rarr; Allowed = no</span></li>
+        </ul>
+    </li>
+    <li>
+        To avoid comment spam you should disallow comments for guests, but allow those features for registered users:
+        <ul>
+            <li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row &quot;Guests&quot; &rarr; Permissions &rarr; Comments = no</span></li>
+            <li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row &quot;Registered&quot; &rarr; Permissions &rarr; Comments = yes</span></li>
+            <li>To fight comment spam you should enable comment approval and/or captcha for comments.<br />
+            To enable comment approval, go to Coppermine's config and change the corresponding setting: <span class="navlocator" style="text-align:right;color:#0E72A4;">Configuration &rarr; Comment settings &rarr; Comments require approval</span>.<br />
+            Additionally (or alternatively), you should enable <acronym title="Completely Automated Public Turing test to tell Computers and Humans Apart">captcha</acronym> (a sort of image that displays scrambled, random letters that the visitor has to read and enter into an input field to prove that he is human and not just a silly bot script) for comments as well: <span class="navlocator" style="text-align:right;color:#0E72A4;">Configuration &rarr; Comment settings &rarr; Display Captcha (Visual Confirmation) for adding comments</span></li>
+        </ul>
+    </li>
+  <li>
+        Allow visitors to rate your content: you enable rating on per group level. Therefore, go to the groups control panel and allow rating for all possible groups:
+          <ul>
+            <li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row &quot;Guests&quot; &rarr; Permissions &rarr; Rating = yes</span></li>
+            <li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Row &quot;Registered&quot; &rarr; Permissions &rarr; Rating = yes</span></li>
+        </ul>
+      Please understand though that this is not all: think of those per-group settings as a general on/off switch. You can fine-tune those settings per individual album: you can allow rating in one album and deny it in another one. Go to the <a href="albums.htm#album_prop">album properties</a> of an individual album to allow/disallow ratings for this particular album.    </li>
+</ul>
+
+<a name="getting_typical_multiple_uploader_closed"></a><h3>Multiple uploaders <em>without</em> new registrations (closed group)<a href="#getting_typical_multiple_uploader_closed" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Usually this setup is used if you are going to have a comparatively low number of users who will be uploading, but a larger number of people who are suppossed to see your galery's content. This is often the case for clans, clubs or companies, where members are allowed to upload files, but the visitors of the page are just meant to browse those images without adding any new content. There is comparatively little difference to the previous setup &quot;<a href="#getting_typical_single_uploader_community">Single uploader <em>with</em> user interaction</a>&quot; except for the following:</p>
+<ul>
+	<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Configuration &rarr; Registration &rarr; Allow new user registrations = no</span> that will make sure that no new users register. It's up to the admin to create the needed user accounts.</li>
+	<li>The admin of course needs to set <a href="#getting_upload_permissions">permissions for uploads</a> for the registered users as well</li>
+</ul>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,778 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Plugin Tutorial &amp; API - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="tutorial for the Coppermine plugin API" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="robots" content="noindex" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<div id="doc_en_only">No translation available</div>
+
+<a name="plugin_api"></a><h1>Plugin Writing: Tutorial, API<a href="#plugin_api" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+
+    <a name="plugin_api_overview_who"></a><h2>Intended Audience<a href="#plugin_api_overview_who" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+    <p>Here's a list of who should and who should not (or doesn't need to) read this documentation.  The categories overlap in many places, so make sure to read the entire list.  Find yourself in the list and then decide whether you should read on.</p>
+    <div class="indent">
+        <div id="ulgreen" class="cpg_message_success">
+        <a name="plugin_api_overview_who_yes"></a><h3>People who <em>should</em> read this documentation:<a href="#plugin_api_overview_who_yes" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+        <ul type="square">
+            <li>Anyone who wants to write plugins to customize Coppermine</li>
+            <li>Current Coppermine coders who want to convert their hacks &amp; mods to plugins</li>
+            <li>Anyone who wants to add in features or modify a current plugin</li>
+            <li>Coders who want to start customizing Coppermine but do not know where to start</li>
+        </ul>
+        </div>
+        <div id="ulred" class="cpg_message_validation">
+        <a name="plugin_api_overview_who_no"></a><h3>People who do <em>not</em> need to read this documentation:<a href="#plugin_api_overview_who_no" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+        <ul>
+            <li>Anyone learning Coppermine for the first time - the <a href="index.htm">main manual</a> is all you need at first</li>
+            <li>Anyone who wants to download &amp; use plugins - you can use many plugins without knowing what they do internally</li>
+        </ul>
+        </div>
+        <p class="cpg_message_info">People interested in using plugins but who do not need to modify them or write their own should read the main documentation instead - <a href="plugins.htm">the plugins section</a> describes everything you need to know.</p>
+    </div>
+
+<p><a class="back" href="#top">Back to top</a></p><hr />
+
+    <a name="plugin_api_overview_skills"></a>
+    <h2>Required Skills &amp; Knowledge<a href="#plugin_api_overview_skills" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+    <p>This documentation assumes a few skills &amp; knowledge you need to have before creating or modifying plugins.</p>
+    <ul>
+        <li><strong>Some PHP knowledge</strong><br />
+        You don't need advanced skills, but you do need to know basic syntax and how to read (and search) the <a href="http://www.php.net/docs.php"  rel="external" class="phpnet">PHP Documentation</a>.  Classes (<abbr title="also known as">a.k.a.</abbr> objects) are used by the Plugin API, but you don't need to know <em>a priori</em> much about classes; this documentation will teach you enough about the plugin class to use it in writing plugins.  (If you don't know what a "class" is, that's OK too, although it's a bit strange that you haven't heard of classes in any of your programming experience.  Regardless, make sure you know PHP syntax well.)  If you are an advanced programmer in another language, take a look at some PHP quick-start guides and learn enough to get going.</li>
+        <li><strong>Good working knowledge of Coppermine</strong><br />
+        You don't need to know anything about the Coppermine code (yet), but you do need to be able to use Coppermine as an end-user.  You should know how to use plugins; this documentation assumes that you have read the <a href="plugins.htm">plugins section</a> of the main manual and know the user interface for installing &amp; configuring plugins.  Of course you need to have administrator access to a Coppermine gallery, but that should be obvious.</li>
+        <li><strong>Basic MySQL knowledge</strong><br />
+        You can get by with very simple plugins or modifying current plugins with not using MySQL commands, but otherwise, you need to know how to write basic UPDATE, SELECT, and DELETE queries.  The main reason is that a good plugin has configuration options for the user and to save, update, and delete these configuration parameters, you need to be able to write MySQL queries.  Read a simple tutorial online and keep a bookmark on the <a href="http://dev.mysql.com/doc/"  rel="external" class="external">MySQL documentation</a>.  You could merely copy the examples here, but we strongly recommend you learn the basic syntax well, for reasons of sanity when debugging.</li>
+    </ul>
+
+<p><a class="back" href="#top">Back to top</a></p><hr />
+    <a name="plugin_api_overview_tools"></a>
+    <h2>Recommended Software &amp; Support Forums<a href="#plugin_api_overview_tools" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+    <p>You can easily write plugin code with simply a text editor and administrator-access to a Coppermine gallery, but here are a few more tools that are useful in one way or another.</p>
+    <ul>
+        <li><strong>grep</strong> - <span class="small">[<a href="http://en.wikipedia.org/wiki/Grep"  rel="external" class="external">definition</a>]</span><br />
+        Very useful for finding code and following code from file to file in Coppermine.  For a *nix environment, this should be obvious and easy to find and use.  In Windows, <a href="http://www.wingrep.com/"  rel="external" class="external">Windows Grep</a> is a good shareware program; many others also exist.  Besides using the command-line 'grep' in Mac OS X, we have no other recommendations for Mac users.</li>
+        <li><strong>Coppermine Support</strong> - <span class="small">[<a href="http://coppermine-gallery.net/forum"  rel="external" class="external">home page</a>]</span><br />
+        Obvious place to look for support - look for "Plugins" support board for the appropriate Coppermine version</li>
+        <li><strong>Coppermine Plugins</strong> - <span class="small">[<a href="http://coppermine-gallery.net/plugins.php"  rel="external" class="external">home page</a>]</span><br />
+        Plugin summary page on the official Coppermine site that lists all plugins known to the coppermine dev team.</li>
+		<!--<li><strong>Coppermine Contrib</strong> - <span class="small">[<a href="http://cpg-contrib.org/"  rel="external" class="external">home page</a>]</span><br />
+        Web site for Coppermine contributors - announcements, discussion forum, CVS - Commented out, as the site is currently down and has remained in  this stage for more than a year, so it's more than likely that the cpg-contrib team is in permanent hiatus (Joachim)</li>-->
+    </ul>    
+<p><a class="back" href="#top">Back to top</a></p><hr />
+
+<!--
+    <a name="plugin_api_overview_doc"></a>
+    <h3>Structure of this Documentation<a href="#plugin_api_overview_doc" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <p>Placeholder.  Content will be added.</p>
+<p><a class="back" href="#top">Back to top</a></p><hr />
+	-->
+
+
+<a name="plugin_api_tutorial"></a>
+<h2>"Hello, world" Plugin Tutorial<a href="#plugin_api_tutorial" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Here we go.  We are going to write a simple plugin and learn how to implement a number of useful features.</p>
+<div class="indent">
+
+<a name="plugin_api_tutorial_first"></a>
+<h3>My First Plugin<a href="#plugin_api_tutorial_first" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>The first thing you need to do is come up with a short name for your plugin.  This short name must be unique enough so that it is different from other plugins currently available and be specific enough that it describes what your plugin does, compared to any plugins that are yet to be written.  For example, do not name your plugin "thumbnail" because that's way too general.  You need to come up with the name now because you need to use this name to create a folder to hold your plugin's files.  Since this short name is to be used as your folder name (and later for a prefix for your plugin's functions), use a valid folder name: no spaces, start with a letter, and use only alphanumeric characters and underscores (to separate words).  So take a moment and come up with a short name for your plugin.  The full name of your plugin can be decided later.</p>
+<p>Each and every Coppermine plugin requires its own folder and a minimum of two files.  The folder must be located under the Coppermine plugins folder.  So if your Coppermine is located in a folder named "cpg" on your domain, and the short name you chose for your plugin is "yellow_banana", the plugin folder would be: <tt class="code">http://www.yourdomain.org/cpg/plugins/yellow_banana/</tt> - put all plugin files in this folder.  The two files every plugin requires are:</p>
+<ul>
+    <li><strong>codebase.php</strong> - holds the basic code to install, configure, uninstall, clean-up, and hook into the Coppermine system, along with any other custom functions you create; you may also use a separate file for functions that are not one of the basic plugin operations but this will be described later</li>
+    <li><strong>configuration.php</strong> - holds the name, description, author (your name), and version for your plugin; even though the name is 'configuration', the intent of this file is to hold only the very basic configuration information for your plugin - this information shows up on the plugin manager page so people can see quickly your plugin's basic information; all operational configuration forms and parameters should go in codebase.php</li>
+</ul>
+<p>The 'sample' plugin that ships with Coppermine shows most of the features that will be described in this tutorial, but please do not copy the 'sample' plugin for this tutorial.  Please start from scratch so you know precisely how a plugin is written and developed.  You can download all the tutorial plugins using the links in each section.  If you do so, each section's plugin will install in a different folder with a name related to the relevant section.  Make sure you are using the correct plugin for the section you are reading.  For the first tutorial plugin below, it is strongly recommended that you do things manually so you understand the basics.  For the subsequent sections, you can then use the downloaded plugins knowing that you can create a plugin from scratch successfully.  Keeping this in mind, <a href="../tutorial/cpg1.5_plugin_hello-world_v2.1.zip">click here</a> to download the plugin for this section.  Once again, it is recommended you only use these files if you have problems.  Create the folder and files from scratch so you understand how to do so.</p>
+<p>Let's get started!</p>
+<p><strong>Create a folder named "hello_world" in the Coppermine plugins folder as shown:</strong></p>
+<pre>http://www.yourdomain.org/cpg/plugins/hello_world/</pre>
+<p>Make sure you enable read and execute permissions on this folder (see the <a href="install_permissions.htm">permissions section</a> in the main manual).  You can create the folder and files on your personal computer and upload them using FTP to your web server, but keep in  mind that you cannot try out your plugin until it is on the web server.  For each step in this tutorial where you add new lines, edit the text file on your computer, save it, then upload the new version onto web server, making sure to overwrite the previous file on the web server.  (Some FTP programs "append" by default - which won't work with these text files, so make sure you are definitely overwriting the file with the new version.)</p>
+<p><strong>Create this file in the "hello_world" folder, with contents as shown (and read &amp; execute permissions):</strong></p>
+<p class="filename">configuration.php</p>
+<pre class="cpg_code">&lt;?php
+/**************************************************
+  Coppermine Plugin - Hello, World
+  *************************************************
+  Copyright (c) 2010 &lt;-InsertNameHere-&gt;
+  *************************************************
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License version 3
+  as published by the Free Software Foundation.
+***************************************************/
+
+$name='Hello, World';
+$description='Plugin API Tutorial - My First Plugin';
+$author='Tutorial';
+$version='2.1';
+$plugin_cpg_version = array('min' => '1.5');
+?&gt;
+</pre>
+<p>The beginning part is a comment block of course.  We suggest you use such a block at the beginning of each of your plugin files.  The first text line tells people this is a Coppermine Plugin and lists the name of your plugin.  The next text line has a copyright message with your name (real name or username used on the Coppermine forum).  The next text block  gives the GPL message that Coppermine uses and is recommended for your code as well.  This comment block is not strictly required for your plugin to work.  That being said, it is important for organization and clarity, so please make sure to add it to each of your plugin files.</p>
+<p>The parameters used by the Plugin API are the 4 variables shown.  These variables are shown on the plugin manager page to describe your plugin.</p>
+<ul>
+    <li><tt class="code">$name</tt> gives the name of your plugin which will be shown on the plugin manager page.  You can use any string here; you are not limited to the short name rules you picked earlier.</li>
+    <li><tt class="code">$description</tt> gives a phrase or sentence or paragraph that describes your plugin.  This will be shown on the plugin manager page underneath the plugin's name.  You can use any text here; it's recommended to keep the description succinct so it's clear what your plugin does without using too many words.</li>
+    <li><tt class="code">$author</tt> gives the author or authors of your plugin (if you collaborated with others on the creation or modification of the plugin).  Use whatever credits you want to give here.  This is also shown on the plugin manager page.</li>
+    <li><tt class="code">$version</tt> gives the version number (or letter) of your plugin.  You can use whatever version numbering you want.  Most people use 1.0 for the first release of a plugin that works (sub-1.0 could be used for trial releases if you are not sure it will work in all cases).  Then you can use tenths or hundredths for follow-up minor revisions, e.g. 1.01, 1.02, etc. or 1.1, 1.2, etc.  Feel free to put the tag "beta" in the version variable if desired, however with the fact that most plugins are fairly simple, it's probably not necessary to do so.  If you find a bug in a version, fix it, and release another revision.  In any case, you can put whatever text you like to describe your plugin's current version.</li>
+    <li><tt class="code">$plugin_cpg_version</tt> defines an array that allows you to specify the minimum and maximum Coppermine version for your plugin. It has been added in cpg1.5.x to make sure that users don't accidentally install plugins that haven't been designed for their version of Coppermine.<br />
+    Currently, two array keys are being processed: 'min' and 'max'. Against both, a version comparison will be performed using the function <a href="http://www.php.net/manual/en/function.version-compare.php" rel="external" class="phpnet">version_compare</a>.
+    <div class="cpg_example">Specifying <tt class="code">$plugin_cpg_version = array('min' => '1.5');</tt> will apply for all Coppermine versions, including both cpg1.5.0 as well as cpg1.5.23, but will fail for cpg1.4.27. Specifying <tt class="code">$plugin_cpg_version = array('min' => '1.5.3');</tt> will apply for all Coppermine versions equal or better than cpg1.5.3, so it will not apply for cpg1.5.0, but it will apply for cpg1.5.23. Only specify a minor version if a particular plugin hook was introduced in the Coppermine version you refer to.</div>
+    </li>
+</ul>
+<p><strong>Now create your code file in the "hello_world" folder, with contents as shown (and read &amp; execute permissions):</strong></p>
+<p class="filename">codebase.php</p>
+<pre class="cpg_code">&lt;?php
+/**************************************************
+  Coppermine Plugin - Hello, World
+  *************************************************
+  Copyright (c) 2010 &lt;-InsertNameHere-&gt;
+  *************************************************
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License version 3
+  as published by the Free Software Foundation.
+***************************************************/
+
+if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
+
+
+// Add a filter for the gallery header
+$thisplugin-&gt;add_filter('gallery_header','helloworld_header');
+
+// Sample function to modify gallery header html
+function helloworld_header($html) {
+    $html = '&lt;p style="color:red"&gt;&lt;b&gt;Hello, world.&lt;/b&gt; (tutorial 2.1)&lt;/p&gt;'
+            .$html;
+    return $html;
+}
+
+?&gt;
+</pre>
+<p>These 2 files are all you need to install and run your first plugin.  Before explaining the code for this plugin, go ahead and install this plugin.  The plugin manager will show "Hello, World" as one of the "Plugins Not Installed".  Click on the install button to install this plugin.  It will immediately show up on the "Installed Plugins" section since there is no configuration for it.  You should see bold red text declaring "Hello, world." near the top of the page.  For detailed instructions on how to use plugins as an end-user, read the <a href="plugins.htm">plugins section</a> of the main documentation.  If you haven't read this section completely, please do so now.</p>
+<p>So how does this plugin work?  The first block in <tt class="code">codebase.php</tt> is the same comment block we used in <tt class="code">configuration.php</tt>.  For the same reasons as noted above, it is recommended that you use this comment block in each and every one of your plugin files.</p>
+<p>Moving on, the first line of code is the following:</p>
+<pre class="cpg_code">if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
+</pre>
+<p>The constant 'IN_COPPERMINE' is defined in each of the public scripts that users use directly, i.e. ones that show up in the URL of a webpage.  All secondary scripts check for this constant before doing anything else.  If it has not been set, then the script stops and exits with a "Not in Coppermine..." message.  With this technique, all secondary files are inaccessible to users and cannot be run directly.  Besides security, a larger reason is that these scripts are not meant to be run directly; they assume they are being called by another script - a script which ensures that all the standard Coppermine definitions and declarations have been made.  Your plugin script is such a secondary script and is not meant to be run directly, hence the check for 'IN_COPPERMINE' and the quick exit if it doesn't exist.  You can see this in action by typing the following URL into your web browser: <tt class="filename">http://www.yourdomain.org/cpg/plugins/hello_world/codebase.php</tt> (assuming Coppermine is located in the 'cpg' folder under your domain).</p>
+<p>The next line of code (after the comment describing it) tells Coppermine which hook your plugin wants to access:</p>
+<pre class="cpg_code">// Add a filter for the gallery header
+$thisplugin-&gt;add_filter('gallery_header','hello_world_header');</pre>
+<p>With this line of code, you are registering your plugin to use this plugin hook.  In this case, we're hooking onto the <tt class="code">gallery_header</tt> hook which is located in <tt class="filename">functions.inc.php</tt> in the load_template() function.  This function parses your theme's <tt class="filename">template.html</tt> file, replacing tags like {ADMIN_MENU} and {LANGUAGE_SELECT_LIST} with the corresponding Coppermine HTML to render these content blocks.  The two plugin hooks <tt class="code">gallery_header</tt> and <tt class="code">gallery_footer</tt> allow HTML to be placed before and after the {GALLERY} tag, respectively.  (See the <a href="#plugin_api_hooks_func_gh-gf">reference section</a> below on these hooks for more detailed information.)  On the main page, {GALLERY} is replaced with the "content of the main page" config setting, which usually includes the breadcrumb, category list, album list, and random/lastup blocks.  On a page like the plugin manager (where you first see "Hello, world." after installing the plugin), {GALLERY} is replaced with the main part of the page, in this case, the plugin manager tables listing the plugins.  The "Hello, World" plugin places the text "Hello, world." just above {GALLERY} in both places.  If you modify the line of code above to use <tt class="code">gallery_footer</tt> instead, you'll see "Hello, world." just below the main part of the page, as expected.</p>
+<p>Let's break apart this line of code to understand how you register your plugin to use a particular plugin hook.  For those programmers who have used classes before (in PHP or another language with similar constructs), you'll recognize the arrow operator <tt class="code">-></tt> as a class operator used to access class properties and methods.  In this case, the Coppermine Plugin API provides <tt class="code">$thisplugin</tt> as a pointer to the instance of your plugin's class.  So when your plugin's <tt class="filename">codebase.php</tt> is loaded by the plugin API, you can access the properties and methods of your plugin's class by using <tt class="code">$thisplugin</tt>.  For example, <tt class="code">$thisplugin->name</tt> refers to your plugin's name (whose value is defined in your plugin's <tt class="filename">configuration.php</tt>).  See the <a href="#plugin_api_plugin_class">section below</a> on plugin class properties &amp; methods for more detailed information.</p>
+<p>In this case, we are using the add_filter() function to add the filter hook we want to use to our plugin's list of registered plugin hooks.  The user-defined function we will use for each call of the hook is <tt class="code">hello_world_header</tt>, which is defined in the last section of code in our plugin, as shown:</p>
+<pre class="cpg_code">// Function to modify the gallery header
+function hello_world_header($html) {
+    $html = '&lt;p style="color:red"&gt;&lt;b&gt;Hello, world.&lt;/b&gt;  (tutorial 2.1)&lt;/p&gt;'
+            .$html;
+    return $html;
+}</pre>
+<p>Our function needs one parameter since it is attached to a filter hook (instead of an action hook), and here we name it <tt class="code">$html</tt>.  In this function, we add on the "Hello, world." text, which is tagged to be bold &amp; red for extra effect.  We need to ensure that the parameter is added-on to, <strong>not</strong> replaced, so that it plays well with other plugins who tag on to the same hook.  We place the parameter coming in on a separate line to ensure we don't forget to do this.  Finally, the function returns the modified parameter.  And that does it.</p>
+<p>So now you should know how a plugin, albeit a very basic plugin, works.  The other sections in this tutorial describe useful features to add to your plugin including installation, configuration, linking in Coppermine, <a href="#plugin_api_tutorial_lang">multi-language support</a>, and <a href="#plugin_api_tutorial_distrib">distributing your plugin</a> as a package. Read on and follow along.</p>
+
+
+<p><a class="back" href="#top">Back to top</a></p><hr />
+<a name="plugin_api_tutorial_installconfig"></a>
+<h3>Installation, Configuration, and Clean-Up<a href="#plugin_api_tutorial_installconfig" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>The tutorial plugin so far merely outputs text via a particular hook.  During the installation of the plugin, nothing special is done besides registering the plugin with Coppermine.  The only configuration parameters are the identification ones in <tt class="filename">configuration.php</tt>.  It's fairly easy to imagine additional installation steps and configuration parameters that would be useful in a real-world plugin.  This section teaches you how to add such installation and configuration features to the tutorial plugin.</p>
+
+<p><a class="back" href="#top">Back to top</a></p><hr />
+
+<div class="indent">
+<a name="plugin_api_tutorial_installsimple"></a>
+<h4>Installation with Simple Configuration<a href="#plugin_api_tutorial_installsimple" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<p>First, we're going to add a very simple installation step, so you can see how the plugin installation can be customized to do whatever you like to do when the plugin is installed.  If your plugin needs to create a custom table that it will use during operation, this section will describe where to add such a installation step.  This simple installation is simple in that it can only be used for "hands-off" installation, where the user is not involved in customizing the installation.  In this section, the user will merely confirm the installation and that's it.  The next sections will expand on this to provide more complicated installation steps.  This section is important because you need to know exactly how the Coppermine Plugin API calls your installation and configuration functions and that is best described with a very simple installation procedure.</p>
+
+<p><a href="../tutorial/cpg1.5_plugin_hello-world_V2.2.1.zip">Click here</a> to download the plugin for this section.</p>
+
+<p>Here's the new <tt class="filename">codebase.php</tt> with the new sections highlighted in bold.</p>
+<textarea class="cpg_code code smaller" style="width:90%" rows="10">&lt;?php
+/**************************************************
+  Coppermine Plugin - Hello, World
+  *************************************************
+  Copyright (c) 2010 &lt;-InsertNameHere-&gt;
+  *************************************************
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License version 3
+  as published by the Free Software Foundation.
+***************************************************/
+
+if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
+
+
+// Add install &amp; configure actions
+$thisplugin-&gt;add_action('plugin_install','hello_world_install');
+$thisplugin-&gt;add_action('plugin_configure','hello_world_configure');
+
+
+// Add a filter for the gallery header
+$thisplugin-&gt;add_filter('gallery_header','hello_world_header');
+
+// Function to modify the gallery header
+function hello_world_header($html) {
+    $html = '&lt;p style="color:red"&gt;&lt;b&gt;Hello, world.&lt;/b&gt; (tutorial 2.2.1)&lt;/p&gt;'
+            .$html;
+    return $html;
+}
+
+
+// Install the plugin
+function hello_world_install() {
+    $superCage = Inspekt::makeSuperCage();
+    $submit_code = '';
+    if ($superCage-&gt;post-&gt;keyExists('submit')) {
+      $submit_code = $superCage-&gt;post-&gt;getEscaped('submit');
+    }
+    if (!$submit_code) {
+        return 1;  // configure function has not been called yet, so return error code '1'
+    } elseif ($submit_code == 'Yes') {
+        return true;  // configure function has been called, so install the plugin
+    } elseif ($submit_code == 'No')  {
+        header("Location: pluginmgr.php\n\n");  // go back to plugin manager without installing the plugin
+        exit(0);
+    } elseif ($submit_code == 'Simulate critical error') {
+        return false;  // simulate a critical error by returning false
+    } else {
+        return 2;  // user is not sure whether to install yet, so return error code '2'
+    }
+}
+
+
+// Configure function: displays the configuration form
+function hello_world_configure($action_code) {
+    global $thisplugin;
+    $still = '';
+    if ($action_code == 2) {
+        echo 'Ok, I hope you\'ve had enough time to decide now.&lt;br /&gt;';
+        $still = 'still ';
+    }
+    if (($action_code === 1) || ($action_code == 2)) {
+        echo &lt;&lt;&lt; EOT
+
+            &lt;h3&gt;Do you want to install plugin &lt;b&gt;{$thisplugin-&gt;name}&lt;/b&gt;?&lt;/h3&gt;
+            &lt;form action="{$_SERVER['REQUEST_URI']}" method="post"&gt;
+
+            &lt;input type="submit" name="submit" value="Yes" /&gt;
+            &lt;input type="submit" name="submit" value="No" /&gt;
+            &lt;input type="submit" name="submit" value="I'm {$still}not sure" /&gt;
+            &lt;input type="submit" name="submit" value="Simulate critical error" /&gt;
+            &lt;/form&gt;
+
+EOT;
+    }
+}?&gt;</textarea>
+
+<p>Install this new plugin and give it a whirl.  You can use the plugin package linked above, or you can edit the plugin code yourself if you want to get your hands dirty.  It's certainly recommended for you to play with and modify each tutorial plugin to see how things work, and typing in the new code each time may be a useful exercise.  If you have shell access to your web server, you could modify the plugin code directly, in fact you could modify the plugin code while the plugin is installed because the code is loaded on each page load and so the new code would be available immediately.  However, it is not recommended to do this with a "live" website since you may break things in modifying the plugin code directly.  You should set up a system for working on your plugin, ideally on a test installation, but it could also be done by including an administration check for each operational feature of your plugin so only you the admin would see the effect of the plugin in progress.  Or you could set your site offline (in the Coppermine configuration) during this maintenance/upgrade work.  The test installation is clearly the most versatile option, as long as you include enough test content there to simulate the real website and test out your plugin thoroughly.</p>
+
+<p>This new configuration is obviously very simple, but it shows the core structure of customizing the installation of a plugin.  We have added <tt class="code">plugin_install</tt> and <tt class="code">plugin_configure</tt> actions at the beginning.  Then we define the functions that will implement these actions.  The install action is executed when you click on the "install" button on the plugin manager page.  The configure action is executed afterwards, depending upon what return value your install action sends back.  The configure action is only executed at installation time and is meant as such to only include configuration that is done on installation.  For other configuration parameters of your plugin that you want accessible while the plugin is running, you need to set up a separate function and/or script (a <a href="#plugin_api_tutorial_config">later section</a> will give a "best practices" guide for doing this).  To be clear: there is <em>no</em> plugin hook for configuring your plugin while it's running.  You set up your own functions for this.</p>
+
+<p>The install action is meant to direct the execution of the configure action and a "best practices" usage would have the configure action do the same for the install action.  This may sound confusing, but it makes sense once you carefully step through the procedure.  You'll find it very useful in many plugin implementations.  The basic theory is this: the Plugin API asks your install function to install the plugin.  If your install function needs a configuration step, it returns back a code telling the API that it needs to be configured first.  Then your configure function is called.  Once things are all set, your configure function should tell your install function this.  Your install function then says "I'm ready" to the Plugin API, and the plugin is finally installed.</p>
+
+<p>As a step-by-step guide, let's look at the order of operations for the installation of a plugin.  <em>Note</em>: In the following, the Plugin Manager is the script <tt class="filename">pluginmgr.php</tt>, and the Plugin API is the script <tt class="filename">include/plugin_api.inc.php</tt>.  Both will be capitalized here to make it clear a script (and its set of functions) is being referred to.</p>
+
+<p><strong>Installation Order of Operations:</strong></p>
+<ul>
+    <div id="ulnum">
+    <li>The user clicks the "install" button on the Plugin Manager page.</li>
+    <li>The Plugin Manager executes the install function in the Plugin API.</li>
+    <li>The Plugin API executes the <tt class="code">plugin_install</tt> action hook function of your plugin.</li>
+    <li>Depending upon what value your plugin install function returns, the following is done:</li>
+    </div>
+    <div id="ulnone">
+    <ul>
+        <li><strong>True</strong>: the Plugin API installs the plugin and returns <em>true</em> to the Plugin Manager which then goes back to its normal business of displaying the plugin list, with your plugin now listed in the "installed plugins" list.</li>
+        <li><strong>False</strong>: the Plugin API does <strong>not</strong> install the plugin and tells Coppermine to die with an error message saying there was an error while installing the plugin.</li>
+        <li><strong>Integer</strong>: the Plugin API holds off on installing your plugin and returns the <em>integer</em> to the Plugin Manager, which then executes the <tt class="code">plugin_configure</tt> action hook function of your plugin, passing the install return value to it as a function parameter.  Ideally, your configure function should execute the install again to give your plugin's install function another chance to return <em>true</em> and get itself installed.  As you can see, the <em>integer</em> here is intended to be used as a program-flow code or an error code to direct the configuration and installation of the plugin.  Set up these codes as you see fit.</li>
+        <li><strong>Anything else</strong>: the Plugin API treats this the same as a return value of <em>false</em>.</li>
+    </ul>
+    </div>
+    <div id="ulnum">
+    <li>The Plugin Manager will keep trying to install your plugin using the configure function until the Plugin API tells it that the plugin has been installed.  At this point, it goes back to what it does best (or at least most), showing you the list of plugins.</li>
+    </div>
+</ul>
+
+<p>You can use the install and configure hooks as you see fit.  Keep in mind how and when each is called and place your installation steps in one or both of your hooked functions.  One practice that is commonly used is the following:</p>
+
+<div id="ulnone">
+<ul>
+    <li><strong>Configure</strong>: Output a form to allow the user to interact with the installation.</li>
+    <li><strong>Install</strong>: Process the configure form data; install the plugin or re-configure as necessary.</li>
+</ul>
+</div>
+
+<p>If your plugin does not require the user to configure any installation parameters, the configure form is often still used to tell the user that the plugin has been or will be installed, with a simple submit button which then returns the user to the plugin manager list.  If you put your installation steps in the install function, then the message should say that the plugin will be installed.  In this case, the install function needs to wait for the "Go" or "Continue" button on the configure form before executing the installation steps.  If you put your installation steps in the configure function, then the message should say that the plugin has been installed, with a "Ok" or "Plugin Manager" button to return to the plugin manager page.  Where you put your installation steps is up to you.  Choose either the configure or install function or spread them between both.</p>
+
+<p>Let's return to the current tutorial plugin.  It demonstrates a common practice employed in the install and configure actions.  It doesn't actually do anything else besides ask the user whether to install the plugin or not.  If we check the order of operations listed above, we see that the install action is called first.  Our install function first checks to see if the configure function has been called by checking for form POST data.  If it doesn't exist, this is the first call to the install function and so the configure function needs to be called.  We return the integer value <tt class="code">1</tt> as our error code.  (Note that we are calling it an error code because the API plugin installation as not been triggered yet.  It doesn't mean that the install has run into a fatal fault.  If you prefer, you can call it a program-flow code.)</p>
+
+<p>Our configure function will output a form to ask the user whether to install the plugin or not.  As a useful aside, we are going to use the plugin name (as defined by <tt class="code">$name</tt> in <tt class="filename">configuration.php</tt>), so we need to ask for the global variable <tt class="code">$thisplugin</tt>, which is a pointer to the plugin's object class.  The plugin name is the object property <tt class="code">$thisplugin->name</tt>.  For more information, refer to <a href="#plugin_api_plugin_class">this section</a> on plugin class properties and methods.</p>
+
+<p>Back to the configure form: we ask the user, "Do you want to install plugin Hello, World?".  The four submit buttons are "Yes", "No", "I'm not sure", and "Simulate critical error".  Each button will trigger a different return value in the install function.  The form itself uses POST to return its data and it should be returned to the plugin manager.  The best way to define the form action is as shown:</p>
+
+<pre class="cpg_code">&lt;form action="{$CPG_PHP_SELF}" method="post"&gt;</pre>
+
+<p>Now let's see what the buttons do.  "Yes" triggers a return value of <em>True</em> which will cause the plugin to be installed.  "No" means that the user wants to cancel the installation of the plugin.  There is no way through the Plugin API to do so, so you need to do it yourself in your plugin code.  Our plugin code shows a good way to cancel the plugin installation: send a header pointing to the Plugin Manager and exit, as shown:</p>
+<pre class="cpg_code">("Location: pluginmgr.php\n\n");  // go back to plugin manager without installing the plugin
+exit(0);</pre>
+<p>The button "I'm not sure" triggers a return value of "2" in the install function, which triggers another display of the configure form.  For fun, we add a line regarding having enough time to decide and modify the button to "I'm still not sure".  This shows how you can use the integer return value from the install function to direct program flow in the configure function.  The return value is passed to the configure function; you can call the parameter whatever you like.  We called it here <tt class="code">$action_code</tt>.</p>
+
+<p>Finally, the button "Simulate critical error" shows you what happens when you return <em>False</em> from the install function.  Admittedly, this is not very useful to the poor administrator trying to install your plugin, so it should not be used unless you do not implement another way to inform the user of an installation problem.  There may be times when your plugin installation runs into a fatal error.  For example, your plugin may add a table for its data but during installation, the table cannot be created.  In this case, you should output an informative error message saying the table could not be created, then exit, returning to the plugin manager or using the <tt class="code">cpg_die</tt> function.  The user will appreciate your extra effort to tell him/her what went wrong with the plugin installation.</p>
+
+<p>Now you should understand how the installation process works and the basics of coding your plugin installation.  If you are uncertain about these basics, please re-read this section and play with the plugin.  Once you have this groundwork set, the next section shows how you can save configuration parameters during your installation.</p>
+
+<p><a class="back" href="#top">Back to top</a></p><hr />
+
+
+<!--
+<a name="plugin_api_tutorial_install"></a>
+<h4>Installation with Configuration Parameters Saved<a href="#plugin_api_tutorial_install" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<p>Placeholder.  Content will be added.</p>
+<p><a class="back" href="#top">Back to top</a></p><hr />
+-->
+
+<!--
+<a name="plugin_api_tutorial_config"></a>
+<h4>Configuration during Operation<a href="#plugin_api_tutorial_config" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<p>Placeholder.  Content will be added.</p>
+<p><a class="back" href="#top">Back to top</a></p><hr />
+-->
+
+<a name="plugin_api_tutorial_cleanup"></a>
+<h4>Uninstallation &amp; Clean-Up<a href="#plugin_api_tutorial_cleanup" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<p>Use the plugin cleanup mechanism to perform a custom action when the plugin is being uninstalled.</p>
+<div class="cpg_example">
+Add something like
+<pre class="cpg_code">$thisplugin->add_action('plugin_cleanup','coffee_maker_plugin_cleanup_function');</pre>
+at the top of <tt class="code">./plugins/coffee_maker/codebase.php</tt>. The function could simply perform some queries that delete the database changes your plugin install might have caused. The actual uninstall action is being triggered like this:
+<pre class="cpg_code">$thisplugin->add_action('plugin_uninstall','coffee_maker_uninstall');</pre>
+Here's a more complex example function that will ask the user if the plugin settings should be kept or removed and performs the corresponding action.
+<textarea class="cpg_code code smaller" style="width:94%" rows="10">// Ask if we want to drop the table
+function coffee_maker_cleanup_function($action) {
+    global $CONFIG, $lang_plugin_coffee_maker, $lang_common, $coffee_maker_icon_array;
+	// Initialize language and icons
+	require_once './plugins/coffee_maker/init.inc.php';
+	$coffee_maker_init_array = coffee_maker_initialize();
+	$lang_plugin_coffee_maker = $coffee_maker_init_array['language']; 
+	$coffee_maker_icon_array = $coffee_maker_init_array['icon'];
+    $superCage = Inspekt::makeSuperCage();
+    $cleanup = $superCage-&gt;server-&gt;getEscaped('REQUEST_URI');
+    if ($action===1) {
+    echo &lt;&lt;&lt; EOT
+    &lt;form action="{$cleanup}" method="post"&gt;
+EOT;
+    starttable('100%', '', 2);
+    echo &lt;&lt;&lt; EOT
+            &lt;tr&gt;
+                &lt;td class="tableb"&gt;
+                    {$lang_plugin_coffee_maker['config']}
+                &lt;/td&gt;
+                &lt;td class="tableb"&gt;
+                    &lt;input type="checkbox" class="checkbox" name="drop" id="drop_yes" value="1" /&gt;
+                    &lt;label for="drop_yes" class="clickable_option"&gt;{$lang_plugin_coffee_maker['remove_settings']}&lt;/label&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+			&lt;tr&gt;
+                &lt;td class="tableb tableb_alternate"&gt;
+                    {$lang_plugin_coffee_maker['cache']}
+                &lt;/td&gt;
+                &lt;td class="tableb tableb_alternate"&gt;
+                    &lt;input type="checkbox" name="cache" id="cache" class="checkbox" value="1" checked="checked" /&gt;
+					&lt;label for="cache" class="clickable_option"&gt;{$lang_plugin_coffee_maker['empty_cache']}&lt;/label&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="tablef"&gt;
+				&lt;/td&gt;
+				&lt;td class="tablef"&gt;
+                    &lt;button type="submit" class="button" name="submit" value="{$lang_common['go']}"&gt;{$coffee_maker_icon_array['ok']}{$lang_common['go']}&lt;/button&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+EOT;
+	endtable();
+    echo &lt;&lt;&lt; EOT
+    &lt;/form&gt;
+EOT;
+    }
+}
+
+function coffee_maker_uninstall() {
+	global $CONFIG;
+	$superCage = Inspekt::makeSuperCage();
+	if (!$superCage-&gt;post-&gt;keyExists('submit')) {
+		return 1;
+	}
+	if ($superCage-&gt;post-&gt;keyExists('cache') && $superCage-&gt;post-&gt;getInt('cache') == 1) {
+		coffee_maker_empty_cache();
+		cpg_db_query("DROP TABLE IF EXISTS {$CONFIG['TABLE_PREFIX']}plugin_coffee_maker");
+	}
+	// Drop the database records
+	if ($superCage-&gt;post-&gt;keyExists('drop') && $superCage-&gt;post-&gt;getInt('drop') == 1) {
+		cpg_db_query("DELETE FROM {$CONFIG['TABLE_CONFIG']} WHERE name = 'plugin_coffee_maker_radius'");
+		cpg_db_query("DELETE FROM {$CONFIG['TABLE_CONFIG']} WHERE name = 'plugin_coffee_maker_maxrotation'");
+		cpg_db_query("DELETE FROM {$CONFIG['TABLE_CONFIG']} WHERE name = 'plugin_coffee_maker_bgcolor'");
+		cpg_db_query("DELETE FROM {$CONFIG['TABLE_CONFIG']} WHERE name = 'plugin_coffee_maker_borderwidth'");
+		cpg_db_query("DELETE FROM {$CONFIG['TABLE_CONFIG']} WHERE name = 'plugin_coffee_maker_bordercolor'");
+		cpg_db_query("DELETE FROM {$CONFIG['TABLE_CONFIG']} WHERE name = 'plugin_coffee_maker_thumb_pfx'");
+		cpg_db_query("DELETE FROM {$CONFIG['TABLE_CONFIG']} WHERE name = 'plugin_coffee_maker_timestamp'");
+		cpg_db_query("DELETE FROM {$CONFIG['TABLE_CONFIG']} WHERE name = 'plugin_coffee_maker_timelimit'");
+		cpg_db_query("DELETE FROM {$CONFIG['TABLE_CONFIG']} WHERE name = 'plugin_coffee_maker_admin_only'");
+		cpg_db_query("DELETE FROM {$CONFIG['TABLE_CONFIG']} WHERE name = 'plugin_coffee_maker_filetype'");
+		cpg_db_query("DELETE FROM {$CONFIG['TABLE_CONFIG']} WHERE name = 'plugin_coffee_maker_rotation_method'");
+	}
+	return true;
+}</textarea>
+</div>
+</div>
+
+<p><a class="back" href="#top">Back to top</a></p><hr />
+<a name="plugin_api_tutorial_linking"></a>
+<h3>Linking to Custom Plugin Scripts<a href="#plugin_api_tutorial_linking" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>You can refer to any php-driven file within your plugin folder using the <tt class="code">file</tt> URL parameter. The only pre-requisite is that the file you refer to needs to comply to the <a href="dev_plugins.htm#plugin_writing_naming_conventions">naming conventions</a> for files within plugins.</p>
+<div class="cpg_example">Let's assume that you want to refer to a PHP-driven file named foobar.php that resides inside your custom plugin folder named &quot;<tt class="code">coffee_maker</tt>&quot;:
+<ul>
+	<li>File system: <tt class="code">./plugins/coffee_maker/foobar.php</tt></li>
+	<li>URL: <tt class="code">http://example.com/your_coppermine_folder/plugins/coffee_maker/foobar.php</tt></li>
+</ul>
+To refer to that file, refer to <tt class="code">index.php?file=coffee_maker/foobar</tt>, i.e. to <tt class="code">http://example.com/your_coppermine_folder/index.php?file=coffee_maker/foobar</tt> or (even shorter) to <tt class="code">http://example.com/your_coppermine_folder/?file=coffee_maker/foobar</tt>
+</div>
+<p>With this being said, it's obvious that you don't have to move files into the coppermine root folder - you can refer to files that reside in your plugin's sub-folder as if it resided in coppermine's root folder that way.</p>
+<p class="cpg_message_error">You (as a coppermine plugin author) <strong>mustn't</strong> create plugins that require end users to move files around before they can start using your plugin. It's simply not necessary to create plugins that way, as you can savely do as if files resides in coppermine's root folder by using the technique used in this section.</p>
+
+
+<p><a class="back" href="#top">Back to top</a></p><hr />
+<a name="plugin_api_tutorial_button"></a>
+<h3>Adding a Button to Coppermine<a href="#plugin_api_tutorial_button" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>There are two places where you might want to add a menu item to: to the admin menu (usually to offer a link to a plugin's config screen) or to the &quot;regular&quot; coppermine menu.</p>
+
+<div class="indent">
+<a name="plugin_api_tutorial_button_admin_menu"></a><h4>Adding a Button to the admin menu<a href="#plugin_api_tutorial_button_admin_menu" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<div class="cpg_example">
+<pre class="cpg_code">$thisplugin->add_filter('admin_menu','coffee_maker_config_button');</pre>
+<pre class="cpg_code">function coffee_maker_bar_config_button($admin_menu){
+    global $lang_plugin_coffee_maker, $CONFIG, $coffee_maker_icon_array;
+    if ($CONFIG['plugin_coffee_maker_config_link'] == 1) {
+	    $new_button = '&lt;div class="admin_menu admin_float"&gt;&lt;a href="index.php?file=coffee_maker/index&amp;action=configure"';
+	    $new_button .= ' title="' . $lang_plugin_coffee_maker['config'] . '"&gt;';
+	    $new_button .= $coffee_maker_icon_array['config_menu'] . $lang_plugin_coffee_maker['config'] . '&lt;/a&gt;&lt;/div&gt;';
+	    $look_for = '&lt;!-- END export --&gt;'; // This is where you determine the place in the admin menu
+	    $admin_menu = str_replace($look_for, $look_for . $new_button, $admin_menu);
+    }
+    return $admin_menu;
+}</pre>
+</div>
+
+<a name="plugin_api_tutorial_button_overall_menu"></a><h4>Adding a Button to the overall menu<a href="#plugin_api_tutorial_button_overall_menu" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<div class="cpg_example">
+<pre class="cpg_code">$thisplugin->add_filter('sys_menu','coffee_maker_sys_button');</pre>
+<pre class="cpg_code">function coffee_maker_bar_sys_button($menu) {
+    global $lang_plugin_coffee_maker, $template_sys_menu_spacer, $CONFIG;
+    if ($CONFIG['plugin_coffee_maker_how'] == 4) {
+		coffee_maker_bar_language(); // Call the function that populates the language variable
+        $new_button = array();
+        $new_button[0][0] = $lang_plugin_coffee_maker['picinfo_heading'];
+        $new_button[0][1] = $lang_plugin_coffee_maker['menu'];
+        $new_button[0][2] = 'index.php?file=coffee_maker/index';
+        $new_button[0][3] = 'coffee_maker';
+        $new_button[0][4] = $template_sys_menu_spacer;
+        $new_button[0][5] = 'rel="nofollow"';
+        array_splice($menu, count($menu)-1, 0, $new_button);
+    }
+    return $menu;
+}</pre>
+</div>
+</div>
+<p><a class="back" href="#top">Back to top</a></p><hr />
+
+<a name="plugin_api_tutorial_js"></a><h3>Adding JavaScript to plugins<a href="#plugin_api_tutorial_js" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>How to add JavaScript to plugins is being described in the section &quot;<a href="dev_javascript.htm#dev_javascript_include_files_plugin">How to include JavaScript files in plugins</a>&quot;.</p>
+<p><a class="back" href="#top">Back to top</a></p><hr />
+
+<a name="plugin_api_tutorial_lang"></a>
+<h3>Multi-language Support<a href="#plugin_api_tutorial_lang" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>You can make your plugins capable to be used in multiple languages. Therefore, your mustn't hard-code language strings into your plugin, but use variables instead. As you wouldn't want to introduce a load of individual language variables, you better use an array, preferably following the naming scheme <tt class="code">$lang_plugin_foldername</tt>. All that is left to do is adding a little switch into your plugin that determines the end user's language and make it use the language file if present.</p>
+<p class="cpg_example">Let's assume that the folder your plugin resides in is named <tt class="code">coffee_maker</tt> and the name is "Coffee Maker".</p>
+<p>It's advisable to move the definition of languages and other resources that you want to use globaly into a separate file. This way, you can call the function directly if needed (outside the scope of the plugin).</p>
+<div class="cpg_example">Therefore, at the very start of codebase.php, right after the starting PHP tag, insert
+<pre class="cpg_code">require_once "./plugins/coffee_maker/initialize.inc.php";</pre></div>
+<p>Of course you need to create the file you just refered to.</p>
+<div class="cpg_example">This is how the content of <tt class="code">initialize.inc.php</tt> should look like:
+<pre class="cpg_code">&lt;?php
+function coffee_maker_language() {
+	global $CONFIG, $lang_plugin_coffee_maker;
+	require "./plugins/coffee_maker/lang/english.php";
+	if ($CONFIG['lang'] != 'english' && file_exists("./plugins/coffee_maker/lang/{$CONFIG['lang']}.php")) {
+	    require "./plugins/coffee_maker/lang/{$CONFIG['lang']}.php";
+	}
+}
+?&gt;</pre></div>
+<p>As you can see from the code above, inside your plugin's folder, there should be another folder named <tt class="code">lang</tt> that contains the language files. It needs to contains <tt class="code">english.php</tt> at least.</p>
+<div class="cpg_example">Here's how the content of english.php could look like:
+<pre class="cpg_code">&lt;?php
+$lang_plugin_coffee_maker['plugin_name'] = 'Coffee Maker';
+$lang_plugin_coffee_maker['plugin_description'] = 'This plugin will turn your gallery into a full-featured coffee machine.';
+$lang_plugin_coffee_maker['coffee_bean'] = 'coffee bean';
+$lang_plugin_coffee_maker['brew'] = 'brew';
+?&gt;</pre></div>
+<p>Within <tt class="code">codebase.php</tt> or any other plugin file, you can then use the language strings instead of hard-coding them in. Don't forget to make them global inside functions (see <a href="http://www.php.net/manual/en/language.variables.scope.php" rel="external" class="phpnet">PHP: variable scope</a>).</p>
+<p><a class="back" href="#top">Back to top</a></p><hr />
+
+<a name="plugin_api_tutorial_config"></a>
+<h3>Adding a config section to your plugin<a href="#plugin_api_tutorial_config" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>It's advisable to have a config screen available for your plugin - nearly all plugins sooner or later need one.</p>
+<div class="indent">
+<a name="plugin_api_tutorial_config_preparation"></a>
+<h4>Preparations<a href="#plugin_api_tutorial_config_preparation" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<p>To accomplish that, create an empty file inside your plugin folder and name that <tt class="code">admin.php</tt> in analogy to the naming of coppermine's config screen. The config screen can then be accessed with the URL <tt class="code">http://yoursite.tld/your_coppermine_folder/?file=coffee_maker/admin</tt>, so it's advisable to add a link to the plugin manager that points to your config screen. To accomplish that, add the link to the string <tt class="code">$extra_info</tt> in <tt class="code">configuration.php</tt>.</p>
+<div class="cpg_example code">$extra_info .= '&lt;a href="index.php?file=coffee_maker/admin" class="admin_menu"&gt;' . $lang_plugin_coffee_maker['plugin_configuration'] . '&lt;/a&gt;';</div>
+Now let's compose the config screen for your plugin; edit <tt class="code">admin.php</tt> with a plain text editor and add
+<pre class="cpg_code code">if (!GALLERY_ADMIN_MODE) {
+    cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
+}</pre>
+at the very start to make sure that only the admin can access the plugin's configuration screen and nobody else.<br />
+If you're using <abbr title="Internationalization">i18n</abbr>, i.e. if you are using the <a href="#plugin_api_tutorial_lang">multi-lingual</a> feature, don't forget to add your call to the language file into your config screen by adding
+<pre class="cpg_code">require_once "./plugins/coffee_maker/initialize.inc.php";</pre>
+Now it's time to add the actual functionality to your config screen. Therefore, there are five steps that we actually need to perform:
+<ul>
+    <li>Define the defaults of each config setting and what the values can be (min/max etc.)</li>
+    <li>Sanitize the data sent using the form and write them to the database</li>
+    <li>Populate the form options</li>
+    <li>Output the actual form</li>
+</ul>
+<p>Here's a default config page with only one config option that is first split into chunks to comment them:</p>
+
+<a name="plugin_api_tutorial_config_header"></a><h4>Header<a href="#plugin_api_tutorial_config_header" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+As suggested above, in the header you just need to make the preparations, e.g. include the language file and make sure that only the gallery admin can access the config page. To accomplish this, use this piece of code:
+<pre class="cpg_code code">if (!GALLERY_ADMIN_MODE) {
+    cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
+}
+require_once "./plugins/coffee_maker/initialize.inc.php";</pre>
+
+<a name="plugin_api_tutorial_config_defaults"></a><h4>Defaults<a href="#plugin_api_tutorial_config_defaults" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+Let's populate the variables that we need later. If you plan to beautify your config options using icons, define them now, using this code:
+<pre class="cpg_code code">$plugin_coffee_maker_icon['submit'] = cpg_fetch_icon('ok', 1);</pre>
+We'll need to specify as well what variables you'll be using inside the form and what type they are:
+<pre class="cpg_code code">$sanitization_array = array(
+    'plugin_coffee_maker_width' => array('type' => 'int', 'min' => '10', 'max' => '32'),
+    'plugin_coffee_maker_height' => array('type' => 'int', 'min' => '0', 'max' => '100'),
+    'plugin_coffee_maker_enabled' => array('type' => 'checkbox', 'min' => '0', 'max' => '1'),
+);</pre>
+This looks more complicated than it actually is: the keys of the array <em>$sanitization_array</em> (i.e. 'plugin_coffee_maker_width') needs to correspond to the name of the form field. It's advisable to respect the naming scheme, i.e. to name your form fields as suggested in this example, using the word "plugin", followed by an underscore, followed by the plugin folder name, followed by another underscore, followed by a short description of the actual purpose of the field. Keep in mind though that there is a limitation in the overall number of characters allowed here: the names we assign here will later be used as well when coming up with the database records. We'll use the config table to store our plugin values, so we need to respect the maximum of 40 characters for the name of the config field. If you need to use abbreviations, choose them wisely to be able to identify your stuff later.<br />
+The values for the key 'type' can be 'int', 'checkbox', 'raw' or 'array'. Depending on that value, there are different keys available. The following table should explain what can be done:
+<table border="0" cellspacing="0" cellpadding="0" width="100%" class="cpg_zebra">
+    <tr>
+        <th valign="top">type</th>
+        <th valign="top">Usage (range)</th>
+        <th valign="top">Parameters</th>
+    </tr>
+    <tr>
+        <td valign="top">int</td>
+        <td valign="top">Text input fields where only integers are allowed</td>
+        <td valign="top">'min' -> minimum value<br />'max' -> maximum value</td>
+    </tr>
+    <tr>
+        <td valign="top">checkbox</td>
+        <td valign="top">Radio buttons and checkboxes with the values of the individual fields set to integers. The difference lies in the way that browsers handle empty checkboxes: if a checkbox is not ticked, there is no data submit with the form, just as if the checkbox wasn't there in the first place. This can cause issues if you explicitely empty a checkbox. The type 'int' can't handle this, but the type 'checkbox' can.</td>
+        <td valign="top">'min' -> minimum value<br />'max' -> maximum value</td>
+    </tr>
+    <tr>
+        <td valign="top">raw</td>
+        <td valign="top">Use this for text input fields where you expect other content than integers - you can sanitize the input further using the parameter for this field.</td>
+        <td valign="top">'regex_ok' -> <a href="dev_superglobals.htm#superglobals_sanitization_howto_regex">regular expression</a> that the submit data needs to match against.
+        </td>
+    </tr>
+    <tr>
+        <td valign="top">array</td>
+        <td valign="top">Use this for an array of possible results that comes from one field, separated with a particular delimiter</td>
+        <td valign="top">'regex_ok' -> regular expression that the submit data needs to match against, similar to the examples given above for the type 'regex'<br />
+        'delimiter' -> character that is being used to delimit one array element from the other inside the string, e.g. a slash</td>
+    </tr>
+</table>
+
+<a name="plugin_api_tutorial_config_sanitize"></a><h4>Sanitize form data &amp; write to database<a href="#plugin_api_tutorial_config_sanitize" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+We only need to sanitize the form data if the form has actually been submit, so we'll wrap the next section between <tt class="code">if ($superCage->post->keyExists('submit')) {</tt> and the closing curly bracket <tt class="code">}</tt> that is needed to close the if construct. You will be able to re-use the piece of code in each and every plugin - it has been designed for that purpose. Use this piece of code:
+<textarea class="cpg_code code smaller" style="width:94%" rows="10">    // get sanitized POST parameters    if ($superCage->post->keyExists('submit')) {
+        //Check if the form token is valid        if(!checkFormToken()){
+            cpg_die(ERROR, $lang_errors['invalid_form_token'], __FILE__, __LINE__);
+        }
+        $config_changes_counter = 0;
+      foreach ($sanitization_array as $san_key => $san_value) {
+          if (isset($CONFIG[$san_key]) == TRUE) { // only loop if config value is set --- start              if ($san_value['type'] == 'checkbox') { // type is checkbox --- start                if ($superCage->post->getInt($san_key) == $san_value['max'] && $CONFIG[$san_key] != $san_value['max']) {
+                    $CONFIG[$san_key] = $san_value['max'];
+                    cpg_db_query("UPDATE {$CONFIG['TABLE_CONFIG']} SET value='{$CONFIG[$san_key]}' WHERE name='$san_key'");
+                    $config_changes_counter++;
+                } elseif($superCage->post->getInt($san_key) == $san_value['min'] && $CONFIG[$san_key] != $san_value['min']) {
+                    $CONFIG[$san_key] = $san_value['min'];
+                    cpg_db_query("UPDATE {$CONFIG['TABLE_CONFIG']} SET value='{$CONFIG[$san_key]}' WHERE name='$san_key'");
+                    $config_changes_counter++;
+                } elseif($superCage->post->keyExists($san_key) != TRUE && $CONFIG[$san_key] != '0') {
+                    $CONFIG[$san_key] = 0;
+                    cpg_db_query("UPDATE {$CONFIG['TABLE_CONFIG']} SET value='{$CONFIG[$san_key]}' WHERE name='$san_key'");
+                    $config_changes_counter++;
+                }
+              } // type is checkbox --- end              if ($san_value['type'] == 'int') { // type is integer --- start                  if ($superCage->post->getInt($san_key) <= $san_value['max'] && $superCage->post->getInt($san_key) >= $san_value['min'] && $superCage->post->getInt($san_key) != $CONFIG[$san_key]) {
+                      $CONFIG[$san_key] = $superCage->post->getInt($san_key);
+                      cpg_db_query("UPDATE {$CONFIG['TABLE_CONFIG']} SET value='{$CONFIG[$san_key]}' WHERE name='$san_key'");
+                      $config_changes_counter++;
+                  }
+              } // type is integer --- end              if ($san_value['type'] == 'raw') { // type is raw --- start                  if (isset($san_value['regex_ok']) == TRUE && preg_match($san_value['regex_ok'], $superCage->post->getRaw($san_key)) && $superCage->post->getRaw($san_key) != $CONFIG[$san_key]) {
+                      $CONFIG[$san_key] = $superCage->post->getRaw($san_key);
+                      if ($superCage->post->getRaw($san_key) == 'none') {
+                        $CONFIG[$san_key] = '';
+                      }
+                      cpg_db_query("UPDATE {$CONFIG['TABLE_CONFIG']} SET value='{$CONFIG[$san_key]}' WHERE name='$san_key'");
+                      $config_changes_counter++;
+                  }
+              } // type is raw --- end              if ($san_value['type'] == 'array') { // type is array --- start                                $evaluate_value = $superCage->post->getRaw($san_key);
+                  if (is_array($evaluate_value) && isset($san_value['regex_ok']) == TRUE && isset($san_value['delimiter']) == TRUE) {
+                      $temp = '';
+                      for ($i = 0; $i <= count($evaluate_value); $i++) {
+                          if (preg_match($san_value['regex_ok'], $evaluate_value[$i])) {
+                              $temp .= $evaluate_value[$i] . $san_value['delimiter'];
+                          }
+                      }
+                      unset($evaluate_value);
+                      $evaluate_value = rtrim($temp, $san_value['delimiter']);
+                      unset($temp);
+                  }
+                  if ($evaluate_value != $CONFIG[$san_key]) {
+                      $CONFIG[$san_key] = $evaluate_value;
+                      cpg_db_query("UPDATE {$CONFIG['TABLE_CONFIG']} SET value='{$CONFIG[$san_key]}' WHERE name='$san_key'");
+                      $config_changes_counter++;
+                  }
+              } // type is array --- end          } // only loop if config value is set --- end      }
+    }</textarea>
+
+<a name="plugin_api_tutorial_config_options"></a><h4>Populate form options<a href="#plugin_api_tutorial_config_options" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+The radio buttons and checkboxes need to be populated with values based on the corresponding values:
+<pre class="cpg_code code">if ($CONFIG['plugin_coffee_maker_enabled'] == '1') {
+	$option_output['plugin_coffee_maker_enabled'] = 'checked="checked"';
+} else { 
+	$option_output['plugin_coffee_maker_enabled'] = '';
+}</pre>
+
+<a name="plugin_api_tutorial_config_form"></a><h4>Output the form<a href="#plugin_api_tutorial_config_form" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+Coming up with the actual config form output now should be dead easy, starting with the pageheader, the population of the form token variables, followed by the form tag and the table start. Basically the output starts like this:
+<pre class="cpg_code code">pageheader($lang_plugin_enlargeit['display_name']);
+list($timestamp, $form_token) = getFormToken();
+echo <<< EOT
+<form action="index.php?file=coffee_maker/admin" method="post" name="coffee_maker_settings">
+EOT;
+starttable('100%', $lang_plugin_coffee_maker['configuration'], 2, 'cpg_zebra');</pre>
+Now you populate the table, using the <a href="http://www.php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc" rel="external" class="phpnet">heredoc syntax</a> to come up with one table row per config setting:
+<pre class="cpg_code code">echo <<< EOT
+	&lt;tr&gt;
+		&lt;td valign="top"&gt;
+			&lt;label for="plugin_coffee_maker_enabled" class="clickable_option"&gt;{$lang_plugin_coffee_maker['enable_brewing_of_coffee']}&lt;/label&gt;
+		&lt;/td&gt;
+		&lt;td valign="top"&gt;
+			&lt;input type="checkbox" name="plugin_coffee_maker_enabled" id="plugin_coffee_maker_enabled" class="checkbox" value="1" {$option_output['plugin_coffee_maker_enabled']} /&gt;
+			({$lang_common['yes']})
+		&lt;/td&gt;
+	&lt;/tr&gt;
+<span class="important">[... more table rows here ... ]</span>
+EOT;</pre>
+Finally, you have to
+<ul>
+    <li>Add the form token elements</li>
+    <li>Add the submit button</li>
+    <li>Close the table</li>
+    <li>Close the form</li>
+    <li>Send the pagefooter</li>
+</ul>
+Therefore, the last chunk of code looks like this:
+<pre class="cpg_code code">echo &lt;&lt;&lt; EOT
+	&lt;tr&gt;
+		&lt;td class="tablef" colspan="2"&gt;
+			&lt;input type="hidden" name="form_token" value="{$form_token}" /&gt;
+			&lt;input type="hidden" name="timestamp" value="{$timestamp}" /&gt;
+			&lt;button type="submit" class="button" name="submit" value="{$lang_plugin_coffee_maker['submit']}"&gt;{$coffee_maker_icon_array['ok']}{$lang_plugin_coffee_maker['submit']}&lt;/button&gt;
+		&lt;/td&gt;
+	&lt;/tr&gt;
+EOT;
+endtable();
+echo &lt;&lt;&lt; EOT
+&lt;/form&gt;
+EOT;
+pagefooter();</pre>
+
+<!--
+<a name="plugin_api_tutorial_config_template"></a><h4>Plugin template<a href="#plugin_api_tutorial_config_template" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+Still feeling a bit confused and dizzy? Don't worry, here's something you can use to start with: we're providing you with a plugin template that you can use to build a plugin of your own.
+-->
+</div>
+
+<p><a class="back" href="#top">Back to top</a></p><hr />
+</div>
+
+<a name="plugin_api_tutorial_distrib"></a>
+<h3>Distributing your plugin<a href="#plugin_api_tutorial_distrib" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>If you have written a plugin that works for you, why not share it with the Coppermine community - others might find your plugin helpfull as well. If you decide to share your plugin, please do as suggested in these steps:</p>
+<ul>
+	<li>Read up the <a href="dev_plugins.htm#plugin_writing_naming_conventions">naming conventions</a> (if you haven't already done so) to make sure your plugin matches the standards</li>
+	<li>Create a readme file within your plugin's sub-folder and name it "readme.txt". In that file you should write down all needed details:
+	<ul>
+		<li>Author name (your name)</li>
+		<li>Plugin name</li>
+		<li>Plugin description (summarize what the plugin does)</li>
+		<li>Plugin license (if you plan to release your plugin under a particular license that differs from <a href="copyrights.htm#copyright_license">the license Coppermine is being released under</a> - the GNU GPL v3)</li>
+		<li>Installation instructions (if they differ from regular plugin installation instructions using the <a href="plugins.htm#plugin_manager">plugin manager</a>)</li>
+		<li>Version history / changelog (if applicable)</li>
+	</ul>
+	</li>
+	<li>Create a zip-archive of your plugin's folder (including the folder name itself). It is vital that your plugin doesn't just contain your plugin files only (<tt class="code">codebase.php</tt>, <tt class="code">configuration.php</tt> and <tt class="code">readme.txt</tt>), but the plugin's sub-folder as well (and the plugin files residing in that sub-folder of course), as your plugin will only work for others if it is being installed using the exact folder name you chose in the first place. If you're not sure, take a look at some plugins from the download section of the <a href="http://coppermine-gallery.net/">Coppermine site</a> as an example.</li>
+	<li>Name the zip-archive that contains your plugin according to <a href="dev_plugins.htm#plugin_writing_naming_conventions">naming conventions</a></li>
+	<li>Go to the official <a href="http://coppermine-gallery.net/">Coppermine site</a> and register an account if you haven't already done so.</li>
+	<li>Log in with your account, go to the <a href="http://forum.coppermine-gallery.net/index.php/board,97.0.html">plugin support board for cpg1.5.x</a> and start a new thread there (your thread will be moved later to the <a href="http://forum.coppermine-gallery.net/index.php/board,91.0.html">plugin contributions board for cpg1.5.x</a> by a moderator if applicable: you can't start new threads there directly to stop the board from getting cluttered with plugin requests started by newbies who are too lazy to read the board rules)</li>
+	<li>In your new thread, post a summary of your plugin (in fact everything that went into your readme) and all additional data if appicable (e.g. a link to a working demo where end users can see the plugin in action). Attach your plugin's zip archive to the thread. You might as well attach a screenshot that illustrates what the plugin does.</li>
+</ul>
+<p><a class="back" href="#top">Back to top</a></p><hr />
+
+<a name="plugin_api_hooks"></a>
+<h2>Plugin Hooks<a href="#plugin_api_hooks" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>For a detailed list of plugin hooks that you can use for your own plugins, please refer to the page <a href="dev_plugin_hooks.htm">plugin hooks</a>.  You'll find information there on how to find and use all the hooks available in Coppermine.</p>
+<p><a class="back" href="#top">Back to top</a></p><hr />
+
+<!--
+<a name="plugin_api_plugin_class"></a>
+<h2>Plugin Class Properties &amp; Methods<a href="#plugin_api_plugin_class" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Placeholder.  Content will be added.</p>
+<p><a class="back" href="#top">Back to top</a></p><hr />
+-->
+
+<a name="plugin_api_globals"></a>
+<h2>Global Variables &amp; Constants<a href="#plugin_api_globals" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>There is a list of global <a href="dev_vars.htm#vars_constants">variables and constants</a> used througout coppermine that can be accessed as well from within plugins.</p>
+
+
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

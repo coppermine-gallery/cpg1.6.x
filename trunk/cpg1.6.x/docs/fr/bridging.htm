@@ -1,0 +1,395 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Intégration/Passerelle - Coppermine Photo Gallery - Documentation &amp; manuel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="fr" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Intégration du script avec une autre application (passerelle). Coppermine peut être intégré à d'autres applications au niveau de la gestion des utilisateurs, partageant le même identifiant pour l'ensemble de votre site; c'est ce que l'on appelle l'intégration ou passerelle. Cela facilitera l'utilisation pour les visiteurs, puisqu'ils ne devront s'identifier qu'une seule fois; leur identifiant fonctionnera avec Coppermine aussi bien qu'avec toutes les pages avec lesquelles Coppermine sera intégré." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation et manuel</h1>
+<div id="toc">
+<a href="toc.htm">Table des matières</a>
+</div>
+
+<a name="integrating"></a><h1>Intégration du script avec une autre application (passerelle)<a href="#integrating" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+
+<a name="integrating_bridge_purpose"></a><h2>Ce que fait l'intégration<a href="#integrating_bridge_purpose" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Coppermine peut être intégré à d'autres applications au niveau de la gestion des utilisateurs, partageant le même identifiant pour l'ensemble de votre site; c'est ce que l'on appelle l'intégration ou passerelle. Cela facilitera l'utilisation pour les visiteurs, puisqu'ils ne devront s'identifier qu'une seule fois; leur identifiant fonctionnera avec Coppermine aussi bien qu'avec toutes les pages avec lesquelles Coppermine sera intégré.</p>
+<p>Par défaut, l'intégration est désactivée, et ceux qui ne souhaitent pas l'utiliser peuvent oublier cette fonction sans problèmes. Il y a toutefois des <a href="#integrating_users_start">problèmes lors de l'intégration à un stade plus avancé</a> (une fois qu'il y a déjà du contenu dans Coppermine), donc, si vous souhaitez utiliser l'intégration, vous devriez l'activer avant de commencer à ajouter du contenu.</p>
+<p>Originellement, l'intégration de Coppermine a été crée pour une intégration avec des <acronym title="Bulletin Board System">BBS</acronym> (Forums). Par la suite, des passerelles pour d'autres applications (qui n'entrent pas dans la catégorie des "BBS") ont été ajoutées - le plus souvent pour des systèmes de gestion de contenu (CMS). Néanmoins, les références aux applications BBS restent dans certains documents et chaines de caractères du fichier langue. Il n'y a pas de raison de s'inquiéter de cela.</p>
+<p>Les passerelles n'intègrent <strong>pas</strong> votre galerie et l'application avec laquelle vous voulez appliquer cette passerelle de manière visuelle. Si vous voulez une intégration visuelle, créez un <a href="theme.htm">thème personnalisé</a> pour votre galerie, qui correspond à l'aspect de l'ensemble de votre site et ajoutez un lien pointant du menu de Coppermine à l'application avec laquelle vous l'avez intégré et vice et versa.</p>
+<p>Lorsque l'intégration est activée, Coppermine enlève la gestion des utilisateurs interne et utilise celle de l'application avec laquelle vous avez crée une passerelle (par exemple votre forum). En conséquence, vos utilisateurs devront s'enregistrer et s'identifier dans votre application avec laquelle Coppermine est intégré (BBS). Une fois fait, ils seront redirigés vers Coppermine (s’ils viennent de la page d'identification de Coppermine et que l'application avec laquelle la passerelle est faite autorise les redirections).</p>
+<a name="integrating_bridge_purpose_end"></a>
+<a name="integrating_bridge_start"></a><h2>Fichiers d'intégration disponibles<a href="#integrating_bridge_start" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Coppermine peut s'intégrer avec les applications suivantes (exemple: Coppermine 
+  et votre forum vont partager la même base de données utilisateurs).</p>
+ <br />
+<ul>
+  <li>Invision Power Board</li>
+  <li>Mambo</li>
+  <li>MyBB</li>
+  <li>Phorum</li>
+  <li>phpBB 2</li>
+  <li>phpBB 3</li>
+  <li>PunBB 1.15</li>
+  <li>PunBB 1.2 (fonctionne aussi avec FluxBB 1.2)</li>
+  <li>SMF 1.x</li>
+  <li>SMF 2.x</li>
+  <li>vBulletin</li>
+  <li>XMB</li>
+  <li>Xoops2</li>
+</ul>
+
+<a name="integrating_bridge_end"></a>
+
+<a name="integrating_prerequisites_start"></a><h2>Pré-requis<a href="#integrating_prerequisites_start" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+
+
+<a name="integrating_cookie_start"></a><h3>Autentification par cookie<a href="#integrating_cookie_start" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>L'intégration de l'identification utilise le cookie de votre application de forum, toutefois, cela ne fonctionnera pas si les cookies de votre forum ne sont pas visibles par Coppermine. Donc, si vous n'êtes pas un expert, faites les choses simplement et installer Coppermine et votre application à bridger sur le même domaine.</p>
+<div class="cpg_example">
+	<table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra">
+	    <tr>
+	        <td>Cela <strong>va</strong> fonctionner:</td>
+	        <td>Cela <strong title="depending on your subdomain setup">peut</strong> fonctionner:</td>
+	        <td>Cela <strong class="important">ne va pas</strong> fonctionner:</td>
+	    </tr>
+	    <tr>
+	        <td>Application intégrée: <tt class="code">http://votredomaine.com/forum/</tt><br />
+	        Coppermine: <tt class="code">http://votredomaine.com/galerie/</td>
+	        <td>Application intégrée: <tt class="code">http://forum.votredomaine.com/</tt><br />
+	        Coppermine: <tt class="code">http://galerie.votredomaine.com/</tt></td>
+	        <td>Application intégrée: <tt class="code">http://votrepremierdomaine.com/forum/</tt><br />
+	        Coppermine: <tt class="code">http://votreseconddomaine.com/galerie/</tt></td>
+	    </tr>
+	</table>
+</div>
+<p>Le chemin du cookie dans la configuration du forum devrait être '/' là ou l'option est disponible.</p>
+<p class="cpg_message_warning">Les noms des cookies de votre application intégrée et de Coppermine <strong>ne doivent pas</strong> être les mêmes - ils <strong>doivent</strong> être différents !</p>
+<p>Certaines applications intégrées ont une option pour activer les cookies indépendants des sous-domaines. Vous devez activer cette option si vous possédez l'ensemble du domaine.</p>
+<p>Certaines applications intégrées utilisent un chemin de cookie par défaut qui ne rend le cookie disponible que pour l'application elle même, et pas pour les applications se trouvant dans un autre répertoire du serveur. Si c'est le cas pour vous, vous devrez revoir la configuration de votre application intégrée d'abord pour vous assurer que le cookie de votre application intégrée est bien visible par Coppermine.</p>
+<p class="cpg_example">
+Dans SMF 1.1.x, l'option est appelée &quot;stockage local des cookies&quot;. Si elle est activée, les cookies issus de SMF ne seront accessibles que pour le forum et pas par les autres applications. C'est pourquoi, lors de l'établissement d'une passerelle entre Coppermine et SMF, vous devrez aller dans le panneau de configuration de SMF et de désactiver l'option stockage local des cookies. Dans SMF cette option peut être trouvée sous "Administrateur" &rarr; "paramètres du serveur" &rarr; "Options de configuration" &rarr; "Activer le stockage local des cookies".<br />
+Pour d'autres applications intégrables, l'option peut être nommée différemment et peut se trouver sous une autre structure de navigation, mais le résultat reste le même: le cookie généré par l'application intégrée doit être stocké de manière à ce qu'il soit accessible par les autres applications dans le même domaine.</p>
+<p>Dans la plupart des applications BBS récentes, vous pouvez déterminer si vous voulez gérer l'authentification des utilisateurs par cookie ou par session. Si vous voulez établir une passerelle, vous devez vous assurer que l'application avec laquelle vous voulez établir une passerelle, utilise les cookies comme méthode d'authentification - Coppermine ne fonctionne pas avec les authentifications gérées par les sessions !</p>
+<a name="integrating_cookie_end"></a>
+
+<a name="integrating_standalone_start"></a><h3>Version autonome d'abord<a href="#integrating_standalone_start" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Pour éviter les confusions, assurez vous de paramétrer les deux applications (Coppermine et l'application intégrée) de manière autonome d'abord. Assurez-vous que les deux fonctionnent correctement, sans l'intégration. Testez toutes les fonctions de Coppermine (comme le téléchargement, l'enregistrement etc...) une fois que Coppermine est installé, avant de commencer la mise en place de la passerelle.</p>
+<a name="integrating_standalone_end"></a>
+
+<a name="integrating_users_start"></a><h3>Les utilisateurs, groupes et images téléchargées par les utilisateurs de Coppermine sont perdus lors de l'intégration<a href="#integrating_users_start" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p class="cpg_message_warning"><span class="important">Attention:</span> Si vous avez déjà des utilisateurs et des groupes personnalisés dans votre base de données de Coppermine lorsque vous activez l'intégration, soyez attentifs au fait qu'ils seront perdus ! Si vous utilisateurs de Coppermine ont crées des albums privés et y ont téléchargés des fichiers, ils seront eux aussi perdus !</p>
+<p><strong>Explication détaillée:</strong><br />
+Comme la plupart des applications utilisant une communauté Coppermine stocke tout ce que font les utilisateurs (y compris l'administrateur) comme le téléchargement de fichiers, les commentaires, les votes, dans la base de données. La référence à chaque action faite par un utilisateur est défini par un IDentifiant utilisateur unique. La corrélation entre les actions de l'utilisateur et le profil de l’utilisateur correspondant est faite par le biais d'un IDentifiant unique dans chaque enregistrement de la base de données qui défini les actions des utilisateurs.<br />
+Lorsque la passerelle est établie, la gestion des utilisateurs de Coppermine est remplacée par celle de l'application avec laquelle la passerelle est établie. En conséquence l'IDentifiant de l'utilisateur de l'application intégrée (qui est différent de celui de Coppermine) est pris en compte.</p>
+<div class="cpg_example">
+L'utilisateur de Coppermine &quot;Pierre&quot; a pour IDentifiant utilisateur Coppermine &quot;3&quot;. Il l'a utilisé pour télécharger plusieurs fichiers qui ont été placés dans le répertoire /albums/userpics/10003/. L'URL de cette galerie personnelle est http://votresite.com/votre_repertoire_coppermine/index.php?cat=10003.<br /> Dans l'application BBS l'utilisateur  &quot;Paul&quot; a eu l'identifiant &quot;3&quot;.<br />
+Après l'activation de la passerelle, l'URL http://votresite.com/votre_repertoire_coppermine/index.php?cat=10003 pointera vers la galerie personnelle de l'utilisateur &quot;Paul&quot;. Toutes les images que Pierre avait téléchargées apparaissent comme ayant été téléchargées par Paul.
+</div>
+<p><strong>Conclusion:</strong><br />
+La corrélation entre les actions faites par les utilisateurs de Coppermine non intégré et les &quot;nouveaux&quot; comptes de l'application avec laquelle vous avez crée la passerelle sont perdus. En conséquence vous n'avez actuellement pas perdus les fichiers qui ont été téléchargés auparavant, mais ils apparaissent comme ayant été téléchargés par un autre utilisateur.</p>
+
+<a name="integrating_users_end"></a>
+
+<a name="integrating_backup_start"></a><h3>Sauvegarde<a href="#integrating_backup_start" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p class="cpg_message_info">Il est particulièrement recommandé de <a href="export.htm#backup">sauvegarder</a> aussi bien votre base de données Coppermine que vos fichiers avant d'activer la passerelle, de sorte à pouvoir revenir en arrière si l'intégration devait mal se passer.</p>
+<p>En fait, vous êtes encouragés à sauvegarder votre base de données régulièrement, et plus particulièrement avant de faire des changements dans le code.</p>
+<p>Cependant, ne vous alarmez pas des disfonctionnement de votre forum qui pourraient être causés par la passerelle: Coppermine n'affecte pas votre forum (ni aucune autre application). Lors de la mise en place de la passerelle, Coppermine ne lance aucune requête en écriture/modification dans la base de données de l'application intégrée, tout comme Coppermine ne modifie aucun fichier de l'application intégrée ! La pire chose qui puisse arriver si quelque chose se passait mal, serait que votre galerie Coppermine soit inaccessible. Il est tout à fait impossible que la passerelle de Coppermine affecte l'application intégrée.</p>
+<a name="integrating_backup_end"></a>
+
+
+<a name="integrating_prerequisites_end"></a>
+
+<a name="integrating_steps_start"></a><h2>Etapes de l'intégration<a href="#integrating_steps_start" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Depuis cpg1.4.x vous pouvez utiliser <a href="#bridge_manager_start">le gestionnaire d'intégration</a> qui propose une interface sous forme d'assistant pour activer/désactiver la passerelle.</p>
+
+
+<a name="bridge_manager_start"></a><h3>Utilisation du gestionnaire d'intégration<a href="#bridge_manager_start" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Le gestionnaire d’intégration est une nouvelle fonction de cpg1.4, il n'était pas disponible dans les versions précédentes. Au lieu de modifier manuellement le code de Coppermine, vous pouvez activer/désactiver la passerelle depuis votre navigateur, en utilisant une interface sous forme d'assistant. Pour démarrer le gestionnaire d’intégration, identifiez vous comme administrateur choisissez &quot;Gestionnaire d'intégration&quot; dans le menu administrateur.</p>
+<p class="cpg_message_info">Note: A chaque étape dans l'assistant, des informations sont écrites dans la base de données de Coppermine ! A l'inverse d'autres assistants (généralement sur votre ordinateur) le gestionnaire d’intégration n'a pas de bouton &quot;annuler&quot; ! Une fois que vous avez activé la passerelle et que tout fonctionne correctement, vous ne devriez pas changer de valeurs, juste par curiosité, puisqu'elles sont écrites dans la base de données, cela ferait que la passerelle utilisée ne fonctionnerait plus une fois que vous aurez &quot;joué&quot; avec.<br clear="all" /></p>
+<p class="quote"><em>Note complémentaire</em><br />
+Si vous avez crée un fichier de passerelle personnalisé, copiez simplement ce fichier de passerelle  dans le répertoire bridge de Coppermine et il s'affichera dans l'interface du gestionnaire d’intégration (le fichier de passerelle doit se trouver dans le sous répertoire de Coppermine &quot;bridge&quot;).</p>
+
+<p>Si un bouton retour (<img src="../../images/flags/reset.png" width="16" height="11" border="0" alt="" />) est affiché après un champ d'entré, la valeur du champ n'a pas la valeur par défaut. Cela peut être tout à fait normal de ne pas avoir la valeur par défaut, néanmoins vous devez garder en mémoire que si vous avez &quot;joué&quot; avec le gestionnaire d'intégration avant, les paramètres précédents qui se trouvent dans un champ peuvent ne pas être correct. - ne passez pas allègrement une étape sans faire très attention à cela. Utilisez le bouton retour pour revenir à la valeur par défaut (pas nécessairement &quot;votre&quot; valeur par défaut).<br clear="all" /></p>
+
+
+<a name="bridge_manager_app_start"></a><h4>Choisissez l'application avec laquelle vous voulez établir une passerelle<a href="#bridge_manager_app_start" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<p><img src="images/bridge_02_app.png" width="800" height="340" border="0" alt="" align="right" />Dans la première étape de l'assistant &quot;choisissez l'application avec laquelle vous voulez établir une passerelle avec Coppermine&quot;, vous devez choisir l'application que vous voulez avec Coppermine. Notez que vous <strong>devez</strong> avoir cette application installée sur votre serveur, elle doit être correctement configurée et doit être opérationnelle. N'utilisez pas le gestionnaire d'intégration si vous avez juste <em>planifié</em> l'intégration de Coppermine avec une autre application plus tard.</p>
+<p>Choisissez un des fichier passerelle disponible</p>
+
+<p>Cliquez sur &quot;suivant&quot;</p>
+<a name="bridge_manager_app_end"></a>
+
+<a name="bridge_manager_next_steps"></a><h4>Etapes suivantes<a href="#bridge_manager_next_steps" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<p>Les étapes suivantes dépendent de l'application avec laquelle vous voulez faire l'intégration de Coppermine: certaines applications ont besoin que l'on entre une <acronym title="Uniform Resource Locator">URL</acronym> ou un chemin. Certaines ont besoin que des données de cookies soient entrées, d'autres pas. L'assistant ne vous demandera que les paramètres nécessaires à votre application - si l'un ou l'autre des points décrits plus bas ne s'appliquent pas à votre application, pas de panique - ne remplissez que les informations obligatoires et cliquez sur &quot;suivant&quot;. Toutefois, vous devez comprendre que Coppermine ne peut vérifier que certaines de vos entrées - certaines peuvent être invalidées.</p>
+<a name="bridge_manager_next_steps_end"></a>
+
+
+<a name="bridge_manager_path_start"></a><h4>Chemin(s) vers l'application avec laquelle vous voulez établir une passerelle<a href="#bridge_manager_path_start" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<p>Il y a de multiples manières utilisées par le mécanisme d'intégration de Coppermine pour se connecter à une application intégrée. Généralement, les paramètres entrés dans le gestionnaire d’intégration à cette étape "demandent" à Coppermine ou se trouve votre application intégrée et ou se trouve le fichier de configuration contenant les donnée utilises par Coppermine pour "s'accrocher" à l'application à intégrée. Comme il y a différentes approches des applications intégrées sur la manière dont cela peut être fait, la méthode utilisée par l'assistant peut être différente, en fonction de l'application que vous avez choisie à la première étape de l'assistant. Lancez simplement l'assistant et regardez quels sont les paramètres nécessaires et renseignez les soigneusement.</p>
+<ul><li><a name="bridge_manager_path_full_forum_url"></a><h5>URL de l'application intégrée<a href="#bridge_manager_path_full_forum_url" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
+<p>L'URL complète du répertoire de votre application à intégrer (y compris le <tt class="code">http://</tt> , exemple. <tt class="code">http://www.votredomaine.com/forum/</tt>).</p>
+<p>Notez que vous ne devez pas préciser de fichier à la fin de l'URL - si votre application se trouve à l'adresse <tt class="code">http://www.votredomaine.com/forum/index.php</tt>, ne spécifiez que l'URL du répertoire qui contient le fichier index de votre application.</p>
+<p>Assure vous de mettre l eslash de fin - l'URL doit être <tt class="code">http://www.votre domaine.com/forum<strong>/</strong></tt> et pas juste <tt class="code">http://www.votredomaine.com/forum</tt></p>
+<a name="bridge_manager_path_full_forum_url_end"></a></li></ul>
+<ul><li><a name="bridge_manager_path_relative_path_of_forum_from_webroot"></a><h5>Chemin absolu de l'application bridgée<a href="#bridge_manager_path_relative_path_of_forum_from_webroot" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
+<p>C'est le chemin absolu de votre application intégrée vue depuis la racine de votre site</p>
+<div class="cpg_example"> 
+    <ul>
+        <li>Si votre application intégré est à l'adresse http://www.exemple.com/forum/, entrez <tt class="code">/forum/</tt> dans ce champ</li>
+        <li>Si votre application intégré est à l'adresset http://www.exemple.com/foo/bar/, enrez <tt class="code">/foo/bar/</tt> dans ce champ</li>
+    </ul>
+</div>
+<p>Vous devez comprendre que ce paramètre  <strong>n'est pas</strong> le chemin absolu d'un système de fichier sur votre serveur web, mais juste le chemin absolu vu depuis la racine de votre site.</p>
+
+<p class="cpg_example">Dans le système de fichier de votre serveur, le chemin absolu vers la racine de votre site devrait être quelque chose comme <tt class="code">/var/www/votre_nom_de_compte/public_html/</tt>. En conséquence, l'application avec laquelle vous voulez établir une passerelle doit se trouver dans un chemin absolu du système de fichier de votre serveur comme ceci: <tt class="code">/var/www/votre_nom_de_compte/public_html/forum/</tt>. Votre galerie Coppermine devrait se trouver dans le chemin absolu comme ceci: <tt class="code">/var/www/votre_nom_de_compte/public_html/galerie/</tt>. Toutefois, c'est le répertoire racine qui importe à ce stade - Coppermine ne va pas plonger dans le système de fichier et ne prend pas en compte le chemin absolu que vous devez utiliser avec d'autres applications ou pour inclure des fichiers - il utilise juste le chemin vu depuis la racine (ce qui peut être directement accessible depuis le navigateur). Donc, pour cet exemple, le chemin absolu vu depuis la racine de votre site devrait être <tt class="code">/forum/</tt> - ni plus ni moins.</p>
+<a name="bridge_manager_path_relative_path_of_forum_from_webroot_end"></a></li></ul>
+<ul><li><a name="bridge_manager_path_relative_path_to_config_file"></a><h5>Chemin relatif vers le fichier de configuration de l'application intégrée<a href="#bridge_manager_path_relative_path_to_config_file" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
+<p>C'est le chemin relatif vers l'application avec laquelle vous voulez établir une passerelle, vu depuis le répertoire de Coppermine (exemple "../forum/" si votre application intégrée se trouve à l'adresse http://www.votredomaine.com/forum/ et Coppermine à http://www.votredomaine.com/gallery/)</p>
+<p>Un chemin relatif <strong>ne doit pas</strong> commencer avec un slash - c'est la différence visuelle d'un chemin absolu. Vous devez penser en niveau de répertoire/sous-répertoire pour comprendre le concept de chemin relatif. Imaginez que tous les répertoires de votre serveur sont les branches d'un arbre qui sont tournées vers le bas: les racines étant en haut et les branches allant vers le sol. Le chemin relatif décrit la route que vous devez faire depuis un répertoire particulier (le répertoire dans lequel se trouve Coppermine) vers un autre répertoire (le répertoire ou se trouve l'application intégrée). La manière d'écrire un chemin relatif contient une manière spéciale de dire "un niveau plus haut": ce sont deux points suivis par un slash (<tt class="code">../</tt>). Ceci dit, regardez les quelques exemples ci-dessous:</p>
+<div class="cpg_example">
+<table border="0" cellspacing="1" cellpadding="0" class="cpg_zebra">
+    <tr>
+        <th>Votre installation Coppermine</th>
+        <th>L'installation de l'appliaction intégrée</th>
+        <th>Chemin relatif</th>
+    </tr>
+    <tr>
+        <td><tt class="code">http://exemple.com/galerie/</tt></td>
+        <td><tt class="code">http://exemple.com/forum/</tt></td>
+        <td><tt class="code">../forum/</tt></td>
+    </tr>
+    <tr>
+        <td><tt class="code">http://exemple.com/galerie/</tt></td>
+        <td><tt class="code">http://exemple.com/communaute/forum/</tt></td>
+        <td><tt class="code">../communaute/forum/</tt></td>
+    </tr>
+    <tr>
+        <td><tt class="code">http://exemple.com/images/coppermine/</tt></td>
+        <td><tt class="code">http://exemple.com/bbs/</tt></td>
+        <td><tt class="code">../../bbs/</tt></td>
+    </tr>
+    <tr>
+        <td><tt class="code"></tt></td>
+        <td><tt class="code"></tt></td>
+        <td><tt class="code"></tt></td>
+    </tr>
+    <tr>
+        <td><tt class="code">http://exemple.com/galerie/</tt></td>
+        <td><tt class="code">http://example.com/</tt></td>
+        <td><tt class="code">../</tt></td>
+    </tr>
+    <tr>
+        <td><tt class="code">http://exemple.com/</tt></td>
+        <td><tt class="code">http://exemple.com/forum/</tt></td>
+        <td><tt class="code">forum/</tt></td>
+    </tr>
+    <tr>
+        <td><tt class="code">http://exemple.com/communaute/images/</tt></td>
+        <td><tt class="code">http://exemple.com/communaute/</tt></td>
+        <td><tt class="code">../</tt></td>
+    </tr>
+    <tr>
+        <td><tt class="code">http://exemple.com/un/repertoire/tres/complique/</tt></td>
+        <td><tt class="code">http://exemple.com/</tt></td>
+        <td><tt class="code">../../../../</tt></td>
+    </tr>
+    <tr>
+        <td><tt class="code">http://exemple.com/galerie/</tt></td>
+        <td><tt class="code">http://exemple.com/communaute/forum/</tt></td>
+        <td><tt class="code">../communaute/forum/</tt></td>
+    </tr>
+</table>
+</div>
+<a name="bridge_manager_path_relative_path_to_config_file_end"></a></li></ul>
+<ul><li><a name="bridge_manager_path_cookie_prefix"></a><h5>Préfixe de cookie<a href="#bridge_manager_path_cookie_prefix" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
+<p>Ce doit être le nom du cookie de l'application avec laquelle vous souhaitez établir la passerelle. <strong>N'entrez pas</strong> le préfixe de cookie de votre galerie Coppermine ici ! Vous ne pouvez pas le définir vous-même - vous devez regarder la documentation ou les réglages de l'application avec laquelle vous voulez établir la passerelle.</p>
+
+<p class="cpg_example">L'application populaire "phpBB2" utilise le préfixe de cookie par défaut <tt class="code">phpbb2mysql</tt> - il peut être modifié par l'administrateur du forum, donc, si vous n'êtes pas sur de votre préfixe de cookie, allez dans le panneau de configuration du forum et cherchez le préfixe du cookie qui s'y trouve.</p>
+<p>Le préfixe de cookie ne doit pas être confondu avec le chemin du cookie - ce sont deux choses très différentes. Le préfixe de cookie (dans certaines applications est appelé "nom du cookie") fait partie intégrante de l'application - quelque chose que les développeurs de l'application ont définie.</p>
+<a name="bridge_manager_path_cookie_prefix_end"></a></li></ul>
+<a name="bridge_manager_path_end"></a>
+
+<a name="bridge_manager_specific_start"></a><h4>Paramètres spécifiques des applications intégrées<a href="#bridge_manager_specific_start" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+
+<ul><li><a name="bridge_manager_specific_groups"></a><h5>Utiliser les groupes personnalisés de l'application bridgée ?<a href="#bridge_manager_specific_groups" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
+<p>Est ce que Coppermine doit importer les groupes spéciaux qui existent dans votre application intégrée ? Si vous sélectionnez Non, Coppermine utilisera uniquement les groupes standards (Administrateur, Enregistré et Anonyme) ce qui rendra l'administration plus facile. Si vous activez cette option en sélectionnant Oui, vous aurez une gestion des droits plus fine dans Coppermine et pourrez définir les droits dans Coppermine en vous appuyant sur les groupes personnalisés de votre application intégrée. Vous pouvez changer ce paramètre plus tard.</p>
+<a name="bridge_manager_use_post_based_groups_end"></a></li></ul>
+
+<a name="bridge_manager_specific_end"></a>
+
+<a name="bridge_manager_enable_start"></a><h4>Activer/désactiver la passerelle<a href="#bridge_manager_enable_start" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<p>C'est la dernière étape du gestionnaire d’intégration - il résume les paramètres que vous avez défini dans les étapes précédentes - vous pouvez activer/désactiver l'intégration ici. Par défaut, l'intégration est paramétrée sur &quot;désactivé&quot; une fois que le gestionnaire d'intégration a été lancé pour la première fois. Vous ne devez activer l'intégration que si vous êtes sur que l'application avec laquelle vous voulez établir la passerelle est paramétrée correctement. Cliquez sur le bouton &quot;Terminer&quot; dans tous les cas pour finalement écrire dans la base de données, même si vous choisissez de garder les paramètres actuels (laisser l'intégration &quot;désactivée&quot;).</p>
+<ul>
+<li><strong>Activer l'intégration/passerelle avec XXX</strong></li>
+</ul>
+<a name="bridge_manager_enable_end"></a>
+
+<a name="bridge_manager_end"></a>
+
+<a name="bridge_manager_recover_start"></a><h2>Restauration après une erreur d'intégration<a href="#bridge_manager_recover_start" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Si vous avez donné de mauvais réglages lors de l'utilisation de l'assistant d'intégration, votre intégrateur peut échouer, avec pour résultat (dans la plupart des cas) dans une situation ou l'intégration est activée, mais ou vous ne pouvez pas vous identifier pour la désactiver à nouveau (exemple si vous entrez un mauvais paramètre de cookie qui empêche le fonctionnement de l'authentification). Pour parer à cette situation, un paramètre de restauration a été inclue dans le gestionnaire d'intégration: si vous n'êtes pas identifié comme administrateur dans Coppermine (en fait si vous n'êtes pas identifié du tout) et que vous accédez à l'URL du gestionnaire d'intégration depuis votre navigateur (http://votredomaine.com/votrerepertoirecoppermine/bridgemgr.php) en entrant cette adresse manuellement dans la barre d'adresse de votre navigateur, il vous est demandé d'entrer vos paramètres de compte d'administrateur (identifiant et mot de passe) - utilisez les paramètres que vous avez définis lors de l'installation de Coppermine (identifiants administrateurs pour une version autonome). Cela ne va pas vous identifier, mais va désactiver l'intégration, vous permettant de corriger les mauvais réglages. Pour éviter que d'autres essayent de trouver vos identifiants administrateurs ici, il y a un temps d'attente entre chaque essai qui augmente à chaque fois, faites donc attention lorsque vous entrez vos identifiants administrateurs.</p>
+
+<a name="bridge_manager_recover_end"></a>
+
+<a name="integrating_steps_sync_start"></a><h2>Synchroniser les groupes de l'application intégrée avec les groupes de Coppermine<a href="#integating_steps_sync_start" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Identifiez-vous en utilisant le compte administrateur de votre forum. Allez sur votre galerie, activez le mode administrateur et cliquez sur le bouton &quot;Groupes&quot;. Cela va synchroniser les groupes de Coppermine avec ceux de votre forum. Les permissions que vous verrez pour chaque groupe seront totalement fausses. Prenez donc le temps de les paramétrer correctement.</p>
+<p>Chaque fois que vous ajoutez ou effacez un groupe dans votre forum vous devrez faire l'opération ci-dessus pour garder la synchronisation des groupes.</p>
+<p>Lorsque vous essayerez de vous identifier/déconnecter ou gérer les utilisateurs depuis Coppermine, vous serez redirigé vers la page correspondante de votre application forum. Une fois que l'identification /la déconnection sera faite, vous ne serez pas automatiquement redirigé vers votre galerie parce que votre forum n'a pas de fonctions pour cela. Il est de votre initiative d'ajouter un lien sur la page de votre forum pour retourner vers la galerie.</p>
+<p class="cpg_message_validation">Il est obligatoire que vous (en tant qu'administrateur) alliez directement à la page de gestion des groupes après l'intégration ou à chaque fois que vous aurez changé quelque chose dans la configuration de l'application intégrée, parce que vous devrez refaire une resynchronisation.</p>
+<a name="integrating_steps_sync_end"></a>
+<a name="integrating_steps_end"></a>
+
+
+
+<a name="integrating_support_start"></a><h2>Aide à l'intégration<a href="#integrating_support_start" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Avec les explications données plus haut, vous devriez être en mesure de créer une passerelle entre votre forum et Coppermine. Néanmoins, si quelque chose ne fonctionne pas correctement, vous pouvez bien entendu aller sur le <a href="http://coppermine-gallery.net/forum/">Forum d'aide de Coppermine</a>. Lorsque vous demandez de l'aide, merci de garder en mémoire que les supporteurs auront besoin de certaines informations pour pouvoir vous venir en aide:</p>
+<br />
+<ul>
+  <li>Cherchez sur le forum avant de poster - il y a peut être déjà quelqu'un qui a eu un problème similaire et qui a déjà été résolu</li>
+  <li>Postez dans la section qui s'applique à votre version - les mécanismes d'intégration ont changés de version en version, c'est la raison pour laquelle il est important de bien poster dans la section qui se rapporte à votre version de Coppermine</li>
+  <li>Ne parasitez pas des sujets existants - lorsque vous cherchez de l'aide sur l'intégration, commencez votre propre sujet</li>
+  <li>Lisez les fils en Post-it avant de poster</li>
+  <li>Assurez vous d'utiliser la dernière version du fichier de passerelle, ils sont mis à jour entre les publications officielles. Téléchargez les fichiers correspondants depuis le <a href="http://svn.sourceforge.net/viewvc/coppermine/trunk/cpg1.5.x/bridge/">SVN</a>. Mettez à jour udb_base.inc.php et le fichier qui correspond à l'intégration que vous utilisez et placez les dans le répertoire bridge de votre serveur, en vous assurant de bien remplacer les anciens fichiers. Bien entendu, en premier lieu, vous devez vous assurer de bien utiliser la dernière version stable de Coppermine.</li>
+  <li>Lors d'une demande d'aide sur l'intégration, merci de poster un lien vers votre site, avec les identifiants d'un compte test, ainsi que ce que vous avez défini dans le gestionnaire d'intégration.<br />Assurez-vous que le compte utilisateur test n'a pas les privilèges administrateur. Lorsque vous postez les données requises, assurez-vous de remplacer les mots de passe par des astérisques.<br />&nbsp;<br />Voici comment devrait se présenter votre post (avec vos données à la place de celles mises dans l'exemple - en rouge):<br />
+  <pre class="code">J'ai le problème suivant en essayant de créer une passerelle entre Coppermine et <span class="important">XXX</span>:
+<span class="important">[message d'erreur ou description du problème ici]</span>
+
+Installation de Coppermine: <span class="important">http://monsite.com/mon_dossier_coppermine/</span>
+Installation de l'application intégrée: <span class="important">http://monsite.com/mon_dossier_forum/</span>
+version de Coppermine: <span class="important">cpg1.5.0</span>
+Version de l'application intégrée: <span class="important">SuperDuper BBS app v0.8.15</span>
+Compte utilisateur test: <span class="important">nom_utilisateur_test</span> / <span class="important">mot_de_passe_utilisateur_test</span>
+
+Paramètres du gestionnaire d'intégration:
+URL de l'application intégrée:  <span class="important">http://monsite.com/test/foo_bar</span>
+Chemin relatif au fichier de configuration de l'application intégrée:  <span class="important">../bla/</span>
+Nom du cookie ou préfixe:  <span class="important">forum</span>
+Utiliser les groupes basés sur le nombre de posts ?:  <span class="important">1</span>  </pre></li>
+<li>Les supporteurs doivent pouvoir voir les pages en question - assurez-vous que vous avez bien activé l'intégration lorsque vous demandez de l'aide</li>
+<li>Le compte utilisateur de test ne doit pas être un compte administrateur. Le compte utilisateur test doit évidemment avoir été créé dans l'application intégrée, pas un compte Coppermine (puisque la gestion des utilisateurs de Coppermine a été enlevée lors de l'intégration, il n'y a donc pas d'utilité d'avoir un compte test pour une installation autonome de Coppermine)</li>
+</ul>
+<a name="integrating_support_end"></a>
+
+<a name="integrating_config_options_start"></a><h2>Certaine options de la configuration sont désactivées<a href="#integrating_config_options_start" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Comme expliqué dans cette page, Coppermine va remplacer la gestion des utilisateurs avec celle de l'application intégrée. En conséquence, les options de configuration de Coppermine ne s'appliquent plus non plus (par exemple les champs du profil utilisateur). C'est pourquoi les options de configuration qui s'appliquent uniquement aux installations autonomes, non intégrées, de Coppermine seront désactivées sur la page de configuration si l'intégration est activée.</p>
+<a name="integrating_config_options_end"></a>
+
+<a name="integrating_files_start"></a><h2>Fichiers d'intégration (Passerelle)<a href="#integrating_files_start" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Dans le répertoire racine de Coppermine vous trouverez un sous-dossier nommé "bridge" - c'est l'emplacement ou se trouvent les fichiers d'intégration. Lorsque Coppermine est lancé (lorsque les visiteurs naviguent sur des pages pilotées par Coppermine), Coppermine inclue les fichiers passerelle relatifs à l'application avec laquelle vous avez créé une passerelle. En utilisant ce fichier, Coppermine fait ce qui est nécessaire pour l'authentification des visiteurs. Même si Coppermine n'est pas du tout intégré, il y a quand même un fichier qui est inclu depuis le répertoire bridge (&quot;coppermine.inc.php&quot;) qui défini quelles sont les tables à utiliser.</p>
+<p>Généralement, vous ne devez pas modifier les fichiers qui se trouvent dans le répertoire bridge - en fait, la chose la plus importante que vous devez vous rappeler est que Coppermine a besoin du répertoire bridge et de son contenu, même si vous n'avez pas activé la fonction d'intégration. Laissez donc les fichiers tels quels. Les super-utilisateurs qui savent ce qu'ils font peuvent bien évidemment modifier les fichiers passerelle pour les  adapter à leurs besoins.</p>
+<p>Il y a eu des utilisateurs qui ont essayé de &quot;lancer&quot; les fichiers passerelle eux-même depuis leur navigateur - cela ne fonctionne pas et ne fait rien, mais il en résulte un message d'erreur. Les fichiers passerelle ne sont pas destinés à fonctionner de manière autonome. - ils sont inclus par Coppermine pendant son fonctionnement. Si vous ne savez pas ce que cela signifie, laissez simplement ces fichiers ou ils sont. Cela ne pose pas de problèmes d'avoir des fichiers passerelle sur votre serveur même si vous n'utilisez pas de passerelle correspondant à un fichier particulier.</p>
+<a name="integrating_files_end"></a>
+
+<a name="integrating_bridge_file_creating_start"></a><h2>Créer un fichier passerelle personnalisé<a href="#integrating_bridge_file_creating_start"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>En théorie, Coppermine peut être s'intégré avec n'importe quelle application tierce qui a une gestion/authentification d'utilisateurs. Il y a des centaines d'applications qui sont des candidats potentiels. Simplement à cause du très grand nombre de passerelle possible, mais aussi à cause d'autres restrictions (applications non libres, manque de temps, manque de besoin), l'équipe de développement de Coppermine ne peut pas fournir un nombre énorme de fichiers. C'est pourquoi seul un petit nombre de fichiers passerelle sont disponibles. Si vous cherchez un fichier passerelle pour une autre application qui n'est pas disponible directement dans Coppermine, cherchez sur le forum d'aide de Coppermine s'il n'y a pas déjà un fichier passerelle issu d'une contribution d'utilisateur, ou (encore mieux), vous êtes encouragés à créer vous même votre propre fichier passerelle et à le partager sur le forum. Nous (l'équipe de développement de Coppermine) devons compter sur les contributions des utilisateurs pour la plupart des fichiers passerelles potentiels.</p>
+<p>Malheureusement, il n'y a actuellement pas de section particulière de documentation expliquant comment créer un fichier passerelle personnalisé, la meilleure méthode est donc de regarder un fichier existant et de le modifier pour l'adapter à vos besoins.</p>
+<a name="integrating_bridge_file_creating_end"></a>
+
+<a name="integrating_philosophy_start"></a><h2>Philosophie de l'intégration<a href="#integrating_philosophy_start"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>L'équipe de développement de Coppermine pense que le mécanise d'intégration ne doit pas interférer avec l'application à intégrer avec Coppermine. C'est pourquoi un bon fichier passerelle qui peut être considéré comme pouvant être intégré au code principal de Coppermine ne doit pas obliger à faire des modifications du code l'application à intégrer, ni de faire des changements dans la structure de la base de données de l'application intégrée depuis des requêtes envoyées par Coppermine.<br />
+La raison de notre réticence à autoriser l'intégration d'interférer avec l'application bridgée est que nous ne souhaitons pas corrompre celle ci si quelque chose ne passait mal.</p>
+<p>Néanmoins, il y a des fichiers passerelle issus de contributions qui ne peuvent pas fonctionner de la manière non-intrusive que nous proposons (comme la passerelle de Mehdi pour Joomla). Nous ne disons pas que ces fichier passerelle sont mauvais - en fait nous apprécions que ces fichiers soient mis à disposition. Vous devez comprendre que nous ne pouvons pas apporter de l'aide sur les applications tierces. Nous vous recommandons de faire une sauvegarde avant de mettre en place une passerelle en utilisant ces applications tierces.</p>
+<a name="integrating_philosophy_end"></a>
+
+<a name="integrating_individual_bridge_issues_start"></a><h2>Problèmes particuliers d'intégration<a href="#integrating_individual_bridge_issues_start"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Il y a quelques remarques  additionnelles qui s'appliquent à certains fichiers passerelle particuliers:</p>
+<ul>
+	<li>
+		<a name="integrating_individual_bridge_issues_phpbb3"></a><h3>phpBB3<a href="#integrating_individual_bridge_issues_phpbb3"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+		Redirection après déconnexion: pour pouvoir créer une redirection après déconnexion en utilisant le fichier passerelle phpBB3, vous devez modifier le fichier phpBB <tt class="code">ucp.php</tt>:<br />
+		Trouvez<pre class="cpg_code code">meta_refresh(3, append_sid("{$phpbb_root_path}index.$phpEx"));
+$message = $message . '&lt;br /&gt;&lt;br /&gt;' . sprintf($user->lang['RETURN_INDEX'], '&lt;a href="' . append_sid("{$phpbb_root_path}index.$phpEx") . '"&gt;', '&lt;/a&gt; ');</pre>et remplacez par<pre class="cpg_code code">meta_refresh(3, request_var('redirect', append_sid("{$phpbb_root_path}index.$phpEx")));
+$message = $message . '&lt;br /&gt;&lt;br /&gt;' . sprintf($user->lang['RETURN_INDEX'], '&lt;a href="' . request_var('redirect', append_sid("{$phpbb_root_path}index.$phpEx")) . '"&gt;', '&lt;/a&gt; ');</pre>
+<p>Reconnaissance de l'administrateur pour les forums mis à jour: si votre forum a été mis à jour depuis phpBB2 vers phpBB3 vous devrez faire une étape supplémentaire.</p>
+<p>Ouvrez phpbb3.inc.php, trouvez
+<pre class="cpg_code code">
+$this-&gt;admingroups = array(5);
+</pre>
+
+Changez le 5 pour le groupe administrateur dans phpBB3. Vous pouvez le trouver en faisant ce qui suit
+
+<div class="cpg_example">
+Allez sur votre forum, identifiez vous comme administrateur; cliquez sur l'onglet "Utilisateurs et Groupes" et allez à "Gestion des groupes". Vous verrez maintenant tous les groupes de votre forum et à côté d'eux trois liens (Paramètres/Membres/Effacer); cliquez sur "Paramètres" à côté du groupe auquel vous souhaitez donner les droits administrateur. Regardez maintenant la ligne d'adresse qui doit être similaire à ça:
+
+http://votredomaine.com/phpbb3/adm/index.php?i=groups&sid=[lettresetchiffresalléatoires]&icat=12&mode=manage&action=edit&g=64
+
+Dans notre exemple, l'ID du groupe est 64;</div>
+<br /></li>
+	<li>
+		<a name="integrating_individual_bridge_issues_punbb115"></a><h3>PunBB1.1.5<a href="#integrating_individual_bridge_issues_punbb115"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+		Pour la redirection après identification/deconnexion:<br />
+Ouvrez le fichier punbb <tt class="code">login.php</tt>, trouvez: <pre class="cpg_code code">$page_title = pun_htmlspecialchars($pun_config['o_board_title']).' / '.$lang_common['Login'];</pre>et ajoutez avant<pre class="cpg_code code"> $redirect_url = (isset($_GET['redir'])) ? $_GET['redir'] : $redirect_url;</pre>
+puis trouvez: <pre class="cpg_code code">redirect('index.php', $lang_login['Logout redirect']);</pre>et changez pour: <pre class="cpg_code code">redirect(isset($_GET['redir']) ? $_GET['redir'] : 'index.php', $lang_login['Logout redirect']);</pre>
+	</li>
+	<li>
+		<a name="integrating_individual_bridge_issues_punbb12"></a><h3>PunBB1.2<a href="#integrating_individual_bridge_issues_punbb12"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+		Pour la redirection après identification/déconnexion:<br />
+Ouvrez le ficher PunBB <tt class="code">login.php</tt> et trouvez: <pre class="cpg_code code">$page_title = pun_htmlspecialchars($pun_config['o_board_title']).' / '.$lang_common['Login'];</pre>ajoutez juste avant<pre class="cpg_code code">$redirect_url = (isset($_GET['redir'])) ? $_GET['redir'] : $redirect_url;</pre>Puis trouvez<pre class="cpg_code code">redirect('index.php', $lang_login['Logout redirect']);</pre>et changez par<pre class="cpg_code code">redirect(isset($_GET['redir']) ? $_GET['redir'] : 'index.php', $lang_login['Logout redirect']);</pre>
+	</li>
+	<li>
+		<a name="integrating_individual_bridge_issues_xmb"></a><h3>XMB<a href="#integrating_individual_bridge_issues_xmb"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+Correction du Cookie (si votre forum n'est pas installé à la racine du site): ouvrez le fichier XMB <tt class="code">functions.php</tt>, trouvez la définition de fonction pour <tt class="code">put_cookie</tt> (vers la ligne 1414) et ajoutez<pre class="cpg_code code">$path = '/';</pre>juste en haut de la focntion
+	</li>
+</ul>
+<a name="integrating_individual_bridge_issues_end"></a>
+
+<a name="integrating_subdomain"></a><h2>Problèmes de sous-domaines<a href="#integrating_subdomain"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Il y a beaucoup d'utilisateurs qui demandent fréquemment sur le forum d'aide si l'intégration de Coppermine est possible entre sous-domaines: la réponse est "oui" en théorie en tout cas. Comme <a href="#integrating_cookie_start">expliqué ci-dessus</a>, vous <strong>ne pouvez pas</strong> crée de passerelles entre des domaines différents (utiliser le mot domaine au sens large, ce devrait être ici "un second niveau de domaine"), mais vous pouvez crée des passerelles entre différents sous-domaines si certains pré-requis sont présents, qui peuvent difficilement être influencés par les développeurs de Coppermine: les cookies du domaine ou se trouve l'application avec laquelle vous voulez créer la passerelle doit être lisible par Coppermine et les deux domaines doivent être physiquement sur le même serveur. C'est le cas pour la plupart des utilisateurs qui sont sur des serveurs mutualisés.</p>
+<div class="indent">
+
+    <a name="integrating_subdomain_file_system"></a><h3>Système de fichiers<a href="#integrating_subdomain_file_system"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <p>La plupart des hébergeurs, paramètrent leurs serveurs de sorte que le sous-domaine soit juste un sous-répertoire du domaine parent dans le système de fichiers. Nous (l'équipe de développement de Coppermine) ne pouvons garantir que c'est le cas pour les paramètres de votre serveur, donc, en cas de doute, demandez de l'aide à votre hébergeur. Ce n'est donc ici que l'explication sur comment les sous-domaines fonctionnent <em>sur la plupart</em> des serveurs - ne nous en voulez pas si ce n'est pas le cas pour vous.</p>
+    
+    <p class="cpg_example">Votre application intégrée a l'URL <tt class="code">http://forum.exemple.com/</tt>, avec comme chemin absolu dans le système de fichiers: <tt class="code">/var/www/votre_nom_de_compte/public_html/forum/</tt>, avec <tt class="code">/var/www/votre_nom_de_compte/public_html/</tt> représentant la racine du site (ex. <tt class="code">http://exemple.com/</tt>). Votre galerie est accessible depuis l'URL <tt class="code">http://gallery.exemple.com/</tt>, qui correspond au chemin absolu du système de fichier <tt class="code">/var/www/votre_nom_de_compte/public_html/galerie/</tt>. Vu depuis la racine du site, les sous-domaines "forum" et "galerie" sont juste la représentation des sous-répertoires de la racine du site qui sont nommés de la même manière ("forum" et "galerie"). C'est pourquoi le <a href="#bridge_manager_start">gestionnaire d'intégration</a> vous demande d'entrer le chemin relatif depuis la galerie vers l'application à intégrée, cela serait <tt class="code">../forum/</tt> (qui se lit "un niveau de répertoire plus haut", puis aller dans le sous-répertoire "forum").</p>
+    
+    <a name="integrating_subdomain_cookie"></a><h3>Cookies<a href="#integrating_subdomain_cookie"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <p>Comme indiqué à plusieurs reprises, l'authentification de Coppermine est basée sur les cookies. Si l'intégration est activée, Coppermine doit être capable de lire le cookie de l'application intégrée. Ce n'est possible que si vous n'avez pas de restrictions empêchant Coppermine de le faire. La plupart des applications tierces (et beaucoup des applications avec lesquelles Coppermine peut créer une passerelle) autorisent la définition d'un <em>chemin de cookie</em>. Malheureusement, toutes n'identifient pas clairement ce chemin dans leur panneau de configuration: certaines l'appellent <em>cookie local</em> sans vous permettre de définir un chemin particulier. Cette option existe pour des raisons historiques: autrefois, beaucoup d'utilisateurs ne pouvaient pas acquérir leur propre domaine, dons ils étaient hébergés dans un sous répertoire du domaine parent. Tout leur contenu devait se trouver dans un seul répertoire et donc devait avoir une option dans leur application pour s'assurer que leur cookie n'était pas accessible par les autres utilisateurs du domaine parent. Aujourd'hui, les universités offrent souvent à leurs étudiants un espace ressemblant à ça: <tt class="code">http://exemple.com/~nomutilisateur/</tt>. Les utilisateurs de ce genre d'hébergement doivent avoir une option pour avoir un chemin de cookie qui permette de s'assurer que quelqu'un d'autre qui est hébergé à l'adresse <tt class="code">http://exemple.com/~un_autre_utilisateur/</tt> n'a pas accès à son cookie.</p>
+    <p>Si votre galerie se trouve à <tt class="code">http://exemple.com/galerie/</tt> et que votre application intégrée se trouve à <tt class="code">http://exemple.com/forum/</tt>, ce n'est pas une bonne idée de définir le chemin du cookie de votre application intégrée comme étant <tt class="code">/forum</tt> - cela signifie que seules les pages se trouvant dans le sous-répertoire <tt class="code">/forum</tt> du répertoire racine du site. Comme votre galerie ne se trouve pas dans ce sous-répertoire, elle ne pourra pas lire le cookie de votre application intégrée - résultat, la passerelle ne fonctionnera pas.</p>
+    <p>Pour finir: pour 99% des utilisateurs, régler le chemin de cookie à "" (rien) sera le meilleur choix.</p>
+    
+    <a name="integrating_subdomain_www"></a><h3>sous-domaines en www<a href="#integrating_subdomain_www"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <p>La plupart des sites internet sont accessibles avec ou sans le sous-domaine www: généralement, <tt class="code">http://exemple.com/</tt> fonctionne de la même manière que  <tt class="code">http://www.exemple.com/</tt>. C'est très bien et facilite la vie des utilisateurs, mais avec un inconvénient: un sous-domaine <strong>est</strong> un domaine différent du point de vue des cookies. C'est pourquoi vous devrez être cohérent dans l'utilisation des sous-domaines www: intégrer <tt class="code">http://exemple.com/galerie/</tt> et <tt class="code">http://www.exemple.com/bridge-app/</tt> va certainement causer des problèmes de cookies.</p>
+    <p>Pour éviter cela, vérifiez les réglages de Coppermine aussi bien que de l'application intégrée: assurez-vous dans les deux panneaux de configuration que vous utilisez le même type d'URL avec le sous domaine WWW ou sans.</p>
+    <div class="cpg_message_success"><h4>Recomandation:</h4>
+    Le sous-domaine www a été introduit dans les premiers jours de l'Internet. Techniquement, il n'est plus nécessaire, mais beaucoup d'utilisateur on prit l'habitude d'utiliser le sous-domaine www lorsqu'ils tapent une URL. Nous recommandons d'utiliser une URL sans le www pour la rendre plus facile à mémoriser. Pour être sûr de ne pas gêner ceux qui entreraient une URL <em>avec</em> le www, nous recommandons de définir une règle de réécriture dans un fichier .htaccess personnalisé qui ressemblerait à ceci:<br />
+    <textarea cols="70" rows="2" class="code smaller">RewriteEngine on
+    RewriteCond %{HTTP_HOST} ^www\.votredomaine\.com$ [NC]
+    RewriteRule ^(.*) http://votredomaine.com/$1 [R,L]</textarea><br />
+    Remplacez <tt class="code">votredomaine</tt> et <tt class="code">com</tt> dans les éléments de codes ci dessus. Si votre site se trouve à l'adresse exemple.fr, changez le code ci-dessus avec quelque chose comme
+    <textarea cols="70" rows="2" class="code smaller">RewriteEngine on
+    RewriteCond %{HTTP_HOST} ^www\.exemple\.fr$ [NC]
+    RewriteRule ^(.*) http://exemple.fr/$1 [R,L]</textarea><br />
+    <em>Merci de noter que la définition de vos règles de réécriture n’est pas dans les attributions du forum d'aide de Coppermine - vous devez utiliser votre moteur de recherche favori pour trouver des détails à ce sujet.</em></div>
+</div>
+
+<a name="integrating_end"></a>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

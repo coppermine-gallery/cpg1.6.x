@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Bannissement - Coppermine Photo Gallery - Documentation &amp; manuel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="fr" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Bannissement d’utilisateurs basé sur le nom, le courriel ou l'adresse IP. Gérer les interdictions. Régler la date d'expiration de bannissement." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation et manuel</h1>
+<div id="toc">
+<a href="toc.htm">Table des matières</a>
+</div>
+
+<a name="banning"></a><h1>Bannissement<a href="#banning" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>Comme pour toutes les applications permettant une interaction à l'utilisateur, il y a une minorité d'utilisateurs qui ne respectent pas les règles. Les administrateurs de la galerie ont besoin d'un outil leur permettant de se débarrasser des utilisateurs indésirables. C'est ce pourquoi cette fonction est faite.</p>
+
+<a name="banning_whats_new"></a><h2>Quoi de neuf ?<a href="#banning_whats_new" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Pour cpg1.5.x (en comparaison avec cpg1.4.x), la page de bannissement a été a été remaniée pour la rendre plus pratique, avec une pagination, de multiples modifications (au lieu d'une ligne par modification), un tri, et la possibilité de bannissement par adresse courriel, et également le bannissement "d'avance", c'est-à-dire l'interdiction des noms d'utilisateurs qui ont pas encore été enregistrés..</p>
+
+<a name="banning_scope"></a><h2>Point de vue<a href="#banning_scope" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Vous devez comprendre que le bannissement <strong>n'est pas</strong> un outil pour sécuriser votre site contre les utilisateurs malveillants. En fait, c'est presque l'opposé: il vous permet de réduite les dommages que pourraient causer des personnes malveillantes <em>après</em> qu'elles aient fait quelque chose de mal.</p>
+<p>Le bannissement <strong>n'est pas</strong> le bon outil pour combattre le spam - les spammeurs reviendront avec d'autres comptes quelque soit le nombre de fois ou vous les bannirez. Il y d'autres outils qui fonctionnent bien mieux contre le spam (comme Captcha et l'approbation des commentaires).</p>
+<p>La page de "bannissement des utilisateurs" est bien entendu réservée aux administrateurs. Les utilisateurs sans droits  d'administration n'y ont pas accès.</p>
+
+<a name="banning_how_it_works"></a><h2>Comment fonctionne le bannissement<a href="#banning_how_it_works" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Vous pouvez entrer un enregistrement de bannissement dans la page "Bannir un utilisateur" qui est accessible en utilisant le lien correspondant de votre <a href="admin_menu.htm#admin_menu">menu administrateur</a> (si vous êtes identifiés comme administrateur).</p>
+<p>Cela a un sens de bannir un utilisateur d'après son nom d'utilisateur et son adresse courriel, mais il n'est généralement pas recommandé de le bannir avec son adresse IP.</p>
+<p>Un enregistrement de bannissement contient un bannissement par nom d'utilisateur, par adresse courriel et par adresse IP.</p>
+<p>Si vous bannissez par nom d'utilisateur et que cet utilisateur existe déjà dans votre galerie, il sera banni immédiatement - quelque soit la page de votre galerie Coppermine qu'il essaye de visiter. Si vous bannissez un nom d'utilisateur qui n'existe pas encore, l'enregistrement est accepté: cela signifie que vous réservez les noms d'utilisateurs que vous ne souhaitez pas que vos visiteurs utilisent lors de leur enregistrement: c'est une bonne idée que de bannir des noms d'utilisateurs que les utilisateurs malveillants pourraient utiliser pour faire croire aux autres qu'ils ont un rôle particulier sur votre site: Généralement vous voudrez empêcher vos utilisateurs d'utiliser des nomes comme "admin", "administrateur", "modérateur", "origine" etc. Bien entendu ce ne sont que des noms et aucuns droits particuliers ne sont rattachés à ces noms, mais les autres peuvent avoir l'impression que l'utilisateur ayant choisi le nom "admin" est l'administrateur réel de votre galerie.</p>
+<p>Le bannissement par adresse courriel n'est pas immédiatement pris en compte: si vous bannissez une adresse courriel qu'un de vos membres enregistrés utilise déjà, cet utilisateur ne sera pas banni automatiquement (utilisez le bannissement par nom d'utilisateur à la place). La fonction de bannissement par adresse courriel n'est prise en compte que sur la page d'enregistrement: personne ne peut s'enregistrer en utilisant une adresse courriel qui a été bannie.</p>
+
+<a name="banning_by_ip_address_no_good"></a>
+<h2>Pourquoi le bannissement par adresse IP n'est pas recommandé<a href="#banning_by_ip_address_no_good" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Certains pourraient penser que le bannissement par adresse IP est la manière la plus efficace de bannir définitivement un utilisateur et d'empêcher un réenregistrement en utilisant un autre nom et une autre adresse courriel. Malheureusement ce n'est pas le cas: comme l'utilisateur moyen n'a généralement pas le contrôle de son adresse IP, le bannissement par adresse IP est généralement comme un emplâtre sur une jambe de bois. N'utilisez le bannissement par adresse IP que si vous constatez des abus provenant fréquemment de la même adresse IP.</p>
+<p>Les raisons principales du pourquoi le bannissement par adresse IP n'est pas recommandé:</p>
+<ul>
+  <li><a name="banning_by_ip_address_dynamic_assigning"></a><h3>Les adresses IP sont attribuées dynamiquement aux utilisateurs à chaque session de navigation sur internet<a href="#banning_by_ip_address_dynamic_assigning" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	Les adresses IP sont attribuées aux utilisateurs par leurs <abbr title="Fournisseurs d'Accès Internet">F.A.I.</abbr> à chaque fois qu'ils se connectent sur internet, qu'ils utilisent l'ADSL, le câble, un modem ou une autre manière de se connecter. Le F.A.I. peut ou ne peut pas donner la même adresse IP que celle utilisée lors de la dernière session, mais de temps en temps, l'adresse IP attribuée à un utilisateur peut changer.</li>
+	<li><a name="banning_by_ip_address_lock_out_legitimate_users"></a><h3>Des visiteurs légitimes de votre galerie peuvent être bloqués<a href="#banning_by_ip_address_lock_out_legitimate_users" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	Comme expliqué ci-dessus, les adresses IP sont attribuées par les F.A.I. Si vous bannissez un utilisateur par son adresse IP, il est possible qu'il ait une autre adresse IP lors de sa prochaine session. L'adresse IP que vous aviez banni au départ, peut avoir été attribuée à un autre utilisateur qui n'a rien fait de mal, et maintenant le bannissement par adresse IP le concerne  il est bloqué et ne peut accéder à votre site et encore moins s'en plaindre à vous.</li>
+	<li><a name="banning_by_ip_address_spammers_use_bots"></a><h3>Les spammeurs utilisent des robots<a href="#banning_by_ip_address_spammers_use_bots" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	Généralement les spammeurs n'utilisent pas leurs propres PC pour envoyer leurs messages indésirables, mais ils contrôlent les ordinateurs ou les serveurs d'autres personnes, utilisant des chevaux de Troie (aussi appelés "bots"). Ces PC zombies font leur travail d'envoie de spam sans que leur propriétaire ne s'en rende compte. Si vous bannissez un tel PC Zombie, un autre PC sous contrôle du spammeur va prendre en charge le travail de spam vers votre site. Les spammeurs ont souvent le contrôle d'élevages de "robots"' qui contiennent des centaines voire des milliers d'ordinateurs qui ont été piratés. Essayer de bannir un PC dont l'adresse IP est membre d'un de ces 'élevages' est une tache futile et inutile.</li>
+	<li><a name="banning_by_ip_address_spoofing"></a><h3>Les adresses IP peuvent être falsifiées<a href="#banning_by_ip_address_spoofing" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	Les utilisateurs normaux n'ont généralement pas les connaissances pour manipuler leur adresse IP. Mais les Hackers savent comment faire ça. Les spammeurs demandent à des hackers ou se procurent des programmes de falsifications depuis des sources obscures pour manipuler leur adresse IP. Il en résulte que, si vous bannissez quelqu'un comme ça par son adresse IP, l'adresse IP créer va simplement changer. Comme pour les attaques de robots, vous ne pouvez pas faire grand chose contre.</li>
+	<li><a name="banning_by_ip_address_anonymizing"></a><h3>Les gens utilisent des proxys d'anonymisation<a href="#banning_by_ip_address_anonymizing" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	Il y a de plus en plus de personnes qui utilisent des proxys d'anonymisation pour naviguer sur le web de manière plus sécurisée. Si vous bannissez un utilisateur qui accède à votre site alors qu'il utilise un proxy d'anonymisation, vous allez bannir toutes les personnes utilisant ce service, ce qui pourrait toucher des millions de personnes. Vous ne voudrez certainement pas que ça se passe comme ça.</li>
+</ul>
+
+<a name="banning_page"></a><h2>Contrôles de la page<a href="#banning_page" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>La page de bannissement des utilisateurs consiste aux contrôles suivants:</p>
+<ul>
+	<li><a name="banning_page_statistics"></a><h3>Informations statistiques et de filtrage<a href="#banning_page_statistics" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	La première ligne de la table (après le titre) contient des statistiques sur le nombre total de bannissement et le nombre total de pages. S’il y a plus d'enregistrements de bannissement que le nombre défini par page (25), des onglets de pagination sont affichés à droite pour vous permettre d'aller aux pages suivantes ou précédentes.<br />
+	La même ligne est affichée en bas de la table pour vous faciliter la navigation entre les onglets.<a name="banning_page_statistics_end"></a></li>
+	<li><a name="banning_page_ban_id"></a><h3>ID de bannissement<a href="#banning_page_ban_id" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	La colonne ID de bannissement peut être triée de manière ascendante ou descendante, en utilisant les petites flèches dans le titre de la colonne. L'ID de bannissement ne peut pas être modifié - un nouvel ID de bannissement est crée pour chaque enregistrement entré par l'administrateur. Comme l'ID de bannissement augmente avec chaque enregistrement, le tri de la table entière par ID de bannissement donnera une table triée par date de création du bannissement.<a name="banning_page_ban_id_end"></a></li>
+	<li><a name="banning_page_delete"></a><h3>Effacer<a href="#banning_page_delete" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	La colonne "Effacer" contient des cases à cocher pour chaque enregistrement de bannissement - si vous voulez effacer un bannissement (ne plus bannir un utilisateur) cochez simplement la case à cocher correspondante et envoyez le formulaire en utilisant le bouton "ok" en bas de page.<br />
+	Si un enregistrement de bannissement est réglé pour expire à une date dépassée, l'enregistrement de bannissement sera taguée avec le mot "Expiré" dabs la colonne "Effacer" - colonne qui alerte l'administrateur des bannissements expirés si vous n'avez pas activé l'option de configuration "<a href="configuration.htm#admin_user_purge_expired_bans">purger automatiquement les bannissements</a>".<a name="banning_page_delete_end"></a></li>
+  <li><a name="banning_page_user_name"></a><h3>Nom d'utilisateur<a href="#banning_page_user_name" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	La colonne "Nom d'Utilisateur" peut être triée de manière ascendante ou descendante, en utilisant les petites flèches dans la colonne de titre. Cette colonne affiche le champ de bannissement nom d'utilisateur pour l'enregistrement de bannissement. Un nom d'utilisateur existant dans la base de données de Coppermine affichera une icone utilisateur à côté du champ qui permet d'aller au profil de l'utilisateur correspondant en cliquant dessus. Les bannissements d'utilisateurs par leur nom qui ont un impact (c'est à dire qui empêchent un utilisateur de voir la galerie ou de faire quoi que ce soit d'autre) auront l'icone pour accéder au profil à côté du nom. Les enregistrements de bannissements crées pour réserver "en avance" un nom (pour préserver un nom particulier afin d'être sur qu'aucun utilisateur ne l'utilisera pour s'enregistrer), sans enregistrement correspondant dans la base de données, n'afficheront pas le lien et l'icone du profil. Si vous effacer un utilisateur le lien s'en ira aussi. Le lien entre le bannissement par nom d'utilisateur et un compte existant est vérifié à chaque accès à la page de bannissement des utilisateurs.<a name="banning_page_user_name_end"></a></li>
+	<li><a name="banning_page_email_address"></a><h3>Adresse courriel<a href="#banning_page_email_address" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	La colonne "Adresse courriel" peut être triée de manière ascendante ou descendante, en utilisant les petites flèches dans la colonne de titre. La colonne affiche le champ de bannissement par adresse courriel pour l'enregistrement de bannissement. Le bannissement par adresse courriel n'est pris en compte que dans la page d'enregistrement. Il est invalide si Coppermine est intégré.<br />
+	Actuellement les jokers et autres conteneurs ne peuvent <strong>pas</strong> être utilisés lors du bannissement par adresse courriel, il n'y a donc aucune option pour utiliser le bannissement par domaine.<a name="banning_page_email_address_end"></a></li>
+	<li><a name="banning_page_ip_address"></a><h3>Adresse IP<a href="#banning_page_ip_address" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	La colonne  "adresse IP" peut être triée de manière ascendante ou descendante, en utilisant les petites flèches dans la colonne de titre. La colonne affiche le champ de bannissement par adresse IP pour l'enregistrement du bannissement. Le bannissement par adresse IP n'est pas recommandé (voyez <a href="#banning_by_ip_address_no_good">Pourquoi le bannissement par adresse IP n'est pas recommandé</a>)<br />
+	Actuellement vous ne pouvez spécifier qu'une adresse IP, vous ne pouvez pas spécifier une plage d'adresses IP. La notation avancées ni l'utilisation de Jokers n'est actuellement supportée.<a name="banning_page_ip_address_end"></a></li>
+  <li><a name="banning_page_expiration"></a><h3>Expire<a href="#banning_page_expiration" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	La colonne "Expire" peut être triée de manière ascendante ou descendante, en utilisant les petites flèches dans la colonne de titre. Vous pouvez spécifier des enregistrements de bannissements qui expirent à une certaine date, donnant la possibilité aux utilisateurs bannis d'utiliser votre galerie comme convenu. Cette fonction peut être utile pour rendre un bannissement non permanent si vous décidez qu'un utilisateur doit être empêché d'accéder à votre galerie pour un temps limité, par exemple parce qu'il n'a pas respecté les règles de la galerie. Laisser le champ vide signifie que le bannissement est permanent (il n'expire jamais). Utiliser l'icone de calendrier à côté du champ d'expiration pour sélectionner une date (la fonction calendrier nécessite que JavaScript soit disponible pour votre navigateur). Le format de date est AAAA-MM-JJ (l'année complète au format numérique, un tiret, le mois avec le zéro de départ éventuellement, un tiret le jour avec le zéro de départ éventuellement). Ce format de date est particulièrement utile lors du tri de la table par date d'expiration.<a name="banning_page_expiration_end"></a></li>
+	<li><a name="banning_page_new_ban"></a><h3>Ajout d'un nouveau bannissement<a href="#banning_page_new_ban" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	Utilisez les champs dans la ligne "Ajouter un nouveau bannissement" pour créer un enregistrement de bannissement. Un nouvel enregistrement de bannissement contient le nom d'utilisateur, l'adresse courriel, l'adresse IP et peut avoir une date d'expiration, mais il n'a pas besoin de contenir les trois parties du mécanisme de bannissement - un seul champ est nécessaire pour créer l'enregistrement de bannissement.<br />
+	Lors de la création de l'enregistrement vous avez l'option d'effacement des commentaires postés par l'utilisateur (lors du bannissement par nom).<a name="banning_page_new_ban_end"></a></li>
+	<li><a name="banning_page_lookup_ip_address"></a>
+	<h3>Chercher une adresse IP<a href="#banning_page_lookup_ip_address" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	Sous la table des bannissements vous avez un autre formulaire qui permet de chercher une adresse IP particulière. Cela peut s'avérer pratique pour déterminer quelles adresse IP viennent d'un <abbr title="Fournisseurs d'Accès Internet">F.A.I.</abbr> ou si il s'agit d'une adresse IP fixe qu'il est nécessaire de bannir<br />
+	Gardez en mémoire que la cible de la recherche d'adresse IP vous envoie vers un site web externe. L'équipe de Coppermine ne peut pas être tenue pour responsable de son contenu. La recherche d'adresse IP est fournie pour aider l'utilisateur, mais sans garantie. Elle peut ne plus être disponible si le site externe devait changer ses règles.<a name="banning_page_lookup_ip_address_end"></a></li>
+</ul>
+<a name="banning_page_end"></a>
+
+<a name="banning_bridged"></a><h2>Pas de bannissement s'il y a une passerelle<a href="#banning_bridged" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Veuillez noter que le bannissement n'a pas de sens si vous avez intégré Coppermine avec une autre application (voyez "<a href="bridging.htm">Intégration</a>"), parce que dans ce cas, Coppermine utilise la gestion des utilisateurs de l'application au lieu de la sienne. C'est pourquoi l'élément du menu administrateur "Bannissement des utilisateurs" est délibérément caché si vous avez fait une intégration de votre galerie. Vous pourrez tout de même accéder à la page de bannissement en entrant l'adresse URL dans la barre d'adresse de votre navigateur (exemple: <tt class="code">http://votresite.com/votre_repertoire_coppermine/banning.php</tt> - Il y a un avertissement sur la page de bannissement; utilisez cette fonction avec prudence et à vos risques et périls si vous êtes intégré.</p>
+<p>La plupart des applications qui peuvent être intégrées avec Coppermine ont leur propre mécanisme de bannissement, donc, si votre galerie est intégrée, vous devriez utiliser le mécanisme de bannissement de l'application avec laquelle vous êtes intégré plutôt que celui de Coppermine.</p>
+<a name="banning_bridged_end"></a>
+
+<a name="banning_todo"></a><h2>A Faire<a href="#banning_todo" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>La plupart des applications qui peuvent être intégrées avec Coppermine ont leur propre mécanisme de bannissement, donc, si votre galerie est intégrée, vous devriez utiliser le mécanisme de bannissement de l'application avec laquelle vous êtes intégré plutôt que celui de Coppermine.</p>
+<a name="banning_end"></a>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

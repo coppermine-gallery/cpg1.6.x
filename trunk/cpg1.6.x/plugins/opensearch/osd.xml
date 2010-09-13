@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+ <ShortName>{SHORT_NAME}</ShortName>
+ <Description>{DESCRIPTION}</Description>
+ <Url type="text/html" template="{SITE_URL}thumbnails.php?album=search&amp;search={searchTerms}"/>
+</OpenSearchDescription>

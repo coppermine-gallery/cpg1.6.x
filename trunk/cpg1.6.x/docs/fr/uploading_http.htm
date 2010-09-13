@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Uploading - Coppermine Photo Gallery - Documentation &amp; Manuel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="fr" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Il y a plusieures methode de téléchargement des fichiers dans Coppermine (Vous (en tant qu'administrateur) devriez utiliser le téléchargement par fTP plus l'ajout par lots (seuls les administrateurs peuvent le faire). Les utilisateurs normaux de Coppermine sont supposés utiliser le téléchargement par HTTP ou (si ils sont sous Windows XP) XP Publisher." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+  $Date$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation et Manuel</h1>
+<div id="toc">
+<a href="toc.htm">table des matières</a>
+</div>
+
+<a name="upload_http"></a><h1>Téléchargement par HTTP<a href="#upload_http" title="Lien vers vette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>L'utilisation normale de téléchargement par HTTP utilise les capacités inclues dans le navigateur web de télécharger des fichiers sur un serveur. La taille maximale de fichier est déterminée par deux facteurs de base: la vitesse et le volume de données que le serveur peut télécharger avant le dépassement de temps et la taille maximale de fichier déterminée par le paramétrage du serveur. Notez que ces paramètres ne sont <strong>pas</strong> déterminés par Coppermine, mais par la configuration du serveur (php.ini). Les utilisateurs qui ont un hébergement web ne peuvent pas modifer le php.ini, ils devront donc faire avec les paramètres définis par l'administrateur du serveur. Ceux qui ont leur propre serveur et peuvent modifier le  php.ini doivent regarder ces réglages qui sot expliqués dans  <a href="upload_troubleshooting.htm#upload_trouble_server-sided_restrictions">la page de résolution des problèmes de téléchargement</a> si les téléchargements par HTTP (les gros fichiers) posent problème.</p>
+
+<p>Il est évident que les fichiers téléchargés doivent aller quelque part (dans un dossier) de votre serveur - c'est le répertoire albums qui se trouve dans le répertoire ou vous avez installé Coppermine sur votre serveur. Les téléchargements par HTTP vont dans un sous-dossier du dossier "userpics"  (qui se trouve dans le répertoire "albums"). Evidemment, le script de téléchargement de Coppermine doit avoir les droits d'écriture pour télécharger des fichiers à cet endroit. C'est pourquoi vous devez changer les <a href="install_permissions.htm#permissions">droits</a> du répertoire albums et de ce qu'il contient pendant l'installation de Coppermine - les rendre inscriptibles pour les utilisateurs du serveur. Ceci est fait en utilisant la commande CHMOD sur un serveur Unix/Linux. Si vous avez des problèmes de téléchargement, assurez vous d'avoir paramétré les droits correctement.</p>
+
+<a name="upload_http_interface"></a><h2>Interfaces de téléchargement<a href="#upload_http_interface" title="Lien vers vette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Coppermine comprends deux interfaces de téléchargement: une traditionelle utilisant ue methode entièrement en HTML et permettant de télécharger un seul fichier à la fois et une interface avancée Flash, permettant le téléchargement de plusieurs fichiers en même temps depuis le même écran.</p>
+
+<a name="upload_http_interface_flash"></a><h3>Interface Flash de téléchargement multiples<a href="#upload_http_interface_flash" title="Lien vers vette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>L'interface Flash offre plus de fonctions et est plus facile d'utilisation, c'est pourquoi elle est recommandée comme interface par défaut.</p>
+<a name="upload_http_interface_flash_usage"></a><h4>Utilisation<a href="#upload_http_interface_flash_usage" title="Lien vers vette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<ol>
+	<li>Sélectionnez un album de la liste déroulante des albums</li>
+	<li>Cliquez sur le bouton "Parcourir" et allez jusqu'au fichier que vous voulez télécharger et sélectionnez le</li>
+	<li>Sélectionnez plus de fichiers en répétant l'étape 3</li>
+	<li>Cliquez sur le bouton "Continuer" une fois que vous avez sélectionné tous les fichiers que vous voulez télécharger (Le bouton apparait une fois que vous avez téléchargé au moins un fichier).</li>
+	<li>Vous serez dirigé vers une page ou vous pourrez entre les détails concernant les fichiers téléchargés. Après avoir complété ces données, validez le formulaire en utilisant le bouton "Appliquer les modifications" au bas de ce formulaire.</li>
+</ol>
+<a name="upload_http_interface_flash_end"></a>
+
+   
+<a name="upload_http_interface_html"></a><h3>Interface de téléchargement HTML<a href="#upload_http_interface_html" title="Lien vers vette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>L'interface de téléchargement HTML est recommandée pour ceux qui n'ont pas Flash d'installé (pour quelue raison que ce soit) et particulièrement pour <a href="upload_troubleshooting.htm#upload_trouble">résoudre les problèmes de téléchargement</a>.</p>
+
+<a name="upload_http_interface_html_usage"></a><h4>Utilisation<a href="#upload_http_interface_html_usage" title="Lien vers vette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<ol>
+	<li>Sélectionnez un album depuis la liste déroulante des albums</li>
+	<li>Cliquez sur le bouton "Parcourir" et allez jusqu'au fichier que vous voulez télécharger</li>
+	<li>Entrez le titre du fichier, sa description et les mots clé dans les champs correspondants si possible</li>
+	<li>Cliquez sur le bouton "Télécharger le fichier" et validez le formulaire pout télécharger le fichier.</li>
+</ol>
+<a name="upload_http_interface_html_end"></a>
+
+<a name="upload_http_end"></a>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,287 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Coppermine Photo Gallery - Documentatie &amp; Handleiding</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="nl" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Coppermine Photo Gallery is een geavanceerd, gebruiksvriendelijk, fotogalerij-script met ingebouwde ondersteuning voor andere multi-media/data bestanden. De galerij kan privaat zijn, alleen bereikbaar voor de geregistreerde gebruikers, en/of open voor alle bezoekers van uw site. Gebruikers, indien toegelaten, kunnen foto's uploaden met hun webbrowser (thumbnail and tussenformaatafbeeldingen worden en passant gemaakt), foto's beoordelen, commentaar toevoegen en zelfs e-kaarten sturen." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+  $Date$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentatie en Handleiding</h1>
+<div id="toc">
+<a href="toc.htm">Inhoudstafel</a>
+</div>
+
+<a name="about"></a><h1>Over Coppermine<a href="#about" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+
+<p><img src="../images/php-med-trans.png" border="0" alt="" width="95" height="51" title="PHP" align="left" style="padding-right:20px" /><img src="../images/mysql.png" border="0" alt="" width="125" height="64" title="mySQL" align="right" style="padding-left:20px" />Coppermine Photo Gallery is een geavanceerd, gebruiksvriendelijk, fotogalerij-script met ingebouwde ondersteuning voor andere multi-media/data bestanden. De galerij kan privaat zijn, alleen bereikbaar voor de geregistreerde gebruikers, en/of open voor alle bezoekers van uw site. Gebruikers, indien toegelaten, kunnen foto's uploaden met hun webbrowser (thumbnail and tussenformaatafbeeldingen worden en passant gemaakt), foto's beoordelen, commentaar toevoegen en zelfs e-kaarten sturen. De sitebeheerder bepaalt welke hierboven genoemde toepassingen beschikbaar zijn voor geregistreerde en ongeregistreerde gebruikers. De sitebeheerder kan ook galerijen besturen en grote hoeveelheden van foto's, die naar de server geüpload zijn via <abbr title="File Transfer Protocol">FTP</abbr>, in batch bewerken.</p>
+<p><img src="../images/jquery.png" border="0" alt="" width="200" height="50" title="jQuery" align="left" style="padding-right:20px" /><img src="../images/imagemagick.png" border="0" alt="" width="130" height="54" title="ImageMagick" align="right" style="padding-left:20px" />Beeldbestanden worden opgeslagen in albums en albums kunnen gegroepeerd worden in categorieën, welke op hun beurt verder gegroepeerd kunnen worden onder hogerliggende categorieën. Het script ondersteunt meerdere gebruikers en voorziet de beheerder van de website met gereedschappen om te beslissen welke gebruikersgroepen al dan niet hun persoonlijke albums kunnen hebben, e-kaarten kunnen versturen of commentaar kunnen toevoegen. Gebruikers kunnen ook uploaden naar publieke albums indien de websitebeheerder het toelaat. Rechten om albums aan te maken, te uploaden en te wissen worden allemaal bepaald door de websitebeheerder.</p>
+<p><img src="../images/license/gpl.png" border="0" alt="" width="127" height="51" title="GNU GPL" align="left" style="padding-right:20px" /><img src="../images/license/osi.png" border="0" alt="" width="100" height="137" title="OSI approved" align="right" style="padding-left:20px" />Coppermine heeft een door gebruikers optioneel te selecteren themasysteem met een aantal verschillende thema's voorgeïnstalleerd. Het ondersteunt ook het gebruik van meerdere talen en bevat zijn eigen taalbibliotheek. Deze taalbestanden laten de gebruikers van uw galerij toe om de galerij te gebruiken in hun voorkeurtaal. Coppermine gebruikt PHP, een MySQL database, en ofwel de GD bibliotheek (versie 1.x or 2.x) ofwel ImageMagick als fotobibliotheek om een database te genereren van bestandsinformatie van alle thumbnails, tussenformaat en full-sized afbeeldingen. Coppermine genereert de nodige html-code om de verschillende categorieën, sub-categorieën, albums, tussenformaat- en full-sized-afbeeldingen dynamisch af te beelden. Dit vermindert drastisch het aantal bestanden en de gebruikte ruimte die uw galerij anders zou innemen bij gebruik van de standaard HTML. Het installatiescript (install.php) maakt het u snel en gemakkelijk om te starten.</p>
+<p>Coppermine gebruikt de jquery JavaScript/Ajax-bibliotheek voor een rijke gebruikersbelevenis en gemakkelijke aanpassingen.</p>
+<p>Coppermine is gratis, open source software en mag gebruikt worden voor zowel privé als professioneel gebruik. Het is uitgebracht onde de GNU GPL <a href="copyrights.htm#copyright_license">licentie</a>, versie 3, welke goedgekeurd is door de <abbr title="Open Source Initiative">OSI</abbr>.</p>
+<a name="about_end"></a>
+
+<a name="about_documentation"></a><h2>Over de documentatie<a href="#about_documentation" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p><img src="../images/gd.png" border="0" alt="" width="148" height="93" title="GD" align="right" style="padding-left:20px" />Gebruik het menu boven-links van dit scherm om door de Coppermine documentatie te bladeren. Het menu is beschikbaar doorheen de ganse documentatie. Het menu is JavaScript-gestuurd - als u JavaScript hebt uitgeschakeld of niet kunt gebruiken voor eender welke reden, gebruik dan bovenaan de link, die zal u naar de inhoudstafel brengen en van daaruit naar de sectie van de documenten die u wilt lezen.</p>
+<p>Het Coppermine ontwikkelingsteam kan u sterk aanbevelen om Javascript in te schakelen en een moderne browser te gebruiken (met CSS en JavaScript in overeenstemming tot de <abbr title="Document Object Modell">DOM</abbr> standaard) om meer te genieten van de speciale opbouw van deze documentatie.</p>
+
+<a name="about_documentation_conventions"></a><h3>Documentatie Conventies<a href="#about_documentation_conventions" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<a name="about_documentation_conventions_boxes"></a><h4>Tekstkaders<a href="#about_documentation_conventions_boxes" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<p>In deze documentatie komen verschillende tekstkaders voor met een speciale betekenis:</p>
+<p class="cpg_example"><strong>Voorbeelden</strong> die bedoeld zijn om de gegeven instructies te illustreren, worden aangegeven zoals dit!</p>
+<p class="cpg_message_info">Extra <strong>informatie</strong> die zeker bekeken moet worden, wordt aangegeven zoals dit.</p>
+<p class="cpg_message_success">Hints die gewoonlijk leiden tot een beter inzicht in de algemene werking van Coppermine of u zullen helpen om bepaalde functies met succes te kunnen toepassen worden geaccentueerd zoals dit.</p>
+<p class="cpg_message_warning"><strong>Waarschuwingen</strong> over dingen die gemakkelijk fout kunnen gaan als er een vergissing gebeurd is, worden op deze manier weergegeven. Het is aan te raden om extra aandacht te besteden aan de tekst in dit soort kaders.</p>
+<p class="cpg_message_validation">Zaken die fout kunnen gaan afhankelijk van een actie of invoer door een gebruiker, worden op deze manier getoond.</p>
+<p class="cpg_message_error">Momentele <strong>fouten</strong> of toestanden die een grote impact kunnen hebben, worden zoals deze getoond. Dit is de meest ernstige soort van de tekstvakken - de inhoud is zeer belangrijk om te lezen.</p>
+<p class="cpg_code">Grotere delen van <strong>codevoorbeelden</strong> (kan PHP, HTML, CSS of JavaScript zijn) worden getoond met een typemachine vooraan in het tekstvak.</p>
+
+<a name="about_documentation_conventions_links"></a><h4>Linken<a href="#about_documentation_conventions_links" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<p>Alle &quot;normale&quot; linken (die geen speciaal icoon vertonen) zijn interne linken, zij verwijzen bvb. naar een sectie van deze documentatie en laten u toe om door dit document te navigeren. Uitzonderingen op deze regel zijn de volgende linken:</p>
+<ul>
+    <li>
+        <a name="about_documentation_conventions_links_expandable"></a><h5>Uitklapbare / dichtgeklapte secties<a href="#about_documentation_conventions_links_expandable" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
+        Dit zijn sommige secties die uitgeklapt of dichtgeklapt kunnen worden (als Javascript ingesteld is in uw browser) voor een overzichtelijker geheel. Gewoonlijk bevatten deze secties details over de tekst aangegeven in de alinea die er net voor staat. Uitklapbare secties worden voorafgegaan door een klein kadertje met een plusteken (<img src="../../images/tree/plus.gif" border="0" width="9" height="9" alt="" />), de uitgeklapte toestand wordt weergegeven met een min-teken (<img src="../../images/tree/minus.gif" border="0" width="9" height="9" alt="" />). Als JavaScript uitgeschakeld is in uw browser, dan worden alle uitklapbare delen weergegeven als uitgeklapt - klikken op de icoontjes heeft dan geen effect.
+    </li>
+    <li>
+        <a name="about_documentation_conventions_links_external"></a><h5>Externe linken<a href="#about_documentation_conventions_links_external" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
+        Externe linken die naar een pagina verwijzen buiten deze documentatie, worden gevolgd door een klein icoontje dat een venster met daarin een pijl voorstelt: <img src="../images/link.gif" border="0" width="7" height="8" alt="" />.
+    </li>
+    <li>
+        <a name="about_documentation_conventions_links_php"></a><h5>PHP documentatie<a href="#about_documentation_conventions_links_php" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
+        Coppermine is een PHP-applicatie, er zijn een aantal verwijzingen in dit document die verband houden met technische termen uit de programmeertaal PHP. De linken met een PHP-icoon (<img src="../images/php.png" border="0" width="16" height="10" alt="" />) verwijzen dan ook naar secties in de officiële PHP documentatie op  php.net waar meer informatie te vinden is over definities of termen gebruikt in de Coppermine documentatie.
+    </li>
+    <li>
+        <a name="about_documentation_conventions_links_anchor"></a><h5>Ankers<a href="#about_documentation_conventions_links_anchor" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
+        Op iedere pagina in de Coppermine documentatie zult u anker-iconen vinden (<img src="images/anchor.gif" width="15" height="9" border="0" alt="" />) volgend op veel alineahoofdingen. Zij zijn aanklikbaar en verwijzen exact naar de genoemde alinea. Deze symbolen zijn hoofdzakelijk bedoeld om gemakkelijker ondersteuning te kunnen geven: indien een supportgever wil verwijzen naar een bepaalde sectie van de documenten vanuit zijn/haar bericht, kan hij/zij vanuit de officiële coppermine homepage op dat anker rechtsklikken, "snelkoppeling kopiëren" en die gekopieerde link dan plakken in de e-mail. Voor u als eindgebruiker kunnen de ankers helpen als u bladwijzers voor bepaalde secties wilt aanmaken.
+    </li>
+</ul>
+
+<a name="features"></a><h2>Functies<a href="#features" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Coppermine omvat een groot aantal functies. Beneden vind u een <em>onvolledige</em> lijst. Nieuwe functies in cpg1.5.x (vergeleken met cpg1.4.x) zijn als dusdanig gemarkeerd.</p>
+<span class="detail_head_collapsed">Details</span>
+<div class="detail_body border1">
+	<ul>
+		<li>
+			<strong>Installatie</strong><br />
+			<ul>
+				<li>gemakkelijk <a href="install.htm#how">installeren</a> (installatiescript is voorzien)</li>
+				<li>verbeterd, wizard-achtige installatie (cpg1.5.x)</li>
+			</ul>
+		</li>
+		<li>
+			<strong>Registratie &amp; Login</strong><br />
+			<ul>
+				<li><a href="configuration.htm#admin_user_registration_disclaimer">termen, voorwaardenoptie</a> (cpg1.5.x)</li>
+				<li>config settable <a href="configuration.htm#admin_global_registration_pw">globaal  paswoord</a> voor registratie functie (cpg1.5.x)</li>
+				<li><a href="configuration.htm#admin_registration_captcha_start">visuele confirmatie (captcha) voor registratie</a> (cpg1.5.x)</li>
+				<li><a href="configuration.htm#admin_registration_verify">e-mailadres verificatie</a> (activation link)</li>
+				<li>resend activation link feature (cpg1.5.x)</li>
+				<li><a href="configuration.htm#admin_activation">goedkeuring registratie</a> door admin</li>
+				<li><a href="configuration.htm#admin_registration_notify">registratie notificatie</a> voor admin</li>
+				<li>optional <a href="configuration.htm#admin_personal_album_on_registration">creatie van persoonlijke albums bij registratie</a> (cpg1.5.x)</li>
+				<li><a href="configuration.htm#admin_user_allow_account_delete">gebruiker kan eigen account wissen</a> functie (cpg1.5.x)</li>
+				<li><a href="configuration.htm#admin_user_login_method_start">login mogelijk met gebruikersnaam <em>of</em> e-mailadres</a> (cpg1.5.x)</li>
+			</ul>
+		</li>
+		<li>
+			<strong>Gebruikersbeheer</strong><br />
+			<ul>
+				<li><a href="users.htm#user_cp">gebruikersbeheer</a> (private galerijen, groepen)<br />
+				bezoekers kunnen hun eigen registreren (als de admin registraties toestaat). Alternatief, admin kan gebruikersaccount creëren.</li>
+				<li>Gebruikersbeheer gebaseerd op groepen</li>
+				<li>Rechten worden beheerd/toegewezen per groep</li>
+				<li><a href="bridging.htm#integrating">bridging</a>: integratie van gebruikersbeheer met  verschillende bbs (zoals phpBB, YaBB SE, SMF, Invisionboard, vbulletin)</li>
+				<li>bbs integratie instelbaar met een wizardachtige gebruikersinterface (<a href="bridging.htm#bridge_manager_start">bridge manager</a>)</li>
+				<li><a href="users.htm#user_cp_group">gebruikers lidmaatschap in meerdere groepen</a></li>
+				<li>meer <a href="configuration.htm#admin_custom">admin-instelbaar gebruikersprofiel</a> velden</li>
+				<!--<li>optionele moderator voor album foto\'s (cpg1.5.x)</li>-->
+			</ul>
+		</li>
+		<li>
+			<strong>Beheer van categorieën en albums</strong><br />
+			<ul>
+				<li>indelen van foto\'s in <a href="categories.htm">categorieën</a>, optioneel sub-categorieën en <a href="albums.htm">albums</a></li>
+				<li>gebruikers kunnen albums aanmaken in categorieën met admin toestemming (cpg1.5.x)</li>
+				<li>Nieuwe categorie hiërarchisch systeem (cpg1.5.x)</li>
+			</ul>
+		</li>
+		<li>
+			<strong><a href="uploading.htm#uploading">Uploading</a></strong><br />
+			<ul>
+				<li>gebruikers kunnen <a href="uploading_http.htm#upload_http">foto\'s/bestanden uploaden met webinterface</a> (en admin kan FTP-uploaden en <a href="uploading_batch-add.htm#batch_add_pics">batch-toevoegen </a> aan database)</li>
+				<li><a href="start.htm#getting_resizing">aanmaken van thumbnails en tussenmaat-foto\'s</a></li>				<li>bijschrift, titel, omschrijving en <a href="configuration.htm#admin_custom_image">gebruiker gedefinieerde velden</a> voor iedere foto (doorzoekbaar)</li>
+				<li><a href="configuration.htm#admin_approval_notify">upload goedkeuringsnota</a> voor admin</li>
+				<li>beeldverdraaiïng</li>
+				<li>multi-pic upload</li>
+				<li>optie te kiezen <a href="configuration.htm#admin_picture_thumbnail_max-dimension">max hoogte of breedte voor thumbnails</a> helpt bij het mooier uitlijnen van thumbnail rijen en kolommen</li>
+				<li><a href="start.htm#getting_resizing">foto-afmetingen aanpassen tijdens het opladen</a></li>
+				<li>optioneel <a href="configuration.htm#admin_general_display_thumbs_batch_add">bekijk thumbnails tijdens batch-upladen</a> (cpg1.5.x)</li>
+				<li>boodschap toegelaten bestandstypes getoond op uploadscherm (cpg1.5.x)</li>
+				<li>geanimeerde grafieken op het oplaadscherm om het vorderen van het opladen aan te geven (cpg1.5.x)</li>
+				<li>niet-latijnse karakters in bestandsnamen worden vervangen door transliteratie indien mogelijk en underscore indien er geen transliteratie voor webveilige bestandsnamen beschikbaar is, ongeacht de gebruikerskennis (cpg1.5.x)</li>
+			</ul>
+		</li>
+		<li>
+			<strong>Tonen van afbeeldingen</strong><br />
+			<ul>
+				<li>Meta albums:<br />
+				admin kan specificeren welke virtuele extra albums gebruikt kunnen worden om alternatieve voorstellingen of methodes aan te bieden om door de galerij te bladeren:
+				<ul>
+					<li>laatst becommentarieerd</li>
+					<li>laatst toegevoegd</li>
+					<li>random foto</li>
+					<li>blader op datum meta-album (cpg1.5.x)</li>
+					<li>meest bekeken</li>
+					<li>top waardering</li>
+					<li>favorieten</li>
+				</ul>
+				</li>
+				<li>diashow bekijken</li>
+				<li>optie om een klikbare filmstrip van thumbnails te tonen onder de beeldweergave</li>
+				<li>watermerk optie (cpg1.5.x)</li>
+				<li>thumb bijknippen en verscherpen (cpg1.5.x)</li>
+			</ul>
+		</li>
+		<li>
+			<strong>Gebruikers interactie</strong><br />
+			<ul>
+				<li><a href="comments.htm#comments">gebruikers commentaar</a></li>
+				<li><a href="configuration.htm#admin_comment_approval">commentaar goedkeuring</a> optie (cpg1.5.x)</li>
+				<li><a href="configuration.htm#admin_comment_captcha_start">visuele confirmatie (captcha) voor commentaren</a> (cpg1.5.x)</li>
+				<li><a href="comments.htm#comments_options_spam_akismet">gebruik van Akismet voor commentaarfiltering</a> (cpg1.5.x)</li>
+				<li><a href="configuration.htm#admin_comment_promote_registration_start">registratie promotie in de commentaarsectie</a> (cpg1.5.x)</li>
+				<li>e-kaart functie</li>
+				<li><a href="configuration.htm#admin_image_ecard_flash_start">Flash support voor e-kaart</a> (cpg1.5.x)</li>
+				<li>taalselectie optie in template</li>
+				<li><a href="albums.htm#album_prop">paswoord-beveiligde albums</a></li>
+				<li>Stemming/Waardering</li>
+				<li>optioneel <a href="configuration.htm#admin_thumbnail_display_rating">weergave van de waardering op thumbnailscherm</a> (cpg1.5.x)</li>
+				<li><a href="configuration.htm#admin_image_old_style_rating_start">stemmingsniveau aanpasbaar en  ajax-driven</a> (cpg1.5.x)</li>
+				<li>optioneel <a href="configuration.htm#admin_contact_start">contactformulier</a> met captcha (cpg1.5.x)</li>
+				<li>gebruikers kunnen <a href="configuration.htm#admin_user_enable_report">misplaatste of ongewenste inhoud rapporteren</a> aan admin</li>
+				<li>favorieten: bezoekers kunnen beelden toevoegen aan hun favorieten voor toekomstige bezoeken</li>
+			</ul>
+		</li>
+		<li>
+			<strong>Statistieken</strong><br />
+			<ul>
+				<li>publiek tonen van aantal beelden, bekeken en laatste uploads</li>
+				<li>browser en os stats voor admin (cpg1.5.x)</li>
+				<li>algemene stats (cpg1.5.x)</li>
+				<li>album hits teller (cpg1.5.x)</li>
+				<li>publieke stats kunnen uitgeschakeld worden (cpg1.5.x)</li>
+			</ul>
+		</li>
+		<li>
+			<strong>Zoeken</strong><br />
+			<ul>
+				<li>geavanceerd zoeken (boolean operators)</li>
+				<li>regular expressions in zoekopdracht (cpg1.5.x)</li>
+				<li>klikbare trefwoorden</li>
+				<li>tag wolk functie (cpg1.5.x)</li>
+			</ul>
+		</li>
+		<li>
+			<strong>Administratie</strong><br />
+			<ul>
+				<li><a href="admin-tools.htm#admin_tools">Admin hulpjes</a></li>
+				<li>basis goedkeuring voor update script (cpg1.5.x)</li>
+				<li>reset naar standaard voor individuele configuratie opties (cpg1.5.x)</li>
+				<li>Opgeladen bestanden kunnen afgekeurd worden door de admin om ze tijdelijk te verbergen (cpg1.5.x)</li>
+				<li>Directe verbanningsoptie op commentaartoelatingsscherm (cpg1.5.x)</li>
+				<li>Gebruikersbeheerscherm met bijkomende criteria, toont de gebruikersinteractie (cpg1.5.x)</li>
+			</ul>
+		</li>
+		<li>
+			<strong><a href="plugins.htm#plugin">Plugins</a></strong><br />
+			<ul>
+				<li>plugin-API om verbeteringen toe te laten die door gebruikers aangebracht worden</li>
+				<li>veel plugin bijdragen beschikbaar</li>
+				<li><a href="plugins.htm#plugin_manager">plugin-manager</a></li>
+			</ul>
+		</li>
+		<li>
+			<strong>Documentatie</strong><br />
+			<ul>
+				<li>online help functie voor de admin pagina\'s</li>
+				<li><a href="configuration.htm#admin_theme_bbcode">bbcode help icoon</a> op commentaren (cpg1.5.x)</li>
+				<li>complete admin documentatie beschikbaar</li>
+				<li>veeltalige documentatie</li>
+				<li>documentatie gesplitst in secties om leesbaarder te maken (cpg1.5.x)</li>
+			</ul>
+		</li>
+		<li>
+			<strong>Allerlei</strong><br />
+			<ul>
+				<li>beeldinformatie opgeslagen in database</li>
+				<li>volledig multimedia support</li>
+				<li>meertalig</li>
+				<li>Engels als een <a href="configuration.htm#admin_language_fallback">backup</a> taal voor (nog)niet-vertaalde delen in de taalbestanden</li>
+				<li>alle functies aanpasbaar via webinterface (admin section)</li>
+				<li>EXIF/IPTC support</li>
+				<li>URL parameters verwijzen naar absolute posities inplaats van relatieve om de zoekfunctie gebruiksvriendelijker te maken (cpg1.5.x)</li>
+				<li>API voor Coppermine om te gebruiken met applicaties zoals Koppermine en andere (cpg1.5.x)</li>
+				<li><a href="configuration.htm#admin_general_coppermine_news">nieuwssectie voor de admin</a> om hem te verwittigen bij beschikbare updates (cpg1.5.x)</li>
+				<li>gebruik van Inspekt voor de <a href="dev_superglobals.htm">gezondmaking van superglobals</a>, een hulpprogramma om veilige PHP applicaties te maken (cpg1.5.x)</li>
+				<li>granulaire controle voor <a href="configuration.htm#admin_allow_unlogged_access">gast toegang</a>: geen toegang, alleen thumbs, thumbs + middelmaat alleen, thumbs + middelmaat + full-size (cpg1.5.x)</li>
+				<li>Voorkomt dat zoekrobotten meta albums kunnen indexeren (cpg1.5.x)</li>
+			</ul>
+		</li>
+		<li>
+			<strong>Uitzicht</strong><br />
+			<ul>
+				<li><a href="theme.htm">template/thema systeem</a></li>
+				<li><a href="configuration.htm#admin_album_list_content">scheiding van de breadcrumb blok zodat hij onafhankelijk van de categorie kan geplaatst worden in de template</a></li>
+				<li>optie om <a href="configuration.htm#admin_album_first-level_thumbs">eerste niveau albums tonen</a> van een categorie inplaats van alleen maar statistieken van de categorie</li>
+				<li>optie om de <a href="configuration.htm#admin_picture_thumb_advanced_private_icon_show">toon  "Privaat" Icoon aan niet-ingelogde / niet-gemachtigde gebruiker</a> aan of uit te zetten</li>				<li>option to send visitors directly <a href="configuration.htm#admin_thumbnail_to_fullsize">from the thumbnail page to the full-size</a> pop-up (cpg1.5.x)</li>
+				<li>optioneel <a href="configuration.htm#admin_image_movie_download_link_visible">film download link</a> (cpg1.5.x)</li>
+				<li>afwisselende kleuren voor tabelrijen (cpg1.5.x)</li>
+				<li>optionele tag wolk (cpg1.5.x)</li>
+				<li><a href="configuration.htm#admin_sidebar">sidebar</a> voor gemakkelijker navigatiebalk (cpg1.5.x)</li>
+				<li>ajax filmstrip (cpg1.5.x)</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<a name="about_next"></a><h2>Wat nu?<a href="#about_next" title="Link naar deze sectie"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Er zijn een aantal pagina's in deze documentatie waar beginners best zouden mee beginnen:</p>
+<ul>
+	<li><a href="quickstart.htm#about">Quick-Start gids</a></li>
+	<li><a href="requirements.htm">Minimum eisen</a></li>
+	<li><a href="testing.htm">Testen (alpha/beta versies!)</a></li>
+	<li><a href="languages.htm">Talen</a></li>
+	<li><a href="credits.htm">Credits</a></li>
+	<li><a href="copyrights.htm">Licentie &amp; Copyright</a></li>
+	<li><a href="known_issues.htm">Gekende problemen</a></li>
+</ul>
+
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

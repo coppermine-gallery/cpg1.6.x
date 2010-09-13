@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Albums - Coppermine Photo Gallery - Documentation &amp; manuel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="fr" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Albums: Coppermine organise les fichiers à l’intérieur d’albums, ce qui implique que vous aurez besoin d’au moins un album pour vos photos et fichiers. Les albums peuvent être organisé en catégorie, mais ce n’est pas une obligation, ils peuvent parfaitement être à la racine de Coppermine." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+  
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation et manuel</h1>
+<div id="toc">
+<a href="toc.htm">Table des matières</a>
+</div>
+
+<a name="albums"></a><h1>Albums<a href="#albums" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>Dans Coppermine, les <a href="files.htm">fichiers</a> téléchargés sont placés dans des albums. Les albums peuvent contenir des fichiers, mais pas de sous-albums. Les albums peuvent être placés dans des <a href="categories.htm">catégories</a>. Les catégories peuvent contenir des sous-catégories et des albums, mais ne <strong>peuvent pas</strong> contenir de fichiers.</p>
+<p>Dans Coppermine, les autorisations fonctionnent par album: vous pouvez autoriser vos utilisateurs à télécharger dans des albums en particulier, mais l’interdire pour d’autres albums. Vous pouvez explicitement autoriser ou refuser des commentaires ou des notations dans les albums.</p>
+
+<a name="albmgr"></a><h2>Gestionnaire d'albums<a href="#albmgr" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<img src="images/albmgr.png" width="309" height="194" border="0" alt="" title="Album Manager" align="right" style="padding-left:5px;" />
+<p>Coppermine stocke les fichiers dans des albums, de sorte que vous aurez besoin d'au moins un album pour vos photos et fichiers. Les albums peuvent être organisées en catégories mais <em>ce n’est pas une obligation</em>, ils peuvent parfaitement être à la &quot;racine&quot; de Coppermine.</p>
+<p>Lorsque vous êtes Administrateur, cliquez sur &quot;albums&quot; dans le menu outils, vous pourrez voir le <em>Gestionnaire d'album</em>.</p>
+
+
+<a name="albmgr_create"></a><h3>Création d'albums<a href="#albmgr_create" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<ul>
+<li><strong>Choisissez une catégorie ou résidera votre album dans la liste déroulante</strong> &quot;Sélectionnez une catégorie&quot;. Si vous ne souhaitez pas qu’il soit dans une catégorie, mais à la &quot;racine&quot; de Coppermine, choisissez &quot;* Pas de Catégorie *&quot;.Si vous n’avez pas encore créé de catégorie via le <a href="categories.htm#cat_cp">gestionnaire de catégorie</a>, vous pouvez quand même commencer par créer un album et le mettre dans une catégorie plus tard, tâche que vous pouvez également faire depuis la page <a href="#album_prop">propriétés de l’album</a>.</li>
+<li><strong>Pour créer un album, cliquez sur le bouton &quot;Nouveau&quot;</strong> - un nouvel album apparaitra dans la liste, par défaut cet album est nommé &quot;Nouvel album&quot;</li>
+<li><strong>Cliquez sur le champ texte en bas de page</strong>, surlignez le texte par défaut &quot;Nouvel album&quot; </li>
+<li><strong>Puis entrez le nom que vous souhaitez donner à l'album</strong></li>
+<li>(Recommencer à l'étape 2 si vous désirez plus d’albums)</li>
+<li><strong>Cliquez sur "OK"</strong> pour soumettre vos modifications à la base de données. Ne pas le faire se traduira par la perte de tous les changements que vous venez de faire. Vous pouvez toujours revenir au gestionnaire d’albums pour, éditer et  modifier des noms d'albums, ainsi que les trier au sein de leur catégorie mère, et / ou les déplacer dans différente catégories</li>
+<li><strong>Après avoir cliqué sur &quot;Appliquer les modifications&quot;, confirmez votre intention dans la boite d'alerte en cliquant sur &quot;OK&quot; </strong> (<em>Êtes vous sur de vouloir faire ces modifications ? "bouton".</em>)</li>
+</ul>
+
+<a name="albmgr_rename"></a><h3>Renommer un album<a href="#albmgr_rename" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<ul>
+<li><strong>Choisissez une catégorie dans la liste déroulante</strong></li>
+<li>Cliquez <strong>sur</strong> le nom de l'album que vous souhaitez modifier</li>
+<li>Cliquez sur le mot <strong>modifier</strong> qui viens d’apparaitre à droite du nom actuel de l’album.</li>
+<li><strong>Ecrivez le nouveau nom que vous désirez</strong></li>
+<li>Pour finir, cliquez sur <strong>&quot;Ok&quot;</strong></li>
+<li><strong>Après avoir cliqué sur &quot;Appliquer les modifications&quot;, confirmez votre intention dans la boite d'alerte en cliquant sur &quot;OK&quot; </strong> (<em>Êtes vous sur de vouloir faire ces modifications ? "bouton".</em>)</li>
+
+</ul>
+<a name="albmgr_order"></a><h3>Modification de l'ordre des albums<a href="#albmgr_order" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<ul>
+<li><strong>Choisissez une catégorie dans la liste déroulante</strong></li>
+<li><strong>Cliquez sur l'album que vous souhaitez déplacer vers le haut ou vers le bas dans la liste</strong></li>
+<li><strong>Utilisez les touches fléchées pour déplacer l'album vers le haut ou vers le bas.</strong></li>
+<li><strong>Cliquez sur &quot;Appliquez les changements&quot;</strong></li>
+<li><strong>Après avoir cliqué sur &quot;Appliquer les modifications&quot;, confirmez votre intention dans la boite d'alerte en cliquant sur &quot;OK&quot; </strong> (<em>Êtes vous sur de vouloir faire ces modifications ? "bouton".</em>)</li>
+
+</ul>
+<a name="albmgr_delete"></a><h3>Suppression d'un album<a href="#albmgr_delete" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<ul>
+<li><strong>Choisissez une catégorie dans la liste déroulante</strong></li>
+<li><strong>Cliquez sur l'album que vous souhaitez supprimer</strong></li>
+<li><strong>Cliquez sur la &quot;croix rouge&quot; (Effacez l’album) en bas de la liste des albums</strong></li>
+<li><strong>Confirmer dans fenêtre s’ouvrant en cliquant sur &quot;OK&quot;</strong> <em>(Voulez vous vraiment supprimer cet album? Toutes vos images et tous vos commentaires seront perdus !)</em></li>
+<li><strong>Cliquez sur &quot;Appliquer les modifications&quot;</strong></li>
+<li><strong>Après avoir cliqué sur &quot;Appliquer les modifications&quot;, confirmez votre intention dans la boite d'alerte en cliquant sur &quot;OK&quot; </strong> (<em>Êtes vous sur de vouloir faire ces modifications ? "bouton".</em>)</li>
+
+</ul>
+<a name="albmgr_end"></a>
+
+
+
+<a name="modif_alb_pics"></a><h2>Modifications d’albums ou de ses fichiers<a href="#modif_alb_pics" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Lorsque vous êtes connecté en tant qu'administrateur et sans avoir caché les <a href="admin_menu.htm#admin_user_mode">contrôles administrateurs</a>, il y a un menu affiché à côté de chaque album.</p>
+<p><img src="images/album_menu.png" width="420" height="116" border="0" alt="" /></p>
+<ul>
+	<li><strong>Supprimer</strong> vous permet de supprimer l'album et <strong>(ATTENTION)</strong> tous les fichiers qu'il contient.</li>
+	<li><strong><a href="#album_prop">Propriétés</a></strong> vous permet de modifier le nom, la description et les autorisations de l'album et d’autres paramètres.</li>
+	<li><strong><a href="files.htm#edit_pics">Modifier les photos</a></strong> vous permet de modifier le titre, la description, les mots-clés, etc... Des fichiers dans l'album</li>
+</ul>
+
+<a name="album_prop"></a><h2>Propriétés de l'Album<a href="#album_prop" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>La gestion des propriétés d’un album est accessible en cliquant sur &quot;Propriétés&quot; à côté de la vignette qui représente un album en particulier.</p>
+<img src="images/edit_album.gif" border="0" alt="" align="right" />
+<a name="album_prop_controls"></a><h3>Contrôles<a href="#album_prop_controls" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<ul>
+	<li>
+		<a name="album_prop_controls_related_tasks"></a><h4>Tâches relatives<a href="#album_prop_controls_related_tasks" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		Boutons qui mènent  à des pages qui sont liés à ce que vous faîtes actuellement. En cliquant sur l’un de ses boutons, tous les changements que vous avez faits dans la page propriétés de l’album, seront perdus si vous ne les enregistrez pas avant. Vous serez directement envoyé vers la tâche que vous avez choisie.
+		<ul>
+			<li>	
+				<a name="album_prop_controls_edit_files"></a><h5>Editer les fichiers<a href="#album_prop_controls_edit_files" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
+				Le bouton &quot;Editer les fichiers&quot; vous fera parvenir directement à la page <a href="files.htm#edit_pics">Modifier les images</a> qui est accessibles via le bouton "Modifier les photos" à côté de la vignette qui représente un album sur la page d'index
+			</li>
+			<li>
+				<a name="album_prop_controls_parent_category"></a><h5>Catégorie parente<a href="#album_prop_controls_parent_category" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
+				Le bouton &quot;Catégorie parente&quot; vous enverra à la page d'index de la catégorie ou l'album que vous éditez est placé.
+			</li>
+			<li>
+				<a name="album_prop_controls_thumbnail_view"></a><h5>Vue des vignettes<a href="#album_prop_controls_thumbnail_view" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
+				Le bouton &quot;Vue des vignettes&quot; vous envoie directement à l'aperçu des miniatures de l'album que vous modifiez.
+			</li>		
+		</ul>
+		<a name="album_prop_controls_related_tasks_end"></a>
+	</li>
+	<li>
+		<a name="album_prop_controls_album_dropdown"></a><h4>Choisir un album<a href="#album_prop_controls_album_dropdown" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		&quot;Choisir un album&quot; dans la liste déroulante, vous permet de passer rapidement de la page de propriétés d’un l'album à un autre. Utilisez cette liste déroulante comme un raccourci, si vous voulez modifier les propriétés de plusieurs albums d'affilée, sans avoir à passer à la catégorie mère avant. Lorsque vous sélectionnez l'un des albums dans cette liste déroulante, vous serez immédiatement envoyé à l'album correspondant sans sauver les changements, sur la page qui étaient en cours.
+		<a name="album_prop_controls_album_dropdown_end"></a>
+	</li>
+	<li>
+		<a name="album_prop_controls_album_title"></a><h4>Titre de l'album<a href="#album_prop_controls_album_title" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		Le champ de saisie &quot;Titre de l'album&quot; peut être utilisé comme une alternative à l'option de nommage dans le gestionnaire d’album, si vous voulez simplement renommer l'album en cours. Le titre de l'album sera le texte cliquable sur la page d'index.
+		<a name="album_prop_controls_album_title_end"></a>
+	</li>
+	<li>
+		<a name="album_prop_controls_album_category"></a><h4>Catégorie de l'album<a href="#album_prop_controls_album_category" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		La liste déroulante vous permet de déplacer un album d'une catégorie à l'autre. Si vous réglez ce paramètre sur &quot;* Pas de catégorie *&quot; l'album sera affiché sur votre page principale, à savoir la racine de votre galerie.
+		<a name="album_prop_controls_album_category_end"></a>
+	</li>
+	<li>
+		<a name="album_prop_controls_album_description"></a><h4>Description de l'album<a href="#album_prop_controls_album_description" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		Le champ de saisie optionnel &quot;Description de l'album&quot; peut être utilisé pour fournir ou effacer une description sur ce qui se trouve dans l'album. L'utilisation du <a href="bbcode.htm#bbcode">BBCODE</a> pour ajouter par exemple des liens est possible.
+	</li>
+	<li>
+		<a name="album_prop_controls_album_keyword"></a><h4>Mot-clé de l'album<a href="#album_prop_controls_album_keyword" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		Depuis la version1.4.x de Coppermine les mots-clés des albums sont utilisés pour lier des images d’un l'album à d'autres. En utilisant cette méthode, les fichiers / images peuvent être affichées dans les différents albums alors que le fichier lui-même n'existe pas sur votre serveur. Il vous suffit de télécharger un fichier dans un album comme vous le feriez normalement, puis d’attribuer un ou plusieurs <a href="keywords.htm#keywords">mots-clés</a> dans le fichier.<br />
+		La fonction de mot-clé lit les espaces vides entre les mots. Si vous devez utiliser des expressions pour vos mots-clés, les relier par un trait de soulignement ou en utilisant le code ASCII du caractère d'espace [Ctrl] + [Alt] + [0] [1], [6] [0] (Remarque: cette dernière option ne fonctionne qu'avec les jeux de caractères latin.) Chaque album ne peut avoir qu'<strong>un</strong> (1!) mot-clé ou phrase. Toutes les images se trouvant dans les différents albums que vous souhaitez afficher doivent avoir le même mot-clé ou la même phrase en mot-clé dans leurs champs mot-clé respectifs. Les photos, contrairement aux albums peuvent avoir plusieurs mots-clés ou expressions de mots-clés séparés par des espaces ou un autre <a href="configuration.htm#admin_general_keyword_separator_start">séparateur spécifique de mots-clés</a> qui doit être unique pour votre galerie entière. Cela vous donne la possibilité d'afficher des images dans de nombreux albums. Pour le visiteur de ces albums, cela apparaîtra comme si les fichiers / images avaient été transféré à chaque album.
+		<a name="album_prop_controls_album_keyword_end"></a>
+	</li>
+	<li>
+		<a name="album_prop_controls_album_thumbnail"></a><h4>Vignette de l'album<a href="#album_prop_controls_album_thumbnail" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		L'option vignette de l'album vous permet de sélectionner l'image qui représentera l'album dans la liste des albums. Les options possibles sont:
+		<ul>
+			<li>L’une des photos qui a été téléchargées pour cet album</li>
+			<li>La dernière photo transférée (par défaut)</li>
+			<li>Les photos de manière aléatoire se trouvant dans l’album</li>
+		</ul>
+		<a name="album_prop_controls_album_thumbnail_end"></a>
+	</li>
+	<li>
+	    <a name="album_prop_controls_album_can_be_viewed_by"></a><h4>Cet album peut être consulté par<a href="#album_prop_controls_album_can_be_viewed_by" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		L'utilisation de ce menu déroulant vous permet de spécifier qui sera autorisé à voir le contenu de cet album. Si vous avez spécifié l’accès à un groupe particulier, les personnes qui n’en seront <em>pas</em> membres ne seront pas en mesure d'afficher le contenu de cet album. Cela s'applique aussi bien au contenu lié via d'autres albums en utilisant la fonction Mot-clé de l'album- Si la personne n'est pas autorisée à accéder au contenu original, elle ne sera pas en mesure d'accéder au contenu lié. Si un visiteur se voit refuser l'accès en utilisant le &quot;Cet album peut être consulté par&quot;, il ne sera pas en mesure de télécharger dans cet album non plus; pour pouvoir le faire, il faut en premier lieu être autorisé à en voir le contenu !<br />
+		Pré-requis: si vous avez réglé &quot;<a href="configuration.htm#admin_picture_thumb_advanced_private_toggle">Montrer les vignettes des albums privés aux utilisateurs anonymes</a>&quot; sur OUI dans la page de, <a href="configuration.htm">Configuration de la galerie</a> à l’intérieur de: Paramètres des fichiers, vous pouvez déterminer qui aura l'autorisation d'afficher les fichiers de cet album. Si vous avez défini l'option de configuration &quot;Les albums peuvent être privés (NOTE : si vous commutez de 'Oui' à 'Non' les albums privés actuels deviendront publics)&quot; à Non (non recommandé), vous ne serez pas en mesure de spécifier les autorisations d'accès, c'est à dire que tous les albums seront publiques et &quot;Cet album peut être consulté par&quot; ne sera même pas affiché.<br />
+		<div class="cpg_message_info">Si vous avez spécifié un mot de passe dans le champ &quot;<a href="#album_prop_controls_album_password">Protéger cet album par mot de passe (cochez pour Oui)</a>&quot;, la liste déroulante &quot;Cet album peut être consulté par&quot; sera réglé sur &quot;Moi seulement&quot;. Ce comportement est normal si vous voulez activée la protection par mot de passe. En d'autres termes: si vous spécifiez un mot de passe à un album, c’est pour en restreindre l’accès au maximum.</div>
+		<a name="album_prop_controls_album_can_be_viewed_by_end"></a>
+	</li>
+	<li>
+	    <a name="album_prop_controls_password_protection"></a><h4>Protection par mot de passe<a href="#album_prop_controls_password_protect" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		Au lieu de définir des restrictions d'accès en utilisant le liste déroulante de &quot;<a href="#album_prop_controls_album_can_be_viewed_by">Cet album peut être consulté par</a>&quot;, vous pouvez à la place spécifier un mot de passe pour l’album, ainsi les visiteurs en auront besoin s'ils souhaitent, accéder à un album en particulier.
+		<ul>
+			<li>	
+				<a name="album_prop_controls_password_protect"></a><h5>Protéger cet album par mot de passe<a href="#album_prop_controls_password_protect" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
+				Cochez cette case pour activer la protection par mot de passe. Les champs &quot;Mot de passe de l'album&quot; et &quot;Pense-bête du mot de passe de l'album&quot; ne seront visibles que si l'option &quot;Mot de passe de l'album&quot; a été cochée.
+			</li>
+			<li>
+				<a name="album_prop_controls_album_password"></a><h5>Mot de passe de l'album (Nouveau mot de passe)<a href="#album_prop_controls_album_password" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
+				Le champ de saisie &quot;Mot de passe de l'album&quot; ne sera affiché que si la case &quot;<a href="#album_prop_controls_password_protect">Protéger cet album par mot de passe</a>&quot; a été activée.
+				<a name="album_prop_password_start"></a>
+				Au lieu de compter sur les autorisations basées sur des groupes, vous pouvez protéger un album spécifique. De cette façon, vous pouvez même autoriser l'accès à des utilisateurs anonymes / invités à qui vous aurez donné le mot de passe. Utilisez cette option, pour par exemple, mettre en place un album pour les membres de votre famille uniquement visible par mot de passe, sachant qu’ils pourraient le trouver via, un indice du mot de passe dans le champ « Pense-bête du mot de passe de l'album »  (par exemple: <em>Quel était le nom de jeune fille de tante Emma ?</em>), Ou vous pourriez parfaitement décider de l’envoyer à des amis spécifiques, la famille ou des associés professionnels par courriel.<br />
+				<div class="cpg_message_warning">Lors de l'établissement d'un mot de passe d'album, le champ déroulant permission &quot;<a href="#album_prop_controls_album_can_be_viewed_by">Cet album peut être vu par</a>&quot; sera activé automatiquement sur "<em>Moi seulement</em>" - ce comportement est normal. Si vous changez la valeur du champ "<em> Cet album peut être consulté par </em>" pour une autre valeur, vous devrez effacer le mot de passe de l'album.</div>
+				<a name="album_prop_password_end"></a>
+			</li>
+			<li>
+				<a name="album_prop_controls_album_password_hint"></a><h5>Pense-bête du Mot de Passe de l'album<a href="#album_prop_controls_album_password_hint" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
+				Le champ de saisie &quot;Pense-bête du mot de passe de l'album&quot; ne s'affiche que si la case &quot;<a href="#album_prop_controls_password_protect">Protéger cet album par mot de passe</a>&quot; a été activée.<br />
+				L'indice optionnel du <strong>mot de passe de l’album</strong> sera affiché à l'invitation d’entrer le mot de passe pour accéder à l’album.
+			</li>
+		</ul>
+		<a name="album_prop_controls_password_protection_end"></a>
+	</li>
+	<li>
+	    <a name="album_prop_controls_visitor_upload"></a><h4>Les visiteurs peuvent télécharger des images<a href="#album_prop_controls_visitor_upload" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+	    Quand &quot;Les visiteurs peuvent télécharger des images&quot; est réglé sur OUI, ils leur est possible pour de télécharger des fichiers dans cet album.<br />
+	    <a name="album_prop_visitor_start"></a>
+	    <div class="cpg_message_info">Noter que seuls les visiteurs qui sont membres d'un groupe pour lequel le paramètre &quot;Téléchargement dans les albums publics&quot; (panneau de configuration des groupes) est réglé sur OUI peuvent effectivement télécharger dans les albums.</div>
+		Les visiteurs qui ne sont pas autorisés dans le panneau de configuration des  groupes, ne seront pas en mesure de télécharger des fichiers dans un album. Les utilisateurs non inscrits sont membres du groupe &quot;Anonymes / Invités&quot;.
+		<a name="album_prop_controls_visitor_upload_end"></a>
+	</li>
+	<li>
+	    <a name="album_prop_controls_can_post_comment"></a><h4>Les visiteurs peuvent poster des commentaires<a href="#album_prop_controls_can_post_comment" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+	    <div class="cpg_message_info">Noter que seuls les visiteurs qui sont membres d'un groupe pour lequel le paramètre &quot;Commentaires&quot; (panneau de configuration des groupes) est réglé sur OUI peuvent effectivement écrire des commentaires sur les fichiers dans les albums quand l'option &quot;Les visiteurs peuvent poster des commentaires&quot; (panneau de configuration de l'album) est activée.</div>
+	    Les visiteurs qui ne sont pas dans un groupe autorisé, ne seront pas en mesure de commenter sur les fichiers ce trouvant dans un album.
+		<a name="album_prop_controls_can_post_comment_end"></a>
+	</li>
+	<li>
+	    <a name="album_prop_controls_can_rate_files"></a><h4>Les visiteurs peuvent noter les photos<a href="#album_prop_controls_can_rate_files" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+	    <div class="cpg_message_info">Noter que seuls les visiteurs qui sont membres d'un groupe pour lequel le paramètre &quot;Notation&quot; (panneaux de configuration des groupes) est réglé sur OUI peuvent noter les fichiers dans des albums, où l'option &quot;Les visiteurs peuvent noter les photos&quot; (propriétés de l'album) est activée.</div>
+		Les visiteurs d’un groupe non autorisé, ne seront pas en mesure de noter les fichiers dans un album.
+	    <a name="album_prop_controls_can_rate_files_end"></a>
+	</li>
+	<!--<li>
+	    <a name="album_prop_controls_album_moderation"></a><h4>L'album peut être modéré par<a href="#album_prop_controls_album_moderation" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+	    Choisissez qui sera autorisé à modérer l'album.
+		<a name="album_prop_controls_album_moderation_end"></a><h4>
+	</li>-->
+</ul>
+
+<a name="album_prop_reset_start"></a><h3>Réinitialiser les propriétés de l'Album<a href="#album_prop_reset_start" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<img src="images/modifyalb_reset.gif" width="436" height="148" border="0" alt="" />
+<p>Vous pouvez en cochant les cases, réinitialiser le compteur de vues, effacer les votes, supprimer les commentaires et même toutes les images à la fois dans la sous-section &quot;Réinitialiser l'album&quot; du panneau de configuration de l’album, puis en cliquant sur soumettre les changements. Pour éviter les réinitialisations accidentelles, vous devrez cocher la case &quot;Je suis sûr et certain&quot; avant que des changements puissent être soumis (une croix rouge apparaitra sur le bouton (soumettre les changements) si vous ne l'avez pas fait).</p>
+<p>Utilisez ces options avec précaution: la suppression des fichiers est irréversible, ainsi que la remise à zéro du compteur de vue, des commentaires et des notations (vous ne pouvez les restaurer manuellement qu'en éditant les entrées de la base de données de Coppermine avec des outils tiers comme <a href="http://www.phpmyadmin.net/" class="external" rel="external">phpMyAdmin</a> - non recommandé).</p>
+<a name="album_prop_reset_end"></a>
+<a name="album_prop_end"></a>
+
+<a name="album_admin_user"></a><h2>Administrateur vs. utilisateur<a href="#album_admin_user" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Les utilisateurs non-administrateur ne peuvent créer des albums dans les catégories publics par défaut. Seul l'administrateur le peut. A partir de cpg1.5.x, il y a une option pour permettre aux non-administrateurs de créer des albums dans des catégories qui ont été créées par un administrateur. Pour ce faire, allez dans le panneau de configuration des <a href="categories.htm#cat_cp">catégories</a> &quot;Groupe(s) autorisé(s) à créer des albums dans cette catégorie&quot; mettez en surbriance dans la liste, le groupe que vous autorisez pour cette catégorie spécifique puis, cliquez sur mettre à jour / créer la catégorie.</p>
+<p>Si un utilisateur non administrateur est membre d'un groupe qui est autorisé à avoir  <a href="groups.htm#group_cp_personal">des galeries personnelles</a> (configurable dans le gestionnaire de groupe), il aura accès à une page de gestion des albums réduite (par l'option de menu &quot;Créer / Gérer mes albums&quot;) ou il pourra crée des albums dans sa galerie personnelle (<acronym title="aussi connue sous">alias</acronym> &quot;user gallery&quot;).</p>
+<p>L'administrateur peut créer des albums dans toutes les catégories. Si vous voulez créer un album personnel en tant qu'administrateur, choisissez &quot;<tt class="code">* Ma galerie *</tt>&quot; dans sélectionnez une catégorie pour votre album personnel.</p>
+
+<a name="album_faq"></a><h2>Album <acronym title="Réponse aux questions fréquente">FAQ</acronym><a href="#album_faq" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+
+<a name="album_howAlbumsFolderWork"></a>
+<h3>Comment fonctionnent les <strong>fichiers et dossiers</strong> dans Coppermine ?<a href="#album_howAlbumsFolderWork" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<ol>
+<li>Lorsque vous créez un album, c'est dynamiquement un album 'virtuel'. Coppermine ne crée pas de  dossier physique pour un album sur le disque dur du serveur, il laisse les photos où vous les placez sur le serveur, et utilise la base de données pour savoir quelle image appartient à quel album. Vous pouvez déplacer des photos d'album en album dans Coppermine, tout se fait dans la base de données, les photos ne sont jamais déplacés sur le serveur.</li>
+<li>Lorsque vous téléchargez par le HTML, en utilisant le bouton 'Télécharger un fichier', Coppermine place le fichier (la miniature, la taille intermédiaire et la taille normale) dans le répertoire 'userpics'.</li>
+<li>Lorsque vous téléchargez par FTP, vous devez placer les photos dans des dossiers que vous créez dans le dossier "albums", mais jamais dans le dossier "userpics". Le dossier "userpics" est réservé uniquement pour les envois en HTML. Vous pouvez créer autant de dossiers et sous-dossiers pour vos téléchargements en FTP que vous souhaitez. (De nombreux hébergeurs recommandent de conserver un nombre de fichiers par dossier à moins de 500, afin de maximiser la vitesse et certaines fonctions. Cela signifie que vous pouvez télécharger jusqu'à 166 fichiers (500/3) dans chaque dossier.) Vous pouvez nommer ces dossiers comme vous le voulez, mais nous vous conseillons d’utiliser la même arborescence que vous avez créé pour la structure de vos catégories et albums, chaque fois que possible, afin de faciliter l'utilisation et la gestion de votre site.</li>
+<li>Lorsque vous <a href="uploading_batch-add.htm#batch_add_pics">ajoutez des fichiers par lot</a> via le FTP à votre site, Coppermine vous demande dans quel album vous voulez mettre les photos, mais laisse les photos là où elles sont sur le serveur.</li>
+</ol>
+
+<a name="album_howMoveAlbum"></a>
+<h3>Comment puis-je <strong>déplacer un albums d'une catégorie à une autre</strong>?<a href="#album_howMoveAlbum" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<ul>
+<li>Identifiez-vous comme administrateur</li>
+<li>Créez des catégories (panneau de <a href="categories.htm#cat_cp">configuration des catégories</a> du menu administrateur)</li>
+<li>Allez à la page d'index de votre galerie</li>
+<li>Cliquez sur "Propriétés" à côté de la vignette qui représente l'album que vous voulez voir déplacé.</li>
+<li>Dans la liste déroulante &quot;Catégorie de l'album&quot;, choisissez la catégorie ou l'album devra aller.</li>
+<li>Cliquez sur &quot;Mettre à jour l’album&quot;</li>
+</ul>
+
+<a name="album_createPublicAlbum"></a>
+<h3>Comment puis-je créer un <strong>album</strong> ou <strong>tous les utilisateurs</strong> peuvent ajouter des photos ?<a href="#album_createPublicAlbum" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>(En supposant que vous avez déjà créé au moins une catégorie et / ou un album, dans lesquelles les photos téléchargées doivent aller):
+<ul>
+	<li>Identifiez-vous comme administrateur</li>
+	<li>Assurez-vous que les contrôles administrateurs sont affichés</li>
+	<li>Sélectionnez le bouton "Albums"</li>
+	<li>Si vous avez placé l'album dans une catégorie, choisissez la catégorie dans laquelle vous avez crée l'album</li>
+	<li>A côté de l'album en question, cliquez sur &quot;propriétés&quot;</li>
+	<li>Définissez &quot;Les visiteurs peuvent télécharger des images&quot; sur &quot;Oui&quot; et cliquez sur &quot;mettre à jour l'album&quot;</li>
+	<li>Mettez un lien de téléchargement dans votre menu s'il n'existe pas déjà (regardez dans  /themes/votretheme/theme.php)</li>
+	<li>Puis cliquez sur l'onglet Groupes</li>
+	<li>Pour le groupe &quot;anonymous&quot; - définissez le quota d'espace alloué et les droits de téléchargement</li>
+</ul>
+
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

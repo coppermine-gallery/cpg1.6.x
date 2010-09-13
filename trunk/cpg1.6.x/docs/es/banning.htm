@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Banning - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Ban users based on hostname, email or IP address. Manage bans. Set ban expiry date." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+  $Date$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<div id="doc_en_only">No translation available</div>
+
+<a name="banning"></a><h1>Banning<a href="#banning" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>As with most applications that allow user interaction, there is always a small minority of users that does not play by the rules. Gallery admins therefore need a tool to get rid of the users who misbehaved. That is what the ban feature is meant to be used for.</p>
+
+<a name="banning_whats_new"></a><h2>What's new?<a href="#banning_whats_new" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>For cpg1.5.x (in comparison to cpg1.4.x), the ban page has been overhauled to make it more useful, featuring pagination, multiple edits (instead of one row per edit), sorting, and the ability to ban by email address and also ban "in advance", i.e. ban user names that have not been registered yet.</p>
+
+<a name="banning_scope"></a><h2>Scope<a href="#banning_scope" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>You have to understand though that banning is <strong>not</strong> a tool to pro-actively secure your site against malevolent users. In fact, it is quite the opposite: it allows you to reduce the damage that could be caused by people who misbehave <em>after</em> they have done something wrong.</p>
+<p>Banning is <strong>not</strong> the proper tool to fight spam - spammers will return with different accounts no matter how often you ban them. There are some others tools that work better against spammers (like captcha and comment moderation).</p>
+<p>The "Ban users" page is of course admin-only. Non-admins can not access it.</p>
+
+<a name="banning_how_it_works"></a><h2>How banning works<a href="#banning_how_it_works" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>You can enter ban records on the "Ban users" page that can be accessed using the corresponding link in your <a href="admin_menu.htm#admin_menu">admin menu</a> (when you are logged in as admin).</p>
+<p>It makes some sense to ban users by user name and email address, but it usually is not recommended to ban by IP address.</p>
+<p>A ban record can contain a ban by user name, by email address and by IP address.</p>
+<p>If you ban by user name and that user already exists in your gallery, the user is  banned immediately - no matter what Coppermine page he is trying to visit. If you ban a user name that does not exist yet, the record is accepted as well: this is meant to reserve user names that you do not want your visitors to use when registering: it might be a good idea to ban user names that malevolent users might use to make others believe that they have a particular role on your site: usually, you would want to disallow your users to use names like "admin", "administrator", "moderator", "root" etc. Of course those would just be names and no special privileges would come with those names, but others might get the impression that the user who has chosen the name "admin" actually was the real admin of your gallery.</p>
+<p>Bans on email addresses are not immediately  taken into account: if you ban an email address that one of your registered users is already using, that user will not automatically be banned (use the ban by user name feature instead). The ban-by-email feature is only  taken into account on the registration page: no one can register using the email addresses that have been banned.</p>
+
+<a name="banning_by_ip_address_no_good"></a>
+<h2>Why banning by IP address is not recommended <a href="#banning_by_ip_address_no_good" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>One might think that banning by IP address is the most effective way to ban a user for good and avoid re-registration using another user name and email address. However, this is not the case: although the average user does not have control over his own IP address, banning by IP address usually is a lame crutch. Only use banning by IP address if you notice abuse frequently coming from the same IP address.</p>
+<p>The main reasons why banning by IP address is not recommended:</p>
+<ul>
+  <li><a name="banning_by_ip_address_dynamic_assigning"></a><h3>IP addresses get assigned dynamically to end users with each surfing session<a href="#banning_by_ip_address_dynamic_assigning" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	IP addresses  get assigned to end users by their <abbr title="Internet Service Provider">ISP</abbr> each time they connect to the internet, no matter if they use DSL, cable, modem or another method to connect. The ISP may or may not assign the same IP address they used to have in a previous session, but from time to time the IP address that gets assigned to end users usually will change.</li>
+	<li><a name="banning_by_ip_address_lock_out_legitimate_users"></a><h3>Legitimate visitors of your page might get locked out<a href="#banning_by_ip_address_lock_out_legitimate_users" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	As suggested above, IP addresses get assigned by ISPs. If you ban a user by IP address, that user might get another IP address during his next session. The IP address you originally banned might then get assigned by the ISP to another user who has not done anything wrong, yet the ban by IP then affects him - he is locked out of your site and does not even have a chance to complain.</li>
+	<li><a name="banning_by_ip_address_spammers_use_bots"></a><h3>Spammers use bots<a href="#banning_by_ip_address_spammers_use_bots" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	Usually, spammers do not use their own PCs to drop their unwanted messages, but they control others' computers or servers, using trojan horses (so-called "bots"). Those zombie PCs do their task of dropping spam without the owner being aware of it. If you ban such a zombie PC, another PC that is under the control of the spammer will take over the job of spamming your site. The spammers often have control over bot farms that contain hundreds or even thousands of computers that were hijacked. Trying to ban one PC by IP address that is member of a bot net is a futile task.</li>
+	<li><a name="banning_by_ip_address_spoofing"></a><h3>IP addresses can be spoofed<a href="#banning_by_ip_address_spoofing" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	Regular users usually do not have the skills to manipulate their IP address. However, hackers know how to do that. Spammers might hire hackers or buy spoofing applications from obscure sources to manipulate their IP address. As a result, if you ban someone like that by IP address, the forged IP address will just change. Similar to the attacks by bot nets, there is little you can do against that.</li>
+	<li><a name="banning_by_ip_address_anonymizing"></a><h3>People use anonymization proxies<a href="#banning_by_ip_address_anonymizing" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	There is a growing number of people who are using anonymizing proxies to surf the web in a more secure manner. If you ban one user who accessed your site while using an anonymization proxy, you ban all users using that service, which could be millions. You certainly would not want that to happen.</li>
+</ul>
+
+<a name="banning_page"></a><h2>Page controls<a href="#banning_page" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>The "Ban users" page consists of the following controls:</p>
+<ul>
+	<li><a name="banning_page_statistics"></a><h3>Statistics and filtering information<a href="#banning_page_statistics" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	The first actual row of the table (after the heading) contains statistical data about the total number of bans and the number of total pages. If there are more ban records than the set maximum per page (25), a pagination tab will be displayed at the right that allows you to jump to previous and next pages.<br />
+	The identical row is being displayed at the bottom of the table again to allow easier navigation between tabs.<a name="banning_page_statistics_end"></a></li>
+	<li><a name="banning_page_ban_id"></a><h3>Ban ID<a href="#banning_page_ban_id" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	The Ban ID column can be sorted ascending or descending, using the small up and down arrows in the column heading. The ban ID can not be edited - a new ban ID is being created for each ban record the admin enters. As the Ban ID increases with each record, sorting the entire table by Ban ID will result in a table sorted by creation time of the ban.<a name="banning_page_ban_id_end"></a></li>
+	<li><a name="banning_page_delete"></a><h3>Delete<a href="#banning_page_delete" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	The column "Delete" contains checkboxes for each ban record - if you want to delete a ban (i.e. un-ban the user), simply tick the corresponding checkbox and submit the form using the "OK"-button at the bottom.<br />
+	If a ban record is set to expire and the expiry date has passed, the corresponding expired ban record will be tagged with the word "Expired" in the "Delete"-column to alert the admin of those expired bans unless you have enabled the config option "<a href="configuration.htm#admin_user_purge_expired_bans">Automatically purge expired bans</a>".<a name="banning_page_delete_end"></a></li>
+  <li><a name="banning_page_user_name"></a><h3>User Name<a href="#banning_page_user_name" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	The column "User Name" can be sorted in ascending or descending order, using the little arrow icons in the column header cell. The column displays the ban-by-username field for a ban record. A user name that actually exists in Coppermine's user table will show a user icon next to the user name field that can be clicked to go to the corresponding user's profile. Bans by user name that actually have an impact (i.e. that keep an existing user from viewing the gallery or doing anything else) will have the view profile link next to them. Ban records that have been created "in advance" (to reserve a particular user name to make sure users do not register using that name) without corresponding to an existing account will not display the view profile icon next to them. If you delete a user, the view profile link will of course go away as well. The correlation between a ban by user name and an existing account will be checked each time the "Ban users" page is  accessed.<a name="banning_page_user_name_end"></a></li>
+	<li><a name="banning_page_email_address"></a><h3>Email Address<a href="#banning_page_email_address" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	The column "Email Address" can be sorted in ascending or descending order, using the little arrow icons in the column header cell. The column displays the ban-by-email-address field for a ban record. The ban-by-email feature is only  taken into account on Coppermine's registration screen. It is  invalid when Coppermine is  bridged.<br />
+	Currently, wildcards or placeholders can <strong>not</strong> be used when banning by email address, so there is  no option to ban the usage of throw-away email addresses by domain.<a name="banning_page_email_address_end"></a></li>
+	<li><a name="banning_page_ip_address"></a><h3>IP Address<a href="#banning_page_ip_address" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	The column "IP Address" can be sorted in ascending or descending order, using the little arrow icons in the column header cell. The column displays the ban-by-IP-address field for a ban record. Banning by IP address is not recommended (see <a href="#banning_by_ip_address_no_good">Why banning by IP address is not recommended </a>)<br />
+	Currently, you can only specify single IP addresses. You can not specify entire IP address ranges. Advanced notations are currently not supported, nor is the use of wildcards supported.<a name="banning_page_ip_address_end"></a></li>
+  <li><a name="banning_page_expiration"></a><h3>Expires<a href="#banning_page_expiration" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	The column "Expires" can be sorted in ascending or descending order, using the little arrow icons in the column header cell. You can specify ban records to expire at a certain date, giving back the banned user the ability  to use your gallery as intended. This feature can be helpful to make a ban non-permanent if you  decide that a user should be kept from using your site only for a limited time, e.g. because he broke rules that might apply on your page. Leaving the field empty means that the ban will be permanent (i.e. it will never expire). Use the calendar icon next to the expiry fields to select a date (the calendar feature requires JavaScript to be enabled in your browser). The date format is YYYY-MM-DD (a full numeric representation of a year using 4 digits, a dash, numeric representation of a month, with leading zeros, a dash, day of the month using 2 digits with leading zeros). This date format is particularly helpful when sorting the table by expiry date.<a name="banning_page_expiration_end"></a></li>
+	<li><a name="banning_page_new_ban"></a><h3>Add New Ban<a href="#banning_page_new_ban" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	Use the fields in the row "Add New Ban" to create a new ban record. A new ban record can contain user name, email address and IP address and can have an expiry date, but it does not need to contain all three of those ban mechanisms - only one field needs to be populated to create a ban record.<br />
+	When creating a ban record you have the option to delete all comments posted by the banned user (when banning by user name).<a name="banning_page_new_ban_end"></a></li>
+	<li><a name="banning_page_lookup_ip_address"></a>
+	<h3>Look up an IP address<a href="#banning_page_lookup_ip_address" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	Below the  banning table you will find another form that allows you to look up a particular IP address. This can be helpful to determine whether an IP address belongs to an <abbr title="Internet Service Provider">ISP</abbr> or if it is a static IP address that is worth banning by IP<br />
+	Please keep in mind that the target of the IP address lookup will lead you to a third party web site. The Coppermine dev team can not be held responsible for the content of that third party page. The IP lookup field is being provided as a courtesy to end users with no guarantees. It might not be available if the third party site changes their site design or lookup policy.<a name="banning_page_lookup_ip_address_end"></a></li>
+</ul>
+<a name="banning_page_end"></a>
+
+<a name="banning_bridged"></a><h2>No banning when bridged<a href="#banning_bridged" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Please note that banning does not make much sense if you have bridged Coppermine with another application (see "<a href="bridging.htm">Bridging</a>"), as in that case Coppermine drops the user management of its own and instead uses the user management of the app it is being bridged with. That is why the admin menu item "Ban users" is being deliberately hidden when you have bridged your gallery. You can still access the "Ban users" page if you must by manually entering the URL of that page into the address bar of your browser (e.g. <tt class="code">http://yoursite.tld/your_coppermine_folder/banning.php</tt> - there will be a warning on the "Ban users" page; use the feature carefully and at your own risk when bridged.</p>
+<p>Most applications that can be bridged with Coppermine have banning mechanisms of their own, so if your gallery is bridged, you should use your bridging application's banning mechanism instead of the one that ships with Coppermine.</p>
+<a name="banning_bridged_end"></a>
+
+<a name="banning_todo"></a><h2>To Do<a href="#banning_todo" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>There is a number of features that have not made it into the current release; among them is the ability to use wildcards for bans: ideally, you could ban entire IP address ranges or entire email domains. Currently, this is not possible. You are welcome to review Coppermine's core code and contribute your code change suggestions.</p>
+<a name="banning_end"></a>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

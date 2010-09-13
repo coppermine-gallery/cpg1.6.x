@@ -1,0 +1,397 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Erreurs - Coppermine Photo Gallery - Documentation &amp; manuel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="fr" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+  $Date$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation et manuel</h1>
+<div id="toc">
+<a href="toc.htm">Table des matières</a>
+</div>
+
+<a name="errors"></a><h1>Erreurs<a href="#errors" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>Comme avec toutes les applications, vous pouvez rencontrer divers messages d'erreurs, si quelque chose ne va pas avec le script ou si vous (ou vos utilisateurs) avez fait une erreur de manipulation de l'application.</p>
+
+<a name="errors_types"></a><h2>Types d'erreurs<a href="#errors_types" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<div class="indent">
+	<p>Il existe trois types d'erreurs que vous pouvez rencontrer:
+			<ul>
+				<li><a href="#errors_soft">Erreurs légères</a></li>
+				<li><a href="#errors_hard">Erreurs graves</a></li>
+				<li><a href="#errors_unhandled">Erreurs non traitées</a></li>
+			</ul>
+	</p>
+
+	<a name="errors_soft"></a><h3>Erreurs légères<a href="#errors_soft" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>Les erreurs légères se produisent généralement si vous (ou l'utilisateur final) faites une erreur de manipulation. Coppermine affichera un message d'erreur, mais vous pouvez continuer à naviguer dans la galerie. Les erreurs légères sont entièrement internationalisées (c'est à dire qu'elles seront affichées dans la langue que l'utilisateur a choisi), cela implique que les programmeurs de Coppermine s'attendent (plus ou moins) à ce qu’une telle erreur puisse se produire dans certaines circonstances.</p>
+	<div class="cpg_example">
+		Si vous n'avez pas mis en place au moins un album où vos téléchargements puissent aller et que vous cliquez sur le lien de téléchargement, vous pourrez y voir le message d'erreur <tt class="code">L'album sélectionné n'existe pas ou bien vous n'avez pas la permission de télécharger dans cet album</tt>.
+	</div>
+	<p>Si vous obtenez une erreur légère et que vous ne savez pas quoi faire (peut-être parce que le message d'erreur ne signifie pas grand chose pour vous), lisez la section correspondante de cette documentation et recherchez sur le forum d'aide, car il est très probable que quelqu'un d'autre à déjà eu le même problème que vous.</p>
+	<p>Dans certaines sections de la documentation il y a des trucs de dépannage pour la question qui vous préoccupe, que vous devez lire en premier si vous obtenez un message d'erreur, par exemple lorsque vous avez des problèmes avec les <a href="upload_troubleshooting.htm#upload_trouble">téléchargements</a> ou avec une <a href="bridging.htm#integrating_support_start">passerelle (bridge)</a>.</p>
+
+	<a name="errors_hard"></a><h3>Erreurs graves<a href="#errors_hard" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>Les erreurs graves sont des messages qui ne vont pas disparaître, généralement parce que quelque chose est corrompu et doit être réparé. C'est généralement le cas si quelque chose ne va pas avec la base de données. Par conséquent, vous pourriez voir le redoutable message &quot;<a href="#errors_fatal">Erreur fatale</a>&quot; qui ne veut généralement pas dire grand-chose pour les utilisateurs inexpérimentés.</p>
+	<p>Si vous obtenez une erreur grave, vous devez agir immédiatement et réparer <acronym title="Quand c’est possible">le plus vite possible</acronym> la cause de l'erreur.</p>
+	<p>Une erreur grave indique généralement que quelque chose ne se passe pas correctement et que les programmeurs de Coppermine ne pouvaient pas prévoir, c'est pourquoi seul un message d'erreur générique est affiché. Lisez la suite pour savoir ce que vous devez faire.</p>
+
+	<a name="errors_unhandled"></a><h3>Erreurs non traitées<a href="#errors_unhandled" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>Les erreurs non traitées sont celles qui sont habituellement les plus difficiles à résoudre, car Coppermine "plante" en plein fonctionnement, sans message d'erreur significatif qui pourrait indiquer aux utilisateurs ce qui ne va pas. C'est généralement le cas si vous obtenez une page blanche ou tout simplement une erreur de d'affichage (thèmes etc...).</p>
+</div>
+
+<a name="errors_fatal"></a><h2>Erreurs fatales<a href="#errors_fatal" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Le message &quot;Erreur fatale&quot; est un message d'erreur générique qui dit simplement qu'il y a quelque chose qui ne va pas. C’est habituellement une <a href="#errors_hard">erreur grave</a> - vous ne serez pas en mesure de continuer à utiliser Coppermine, sauf si vous corrigez la cause de l'erreur. Les raisons d'un tel message d'erreur générique sont multiples. Pour des raisons de sécurité (pour s'assurer qu’un possible attaquant malveillant du site ne puisse pas abuser des vulnérabilités potentielles), le &quot;véritable message d'erreur&quot; n'est pas affiché par défaut, mais seulement le message générique &quot;Erreur fatale&quot;. Pour vous en tant qu’administrateur de Coppermine il est impératif de savoir le véritable problème. Pour ce faire, vous devez <a href="configuration.htm#debug_mode">Activer le mode débogage </a> dans la <a href="configuration.htm#admin">configuration</a> de Coppermine, cela se traduira par l’affichage &quot;réel&quot; du message d'erreur complet.</p>
+<div class="indent">
+
+	<a name="errors_debug_mode_config"></a><h3>Activation du mode débogage dans configuration<a href="#errors_debug_mode_config" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>Afin d'activer le mode de débogage, aller dans la configuration de Coppermine et dans la section &quot;<a href="configuration.htm#admin_misc">Paramètres de maintenance</a>&quot;, &quot;<a href="configuration.htm#debug_mode">activer le mode débogage</a>&quot;. Laissez l'option &quot;<a href="configuration.htm#admin_misc_debug_notices">Afficher les avertissements dans le mode débogage</a>&quot; désactivée.</p>
+	<p>Dans certains cas, vous pourriez ne pas être en mesure d'accéder à la page de configuration suffisamment longtemps pour permettre d’activer le mode débogage, comme suggéré dans cette section, de sorte que vous devrez activer manuellement le mode débogage. Reportez-vous à la section suivante pour savoir comment faire.</p>
+
+	<a name="errors_debug_mode_manual"></a><h3>Activer manuellement le mode débogage<a href="#errors_debug_mode_manual" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>Si vous avez besoin d’activer le mode de débogage, mais que vous ne pouvez plus accéder à l'écran de configuration (peut-être en raison de l'erreur fatale qui empêche l’affichage de la page de configuration ou peut-être parce que votre identifiant d’administrateur ne fonctionne pas comme prévu non plus), vous pouvez activer manuellement le mode de débogage.</p>
+	<p>Pour ce faire, vous aurez besoin d'un outil tiers comme <a href="http://phpmyadmin.net" rel="external" class="external">phpMyAdmin</a> pour manipuler directement votre base de données. De nombreux hébergeurs fournissent phpMyAdmin ou un outil similaire dans leur panneau de gestion d’hébergement. Vous pouvez y jeter un œil, ou demandez à votre hébergeur s’il peut  vous le fournir gratuitement. S'ils ne le font pas, vous devez installer cette application, car elle est utile non seulement pour le dépannage de Coppermine, mais également pour l’administration de toutes de base de données. Sachez cependant que cet outil est très puissant et manipule directement la base de données et peut donc supprimer ou endommager votre base de données s'il n'est pas utilisé correctement. De plus, phpMyAdmin peut être utilisé pour sauvegarder votre base de données. S'il vous plaît, référez-vous à la documentation de phpMyAdmin pour toutes les questions liées à l'installation, la configuration et l'utilisation de phpMyAdmin - le forum d'aide de Coppermine n'est certainement pas le bon endroit pour poser des questions sur la façon de configurer phpMyAdmin.</p>
+	<p>Ceci étant dit, supposons que vous ayez déjà phpMyAdmin ou que vous ayez réussi à l'installer correctement. Pour activer le mode de débogage manuellement, procédez comme suit:</p>
+	<ul>
+		<li>Allez depuis votre navigateur vers le dossier ou réside phpMyAdmin sur votre serveur (ex. <tt class="code">http://exemple.com/phpMyAdmin/</tt>)</li>
+		<li>Selon les mécanismes de sécurité que vous avez mis en place pendant la configuration initiale de phpMyAdmin, vous pouvez avoir à vous authentifiez pour pouvoir y accéder Cette authentification est très importante pour s'assurer qu'aucun accès non autorisé à phpMyAdmin n’à lieu, comme indiqué précédemment, un utilisateur malveillant pourrait ruiner l’ensemble de votre site s’il a obtenu un accès à un outil de manipulation de bases de données comme phpMyAdmin.</li>
+		<li>Si vous avez plusieurs bases de données disponibles, choisissez celle qui concerne Coppermine en haut de la colonne de gauche. Si vous avez une seule base de données, toutes les tables qui se trouvent dans votre base de données seront instantanément visible dans le cadre de gauche</li>
+		<li>Cliquez dans le cadre de gauche sur la table de la base de données qui contient la configuration de Coppermine. Le nom de la table est &quot;cpg15x_config&quot; ou similaire (en fonction du préfixe des tables que vous avez choisi lors de l'installation).</li>
+		<li>Dans le cadre principal de phpMyAdmin (le plus à droite), cliquez sur le bouton &quot;Afficher&quot; qui se trouve tout en haut.</li>
+		<li>Les entrées individuelles de la table doivent être affichées. Faites défiler vers le bas pour voir la ligne &quot;debug_mode&quot;. Comme phpMyAdmin n'affiche habituellement seulement qu'un nombre donné de lignes par page, vous pouvez continuer à la deuxième ou troisième page des résultats, en utilisant la barre de navigation en haut ou en bas de l'écran.</li>
+		<li>Une fois que vous avez trouvé la ligne intitulée &quot;debug_mode&quot;, ", cliquez dans cette ligne sur l'icône modifier (l'icône  crayon).</li>
+		<li>Sur l'écran d'édition, changez la valeur de &quot;0&quot; (qui signifie &quot;Ne pas afficher le mode de débogage&quot;) à &quot;1&quot; (qui signifie &quot;affichage pour tout le monde du mode de débogage&quot;) et puis enregistrez vos modifications en cliquant sur le bouton &quot;Exécuter&quot;.</li>
+		<li>Vous pouvez maintenant quitter phpMyAdmin et revenir à votre écran de Coppermine – Le mode de débogage doit être activé.</li>
+		<li>Avec le mode débogage autorisé, reproduisez le message d'erreur: cette fois, vous devriez non seulement obtenir le message générique &quot;Erreur fatale&quot; mais également une explication de ce qui à réellement mal tourné.</li>
+	</ul>
+	<p>Maintenant, vous pouvez utiliser le message d'erreur réelle qui indique quel est le problème à résoudre - corrigez l'erreur si vous le pouvez. Si vous ne pouvez pas réparer vous-même, rechercher l'appui du forum de Coppermine pour un conseil sur le message d'erreur (la partie générique, et non la partie spécifique qui s'applique uniquement à votre base de données / site). Il est très probable que quelqu'un d'autre ayant eu les  mêmes questions que vous ait l'expérience pour vous répondre - tenez compte des conseils donnés sur le fil qui décrit votre message d'erreur.</p>
+	<p>Une fois que vous avez terminé et si le message d'erreur à disparu, ne pas oublier de désactiver le mode de débogage avant de vous déconnecter. Si votre galerie est à nouveau pleinement opérationnelle (il faut, avoir corrigé l'erreur), vous pouvez aller dans la configuration de Coppermine et décocher &quot;Activer le mode de débogage&quot;. Si vous ne pouvez pas accéder à la configuration de Coppermine (peut-être parce que vous avez oublié les informations de votre compte administrateur), utilisez la méthode décrite ci-dessus pour activer le mode de débogage afin de l’arrêter manuellement (en utilisant phpMyAdmin): parcourez les tables de configuration de Coppermine à la recherche de   &quot;debug_mode&quot;, modifier cette entrée en la changeant &quot;<tt class="code">1</tt>&quot; à &quot;<tt class="code">0</tt>&quot;.</p>
+
+	<a name="errors_debug_mode_off"></a><h3>Désactiver le mode de débogage<a href="#errors_debug_mode_off" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>La sortie du mode de débogage <strong>n'est pas</strong> un message d'erreur. L'affichage des éléments de débogage sans avoir de message d'erreur ne signifie pas qu'il y a un problème: par défaut, le mode de débogage est désactivé. Si vous n'avez pas de problèmes particuliers avec votre galerie et qu'il n'y a pas d'erreur à corriger, désactivez le mode de débogage depuis la configuration ou manuellement, simplement de la même manière que vous l'aviez activé avant.</p>
+</div>
+
+<a name="errors_messages"></a><h2>Messages d'erreurs<a href="#errors_messages" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Il y a quelques messages d'erreurs qui sont souvent rencontrées. Bien qu'ils soient plus ou moins explicites, certains utilisateurs ne sont semble t’ils, pas être en mesure de les comprendre parfaitement face à eux, alors voici une liste incomplète avec des corrections suggérées.</p>
+
+<div class="indent">
+
+	<a name="errors_messages_database"></a><h3>Messages d'erreur de base de données<a href="#errors_messages_database" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra">
+		<tr>
+			<th align="left">Message d'erreur</th>
+			<th align="left">Cause possible</th>
+			<th align="left">Corrections suggérées</th>
+		</tr>
+		<tr>
+			<td valign="top">
+				<a name="cant_read_write_to_file"></a><tt class="code">Can't create/write to file '/tmp/#sql_45d5_0.MYI'</tt><a href="#cant_read_write_to_file" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+			</td>
+			<td valign="top">
+				MySQL ne peut pas créer de fichier temporaire pour l'ensemble des opérations dans le répertoire temporaire défini.
+			</td>
+			<td valign="top">
+				Changez la variable tmpdir pour qu'elle pointe vers un répertoire inscriptible. Cela demande de changer la ligne tmpdir dans le fichier my.cnf, généralement dans la section [mysqld] (tmpdir = /writable/dir, ou /writable/dir est un répertoire dans lequel vous pouvez écrire).<br />Demandez à votre hébergeur de faire ces modifications, dont seul l'administrateur du serveur ou la base de données MySQL réside peut effectuer cette opération
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+				<a name="cantOpenMYI"></a><tt class="code">Can't open file: 'votrepréfixe_nomdelatable.MYI'</tt><a href="#cantOpenMYI" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+			</td>
+			<td valign="top">
+				Votre table de base de données est endommagée.
+			</td>
+			<td valign="top">
+				Cela ne vient pas de Coppermine, mais de mySQL. Cela peut n'affecter qu'une seule table utilisée par Coppermine dans votre base de données.<br />
+				Utilisez le gestionnaire de contrôle de configuration de votre site internet pour réparer la table, ou utiliser phpMyAdmin pour exécuter cette requête SQL: <tt class="code">Réparer la table votrepréfixe_nomdelatable</tt><br />
+				(Remplacez votrepréfixe_nomdelatable par le nom de votre table, par exemple cpg145_pictures)<br />
+				<strong>Si vous ne comprenez ce qu'il faut faire, demandez à votre hébergeur de faire les changements ci-dessus.</strong>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+				<a name="mySQL_error28StorageEngine"></a><tt class="code">Got error 28 from storage engine</tt><a href="#mySQL_error28StorageEngine" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+			</td>
+			<td valign="top">
+				Pas d'espace restant sur le dispositif, à savoir le disque dur sur lequel votre base de données réside est plein.
+			</td>
+			<td valign="top">
+				Cela ne vient pas de Coppermine, mais de MySQL. Contactez votre hébergeur ou la personne qui est en charge du fonctionnement du serveur ou se trouve votre base de données. Transmettez à cette personne le message d'erreur que vous avez - il/elle devrait savoir quoi faire. De manière générale, vous aurez à dégager de l'espace ou à nettoyer votre base de données. Merci de noter que vous ne pouvez pas faire cela vous même si vous êtes hébergés - seul le gestionnaire du serveur peut faire cela.
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+				<a name="mySQL_crashedTable"></a><tt class="code">Table 'votrepréfixe_nomdelatable' is marked as crashed and should be repaired</tt><a href="#mySQL_crashedTable" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+			</td>
+			<td valign="top">
+				Votre table de base de données est endommagée.
+			</td>
+			<td valign="top">
+				Cela ne vient pas de Coppermine, mais de MySQL. Cela peut n'affecter qu'une seule table utilisée par Coppermine dans votre base de données.<br />
+				Utilisez le gestionnaire de contrôle de configuration de votre site internet pour réparer la table, ou utilisez phpMyAdmin pour exécuter la requête SQL: <tt class="code">Réparer la table votrepréfixe_nomdelatable</tt><br />
+				(Remplacez votrepréfixe_nomdelatable par le nom de votre table, par exemple cpg145_pictures)<br />
+				<strong>Si vous ne comprenez ce qu'il faut faire, demandez à votre hébergeur de faire les changements ci-dessus.</strong> Si cela arrive fréquemment, il doit y avoir quelque chose d'anormal sur votre serveur - demandez à votre hébergeur de l'aide.
+			</td>
+		</tr>
+	</table>
+	<p>Pour obtenir une liste complète des messages d'erreur MySQL qui seraient visibles en utilisant Coppermine, se référer à <a href="http://dev.mysql.com/doc/refman/5.1/en/error-messages-server.html" rel="external" class="external">MySQL 5.1 Reference Manual &rarr; B Errors, Error Codes, and Common Problems &rarr; B.3 Server Error Codes and Messages</a>.</p>
+
+	<a name="common_php_errors"></a><h3>Erreurs commune de PHP<a href="#commonPHPerrors" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>Il y a beaucoup de personnes (particulièrement les débutants en PHP) qui postent des questions du genre <tt class="code">J'ai l'erreur &quot;Parse error: parse error in XXX&quot;</tt> et qui ne savent pas quoi faire avec. C'est la raison pour laquelle nous avons traduit la liste des erreurs communes et la solution sur la manière de les corriger) depuis l'article original en allemand du site <a href="http://www.drweb.de/" rel="external" class="external">Dr. Web</a></p>
+	<table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra">
+		<tr>
+			<th align="left">Message d'erreur</th>
+			<th align="left">Cause possible</th>
+			<th align="left">Corrections suggérées</th>
+		</tr>
+		<tr>
+			<td valign="top">
+				<a name="common_php_errors_parse"></a><tt class="code">Parse error: parse error in C:\Apache\htdocs\read.php on line 8</tt><a href="#common_php_errors_parse" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+			</td>
+			<td valign="top">
+				Ce message d'erreur fait référence à une erreur dans la syntaxe PHP.
+			</td>
+			<td valign="top">
+				Vous avez certainement oublié de terminer la ligne avec <tt class="code">;</tt> ou vous avez trop de crochets ouverts ou fermés (<tt class="code">{</tt>).
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+				<a name="common_php_errors_unsupported_function"></a><tt class="code">Fatal error: Call to unsupported/undefined function ... in C:\Apache\htdocs\read.php on line 8</tt><a href="#common_php_errors_unsupported_function" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+			</td>
+			<td valign="top">
+				Cette erreur signifie que la fonction de votre script n'est pas définie dans votre version de PHP et ses modules, ou vous utilisez une fonction définie par l'utilisateur qui n'est pas déclarée dans votre fonction.
+			</td>
+			<td valign="top">
+				Cela est généralement dû au fait que vous avez oublié d'inclure la définition de la fonction.
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+				<a name="common_php_errors_wrong_parameter"></a><tt class="code">Warning: Wrong parameter ... for ... in C:\Apache\htdocs\read.php on line 8</tt><a href="#common_php_errors_wrong_parameter" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+			</td>
+			<td valign="top">
+				Vous avez passé trop (ou les mauvais) paramètres à la fonction.
+			</td>
+			<td valign="top">
+				Si il s'agit d'une fonction php incluse, vérifiez le <a href="http://www.php.net/manual/fr/funcref.php" rel="external" class="phpnet">manuel </a> pour vérifier. S'il s'agit d'une fonction définie par l'utilisateur, vérifiez votre code.
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+				<a name="common_php_errors_header"></a><tt class="code">Warning: Cannot add header information - header was already sent ... in C:\Apache\htdocs\read.php on line 4</tt><a href="#common_php_errors_header" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+			</td>
+			<td valign="top">
+				Vous avez déjà eu une sortie texte (par exemple une déclaration doctype ou <tt class="code">&lt;html&gt;</tt>) et appelez de nouveau la fonction header().
+			</td>
+			<td valign="top">
+				C'est généralement le cas en utilisant des truc relatifs aux cookies. Rappelez vou, vous ne pouvez pas utiliser header() deux fois!
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+				<a name="common_php_errors_overflow"></a><tt class="code">Parse error: parser stack overflow in C:\Apache\htdocs\read.php</tt><a href="#common_php_errors_overflow" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+			</td>
+			<td valign="top">
+				PHP est à court de mémoire.
+			</td>
+			<td valign="top">
+				Cela arrive généralement, si vous avez créé une boucle sans fin, particulièrement en utilisant les procédés d'inclusion.
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+				<a name="common_php_errors_no_such_file"></a><tt class="code">Warning: fopen("file.txt","r+") - No such file or directory</tt><a href="#common_php_errors_no_such_file" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+			</td>
+			<td valign="top">
+				Le fichier ou le répertoire demandé n'existe pas.
+			</td>
+			<td valign="top">
+				Vérifiez l'orthographe (c'est l'exactitude qui compte ici).
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+				<a name="common_php_errors_safe_mode"></a><tt class="code">SAFE MODE Restriction in effect. The script whose uid is XXX is not allowed to access...</tt><a href="#common_php_errors_safe_mode" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+			</td>
+			<td valign="top">
+				Le Safemode est activé. Certaines fonctions du système de téléchargement ne peuvent pas être utilisées.
+			</td>
+			<td valign="top">
+				Généralement, votre hébergeur à activé le safe mode (souvent mal configuré). Essayez de passer le <a href="configuration.htm#admin_picture_thumb_advanced_silly_safe_mode_start">silly_safe_mode</a> sur on.
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+				<a name="common_php_errors_bom"></a>De drôles de caractères comme <tt class="code">&iuml;&raquo;&iquest;</tt> apparaissent sur certaines ou sur toutes les pages<a href="#common_php_errors_bom" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+			</td>
+			<td valign="top">
+				Une <a href="http://en.wikipedia.org/wiki/Byte_order_mark" rel="external" class="external">Marque d'ordre des octets (Byte Order Mark)</a> (BOM) s'est glissée dans un de vos fichier Coppermine
+			</td>
+			<td valign="top">
+				Cela arrive généralement si vous modifiez un fichier encodé en Unicode (ce que sont les fichiers du noyau de Coppermine) avec un éditeur de texte qui n'est pas fait pour gérer les fichiers Unicodes. Le plus connu est notepad.exe (qui est livré avec Microsoft Windows). Le BOM devrait apparaitre sur la page que vous avez modifée manuellement, mais il peut aussi s'afficher sur des pages que vous ignorez. Annulez votre modification si vous le pouvez et utilisez un éditeur qui peut gérer l'encodage utf-8 (pour une liste d'éditeurs, regardez la section <a href="dev_tools.htm#dev_tools_editor">Outils recommandés par les développeurs &rarr; Editeurs de texte</a>). Si vous ne vous rappelez plus quel fichier vous avez modifié, cherchez le BOM dans tous vos fichiers. L'application d'Emurasoft <a href="http://www.emurasoft.com/replall/" rel="external" class="external">Replace in files</a> est un bon outil pour faire ça sur une machine tournant sous Windows.
+			</td>
+		</tr>
+	</table>
+
+	<a name="errors_messages_upload"></a><h3>Messages d'erreurs liés aux téléchargements<a href="#errors_messages_upload" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>Il y a un ensemble de sous-sections consacrées aux <a href="upload_troubleshooting.htm#upload_error_messages">messages d'erreurs liés aux téléchargements</a> dans la page <a href="upload_troubleshooting.htm#upload_trouble">dépannage des téléchargements</a>.</p>
+
+	<a name="errors_messages_webserver"></a><h3>Codes réponses des serveurs<a href="#errors_messages_webserver" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    La plupart des sites internet sont pilotés par des serveurs Apache, c'est pourquoi le terme &quot;Codes réponses des serveurs Apache&quot; est tout aussi correct. La plupart des surfeurs du Web sont familiers avec les fameux messages <em>404 not found</em> et <em>500 internal Erreur serveur</em>. Dans la majorité des cas, ces erreurs ne sont pas imputables directement à Coppermine. Ci dessous vous trouverez une liste des codes réponses renvoyés par les serveurs Apache ainsi que leur explication. Notez que un code réponse ne signifie pas en lui même que quelque chose se passe mal - la plupart des codes sont silencieux, c'est à dire que l'utilisateur final ne les verra pas, cela faisant partie des liens entre le serveur et le client. La liste ci-dessous est incomplète et ne montre que les messages d'erreur.
+    <p class="cpg_message_info">Notez que cette section de la documentation n'est pas supportée par le forum d'aide de Coppermine - si vous voulez plus de détails sur les codes réponses des serveurs, lisez l'excellente <a href="http://httpd.apache.org/docs/" rel="external" class="external">documentation apache</a> ou l'article sur <a href="http://fr.wikipedia.org/wiki/Liste_des_codes_HTTP" rel="external" class="external">Wikipedia: Liste des codes HTTP</a>.</p>
+    <table border="0" cellspacing="0" cellpadding="0" width="100%" class="cpg_zebra">
+        <tr>
+            <th class="valign_top">Code</th>
+            <th class="valign_top">Categorie</th>
+            <th class="valign_top">Explication</th>
+            <th class="valign_top">Correction proposée</th>
+        </tr>
+        <tr>
+            <td class="valign_top no_linebreak"><a name="errors_messages_webserver_400"></a><h4 class="nopadding">400 Bad Request<a href="#errors_messages_webserver_400" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
+            <td class="valign_top  no_linebreak">Erreur de requête client</td>
+            <td class="valign_top">Il y a une erreur de syntaxe dans la requête et elle est rejetée.</td>
+            <td class="valign_top">Cela ne devrait guère se produite, puisque le message d'erreur signifie qu'il y a quelque chose qui ne va pas dans la communication entre le client (navigateur) et le serveur. Réessayez. Si ça ne change rien, essayez d'utiliser un autre navigateur.</td>
+        </tr>
+        <tr>
+            <td class="valign_top no_linebreak"><a name="errors_messages_webserver_401"></a><h4 class="nopadding">401 Authorization Required<a href="#errors_messages_webserver_401" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
+            <td class="valign_top  no_linebreak">Erreur de requête client</td>
+            <td class="valign_top">L'entête de la requête ne contient pas les codes d'authentifications nécessaires, et l'accès est refusé pour le client. Ce message d'erreur est similaire à <em>403 Forbidden</em>, mais est plus particulièrement destiné aux cas ou l'identification est possible, mais n'a pas fonctionnée ou n'a pas été faite.</td>
+            <td class="valign_top"><abbr title="not applicable">n/a</abbr></td>
+        </tr>
+        <tr>
+            <td class="valign_top no_linebreak"><a name="errors_messages_webserver_403"></a><h4 class="nopadding">403 Forbidden<a href="#errors_messages_webserver_403" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
+            <td class="valign_top  no_linebreak">Erreur de requête client</td>
+            <td class="valign_top">La requête est correcte, mais le serveur refuse d'y réponde, par exemple, le client n'est pas autorisé à voir certains fichiers. Cette erreur est aussi renvoyée lorsque le serveur ne veut plus de visiteurs.</td>
+            <td class="valign_top">Cette erreur est souvent une indication que les <a href="install_permissions.htm">droits</a> au niveau du système de fichiers n'ont pas été correctement appliqués. Une autre raison possible peut être une restriction imposée par un fichier <tt class="code">.htaccess</tt>. Dans de rares cas, cette erreur est causée Dans de rares cas, cette erreur peut être provoquée par les questions de propriété (CHOWN), qui peut généralement être résolue par l'administrateur du serveur, par exemple l'hébergeur de votre compte d'hébergement mutualisé.</td>
+        </tr>
+        <tr>
+            <td class="valign_top no_linebreak"><a name="errors_messages_webserver_404"></a><h4 class="nopadding">404 Not Found<a href="#errors_messages_webserver_404" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
+            <td class="valign_top  no_linebreak">Erreur de requête client</td>
+            <td class="valign_top">Le fichier demandé n'a pas pu être trouvé (mais peut à nouveau être disponible par la suite). Peut être parce qu'il a été effacé, ou qu'il n'a jamais existé auparavant. Souvent causé par une mauvaise orthographe de l'URL. N'oubliez pas que les majuscules ont une importance pour la majorité des systèmes d'exploitation des serveurs.</td>
+            <td class="valign_top">Vérifiez si le fichier recherché existe actuellement sur le serveur.</td>
+        </tr>
+        <tr>
+            <td class="valign_top no_linebreak"><a name="errors_messages_webserver_405"></a><h4 class="nopadding">405 Method Not Allowed<a href="#errors_messages_webserver_405" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
+            <td class="valign_top  no_linebreak">Erreur de requête client</td>
+            <td class="valign_top">La méthode que vous utilisez pour accéder au fichier n'est pas autorisée. Exemples: utilisation de GET dans un formulaire qui demande que les données soient envoyées par POST, ou utilisation de PUT avec une ressource en lecture seule.</td>
+            <td class="valign_top">Cette erreur ne devrait pas se produire avec une version stable de Coppermine, car tous les formulaires existants ont été testés minutieusement. Si elle se produit quand même et que vous pensez qu'elle vient du code source de Coppermine, merci de faire un rapport sur le forum d'aide de Coppermine.</td>
+        </tr>
+        <tr>
+            <td class="valign_top no_linebreak"><a name="errors_messages_webserver_406"></a><h4 class="nopadding">406 Not Acceptable (encoding)<a href="#errors_messages_webserver_406" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
+            <td class="valign_top  no_linebreak">Erreur de requête client</td>
+            <td class="valign_top">La ressource demandée est uniquement capable de générer un contenu non acceptable au regard de l'entête Accept envoyé par la requête, ex. Le fichier demandé existe mais ne peut pas être utilisé parce que le système client ne reconnait pas le format de fichier utilisé.</td>
+            <td class="valign_top">Cette erreur ne devrait pas se produire avec une version stable de Coppermine.</td>
+        </tr>
+        <tr>
+            <td class="valign_top no_linebreak"><a name="errors_messages_webserver_408"></a><h4 class="nopadding">408 Request Timed Out<a href="#errors_messages_webserver_408" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
+            <td class="valign_top  no_linebreak">Erreur de requête client</td>
+            <td class="valign_top">Le serveur met trop de temps pour la requête. [2] Conformément aux spécifications HTTP W3 HTTP;<em> Le client ne peut pas produire de requête dans le temps d'attente du serveur. Le client doit répéter la requête sans modifications un peu plus tard.</em>&quot; En d'autres mots, le serveur mais plus longtemps que ce qui lui est autorisé pour interprêter la requête.</td>
+            <td class="valign_top">C'est souvent causé par un gros trafic. Essayez encore plus tard. Si ça arrive fréquemment, réfléchissez à augmenter votre contrat d'hébergement ou à changer pour un meilleur hébergeur.</td>
+        </tr>
+        <tr>
+            <td class="valign_top no_linebreak"><a name="errors_messages_webserver_409"></a><h4 class="nopadding">409 Conflict<a href="#errors_messages_webserver_409" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
+            <td class="valign_top  no_linebreak">Erreur de requête client</td>
+            <td class="valign_top">Indique que la requête n'a pu être exécutée à cause d'un conflit dans la requête. Cela peut être un indicateur de trop de requêtes similaires pour un même fichier.</td>
+            <td class="valign_top"><abbr title="not applicable">n/a</abbr></td>
+        </tr>
+        <tr>
+            <td class="valign_top no_linebreak"><a name="errors_messages_webserver_410"></a><h4 class="nopadding">410 Gone<a href="#errors_messages_webserver_410" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
+            <td class="valign_top  no_linebreak">Erreur de requête client</td>
+            <td class="valign_top">Le fichier devrait être à cet endroit, mais ne l'est plus. Ce code réponse indique que la ressource demandée n'est plus disponible et <strong>ne le sera plus</strong> par la suite. Cela arrive lorsque la ressource a été effacée <strong>intentionnellement</strong>; Toutefois, il n'est pas obligatoire que ce code soit renvoyé - un code <em>404 Not Found</em> peut l'être à la place. Lors de la réception d'un code 410, le client ne doit pas vouloir accéder à la ressource par la suite. Les clients comme les moteurs de recherche doivent enlever la ressource de leurs index.</td>
+            <td class="valign_top"><abbr title="not applicable">n/a</abbr></td>
+        </tr>
+        <tr>
+            <td class="valign_top no_linebreak"><a name="errors_messages_webserver_411"></a><h4 class="nopadding">411 Length Required<a href="#errors_messages_webserver_411" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
+            <td class="valign_top  no_linebreak">Erreur de requête client</td>
+            <td class="valign_top">La requête ne contient pas l'entête Content-Length.</td>
+            <td class="valign_top"><abbr title="not applicable">n/a</abbr></td>
+        </tr>
+        <tr>
+            <td class="valign_top no_linebreak"><a name="errors_messages_webserver_412"></a><h4 class="nopadding">412 Precondition Failed<a href="#errors_messages_webserver_412" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
+            <td class="valign_top  no_linebreak">Erreur de requête client</td>
+            <td class="valign_top">Un paramétrage précis est demandé pour pouvoir accéder à ce fichier, mais le client ne l'a pas configuré.</td>
+            <td class="valign_top"><abbr title="not applicable">n/a</abbr></td>
+        </tr>
+        <tr>
+            <td class="valign_top no_linebreak"><a name="errors_messages_webserver_413"></a><h4 class="nopadding">413 Request Entity Too Long<a href="#errors_messages_webserver_413" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
+            <td class="valign_top  no_linebreak">Erreur de requête client</td>
+            <td class="valign_top">Le fichier demandé est trop gros à gérer, c'est à dire que la requête est plus grande que ce que le serveur peut (ou veut) exécuter.</td>
+            <td class="valign_top">Si cela arrive avec une page Coppermine, vérifiez les réglages de votre serveur. Si vous n'êtes pas l'administrateur du serveur (si vous êtes hébergés) demandez de l'aide à votre hébergeur.</td>
+        </tr>
+        <tr>
+            <td class="valign_top no_linebreak"><a name="errors_messages_webserver_414"></a><h4 class="nopadding">414 Request URI Too Long<a href="#errors_messages_webserver_414" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
+            <td class="valign_top  no_linebreak">Erreur de requête client</td>
+            <td class="valign_top">L' <abbr title="Uniform Resource Identifier">URI</abbr> donnée est trop longue pour être interprétée par le serveur.</td>
+            <td class="valign_top"></td>
+        </tr>
+        <tr>
+            <td class="valign_top no_linebreak"><a name="errors_messages_webserver_415"></a><h4 class="nopadding">415 Unsupported Media Type<a href="#errors_messages_webserver_415" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
+            <td class="valign_top  no_linebreak">Erreur de requête client</td>
+            <td class="valign_top">Le type de fichier de la requête n'est pas pris en compte. Exemple: le client télécharge une image comme <tt class="code">image/svg+xml</tt>, mais le serveur demande l'usage d'un autre type de fichier.</td>
+            <td class="valign_top">Si cela arrive avec une page Coppermine, vérifiez les réglages de votre serveur. Si vous n'êtes pas l'administrateur du serveur (si vous êtes hébergés) demandez de l'aide à votre hébergeur.</td>
+        </tr>
+        <tr>
+            <td class="valign_top no_linebreak"><a name="errors_messages_webserver_450"></a><h4 class="nopadding">450 Blocked by Windows Parental Controls<a href="#errors_messages_webserver_450" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
+            <td class="valign_top  no_linebreak">Erreur de requête client</td>
+            <td class="valign_top">Extension Microsoft. Cette erreur arrive lorsque le contrôle parental de Windows est activé et bloque l'accès à la page demandée.</td>
+            <td class="valign_top"><abbr title="not applicable">n/a</abbr></td>
+        </tr>
+        <tr>
+            <td class="valign_top no_linebreak"><a name="errors_messages_webserver_500"></a><h4 class="nopadding">500 Internal Erreur serveur<a href="#errors_messages_webserver_500" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
+            <td class="valign_top  no_linebreak">Erreur serveur</td>
+            <td class="valign_top">Réponse pénible qui est généralement causée par un problème de code lorsqu'un script CGI est lancé, ou si le code dépasse une limitation imposée par la configuration du serveur.</td>
+            <td class="valign_top">Si vous le pouvez, vous devrez vérifier les enregistrements des erreurs du serveur (log's), pas ceux de Coppermine, pour plus de détails sur ce qui ne va pas. Généralement, si vous n'êtes hébergés (si vous n'êtes pas votre propre administrateur), vous n'avez pas accès à ces données, vous devriez plutôt voir ça avec votre hébergeur.<br />
+            Généralement ce message survient avec une page Coppermine si vous dépassez une limitation côté serveur, au niveau de la consommation de mémoire. Dans 90% des cas, cela arrive lorsque vous essayez de traiter une image qui est trop grande en terme de résolution.</td>
+        </tr>
+        <tr>
+            <td class="valign_top no_linebreak"><a name="errors_messages_webserver_501"></a><h4 class="nopadding">501 Not Implemented<a href="#errors_messages_webserver_501" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
+            <td class="valign_top  no_linebreak">Erreur serveur</td>
+            <td class="valign_top">La requête ne peut pas être exécutée par le serveur.</td>
+            <td class="valign_top">Si cela arrive avec une page Coppermine, vérifier les enregistrements des erreurs du serveur. Si vous n'êtes hébergés (si vous n'êtes pas votre propre administrateur), vous n'avez pas accès à ces données, vous devriez plutôt voir ça avec votre hébergeur.</td>
+        </tr>
+        <tr>
+            <td class="valign_top no_linebreak"><a name="errors_messages_webserver_503"></a><h4 class="nopadding">503 Service Unavailable<a href="#errors_messages_webserver_503" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
+            <td class="valign_top  no_linebreak">Erreur serveur</td>
+            <td class="valign_top">Le service ou le fichier de la requête n'est actuellement pas disponible (l'ensemble du serveur n'est pas accessible à cause d'une surcharge ou d'une maintenance). Généralement ce n'est que temporaire.</td>
+            <td class="valign_top">Demandez de l'aide à votre hébergeur si le message d'erreur s'affiche en permanence.</td>
+        </tr>
+        <tr>
+            <td class="valign_top no_linebreak"><a name="errors_messages_webserver_509"></a><h4 class="nopadding">509 Bandwidth Limit Exceeded<a href="#errors_messages_webserver_509" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
+            <td class="valign_top  no_linebreak">Erreur serveur</td>
+            <td class="valign_top">Ce code d'état, même si il est utilisé par beaucoup de serveurs n'est pas expliqué dans les commentaires concernant les limites d'extensions Apache.</td>
+            <td class="valign_top">Demandez à votre hébergeur pour avoir de l'aide !</td>
+        </tr>
+    </table> 
+</div>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

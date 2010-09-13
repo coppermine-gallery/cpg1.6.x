@@ -1,0 +1,1619 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Créer un thème pour Coppermine qui reprend l'aspect général de votre site - Coppermine Photo Gallery - Documentation &amp; Manuel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="fr" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Coppermine inclue un moteur de thème très puissant qui vous permets de créer votre propre thème, donnant à votre galerie un aspect unique correspondant à l'ensemble de votre site. Pour être sur que votre thème personnalisé ne soit pas remplacé lors des mises à jour, vous devrez commencer avec un nom de thème personnalisé." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+  $Date$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manuel</h1>
+<div id="toc">
+<a href="toc.htm">Table des Matières</a>
+</div>
+
+
+
+
+<a name="theme_matching"></a><h1>Créer un thème pour Coppermine qui reprend l'aspect général de votre site<a href="#theme_matching" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<a name="theme_matching_intro"></a><h2>Introduction<a href="#theme_matching_intro" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Coppermine peut faire beaucoup de choses extraordinaires. L'une de ces choses qui peut être faite facilement avec Coppermine est de l'appeler via une commande include de PHP, sans que ce soit une option. Que pouvez vous faire alors? Certains décident de placer Coppermine dans un cadre (frame) ou dans une iframe à l'intérieur de leur site, ce qui fonctionne comme souhaité, mais qui n'est pas une bonne idée: tous les inconvénients des cadres ou des iframes s'appliquent à cette solution bien évidemment. Donc, quelle est la méthode à préférer pour que votre galerie s'intègre totalement à votre site: vous devrez crére un thème qui s'adapte complètement à l'aspect général de vos pages.</p>
+<p>Cette section est faite pour vous explique comment faire cela.</p>
+
+<a name="theme_matching_pre-requisites"></a><h2>Pré-requis<a href="#theme_matching_pre-requisites" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Pour être en mesure d'utiliser ce tutoriel, vous devrez remplir un certain nombre de conditions:</p>
+<a name="theme_matching_pre-requisites_tools"></a><h3>Outils<a href="#theme_matching_pre-requisites_tools" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<ul>
+    <li><h4>Navigateur</h4>
+    A priori vous en avez un - vous ne pouriez par lire cette documentations sinon. L'équipe de développement recommande l'utilisation de <a href="http://www.mozilla.com/" rel="external" class="external">Firefox</a> associé à <a href="dev_tools.htm#dev_tools_web_developer">la barre d'outils web developer</a></li>
+    <li><h4>Editeur</h4>
+    Vous aurez besoin d'un éditeur de texte. Si vous utilisez Windows, vous pouvez utiliser  notepad.exe, mais nous recommandons de meilleurs outils comme <a href="http://notepad-plus.sourceforge.net/" rel="external" class="external">Notepad++</a>. Les éditeurs <acronym title="What You See Is What You Get">WYSIWYG</acronym> comme Frontpage ou Dreamweaver n'entrent pas dans la catégorie des "éditeurs de texte" et ne doivent pas être utilsiés pour modifier les fichiers Coppermine, parcequ'ils ont tendance à modifier le code alors qu'ils ne le devraient pas.<br />
+    Dés recommandations plus détaillées peuvent être trouvées dans la pageDetailed recommendations for editors can be found on the page <a href="dev.htm#dev">Documentation du développeur</a> &rarr; <a href="dev_tools.htm#dev_tools">Outils recommandés par les développeurs</a> &rarr; <a href="dev_tools.htm#dev_tools_editor">Editeurs de texte</a></li>
+    <li><h4>Application FTP</h4>
+    Bien entendu vous devrez être en mesure de télécharger votre thème personnalsié sur votre serveur, donc vous devrez avoir votre propre client FTP (vous en avez probablement déjà un si vous avez une page web).<br />
+    Pour une liste des clients FTP recommandés, voyez <a href="dev.htm#dev">la Documentation du développeur</a> &rarr; <a href="dev_tools.htm#dev_tools">Outils recommandés par les développeurs</a> &rarr; <a href="dev_tools.htm#dev_tools_ftp_client">Clients FTP</a></li>
+</ul>
+<a name="theme_matching_pre-requisites_skills"></a><h3>Connaissances<a href="#theme_matching_pre-requisites_skills" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<ul>
+    <li>Des connaissances basiques en HTML et CSS sont tout ce dont vous aurez besoin. Vous n'avez pas besoin de connaitre/de comprendre le code PHP qui se trouvera dans votre thème personnalisé</li>
+    <li>être prêt à passer du temps: un programmeur expérimenté pourra créer un thème personnalisé basé sur un thème existant en quelques minutes. Une adaptation précise prendra plus de temps.</li>
+</ul>
+<a name="theme_matching_examples"></a><h2>Exemple<a href="#theme_matching_examples" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Dans ce tutoriel nous utiliserons le thème "<a href="http://www.alistapart.com/articles/holygrail" rel="external" class="external">In Search of the Holy Grail</a>" créer par Matthew Levine comme exemple.</p>
+<p>Comme il s'agit d'un thème extrèmement léger utilisé pour la démonstration (et non remplis de contenu particulier), il a été ajouté à cette documentation, visualisez le <a href="../tutorial/matching_theme.htm">ici</a> (il vaut mieux l'ouvrir dans un nouvel onglet ou dans une nouvelle fenêtre, puisque nous en aurons besoin pendant ce tutoriel).</p>
+<a name="theme_matching_pick_similar"></a><h2>Prenez d'abbord un thème similaire<a href="#theme_matching_pick_similar" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>La première étape est de choisir un thème qui correspond le mieux au désign de votre site. Pour cela, vous pouvez choisir un thème qui est fourni avec le pack de Coppermine ou prendre <a href="theme_user-contributions.htm#theme_user-contributions">un thème proposé en contribution par un utilisateur</a>.</p>
+<p>Dans ce tutoriel, nous utiliserons le thème <strong>classic</strong> comme exemple de base de départ.</p>
+<p>Comme expliqué dans la section "<a href="theme_create.htm#theme_create_rename">Renommer votre thème d'abbord</a>", vous ne devez pas commencer à modifier directement le thème clasic, mais créer une copie de ce thème. Cette étape est essentielle pour être sécurisé dans lors des futures mises à jour. Pour ce tutoriel, nous supposons que vous avez fait comme suggéré et renommé votre copie du thème classic en "mon_theme".</p>
+<p>Suivez les autres étapes de la même manière: lancez votre éditeur de texte, ouvrez themes/mon_theme/template.html et faites un <tt class="code">trouver/remplacer</tt> pour la chaine &quot;<tt class="code">classic</tt>&quot; (sans les guillemets) et remplacez la par la chaine &quot;<tt class="code">mon_theme</tt>&quot; (toujours sans les guillemets). Sauvegardez vos changements dans un fichier temporaire nommé "<tt class="code">template_copy.html</tt>" dans le nouveau répertoire, mais ne fermez pas l'éditeur de texte - nous en aurons encore besoin.</p>
+
+<a name="theme_matching_start"></a><h2>Commencez à modifier votre thème<a href="#" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Ce que nous allons faire maintenant est d'utiliser la sortie crée par votre site en général pour créer un fichier template personalisé. Pour cela, affichez votre site dans votre navigateur comme exemple - bien sur vous ferez cela avec votre vrai site plutôt qu'avec l'exemple.</p>
+<p>En regardant la page d'index de votre site dans votre navigateur, faites un "clic droit" n'impotrte ou dans un endroit vide de la sortie et choisissez "voir la source" du menu contextuel qui s'affiche. Une fenêtre devrait apparaitre qui affiche le code HTML complet de la page: sélectionnez le (l'ensemble du contenu de la fenêtre du code source) et copiez le dans le presse papier. Puis allez dans votre éditeur de texte (par exemple lancez notepad) et collez el contenu du prese papier dans une fenêtre vide. Maintenant sauvegardez cela dans le répertoire de votre nouveau thème personnalisé (dans notre tutoriel, le nom du dossier est <tt class="code">themes/mon_theme/</tt>). Comme nom de fichier, choisissez <tt class="code">template.html</tt>. L'éditeur de texte devrait vous avertir que ce fichier existe déjà, ce qui est normal puisque nous avons créer une copie de ce fichier, vous pouvez donc sans risque le remplacer.  Maintenant nous avons la sortie HTML de votre site général dans un fichier template.</p>
+<p>Dans notre petit exemple, le contenu devrait ressembler à ceci:</p>
+<textarea cols="80" rows="20" class="quote" style="width:100%">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"&gt;
+&lt;head&gt;
+	&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /&gt;
+	&lt;title&gt;Example page&lt;/title&gt;
+	&lt;style type="text/css"&gt;
+		/*** The Essential Code ***/
+
+		body {
+			margin: 0;
+			padding-left: 200px;    /* LC fullwidth */
+			padding-right: 190px;   /* RC fullwidth + CC padding */
+			min-width: 240px;       /* LC fullwidth + CC padding */
+		}
+
+		#header, #footer {
+			margin-left: -200px;    /* LC fullwidth */
+			margin-right: -190px;   /* RC fullwidth + CC padding */
+		}
+
+		.column {
+			position: relative;
+			float: left;
+		}
+
+		#center {
+			padding: 0 20px;
+			width: 100%;
+		}
+
+		#left {
+			width: 180px;           /* LC width */
+			padding: 0 10px;        /* LC padding */
+			right: 240px;           /* LC fullwidth + CC padding */
+			margin-left: -100%;
+		}
+
+		#right {
+			width: 130px;           /* RC width */
+			padding: 0 10px;        /* RC padding */
+			margin-right: -100%;
+		}
+
+		#footer {
+			clear: both;
+		}
+
+		/*** IE Fix ***/
+		* html #left {
+			left: 150px;            /* RC fullwidth */
+		}
+
+		/*** Just for Looks ***/
+
+		body {
+			background: #FFF;
+		}
+
+		#header, #footer {
+			font-size: large;
+			text-align: center;
+			padding: 0.3em 0;
+			background: #999;
+		}
+
+		#left {
+			background: #66F;
+		}
+
+		#center {
+			background: #DDD;
+		}
+
+		#right {
+			background: #F66;
+		}
+
+		.column {
+			padding-top: 1em;
+			text-align: justify;
+		}
+	&lt;/style&gt;
+    &lt;!-- Taken from http://www.alistapart.com/articles/holygrail --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div id="header"&gt;This is the header - the place where your site logo could reside.&lt;/div&gt;
+	&lt;div id="center" class="column"&gt;
+		&lt;h1&gt;This is the main content.&lt;/h1&gt;
+		&lt;p&gt;This design is based on the article &quot;&lt;a href="http://www.alistapart.com/articles/holygrail"&gt;In Search of the Holy Grail&lt;/a&gt;&quot; by &lt;a href="http://www.alistapart.com/authors/l/matthewlevine"&gt;Matthew Levine&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;The center column of this example design is supposed to contain the actual page content.
+	&lt;/div&gt;
+	&lt;div id="left" class="column"&gt;
+		&lt;h2&gt;This is the left sidebar.&lt;/h2&gt;
+		&lt;p&gt;For the sake of the tutorial, let's assume that this is the place where your overall site navigation resides.&lt;/p&gt;
+	&lt;/div&gt;
+	&lt;div id="right" class="column"&gt;
+		&lt;h2&gt;This is the right sidebar.&lt;/h2&gt;
+		&lt;p&gt;In this column, the coppermine menu is supposed to reside.&lt;/p&gt;
+	&lt;/div&gt;
+	&lt;div id="footer"&gt;This is the overall site footer. The place where you usually keep your copyright or disclaimer.&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea><p>, Mais évidemment, cela sera différent pour vous, puisque la sortie HTML de votre page est différente.</p>
+
+<a name="theme_matching_placeholder_replace"></a><h2>Remplacer le contenu de l'exemple avec les appels aux conteneurs (Tokens)<a href="#theme_matching_placeholder_replace" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Ce que nous allons faire maintenant, est de se débarraser du contenu inutile qui se trouve dans template.html:</p>
+<p>Dans l'exemple de notre tutoriel, c'est particulièrement simple, mais dans la réalité ce peut devenir plus que délicat pour arriver à réaliser votre propre thème personnalisé, en particulier si vous êtes débutant en HTML et que votre sortie est plus complexe, mais ne vous alarmez pas: suivez ce tutoriel étape par étape, en effacant attentivement élément par élément, et en prévisualisant pour voir si tout fonctionne comme prévu.</p>
+<p>Nous allons remplacer le contenu par des appels aux conteneurs: ça nécéssite une première explication - si vous n'avez pas l'habitude du concept des <a href="theme_template.htm#theme_template_token">conteneurs de thèmes</a> lisez d'abbord cette section.</p>
+<ul> 
+    <li>Le conteneur <strong>{GALLERY}</strong><br />
+        Dans notre petit exemple, nous devons enlever le texte de la colonne de gauche qui commence avec les mots <tt class="code">This is the main content.</tt> et se termine par &quot;<tt class="code">The center column of this example design is supposed to contain the actual page content.</tt>&quot;, nous effaçons donc</p>
+        <textarea cols="80" rows="3" class="quote" style="width:100%">&lt;h1&gt;This is the main content.&lt;/h1&gt;
+		&lt;p&gt;This design is based on the article &quot;&lt;a href="http://www.alistapart.com/articles/holygrail"&gt;In Search of the Holy Grail&lt;/a&gt;&quot; by &lt;a href="http://www.alistapart.com/authors/l/matthewlevine"&gt;Matthew Levine&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;The center column of this example design is supposed to contain the actual page content.</textarea>
+        du fichier template.html. A la place, nous voulons par la suite que le contenu principal généré par Coppermine soit affiché, nous devons donc colle l'appel au conteneur principal <tt class="code">{GALLERY}</tt> de <tt class="code">themes/mon_theme/template_copy.html</tt> à cette place.<br />
+        Actuellement le contenu du fichier <tt class="code">themes/mon_theme/template.html</tt> doit ressembler à ceci:</p>
+        <textarea cols="80" rows="20" class="quote" style="width:100%">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"&gt;
+&lt;head&gt;
+	&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /&gt;
+	&lt;title&gt;Example page&lt;/title&gt;
+	&lt;style type="text/css"&gt;
+		/*** The Essential Code ***/
+
+		body {
+			margin: 0;
+			padding-left: 200px;    /* LC fullwidth */
+			padding-right: 190px;   /* RC fullwidth + CC padding */
+			min-width: 240px;       /* LC fullwidth + CC padding */
+		}
+
+		#header, #footer {
+			margin-left: -200px;    /* LC fullwidth */
+			margin-right: -190px;   /* RC fullwidth + CC padding */
+		}
+
+		.column {
+			position: relative;
+			float: left;
+		}
+
+		#center {
+			padding: 0 20px;
+			width: 100%;
+		}
+
+		#left {
+			width: 180px;           /* LC width */
+			padding: 0 10px;        /* LC padding */
+			right: 240px;           /* LC fullwidth + CC padding */
+			margin-left: -100%;
+		}
+
+		#right {
+			width: 130px;           /* RC width */
+			padding: 0 10px;        /* RC padding */
+			margin-right: -100%;
+		}
+
+		#footer {
+			clear: both;
+		}
+
+		/*** IE Fix ***/
+		* html #left {
+			left: 150px;            /* RC fullwidth */
+		}
+
+		/*** Just for Looks ***/
+
+		body {
+			background: #FFF;
+		}
+
+		#header, #footer {
+			font-size: large;
+			text-align: center;
+			padding: 0.3em 0;
+			background: #999;
+		}
+
+		#left {
+			background: #66F;
+		}
+
+		#center {
+			background: #DDD;
+		}
+
+		#right {
+			background: #F66;
+		}
+
+		.column {
+			padding-top: 1em;
+			text-align: justify;
+		}
+	&lt;/style&gt;
+    &lt;!-- Taken from http://www.alistapart.com/articles/holygrail --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div id="header"&gt;This is the header - the place where your site logo could reside.&lt;/div&gt;
+	&lt;div id="center" class="column"&gt;
+		{GALLERY}
+	&lt;/div&gt;
+	&lt;div id="left" class="column"&gt;
+		&lt;h2&gt;This is the left sidebar.&lt;/h2&gt;
+		&lt;p&gt;For the sake of the tutorial, let's assume that this is the place where your overall site navigation resides.&lt;/p&gt;
+	&lt;/div&gt;
+	&lt;div id="right" class="column"&gt;
+		&lt;h2&gt;This is the right sidebar.&lt;/h2&gt;
+		&lt;p&gt;In this column, the coppermine menu is supposed to reside.&lt;/p&gt;
+	&lt;/div&gt;
+	&lt;div id="footer"&gt;This is the overall site footer. The place where you usually keep your copyright or disclaimer.&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+        C'est correct et exactement ce que nous voulions.
+    </li>
+    <li>Les conteneurs de menu<br />
+        Retournons maintenant dans la fenêtre du navigateur et jetons un oeil à l'aspect de la sortie: dans notre exemple, nous voulons par la suite que les menus/la navigation de Coppermine se trouvent dans la colonne de droite de l'exemple existant - la colonne qui contient le texte <tt class="code">This is the right sidebar. In this column, the coppermine menu is supposed to reside.</tt>, trouvons la section correspondante dans le code souce: retour vers la fenêtre de l'éditeur qui contient <tt class="code">themes/mon_theme/template.html</tt>. Là, enlevons la section
+        <textarea cols="80" rows="2" class="quote" style="width:100%">&lt;h2&gt;This is the right sidebar.&lt;/h2&gt;
+		&lt;p&gt;In this column, the coppermine menu is supposed to reside.&lt;/p&gt;</textarea>
+        A la place de cette section, nous devons ajouter l'appel des conteneurs qui seront remplacés plus tard (lorsque Coppermine sera lancé) par les menus. Comme Coppermine possède plusieurs menus qui peuvent être placés indépendament, il y a plusieurs conteneurs que nous devons copier: allez dans la fenêtre de l'éditeur contenant <tt class="code">themes/mon_theme/template_copy.html</tt> et copions-y <tt class="code">{SYS_MENU}</tt>, <tt class="code">{SUB_MENU}</tt>, et <tt class="code">{ADMIN_MENU}</tt> pour les coller dans <tt class="code">themes/mon_theme/template.html</tt>, juste à l'emplacement d'origine du texte que nous venons d'effacer. Nous verrons plus tard l'aspect de ces menus.<br />
+        Maintenant, le contenu de la fenêtre de l'éditeur de texte pour <tt class="code">themes/mon_theme/template.html</tt> devrait ressembler à ça:
+        <textarea cols="80" rows="20" class="quote" style="width:100%">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"&gt;
+&lt;head&gt;
+	&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /&gt;
+	&lt;title&gt;Example page&lt;/title&gt;
+	&lt;style type="text/css"&gt;
+		/*** The Essential Code ***/
+
+		body {
+			margin: 0;
+			padding-left: 200px;    /* LC fullwidth */
+			padding-right: 190px;   /* RC fullwidth + CC padding */
+			min-width: 240px;       /* LC fullwidth + CC padding */
+		}
+
+		#header, #footer {
+			margin-left: -200px;    /* LC fullwidth */
+			margin-right: -190px;   /* RC fullwidth + CC padding */
+		}
+
+		.column {
+			position: relative;
+			float: left;
+		}
+
+		#center {
+			padding: 0 20px;
+			width: 100%;
+		}
+
+		#left {
+			width: 180px;           /* LC width */
+			padding: 0 10px;        /* LC padding */
+			right: 240px;           /* LC fullwidth + CC padding */
+			margin-left: -100%;
+		}
+
+		#right {
+			width: 130px;           /* RC width */
+			padding: 0 10px;        /* RC padding */
+			margin-right: -100%;
+		}
+
+		#footer {
+			clear: both;
+		}
+
+		/*** IE Fix ***/
+		* html #left {
+			left: 150px;            /* RC fullwidth */
+		}
+
+		/*** Just for Looks ***/
+
+		body {
+			background: #FFF;
+		}
+
+		#header, #footer {
+			font-size: large;
+			text-align: center;
+			padding: 0.3em 0;
+			background: #999;
+		}
+
+		#left {
+			background: #66F;
+		}
+
+		#center {
+			background: #DDD;
+		}
+
+		#right {
+			background: #F66;
+		}
+
+		.column {
+			padding-top: 1em;
+			text-align: justify;
+		}
+	&lt;/style&gt;
+    &lt;!-- Taken from http://www.alistapart.com/articles/holygrail --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div id="header"&gt;This is the header - the place where your site logo could reside.&lt;/div&gt;
+	&lt;div id="center" class="column"&gt;
+		{GALLERY}
+	&lt;/div&gt;
+	&lt;div id="left" class="column"&gt;
+		&lt;h2&gt;This is the left sidebar.&lt;/h2&gt;
+		&lt;p&gt;For the sake of the tutorial, let's assume that this is the place where your overall site navigation resides.&lt;/p&gt;
+	&lt;/div&gt;
+	&lt;div id="right" class="column"&gt;
+		{SYS_MENU} {SUB_MENU} {ADMIN_MENU}
+	&lt;/div&gt;
+	&lt;div id="footer"&gt;This is the overall site footer. The place where you usually keep your copyright or disclaimer.&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+    </li>
+</ul>
+<p>Le travail le plus dur est fait, allons maintenant aux choses plus faciles: certains conteneurs sont obligatoires, d'autres optionnels. Jetons un oeil aux autres conteneurs obligatoires et ajouttons les au bon endroit:</p>
+<ul>
+    </li>
+    <li>Le conteneur <strong>{LANG_DIR}</strong><br />
+        dans <tt class="code">themes/mon_theme/template.html</tt>, trouvez la balise d'ouverture <tt class="code">&lt;html&gt;</tt> - dans notre exemple elle ressemble à ça:
+        <pre class="quote">&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"&gt;</pre>
+        Remplacez là par
+        <pre class="quote">&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="{LANG_DIR}"&gt;</pre>
+    </li>
+    <li>Le conteneur <strong>{CHARSET}</strong><br />
+        Quel que soit la définition qur vous utilisez dans votre site pour le jeu de caractères, il est obligatoire de remplacer cette définition du jeu de caractères par le conteneur de Coppermine - trouvez
+        <pre class="quote">&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /&gt;</pre>
+        et remplacez par
+        <pre class="quote">&lt;meta http-equiv="Content-Type" content="text/html; charset={CHARSET}" /&gt;</pre>
+        Si une telle ligne qui défini le jeu de caractères n'existe pas pour votre page générale, ajoutez cette ligne directement après la balise <tt class="code">&lt;head&gt;</tt>.
+    </li>
+    <li>Le conteneur <strong>{TITLE}</strong> <br />
+        Trouvez la balise d'ouverture/fermeture <tt class="code">&lt;title&gt;</tt>- et remplacez le contenu entre les balises d'ouverture et de fermeture par le conteneur {TITLE}. dans notr eexemple, remplacez 
+        <pre class="quote">&lt;title&gt;Example page&lt;/title&gt;</pre>
+        par
+        <pre class="quote">&lt;title&gt;{TITLE}&lt;/title&gt;</pre>
+    </li>
+    <li>Le conteneur <strong>{META}</strong><br />
+        Coppermine utilise/complète certaines méta-balises, vous devrez donc enlever les méta-balises existantes dans le fichier  template.html et les remplacer par le conteneur correspondant. Dans notre exemple, il n'y a pas de méta-balises, il n'y a donc rien à remplacer. Si c'est aussi le cas pour vous, ajoutez le conteneur
+        <pre class="quote">{META}</pre>
+        dans une nouvelle ligne directement apès la balise de fermeture title (c.a.d après <tt class="code">&lt;/title&gt;</tt>).<br />
+        Si vous avez déjà des méta-balises dans le design général de votre site, remplacez les toutes par le conteneur {META} de Coppermine.
+    </li>
+    <li>Le conteneur <strong>{JAVASCRIPT}</strong><br />
+        Ce conteneur est souvent oublié par les débutants qui veulent créer leur propre thème - c'est une erreur commune, parceque les débutants pensent que JavaScript n'est pas important. Néanmoins, ce conteneur est remplacé, lorsque la galerie fonctionne par des scripts vitaux pour Coppermine. Ceci dit, le conteneur {JAVASCRIPT} ne remplace rien, mais est à placer directement avant la balise de fermeture <tt class="code">&lt;/head&gt;</tt>. Ajoutez le conteneur dans une nouvelle ligne avant
+        <pre class="quote">&lt;/head&gt;</pre>
+    </li>
+    <li>Le conteneur <strong>{MESSAGE_BLOCK}</strong><br />
+        Le bloc de message ne sera généré que si un message important doit être affiché à l'utilisateur final. Il est directement relié à ce qui se passe et doit se trouver directement avant le conteneur {GALLERY}, vous devez donc l'ajouter dans une nouvelle ligne juste avant la ligne contenant le conteneur {GALLERY}.
+    </li>
+</ul>
+<p>Avec tous les conteneurs obligatoires en place, voici à quoi doit ressembler notre exemple:</p>
+<textarea cols="80" rows="20" class="quote" style="width:100%">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="{LANG_DIR}"&gt;
+&lt;head&gt;
+	&lt;meta http-equiv="Content-Type" content="text/html; charset={CHARSET}" /&gt;
+	&lt;title&gt;{TITLE}&lt;/title&gt;
+    {META}
+	&lt;style type="text/css"&gt;
+		/*** The Essential Code ***/
+
+		body {
+			margin: 0;
+			padding-left: 200px;    /* LC fullwidth */
+			padding-right: 190px;   /* RC fullwidth + CC padding */
+			min-width: 240px;       /* LC fullwidth + CC padding */
+		}
+
+		#header, #footer {
+			margin-left: -200px;    /* LC fullwidth */
+			margin-right: -190px;   /* RC fullwidth + CC padding */
+		}
+
+		.column {
+			position: relative;
+			float: left;
+		}
+
+		#center {
+			padding: 0 20px;
+			width: 100%;
+		}
+
+		#left {
+			width: 180px;           /* LC width */
+			padding: 0 10px;        /* LC padding */
+			right: 240px;           /* LC fullwidth + CC padding */
+			margin-left: -100%;
+		}
+
+		#right {
+			width: 130px;           /* RC width */
+			padding: 0 10px;        /* RC padding */
+			margin-right: -100%;
+		}
+
+		#footer {
+			clear: both;
+		}
+
+		/*** IE Fix ***/
+		* html #left {
+			left: 150px;            /* RC fullwidth */
+		}
+
+		/*** Just for Looks ***/
+
+		body {
+			background: #FFF;
+		}
+
+		#header, #footer {
+			font-size: large;
+			text-align: center;
+			padding: 0.3em 0;
+			background: #999;
+		}
+
+		#left {
+			background: #66F;
+		}
+
+		#center {
+			background: #DDD;
+		}
+
+		#right {
+			background: #F66;
+		}
+
+		.column {
+			padding-top: 1em;
+			text-align: justify;
+		}
+	&lt;/style&gt;
+    &lt;!-- Taken from http://www.alistapart.com/articles/holygrail --&gt;
+    {JAVASCRIPT}
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div id="header"&gt;This is the header - the place where your site logo could reside.&lt;/div&gt;
+	&lt;div id="center" class="column"&gt;
+		{MESSAGE_BLOCK}
+        {GALLERY}
+	&lt;/div&gt;
+	&lt;div id="left" class="column"&gt;
+		&lt;h2&gt;This is the left sidebar.&lt;/h2&gt;
+		&lt;p&gt;For the sake of the tutorial, let's assume that this is the place where your overall site navigation resides.&lt;/p&gt;
+	&lt;/div&gt;
+	&lt;div id="right" class="column"&gt;
+		{SYS_MENU} {SUB_MENU} {ADMIN_MENU}
+	&lt;/div&gt;
+	&lt;div id="footer"&gt;This is the overall site footer. The place where you usually keep your copyright or disclaimer.&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+
+<a name="theme_matching_style"></a><h2>Adapter le style<a href="#theme_matching_style" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>A présent, nous avons terminé avec les appels de conteneurs obligatoires - maintenant, regardons la feuille de style (CSS). Dans notre petut exemple, il est très facile d'intégrer le CSS qui se trouve dans le design général du site dans la feuille de style de Coppermine, puisqu'il n'y a que peu de définitions, et que pour une facilité d'utilisations, elles se trouvent dans le fichier de template (styles inclus). Alors que c'est une bonne idée pour une petite démonstration pour rendre le code lisible, il est généralement recomendé de placer les styles dans une feuille de style externe. C'est pourquoi Coppermine le fait. Dans chaque thème il y a un fichier nommé &quot;<tt class="code">style.css</tt>&quot; contenant toutes les CSS. C'est le cas pour le thème que nous utilisons comme base pour notre thème personnalisé. Pour celà, ouvrez une autre fenêtre dans votre éditeur de texte  et ouvrez le fichier themes/mon_theme/style.css. Laissez cette fenêtre ouverte - nous en aurons besoin pendant une bout de temps.</p>
+<p>D'abbord, nous devons "prévenir" notre fichier HTML qu'il existe une feuille de style externe qui doit être prise en compte. Pour cela, regardez la fenêtre de l'éditeur contenant <tt class="code">themes/mon_theme/template_copy.html</tt>: cherchez <tt class="code">&gt;link rel="stylesheet" href="themes/my_theme/style.css" type="text/css" /&gt;</tt>. Copiez cette ligne dans <tt class="code">themes/mon_theme/template_copy.html</tt>, juste après l'appel au conteneur <tt class="code">{META}</tt> . Comme vous pouvez le voir, elle ne contient pas juste une référence à <tt class="code">style.css</tt>, mais à <tt class="code">themes/my_theme/style.css</tt>.</p>
+<p class="cpg_message_info">La raison de ce chemin "étrange" est que vous devez avoir en tête que le thème sera par la suite interprété lors de l'execution de Coppermine - cela se passera depuis le répertoire racine de votre galerie Coppermine. C'est la raison pour laquelle le chemin vers toutes les ressources soit être vu depuis le répertoire racine de votre installation Coppermine. Vous noterez par la suite que ce n'est pas uniquement le cas pour la feuille de style, mais aussi pour d'autres ressources similaires (comme les images inclues dans votre thème).</p>
+<p>Nous avons maintenant demandé à notre thème personnalisé de prendre en compte la feuille de style - ce qui reste à faire maintenant est de déplacer les CSS inclus dans le fichier template.html dans notre feuille de style externe. Dans notr eexemple, c'est particulièrement facile, mais dans la réalité, ce peut être plus compliqué, parceque l'aspect de votre site tout comm la feuille de style de Coppermine font appel à des définitions CSS se rapportant à des balises HTML particulières. De plus, des classes additionelles et des objets peuvent avoir, par coincidence le même nom. Ce n'est pas le but de ce tutoriel d'expliquer tous les détails des CSS, il n'y aura donc ici qu'une explication de base: ce que nous voulons faire, c'est juste couper les CSS depuis le fichier template.html et les copier dans style.css - nous devons "juste" nous assurer qu'il n'y a pas de double définitions. La seule double définition se trouvant dans notre exemple est celle de la balise HTML "body" - nous la regarderons donc séparemment, donc commencons par notter quelques indications sur elle:</p>
+<pre class="quote">		body {
+			margin: 0;
+			padding-left: 200px;    /* LC fullwidth */
+			padding-right: 190px;   /* RC fullwidth + CC padding */
+			min-width: 240px;       /* LC fullwidth + CC padding */
+		}</pre>
+et
+<pre class="quote">		body {
+			background: #FFF;
+		}</pre>
+doit être coupé et traité séparément. Le reste n'existe pas deux fois, donc nous pouvons sans crainte le couper du fichier <tt class="code">themes/mon_theme/template.html</tt> et le copier dans <tt class="code">themes/mon_theme/style.css</tt>. Dans notre cas, le code correspondant est:</p>
+<textarea cols="80" rows="20" class="quote" style="width:100%">		/*** The Essential Code ***/
+
+		#header, #footer {
+			margin-left: -200px;    /* LC fullwidth */
+			margin-right: -190px;   /* RC fullwidth + CC padding */
+		}
+
+		.column {
+			position: relative;
+			float: left;
+		}
+
+		#center {
+			padding: 0 20px;
+			width: 100%;
+		}
+
+		#left {
+			width: 180px;           /* LC width */
+			padding: 0 10px;        /* LC padding */
+			right: 240px;           /* LC fullwidth + CC padding */
+			margin-left: -100%;
+		}
+
+		#right {
+			width: 130px;           /* RC width */
+			padding: 0 10px;        /* RC padding */
+			margin-right: -100%;
+		}
+
+		#footer {
+			clear: both;
+		}
+
+		/*** IE Fix ***/
+		* html #left {
+			left: 150px;            /* RC fullwidth */
+		}
+
+		/*** Just for Looks ***/
+
+		#header, #footer {
+			font-size: large;
+			text-align: center;
+			padding: 0.3em 0;
+			background: #999;
+		}
+
+		#left {
+			background: #66F;
+		}
+
+		#center {
+			background: #DDD;
+		}
+
+		#right {
+			background: #F66;
+		}
+
+		.column {
+			padding-top: 1em;
+			text-align: justify;
+		}</textarea>
+<p>Placez le à la tout efin du fichier <tt class="code">themes/mon_theme/style.css</tt>. Si vous voulez le rendre plus agréable, réduisez l'indentation du code que vous venez de coller pour correspondre à celle du reste de votre code.</p>
+<p>Ensuite, regardons la section qui pose problème: dans style.css nous avons cette définition pour la balise "body":</p>
+<textarea cols="80" rows="19" class="quote" style="width:100%">body {
+    font-family : Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    background : #CCCCCC;
+    color : Black;
+    margin: 0px;
+}</textarea>
+<p>bien, fusionnons les deux définitions en une dans style.css, en remplacant la définition originelle:</p>
+<textarea cols="80" rows="10" class="quote" style="width:100%">body {
+	font-family : Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background: #FFF;
+	color : Black;
+	margin: 0px;
+	padding-left: 200px;    /* LC fullwidth */
+	padding-right: 190px;   /* RC fullwidth + CC padding */
+	min-width: 240px;       /* LC fullwidth + CC padding */
+}</textarea>
+<p>Enfin, nettoyons un peu:</p>
+<pre class="quote">	&lt;style type="text/css"&gt;
+	&lt;/style&gt;</pre>
+<p>dans <tt class="code">themes/mon_theme/template.html</tt> ne fait rien de particulier, nous pouvons donc l'effacer ainsi que le commentaire dans la ligne juste en dessous.</p>
+<p>Nous pouvons aussi nous débarasser des informations de SVN de Coppermine dans style.css. Effaçons donc</p>
+<pre class="quote">/*************************
+  Coppermine Photo Gallery
+  ************************
+  Copyright (c) 2003-2010 Coppermine Dev Team
+  v1.0 originally written by Gregory Demar
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License version 3
+  as published by the Free Software Foundation.
+
+  ********************************************
+  Coppermine version: 1.5.9
+  $Source$
+  $Revision$
+
+  $Date$
+**********************************************/</pre>
+<p>de ce fichier.</p>
+<p>Comme résultat, voici ce à quoi doivent ressembler nos deux fichiers:</p>
+<p><tt class="code">themes/mon_theme/template.html</tt>:</p>
+<textarea cols="80" rows="19" class="quote" style="width:100%">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="{LANG_DIR}"&gt;
+&lt;head&gt;
+	&lt;meta http-equiv="Content-Type" content="text/html; charset={CHARSET}" /&gt;
+	&lt;title&gt;{TITLE}&lt;/title&gt;
+    {META}
+    <link rel="stylesheet" href="themes/mon_theme/style.css" type="text/css" />
+    {JAVASCRIPT}
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div id="header"&gt;This is the header - the place where your site logo could reside.&lt;/div&gt;
+	&lt;div id="center" class="column"&gt;
+		{MESSAGE_BLOCK}
+        {GALLERY}
+	&lt;/div&gt;
+	&lt;div id="left" class="column"&gt;
+		&lt;h2&gt;This is the left sidebar.&lt;/h2&gt;
+		&lt;p&gt;For the sake of the tutorial, let's assume that this is the place where your overall site navigation resides.&lt;/p&gt;
+	&lt;/div&gt;
+	&lt;div id="right" class="column"&gt;
+		{SYS_MENU} {SUB_MENU} {ADMIN_MENU}
+	&lt;/div&gt;
+	&lt;div id="footer"&gt;This is the overall site footer. The place where you usually keep your copyright or disclaimer.&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+
+<p><tt class="code">themes/mon_theme/style.css</tt></p>
+<textarea cols="80" rows="19" class="quote" style="width:100%">/* Colors used in this style sheet:
+   Hex 000000 = RBG   0,   0,   0 = black
+   Hex 5F5F5F = RBG  95,  95,  95 = light black
+   Hex BDBEBD = RBG 189, 190, 189 = dark grey
+   Hex D1D7DC = RBG 209, 215, 220 = medium grey
+   Hex CCCCCC = RBG 204, 204, 204 = medium grey
+   Hex E4E4E4 = RGB 228, 228, 228 = medium grey
+   Hex EFEFEF = RBG 239, 239, 239 = dark white
+   Hex FFFFFF = RBG 255, 255, 255 = white
+   Hex 005D8C = RBG   0,  93, 140 = dark blue
+   Hex 0033CC = RBG   0,  91, 104 = medium blue
+   Hex 0E72A4 = RBG  14, 114, 164 = light blue
+   Hex 840084 = RBG 132,   0, 132 = purple
+*/
+
+body {
+    font-family : Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    background: #FFF;
+    color : Black;
+    margin: 0px;
+	padding-left: 200px;    /* LC fullwidth */
+	padding-right: 190px;   /* RC fullwidth + CC padding */
+	min-width: 240px;       /* LC fullwidth + CC padding */
+}
+
+table {
+    font-size: 12px;
+}
+
+h1{
+    font-weight: bold;
+    font-size: 22px;
+    font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    line-height : 120%;
+    color : #000000;
+    margin: 2px;
+}
+
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    margin: 0px;
+}
+
+h3 {
+    font-weight: normal;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    margin: 2px;
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 100%;
+    margin: 2px 0px;
+}
+
+ul {
+    margin-left: 5px;
+    padding: 0px;
+}
+
+li {
+    margin-left: 10px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding: 0px;
+    list-style-position: outside;
+    list-style-type: disc;
+}
+
+form {
+    margin-top:0px;
+    margin-bottom:0px;
+}
+
+.inline {
+    /*display:inline;*/
+}
+
+.textinput {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 100%;
+    border: 1px solid #D1D7DC;
+    padding-right: 3px;
+    padding-left: 3px;
+}
+
+.listbox {
+    font-family: Verdana, Arial, Arial, Helvetica, sans-serif;
+    font-size: 100%;
+    border: 1px solid #D1D7DC;
+    vertical-align : middle;
+}
+
+.button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 100%;
+    border: 1px solid #005D8C;
+    background-image : url(images/button_bg.gif);
+    background-position : bottom;
+}
+
+.comment_button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 85%;
+    border: 1px solid #005D8C;
+    background-image : url(images/button_bg.gif);
+    background-position : bottom;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.radio {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 100%;
+    vertical-align : middle;
+}
+
+.checkbox {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 100%;
+    vertical-align : middle;
+}
+
+a:link {
+    color: #0033CC;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #0033CC;
+    text-decoration: none;
+}
+
+a:focus {
+    color: #0033CC;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #0033CC;
+    text-decoration: underline;
+}
+
+a:active {
+    color: #0033CC;
+    text-decoration: none;
+}
+
+.bblink a {
+    color: #0033CC;
+    text-decoration: none;
+}
+
+.bblink a:hover {
+    color: #0033CC;
+    text-decoration: underline;
+}
+
+.maintable {
+    border: 1px solid #0E72A4;
+    background-color: #EFEFEF;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+.tableh1 {
+    background : #0E72A4 ;
+    color : #FFFFFF;
+    padding-top: 3px;
+    padding-right: 10px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    font-weight:bold;
+}
+
+.tableh1_compact {
+    background : #0E72A4 ;
+    color : #FFFFFF;
+    padding-top: 2px;
+    padding-right: 5px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    font-weight:bold;
+}
+
+.tableh2 {
+    background: #D1D7DC ;
+    color : #000000;
+    padding-top: 3px;
+    padding-right: 10px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+}
+
+.tableh2_compact {
+    background: #D1D7DC ;
+    color : #000000;
+    font-weight:bold;
+    padding-top: 2px;
+    padding-right: 5px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+}
+
+.tableb {
+    background: #EFEFEF ;
+    padding-top: 3px;
+    padding-right: 10px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+}
+
+/* This class will be used in conjunction with class tableb: attributes not particularly (re)-assigned will be taken into account from tableb. */
+/* It is being used to accomplish alternating row colors for lists. */
+/* It's recommended to only assign another background color that slightly differs from the one defined in tableb */
+.tableb_alternate {
+    background: #E4E4E4;
+}
+
+
+.tableb_compact {
+    background: #EFEFEF ;
+    padding-top: 2px;
+    padding-right: 5px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+}
+
+.tablef {
+    background: #D1D7DC;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+
+.catrow_noalb {
+    background: #D1D7DC ;
+    color : #000000;
+    padding-top: 3px;
+    padding-right: 10px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+}
+
+.catrow {
+    background: #EFEFEF ;
+    padding-top: 3px;
+    padding-right: 10px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+}
+
+.album_stat {
+    font-size: 85%;
+    margin: 5px 0px;
+}
+
+.thumb_filename {
+    font-size: 80%;
+    display: block;
+}
+
+.thumb_title {
+    font-weight : bold;
+    font-size: 80%;
+    padding: 2px;
+    display : block;
+}
+
+.thumb_caption {
+    font-size: 80%;
+    padding: 1px;
+    display : block;
+}
+
+.thumb_caption a {
+    text-decoration: underline;
+    color: #000000;
+}
+
+.thumb_num_comments {
+    font-weight: normal;
+    font-size: 80%;
+    padding: 2px;
+    font-style : italic;
+    display : block;
+}
+
+.user_thumb_infobox {
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+.user_thumb_infobox th {
+    font-weight : bold;
+    font-size: 100%;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    text-align : center;
+}
+
+.user_thumb_infobox td {
+    font-size: 80%;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    text-align : center;
+}
+
+.user_thumb_infobox a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.user_thumb_infobox a:hover {
+    color: #000000;
+    text-decoration: underline;
+}
+
+.sortorder_cell {
+    background : #0E72A4 ;
+    color : #FFFFFF;
+    padding: 0px;
+    margin: 0px;
+}
+
+.sortorder_options {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    background : #0E72A4 ;
+    color : #FFFFFF;
+    padding: 0px;
+    margin: 0px;
+    font-weight: normal;
+    font-size: 80%;
+    white-space: nowrap;
+}
+
+.navmenu {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #FFFFFF;
+    font-size: 100%;
+    font-weight: bold;
+    background : #0E72A4 ;
+    border-style: none;
+}
+
+.navmenu img {
+    margin-top: 1px;
+    margin-right: 5px;
+    margin-bottom: 1px;
+    margin-left: 5px;
+}
+
+.navmenu a {
+    display: block;
+    padding-top: 2px;
+    padding-right: 5px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.navmenu a:hover {
+    background : #EFEFEF ;
+    text-decoration: none;
+    color:         #000000;
+}
+
+.admin_menu {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 85%;
+    border: 1px solid #005D8C;
+    background-color:#FFFFFF;
+    background-image: url(images/button_bg.gif);
+    background-position: bottom;
+    background-repeat:repeat-x;
+    color: #000000;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top:2px;
+    padding-bottom:2px;
+    padding-left:1px;
+    padding-right:1px;
+    text-align: center;
+}
+
+.admin_menu a {
+    color: #000000;
+    text-decoration: none;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.admin_menu a:hover {
+    color: #000000;
+    text-decoration: underline;
+}
+
+.admin_float {
+    float:left;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    max-height:1.5em;
+    white-space:nowrap;
+    display: block;
+    position: relative;
+    /*width:100px;*/
+}
+
+.admin_menu_wrapper {
+    width:100%;
+    white-space:normal;
+}
+
+#admin_menu_anim {
+    background-image : url(images/button_bg_anim.gif);
+}
+
+.icon {
+	vertical-align:middle;
+	margin-right:1px;
+}
+
+.comment_date{
+    color : #5F5F5F;
+    font-size : 90%;
+    vertical-align : middle;
+}
+
+.image {
+    border-style:solid;
+    border-width:1px;
+    border-color:#000000;
+    margin:2px;
+}
+
+/* pseudo-classes for image links */
+a:link .image{
+    border-style:solid;
+    border-width:1px;
+    border-color:#000000;
+    margin:2px;
+}
+
+a:visited .image{
+    border-style:solid;
+    border-width:1px;
+    border-color:#840084;
+    margin:2px;
+}
+
+a:focus .image{
+    border-style:solid;
+    border-width:1px;
+    border-color:#000000;
+    margin:2px;
+}
+
+a:hover .image{
+    border-style:solid;
+    border-width:1px;
+    border-color:#0033CC;
+    margin:2px;
+}
+
+a:active .image{
+    border-style:solid;
+    border-width:1px;
+    border-color:#000000;
+    margin:2px;
+}
+
+/* pseudo-classes for middlethumb links */
+a:link .middlethumb,a:visited .middlethumb,a:focus .middlethumb,a:hover .middlethumb,a:active .middlethumb{
+	border: 2px solid blue;
+}
+
+.imageborder {
+    border: 1px solid #000000;
+    background-color: #FFFFFF;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.display_media {
+    background: #EFEFEF ;
+    padding-top: 3px;
+    padding-right: 3px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+}
+
+.thumbnails {
+    background: #EFEFEF ;
+    padding: 5px;
+}
+
+.footer {
+    font-size : 9px;
+}
+
+.footer a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.footer a:hover {
+    color: #000000;
+    text-decoration: underline;
+}
+
+.statlink {
+    color: #FFFFFF;
+}
+
+.statlink a {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.statlink a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+.alblink {
+    font-weight:bold;
+}
+
+.alblink a {
+    text-decoration: underline;
+    color: #000000;
+}
+
+.alblink a:hover {
+    color: #000000;
+    text-decoration: underline;
+}
+
+.catlink {
+    display: block;
+    margin-bottom: 2px;
+    font-weight:bold;
+}
+
+.catlink a {
+    text-decoration: underline;
+    color: #000000;
+}
+
+.catlink a:hover {
+    color: #000000;
+    text-decoration: underline;
+}
+
+.topmenu {
+    line-height : 130%;
+    font-size: 100%;
+}
+
+.topmenu a {
+    color : #0033CC;
+    text-decoration : none;
+}
+
+.topmenu a:hover  {
+    color : #0033CC;
+    text-decoration : underline;
+}
+
+.img_caption_table {
+    border: none;
+    background-color: #FFFFFF;
+    width : 100%;
+    margin : 0px;
+}
+
+.img_caption_table th {
+    background: #D1D7DC ;
+    font-size: 100%;
+    color : #000000;
+    padding-top: 4px;
+    padding-right: 10px;
+    padding-bottom: 4px;
+    padding-left: 10px;
+    border-top : 1px solid #FFFFFF;
+}
+
+.img_caption_table td {
+    background: #EFEFEF ;
+    padding-top: 6px;
+    padding-right: 10px;
+    padding-bottom: 6px;
+    padding-left: 10px;
+    border-top : 1px solid #FFFFFF;
+    white-space: normal;
+}
+
+.debug_text {
+    border: #BDBEBD;
+    background-color: #EFEFEF;
+    width : 100%;
+    margin : 0px;
+}
+
+.clickable_option {
+    cursor : default;
+}
+
+.listbox_lang {
+    color: #000000;
+    background-color: #D1D7DC;
+    border: 1px solid #0E72A4;
+    font-size: 80%;
+    font-family: Arial, Helvetica, sans-serif;
+    vertical-align : middle;
+
+}
+
+.pic_title {
+    color: #000000;
+    font-size: 120%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight:bold;
+    text-align : center;
+    padding-top:0px;
+    padding-bottom:0px;
+    margin-top:0px;
+    margin-bottom:0px;
+    line-height:1.0em;
+}
+
+.pic_caption {
+    color: #000000;
+    font-size: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight:bold;
+    text-align : center;
+    padding-top:0px;
+    padding-bottom:0px;
+    margin-top:0px;
+    margin-bottom:0px;
+    line-height:1.0em;
+}
+
+.cpg_user_message {
+    font-size:1.4em;
+    font-weight:bold;
+    color:red;
+}
+
+#vanity a {
+    display:block;
+    width:57px;
+    height:20px;
+    margin: 3px 20px;
+}
+
+#vanity img {
+	border:0
+}
+#v_php {
+	float:left;
+	background-image:url(../../images/powered-php.gif);
+}
+#v_php:hover {
+	background-image:url(../../images/h_powered-php.gif);
+}
+#v_mysql {
+	float:left;
+	background-image:url(../../images/powered-mysql.gif);
+}
+#v_mysql:hover  {
+	background-image:url(../../images/h_powered-mysql.gif);
+}
+#v_xhtml {
+	float:right;background-image:url(../../images/valid-xhtml10.gif);
+}
+#v_xhtml:hover {
+	background-image:url(../../images/h_valid-xhtml10.gif);
+}
+#v_css {
+	float:right;
+	background-image:url(../../images/valid-css.gif);
+}
+#v_css:hover {
+	background-image:url(../../images/h_valid-css.gif);
+}
+
+#cpg_main_block {
+    border: 1px solid #666666;
+    background-color:#FFFFFF;
+    margin:20px;
+    padding:20px;
+}
+
+.important {
+    /* background-image : url(images/important.gif); */
+    color: red;
+    font-weight: bold;
+    padding-left:1px;
+    padding-right:1px;
+    padding-top:3px;
+    padding-bottom:3px;
+}
+
+#cpgChooseLanguageWrapper {
+    float:left;
+    margin-left:3px;
+    margin-right:3px;
+    margin-top:0px;
+    margin-bottom:0px;
+}
+
+#cpgChooseThemeWrapper {
+    float:left;
+    margin-left:3px;
+    margin-right:3px;
+    margin-top:0px;
+    margin-bottom:0px;
+}
+
+.filmstrip_background {
+	background-color:#000000;
+}
+
+.dtree {
+    color: #666;
+    white-space: nowrap;
+}
+.dtree img {
+    border: 0px;
+    vertical-align: middle;
+}
+.dtree a {
+    color: #333;
+    text-decoration: none;
+}
+.dtree a.node, .dtree a.nodeSel {
+    white-space: nowrap;
+    padding: 1px 2px 1px 2px;
+}
+.dtree a.node:hover, .dtree a.nodeSel:hover {
+    color: #333;
+    text-decoration: underline;
+}
+.dtree a.nodeSel {
+    background-color: #0871A5;
+    color: #FFFFFF;
+}
+.dtree .clip {
+    overflow: hidden;
+}
+
+/* jQuery Bookmark styles */
+.bookmark_list {
+	display: block;
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {  /* Safari3/Opera9 */
+	.bookmark_list {
+		font-size: 100%;
+	}
+}
+html:first-child .bookmark_list {  /* Opera */
+	/*font-size: 80%;*/
+}
+.bookmark_list li {
+	float: left;
+	width: 23%;
+	margin: 0% 0.5%;
+	padding: 2px;
+	background-color: #eee;
+	border: 1px outset;
+	list-style-type: none;
+}
+.bookmark_compact {
+	background-color: #eee;
+	border: 1px outset;
+}
+.bookmark_compact li {
+	width: 16px;
+	height: 16px;
+	margin: 0%;
+	background-color: transparent;
+	border: none;
+}
+.bookmark_list a {
+	width: 100%;
+}
+.bookmark_list span {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+}
+.bookmark_list img {
+	border: none;
+	vertical-align: bottom;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {  /* Safari3/Opera9 */
+	.bookmark_list img {
+		margin-bottom: 3px;
+		vertical-align: middle;
+	}
+}
+html:first-child .bookmark_list img { /* Opera */
+	margin-bottom: 3px;
+	vertical-align: middle;
+}
+
+#bookmarkIt { /* This is the container that wraps the entire social bookmarks button */
+	float: left; 
+	border: 1px solid #0E72A4; 
+	padding: 0px 3px; 
+    font-size: 80%; 
+    cursor: pointer;
+    background-color: #D1D7DC;
+    margin-left:3px;
+    margin-right:3px;
+    margin-top:0px;
+    margin-bottom:0px; 
+} 
+#popupClose { 
+	display: none; 
+	vertical-align: top; 
+} 
+#popupBookmark { 
+	display: none; 
+	position: absolute; 
+	z-index: 100; 
+} 
+#popupBookmark ul { 
+	float: left; 
+	width: 180px; 
+    border: 1px solid #aaa; 
+    background-color: #fff; 
+}
+
+/*** The Essential Code ***/
+
+#header, #footer {
+	margin-left: -200px;    /* LC fullwidth */
+	margin-right: -190px;   /* RC fullwidth + CC padding */
+}
+
+.column {
+	position: relative;
+	float: left;
+}
+
+#center {
+	padding: 0 20px;
+	width: 100%;
+}
+
+#left {
+	width: 180px;           /* LC width */
+	padding: 0 10px;        /* LC padding */
+	right: 240px;           /* LC fullwidth + CC padding */
+	margin-left: -100%;
+}
+
+#right {
+	width: 130px;           /* RC width */
+	padding: 0 10px;        /* RC padding */
+	margin-right: -100%;
+}
+
+#footer {
+	clear: both;
+}
+
+/*** IE Fix ***/
+* html #left {
+	left: 150px;            /* RC fullwidth */
+}
+
+/*** Just for Looks ***/
+
+#header, #footer {
+	font-size: large;
+	text-align: center;
+	padding: 0.3em 0;
+	background: #999;
+}
+
+#left {
+	background: #66F;
+}
+
+#center {
+	background: #DDD;
+}
+
+#right {
+	background: #F66;
+}
+
+.column {
+	padding-top: 1em;
+	text-align: justify;
+}</textarea>
+
+<a name="theme_matching_test1"></a><h2>Test initial<a href="#theme_matching_test1" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p><img src="../images/screenshot_missing_menu.png" border="1" width="400" height="204" alt="" align="right" />Maintenant, il est temps de faire le premier test, et de regarder le résultat de ce que nous avons fait jusqu'a présent, regardons donc notre galerie avec notr enouveau thème personnalisé. Pour cela , téléchargez vos changements sur votr eserveur (en utilisant un client FTP) si vous ne le faites pas sur votre serveur de test local. Mais attendez: ne plongez pas dans la configuration de coppermine maintenant: ne faites qu'une prévisualisation pour vous, sans avertir vos utilisateurs que vous vaez fait un nouveau thème qui sera rendu public prochainement, lancez votre galerie avec les paramètres d'URL qui spécifient le thème à utiliser - comme expliqué dans <a href="theme_create.htm#theme_create_tipps">Trucs &amp; astuces</a>, lancez votre navigateur et allez à l'URL <tt class="code">http://votresite.com/coppermine/index.php?theme=mon_theme</tt>.</p>
+<p>Le résultat devrait être similiare à ce que vous voyez à droite (surtout si vous avez suivi ce tutoriel à la lettre en utilisant le design simple en premier).</p>
+
+<p><abbr title="à suivre">à suivre</abbr>...</p>
+
+
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

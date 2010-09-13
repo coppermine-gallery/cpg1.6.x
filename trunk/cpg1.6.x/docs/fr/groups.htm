@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Groupes - Coppermine Photo Gallery - Documentation &amp; manuel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="fr" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Le panneau de contrôle des groupes est l'endroit où vous définissez ce que les membres d'un groupe peuvent et ne peuvent pas faire. Avec Coppermine, vous ne donnez pas de privilèges à chaque utilisateur, mais à des groupes. Les utilisateurs peuvent être dans différents groupes, afin que vous puissiez déterminer les niveaux hiérarchiques." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation et manuel</h1>
+<div id="toc">
+<a href="toc.htm">Table des matières</a>
+</div>
+
+<a name="groups"></a><h1>Groupes<a href="#groups" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>Chaque visiteur de votre galerie est membre d'au moins un groupe. Avec Coppermine, vous ne donnez pas d’autorisations individuellement aux utilisateurs, mais par groupe d'appartenance. Il ya un certain nombre de groupes prédéfinis qui ne peuvent pas être supprimés, et un nombre infini de groupes personnalisables qui peuvent être définies par l'administrateur.</p>
+
+<a name="group_cp"></a><h2>Panneau de configuration des groupes<a href="#group_cp" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p><img src="images/group_cp.png" width="600" height="211" border="0" alt="" align="right" /></p>
+<p>C’est l’endroit ou vous définissez ce que peuvent faire et ne pas faire les membres des <em>groupes</em>. Avec Coppermine, vous ne donnez pas de privilèges à chaque utilisateur, mais à des groupes. Les utilisateurs peuvent être dans différents groupes, afin que vous puissiez déterminer les niveaux hiérarchiques.</p>
+
+<div class="indent">
+	<a name="group_cp_names"></a><h3>Nom du groupe<a href="#group_cp_names" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>Il y a quatre groupes dans Coppermine. Vous pouvez les renommer de même que vous pouvez renommer des groupes personnalisés, mais il est recommandé de les laisser comme ils sont par défaut. Cela rendra plus facile les mises à niveau et vous aidera à administrer et entretenir votre galerie. Les utilisateurs finaux ne voient généralement pas le nom du groupe auquel ils appartiennent, ainsi vous n'avez pas à fournir les noms des autres groupes</p>
+	<p>Toutefois, si vous choisissez de renommer un groupe, il suffit de changer le nom et soumettre le formulaire en cliquant sur  &quot;Appliquez les changements&quot;.</p>
+	<a name="group_cp_names_end"></a>
+
+	<a name="group_cp_types"></a><h3>Types de groupes<a href="#group_cp_types" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>Il existe deux types de groupes dans Coppermine: ceux par défaut (groupes principaux) et les groupes d'utilisateurs personnalisés (groupe secondaire). Ceux par défaut de Coppermine (&quot;Administrateurs&quot;, &quot;Enregistrés&quot;, &quot;Anonymes / Invités&quot;) ne peuvent être supprimés.<br />
+	Les utilisateurs peuvent être membres de plusieurs groupes - les privilèges hérités des groupes s'accumulent. Cela signifie que le réglage le moins restrictif concernant les autorisations est pris en compte.</p>
+	<p class="cpg_example">L’utilisateur "Linus" est membre du groupe "Enregistrés" mais, également membre des groupes personnalisés "Caricaturistes" et "Photographes". Les membres du groupe "Enregistrés" sont autorisés à envoyer des cartes, mais ne sont pas autorisés à noté, n’y poster des commentaires. Ils ne sont pas autorisés non plus à avoir une galerie personnelle. Les membres du groupe "Caricaturistes" sont autorisés à commenter, envoyer des cartes et noté. Les membres du groupe "Photographes" ne sont pas autorisés à commenter, envoyer des cartes postales, ni noté, mais ils sont autorisés à avoir des galeries personnelles. Par la suite, l'utilisateur "Linus" aura le privilège d'envoyer des cartes (hérité de l'appartenance au groupe "Enregistrée"), il sera autorisé à poster des commentaires et faire des notations (hérité de l'appartenance au groupe "Caricaturistes"). En outre, "Linus" aura le privilège d'avoir une galerie personnelle (héritage du groupe "Photographes"). Le fait que les membres du groupe "Photographes" ne sont pas autorisés à notés, envoyer des cartes ou faires des commentaires aux photos ne sera pas pris en compte, Car adhérant aux deux autres groupes, qui accordent des privilèges que le groupe "Les photographes" n’a pas.</p>
+
+	<div class="indent">
+		<a name="group_cp_administrators"></a><h4>Administrateurs<a href="#group_cp_administrators" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<p>Par défaut (après l'installation initiale), il n'y a qu'un seul utilisateur qui réside dans le groupe Administrateurs: le compte administrateur créé lors de l'installation initiale. Vous pouvez ensuite ajouter d'autres utilisateurs au groupe Administrateurs (à l'aide du panneau de contrôle des utilisateurs), mais vous devez garder à l'esprit que tous les autres membres de ce groupe ont exactement les mêmes privilèges que l'administrateur initial: ils pourraient ruiner votre galerie entière en quelques clics de souris. Il est fortement recommandé d'attribuer ses privilèges d’administrateur seulement dans les personnes en qui vous avez pleinement confiance.</p>
+		<a name="group_cp_administrators_end"></a>
+
+		<a name="group_cp_registered"></a><h4>Enregistrés<a href="#group_cp_registered" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<p>Par défaut, il n'y a pas d'utilisateur à l'intérieur du groupe «Enregistrés». Cette situation changera dès que vous permettrez l'enregistrement et que des membres s’enregistreront. Tous les nouveaux utilisateurs qui sont créées (soit en remplissant le formulaire d'inscription ou quand ils sont créés par un administrateur) résident dans le groupe "Enregistrés" (groupe principal).</p>
+		<a name="group_cp_registered_end"></a>
+
+		<a name="group_cp_anonymous"></a><h4>Anonymes / Invités<a href="#group_cp_anonymous" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<p>Utilisez le groupe <strong>Anonymes / Invités</strong> pour définir ce que les utilisateurs non inscrits peuvent et ne peuvent pas faire. Quota et &quot;<em>galerie personnelle</em>&quot; sont dénués de sens pour les utilisateurs &quot;anonymes / invités&quot;. Vous ne pouvez pas (et ne devez pas essayer) d'affecter des utilisateurs existants aux groupes anonymes - être un utilisateur enregistré évite automatiquement d'être membre du groupe "Anonyme / invités".</p>
+		<a name="group_cp_anonymous_end"></a>
+
+		<a name="group_cp_custom"></a><h4>Groupes personnalisés<a href="#group_cp_custom" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<p>Vous pouvez <a href="#group_cp_create">créer des groupes</a> comme bon vous semble. Assurez-vous d'arriver à un schéma de nommage qui ait un sens, en premier lieu. Il est conseillé de commencer avec un minimum de groupes personnalisés et de n’en ajouter d’autres, que si vous le devez, plus tard.</p>
+		<p>Les utilisateurs peuvent être <a href="#group_cp_more_than_one_group">membres de plusieurs groupes</a>.</p>
+		<a name="group_cp_custom_end"></a>
+	</div>
+	
+	<a name="group_cp_types_end"></a>
+
+	<a name="group_cp_quota"></a><h3>Quotas<a href="#group_cp_quota" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<div class="indent">
+		<a name="group_cp_quota_scope"></a><h4>Capacité<a href="#group_cp_quota_scope" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<p>Préciser l'utilisation maximum d'espace web que les images (ou d'autres fichiers, si vous le permettez) transféré par un utilisateur qui est membre de ce groupe particulier, vous affecter le quota, c'est le droit de consommer. Le quota est fixé en kilo-octets (Ko) et ne s'applique que pour les fichiers téléchargés dans la galerie personnelle d'un utilisateur. Les téléchargements de cet  utilisateur qui vont dans des albums publics ne sont pas pris en compte et ne sont <strong>pas</strong> ajouter au quota de l'utilisateur.</p>
+		<p>Le quota de disque ne s'applique que pour les groupes dont la &quot;<em>galerie personnelle</em>&quot; a été &quot;<strong>Autorisé</strong>&quot;. Les fichiers téléchargés par un utilisateur dans sa galerie personnelle ainsi que dans les galeries publiques sont inclus dans le quota. Le contingent s'applique à chaque membre du groupe. La fixation du contingent doit être à une valeur qui ait réellement un sens. Un quota de plusieurs téraoctets n'a aucun sens mais peut conduire à côté, à de drôles d'effets secondaires.</p>
+		<a name="group_cp_quota_zero"></a><h4>Zéro veut dire illimité<a href="#group_cp_quota_zero" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<p>Gardez à l'esprit que la fixation d'un quota de zéro signifie en fait "quota illimité". Si vous voulez interdire le téléchargement, sélectionner l’option correspondante qui permettent aux membres du groupe d'avoir une galerie personnelle et de télécharger dans la colonne <a href="#group_cp_personal">galerie personnelle</a> en paramétrant de &quot;autorisé&quot; à &quot;non&quot; au lieu de fixer la valeur du quota à zéro.</p>
+		<a name="group_cp_quota_calculation"></a><h4>Calcul<a href="#group_cp_quota_calculation" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<p>Si un utilisateur est membre de différents groupes, les quotas des groupes ne s’ajoutent pas. Au lieu de cela, le quota le moins restrictive s'applique.</p>
+		<div class="cpg_example">L’utilisateur "Linus" est membre du groupe "social" comme groupe principal et, en outre membre des groupes d'utilisateurs personnalisés "caricaturistes» et «Photographes». Les membres du groupe «enregistré» ne sont pas autorisés à avoir des galeries personnelles, mais les membres du groupe «caricaturistes» sont autorisés à avoir une galerie personnelle et leur quota est fixé à 20480 Ko (soit environ 20 Mo), les membres du groupe "Photographes" ont droit à une galerie personnelle avec un quota de 40960 KB (soit environ 40 Mo). Donc, Linus sera en mesure de télécharger des fichiers dans sa galerie personnelle, pour un total de 40 Mo, car il hérite du quota, d’'appartenance du groupe "Photographes" qui est le moins contraignant.</div>
+	</div>
+	<a name="group_cp_quota_end"></a>
+
+	<a name="group_cp_permissions"></a><h3>Droits (Note/Cartes électronique/Commentaires)<a href="#group_cp_permissions" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>Réglages des <em>autorisations</em> de ce que l'utilisateur est autorisé à faire dans la galerie (Notation / Envoi de cartes électronique / Poster des commentaires).</p>
+	<p>Gardez à l'esprit que si un utilisateur est membre d'un groupe où  &quot;<em>Note &quot;</em>, &quot;<em>Commentaires&quot;</em> ou &quot;<em>Téléchargement dans les albums publics&quot;</em> est sur "Oui / Autorisé", il / elle aura le droit d'effectuer ces opérations uniquement dans les albums où ils sont autorisés. ( le téléchargement des fichiers ne sera possible que dans des albums où <em>&quot;Les visiteurs peuvent mettre des photos en ligne</em>&quot; a été mis à <em>Oui</em> en utilisant les propriétés de l'album.)</p>
+	<a name="group_cp_permissions_end"></a>
+
+	<a name="group_cp_public"></a><h3>Téléchargement dans les albums publics<a href="#group_cp_public" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>Pensez au &quot;Téléchargement dans les Albums Publics&quot; comme un interrupteur général qui détermine si les membres d’un groupe particulier sont autorisés à télécharger vers les albums public. Mettre ce paramètre à &quot;Oui&quot; ne voudra pas dire que les utilisateurs pourront télécharger vers tous les albums publics, mais seulement ceux, dont les <a href="albums.htm#album_prop">propriétés de l’album</a> l’autorise. 
+	<a name="group_cp_public_end"></a>
+
+	<a name="group_cp_personal"></a><h3>Galerie personnelle<a href="#group_cp_personal" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>Si &quot;<em>galerie personnelle</em>&quot; est définie comme étant <em>Autorisé</em>, les membres du groupe seront en mesure d'avoir leur propre galerie dans &quot;<em>Galerie de l'Utilisateur</em>&quot;, catégorie où ils seront en mesure de créer leurs propres albums.</p>
+	Si &quot;<em>Approbation</em>&quot; est réglée sur <em>Non</em>, les fichiers téléchargés par les membres du groupe, dans les albums créés dans leur propre galerie, n'auront pas besoin d'être approuvé par l'administrateur. Si &quot;<em>Approbation</em>&quot; est réglé sur <em>Oui</em>, les utilisateurs dans le groupe particulier seront capables de télécharger, mais les fichiers ne seront visibles qu'après que l'administrateur (vous) les ayez approuvées.</p>
+	<a name="group_cp_personal_end"></a>
+
+	<a name="group_cp_access_level"></a><h3>Niveau d'accès<a href="#group_cp_access_level" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>Pour chaque groupe, vous pouvez définir le niveau d'accès du groupe à:</p>
+	<ul>
+	  <li><strong>Aucuns</strong><br />
+	  Les utilisateurs ne peuvent pas du tout pas afficher les images, à l'exception de la vignette représentante un album ou une catégorie. Cette option est uniquement recommandée pour le groupe Invité / Anonyme. L’intérêt est d’inciter les personnes à ouvrir une session, pour afficher les miniatures et les autres fichiers. Pour d'autres groupes, cette option n'a généralement pas de sens puisque vos utilisateurs enregistrés, se demanderont, pourquoi s’identifié s’ils ne peuvent rien voir, l'option est fournie ici au cas où certains administrateurs la trouveraient utile. Si vous allez définir l'accès d'un groupe à 'aucuns', assurez-vous que le groupe Invité / Anonyme est également mis à 'aucuns'. Sinon, les utilisateurs non-identifiés auront plus d’accès que ceux ayant ouvert une session !
+	  <li><strong>Vignette uniquement</strong><br />
+	  Les utilisateurs peuvent seulement afficher les vignettes. S'ils cliquent dessus, un message leur indiquera qu'ils ne sont pas autorisés à afficher les images dans une taille plus grande.</li>
+	  <li><strong>Vignette et image intermédiaire</strong><br />
+	  Les utilisateurs peuvent tout voir, mais pas les images en tailles réel</li>
+	  <li><strong>Vignette, image intermédiaire, et image taille originale</strong><br />
+	  Les utilisateurs peuvent accéder à toutes les tailles d'images.</li>
+	</ul>
+	<p>Le réglage ici pour le groupe Invité / Anonymes est le même que le paramètre " Autoriser l'accès aux Visiteurs non authentifiés" dans la page configuration de coppermine à l’intérieur de " Paramètres des Utilisateurs". Si vous mettez ici l’option à jour, il se mettra à jour également dans la page de configuration et inversement.</p>
+	<a name="group_cp_access_level_end"></a>
+
+	<a name="group_cp_assigned"></a><h3>Albums(s) assigné(s)<a href="#group_cp_assigned" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>Le lien " Albums(s) assigné(s) vous permettra d'<strong>afficher</strong> les noms des albums qui sont affectés exclusivement aux membres d'un groupe en particulier. Pour être tout à fait clair: cette fonctionnalité <strong>ne vous permet pas</strong> d'attribuer des albums à des groupes, il ne fait qu'<strong>afficher</strong> ces assignations. Pour attribuer un album pour à un groupe en particulier, utilisez les <a href="albums.htm#album_prop">propriétés de l'album</a> individuels.</p>
+	<a name="group_cp_assigned_end"></a>
+
+
+	<a name="group_cp_create"></a><h3>Créer un nouveau groupe<a href="#group_cp_create" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>Pour créer un groupe d'utilisateurs personnalisés, cliquez sur &quot;Créer un nouveau groupe&quot; dans &quot;Groupes&quot;. En bas du "panneau de configuration des groupes" une ligne dans le tableau va apparaître au bas, du nom des autres groupes avec un nom vide. Il n'a pas encore été enregistré. Il vous faudra lui donner un nom. Modifiez les autres propriétés de votre nouveau groupe et enfin cliquer sur le bouton &quot;Appliquez les changements&quot;.<br />Il est recommandé de n'utiliser que des caractères alphanumériques "normaux" (web-safe) pour les noms de groupe.</p>
+	<p class="cpg_message_info">Lorsque vous utilisez une <a href="bridging.htm#integrating">passerelle</a>, vous ne pouvez pas créer de nouveaux groupes via Coppermine en utilisant le panneau de configuration des groupes puisqu’il ne les contrôles plus. Par conséquent, vous devez créer de nouveaux groupes personnalisés à l'intérieur de l'application que vous avez comme passerelle.</p>
+	<a name="group_cp_create_end"></a>
+
+	<a name="group_cp_delete"></a><h3>Suppression des groupes personnalisés<a href="#group_cp_delete" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>Vous ne pouvez pas supprimer les trois groupes prédéfinis (&quot;Administrateurs&quot;, &quot;Enregistré&quot;, &quot;Anonymes / Invités&quot;). Tous les autres groupes peuvent être supprimés en allant dans le panneau de configuration des groupes de Coppermine, en cochant la case en face du groupe que vous souhaitez supprimer et enfin cliquer sur "Supprimer le(s) Groupe(s) sélectionné(s)" au bas de l'écran. Cette action ne peut être annulée et ne supprimera pas les membres de ce groupe de Coppermine.<br />
+	Lorsqu’une <a href="bridging.htm#integrating">passerelle</a> ou quelque chose de semblable s'applique avec une autre application pour la création de groupes, elle s'applique également à les supprimer.</p>
+	<a name="group_cp_delete_end"></a>
+
+	<a name="group_cp_sync"></a><h3>Déclenchement de synchronisation (passerelle avec une autre application uniquement)<a href="#group_cp_sync" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>Lorsque Coppermine fonctionne avec une <a href="bridging.htm#integrating">passerelle</a>, vous créez et supprimer des groupes personnalisés de Coppermine à l'aide de la dite passerelle. Cependant, chaque fois que vous modifiez les groupes à l'intérieur du logiciel qui vous sert de passerelle, il faut aller dans le panneau de configuration des groupes de Coppermine pour déclencher une synchronisation entre Coppermine et l'application que vous avez comme passerelle. En d'autres termes: vous devez mettre au courant Coppermine des changements qui ont eu lieu dans l'autre application.</p>
+	<p class="cpg_message_info">Gardez à l'esprit que l'ensemble des noms des groupes depuis votre application d’intégration qui montre les noms des groupes de Coppermine dans le panneau de contrôle après l’intégration, n’est simplement qu’un ensemble de noms pour Coppermine. Coppermine n'est pas "au courant" des autorisations de niveau de votre application servant de passerelle, ainsi un groupe de modérateurs ou de membres privilégiés ne veut pas dire que le groupe aura toutes les autorisations spéciales qu’il avait dans  Coppermine après l’intégration.</p>
+	<a name="group_cp_sync_end"></a>
+
+	<a name="group_cp_more_than_one_group"></a><h3>L'appartenance à plus d'un groupe<a href="#group_cp_more_than_one_group" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<p>Un utilisateur peut être membre de plusieurs groupes, où un groupe est le groupe principal et toutes les adhésions ultérieures sont les appartenances aux groupes secondaires. Tous les utilisateurs enregistrés sont membres du groupe intégré &quot;<a href="#group_cp_registered">Enregistrés</a>&quot; peu importe ce que vous faites - vous ne pouvez pas changer cela.</p>
+	<p>Il n'y a pas de limite dans le nombre de groupes auxquels un utilisateur peut être membre (du moins il n'y a pas de limite intégrés dans Coppermine), mais augmente l'effort d'administration si vous avez trop de groupes, vous avez donc besoin de trouver un niveau de l'autorisation qui fonctionne pour vos besoin.</p>
+	<div class="indent">
+		<a name="group_cp_more_than_one_group_limitations"></a><h4>Limitations de l'architecture des groupes de Coppermine<a href="#group_cp_more_than_one_group_limitations" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<p>Il y a certaines choses que d'autres applications sont capables de faire actuellement et que Coppermine ne peut pas faire:</p>
+		<ul>
+			<li>Coppermine ne dispose pas de fonctions de modérateur, si vous êtes invités à nommer un <a href="#group_cp_create">groupe personnalisé</a> de cette façon, cela n'aidera pas pour les autorisations, ni cette fonctionnalité à être facilement mise être mis en œuvre, puisque comme le noir / blanc <tt class="code">est-administrateur / n'est-pas-administrateur</tt> peut-être trouvé partout dans le code de base de Coppermine.</li>
+			<li>Un compte utilisateur peut être membre de plusieurs groupes, mais vous ne pouvez pas imbriquer les groupes, c'est à dire que des groupes ne peuvent pas être membres d'autres groupes. De ce point de vus, Coppermine est différent d'autres modèles de droits et de permissions (comme LDAP ou équivalents).</li>
+			<li>Certains niveaux de permissions (comme par exemple le droit de voir un album particulier qui est défini dans la boite de dialogue <a href="albums.htm#album_prop">des propriétés de l'album</a>) sont définis par groupes, mais vous ne pouvez définir qu'un seul groupe et non plusieurs dans cet écran. Encore une fois, il ne serait pas facile de contourner cela.</li>
+		</ul>
+	</div>
+
+<a name="group_cp_end"></a>
+</div>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

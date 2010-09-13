@@ -1,0 +1,377 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Theme Upgrading from cpg1.4.x to cpg1.5.x - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="To make your custom made theme from cpg1.4.x work with cpg1.5.x, you will need to make some changes. Remember to back up your original files, so you can go back to a working version in case something goes wrong with the modifications." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Inhoudstafel</a>
+</div>
+
+<div id="doc_en_only">No translation available</div>
+
+<a name="theme_convert"></a><h1>Converting cpg1.4.x themes to cpg1.5.x</h1>
+<p>To make your custom made theme from cpg1.4.x work with cpg1.5.x, you will need to make some changes. Remember to back up your original files, so you can go back to a working version in case something goes wrong with the modifications.</p>
+<p>The files to be edited would be in the particular folder of the theme in the themes folder. For example, the files for the "curve" theme could be found in themes/curve</p>
+<p>If you're using a default package that came with cpg1.4.x and comes with cpg1.5.x as well and if you haven't changed your theme files at all, you don't have to apply any changes and can savely skip this page. However, if you are using a custom theme or if you have edited one of the default themes (making it a custom theme this way) you need to read this page and do as suggested on this very page.</p>
+<p>Make sure that the folder name of your custom theme differs from the default theme that you have based your custom theme on, i.e. make sure to <a href="theme_create.htm#theme_create_rename">rename your theme first</a>.
+<p class="cpg_message_warning">You can <strong>not</strong> use a theme that was designed for cpg1.4.x with a cpg1.5.x driven gallery unless you apply the basic changes discussed on this page. This applies to all cpg1.4.x-themes.</p>
+<ul>
+  <li><a href="#theme_convert_style">Edit style.css</a></li>
+  <li><a href="#theme_convert_template">Edit template.html</a></li>
+  <li><a href="#theme_convert_theme">Edit theme.php</a></li>
+  <li><a href="#theme_convert_validation">Validation</a></li>
+</ul>
+
+<a name="theme_convert_style"></a><h2>Edit style.css<a href="#theme_convert_style" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>For all changes below, edit themes/your_custom_theme/style.css</p>
+
+<div class="indent">
+
+<a name="theme_convert_style_pseudo"></a><h3>Define pseudo-classes <tt class="code">:link</tt>, <tt class="code">:visited</tt>, <tt class="code">:focus</tt>, <tt class="code">:active</tt><a href="#theme_convert_style_pseudo" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Before applying this fix, make sure that your stylesheet doesn't contain definitions for the pseudo-classes already. If it doesn't contain those classes</p>
+<p>Find:</p>
+<pre class="cpg_code smallcode">a:hover {</pre>
+<p>Add before it (in a new line):</p>
+<pre class="cpg_code smallcode">a:link {
+        color: #0033CC;
+        text-decoration: none;
+}
+
+a:visited {
+        color: #0033CC;
+        text-decoration: none;
+}
+
+a:focus {
+        color: #0033CC;
+        text-decoration: none;
+}
+
+a:active {
+        color: #0033CC;
+        text-decoration: none;
+}</pre>
+and edit the colors and format as you see fit.
+
+<a name="theme_convert_style_bold_table_headers"></a><h3>Bold table headers<a href="#theme_convert_style_bold_table_headers" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Find:</p>
+<pre class="cpg_code smallcode">.tableh1 {</pre>
+<p>and add after it:</p>
+<pre class="cpg_code smallcode">        font-weight:bold;</pre>
+<hr />
+<p>Find:</p>
+<pre class="cpg_code smallcode">.alblink a {</pre>
+<p>and add before it (into a new line):</p>
+<pre class="cpg_code smallcode">.alblink {
+        font-weight:bold;
+}</pre>
+<hr />
+<p>Find:</p>
+<pre class="cpg_code smallcode">.catlink {</pre>
+<p>and add after it:</p>
+<pre class="cpg_code smallcode">        font-weight:bold;</pre>
+
+<a name="theme_convert_style_navmenu"></a><h3>Edit class &laquo;<tt class="code">navmenu</tt>&raquo;<a href="#theme_convert_style_navmenu" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Find:</p>
+<pre class="cpg_code smallcode">.navmenu a {
+        position: relative;</pre>
+<p>and replace with:</p>
+<pre class="cpg_code smallcode">.navmenu a {</pre>
+
+<a name="theme_convert_style_admin_menu"></a><h3>Fix background repetition for &laquo;<tt class="code">admin_menu</tt>&raquo;<a href="#theme_convert_style_admin_menu" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Find:</p>
+<pre class="cpg_code smallcode">.admin_menu {</pre>
+<p>and add after it:</p>
+<pre class="cpg_code smallcode">background-repeat:repeat-x;</pre>
+
+<a name="theme_convert_style_admin_float_wrapper"></a><h3>Add classes &laquo;<tt class="code">admin_float</tt>&raquo; &amp; &laquo;<tt class="code">admin_menu_wrapper</tt>&raquo;<a href="#theme_convert_style_admin_float_wrapper" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Find:</p>
+<pre class="cpg_code smallcode">#admin_menu_anim {</pre>
+<p>and add before it (into a new line):</p>
+<pre class="cpg_code smallcode">.admin_float {
+        float:left;
+        margin-left: 1px;
+        margin-right: 1px;
+        margin-top: 1px;
+        margin-bottom: 1px;
+}
+
+.admin_menu_wrapper {
+        width:100%;
+}</pre>
+
+<a name="theme_convert_style_image_links"></a><h3>Add pseudo-classes for image links<a href="#theme_convert_style_image_links" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Find:</p>
+<pre class="cpg_code smallcode">.image {</pre>
+<p>and add before it (into a new line):</p>
+<pre class="cpg_code smallcode">/* pseudo-classes for image links */
+a:link .image{
+        border-style:solid;
+        border-width:1px;
+        border-color:#000000;
+        margin:2px;
+}
+
+a:visited .image{
+        border-style:solid;
+        border-width:1px;
+        border-color:#840084;
+        margin:2px;
+}
+
+a:focus .image{
+        border-style:solid;
+        border-width:1px;
+        border-color:#000000;
+        margin:2px;
+}
+
+a:hover .image{
+        border-style:solid;
+        border-width:1px;
+        border-color:#0033CC;
+        margin:2px;
+}
+
+a:active .image{
+        border-style:solid;
+        border-width:1px;
+        border-color:#000000;
+        margin:2px;
+}</pre>Edit the colors and attributes as you see fit. This is supposed to show which thumbnails have already been clicked. The important bit being the attributes of the pseudo-class :visited; they have to differ from the other pseudo-classes.
+
+<a name="theme_convert_style_pic_title_caption_user_message"></a><h3>Add the classes &laquo;<tt class="code">pic_title</tt>&raquo; &amp; &laquo;<tt class="code">pic_caption</tt>&raquo;<a href="#theme_convert_style_pic_title_caption_user_message" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Find:</p>
+<pre class="cpg_code smallcode">#vanity a {</pre>
+<p>and add before it (into a new line):</p>
+<pre class="cpg_code smallcode">.pic_title {
+        color: #000000;
+        font-size: 120%;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight:bold;
+        text-align : center;
+        padding-top:0px;
+        padding-bottom:0px;
+        margin-top:0px;
+        margin-bottom:0px;
+        line-height:1.0em;
+}
+
+.pic_caption {
+        color: #000000;
+        font-size: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight:bold;
+        text-align : center;
+        padding-top:0px;
+        padding-bottom:0px;
+        margin-top:0px;
+        margin-bottom:0px;
+        line-height:1.0em;
+}</pre>
+
+<a name="theme_convert_style_cpg_message"></a><h3>Add the classes &laquo;<tt class="code">cpg_message_info</tt>&raquo;, &laquo;<tt class="code">cpg_message_success</tt>&raquo;, &laquo;<tt class="code">cpg_message_warning</tt>&raquo;, &laquo;<tt class="code">cpg_message_error</tt>&raquo;, &laquo;<tt class="code">cpg_message_validation</tt>&raquo;, &laquo;<tt class="code">cpg_summary</tt>&raquo;<a href="#theme_convert_style_cpg_message" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Find:</p>
+<pre class="cpg_code smallcode">#vanity a {</pre>
+<p>and add before it (into a new line):</p>
+<pre class="cpg_code smallcode">.cpg_message_info, .cpg_message_success, .cpg_message_warning, .cpg_message_error, .cpg_message_validation {
+    border: 1px solid;
+    margin: 10px 0px;
+    padding:15px 10px 15px 50px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+.cpg_message_info {
+    color: #00529B;
+    background-color: #BDE5F8;
+    background-image: url('../../images/message/info.png');
+}
+.cpg_message_success {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+    background-image: url('../../images/message/ok.png');
+}
+.cpg_message_warning {
+    color: #9F6000;
+    background-color: #FEEFB3;
+    background-image: url('../../images/message/warning.png');
+}
+.cpg_message_error {
+    color: #D8000C;
+    background-color: #FFBABA;
+    background-image: url('../../images/message/stop.png');
+}
+.cpg_message_validation {
+    color: #D63301;
+    background-color: #FFCCBA;
+    background-image: url('../../images/message/error.png');
+}
+.cpg_summary {
+    font-size:0.9em;
+	border: 1px solid;
+    margin: 10px 0px;
+	padding:5px 10px 5px 10px;
+    color: #FF2B9C;
+    background-color: #FFDEEF;
+	text-align:right;
+	float:right;
+	width:400px;
+}</pre>
+
+<a name="theme_convert_style_greybox"></a><h3>Add the &laquo;<tt class="code">greybox</tt>&raquo;-class to your stylesheet<a href="#theme_convert_style_greybox" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>In cpg1.5.x, the jquery plugin Greybox Redux is used to display the help-popups embedeed into the page. You need to add the corresponding CSS color definition into your stylesheet.</p>
+<p>Add at the end of your stylesheet (into a new line):</p>
+<pre class="cpg_code smallcode">#GB_window {
+  background-color: #FFFFFF;
+  border: 5px solid #AAAAAA;
+}</pre>
+
+<p>In the definition for <tt class="code">#GB_window</tt>, change the background attribute to match your theme's background color. Change the border attribute to match your theme's border color.<br />
+If you're not sure what the background color of your theme is or what border color to use, take a look at your theme's color definitions for the class <tt class="code">maintable</tt>.</p>
+<p>The other styles of the greybox are being defined in <tt class="code">css/coppermine.css</tt>. The definitions in that file should be left alone - don't edit that file unless you really know what you're doing.</p>
+
+<a name="theme_convert_style_vanity"></a><h3>Remove the vanity styles<a href="#theme_convert_style_vanity" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>The styles for the <a href="theme_template.htm#theme_template_vanity">vanity icons</a> has been moved into the overall CSS file (located at <tt class="code">css/coppermine.css</tt>).</p>
+<p>Find</p>
+<pre class="cpg_code smallcode">#v_php {float:left;background-image:url(../../images/powered-php.gif);}
+#v_php:hover {background-image:url(../../images/h_powered-php.gif);}
+#v_mysql {float:left;background-image:url(../../images/powered-mysql.gif);}
+#v_mysql:hover  {background-image:url(../../images/h_powered-mysql.gif);}
+#v_xhtml {float:right;background-image:url(../../images/valid-xhtml10.gif);}
+#v_xhtml:hover {background-image:url(../../images/h_valid-xhtml10.gif);}
+#v_css {float:right;background-image:url(../../images/valid-css.gif);}
+#v_css:hover{background-image:url(../../images/h_valid-css.gif);}</pre>
+<p>and delete from your custom stylesheet.</p>
+<a name="theme_convert_style_end"></a>
+
+<a name="theme_convert_style_comment_button"></a><h3>Remove the class &laquo;<tt class="code">comment_button</tt>&raquo;<a href="#theme_convert_style_comment_button" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>The class "comment_button" didn't differ much from the class "button" and has been removed. It won't hurt to leave the class definition in your custom stylesheet, it just won't have any impact. If you like to clean your stylesheet, remove all references to the class.</p>
+
+<a name="theme_convert_style_tableh1_compact"></a><h3>Remove the class &laquo;<tt class="code">tableh1_compact</tt>&raquo;<a href="#theme_convert_style_tableh1_compact" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>The class "tableh1_compact" didn't differ much from the class "tableh1" and has been removed, as it was hardly ever used for the purpose it was originally intended. It won't hurt to leave the class definition in your custom stylesheet, it just won't have any impact. If you like to clean your stylesheet, remove all references to the class.</p>
+
+<a name="theme_convert_style_tableh2_compact"></a><h3>Remove the class &laquo;<tt class="code">tableh2_compact</tt>&raquo;<a href="#theme_convert_style_tableh2_compact" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>The class "tableh2_compact" didn't differ much from the class "tableh2" and has been removed, as it was hardly ever used for the purpose it was originally intended. It won't hurt to leave the class definition in your custom stylesheet, it just won't have any impact. If you like to clean your stylesheet, remove all references to the class.</p>
+
+<a name="theme_convert_style_tableb_compact"></a><h3>Remove the class &laquo;<tt class="code">tableb_compact</tt>&raquo;<a href="#theme_convert_style_tableb_compact" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>The class "tableb_compact" didn't differ much from the class "tableb" and has been removed, as it was hardly ever used for the purpose it was originally intended. It won't hurt to leave the class definition in your custom stylesheet, it just won't have any impact. If you like to clean your stylesheet, remove all references to the class.</p>
+
+</div>
+
+<a name="theme_convert_template"></a><h2>Edit template.html<a href="#theme_convert_template" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>There have been only minor changes to this file, so the changes should be easy to apply. However, if you fail to apply the changes in this file, your upgrade will be incomplete and your custom theme will not work for cpg1.5.x. Just follow the instructions in this section thoroughly. <br />
+Open <tt class="code">themes/your_theme/template.html</tt> with a plain text editor and edit as suggested below:</p>
+
+<div class="indent">
+
+<a name="theme_convert_template_javascript"></a><h3>Replace the call for <tt class="filename">script.js</tt><a href="#theme_convert_template_javascript" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Find:</p>
+<pre class="cpg_code smallcode">&lt;script type="text/javascript" src="scripts.js"&gt;&lt;/script&gt;</pre>
+<p>and replace with:</p>
+<pre class="cpg_code smallcode">{JAVASCRIPT}</pre>
+<p>Failing to apply this change to your custom theme will make your theme work no longer (see <a href="theme_template.htm#theme_template_javascript">details</a> on the <tt class="code">{JAVASCRIPT}</tt>-placeholder-token).</p>
+
+<a name="theme_convert_template_global_css"></a><h3>Add the call for the global stylesheet<a href="#theme_convert_template_global_css" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>To reduce the weight of an individual style sheet, the global CSS definitions that are the same for all Coppermine themes have been moved from <tt class="code">themes/yourtheme/style.css</tt> into a global CSS file located at <tt class="code">css/coppermine.css</tt>. The new stylesheet <tt class="code">css/coppermine.css</tt> should not be edited at all. To upgrade your custom theme designed for cpg1.4.x for the new cpg1.5.x, you need to add the call to the new stylesheet to your theme's template.html:</p>
+<p>Find:</p>
+<pre class="cpg_code smallcode">&lt;link rel="stylesheet" href="themes/YOUR_THEME/style.css" type="text/css"&gt;</pre>
+<p>and add before it into a new line:</p>
+<pre class="cpg_code smallcode">&lt;link rel="stylesheet" href="css/coppermine.css" type="text/css" /&gt;</pre>
+
+<a name="theme_convert_template_message_block"></a><h3>Add <tt class="code">{MESSAGE_BLOCK}</tt> token<a href="#theme_convert_template_message_block" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Insert</p>
+<pre class="cpg_code smallcode">{MESSAGE_BLOCK}</pre>anywhere before the <tt class="code">{GALLERY}</tt>-token, preferably right after the menu section. This new placeholder will display messages both to the admin as well as the end user. It should be visible in the upper part of the screen without the need to scroll down, see <a href="theme_template.htm#theme_template_message_block">details</a> on the <tt class="code">{MESSAGE_BLOCK}</tt>-placeholder-token.
+
+<a name="theme_convert_template_credits"></a><h3>Add <tt class="code">{CREDITS}</tt> token<a href="#theme_convert_template_credits" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Insert</p>
+<pre class="cpg_code smallcode">{CREDITS}</pre>anywhere after the <tt class="code">{GALLERY}</tt>-token, preferably at the very end of the file, above the <tt class="code">&lt;/body&gt;</tt>-tag. This new placeholder can display the copyright notice of your gallery and (ideally) the <a href="theme_copyright.htm#theme_copyright">Coppermine disclaimer</a>.<br />
+If you don't insert that token, there will be no error message and the default Credits will be displayed, see <a href="theme_template.htm#theme_template_credits">details</a> on the <tt class="code">{CREDITS}</tt>-placeholder-token. 
+
+<a name="theme_convert_template_vanity"></a><h3>Remove <tt class="code">{VANITY}</tt> token<a href="#theme_convert_template_vanity" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>In older versions of Coppermine, all themes used to contain the placeholder token <tt class="code">{VANITY}</tt>. This token used to be replaced with a reference to the w3c validation pages and php.net and mysql.com only if the theme was defined as standards compliant and only if the corresponding option in coppermine's config used to be checked (by default, the option used to be unchecked). This has changed in cpg1.5.x: if your custom theme's template.html contains the token <tt class="code">{VANITY}</tt>, the corresponding output will be displayed no matter what, as the option in coppermine's config has been dropped as well as the definition inside the theme.</p>
+<p>Therefore, if you use a theme that was designed for cpg1.4.x, the vanity display will show after the upgrade to cpg1.5.x even if you had the display turned off before. If this bothers you, just remove the template placeholder token <tt class="code">{VANITY}</tt> (&rarr; <a href="theme_template.htm#theme_template_vanity">details</a>).</p>
+<img src="../images/vanity.png" width="351" height="26" border="0" alt="" title="vanity block" />
+
+<a name="theme_convert_template_language_select_flags"></a><h3>Remove <tt class="code">{LANGUAGE_SELECT_FLAGS}</tt> token<a href="#theme_convert_template_language_select_flags" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>In older versions of Coppermine, all themes used to contain the placeholder token <tt class="code">{LANGUAGE_SELECT_FLAGS}</tt>. This token used to be replaced with a list of flags representing the available languages and only if the corresponding option in coppermine's config used to be checked (by default, the option used to be unchecked). This has changed in cpg1.5.x: if your custom theme's template.html contains the token <tt class="code">{LANGUAGE_SELECT_FLAGS}</tt>, the corresponding output will be displayed no matter what, as the option in coppermine's config has been dropped.</p>
+<p>Therefore, if you use a theme that was designed for cpg1.4.x, the language selector by flag will show after the upgrade to cpg1.5.x even if you had the display turned off before. If this bothers you, just remove the template placeholder token <tt class="code">{LANGUAGE_SELECT_FLAGS}</tt>.</p>
+
+<a name="theme_convert_template_language_select_list"></a><h3>Remove <tt class="code">{LANGUAGE_SELECT_LIST}</tt> token<a href="#theme_convert_template_language_select_list" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>In older versions of Coppermine, all themes used to contain the placeholder token <tt class="code">{LANGUAGE_SELECT_LIST}</tt>. This token used to be replaced with a list of the available languages and only if the corresponding option in coppermine's config used to be checked (by default, the option used to be unchecked). This has changed in cpg1.5.x: if your custom theme's template.html contains the token <tt class="code">{LANGUAGE_SELECT_LIST}</tt>, the corresponding output will be displayed no matter what, as the option in coppermine's config has been dropped.</p>
+<p>Therefore, if you use a theme that was designed for cpg1.4.x, the language selector by list will show after the upgrade to cpg1.5.x even if you had the display turned off before. If this bothers you, just remove the template placeholder token <tt class="code">{LANGUAGE_SELECT_LIST}</tt>.</p>
+
+<a name="theme_convert_template_theme_select_list"></a><h3>Remove <tt class="code">{THEME_SELECT_LIST}</tt> token<a href="#theme_convert_template_theme_select_list" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>In older versions of Coppermine, all themes used to contain the placeholder token <tt class="code">{THEME_SELECT_LIST}</tt>. This token used to be replaced with a list of the available themes and only if the corresponding option in coppermine's config used to be checked (by default, the option used to be unchecked). This has changed in cpg1.5.x: if your custom theme's template.html contains the token <tt class="code">{THEME_SELECT_LIST}</tt>, the corresponding output will be displayed no matter what, as the option in coppermine's config has been dropped.</p>
+<p>Therefore, if you use a theme that was designed for cpg1.4.x, the theme selector will show after the upgrade to cpg1.5.x even if you had the display turned off before. If this bothers you, just remove the template placeholder token <tt class="code">{THEME_SELECT_LIST}</tt>.</p>
+
+</div>
+
+<a name="theme_convert_template_end"></a>
+
+<a name="theme_convert_theme"></a><h2>Edit theme.php<a href="#theme_convert_theme" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+
+<p>Many notable things have happened that will influence your modifications to your theme.php.</p>
+<p>If you can, empty your copy of theme.php (of course you should keep a backup somewhere safe as a precaution) and then re-add the changes you need as if you were creating your custom theme from scratch, copying the relevant bits you want to see changed from the sample theme (as suggested in &quot;<a href="theme_theme_php.htm#theme_sample">The sample theme - a template to copy from</a>&quot;) and then modifying your edits as you see fit.</p>
+<a name="theme_convert_theme_end"></a>
+
+<a name="theme_convert_validation"></a><h2>Validation Methodology<a href="#theme_convert_validation" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Now that you have a functioning "style.css", "template.html" and  "theme.php" you should verify that it is generating valid output.</p>
+<ul>
+    <li>Suggestions to help you bring the theme you are editing up to XHTML 1.0 Transitional HTML
+      <ul>
+        <li>All ampersands (&amp;) that form part of a <strong>URL</strong> are to be coded '<tt class="code">&amp;amp;</tt>'. There are quite a few of these in the functions of theme.php.</li>
+        <li>All images to have the 'alt' attribute, and be closed '<tt class="code"> /&gt;</tt>'.</li>
+        <li>All meta tags should be closed '<tt class="code"> /&gt;</tt>'</li>
+        <li>All <tt class="code">&lt;hr&gt;</tt> and <tt class="code">&lt;br&gt;</tt> tags should be closed, i.e. instead of <tt class="code">&lt;hr&gt;</tt> you should write <tt class="code">&lt;hr /&gt;</tt> and instead of <tt class="code">&lt;br&gt;</tt> you should use <tt class="code">&lt;br /&gt;</tt></li>
+        <li>All background images/colors to be changed to CSS or style attributes. This depends on the layout.</li>
+        <li>Any existing tags or attributes in uppercase or partial uppercase (such as <tt class="code">onClick</tt>) to be changed to lowercase.</li>
+      </ul>
+    </li>
+    <li>Save all your open files and upload them to your webserver; test-drive both as admin and as "regular" user.</li>
+    <li>Use the following methodology to confirm that your theme generates valid XHTML 1.0 Transitional HTML.<br />
+    Each of the following pages needs to be <a href="http://validator.w3.org/">validated</a> as an anonymous user, registered user, and in admin mode:
+      <ul>
+        <li>index.php</li>
+        <li>thumbnails.php</li>
+        <li>displayimage.php</li>
+        <li>search.php</li>
+        <li>emailed HTML E-card.</li>
+      </ul>
+      &nbsp;<br />
+      To find help to validate your custom theme, review the section <a href="dev.htm#dev">Developer documentation</a> &rarr; <a href="dev_tools.htm#dev_tools">Tools recommended by the devs</a> &rarr; <a href="dev_tools.htm#dev_tools_web_development">Web development</a>
+    </li>
+</ul>
+<a name="validation_end"></a>
+
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

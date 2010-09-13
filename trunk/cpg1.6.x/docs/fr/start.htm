@@ -1,0 +1,357 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Démarrage - Coppermine Photo Gallery - Documentation &amp; manuel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="fr" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Démarrage" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation et manuel</h1>
+<div id="toc">
+<a href="toc.htm">Table des matières</a>
+</div>
+
+
+<a name="getting"></a><h1>Démarrage<a href="#getting" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>Voici la liste des problèmes souvent rencontrés par les débutants, lisez les donc un par un:</p>
+<ul>
+	<li>Utilisez le &quot;<strong><a href="albums.htm#albmgr">gestionnaire d'albums</a></strong>&quot; (la lien &quot;Albums&quot; dans le <a href="admin_menu.htm">menu administrateur</a>) pour créer et classer vos albums. Vous aurez besoin <strong>d'au moins un album</strong> ou vos fichiers pourront être placés.</li>
+	<li>Utilisez le groupe <strong>anonymous/guest</strong> pour définir ce que les utilisateurs non enregistrés (<abbr title="also known as">alias</abbr> <em>guests/visiteurs</em>) peuvent ou ne peuvent pas faire (dans le <a href="groups.htm#group_cp">gestionnaire des groupes</a>).</li>
+	<li>Utilisez les <strong><a href="albums.htm#modif_alb_pics">propriétés</a></strong> d'un album pour modifier ses descriptions et autorisations. L'écran de gestion des propriétés de l'album est accessible en cliquant sur le bouton "Propriétés"- à côté de la vignette représentant un album.</li>
+	<li>Pour que les utilisateurs puissent télécharger des fichiers dans un album, <strong>deux</strong> conditions doivent être remplies:
+		<ul>
+		  <li>L'utilisateur doit faire partie d'un <a href="groups.htm#group_cp">groupe</a> qui peut télécharger des fichiers.</li>
+		  <li>Il doit y avoir au moins un album ou les fichiers peuvent être téléchargés. C'est le cas si 
+		  	<ul>
+		  		<li>Il y a au moins un album dans une catégorie publique (ce peut être à la racine de la galerie) où &quot;<strong>Les visiteurs peuvent télécharger des fichiers</strong>&quot; a été paramétré sur &quot;<strong>Oui</strong>&quot;,<br /> <strong>ou</strong></li>
+		  		<li>L'utilisateur a crée un album dans la catégorie 'user galleries', s'il est autorisé à le faire.</li>
+		  	</ul>
+		  </li>
+		</ul>
+	</li>
+	<li>La même chose s'applique au <strong>vote pour les images</strong> et à <strong>l'envoi de commentaires</strong>: Le groupe auquel appartient l'utilisateur doit avoir les droits pour voter / poster des commentaires <strong>et</strong> il doit y avoir au moins un album ou les autorisations correspondantes ont été mises à OUI. Les autorisations des albums peuvent être paramétrées en utilisant l'écran de propriétés des albums.</li>
+	<li>Si vous avez installé sans problèmes la galerie mais que vous avez des problèmes pour la faire fonctionner correctement vous pouvez activer &quot;<strong><a href="configuration.htm#debug_mode">le mode de débogage</a></strong>&quot; dans la <strong>page de configuration</strong>. Dans ce mode, le script affichera la plupart des messages d'erreur ou d'alertes produits par PHP en plus de certaines informations de débogage. Cela peut vous fournir des informations très utiles pour comprendre ce qui ne fonctionne pas.</li>
+	<li>Dans la documentation, le mot "visiteur" est utilisé pour <em>toute</em> personne qui accède à une page (identifié ou non). "Visiteur" n'est pas équivalent à "Invité/Guest". Les invités comme les utilisateurs enregistrés sont des visiteurs.</li>
+</ul>
+
+
+
+<a name="getting_concepts"></a><h2>Concepts de base<a href="#getting_concepts" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Bien entendu vous êtes excités par Coppermine et voulez démarrer tout de suite. Néanmoins il y a quelques considérations de base que vous devez d'abord prendre en compte, parce que certains paramétrages ne peuvent pas être changés facilement par la suite, une fois que votre galerie est remplie de contenu (fichiers et images).</p>
+<p>Cette section est faite comme un guide une fois que vous avez terminé <a href="install.htm#installation">l'installation</a> de Coppermine. Consultez-la attentivement afin de vous éviter des problèmes qui pourraient survenir par la suite.</p>
+<ul>
+        <li><strong><a href="#getting_initial_configuration">Configuration initiale</a></strong><br />
+        Paramétrages que vous devez modifier immédiatement après avoir terminé l'installation</li>
+        <li><strong><a href="#getting_structure">Structure des catégories/album/fichiers</a></strong><br />
+        Pour comprendre comment Coppermine organise la navigation et le stockage des fichiers individuels</li>
+        <li><strong><a href="#getting_resizing">Redimensionnement des images</a></strong><br />
+        Une version redimensionnées des images originales que vous avez téléchargés est crée en fonction du paramétrage dans la configuration</li>
+        <li><strong><a href="#getting_admin_account">Votre compte administrateur</a></strong><br />
+        Assurez-vous d'avoir entré correctement tous les détails administrateur</li>
+		<li><strong><a href="#getting_upload_permissions">Permettre les téléchargements</a></strong><br />
+        Vous pouvez autoriser ou interdire aux utilisateurs de télécharger</li>
+        <li><strong><a href="#getting_check_uploads">Vérifiez les téléchargements</a></strong><br />
+        Assurez-vous que le téléchargement fonctionne correctement avant de laisser les visiteurs accéder à votre galerie</li>
+        <li><strong><a href="#getting_consider_bridging">Considérez le problème d'intégration</a></strong><br />
+        L'intégration(Bridging) peut être difficile si vous avez déjà des utilisateurs enregistrés</li>
+        <li><strong><a href="#getting_interaction">Qu'est ce que vos visiteurs ont le droit de faire ?</a></strong><br />
+        Quel niveau d'interaction allez-vous laisser aux visiteurs ?</li>
+        <li><strong><a href="#getting_design">Changez l'aspect de votre galerie Coppermine</a></strong><br />
+        Faites en sorte que votre galerie s'intègre parfaitement au reste de votre site</li>
+        <li><strong><a href="#getting_typical">Réglages particuliers</a></strong><br />
+        Le niveau d'interaction des visiteurs que vous souhaitez autoriser</li>
+</ul>
+
+
+<a name="getting_initial_configuration"></a><h2>Configuration initiale<a href="#getting_initial_configuration" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Il y a certains paramètres de la configuration de Coppermine que vous devrez modifier tout de suite après l'installation.</p>
+<p>Identifiez-vous avec l'identifiant et le mot de passe administrateur que vous avez défini lors de l'installation, cliquez sur le lien &quot;Montrer les contrôles administrateurs&quot; s’il est visible, allez à la page de <strong>configuration</strong> et commencez à configurer votre galerie. Notez que même si vous êtes membre du groupe administrateur, vous devrez activer la fonction &quot;Montrer les contrôles administrateurs&quot;. Dans les versions précédentes, ce lien était nommé &quot;mode administrateur&quot;, mais il a été renommé parce que certains pensaient que le fait de passer du mode administrateur au mode utilisateur leur montrait ce que les visiteurs pouvaient voir (ce qui n'est pas le cas).</p>
+<ul>
+  <li><a href="configuration.htm#admin_general_email">Courriel de l'administrateur de la galerie</a></li>
+  <li><a href="configuration.htm#admin_general_coppermine-url">URL du dossier de la galerie Coppermine</a></li>
+</ul>
+<p>Il y a certains paramètres de la configuration qui ne peuvent pas être changés plus tard (s’il y a déjà des fichiers dans la base de données) – assurez-vous de les configurer correctement dès le départ (ceux marqués par un astérisque &quot;*&quot;).</p>
+<p>Certains paramétrages ont de sérieux impacts sur les <a href="performance.htm">performances</a> et doivent être regardés attentivement, en particulier si vous êtes hébergés sur un hébergeur mutualisé ou gratuit.</p>
+
+<a name="getting_structure"></a><h2>Structure des catégories, albums et fichiers<a href="#getting_structure" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Coppermine Photo Gallery fonctionne de la manière suivante:</p>
+<ul>
+  <li>Les fichiers sont placés dans des albums</li>
+  <li>Les albums sont organisés en catégories</li>
+  <li>Les catégories peuvent être imbriquées (en sous-catégories)</li>
+</ul>
+
+<p>Si vous n'avez pas l'intention d'avoir beaucoup d'albums, vous ne souhaiterez peut être pas utiliser les catégories. Si c'est le cas, ne créez simplement pas de catégories et tous vos albums apparaîtront sur la page principale de votre galerie.</p>
+<p>Il y a toutefois une catégorie spéciale nommée &quot;<strong>User galleries/Galerie d’utilisateurs</strong>&quot;. Cette catégorie ne peut pas être effacée. Si un utilisateur appartient à un groupe qui &quot;peut avoir une galerie personnelle&quot; et que ce paramètre est défini à OUI, il aura le droit de crée ses propres albums et sa galerie sera une sous-catégorie &quot;User galleries&quot;. Ce lien n'est toutefois pas visible pour les visiteurs de votre site si vous n'autorisez pas vos utilisateurs à télécharger des images et à avoir leurs propres albums.</p>
+<p>L'administrateur peut crée des albums dans n'importe quelle catégorie. Un utilisateur non-administrateur ne peut crée des albums que dans &quot;User galleries/son_nom_d_utilisateur&quot;.</p>
+<p>Vous pouvez toutefois renommer &quot;User Galleries&quot;. Pour renommer la catégorie &quot;<strong>User galleries</strong>&quot; et sa description, allez simplement dans votre <a href="#cat_cp">gestionnaire de catégories</a> et changez le nom (par exemple en traduisant les mots &quot;User galleries&quot; dans votre langue).</p>
+
+<a name="getting_resizing"></a><h2>Images redimensionnées<a href="#getting_resizing" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Un des avantages principaux de Coppermine est le fait que le script crée les vignettes et les images intermédiaires pour les images originales téléchargées. Cela se fait une fois (au téléchargement), néanmoins le processus de création des images redimensionnées peut être relancé en utilisant <a href="admin-tools.htm#admin_tools">l'outil d'administration</a>. Les copies redimensionnée de vos images originales sont stockées dans le même répertoire que vos originaux - elles diffèrent uniquement au niveau des préfixes.</p>
+<p>Les images redimensionnées suivantes sont générées lorsque vous téléchargez une image:</p>
+<ul>
+	<li>
+	<a name="getting_resizing_thumbnails"></a><h3>Vignettes<a href="#getting_resizing_thumbnails" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	Les vignettes sont crées en fonction des options définies dans les "<a href="configuration.htm#admin_thumb_start">paramètres des vignettes</a>" dans la configuration, si le fichier téléchargé est plus grand en terme de dimensions que les dimensions définies dans le paramétrage des vignettes. Les vignettes sont essentiellement utilisées sur la page de vignettes des albums, mais aussi à d'autres endroits (par exemple dans la page de profil ou comme vignette des albums ou des catégories). La création de vignettes augmente grandement la vitesse de chargement de votre galerie - si Coppermine ne générait pas de vignettes et affichait à la place les images originales (en utilisant les attributs HTML pour les afficher en plus petit), la page des vignettes serait terriblement longue à charger.<br />
+	Pour les dimensions de vos vignettes, vous devez trouver le bon compromis: des vignettes avec de petites dimensions génèrent de petits fichiers et donc la page se charge très rapidement. L'inconvénient de petites dimensions sont manifestes: si vous entrez des valeurs trop petites, vos visiteurs ne se rendront pas compte de ce qu'il y a sur la photo et ne cliqueront pas sur la vignette pour voir l'image originale. Il n'y a pas de paramètres idéaux pour la taille des vignettes, cela dépends beaucoup du sujets de votre galerie, Toutefois nous vous conseillons d'utiliser en règle générale entre 50 et 250 pixels.<br />
+	Si vous téléchargez un fichier plus petit en termes de dimensions que la largeur/hauteur paramétrée pour les vignettes dans la configuration de Coppermine, la création de la vignette sera ignorée et l'image originale sera utilisée comme vignette.</li>
+	<li>
+	<a name="getting_resizing_intermediate"></a><h3>Images intermédiaires<a href="#getting_resizing_intermediate" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	L'image intermédiaire est crée si vous n'avez pas désactivé l'option "<a href="configuration.htm#admin_picture_thumbnail_intermediate_toggle">Créer une image intermédiaire</a>" ou si l'image téléchargée est plus petite ou égale en terme de dimensions aux valeurs pour largeur/hauteur que vous avez défini pour <a href="configuration.htm#admin_picture_thumbnail_intermediate_dimension">Largeur ou hauteur maximum d'une image intermédiaire</a>. Les images intermédiaires sont essentiellement utilisées pour l'affichage de la page des images intermédiaires (displayimage.php) que l'utilisateur voit une fois qu'il a cliqué sur la vignette. La page des images intermédiaires peut contenir toutes sortes d'informations complémentaires sur l'image (comme le nom de la personne ayant téléchargé l’image dans l’album, le titre, la description, des mots-clés etc...) et a un contrôle de navigation permettant aux visiteurs d'aller directement à l'image suivante/précédente d'un album sans être obligé de retourner à la page des vignettes. En plus, la page des images intermédiaires comprends des sections pour une interaction avec les utilisateurs (comme le vote ou les commentaires, si vous les avez autorisés dans la configuration).<br />
+	Le plus gros avantage d'avoir des images intermédiaire réside dans le fait que celle ci est prévue pour s'adapter à l'écran du visiteur, quelque soit sa résolution. Il en résulte une navigation transparente pour vos visiteurs. Il est préférable d'utiliser des valeurs "sûr" pour <a href="configuration.htm#admin_picture_thumbnail_intermediate_dimension">Largeur ou hauteur maximum pour les images intermédiaires</a> pour être sûr qu'elles tiennent à l'écran (y compris avec les contrôles supplémentaires de la page). Comme l'espace nécessaire à ces contrôles dépend du <a href="theme.htm#theme">thème</a> utilisé et que vous ne pouvez par être sûr de la résolution d'écran de vos visiteurs, il est préférable d'utiliser des dimensions pour les images intermédiaires se situant entre 400 et 800 pixels.<br />
+	La création des images intermédiaires accélère aussi le chargement des pages, particulièrement pour les utilisateurs avec une connexion lente, mais elles prennent bien entendu de la place sur le serveur d'hébergement. Ne désactivez la génération d'images intermédiaires <em>uniquement</em> vous n'avez pas beaucoup d'espace sur votre serveur. Les images intermédiaires sont stockées dans le même répertoire que les images originales et ont le préfixe "normal_".
+	<div class="cpg_example">
+		Admettons que vous ayez paramétré les dimensions maximales pour les images intermédiaires à 400 pixels. Vous (ou un de vos utilisateurs à qui vous avez autorisé le téléchargement) téléchargez une image nommée "monimage.jpg" qui a 800 pixels de large et 600 pixels de haut. Une image intermédiaire sera crée lors du processus de téléchargement, et sera nommée "normal_monimage.jpg" avec une résolution de 400 x 300. Une autre image est alors téléchargée avec pour nom "foobar.jpg" qui a 1024 par 768 pixels: là aussi, une image intermédiaire sera crée avec pour nom "normal_foobar.jpg" et qui sera aussi de dimensions 400 par 300 pixels. Une troisième image est téléchargée nommée "grosseimage.jpg" avec pour dimensions 1280 par 800 pixels. L'image intermédiaire crée ("normal_grosseimage.jpg") aura 400 par 250 pixels. Vous noterez que les dimensions de la troisième image intermédiaire sont différentes des deux autres. La raison est que la création des images intermédiaires respecte le ration des images originales. Néanmoins, vos visiteurs, lorsqu'ils parcourront l'album qui contient les trois images, verront toujours une image inclue dans la page et qui aura 400 pixels de large, de manière à ce que la page soit toujours visible sans barre de défilement horizontale qui forcerait le visiteur à faire défiler les pages sans arrêt.
+	</div>
+	</li>
+	<li>
+	<a name="getting_resizing_original"></a><h3>Images originales<a href="#getting_resizing_original" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	Les images originales sont affichées dans une fenêtre pop-up lorsque l'utilisateur clique sur l'image intermédiaire si l'image originale est plus grande en termes de dimensions que l'image intermédiaire.
+	  <div class="cpg_example">
+	Si vous avez paramétré les dimensions maximales pour les images intermédiaires à 400 pixels et que vous autorisez le téléchargement de plus grandes images. Deux fichiers sont téléchargés: le fichier "premiere_image.jpg" qui a 800 par 600 pixels, le ficher "seconde_image.jpg" qui a 400 par 300 pixels. Si un visiteur regarde l'image intermédiaire affichée pour "premier_image.jpg", il/elle pourra cliquer sur l'image intermédiaire et l'image originale s'affichera dans une fenêtre pop-up. Si il/elle regarde l'image intermédiaire affichée pour "seconde_image.jpg", le fait de cliquer sur cette image intermédiaire n'aura aucun effet, puisque visualiser l'image originale dans une fenêtre pop-up n'a pas vraiment de sens: l'image intermédiaire affiche déjà l'image dans la résolution la plus grande disponible.
+	</div>
+	Vous <em>pouvez</em> demander à Coppermine de ne jamais redimensionner les images originales qui sont téléchargées et de cette manière (en théorie toutefois) de préserver l'image originale sans modifications, il y a toutefois de gros inconvénients: avec les appareils photos modernes capables de faire des images plus grandes en terme de dimensions que les capacités des écrans de vos visiteurs, l'image originale affichée dans une fenêtre pop-up ne s'adaptera jamais à la taille de l'écran de vos visiteurs, les forçant à utiliser les barres de défilement sans arrêt. En plus, d'énormes images utiliseront beaucoup d'espace web et se chargeront très lentement pour les visiteurs ayant des connexions avec peu de bande passante.<br />
+	C'est pourquoi Coppermine contient une option pour redimensionner les images originales au moment du téléchargement à une résolution maximale - il est fortement recommandé d'utiliser cette option aussi bien pour les téléchargements de l'administrateur que pour ceux des visiteurs réguliers. Cette option se trouve dans la configuration de Coppermine et s'appelle <a href="configuration.htm#admin_picture_thumbnail_auto-resize">Redimensionner automatiquement les images qui dépassent la hauteur et/ou la largeur maximale</a>. Il est recommandé d'utiliser des valeurs comprises entre 800 et 1200 pixels. Dans cette documentation, nous nous référons à ces images comme étant "originales" bien qu'elles aient été initialement redimensionnées par Coppermine pendant le téléchargement. Techniquement parlant, ce ne sont plus des images originales, mais des copies redimensionnées, mais comme cette option a été ajoutée après la publication de la première version de Coppermine, la documentation se réfère à ces fichiers comme "originaux". Les images originales sont stockées sans préfixe, utilisant le nom de fichier donné par la personne ayant téléchargé l’image dans la galerie. Le nom de fichier est uniquement modifié s’il contient certains caractères interdits ou spéciaux, spécifiés dans les options de configuration de Coppermine <a href="configuration.htm#admin_picture_thumb_advanced_filename_forbidden_chars">Caractères interdits pour les noms de fichiers</a>.<br />
+	<!--With watermarking becoming a core feature in cpg1.5.x, there is another possible file that can be created: if you choose to enable server-sided watermarking, the unmarked original of the file can be kept as a safe copy - if you enable the corresponding watermarking option.-->
+	</li>
+</ul>
+<p>Coppermine utilise des librairies graphiques (soit GD ou ImageMagick) qui doivent exister sur votre serveur et capable de créer des images redimensionnées (regardez les "<a href="requirements.htm#what">minimum requis</a>"). Ces librairies ne sont pas en mesure de redimensionner les vidéos ni de préserver les métadonnées comme les données EXIF ou IPTC. C'est la raison pour laquelle les vignettes et les images intermédiaires ne peuvent être crées que pour le type de fichiers images supportés par la librairie que vous utilisez.</p>
+<p>Il peut y avoir des problèmes lors du redimensionnement de grandes images, parce que le redimensionnement utilise beaucoup de ressources serveur. Référez-vous à la section "<a href="upload_troubleshooting.htm#upload_trouble">Résolution de problèmes de téléchargement</a>" de la documentation si vous avez des problèmes avec de gros fichiers (ou pour faire fonctionner le téléchargement au départ).</p>
+
+<a name="getting_resizing_recommended"></a><h3>Paramètres recommandés pour le redimensionnement<a href="#getting_resizing_recommended" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<div class="cpg_message_success">Vous devez comprendre que le fait de changer le paramétrage de redimensionnement n'aura un impact que sur les images téléchargées après la modification. Les images déjà présentes au moment des changements que vous ferez dans cette partie de la configuration ne seront <strong>pas</strong> automatiquement redimensionnées suivant les nouveaux paramètres - vous devrez avoir recours au processus de redimensionnement en utilisant l'option correspondante &quot;<a href="admin-tools.htm#admin_tools_options_rebuild">mise à jour des vignettes et/ou des images redimensionnées</a>&quot; des <a href="admin-tools.htm#admin_tools">outils administrateur</a> et passer dans tous les albums pour utiliser ces nouveaux paramètres.</div>
+
+<a name="getting_resizing_recommended_nofullsize"></a><h4>Pas d'images de grande taille dans une fenêtre pop-up<a href="#getting_resizing_recommended_nofullsize" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<p>Si vous ne projetez pas du tout d'utiliser l'affichage des images de grande taille dans une fenêtre pop-up, par exemple si les images doivent toujours être affichées à l'intérieur de votre galerie Coppermine, vous pouvez paramétrer Coppermine de cette manière afin d'économiser de l'espace sur le serveur.</p>
+<p>Vous devez comprendre que vous devrez satisfaire vos visiteurs avec une plus petite résolution. Si vous pensez que vos visiteurs ont une résolution de 1024 x 768 pixels ou mieux, vous devriez paramétrer la taille de la largeur des images embarquées à 800, parce que vous aurez besoin d'espace complémentaire pour l'affichage des espaces et des autres contrôles de la page.</p>
+<p class="cpg_example">Admettons par exemple que la taille maximale que vos visiteurs sont en mesure de voir soit 800 pixels.</p>
+<p>Allez dans la configuration de Coppermine et <strong>paramétrez</strong>:</p>
+<ul>
+	<li>&quot;<a href="configuration.htm#admin_picture_thumbnail_intermediate_toggle">Créer des images intermédiaires</a>&quot; sur "non"<br />
+	De cette manière, les images originales seront utilisées dans la page displayimage (affichage après le clic sur la vignette)</li>
+    <li>&quot;<a href="configuration.htm#admin_picture_thumbnail_intermediate_dimension">Largeur ou hauteur maximale pour une image ou une vidéo intermédiaire</a>&quot; à "800"<br />
+	Cela prendra en compte la résolution que vous voulez avoir pour les images affichées dans la page displayimage</li>
+    <li>&quot;<a href="configuration.htm#admin_picture_thumbnail_max_upload_dimension">Longueur ou hauteur maximale pour les images ou vidéos téléchargées</a>&quot; à "800"<br />
+	Il en résultera un message d'erreur si l'utilisateur essaye de télécharger des images avec une plus grande résolution si vous paramétrez l'option suivante "Redimensionner automatiquement les images qui dépassent la hauteur et/ou la largeur maximale" sur "Non". Toutefois si vous réglez, "Redimensionner automatiquement les images qui dépassent la hauteur et/ou la largeur maximale" sur "Oui", tous les fichiers téléchargés seront redimensionnés en fonction de ce que vous aurez défini dans "Longueur ou hauteur maximale pour les images ou vidéos téléchargées"</li>
+    <li>&quot;<a href="configuration.htm#admin_picture_thumbnail_auto-resize">Redimensionner automatiquement les images qui dépassent la hauteur et/ou la largeur maximale</a>&quot; à "Oui: Tous"<br />
+	Comme expliqué plus haut, vous devez définir ce paramètre à "Oui" pour être sûr que les visiteurs n'aient pas de message d'erreur s’ils téléchargent des fichiers plus grands que ce qu'ils devraient être. Coppermine redimensionnera les fichiers sur le serveur si nécessaire</li>
+</ul>
+<p>Les paramètres ci-dessus sont les plus importants si vous décidez de désactiver la fonction d'affichage des images de grande taille dans une fenêtre pop-up, puisqu'ils économisent le maximum de place sur le serveur et rendent impossible pour les visiteurs de voir les images dans une plus grande résolution.</p>
+
+<a name="getting_resizing_recommended_nointermediate"></a><h4>Autoriser les images originales dans une fenêtre pop-up en gagnant un maximum de place<a href="#getting_resizing_recommended_nointermediate" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<p>&quot;<a href="configuration.htm#admin_picture_thumbnail_intermediate_toggle">Créer des images intermédiaires</a>&quot; sur "Non" dans la configuration ne créera pas une galerie ou vous n'aurez pas d'images intermédiaires inclues dans l'affichage; à la place, les images originales seront affichées et redimensionnées par à un mécanisme HTML. Cette option est recommandée si la majorité de vos images doivent être vues en grande taille: de cette manière, le navigateur mettra les images en cache et les fenêtres des pop-up des images de grande taille s'afficheront très rapidement.</p>
+<p>Le fait de ne pas crée d'images intermédiaires aura bien entendu un impact dur l'espace web économisé: ne pas créer d'images économisera bien entendu un peu d'espace. Toutefois, si vous avez un problème de place sur votre serveur, vous feriez mieux de limiter la &quot;<a href="configuration.htm#admin_picture_thumbnail_max_upload_dimension">Longueur ou hauteur maximale pour les images ou vidéos téléchargées</a>&quot; et d'activer le redimensionnement d'images à ces dimensions (option &quot;<a href="configuration.htm#admin_picture_thumbnail_auto-resize">Redimensionner automatiquement les images qui dépassent la hauteur et/ou la largeur maximale</a>&quot;) - les appareils photos numériques actuels font des images énormes, avec des résolutions telles qu'elles utilisent beaucoup de place de stockage. Le redimensionnement de ces images à des résolutions qui ont un sens au niveau du web est tout à fait adapté pour toutes les sortes de galeries.</p>
+<div class="cpg_example">
+Exemple de configuration:
+<ul>
+	<li>Paramètre de configuration &quot;<a href="configuration.htm#admin_picture_thumbnail_intermediate_toggle">Créer des images intermédiaires</a>&quot; &rarr; "Non"</li>
+    <li>Paramètre de configuration &quot;<a href="configuration.htm#admin_picture_thumbnail_intermediate_dimension">Largeur ou hauteur maximale pour une image ou une vidéo intermédiaire</a>&quot; &rarr; "600"</li>
+    <li>Paramètre de configuration &quot;<a href="configuration.htm#admin_picture_thumbnail_max_upload_dimension">Longueur ou hauteur maximale pour les images ou vidéos téléchargées</a>&quot; &rarr; "1280"</li>
+    <li>Paramètre de configuration &quot;<a href="configuration.htm#admin_picture_thumbnail_auto-resize">Redimensionner automatiquement les images qui dépassent la hauteur et/ou la largeur maximale</a>&quot; &rarr; "Oui: Tous"</li>
+</ul>
+</div>
+
+<a name="getting_resizing_recommended_regular"></a><h4>Paramétrage &quot;standard&quot; avec utilisation modérée d'espace par les fichiers<a href="#getting_resizing_recommended_regular" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<p>Si vous avez assez de place sur votre serveur ainsi que de bande passante et que vos visiteurs ont une bande passante décente, il est recommandé d'autoriser la création d'images intermédiaires et d'autoriser l'affichage des images de grande taille dans des fenêtres pop-up pour les visiteurs qui voudront les voir en détails.</p>
+<div class="cpg_example">
+Exemple de configuration:
+<ul>
+	<li>Paramètre de configuration &quot;<a href="configuration.htm#admin_picture_thumbnail_intermediate_toggle">Créer des images intermédiaires</a>&quot; &rarr; "Oui"</li>
+    <li>Paramètre de configuration &quot;<a href="configuration.htm#admin_picture_thumbnail_intermediate_dimension">Largeur ou hauteur maximale pour une image ou une vidéo intermédiaire</a>&quot; &rarr; "800"</li>
+    <li>Paramètre de configuration &quot;<a href="configuration.htm#admin_picture_thumbnail_max_upload_dimension">Longueur ou hauteur maximale pour les images ou vidéos téléchargées</a>&quot; &rarr; "1600"</li>
+    <li>Paramètre de configuration &quot;<a href="configuration.htm#admin_picture_thumbnail_auto-resize">Redimensionner automatiquement les images qui dépassent la hauteur et/ou la largeur maximale</a>&quot; &rarr; "Oui: Tous"</li>
+</ul>
+</div>
+
+<a name="getting_admin_account"></a><h2>Votre compte administrateur<a href="#getting_admin_account" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Il est impératif de configurer correctement votre compte administrateur et de mémoriser les éléments de ce compte. Coppermine vous propose une option pour recréer un mot de passe si vous l'avez oublié, mais pour cela, il faut que vous ayez défini une adresse courriel pour chaque compte. Lorsque les utilisateurs s'enregistrent, ils doivent entrer une adresse courriel, il n'y a donc pas de problèmes pour eux. Toutefois, le compte administrateur que vous avez crée pendant l'installation de la galerie n'a pas encore d'adresse courriel. Vous devez allez à la page de votre profil en étant identifié comme administrateur et entrer une adresse courriel valide pour l'administrateur - de cette manière, vous pourrez demander la création d'un nouveau mot de passe si vous deviez oublier le votre par la suite.</p>
+<p>Pour être absolument clair: il y a deux endroits dans Coppermine ou vous devez entrer une adresse courriel:</p>
+<ul>
+    <li>Le premier endroit est l'option de configuration &quot;<a href="configuration.htm#admin_general_email">Adresse courriel de l'administrateur</a>&quot;. Coppermine utilisera cette adresse comme adresse "de" lors de l'envoi de courriels (par exemple pendant l'enregistrement). Il est impératif de renseigner cette adresse courriel correctement. Si vous avez votre propre domaine, il peut être intéressant d'avoir une adresse courriel en lien avec ce nom de domaine.</br>
+    <div class="cpg_example">Si votre nom de domaine est &quot;exemple.com&quot;, vous devriez créer une adresse courriel nommée galerie@exemple.com et utiliser cette adresse dans la configuration de Coppermine. Coppermine ne crée <strong>pas</strong> cette adresse pour vous !</div></li>
+    <li>Le second endroit est le profil de votre compte administrateur: vous devrez aussi définir une adresse courriel pour ce compte. Ce peut être n'importe quelle sorte d'adresse courriel - à condition que ce soit une adresse que vous suiviez.</li>
+</ul>
+<p>Ce n'est pas un problème si ces deux adresses courriels sont les mêmes: elles peuvent être identiques ou différentes. Assurez-vous simplement d'avoir défini les deux.</p>
+
+<a name="getting_upload_permissions"></a><h2>Autorisations de téléchargement<a href="#getting_upload_permissions" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Avec Coppermine, la permission de télécharger des fichiers est déterminée au niveau de l'appartenance au groupe. A cet effet, vous affectez le privilège aux groupes de télécharger dans le panneau de <a href="groups.htm#group_cp">configuration des groupes</a> il y a les configurations suivante possibles (par groupe):</p>
+<ul>
+	<li>
+		<a name="getting_upload_permissions_no"></a><h3>Aucun téléchargement possible<a href="#getting_upload_permissions_no" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+		<ul>
+			<li>
+				Interdire toutes sortes d'ajouts dans le <a href="groups.htm#group_cp">gestionnaire de groupes</a> pour le groupe en question
+				<ul>
+					<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne correspondante au groupe &rarr; Galerie personnelle &rarr; Autorisé = Non</span></li>
+					<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne correspondante au groupe &rarr; Téléchargement dans les albums publics &rarr; Autorisé = Non</span></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li>
+		<a name="getting_upload_permissions_public_nocreate"></a><h3>L'utilisateur peut télécharger dans des albums crée notamment dans les catégories faites par l’administrateur, mais ne peut pas créer d’albums<a href="#getting_upload_permissions_public_nocreate" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+		<ul>
+			<li>
+				Autorisé le téléchargement dans les albums publics dans le <a href="groups.htm#group_cp">gestionnaire de groupes</a> pour le groupe en question
+				<ul>
+					<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne correspondante au groupe &rarr; Galerie personnelle &rarr; Autorisé = Non</span></li>
+					<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne correspondante au groupe &rarr; Téléchargement dans les albums publics &rarr; Autorisé = Oui</span></li>
+				</ul>
+			</li>
+			<li>
+				Vous aurez besoin d'au moins un album où les ajouts de fichiers ont été autorisés. Allez dans les <a href="albums.htm#album_prop">propriétés de l'album</a> dans une catégorie public, dont l'utilisateur est pourra télécharger des fichiers dedans.
+				<ul>
+					<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Propriétés de l'album &rarr; Les visiteurs peuvent mettre des photos en ligne = Oui</span></li>
+				</ul>
+				Répétez cette opération si vous voulez pour permettre le chargement de fichiers dans plusieurs albums.
+			</li>
+		</ul>
+	</li>
+	<li>
+		<a name="getting_upload_permissions_public_yescreate"></a><h3>L'utilisateur peut télécharger dans les albums notamment ceux dont les catégories ont été créées par l’administrateur et peut créer des albums à l'intérieur des catégories particulières<a href="#getting_upload_permissions_public_yescreate" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+		<ul>
+			<li>
+				Autorisé le téléchargement dans les albums publics dans le <a href="groups.htm#group_cp">gestionnaire de groupes</a> pour le groupe en question
+				<ul>
+					<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne correspondante au groupe &rarr; Galerie personnelle &rarr; Autorisé = Non</span></li>
+					<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne correspondante au groupe &rarr; Téléchargement dans les albums publics &rarr; Autorisé = Oui</span></li>
+				</ul>
+			</li>
+			<li>
+				Allez dans le <a href="categories.htm#cat_cp">gestionnaire de catégorie</a> et déterminer la ou les catégories dans lesquelles l'utilisateur est supposé être en mesure de créer des albums.
+				<ul>
+					<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Catégories &rarr; Icône modifier sur la ligne qui correspond à la catégorie dont vous souhaitez autoriser la création d'albums dedans &rarr; Groupe(s) autorisé(s) à créer des albums dans cette catégorie &rarr; Sélectionnez les groupes (pour sélectionner plusieurs groupes, appuyez sur [Ctrl] en le maintenant et cliquer sur les groupes désirez)</span></li>
+				</ul>
+				Par défaut, les non-administrateurs ne sont pas autorisés à créer des albums dans les catégories publics, il faut donc explicitement permettre à des groupes particuliers de créer des albums dans une catégorie particulière.
+			</li>
+		</ul>
+	</li>
+	<li>
+		<a name="getting_upload_permissions_personal"></a><h3>L'utilisateur peut créer des albums personnels au sein de la galerie d'utilisateurs et peut télécharger dans les albums, qu’il a créés<a href="#getting_upload_permissions_personal" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+		Lorsque l'utilisateur est autorisé à télécharger dans les galeries personnelles, les paramètres suivants doivent être appliqués.
+		<ul>
+			<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne correspondante au groupe &rarr; Galerie personnelle &rarr; Autorisé = Oui</span></li>
+			<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne correspondante au groupe &rarr; Téléchargement dans les albums publics &rarr; Autorisé = Non</span></li>
+		</ul>
+		L'utilisateur aura alors un <a href="admin_menu.htm#user_menu_items">menu additionel</a> bouton intitulé &quot;Créer / classer mes albums&quot; Qu’il aura besoin pour créer un premier album avant de pouvoir télécharger dedans (à moins que l'option de configuration <span class="navlocator" style="text-align:right;color:#0E72A4;">Configuration &rarr; Enregistrement &rarr; Créer un album personnel pour l'utilisateur lors de son enregistrement</span> soit activée).
+	</li>
+	<li>
+		<a name="getting_upload_permissions_combination"></a><h3>L'utilisateur peut télécharger à la fois dans les albums publics et personnels<a href="#getting_upload_permissions_combination" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+		Une combinaison pour permettre à la fois l’ajout de fichiers dans des albums publics ainsi que personnel est également possible: vous pouvez déterminer que l'utilisateur puisse télécharger dans des albums à la fois dans des catégories publics ainsi que dans des albums personnels au sein de sa section Galerie d'utilisateurs. Pour ce faire, dans le panneau de configuration des groupes les options suivantes doivent être définies:
+		<ul>
+			<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne correspondante au groupe &rarr; Galerie personnelle &rarr; Autorisé = Oui</span></li>
+			<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne correspondante au groupe &rarr; Téléchargement dans les albums publics &rarr; Autorisé = Oui</span></li>
+		</ul>
+		Les méthodes proposées ci-dessus permettent le téléchargement dans des albums notamment en utilisant les propriétés de l'album ainsi que les paramétrages nécessaires dans le panneau de configuration des catégories pour appliquer les suggestions ci-dessus.
+	</li>
+</ul>
+
+<a name="getting_check_uploads"></a><h2>Vérification des téléchargements<a href="#getting_check_uploads" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Avant de promouvoir votre galerie Coppermine auprès du public, vous devrez vous assurez que le téléchargement fonctionne correctement, car ce sont les problèmes les plus courants rencontrés par les utilisateurs, qui peuvent être causés par de multiples facteurs qu'il faut prendre en compte. Regardez la section de <a href="upload_troubleshooting.htm">résolution des problèmes de téléchargement</a> si vous rencontrez des problèmes.</p>
+
+
+<a name="getting_consider_bridging"></a><h2>Penser à l'intégration<a href="#getting_consider_bridging" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Coppermine a été conçu comme une application autonome. Toutefois, beaucoup de personnes souhaitent l'intégrer à une autre <abbr title="application">app</abbr>, donc, depuis la version cpg1.1.x, Coppermine propose un mécanisme qui permet aux utilisateurs d'intégrer Coppermine avec d'autres applications pour la gestion des utilisateurs. Le principal avantage est de ne demander qu'une seule identification à vos visiteurs pour l'ensemble du site (par exemple aussi bien pour votre galerie que pour votre forum), de ce fait ils n'ont pas à s'enregistrer deux fois ni à se rappeler deux différents identifiants.</p>
+<p class="cpg_message_success">La passerelle <strong>n'intègre pas</strong> visuellement Coppermine dans votre site (vous devrez <a href="theme.htm#creating">créer un thème personnalisé</a> pour faire cela). Tout de qu’elle fait, c’est la liaison entre Coppermine et votre autre application, ce qui est logique car ne s’occupant que de la gestion et de l’inscription des utilisateurs.</p>
+<p>Vous pouvez activer (ou désactiver) l'intégration à tout moment, mais vous devriez y réfléchir au moment de l'installation de Coppermine, parce qu'il y a certains problèmes à prendre en compte: si vous avez déjà des utilisateurs dans votre base de données Coppermine lorsque vous activez la passerelle, la corrélation entre les utilisateurs initiaux de Coppermine et les "nouveaux" utilisateurs de l'application avec laquelle vous intégrer Coppermine sera perdue. La conséquence sera qu'il n'y aura plus de corrélation avec les actions que vos "anciens" utilisateurs avaient faites (téléchargement d'images, commentaires etc...) et les "nouveaux" utilisateurs de l'application avec laquelle vous intégrez Coppermine.</p>
+<p>Pour éviter ces problèmes futurs, vous devez vous poser la question au moment de l'installation de Coppermine: voulez-vous autoriser l'interaction des utilisateurs ? Avez-vous l'intention de proposer un forum par la suite (ou toute autre application utilisant une gestion des utilisateurs) ? Si votre réponse est "oui" ou "peut-être", il est préférable d'activer la passerelle avant de publier votre site et de laisser les visiteurs s'enregistrer.</p>
+<p>Voyez les détails dans la section <a href="bridging.htm#integrating">intégration</a> de la documentation.</p>
+
+
+
+<a name="getting_interaction"></a><h2>Qu'est ce que vos visiteurs sont autorisés à faire ?<a href="#getting_interaction" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Coppermine peut être utilisé pour beaucoup de choses: certains l'utilisent pour afficher leurs fichiers personnels et les rendre visibles à tous sur Internet, d'autres ne veulent uniquement qu'un nombre limité d'utilisateurs soient en mesure d'accéder à leur site uniquement pour une visualisation et sans interaction du tout. Une grande part de Webmasters veulent créer des sites communautaires, ou les utilisateurs peuvent participer en téléchargeant des fichiers, en commentant les fichiers des autres et en votant pour eux.</p>
+<p>Vous pouvez utiliser Coppermine pour toutes ces utilisations (ou pour un mélange de celles-ci), mais vous devrez être conscient des possibilités et limitations en premier lien:</p>
+<p>Les utilisateurs &quot;héritent&quot; leurs autorisations du groupe auquel ils appartiennent. C'est pourquoi plusieurs paramètres de Coppermine sont définis par groupes. De cette manière, vous pouvez avoir plusieurs niveaux de permissions. Définissez les permissions par groupe en utilisant le <a href="groups.htm#group_cp">gestionnaire de groupe</a></p>
+
+
+
+<a name="getting_design"></a><h2>Changez l'aspect de votre galerie Coppermine<a href="#getting_design" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Vous pouvez modifier certains aspects de conception et de mise en page (par exemple <a href="configuration.htm#admin_album_list_content">affichage de vignettes au hasard sur la page d'index</a>) dans la section correspondante de la <a href="configuration.htm">configuration</a> Coppermine possède un <a href="theme.htm#theme_engine">moteur de thème</a> vous permettant de personnaliser l'aspect de votre galerie. Vous pouvez choisir un des thèmes inclus dans Coppermine ou vous pouvez télécharger <a href="theme_user-contributions.htm#theme_user-contributions">thèmes provenant de contributions d'utilisateurs</a> depuis la page de téléchargement du site de Coppermine. A partir d'un thème disponible, vous pouvez <a href="theme_create.htm#theme_create">personnaliser votre propre thème</a> pour faire en sorte que votre site ait un look unique et que la galerie ait le même aspect que le reste de votre site.</p>
+
+<a name="getting_typical"></a><h2>Réglages typique<a href="#getting_typical" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Il y a beaucoup d'options de configuration à l'intérieur de Coppermine - utilisez les à bon escient. Comme beaucoup d'utilisateurs demandent un réglage <em>typique</em> (bien qu'il n'y ait rien de tel et que <em>le</em> réglage par défaut est adapté à tout le monde), en voici juste quelques-uns:</p>
+
+<a name="getting_typical_monolithic"></a><h3>Téléchargeur unique <em>sans</em> interaction d'utilisateur (galerie monolithique)<a href="#getting_typical_monolithic" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p><em>Seul un téléchargeur (vous l'administrateur) et peu ou pas d'interaction de l'utilisateur</em><br />
+Si vous êtes le seul à télécharger des images et que vous ne voulez pas ou peu d'interaction de la part des utilisateurs, désactivez tout ce que vous ne souhaitez pas permettre à vos visiteurs de faire. C'est généralement le cas si vous êtes un artiste ou photographe: il n'y a pas de communauté crée avec la galerie - vous voulez juste montrer au public le contenu de votre site.</p>
+<ul>
+    <li>Désactivez l'enregistrement de nouveaux utilisateurs dans la configuration de Coppermine (<span class="navlocator" style="text-align:right;color:#0E72A4;">Configuration &rarr; Enregistrement &rarr; Autoriser les nouvelles inscriptions</span>). Cela va désactiver le lien "inscription" du menu. Les utilisateurs qui se rendraient manuellement sur la page d'enregistrement auront un message leur expliquant qu'ils ne peuvent pas faire cette opération</li>
+    <li>Désactivez la création de nouveaux albums pour les utilisateurs (<span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne &quot;Registered&quot; &rarr; Galerie personnelle &rarr; Autorisé = Non</span>) au cas ou vous n'aviez pas désactivé les enregistrements dès le début et qu'il reste des utilisateurs enregistrés.</li>
+    <li>Interdisez les visiteurs de télécharger dans les albums en allant dans le panneau de gestion des groupes et en paramétrant &quot;Téléchargement dans les albums publics&quot; to be not allowed: <span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne &quot;Guests&quot; &rarr; Téléchargement dans les albums publics &rarr; Autorisé = Non</span>. Si des visiteurs (ou un autre groupe d'utilisateur) n'est pas autorisé à avoir une galerie personnelle ni à télécharger dans les albums publics, le lien &quot;Télécharger un fichier&quot; du menu ne sera pas affiché.</li>
+    <li>Si vous ne voulez pas que vos visiteurs interagissent en <strong>notant</strong>, turn rating off on the groups control panel for the guests/anonymous group: <span class="navlocator" style="text-align:right;color:#0E72A4;">Groups &rarr; Ligne &quot;Guests&quot; &rarr; Droits &rarr; Note = Non</span>. Si la notation est désactivée, le visiteur ne verra pas les étoiles de notation qui lui permettrait de noter l'image.</li>
+    <li>Si vous ne voulez pas que vos visiteurs postent des commentaires, mettez "non" pour les commentaires pour les visiteurs: <span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne &quot;Guests&quot; &rarr; Droits &rarr; Commentaires = Non</span>.</li>
+    <li>Si vous ne voulez pas que vos visiteurs <strong>envoient des cartes électroniques</strong>, désactivez l'autorisation d'envoyer des cartes électroniques  dans le panneau de gestion des groupes comme ci-après: <span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne &quot;Guests&quot; &rarr; Droits &rarr; Cartes électronique = Non</span></li>
+    <ul>
+
+<a name="getting_typical_single_uploader_community"></a><h3>Téléchargeur unique <em>avec</em> interaction des utilisateurs<a href="#getting_typical_single_uploader_community" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Si vous devez être l'unique téléchargeur, mais que vous voulez créer une communauté autour de votre site avec des visiteurs enregistrés qui postent des commentaires etc..., désactivez uniquement le téléchargement pour vos utilisateurs, mais activez toutes les autres fonctions que vous souhaitez autoriser:</p>
+<ul>
+    <li>
+        Désactiver tous les téléchargements pour les visiteurs aussi bien que pour les utilisateurs enregistrés:
+        <ul>
+            <li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne &quot;Guests&quot; &rarr; Galerie personnelle &rarr; Autorisé = Non</span></li>
+            <li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne &quot;Registered&quot; &rarr; Galerie personnelle &rarr; Autorisé = Non</span></li>
+            <li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne &quot;Guests&quot; &rarr; Téléchargement dans les albums publics &rarr; Autorisé = Non</span></li>
+            <li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne &quot;Registered&quot; &rarr; Téléchargement dans les albums publics &rarr; Autorisé = Non</span></li>
+        </ul>
+    </li>
+    <li>
+        Pour éviter les spams dans les commentaires, vous devriez ne pas autoriser les commentaires pour les visiteurs, mais les autoriser pour les utilisateurs enregistrés:
+        <ul>
+            <li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne &quot;Guests&quot; &rarr; Droits &rarr; Commentaires = Non</span></li>
+            <li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne &quot;Registered&quot; &rarr; Droits &rarr; Commentaires = Oui</span></li>
+            <li>Pour lutter contre les spams dans les commentaires vous devriez activer l'approbation des commentaires et/ou Captcha pour les commentaires.<br />
+            Pour activer l'approbation des commentaires, allez dans la configuration de Coppermine et changez les réglages suivants: <span class="navlocator" style="text-align:right;color:#0E72A4;">Configuration &rarr; Paramètres des commentaires &rarr; Les commentaires nécessitent l'approbation de l'administrateur</span>.<br />
+            En plus (ou à la place), vous devriez activer <acronym title="Completely Automated Public Turing test to tell Computers and Humans Apart">captcha</acronym> (une sorte d'image qui affiche des lettres aléatoires que le visiteur doit lire et entrer dans un champ afin de prouver qu'il est bien un humain et pas un fichu robot) pour les commentaires: <span class="navlocator" style="text-align:right;color:#0E72A4;">Configuration &rarr; Paramètres des commentaires &rarr; Afficher CAPTCHA (confirmation visuelle) pour l'ajout de commentaires</span></li>
+        </ul>
+    </li>
+  <li>
+        Autoriser les visiteurs à noter votre contenu: vous activez la notation par niveau de groupe. Pour cela, allez dans le panneau de gestion des groupes et autorisez la notation pour tous les groupes possibles:
+          <ul>
+            <li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne &quot;Guests&quot; &rarr; Droits &rarr; Note = Oui</span></li>
+            <li><span class="navlocator" style="text-align:right;color:#0E72A4;">Groupes &rarr; Ligne &quot;Registered&quot; &rarr; Droits &rarr; Note = Oui</span></li>
+        </ul>
+      Comprenez que ce n'est pas tout: pensez à ces réglages par groupes comme un commutateur général. Vous pouvez ajuster ces réglages individuellement pour chaque album: vous pouvez autoriser la notation pour un album et l'interdire pour un autre. Allez dans les <a href="albums.htm#album_prop">Propriétés des albums</a> de chaque album pour autoriser/interdire la notation pour cet album en particulier.</li>
+</ul>
+
+<a name="getting_typical_multiple_uploader_closed"></a><h3>Téléchargeurs multiples <em>sans</em> nouvelles inscriptions (groupe fermé)<a href="#getting_typical_multiple_uploader_closed" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Habituellement, cette configuration est utilisée si vous allez avoir un nombre relativement faible d'utilisateurs qui pourront faire du téléchargement, mais un plus grand nombre de personnes qui sont supposés pouvoir voir le contenu de votre galerie. C'est souvent le cas pour les clans, les clubs ou des entreprises, où les membres sont autorisés à télécharger des fichiers, mais les visiteurs de la page ne sont là que pour parcourir les images, sans ajouter de nouveau contenu. Il y a relativement peu de différence avec la configuration précédente &quot;<a href="#getting_typical_single_uploader_community">Téléchargeur unique <em>avec</em> interaction des utilisateurs</a>&quot; sauf dans les cas suivants:</p>
+<ul>
+	<li><span class="navlocator" style="text-align:right;color:#0E72A4;">Configuration &rarr; Enregistrement &rarr; Autoriser de nouvelles inscriptions  = Non</span> qui fera en sorte qu'aucun utilisateur ne pourra s’inscrire. C'est à l'administrateur de créer les comptes utilisateurs nécessaires.</li>
+	<li>L'administrateur peut bien entendu définir des <a href="#getting_upload_permissions">autorisations pour les transferts</a> pour les utilisateurs ainsi enregistrés</li>
+</ul>
+
+<a name="getting_typical_multiple_uploader_open"></a><h3>Téléchargeurs multiples avec nouvelles inscriptions<a href="#getting_typical_multiple_uploader_open" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Dans cette configuration, nous allons passer par une installation qui peut vous paraître un peu déroutante au départ, mais c'est quelque chose que beaucoup d'administrateurs de galeries souhaitent avoir: une galerie où tout le monde peut s'inscrire et où les utilisateurs peuvent ainsi télécharger.</p>
+<p>Pour construire une communauté autour de votre site Web, vous devrez donner à vos visiteurs un avantage supplémentaire pour qu’ils s’enregistrent: l'enregistrement demande de faire un effort dans la visite de votre site, c’est pourquoi il doit y avoir un avantage.
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>
