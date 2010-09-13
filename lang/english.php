@@ -2539,9 +2539,6 @@ $lang_xp_publish_php['link'] = '';
 // Core plugins
 // ------------------------------------------------------------------------- //
 if (defined('CORE_PLUGIN')) {
-$lang_plugin_php['usergal_alphatabs_config_name'] = 'User Gallery Alphabetic Tabbing'; // cpg1.5
-$lang_plugin_php['usergal_alphatabs_config_description'] = 'What it does: displays tabs from A to Z at the top of user galleries that visitors can click on to directly jump to a page that displays all user galleries of the users who\'s username starts with that letter. Plugin only recommended to be used if you have a really large number of user galleries.'; // cpg1.5
-$lang_plugin_php['usergal_alphatabs_jump_by_username'] = 'Jump by username'; // cpg1.5
 $lang_plugin_php['sample_config_name'] = 'Sample Plugin'; // cpg1.5
 $lang_plugin_php['sample_config_description'] = 'This is a sample plugin. It will not do anything particular useful - it is just meant to demonstrate what plugins can do and how to code them. When enabled, it will display some sample text in red.'; // cpg1.5
 $lang_plugin_php['sample_plugin_documentation'] = 'Plugin Documentation'; // cpg1.5
@@ -2550,40 +2547,6 @@ $lang_plugin_php['sample_install_explain'] = 'Enter the username (\'foo\') and p
 $lang_plugin_php['sample_install_username'] = 'Username'; // cpg1.5
 $lang_plugin_php['sample_install_password'] = 'Password'; // cpg1.5
 $lang_plugin_php['sample_output'] = 'This is sample data returned from the sample plugin'; // cpg1.5
-$lang_plugin_php['opensearch_config_name'] = 'OpenSearch'; // cpg1.5
-$lang_plugin_php['opensearch_config_description'] = 'An implementation of <a href="http://www.opensearch.org/" rel="external" class="external">OpenSearch</a> for Coppermine.<br />When enabled, visitors can add your gallery to their browser\'s search bar.'; // cpg1.5
-$lang_plugin_php['opensearch_search'] = 'Search %s'; // cpg1.5
-$lang_plugin_php['opensearch_extra'] = 'You may want to add some text to your site that explains what this plugin does'; // cpg1.5
-$lang_plugin_php['opensearch_failed_to_open_file'] = 'Failed to open file %s - check permissions'; // cpg1.5
-$lang_plugin_php['opensearch_failed_to_write_file'] = 'Failed to write to file %s - check permissions'; // cpg1.5
-$lang_plugin_php['opensearch_form_header'] = 'Enter the details to be used for the description file'; // cpg1.5
-$lang_plugin_php['opensearch_gallery_url'] = 'Gallery URL (must be correct)'; // cpg1.5
-$lang_plugin_php['opensearch_display_name'] = 'Name as displayed in browser'; // cpg1.5
-$lang_plugin_php['opensearch_description'] = 'Description'; // cpg1.5
-$lang_plugin_php['opensearch_character_limit'] = '%s character limit'; // cpg1.5
-$lang_plugin_php['onlinestats_description'] = 'Display a block on each gallery page that shows users and guests actually online.';
-$lang_plugin_php['onlinestats_name'] = 'Who is online?';
-$lang_plugin_php['onlinestats_config_extra'] = 'To enable this plugin (make it actually display the onlinestats block), the string "onlinestats" (separated with a slash) has been added to "the content of the main page" in <a href="admin.php">Coppermine\'s config</a> in the section "Album list view". The setting should now look like "breadcrumb/catlist/alblist/onlinestats" or similar. To change the position of the block, move the string "onlinestats" around inside that config field.';
-$lang_plugin_php['onlinestats_config_install'] = 'The plugin runs additional queries on the database each time it is being executed, burning CPU cycles and using resources. If your Coppermine gallery is slow or has got a lot of users, you shouldn\'t use it.';
-$lang_plugin_php['onlinestats_we_have_reg_member'] = 'There is %s registered user';
-$lang_plugin_php['onlinestats_we_have_reg_members'] = ' There are %s registered users';
-$lang_plugin_php['onlinestats_most_recent'] = 'The newest registered user is %s';
-$lang_plugin_php['onlinestats_is'] = 'In total there is %s visitor online';
-$lang_plugin_php['onlinestats_are'] = 'In total there are %s visitors online';
-$lang_plugin_php['onlinestats_and'] = 'and';
-$lang_plugin_php['onlinestats_reg_member'] = '%s registered user';
-$lang_plugin_php['onlinestats_reg_members'] = '%s registered users';
-$lang_plugin_php['onlinestats_guest'] = '%s guest';
-$lang_plugin_php['onlinestats_guests'] = '%s guests';
-$lang_plugin_php['onlinestats_record'] = 'Most users ever online: %s on %s';
-$lang_plugin_php['onlinestats_since'] = 'Registered users who have been online in the past %s minutes: %s';
-$lang_plugin_php['onlinestats_config_text'] = 'How long do you want to keep users listed as online for before they are assumed to have gone?';
-$lang_plugin_php['onlinestats_minute'] = 'minutes';
-$lang_plugin_php['onlinestats_remove'] = 'Remove the table that was used to store online data?';
-$lang_plugin_php['link_target_name'] = 'Link target';
-$lang_plugin_php['link_target_description'] = 'Changes the way external links are being opened: when this plugin is enabled, all links that contain the attribute rel="external" will open in a new window (instead of the same window).';
-$lang_plugin_php['link_target_extra'] = 'This plugin has an impact mostly on the "Powered by Coppermine" link at the bottom of the gallery output.';
-$lang_plugin_php['link_target_recommendation'] = 'It is recommended not to use this plugin to avoid bossing your users around: opening links in a new window means bossing around your site visitors.';
 }
 
 ?>
