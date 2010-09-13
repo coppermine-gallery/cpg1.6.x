@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Filigrane - Coppermine Photo Gallery - Documentation &amp; manuel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="fr" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+  $Date$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation et manuel</h1>
+<div id="toc">
+<a href="toc.htm">Table des matières</a>
+</div>
+
+<a name="watermark"></a><h1>Filigrane<a href="#watermark" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>Le Filigrane d'image est une option de configuration de Coppermine qui peut être activée en cas de besoin. Par défaut, le filigranne est désactivé. Les réglages peuvent être trouvés dans 
+<a href="configuration.htm#admin_watermarking">Configuration &rarr; Filigrane d'image</a>.</p>
+<p>Le Filigrane fonctionne aussi bien avec ImageMagick que GD2. Le <a href="configuration.htm#admin_watermarking_enable">Filigrane d'image</a> devrait être un fichier de type .png. Vous pouvez avoir un fond transparent. Vous devrez entrer dans la configuration le chemin absolu ou relatif de l'image dont vous voulez vous servir comme filigrane. Le réglage par défaut est une image de filigrane "échantillon" située dans le répertoire images. Vous devriez donc voir cet exemple lors de l'activation de la fonction filigrane et le téléchargement d'une image test.</p>
+<p>Les paramètres de <a href="configuration.htm#admin_watermarking_transparency">transparence dans la configuration </a> règlent la transparance du filigrane par rapport à l'imagede fond (uniquement avec ImageMagick).</p>
+<p>Il ya une nouvelle fonctionnalité astucieuse. La réduction automatique des Filigrane d'image lorsque l'image transférée est inférieure à la largeur que vous avez défini (<a href="configuration.htm#admin_watermarking_downsize">Réduire le filigrane si la largeur de l'image est inférieure à la valeur entrée</a>). C'est le point de référence à 100%. La réduction du filigrane est linéaire (0 pour désactiver).</p>
+<p class="cpg_example">Si par exemple vous entrez ici 1024 (comme Stramm, le créateur de la fonction de Filigrane, à fait sur le <a href="http://stramm.st.funpic.org/displayimage.php?pos=-96" rel="external" class="external">site de démo</a> de son modpack pour cpg1.4.x ou le filigrane d'image a été indroduit en premier), alors la référence de 100% concerne les imgaes qui ont une largeur de 10247px ou plus. Si vous téléchargez des images > 1024px l'image de filigrane ne sera pas redimensionnée et sera attachée avec sa taille réelle. Si vous laissez Coppermine créer une image intermédiaire avec une largeur de 400 px, alors, le filigrane sera réduit à 39% de sa taille originelle. Si l'image originale est de  512px, le filigrane aura 50% de sa taille originale. Bien sur cela consomme pas mal de ressources. Cela fonctionne très bien aussi en même temps que  <a href="configuration.htm#admin_picture_thumbnail_auto-resize">le redimensionnement automatique desimages qui sont plus grandes que la largeur ou la hauteur maximale</a> (paramétrez cette fonction de la mâme manière que pour votre référence à 100% ... Par exemple 1024). De cette manière, votre filigrane s'adaptera parfaitement à vos images.</p>
+<p>Pour annuler un filigrane désactivez le en décochant l’option <a href="configuration.htm#admin_watermarking_enable">Filigrane d'image (watermark)</a> et  utilisez les <a href="admin-tools.htm#admin_tools">outils d'administrations</a> pour recréer vos fichiers.</p>
+<p>Si vous utilisez GD2, le paramètre de transparence dans la configuration, ne fonctionnera pas. Si vous souhaitiez que le filigrane ait une transparance sur le fond, réduisez la transparence du calque de votre filigrane sur votre image par exemple, à 50% (c'est ce qui a été fait pour le filigrane de l'échantillon)...</p>
+
+<a name="watermark_alternatives"></a><h2>Alternatives<a href="#watermark_alternatives" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Dans un monde idéal, concernant la propriété intellectuelle, personne dans le monde ne volerait les images des autres. Mais le monde n’étant pas parfait et la façon dont fonctionnent les navigateurs internet (Vous ne voyez pas « le site à la volée », mais votre navigateur télécharge tout, avant de vous l’afficher), il est donc facile pour les autres de voler votre photos. C’est pour cette raison que le filigrane à été inventé : vous pouvez marquer vos images avec un filigrane ce qui permet aux autres de voir vos images, et ceux qui vous les voleraient serait dans l’obligation de les avoirs avec le filigrane et donc ils leurs seraient difficile, de prétendre qu’ils sont les propriétaires des images.</p>
+<p>Il y a une ligne mince entre le fait de bien vous assurer du respect de votre propriété intellectuelle et le fait de faire fuir vos visiteurs  légitimes: si le filigrane est à proximité du bord d'une image, un voleur pourrait s'en tirer avec seulement un recadrage de votre image. Si le filigrane est trop grand ou bien "trop visible", le filigrane sera trop perturbant et vos visiteurs se lasseront.</p>
+<p>C'est pourquoi les utilisateurs ont demandé d'autres moyens de protections contre les voleurs de contenu - Voici quelques-uns des mécanismes:</p>
+<ul>
+	<li><a name="watermark_alternatives_no_right_click"></a><h3>Interdire le clic droit<a href="#watermark_alternatives_no_right_click" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	C'est la chose la plus simple et stupide qui ne peut absolument pas arrêter un débutants de voler vos images. Cependant, il va faire fuir de nombreux visiteurs honnêtes de votre site. L’interdiction imbécile du clic droit par un script n’est tout simplement pas une option – Faîtes vous votre idée à ce sujet.  Si vous ne nous croyez pas, et êtes déterminés à l'utiliser, allez-y et Google est là pour vous - ces scripts sont disponibles en abondance gratuitement et aucun d'eux, ne fonctionne parfaitement.</li>
+	<li><a name="watermark_alternatives_registered_only"></a><h3>Afficher seulement votre précieux contenu pour des utilisateurs enregistrés<a href="#watermark_alternatives_registered_only" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	Ne permettez simplement pas aux visiteurs anonymes de visualiser votre galerie, ou permettez leur seulement de voir les images en basse résolution (vignettes). Vous perdrez naturellement des visiteurs, ce n'est une option valable que si vous avez un contenu de qualité absolue.</li>
+	<li><a name="watermark_alternatives_overlay"></a><h3>Afficher un recouvrement<a href="#watermark_alternatives_overlay" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	Ce petit truc peut tromper de nombreux voleurs d'image (surtout les débutants): il vous suffit d'afficher une image transparente au dessus de votre contenu réel - si le &quot;voleur&quot; effectue un clic droit, pour enregistrer l'image, il ne lui restera plus qu'à enregistrer la superposition du transparent. Coppermine est livré avec cette option: <a href="configuration.htm#admin_image_transparent_overlay_start">Insérer un recouvrement transparent pour réduire au minimum le vol d'image</a> dans la configuration de Coppermine.</li>
+	</ul>
+
+<a name="watermark_client_sided"></a><h2>Filigrane côté client<a href="#watermark_client_sided" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Le filigrane est un processus demandant beaucoup de ressources serveur, qui peut le "planter" ou vous attirer des ennuis avec votre hébergeur, car ils sont en général préoccupés par l'utilisation des ressources. En outre, un utilisateur qui connaît le truc, contournera Coppermine et pourra trouver le chemin de l'image d’origine en taille réelle qui n’est pas filigranée et la récupérer.</p>
+<p>La seule chose qui va définitivement régler ce problème est le filigrane soit fait du côté client. En d'autres termes: appliquez un filigrane à vos images de manière permanente sur votre ordinateur avant même de les charger sur votre serveur. Gardez les originaux non marquées seulement sur votre ordinateur et non sur votre serveur.</p>
+<p>Il existe de nombreux outils qui peuvent être utilisés pour appliquer un filigrane à vos fichiers sur votre ordinateur, et certains peuvent même l’accomplir en lots, par exemple, l'outil gratuit <a href="http://www.picture-shark.com/" rel="external" class="external">Picture Shark</a> (mais il y en a bien d'autres).</p>
+
+<br clear="all" />
+<a name="exif_end"></a>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

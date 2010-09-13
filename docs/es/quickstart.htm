@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Quick-Start Guide - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Quick-Start Guide" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+  $Date$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<div id="doc_en_only">No translation available</div>
+
+<h1>CPG - Coppermine Photo Gallery Quick-Start Guide</h1>
+<p>Congratulations on downloading the most recent, most powerful, and feature rich version of Coppermine, ever.  You've already made the right decision in selecting Coppermine as your photo gallery script and just about now, you're probably wondering how to get started and you want to install <acronym title="Coppermine Photo Gallery">CPG</acronym> <acronym title="as soon as possible">A.S.A.P.</acronym> Right?  Before that, however, make another "right" decision and take some time out to <strong>r</strong>ead <strong>t</strong>he '<strong>f</strong>ascinating' <strong>m</strong>anuals (RTFM) that come with Coppermine.</p>
+
+<p>Look in the folder that you just extracted your Coppermine files into.  In it, you'll find a folder called 'docs'. All the documentation for <a href="install.htm">installation</a>, <acronym title="Frequently Asked Questions">FAQ</acronym>s, <a href="administration.htm">administration</a>, troubleshooting, modifying <a href="theme.htm">themes</a>, and more is there.  Familiarize yourself with the contents of the various docs to enhance your <acronym titel="Coppermine Photo Gallery">CPG</acronym> experience and create the gallery that you've always dreamed about, in the least amount of time, and with the least amount of set-backs and frustration.  Read it and in no time at all, your friends and relatives will be praising you and gawking at your incredible photo-gallery.</p>
+
+<p>Even if you are installing this as an upgrade from an older version of Coppermine, you'll still need to read the docs for directions and to understand some of the major changes between CPG 1.5.x and all previous versions. You'll need to know what can and cannot be ported from your previous installation to this new version.  It is important to note that <strong>upgrade</strong> installations are considerably different from <strong>update</strong> installations. For example, in version 1.3.5 (an 'update' to 1.3.4) the Classic theme's theme.php script was a whopping 1487 lines long. In 1.4.x, an upgrade, it's a mere 24. Nope, this is <strong>not</strong> a miss-type. So where did all that code go? Read the docs. Your custom themes from previous versions will undoubtedly need some changes made to it before you can use them in this new version. So, just how do you go about doing that?  <a href="index.htm">RTFM!</a></p>
+
+<p>Ok, okay, so you don't want to read the documentation. At least, "not just yet," you say. You just want to get it up and running. Poke around and see what's what. Well, you've been warned! The rest of this guide will help walk you through the basics of installing Coppermine as a fresh, stand-alone (non-upgrade) install. (If you are trying to upgrade from a previous installation of Coppermine, you already know what to do - RTFM, particularly the <a href="upgrading.htm">upgrading section of the docs</a>.) Ready?</p>
+<br />
+
+<h2>Let's Start!</h2>
+
+<p><strong>Question:</strong>  Does my webserver support Coppermine?<br />
+<strong>Answer:</strong>  Read up the <a href="requirements.htm">minimum requirements</a>.</p>
+
+<p><strong>Question:</strong>  Where do I put all these files?<br />
+<strong>Answer:</strong>  You could put them in your root directory (not recommended) or upload the Coppermine directory to your website. If you are uncertain about where exactly to upload it,ask your webhost into what folder you need to upload your html and other script files. We recommend uploading the directory cpgXXXX (and all the files contained within) directly to your webhost's recommended folder and renaming to your liking after the upload is complete. Compare your uploaded files with your Coppermine package. Make sure all the files were successfully uploaded. </p>
+
+<p><strong>Question:</strong>  Ok, I uploaded everything to www.yoursite.com/cpgXXX.  Now what?<br />
+<strong>Answer:</strong>  You need to change permissions on a few directories before you can do anything else.  Using your FTP program or website Control Panel, change permissions on the: "include", "albums", "albums/userpics", and "albums/edit" directories to 777.  You should also create a new directory in albums that you will FTP your images/files into (name it "uploads" or any thing that catches your fancy - just no spaces or funny diacritical symbols, please.) and set it's permissions to '777' also.  Some server set-ups will not work with chmod '777'. In which case, you should use '755'. (Confused? Don't know what CHMODe is? You've been warned, need we say more?) </p>
+
+<p><strong>Question:</strong>  I changed the permissions.  What's next?<br />
+<strong>Answer:</strong>  You need to create a MySQL database.  Using your website Control Panel or a
+tool like phpMyAdmin, create a MySQL database.  Write down the database name, the username and password - you'll need it to successfully install Coppermine.  If you already have a database you're using for a BBS or something else, that'll work just as well.  You can use that database for Coppermine, too.  If you have a BBS and plan to connect it to Coppermine install, you'll need to share the database anyway.</p>
+
+<p><strong>Question:</strong>  My files are in place, permissions are set, and I have my MySQL database information.  What's the next step? <br />
+<strong>Answer:</strong>  Read the... (Oops, sorry.)&nbsp; Now you have to run the Coppermine install.  Launch your web browser and enter http://www.yousite.com/coppermine/install.php and fill in the information that is requested. If you have never used ImageMagick before, leave that line blank during the install process. You can always add that information after you have Coppermine up and running. </p>
+
+<p><strong>Question:</strong>  Screen went blank! Suddenly there are error messages popping up all over the place! My webhost, crashed!  What do I do?<br />
+<strong>Answer:</strong>  Read the documentation!  If you haven't done so already, you're not going anywhere, anyway, so here's the perfect opportunity. We can wait. Chances are, you'll find the answers you need, there. All we can say at this point is that if your server crashed, it probably wasn't your install and it wasn't our fault. It was just a coincidence. Wait till it's up and running again and try the installation again. If, however, you really can't find the answers you need in the documents, go to
+<a href="http://coppermine-gallery.net/">coppermine-gallery.net</a> and review the support boards.  Spend a little time looking around and search for your problem. Thousands have gone before you, so a solution for your installation issues have probably been posted, already. (HINT: search using the exact error message you see on your screen.)</p>
+
+<p><strong>Question:</strong>  Ha! Ha! Got You!  It's installed and working!  Now what?<br />
+<strong>Answer:</strong>  1) Wipe that smile off your face. 2) Read the docs, anyway -- twice. 3) You'll need to look at the configuration of Coppermine to make sure it's set up the way you want it.  Log in as the admin, if you aren't already logged in. Click on the Config button.  These are a few of the things you should pay close attention to:<br /><br />
+<ul><li><strong>General Settings:</strong> You should put in your site name and email address, and set your GMT time zone offset.</li>
+<li><strong>Language, Themes &amp; Charset settings:</strong>  Choose your default language.</li>
+<li><strong>Files and thumbnails settings:</strong>  Set the max size for uploaded files to whatever size you prefer in kilobytes .  The default setting is 1024kb.  Make sure that this maximum file size is within the maximum allowed by your webhost. While you are at it, you should also set the "max width or height for uploaded pictures/videos (pixels)" - this will prevent your users from uploading images that are larger than what is desireable.  If you would like Coppermine to automatically resize images that are larger than what you've designated in the Config settings, set "auto resize images that are larger than max width or height" to either:  "Yes:Everyone" or "Yes:User only".  "Everyone" means everybody, including when the administrator(you) batch-adds pictures, and User means just your gallery members when they upload pictures.</li>
+<li><strong>Files and thumbnails advanced settings:</strong>  Make sure you have the correct image
+manipulation software selected.  If you are using GD, you should select GD2 if available on your webserver.  If you plan to use ImageMagick you should put in the path now to
+the binaries (make sure it ends with a trailing slash "/").  Do you want to allow your members to be able to create private albums?  If you do, be sure to set "Users can have private albums" to 'Yes'.</li>
+<li><strong>User settings:</strong>  If you plan to let people register and upload pictures, make certain that you set "Allow new user registrations" to 'Yes'.</li>
+<li>You also want to take a peek at the groups settings.  Coppermine comes with three
+groups by default: administrators, registered users, anonymous users.
+This is where you control permissions to send e-cards, upload files, etc.  This is also
+where you can set the maximum allowed disk space for each group (disk quota).  It's set to
+1024kb by default.</li></ul></p>
+
+<p><strong>Question:</strong>  I think everything is set correctly.  Can I upload pictures yet?<br />
+<strong>Answer:</strong>  No.  First you need to create an album to put them in.  In the same row as the Config link or button, you'll see a link called Albums.  Click on it and you are taken to a screen that allows you to create an album.  Click "New Album", then rename it to whatever you'd like.  Click "Apply changes" and presto!  You now have an album.</p>
+
+<p><strong>Question:</strong>  I made an album, so now can I upload pictures?<br />
+<strong>Answer:</strong>  Yes.  As the admin, you should use an FTP program to upload your pictures
+to your website, then do a batch-add to put them into your Coppermine database.  Back at
+the beginning of this guide I told you to create a directory in albums for just this purpose. Let's say you made one called "uploads".  FTP your images to your albums/uploads folder.  When that's done, click on batch-add.  Select uploads as the directory.  You are now presented with a list of all the pictures you just uploaded.  By default Coppermine selects all of the images.  Select the album (uploads) to put them into, then click Go.  You now have an online gallery with pictures to look at! Aren't you amazing!</p>
+
+<p><strong>Question:</strong>  Now, can I add a title to a picture?<br />
+<strong>Answer:</strong>  Yes you can.  On the main Coppermine screen, when you are logged in as an
+admin, you'll see a number of options listed next to the album.  If you click on "edit files" you will be able to add all sorts of information to each picture.</p>
+
+<p><strong>Question:</strong>  I can delete the original pictures now, right?  After all, they are in the database, right?<br />
+<strong>Answer:</strong>  Wrong!  Coppermine doesn't actually put the pictures into the database.  It just uses the database to remember where the pictures are stored on the webserver, what
+album and category they belong to, and other information related to the pictures.  If you
+delete the original picture, it will cause a bunch of errors.  If you want to delete the
+original, read the documentation on what the Admin Tools are for and can do for you. You should never delete anything using your webhost tools or ftp program that can be handled internally with Coppermine. Doing so can lead to a host of mysql database errors.</p>
+
+<p>You are now successfully running Coppermine on your website!  Now take a few minutes to read the documentation so you'll know how to administer your gallery. Coppermine is very powerful and can do a lot more than what you probably thought was possible.<br /><br />Experiment with it with just a few pictures, categories, and albums at first. Set it up exactly the way you want it before adding a bunch of pictures. Most of all have a good time! Oh yeah, and don't forget, <a href="index.htm">RTFM</a>! </p><br /><br />
+
+<p>The Coppermine Dev Team<br />
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Packaging a new release - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+  $Date$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<div id="doc_en_only">No translation available</div>
+
+<a name="packaging"></a><h1>Packaging a new release<a href="#packaging" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>This section of the documentation is meant to explain the <a href="#packaging_steps">steps</a> needed to perform by the maintainer of the coppermine package each time a new package release is being made.</p>
+<p>This page does <strong>not</strong> deal with the steps that end users need to make when a new package comes out.</p>
+
+<div class="indent">
+    <a name="packaging_target_audience"></a><h2>Target audience<a href="#packaging_target_audience" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+    <p>This part of the documentation is not meant for end users of Coppermine, but <strong>only</strong> for developers. There is absolutely no support for this section, it comes as-is. If you're not a member of the coppermine dev team, then the contents of this page are not meant for you; go away.</p>
+    <a name="packaging_target_audience_end"></a>
+    
+    <a name="packaging_subversion"></a><h2>Subversion repository<a href="#packaging_subversion" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+    <p>In the first place you need to perform core actions on the <a href="dev_subversion.htm#subversion">subversion</a> repository level of Coppermine. For this purpose, you need to have write access to the subversion repository, which is something you can not make up. A dev team member with project admin status needs to have granted you write access to the subversion repository that is hosted at sourceforge.net. You need to have some experience in using your subversion client before trying to accomplish the actions described here.</p>
+    
+    <a name="packaging_steps"></a><h2>Steps<a href="#packaging_steps" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+    These steps need to be taken to package a new release.
+    <ul>
+        <li>
+            <a name="packaging_steps_checkout"></a><h3>Check out<a href="#packaging_steps_checkout" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+            As with all subversion operations, you need to perform a checkout to make sure that your working copy of the subversion repository is up-to-date.
+        </li>
+        <li>
+            <a name="packaging_steps_loop_through_files"></a><h3>Replace version number in all files<a href="#packaging_steps_loop_through_files" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+            You need to loop through all text files (file extensions <tt class="code">.php</tt>, <tt class="code">.css</tt>, <tt class="code">.js</tt>, <tt class="code">.txt</tt>, <tt class="code">.sql</tt>, <tt class="code">.htm</tt>) and replace the version number in the header with the version number of the new release.<br />
+            <div class="cpg_example">You will have to find <input type="text" readonly="readonly" value="Coppermine version: 1.5.X" size="25" maxlength="25" class="code smaller" /> and replace with <input type="text" readonly="readonly" value="Coppermine version: 1.5.Y" size="25" maxlength="25" class="code smaller" /></div>
+            To accomplish this, you will need a tool that can batch-replace in files:
+            <ul>
+                <li>
+                    <a name="packaging_steps_loop_through_files_linux"></a><h4>Linux<a href="#packaging_steps_loop_through_files_linux" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+                    On most posix-compliant operating systems (like Unix, Linux, BSD etc.) you should have all needed tools at hand already. Basically you loop through all files with a given extension, search for the string inside it and replace it. The command that can be run in a console could look like this:
+                    <textarea class="code smaller" style="width:100%" rows="1">find /path/on/filesystem/level/to/your/working/copy/ -maxdepth 4 -name "*.php" | xargs sed -i 's/Coppermine version: 1.5.9/Coppermine version: 1.5.10/g'</textarea>
+                    If you want to turn this into a shell script, don't forget the shebang at the start of the file (usually something like <tt class="code">#!/bin/sh</tt>).
+                </li>
+                <li>
+                    <a name="packaging_steps_loop_through_files_windows"></a><h4>Windows<a href="#packaging_steps_loop_through_files_windows" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+                    On Windows-driven computers you will need an editor that is capable to replace in multiple files or a tool that is dedicated to the replacement of text in files like the freeware apps <a href="http://www.emurasoft.com/replall/" rel="external" class="external">Replace in files</a> by Emurasoft or the app <a href="http://www.markus-bader.de/MB-SearchAndReplace/index.php" rel="external" class="external">MB-Search&amp;Replace</a> by Markus Bader. Both apps are available in English as well as in German and both don't require an installation (the executable runs out of the box, even from a USB stick or similar).
+                </li>
+            </ul>
+            After having looped through all files, check in your subversion client if you actually have changed all non-binary files inside the package - all files should be marked as "changed" in your subversion client. Those that are not marked as changed require manual editing - maybe the version number had been forgotten to be changed in the previous release or when the file was <a href="dev_files.htm">added to the subversion repository</a> in the first place.<br />
+    Don't commit your changes yet though; there are some more edits that need to be performed.
+        </li>
+        <li>
+            <a name="packaging_steps_bom"></a><h3>Remove Byte Order Marks<a href="#packaging_steps_bom" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+            As Coppermine is a community effort and there are many developers who have write access to the subversion repository it might happen that a Byte Order Mark (BOM) has crept into non-binary files. This happens without the developer being aware of it and shouldn't cause a lot of fuzz among the dev team, yet it can cause serious issues after the release, with the byte order mark shining through on some or all pages and especially with authentification issues, as the pre-mature start of the output (even if it's just the accidental output of the BOM) will interact with the browser's ability to receive the header and subseuqently the cookie.<br />
+            That's the reason why it's a good idea to scan the non-binary files (file extensions <tt class="code">.php</tt>, <tt class="code">.css</tt>, <tt class="code">.js</tt>, <tt class="code">.txt</tt>, <tt class="code">.sql</tt>, <tt class="code">.htm</tt>) once more for the existance of a BOM and get rid of it if present. On Windows-driven computers, the BOM usually manifests with "funny" charcters - usually <tt class="code">&iuml;&raquo;&iquest;</tt>, so you should loop through all text-only files for that string and get rid of that string by replacing it with "" (nothing), using exactly the same tool used for the version number replacement above.
+        </li>
+        <li>
+            <a name="packaging_steps_write_announcement_thread"></a><h3>Prepare an announcement thread<a href="#packaging_steps_write_announcement_thread" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+            Prepare an announcement thread in advance (before you actually release) inside the dev-only sub-board of the coppermine forum. This thread can be empty - you can fill it later, or have another dev team member fill it. You need to create it in advance in order to be able to refer to the thread from within the documentation that will ship with the release.
+        </li>
+        <li>
+            <a name="packaging_steps_docs_upgrade"></a><h3>Edit the upgrade section of the docs<a href="#packaging_steps_docs_upgrade" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+            Edit the <a href="upgrading.htm">upgrade section of the docs</a> and (if you can) the other corresponding sections of the localizations of the docs. Find the table inside the section &quot;<a href="upgrading.htm?expand_all=1#upgrade_why_reasons">Reasons for package releases</a>&quot; there and add a table row at the top with the needed information. Take a look at the other table rows that correspond to previous release to get an idea what should go into that section. Refer to the changelog file in the root folder to figure out about the changes that went into the release that you're about to package. Don't forget to refer to the announcement thread that you have created in the previous step to make sure you can inform users about last minute changes accordingly.
+        </li>
+        <li>
+            <a name="packaging_steps_changelog"></a><h3>Edit the changelog<a href="#packaging_steps_changelog" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+            Add at least one line to the changelog that explains the version number change that you're about to commit. Add a line as well that mentions the release date.
+        </li>
+        <li>
+            <a name="packaging_steps_version_number"></a><h3>Edit the version number<a href="#packaging_steps_version_number" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+            To edit the version number of the Coppermine release, you will need to edit several files:
+            <ul>
+                <li>The actual version number is being stored in the file <tt class="code">include/init.inc.php</tt>, so you will need to edit that file with a plain text editor and find <input type="text" readonly="readonly" value="define('COPPERMINE_VERSION', '1.5.X');" size="38" maxlength="38" class="code smaller" />, where X corresponds to the current minor version count that needs to be counted up.</li>
+                <li>The version number output of all pages of the documentation is being replaced using the JavaScript file behind each localization folder; that's why you need to loop through all language folders within the <tt class="code">docs</tt>-folder, edit <tt class="code">script.js</tt>, find the definition for the function <tt class="code">cpgDocHeader</tt> and inside that definition change the localization line that corresponds to <input type="text" readonly="readonly" value="$('#docheader').text('Coppermine Photo Gallery v1.5.X: Documentation and Manual');" size="82" maxlength="82" class="code smaller" />, where X stands for the minor version number.</li>
+            </ul>
+        </li>
+        <li>
+            <a name="packaging_steps_svn_commit"></a><h3>Commit your changes<a href="#packaging_steps_svn_commit" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+            Of course you need to commit all your changes to the subversion repository, using your subversion client.
+        </li>
+        <li>
+            <a name="packaging_steps_versioncheck"></a><h3>Update the versioncheck data<a href="#packaging_steps_versioncheck" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+            This is the most complicated step. It needs to be taken <em>after</em> having committed all other files to make sure that their revision numbers and hashes no longer are altered.<br />
+            Edit the file <tt class="code">include/cpg15x.files.xml</tt> inside your working copy of the subverion repository with a plain text file.
+            <ul>
+                <li>
+                    <a name="packaging_steps_versioncheck_complete"></a><h4>Completeness<a href="#packaging_steps_versioncheck_complete" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+                    In this step you need to make sure that the  XML file is complete. Loop through the changelog to check if all files (language files etc.) that have been <a href="dev_files.htm">added to the subversion repository</a> since the previous release have been added to <tt class="code">include/cpg15x.files.xml</tt> file as well. If all developers have done as suggested, there should be nothing left to do for you in this aspect. Save your changes (if any).
+                </li>
+                <li>
+                    <a name="packaging_steps_versioncheck_update"></a><h4>Update revision numbers and hashes<a href="#packaging_steps_versioncheck_update" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+                    Coppermine is storing the checksums for each file to allow the user to check that a file hasn't been tampered with. In this step, the checksums (hashes) are being calculated.
+                    <ul>
+                        <li>Run the versioncheck utility in your browser with the parameter <tt class="code">?output=create</tt> as suggested in <a href="dev_versioncheck.htm#dev_versioncheck_hidden_features">Versioncheck &rarr; Hidden features</a> while being logged in as admin (the URL in your browser's address bar looking like this: <tt class="code">http://yourtestbed.tld/your_coppermine_folder/versioncheck.php?output=create</tt>. The versioncheck tool will then loop through all files specified in <tt class="code">include/cpg15x.files.xml</tt> and re-calculate the hashes and outputs them again in XML.</li>
+                        <li>There should be a huge textarea field that contains everything you need - just select the entire field's content,</li>
+                        <li>copy to clipboard,</li>
+                        <li>go to your editor where you have <tt class="code">include/cpg15x.files.xml</tt> opened previously,</li>
+                        <li>highlight everything in the editor window and delete the content there.</li>
+                        <li>Paste the content of the clipboard into the empty editor window that corresponds to <tt class="code">include/cpg15x.files.xml</tt>.</li>
+                        <li>Then remove whitespace (if any) after the closing <tt class="code">&lt;/file_data&gt;</tt>-tag</li>
+                        <li>and finally save the changes in <tt class="code">include/cpg15x.files.xml</tt>.</li>
+                        <li>Go back to your browser window and remove the parameter <tt class="code">?output=create</tt> from the address bar. Make sure <strong>not</strong> to connect to the online repository by ticking the corresponding checkbox to make sure that you're looking at the changed file. In all the three columns &quot;Version&quot;, &quot;Revision&quot; and &quot;Modified&quot; you should by now see green check icons that show everything is OK. There mustn't be any warnings in red. If tthis is the case, continue.</li>
+                        <li>Commit your changes applied to <tt class="code">include/cpg15x.files.xml</tt> to the subversion repository.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a name="packaging_steps_xml_webspace"></a><h3>Update cpg15x.files.xml on the Coppermine home page<a href="#packaging_steps_xml_webspace" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+            The xml file that contains the information about the most recent stable release needs to be uploaded to the official web space, replacing the file http://coppermine-gallery.net/cpg15x.files.xml that clients will connect to when checking for upgrades with the one from the subversion repository (e.g. the file that corresponds to http://coppermine.svn.sourceforge.net/viewvc/coppermine/trunk/cpg1.5.x/include/cpg15x.files.xml). If you don't have access to the project's official webspace by FTP, ask a fellow developer to perform this task for you.
+        </li>
+        <li>
+            <a name="packaging_steps_svn_export"></a><h3>Export from subversion<a href="#packaging_steps_svn_export" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+            By now it's time to create the actual package, so you may be tempted to just zip your local working copy of the subversion repository, but that would be a very bad idea, as both your individual config file as well as all your changes (e.g. test uploads etc.) would be residing in that copy. Additionally, a lot of garbage would reside in that copy, as subversion creates a lot of hidden files inside your local working copy.<br />
+            That's why you need to perform an export from the subversion repository into a new, empty folder on your client and use that from now on. This will make sure that only the files that are meant to go into the package will actually go into your package.<br />
+            How the export feature actually works depends on the subversion client you use. The list items below describe the process just for some example clients:
+            <ul>
+                <li>
+                    <a name="packaging_steps_rapidsvn"></a><h4>RapidSVN<a href="#packaging_steps_rapidsvn" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+                    The subversion client <a href="http://rapidsvn.tigris.org/" rel="external" class="external">RapidSVN</a> is available for many platforms (Linux, Windows, Mac OS/X, Solaris, etc.) and in many languages (English, German, French, Italian, Portuguese, Russian, Ukrainian, Simplified Chinese, Japanese). The Coppermine dev team recommends it as graphical client on Linux-driven systems.
+                    <ul>
+                        <li>In the left frame that represents the folder view, highlight the folder that represents the root of cpg1.5.x (i.e. </li>
+                        <li>Click on the menu entry "Repository" - "Export..."</li>
+                        <li>In the export dialog, make sure that as revision the "Use latest" checkbox is ticked and that the "Recursive" checkbox is ticked as well.</li>
+                        <li>As Destination directory, you need to specify a folder name that <em>doesn't</em> already exist within a folder that <em>does</em> exist. This dialog is a little bit unusual, so here's a detailed example, assuming that you're on Linux and that your user name is <tt class="code">johndoe</tt>:
+                            <ul>
+                                <li>On the export dialog, click on the button with the three dots within the "Destination Directory" section that allows you to browse the folder structure</li>
+                                <li>In the sub-dialog that open, browse to the Desktop folder within your user's home folder, i.e. to <tt class="code">/home/johndoe/Desktop</tt> and hit the "OK" button. This will close the sub-dialog and populate the input field "Destination Directory" in the export dialog with the absolute path you just selected.</li>
+                                <li>Click into this input field to put your cursor into that field to the end (right after <tt class="code">/home/johndoe/Desktop</tt>) and type a slash, followed by the name of the sub-folder that you want to get created, e.g. <tt class="code">cpg15x</tt>. After you did that, the input field's content now should look similar to this: <tt class="code">/home/johndoe/Desktop/cpg15x</tt></li>
+                                <li>After having verified that everything looks as expected, click on the "OK" button of the export dialog.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a name="packaging_steps_tortoisesvn"></a><h4>Tortoise SVN<a href="#packaging_steps_tortoisesvn" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+                    tbc
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a name="packaging_steps_create_zip"></a><h3>Create the archive<a href="#packaging_steps_create_zip" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+            Create an archive according to the <a href="dev_plugins.htm#plugin_writing_naming_conventions">naming conventions</a>, using your favorite archiver (on Windows, 7-Zip is recommended). The naming convention for package releases is pretty streightforward: it's just the abbreviation <tt class="code">cpg</tt> followed by the exact version number. Subseuqently, your archive should be named <tt class="code">cpg1.5.X.zip</tt>, where X represents the minor version number that you're about to package. Its'mandatory to come up with a  <tt class="code">zip</tt> archive, but you can come up with additional archives as well (e.g. <tt class="code">.7z</tt>, <tt class="code">.tar.gz</tt> or <tt class="code">.tar.bz2</tt>) to make things easier for users on alternative operating systems.
+        </li>
+        <li>
+            <a name="packaging_steps_upload_zip"></a><h3>Upload the archive<a href="#packaging_steps_upload_zip" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+            The archive(s) created in the previous step are meant to go into the download repository at <a href="https://sourceforge.net/projects/coppermine/files/" rel="external" class="external">https://sourceforge.net/projects/coppermine/files/</a>. You will need packager privileges on the Coppermine project pages that reside on the sourceforge.net webspace. 
+            <ul>
+                <li><a href="https://sourceforge.net/account/login.php" rel="external" class="external">Log in</a> into your account on sf.net</li>
+                <li>go to the <a href="https://sourceforge.net/project/admin/explorer.php?group_id=89658" rel="external" class="external">File Manager</a></li>
+                <li>expand the folder labelled "Coppermine" and then click on the gear icon in front of the folder "Coppermine"</li>
+                <li>From the menu that will show, select "new folder" and then create a folder that corresponds to your release number, e.g. something like <tt class="code">cpg1.5.X (stable)</tt>, where X corresponds to the minor version number of the package you're about to release.</li>
+                <li>Click on the gear icon in front of the new folder you created</li>
+                <li>Choose "upload here" from the menu that pops up</li>
+                <li>Browse to your package on your client and select it for upload</li>
+                <li>After uploading has finished, move the package that used to be the most recent release before you just uploaded the new package into the folder <tt class="code">1.5.x (outdated)</tt>, using the gear icon in front of the previous release and selecting "cut" there. From the context menu of the target folder, select "paste" to complete the move. After moving the previous release, delete the orphaned folder it used to reside in</li>
+            </ul>
+        </li>
+        <li>
+            <a name="packaging_steps_move_announcement"></a><h3>Publish announcement thread<a href="#packaging_steps_move_announcement" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+            Move the announcement thread from the dev-only board to the announcement board. You will need moderator capabilities on forum level.
+        </li>
+        <li>
+            <a name="packaging_steps_news"></a><h3>Create news items<a href="#packaging_steps_news" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+            There are various news items that need to be created. They can all be filled with similar or even identical content, as they catter for different media or different ways to access the news.
+            <ul>
+                <li>
+                    <a name="packaging_steps_news_sf"></a><h4>News item on sf.net<a href="#packaging_steps_news_sf" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+                    Create a news article on sf.net that contains a link to the announcement thread. To accomplish this, select, "<a href="https://sourceforge.net/news/?group_id=89658" rel="external" class="external">News</a>" from the "Develop" menu while being logged in with your sourceforge.net account. On the news page, use the "Submit" link to create a news item. The news item should contain a link to the announcement thread on the forum.
+                </li>
+                <li>
+                    <a name="packaging_steps_news_forum"></a><h4>News item on forum<a href="#packaging_steps_news_forum" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+                    Create a news item on the forum that contains a link to the announcement thread. You will need the corresponding priviledge on the forum.
+                </li>
+                <li>
+                    <a name="packaging_steps_news_homepage"></a><h4>News item on home page<a href="#packaging_steps_news_homepage" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+                    On the <a href="http://coppermine-gallery.net/" rel="external" class="external">Coppermine home page</a>, create a news item that contains a link to the announcement thread.
+                </li>
+                <li>
+                    <a name="packaging_steps_news_embedded"></a><h4>News embedded into existing galleries<a href="#packaging_steps_news_embedded" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+                    To make users of existing galleries aware of the new release, edit <a href="http://coppermine-gallery.net/cpg15x_news.htm" rel="external" class="external">http://coppermine-gallery.net/cpg15x_news.htm</a>. This file is the source for the news item that is displayed for Coppermine admins on their galleries if the option <a href="configuration.htm#admin_general_coppermine_news">Display news from coppermine-gallery.net</a> is enabled.
+                </li>            
+            </ul>
+        </li>
+        <li>
+            <a name="packaging_steps_demo"></a><h3>Update the demo<a href="#packaging_steps_demo" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+            Use your favorite FTP app to update the demo on the coppermine home page. You will of course need FTP access to the corresponding web space.<br />
+            Make sure not to overwrite the custom anycontent.<br />
+            Keep in mind that you need to apply changes to the JavaScript file <tt class="code">script.js</tt> inside the localizations of the docs folder - they compose the site navigation.
+        </li>
+    </ul>
+</div>
+<a name="packaging_end"></a>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

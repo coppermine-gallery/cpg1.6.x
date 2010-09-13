@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Graphic resources in themes - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Graphical resources like menu icons, navigation bars, rating images etc. can be customized and are fully themeable." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+
+
+
+<a name="theme_graphics"></a><h1>Graphic resources in themes<a href="#theme_graphics" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>Graphical resources within themes can be customized and configured. The following standards are being used to change or edit the looks of <a href="theme_create.htm">your custom theme</a>:</p>
+<ul>
+	<li><a href="#theme_graphics_menu_icons">Menu Icons</a></li>
+  	<li><a href="#theme_graphics_nav_bar">Image Navigation bar</a></li>
+  	<li><a href="#theme_graphics_rating">Rating images</a></li>
+	<li><a href="#theme_graphics_film_strip">Film Strip graphics</a></li>
+  	<li><a href="#theme_graphics_progress">Progress image (loader)</a></li>
+</ul>
+
+<a name="theme_graphics_menu_icons"></a><h2>Menu Icons<a href="#theme_graphics_menu_icons" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>The term <em>menu icons</em> may appear a bit misleading: depending on the corresponding option &quot;<a href="configuration.htm#admin_enable_menu_icons">Enable menu icons</a>&quot; setting, not only admin menu icons may be taken into account, but icons all over coppermine's output both for the admin as well as the visitor may or may not be "spiced up" with little icons that represent the action that can be performed or has been performed.</p>
+<p>A Coppermine theme <em>can</em> come with an iconset of it's own. If it doesn't come with an icon set of it's own, the default icon set is being used that resides in the folder <tt class="code">./your_coppermine_folder/images/icons/</tt>. If a theme comes with an iconset of it's own, the icons will reside in the folder <tt class="code">./your_coppermine_folder/themes/your_custom_theme/images/icons/</tt>. You have to explicitely specify that a custom theme has got a per-theme icon set of it's own. To accomplish this, you need to edit <tt class="code">./your_coppermine_folder/themes/your_custom_theme/theme.php</tt> with a <a href="dev_tools.htm#dev_tools_editor">plain-text editor</a> and add/uncomment a line like this:</p>
+<pre class="code">define('THEME_HAS_MENU_ICONS',16);</pre>
+<p>If such a line is present, coppermine will look for menu icons within <tt class="code">./your_coppermine_folder/themes/your_custom_theme/images/icons/</tt>. If such a line is not present, the default icon set that comes with coppermine will be used. The code you need to add must be in a line of it's own. It defines a constant and fills that constant with the value "16", where that value stands for the size (in pixels) of the square menu icons.</p>
+<p>The menu icon feature is comparatively new, so with the initial release of cpg1.5.x, there probably won't be many different menu icons to choose from. However, this may differ, as the number of available menu icon sets may increase. It's recommended to check the official website from time to time for new icon sets.</p>
+<a name="theme_graphics_menu_icons_end"></a>
+
+<a name="theme_graphics_nav_bar"></a><h2>Image Navigation bar<a href="#theme_graphics_nav_bar" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>A Coppermine theme <em>can</em> come with a set of images used for the image navigation bar. The image navigation bar is the horizontal line above the intermediate image that allows the visitor to jump back to the thumbnail overview, jump to the previous or next image within the album and (if applicable) toggle the picture information section and allow users to send ecards and start a slideshow. If a theme doesn't come with graphics for the navbar of it's own, the default set of images is being used that resides in the folder <tt class="code">./your_coppermine_folder/images/navbar/</tt>. If a theme comes with a set of images for the navbar, the images will reside in the folder <tt class="code">./your_coppermine_folder/themes/your_custom_theme/images/navbar/</tt>. You have to explicitely specify that a custom theme has got a per-theme navbar set of it's own. To accomplish this, you need to edit <tt class="code">./your_coppermine_folder/themes/your_custom_theme/theme.php</tt> with a <a href="dev_tools.htm#dev_tools_editor">plain-text editor</a> and add/uncomment a line like this:</p>
+<pre class="code">define('THEME_HAS_NAVBAR_GRAPHICS',1);</pre>
+<p>If such a line is present, coppermine will look for navbar images within <tt class="code">./your_coppermine_folder/themes/your_custom_theme/images/navbar/</tt>. If such a line is not present, the default navbar image set that comes with coppermine will be used. The code you need to add must be in a line of it's own. It defines a constant and fills that constant with the value "1", where that value doesn't have a particular meaning.</p>
+<p>If you decide to design a navbar set of your own for your custom theme, the following images need to reside in your custom navbar folder (<tt class="code">./your_coppermine_folder/themes/your_custom_theme/images/navbar/</tt>):</p>
+<ul>
+	<li>ecard.png</li>
+	<li>info.png</li>
+	<li>next.png</li>
+	<li>prev.png</li>
+	<li>report.png</li>
+	<li>slideshow.png</li>
+	<li>thumbnails.png</li>
+</ul>
+<a name="theme_graphics_nav_bar_end"></a>
+
+<a name="theme_graphics_rating"></a><h2>Rating images<a href="#theme_graphics_rating" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>A Coppermine theme <em>can</em> come with a set of images used for rating. The ability of visitors to rate is not determined by the presence of the rating image - it's a setting that depends on the permission of the group the visitor is in (&rarr; <a href="groups.htm#group_cp">Groups control panel</a>) and the properties of the album (&rarr; <a href="albums.htm#album_prop">Album Properties</a>). If a theme doesn't come with rating images of it's own, the default set of images is being used that resides in the folder <tt class="code">./your_coppermine_folder/images/</tt>. If a theme comes with a set of rating images, the images will reside in the folder <tt class="code">./your_coppermine_folder/themes/your_custom_theme/images/</tt>. You have to explicitely specify that a custom theme has got a per-theme rating images of it's own. To accomplish this, you need to edit <tt class="code">./your_coppermine_folder/themes/your_custom_theme/theme.php</tt> with a <a href="dev_tools.htm#dev_tools_editor">plain-text editor</a> and add/uncomment a line like this:</p>
+<pre class="code">define('THEME_HAS_RATING_GRAPHICS',1);</pre>
+<p>The code you need to add must be in a line of it's own. It defines a constant, where the value of the constant doesn't have a particular meaning.</p>
+<p>If defined, the following files need to reside in the theme's images folder:</p>
+<ul>
+	<li><tt class="code">rate_empty.png</tt></li>
+	<li><tt class="code">rate_full.png</tt></li>
+	<li><tt class="code">rate_new.png</tt></li>
+	<li><tt class="code">rating.png</tt></li>
+</ul>
+<a name="theme_graphics_rating_end"></a>
+
+<a name="theme_graphics_film_strip"></a><h2>Film Strip graphics<a href="#theme_graphics_film_strip" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>A Coppermine theme <em>can</em> come with a set of images used to compose the <a href="configuration.htm#admin_image_comment_filmstrip_toggle">film strip</a>. If a theme doesn't come with film strip images of it's own, the default set of images is being used that resides in the folder <tt class="code">./your_coppermine_folder/images/</tt>. If a theme comes with a set of film strip images, the images will reside in the folder <tt class="code">./your_coppermine_folder/themes/your_custom_theme/images/</tt>. By default, the film strip graphics are named <tt class="code">tile.gif</tt>.</p>
+<p>You have to explicitely specify that a custom theme has got a per-theme film strip images of it's own. To accomplish this, you need to edit <tt class="code">./your_coppermine_folder/themes/your_custom_theme/theme.php</tt> with a <a href="dev_tools.htm#dev_tools_editor">plain-text editor</a> and add/uncomment a line like this:</p>
+<pre class="code">define('THEME_HAS_FILM_STRIP_GRAPHIC',1);</pre>
+<p>The code you need to add must be in a line of it's own. It defines a constant, where the value of the constant doesn't have a particular meaning.</p>
+<a name="theme_graphics_rating_end"></a>
+
+<a name="theme_graphics_progress"></a><h2>Progress image (loader)<a href="#theme_graphics_progress" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>A Coppermine theme <em>can</em> come with an image used as progress bar or loading icon. With modern web applications users expect to see if the page they are on is busy with something (i.e. an upload or download) - that's what the progress bar is being used for.<br />
+If a theme doesn't come with a loader image of it's own, the default image is being used that resides in the folder <tt class="code">./your_coppermine_folder/images/</tt>. If a theme comes with a pprogress bar animation image, the image will reside in the folder <tt class="code">./your_coppermine_folder/themes/your_custom_theme/images/</tt>. By default, the loader image is named <tt class="code">loader.gif</tt>.</p>
+<p>You have to explicitely specify that a custom theme has got a per-theme loader image of it's own. To accomplish this, you need to edit <tt class="code">./your_coppermine_folder/themes/your_custom_theme/theme.php</tt> with a <a href="dev_tools.htm#dev_tools_editor">plain-text editor</a> and add/uncomment a line like this:</p>
+<pre class="code">define('THEME_HAS_PROGRESS_GRAPHICS',1);</pre>
+<p>The code you need to add must be in a line of it's own. It defines a constant, where the value of the constant doesn't have a particular meaning.</p>
+<a name="theme_graphics_progress_end"></a>
+
+<a name="theme_graphics_end"></a>
+
+
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

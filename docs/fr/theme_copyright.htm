@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Affichage des droits d'auteurs et clause de non responsabilité dans le pied de page - Coppermine Photo Gallery - Documentation &amp; manuel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="fr" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Affichage des droits d'auteurs et clause de non responsabilité dans le pied de page. Dans les précédentes versions de Coppermine, le 'Powered by Coppermine' était utilisé de manière non transparente pour rendre plus difficile aux non programmeurs l'effacement de cette balise. La raison était un avenant à la licence qui n'autorisait pas l'utilisateur à changer cette ligne. L'équipe de développement de Coppermine à revu ces règles pour cpg1.5.x et a décidé que l'utilisateur EST autorisé à effacer ou à modifier cette ligne de manière légale." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation et manuel</h1>
+<div id="toc">
+<a href="toc.htm">Table des matières</a>
+</div>
+
+
+
+<a name="theme_copyright"></a><h1>Affichage des droits d'auteurs et clause de non responsabilité dans le pied de page<a href="#theme_copyright" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>Dans les précédentes versions de Coppermine, le "Powered by Coppermine" était utilisé de manière non transparente pour rendre plus difficile aux non programmeurs l'effacement de cette balise. La raison était un avenant à la licence qui n'autorisait pas l'utilisateur à changer cette ligne. L'équipe de développement de Coppermine à revu ces règles pour cpg1.5.x et a décidé que l'utilisateur <strong>est</strong> autorisé à effacer ou à modifier cette ligne de manière légale. - Pour plus de détails merci de lire la section <a href="copyrights.htm">Droits d'auteurs &amp; clause de non responsabilité.</a>.</p>
+<div class="cpg_message_error"><strong>Toutefois</strong>: Nous avons des règles sur le forum d'aide à ce sujet: l'aide n'est  <strong>uniquement</strong> apportée qu'aux galeries qui montrent de manière claire le "Powered by Coppermine". L'ajouter par la suite, une fois qu'on vous l'aura demandé, n'accélèrera pas l'aide apportée.</div>
+<p>Avant d'enlever les crédits, merci de prendre ceci en considération: Coppermine est un logiciel libre, l'équipe de développement <strong>vous demande</strong> de laisser le pied de page intact. Nous sommes convaincus que vous donnerez du crédit à ce qui le mérite. De plus, le pied de page est supposé se déployer à travers le monde, avec le "Powered by Coppermine" donnant aux autres la possibilité d'avoir leur propre galerie. Réfléchissez-y à deux fois avant de décider de l'effacer.</p>
+<p>Cela dit, voici comment vous pouvez le modifier: pour changer la place ou la balise est affichée, ouvrez <tt class="code">themes/votretheme/template.html</tt> et déplacez le conteneur <tt class="code">{CREDITS}</tt> Si vous l'enlevez du fichier themes/votretheme/template.html, c'est la balise originale par défaut qui est affichée. Comme elle est générée par la fonction de pied de page de Coppermine, elle doit apparaitre après le conteneur <tt class="code">{GALLERY}</tt> Pour changer le contenu de la balise, ouvrez <tt class="code">themes/votretheme/theme.php</tt> et modifiez la fonction <tt class="code">theme_credits</tt> à votre convenance. Si cette fonction n'existe pas dans votre thème personnalisé, copiez-la depuis le thème sample vers votre thème personnalisé. Pour entièrement enlever le pied de page "Powered by Coppermine", modifiez cette fonction pour qu'elle ne renvoie rien.</p>
+
+<div class="indent">
+
+    <a name="theme_copyright_fair_use"></a><h2>Utilisation acceptable<a href="#theme_copyright_fair_use" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+    <p>Plutôt que d'enlever totalement les références au site web de Coppermine, nous vous encourageons à modifier la fonction dans votre thème personnalisé, et d'y ajouter les informations que vous souhaitez y voir. Voici quelques exemples de sorties que l'équipe de développement de Coppermine considère comme acceptable:</p>
+    <div class="cpg_example">
+    <ul>
+    	<li><div class="footer" align="left" style="padding-top:10px;display:block;visibility:visible; font-family: Verdana,Arial,sans-serif;"><a href="http://coppermine-gallery.net/">Powered by Coppermine</a>, tout le contenu par John Doe</div></li>
+    	<li><div class="footer" align="left" style="padding-top:10px;display:block;visibility:visible; font-family: Verdana,Arial,sans-serif;"><a href="http://coppermine-gallery.net/">Powered by Coppermine</a>, photos &copy; 2004 - 2010 par <a href="http://example.com/">John Doe</a></div></li>
+    	<li><div class="footer" align="left" style="padding-top:10px;display:block;visibility:visible; font-family: Verdana,Arial,sans-serif;"><a href="http://coppermine-gallery.net/">Powered by Coppermine</a>, adapté pour <a href="http://example.com/">SuperDuperPortal</a> par John Doe.</li>
+    	<li><div class="footer" align="left" style="padding-top:10px;display:block;visibility:visible; font-family: Verdana,Arial,sans-serif;"><a href="http://coppermine-gallery.net/">Powered by Coppermine</a>, theme créer par <a href="http://example.com/">John Doe</a></div></li>
+    	<li><div class="footer" align="left" style="padding-top:10px;display:block;visibility:visible; font-family: Verdana,Arial,sans-serif;"><a href="http://example.com/">SuperDuper-Gallery</a> &copy; 2010 par John Doe, <a href="http://coppermine-gallery.net/">Powered by Coppermine</a></div></li>
+    </ul>
+    </div>
+    <p>Evidemment, un mélange entre tous ces exemples sera aussi correct.</p>
+    <a name="theme_copyright_end"></a>
+    
+    <a name="theme_copyright_unfair_use"></a><h2>Utilisation inacceptable<a href="#theme_copyright_unfair_use" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+    <p>Cela peut paraitre incroyable à une majorité, comme les règles expliquées plus haut sont relativement raisonnables et faciles à comprendre et à respecter. Toutefois par le passé, il y a eu des tierces personnes qui on essayé d'utiliser Coppermine pour en faire leur propre marque: en particulier un site Allemand qui a essayer de construire une communauté offrant le pack de Coppermine en téléchargement avec uniquement de tout petits changements par rapport au pack original: la référence au "Powered by Coppermine" en pied de page ne pointait plus vers le site officiel de Coppermine (<a href="http://coppermine-gallery.net/" rel="external" class="external">coppermine-gallery.net</a>), mais vers le site des initiateurs de cette communauté. Nous laisserons le soin à la communauté du web de déterminer si c'est légitime ou pas.</p>
+    <p>Cette section de la documentation n'est pas destinée aux utilisateurs finaux, mais à ceux qui veulent redistribuer, modifier, faire un paquetage ou s'approprier Coppermine et faire profiter les autres de leurs modifications.</p>
+    <p>Avec ceci en mémoire, voici une clarification de ce que l'équipe de développement considère comme utilisation <strong>inacceptable</strong>:</p> 
+    <ul>
+    	<li>Essayer de s'approprier la référence "Powered by Coppermine" en la faisant pointer vers un autre site que l'original.</li>
+    	<li>Essayer d'induire en erreur les utilisateurs sur la propriété intellectuelle du code de Coppermine.<br />
+    	<span class="small">Le fait de passer quelques heures pour faire de petites modifications du code ne vous autorise pas à changer la référence pour une distribution.</span></li>
+    </ul>
+    <p>Notez la différence entre <em>acceptable</em> et <em>inacceptable</em> les utilisateurs (c.à.d. les propriétaires de galeries particulières sur une page web) sont autorisés à changer la ligne contenant les crédits pour informer leurs visiteurs des droits d’auteurs, de propriété etc. Redistribuer Coppermine (adapter) est aussi autorisé et même encouragé, mais la modification des références doit être justifiée par rapport à la masse de travail réalisée pour l'adaptation, et la modification ne doit pas induire en erreur concernant le créateur des modifications et le code d'origine.</p>
+    <p>Pour ceux qui prévoient de redistribuer une version modifiée de Coppermine: merci de lire la section concernant <a href="copyrights.htm#copyright_additional_preservation">préservation des droits d'auteurs</a> dans le code: même s’il est autorisé d'enlever le "Powered by Coppermine" de l'affichage de la galerie Coppermine, il est obligatoire de préserver les crédits inclus dans le code, même si vous redistribuez Coppermine avec une version modifiée. Toutefois il est important d'informer les autres que votre "version" de Coppermine est différente de l'originale, lisez donc aussi <a href="copyrights.htm#copyright_additional_marking">Marquage des versions modifiées</a>.</p>
+
+</div>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

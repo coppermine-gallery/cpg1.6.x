@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Keywords - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+  $Date$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Inhoudstafel</a>
+</div>
+<div id="doc_en_only">No translation available</div>
+
+<a name="keywords"></a><h1>Keywords<a href="#keywords" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>Coppermine uses &quot;keywords&quot; for gallery items that allows both the gallery admin as well as end users to assign one or more keywords to each file in a gallery. This is helpful for tagging files so they may be searched or browsed more easily.</p>
+
+<a name="keywords_assign"></a><h2>Assigning keywords<a href="#keywords_assign" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Keywords can be assigned to files during the upload stage or afterwards in the gallery itself.  Keywords can be selected from a list of keywords or entered by typing them in.</p>
+
+<a name="keywords_assign_separator"></a><h3>Keyword separator or keyword delimiter<a href="#keywords_assign_separator" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Different keywords are separated using a delimiter set on the gallery configuration panel.  Choosing the delimiter is a new feature of Coppermine 1.5; previously, keywords could only be separated by spaces.  You can choose the keyword separator to be a semicolon, a comma, or a space.  The semicolon is the default for new installations of Coppermine 1.5; the space is retained for upgrades from Coppermine 1.4 and earlier.  For upgrades, you can convert your keyword separator to a semicolon or comma by going to the <a href="admin-tools.htm#admin_tools_options_keyword_convert">Admin Tools</a> page.</p>
+
+<a name="keywords_assign_edit"></a><h3>Editing/adding keywords<a href="#keywords_assign_edit" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Click on &quot;edit files&quot; next to the thumbnail that represents that album.  You can also edit the file information for a single file by clicking on the button underneath the intermediate image.  Edit the keywords by entering them into the corresponding field.</p>
+
+<a name="keywords_manager"></a><h3>Keywords manager<a href="#keywords_manager" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p><img src="images/keywordmgr.jpg" width="459" height="226" border="0" alt="" title="Keyword manager" align="right" />As your gallery grows, there will be an increasing number of files in it and subsequently a lot of keywords to manage. To help you manage your keywords, there is a keyword manager available - just click on the corresponding link in the <a href="admin_menu.htm">admin menu</a>.</p>
+<p>Note that the keyword manager will only show up in the admin menu if you have enabled &quot;<a href="configuration.htm#admin_general_keywords_start">Enable clickable keywords in search</a>&quot; in Coppermine's config. If you have disabled the feature in config, you can still access the keyword manager using the link on the config page or by typing in <tt class="code">keywordmgr.php</tt> in your browser's address bar (i.e. by going to <tt class="code">http://yourdomain.tld/your_coppermine_folder/keywordmgr.php</tt>).</p>
+<p>The items on they keyword manager screen should be self-explanatory: using the most left column labeled &quot;edit&quot; with the edit-icon next to a keyword you can edit a keyword that can be assigned to several files. Click on the radio button in that column, then modify the keyword using the input field at the bottom of the screen. After editing, submit the change by clicking on the &quot;change keyword&quot; button. This will change the selected keyword for all files.</p>
+<p>This feature is particularly helpful if you have keywords assigned to your files that only differ slightly: for example, there could be both the keyword &quot;apple&quot; as well as &quot;apples&quot; in your gallery, which are not the same and therefore might cause issues. Using the above-mentioned option to change a keyword site-wide, either change all occurrences of &quot;apples&quot; to &quot;apple&quot; or vice versa.</p>
+<p>The feature &quot;delete keyword&quot; works similarly - just clicking on the &quot;delete keyword XYZ&quot;-link will delete the keyword for all files (it will <strong>not</strong> delete the file itself, just the keyword).</p>
+<p>To find out in which files a particular keyword is being used, just click on &quot;search for "XYZ" in new window&quot;.<br />
+If <a href="configuration.htm#admin_general_keywords_start">Enable clickable keywords in search</a> is enabled, the list will be displayed at the bottom of the keyword manager screen just as it will be displayed on the search page.</p>
+
+
+<a name="keywords_album"></a><h2>Album keywords<a href="#keywords_album" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Coppermine comes with a powerful feature that allows you to have files that only need to be uploaded once to appear in another (or several other) albums as linked files. This can be accomplished using the album keyword feature.</p>
+<p>Here's how you accomplish that: go to the album that contains the pics that are supposed to show up in another album, click on &quot;edit files&quot; next to the thumbnail that represents that album. On the <a href="files.htm#edit_pics">edit files</a> screen, come up with a unique keyword that all those files have in common that a human would not choose as simple keyword. Keep in mind what the keyword separator is for your gallery (set on the configuration panel). A good keyword would be &quot;<tt class="code">Holiday Transylvania 2007 With Brad And Janet</tt>&quot; for example.  (If your gallery keyword separator is a space and you want to keep it a space - and not convert to a better separator like a semicolon - then use &quot;<tt class="code">HolidayTransylvania2007WithBradAndJanet</tt>&quot;.)  By using a long and specific keyword, you can be assured that only the files you assign to this specific keywords show up in the album.  You can use a simpler keyword if you want to include more variations of the album keyword you choose.  Assign that keyword (without the quotes) to all files that are supposed to show up in another album. Then submit the changes. Final step: go to the album that is supposed to contain the copies (linked files). Navigate to the <a href="albums.htm#album_prop">properties screen</a> of that album (use the &quot;properties&quot; button next to the thumbnail that represents the album) and enter the keyword you chose (&quot;<tt class="code">Holiday Transylvania 2007 With Brad And Janet</tt>&quot; in the above example or without spaces if necessary) into the field &quot;Album Keyword&quot; field (again without the quotes) on the properties page and submit the form. Observe the results - pretty nifty, eh? One drawback though: an album that <em>only</em> contains files linked from another album (using the album keyword feature) and no actual &quot;non-linked&quot; file can not be represented with an album thumbnail. So we suggest uploading at least one &quot;real&quot; pic to the album that is supposed to contain the linked files and assign the thumbnail of that file to the album.</p>
+<p>If you use a space as the keyword separator, remember that spaces between words will break those words into separate keywords.  If you must use phrases for your keywords, connect them with an underscore or by using the ascii space holder ctrl+Alt+0160 (NOTE: the latter option only works with latin based character sets.)</p>
+<p>The better option is to use a semicolon as the gallery keyword separator (set on the configuration panel).  That way, you can use a space or a comma in your keywords.  For example, for a photo of Mount Rushmore a keyword set could be "Washington, George;mountain;South Dakota" and you would have 3 keywords: (1) "Washington, George", (2) "mountain", (3) "South Dakota".</p>
+<p>Each album can only have <strong>ONE</strong> (1) keyword or keyword phrase.  All pictures residing in different albums that you would like to be displayed in this album must have the same keyword or keyword phrase in their respective keyword fields. Pictures, unlike albums can have multiple keywords or keyword phrases separated by the keyword separator/delimiter. This provides you with the option to display pictures in many albums.  For the visitor of these albums, it will appear as if the file/image had been uploaded to each album.</p>
+
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

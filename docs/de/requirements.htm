@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Mindestvoraussetzung - Coppermine Photo Gallery - Documentation &amp; Handbuch</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="de" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Es gibt bestimmte Mindestvoraussetzung, die erfüllt werden müssen, um Coppermine betreiben zu können: PHP, mySQL, GD/ImageMagick" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<div id="doc_en_partial">Only partial translation available</div>
+
+<a name="what"></a><h1>Was wird benötigt (Mindestvoraussetzungen)<a href="#what" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>Um Coppermine installieren zu können gibt es einige <strong>Mindestvoraussetzung</strong>, die erfüllt sein müssen:</p>
+<a name="what_minimum"></a><h2>Server-seitige Mindestvoraussetzungen<a href="#what_minimum" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<ul>
+    <li>
+	  <a name="what_minimum_webserver"></a><h3>Ein Webserver<a href="#what_minimum_webserver" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	  <img src="../images/apache.gif" border="0" alt="" width="180" height="50" title="Apache" align="right" style="padding-left:10px" />
+	  Coppermine kann auf jedem beliebigen Webserver betrieben werden - es gibt Rückmeldungen von erfolgreichen Installationen unter <a href="http://httpd.apache.org/" rel="external" class="external">Apache</a>, <a href="http://www.microsoft.com/iis/" rel="external" class="external">Microsoft Internet Information Server</a> (IIS), <a href="http://www.roxen.com/products/webserver/" rel="external" class="external">Roxen WebServer</a>, <a href="http://www.aprelium.com/" rel="external" class="external">Abyss</a>, <a href="http://www.janaserver.de/" rel="external" class="external">JanaServer</a>, <a href="http://www.zeus.com/" rel="external" class="external">Zeus</a>. Das Coppermine Entwicklerteam empfiehlt Apache.
+	</li>
+  <li><a name="what_minimum_php"></a><h3>Ein Webserver mit PHP-Unterstützung<a href="#what_minimum_php" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+  <img src="../images/php-med-trans.png" border="0" alt="" width="95" height="51" title="PHP" align="right" style="padding-left:10px" />
+  PHP (Version 4.3.0 oder besser), entweder mit Unterstützung für die GD-Bibliothek einkompiliert oder mit der Berechtigung, die exec()-Funktion für ImageMagick benutzen zu dürfen (für die ausführbare Datei &quot;convert&quot;), damit Thumbnails und Bilder in Zwischengrößen erzeugt werden können. Mysql-Unterstützung muss ebenfalls in PHP einkompiliert sein.</li>
+  <li><a name="what_minimum_mysql"></a><h3>Eine MySQL-Datenbank<a href="#what_minimum_mysql" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+  <img src="../images/mysql.png" border="0" alt="" width="125" height="64" title="mySQL" align="right" style="" />
+  MySQL (in Version 3.23.23 oder besser) wird benötigt. MySQL 4.1 wird empfohlen, MySQL 5 wird unterstützt. The MySQL-Benutzer benötigt die Berechtigung für die Befehle CREATE, ALTER, REPLACE, SELECT, UPDATE, DELETE, INSERT innerhalb der Datenbank. Die meisten Benutzer (auf gehosteten Plattformen) haben diese Berechtigungen. Falls diese Berechtigungen nicht vorhanden sind kann in der Regel überhaupt kein vorgefertigtes Skript wie Coppermine auf dem Server betrieben werden. Bei Unsicherheiten bezüglich der Berechtigungen oder des Vorhandenseins der notwendigen Programme ist dies mit dem Webhost zu klären. Die meisten Hoster können mit Sicherheit eine Aussage treffen, ob Coppermine auf ihren Systemen betrieben werden kann oder nicht.<br />
+  Eine Datenbank, die Coppermine benutzen kann muss bereits vorhanden und aufgesetzt sein - das Installationsskript legt <strong>keine</strong> Datenbank an, falls diese noch nicht besteht. In den meisten gehosteten Umgebungen ist mindestens eine Datenbank bereits vorhanden, die genutzt werden kann; ist das nicht der Fall, dann musst Du eine solche Datenbank anlegen (oder durch den Webhost anlegen lassen). Details zur Vorgehensweise sind beim Webhoster zu erfragen. Beim Anlegen der Datenbank unbedingt den Datenbanknamen, den MySQL-Benutzernamen und dessen Passwort notieren - diese Daten werden während der Installation benötigt.</li>
+  <li><a name="what_minimum_image_library"></a><h3>Eine Grafik-Bibliothek:<a href="#what_minimum_image_library" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+  <img src="../images/imagemagick.png" border="0" alt="" width="130" height="54" title="ImageMagick" align="right" style="padding-left:20px" />
+  <img src="../images/gd.png" border="0" alt="" width="148" height="93" title="GD" align="left" style="padding-right:20px" />
+  Entweder GD in Version 1.x oder 2.x (PHP muss mit GD-Unterstützung kompiliert sein) oder ImageMagick werden benötigt (vgl. <a href="install_faq.htm#whatIsImageMagick">Was ist ImageMagick</a> und <a href="install_faq.htm#WhatIsGD">Was ist GD</a>).</li>
+</ul>
+<br clear="all" />
+<p class="cpg_message_success">Es ist immer eine gute Idee, den Support des Webhosts vor der Installation von Coppermine anzufragen, ob es irgendwelche bekannten Probleme im Zusammenhang mit Coppermine beim jeweiligen Webhost gibt.</p>
+
+<a name="what_minimum_self-hosting"></a><h2>Selbst-Hosting und Webserver-Setup<a href="#what_minimum_self-hosting" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Obwohl Coppermine auf <em>jedem</em> Webserver betrieben werden kann, der die oben genannten Mindestvoraussetzungen erfüllt kann das Coppermine Entwickler-Team keinerlei Support leisten in Sachen Webserver-Installation und Setup. Wie bereits erwähnt sind die oben gennanten Mindestvoraussetzungen Grundbedingungen, d.h. sie müssen bereits erfüllt sein vor der Installation von Coppermine. Nimm bitte zur Kenntnis, dass das Coppermine-Team Selbst-Hosting es weder empfielt noch unterstützt es sei denn, Du bist ein bereits ein erfahrener Webserver-Administrator und kennst Dich bestens mit dem Server aus.</p>
+
+<a name="personal"></a><h2>Persönliche Voraussetzungen<a href="#personal" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Coppermine richtet sich an Webmaster, die zumindest über grundlegende HTML-Kenntnisse verfügen und bereits über ein wenig Erfahrung beim Installieren vorgefertigter Skripte haben. Das Entwicklerteam ist sich im Klaren, dass es eine Anzahl von Benutzern gibt, die Ihre Galerie mit Hilfe von <a href="auto-installers.htm">Auto-Installern</a> aufsetzen. Diese Benutzergruppe hat meist keine oder nur sehr wenig Erfahrung im Ausetzen von Skripts, die Coppermine ähnlich sind. Auch das ist in Ordnung - wir verlangen nur, dass die Dokumentation ausgiebig und gründlich gelesen wird, bevor Ihr Fragen im Coppermine Support Forum stellt, da die meisten Anfängerfragen dort schon mehrfach beantwortet wurden. Coppermine kann problemlos mit einem der <a href="theme.htm#theme_builtin">vorgefertigten Themen (Designs)</a> betrieben werden, die bereits im Paket enthalten sind. Falls Du jedoch eines der bestehenden Themen abändern oder <a href="theme_create.htm#theme_create">ein neues Thema/Design erstellen</a> willst (das dem Aussehen Deiner restlichen Seite entspricht) solltest Du zumindest grundlegende bis durchschnittliche Fähigkeiten haben in <acronym title="Hyper Text Markup Language">HTML</acronym> und <acronym title="Cascading Style Sheets">CSS</acronym>.</p>
+
+<a name="requirements_faq"></a><h2>Requirements FAQ<a href="#requirements_faq" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Some questions that are related to the minimum requirements are being covered on the <a href="install_faq.htm">install FAQ</a> pages:</p>
+<ul class="nomargin">
+    <li><a class="content" href="install_faq.htm#whatIsImageMagick">What's <strong>ImageMagick</strong> and how can I get it?</a></li>
+    <li><a class="content" href="install_faq.htm#WhatIsGD">What's <strong>GD</strong> and how can I get it?</a></li>
+    <li><a class="content" href="install_faq.htm#VersionPHP">How do I find out <strong>which version of PHP</strong> I have?</a></li>
+    <li><a class="content" href="install_faq.htm#VersionGD">How do I find out <strong>which version of GD</strong> I have?</a></li>
+    <li><a class="content" href="install_faq.htm#GD1vsGD2">What's the difference between <strong>GD1 and GD2</strong>?</a></li>
+    <li><a class="content" href="install_faq.htm#enableGD">How do I <strong>enable gd</strong> on my Windows server?</a></li>
+    <li><a class="content" href="install_faq.htm#enableIMonWindows">How do I <strong>enable ImageMagick</strong> on my Windows server?</a></li>
+    <li><a class="content" href="install_faq.htm#installIMwhenHosted">How can I <strong>install ImageMagick or GD</strong>?</a></li>
+</ul>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

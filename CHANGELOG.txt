@@ -1,0 +1,1479 @@
+************************
+Coppermine Photo Gallery
+************************
+Copyright (c) 2003-2010 Coppermine Dev Team
+v1.0 originally written by Gregory Demar
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License version 3
+as published by the Free Software Foundation.
+********************************************
+Coppermine version: 1.5.9
+$HeadURL$
+$Revision$
+*********************************************
+Changelog
+=========
+[A] = Added new feature
+[B] = Bugfix (fix something that wasn't working as expected)
+[C] = Cosmetical fix (layout, typo etc.)
+[D] = Documentation improvements
+[M] = Maintenance works
+[O] = Optimization of code
+[S] = Security fix (issues that are related to security)
+*********************************************
+
+2010-09-12 [B] Fixed display of unprocessed bbcode markup in ecard display {Nibbler}
+2010-09-10 [O] Optimized picture resizing and watermarking procedure {eenemeenemuu}
+2010-09-10 [B] Fixed exif issue when auto resizing is enabled and watermarking is disabled (thread ID 66994) {eenemeenemuu}
+2010-09-10 [A] Show 'upload needs admin approval' message for flash uploader (thread ID 66832) {eenemeenemuu}
+2010-09-10 [B] Fixed setting email sender address {Nibbler}
+2010-09-03 [B] Updated regex to fix error message for blank 'allowed file types' values (thread ID 66289) {eenemeenemuu}
+2010-09-03 [B] Fixed missing classid attribute causing videos not to play (thread ID 66477 & 66393) {eenemeenemuu}
+2010-09-03 [B] Fixed issue when regular users try to upload to self-created public albums with simple upload form (thread ID 66903) {eenemeenemuu}
+2010-09-02 [B] Allow admin to change email address (thread ID 66881) {eenemeenemuu}
+2010-09-01 [B] Fixed template error if guests are allowed to create public albums {eenemeenemuu}
+2010-09-01 [A] Added partial Catalan language file (user contribution) {eenemeenemuu}
+2010-09-01 [A] Added partial Portuguese language file (user contribution) {eenemeenemuu}
+2010-08-31 [C] HTML validation (thread ID 66448) {eenemeenemuu}
+2010-08-30 [B] Fixed issue where users can edit public albums (thread ID 66380) {eenemeenemuu}
+2010-08-30 [B] Fixed lower case user name issue with plugin usergal_alphatabs (thread ID 66485) {eenemeenemuu}
+2010-08-23 [B] Fixed album manager issue when users aren't allowed to create private albums (thread ID 66325) {eenemeenemuu}
+2010-08-23 [B] Added code that makes sure mb_strlen actually exists when called (thread ID 66674) {GauGau}
+2010-08-20 [B] Updated default value of transparent_overlay in configuration.htm (thread ID 66660) {eenemeenemuu}
+2010-08-20 [O] Updated Finnish language file (user contribution) {eenemeenemuu}
+2010-08-19 [B] Added language fallback to function cpg_get_default_lang_var (thread ID 66513) {eenemeenemuu}
+2010-08-16 [A] Added Icelandic language file (user contribution) {eenemeenemuu}
+2010-08-16 [A] Added Italian language file (user contribution) {eenemeenemuu}
+2010-08-16 [A] Added partial Swedish language file (user contribution) {GauGau}
+2010-08-14 [B] Fixed search feature in the keyword manager (thread 66550) {Frantz}
+2010-08-14 [B] Corrected French lang file to fix the non showing dropdown in the user manager (thread ID 66524) {Frantz}
+2010-08-12 [B] Fixed admin email address validation (thread ID 66512) {eenemeenemuu}
+2010-08-12 [B] Added charsetmgr.php to the delete files array (thread ID 66490) {eenemeenemuu}
+2010-08-12 [B] Fixed issue with plugin usergal_alphatabs when bridged (thread ID 66340) {eenemeenemuu}
+2010-08-10 [M] Counted version count up in SVN repository from cpg1.5.8 to cpg1.5.9 {eenemeenemuu}
+2010-08-09 [B] Fixed default page when comments are sorted in descending order (thread ID 66441) {Nibbler}
+2010-08-06 [M] Release of cpg1.5.8 {eenemeenemuu}
+2010-07-28 [B] Fixed setting default language with language manager (thread ID 66276) {eenemeenemuu}
+2010-07-28 [M] Changed form token generation - removed trouble maker parameters (thread ID 65918) {eenemeenemuu}
+2010-07-28 [B] Fixed language manager issue for language files with underscore (thread ID 66274) {eenemeenemuu}
+2010-07-24 [B] Set moderator group to '0' for all albums to avoid problems for people who used that feature before it was dropped (thread ID 66118) {eenemeenemuu}
+2010-07-22 [B] Fixed ecard if no intermediate picture is present (thread ID 66161) {eenemeenemuu}
+2010-07-22 [A] Added Estonian language file (user contribution) {eenemeenemuu}
+2010-07-21 [B] Update 'last visit' time if it's a 'remember me' session (thread ID 66145) {eenemeenemuu}
+2010-07-21 [A] Added Slovak language file (user contribution) {eenemeenemuu}
+2010-07-19 [A] While deleting non-images, delete the corresponding custom thumbnail if exists {eenemeenemuu}
+2010-07-19 [A] While renaming non-images, rename the corresponding custom thumbnail if exists {eenemeenemuu}
+2010-07-19 [O] While renaming files, check if there will be no conflicts before doing anything {eenemeenemuu}
+2010-07-16 [A] Added plugin hook 'token_criteria' {eenemeenemuu}
+2010-07-16 [C] Fixed missing CSS class cpg_summary and icon replacement leading to broken output of help boxes on config screen (thread IDs 65994 and 65996) {GauGau}
+2010-07-13 [B] Fixed possibility for users to edit their files in public galleries if disabled in config (thread ID 65693) {eenemeenemuu}
+2010-07-13 [A] Disable the possibility for guests to enter file details by default (thread ID 62522) {eenemeenemuu}
+2010-07-13 [B] Fixed error message when regular users try to delete their albums in public categories {eenemeenemuu}
+2010-07-13 [M] Re-organizing zip archives inside docs folder {GauGau}
+2010-07-12 [D] Adding documentation about plugin config options {GauGau}
+2010-07-09 [B] Fixed issue when reset file ratings (thread ID 65896) {eenemeenemuu}
+2010-07-05 [B] Fixed empty values for 'reason' in 'report to administrator' email (thread ID 65752) {eenemeenemuu}
+2010-07-05 [B] Fixed category view when albums with keywords are present (thread ID 64155) {eenemeenemuu}
+2010-07-05 [B] Changed type of plugin hooks 'theme_thumbnails_wrapper_start/end' from 'filter' to 'action' and adjusted English documentation accordingly (thread ID 58734) {eenemeenemuu}
+2010-07-05 [A] Added search terms to the title of the thumbnails page (thread ID 65840) {eenemeenemuu}
+2010-07-05 [A] Added Japanese language file (user contribution) {GauGau}
+2010-07-02 [D] Adding boxes to config documentation for defaults, max, min, recomended and record name {GauGau}
+2010-06-30 [B] Display Coppermine news always in an iframe (thread ID 65424) {eenemeenemuu}
+2010-06-29 [B] Fixed error message for non existing categories (thread ID 65763) {eenemeenemuu}
+2010-06-26 [B] Replaced wrong link in update.php (thread ID 65714) {GauGau}
+2010-06-25 [B] Added language table population section to update script to stop cpg1.4.x upgrades seing only Luxemburgish and Mexican as available langauges {GauGau}
+2010-06-25 [O] Updated Turkish language file (user contribution) {eenemeenemuu}
+2010-06-24 [A] Show password prompt if user tries to access file in password protected album directly {eenemeenemuu}
+2010-06-24 [A] Added Brazilian language file (user contribution) {eenemeenemuu}
+2010-06-24 [B] Fixed uploading to password protected albums in public categories (thread ID 65677) {eenemeenemuu}
+2010-06-22 [B] Changed default values for user galleries category (thread ID 65543) {eenemeenemuu}
+2010-06-21 [B] Fixed album visibility issue with user galleries (thread ID 65543) {Nibbler}
+2010-06-21 [B] Changed fix for category alpha sorting {Nibbler}
+2010-06-21 [B] Fixed a critical error with the most viewed meta album {Nibbler}
+2010-06-21 [O] Updated French language file (improvement and corrections){Frantz}
+2010-06-21 [B] Allow higher port numbers for the site url config setting {Nibbler}
+2010-06-18 [B] Fixed display of swf files in Firefox (thread ID 63624) {eenemeenemuu}
+2010-06-17 [B] Fixed resizing of watermark backup images (thread ID 65531) {eenemeenemuu}
+2010-06-17 [B] Fixed category permissions for secondary user groups (thread ID 65551) {eenemeenemuu}
+2010-06-17 [B] Fixed issue when editing user albums (thread ID 65542) {eenemeenemuu}
+2010-06-17 [B] Fixed issues with usergal_alphatabs plugin (thread ID 65473 & 65547) {eenemeenemuu}
+2010-06-16 [C] Fixed line breaks in contact form emails {eenemeenemuu}
+2010-06-15 [D] Removed outdated FAQ items {GauGau}
+2010-06-12 [O] Updated Hungarian language file (user contribution) {eenemeenemuu}
+2010-06-11 [B] Fixed pre-population of user name on comments form (thread ID 65293) {eenemeenemuu}
+2010-06-11 [B] Fixed timeout issue when fetching remote files (thread ID 65424) {eenemeenemuu}
+2010-06-11 [B] Fixed thumb sharpening (thread ID 65398) {eenemeenemuu}
+2010-06-11 [A] Place new comments form accordingly to sort order of comments (thread ID 65461) {eenemeenemuu}
+2010-06-10 [A] Added Danish language file (user contribution) {eenemeenemuu}
+2010-06-10 [B] Added default value for 'user_profile6' during user creation (thread ID 65451) {eenemeenemuu}
+2010-06-10 [B] Fixed HTML validation issue for german lang files - replaced & by &amp; {Timo}
+2010-06-07 [D] Updated plugin manager documentation (thread ID 65379) {GauGau}
+2010-06-07 [A] Added Hungarian language file (user contribution) {GauGau}
+2010-06-07 [M] Counted version count up in SVN repository from cpg1.5.6 to cpg1.5.7 {GauGau}
+2010-06-07 [B] Fixed pagination for user manager (thread ID 65365) {eenemeenemuu}
+2010-06-06 [O] Updated Finnish language file (user contribution) {eenemeenemuu}
+2010-06-04 [M] Release of cpg1.5.6 {GauGau}
+2010-06-04 [B] Fixed display of upload approval button (thread ID 65314) {eenemeenemuu}
+2010-06-04 [B] Fixed query for album moderation group (thread ID 65312) {eenemeenemuu}
+2010-06-04 [B] Fixed config value for path to ImageMagick when selecting GD during intallation (thread ID 65177) {eenemeenemuu}
+2010-06-04 [A] Differentiate user registrations and admin user creations in access log file (thread ID 65298) {eenemeenemuu}
+2010-06-04 [M] Removed cpg1.3.x theme upgrade guide, as a direct upgrade from cpg1.3.x to cpg1.5.x no longer is supported {GauGau}
+2010-06-03 [B] Fixed log file entry on user registration/creation (thread ID 65290) {eenemeenemuu}
+2010-06-03 [B] Fixed ip address dupes at various places (thread ID 65294) {eenemeenemuu}
+2010-06-03 [B] Fixed issue when creating users (thread ID 64457) {eenemeenemuu}
+2010-06-03 [B] Fixed issue when uploading plugins to windows driven galleries {eenemeenemuu}
+2010-06-03 [B] Fixed typo that caused the display of the 'not supported version' message box (thread ID 65224) {eenemeenemuu}
+2010-06-03 [O] Updated Czech language file (user contribution) {eenemeenemuu}
+2010-06-02 [B] Fixed ip address dupes on stat_details.php (thread ID 65230) {eenemeenemuu}
+2010-06-02 [B] Extended lang_byte_units array for some language files (thread ID 65231) {eenemeenemuu}
+2010-06-02 [B] Fixed broken link (thread ID 65226) {eenemeenemuu}
+2010-06-02 [M] Release of cpg1.5.4 as initial stable release for the public {GauGau}
+2010-06-01 [M] Preparing the release of cpg1.5.4 {GauGau}
+2010-06-01 [B] Fixed issue when selecting IM on installation (thread ID 65185) {eenemeenemuu}
+2010-06-01 [B] Moved profile button for curve theme (thread ID 65204) {eenemeenemuu}
+2010-05-31 [A] Added Ukrainian language file (user contribution) {GauGau}
+2010-05-27 [A] Remove outdated guest_tokens (thread ID 62522) {eenemeenemuu}
+2010-05-27 [M] Hid album moderation drop down box on modifyalb.php (thread ID 64408) {eenemeenemuu}
+2010-05-27 [B] Disabled selection of another album after successful flash upload (thread ID 64310) {eenemeenemuu}
+2010-05-27 [B] Fixed blank names when batch adding secondary user group with usermgr.php (thread ID 64410) {eenemeenemuu}
+2010-05-27 [B] Fixed sorting categories alphabetically (thread ID 64477) {eenemeenemuu}
+2010-05-27 [C] Changed table headers of usermgr.php and reviewcom.php (thread ID 64166) {eenemeenemuu}
+2010-05-27 [C] Changed table header of groupmgr.php (thread ID 64407) {eenemeenemuu}
+2010-05-26 [B] Fixed clipping of comments (thread ID 64662) {eenemeenemuu}
+2010-05-26 [B] Fixed display for regular users if they have no quota {eenemeenemuu}
+2010-05-26 [B] Fixed quota display for regular users (thread ID 64452) {eenemeenemuu}
+2010-05-26 [D] Added section about creating svn tags to documentation (thread ID 38932) {eenemeenemuu}
+2010-05-25 [B] Porting the security fix that lead to the release of cpg1.4.27 for cpg1.5.x (making sure that image_processor.php doesn't exist) {GauGau}
+2010-05-24 [D] Added screenshots to install screen documentation {GauGau}
+2010-05-24 [D] Added fullsize jquery plugin to docs {GauGau}
+2010-05-20 [S] Fixed potential XSS issue (thread ID 64734) {eenemeenemuu}
+2010-05-20 [D] Added ownership section to permissions page. Added webserver response codes to errors page. {GauGau}
+2010-05-19 [O] Revised session handling (thread ID 65012) {eenemeenemuu}
+2010-05-19 [A] Added partial Czech translation (user contribution) {GauGau}
+2010-05-11 [D] Added apache server response codes {GauGau}
+2010-05-12 [B] Fixed language issue during installation (thread ID 64829) {eenemeenemuu}
+2010-05-12 [B] Fixed dupes when ordering by position (thread ID 64919) {eenemeenemuu}
+2010-05-11 [D] Added theme examples to navigation {GauGau}
+2010-05-11 [D] Started Spanish translation of documentation (user contribution) {GauGau}
+2010-05-11 [B] Fixed ambiguous column name (thread ID 64809) {eenemeenemuu}
+2010-05-10 [A] Fixed check for missing JAVASCRIPT token (thread ID 63279) {eenemeenemuu}
+2010-05-10 [A] Added check for missing JAVASCRIPT token (thread ID 63279) {GauGau}
+2010-05-10 [D] Added navigation sub-items to theme creation tutorial {GauGau}
+2010-05-10 [D] Added clarification about editing include/themes.inc.php {GauGau}
+2010-05-10 [A] Added klingon flag for a possible future language file {GauGau}
+2010-05-05 [B] Fixed disabling of browse by date button (thread ID 64806) {eenemeenemuu}
+2010-05-03 [A] Added plugin hook to display something after an IP address {GauGau}
+2010-05-03 [D] Updated Dutch translation (user contribution) {GauGau}
+2010-05-02 [B] Fixed faulty executed database update on stat_details.php {eenemeenemuu}
+2010-05-02 [C] Fixed missing header for overall stats (thread ID 64799) {eenemeenemuu}
+2010-05-02 [B] Fixed js error for search meta album (thread ID 64312) {eenemeenemuu}
+2010-05-02 [B] Fixed 'crop and rotate' issue {eenemeenemuu}
+2010-05-01 [B] Fixed issue when performing an OR search (thread ID 64786) {eenemeenemuu}
+2010-04-28 [O] Updated language file for Castilian Spanish (user contribution) {GauGau}
+2010-04-28 [A] Added partial translation of Mexican Spanish (user contribution) {GauGau}
+2010-04-27 [B] Fixed help text issue (thread ID 64743) {eenemeenemuu}
+2010-04-27 [A] Added partial Luxembourgish language file (user contribution) {eenemeenemuu}
+2010-04-27 [A] Added partial Turkish language file (user contribution) {eenemeenemuu}
+2010-04-26 [A] Added user-contributed partially-translated Spanish language file that is more complete than the previous one (but still incomplete) {GauGau}
+2010-04-26 [D] Added language details to documentation navigation {GauGau}
+2010-04-24 [C] Fixed message box issue (thread ID 64492) {eenemeenemuu}
+2010-04-23 [C] Fixed white lines in curve theme (thread ID 64492) {eenemeenemuu}
+2010-04-23 [A] Added animation to upload approval button for curve theme (thread ID 64687) {eenemeenemuu}
+2010-04-23 [A] Added upload approval message to admin welcome message (thread ID 64687) {eenemeenemuu}
+2010-04-19 [B] Fixed number of users when searching users on user manager (thread ID 64455) {eenemeenemuu}
+2010-04-19 [D] Added developer documentation that explains packaging {GauGau}
+2010-04-19 [C] Fixed typos in docs/*/script.js (thread ID 64510) {eenemeenemuu}
+2010-04-15 [D] Added details to docs about translation {GauGau}
+2010-04-15 [D] Added admin tools and administration section for Dutch documentation section (user contribution) {GauGau}
+2010-04-15 [C] Fixed version count issue in install.php (thread ID 64566) {GauGau}
+2010-04-15 [D] Added indentation and "to top" links on config page {GauGau}
+2010-04-15 [C] Added correct default value for ImageMagick path to reflect check for traling slash {GauGau}
+2010-04-15 [C] Corrected improper German translation {GauGau}
+2010-04-11 [A] Added partial Slovenian translation (user contribution) {GauGau}
+2010-04-11 [D] Added section about adding language files to dev-only section of documentation {GauGau}
+2010-04-10 [A] Added partial Arabic translation (user contribution) {GauGau}
+2010-04-09 [D] Added clarification about quota to docs {GauGau}
+2010-04-08 [C] Changed label of submit button for user creation (thread ID 64423) {GauGau}
+2010-04-07 [D] Added credits for Dutch language contributions {GauGau}
+2010-04-07 [D] Added partial Dutch translation of documentation (user contribution) {GauGau}
+2010-04-07 [M] Added code so that debug messages of swfupload flash uploader is shown in debug output {Abbas}
+2010-04-01 [C] Added number of views to file details if detailed hit statistics are enabled (thread ID 63440) {eenemeenemuu}
+2010-04-01 [C] Added class 'buttonlist' to all core themes {eenemeenemuu}
+2010-03-31 [A] Added trailing slash check for ImageMagick path (thread ID 64333) {Nibbler}
+2010-03-31 [B] Added check if plugin is installed (thread ID 64325) {eenemeenemuu}
+2010-03-30 [B] Fixed issue when clicking keyword in file information (thread ID 64209) {eenemeenemuu}
+2010-03-30 [C] Changed delimiter in page title (thread ID 64283) {eenemeenemuu}
+2010-03-30 [B] Fixed referer issue when switching between login.php and contact.php (thread ID 64288) {eenemeenemuu}
+2010-03-30 [O] Removed hard coded user_id on install.php (thread ID 64292) {eenemeenemuu}
+2010-03-30 [O] Updated German language files {eenemeenemuu}
+2010-03-29 [B] Removed referer from contact link if we are already on the contact page (thread ID 64288) {eenemeenemuu}
+2010-03-28 [A] Added user-contributed partially-translated Spanish language file {GauGau}
+2010-03-27 [D] Various minor documentation improvements {GauGau}
+2010-03-26 [A] Added plugin hook main_page_layout {GauGau}
+2010-03-26 [B] Fixed wrong linked files counter for subcategories {eenemeenemuu}
+2010-03-26 [B] Fixed category meta album issue with linked files (thread ID 64155) {eenemeenemuu}
+2010-03-25 [B] Improved fix for IE and non-latin characters in album name (thread ID 64167) {Nibbler}
+2010-03-25 [C] Fixed validation issue with javascript generated page navigation {timoswelt}
+2010-03-25 [C] Always display arrow and delete icons in album manager {eenemeenemuu}
+2010-03-25 [B] Fixed sidebar search (thread ID 64247) {eenemeenemuu}
+2010-03-25 [C] Added missing greybox class to updater help {GauGau}
+2010-03-24 [A] Added guest token. Fixes guests cannot enter file details issue (thread ID 62522) {eenemeenemuu}
+2010-03-24 [B] Fixed issue with IE and non-latin characters in album name (thread ID 64167) {eenemeenemuu}
+2010-03-24 [B] Fixed missing uniqid() parameter for users running PHP 4 (thread ID 64193) {eenemeenemuu}
+2010-03-23 [B] Fixed empty list of available bridges in bridge manager when running PHP4 (thread ID 64220) {Nibbler}
+2010-03-23 [B] Fixed missing album details for albums in sub categories (thread ID 64215) {eenemeenemuu}
+2010-03-23 [M] Counted version number up from in file headers from cpg1.5.3 to cpg1.5.4 as a preparation for the next release {GauGau}
+2010-03-22 [D] Updated visual appearance of plugin version checking routine {GauGau}
+2010-03-22 [D] Added documentation section about plugin manager feature that checks Coppermine version of a plugin {GauGau}
+2010-03-22 [O] Removed line numbers showing through on approval screen, displaying additional related links instead (thread ID 64192) {GauGau}
+2010-03-21 [A] Added user-contributed Dutch language file (thread ID 64109) {GauGau}
+2010-03-19 [B] Fixed issue when admin renames file and new file name already exists (thread ID 61956) {eenemeenemuu}
+2010-03-19 [B] Fixed error message after upload for registered users (thread ID 64117) {eenemeenemuu}
+2010-03-19 [C] Removed hard coded table header layout in user manager (thread ID 64166) {eenemeenemuu}
+2010-03-18 [O] Removed reference to oudated config setting 'display_social_bookmarks' (thread ID 64143) {GauGau}
+2010-03-18 [B] Fixed clickable keyword in file information (thread ID 64151) {eenemeenemuu}
+2010-03-18 [B] Fixed clickable keyword search (thread ID 64151) {eenemeenemuu}
+2010-03-17 [C] Fixed a lot of cosmetical issues with curve theme and IE7 {timoswelt}
+2010-03-16 [B] Fixed deprecated warning message on plugin manager (thread ID 62560) {eenemeenemuu}
+2010-03-16 [O] Updated Polish language file (user contribution) {GauGau}
+2010-03-15 [D] Added documentation section about forgotten passwords {GauGau}
+2010-03-14 [D] Fixed link to upgrade section (thread ID 64092) {GauGau}
+2010-03-13 [B] Fixed search issue (thread ID 64087) {eenemeenemuu}
+2010-03-12 [D] Added details about language selectors to documentation {GauGau}
+2010-03-12 [C] Fixed contact form validation issues (thread ID 64074) {eenemeenemuu}
+2010-03-12 [C] Further improved curve IE6 compatibility {timoswelt}
+2010-03-12 [M] Moved valid_meta_albums array to init.inc.php (thread ID 63977) {eenemeenemuu}
+2010-03-12 [C] Fixed comment input box width {eenemeenemuu}
+2010-03-12 [C] Curve theme menu and layout is now IE6 compatible {timoswelt}
+2010-03-12 [A] Added Luxembourgish to language variables as a preparation for the language file contribution {GauGau}
+2010-03-10 [B] Fixed validation issue with curve theme (thread ID 64041) {GauGau}
+2010-03-10 [D] Added GD logo {GauGau}
+2010-03-10 [B] Fixed error message for invalid meta albums entered in 'content of the main page' (thread ID 63977) {eenemeenemuu}
+2010-03-10 [D] Fixed broken images inside documentation that refered to rating {GauGau}
+2010-03-08 [C] Fixed missing space between album admin menu items (thread ID 63987) {GauGau}
+2010-03-08 [C] Fixed mis-alignement of album description in index view (thread ID 63990) {GauGau}
+2010-03-08 [B] Replacing hard-coded words in curve theme with translated variables (thread ID 63985) {GauGau}
+2010-03-06 [C] Updated Finnish language file (user contribution) {eenemeenemuu}
+2010-03-05 [C] Added minimum height attribute to curve theme to catter for gradient background needing more space{GauGau}
+2010-03-05 [M] Counted version number up as a preparation for the upcoming release {GauGau}
+2010-03-04 [B] Fixed browse-by-date link in curve theme and missing extension for spacer (thread ID 63947) {GauGau}
+2010-03-04 [B] Fixed search issue when private albums are present (thread 63940) {eenemeenemuu}
+2010-03-04 [B] Fixed display of empty meta albums (thread ID 63939) {eenemeenemuu}
+2010-03-03 [C] Set theme "curve" as default theme {GauGau}
+2010-03-03 [M] Removed outdated core themes {GauGau}
+2010-03-01 [D] Added language manager section to docs {GauGau}
+2010-03-01 [A] Added Greek language file (user contribution) {eenemeenemuu}
+2010-02-26 [B] Slideshow from lastcom of an album doesn't start at correct file (thread ID 63585) {timoswelt}
+2010-02-25 [A] Populate thumbnail pages dropdown list using JavaScript (thread ID 63844) {eenemeenemuu}
+2010-02-23 [A] Added plugin hook 'theme_thumbnails_album_types' {eenemeenemuu}
+2010-02-22 [C] Increased height for logo section of coppermine theme {GauGau}
+2010-02-19 [A] Added plugin hooks for thumbnail table manipulation {GauGau}
+2010-02-18 [B] Added missing token checks to forms {GauGau}
+2010-02-18 [A] Added icon display to preserve the same look all over the app {GauGau}
+2010-02-14 [A] Use intermediate picture size as default video size (thread ID 63728) {eenemeenemuu}
+2010-02-11 [A] Added plugin hook 'search_form' (thread ID 63693) {eenemeenemuu}
+2010-02-11 [A] Added new parameter to functions 'starttable' and 'endtable': return or echo content {eenemeenemuu}
+2010-02-10 [B] Fixed slideshow from lastcom of an album to start at correct file (threadID 63585) {Nibbler}
+2010-02-10 [B] Fixed search results leading to wrong files (threadID 63583) {Nibbler}
+2010-02-09 [C] Replaced ascending and descending GIFs by PNGs {Timo}
+2010-02-09 [C] Replaced all rating GIFs by PNGs {Timo}
+2010-02-05 [A] Added Chinese language file (user contribution) {eenemeenemuu}
+2010-02-04 [C] Added draft for new default theme (work in progress) {GauGau}
+2010-02-04 [C] Added icons for new default theme {GauGau}
+2010-02-04 [B] Fixed sidebar issue (thread ID 63620) {eenemeenemuu}
+2010-02-04 [M] Removed export feature that didn't work as expected {GauGau}
+2010-02-04 [B] Updated Russian language file (user contribution) {GauGau}
+2010-02-03 [C] Fixed punctuation dupes in ban manager (thread ID 63594) {eenemeenemuu}
+2010-02-03 [C] Removed text on some buttons on album manager for space reasons (thread ID 63596) {GauGau}
+2010-02-02 [B] Fixed contact form referer (thread ID 63565) {eenemeenemuu}
+2010-02-02 [C] Added category parameter to album list link (thread ID 63530) {eenemeenemuu}
+2010-02-01 [C] Fixing contact form redirect (thread ID 63544) {GauGau}
+2010-02-01 [C] Added comment blocks to JS head to increase compatibility and robustness (thread ID 63555) {GauGau}
+2010-01-31 [B] Fixed error message on contact page when no subject was given and the config option was set to optional (thread ID 63541) {GauGau}
+2010-01-31 [C] Fixed cosmetical issue with missing suject lines (thread ID 63540) {GauGau}
+2010-01-31 [B] Corrected plugin version check not taking into account exact matches {GauGau}
+2010-01-31 [A] Added Russian language file (user contribution) {eenemeenemuu}
+2010-01-29 [D] Added details about subversion repository structure {GauGau}
+2010-01-29 [A] Added plugin hook 'thumb_strip_html_title' (redundant code in functions.inc.php) {timoswelt}
+2010-01-26 [C] Corrected minor language file issues discussed in threads 63435 and 63437 {GauGau}
+2010-01-26 [B] Removed unneeded spaces in translation strings (thread ID 63434) {GauGau}
+2010-01-26 [B] Changed string 'Flash Pix' to 'FlashPix' (thread ID 63425) {GauGau}
+2010-01-26 [B] Fixing translation mistake for util.php (thread ID 63417) {GauGau}
+2010-01-25 [B] Fixed slide show for non-images (thread ID 63316) {Aditya}
+2010-01-24 [A] Added check to plugin manager for version requirements (thread ID 63279) {GauGau}
+2010-01-22 [A] Added plugin hook 'thumb_html_title' (thread ID 63321) {timoswelt}
+2010-01-20 [B] Fixed display of 'optional information' header on register form (thread ID 63338) {eenemeenemuu}
+2010-01-20 [C] Centered film strip thumbnails (thread ID 63320) {eenemeenemuu}
+2010-01-20 [B] Fixed film strip jump label for lastcom meta album {eenemeenemuu}
+2010-01-20 [C] Added title and alt attributes to ajax loaded film strip thumbnails (thread ID 63321) {eenemeenemuu}
+2010-01-19 [B] Fixed ajax film strip target for lastcom meta album (thread ID 63319) {eenemeenemuu}
+2010-01-19 [B] Set content type to 'text/plain' for plain text ajax replies to bypass faulty ad injection on some free hosters (thread ID 63119) {eenemeenemuu}
+2010-01-19 [B] Count admin hits during slideshow if enabled in config {eenemeenemuu}
+2010-01-18 [A] Added icon for Windows 7 {GauGau}
+2010-01-17 [A] Added generic thumbnail for flv files to reflect t he increasing importance of that file type {GauGau}
+2010-01-17 [C] Call jump label 'top_display_media' from thumbnail view {eenemeenemuu}
+2010-01-16 [B] Redirect to the newly uploaded picture more reliably (thread ID 63270) {Nibbler}
+2010-01-16 [A] Added plugin hook 'javascript_includes' (thread ID 63185) {eenemeenemuu}
+2010-01-15 [B] Fixed keyword dupes in keyword manager (thread ID 63228) {eenemeenemuu}
+2010-01-13 [B] Better check if we currently look at a full sized picture or an intermediate sized picture (thread ID 63184) {eenemeenemuu}
+2010-01-13 [C] Display full size register notice only if registration of new users is enabled (thread ID 63184) {Timo}
+2010-01-11 [C] Better behaviour of 'Add your comment' name field. Click deletes the default text. {Timo}
+2010-01-08 [C] Adjusted rowspan in edit_one_pic.php {eenemeenemuu}
+2010-01-08 [D] Small documentation improvements (web dev toolbar usage, collapsible tools recommendation list, typo fixed, class added to pre-tags) {GauGau}
+2010-01-08 [B] Fixed issue with admin username during install (thread ID 63135) {eenemeenemuu}
+2010-01-07 [D] Added database section to plugin documentation {GauGau}
+2010-01-05 [C] Removed class 'image' from spacer {eenemeenemuu}
+2010-01-05 [B] Fixed template error with certain settings for comments and smileys (thread ID 62835) {eenemeenemuu}
+2010-01-05 [B] Fixed display of rating stars after vote {eenemeenemuu}
+2010-01-04 [D] Minor improvements of docs {GauGau}
+2010-01-02 [M] Updated header information to reflect new year {GauGau}
+2009-12-30 [B] Added missing anchor attributes to themes which override the menus {Nibbler}
+2009-12-29 [D] Undid the syntax highlighting changes from 2009-01-02 and added a section in the coding guidelines page about it {GauGau}
+2009-12-29 [D] Added usability section to coding guidelines {GauGau}
+2009-12-27 [M] Counted version number up for onlinestats from 2.3 to 2.4 {GauGau}
+2009-12-27 [C] Silenced notice in onlinestats {GauGau}
+2009-12-27 [B] Added missing config page for onlinestats {GauGau}
+2009-12-26 [D] Updated navigation of German docs {GauGau}
+2009-12-25 [D] Added detailed explanations about permissions on folder level {GauGau}
+2009-12-25 [O] Removed unneeded language string {GauGau}
+2009-12-25 [C] Added coppermine style classes to installer {GauGau}
+2009-12-25 [C] Added button icons to installer {GauGau}
+2009-12-25 [C] Renamed install_old.php to install_classic.php {GauGau}
+2009-12-22 [B] Turned "restore factory defaults" into a hidden option to avoid issues with IE6 (thread ID 62899) {GauGau}
+2009-12-22 [D] Added install screen steps for the wizard {GauGau}
+2009-12-21 [D] Added details to documentation navigation {GauGau}
+2009-12-21 [C] Fixed some minor typos in docs {GauGau}
+2009-12-17 [B] Fixed server side 404 errors when rating is disabled (thread ID 62747) {eenemeenemuu}
+2009-12-17 [C] Fixed typo in inline CSS (thread ID 62885) {GauGau}
+2009-12-11 [D] Added announcement icon {GauGau}
+2009-12-11 [B] Fixed typo in Polish language file {eenemeenemuu}
+2009-12-11 [B] Fixed template error with certain settings for comments and smileys (thread ID 62835) {eenemeenemuu}
+2009-12-11 [B] Preserve alpha channel in png thumbnails (thread ID 62286) {eenemeenemuu}
+2009-12-11 [M] Updated version count from cpg1.5.2 to cpg1.5.3 to prepare the next release {GauGau}
+2009-12-11 [O] Added coppermine globals to custom_include function to allow usage of those variables from within the custom header or footer files {GauGau} {Timo}
+2009-12-10 [B] Added support for vertical filmstrip (thread ID 62740) {Timo}
+2009-12-07 [C] Added loader.gif to image class (thread ID 62780) {Timo}
+2009-12-02 [C] Prev button in filmstrip wrong position in some browsers (thread ID 62710) {Timo}
+2009-11-30 [B] Use recursive stripslashes function in Inspekt (thread ID 62532) {eenemeenemuu}
+2009-11-30 [B] Fixed navigation section of thumbnails page in eyeball theme (thread ID 62682) {eenemeenemuu}
+2009-11-28 [B] Fixed intermediate image display (thread ID 62581) {Nibbler}
+2009-11-28 [B] Fixed private album display (thread ID 62659) {Nibbler}
+2009-11-27 [O] Removed double entry from debug_output {GauGau}
+2009-11-27 [C] Added color attribute to expand/collapse links {GauGau}
+2009-11-23 [A] Added plugin hook 'fullsize_html' (thread ID 62592) {eenemeenemuu}
+2009-11-20 [B] Fixed linked picture count on album details {eenemeenemuu}
+2009-11-20 [C] Fixed filmstrip hopping around if prev/next buttons get hidden (thread ID 62562) {Timo}
+2009-11-18 [B] Fixed filmstrip showing (after scrolling) the same image several times (thread ID 62461) {Timo}
+2009-11-18 [A] Added Polish language file (user contribution) {eenemeenemuu}
+2009-11-17 [B] Fixed error message after guests upload files with swf uploader (thread ID 62522) {eenemeenemuu}
+2009-11-17 [M] Added old bridge files to delete file array (thread ID 62519) {eenemeenemuu}
+2009-11-16 [C] Added transparency to navbar images {GauGau}
+2009-11-16 [C] Added missing navbar images to standard themes (thread ID 62511) {eenemeenemuu}
+2009-11-16 [M] Added message if no pictures were moved in picmgr.php (thread ID 62494) {eenemeenemuu}
+2009-11-16 [S] Release of cpg1.5.2 (beta) for the public {GauGau}
+2009-11-12 [B] Fixed IE category creation bug (thread ID 62441) {eenemeenemuu}
+2009-10-12 [B] Fix missing user admin buttons (thread ID 62046) {Paver}
+2009-10-12 [A] Allow theme to override default pic_info and slideshow buttons on displayimage (thread ID 61877) {Paver}
+2009-10-07 [O] Replaced hard coded JPEG quality with config value in picture editor {eenemeenemuu}
+2009-10-07 [B] Fixed several issues with picture editor (thread ID 61789) {eenemeenemuu}
+2009-10-07 [B] Set correct owner id for personal albums during upgrade process (thread ID 61715) {eenemeenemuu}
+2009-10-07 [B] Fixed editpics permission error (thread ID 62045) {eenemeenemuu}
+2009-10-06 [A] Added navbar buttons for first/last file (thread ID 61335) {eenemeenemuu}
+2009-10-06 [A] Added Finnish language file (user contribution) {GauGau}
+2009-10-02 [A] Added formal German language file {GauGau}
+2009-10-02 [C] Hide noscript table rows if JavaScript is enabled {eenemeenemuu}
+2009-10-01 [O] Moved transliteration library to include sub-folder {GauGau}
+2009-10-01 [A] Added transliteration library (thread ID 61723) {eenemeenemuu}
+2009-09-29 [B] Fixed several issues with meta album 'lastalb' {eenemeenemuu}
+2009-09-21 [A] Added plugin filter theme_pageheader_params for pageheader manipulation purposes {GauGau}
+2009-09-14 [A] Rename special chars in file name with underscore during upload process (thread ID 61723) {eenemeenemuu}
+2009-09-14 [B] Fixed code to check the filesize and reject if it exceeds the max allowed by cpg config {Abbas}
+2009-09-10 [O] Removed default social bookmarks option, turning feature into standalone plugin {GauGau}
+2009-09-10 [B] Fixed keyword separator of space being trimmed in config table due to VARCHAR {Paver}
+2009-09-09 [B] Fixed config panel theme & lang being overridden by user settings (thread ID 61650 & 61651) {Paver}
+2009-09-09 [B] Fixed ?theme=xxx to reset to config theme (thread ID 61645) {Paver}
+2009-09-02 [A] Added plugin hooks 'cpg_mail_to_email' & 'cpg_mail_sender_email' {eenemeenemuu}
+2009-09-01 [B] Fixed old-style rating system and cleaned up rating system code {Paver}
+2009-09-01 [O] Removed raw HTML lines from theme_display_fullsize_pic {Paver}
+2009-08-31 [B] Fixed permission check in crop/rotate wrongly denying access {Nibbler}
+2009-08-28 [A] Added js function strip_tags  to strip html while showing error in js alert {Abbas}
+2009-08-26 [A] Added back in "move to top/bottom" to album & picture managers {Paver}
+2009-08-26 [C] Cleaned up picture manager display including toggle buttons to show/hide thumbnails {Paver}
+2009-08-26 [B] Fixed the issue of proper handling of php's native error during upload process (flash) {Abbas}
+2009-08-25 [B] Fixed sorting bugs in album and picture managers (thread ID 61352) {Paver}
+2009-08-25 [B] Fixed caching issues with xp publisher {Nibbler}
+2009-08-25 [B] Fixed issue with creating albums in xp publisher with MySQL's strict mode enabled {Nibbler}
+2009-08-25 [B] Fixed bridge issue when creating albums in xp publisher {Nibbler}
+2009-08-23 [A] Displaying thumbnail on picture manager (thread ID 61340) {GauGau}
+2009-08-21 [B] Fixed issue when viewing pictures of meta albums (thread ID 61265) {eenemeenemuu}
+2009-08-20 [B] Added function to bring jquery library to top of JavaScript includes list {GauGau}
+2009-08-14 [S] Added form token to plug-in manager {eenemeenemuu}
+2009-08-12 [O] Disallowed zero as possible value for number of login attempts option {GauGau}
+2009-08-06 [A] Added plugin hooks 'smilies_display' & 'smilies_process' {eenemeenemuu}
+2009-08-04 [B] Fixed sloppy coding in album manager {GauGau}
+2009-08-03 [B] Fixed user manager pagination (thread ID 60871) {Nibbler}
+2009-07-29 [B] Removed unneeded <head>-section that caused 404 error for inline-help (thread ID 60847) {GauGau}
+2009-07-25 [D] Fixed reference to plugins folder (thread ID 60772) {GauGau}
+2009-07-24 [M] Updated version count from cpg1.5.1 to cpg1.5.2 to prepare the next release {GauGau}
+2009-07-24 [S] Release of cpg1.5.1 (alpha) to closed user group {GauGau}
+2009-07-22 [B] Fixing 'browse by date' function (thread ID 60694) {Nibbler}
+2009-07-14 [B] Only display custom user profile fields if corresponding config option is populated {GauGau}
+2009-07-13 [D] Updated testing instructions as a preparation for the first release to the testers {GauGau}
+2009-07-10 [A] Added config option to determine resize dimension for intermediate pictures {eenemeenemuu}
+2009-07-10 [C] Added confirmation message after editing a file (thread 60096) {eenemeenemuu}
+2009-07-08 [O] Added additional information for register globals (thread ID60486) {GauGau}
+2009-06-23 [O] Organized & optimized update.php and added output rows for file updates {Paver}
+2009-06-23 [B] Corrected label on update.php for deleting files by fixing delete function return value {Paver}
+2009-06-18 [D] Added missing documentation about thumb sharpening {GauGau}
+2009-06-14 [A] Handle missing images better by displaying a placeholder image and logging the missing file {Nibbler}
+2009-06-13 [M] Remove image_processor.php {Nibbler}
+2009-06-12 [B] Fixed checkAll function calling who doesn't work in reviewcom.php  {Frantz}
+2009-06-11 [C] Added help icons and alternative layout to category manager {GauGau}
+2009-06-10 [A] Added parameter to starttable function to allow easy adding of alternating row colors in the future {GauGau} 
+2009-06-09 [C] Replaced hard-coded lang strings with lang variables ind delete.php {Frantz}
+2009-06-09 [A] Added support for HTML5 <video> and <audio> tags {Nibbler}
+2009-06-09 [O] Changed keyword-insertion from list from pop-up to greybox {GauGau}
+2009-06-09 [O] Beautified upload screens by moving noise into help display {GauGau}
+2009-06-09 [B] Fixed the issues with folders with spaces and path separators in batch upload - topic 57256 {Aditya}
+2009-06-08 [A] Added file and line numbers to debug mode query list {Nibbler}
+2009-06-08 [A] Added config option to count admin views {eenemeenemuu}
+2009-06-07 [D] Translation Copyright section for the french doc {Frantz}
+2009-06-06 [D] Replaced hard-coded table row alternation in docs with JS-driven alternation {GauGau}
+2009-06-06 [A] Added functionality to allow use of editpics.php by non-admin users (thread 59414) {Aditya}
+2009-06-06 [C] Added new string when in upload approval mode insteas of empty album message {SaWey}
+2009-06-06 [B] Fixed IM being selected in installation when it's not working {SaWey}
+2009-06-05 [C] Fixed bad displaying admin menu buttons on thumnails view with longer names as in english {Frantz}
+2009-06-05 [B] Re-added record for encrypted passwords into basic.sql (thread ID 59916) {GauGau}
+2009-06-05 [M] Removed the include folder is_writable check and warning message (thread 59896) {Abbas}
+2009-06-05 [B] Check for default values in admin section not working correctly {SaWey}
+2009-06-04 [C] Added nicer debug_output {GauGau}
+2009-06-04 [O] Use username from users table now, dropping owner_name field in pictures table {Nibbler}
+2009-06-04 [M] Added missing SVN header information {GauGau}
+2009-06-03 [O] Use newer album selection code for 'sort my pictures' page, reduces query count and memory usage {Nibbler}
+2009-06-03 [O] Moved combi flags from docs to images folder {GauGau}
+2009-06-03 [D] Fixing broken documentation navigation for IE (thread ID 59772) {GauGau}
+2009-06-02 [D] Updating French doc {Frantz}
+2009-06-02 [C] Updating french lang file {Frantz}
+2009-06-02 [A] Added config option to allow users rating their own files {eenemeenemuu}
+2009-06-02 [B] Fixed 'missing query' known issue {Nibbler}
+2009-06-02 [D] Added section to docs about debug_output {GauGau}
+2009-06-02 [D] Added URL parameter expand_all for docs to allow reference to anchors within sections that are collapsed out of the box {GauGau}
+2009-06-02 [A] Added peak records for page performance records in debug_mode {GauGau}
+2009-06-01 [A] Added log entries for attempts to access pages that the current user doesn't have access to {GauGau}
+2009-06-01 [D] Translated Quickstart section in french and deleted reference to the banned user group who doesnt exist anymore in the english qickstart.htm file {Frantz}
+2009-06-01 [O] Added memory_get_usage function {GauGau}
+2009-05-31 [M] Updating French lang file {Frantz}
+2009-05-31 [D] Updating french documentation (added missing documents) {Frantz}
+2009-05-31 [D] Added expand arrow in the table content{Frantz}
+2009-05-31 [A] Added browser agents for stats {GauGau}
+2009-05-30 [D] Hiding table of content in docs if unused {GauGau}
+2009-05-30 [A] Added toggle in config that disables the reset to default checkboxes on the config screen for performance reasons {GauGau}
+2009-05-29 [D] Added flag icons for half-translated documents {GauGau}
+2009-05-29 [D] Translated license section into German {German}
+2009-05-29 [D] Added missing documents to German documentation {GauGau}
+2009-05-28 [D] Upgraded jquery to version 1.3.2 for documentation {Abbas}
+2009-05-28 [D] Added i18n helpers to documentation {GauGau}
+2009-05-27 [D] Changed documentation to use more jquery mechanisms {GauGau}
+2009-05-27 [D] Added detailed instructions to the upload troubleshooting section of the docs {GauGau}
+2009-05-26 [O] Removed function deldir in plugin manager in favor of existing global function cpg_folder_file_delete (thread ID 58603) {GauGau}
+2009-05-25 [B] Fixing duplicates during batch-add (thread ID 57717) {GauGau}
+2009-05-25 [D] Added documentation about updater {GauGau}
+2009-05-25 [C] Removed unneeded tables from thumbnail sorting {GauGau}
+2009-05-25 [O] Replaced hardcoded linebreaks with global variable {GauGau}
+2009-05-22 [A] Turned calendar pop-up and stats pop-up into greyboxes {GauGau}
+2009-05-22 [O] Made fruity theme more standards-compliant {GauGau}
+2009-05-22 [O] Moved draghandle class from individual to global stylesheet {GauGau}
+2009-05-19 [O] Added separate overall stylesheet that contains theme-independant styles {GauGau}
+2009-05-19 [C] Replaced cluetip plugin with greybox plugin {GauGau}
+2009-05-16 [B] Fixed first level album thumbs not showing in pre PHP 5.0.2 {SaWey}
+2009-05-15 [B] Fixed CAPTCHA Session not correctly starting {SaWey}
+2009-05-15 [B] Fixed CAPTCHA not enabled according to config {SaWey}
+2009-05-15 [B] Fixed users not able to edit pics and wrong albums being shown in editpics {SaWey}
+2009-05-12 [O] Added admin buttons for album management to album manager and thumbnail view {Paver}
+2009-05-12 [A] Added a timestamp to the generated form_token to increase security, now we can also set the lifetime of a token. {SaWey}
+2009-05-12 [B] Fixed keyword manager delete to use form token {Paver}
+2009-05-11 [B] Fixed admin approval email now sent in admin language for user registrations {SaWey}
+2009-05-11 [B] Fixed not able to create new user from admin panel {SaWey}
+2009-05-10 [O] Got rid of some undefined index error messages in admin.php {SaWey}
+2009-05-08 [D] Added documentation section about watermarking based on Stramm's modpack document {GauGau}
+2009-05-08 [B] Fixed @unlink($folder.'cpgvc_tf.txt'); throwing errors {SaWey}
+2009-05-08 [O] Replaced autogrow plugin with elastic plugin {GauGau}
+2009-05-08 [O] Replaced expand/collapse all toggles on config page with jquery technology {GauGau}
+2009-05-08 [O] Added sanitization element for config screen with additional ease of use (spin button) {GauGau}
+2009-05-08 [B] Fixed albmgr not showing the first created album when the category was empty {SaWey}
+2009-05-07 [M] Removed charsetmgr.php (also from cpg15x.files.xml) {SaWey}
+2009-05-07 [B] Removed the include path for Inspekt {SaWey}
+2009-05-06 [S] Added form token to all important forms and also added a check on the token where needed {SaWey}
+2009-05-05 [O] Cleaned up some unnecessary code in functions.inc.php {SaWey}
+2009-05-05 [B] Fixed album thumbnail display on index page ignoring album keyword and approval status {Paver}
+2009-05-05 [B] Fixed album thumbnail display for "Last-Updated Albums" meta-album {Paver}
+2009-04-30 [B] Re-added alternating table rows for batch-add {GauGau}
+2009-04-30 [O] Hiding unneeded file types from minibrowser {GauGau}
+2009-04-30 [C] Added icon to minibrowser {GauGau}
+2009-04-30 [O] Added alternating colors to debug_output {GauGau}
+2009-04-29 [B] Fixed improper ban expirations due to time offset being incorrectly applied (thread ID 58546) {Paver}
+2009-04-24 [B] Fixed sections in admin page to use full width {Nibbler}
+2009-04-24 [O] Added expand/collapse styles {GauGau}
+2009-04-24 [O] Added some icons to buttons {GauGau}
+2009-04-24 [O] Optimized debug output {GauGau}
+2009-04-23 [B] Increased maxlength for password field in user manager from 8 to 25 to match the limits elsewhere {Nibbler}
+2009-04-21 [B] Fixed ecard image displaying at the wrong size {Nibbler}
+2009-04-16 [D] Added expandable detail boxes to documentation {GauGau}
+2009-04-13 [B] Fixed minibrowser when magic_quotes is on {Paver}
+2009-04-12 [O] Replaced sidebar library dtree with treeview plugin for jquery {GauGau}
+2009-03-31 [O] Removed css class variants that hardly made a difference to the original classes {GauGau} 
+2009-03-31 [M] Upgraded SwfUpload to v2.2.0.1 Stable version. {Abbas}
+2009-03-31 [D] Added document about style.css (work in progress) {GauGau}
+2009-03-30 [M] Upgraded jquery to version 1.3.2 {Abbas}
+2009-03-29 [O] Removed hard-coded script that opened external links in new windows. Added corresponding plugin instead {GauGau}
+2009-03-26 [M] CPG_temp_data table no longer required {Nibbler}
+2009-03-25 [M] Removed language list, theme list and language flags from config (thread ID 58681) {GauGau}
+2009-02-22 [M] Renamed PHPMailer and SMTP classes to avoid conflicts with other scripts {Nibbler}
+2009-03-02 [B] Fixed HTML special characters in referer for hit/vote stats {Paver}
+2009-03-02 [B] Added function to recursively delete folder/file structures as a fix for the unlink-issue in update script (thread ID 57514) {GauGau}
+2009-02-26 [B] Fixed browser detect giving older IE version when user_agent gives multiple {Paver}
+2009-02-26 [B] Fixed converting 'search_phrase' from array to string for table 'hit_stats' {Paver}
+2009-02-20 [B] Fixed 'Selecting private pics as a category thumbnail' issue (thread ID 57898) {Nibbler}
+2009-02-08 [B] Fixed minibrowser for Windows servers ('browsable interface' for 'batch add files') {Paver}
+2009-02-06 [B] Changed redirect for login/logout pages as appropriate to avoid extraneous messages {Paver}
+2009-02-06 [B] Fixed 'cookie_warning' on login page when anonymous access is not allowed {Paver}
+2009-02-06 [C] Changed 'disapproved' to 'unapproved' in language keys as appropriate {Paver}
+2009-01-19 [B] Fixed missing delimiter in basic.sql on exif table {SaWey}
+2009-01-16 [B] Fix "Select a Keyword" list not refreshing to itself when click "Regenerate Dictionary" {Paver}
+2009-01-16 [B] Fix "Regenerate Dictionary" including old keywords {Paver}
+2009-01-16 [B] Fix bug in picture info for keyword separator in keywords field {Paver}
+2009-01-15 [B] Fix approval status based on permissions in edit_one_pic - thread 57344 {Paver}
+2009-01-15 [O] EXIF table now uses pid instead of filename for indexing {Nibbler}
+2009-01-14 [O] Added universal javascript function selectAll() to be used in all pages with a select/deselect all feature {Nibbler,SaWey}
+2009-01-14 [M] Removed include/smtp.inc.php since it is no longer used. {Nibbler}
+2009-01-14 [A] Added the albmgr.js to carry out the album and picture manger functionality - thread 57113 {Sameera}
+2009-01-14 [O] Cleaned up album/picture manager file codes - thread 57113 {Sameera}
+2009-01-14 [B] Fixed duplicate and blank albums in edit_one_pic album list {Paver}
+2009-01-14 [C] Remove the picture background color in slideshow - thread 57055 {Sameera}
+2009-01-12 [B] Fixed album manager creating user albums in 'No category' - thread 57536 {Paver}
+2009-01-10 [A] Implemented admin tool to convert keyword separator {Paver}
+2009-01-10 [O] Added heredoc to install.php and cleaned up code {Paver}
+2009-01-10 [C] Corrected non Internationalized string in jquery.sort.js {Frantz}
+2009-01-10 [C] Fixed typo in french.php and corrected the file accordingly to the english.php {Frantz} 
+2009-01-10 [B] Fixed missing 'abbr' field for languages table in basic.sql {Paver}
+2009-01-09 [O] Cleaned up album/picture manager and language files {Paver}
+2009-01-08 [A] Added language keys for admin tool to convert keyword separator {Paver}
+2009-01-08 [A] Added config option for batch add process limit {Nibbler}
+2009-01-08 [A] Added config option for number of comments per page {Nibbler}
+2009-01-08 [A] Added plugin hook 'theme_img_navbar' to function theme_html_img_nav_menu {Paver}
+2009-01-07 [B] Fixed upload_choices plugin hook in upload.php to work with multiple plugins {Paver}
+2009-01-07 [A] Added plugin hook to theme_display_thumbnails in theme engine & core themes {Paver}
+2009-01-07 [B] Set default value for $admin_menu in theme engine to allow for error in theme_admin_mode_menu {Paver}
+2009-01-07 [D] Changed documentation link in admin menu to localized version if available {GauGau}
+2009-01-06 [B] Use the right keyword separator when reading IPTC keyword info {Nibbler}
+2009-01-06 [B] Fixed "'Minimum number of votes for a file to appear in the 'top-rated' list' is one step too low" issue (thread ID 57462) {Nibbler}
+2009-01-06 [C] Added message styles to core functions (thread ID 57133) {GauGau}
+2009-01-06 [B] Fixed output buffering bug in cpgGetRemoteFileByURL's curl code that caused the page_html plugin filter to fail (thread ID 57424) {Nibbler}
+2009-01-06 [O] Removed features "custom thumbs" and "allowed extensions" that have not been implemented yet (thread ID 54826) {GauGau}
+2009-01-05 [B] Album manager and photo manger bugs fixed {Sameera}
+2009-01-05 [M] Internationalized the swfupload's browse button {Abbas}
+2009-01-04 [M] Updated version count from cpg1.5.0 to cpg1.5.1 to prepare upcoming alpha release {GauGau}
+2009-01-04 [M] Updated header information to reflect new year {GauGau}
+2009-01-02 [C] Add lang string for i18n of udb_base.inc {Frantz}
+2009-01-02 [B] Fixed keyword_select.php not using keyword_separator setting {Paver}
+2009-01-02 [D] Color coded some of the docs for better readability {SaWey}
+2008-12-31 [M] Updated bundled PHPMailer to 2.03 {Nibbler}
+2008-12-31 [B] Update names associated with pictures and comments when user name is changed {Nibbler}
+2008-12-31 [O] Removed the OK button from albmgr. Now the changes are saved on client side on blur {Abbas}
+2008-12-27 [C] Adapted French lang file to new core changes of internationalization {Frantz}
+2008-12-25 [C] Removed potentially confusing plus icon in ban manager; adjusted text input sizes for consistent look {TranzNDance}
+2008-12-25 [C] Reorganized admin menu to place related buttons next to each other {TranzNDance}
+2008-12-24 [B] Fixed the json_encode function to properly escape the strings {Abbas}
+2008-12-23 [B] Fixed issue involving display of name field in the report to admin form {TranzNDance}
+2008-12-23 [O] Modified code to record hit in a single ajax call instead of two in slideshow {Abbas}
+2008-12-22 [O] Developed AJAX slideshow in new looks and new functionality {Sameera}
+2008-12-20 [M] Removed the redundant slideshow.inc.php and its references {Abbas}
+2008-12-19 [O] Moved pic_editor.php js to external file {SaWey}
+2008-12-19 [C] In all style.css, commented out blinking important.gif, replaced with red bold {Paver}
+2008-12-19 [O] Moved contact.php js to external file {SaWey}
+2008-12-19 [B] Fixed [url] bbcodes not properly rendering {SaWey}
+2008-12-19 [A] Added opening of rel="external" links in new window (core & documentation) {SaWey}
+2008-12-19 [B] Fixed the bug http://forum.coppermine-gallery.net/index.php/topic,57065.msg279324.html#msg279324 {Abbas}
+2008-12-19 [M] Removed the redundant display filename in filmstrip feature completely {Abbas}
+2008-12-18 [B] Fixed db_ecard.php not deleting ecards {SaWey}
+2008-12-18 [O] Replace inline js of util.php & db_ecard.php with external jQuery code {SaWey}
+2008-12-18 [B] Fixed the merging of upload mechanisms array {Abbas}
+2008-12-18 [M] Removed api folder {GauGau}
+2008-12-18 [B] Fixed filmstrip work for odd number of thumbnail in filmstrip 
+2008-12-18 [A] Added 6 new plugin hooks to be able to add custom CAPTCHA {SaWey}
+2008-12-17 [O] Added code to disable the browse button if no album is selected on upload page {Abbas}
+2008-12-17 [O] Added the disabled button to the swfupload button sprite image {Abbas}
+2008-12-17 [A] Fleshed out implementation of upload choices including alternate ones from plugins {Paver}
+2008-12-17 [O] Changed 3 themes to use thumbnails.js instead of inline js. {SaWey}
+2008-12-16 [B] Added swfupload style to all themes {Abbas}
+2008-12-16 [B] Fixed category list in modifyalb.php {Paver}
+2008-12-15 [A] Added AJAX picture and album managers {Sameera}
+2008-12-15 [A] Added keyword separator {Paver}
+2008-12-15 [B] Added missing javascripts {SaWey}
+2008-12-15 [O] Replaced inline javascript of admin and albmgr section + optimised for jQuery (admin.js, albmgr.js) {SaWey}
+2008-12-15 [A] Added previous and next tabs, plus dropdown list of tabs (with configuration option) {Paver}
+2008-12-15 [O] Moved code to themes to create theme_msg_box, _cpg_die, _create_tabs, _breadcrumb {Paver}
+2008-12-15 [O] Replaced inline javascript of slideshow btn & pic_info btn (displayimage.js) {SaWey}
+2008-12-15 [O] Replaced inline javascript of sidebar (dTree.js) {SaWey}
+2008-12-15 [O] Replaced inline javascript of bookmark function (scripts.js) {SaWey}
+2008-12-15 [O] Replaced sort table in thumbnails by external javascript (thumbnails.js) {SaWey}
+2008-12-15 [A] Added the fallback mechanism for flash upload interface {Abbas}
+2008-12-14 [A] Added AJAX filmstrip {Sameera}
+2008-12-14 [A] Modified breadcrumb for meta-albums to show more intuitive breadcrumb {Paver}
+2008-12-14 [A] Added navbar buttons for inactive previous and next {Paver}
+2008-12-14 [B] Fixed some bugs in voting and changed it to make better use of jQuery {SaWey}
+2008-12-14 [C] Moved vanity icons into separate folder {GauGau}
+2008-12-14 [C] Re-did batch-add graphics for fresher look {GauGau}
+2008-12-14 [A] Added missing hook to add custom bbcode {SaWey}
+2008-12-14 [A] Reworked upload form to show flash-based form or single file form - all other options removed {Paver}
+2008-12-13 [B] Update slideshow fixing a bug {Sameera}
+2008-12-13 [A] Added AJAX help dialog box {Sameera}
+2008-12-13 [A] Added 2 plugin hooks to add custom bbcode {SaWey}
+2008-12-11 [O] Replaced flag icons (from gif to png) {GauGau}
+2008-12-11 [A] Added group-based access levels (thumbs,intermediate,full-size) {Paver}
+2008-12-04 [A] Added 10 new plugin hooks {SaWey}
+2008-12-01 [A] Added the new upload page which uses swfupload (http://swfupload.org) {Abbas}
+2008-11-30 [A] Added pagination of comments {Nibbler}
+2008-11-30 [O] Converted ereg*() functions to use preg_match, simple string functions or existing Inspekt validation code for performance and compatibility with future versions of PHP. (Code contributed by ripat) {Nibbler}
+2008-11-29 [D] Changed minimum requirements section in docs from PHP4.2.0 to PHP4.3.0 {Nibbler}
+2008-11-26 [O] Removed toggle for private IP address banning, as it never really has been used {GauGau}
+2008-11-26 [O] Replaced identical translations for "apply modifications" by one string in language file {GauGau}
+2008-11-26 [O] Added optional icons to some buttons {GauGau}
+2008-11-26 [O] Removed banned group, since it never has been taken into account anyway {GauGau}
+2008-11-25 [A] Implemented option to use Akismet for guests only or for everyone {GauGau}
+2008-11-25 [A] Added Akismet and IP address columns to review comments page {GauGau}
+2008-11-24 [A] Added akismet check and stats on review comments page {GauGau}
+2008-11-24 [A] Added Akismet option for comment filtering {GauGau}
+2008-11-23 [B] Fixed langfallback.inc.php and added French language by Frantz {SaWey}
+2008-11-20 [O] Replaced dtree with treeview plugin for documentation {GauGau}
+2008-11-19 [B] Fixed admin not being able to change an album's category in modifyalb.php {Paver}
+2008-11-18 [A] Added status display (active/inactive/banned) to profile.php and usermgr.php {GauGau}
+2008-11-17 [A] Re-did ban users page with pagination, sorting and multiple edits. Allowed email bans. Allowed ban by user name for non-existing accounts. {GauGau}
+2008-11-12 [A] Added option to automatically purge expired bans {GauGau}
+2008-11-09 [O] Changed installer coding style (removed install class) {SaWey}
+2008-11-09 [D] Added document about adding/renaming/deleting files for developers {GauGau}
+2008-11-08 [C] Changed html header in old instaler {SaWey}
+2008-11-08 [B] Installer temp cofig is deleted again + removed this from update.php {SaWey}
+2008-11-07 [C] Enlarged icons and changed stepper link colors in installer, reformatted css {SaWey}
+2008-11-05 [A] Added check in util.php if file to process is actually an image {GauGau}
+2008-11-04 [A] Resized full-size pop-up to fit on the screen {GauGau}
+2008-10-24 [B] Fixed the random meta album query for cases where no pictures are in db {Abbas}
+2008-10-24 [B] Fixed the album password case sensitivity issue by hashing it {Abbas}
+2008-10-24 [A] Added profile field user_language (thread ID 15977) {GauGau}
+2008-10-24 [A] Added DivX support (thread ID 32380) {GauGau}
+2008-10-23 [O] Added random files speedup (thread ID 54144) {Nibbler}
+2008-10-22 [A] Added options to version check to hide images and the modified column {GauGau}
+2008-10-21 [A] Removal of outdated files by updater {GauGau}
+2008-10-19 [O] Removed double ; at line ends (thread ID 51899) {GauGau}
+2008-10-19 [C] Fixed validation issue for browse-by-date link {GauGau}
+2008-10-19 [C] Fixed validation issue with registration screen (thread ID 51310) {GauGau}
+2008-10-18 [B] Added error message if pic editor is being run with missing parameters or without authorization (thread ID 54414) {GauGau}
+2008-10-18 [B] Fixed error message in ecard.php that complained about wrong recipient email although sender email is wrong (thread ID 50844) {GauGau}
+2008-10-18 [C] Fixed minor smilies issue (thread ID 52804) {GauGau}
+2008-10-18 [C] Improved improper translation (thread ID 50460) {GauGau}
+2008-10-17 [A] Added "modified" column to versioncheck to find out if a file has been tampered with {GauGau}
+2008-10-15 [B] Fixed a few bugs caused because of typos {Abbas}
+2008-10-15 [O] Re-implemented 'restore to defaults' feature {Nibbler}
+2008-10-14 [B] Fixed language and theme selectors that had been inspektified improperly {GauGau}
+2008-10-14 [O] Moved scripts.js into js folder {GauGau}
+2008-10-12 [A] Added known problematic suhosin options to debug output {Nibbler}
+2008-10-12 [O] Cache processed phpinfo data when generating debug output for performance {Nibbler}
+2008-10-12 [A] Added cleaner album selection box for admin tools {Nibbler}
+2008-10-12 [O] Switched cpg_db_fetch_row* functions to use mysql_fetch_assoc() instead of mysql_fetch_array() to save memory {Nibbler}
+2008-10-08 [B] Corrected SMF2 anonymous user fix {Nibbler}
+2008-10-06 [O] Brushed up look of XP Publisher instructions screen {GauGau}
+2008-10-06 [A] Added option to promote XP Publisher on upload page {GauGau}
+2008-10-05 [B] Fixed versioncheck in installer and changed method of installation steps {SaWey}
+2008-10-04 [B] Fixed ratepic.php to not do unnecessary things {SaWey}
+2008-10-04 [B] Fixed typo in basic.sql as noted by Francois and corrected all other language insertions {SaWey}
+2008-10-02 [A] Added language manager {GauGau}
+2008-09-27 [A] Added optional text file for favorites download {GauGau}
+2008-09-17 [A] Added license display to installer {GauGau}
+2008-09-17 [O] Reduced memory usage of keyword manager {Nibbler}
+2008-09-15 [M] Removed FAQ menu item as per dev team decision {GauGau}
+2008-09-15 [A] Updater can now be run using cookie authentication; fallback mechanisms existing as well {GauGau}
+2008-09-04 [M] Updated the jquery to version 1.2.6 and also included it in init.inc.php so that it is available on all pages {Abbas}
+2008-09-04 [O] Turned social bookmark script into jquery bookmark plugin {GauGau}
+2008-09-01 [C] Replaced deprecated tag <b> with recommended tag <strong> {GauGau}
+2008-08-31 [O] Removed option to allow different users sharing one email address {GauGau}
+2008-08-30 [D] Added documentation for new hooks (after_delete_file, before_delete_file and add_file_data_success) {Abbas}
+2008-08-29 [O] Removed configurability of thumbnail and intermediate image prefix as per poll ID 54324 {GauGau}
+2008-08-29 [O] Removed vanity option from config as per poll id 54323 - users who want to show the vanity block just need to add the {VANITY} token to their custom theme {GauGau}
+2008-08-28 [C] Added CSS class for filmstrip background {GauGau}
+2008-08-28 [O] Upgraded Exifixer-library from v1.5 to v1.7 (development continued by ZenPhoto) {GauGau}
+2008-08-20 [A] Added new plugin hooks - add_file_data_success, before_delete_file and after_delete_file {Abbas}
+2008-08-12 [B] Moved $THEME_DIR before include theme.php and themes.inc.php {Paver}
+2008-08-12 [B] Added workaround for video files shown on batch-add page (searchnew.php) {Paver}
+2008-08-12 [B] Consolidated common language variables from multiple pages into $lang_common {Paver}
+2008-08-12 [B] Fixed album dropdown on multiple pages to show categorized albums {Paver}
+2008-08-12 [B] Fixed cpg_getimagesize custom function to give image size {Paver}
+2008-08-12 [B] Fixed display_fullsize_pic for picfile GET variable {Paver}
+2008-08-11 [B] Fixed transparent overlay with HTML entities in $picture_url {Paver}
+2008-08-11 [B] Fixed thumbnail dimension calculation rounding error {Nibbler}
+2008-08-09 [C] Added new set of generic thumbnails representing non-image files {GauGau}
+2008-08-08 [O] Added new set of flag icons {GauGau}
+2008-08-06 [O] Removed unneeded CSS classes admin_menu_thumb and adm_menu {GauGau}
+2008-08-06 [A] Added menu icons {GauGau}
+2008-08-02 [S] Fixed a security issue reported at http://www.milw0rm.com/exploits/6178 {Abbas}
+2008-08-01 [B] Fixed profile email check issue (thread ID 52391) {Nibbler}
+2008-08-01 [A] Added recording of user id for hit stats {GauGau}
+2008-07-25 [B] SMF anonymous user fix {Nibbler}
+2008-07-17 [A] Added animated graphics to upload screen to indicate the upload stage {GauGau}
+2008-07-01 [A] Converted the phpBB2.2 bridge file to phpBB3 {Nibbler}
+2008-06-28 [D] Added formatting instructions in coding guidelines {Abbas}
+2008-06-28 [B] Fixed the typo bug in editpics and star rating info calculation in functions.inc {Abbas}
+2008-06-27 [D] Added coding guidelines to documentation {GauGau}
+2008-06-19 [A] New javascript based multi-processing queue for batch add {Nibbler}
+2008-06-17 [C] Cleaned up code, indentation for multiple files {Paver}
+2008-06-17 [O] Consolidated and cleaned up language variables {Paver}
+2008-06-15 [A] New category hierarchy system {Nibbler}
+2008-06-12 [B] Fixed bug in thumb size output for search results of categories & albums {Paver}
+2008-06-12 [C] Added alternating table rows to updater {GauGau}
+2008-06-12 [O] Fixed broken debug mode for updater due to Inspekt sanitization {GauGau}
+2008-06-12 [D] Added dev document for the updater to explain the hidden debug feature {GauGau}
+2008-06-10 [B] Fixed plugin manager when plugin API is disabled (thread ID 46155) {Paver}
+2008-06-08 [A] Added 'move to top/bottom' in picture manager {Paver for Frantz}
+2008-06-06 [B] Fixed selecting thumbnail from albums with only linked images showing un-approved images {Paver}
+2008-06-06 [B] Fixed/adjusted Admin Tools, Filename->Title, 4 options plus broken "only empty titles" {Paver}
+2008-06-06 [A] Added 'move to top/bottom' in category and album managers {Paver}
+2008-06-03 [O] Removed switch for allowing unencrypted user passwords in the database, as this used to be an outdated feature in cpg1.3.x and older. Since there is no longer support for cpg1.3.x, this feature can easily be dropped {GauGau}
+2008-05-26 [D] Created sub-folders in docs folder to prepare translation of documentation {GauGau}
+2008-05-23 [O] Use JavaScript to display the sorting options only to humans, but hide them from search engines to avoid double-content indexing {GauGau}
+2008-05-21 [B] Replaced hard-coded string "edit keywords" with translation (thread ID 52721) {GauGau}
+2008-05-04 [B] Fixed resources consumption for slideshows in meta albums {GauGau}
+2008-05-03 [B] Fixing the type being translated in reports {GauGau}
+2008-05-01 [O] Optimization of sanitization of strip-Tags and max. length for comments {GauGau}
+2008-04-30 [C] Removed invalid <f>-tag in upload.php {GauGau}
+2008-04-30 [C] Fixing improper nesting of form-tag in various files {GauGau}
+2008-04-28 [C] Fixing spacer for empty album list cells (thread ID 51414) {GauGau}
+2008-04-14 [O] Numerous session handling optimizations {Nibbler}
+2008-04-13 [S] Corrected SQL injection vulnerabilities in session handling code {Nibbler}
+2008-04-10 [S] Corrected an SQL injection vulnerability in URI upload code {Nibbler}
+2008-04-07 [O] Added expandable admin tools sections {GauGau}
+2008-03-25 [A] Added warning on the config page for settings that mustn't be changed lightheartedly {GauGau}
+2008-03-25 [A] Added favicon tag to all themes that come with coppermine {GauGau}
+2008-03-25 [B] Rewrote json_encode function as the old one was not working correctly {Abbas}
+2008-03-24 [A] Added "reset to default" feature for config {GauGau}
+2008-03-21 [O] Removed 'root template' feature {Nibbler}
+2008-03-20 [O] Changed versioncheck to work with the installer-class + minor cosmetical fixes in source {SaWey}
+2008-03-20 [B] Fixed some typos I introduced {SaWey}
+2008-03-19 [A] Added versioncheck to the installer {SaWey}
+2008-03-16 [D] Added document about the export feature {GauGau}
+2008-03-09 [B] Removed length restriction for the album password hint {Nibbler}
+2008-03-09 [A] Added options to disable file and album hit counters {Nibbler}
+2008-03-08 [A] Added export feature (gsoc2007 - drhammond) {Nibbler}
+2008-03-06 [C] Fixing notice in social bookmarking code {Nibbler}
+2008-03-06 [A] Added Album and Category Title Search (gsoc2007 - drhammond) {Nibbler}
+2008-03-06 [A] Added phrase searching by double quotes (gsoc2007 - drhammond) {Nibbler}
+2008-03-06 [A] Added regular expressions to search (gsoc2007 - drhammond) {Nibbler}
+2008-03-06 [B] Fixed search parameters being ignored (gsoc2007 - drhammond) {Nibbler}
+2008-03-06 [C] Cleaned up notices in admin.php {Nibbler}
+2008-03-04 [O] Re-did the select_multiple option in config to allow a larger number of entries {GauGau}
+2008-02-21 [O] Voting now shows result back after vote {SaWey}
+2008-02-28 [A] Added feature "allow user to assign album keyword" {GauGau}
+2008-02-26 [D] Updated versioncheck documentation to reflect changes in the core file behaviour {GauGau}
+2008-02-26 [C] Replaced inline stat_details with popup {SaWey}
+2008-02-25 [A] Voting is now customizable in max- and min rate + ajax enabled {SaWey}
+2008-02-21 [O] Inspektified all bridge files {SaWey}
+2008-02-21 [B] Fixed function cpgGetScriptNameParams that has been Inspektified improperly (did not return file names at all) {GauGau}
+2008-02-21 [A] Added basic authentication to update script {SaWey}
+2008-02-20 [M] Renamed plain text files in root folder to enable Windows-users to read it easily {GauGau}
+2008-02-20 [M] Renamed warning files within edit and userpics folder to make sure that operating systems don't confuse those files with folders {GauGau}
+2008-02-16 [O] Inspektified thumbnails.php, functions.inc.php, mailer.inc.php, themes.inc.php, sample/theme.php {SaWey}
+2008-02-15 [O] Improved installer {SaWey}
+2008-02-13 [O] Added help icons for "permission by group" {GauGau}
+2008-02-12 [B] Fixed language drop down bug and changed folder permission check in new installer {SaWey}
+2008-02-12 [B] Fixed mysql warning in update.php {SaWey}
+2008-02-12 [B] Fixed not able to go to 'My Profile' {SaWey}
+2008-01-11 [B] Fixing 'edipic.php problem for approval' issue {Nibbler}
+2008-02-11 [B] Removing column comments for compatibility {Nibbler}
+2008-02-10 [A] Added onlinestats plugin {GauGau}
+2008-02-09 [A] Added OpenSearch plugin {GauGau}
+2008-02-09 [O] Modified the code in picmgr.php to reflect security improvements imposed by Inspekt {SaWey}
+2008-02-07 [C] Added nicer album drop down in modifyalb.php {SaWey}
+2008-02-07 [B] Fixed users not able to go to modifyalb.php when no album is set in super globals {SaWey}
+2008-02-07 [C] Changed all needed files to lowercase {Frantz & SaWey}
+2008-02-06 [A] Added login method to config, possible to set it to username, email address or both. {SaWey}
+2008-02-05 [B] Fixed typo in SMF 2 bridge file {Nibbler}
+2008-02-04 [A] Added "Filename => Filetitle" only apply for empty filename fields in util.php. {Frantz}
+2008-02-04 [A] Added allowed filetypes message on upload. {Frantz}
+2008-02-03 [O] Added custom cpg_getimagesize function. {SaWey}
+2008-01-28 [A] Added plugin "User Gallery Alphabetic Tabbing" to core {GauGau}
+2008-01-26 [M] Updated year info in header (copyright line) {GauGau}
+2008-01-24 [D] Added section of how to use superglobals in plugin_writing.htm {SaWey}
+2008-01-24 [O] Modified search.inc, xp_publish, viewlog, index, picmgr, update, viewlog, thumbnails and visiblehookpoints-plugin to reflect security improvements imposed by Inspekt {SaWey}
+2008-01-09 [A] Added ajax filmstrip feature {Abbas}
+2008-01-09 [A] Added jQuery1.2.1 library (packed) {Abbas}
+2008-01-08 [D] Added (preliminary) JavaScript documentation {Abbas}
+2008-01-07 [O] Added two new functions js_include and set_js_vars which can be used in php to include js files and set js variables. {Abbas}
+2008-01-06 [B] Removed 'banned' group from selection of user creatable albums {SaWey}
+2008-01-06 [B] Not able to upload to albums that aren't in any category {SaWey}
+2008-01-04 [A] Retrieve the news by URI if possible and fall back to iframe only if retrieval does not work as expected {GauGau}
+2008-01-04 [B] Avoid possible corrupt zip files by cleaning output buffer {Nibbler}
+2007-12-29 [A] Added new installer, renamed old one until this one is stable {SaWey}
+2007-12-29 [D] Fixed documentation that explains admin passwords (thread ID 49304) {GauGau}
+2007-12-27 [B] Improved versioncheck functionality for offline use (work in progress) {GauGau}
+2007-12-27 [O] Modified the code in send_activation.php to reflect security improvements imposed by Inspekt {Frantz}
+2007-12-21 [A] Improved debug output {Nibbler}
+2007-12-21 [O] Performance improvement for album dropdown code {Nibbler}
+2007-12-21 [O] Should have indexes for the moderator group and visibility fields {Nibbler}
+2007-12-18 [A] Added ability to ban and delete comment(s) in reviewcom {SaWey}
+2007-12-18 [B] Fixed admin always allowed to use all categories {SaWey}
+2007-12-18 [B] Fixed calendar only showing dates in the future when usng it for banning {SaWey}
+2007-12-17 [B] Fixed calendar not showing in IE {SaWey}
+2007-12-17 [B] Fixed user ip not retrieved {SaWey}
+2007-12-17 [O] Modified pluginmgr, plugin_api and sample plugin to reflect security improvements imposed by Inspekt {Abbas}
+2007-12-17 [A] Switched from sprintf() to using a template for forgot password emails (thread id 25669) {Abbas}
+2007-12-17 [B] Corrected the bug reported in 49059 regarding display of dialog box for unlogged users {Aditya}
+2007-12-17 [O] Modified report_file to reflect security improvements imposed by Inspekt {Aditya}
+2007-12-17 [O] Modified displayreport to reflect security improvements imposed by Inspekt {Frantz}
+2007-12-15 [B] Fixed some permissions on user creatable albums {SaWey}
+2007-12-15 [O] Modified forgot_passwd to reflect security improvements imposed by Inspekt {Aditya}
+2007-12-15 [A] Added auto check of internal/external links in bbcode + add rel="external nofollow" accordingly and removed [iurl] option {SaWey}
+2007-12-15 [A] Added bbcode help icon on comments {SaWey}
+2007-12-15 [B] Fixed users not able modify albums when they don't have one in the 'My gallery' cat {SaWey}
+2007-12-15 [B] Fixed users not able to upload pics in there albums other then 'My gallery' {SaWey}
+2007-12-14 [A] Added two more levels of access for guests: no access, thumbs only, thumbs + intermediate only, thumbs + intermediate + full-size {GauGau}
+2007-12-14 [O] Modified ecard and displayecard to reflect security improvements imposed by Inspekt {Aditya}
+2007-12-14 [B] Fixed parent category on category-edit {SaWey}
+2007-12-14 [A] Added possibility for users to create albums in admin allowed categories {SaWey}
+2007-12-02 [S] Added code to avoid the direct execution of slideshow.inc.php {Aditya}
+2007-12-08 [B] The CSS used for middlethumb class for filmstrip was not working. Fixed it (related to thread 48803) {Abbas}
+2007-12-06 [A] Added separate CSS class for filmstrip thumb that represents actual image (thread id 48803) {GauGau}
+2007-12-02 [B] Adding xmlns to html tag to fix XHTML compliance {Nibbler}
+2007-12-02 [B] Fixed subcategory depth issue {Nibbler}
+2007-11-29 [O] Hiding empty IPTC fields as suggested in thread 48672 {GauGau}
+2007-11-28 [D] Added list of configurable items in theme.php to documentation {GauGau}
+2007-11-28 [O] Added default favicon (can of course be removed at will) {GauGau}
+2007-11-27 [O] Added new versioncheck scheme based on XML files (work in progress) {GauGau}
+2007-11-22 [D] Added (preliminary) Inspekt documentation {GauGau}
+2007-11-22 [D] Added lib.xml.php to the credits section {GauGau}
+2007-11-22 [O] Display database errors for the admin no matter if debug_mode is enabled or not {GauGau}
+2007-11-21 [O] Modified files related to batch add functionality to reflect security improvements imposed by adding Inspekt {Aditya/Frantz}
+2007-11-17 [O] Modified usermgr, banning, upload to reflect security improvements imposed by adding Inspekt {Aditya}
+2007-11-16 [B] Fixed the problem of message author getting blank on comment update {Aditya}
+2007-11-15 [B] British English now recognised correctly {Nibbler}
+2007-11-15 [B] Compatibility fix for MyBB 1.2.9 {Nibbler}
+2007-11-15 [O] Modified util.php to reflect security improvements imposed by adding Inspekt {Frantz}
+2007-11-15 [O] Modified groupmgr to reflect security improvements imposed by adding Inspekt {Aditya}
+2007-11-14 [O] Modified index, thumbnails, displayimage, login, albmgr, catmgr to reflect security improvements imposed by adding Inspekt {Aditya}
+2007-11-02 [O] Modified help popup to reflect security improvements imposed by adding Inspekt {GauGau}
+2007-11-02 [A] Added Inspekt, a tool to create secure PHP application {Aditya}
+2007-10-31 [S] Removed html_entity_decode causing potential XSS vulnerability as discussed in http://coppermine-gallery.net/forum/index.php?topic=47390.0 {Aditya}
+2007-10-19 [O] Replaced hard-coded language in util.php with translation strings {Frantz}
+2007-10-17 [A] Added plugin "Visible HookPoints" to package {GauGau}
+2007-10-17 [A] Added feature "delete files older than XXX days" {Frantz}
+2007-10-15 [D] Split admin tools into separate page {GauGau}
+2007-10-08 [O] Sidebar made themeable {GauGau}
+2007-10-08 [A] Added sidebar {GauGau}
+2007-09-27 [A] Added social bookmarks icons {GauGau}
+2007-09-20 [O] Re-did versioncheck.php (work in progress) {GauGau}
+2007-09-17 [B] Fixed usergroups-bug in bridge file for SMF2.0 (user contribution) {GauGau}
+2007-09-07 [A] Added optional contact form with captcha option {GauGau}
+2007-09-06 [A] Added feature (posted at http://coppermine-gallery.net/forum/index.php?topic=36087) to display error message (using javascript and PHP both) if name for comment is same as default name of comment {Amit}
+2007-09-05 [S] Added code to remove risky characters in log file name in URL and to check if given log file name's directory is current directory or not to fix second vulnerability posted at http://coppermine-gallery.net/forum/index.php?topic=46623 {Amit}
+2007-09-05 [S] If 'http' or 'script' is set in referer then referer will be set to 'index.php' - first vulnerability posted at http://coppermine-gallery.net/forum/index.php?topic=46623  {Amit}
+2007-09-04 [A] Added preliminary (beta) bridge for SMF 2.x (user contribution) {GauGau}
+2007-09-01 [B] Fixed the bugs introduced because of moderator mod and editpics changes {Abbas}
+2007-08-25 [C] Removed config option "Display album description" that hasn't been implemented yet {GauGau}
+2007-08-23 [A] Adding "last comment" and "last upload" to user's profile edit page {GauGau}
+2007-08-21 [A] Adding news section for the admin to alert him about updates {GauGau}
+2007-08-21 [O] Replaced "ALL" setting for filetypes with slash-separated list {GauGau}
+2007-08-21 [A] Added another regex check to config that makes sure the user overwrites certain default values when configuring his gallery for the first time {GauGau}
+2007-08-21 [C] Added noscript section to pages that require JavaScript {GauGau}
+2007-08-20 [D] Added keyword manager section to documentation {GauGau}
+2007-08-19 [D] Added keywords section to documentation {GauGau}
+2007-08-18 [B] XHTML ampersand fix in clickable keywords {Nibbler}
+2007-08-18 [B] Fixing conditional call to process_smilies() in report file {Nibbler}
+2007-08-18 [B] Quota check only applies to uploads to user galleries {Nibbler}
+2007-08-18 [B] Avoid redirecting users to the logout page after logging in {Nibbler}
+2007-08-18 [B] Fixed sending of duplicate forgot password emails {Nibbler}
+2007-07-18 [O] Removed from intermediate image view page (dsiplayimage.php) JavaScript-only features for users with JavaScript disabled {GauGau}
+2007-07-18 [A] Added link to table footer of batch-add results to jump quickly to the second step of the batch-add {GauGau}
+2007-07-18 [A] Added toggle to config and batch-add screen to display/hide preview thumbnails on the second batch-add screen {GauGau}
+2007-07-18 [A] Added alternating table rows to batch-add {GauGau}
+2007-08-18 [A] Skip redirection for album manager {GauGau}
+2007-08-18 [A] Added code to skip redirection for login and logout {GauGau}
+2007-08-17 [B] Replaced hard-coded text in plugin manager with translation string {GauGau}
+2007-08-17 [A] Added faster mode (show/hide admin controls) switch {GauGau}
+2007-08-09 [O] Re-structured config page for easier translation, separation of logic and content in language files, better usability and increased functionality {GauGau}
+2007-07-31 [A] Added plugin hook at the end of function get_pic_url {GauGau}
+2007-07-30 [O] Re-ordered entries in config table for fresh installs {GauGau}
+2007-07-30 [O] Replaced link tag in language file for banning with placeholder {GauGau}
+2007-07-30 [C] Added attributes to class admin_float to fix overflow issue in IE for admin menu {GauGau}
+2007-07-30 [O] Removed links in admin tools that now reside in admin menu {GauGau}
+2007-07-27 [M] Updated license reference from GNU GPL v2 to GNU GPL v3 {GauGau}
+2007-07-27 [B] Fixing issue creating new user with mysql strict mode {Nibbler}
+2007-07-26 [A] Added admin option to display redirection page or jump directly to target page with success/failure message at top of screen {GauGau}
+2007-07-26 [O] Allowed admin to change his email address in profile even if "Allow users to change their email address in profile" is set to "no" {GauGau}
+2007-07-19 [B] Replaced the PHP5 specific function (stripos) with PHP4 compatible function in update.php {Abbas}
+2007-07-06 [D] Added documentation sections about plugin writing and plugin hooks {GauGau}
+2007-07-04 [B] Fixed improper fix for double quotes for comment input fields (thread ID 40423) {GauGau}
+2007-07-05 [A] Added 'insert from list' selection for keywords field when editing files {GauGau}
+2007-07-04 [D] Added basic plugin-writing chapter to developer documentation {GauGau}
+2007-07-02 [C] Fixed double quotes for comment input fields (thread ID 40423) {GauGau}
+2007-06-12 [D] Added section about user-contributed themes to documentation {GauGau}
+2007-06-06 [A] Added rating confirmation on page {GauGau}
+2007-06-04 [A] Added success/failure message on target page (instead of sending users to redirection page) {GauGau}
+2007-06-03 [B] Increased CPG_filetypes mime field length {Donnoman}
+2007-06-03 [O] Removed "CREATE TABLE IF NOT EXISTS" in update.sql; this case is already handled by the nature of update.php, a failure is preferred. {Donnoman}
+2007-06-03 [A] Additional mysql output while running update.php by appending ?debug to the url {Donnoman}
+2007-06-03 [B] Output_Buffer Template error due to magic_quotes_runtime not being forcibly set in update.php {Donnoman}
+2007-05-31 [C] Removed wrapping table in classic theme, moved formatting completely into style sheet {GauGau}
+2007-05-21 [C] Removed deprecated HTML tags from email templates {GauGau}
+2007-05-21 [C] Replaced hard-coded bold tags with corresponding CSS formats in theme files {GauGau}
+2007-05-21 [A] Added browse-by-date meta-album {GauGau}
+2007-05-21 [B] Fixed charset for help pop-ups {GauGau}
+2007-05-07 [O] Changed picture title and description from regular text to header formatting for search engine friendliness {GauGau}
+2007-05-07 [O] Added noindex & nofollow meta-tags to meta albums for search engine friendliness {GauGau}
+2007-05-07 [O] Inversed order of items in title tag for search engine friendliness {GauGau}
+2007-05-07 [A] Added option to hide stats on index page {GauGau}
+2007-05-03 [O] Added various archive and OpenDocument file types support {GauGau}
+2007-04-29 [D] Changed help function to reflect changes in documentation structure {GauGau}
+2007-04-25 [C] Fixed workaround for missing translation in category manager {GauGau}
+2007-04-20 [D] Added developer-section to documentation {GauGau}
+2007-04-13 [D] Added link icons for anchors for easier reference on support board {GauGau}
+2007-04-11 [D] Restructured documentation into several documents {GauGau}
+2007-03-12 [A] Added sub-menu items to overall stats {GauGau}
+2007-03-09 [A] Added pagination to overall hit stats {GauGau}
+2007-03-09 [A] Added link to intermediate view for individual stats {GauGau}
+2007-03-05 [A] Added thumbnail column to overall hit stats {GauGau}
+2007-03-02 [B] Populated hit details list for overall stats {GauGau}
+2007-02-24 [A] Improving ability of category manager to deal with large numbers of categories. {Nibbler}
+2007-02-05 [A] Added message block for advanced administration purposes and output of messages of previous screens (work in progress) {GauGau}
+2007-02-01 [A] Added "user can delete own account" to comply with German legislation {GauGau}
+2007-01-30 [M] Cleaning all the GPC variables at the top of each file. (Work in progress ...) {Aditya}
+2007-01-29 [C] Replaced table-driven admin menu with CSS-driven one {GauGau}
+2007-01-27 [B] Adding support for multiple window.onloads to resolve issue of conflicting calls. {Nibbler}
+2007-01-25 [D] Improved groups control panel section in documentation {GauGau}
+2007-01-24 [O] Added Lithuanian preparation to language selector {GauGau}
+2007-01-23 [O] Improved stats page (work in progress) {GauGau}
+2007-01-19 [O] Embedded stats details into page instead of opening a pop-up {GauGau}
+2007-01-19 [O] Moved some translation strings that exist in multiple arrays into the common array for easier translation {GauGau}
+2007-01-18 [O] Moved some frequently used strings into $lang_common array for easier translation {GauGau}
+2007-01-18 [A] Added recording of voter id {GauGau}
+2007-01-18 [O] Added browser and os entries to vote stats records {GauGau}
+2007-01-18 [B] Fixed vote stats reference to hit stats table {GauGau}
+2007-01-15 [O] Moved statistics code into functions in separate include file for for re-use in other pages (planned overall stats page) {GauGau}
+2007-01-14 [B] Fixed situation in plugin api that caused bizarre plugin behavior when plugins called underlying plugin api hooks {Donnoman}
+2007-01-09 [O] Added nofollow attributes to image navigation bar to keep google from spidering slideshow links {GauGau}
+2007-01-08 [S] Fixed the vulnerability mentioned in topic 39943, though only admins could have exploited that. {Abbas}
+2007-01-02 [D] Added stylesheet for printing the documentation {GauGau}
+2006-12-28 [B] Fixed garbage collection deleting special file "no_FTP-uploads_into_this_folder!" inside edit folder {GauGau}
+2006-12-28 [B] Fixed bug in search by keyword {GauGau}
+2006-12-27 [M] Updated copyright date {GauGau}
+2006-12-27 [C] Small fix in background image of sub menu for project_vii {GauGau}
+2006-12-27 [B] Updated zipdownload with more recent library to enable zip downloads for mac users {GauGau}
+2006-12-14 [C] Improved expand/collapse all buttons on config screen {GauGau}
+2006-12-14 [B] Fixed visibility of upload link for users disallowed public uploads, but allowed personal galleries {GauGau}
+2006-12-09 [A] Added feature to promote registration in the comments section {GauGau}
+2006-12-09 [A] Added optional transparent overlay against image theft {GauGau}
+2006-12-06 [B] Avoid attempting to send emails to admins who have no email address in profile. {Nibbler}
+2006-12-05 [C] Added visibility toggle for debug_output to avoid debug_mode breaking the layout (width) {GauGau}
+2006-12-02 [B] bugfix for topic=38484 Problem creating/editing album via albmgr {Donnoman}
+2006-12-01 [D] Improved theme section {GauGau}
+2006-11-28 [A] Passing album id with upload link so that current album can be shown selected by default in upload form. {Aditya}
+2006-11-28 [M] Prepared languages array for future language contributions {GauGau}
+2006-11-27 [B] Fixing redirect to file after new upload while bridged. {Nibbler}
+2006-11-18 [A] Added the collapse all button on admin/config page. {Abbas}
+2006-11-17 [D] Updated code in FAQ entry {Nibbler}
+2006-11-16 [C] Unobfuscated the credits tag {GauGau}
+2006-11-14 [A] Added album hits feature. {Abbas}
+2006-11-12 [B] Fixed plugin api sleep and wake actions to be scoped correctly. {Donnoman}
+2006-11-11 [S] Replaced init.inc.php sanitization and magicquotes remediation code (topic=38166.0) {Donnoman}
+2006-11-09 [B] Fixed display of hit stats link on displayimage {Nibbler}
+2006-11-07 [B] Disabled global registration password for bridged installs {GauGau}
+2006-11-02 [O] Turned the voting links to javascript based redirection to stop bots from rating {Abbas}
+2006-11-02 [B] Fixed the pic approval on editpics {Abbas}
+2006-10-28 [S] Removing SQL injection vulnerability {Nibbler}
+2006-10-27 [M] Removing unused file include/exifReader.inc.php {Nibbler}
+2006-10-27 [B] Adding missing checks for email address validity and duplicate email addresses to profile page. {Nibbler}
+2006-10-27 [B] Pictures awaiting approval are no longer found using the search feature. {Nibbler}
+2006-10-27 [B] Converting htmlentities back to normal format for use in emails {Nibbler}
+2006-10-21 [B] An empty string is NOT an integer {Nibbler}
+2006-10-20 [O] Added sorting improvement to SEF_URLs plugin {GauGau}
+2006-10-16 [O] Improved editpics screen {GauGau}
+2006-10-16 [A] Added "Moderator for album pictures" hack {GauGau}
+2006-10-16 [B] BLOB and TEXT columns cannot have DEFAULT values. {Nibbler}
+2006-10-16 [D] Updated minimum requirements information. {Nibbler}
+2006-10-08 [S] block launch of exif_php.inc.php if not in Coppermine {Donnoman}
+2006-10-03 [S] Corrected flaw in search logic {Nibbler}
+2006-09-18 [A] Added overall stats mod {GauGau}
+2006-09-18 [B] Escape queries in include/exif_php.inc.php {Paver}
+2006-09-18 [A] Added browser and OS icons for stats {GauGau}
+2006-09-17 [M] Updated credits section of documentation {GauGau}
+2006-09-17 [A] Added German language file (based on revision 3288 of english.php) to be able to test the dev version in a production environment of my personal page. During the dev stage of cpg1.5.x, I will update the German language file only from time to time {GauGau}
+2006-09-16 [A] Added resend activation link feature per http://coppermine-gallery.net/forum/index.php?topic=15677.0 {Aditya}
+2006-09-15 [A] Added tag cloud hack (with better font size calculation) {Aditya}
+2006-09-15 [C] Split user settings into registration and user settings {GauGau}
+2006-09-11 [A] Added the option to show random image from the album as album thumbnail {Abbas}
+2006-09-08 [D] Resized some screenshots, added content to "getting started" section {GauGau}
+2006-09-08 [O] Added proper attribute to radio buttons for comment approval when editing files (standards compliance) {GauGau}
+2006-09-07 [A] Added slideshow view counter option {GauGau}
+2006-09-06 [A] Added "create personal album on registration" feature {GauGau}
+2006-09-06 [C] Minor fixes to sample plugin for illustration purposes {GauGau}
+2006-09-06 [C] Improved table layout on plugin manager page, added help icons and missing translation {GauGau}
+2006-09-04 [B] Updated query for lastcom meta album to reflect comment approval feature {GauGau}
+2006-09-01 [B] Reverted width="100%%" in themes.inc.php & sample theme - topic: 35701 {Paver}
+2006-09-01 [O] Added help icons {GauGau}
+2006-09-01 [D] Added comments section to docs {GauGau}
+2006-08-31 [A] Added the checkbox "send login data to this user" while creating new user in usermgr {Abbas}
+2006-08-31 [O] Removed hard-coded translation in versioncheck.php {GauGau}
+2006-08-31 [B] Fixed missing features for flash support in ecards, added config option {GauGau}
+2006-08-29 [D] Improved language section of documentation {GauGau}
+2006-08-26 [B] Fixed the file rename issue on editOnePic when watermarking is disabled {Abbas}
+2006-08-26 [A] Implemented the read exif info again checkbox on editOnePic {Abbas}
+2006-08-24 [D] Added group membership section to docs {GauGau}
+2006-08-22 [C] Corrected spelling of 'determine' {Nibbler}
+2006-08-21 [A] Added Flash support to ecard {GauGau}
+2006-08-20 [B] Fixed sql issue with missing/incorrect user galleries {Nibbler}
+2006-08-20 [A] Added title to slideshow {GauGau}
+2006-08-19 [O] Replaced common language vars with array equivalents {GauGau}
+2006-08-18 [A] Added disapproval/disapproval option of individual comments {GauGau}
+2006-08-18 [M] Updated file header info {GauGau}
+2006-08-18 [A] Added captcha for registration {GauGau}
+2006-08-18 [O] Started language array $lang_common for common strings as replacement for various language strings {GauGau}
+2006-08-17 [B] Fixed profile HTML shining through when editing comments {GauGau}
+2006-08-17 [A] Added visual confirmation (captcha) for comments {GauGau}
+2006-08-17 [A] Added option to disallow users editing their comments {GauGau}
+2006-08-16 [A] Added mass comment approval {GauGau}
+2006-08-16 [A] Added comment placeholder option {GauGau}
+2006-08-16 [B] Fixed row striping when config entries are hidden (ie. md5 passwords) {Nibbler}
+2006-08-16 [M] PHP6 compatibility fixes {Nibbler}
+2006-08-16 [B] Fixed SEF plugin issue with favpics meta album {Nibbler}
+2006-08-16 [A] Added row alternation for config, user manager, group manager, category manager, banning {GauGau}
+2006-08-15 [A] Added CSS class tableb_alternate to all themes, allowing alternating rows for lists of any kind {GauGau}
+2006-08-11 [B] Fixed duplicate documentation_lnk per http://coppermine-gallery.net/forum/index.php?topic=33836.msg158112#msg158112 {Donnoman}
+2006-08-11 [D] Added $extra_info and $install_info implementations to the sample plugin {Donnoman}
+2006-08-11 [C] Changed pluginmgr.php to display $extra_info and $install_info clearly with its associated plugin {Donnoman}
+2006-08-11 [B] Fixed $extra_info and $install_info repeating for unrelated plugins {Donnoman}
+2006-08-10 [D] Changed minimum requirements section in docs from PHP4.1.0 to PHP4.2.0 {GauGau}
+2006-08-09 [B] Replaced hard-coded strings in crop/rotate function with actual translation strings {GauGau}
+2006-08-08 [D] Resized some images in the docs for faster loading of the page {GauGau}
+2006-08-07 [D] Added breadcrumb to config section of documentation {GauGau}
+2006-08-06 [B] Fixed distorted album thumbs when using cropping and thumb width != height {Stramm}
+2006-08-05 [A] Added movie download link to picinfo {Stramm}
+2006-08-05 [A] Added thumb cropping and sharpening {Stramm}
+2006-08-05 [B] Fixed the exif/iptc issues -  watermark related. {Abbas}
+2006-08-01 [C] Fixed relative positioning glitch of navmenu in IE {GauGau}
+2006-07-28 [D] Fixed anchor link in docs {GauGau}
+2006-07-22 [A] Added the undo watermark and autorefresh in admin tools {Abbas}
+2006-07-21 [A] Added the watermark feature {Abbas}
+2006-07-21 [O] Made silly_safe_mode a config option instead of a constant {GauGau}
+2006-07-13 [C] Fixed linked space char in comments {GauGau}
+2006-07-10 [D] Added documentation improvements {GauGau}
+2006-07-09 [M] Replaced ignoring of CVS folders in favor of .svn folders {GauGau}
+2006-06-25 [B] Removed admin from secondary group in usermgr.php - topic 32781 {Paver}
+2006-06-25 [B] Fixed user profile fields in charsetmgr.php - topic 32491 {Paver}
+2006-06-25 [B] Fixed theme_create_tabs call in functions.inc.php - topic 33030 {Paver}
+2006-06-25 [C] Modified Persian label according to topic 33024 {Paver}
+2006-06-23 [C] Fixed extra bold tags surrounding {STATISTICS} in themes.inc.php {Paver}
+2006-06-23 [S] Fixed the security flaw in parameter cleanup system reported by imei addmimistrator @ http://myimei.com/security/2006-06-20/coppermine-148parameter-cleanup-system-bypassregistering-global-varables.html  (addmimistrator(4}gmail(O}com) {Aditya}
+2006-06-23 [S] Fixed the security flaw in add_hit function reported by imei addmimistrator @ http://myimei.com/security/2006-06-11/copperminephotogallery148-addhit-function-sqlinjection-attack.html  (addmimistrator(4}gmail(O}com) {Aditya}
+2006-06-15 [B] Fixed keyword "insert from list" not working in Firefox {Paver}
+2006-06-12 [B] Fixed loss of default value for user_password in update.sql {Nibbler}
+2006-06-12 [B] Added table type info for all tables {GauGau}
+2006-06-07 [D] Added section to docs about editing user profiles {GauGau}
+2006-06-07 [B] Reversed 'lastalb' fix due to stability issue {Paver}
+2006-06-06 [B] Fixed 'lastalb' bug for MySQL 4.1+ (known issue for 3.23, 4.0) {Paver}
+2006-06-06 [S] Modified fix for usermgr security issue {Paver}
+2006-06-05 [S] Fixed the usermgr security issue {Abbas}
+2006-06-04 [B] Fixed private images showing up in lastup & random {Paver}
+2006-06-02 [M] Fixed discrepancies between themes.inc.php and sample theme {GauGau}
+2006-06-02 [A] Added code so that during upload the last selected album comes preselect in album list {Abbas}
+2006-06-01 [A] Added Approve/Disapprove radio buttons in editpics.php as well as editOnePic.php {Aditya}
+2006-06-01 [A] Added config settable global password for registration feature {Abbas}
+2006-05-29 [A] Added comment approval option {GauGau} - work in progress (still open issues)
+2006-05-23 [D] Added missing detail in database requirements section {GauGau}
+2006-05-19 [B] Fixed clickable keywords for utf-8 encoding {GauGau}
+2006-05-18 [B] Fixed the reset of detailed hit/vote stats issue {Abbas}
+2006-05-19 [O] Removed unneeded flush of outbut buffer in category manager {GauGau}
+2006-05-19 [C] Replaced "report to moderator" button in hardwired theme to match the overall look of the theme {GauGau}
+2006-05-19 [C] Replaced "report to moderator" button in eyeball theme to match the overall look of the theme {GauGau}
+2006-05-18 [B] Added imagejpeg workaround to address bug in PHP4.4.1 {GauGau}
+2006-05-17 [B] Created default value of $category['cat_thumb'] when not defined in theme_display_cat_list {Paver}
+2006-05-17 [B] Fixed $cpg_show_private_album setting & use for meta-albums, topic 30894 {Paver}
+2006-05-17 [B] Fixed hardcoding of 'iso-8859-1' in stat_details, keyword_select, xp_publish {Paver}
+2006-05-17 [B] Fixed errant "inactive_next_tab" notice & put in commented placeholder code {Paver}
+2006-05-17 [B] Fixed known issue from 1.4.x with "albums with same name" (topic:31146) {Paver}
+2006-05-17 [B] Fixed category statistics, making unapproved uploads not being taken into account {GauGau}
+2006-05-17 [B] Fixed upload approval to personal galleries when public upload approval is turned off {GauGau}
+2006-05-17 [B] Preventing whitespace in include/config.inc.php breaking cookies {Nibbler}
+2006-05-17 [C] Cleaning notices caused by bridging system {Nibbler}
+2006-05-17 [B] Fixing nuke check 'continue anyway' feature {Nibbler}
+2006-05-17 [B] Fixing search * wildcard {Nibbler}
+2006-05-17 [C] Avoid deleting group_name unnecessarily {Nibbler}
+2006-05-17 [C] Avoiding php notice in profile.php {Nibbler}
+2006-05-17 [B] Fixing edit permissions bug {Nibbler}
+2006-05-17 [S] Fix the obscure, misdocumented "feature" in Apache that causes the server to process the last "valid" extension in the filename (rar exploit): replace all dots in the filename except the last one with an underscore {GauGau}
+2006-05-16 [O] Removed file that was suppossed to enable upgrades from cpg1.1.x to cpg1.2.x {GauGau}
+2006-05-16 [O] Changed labels of admin mode/user mode to show/hide admin controls {GauGau}
+2006-05-15 [D] Added mySQL issues to FAQ {GauGau}
+2006-05-13 [O] Removed check for install.lock in favor of config.inc.php {GauGau}
+2006-05-13 [C] Fixed visibility issue for clickable options in fruity theme {GauGau}
+2006-05-13 [B] Fixed missing translation in batch-add {GauGau}
+2006-05-13 [A] Added pseudo-class definitions (hover and visited) for thumbnails in all themes {GauGau}
+2006-05-10 [B] Fixed admin recognition issue in IPB bridge {Nibbler}
+2006-05-09 [D] Updated screenshots in docs {GauGau}
+2006-05-08 [B] Replaced $lang_displayreport_php['invalid_data'] with $lang_report_php['invalid_data'] in displayreport.php {TranzNDance}
+2006-05-08 [B] Fixed bug where input field was saved for sender's name in report_file.php {TranzNDance}
+2006-05-08 [B] Fixed JavaScript error messages for crop and rotate {GauGau}
+2006-05-08 [A] Added better album dropdown to upload screen {GauGau}
+2006-04-21 [S] Fixed remote file inclusion vulnerability {GauGau}
+2006-04-20 [C] Moved theme and language styling from hardcoded into stylesheet (inline class) {GauGau}
+2006-04-19 [D] Added start/end tokens to the individual sections of the sample theme for easier theming {GauGau}
+2006-04-18 [A] Added API for Coppermine to be used with applications like Koppermine and may be some others {Aditya}
+2006-04-17 [A] Added option to send visitors directly from the thumbnail page to the full-size pop-up {GauGau}
+2006-04-17 [D] Removed section about GD's GIF capability restrictions, as GIF support has returned is recent GD versions {GauGau}
+2006-04-17 [M] Replaced CVS keywords with SVN keywords in file header {GauGau}
+2006-04-17 [A] Added terms and conditions (registration disclaimer) as admin settable option {GauGau}
+2006-04-13 [M] Committing to SVN {GauGau}
+2006-04-10 [O] Replaced count(*) with count(id) in stats query on index page and get_pic_data function in functions.inc.php {Abbas}
+2006-04-10 [M] Removed comments in language file that indicated changes in cpg1.4.x. {GauGau}
+2006-04-10 [B] Re-added config.php and server_relocate.php to overwrite the outdated files when users upgrade. {GauGau}
+2006-04-10 [A] Added option to display rating on thumbnail page. {GauGau}
+2006-04-08 [A] Added pid in URLs to avoid relative URLs. This will make pic URLs static and search engine friendly. {Abbas}
+2006-04-07 [S] Changed default docfile types and soundfile types from all to a list as a counter-measure against the apache webserver flaw that allows parsing of rar files {GauGau}
+2006-04-07 [A] Changed layout of changelog to improve readability {GauGau}
+2006-03-28 [C] Added name and id attributes to form elements for standards compliance and possible future use of the id {GauGau}
+2006-03-06 [B] Fixed redirecting back to original url after adding to favs {GauGau}
+2006-03-06 [C] Fixing issue with smilie url prefix in admin comment notification {GauGau}
+2006-02-27 [C] Added default values for $or and $galleryicon in editpics.php to remove unnecessary notices {Paver}
+2006-02-23 [B] Fixed bug in charsetmgr {Abbas}
+2006-02-20 [C] Fixed some deprecated tags like <font> {GauGau}
+2006-02-20 [B] Fixed help pop-up in batch-add section {GauGau}
+2006-02-05 [A] Added ukrainian language string to language selector, fixed slovak flag {GauGau}
+2006-02-04 [A] Added function get_batch_add_album_list to get the personal albums for admin on batch add page {Abbas}
+2006-02-04 [B] Fixed reset password bug {Abbas}
+2006-01-31 [B] Fixed bug- smilies coming broken in notification email {Abbas}
+2006-01-26 [D] Added plugin section to docs {GauGau}
+2006-01-25 [B] Fixed issue "gif can't be added to favorites" {GauGau}
+2006-01-25 [B] Fixed the Search Engine friendly URLs (plugin) bug in displaying multipage thumbnails and albums {Abbas}
+2006-01-25 [C] Fixed css class glitch ("button" instead of "submit") {GauGau}
+2006-01-25 [D] Removed "user mode" paragraph from faq section of language file {GauGau}
+2005-12-27 [B] Internationalized ecard button titles {TranzNDance}
+2005-12-27 [B] Fixed issue with topn images not working in keyworded albums, provided by donnoman {TranzNDance}
+2005-12-26 [M] Removed cpg1.3.x language files {GauGau}
+2005-12-10 [B] Fixed selecting sample theme from admin.php {Donnoman}
+2005-12-02 [B] Added fix for showing correct number of tabs and pages when viewing lastalb meta album {Abbas}
+2005-12-02 [B] Fixed moved title after setting the charset {Donnoman}
+2005-12-02 [C] Fixed XHTML compliance and charset missing from picEditor.php {Donnoman}
+2005-12-01 [C] Fixed minor typo in english.php regarding "Create intermediate pictures" {Donnoman}
+2005-11-29 [B] Added fix for selecting thumbnail for the album which contains only linked files {Abbas}
+2005-11-28 [M] Increased version count from cpg1.4.2 to cpg1.5.0 {GauGau}
+2005-11-24 [C] Fixed example for template_sub_menu to include custom_link button in the docs {Donnoman}
+2005-11-24 [B] Fixed non-approved images from showing up errantly in albums with keywords set {Donnoman}
+2005-11-20 [A] Added phpBB 2.0.18 bridge support {Nibbler}
+2005-11-20 [B] Applied speculative fixes to xp publisher component {Nibbler}
+2005-11-10 [B] Fixed issue with MySQL 5 {Nibbler}
+2005-11-03 [A] Added French translation of the FAQ to docs folder {GauGau}
+2005-10-20 [A] Added portuguese language file for cpg1.4.x (user contrib) {GauGau}
+2005-10-01 [C] Added files to userpics and edit directory to avoid uploads to those folders {GauGau}
+2005-09-25 [S] Release of CPG1.3.5 {GauGau}
+2005-09-20 [S] Added fix for XSS vulnerability in language selector {Aditya}
+2005-09-20 [B] Added fix for forbidden characters (space and ampersand) issue {Abbas}
+2005-09-19 [D] Added improved XP publisher section to docs {GauGau}
+2005-09-19 [A] Added portuguese language file {GauGau}
+2005-09-09 [D] Added exif section to docs {GauGau}
+2005-08-22 [B] Release of CPG1.3.4 {GauGau}
+2005-08-12 [A] Added Galician language support (user contribution) {GauGau}
+2005-08-12 [C] Fixed minor bugs in italian translations {GauGau}
+2005-08-12 [B] Fixed email validation routine for ecards {GauGau}
+2005-08-11 [C] Fixed hardwired {Donnoman}
+2005-08-07 [B] Fixed multiple keywords getting filtered out from iptc on upload {Donnoman}
+2005-08-07 [B] Changed Upload title to be iptc headline if iptc title isn't available {Donnoman}
+2005-07-24 [M] Removed depreciated randomizing code from index.php {Donnoman}
+2005-07-24 [C] Changed to not automatically include init.inc.php for included files via the query string (?file=) {Donnoman}
+2005-07-05 [C] Fixed typos in finnish language file {GauGau}
+2005-07-04 [C] Fixed omission about privacy settings in french language file {GauGau}
+2005-07-04 [D] Updated the translator's guide {GauGau}
+2005-07-02 [M] Release of CPG1.4.1 {GauGau}
+2005-05-04 [B] Added fix for sort order of rated thumbs with identical rating {GauGau}
+2005-04-24 [A] Added plugin hook in picmgmt.inc.php 'add_file_data' {Donnoman}
+2005-04-24 [A] Added define('THEME_HAS_FILM_STRIP_GRAPHIC', 1); adjusted filmstrip template {Donnoman}
+2005-04-10 [B] Fixed custom thumbs in directories that have spaces {Donnoman}
+2005-04-10 [C] Fixed notices coming from create_session in the bridge files  {Donnoman}
+2005-04-10 [A] Added <span> to alblink so that it's selector will work like the other anchor selectors {Donnoman}
+2005-04-10 [M] Changed themes/classic => themes/sample, themes/core => themes/classic, excluded 'sample' from the themeSelect {Donnoman}
+2005-04-10 [B] Fixed require path to 'udb_base.inc.php' in the bridge files {Donnoman}
+2005-03-23 [A] Added new bridge files (Xoops, XMB, MyBB) to bridge manager {Nibbler}
+2005-03-22 [A] Added thai language file (user contribution) {GauGau}
+2005-03-22 [A] Added persian (farsi) language file (user contribution) {GauGau}
+2005-03-09 [M] Removed styleguide theme from package (available in coppermine download section instead), usage is deprecated {GauGau}
+2005-03-08 [B] Fixed display of IP address in last viewed to be dependent on 'GALLERY_ADMIN_MODE' {Donnoman}
+2005-03-08 [B] Fixed display of bb_code'ed comments being displayed raw in thumbnail captions, now is bb_decoded then strip_tagged {Donnoman}
+2005-03-07 [A] Added plugin actions to put content below the breadcrumb on thumbnail.php and displayimage.php {Donnoman}
+2005-02-19 [A] Added single function to generate the thumbnail captions {Donnoman}
+2005-02-18 [A] Added ability to see summaries of which albums different user groups have access to (prevents assigning users to groups with too much access) {TranzNDance}
+2005-02-18 [A] Enabled smilies in reviewcom.php (Review Comments) for comments with smilies {TranzNDance}
+2005-02-17 [B] Various bug fixes in UDB integration {Chris}
+2005-02-17 [A] Added ability to filter blocks and include plugin files into Coppermine {Chris}
+2005-02-17 [A] Added experimental code to create and use a separate "album set" for metalbums that is not limited to the configured category depth {Donnoman}
+2005-02-15 [A] Added "anonymous user posting comments can not disguise as registered user" hack (contributed by nol33t) {GauGau}
+2005-02-15 [A] Added linked file statistics along with normal stats. (Admin setable) {Aditya}
+2005-02-11 [A] Added admin configurable "home" button as first button in the sys_menu. {Donnoman}
+2005-02-09 [A] Added display filename under thumbnail based on admin configuration. {Donnoman}
+2005-02-09 [A] Added display filename under thumbnail of the film strip based on admin configuration. {Donnoman}
+2005-02-08 [C] Changed wording on the ability to hide admin uploaders to Display admin uploaders under thumbnails {Donnoman}
+2005-02-08 [B] Changed the reliance on having regular uploaders displayed in order to turn on or off displaying admin uploaders being displayed under thumbnails {Donnoman}
+2005-02-05 [A] Added IPTC import of title, caption, and keywords with upload.php and batch add {Donnoman}
+2005-02-05 [A] Added function filter_content that filters arbitrary arrays of strings for bad_word matches and replaces them with the bad_word token (...) {Donnoman}
+2005-02-03 [A] Added {pseudo session functionality {Chris}
+2005-02-01 [A] Added link to user profile and sort options in review comments page {GauGau}
+2005-01-30 [A] Added display of the uploader under all thumbs when set in config (even random/lastviewed/lastupdated) {Donnoman}
+2005-01-30 [A] Added switch to show/hide admin username under thumbnails {Donnoman}
+2005-01-27 [A] Added documentation link to admin menu {GauGau}
+2005-01-26 [A] Added coppermine bridge file (Coppermine is bridged 100% of the time) {Chris}
+2005-01-26 [A] Modified bridging processes (usermgr *can* work with all bridge files) {Chris}
+2005-01-26 [A] Added HTML necessary for user customizable media players {Chris}
+2005-01-26 [B] Bug fixes {Chris}
+2005-01-22 [B] Added minibrowser to language fallback {GauGau}
+2005-01-18 [B] Added files to language fallback {GauGau}
+2005-01-18 [C] Added buttons to searchnew.php for album properties and thumbnail view {GauGau}
+2005-01-16 [A] Added configuration option to disable the vanity block {Donnoman}
+2005-01-13 [C] Added calendar icon to let users choose date on banning page {GauGau}
+2005-01-05 [M] Removed all the language- Utf-8.files; the language.php files are encoded in utf-8 {chtito}
+2005-01-02 [A] Made utf-8 the default encoding for new installs; added a "not recommended" warnin for the 'language file' encoding {chtito}
+2005-01-02 [A] Link to the charset manager added to update.php {chtito}
+2005-01-02 [M] Moved the contents of english.php into english-utf-8.php {chtito}
+2005-01-01 [M] Changed default theme from "classic" to "core" {GauGau}
+2005-01-01 [A] Added a update.in.php file for a couple of functions common with charsetmgr {chtito}
+2005-01-01 [C] Some cosmetic changes in installer.css {chtito}
+2005-01-01 [A] Added charsetmgr.php to convert the encoding of the whole database {chtito}
+2004-12-30 [M] Updated file headers {GauGau}
+2004-12-28 [A] Added ability for admin to approve registrations {TranzNDance}
+2004-12-27 [A] Removed admin menu item "Upload approval" from sight if there are no pending approvals {GauGau}
+2004-12-27 [A] Removed admin menu item "Display Ecards" from sight if ecard logging has not been enabled {GauGau}
+2004-12-27 [C] Changed order of admin menu items to be more intuitive {GauGau}
+2004-12-23 [C] Changed full size pic pop-up to remove style.css and use embedded stylesheet to assure minimal padding {Donnoman}
+2004-12-23 [C] Changed script.js to use a different method to catch IE and FF in DOCTYPE mode, accomodate vert scroll bar of IE {Donnoman}
+2004-12-23 [A] Added _TITLE localizations where _LNK's had been re-used. {Donnoman}
+2004-12-23 [B] Fixed {APPROVAL_ID causing validation issues {Donnoman}
+2004-12-20 [A] Enable BBcode for comments and ecards {TranzNDance}
+2004-12-19 [B] Changed script.js to recognize IE6 and FF in compliance mode for pop-up resize {Donnoman}
+2004-12-19 [C] Changed full size pic pop-up to be XHTML 1.0 Transitional Compliant {Donnoman}
+2004-12-19 [B] Fixed pipe separator display when no keywords existed on the search page {Donnoman}
+2004-12-16 [A] Added "advanced album dropdown" to "sort my pics" (picmgr.php) {GauGau}
+2004-12-15 [A] Added ability to preview and edit ecard before sending {TranzNDance}
+2004-12-14 [A] Added Basque language (user contribution) {GauGau}
+2004-12-12 [M] Changed coppermine version from cpg1.4.0 alpha to cpg1.4.1 beta {GauGau}
+2004-12-12 [A] Added admin option "Allow unlogged users (guest or anonymous) access" {GauGau}
+2004-12-10 [A] Added server relocation script {kegobeer}
+2004-12-08 [A] Added advanced searching {Nibbler}
+2004-12-01 [C] Removed dotted line from css class "clickable_option" {GauGau}
+2004-12-01 [A] Added support for PunBB 1.2 {Nibbler}
+2004-11-28 [A] Added file renaming option {Nibbler}
+2004-11-28 [A] Added ability for users to edit their pics after upload {Nibbler}
+2004-11-26 [B] Added code to check/add trailing slash to ecards_more_pic_target in config.php {kegobeer}
+2004-11-20 [A] Added report to admin/mod function for files and comments {TranzNDance}
+2004-11-19 [A] Added IPB 2.0 bridge file (user contribution) {GauGau}
+2004-11-19 [A] Added ability to hide ecard button when user can't send {TranzNDance}
+2004-11-16 [M] Removed admin/user mode toggle for non-admins {GauGau}
+2004-11-09 [C] Changed help pop-up to so can be read when body dark colour {Casper}
+2004-11-08 [C] Changed options for "Image view" and "Comment settings" to be different sections {GauGau}
+2004-11-08 [A] Added option to sort comments ascending or descending {GauGau}
+2004-11-06 [A] Added slovak translation (user contribution) {GauGau}
+2004-11-02 [A] Added custom header and footer include option {GauGau}
+2004-10-28 [A] Added option to delete all files and comments when deleting users {GauGau}
+2004-10-27 [A] Added "change secondary group" for multiple users (usermgr.php) {GauGau}
+2004-10-26 [A] Added language support for xp_publish.php {Casper}
+2004-10-22 [B] Changed edit dirctory creation from 666 to 777 in picmgmt.inc.php {Casper}
+2004-10-13 [A] Added "change primary group membership" for multiple users at once in user management {GauGau}
+2004-10-10 [A] Added batch-activation/deactivation/password-reset in user manager {GauGau}
+2004-10-07 [C] Added "check/uncheck all" option in exif manager {GauGau}
+2004-10-07 [A] Added provisional phpbb 2.2 integration support {Nibbler}
+2004-10-06 [A] Added optional browsing through batch-added files {GauGau}
+2004-10-06 [D] Added sub-section for logging and statistics in coppermine config and the docs to reflect the additional log features introduced lately {GauGau}
+2004-10-05 [A] Added "check/uncheck all" option in groupmanager {GauGau}
+2004-10-05 [A] Added scripts for recording detailed statistics for votes and hits {Aditya}
+2004-10-04 [A] Added mulitiple user selection and deleting {GauGau}
+2004-10-04 [A] Added "reset group names to default" option in group manager {GauGau}
+2004-09-29 [C] Fixed typos in French language file (user contribution) {GauGau}
+2004-09-29 [A] Added overhauled Russian translation (user contribution) {GauGau}
+2004-09-27 [A] Added check/uncheck all fields in reviewcom.php {GauGau}
+2004-09-27 [A] Added link to edit files, parent category and thumbnail view in album properties {GauGau}
+2004-09-27 [A] Added GIF support for GD back into Coppermine {kegobeer}
+2004-09-25 [M] Admin.php name changed to mode.php {Casper}
+2004-09-25 [M] Config.php renamed admin.php {Casper}
+2004-09-15 [A] Added Kurdish language file (user contrib) {GauGau}
+2004-09-12 [A] Added bridge manager for easier BBS integration {GauGau}
+2004-09-10 [A] Added Uighur language file (user contrib) {GauGau}
+2004-09-10 [A] Added Estonian language file (user contrib) {GauGau}
+2004-09-05 [A] Added Turkish language file (user contrib) {GauGau}
+2004-09-05 [A] Added Catalan language file (user contrib) {GauGau}
+2004-09-03 [A] Added section to album properties where the admin can reset views, votes and files {GauGau}
+2004-08-31 [C] Added alt tags to some images for xhtml compliance {GauGau}
+2004-08-31 [C] Changed bbcode help to display help icon instead of full text {GauGau}
+2004-08-31 [A] Added option to sort categories by name instead of position {GauGau}
+2004-08-20 [B] Added facility to disable config settings that are irrelevent with bridged installs {Nibbler}
+2004-08-18 [B] Release of CPG1.3.2 {GauGau}
+2004-08-16 [A] Added version check routine for easier upgrades {GauGau}
+2004-08-13 [C] Silenced CHMOD command to avoid issues on servers not supporting the command {GauGau}
+2004-08-13 [A] Added advanced sorting hack (sort by position, picture manager) {GauGau}
+2004-08-12 [A] Added option to select all checkboxes when editing files in an album {GauGau}
+2004-08-12 [A] Added clickable keyword search and keyword manager {GauGau}
+2004-08-10 [A] Added display number of uploaded pictures in the profile mod (user contribution) {GauGau}
+2004-08-10 [C] Fixed animated smilies stopping to move when being clicked on (user contribution) {GauGau}
+2004-08-09 [A] Added option to sort categories alphabetically {GauGau}
+2004-08-09 [A] Added brute force attack protection {GauGau}
+2004-07-25 [A] Added bridge for PunBB {Nibbler}
+2004-07-22 [D] Added overview over used colors in style sheets {GauGau}
+2004-07-22 [C] Changed help icon availability for all users vs. admin only {GauGau}
+2004-07-22 [A] Added option 'user can change email address in profile' {GauGau}
+2004-07-20 [A] Added reset view counter into admin tools {Nibbler}
+2004-07-20 [C] Modified groups manager to fit on one page {GauGau}
+2004-07-20 [C] New javascript driven config page  {Nibbler}
+2004-07-19 [B] Changed activation email link to use config set gallery url {Nibbler}
+2004-07-15 [M] Release of CPG1.3.1 {GauGau}
+2004-07-14 [D] Added online help (help icon that can refer to parts of documentation) {GauGau}
+2004-07-14 [D] Fixed all internal and external links in the documentation {Nibbler}
+2004-07-13 [A] Added links to album properties, parent category and thumbnail view in editpics.php {GauGau}
+2004-07-11 [A] Replaced mailer functions to send both plain-text and html-enabled emails {GauGau}
+2004-07-09 [C] Added flashing approval button if pics require admin approval {GauGau}
+2004-07-08 [M] Moved SMTP settings from include/mailer.inc.php to coppermine config {GauGau}
+2004-07-08 [A] Added various changes for plugin API {Chris}
+2004-07-06 [A] Added Password protected albums {Tarique}
+2004-07-06 [C] Changed hard coded english in delete.php and upload.php to lang file, user contribution u3uk {Casper}
+2004-07-06 [B] Fixed expiration bug in banning.php, added calendar.php to select date {GauGau}
+2004-07-06 [A] Added admin option to allow banning of private IPs  {GauGau}
+2004-07-04 [D] Added warning in docs to backup anycontent when upgrading {Casper}
+2004-07-04 [B] Fixed 'system thumbs not renaming on config change' {Chris}
+2004-07-04 [B] Added 'if' block for unlink operations in update.php {Chris}
+2004-07-04 [A] Added 'media-autostart' to config values {Chris}
+2004-07-04 [A] Added 'media_autostart' to lang_config_data {Chris}
+2004-07-03 [A] Added 'thumb_pfx' to system thumbs {Chris}
+2004-07-03 [A] Added 'thumb_nopic.jpg' and 'thumb_private.jpg' to images folder {Chris}
+2004-07-01 [B] Fixed "> 1k users -> very slow" bug {Chris}
+2004-06-30 [A] Added Latvian language files (user contrib) {GauGau}
+2004-06-30 [A] Added Czech language files (user contrib) {GauGau}
+2004-06-29 [A] Added timezone GMT offset feature {Nibbler}
+2004-06-29 [A] Added individual query timings for debug mode box {Nibbler}
+2004-06-28 [B] Fixed 'Private pics no longer displayed as 'last comment by' in profile page' bug {Nibbler}
+2004-06-28 [B] Rewritten admin tools page, added db refresh, deletion of resized pics, XHTML compliance {Nibbler}
+2004-06-25 [A] Added Arabic language files (user contrib) {GauGau}
+2004-06-25 [A] Added Swedish language files (user contrib) {GauGau}
+2004-06-25 [B] Added check to searchnew.php for "no subfolders within albums" {GauGau}
+2004-06-25 [C] Added some Site Navigation elements using <LINK rel='' {Tarique}
+2004-06-24 [B] Fixed 'Restore factory defaults' bug {Nibbler}
+2004-06-23 [C] Added text link over thumbnails on profile page {GauGau}
+2004-06-22 [A] Added framework for language fall back {Tarique}
+2004-06-22 [A] Added version warning if other version than stable is being used {GauGau}
+2004-06-22 [A] Changed profile field 6 to text area for longer biography entries etc {Casper}
+2004-06-20 [A] Added keyword Inserter {tarique}
+2004-06-19 [A] Added config settable profile fields {casper}
+2004-06-17 [C] Added valid XHTML 1.0 transitional output to displayimage {tarique}
+2004-06-17 [A] Updated Server side favorite to be in separate table {tarique}
+2004-06-16 [B] Fixed album visibility issue {Chris}
+2004-06-16 [B] Fixed 'install not working' {Chris}
+2004-06-15 [B] Fixed bug in index.php of not showing user gallery thumbnails {tarique}
+2004-06-14 [C] Added valid XHTML 1.0 transitional output to index and thumbnail {tarique}
+2004-06-14 [A] Added server side favorite {tarique}
+2004-06-14 [A] Added more info display to lasthits meta album {tarique}
+2004-06-14 [A] Added ISO to EXIF extraction {tarique}
+2004-06-14 [B] Fixed bug in update.sql {casper}
+2004-06-14 [M] Changed 'cpg130_filetypes' to 'CPG_filetypes' {Chris}
+2004-06-13 [C] Removed 'field1' typo in editOnepics.php {casper}
+2004-06-11 [M] Release 1.3.0 {GauGau}
+2004-05-20 [B] Anonymous can not send ecards bug fix {Nibbler}
+2004-05-01 [A] Calculate suitable permissioons and quotas for users in multiple usergroups {Jack}
+2004-05-01 [B] Album visibility now correct for admins and users in multiple usergroups {Jack}
+2004-04-24 [D] Updated miscellaneous documentation information {Chris}
+2004-04-24 [D] Updated/Added new screenshot gifs {Chris}
+2004-04-24 [A] Bridge to Simple Machines Forum (SMF) {Jack}
+2004-04-22 [A] Changed 'tiff', 'ram', and 'psd' doctypes to 'document' {Chris}
+2004-04-20 [C] Added height/width fields to editOnePic.php {Chris}
+2004-04-20 [C] Fixed height/width fields in editpics.php {Chris}
+2004-04-20 [B] Fixed 'missing controls' bug in displayimage.php {Chris}
+2004-04-19 [B] Fixed 'unable to ban with bb integration bug {Nibbler}
+2004-03-30 [A] Added support for multiple HTTP/URI uploads {Hyperion}
+2004-03-22 [B] Fixed album thumb bug {Chris}
+2004-03-16 [A] Added multiple URI upload changes to the language file {Hyperion}
+2004-03-14 [A] Added IP address lookup {GauGau}
+2004-03-14 [A] Added switch to turn off notices in debug mode {GauGau}
+2004-03-14 [A] Added slideshow interval as admin option {GauGau}
+2004-03-14 [A] Added pic keywords to meta tags {GauGau}
+2004-03-11 [B] Added feature "admin can't ban himself" {GauGau}
+2004-03-05 [D] Added footnote on album manager to explain group settings {GauGau}
+2004-03-04 [A] Added Download Favourites as Zip file {Tarique}
+2004-03-02 [A] Added config option "debug output for admin only" {GauGau}
+2004-03-02 [A] Added multiple HTTP upload changes to the language file {Hyperion}
+2004-03-01 [C] Changed "picture" to "file" in lang/english.php {Chris}
+2004-03-01 [B] Added bug fixes for video mod to {reviewcom.php;index.php;displayimage.php {Chris}
+2004-02-29 [A] Added theme 'styleguide' {GauGau}
+2004-02-29 [A] Added ecards logging {GauGau}
+2004-02-29 [A] Re-introduced "notify admin on comments" {GauGau}
+2004-02-29 [C] Moved HTML format for image-borders from theme.php to style.css {GauGau}
+2004-02-21 [A] Added clickable album names (user contrib) {GauGau}
+2004-02-20 [A] Added "user can't rate own picture" hack (user contrib by jdbaranger) {GauGau}
+2004-02-20 [A] Added bbcode help (user contrib by icebox) {GauGau}
+2004-02-18 [A] Added user FAQ (admin option) {GauGau}
+2004-02-17 [A] Added category name to dropdown in upload.php (user contrib by the Burrek) {GauGau}
+2004-02-17 [A] Added memberlist hack by jason {GauGau}
+2004-02-17 [D] Updated the documentation {GauGau}
+2004-02-01 [A] Added video mod to {index.php;reviewcom.php;displayimage.php;db_input.php;editpics.php;searchnew.php;thumbnails.php;include/functions.inc.php;include/picmgmt.php;include/init.inc.php {Chris}
+2004-01-29 [A] Added admin option "show views under thumbnail" {GauGau}
+2004-01-09 [A] Added RSS Feed Add On {Tarique}
+2004-01-07 [A] Added a faster EXIF Reader class {Tarique}
+2004-01-07 [A] Added a new crop and rotate editor {Tarique}
+2004-01-03 [A] Added admin set able option to put gallery offline {Tarique}
+2003-11-22 [M] Moved debug_output from themes to functions.inc.php with easy copy-and-paste option {GauGau}
+2003-11-22 [C] Changed yes/no dropdown in config to radio buttons (less clicks!) {GauGau}
+2003-11-19 [A] Added language and theme selection {GauGau}
+2003-11-17 [A] Added picture ownername display as an admin settable option {Tarique}
+2003-11-10 [C] Cosmetical fixes to util.php {GauGau}
+2003-11-09 [A] Added forgot my password link in login form {GauGau}
+2003-11-08 [A] Added Breadcrumb for meta-albums {Tarique}
+2003-11-02 [A] Added options to searchnew.php (batch- add): album selection mandatory; no display of dot-folders, userpics nor manipulation folders; buttons "select all/unselect all" {GauGau}
+2003-11-02 [A] Added focus on search box and login box {GauGau}
+2003-11-02 [A] Added admin notification for upload approval {GauGau}
+2003-10-27 [B] Removed buggy no right- click option {GauGau}
+2003-10-22 [A] Added portuguese language file for 1.2.0 {GauGau}
+2003-10-21 [A] Added estonian and japanese language file for 1.2.0 {GauGau}
+2003-10-21 [A] Updated croatian, french, german, italian  {GauGau}
+2003-10-19 [A] Added notification on user registration by email (admin option) {GauGau}
+2003-10-19 [A] Added option to disable comment flood protection {GauGau}
+2003-10-16 [A] Added Thumbnails for categories, Edit Single Picture, EXIF and IPTC data shown, some bug fixes and new bugs {Tarique}
+2003-10-16 [A] Added latvian language file for 1.2.0 {GauGau}
+2003-10-14 [A] Added croatian language file for 1.2.0 {GauGau}
+2003-10-14 [A] Added chinese_gb language file for 1.2.0 {GauGau}
+2003-10-12 [A] Added slovenian language file for 1.2.0 {GauGau}
+2003-10-10 [A] Added french translation for 1.2.0 {GauGau}
+2003-10-10 [A] Added korean language file for 1.2.0 {GauGau}
+2003-10-09 [A] Added romanian language file {GauGau}
+2003-10-09 [B] Fixed rtl-bug (filesize/unit) {GauGau}
+2003-10-08 [A] Added 1.2.0 indonesian (done by sengsara), updated danish (Laugesen) {GauGau}
+2003-10-08 [B] Fixed corrupted language files (mustn't be in unicode, but ansi)  {GauGau}
+2003-10-07 [A] Added 1.2.0 translations for swedish and german {GauGau}
+2003-10-07 [A] Added 1.2.0 changes in english language to bosnian.php, brazilian.php, estonian.php, latvian.php, portuguese.php, russian.php, slovenian.php for 1.2.0 compliance {GauGau}
+2003-10-06 [A] Added 1.2.0 translations for arabic, hebrew and turkish {GauGau}
+2003-10-06 [M] Moved all docs into the docs folder {GauGau}
+2003-10-05 [B] Fixed charset in pop-up bug (http://coppermine.sourceforge.net/board/viewtopic.php?t=291) {GauGau}
+2003-10-05 [B] Fixed pop-up scrollbar bug (http://coppermine.sourceforge.net/board/viewtopic.php?t=290) {GauGau}
+2003-10-05 [A] Added 1.2.0 translations for dutch, finnish, norwegian, spanish {GauGau}
+2003-10-03 [D] Added offline- manual in /docs- folder (manual.pdf) {GauGau}
+2003-10-02 [A] Added user banning functionality {GauGau}
+2003-10-01 [C] fixed improper html tags in hardwired theme {GauGau}
+2003-10-01 [A] added version info to html output (above </body>) for easier support {GauGau}
+2003-09-30 [A] updated dutch.php and greek.php (minor bugfixes by original translators) {GauGau}
+2003-09-30 [A] Added 'no right- click' admin option (I know this is childish but has been requested often), db update necessary (see update.sql) {GauGau}
+2003-09-30 [A] IP Logging now on picture uploads {Jack}
+2003-09-27 [C] Moved hardcoded text from util.php to language file {GauGau}
+2003-09-25 [B] Fixed Batch Update to force selection of an album & identify the category of an album {Jack}
+2003-09-25 [A] Added Email notification on Comment {Tarique}
+2003-09-24 [A] Added Complete Queries to the debug output {Tarique}
+2003-09-24 [A] Added Comment IP viewing {Jack}
+2003-09-19 [A] Added AnyContent Block {Tarique}
+2003-09-18 [A] Added IP logging {Jack}
+2003-09-18 [A] Added Fav Pics Option {Tarique}
+2003-09-02 [A] Added Edit Name in comments {Tarique}
+2003-09-01 [B] Fixed the bug in search.inc.php {Tarique}
+2003-08-23 [A] Added Breadcrumb navigation to include album names {Tarique}
+2003-08-23 [A] Added Last Updated Album Block {Tarique}
+2003-08-22 [A] Added Title option to sort in albums {Tarique}
+2003-08-22 [A] Separated the breadcrumb block so that it can be placed independently of category {Tarique}
+2003-08-22 [A] Added option to choose max height or width for thumbnails - will help in creating nicer looking thumbnail rows and cols {Tarique}
+2003-08-22 [A] Added option to display a clickable filmstrip of thumbnails below the image display {Tarique}
+2003-08-22 [A] Added option to show first level albums of a category instead of just statistics of the category {Tarique}
+2003-08-22 [A] Added Absolute URL of a picture in the pic info this helps in giving out links to other people and the same picture will display regardless of the sort setting of the individual {Tarique}
+2003-08-22 [A] Added option of turning on OR off the showing of "Private" Icon to unlogged / unprivileged user {Tarique}

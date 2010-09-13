@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Transfert à l'aide de Publisher 2002- Coppermine Photo Gallery - Documentation &amp; manuel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="fr" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Si vous (ou vos utilisateurs) avez Windows XP ou Vista, vous pouvez utiliser XP Publisher." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+  $Date$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation et manuel</h1>
+<div id="toc">
+<a href="toc.htm">Table des matières</a>
+</div>
+
+<a name="xp"></a><h1>Utilisation de l’assistant de publication web, Windows XP Publisher avec Coppermine<a href="#xp" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>Si vous utilisez Windows XP, vous pouvez utiliser son assistant intégré de publication  Web pour télécharger vos photos dans votre galerie.</p>
+<p>Une fois que vous avez correctement installé le script sur votre serveur, appelez le fichier xp_publish.php depuis votre navigateur web (http://votre_site.fr/votre_dossier_coppermine/xp_publish.php).</p>
+<p>Le script affiche des informations sur la manière de faire l'installation du côté client et comment utiliser l'assistant. Fondamentalement, vous aurez besoin de télécharger un petit fichier créé par le script, qui doit être chargé dans votre base de registre Windows.</p>
+<p>Si vous souhaitez permettre à vos utilisateurs d'utiliser l’assistant de publication Web de Windows XP, il est conseillé de le lancer en affichant un lien vers le fichier quelque part sur votre page.</p>
+
+<a name="xp_publish_requirements"></a><h2>Requis<a href="#xp_publish_requirements" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<ul>
+	<li>XP Publisher est un produit Microsoft. Il ne fonctionne que sur Windows XP / Vista. Il ne fonctionnera que si le client utilise le navigateur de Microsoft &quot;Internet Explorer&quot;. Coppermine fournit simplement un fichier pour utiliser l'interface d’utilisateur de XP Publisher. Il n'y a rien qui peut être fait pour contourner cela. Si vous n'êtes pas satisfait de la façon dont fonctionne XP Publisher ou si vous voulez des fonctionnalités supplémentaires ou différentes, vous devrez vous adressez à Microsoft, et non aux  développeurs de Coppermine.</li>
+	<li>Comme indiqué plus haut, le fichier de registre a besoin de créer une clé dans la base de registre de l'utilisateur. Il doit y avoir un nom pour cette clé. C'est pourquoi vous devez avoir spécifié <a href="configuration.htm#admin_general_name">un nom à votre galerie</a> et une <a href="configuration.htm#admin_general_description">description de la galerie</a> dans la configuration de Coppermine.</li>
+</ul>
+
+<a name="xp_publish_setup"></a><h2>Installation<a href="#xp_publish_setup" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+Avant de pouvoir utiliser l’assistant de publication Web XP Publisher, il faut connaître l'adresse de votre galerie.
+<ul>
+<li>Ouvrez votre navigateur et tapez la commande suivante dans la barre d'adresse, remplacez "votre_site.fr" et "votre_dossier_coppermine" avec les informations de l’adresse de votre propre galerie : <tt class="code">http://votre_site.fr/votre_dossier_coppermine/xp_publish.php</tt></li>
+<li>Au "Téléchargement de fichier - Avertissement de sécurité", cliquez sur «Enregistrer» pour enregistrer le fichier  cpg_###.reg sur votre bureau. (# # # représente un horodatage à 10-chiffres.)</li>
+<li>L'explorateur de Windows s'ouvre</li>
+<li>Sélectionnez bureau dans la colonne de gauche</li>
+<li>Double-cliquez sur le nom du fichier que vous venez d'enregistrer</li>
+<li>Dans l’éditeur de registre, à la question "Etes-vous sûr ..." cliquez sur boîte de dialogue "Oui"</li>
+</ul>
+<a name="xp_publish_setup_end"></a>
+
+La procédure ci-dessus ne doit être effectuée qu'une seule fois par les utilisateurs qui souhaitent utiliser l’assistant de publication XP-Publisher.
+
+<a name="xp_publish_upload"></a><h2>Télécharger des photos<a href="#xp_publish_upload" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Le processus de transfert de photos est une suite de simple boîte de dialogue. La description du processus est plus longue que son exécution.</p>
+<ul>
+<li>Ouvrez l'explorateur de Windows et recherchez le répertoire contenant vos photos, sélectionnez en une ou plusieurs pour les télécharger.</li>
+<li>Si dans l'explorateur de Windows la colonne de gauche n’est pas intitulé "Gestion d’image", cliquez sur le «X» dans le coin supérieur droit du panneau pour le fermer et laisser voir le panneau de Gestion d'image.</li>
+<li>Sélectionnez "Publier xxx sur le web" de "fichier et dossier de tâches" sur le panneau de gauche. "Xxxx" peut vouloir dire "ce fichier, ces fichiers ou ce dossier" selon ce qui est mis en évidence sur le panneau à droite.</li>
+<li>Au message de bienvenue de l’assistant de publication Web , cliquez sur l'écran, "Suivant".</li>
+<li>Vous pouvez modifier votre choix si nécessaire dans la fenêtre montrant l’aperçu. Cliquez sur "Suivant" lorsque vous êtes prêt.</li>
+<li>Dans la fenêtre, mettre en évidence le nom de votre galerie et cliquez sur "suivant".</li>
+<li>Entrez votre nom d'utilisateur et votre mot de passe de Coppermine pour accéder à votre galerie et cliquez sur "Suivant".</li>
+<li>Dès la fenêtre de "Bienvenue votre identifiant", vous avez la possibilité de télécharger votre photo (s) dans l'un des albums existants ou à partir d'un nouvel album. Cliquez sur "Suivant" lorsque vous êtes prêt.</li>
+<li>Cliquez sur "Suivant" dans la fenêtre de confirmation pour télécharger</li>
+<li>Sélectionnez la taille des images pour les images téléchargées. Si vous n'êtes pas sûr du format d'image accepté, vérifiez auprès de votre administrateur de Galerie. Cliquez sur "Suivant" lorsque vous êtes prêt.</li>
+<li>Vous êtes a présent sur la dernière boite de dialogue et devez donner un choix pour l'ouverture de la galerie, lorsque le transfert est terminé.</li>
+<li>Cliquez sur "Terminer" terminer l’assistant de publication web XP Publisher et entrer dans la galerie pour vérifier le contenu du nouvel album.</li>
+<li>Afin d'éviter que les galeries ne puissent être <em>envahies</em> par les images téléchargées par le biais de l'assistant, seuls les <strong>administrateurs de galeries</strong> et <strong>les utilisateurs qui peuvent avoir leurs propres albums</strong> peuvent utiliser cette fonctionnalité.</li>
+<li>Une fois le téléchargement commencé, l'assistant ne peut pas afficher de message d'erreur renvoyé par le script, de sorte que vous ne pouvez savoir si le téléchargement a échoué ou réussi jusqu’au moment où vous vérifiez votre galerie.</li>
+<li>Si le téléchargement échoue, l'administrateur devrait autoriser &quot;Activer le mode débogage&quot; dans la configuration de Coppermine et essayer avec une seule image et vérifier les messages d'erreur dans le fichier du journal qui se trouve dans le répertoire racine de Coppermine sur le serveur.</li>
+ </ul>
+<a name="xp_publish_upload_end"></a>
+
+<a name="xp_publish_file_structure"></a><h2>Structure des fichiers<a href="#xp_publish__file_structure" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Beaucoup d’administrateurs de galerie préfèrent avoir un dossier physique de la  structure des fichiers au sein de leur dossier albums qui représente la structure logique catégorie/albums de la galerie. L’utilisation d’XP Publisher, ne peut conserver la structure des dossiers/fichiers: les fichiers téléchargés en utilisant l'assistant de publication XP Publisher vont aller dans un dossier albums qui suit une règle particulière de nommage: l'Assistant crée des dossiers nommés &quot;wpw-YYYYMMDD&quot; (par exemple &quot;wpw-20081026&quot;) et télécharge les fichiers dans ce dossier. Il n'est pas possible de contourner ou de modifier ce comportement, mais après tout l’homme n’a pas à le faire car : Coppermine garde une trace des fichiers dans sa base de données.</p>
+
+<a name="xp_publish_remove"></a><h2>Suppression/Désinstallation<a href="#xp_publish_remove" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Si vous souhaitez supprimer l’entrée de l’assistant de publication Web XP Publisher créer pour votre galerie (par exemple parce que vous avez déménagé vers un nouveau domaine), vous devez modifier le Registre manuellement. Faites attention lorsque vous le faite - jouer avec le registre sans savoir ce que vous faites peut endommager votre système d'exploitation.</p>
+<ul>
+  <li>Cliquez &quot;Démarrer&quot; - &quot;Exécuter...&quot;</li>
+  <li>Taper &quot;<tt class="code">regedit</tt>&quot; (sans les guillemets) et appuyez sur Entrée</li>
+  <li>Accédez à <tt class="code">HKEY_CURRENT_USER \ Software \ Microsoft \ Windows \ CurrentVersion \ Explorer \ PublishingWizard \ PublishingWizard \ Providers \</tt></li>
+  <li>Sélectionnez l'entrée sur le côté gauche de l'écran qui correspond à votre installation de Coppermine</li>
+  <li>Appuyez sur la touche &quot;supprimer&quot; de votre clavier</li>
+  <li>Cliquez sur &quot;Oui&quot; la boîte de dialogue de confirmation</li>
+  <li>Fermez l'éditeur de registre</li>
+</ul>
+
+
+<a name="xp_end"></a>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

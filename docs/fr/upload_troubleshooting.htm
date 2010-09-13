@@ -1,0 +1,629 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Dépannage du téléchargement - Coppermine Photo Gallery - Documentation &amp; Manuel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="fr" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Si vous rencontrez des problèmes avec le téléchargement, changez temporairement les réglages de Coppermine comme expliqué ici pour voir les messages d'erreurs plus détaillés. Cela s'applique à toutes les méthodes de téléchargement, pas seulement au téléchargement par HTTP." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation et Manuel</h1>
+<div id="toc">
+<a href="toc.htm">Table des Matières</a>
+</div>
+
+
+<a name="upload_trouble"></a><h1>Dépannage du téléchargement<a href="#upload_trouble" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>Si vous avez des problèmes de téléchargement, lisez cette page - entièrement! L'équipe de développement de Coppermine considère cette page comme la plus importante de toute la documentation, simplement parcequ'il peut y avoir plusieurs choses qui peuvent mal se passer lors du processus de téléchargement. Ces problèmes sont le plus souvent causés par de mauvais paramétrages du serveur.</p>
+<button type="button" class="button detail_expand_all" name="expandalltop" id="expandalltop" onclick="return false"><img src="../../images/tree/plus.gif" width="9" height="9" border="0" alt="" title="Expand All" /> Montrer tous les détails</button>
+<button type="button" class="button detail_collapse_all" name="collapsealltop" id="collapsealltop" style="display:none;" onclick="return false"><img src="../../images/tree/minus.gif" width="9" height="9" border="0" alt="" title="Collapse all" /> Cacher tous les détails</button>
+
+<a name="upload_trouble_permission"></a><h2>Droits<a href="#upload_trouble_permission" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p class="cpg_message_info"><strong>En premier lieu et avant tout:</strong> Vérifiez les paramètres des droits des répertoires <tt class="code">/albums</tt>, <tt class="code">/albums/userpics</tt>, et <tt class="code">/albums/edit</tt>. Sur les serveurs tournant sous  <abbr title="Unix, Linux and related operating systems">*nix</abbr>, le répertoire <tt class="code">/albums</tt> et tous ses sous-répertoires doivent être sur 777 ou 755 (en fonction de la configuration du serveur). Si vous ne savez pas ce que nous voulons dire par <em>777</em> ou <em>755</em>, vous devrez lire la <a href="install_permissions.htm#permissions">section concernant les droits</a> (si ça ne vous aide pas, faites une recherche Google sur <em>les droits des fichiers UNIX</em>). Windows a un système de droits similaire. Vous pouvez généralement paramétrer ces droits en utilisant un <em>client FTP</em> (Si vous ne savez pas ce qu'est un <em>client FTP</em>, faites une recherche sur Google pour <em>client FTP</em> ou jetez un oeil sur la liste des <a href="dev_tools.htm#dev_tools_ftp_client">outils recommandés</a>).</p>
+
+<p class="cpg_message_error">Pour ceux qui passent sur les déclarations écrites en rouge, nous allons nous répéter pour essayer d'attirer votre attention:<br />
+<span class="important"><strong>Oui, nous écrivons sur des choses qui peuvent facilement s'appliquer à vous</strong></span>
+</p>
+<p>Nous répettons  - vérifiez/appliquez les permissions aux répertoires <tt class="code">/albums</tt>, <tt class="code">/albums/userpics</tt>, et <tt class="code">/albums/edit</tt>.  Tous devraient être sur 777 ou 755 (en fonction des paramètres de votre serveur) ou de manière à donner à Coppermine les droits d'accès en écriture.</p>
+<p class="cpg_message_info">Oui, nous voulons que vous <strong>aapliquiez</strong> ces droits pour chaque répertoire, même si vous pensez que vous l'avez déjà fait. Oui nous le <strong>voulons</strong>. Non, juste <em>vérifier</em> les droits (ex. regarder ce que votre client FTP déclare au niveau des droits)  <strong>n'est pas</strong> suffisant. Comme nous l'avons déjà dit: paramétrez/appliquez les droits, ne faites pas juste une vérificatio.</p>
+
+<a name="upload_trouble_enable_settings"></a><h2>Activez les paramètres de dépannage<a href="#upload_trouble_enable_settings" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Si vous rencontrez des problèmes avec le processus de téléchargement de Coppermine, changez temporairement les paramètres de Coppermine comme expliqué plus bas pour avoir des <a href="#upload_error_messages">messages d'erreur</a> plus détaillés. Cela s'applique à <strong>toutes</strong> les methodes de téléchargement, pas uniquement aux <a href="uploading_http.htm#upload_http">téléchargements par HTTP</a>.</p>
+<span class="detail_head_collapsed">Détails</span>
+<div class="detail_body border1">
+	Même si vous avez des problèmes avec l'ajout d'images par lots (ou pour toute autre méthode de téléchargement), vous devez suivre les étapes détaillées ci-après et qui vérifient les téléchargements par HTTP, parceque le téléchargement par HTTP est la méthode de téléchargement la plus basique et qu'elle doit fonctionner dans toutes les circonstances.<br />
+	Si vous êtes sur le point de demander de l'aide à propos de problèmes de téléchargement sur le forum de Coppermine, il est impératif que vous ayez suivi scrupuleusement les étapes détaillées ci-dessous.
+</div>
+<p>Pour l edépannage de problèmes de téléchargement dans <abbr title="Coppermine Photo Gallery">CPG</abbr> 1.5, il vous est demandé d'activer le '<a href="configuration.htm#debug_mode">Mode de déboguage</a>' dans  <a href="configuration.htm">la page de configuration</a>. Le changement de ce paramètre annule le masquage des erreurs lors des téléchargements multiples. Cela vous permettra d'avoir des mesages d'erreur plus détaillés.</p>
+<ul>
+	<li>
+		<strong class="detail_head_collapsed">Identifiez vous en tant qu'administrateur</strong>
+		<div class="detail_body">Allez sur votre galerie Coppermine et identifiez vous en tant qu'administrateur</div>
+	</li>
+	<li>
+		<strong class="detail_head_collapsed">Paramétrez &quot;Méthode de téléchargement par défaut&quot; à &quot;Simple&quot;</strong>
+		<div class="detail_body">
+			<ul>
+				<li>Allez sur <a href="configuration.htm#admin">la page de configuration</a></li>
+				<li>Descendez jusqu'à la section &quot;Paramètre des Utilisateurs&quot; et développez là en cliquant dessus</li>
+				<li>Paramétrez <a href="configuration.htm#admin_upload_mechanism">Methode de téléchargement par défaut</a> à  &quot;<em>Simple - un fichier à la fois</em>&quot;</li>
+				<li>Descendez jusqu'au bas de la page</li>
+				<li>Sauvegardez les nouveaux réglages en  cliquant sur &quot;Sauvegardez la nouvelle configuration&quot;</li>
+			</ul>
+		</div>
+	</li>
+	<li>
+		<strong class="detail_head_collapsed">Activez le &quot;mode de déboguage&quot;</strong>
+		<div class="detail_body">
+			<ul>
+				<li>Allez à la <a href="configuration.htm#admin">page de configuration</a></li>
+				<li>Descendez à la section &quot;Paramètres de maintenance&quot; et développez là en cliquant dessus</li>
+				<li>Activez le mode de déboguage pour tout le monde en cliquant sur &quot;Oui: Tout le monde&quot; dans la ligne &quot;Activez le mode de déboguage&quot;</li>
+				<li>Laissez l'affichage des avertissements sur off - si la case à cocher &quot;Afficher les avertissements dans le mode de déboguage&quot; est cochée, décochez là (les avertissements ne sont là que vous les développeures - si vous n'avez pas idée de ce qu'ils signifient, cachez les de manière permanante)</li>
+				<li>Descendez jusqu'au bas de la page</li>
+				<li>Sauvegardez les nouveaux réglages en  cliquant sur &quot;Sauvegardez la nouvelle configuration&quot;</li>
+			</ul>
+		</div>
+	</li>
+	<li>
+		<strong class="detail_head_collapsed">Allez à la page de téléchargement en cliquant sur le lien &quot;télécharger un fichier&quot; dans le menu principal de Coppermine</strong>
+		<div class="detail_body">
+			La page de téléchargement par HTTP vous sera accessible, à vous en tant qu'administrateur, dans tous les cas. Ce n'est pas le cas pour les visiteurs non-administrateurs de votre galerie: l'affichage du lien dans le menu dépend des droits que vous leur avez assignés .
+		</div>
+	</li>
+	<li>
+		<strong class="detail_head_collapsed">Sur la page de téléchargement de fichiers, choisissez un album depuis la liste déroulante "Album"</strong>
+		<div class="detail_body">
+			Si vous n'avez pas d'album séléctionnables dans la liste, vous n'avez pas encore créer d'albums. Vous devez comprendre que vous devez avoir au moins un album ou vous pourrez placer vos images. Allez au <a href="albums.htm#albmgr">gestionnaires d'albums</a> et créez au moins un album, puis essayez à nouveau de télécharger.
+		</div>
+	</li>
+	<li>
+		<strong class="detail_head_collapsed">Cliquez sur le bouton "Parcourir..." et cherchez une petite images, connue sans problèmes et au format jpg sur votre disque dur.</strong>
+		<div class="detail_body">
+			Ne croyez pas que <em>n'importe quelle</em> image ira - le terme "sans problèmes" signifie dans ce cas une image qui a déjà été traitée par Coppermine, afin d'être sur que Coppermine peut l'utiliser - celà peut être réalisé facilement en téléchargeant une image de la démo de Coppermine depuis la page initiale de Coppermine.
+		</div>
+	</li>
+	<li>
+		<strong class="detail_head_collapsed">Validez le formulaire en cliquant sur le bouton "Télécharger le fichier"</strong>
+		<div class="detail_body">
+			En validant le formulaire, vous lancez le processus de téléchargement - tout ce que vous avez fait avant n'était qu'une préparation.
+		</div>
+	</li>
+</ul>
+<p>Vous devez essayer d'utiliser le téléchargement par HTTP, même si vous avez des problèmes avec une autre méthode. Vous aurez un  <a href="#upload_error_messages">message d'erreur</a> plus détaillé, si quelque chose se passe mal et vous indiquera exactement ce qui ne fonctionne pas avec votre téléchargement. Si le message d'erreur ne signifie rien pour vous,  <a href="http://coppermine-gallery.net/forum/index.php?action=search" rel="external" class="external">cherchez sur le forum d'aide </a> pour le message d'erreur que vous avez eu.</p>
+<p>Si vous n'avez pas de message d'erreur, vous avez probablement surchargé le serveur avec vos essais précédents. Merci de regarder <a href="upload_troubleshooting.htm#upload_trouble_server-sided_restrictions"> les limitations côté serveur</a> qui peuvent s'appliquer à vous.
+
+
+
+
+<a name="upload_support"></a><h2>Demander de l'aide pour des problèmes de téléchargement<a href="#upload_support" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+
+<p class="cpg_message_error">Lorsque vous demandez de l'aide sur le forum de Coppermine, postez un lien vers votre site et un <a href="users.htm#user_cp_new">compte utilisateur de test</a> (L'utilisateur de test ne doit pas avoir de droits d'administrateur!) avec des droits de téléchargement, et les réglages mentionnés plus haut en place - de cette manière, les suppoteurs pourront aussi voir les messages d'erreur. Ne postez <strong>pas</strong> la sortie de déboguage sans y avoir été invité. Si vous voulez avoir des résultats rapide, vous devrez désactiver l'approbation des téléchargements par l'administrateur pour le groupe d'utilisateur de l'utilisateur test, ainsi les supporteurs pourront dire instantanément ce qui ne va pas sans une double vérification.</p>
+<div class="cpg_message_warning">Lorsque des personnes ont des problèmes avec le téléchargement et décident de poster leurs questions sur le forum de Coppermine, il leur est souvent demander de lire cette section de dépannage des téléchargements. Beaucoup d'entre eux ne le font pas correctement, avec comme résultat des frustrations aussi boen du coté de l'utilisateur que du supporteur.<br />
+Pour être très clair: les étapes décrites ci-dessus sont absolument <strong>obligatoires</strong>, quelles que soient vos connaissances, quelle que soit la méthode de téléchargement qui vous pose problèmes. Ne pas faire <strong>exactement</strong> ce qui est demandé fera que vous n'obtiendrez pas d'aide. Oui celà s'applique aussi à vous. Nous vous l'assurons!</div>
+<p>Pas sur de savoir quoi faire maintenant ? Lisez la suite:</p>
+<a name="upload_support_step-by-step"></a><h3>Guide pas à pas pour une demande d'aide<a href="#upload_support_step-by-step" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Ce guide pas à pas est fait pour expliquer de manière précise et complète quels sont les paramètres que vous devez appliquer lorsque vous sollicitez un soutien sur le forum d'aide de Coppermine.</p>
+<p>Nous admettrons que vous avez appliqué les bons réglages au niveau des droits, donc nous allons reprendre de manière plus précise et compliquée que normalement nécéssaire sur la plupart des paramètres de serveur: les instructions ci-dessous sont prévues pour permettre le dépannage par les supporteurs, même si les autres utilisateurs de votre galerie ne sont pas autorisés à télécharger ou si vous avez interdit les nouvelles inscriptions. Si vous savez comment faire, vous pouvez sauter les étapes qui expliquent comment créer un nouveau groupe si tous les utiliseurs enregistrés sont autorisés à télécharger de toute façon. En fin de compte, l'important, ce qui compte, c'est que le supporteur puisse faire des téléchargements jusqu'à ce qu'il / elle puisse voir ce qui se passe réellement pendant le procesus de téléchargement.</p>
+<ul>
+	<li>
+		<a name="upload_support_admin_login"></a><h4 class="detail_head_collapsed">Identifiez vous en tant qu'administrateur<a href="#upload_support_admin_login" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<div class="detail_body">Allez dans votre galerie Coppermine et identifiez vous comme administrateur</div>
+	</li>
+	<li>
+		<a name="upload_support_create_uploader_group"></a><h4 class="detail_head_collapsed">Créez le groupe "téléchargeurs"<a href="#upload_support_create_uploader_group" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<div class="detail_body">
+			Les instructions suivante pour la création d'un groupe ne s'applique que si vous utilisez Coppermine en mode indépendant. Si vous avez bridgé votre galerie Coppermine, utilisez l'application avec laquelle vous êtes brigé pour créer le groupe "téléchargeurs".
+			<ul>
+				<li>Allez <a href="groups.htm#group_cp">dans le gestionnaire de groupes</a> en cliquant sur le lien correspondant du <a href="admin_menu.htm#admin_menu">menu administrateur</a></li>
+				<li>Descendez au bas de la page</li>
+				<li>Cliquez sur le bouton &quot;Créer un nouveau groupe&quot; </li>
+				<li>Une nouvelle ligne apparait au bas de la table du gestionnaire de groupe. Cliquez dans le champ nom et entrez un nom qui à du sens, par exemple , e.g. &quot;téléchargeurs&quot;</li>
+				<li>Descendez en bas de page</li>
+				<li>Validez le formulaire en cliquant sur le bouton &quot;Appliquer les changements&quot;</li>
+			</ul>
+		</div>
+	</li>
+	<li>
+		<a name="upload_support_assign_permissions_uploader_group"></a><h4 class="detail_head_collapsed">Donnez les droits de téléchargement au groupe "téléchargeurs"<a href="#upload_support_assign_permissions_uploader_group" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<div class="detail_body">
+			Les intructions suivantes sur la manière de donner les droits à un groupe s'appliquent aussi bien aux galeries bridgées qu'indépendantes.
+			<ul>
+				<li>Alles <a href="groups.htm#group_cp">dans el gestionnaire de groupes</a> en cliquant sur le lien correspondant du <a href="admin_menu.htm#admin_menu">menu administrateur</a></li>
+				<li>Pour le groupe "téléchargeursé que vous avez créer à l'étape précédente, réglez l'option &quot;Autorisé&quot; à &quot;Ouis&quot; dans la colonne &quot;Téléchargements dans les albums publics&quot;. Paramétrez l'option &quot;Approbation&quot; sur &quot;Non&quot; dans cette celulle.</li>
+				<li>Descendez en bas de page</li>
+				<li>Validez le formulaire en cliquant sur le bouton &quot;Appliquer les changements&quot;</li>
+			</ul>
+		</div>
+	</li>
+	<li>
+		<a name="upload_support_create_test_user"></a><h4 class="detail_head_collapsed">Créez un compte utilisateur de test non Administrateur<a href="#upload_support_create_test_user" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<div class="detail_body">
+			Les instructions suivante pour la création d'un utilisateur ne s'applique que si vous utilisez Coppermine en mode indépendant. Si vous avez bridgé votre galerie Coppermine, utilisez l'application avec laquelle vous êtes brigé pour créer le nouvel utilisateur.
+			<ul>
+				<li>Allez <a href="users.htm#user_cp">dans le gestionnaire d'utilisateurs</a> en cliquant sur le lien correspondant du <a href="admin_menu.htm#admin_menu">menu administrateur</a></li>
+				<li>Descendez en bas de page</li>
+				<li>Cliquez sur le bouton &quot;Créer un nouvel utilisateur&quot; </li>
+				<li>Sur la page suivante, entrez un nom d'utilisateur facile à retenir et à entrer - nous recommandons quelque chose de simple comme &quot;testeur&quot;, de préférence sans majuscules.</li>
+				<li>Donnez un mot de passe facile - ce peut être le même que le nom d'utilisateur.</li>
+				<li>Asssignez cet utilisateur au groupe "téléchargeurs" que vous avez créer avant - assurez vous que la valeur du champ de la liste déroulante des groupes est bien  &quot;téléchargeurs&quot; (ou n'importe quel nom que vous avez choisi pour ce groupe suplémentaire).</li>
+				<li>Descendez en bas de page et validez le formulaire.</li>
+			</ul>
+		</div>
+	</li>
+	<li>
+		<a name="upload_support_create_album"></a><h4 class="detail_head_collapsed">Créez un album dans lequel les fichiers téléchargés pourront être placés<a href="#upload_support_create_album" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<div class="detail_body">
+			Pour l'instant nous vaons créer un groupe spécial qui est autorisé à télécharger dans les albums publics, mais nous n'avons pas défini dans lequel ces téléchargements sont autorisés. Nous devons tout d'abbord créer cet album.
+			<ul>
+				<li>Allez <a href="albums.htm#albmgr">dans le gestionnaire d'albums</a> en cliquant sur le lien correspondant du <a href="admin_menu.htm#admin_menu">menu administrateur</a></li>
+				<li>Choisissez une catégorie dans laquelle cet album test ser acréer - choisissez la catégorie dans la liste déroulante du gestionnaire d'albums. Pour plus de facilité, il est recommandé de créer l'album à la racine de la galerie (sélectionnez &quot;* Pas de Catégorie *&quot; dans la liste déroulante).</li>
+				<li>Cliquez sur le bouton &quot;Nouvel album&quot; au bas de la page du gestionnaire d'albums</li>
+				<li>Un champ de saisie s'affiche. Entrez le nom du nouvel albums comme par exemple &quot;album test&quot; et vaidez le formulaire en cliquant sur le bouton O</li>
+			</ul>
+		</div>
+	</li>
+	<li>
+		<a name="upload_support_album_permissions"></a><h4 class="detail_head_collapsed">Autorisez le téléchargement dans l'album test<a href="#upload_support_album_permissions" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<div class="detail_body">
+			L'album dans lequel seront placés les téléchargements existe, mais pour l'isnatnt personne, à part l'administrateur, n'a le droit d'y télécharger. Autorisons le téléchargement dansr cet album.
+			<ul>
+				<li>Allez à l'index de la galerie ne cliquant sur le lien &quot;Albums&quot; du menu général de la galerie</li>
+				<li>Allez à la catégories dans laquelle vous avez créer l'abum test (si vous avez fait comme nous l'avons suggéré et créer l'album à la racine de la galerie, vous devriez être au bnn endroit, donc pas besoin de faire quoi que ce soit ici pour vous)</li>
+				<li>Cliquez sur le bouton &quot;Propriétés&quot; à côté de la vignette vide représentant l'album de test</li>
+				<li>dans la page <a href="albums.htm#album_prop">propriétés de l'album</a>, paramétrezt &quot;Les visiteurs peuvent télécharger des fichiers&quot; sur &quot;Oui&quot;</li>
+				<li>Si votre galerie à beaucoup de trafic et que vous ne voulez pas prévenir vos visiteurs qu'il y a un album test choisissez &quot;Membres du groupe 'téléchargeurs'&quot; dans la liste déroulante &quot;Les Visiteurs peuvent télécharger des fichiers&quot;</li>
+				<li>Allez en bas de page et validez le formulaire en cliquant sur le bouton &quot;Mettre à jour l'album&quot;</li>
+			</ul>
+		</div>
+	</li>
+	<li>
+		<a name="upload_support_simple_upload_method"></a><h4 class="detail_head_collapsed">Paramétrez &quot;Méthode de téléchargement par défaut&quot; sur &quot;Simple&quot;<a href="#upload_support_simple_upload_method" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<div class="detail_body">
+			<ul>
+				<li>Allez à la page de <a href="configuration.htm#admin">configuration</a></li>
+				<li>Descendez à la section &quot;Paramètres des utilisateurs&quot; et déployez la en cliquant dessus</li>
+				<li>Réglez <a href="configuration.htm#admin_upload_mechanism">Methode de téléchargement par défaut</a> sur  &quot;<em>Simple - un seul fichier à la fois</em>&quot;</li>
+				<li>Descendez en bas de page</li>
+				<li>Sauvegardez les nouveaux réglages en cliquant sur &quot;Sauvegarder la nouvelle configuration&quot;</li>
+			</ul>
+		</div>
+	</li>
+	<li>
+		<a name="upload_support_debug_mode"></a><h4 class="detail_head_collapsed">Activez le &quot;mode de déboguage&quot;<a href="#upload_support_debug_mode" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<div class="detail_body">
+			<ul>
+				<li>Allez à la page de <a href="configuration.htm#admin">configuration</a></li>
+				<li>Descendez à la section &quot;Paramètres de maintenance&quot; et déployez la en cliquant dessus</li>
+				<li>Activez le mode de déboguage pour tout le monde en cliquant sur &quot;Oui: Tout le monde&quot; dans la ligne &quot;Activez le mode de déboguage&quot;</li>
+				<li>Laissez l'affichage des avertissement placé sur off - si la case à cochér &quot;Afficher les averticements en mode de déboguage&quot; est cochée, décochéz là (les avertissements ne s'adressent qu'aux développeurs - si vous ne savez pas ce qu'ils veulent dire, ne les affichez jamais)</li>
+				<li>Descendez en bas de page</li>
+				<li>Sauvegardez les nouveaux réglages en cliquant sur &quot;Sauvegarder la nouvelle configuration&quot;</li>
+			</ul>
+		</div>
+	</li>
+	<li>
+		<a name="upload_support_test_for_yourself"></a><h4 class="detail_head_collapsed">Testez le téléchargement en utilisant le compte de l'utilisateur test<a href="#upload_support_test_for_yourself" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<div class="detail_body">
+			Vous pouriez être tenté d'aller directement demander de l'aide, mais attendez une minute: vous n'avez pas essayé par vous même si tout fonctionne correctement maintenant. Vous n'allez pas ouvrir un sujet de demande d'aide sur le forum juste pour vous entendre dire &quot;faites d'abbord vos devoirs&quot; (parce que c'est ce qui va vous arriver si vous ne faites pas ce qui est demandé ici). Voici ce que vous devez faire:
+			<ul>
+				<li>Déconnectez vous de Coppermine (ou utilisez un autre navigateur) si vous êtes connectés en tant qu'administrateur</li>
+				<li>Identifiez vous en utilisant le compte de l'utilisateur test que vous avez crére précédemment (compte non-administrateur). Si la connection echoue,vérifiez le détail de ce compte en étant identifié en tant qu'administrateur.</li>
+				<li><img src="images/simple_file_upload.png" width="400" height="178" border="0" alt="" title="Interface de téléchargement simple" align="right" style="padding-left:5px;" />Cliquez sur lien du menu &quot;Télécharger un fichier&quot;. Si vous n'avez pas ce line de téléchargement, vous avez mal paramétré les droits - vérifiez les étapes précédentes avec attention.</li>
+				<li>Sur la page de téléchargement, choisissez l'album test dans la liste déroulante &quot;Album&quot;. Si vous ne pouvez pas sélectionner l'album test, vous avez du faire une erreur lors du paramétrage des droits</li>
+				<li>Cliquez sur le bouton "Parcourir..." et cherchez une petite image au format jpg réputée bonne sur votre disque dur. Ne croyez pas que n'importe quelle image fera l'affaire: dans le doute téléchargez une image depuis la galerie de démonstration de Coppermine</li>
+				<li>Validez le formulaire en cliquant sur le bouton &quot;Télécharger un fichier&quot;</li>
+			</ul>
+			Dans un monde idéal, tout devrait marcher comme prévu - votre téléchargement devrait se passer sans problèmes et vous devriez voir l'image téléchargée dans une page Coppermine. Si c'est le cas, le téléchargement par HTTP fonctionne correctement. Si ce n'est pas le cas, vous devriez avoir un <a href="#upload_error_messages">message d'erreur</a> qui explique ce qui ne va pas. Si vous n'arrivez pas à comprendre ce que le message d'erreur veut dire, mais que vous avez pu faire toutes les étapes précédentes, y compris la dernière (la validation du formulaire), alors, allez y demandez de l'aide sur le forum de Coppermine. Vous serez aussi les bienvenus pour demander de l'aide si le téléchargement par HTTP focntionne correctement et que vous souhaitez de l'aide pour une autre méthode de téléchargement.
+		</div>
+	</li>
+	<li>
+		<a name="upload_support_post_support_request"></a><h4 class="detail_head_collapsed">Postez votre demande d'aide sur le forum de Coppermine<a href="#upload_support_post_support_request" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+		<div class="detail_body">
+			<ul>
+				<li>Allez sur le <a href="http://forum.coppermine-gallery.net/" rel="external" class="external">Forum d'aide de Coppermine</a></li>
+				<li>Créez un nouveau compte sur le forum si vous n'en avez pas déjà un et identifiez vous.</li>
+				<li>Assurez vous d'avoir bien lu les règles du forum avant de poster (il y a un lien vers les règles du forum dans le menu de celui ci)</li>
+				<li>Commencez un nouveau sujet dans le forum correspondant à votre version de coppermine. Comme vous venez de lire la documentation de cpg1.5.x, vous utilisez certainement celle-ci, vous devrez donc commencer votre nouveau sujet dans la section correspondant à cette version (ou sur le forum francophone si vous ne parlez pas ou mal l'anglais). Poster dans la section d'une autre version n'est pas une bonne idée, celà n'apportera que de l'iritation de la part des supporteurs et de vous même. Comme vous avez des problèmes avec le téléchargement, vous devriez poster dans la section qui s'y rapporte.</li>
+				<li>Dans votr emessage, asurrez vous de mettre un lien vers votre galerie. Si votre galerie à un contenu destiné aux adultes (le nu soft entre dans cette catégorie) n'oubliez pas de le signaler de manière claire avec votre lien</li>
+				<li>Postez les détails du compte de l'utilisateur test (nom d'utilisateur et mot de passe) que vous avez défini précédemment</li>
+				<li>C'est une bonne idée de montrer aux supporteurs que vous avez essayé par vous même avant de demander de l'aide - expliquez ce qui ne fonctionne pas correctement j'usqu'ou vous avez pu aller, quel message d'erreur vous avez eu etc...</li>
+			</ul>
+		</div>
+	</li>
+</ul>
+<a name="upload_support_step-by-step_end"></a>
+
+<a name="upload_support_example"></a><h3>Exemple de demande d'aide<a href="#upload_support_example" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<div class="cpg_example">
+	<p>Voici comment votre demande d'aide devrait se présenter (assurez vous de bien compléter les données en rouge avec vos données à vous):</p>
+	<div class="quote">J'ai un problème avec le téléchargement dans ma galerie Coppermine <span class="important">http://exemple.com/mon_repertoire_coppermine/</span><br />
+	Lors de l'utilisation du téléchargement par HTTP, avec les réglages recommandés pour le dépannage des téléchargements en place, j'ai le message d'erreur suivant<br />&nbsp;<br />
+	[code]<span class="important">Le texte de votre message d'erreur ici</span>[/code]<br />&nbsp;<br />
+	Voici les données de mon compte utilisateur test: <br />
+	&nbsp;&nbsp;&nbsp;&nbsp;Nom d'utilisateur: <span class="important">testeur</span><br />
+	&nbsp;&nbsp;&nbsp;&nbsp;Mot de passe: <span class="important">truc</span><br />&nbsp;<br />
+	J'ai utilisé l'image prise ici <span class="important">http://exemple.com/chemin_vers_l_image/file.jpg</span> comme exemple pour les tests.<br />
+	En faisant comme indiqué dans <span class="important">http://forum.coppermine-gallery.net/un_sujet_du_forum</span> ça ne fonctionne pas comme prévu: j'ai<br />
+	[code]<span class="important">Un autr emessage d'erreur</span>[/code]<br />
+	en essayant ça. Je ne sais pas quoi faire d'autre.<br />
+	Merci par avance pour vos suggestions</div>
+</div>
+<a name="upload_support_example_end"></a>
+<a name="upload_support_end"></a>
+
+
+<a name="upload_error_messages"></a><h2>Messages d'erreur<a href="#upload_error_messages" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra">
+  <tr>
+    <th align="left">Message d'erreur</th>
+    <th align="left">Cause possible</th>
+    <th align="left">Suggestion de correction</th>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="ErrorCantMovePic"></a><tt class="code">Impossible to move <em>somepic.jpg</em> to albums/userpics/<br />
+      Warning: move_uploaded_file(/tmp/<em>phpezCYKr</em>)<br />
+      [function.move-uploaded-file]: failed to create stream: Operation not permitted</tt><a href="#ErrorCantMovePic" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      Le répertoire temporaire de PHP est manquant ou n'a pas les droits nécessaires
+    </td>
+    <td valign="top">
+      Vous devrez contacter l'administrateur de votre hébergeur parce que vous ne pouvez généralement pas changer l'emplacement du répertoire temporaire de votre site vous même (c'est une partie de la configuration de PHP) .<br />
+      Si la <em>restriction <a href="http://www.php.net/manual/en/ini.php#ini.list" rel="external" class="phpnet">open_basedir</a></em> est effective sur votre site, alors le répertoire temporaire pour les fichiers téléchargés devrait être accessible.
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="ErrorImpossibleToMove"></a><tt class="code">Impossible to move <em>somepic.jpg</em> to albums/userpics/</tt><a href="#ErrorImpossibleToMove" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">Le script Coppermine n'a pas les droits de créer les vignettes ou les images intermédiaires dans répertoire spécifié du système de fichier du serveur</td>
+    <td valign="top">Appliquez les droits au répertoire album et à l'ensemble de son contenu comme expliqué dans la section <a href="install_permissions.htm#permissions">Paramètres des droits</a>. Ce message d'erreur est le plus fréquent, parceque beaucoup d'utilisateurs du script ont fait l'impasse sur la lecture de la section concernant les droits. En premier lieu, si vous avez ce message d'erreur, vous devriez lire cette partie de la documentation très attentivement.</td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="ErrorFailedToOpenDir"></a><tt class="code">Warning: opendir(./albums/edit): failed to open dir: No such file or directory</tt><a href="#ErrorFailedToOpenDir" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      <ul>
+        <li>Le répertoire 'edit'est manquant dans le répertoire album</li>
+        <li>Le répertoire 'edit' dans le répertoire album n'a pas les <a href="install_permissions.htm#permissions">droits</a> rwx</li>
+        <li>Mauvaise mise à jour depuis cpg1.3.x</li>
+      </ul>
+    </td>
+    <td valign="top">
+      <ul>
+        <li>Assurez vous d'avoir un dossier nommé 'edit' dans votre répertoire albums.</li>
+        <li>Assurez vous que le dossier 'edit' ait bien un CHMOD à 777/755.</li>
+        <li>Assurez vous d'avoir complêtement fais <a href="upgrading.htm#upgrade">la mise à jour</a> vers Coppermine 1.5.x</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="httpPostVars"></a><tt class="code">Warning: Undefined variable: HTTP_POST_VARS in include/init.inc.php on line 43</tt><a href="#httpPostVars" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      <ul>
+        <li>Version dépassée de PHP sur votre serveur</li>
+        <li>Mauvaise configuration de votre serveur</li>
+      </ul>
+    </td>
+    <td valign="top">
+      Vérifiez si <a href="install_faq.htm#VersionPHP">votre version de PHP</a> à bien les <a href="requirements.htm#what">minimum requis</a> pour Coppermine. Si votre version est  4.3.0 ou plus récente, cette erreur est probablement causée par une mauvaise configuration de votre serveur d'hébergement, et n'est pas un problème lié à Coppermine. Si vous n'avez pas accès à la configuration de votre serveur (c'est à dire si vous êtes hébergé), vous pouvez essayer cette assuce (à vos risques et périls):<br >
+      Ouvrez le fichier "init.inc.php" et cherchez<br />
+      <div class="quote">$PHP_SELF = isset($_SERVER['REDIRECT_URL']) ? $_SERVER['REDIRECT_URL'] : $_SERVER['SCRIPT_NAME'];</div>
+Remplacez par<br />
+      <div class="quote">$PHP_SELF = $_SERVER['PHP_SELF'];</div>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="ErrorNoAlbumExisting"></a><tt class="code">Sorry there is no album where you are allowed to upload files</tt><a href="#ErrorNoAlbumExisting" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      <ul>
+        <li>Vous (en tant qu'administrateur) n'avez pas encore créer d'album.</li>
+        <li>Vous (en tant qu'utilisateur non administrateur) n'avez pas les droits de téléchargement dans les albums publics</li>
+        <li>Vous (en tant qu'utilisateur non administrateur) n'avez pas créer au moins un album dans votre galerie personnelle</li>
+      </ul>
+    </td>
+    <td valign="top">
+      <ul>
+        <li>Si vous obtenez ce message en étant identifié comme administrateur de votre galerie, vous devez alors <a href="albums.htm#albmgr_create">créer au moins un album</a> ou les fichier peuvent être téléchargés</li>
+        <li>Si vous obtenez ce message en étant identifié comme utilisateur non administrateur, vous devez vous assurer de bien avoir compris le concept des droits qui régissent Coppermine: dans le <a href="groups.htm#group_cp">gestionnaire de groupes</a> l'administrateur détermine quels utilisateurs peuvent créer leur galerie personnelles (ex: créer des albums dans leur espace personnel) ou si ils sont autorisés de télécharger dans des albums publics crées par l'administrateur. Si l'utilisateur <strong>est</strong> autorisé à créer sa galerie personnelle et obtiens ce message, il doit créer tout d'abord au moins un album en cliquant sur &quot;Créer / Gérer mes albums&quot;. Si l'utilisateur est seulement autorisé à télécharger dans les albums publics (qui doivent être créer par l'administrateur en premier) et qu'il obtient ce message d'erreur, l'administrateur doit d'abord autoriser le téléchargement dans les albums publics dans au moins un de ceux ci, en utilisant la page de <a href="albums.htm#album_prop">propriété des albums</a>.</li>
+        <li>Si vous obtenez ce message alors que vous n'êtes pas du tout identifié (en tant que visiteur par exemple), vous devrez revoir le concept des droits de Coppermine: Si vous voulez autoriser les visiteurs à télécharger (ce qui  n'est pas recommandé à cause des abus potentiels), vous devez définir les autorisations de téléchargements dans le  <a href="groups.htm#group_cp">gestionnaire de groupes</a> (pour le groupe visiteurs/anonymes) et vous devrez aussi modifier la page de <a href="albums.htm#album_prop">propriétés des albums</a> d'au moins un des albums et autoriser les téléchargements pour les visiteurs de cet album.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="ErrorAllowedMemorySize"></a><tt class="code">Fatal error: Allowed memory size of <em>XXXXXXX</em> bytes exhausted at (null):0 (tried to allocate <em>XXXX</em> bytes) in /var/www/html/include/picmgmt.inc.php</tt><a href="#ErrorAllowedMemorySize" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      Cette erreur se produit en utilisant GD et en essayant de télécharger des images en haute résolution.  Ce n'est pas la taille du fichier qui entre en compte, mais le nombre de pixels qui détaermine la quantité de mémoire utilisée par GD. Ce n'est pas une <a href="errors.htm#errors_soft">petite erreur</a> générée par Coppermine, mais une <a href="errors.htm#errors_hard">grosse erreur</a> de PHP qui apparait au travers de Coppermine depuis PHP.
+    </td>
+    <td valign="top">
+      Il n'y a pas (en tout cas en théorie) de limites <em>dans Coppermine</em> en ce qui concerne le poids ou les dimensions des fichiers que le sript peut gérer. Il y a néanmoins une limite existante sur votre serveur: le redimmensionnement d'images (pour créer les images intermédiaires et /ou les vignettes) consomme de la mémoire et des ressources processeur. Pour éviter le crash du serveur, l'administrateur a restreint le volume de mémoire que le script est autorisé à utiliser. Le message d'erreur mentionné plus haut indique que les limites imposées par l'administrateur du serveur sont atteintes, c'est à dire que l'image que le scipt essaye de traiter consomme trop de mémoire.
+      <ul>
+        <li><strong>Alternative 1 (idéale):</strong><br />
+        Augmentez la limite de l'allocation de mémoire dans le php.ini comme expliqué dans <a href="upload_troubleshooting.htm#upload_trouble_memory_usage">Utilisation de la mémoire pendant le redimensionnement</a>. 
+        Si vous ne pouvez pas modifier le php.ini, vous devriez lire les alternatives 2 et 3.</li>
+         <li><strong>Alternative 2 (sensible):</strong><br />
+         Redimensionnez vos images avant de les télécharger si vous n'avez pas besoin d'images en haute résolution. Celava vous faire gagner de la bande passante en téléchargement et du temps.</li>
+         <li><strong>Alternative 3 (contourement):</strong><br />
+         Vous devrez télécharger un des nombreux progarmmes gratuits qui redimensionne les images. Puis redimensionnez les images à une résolution plus petite (comme 800 x 600) et sauvegardez les dans un autre dossier en gardant le même nom de fichier.<br />
+         Téléchargez les images redimensionnées dans Coppermine. Puis utilisez votre client FTP et remplacez les images avec celles de plus haute résolution. </li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="ErrorExecDisabled"></a><tt class="code">Exec() has been disabled</tt><a href="#ErrorExecDisabled" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      php.ini permets à l'administrateur du serveur de désactiver certaines focntions. Généralement c'est le cas si votre serveur utilise le safe_mode.
+    </td>
+    <td valign="top">
+      Si l'administrateur du serveur a désactivé exec() vous ne pourrez pas utiliser ImageMagik.<br />
+      Vous pouvez essayer de remplacer exec() par passthru() dans l'ensemble du code de Coppermine (non recommendé) si cette fonction n'a pas aussi été désactivée. Sinon, vous ne pourrez pas utiliser ImageMagik et devrez utiliser GD. Changez la <a href="configuration.htm#admin_picture_thumb_advanced_resize_method">Méthode de redimensionnement des images</a> dans la configuration.
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="ErrorNotAGdExtension"></a><tt class="code">Not a GD extension</tt><a href="#ErrorNotAGdExtension" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      Le(s) fichier(s) que vous essayez de télécharger ne peuvent pas être gérés pas GD
+    </td>
+    <td valign="top">
+      GD ne peut gérer que les fichiers jpeg, png et gif, alors qu'ImageMagick supporte en plus  bmp, psd et certains autre types de fichiers (moins communs). Toutefois, ces fichiers ne sont pas adaptés pour une utilisation sur l'Internet. Vous trouverez des détails dans la section <a href="configuration.htm#admin_picture_thumb_advanced_pic_extensions">type d'images autorisés</a> dans la page de la documention consacrée à la configuration.
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="imagemagick127"></a><tt class="code">The file '<em>albums/userpics/10001/somepic.jpg</em>' can't be inserted in the album. Error executing ImageMagick - Return value <strong>127</strong></tt><a href="#imagemagick127" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      Vous n'avez pas défini le bon <a href="configuration.htm#admin_picture_thumb_advanced_im_path">chemin pour ImageMagick</a>, ou ne disposez pas du tout d'ImageMagick.
+    </td>
+    <td valign="top">
+      Si vous êtes sur d'avoir ImageMagick sur votre serveur, regardez le <a href="configuration.htm#admin_picture_thumb_advanced_im_path">chemin pour ImageMagick</a>. Si ce chemin semble correct, assurez vous que le script Coppermine a les droits de lecture et d'execution de l'éxécutable convert dans le répertoire d'ImageMagic. Si vou sn'êtes pas sur, basculez la <a href="configuration.htm#admin_picture_thumb_advanced_resize_method">Méthode de redimenssionnent d'image</a> de &quot;ImageMagick&quot; à &quot;GD2&quot;, puis réessayez de télécharger.
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="no_gd_support"></a><tt class="code">PHP running on your server does not support the GD image library, check with your webhost if ImageMagick is installed.</tt><a href="#no_gd_support" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      Votre serveur ne supporte pas la librairie graphique GD.
+    </td>
+    <td valign="top">
+      Vérifiez de bien remplir toutes <a href="requirements.htm#what">les conditions minimales requises</a> pour faire tourner Coppermine. Si GD n'est pas disponibles sur votre serveur, vous devrez utiliser ImageMagick. Demandez à votre hébergeur si ImageMagick est disponible sur votre serveur.
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="no_file_uploaded"></a><a name="allow_file_uploads"></a>
+      <tt class="code">No file was uploaded ! If you have really selected a file to upload, check that the server allows file uploads...</tt><a href="#no_file_uploaded" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      Les téléchargements de fichiers sont désactivés dans le php.ini ou il y a un problème de droits avec le mecanisme de téléchargement de votre serveur.
+    </td>
+    <td valign="top">
+      Il peut y avoir plusieurs raisons pour ce message d'erreur. Le fichier que vous essayez de télécharger n'a pas &quot;atteint&quot; le dossier du serveur ou il était sensé aller. Vérifiez si il y a un problème avec le téléchargement HTTP sur votre serveur - cett efonction a peut être été déactivée ou mal configurée. Dans le <a href="faq.htm#VersionPHP">phpinfo()</a>, vérifez que "file_uploads" est sur ON, "upload_max_filesize" a une valeur du genre 2M et "upload_tmp_dir" est un répertoire valide! Assurez vous de bien vérifier une fois de plus les  <a href="install_permissions.htm#permissions">droits pour vos fichiers/répertoires</a>.<br />
+      Si ce n'est pas vous qui administrez le serveur, vous devrez demander de l'aide à votre hébergeur. Voici ce que vous devez vérifier:
+      <ul>
+	      <li>fichier &quot;<strong>trop gros</strong>&quot;<br />
+	      Si vous rencontrez ce message d'erreur pour la première fois, assurez vous que le fichier que vous essayez de télécharger n'est pas trop gros en terme de taille de fichier et de dimensions. Testez avec un fichier plus petit qui est réputé fonctionner. Vous pouvez utiliser sans problème une image téléchargée de la galerie de démonstration de Coppermine pour ce test.</li>
+	      <li>&quot;<strong>file_uploads</strong>&quot; activé<br />
+	      Allez à votre page phpinfo() (accessible depuis le <a href="admin_menu.htm#phpinfo">menu administrateur</a>), cherchez <tt class="code">file_uploads</tt> et assurez vous que la valeur est bien &quot;on&quot;. Si vous êtes sur un serveur mutualisé, seul l'administrateur peut modifier cette valeur.</li>
+	      <li>&quot;<strong>upload_tmp_dir</strong>&quot; doit être défini<br />
+	      Sur la page phpinfo, assurez vous que <tt class="code">upload_tmp_dir</tt> est défini. Si vous êtes sur un serveur mutualisé, seul votr ehébergeur peut le faire pour vous. Le script (c'est à dire l'utilisateur qui utilise le serveur) doit avoir les droits en écriture dans ce fichier.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="destination_not_writable"></a><tt class="code">Destination directory albums/userpics/XXXXX/ is not writable by the script</tt><a href="#destination_not_writable" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">Les droits du système de fichiers ne sont pas corrects</td>
+    <td valign="top">Vérifiez les <a href="install_permissions.htm#permissions">droits des fichiers/répertoires</a>. Si ça ne vous aide pas, demandez à votre hébergeur.</td>
+  </tr>
+</table>
+<a name="upload_error_messages_end"></a>
+
+<a name="upload_trouble_server-sided_restrictions"></a><h2>Restrictions côté serveur<a href="#upload_trouble_server-sided_restrictions" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Toutes les méthodes de téléchargement, mais plus particulièrement les téléchargements par HTTP sont limités par des restrictions se trouvant dans la configuration de PHP.</p>
+
+<a name="upload_trouble_server-sided_restrictions_php_ini"></a><h3>Le fichier de configuration de PHP  php.ini<a href="#upload_trouble_server-sided_restrictions_php_ini" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<div class="cpg_message_info">
+Comprenez bien que les paramètres dans le php.ini ne peuvent être modifiés que si vous êtes l'administrateur du serveur (si vous utilisez votre propre serveur).  Si vous êtes hébergés, vous devrez demander à votre hébergeur si il veut bien changer ces paramètres pour vous, ce qui revient en général à vous autoriser à utiliser plus de ressources sur le serveur. Généralement votre hébergeur n'acceptera  <strong>pas</strong> cela pour des raisons économiques évidentes: accepter que vous utilisez plus de ressources l'obligera à héberger moins de sites sur son serveur mutualisé.</div>
+
+<div class="cpg_message_error">Merci de ne pas poser de questions concernat les réglages supposés du serveur, ni comment les changer, sur le forum de Coppermine - comme expliqué ci-dessus: vous n'êtes généralement pas en mesure de les changer si vous êtes hébergés.<br />Si vous êtes auto-hébergé ( ce que nous ne pouvons pas recommander parceque faire tourner un serveur demande une attention constante pour le fonctionnement et la maintenance du serveur ainsi qu'une grande expérience et de bonnes connaissances), n'essayez pas de poser des questions idiotes comme &quot;Ou est ce que je eux trouver mon fichier php.ini ?&quot; - Si vous ne connaissez pas la réponse à cette question, vous entrez dans la catégories &quot;auto-hébergement non recommandéà cause du manque de connaissances&quot; et serez ignoréssur le forum de Coppermine.</div>
+
+<a name="upload_trouble_server-sided_restrictions_check"></a><h3>Les choses à vérifer<a href="#upload_trouble_server-sided_restrictions_check" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Si vous êtes hébergés, vous devrez consulter votre hébergeur à propos des paramètres suivants. Vous pouvez voir (mais pas modifier) ces paramètres sur votre page <a href="admin_menu.htm#phpinfo">phpinfo</a>.</p>
+<ol>
+  <li>
+      <a name="upload_trouble_server-sided_restrictions_check_max_input_time"></a><h4>max_input_time<a href="#upload_trouble_server-sided_restrictions_check_max_input_time" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+      60 secondes est la limite de temps par défaut pour le téléchargement de fichiers.<br />Cette limite de temps inclue le temps mis pour télécharger les fichiers, donc, si vous dépassez cette limite, le fichier ne sera même pas analysé, et le navigateur n'obtiendra pas de réponse. Vous pouvez contourner cette limite en essayant de télécharger des fichiers plus petits ou moins nombreux, ou vous pouvez essayer de télécharger sur une bande passante plu slarge. La meilleure solution, bien sur est d'augmenter la limite de temps à une valeur qui se rapproche de ce dont vous avez besoin.
+  </li>
+  <li>
+      <a name="upload_trouble_server-sided_restrictions_check_upload_max_filesize"></a><h4>upload_max_filesize<a href="#upload_trouble_server-sided_restrictions_check_upload_max_filesize" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+      2MB est la valeur par défaut de la limite pour chaque fichier.
+  </li>
+  <li>
+      <a name="upload_trouble_server-sided_restrictions_check_post_max_size"></a><h4>post_max_size<a href="#upload_trouble_server-sided_restrictions_check_post_max_size" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+      8MB est la limite oar défaut pout les requêtes postées.
+  </li>
+  <li>
+      <a name="upload_trouble_server-sided_restrictions_check_memory_limit"></a><h4>memory_limit<a href="#upload_trouble_server-sided_restrictions_check_memory_limit" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+      8MB est la taille par défaut. Lisez <a href="#upload_trouble_memory_usage">Utilisation de la mémoire pendant le redimensionnement</a> pour les instructions sur la manière de changer ce paramètre et de contourner les messages d'erreurs relatifs au fait d'avoir atteins la limite de mémoire.
+  </li>
+  <li>
+      <a name="upload_trouble_server-sided_restrictions_check_limitlequestlody"></a><h4>LimitRequestBody<a href="#upload_trouble_server-sided_restrictions_check_limitlequestlody" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+      512KB est la limite par défaut.(plutôt un problème sur les systèmes Redhat/Apache.  Trouvé dans /etc/http/conf.d)<br />En général, pour que les téléchargements fonctionnent correctement il faut que upload_max_filesize &lt; post_max_size &lt; memory_limit. Coppermine peut vous prévenir lorsqu'un fichier est plus grand que upload_max_filesize, mais il ne peut pas vous prévenir si la taille totale des fichiers excède la limite de postage ou de mémoire.
+  </li>
+  <li>
+      <a name="upload_trouble_server-sided_restrictions_check_file_uploads"></a><h4>file_uploads<a href="#upload_trouble_server-sided_restrictions_check_file_uploads" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+      Détermine si PHP autorise ou non les téléchargements. La valeur de ce paramètre doit être &quot;On&quot;.
+  </li>
+  <li>
+      <a name="upload_trouble_server-sided_restrictions_check_upload_tmp_dir"></a><h4>upload_tmp_dir<a href="#upload_trouble_server-sided_restrictions_check_upload_tmp_dir" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+      Détermine le répertoire temporaire dans lequel PHP stoque les fichiers téléchargés.<br />
+      Le problème le plus commun causé pas ce paramètre est une alerte open_basedir.  Dans ce cas, l'administrateur de votre serveur a restreint les fichiers utilisables par PHP à un répertoire précis. Si il ne crée pas de répertoire temporaire spécifique dans la restriction open_basedir, PHP va essayer d'utiliser le répertoire temporaire de l'OS, et il sera rejeté par la restriction open_basedir.
+  </li>
+</ol>
+
+
+<a name="upload_trouble_methods"></a><h3>Mécanismes/méthodes de téléchargement<a href="#upload_trouble_methods" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p><strong>Quelques notes à propos des différents types de mécanismes de téléchargement disponibles depuis  cpg1.3.x (ou plus récent):</strong></p>
+<p>Les téléchargements multiples par HTTP sont prévus pour gérer un petit nombre de fichiers.  Par conséquent, ils ne sont pas bien adaptés pour le téléchargement d'un grand nombre de fichiers, sauf si vous utilisez votre propre serveur web ou exercer un contrôle sur la configuration php.ini
+.</p>
+<p>Si vous cherchez à télécharger plus que 15 ou 20 fichiers à la fois, vous devrez préférer <a href="uploading_batch-add.htm#batch_add_pics">l'ajout par lots</a> ou l'utilitaire <a href="uploading_xp-publisher.htm#xp_publish_upload">XP Publisher</a>.  Ils ont chacuns leurs avantages et leurs inconvénients.</p>
+<p>Le processus d'ajout par lot est rapide, mais il crée une assez grosse charge sur le serveur, avec pour concéquence, d'éventuels timeouts qui termineront vos téléchargements prématurément.  XP Publisher, de l'autre côté, est sensiblement plus lent, mais limite la charge du serveur. Elle contourne également bon nombre des écueils causés par les restrictions énoncées dans la configuration php.ini en téléchargeant chaque fichier du lot en cours de téléchargement comme une requête individuelle.</p>
+<p>D'autres méthodes de téléchargement (comme  JUpload ou autres) peuvent être proposées par des contributions tièrces - Nous vous encouragons à y jetter un oeil, mais gardez en mémoire que les développeurs de Coppermine ne peuvent apporter qu'une aide limitée aux contributions tièrces.</p>
+<p>N'oubliez pas non plus qu'avant d'utiliser une méthode de téléchargement alternative,, vous devez vous assurer que la methode initiale de téléchargement par &quot;http&quot; fonctionne correctement -  si ce n'est pas le cas, vous devez corriger celà d'abord; celà n'a pas de sens d'essayer une méthode alternative si la méthode originelle ne fonctionne pas.</p>
+
+<a name="upload_trouble_memory_usage"></a><h3>Utilisation de la mémoire pendant le redimensionnement<a href="#upload_trouble_memory_usage" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Il n'y a (enprincipe) aucune limite dans Coppermine concernant la taille ou le poids des fichiers que le script peut gérer. Toutefois, il y a au moins une limite existante sur le serveur: le redimensionnement d'images (pour créer des images interédiaires et/ou les vignettes) utiliser de la mémoire et des ressources processeur.</p>
+<p>Si le processus de redimensionnement utilise trop de mémoire, vous aurez généralement un message d'erreur du type <a href="upload_troubleshooting.htm#ErrorAllowedMemorySize"><tt class="code">Fatal error: Allowed memory size of XXXXXXX bytes exhausted at (null):0 (tried to allocate XXXX bytes) in /var/www/html/include/picmgmt.inc.php</tt></a> ou similaire.</p>
+<p>Pour prévenir les crashs du serveur, l'administrateur du serveur à limité le volume de la mémoire que PHP est autorisé à utiliser. C'est fait en utilisant le paramètre <a href="#upload_trouble_server-sided_restrictions_check_memory_limit">memory_limit</a>.</p>
+<p>Vous pouvez être tenté de croire que l'utilisation de la mémoire est égale la taille utilisée par une image dans le système de fichiers, mais ce n'est pas le cas: le format commun de fichier JPEG est compressé, donc si le serveur charge un fichier JPEG en mémoire, il consomme plus de RAM que la taille du fichier.</p>
+<p class="cpg_message_success">Pour calculer le volume de mémoire utilisé par une image, multipliez simplement la largeur et la hauteur en pixels, puis multipliez le résultat par le nombre de couleurs de base (RGB -> 3, CMYK -> 4). Finalement divisez le résultat par 1 048 576 (<span title="parce qu'un mégabyte n'est pas exactement un million de bytes du fait de la nature merveilleuse de l'arithmétique binaire" class="explain">2<sup>20</sup></span>) pour avoir un résultat en  MB.</p>
+<p>Voici quelques résolutions d'images habituelles ey leur utilisation de mémoire avec GD (en RGB):</p>
+<table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra">
+    <tr>
+        <th>Largeur</th>
+        <th></th>
+        <th>Hauteur</th>
+        <th>Utilisation de mémoire</th>
+    </tr>
+    <tr>
+        <td style="text-align:right">800</td>
+        <td style="text-align:center">x</td>
+        <td style="text-align:right">600</td>
+        <td style="text-align:right">1.4 MB</td>
+    </tr>
+    <tr>
+        <td style="text-align:right">1024</td>
+        <td style="text-align:center">x</td>
+        <td style="text-align:right">768</td>
+        <td style="text-align:right">2.3 MB</td>
+    </tr>
+    <tr>
+        <td style="text-align:right">1280</td>
+        <td style="text-align:center">x</td>
+        <td style="text-align:right">800</td>
+        <td style="text-align:right">2.9 MB</td>
+    </tr>
+    <tr>
+        <td style="text-align:right">1280</td>
+        <td style="text-align:center">x</td>
+        <td style="text-align:right">1024</td>
+        <td style="text-align:right">3.8 MB</td>
+    </tr>
+    <tr>
+        <td style="text-align:right">1400</td>
+        <td style="text-align:center">x</td>
+        <td style="text-align:right">1050</td>
+        <td style="text-align:right">4.2 MB</td>
+    </tr>
+    <tr>
+        <td style="text-align:right">1600</td>
+        <td style="text-align:center">x</td>
+        <td style="text-align:right">1200</td>
+        <td style="text-align:right">5.5 MB</td>
+    </tr>
+    <tr>
+        <td style="text-align:right">1920</td>
+        <td style="text-align:center">x</td>
+        <td style="text-align:right">1400</td>
+        <td style="text-align:right">7.7 MB</td>
+    </tr>
+    <tr>
+        <td style="text-align:right">2048</td>
+        <td style="text-align:center">x</td>
+        <td style="text-align:right">1536</td>
+        <td style="text-align:right">9.0 MB</td>
+    </tr>
+    <tr>
+        <td style="text-align:right">2560</td>
+        <td style="text-align:center">x</td>
+        <td style="text-align:right">1600</td>
+        <td style="text-align:right">11.7 MB</td>
+    </tr>
+    <tr>
+        <td style="text-align:right">2800</td>
+        <td style="text-align:center">x</td>
+        <td style="text-align:right">2100</td>
+        <td style="text-align:right">16.8 MB</td>
+    </tr>
+    <tr>
+        <td style="text-align:right">3200</td>
+        <td style="text-align:center">x</td>
+        <td style="text-align:right">2400</td>
+        <td style="text-align:right">22.0 MB</td>
+    </tr>
+    <tr>
+        <td style="text-align:right">4096</td>
+        <td style="text-align:center">x</td>
+        <td style="text-align:right">3072</td>
+        <td style="text-align:right">36.0 MB</td>
+    </tr>
+    <tr>
+        <td style="text-align:right">6400</td>
+        <td style="text-align:center">x</td>
+        <td style="text-align:right">4800</td>
+        <td style="text-align:right">87.9 MB</td>
+    </tr>
+</table>
+<p>Rappelez-vous lorsque vous utilisez les chiffres ci-dessus que la quantité de mémoire utilisée par le reste de Coppermine doit aussi être prise en compte.</p>
+<p>Comme vous le voyez, la consomation de mémoire des images produites par les appareils photos numériques modernes peuvent facilement dépasser les possibilités de votre serveur, même en utilisant <a href="uploading_http.htm#upload_http_interface_html">le téléchargement simple</a> (ne parlons pas de la consomation de mémoire lorsque vous utilisez  <a href="uploading_batch-add.htm#batch_add_pics">l'ajout par lot</a>), il est donc recommandé de redimensionner vos images sur votre ordinateur avant de les télécharger: si le serveur ne peut simplement pas traiter les images téléchargées, il est difficile de blamer le script ( Coppermine) ou de demander de l'aide sur le forum de Coppermine: les développeurs de Coppermine ne peuvent pas trouver de remèdes pour la technologie utilisée sur votre serveur. Utilisez le serveur pour ce à quoi il a été destiné; réalisez les processus demandant de grosses ressources sur votre ordinateur (comme le redimensionnement d'images en haute résolution).</p>
+<p>Pour augmenter la limite de mémoire allouée dans le  php.ini, vous devez être l'administrateur du serveur. Donc, un fichier .htaccess ne changera pas ce paramètre, et il ne peut pas être changé en utilisant ini_set(). Ceci dit, la plupart des utilisateurs de Coppermine qui utilisent un serveur mutualisé ne sont pas en mesure de faire ces changements. Si vous êtes l'administrateur du serveur, voici comment augmenter la limite de mémoire:<br />
+Trouvez d'abord le bloc ci-dessous dans le fichier php.ini (si vous êtes l'administrateur du serveur):<br />
+<pre>;;;;;;;;;;;;;;;;;;;
+; Resource Limits ;
+;;;;;;;;;;;;;;;;;;;
+
+max_execution_time = 30     ; Maximum execution time of each script, in seconds
+max_input_time = 60        ; Maximum amount of time each script may spend parsing request data
+memory_limit = 8M      ; Maximum amount of memory a script may consume (8MB)</pre>
+
+<p>Maintenant augmentez la limite de mémoire en focntion de vos besoins. Une valeur entre 9 et 16 MB devrait convenir à la plupart des besoins.</p>
+<p></p>Si vous n'êtes pas en mesure de modifier le fichier php.ini vous même, vous pouvez toujours demander à l'adinistrateur de votr eserveur de le faire pour vous. Toutefois, la plupart des administrateurs de serveurs (en particulier sur les hénergements mutualisés), sont réticents à le faire, du fait que ces modifications s'appliqueront à tous les utilisateurs du serveur. Une limite de mémoire plus grande réduit le nombre de personnes pouvant être hébergées sur le serveur afin de maintenir la stabilité de celui-ci. Cela réduit aussi les profits etc...</p>
+
+<div class="cpg_message_error">Ne posez <strong>pas</strong> de questions sur la manière de configurer le serveur sur le forum de Coppermine; ce n'est pas dans les attributions du forum de Coppermine d'expliquer les paramétrages des serveurs. Généralement (si vous êtes hébergés sur un serveur mutualisé, ce qui est la cas de la garnde majorité des utilisateurs de Coppermine), vous ne pourrez de toute manière pas changer les paramètres de configuration du serveur. Seule la personne qui administre le serveur (l'administrateur du serveur) peut changer les paramètres de configuration du serveur.<br / >
+C'est la raison pour laquelle il vaut mieux demander de l'aide à  <strong>votre hébergeur</strong> si vous avez des problèmes avec les limitations en ressources ou avec toute question relative au paramétrage du serveur. Si vous êtes <a href="requirements.htm#what_minimum_self-hosting">auto-hébergés</a> (ce que l'équipe de développement de Coppermine de recommande pas), vous devrez chercher dans la documentation de votre serveur.</div>
+
+
+<a name="upload_trouble_end"></a>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

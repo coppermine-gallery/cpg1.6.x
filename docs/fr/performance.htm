@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Performances - Coppermine Photo Gallery - Documentation &amp; manuel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="fr" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Voici quelques conseils pour obtenir les meilleures performances de votre galerie Coppermine. Cela  couvre les modifications que vous pouvez faire à la fois dans la configuration de Coppermine et la configuration de votre serveur (si vous avez accès à celle-cii bien sûr)." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation et manuel</h1>
+<div id="toc">
+<a href="toc.htm">Table des matières</a>
+</div>
+
+<a name="perf_tips"></a><h1>Conseils sur les performances<a href="#perf_tips" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>Voici quelques conseils pour obtenir les meilleures performances de votre galerie Coppermine. Cela  couvre les modifications que vous pouvez faire à la fois dans la configuration de Coppermine et la configuration de votre serveur (si vous avez accès à celle-ci bien sûr).</p>
+
+<a name="perf_config"></a><h2>Paramètres de configuration<a href="#perf_config" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Bon nombre des options de configuration ont des implications sur les performances. Certaines fonctions peuvent provoquer des problèmes de surcharge lorsqu'elles sont utilisées sur de grandes galeries ou des galeries qui sont structurés d'une manière inhabituelle.
+Le conseil général est de désactiver toute fonctionnalité dont vous n'avez pas l'utilité actuellement, et de ne garder qu'un nombre d'options raisonnables.</p>
+
+
+<a name="perf_config_general"></a><h3>Géneral<a href="#perf_config_general" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Eléments augmentant généralement la charge du serveur</p>
+<ul>
+    <li>
+    	<a name="perf_config_general_number_of"></a><h4>Nombre de &lt;quelque chose&gt;<a href="#perf_config_general_number_of" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Maintenir le nombre de quoi que ce soit réglé à des valeurs raisonnables, les valeurs par défaut sont généralement parfaites pour la plupart des galeries.
+    	<div class="cpg_example">Beaucoup d'utilisateurs qui ont des problèmes avec les téléchargements pensent en  premier lieu que c'est une bonne idée de définir la taille maximale des fichiers à un nombre ridiculement grand, par exemple plusieurs terra-octets. C'est évidemment un non-sens total et se traduit généralement par tout le contraire de ce qu'ils voulaient.</div>
+    </li>
+    <li>
+    	<a name="perf_config_general_plugins"></a><h4><a href="configuration.htm#admin_general_enable-plugins">Activation des plugins</a><a href="#perf_config_general_plugins" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Si vous ne voulez pas utiliser de <a href="plugins.htm#plugin">plugins</a>, vous pouvez entièrement désactiver le système de plugin. N’ajoutez pas tous les plugins connus à votre galerie - il suffit d'ajouter ceux dont vous avez besoin. N’ajoutez pas non plus des plugins aveuglément - certains d'entre eux accomplissent des choses  similaires et interagissent donc souvent de manière indésirable. Vous pouvez désactiver les plugins individuellement dans la page de gestionnaire des plugins pour résoudre les problèmes de vitesse et de charge du serveur. Un plugin désactivé ne fait rien, sauf être mentionné dans la page de Gestionnaire de plugins.
+    </li>
+    <li>
+    	<a name="perf_config_general_language"></a><h4>Langue non anglaise<a href="#perf_config_general_language" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	L’affichage de votre galerie dans une <a href="languages.htm">langue</a> autre que l'anglais (Etats-Unis) peut avoir un petit impact au niveau des performances.
+    </li>
+    <li>
+    	<a name="perf_config_general_content_of_the_mainpage"></a><h4><a href="configuration.htm#admin_album_list_content">Le contenu de la page principale</a><a href="#perf_config_general_content_of_the_mainpage" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Paramétrez-la de manière simple de sorte que votre page d'index se charge rapidement. Evitez d'utiliser le bloc <em>random</em> (photos aléatoires) sur les grandes galeries. Le bloc "lastalb" (derniers albums mis à jour) peut devenir très lent sur les grosses galeries, en particulier si vous avez paramétré la vignette d'album sur "aléatoire" ou "dernier téléchargement" pour la plupart des albums.
+    </li>
+    <li>
+    	<a name="perf_config_general_linked_files"></a><h4><a href="configuration.htm#admin_album_linked_files_start">Afficher le nombre de fichiers liés</a><a href="#perf_config_general_linked_files" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Cela nécessite une requête supplémentaire à la base de données par album qui s'affiche sur la page d'index - désactivez cette fonction si elle ne vous est pas nécessaire.
+    </li>
+    <li>
+    <a name="perf_config_general_album_keywords"></a><h4><a href="configuration.htm#admin_allow_user_album_keyword">Autoriser les utilisateurs à assigner des mots-clés aux albums</a><a href="#perf_config_general_album_keywords" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    La fonctionnalité des <em>fichiers liés</em> ne convient pas aux très grandes galeries.
+    </li>
+    <li>
+    	<a name="perf_config_general_comments_below_thumb"></a><h4><a href="configuration.htm#admin_thumbnail_display_comments">Affichage du nombre de commentaires sous la vignette</a><a href="#perf_config_general_comments_below_thumb" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Cela nécessite une requête supplémentaire à la base de données par fichier affiché en regardant les albums - désactiver si non nécessaire.
+    </li>
+    <li>
+    	<a name=""></a><h4><a href="configuration.htm#admin_thumbnail_default_sortorder">Ordre de tri par défaut pour les fichiers</a><a href="#perf_config" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Évitez le trie par nom de fichier ou par titre, le tri par date ou par la position est plus rapide.
+    </li>
+    <li>
+    	<a name="perf_config_general_film_strip"></a><h4><a href="configuration.htm#admin_image_comment_filmstrip_toggle">Démarrage automatique des vidéos</a><a href="#perf_config_general_film_strip" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4> - Le démarrage des vidéos nécessite une requête supplémentaire à la base de données pour s’afficher - désactivez si vous n’en n’avez pas l’utilité.
+    </li>
+    <li>
+    	<a name="perf_config_general_album_private"></a><h4><a href="configuration.htm#admin_picture_thumb_advanced_private_toggle">Les albums peuvent être privés</a><a href="#perf_config_general_album_private" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Désactiver cette fonction offre la possibilité de sauter la vérification privé/visible, aidant à améliorer les performances.
+    </li>
+    <li>
+    	<a name="perf_config_general_purge_bans"></a><h4><a href="configuration.htm#admin_user_purge_expired_bans">Purge automatiquement les bannissements expirés </a><a href="#perf_config_general_purge_bans" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	L'activation de cette option permet de maintenir la table des bannissements plus petite et donc plus rapide.
+    </li>
+    <li>
+    	<a name="perf_config_general_index_stats"></a><h4><a href="configuration.htm#admin_logging_display_stats_on_index">Afficher les statistiques sur la page d'index </a><a href="#perf_config_general_index_stats" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	La désactivation de cette option permettra d'éviter les requêtes coûteuses en ressources pour l’affichage des statistiques sur la page d'index.
+    </li>
+    <li>
+    	<a name="perf_config_general_vote_stats"></a><h4><a href="configuration.htm#admin_logging_votedetails">Enregistrer le détail des statistiques des votes </a><a href="#perf_config_general_vote_stats" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	La désactivation de cette option aidera à garder une petite base de données.
+    </li>
+    <li>
+    <a name="perf_config_general_hit_stats"></a><h4><a href="configuration.htm#admin_logging_hitdetails">Enregistrer le détail des statistiques des Hits</a><a href="#perf_config_general_hit_stats" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4> 
+    La désactivation de cette option aidera à garder une petite base de données. Si vous activez cette fonction, votre base de données va augmenter considérablement si votre galerie est visitée par de nombreuses personnes. Plutôt que de permettre les statistiques des Hits vous devriez envisager de mettre en œuvre un outil de statistique complet, comme <a href="http://www.google.com/analytics/" rel="external" class="external">Google Analytics</a> qui peut être facilement intégrés dans votre galerie Coppermine.
+    </li>
+    <li>
+    	<a name="perf_config_general_count_file_views"></a><h4><a href="configuration.htm#admin_count_file_hits">Compter la visualisation des fichiers</a> / <a href="configuration.htm#admin_count_album_hits">Compter la visualisation des albums</a><a href="#perf_config_general_count_file_views" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	La désactivation signifiera, moins d’écritures dans les tables des photos et albums, ce qui aide le cache concernant les requêtes MySQL à être plus efficace.
+    </li>
+    <li>
+    	<a name="perf_config_general_debug_mode"></a><h4><a href="configuration.htm#debug_mode">Activer le mode débogage</a><a href="#perf_config_general_debug_mode" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Le mode de débogage, augmente les temps de chargement suite aux informations complémentaires, qu’il doit afficher. Sauf si vous êtes effectivement en train de débugger votre galerie, gardez cette option désactivée.
+    </li>
+    <li>
+    	<a name="perf_config_general_news"></a><h4><a href="configuration.htm#admin_general_coppermine_news">Affichez les News de coppermine-gallery.net</a><a href="#perf_config_general_news" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Cela provoque un léger retard d’affichage le temps que les nouvelles soient récupérées. Elles ne s'affichent que pour l'administrateur, afin que les visiteurs de votre site ne remarquent pas de différences. Il est recommandé de garder l’option activé, mais si vous êtes un fou de vitesse, désactivez là.
+    </li>
+    <li>
+    	<a name="perf_config_general_album_properties"></a><h4><a href="albums.htm#album_prop">Propriétés de l'album</a>: vignette de l'album<a href="#perf_config_general_album_properties" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Choisir &quot;Dernier téléchargement&quot; ou &quot;Image aléatoire&quot; pour une vignette d’album, ajoute des requêtes supplémentaires pour chaque album affiché sur une page. Choisissez une image spécifique pour éviter ces requêtes.
+    </li>
+</ul>
+
+<a name="perf_config_spikes"></a><h3>Dopage<a href="#perf_config_spikes" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Les choses qui peuvent causer des pointes de charge sur des pages spécifiques. Si vous êtes sur un serveur partagé, vous devez éviter de créer des pointes de charge.</p>
+
+
+<ul>
+    <li>
+    	<a name="perf_config_spikes_zip_download"></a><h4>Autoriser le téléchargement ZIP de vos photos dans les favoris<a href="#perf_config_spikes_zip_download" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Créer des fichiers zip sur le serveur exige beaucoup de ressources.
+    </li>
+    <li>
+    	<a name="perf_config_spikes_clickable_keywords"></a><h4>Activer les mots cliquables lors d'une recherche<a href="#perf_config_spikes_clickable_keywords" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Le chargement de la liste des mots-clés cliquables peut prendre du temps si vous en avez beaucoup.
+    </li>
+    <li>
+    	<a name="perf_config_spikes_batch_add_process"></a><h4>Simultanéité des processus dans l'interface d'ajout par lot<a href="#perf_config_spikes_batch_add_process" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Laissez une petite valeur; 1 est la meilleure valeur pour une faible charge au moment de l'ajout par lot.
+    </li>
+    <li>
+    	<a name="perf_config_spikes_batch_add_thumb"></a><h4>Afficher les vignettes de prévisualisation dans l'interface d'ajout par lot<a href="#perf_config_spikes_batch_add_thumb" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Créer les vignettes de prévisualisation peut être consommateur intensif de ressources.
+    </li>
+    <li>
+    	<a name="perf_config_spikes_comments_per_page"></a><h4>Commentaires par page<a href="#perf_config_spikes_comments_per_page" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Si vous avez beaucoup de commentaires Assurez-vous que ce réglage est raisonnable. Avec 1000 commentaires affichés sur une page le chargement se fera lentement.
+    </li>
+    <li>
+    	<a name="perf_config_spikes_method_resize"></a><h4>Méthode pour le redimensionnement des images<a href="#perf_config_spikes_method_resize" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Si vous utilisez GD vous pouvez être bloqué par des limites des ressources de PHP. Si vous utilisez ImageMagick vous pouvez échapper à certaines restrictions de ressources car il fonctionne en dehors de PHP.
+    </li>
+    <li>
+    	<a name="perf_config_spikes_exif_read"></a><h4>Lire les données EXIF des fichiers JPEG<a href="#perf_config_spikes_exif_read" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Si cette option est activée l'image prend plus de temps pour être charger la première fois car elle doit accéder et lire les métadonnées EXIF.
+    </li>
+    <li>
+    	<a name="perf_config_spikes_watermarking"></a><h4>Filigrane<a href="#perf_config_spikes_watermarking" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Filigraner vos images sur le serveur va utiliser beaucoup de ressources. Si possible, ajoutez un filigrane à vos images avant de les télécharger
+    </li>
+    <li>
+    	<a name="perf_config_spikes_smtp"></a><h4>SMTP<a href="#perf_config_spikes_smtp" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Décharger votre serveur de l’envoi de votre courriel via un autre serveur ou avec l'aide de votre fournisseur d’accès internet. L'efficacité dépend du nombre de courriels liés à la fonction que vous utilisez.
+    </li>
+</ul>
+
+<a name="perf_server"></a><h2>Paramètres du serveur<a href="#perf_server" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Il existe certains paramètres qui ne sont pas directement liés à Coppermine, mais à votre serveur internet. Si vous êtes chez un hébergeur, il est généralement impossible de les modifier. La  modification de la configuration de votre serveur n’est pas prise en charge sur le forum d'aide de Coppermine. Toutefois, il est recommandé de se pencher sur ces paramètres ainsi - peut-être que votre hébergeur peut changer des choses pour vous.</p>
+
+<a name="perf_server_php"></a><h3>Paramètres PHP<a href="#perf_server_php" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Si vous avez le contrôle de votre serveur, vous pouvez améliorer les performances de Coppermine en ajustant la configuration de PHP.</p>
+
+
+<ul>
+    <li>
+    	<a name="perf_server_php_latest"></a><h4>Utilisez la dernière version<a href="#perf_server_php_latest" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Utiliser la dernière version stable pour avoir de meilleures performances - PHP 5.2 est beaucoup plus rapide que la version précédente.
+    </li>
+    <li>
+    	<a name="perf_server_php_accelerator"></a><h4>Utilisation d'un accélérateur de PHP<a href="#perf_server_php_accelerator" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Ceux-ci peuvent réduire les temps de chargement de la page de 40% ou plus. Note: Coppermine n’utilise pas toutes les données en cache, mais elles ont la capacité de bénéficier de la mise en cache de bytecode. Voir une liste sur <a href="http://fr.wikipedia.org/wiki/PHP:_Hypertext_Preprocessor#Acc.C3.A9l.C3.A9ration" rel="external" class="external">Wikipedia</a>.
+    </li>
+</ul>
+
+<a name="perf_server_mysql"></a><h3>Paramètres MySQL<a href="#perf_server_mysql" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Si vous avez le contrôle de votre serveur, vous pouvez améliorer les performances de Coppermine en ajustant la configuration de MySQL.</p>
+
+
+<ul>
+    <li>
+    	<a name="perf_server_mysql_latest"></a><h4>Utilisez la dernière version<a href="#perf_server_mysql_latest" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Utilisez la dernière version stable pour avoir des performances optimales.
+    </li>
+    <li>
+    	<a name="perf_server_mysql_query_cache"></a><h4>Activer le cache des requêtes<a href="#perf_server_mysql_query_cache" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	Cela permet à la fois réduire la charge du serveur et le temps de chargement des pages.
+    </li>
+    <li>
+    	<a name="perf_server_mysql_tune"></a><h4>Réglage de la configuration<a href="#perf_server_mysql_tune" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4> 
+    	Utiliser un outil comme <a href="http://blog.mysqltuner.com" rel="external" class="external">MySQLTuner</a> ou <a href="http://www.day32.com/MySQL/" rel="external" class="external">tuning-primer.sh</a> pour ajuster MySQL pour à vos habitudes de consommation.
+    </li>
+    <li>
+    	<a name="perf_server_mysql_optimize"></a><h4>OPTIMISER les tables de votre base de données<a href="#perf_server_mysql_optimize" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+    	L’exécution d'une OPTIMISATION DES TABLES de votre base de données en utilisant phpMyAdmin peut contribuer à améliorer la performance, surtout après une mise à jour majeure du contenu de votre galerie. Vous n'avez pas à être l'administrateur du serveur pour effectuer cette requête - il suffira de disposer de l'autorisation d'exécuter la requête (ce qui est le cas pour la plupart des utilisateurs, avec un hébergement mutualisé).
+    </li>
+</ul>
+
+<a name="perf_tools"></a><h2>Outils tiers <a href="#perf_tools" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Il y a un certain nombre d'outils tiers qui peuvent vous aider à améliorer les performances de votre galerie. S'il vous plaît, notez que le Groupe de Coppermine n'est lié à aucun de ces outils et nous n'apportons pas de support concernant ces outils.</p>
+
+<a name="perf_yslow"></a><h3>YSlow<a href="#perf_yslow" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>YSlow analyse les pages web et vous explique pourquoi elles sont lentes en se basant sur <a href="http://developer.yahoo.com/performance/index.html#rules" rel="external" class="external">des règles de haute performance de sites internet</a>. YSlow est un <a href="https://addons.mozilla.org/en-US/firefox/addon/5369" rel="external" class="external">plugin de Firefox</a> intégré au populaire outil de développement web <a href="http://www.getfirebug.com/" rel="external" class="external">Firebug</a>.</p>
+<p>En ajoutant un fichier <em>.htaccess</em> contenant le code suivant dans le répertoire de votre  galerie Coppermine, vous pouvez appliquer certaines de ces suggestions. Si vous n'utilisez pas Apache sur votre serveur web, vous aurez besoin de trouver les paramètres de configuration correspondant au serveur internet que vous avez. Si votre site ne fonctionne plus après avoir effectué ces changements, vous pouvez simplement renommer ou supprimer le fichier <i>.htaccess</i>.</p>
+
+
+<ul>
+    <li>
+        <a name="perf_yslow_header"></a><h4>3. Ajouter un en-tête expire le<a href="#perf_yslow_header" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+        <pre class="cpg_code code">
+        
+&lt;IfModule mod_expires.c&gt;
+    ExpiresActive on
+    ExpiresDefault &quot;access plus 2 weeks&quot;
+    ExpiresByType text/html &quot;access plus 1 seconds&quot;
+&lt;/IfModule&gt;</pre>
+    </li>
+    <li>
+        <a name="perf_yslow_gzip"></a><h4>4. Composants Gzip<a href="#perf_yslow_gzip" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+        <pre class="cpg_code code">
+        
+&lt;IfModule mod_deflate.c&gt;
+	AddOutputFilterByType DEFLATE application/x-javascript text/javascript text/css text/html text/xml
+&lt;/IfModule&gt;</pre>
+Coppermine ne fonctionne pas très bien pour la compression les fichiers avant de les envoyer au navigateur, car il ne s'est pas conçu dans cet esprit: il passe alternativement "dans et hors" de la sortie du tampon assez souvent, c'est pourquoi il ne fonctionnera probablement pas très bien avec la compression des fichiers avant de les envoyer au navigateur.
+    </li>    
+    <li>
+        <a name="perf_yslow_etag"></a><h4>13. Configurer les ETags<a href="#perf_yslow_etag" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+        <pre class="cpg_code code">
+        
+FileETag none</pre>
+    </li>      
+ </ul>
+
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

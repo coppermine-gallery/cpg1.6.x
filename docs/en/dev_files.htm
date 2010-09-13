@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Adding/renaming/removing files - Developer documentation - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="This part of the documentation is not meant for end users of Coppermine, but only for developers. There is no support for this section, it comes as-is." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<a name="dev_files"></a><h1>Adding/renaming/removing files<a href="#dev_files" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+
+<a name="dev_files_target_audience"></a><h2>Target audience<a href="#dev_files_target_audience" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>This part of the documentation is not meant for end users of Coppermine, but only for developers. There is no support for this section, it comes as-is.</p>
+
+<a name="dev_files_scope"></a><h2>Scope<a href="#dev_files_scope" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>This document is meant to explain what needs to be done by developers when adding / renaming / deleting files to/from the SVN during development stage.</p>
+
+<a name="dev_files_naming"></a><h2>Naming conventions<a href="#dev_files_naming" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Refer to the section &quot;<a href="dev_coding.htm#dev_coding_naming_conventions">Naming Conventions</a>&quot; when adding new files or renaming existing files.</p>
+
+<a name="dev_files_adding"></a><h2>Adding files<a href="#dev_files_adding" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>If a developer needs to add a new file to Coppermine's core, here's a list of things that needs to be done:</p>
+<ul>
+	<li>Create the file locally on your client (within the working copy of your Subversion checkout), respecting the <a href="dev_coding.htm#dev_coding_naming_conventions">naming conventions</a></li>
+	<li>If it is a non-binary (i.e. a text file), add the file header that will show that your file is part of the coppermine package. Currently, the file header for PHP files looks like this:<pre class="code">/*************************
+  Coppermine Photo Gallery
+  ************************
+  Copyright (c) 2003-2010 Coppermine Dev Team
+  v1.0 originally written by Gregory Demar
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License version 3
+  as published by the Free Software Foundation.
+  
+  ********************************************
+  Coppermine version: 1.5.9
+  &#36;HeadURL&#36;
+  &#36;Revision&#36;
+**********************************************/</pre>For other file types (e.g. sql files), different comment symbols might apply.</li>
+	<li>Add the file to the SVN, using the add and then the commit command of your favorite SVN client</li>
+	<li>In your SVN client, make sure that the file you have added has the needed SVN-properties. In RapidSVN (Linux-Client), do a right-click, properties and make sure that the name/value pair "svn:keywords"/"Author Date Id Revision HeadURL" exists. If it doesn't exist, create such an entry (using the "new" button on the properties dialog). This will make sure that the placeholder SVN variables within $-signs are populated properly. Take a look at existing files to see how this is done.</li>
+	<li>Add an entry for your newly-created file in <tt class="code">includes/cpg15x.files.xml</tt>. Details can be found in the section <a href="dev_versioncheck.htm#dev_versioncheck_xml">Versioncheck : XML structure</a></li>
+	<li>If applicable, come up with instructions about your file in the documentation</li>
+</ul>
+<div class="indent">
+    <a name="dev_files_adding_language"></a><h3>Language files<a href="#dev_files_adding_language" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    Adding (user-contributed) language files to the package is a process that needs to be performed in various steps. Those steps don't necessarilly have to be performed by one single developer, but it's advisable that only one dev takes care of a language file contribution to make sure that everything works flawlessly.
+    <div class="cpg_message_validation">
+        This section is <strong>not</strong> aimed at end users who want to add a language file to Coppermine. Instead, this section is <strong>only</strong> aimed at members of the Coppermine developer team and nobody else than the team members. Please do not ask questions on the Coppermine support board that deal with the contents of this page, as they simply don't apply to you.
+    </div>
+    <ul>
+        <li>In the channel where the language file has been contributed (usually in a posting on the forum where a user has attached the language file), reply and say that you as a dev team member are volunteering to add the file. This is meant to make sure that the effort is not taken twice.</li>
+        <li>Download  the file and unarchive it if needed into your testbed</li>
+        <li>Start your testbed and force the usage of the new language file by <a href="translation.htm#translation_step_by_step">adding the corresponding parameter to the browser's address bar</a>. The testbed should appear in the chosen language. For a basic test it is enough to verify that the language file doesn't break the testbed with an error message or unexpected output.</li>
+        <li>Edit the language file with a <a href="dev_tools.htm#dev_tools_editor">plain text editor</a> and verify that the header is intact as suggested above. Pay attention to the Coppermine version number that often doesn't match in user-contributed language files.</li>
+        <li>Populate the array <tt class="code">$lang_translation_info</tt> if the translator hasn't done so already. If the translator hasn't supplied a website that he wants to be refered to in the credits section of the docs, refer to the user's profile page of the forum instead.</li>
+        <li>Verify that the language file is in unicode (UTF-8 without a <abbr title="Byte Order Mark">BOM</abbr>) if you can.</li>
+        <li>Edit the <a href="credits.htm#translators">translator credits</a> of the documentation. In an ideal world you'd be editing <em>all</em> credits files for <em>all</em> documentation languages (<tt class="code">docs/language_name/credits.htm</tt> and add the credits for the translator there, but of course this get's increasingly harder with a growing number of documentation languages. Therefore, it's acceptable if you just edit the English section of the documentation (<tt class="code">docs/en/credits.htm</tt>) accordingly and leave the rest to the maintainers of the individual documentation localizations.</a></li>
+        <li>As with all files, you need to edit <tt class="code">includes/cpg15x.files.xml</tt> as well to reflect the newly added file there.</li>
+        <li>Next you need to figure out the status of completion of the language file contribution, i.e. if it's a full translation or only a partial translation. This is a very hard task that might not yield perfect results, so when in doubt, flag a translation as <em>partial translation</em>, which doesn't have an impact in a technical sense, but only serves as an information for end users.<br />
+        Factors to help you determine if a language file is a full translation or a partial translation can be:
+            <ul>
+                <li>The contributor may have posted in his forum posting wether his translation has been done partly or fully.</li>
+                <li>File size: file sizes for full translations can differ dramatically (as languages that have symbols for words or syllables are less space-consuming than languages that are composed of letters that represent sounds (phonemes to be exact). But with the English language file having roughly 180 KB it's pretty obvious that the language file for British English (<tt class="code">lang/english_gb.php</tt>) can not be a full translation, but only a partial translation (which is not very surprising, as it contains only the strings where British English differs from American English)</li>
+                <li>Cursory reading through the language file in your plain text editor should give you an idea if much of the original, underlying English text shines through, espcially when looking at a language file that is using another character set than latin.</li>
+            </ul>
+        </li>
+        <li>You will need to make sure that the translation table in Coppermine's database table structure get's updated as well both for fresh installs as well as for updates, that's why you need to
+            <ul>
+                <li>edit <tt class="code">sql/basic.sql</tt>, find the lines that start with <tt class="code">INSERT INTO CPG_languages</tt> and make sure that the language you're adding exists and that the level of completion of the language file matches the database record.
+                    <div class="cpg_example">If you're about to add a Klingon language file, search the content of <tt class="code">sql/basic.sql</tt> for the string <tt class="code">klingon</tt>. If it's there, i.e. if a line like <br /><textarea class="samplecode" style="width:100%">INSERT INTO CPG_languages (lang_id, english_name, native_name, flag, abbr, available, enabled, complete) VALUES ('klingon', 'Klingon','tlhIngan','klingon','', 'NO', 'NO', 'NO');</textarea>exists, just edit the fields that determine if the translation exists and wether it's complete (full translation) or not.</div>
+                    If a line that corresponds to the new language's English name doesn't exist, create it (keep the alphabetical structure of the <tt class="code">INSERT INTO CPG_languages</tt>-section in mind) accordingly.<br />
+                    For details, refer to the <a href="languages.htm#language_manager">language manager documentation</a>.
+                </li>
+                <li>edit <tt class="code">sql/update.sql</tt> with a plain text editor.
+                    <ul>
+                        <li>If the line in <tt class="code">sql/basic.sql</tt> that corresponds to the new language file didn't exist, you will need to add a line to <tt class="code">sql/update.sql</tt> that adds a new record.
+                        <div class="cpg_example">For the above mentioned Klingon language file, the line to create a new database record would be
+                        <textarea class="samplecode" style="width:100%">INSERT INTO CPG_languages (lang_id, english_name, native_name, flag, abbr, available, enabled, complete) VALUES ('klingon', 'Klingon','tlhIngan','klingon','', 'YES', 'NO', 'NO');</textarea>
+                        </div>
+                        </li>
+                        <li>If there has been a database record already for the language file and you just need to toggle it from unavailable to available, add a line that performs the update
+                        <div class="cpg_example">The example for Klingon in this case would be
+                        <textarea class="samplecode" style="width:100%">UPDATE CPG_languages SET `available` = 'YES' WHERE `lang_id`='klingon';</textarea>
+                        </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>Make sure that there is a flag image inside the folder <tt class="code">images/flags/</tt> that represents the new language. If there is no flag available, create one if you have the skills to do so and add that file. Alternatively, assign a blank image as a flag as a temporary workaround.</li>
+        <li>Add the new language file in your SVN client to the repository. You will need <a href="dev_subversion.htm#dev_subversion_write_access">write access to the subversion repository</a> in order to accomplish this.</li>
+        <li>Add a line to the change log that corresponds to the new language file.</li>
+        <li>Test the language file as thoroughly as you can on your local testbed: browse the gallery as guest, registered user and admin, try to upload a file, take a look at the main views (index, thumbnail page, intermediate image).</li>
+        <li>Commit your changes to the subversion repository using your subversion client.</li>
+        <li>Finally reply to the thread where the user has contributed the language file, posting that you have done what you did. It might help to add a reference to the web SVN and post the revision of your commit.</li>
+        <li>If you have admin privileges on the Coppermine forum, change the language file contributor's group membership; make him member of the translator group.</li>
+        <li>If you have access to the Coppermine internet site, edit the credits file there as well to reflect the newly added translator.</li>
+    </ul>
+</div>
+
+<a name="dev_files_renaming"></a><h2>Renaming files<a href="#dev_files_renaming" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>If a file name can not be kept (e.g. because of collision with naming conventions), it should be renamed instead of deleting the old one and creating a new one. The benfit of renaming is the fact that the version history will be kept in the Subversion repository.</p>
+<p>Once a file has been renamed in SVN, you will have to make additional edits:</p>
+<ul>
+	<li>Add an entry for your the new file name in <tt class="code">includes/cpg15x.files.xml</tt>. Details can be found in the section <a href="dev_versioncheck.htm#dev_versioncheck_xml">Versioncheck : XML structure</a></li>
+	<li>If the old file name already has gone into a prvious public release, you need to make sure that end users will not have an outdated, leftover copy of the file with the old name when performing an update. To accomplish this, you should edit <tt class="code">update.php</tt>, find the definition of the array <tt class="code">$delete_file_array</tt> and add the old file name to it.<br />
+	Additionally, you should edit <tt class="code">includes/cpg15x.files.xml</tt> and flag the old name with the status "remove".</li>
+	<li>If the old file name has <em>not</em> gone into a previous release, it's enough to edit <tt class="code">includes/cpg15x.files.xml</tt> and just remove the record that refers to the old file name.</li>
+	<li>You have to search through all files (both PHP files as well as HTML files inside the documentation) for references to the old file name and change the references as well.</li>
+</ul>
+
+<a name="dev_files_deleting"></a><h2>Deleting files<a href="#dev_files_deleting" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>In a nutshell: what has been said above about renaming files applies to deleting files as well: after having deleted the file in SVN, make sure to edit the XML file used for versioncheck and the array of files scheduled for deleting by the updater.</p>
+<p>Keep in mind though that before deleting core PHP files, you should discuss this with your fellow devs first on the dev-only board.</p>
+
+
+<br clear="all" />
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

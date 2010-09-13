@@ -1,0 +1,87 @@
+/*************************
+  Coppermine Photo Gallery
+  ************************
+  Copyright (c) 2003-2010 Coppermine Dev Team
+  v1.0 originally written by Gregory Demar
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License version 3
+  as published by the Free Software Foundation.
+
+  ********************************************
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+**********************************************/
+
+table.dBug_array,table.dBug_object,table.dBug_resource,table.dBug_resourceC,table.dBug_xml {
+        font-family:Verdana, Arial, Helvetica, sans-serif; color:#000000; font-size:9px;
+}
+
+.dBug_arrayHeader,
+.dBug_objectHeader,
+.dBug_resourceHeader,
+.dBug_resourceCHeader,
+.dBug_xmlHeader
+        { font-weight:bold; color:#FFFFFF; }
+
+/* array */
+body table.dBug_array {};
+table.dBug_array { background-color:#006600;}
+table.dBug_array td.dBug_arrayHeader { background-color:#009900;}
+table.dBug_array td.dBug_arrayKey { background-color:#CCFFCC;}
+table.dBug_array td { background-color:#FFFFFF;}
+
+/* object */
+table.dBug_object { background-color:#0000CC; }
+table.dBug_object td { background-color:#FFFFFF; }
+table.dBug_object td.dBug_objectHeader { background-color:#4444CC; }
+table.dBug_object td.dBug_objectKey { background-color:#CCDDFF; }
+
+/* resource */
+table.dBug_resourceC { background-color:#884488; }
+table.dBug_resourceC td { background-color:#FFFFFF; }
+table.dBug_resourceC td.dBug_resourceCHeader { background-color:#AA66AA; }
+table.dBug_resourceC td.dBug_resourceCKey { background-color:#FFDDFF; }
+
+/* resource */
+table.dBug_resource { background-color:#884488; }
+table.dBug_resource td { background-color:#FFFFFF; }
+table.dBug_resource td.dBug_resourceHeader { background-color:#AA66AA; }
+table.dBug_resource td.dBug_resourceKey { background-color:#FFDDFF; }
+
+/* xml */
+table.dBug_xml { background-color:#888888; }
+table.dBug_xml td { background-color:#FFFFFF; }
+table.dBug_xml td.dBug_xmlHeader { background-color:#AAAAAA; }
+table.dBug_xml td.dBug_xmlKey { background-color:#DDDDDD; }
+
+.vhp_head {
+    position:relative; 
+    z-index:3;
+    display:inline-block;
+    background-color:#CCFFCC;
+    color: grey;
+    font-size:x-small;
+    margin:1px;
+    cursor:pointer;
+    border:1px dashed green;
+}
+
+.vhp_cell {
+    position:absolute; 
+    top:18px;
+    left:0px;
+    z-index:4;
+    display:block;
+    border:2px solid green;
+    background-color:#FFFFFF;
+    margin:1px;
+}
+
+.vhp_wrap {
+    position:relative;
+    display:inline-block;
+}
+
+

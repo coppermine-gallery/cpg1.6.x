@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Install screen - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="The install screen" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+  $Date$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Inhoudstafel</a>
+</div>
+<div id="doc_en_only">No translation available</div>
+
+<a name="install_screen_start"></a><h1>The install screen<a href="#install_screen_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+The version cpg1.5.x differs very much from previous versions as much as the install method is concerned: all coppermine versions ever have come with an installer, but in cpg1.5.x the entire install process has been overhauled: the installer now by default has got a wizard-like interface, where you take one step at a time. You're bing led through the entire install process using the wizard, which is a great improvement for beginners. However, if you are a coppermine expert and know your way around the application, you can still use the old install screen: we have bundled it with the package under the name "classic installer". Please understand that it goes unsupported though: if you have issues during install and want support, use the new installer. Questions related to the old installer will not be answered on the coppermine support board. Of course the old installer doesn't have all features that the new installer has: it doesn't create a database for you etc.<br />
+With this being said, here are your options:
+<ul>
+    <li>The <a href="#install_screen_classic">classic install screen</a></li>
+    <li>The (new) <a href="#install_screen_wizard">install wizard</a> (recommended)</li>
+</ul> 
+
+<a name="install_screen_classic"></a><h2>The classic install screen<a href="#install_screen_classic" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<table border="0" cellpadding="5" cellspacing="0">
+ <tr>
+  <td style="border-top:1px solid #0E72A4;border-left:1px solid #0E72A4;border-right:1px solid #0E72A4;" colspan="2"><strong>Your admin account</strong>
+  </td>
+  <td></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;border-right:1px solid #0E72A4;" colspan="2"> <span class="small">This section requires information to create your administration account. Use only alphanumeric characters. Enter the data carefully !</span>
+  </td>
+  <td><span class="small">Input an original admin username and password here. Make sure to either memorize it well, or note it down somewhere safe; you won't be able to administer your site if you lose this data. </span><hr /></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;" width="20%"><strong>Username</strong>
+  </td>
+  <td style="border-right:1px solid #0E72A4;" width="20%">
+          <input type="text" style="width:100%" readonly="readonly" name="admin_username" value="" />
+  </td>
+  <td valign="top" width="60%"><span class="small">This will be the username for your everyday administration of coppermine - choose one that you can memorize and enter easily. This entry is case sensitive so give special consideration when creating a username. Pics that you upload later under this admin account will display the name shown in the uploader field. Comments you make will also display this name, as well, for others to see.</span><hr /></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;"><strong>Password</strong>
+  </td>
+  <td style="border-right:1px solid #0E72A4;">
+          <input type="text" style="width:100%" readonly="readonly" name="admin_password" value="" />
+  </td>
+  <td><span class="small">This will be your admin password to your coppermine install. Don't use trivial, overly abused passwords - if an attacker figures out your password, s/he will be able to hack your entire site! Use a combination of upper and lower case letters and numbers like "<tt class="code">j3e4N5n6yG</tt>". Remember, passwords like your admin username are case sensitive. Be careful when creating your password. Write it down and keep it safe, preferably somewhere away from your computer.</span><hr /></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;"><strong>Email address</strong>
+  </td>
+  <td style="border-right:1px solid #0E72A4;">
+          <input type="text" style="width:100%" readonly="readonly" name="admin_email" value="" />
+  </td>
+  <td><span class="small">This email address will be used to send emails from the webserver (e.g. the registration email, notifications and ecards). Make sure that it is a valid email address.</span><hr /></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;border-right:1px solid #0E72A4;" colspan="2"><strong>Your MySQL configuration</strong>
+  </td>
+  <td rowspan="2"><span class="small">MySQL is the type of database service that is available on most webservers. If you don't have it, you cannot install it. That is, unless the server is yours to administer. If you are webhosted, you are probably out of luck. It's mandatory to have a mySQL database to run Coppermine or any other PHP-based script. You can not fake the mySQL information during install, you must <strong>know</strong> it before hand, and enter the information as required. If you're not sure about the information required, ask your webhost.</span><hr /></td>
+ </tr>
+ <tr>
+<td style="border-left:1px solid #0E72A4;border-right:1px solid #0E72A4;" colspan="2"><span class="small">This section requires information on how to access your MySQL database. If you don't know how to fill them, check with your webhost support.</span>
+    </td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;"><strong>MySQL Host</strong><br /><span class="small">(localhost is usually OK)</span>
+  </td>
+  <td style="border-right:1px solid #0E72A4;" valign="top">
+          <input type="text" style="width:100%" readonly="readonly" name="dbserver" value="localhost" />
+  </td>
+  <td><span class="small"></span></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;"><strong>MySQL Database Name</strong>
+  </td>
+  <td style="border-right:1px solid #0E72A4;">
+          <input type="text" style="width:100%" readonly="readonly" name="dbname" value="" />
+  </td>
+  <td><span class="small">Coppermine will <strong>not</strong> create this database for you - it must exist prior to any attempt at installing coppermine. (If you do not have a pre-designated database, you will have to create one, provided you have the authority on your site to do so).</span><hr /></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;"><strong>MySQL Username</strong>
+  </td>
+  <td style="border-right:1px solid #0E72A4;">
+          <input type="text" style="width:100%" readonly="readonly" name="dbuser" value="" />
+  </td>
+  <td><span class="small">The mySQL user name does <strong>not</strong> have to be your coppermine admin username, nor is it the necessarily the same as your FTP username (although this <em>can</em> be the case for some users, but only by sheer coincidence or deliberate intention, to simplify site administration).<br />
+  The mySQL user needs the permissions CREATE TABLE, INSERT, ALTER, REPLACE, UPDATE, DELETE, SELECT.</span><hr /></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;"><strong>MySQL Password</strong>
+  </td>
+  <td style="border-right:1px solid #0E72A4;">
+          <input type="text" style="width:100%" readonly="readonly" name="dbpass" value="" />
+  </td>
+  <td><span class="small">The password that goes with your mySQL username.</span><hr /></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;"><strong>MySQL table prefix</strong><br /><span class="small">(the default value is OK; do not use dots!)</span>
+  </td>
+  <td style="border-right:1px solid #0E72A4;" valign="top">
+          <input type="text" style="width:100%" readonly="readonly" name="table_prefix" value="cpg140_" />
+  </td>
+  <td><span class="small">Coppermine's tables can co-exist in an existing database which has tables used by other applications. All coppermine tables will be using a different prefix from these, as specified here. You can even have several coppermine installs using one database - only the table prefixes have to differ in each case. Unless you know what you are doing, don't change the default value.</span><hr /></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;border-right:1px solid #0E72A4;" colspan="2"><strong>ImageMagick</strong>
+  </td>
+  <td rowspan="3" valign="top"><span class="small">You can not fake an ImageMagick path, you have to <em>know</em> it. If you're not sure, leave this field empty - Coppermine will then try to use GD by default. You can edit the path later as well in the <a href="#admin_picture_thumb_advanced">config screen</a>. You can only install ImageMagick or GD if the server is yours to administer - if you're webhosted, you probably can't. The user of the webserver, who wishes to use ImageMagick, will need read/write/execute permissions in the folder where ImageMagick's convert executable resides in.</span><hr /></td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;border-right:1px solid #0E72A4;" colspan="2" valign="top"><span class="small">Coppermine can use the <a href="http://www.imagemagick.org/" rel="external" class="external">ImageMagick</a> 'convert' program to create thumbnails. Quality of images produced by ImageMagick is superior to GD1 but equivalent to GD2.<br /><br />
+  If ImageMagick is installed on your system and you want to use it, you need to input the full path to the 'convert' program below. On Windows the path should look like 'c:/ImageMagick/' (use / not \ in the path) and should not contain any space, on Unix is it something like '/usr/bin/X11/'.</span>
+  </td>
+ </tr>
+ <tr>
+  <td style="border-left:1px solid #0E72A4;" valign="top"><strong>ImageMagick path</strong>
+  </td>
+  <td style="border-right:1px solid #0E72A4;" valign="top">
+          <input type="text" style="width:100%" readonly="readonly" name="impath" value="" />
+  </td>
+ </tr>
+ <tr>
+  <td colspan="2" align="center" style="border-left:1px solid #0E72A4;border-right:1px solid #0E72A4;border-bottom:1px solid #0E72A4;"><br />
+   <input type="submit" value="Let's Go !" /><br /><br />
+  </td>
+  <td><span class="small">After having entered all required data, click this button to submit the form</span></td>
+ </tr>
+</table>
+<hr />
+<a name="install_screen_classic_end"></a>
+
+<a name="install_screen_wizard"></a><h2>The install wizard<a href="#install_screen_wizard" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+Starting with cpg1.5.x coppermine comes with a wizard-like installer that will lead you through the entire install process. Below are the steps of the install wizard, with one chapter per wizard step.
+
+<div class="cpg_message_info">Do <strong>not</strong> use your browser's previous/next buttons if you want to go one page back or forward inside the installer. Instead: do only use the controls built-into the installer. You'll get unpredictable results if you don't heed this advice. To go back to previous steps of the installer, use the links at the top right of the installer where all steps that have been visited so far are highlighted and clickable.</div>
+
+<a name="install_screen_wizard_license"></a><h3>License agreement &amp; language selection<a href="#install_screen_wizard_license" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+On the initial screen of the wizard you will see the <a href="copyrights.htm">license</a> disclaimer that coppermine comes with. If you don't accept the license, you're not allowed to continue the install wizard. You can re-read the license at any later time (after having completed the installer) by going to this documentation and navigating to "Coppermine documentation" &rarr; "License &amp; Copyright".<br />
+Underneath the license you will find a selector that allows you to choose your prefered language during install. Usually your language will be auto-detected, so you won't have do do anything here - just click on the "Let's go" button at the very bottom of the initial screen to continue with the wizard.
+
+<a name="install_screen_wizard_checkversion"></a><h3>Installation file check<a href="#install_screen_wizard_checkversion" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+In the second stage of the installer a check is performed if the package you are about to install is actually the most recent one. This is meant to make sure that you are actually installing the most recent version of Coppermine, where all known bugs and issues have been fixed. Usually, if you have just downloaded Coppermine from the official Coppermine download at sourceforge.net you should be good. If the installer complains that you don't have the most recent version you should get the most recent version first before continuing.<br />
+Click on "next step" if all files are up to date or if you don't want to use the most recent release.
+
+<a name="install_screen_wizard_permission"></a><h3>Directory permissions check<a href="#install_screen_wizard_permission" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+Coppermine needs write permissions in some sub-folders as suggested in <a href="install_permissions.htm">Setting permissions</a>. The installer can't set those permissions for you, so you need to set them in advance. If you have done so successfully, all folders that the install wizard checks in this stage should be marked as "OK". If this is not the case for you (i.e. if the install wizard complains about missing permissions in one or more folders), just leave the browser window as it is and set permissions properly. After having done so, return to the install screen and refresh the page to see if the permission issue has been solved.<br />
+<div class="cpg_message_info">You won't be able to run the installer successfully if the permission haven't been set: the installer needs to write the configuration data you enter to a file. If the installer can't do that because of missing permissions, you will not be able to complete the install.</div>
+
+<a name="install_screen_wizard_imagelib_select"></a><h3>Image library selection<a href="#install_screen_wizard_imagelib_select" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+Coppermine needs an image library to be present on the server (see <a href="requirements.htm#what_minimum_image_library">minimum requirements &rarr; image library</a>). Currently, GD and ImageMagick are supported. In this stage of the install wizard, various checks are being performed to determine what image library you have available on your server. Usually, you can just continue to the next step if at least one library is found. If the installer complains that it couldn't find an image library, you will have to manually specify it. You can't make this up, nor will coppermine install an image library for you - it's part of the minimum requirements to have one. If you don't have one of the supported image libraries, you won't be able to use coppermine.
+
+<a name="install_screen_wizard_imagelib_test"></a><h3>Image library testing<a href="#install_screen_wizard_imagelib_test" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+In this stage, the image library you have selected in the previous step is being tested, i.e. the installer attempts to perform some operations like resizing or image creation that the coppermine script will perform as well once you have set it up. Usually, the test runs fine and you should see the generated images inside the left column. If that's the case for you, you can savely continue. If that is not the case, you might have to go one step back and choose another image library. Another possible reason for the test going wrong are missing <a href="install_permissions.htm">permissions</a>.
+
+<a name="install_screen_wizard_mysql_auth"></a><h3>MySQL user authentication<a href="#install_screen_wizard_mysql_auth" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+In this step you will be prompted for your mysql data. You can not fake the mySQL information during install, you must <strong>know</strong> it before hand, and enter the information as required. If you're not sure about the information required, ask your webhost. The coppermine support team will not be able to tell you what needs to be entered here - you will have to ask your webhost for that information.<br />
+You need to specify
+<ul>
+    <li>the mySQL <strong>hostname</strong><br />
+    <tt class="code">localhost</tt> is usually OK on most setups</li>
+    <li>the mySQL <strong>user name</strong></li>
+    <li>the mySQL <strong>password</strong></li>
+</ul>
+Underneath the input fields you will find a button to test the connection - if you click that button, a test is performed to see if the data you have entered is correct. If it is, you can continue to the next step. If it is not, you will need to review your mySQL authentification settings.
+
+<a name="install_screen_wizard_mysql_select"></a><h3>MySQL database selection<a href="#install_screen_wizard_mysql_select" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+Here you have to choose which database you want to use for Coppermine.<br />
+If your Mysql account has the needed privileges, you can create a new database from within the installer or you can use an existing database. If you don't like both options, you will have to create a database first outside the Coppermine installer, then return here, then select the new database from the dropdown box below.<br />
+You can also change the table prefix (don't use dots though), but keeping the default prefix is recommended.<br />To install more than one instance of coppermine into one database, use different table prefixes.<br />
+After having selected your preferences, click the "populate database" button.
+
+<a name="install_screen_wizard_mysql_structure"></a><h3>Creating database structure<a href="#install_screen_wizard_mysql_structure" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+The database structure screen is for information only - there is nothing you can do to interact here. The screen shows the progress of the database operations performed to create the database tables for your gallery. If everything works as expected, you should see a couple of rows with a message like <tt class="code">Creating table 'XXX' Status:... OK</tt>. If you don't get the status "OK" in each line, something went wrong and needs looking into. This is usually the case if the mysql user account you specified in the step &quot;<a href="#install_screen_wizard_mysql_auth">MySQL user authentication</a>&quot; doesn't have the needed privileges to create the tables. Another reason for failure can be lack of space in the database. In both cases you should contact your webhost for support.<br />
+If everything went OK you can proceed to the next step of the installer by clicking on the button at the bottom of the screen.
+ 
+<a name="install_screen_wizard_admin_user"></a><h3>Create coppermine administrator<a href="#install_screen_wizard_admin_user" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+In this step you need to create a user account with admin privileges for you. It's very important to enter the data carefully. Some facts to remember:
+<ul>
+    <li>Use only alphanumeric characters. No spaces, no special characters!</li>
+    <li>Use an email address that actually exists - in case you forget your password, you can request a new password to be sent to that address.</li>
+    <li>Memorize your user name and password - you better keep it in a safe place (the coppermine dev team recommend using a third party application like <a href="http://keepass.info/" rel="external" class="external">KeePass</a> to manage your passwords and store them savely).</li>
+    <li>It's recommended not to use generic account names like &quot;admin&quot; or &quot;administrator&quot;, as they can easily be guessed and thus make automated brute-force attacks more likely. The name of the admin account will shine through the coppermine user interface in various places for all actions you perform as admin (like uploading, commenting etc.).</li>
+    <li>Choose your password wisely - it mustn't be too short, nor should you choose a trivial password. The coppermine dev team recommends to come up with a sentence that means something for you and use the first letter from the words of the sentence. Ideally, the password should contain upper and lower case characters and numbers. As an example, take a look at the sentence &quot;<tt class="code">Whenever my neighbour's 5 dogs see me I have to run</tt>&quot; - it will become &quot;<tt class="code">Wmn5dsmIh2r</tt>&quot;</li>
+</ul>
+After having populated all fields as required, hit the button at the bottom.
+
+<a name="install_screen_wizard_completed"></a><h3>Installation completed<a href="#install_screen_wizard_completed" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+Once you see that final screen, you have made it - congrats. Click on the button at the bottom or any of the links that will send you to your new gallery's index page or the login screen where you can log in as admin to configure your gallery.<br />
+We recommend to continue reading the documentation section <a href="start.htm">Getting started</a> now. 
+
+<a name="install_screen_end"></a>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

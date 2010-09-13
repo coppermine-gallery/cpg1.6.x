@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Admin Menu - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Coppermine Photo Gallery project - Coppermine is an easily set-up, fast, feature-rich photo gallery script with mySQL database, user management, private galleries, automatic thumbnail creation, ecard feature and a template system for easy customization to match the rest of a site." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+  $Date$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<div id="doc_en_only">No translation available</div>
+
+<a name="admin_menu"></a><h1>Admin menu items<a href="#admin_menu" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+
+<a name="admin_user_mode"></a><h2>Enable / disable admin controls<a href="#admin_user_mode" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>When you are logged in as an administrator, the script provides two modes of operation: Admin controls visible &amp; Admin controls disabled. You can switch between those modes by clicking on the corresponding link in the menu bar at the top of the screen.</p>
+<p>When you have the controls turned on, you can administer your gallery using the menu bar that appears as shown below:</p>
+
+<p>When you have the admin controls turned off you are still logged in as an admin user, but the admin controls (the admin menu bar etc.) are hidden from the screen to give you a basic preview of what the page would look like for "regular users". However (as you still are logged in as admin), certain permissions and options will still look the same as if you had admin controls on; you can <strong>not</strong> use &quot;<em>Hide admin controls</em>&quot; to see what a non-admin user is actually allowed to see.  To see what a casual visitor can see and do on your site, simply log out.  To see what a registered user can see and do on your site, create a test user account (non-admin) and log in with this particular user (when doing this it is recommended that you use two different browsers, NOT  two instances of the same browser, to view your site so you can stay logged in as admin on one and view what regular users see while making changes in admin mode. You will have to refresh the non-admin mode screen to see  changes you incorporated).</p>
+<p>The controls &quot;Admin controls visible&quot; / &quot;Admin controls disabled&quot; used to be named &quot;admin mode&quot; / &quot;user mode&quot; in previous versions of coppermine. The dev team decided to rename the toggle because it was misleading for some users, as they thought that the control &quot;user mode&quot; was supposed to show the admin what the regular user could do; as suggested above, this is <strong>not</strong> the case.</p>
+<p>&nbsp;</p>
+<p>The items in the admin menu should be pretty self-explanatory:</p>
+
+<a name="upload_approval"></a><h2>Upload approval<a href="#upload_approval" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>See all pictures that await approval by the admin (if you set admin approval as a required step on the settings in the &quot;<a href="groups.htm#group_cp">groups</a>&quot; control panel). The upload approval menu item will only be displayed if there are actual uploads that require approval. If there are no pending approvals, the menu item will be skipped to avoid the admin menu becoming too crowded.</p>
+
+<a name="config"></a><h2>Config<a href="#config" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Configure the overall look of your gallery and the settings using the &quot;<a href="configuration.htm#admin">Config</a>&quot; button in the admin menu</p>
+
+<a name="categories"></a><h2>Categories<a href="#categories" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Create/edit/delete <a href="categories.htm">categories</a></p>
+
+<a name="albums"></a><h2>Albums<a href="#albums" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Create/edit/delete <a href="albums.htm#albmgr">albums</a></p>
+
+<a name="sort_my_pictures"></a><h2>Sort my pictures<a href="#sort_my_pictures" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Picture manager that can be used to custom-sort files within an album. By default, the thumbnail page that displays the contents of an album will be sorted by the sorting order specified in &quot;<a href="configuration.htm#admin_thumbnail_default_sortorder">Default sort order for files</a>&quot; on the config page. The &quot;sort my pictures&quot; option overrides the default sorting mechanism and displays the thumbnails in the order you specify. As this means an additional effort in the maintenance of each album, it is recommended to use the default sorting by filename  (instead of specifying a custom sort order) and naming the files appropriately before upload.</p>
+<p>Note: each user (including the admin) can use the sorting controls on the album's thumbnails display page to manually override the sorting option that was specified in coppermine's config and the "Sort my pictures" option; this final method of changing the sort order is stored locally in a cookie of the client and reverts to the config settings when this cookie is discarded.</p>
+
+<a name="groups"></a><h2>Groups<a href="#groups" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Create/edit/delete <a href="groups.htm#group_cp">groups</a></p>
+
+<a name="users"></a><h2>Users<a href="#users" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Create/edit/delete <a href="users.htm#user_cp">users</a></p>
+
+<a name="ban"></a><h2>Ban Users<a href="#ban" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p><a href="banning.htm#banning">Ban</a> users based on user name, email address or IP address. Menu item not available when Coppermine is <a href="bridging.htm">bridged</a>.</p>
+
+<a name="my_profile"></a><h2>My profile<a href="#my_profile" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Edit your own user profile (the profile of the gallery admin)</p>
+
+<a name="review_comments"></a><h2>Review Comments<a href="#review_comments" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>edit/approve/disapprove/delete user <a href="comments.htm#comments_review">comments</a></p>
+
+<a name="ecard_log"></a><h2>Display Ecards<a href="#ecard_log" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>View the ecards sent by users.</p>
+<p>You must have ecard-logging enabled in the config menu, first (by default, logging is disabled). When enabled, all ecards that are  sent are written into the database, where the Coppermine admin can view them.</p>
+<p><img src="images/ecard_log.gif" border="0" alt="" /><br />
+  You can sort the log by clicking on the arrow icons next to each heading, and you can delete single or multiple log entries (deleting the log entries will not disable the ecard recipient to view the ecard).</p>
+<p>Before switching this option on, make sure that logging such information is legal in your country. It is also advisable to notify your users that all ecards are being logged (preferrably on the registration screen).</p>
+<a name="ecard_log_end"></a>
+
+<a name="batch_add"></a><h2>Batch add files<a href="#batch_add" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p><a href="uploading_batch-add.htm#batch_add_pics">Batch-add files</a> to the Coppermine database that have been previously uploaded by FTP. Batch-add files does not upload files for you. You must upload files using your webhost's file manager or an FTP client software. You FTP files into folders that you create in the Coppermine albums directory.  Do not, however, create these folders in the <em>userpics</em> folder.</p>
+
+<a name="admin_tools"></a><h2>Admin Tools (Resize Pictures)<a href="#admin_tools" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>A collection of utilities to:
+<dl>
+          <dt>Rebuild or resize intermediate pictures and thumbnails.</dt>
+          <dt>Delete full-size pictures.</dt>
+          <dt>Delete orphaned comments.</dt>
+          <dt>Rename file titles.</dt>
+          <dt>Delete file titles.</dt>
+          <dt>View your server php info.</dt>
+</dl>
+</p>
+<p>Details on the tools and what you can do with them can be found on the <a href="admin-tools.htm#admin_tools">Admin Tools</a> page of this documentation.</p>
+<a name="admin_tools_end"></a>
+
+<a name="exif_manager"></a><h2>Exif manager<a href="#exif_manager" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Manage what <a href="exif.htm#exif">exif data</a> will be displayed in the file info section of the individual image view. Menu item will only be displayed if the config option &quot;<a href="configuration.htm#admin_picture_thumb_advanced_exif">Read EXIF data in JPEG files</a>&quot; is enabled in the first place.</p>
+
+<a name="keyword_manager"></a><h2>Keyword manager<a href="#keyword_manager" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p><a href="keywords.htm#keywords_manager">Manage the keywords</a> assigned to files</p>
+
+<a name="plugin_manager"></a><h2>Plugin Manager<a href="#plugin_manager" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Install / uninstall / configure <a href="plugins.htm#plugin_manager">plugins</a></p>
+
+<a name="bridge_manager"></a><h2>Bridge Manager<a href="#bridge_manager" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Enable / disable / manage <a href="bridging.htm#integrating">bridging</a> (the integration of Coppermine with another application)</p>
+
+<a name="view_log"></a><h2>View log files<a href="#view_log" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>View the log files generated by Coppermine (only available if you have enabled logging)</p>
+
+<a name="stats"></a><h2>Overall stats<a href="#stats" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>View the overall stats of your gallery (only available if you have enabled the <a href="configuration.htm#admin_logging_votedetails">corresponding option in config</a>).</p>
+<p>Warning: keeping detailed statistics means additional database queries and subsequently a heavy load on the page. Do understand that the size of the corresponding database tables can increase <strong>dramatically</strong> if you enable this feature.</p>
+<p>You should empty the stats record table from time to time to avoid the record table getting to big. To accomplish this, check "Empty all hit stats" at the bottom of the stats page and submit the form.</p>
+<p>The stats tool is meant as a basic statistics module - if you need more details or if you are concerned about the huge database load that the stats can generate, you should look for an alternative like <a href="http://www.google.com/analytics/" rel="external" class="external">Google Analytics</a>or similar.</p>
+
+<a name="versioncheck"></a><h2>Check versions<a href="#versioncheck" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Check the file versions of your core files to make sure you have upgraded as suggested and every file is up-to-date. Details on the usage and interpretation of the versioncheck page can be found in the corresponding section of the documentation <a href="upgrading.htm#versioncheck">Upgrading &rarr; The version check tool</a></p>
+
+<a name="update_database"></a><h2>Update database<a href="#update_database" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Perform a database update when upgrading from older versions. It does not hurt to re-run this application, so if you are not certain if your database is up-to-date, run this script.</p>
+<p>[<a href="upgrading.htm#updater">more</a>]</p>
+<a name="update_database_end"></a>
+
+<a name="phpinfo"></a><h2>phpinfo<a href="#phpinfo" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Display information about the PHP version running on your server and the modules it is using</p>
+<p>This page can be accessed manually as well by entering phpinfo.php as file name into your browser's address bar.</p>
+<div class="cpg_example"><tt class="code">http://yourdomain.tld/your_coppermine_folder/phpinfo.php</tt></div>
+<p>The output of the phpinfo page is admin-only, so it can't be accessed by others. Subsequently, it doesn't make sense to refer to that page when requesting support. Among other things, you can determine GD support, the path to php.ini, safe mode settings, <a href="http://www.hardened-php.net/suhosin/index.html" rel="external" class="external">suhosin</a> settings e.a. on the phpinfo page. In the end, the page just executes PHP's <a href="http://www.php.net/manual/en/function.phpinfo.php" rel="external" class="phpnet">phpinfo()</a> command.</p>
+
+<a name="show_news"></a><h2>Show news<a href="#show_news" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Coppermine comes with a feature that will <a href="configuration.htm#admin_general_coppermine_news">display news from the official Coppermine home page</a> for the admin. If you choose to hide this section, you can re-enable it by clicking on the &quot;show news&quot; link from the admin menu.</p>
+
+<a name="documentation"></a><h2>Documentation<a href="#documentation" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Read the online version of the Coppermine documentation (this document)</p>
+
+
+<hr />
+
+<a name="admin_mode_regular_users"></a><h2>Admin mode for regular users<a href="#admin_mode_regular_users" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>In previous versions of Coppermine (cpg1.4.x and older) there used to be an admin mode and user mode for &quot;regular registered&quot; users, somewhat like those for the true administrator. This feature has been removed as it was both confusing for end users and really did not serve any special purpose.</p>
+
+<a name="user_menu_items"></a><h2>Admin menu items for regular users<a href="#user_menu_items" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>The user with upload permissions has the following admin options:</p>
+<ul>
+  <li><strong>Create / order my albums</strong><br />similar to album manager in admin mode, the user can create albums within his user gallery</li>
+  <li><strong>Modify my albums</strong><br />
+  The user can edit album title and description (similar to &quot;<a href="albums.htm#album_prop">album properties</a>&quot; for the admin, but the user cannot move his albums to other categories)</li>
+  <li><strong>My profile</strong><br />The user can edit his profile (changing passwords, edit location, interests, home page and occupation properties, view quota usage). When integrated with a bbs service, the &quot;My profile&quot; link will send the user to the bbs's profile page. </li>
+</ul>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

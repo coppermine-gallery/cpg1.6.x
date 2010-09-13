@@ -1,0 +1,1230 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Plugin Hooks - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="list of plugin hooks" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<div id="doc_en_only">No translation available</div>
+
+<a name="plugin_hooks"></a><h1>Plugin Hooks<a href="#plugin_hooks" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>This is just a list of the different existing plugin hooks supported in version 1.5.x of Coppermine. The following list is designed to aid in the creation of plugins by listing the hooks based on their different uses and properties. This list does not explain how to use each hook but simply lists them so that they can be identified, further researched, and implemented.</p>
+
+<a name="plugin_hooks_target_audience"></a><h2>Target audience<a href="#plugin_hooks_target_audience" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>This part of the documentation is not meant for end users of Coppermine, but only for developers and skilled users who are familar with coding. There is no support for this section, it comes as-is.</p>
+
+<a name="plugin_hooks_choosing"></a><h2>Choosing Plugin Hooks<a href="#plugin_hooks_choosing" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>In order for your plugin to do anything in Coppermine, you need to register your plugin with the Coppermine plugin API and in so doing, tell Coppermine which hooks you will use to add or modify features of Coppermine.  A plugin hook is a place in a Coppermine script where Coppermine pauses what it is doing and checks to see if any plugins need to be called before Coppermine can continue.  Some hooks are unique and only occur one place in the Coppermine core code.  Others occur in multiple places.  Once a hook is reached, Coppermine checks to see if a plugin has registered to use that hook.  If so, Coppermine calls the plugin, lets the plugin execute its code and return, then Coppermine will continue where it left off.  Some plugin hooks pass data along to the plugin; others do not.</p>
+<p>So, in designing your plugin, you need to determine which plugin hook or hooks to use.  If you plugin adds text or images to a certain page (like displayimage.php), then look for the plugin hooks on that page (using the table below or by searching the script).  Decide which hook occurs at the place you want in Coppermine's order of execution and which hook provides the information you need.  In many cases, it's more important to choose the place in the code, and if the hook doesn't provide the data you need, you can pull in that data from Coppermine global variables, configuration settings, or from the database tables themselves.  In some cases, you may need to add your own database tables to store information that Coppermine does not keep or that only your plugin needs.  There are examples of many of these cases in the core plugins and in the contributed plugins.</p>
+<p>Included as a Coppermine core plugin is the plugin 'visiblehookpoints'.  This plugin places markers on pages and is a useful tool for determining where plugin hooks are called with respect to the HTML displayed by Coppermine.  Read the documentation for this plugin for more information.</p>
+<p><a class="back" href="#top">Back to top</a></p><hr />
+
+<a name="plugin_hooks_finding"></a><h2>Finding Plugin Hooks<a href="#plugin_hooks_finding" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>There are sections below that list the plugin hooks by script and alphabetically.  All plugin hooks should be listed in those 2 sections.  However, you can also search for hooks by searching for the text 'CPGPluginAPI' (in all scripts).  Action hook calls start with 'CPGPluginAPI::action' and filter hook calls start with 'CPGPluginAPI::filter'.  If you are looking for a particular page or place on a page to add text or images, you can look in the script and see where the closest plugin hook is located.  In some cases, you may find there is not a convenient hook available.  In that case, you can use the 'page_html' filter hook which is called just before the page is output to the web browser.  This is not ideal in some cases because the output HTML may change depending upon the theme or other plugin calls (before or after your plugin is called).  In some cases, it may be better to replace a Coppermine page entirely by using this call, either to deny access to a particular page (based upon permissions your plugin sets up) or using a new page your plugin provides.  Usually this is best for administration or configuration pages since pages your users see will use a particular theme and it can be tedious to write whole pages that are theme-compatible.  For user pages, you should try to use a specific plugin hook besides 'page_html'.</p>
+<p>See also the core plugin 'visiblehookpoints' for assistance in associating plugin hooks with Coppermine's output to the web browser.</p>
+<p><a class="back" href="#top">Back to top</a></p><hr />
+
+<a name="plugin_hooks_using"></a>
+<!--<h2>Using Plugin Hooks<a href="#plugin_hooks_using" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Placeholder.  Content will be added here.</p>
+<p><a class="back" href="#top">Back to top</a></p><hr />
+-->
+
+<a name="plugin_hooks_filename"></a>
+<h2>Plugin Hooks by File Name<a href="#plugin_hooks_filename" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>In this section you will find a list of plugin hooks, sorted by script filenames in which the hook is called.</p>
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%" class="cpg_zebra">
+  <tr>
+    <th valign="top" align="left">File</td>
+    <th valign="top" align="left">Hook name</td>
+    <th valign="top" align="left">Hook type</td>
+    <th valign="top" align="left">Explanation</td>
+    <th valign="top" align="left" width="30%">Code</td>
+  </tr>
+  <tr>
+    <td valign="top">banning.php</td>
+    <td valign="top"><a name="plugin_hooks_banning_ip_information"></a><strong>ip_information</strong><a href="#plugin_hooks_banning_ip_information" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">Filters additional information to an IP address (empty out of the box). Use this hook to add information <em>after</em> the output of an IP address.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$row['ip_detail'] = CPGPluginAPI::filter('ip_information', $row['ip_addr']);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">contact.php</td>
+    <td valign="top"><a name="plugin_hooks_captcha_contact_print"></a><strong>captcha_contact_print</strong><a href="#plugin_hooks_captcha_contact_print" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $captcha_print when CAPTCHA is enabled and allows you to override the standard CAPTCHA for the contact form.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$captcha_print = CPGPluginAPI::filter('captcha_contact_print',$captcha_print);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">contact.php</td>
+    <td valign="top"><a name="plugin_hooks_captcha_contact_validate"></a><strong>captcha_contact_validate</strong><a href="#plugin_hooks_captcha_contact_validate" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Action</td>
+    <td valign="top">action when CAPTCHA is enabled and allows you to override the standard CAPTCHA validation for the contact form.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('captcha_contact_validate', null);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">db_ecard.php</td>
+    <td valign="top"><a name="plugin_hooks_db_ecard_ip_information"></a><strong>ip_information</strong><a href="#plugin_hooks_db_ecard_ip_information" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">Filters additional information to an IP address (empty out of the box). Use this hook to add information <em>after</em> the output of an IP address.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$line['ip_detail'] = CPGPluginAPI::filter('ip_information', $line['sender_ip']);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">db_input.php</td>
+    <td valign="top"><a name="plugin_hooks_captcha_comment_validate"></a><strong>captcha_comment_validate</strong><a href="#plugin_hooks_captcha_comment_validate" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Action</td>
+    <td valign="top">action when CAPTCHA is enabled and allows you to override the standard CAPTCHA validation for comments</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('captcha_comment_validate', null);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">delete.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_before_delete_file"></a><strong>before_delete_file</strong><a href="#plugin_hooks_filename_before_delete_file" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">Plugin filter to be called before deleting a file</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::filter('before_delete_file', $pic);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">delete.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_after_delete_file"></a><strong>after_delete_file</strong><a href="#plugin_hooks_filename_after_delete_file" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">Plugin filter to be called after a file is deleted</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::filter('after_delete_file', $pic);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">displayimage.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_file_info"></a><strong>file_info</strong><a href="#plugin_hooks_filename_file_info" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters file information array</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$info = CPGPluginAPI::filter('file_info',$info);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">displayimage.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_post_breadcrumb"></a><strong>post_breadcrumb</strong><a href="#plugin_hooks_filename_post_breadcrumb" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">only on thumbnails.php and displayimage.php</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::filter('post_breadcrumb',null);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">editpics.php</td>
+    <td valign="top"><a name="plugin_hooks_editpics_before_delete_file"></a><strong>before_delete_file</strong><a href="#plugin_hooks_editpics_before_delete_file" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">Plugin filter to be called before deleting a file</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::filter('before_delete_file', $pic);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">editpics.php</td>
+    <td valign="top"><a name="plugin_hooks_editpics_after_delete_file"></a><strong>after_delete_file</strong><a href="#plugin_hooks_editpics_after_delete_file" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">Plugin filter to be called after a file is deleted</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::filter('after_delete_file', $pic);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">index.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_anycontent"></a><strong>anycontent</strong><a href="#plugin_hooks_filename_anycontent" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">anycontent (anycontent page + plugin accessible content)</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$anycontent = CPGPluginAPI::filter('anycontent',ob_get_contents());</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">index.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_user_caption_params"></a><strong>user_caption_params</strong><a href="#plugin_hooks_filename_user_caption_params" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top"></td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$params = CPGPluginAPI::filter('user_caption_params', 
+                               array('{USER_NAME}' => $user['user_name'],
+                                     '{USER_ID}' => $user['user_id'],
+                                     '{ALBUMS}' => $albums_txt,
+                                     '{PICTURES}' => $pictures_txt,
+                               )
+          );</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">index.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_plugin_block"></a><strong>plugin_block</strong><a href="#plugin_hooks_filename_plugin_block" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters main page blocks</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$matches = CPGPluginAPI::filter('plugin_block', $matches);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">index.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_main_page_layout"></a><strong>main_page_layout</strong><a href="#plugin_hooks_filename_main_page_layout" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">Modifies page layout elements</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$elements = CPGPluginAPI::filter('main_page_layout', $elements);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">pluginmgr.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_plugin_configure"></a><strong>plugin_configure</strong><a href="#plugin_hooks_filename_plugin_configure" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Action</td>
+    <td valign="top">executes when <a href="#plugin_hooks_filename_plugin_install">plugin_install</a> returns an integer; returns bool/integer</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('plugin_configure',$installed,CPG_EXEC_NEW);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">pluginmgr.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_plugin_cleanup"></a><strong>plugin_cleanup</strong><a href="#plugin_hooks_filename_plugin_cleanup" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Action</td>
+    <td valign="top">executes when plugin_uninstall returns an integer; returns bool/integer</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('plugin_cleanup',$uninstalled,$plugin_id);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">profile.php</td>
+    <td valign="top"><a name="plugin_hooks_profile_add_data"></a><strong>profile_add_data</strong><a href="#plugin_hooks_profile_add_data" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">Plugin filter to be called before creating the form</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::filter('profile_add_data', array ( 0 => $display_profile_form_param, 1 => $form_data ));</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">register.php</td>
+    <td valign="top"><a name="plugin_hooks_captcha_register_print"></a><strong>captcha_register_print</strong><a href="#plugin_hooks_captcha_register_print" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $captcha_print when CAPTCHA is enabled and allows you to override the standard CAPTCHA for registrations</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$captcha_print = CPGPluginAPI::filter('captcha_register_print',$captcha_print);</textarea></td>
+  </tr>
+   <tr>
+    <td valign="top">register.php</td>
+    <td valign="top"><a name="plugin_hooks_captcha_register_validate"></a><strong>captcha_register_validate</strong><a href="#plugin_hooks_captcha_register_validate" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $error when CAPTCHA is enabled and allows you to override the standard CAPTCHA validation for registrations</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$error = CPGPluginAPI::filter('captcha_register_validate', $error);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">register.php</td>
+    <td valign="top"><a name="plugin_hooks_register_form_create"></a><strong>register_form_create</strong><a href="#plugin_hooks_register_form_create" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">Add more fields to the registration form</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$form_data = CPGPluginAPI::filter('register_form_create', $form_data);</textarea></td>
+  </tr>
+   <tr>
+    <td valign="top">register.php</td>
+    <td valign="top"><a name="plugin_hooks_register_form_submit"></a><strong>register_form_submit</strong><a href="#plugin_hooks_register_form_submit" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">Perform an action corresponding to the submit registration form data</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::filter('register_form_submit', $user_array);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">register.php</td>
+    <td valign="top"><a name="plugin_hooks_register_user_activation"></a><strong>register_user_activation</strong><a href="#plugin_hooks_register_user_activation" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">Perform an action when the user account is activated</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::filter('register_user_activation', $act_key);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">reviewcom.php</td>
+    <td valign="top"><a name="plugin_hooks_reviewcom_ip_information"></a><strong>ip_information</strong><a href="#plugin_hooks_reviewcom_ip_information" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">Filters additional information to an IP address (empty out of the box). Use this hook to add information <em>after</em> the output of an IP address.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$ip_address_output = $row['msg_raw_ip'] . CPGPluginAPI::filter('ip_information', $row['msg_raw_ip']);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">search.php</td>
+    <td valign="top"><a name="plugin_hooks_search_form"></a><strong>search_form</strong><a href="#plugin_hooks_search_form" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">Add or remove content to/from the search form</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$text = CPGPluginAPI::filter('search_form', $text);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">stat_details.php</td>
+    <td valign="top"><a name="plugin_hooks_stat_details_ip_information"></a><strong>ip_information</strong><a href="#plugin_hooks_stat_details_ip_information" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">Filters additional information to an IP address (empty out of the box). Use this hook to add information <em>after</em> the output of an IP address.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">print '      '. $row[$value] . CPGPluginAPI::filter('ip_information', $row[$value]) . $LINEBREAK;</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">thumbnails.php</td>
+    <td valign="top"><a name="plugin_hooks_thumbnails_post_breadcrumb"></a><strong>post_breadcrumb</strong><a href="#plugin_hooks_thumbnails_post_breadcrumb" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">only on thumbnails.php and displayimage.php</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::filter('post_breadcrumb',null);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">upload.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_upload_options"></a><strong>upload_options</strong><a href="#plugin_hooks_filename_upload_options" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">modify or add upload methods which can be selected from the configuration panel or upload form (if allowed) - see <a href="#plugin_hook_example_upload_method">details and examples below</a></td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$upload_choices = CPGPluginAPI::filter('upload_options',$upload_choices);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">upload.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_upload_form"></a><strong>upload_form</strong><a href="#plugin_hooks_filename_upload_form" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Action</td>
+    <td valign="top">used to display alternate upload form - see <a href="#plugin_hook_example_upload_method">details and examples below</a></td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('upload_form',array($upload_form,$upload_select));</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">upload.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_upload_process"></a><strong>upload_process</strong><a href="#plugin_hooks_filename_upload_process" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Action</td>
+    <td valign="top">used to processs alternate upload form - see <a href="#plugin_hook_example_upload_method">details and examples below</a></td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('upload_process',$upload_form);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">usermgr.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_usermgr_header"></a><strong>usermgr_header</strong><a href="#plugin_hooks_filename_usermgr_header" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top"></td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">echo CPGPluginAPI::filter('usermgr_header','');</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">usermgr.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_usermgr_footer"></a><strong>usermgr_footer</strong><a href="#plugin_hooks_filename_usermgr_footer" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top"></td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">echo CPGPluginAPI::filter('usermgr_footer','');</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_gallery_header"></a><strong>gallery_header</strong><a href="#plugin_hooks_filename_gallery_header" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">shows just above the gallery, defined by {GALLERY} in template.html</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$template_header = CPGPluginAPI::filter('gallery_header', $template_header);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_gallery_footer"></a><strong>gallery_footer</strong><a href="#plugin_hooks_filename_gallery_footer" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">shows just below the gallery, defined by {GALLERY} in template.html</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$template_footer = CPGPluginAPI::filter('gallery_footer', $template_footer);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_thumb_data"></a><strong>thumb_data</strong><a href="#plugin_hooks_filename_thumb_data" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $pic_row when get_pic_url is called... usually this is called before any html output is created so you can use this to change a lot of data</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$pic_row = CPGPluginAPI::filter('thumb_data',$pic_row);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_picture_url"></a><strong>picture_url</strong><a href="#plugin_hooks_filename_picture_url" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $pic_row when get_pic_url is called... usually this is called before any html output is created so you can use this to change a lot of data</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$pic_row = CPGPluginAPI::filter('picture_url', $pic_row);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_template_html"></a><strong>template_html</strong><a href="#plugin_hooks_filename_template_html" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters the template html</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$template = CPGPluginAPI::filter('template_html',$template);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_page_meta"></a><strong>page_meta</strong><a href="#plugin_hooks_filename_page_meta" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters header meta data for {META}</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$template_header = str_replace('{META}', '{META}'.CPGPluginAPI::filter('page_meta',''), $template_header);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_thumb_caption"></a><strong>thumb_caption</strong><a href="#plugin_hooks_filename_thumb_caption" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">executed before the more specific "thumb_caption_*" plugins</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$rowset = CPGPluginAPI::filter('thumb_caption',$rowset);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_thumb_caption_regular"></a><strong>thumb_caption_regular</strong><a href="#plugin_hooks_filename_thumb_caption_regular" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">executed after the more general "thumb_caption" plugin</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$rowset = CPGPluginAPI::filter('thumb_caption_regular',$rowset);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_thumb_caption_lastcom"></a><strong>thumb_caption_lastcom</strong><a href="#plugin_hooks_filename_thumb_caption_lastcom" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">executed after the more general "thumb_caption" plugin</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$rowset = CPGPluginAPI::filter('thumb_caption_lastcom',$rowset);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_thumb_caption_lastcomby"></a><strong>thumb_caption_lastcomby</strong><a href="#plugin_hooks_filename_thumb_caption_lastcomby" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">executed after the more general "thumb_caption" plugin</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$rowset = CPGPluginAPI::filter('thumb_caption_lastcomby',$rowset);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_thumb_caption_lastup"></a><strong>thumb_caption_lastup</strong><a href="#plugin_hooks_filename_thumb_caption_lastup" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">executed after the more general "thumb_caption" plugin</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$rowset = CPGPluginAPI::filter('thumb_caption_lastup',$rowset);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_thumb_caption_lastupby"></a><strong>thumb_caption_lastupby</strong><a href="#plugin_hooks_filename_thumb_caption_lastupby" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">executed after the more general "thumb_caption" plugin</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$rowset = CPGPluginAPI::filter('thumb_caption_lastupby',$rowset);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_thumb_caption_topn"></a><strong>thumb_caption_topn</strong><a href="#plugin_hooks_filename_thumb_caption_topn" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">executed after the more general "thumb_caption" plugin</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$rowset = CPGPluginAPI::filter('thumb_caption_topn',$rowset);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_thumb_caption_toprated"></a><strong>thumb_caption_toprated</strong><a href="#plugin_hooks_filename_thumb_caption_toprated" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">executed after the more general "thumb_caption" plugin</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$rowset = CPGPluginAPI::filter('thumb_caption_toprated',$rowset);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_thumb_caption_lasthits"></a><strong>thumb_caption_lasthits</strong><a href="#plugin_hooks_filename_thumb_caption_lasthits" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">executed after the more general "thumb_caption" plugin</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$rowset = CPGPluginAPI::filter('thumb_caption_lasthits',$rowset);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_thumb_caption_random"></a><strong>thumb_caption_random</strong><a href="#plugin_hooks_filename_thumb_caption_random" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">executed after the more general "thumb_caption" plugin</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$rowset = CPGPluginAPI::filter('thumb_caption_random',$rowset);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_thumb_caption_search"></a><strong>thumb_caption_search</strong><a href="#plugin_hooks_filename_thumb_caption_search" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">executed after the more general "thumb_caption" plugin</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$rowset = CPGPluginAPI::filter('thumb_caption_search',$rowset);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_thumb_caption_lastalb"></a><strong>thumb_caption_lastalb</strong><a href="#plugin_hooks_filename_thumb_caption_lastalb" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">executed after the more general "thumb_caption" plugin</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$rowset = CPGPluginAPI::filter('thumb_caption_lastalb',$rowset);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_thumb_caption_favpics"></a><strong>thumb_caption_favpics</strong><a href="#plugin_hooks_filename_thumb_caption_favpics" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">executed after the more general "thumb_caption" plugin</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$rowset = CPGPluginAPI::filter('thumb_caption_favpics',$rowset);</textarea></td>
+  </tr>  
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_thumb_html_title"></a><strong>thumb_html_title</strong><a href="#plugin_hooks_thumb_html_title" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">allows to modify the thumb html title using data from $row</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$pic_title = CPGPluginAPI::filter('thumb_html_title', array($pic_title, $row));
+$pic_title = (is_array($pic_title)) ? $pic_title[0] : $pic_title;</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_thumb_strip_html_title"></a><strong>thumb_strip_html_title</strong><a href="#plugin_hooks_thumb_strip_html_title" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">allows to modify the thumb html title using data from $row for filmstrip thumbs</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$pic_title = CPGPluginAPI::filter('thumb_strip_html_title', array($pic_title, $row));
+$pic_title = (is_array($pic_title)) ? $pic_title[0] : $pic_title;</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_meta_album"></a><strong>meta_album</strong><a href="#plugin_hooks_meta_album" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">executed before meta albums are retrieved, giving the possibility to add or filter meta albums.<br />See below for more info.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$meta_album_params = CPGPluginAPI::filter('meta_album', $meta_album_passto);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_meta_album_get_pic_pos"></a><strong>meta_album_get_pic_pos</strong><a href="#plugin_hooks_meta_album_get_pic_pos" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">determines the position of the a file within a meta album.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$pos = CPGPluginAPI::filter('meta_album_get_pic_pos', $album);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_token_criteria"></a><strong>token_criteria</strong><a href="#plugin_hooks_token_criteria" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">allows to modify the token criteria array. You can add new criteria or remove existing criteria if you don't want to use them to create the token</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$token_criteria_array = CPGPluginAPI::filter('token_criteria', $token_criteria_array);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_bbcode"></a><strong>bbcode</strong><a href="#plugin_hooks_bbcode" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">with this hook, you can modify the comment that has been submitted and add your custom bbcodes. (Only available when a '[' has been found in the comment)</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$text = CPGPluginAPI::filter('bbcode', $text);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/init.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_page_start"></a><strong>page_start</strong><a href="#plugin_hooks_filename_page_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Action</td>
+    <td valign="top">add/modify/delete init settings before they get to the page</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('page_start',null);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/mailer.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_cpg_mail_to_email"></a><strong>cpg_mail_to_email</strong><a href="#plugin_hooks_filename_cpg_mail_to_email" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">Modify recipients' addresses when sending e-mails</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$to = CPGPluginAPI::filter('cpg_mail_to_email', $to);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/mailer.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_cpg_mail_sender_email"></a><strong>cpg_mail_sender_email</strong><a href="#plugin_hooks_filename_cpg_mail_sender_email" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">Modify sender's addresses when sending e-mails</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$sender_email = CPGPluginAPI::filter('cpg_mail_sender_email', $sender_email);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/picmgmt.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_add_file_data"></a><strong>add_file_data</strong><a href="#plugin_hooks_filename_add_file_data" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">available in picmgmt.php, called right before a new image's data is written to the database</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$CURRENT_PIC_DATA = CPGPluginAPI::filter('add_file_data',$CURRENT_PIC_DATA);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/picmgmt.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_add_file_data_success"></a><strong>add_file_data_success</strong><a href="#plugin_hooks_filename_add_file_data_success" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">called right after a new file's data is written to the database. $CURRENT_PIC_DATA holds the pid of new file along with other data.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$CURRENT_PIC_DATA = CPGPluginAPI::filter('add_file_data_success',$CURRENT_PIC_DATA);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/picmgmt.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_image_sharpen"></a><strong>image_sharpen</strong><a href="#plugin_hooks_filename_image_sharpen" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">called while uploading pictures. Toggles $sharpen, to e.g. enable image sharpening for intermediate pictures if thumbnail sharpening is enabled in the first place.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$sharpen = CPGPluginAPI::filter('image_sharpen', array($sharpen, $new_size));</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/plugin_api.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_page_html"></a><strong>page_html</strong><a href="#plugin_hooks_filename_page_html" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters the final output html</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">function&amp; cpg_filter_page_html( &amp;$html ) {
+    return CPGPluginAPI::filter('page_html',$html);
+}</textarea><br />from include/init.inc.php<br /><textarea class="samplecode" style="width:100%">// Start output buffering
+ob_start('cpg_filter_page_html');</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/plugin_api.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_page_end"></a><strong>page_end</strong><a href="#plugin_hooks_filename_page_end" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">executes when the script has output the page to the browser.<br />Note: Working directory of the script can change inside the shutdown function under some web servers, e.g. Apache.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">register_shutdown_function('cpg_action_page_end');</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/plugin_api.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_plugin_install"></a><strong>plugin_install</strong><a href="#plugin_hooks_filename_plugin_install" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">executes when the plugin is installed returns true/false/integer</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$installed = CPGPluginAPI::action('plugin_install',true,CPG_EXEC_NEW);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/plugin_api.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_plugin_wakeup"></a><strong>plugin_wakeup</strong><a href="#plugin_hooks_filename_plugin_wakeup" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">when initialized </td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">if (!($thisplugin->awake = CPGPluginAPI::action('plugin_wakeup',true)))</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/plugin_api.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_plugin_sleep"></a><strong>plugin_sleep</strong><a href="#plugin_hooks_filename_plugin_sleep" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">when shutdown</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">register_shutdown_function(array('CPGPluginAPI','sleep'));</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/smilies.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_smilies_display"></a><strong>smilies_display<br />smilies_process</strong><a href="#plugin_hooks_smilies_display" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $smilies_display &amp; $smilies_process, can be used to add/remove smilies.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$smilies_display = CPGPluginAPI::filter('smilies_display',$smilies_display);<br />
+$smilies_process = CPGPluginAPI::filter('smilies_process',$smilies_process);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_theme_add_comment"></a><strong>theme_add_comment<br />theme_edit_comment</strong><a href="#plugin_hooks_theme_add_comment" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $template_add_your_comment &amp; $template_image_comments, can be used to display extra data when comments are displayed (like bbcode buttons).</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$template_add_your_comment = CPGPluginAPI::filter('theme_add_comment', $template_add_your_comment);<br />
+$template_image_comments = CPGPluginAPI::filter('theme_edit_comment', $template_image_comments);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_file_data"></a><strong>file_data</strong><a href="#plugin_hooks_filename_file_data" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $pic_row when get_pic_url is called... usually this is called before any html is created so you can use this to change a lot of data</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$CURRENT_PIC_DATA = CPGPluginAPI::filter('file_data',$CURRENT_PIC_DATA);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_html_image_reduced_overlay"></a><strong>html_image_reduced_overlay</strong><a href="#plugin_hooks_filename_html_image_reduced_overlay" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $pic_html when the html to display a reduced image with transparant overlay is created. </td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$pic_html = CPGPluginAPI::filter('html_image_reduced_overlay',$pic_html);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_html_image_reduced"></a><strong>html_image_reduced</strong><a href="#plugin_hooks_filename_html_image_reduced" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $pic_html when the html to display a reduced image is created.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$pic_html = CPGPluginAPI::filter('html_image_reduced',$pic_html);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_html_image_overlay"></a><strong>html_image_overlay</strong><a href="#plugin_hooks_filename_html_image_overlay" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $pic_html when the html to display an image with transparant overlay is created.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$pic_html = CPGPluginAPI::filter('html_image_overlay',$pic_html);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_html_image"></a><strong>html_image</strong><a href="#plugin_hooks_filename_html_image" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $pic_html when the html to display an image is created.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$pic_html = CPGPluginAPI::filter('html_image',$pic_html);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_html_document"></a><strong>html_document</strong><a href="#plugin_hooks_filename_html_document" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $pic_html when the html to display a document is created.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$pic_html = CPGPluginAPI::filter('html_document',$pic_html);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_html_other_media"></a><strong>html_other_media</strong><a href="#plugin_hooks_filename_html_other_media" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $pic_html when the html to display other media (video, flash, ...) is created.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$pic_html = CPGPluginAPI::filter('html_other_media',$pic_html);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_fullsize_html"></a><strong>fullsize_html</strong><a href="#plugin_hooks_filename_fullsize_html" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $fullsize_html when viewing fullsize pictures.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$fullsize_html = CPGPluginAPI::filter('fullsize_html', $fullsize_html);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_javascript_includes"></a><strong>javascript_includes</strong><a href="#plugin_hooks_filename_javascript_includes" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $JS['includes'] before the js files will be added to the html output.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$JS['includes'] = CPGPluginAPI::filter('javascript_includes',$JS['includes']);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_admin_menu"></a><strong>admin_menu</strong><a href="#plugin_hooks_filename_admin_menu" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $admin_menu which allows to add a button to it. <br />(See below how to do that)</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$admin_menu = CPGPluginAPI::filter('admin_menu',$html);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_sys_menu"></a><strong>sys_menu</strong><a href="#plugin_hooks_filename_sys_menu" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $sys_menu_buttons which allows to add a button to it. <br />(See below how to do that)</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$sys_menu_buttons = CPGPluginAPI::filter('sys_menu',$sys_menu_buttons);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_sub_menu"></a><strong>sub_menu</strong><a href="#plugin_hooks_filename_sub_menu" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $sub_menu_buttons which allows to add a button to it. <br />(See below how to do that)</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$sub_menu_buttons = CPGPluginAPI::filter('sub_menu',$sub_menu_buttons);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_captcha_comment_print"></a><strong>captcha_comment_print</strong><a href="#plugin_hooks_captcha_comment_print" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $template_add_your_comment when CAPTCHA is enabled and allows you to override the standard CAPTCHA for comments</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$template_add_your_comment = CPGPluginAPI::filter('captcha_comment_print', $template_add_your_comment);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_thumbnail_params"></a><strong>theme_display_thumbnails_params</strong><a href="#plugin_hooks_filename_thumbnail_params" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $template_thumbnail_view which allows you to modify the thumbnail output or add things beneath the thumbails.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$params = CPGPluginAPI::filter('theme_display_thumbnails_params', $params);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_theme_thumbnails_wrapper_start"></a><strong>theme_thumbnails_wrapper_start</strong><a href="#plugin_hooks_filename_theme_thumbnails_wrapper_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Action</td>
+    <td valign="top">Allows plugin authors to output content before the thumbnail table starts, which is particularly helpfull top start a &lt;form&gt;-tag.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('theme_thumbnails_wrapper_start', null);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_theme_thumbnails_footer"></a><strong>theme_thumbnails_footer</strong><a href="#plugin_hooks_filename_theme_thumbnails_footer" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">Allows plugin authors to output content after the last row of thumbnails, before the closing table tag. Can be used to add a footer row of the table</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$footer = CPGPluginAPI::filter('theme_thumbnails_footer', $footer);
+echo $footer;</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_theme_thumbnails_wrapper_end"></a><strong>theme_thumbnails_wrapper_end</strong><a href="#plugin_hooks_filename_theme_thumbnails_wrapper_end" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Action</td>
+    <td valign="top">Output content after the closing tag of the thumbnail table</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('theme_thumbnails_wrapper_end', null);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_theme_thumbnails_title"></a><strong>theme_thumbnails_title</strong><a href="#plugin_hooks_filename_theme_thumbnails_title" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters the $param array which allows you to modify the title row of the thumbnails table.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$params = CPGPluginAPI::filter('theme_thumbnails_title', $param);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_theme_thumbnails_album_types"></a><strong>theme_thumbnails_album_types</strong><a href="#plugin_hooks_theme_thumbnails_album_types" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters the $album_types array which allows you to add new 'album' types. Useful for custom meta albums that don't link to files, but to thumbnail pages.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$album_types = CPGPluginAPI::filter('theme_thumbnails_album_types', $album_types);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_theme_pageheader_params"></a><strong>theme_pageheader_params</strong><a href="#plugin_hooks_filename_theme_pageheader_params" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $template_vars for the pageheader function. Allows you to modify the entire pageheader output, e.g. page title, charset definition, meta tags.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$params = CPGPluginAPI::filter('theme_pageheader_params', $template_vars);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_theme_ip_information"></a><strong>ip_information</strong><a href="#plugin_hooks_filename_theme_ip_information" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">Filters additional information to an IP address (empty out of the box). Use this hook to add information <em>after</em> the output of an IP address.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$ip = $row['msg_hdr_ip'] . CPGPluginAPI::filter('ip_information', $row['msg_hdr_ip']);</textarea></td>
+  </tr>
+</table>
+<p><a class="back" href="#top">Back to top</a></p><hr />
+
+<a name="plugin_hooks_alphabetically"></a>
+<h2>Plugin Hooks Alphabetically<a href="#plugin_hooks_alphabetically" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<table border="0" cellspacing="0" cellpadding="0" width="100%"  class="cpg_zebra">
+    <tr>
+        <td valign="top" align="center">
+            A
+        </td>
+        <td>
+            <ul>
+                <li class="floatleft"><a href="#plugin_hooks_filename_add_file_data">add_file_data</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_add_file_data_success">add_file_data_success</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_admin_menu">admin_menu</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_after_delete_file">after_delete_file</a> (delete.php)</li>
+                <li class="floatleft"><a href="#plugin_hooks_editpics_after_delete_file">after_delete_file</a> (editpics.php)</li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_anycontent">anycontent</a></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" align="center">
+            B
+        </td>
+        <td>
+            <ul>
+                <li class="floatleft"><a href="#plugin_hooks_bbcode">bbcode</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_before_delete_file">before_delete_file</a> (delete.php)</li>
+                <li class="floatleft"><a href="#plugin_hooks_editpics_before_delete_file">before_delete_file</a> (editpics.php)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" align="center">
+            C
+        </td>
+        <td>
+            <ul>
+                <li class="floatleft"><a href="#plugin_hooks_captcha_comment_print">captcha_comment_print</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_captcha_comment_validate">captcha_comment_validate</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_captcha_contact_print">captcha_contact_print</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_captcha_contact_validate">captcha_contact_validate</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_captcha_register_print">captcha_register_print</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_captcha_register_validate">captcha_register_validate</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_cpg_mail_sender_email">cpg_mail_sender_email</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_cpg_mail_to_email">cpg_mail_to_email</a></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" align="center">
+            F
+        </td>
+        <td>
+            <ul>
+                <li class="floatleft"><a href="#plugin_hooks_filename_file_data">file_data</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_file_info">file_info</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_fullsize_html">fullsize_html</a></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" align="center">
+            G
+        </td>
+        <td>
+            <ul>
+                <li class="floatleft"><a href="#plugin_hooks_filename_gallery_footer">gallery_footer</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_gallery_header">gallery_header</a></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" align="center">
+            H
+        </td>
+        <td>
+            <ul>
+                <li class="floatleft"><a href="#plugin_hooks_filename_html_document">html_document</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_html_image">html_image</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_html_image_overlay">html_image_overlay</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_html_image_reduced">html_image_reduced</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_html_image_reduced_overlay">html_image_reduced_overlay</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_html_other_media">html_other_media</a></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" align="center">
+            I
+        </td>
+        <td>
+            <ul>
+                <li class="floatleft"><a href="#plugin_hooks_filename_image_sharpen">image_sharpen</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_banning_ip_information">ip_information</a> (banning.php)</li>
+                <li class="floatleft"><a href="#plugin_hooks_db_ecard_ip_information">ip_information</a> (db_ecard.php)</li>
+                <li class="floatleft"><a href="#plugin_hooks_reviewcom_ip_information">ip_information</a> (reviewcom.php)</li>
+                <li class="floatleft"><a href="#plugin_hooks_stat_details_ip_information">ip_information</a> (stat_details.php)</li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_theme_ip_information">ip_information</a> (include/themes.inc.php.php)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" align="center">
+            J
+        </td>
+        <td>
+            <ul>
+                <li class="floatleft"><a href="#plugin_hooks_filename_javascript_includes">javascript_includes</a></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" align="center">
+            M
+        </td>
+        <td>
+            <ul>
+                <li class="floatleft"><a href="#plugin_hooks_filename_main_page_layout">main_page_layout</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_meta_album">meta_album</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_meta_album_get_pic_pos">meta_album_get_pic_pos</a></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" align="center">
+            P
+        </td>
+        <td>
+            <ul>
+                <li class="floatleft"><a href="#plugin_hooks_filename_page_end">page_end</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_page_html">page_html</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_page_meta">page_meta</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_page_start">page_start</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_picture_url">picture_url</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_plugin_block">plugin_block</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_plugin_cleanup">plugin_cleanup</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_plugin_configure">plugin_configure</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_plugin_install">plugin_install</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_plugin_sleep">plugin_sleep</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_plugin_wakeup">plugin_wakeup</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_post_breadcrumb">post_breadcrumb</a> (displayimage.php)</li>
+                <li class="floatleft"><a href="#plugin_hooks_thumbnails_post_breadcrumb">post_breadcrumb</a> (thumbnails.php)</li>
+                <li class="floatleft"><a href="#plugin_hooks_profile_add_data">profile_add_data</a></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" align="center">
+            R
+        </td>
+        <td>
+            <ul>
+                <li class="floatleft"><a href="#plugin_hooks_register_form_create">register_form_create</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_register_form_submit">register_form_submit</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_register_user_activation">register_user_activation</a></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" align="center">
+            S
+        </td>
+        <td>
+            <ul>
+                <li class="floatleft"><a href="#plugin_hooks_search_form">search_form</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_smilies_display">smilies_display</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_smilies_display">smilies_process</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_sub_menu">sub_menu</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_sys_menu">sys_menu</a></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" align="center">
+            T
+        </td>
+        <td>
+            <ul>
+                <li class="floatleft"><a href="#plugin_hooks_filename_template_html">template_html</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_theme_add_comment">theme_add_comment</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_thumbnail_params">theme_display_thumbnails_params</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_theme_add_comment">theme_edit_comment</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_theme_pageheader_params">theme_pageheader_params</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_theme_thumbnails_album_types">theme_thumbnails_album_types</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_theme_thumbnails_footer">theme_thumbnails_footer</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_theme_thumbnails_title">theme_thumbnails_title</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_theme_thumbnails_wrapper_end">theme_thumbnails_wrapper_end</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_theme_thumbnails_wrapper_start">theme_thumbnails_wrapper_start</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_thumb_caption">thumb_caption</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_thumb_caption_favpics">thumb_caption_favpics</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_thumb_caption_lastalb">thumb_caption_lastalb</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_thumb_caption_lastcom">thumb_caption_lastcom</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_thumb_caption_lastcomby">thumb_caption_lastcomby</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_thumb_caption_lasthits">thumb_caption_lasthits</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_thumb_caption_lastup">thumb_caption_lastup</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_thumb_caption_lastupby">thumb_caption_lastupby</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_thumb_caption_random">thumb_caption_random</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_thumb_caption_regular">thumb_caption_regular</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_thumb_caption_search">thumb_caption_search</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_thumb_caption_topn">thumb_caption_topn</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_thumb_caption_toprated">thumb_caption_toprated</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_thumb_data">thumb_data</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_thumb_html_title">thumb_html_title</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_thumb_strip_html_title">thumb_strip_html_title</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_token_criteria">token_criteria</a></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" align="center">
+            U
+        </td>
+        <td>
+            <ul>
+                <li class="floatleft"><a href="#plugin_hooks_filename_upload_form">upload_form</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_upload_options">upload_options</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_upload_process">upload_process</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_user_caption_params">user_caption_params</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_usermgr_footer">usermgr_footer</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_usermgr_header">usermgr_header</a></li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+
+<p><a class="back" href="#top">Back to top</a></p><hr />
+
+<a name="plugin_hooks_hooktype"></a>
+<h2>Plugin Hooks by Hook Type<a href="#plugin_hooks_hooktype" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>There currently are two different types of plugin hooks: <strong>actions</strong> and <strong>filters</strong>:</p>
+
+<a name="plugin_hooks_action"></a><h3>Action<a href="#plugin_hooks_action" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>The first type of hook is an action hook. Basically this allows for actions related to the plugin such as the following two hooks.</p>
+<pre class="cpg_code">CPGPluginAPI::action('plugin_configure',$installed,CPG_EXEC_NEW);
+CPGPluginAPI::action('plugin_cleanup',$uninstalled,$plugin_id);</pre>
+<p>These next two hooks are useful for running code that does not require anything to be exported.  These hooks have access to the global variables and functions inside of Coppermine.  These hooks will most likely be used to execute code that does not require an output.</p>
+<pre class="cpg_code">CPGPluginAPI::action('page_start',null);
+CPGPluginAPI::action('page_end',null);</pre>
+<p>These two hooks provide the ability to add a custom CAPTCHA validation. The third validation function is a filter, so don't forget to provide that one as well.</p>
+<pre class="cpg_code">CPGPluginAPI::action('captcha_comment_validate', null);
+CPGPluginAPI::action('captcha_contact_validate', null);</pre>
+<p> These two hooks allow plugin authors to output content before the thumbnail table starts and right after the closing tag of the thumbnail table.</p>
+<pre class="cpg_code">CPGPluginAPI::action('theme_thumbnails_wrapper_start', null);
+CPGPluginAPI::action('theme_thumbnails_wrapper_end', null);</pre>
+
+
+<a name="plugin_hooks_filter"></a><h3>Filter<a href="#plugin_hooks_filter" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>This group of plugin hooks is designed to manipulate data that will be used.  Normally this involves adding or removing data from the variable submitted to the filter.  This data can also be simply read from the variable.</p>
+<p>This first group of filters are used in a variety of places and are each unique.</p>
+<pre class="cpg_code">$info = CPGPluginAPI::filter('file_info',$info);
+$params = CPGPluginAPI::filter('user_caption_params', array('{USER_NAME}' => $user['user_name'],
+$matches = CPGPluginAPI::filter('plugin_block', $matches);
+$anycontent = CPGPluginAPI::filter('anycontent',ob_get_contents());
+$template = CPGPluginAPI::filter('template_html',$template);
+$template_header = str_replace('{META}','{META}'.CPGPluginAPI::filter('page_meta',''),$template_header);</pre>
+<p>This group of filters is very specific for manipulating the data of the thumbnails. These are named according to what they modify and are extremely obvious.</p>
+<div class="cpg_code code">$rowset = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumb_caption">thumb_caption</a>',$rowset);<br />
+$rowset = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumb_caption_regular">thumb_caption_regular</a>',$rowset);<br />
+$rowset = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumb_caption_lastcom">thumb_caption_lastcom</a>',$rowset);<br />
+$rowset = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumb_caption_lastcomby">thumb_caption_lastcomby</a>',$rowset);<br />
+$rowset = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumb_caption_lastup">thumb_caption_lastup</a>',$rowset);<br />
+$rowset = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumb_caption_lastupby">thumb_caption_lastupby</a>',$rowset);<br />
+$rowset = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumb_caption_topn">thumb_caption_topn</a>',$rowset);<br />
+$rowset = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumb_caption_toprated">thumb_caption_toprated</a>',$rowset);<br />
+$rowset = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumb_caption_lasthits">thumb_caption_lasthits</a>',$rowset);<br />
+$rowset = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumb_caption_random">thumb_caption_random</a>',$rowset);<br />
+$rowset = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumb_caption_search">thumb_caption_search</a>',$rowset);<br />
+$rowset = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumb_caption_lastalb">thumb_caption_lastalb</a>',$rowset);<br />
+$rowset = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumb_caption_favpics">thumb_caption_favpics</a>',$rowset);<br />
+$pic_title = CPGPluginAPI::filter('<a href="#plugin_hooks_thumb_html_title">thumb_html_title</a>', $row);<br />
+$pic_title = CPGPluginAPI::filter('<a href="#plugin_hooks_thumb_strip_html_title">thumb_strip_html_title</a>', $row);<br />
+$pic_row = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumb_data">thumb_data</a>',$pic_row);<br />
+$params = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumbnail_params">theme_display_thumbnails_params</a>', $params);<br />
+$footer = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_theme_thumbnails_footer">theme_thumbnails_footer</a>', $footer);<br />
+$params = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_theme_thumbnails_title">theme_thumbnails_title</a>', $param);</div>
+<p>These two filters are used specifically to manipulate the data of a picture.</p>
+<div class="cpg_code code">$CURRENT_PIC_DATA = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_add_file_data">add_file_data</a>',$CURRENT_PIC_DATA);<br />
+$CURRENT_PIC_DATA = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_file_data">file_data</a>',$CURRENT_PIC_DATA);</div>
+<p>These six filters allow you to modify the output html to display media.</p>
+<div class="cpg_code code">$pic_html = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_html_image_reduced_overlay">html_picture_image_reduced_overlay</a>',$pic_html);<br />
+$pic_html = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_html_image_reduced">html_picture_image_reduced</a>',$pic_html);<br />
+$pic_html = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_html_image_overlay">html_picture_image_overlay</a>',$pic_html);<br />
+$pic_html = CPGPluginAPI::filter('html_picture_image',$pic_html);<br />
+$pic_html = CPGPluginAPI::filter('html_picture_document',$pic_html);<br />
+$pic_html = CPGPluginAPI::filter('html_picture_other_media',$pic_html);</div>
+<p>If you want to do something (like converting the video to flv, taking a backup of file to remote server etc..) after a file is uploaded then this hook can be used.</p>
+<div class="cpg_code code">$CURRENT_PIC_DATA = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_add_file_data_success">add_file_data_success</a>',$CURRENT_PIC_DATA);</div>
+<p>The breadcrumb plugin:</p>
+<div class="cpg_code code">CPGPluginAPI::filter('<a href="#plugin_hooks_filename_post_breadcrumb">post_breadcrumb</a>',null);</div>
+<p>This plugin is very powerful because it gives access to the entire body of HTML that will be then directly returned to the user.  This filter can be used to remove parts of code or modify links for example.</p>
+<div class="cpg_code code">return CPGPluginAPI::filter('<a href="#plugin_hooks_filename_page_html">page_html</a>',$html);</div>
+<p>These two filters relate to headers.</p>
+<div class="cpg_code code">echo CPGPluginAPI::filter('<a href="#plugin_hooks_filename_usermgr_header">usermgr_header</a>','');<br />
+$template_header .= CPGPluginAPI::filter('<a href="#plugin_hooks_filename_gallery_header">gallery_header</a>','');</div>
+<p>These two filters relate to footers.</p>
+<div class="cpg_code code">echo CPGPluginAPI::filter('<a href="#plugin_hooks_filename_usermgr_footer">usermgr_footer</a>','');<br />
+$template_footer = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_gallery_footer">gallery_footer</a>','').substr($template, $gallery_pos);</div>
+<p>These two filters are meant for cleanup purposes. If there is any additional data related to a file and you want that data to be removed when a file is deleted then use these hooks.</p>
+<div class="cpg_code code">CPGPluginAPI::filter('<a href="#plugin_hooks_filename_before_delete_file">before_delete_file</a>', $pic);<br />
+CPGPluginAPI::filter('<a href="#plugin_hooks_filename_after_delete_file">after_delete_file</a>', $pic);</div>
+<p>This filter is a special one to add or modify meta albums</p>
+<div class="cpg_code code">$meta_album_params = CPGPluginAPI::filter('<a href="#plugin_hooks_meta_album">meta_album</a>', $meta_album_passto);</div>
+It works like this:
+<pre class="cpg_code">&lt;?php
+$meta_album_passto = array (
+        'album' =&gt; $album,
+        'limit' =&gt; $limit,
+        'set_caption' =&gt; $set_caption,
+);
+
+$meta_album_params = CPGPluginAPI::filter('<a href="#plugin_hooks_meta_album">meta_album</a>', $meta_album_passto);
+if ($meta_album_params['album_name']) {
+        $album_name = $meta_album_params['album_name'];
+        $count = $meta_album_params['count'];
+        $rowset = $meta_album_params['rowset'];
+        return $rowset;
+}</pre><br />
+A plugin needs three input variables to do its thing: <tt class="code">$album</tt>, <tt class="code">$limit</tt>, <tt class="code">$set_caption</tt> and it needs to modify three variables: <tt class="code">$album_name</tt>, <tt class="code">$count</tt>, and <tt class="code">$rowset</tt> (and remember that <tt class="code">$rowset</tt> is a multi-dimensional array itself)
+<hr />
+<p>These filters allow you to add buttons to the different menus.</p>
+<div class="cpg_code code">
+$admin_menu = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_admin_menu">admin_menu</a>',$html);<br />
+$sys_menu_buttons = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_sys_menu">sys_menu</a>',$sys_menu_buttons);<br />
+$sub_menu_buttons = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_sub_menu">sub_menu</a>',$sub_menu_buttons);</div>
+To add a button to the admin menu you can do the following:<br />
+<pre class="cpg_code">&lt;?php
+$thisplugin-&gt;add_filter('<a href="#plugin_hooks_filename_admin_menu">admin_menu</a>','add_admin_button');
+
+function add_admin_button($admin_menu){
+    $new_button = '&lt;div class="admin_menu admin_float"&gt;&lt;a href="./menu_link.php" title="menu link"&gt;MENU LINK&lt;/a&gt;&lt;/div&gt;';
+    $look_for = '&lt;!-- END export --&gt;';
+    $admin_menu = str_replace($look_for, $look_for . $new_button, $admin_menu); 
+    
+    return $admin_menu;
+}</pre><br />
+For the sys &amp; sub menus you have to take another approach:<br />
+<pre class="cpg_code">&lt;?php
+$thisplugin-&gt;add_filter('sub_menu','add_sub_button');
+
+function add_sub_button($menu) {
+    $new_button = array();
+    $new_button[0][0] = 'MENU LINK';
+    $new_button[0][1] = 'menu link';
+    $new_button[0][2] = './menu_link.php';
+    $new_button[0][3] = 'class_name';
+    $new_button[0][4] = '::';
+    $new_button[0][5] = 'rel="nofollow"';
+
+    array_splice($menu, count($menu)-1, 0, $new_button);
+
+    return $menu;
+}</pre>
+
+<p>These four hooks can be used to add a custom CAPTCHA validation that overrides the one built into Coppermine.</p>
+<div class="cpg_code code">
+$template_add_your_comment = CPGPluginAPI::filter('<a href="#plugin_hooks_captcha_comment_print">captcha_comment_print</a>', $template_add_your_comment);<br />
+$captcha_print = CPGPluginAPI::filter('<a href="#plugin_hooks_captcha_register_print">captcha_register_print</a>',$captcha_print);<br />
+$captcha_print = CPGPluginAPI::filter('<a href="#plugin_hooks_captcha_contact_print">captcha_contact_print</a>',$captcha_print);<br />
+$error = CPGPluginAPI::filter('<a href="#plugin_hooks_captcha_register_validate">captcha_register_validate</a>', $error);
+</div>
+
+<p>This hook can be used to modify the elements of the main page. Use it to allow differences in page layout (from home page) when visitor clicks on "Album list".</p>
+<div class="cpg_code code">
+$elements = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_main_page_layout">main_page_layout</a>', $elements);
+</div>
+
+<p>Use this hook to add information <em>after</em> the output of an IP address (only for the admin).</p>
+<div class="cpg_code code">
+$row['ip_detail'] = CPGPluginAPI::filter('<a href="#plugin_hooks_banning_ip_information">ip_information</a>', $row['ip_addr']);
+</div>
+<p><a class="back" href="#top">Back to top</a></p><hr />
+
+<a name="plugin_hook_examples"></a>
+<h2>Plugin Hook Examples<a href="#plugin_hook_example" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+
+<a name="plugin_hook_example_upload_method"></a>
+<h3>Adding an upload method<a href="#plugin_hook_example_upload_method" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>To add an upload method that administrators and users (if allowed) can use, use these 3 plugin hooks in concert:</p>
+<pre class="cpg_code">
+$thisplugin->add_filter('upload_options','myfunction_add_upload_option');
+$thisplugin->add_action('upload_form','myfunction_display_upload_form');
+$thisplugin->add_action('upload_process','myfunction_process_upload_form');
+</pre>
+<p>All 3 hooks are called from upload.php.  The first 'upload_options' allows you to add your upload method to the dropdown list displayed on the configuration panel and on the upload page (if allowed on the configuration panel).  Here are the relevant lines from upload.php:</p>
+<pre class="cpg_code">
+// Set up an array of choices for the upload method
+$upload_choices = array(
+    'swfupload'   => $lang_upload_php['upload_swf'],
+    'html_single' => $lang_upload_php['upload_single'],
+);
+// Filter upload choices to allow plugins to add upload methods
+$upload_choices = CPGPluginAPI::filter('upload_options',$upload_choices);
+</pre>
+<p>The key for your upload method must be a simple key (with no spaces or special characters) that can be used as a GET parameter to select your upload form.  The value that corresponds to this key is the label shown on the dropdown list.  Here's an example of a plugin function that uses this hook to add an upload choice to the dropdown box:</p>
+<pre class="cpg_code">
+function myfunction_add_upload_option($upload_choices) 
+{
+    $more_upload_choices = array('alt_upload' => 'Alternate Upload Mechanism');
+    return array_merge($upload_choices, $more_upload_choices);
+}
+</pre>
+<p>The next hook is 'upload_form' used to display the upload form for you upload method.  It is called whether or not your method is chosen, so you need to check this first, and return if your upload method is not chosen.  It is expected that you will display your upload form and then exit.  Here are the relevant lines that call this hook:</p>
+<pre class="cpg_code">
+    // Call active plugins for alternate upload forms
+    CPGPluginAPI::action('upload_form',array($upload_form,$upload_select));
+</pre>
+<p>An array of 2 elements is passed with the hook call.  The first element is  $upload_form which is the choice of upload method.  The second element is a dropdown list of all the upload methods which you should display with your upload form to be consistent with the default upload forms.  In your upload form, you need to include two hidden inputs: 'method' and 'plugin_process'.  The input 'method' must match the key provided in the 'upload_options' hook function.  The input 'plugin_process' must have a value of '1' to signal upload.php that it must process your upload form.  The two required inputs are shown here:
+</p>
+<pre class="cpg_code">
+&lt;input type="hidden" name="method" value="alt_upload" /&gt;
+&lt;input type="hidden" name="plugin_process" value="1" /&gt;
+</pre>
+<p>Here is a complete example of a plugin function that displays an upload form:</p>
+<pre class="cpg_code">
+function myfunction_display_upload_form($upload_settings) 
+{
+    list($upload_form, $upload_select) = $upload_settings;
+    if ($upload_form != 'alt_upload') {
+        return;
+    }
+    pageheader('Alternate Upload Form');
+    starttable('100%', cpg_fetch_icon('upload',2).'Upload Here'.$upload_select, 2);
+    echo &lt;&lt;&lt; EOT
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;form name="altuploadform" id="altuploadform" method="post" action="upload.php" enctype="multipart/form-data"&gt;
+                &lt;input type="hidden" name="method" value="alt_upload" /&gt;
+                &lt;input type="hidden" name="plugin_process" value="1" /&gt;
+                &lt;input type="submit" name="submit" value="submit" /&gt;
+            &lt;/form&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+
+EOT;
+    endtable();
+    pagefooter();
+    exit;
+}
+</pre>
+<p>The last plugin hook is 'upload_process' and is used to process the upload form.  As with 'upload_form', it is called whether or not your upload form is used, so you need to check this first.  Here are the relevant lines from the hook call:</p>
+<pre class="cpg_code">
+    // Call active plugins for alternate upload forms
+    CPGPluginAPI::action('upload_process',$upload_form);
+</pre>
+<p>As with 'upload_form', $upload_form is the choice of upload method.  Check this for your upload method, then respond appropriately.  You should also exit once you have processed your upload form.  Here is an example plugin function:</p>
+<pre class="cpg_code">
+function myfunction_process_upload_form($upload_form) 
+{
+    if ($upload_form != 'alt_upload') {
+        return;
+    }
+    pageheader('Alternate Upload Form');
+    starttable('100%', cpg_fetch_icon('upload',2).'Upload Here', 2);
+    echo &lt;&lt;&lt; EOT
+    &lt;tr&gt;
+        &lt;td&gt;
+            Alternate Upload Form Processed.
+        &lt;/td&gt;
+    &lt;/tr&gt;
+
+EOT;
+    endtable();
+    pagefooter();
+    exit;
+}
+</pre>
+<p><a class="back" href="#top">Back to top</a></p><hr />
+
+
+<a name="plugin_hook_example_theme_display_thumbnails"></a>
+<h3>Add tags for thumbnails display<a href="#plugin_hook_example_theme_display_thumbnails" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>To add tags that will be processed in $template_thumbnail_view in the function theme_display_thumbnails (in theme.php), use the filter hook 'theme_display_thumbnails_params':</p>
+<pre class="cpg_code">
+$params = CPGPluginAPI::filter('theme_display_thumbnails_params', $params);
+</pre>
+<p>Here's an example of a plugin function that adds more thumbnail information that can be tagged in $template_thumbnail_view:</p>
+<pre class="cpg_code">
+function myfunction_add_params($params) 
+{
+    global $thumb;
+    $more_params = array(
+        '{PID}'         => $thumb['pid'],
+        '{TITLE}'       => $thumb['title'],
+        '{DESCRIPTION}' => $thumb['description'],
+        '{PWIDTH}'      => $thumb['pwidth'],
+        '{PHEIGHT}'     => $thumb['pheight'],
+        '{FILEPATH}'    => $thumb['filepath'],
+        '{FILENAME}'    => $thumb['filename'],
+        '{FILESIZE}'    => $thumb['filesize'],
+    );
+    return array_merge($params,$more_params);
+}
+</pre>
+<p>To manipulate the title row of the thumbnail table, use</p>
+<pre class="cpg_code">$param = CPGPluginAPI::filter('theme_thumbnails_title', $param);</pre>
+<p>This plugin hook has been added in cpg1.5.3 only - plugins that rely on the existence of this hook must set the <a href="dev_plugins.htm#plugin_writing_core_files_configuration_plugin_cpg_version">minimum requirements</a> accordingly.</p>
+<p>To add the new tags to $template_thumbnail_view in your plugin, you can override the theme template by using the 'page_start' hook.  Some users may have a theme that uses this template and in that case, your plugin documentation should list the new tags your plugin uses so the user can add these tags to their theme template.  You would also need to disable your plugin from overriding this template.  Ideally, this would be done on your plugin configuration panel.</p>
+
+
+<div id="doc_footer">
+    <div class="doc_info_wrapper">
+        <span id="doc_last_changed">$LastChangedDate$</span>
+        <span id="doc_revision">$Revision$</span>
+    </div>
+</div>
+</body>
+</html>

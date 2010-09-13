@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Administration - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Administration of Coppermine: As most other applications that have some sort of user management, Coppermine comes with tasks that can only be performed by an administrator." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+  $Date$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<div id="doc_en_only">No translation available</div>
+
+<a name="administration"></a><h1>Administration of Coppermine<a href="#administration" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>As most other applications that have some sort of <a href="users.htm#user_cp">user management</a>, Coppermine comes with tasks that can only be performed by an administrator. It is advisable not to name the admin account just &quot;admin&quot; or &quot;administrator&quot;, but to use your real name or nick name that you would like to see appear next to your uploads and comments.<br />
+It is mandatory that you memorize your admin account data and/or keep it at some safe place; although you might have set up your browser to memorize the password, you may need it at some later stage.<br />
+Wether an account has admin powers or not is being determined by group membership: members of the built-in group &quot;administrators&quot; have admin powers. You can manage your groups on the &quot;<a href="groups.htm#group_cp">groups control panel</a>&quot;.<br />
+Technically, it is possible to have more than one gallery administrator, but it is recommended to carefully consider giving admin powers to others: only grant admin powers to users you <strong>fully</strong> trust.</p>
+<p>When logged in as admin, you will see an <a href="admin_menu.htm">admin menu</a> that displays all additional options and menu entries that you (as admin) have compared to regular (non-admin) users or guests.</p>
+<p>Basic as well as advanced settings that have an impact on your entire gallery are being determined on the config screen - some of them are mandatory to set up properly when running Coppermine in the first place, so it's advisable to carefully look into the <a href="configuration.htm#admin">configuration</a> section.</p>
+<p>In Coppermine, <a href="files.htm">files</a> are being organized within a category/album structure. To set categories and albums up and maintain them, use the <a href="categories.htm#cat_cp">categories control panel</a> and the <a href="albums.htm#albmgr">Album Manager</a>.</p>
+<p>Bulletin Board Code (also known as &quot;<a href="bbcode.htm">BBCODE</a>&quot;) can be used to add links, email addresses and some basic formats to text fields like description fields.</p>
+<p>Your Coppermine gallery is capable to extract picture meta data and store them in the database. You can manage the meta data in EXIF format using the <a href="exif.htm#exif_manager">EXIF manager</a>.</p>
+<p>Additional functionaltity that is not needed for all galleries but helpful for many can be added using <a href="plugins.htm">plugins</a>.</p>
+<p>Coppermine can apply <a href="watermarking.htm#watermark">watermarking</a> to uploaded images to minimize content theft.</p>
+
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>PHP-content - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Coppermine is PHP-driven, which means that pages are being created dynamically on the server when requested and sent to the client. Don't worry though: you don't need to know PHP at all to be able to run Coppermine - that's the advantage of a pre-made script. However, there may be some who want to customize their Coppermine-installation to do additional things that can only be accomplished by adding or modifying the PHP code." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<a name="php-content"></a><h1>Dynamic (PHP-driven) content<a href="#php-content" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>Coppermine is PHP-driven, which means that pages are being created dynamically on the server when requested and sent to the client. Don't worry though: you don't need to know PHP at all to be able to run Coppermine - that's the advantage of a pre-made script. However, there may be some who want to customize their Coppermine-installation to do additional things that can only be accomplished by adding or modifying the PHP code. If you're just getting started with Coppermine, you don't have to read this section - only advanced stuff will be explained here:</p>
+
+<a name="php-content_anycontent"></a><h2>Using anycontent.php<a href="#php-content_anycontent" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>To come up with some custom output within the <a href="theme_template.htm#theme_template_gallery">{GALLERY}</a>-block, you can use the file "anycontent.php" that resides within the coppermine root folder. Edit it (using a plain text editor) and upload it to your webserver. By default, the anycontent block is disabled. To enable it (and specify the place where it is supposed to show on the main page), use &quot;<a href="configuration.htm#changing">the content of the main page</a>&quot; in Coppermine's config.<br />
+The output of what you have in anycontent.php will be displayed on the index page only (i.e. the category list and album list pages). Therefore, it doesn't make sense to use anycontent.php to display a site logo that is supposed to display on <em>all</em> pages of your gallery. Instead, you could for example display a welcome message to new users that explains what can be found on your gallery.</p>
+<p>You could for example use anycontent to display a welcome message. However, you wouldn't want your welcome message to appear on all index pages for all category; usually, you want the welcome only to be displayed on your gallery's start page, which equals the root category (or no category at all), and you only want to see it displayed for visitors who are not already logged in.<br />
+This being said, here's some potential sample content for anycontent.php:
+<pre>&lt;?php
+  // The constant USER_ID is being populated by Coppermine.
+  // It is not defined if the visitor is a guest.
+  // It is set to the user's ID if he is a registered user and logged in.
+  if (!USER_ID) {
+    // Inside this curly bracket, the code only will get executed if the above condition was met
+	// , i.e. if we have a guest here (someone who isn't logged in):
+	// Let's determine if we're inside the root category (i.e. if there is no paricular category set)
+	if ($superCage->get->keyExists('cat') == FALSE) {
+		echo 'Hello guest. Why not <a href="register.php">register</a> (it is free!) to see even more pictures?';
+	} 
+  }
+?&gt;</pre>
+
+<a name="php-content_header_footer"></a><h2>Custom header and footer<a href="#php-content_header_footer" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<h4>Purpose</h4>
+<p>The custom header and footer feature of Coppermine is supposed to be used to include bits of static or dynamic HTML into all of your Coppermine pages. Intended use could be to add a dynamic overall site menu for the navigation on your entire page into Coppermine. You can specify the place where the included content should be inserted by editing themes/your_theme/template.html and editing the location of the {CUSTOM_HEADER} and {CUSTOM_FOOTER}-tokens. In most cases, the default position within the HTML template (right after the <tt class="code">&lt;body&gt;</tt>-tag and right before the <tt class="code">&lt;/body&gt;</tt>-tag) should be fine though; only move it around if you have understood the basic concept.</p>
+<h4>Concept</h4>
+<p>Here's how the custom header/footer includes work: if you have specified a working and valid path to your include file in Coppermine's config (&quot;<a href="configuration.htm#admin_theme_custom_header_path_start">Path to custom header include</a>&quot; and &quot;<a href="configuration.htm#admin_theme_custom_footer_path_start">Path to custom footer include</a>&quot;), the code that resides in the include file is being inserted right at the place the placeholder token resides (the generated content replacing the placeholder token in the output) when the template is being parsed (i.e. each time a Coppermine page is being displayed).</p>
+<h4>Possible content</h4>
+<p>The include file can contain HTML, PHP (or a mixture of both), but you have to understand that you can't include all kinds of PHP code: in fact the same limitations apply that apply for all PHP includes - after the file headers have been sent, you can't include PHP code that tries to mess with the file header (e.g. cookie stuff). Be carefull as well with opening database connections: when a new one is opened, connection to the first one is lost.</p>
+<p>This may sound very geekish for non-coders, so let's take a look at some examples:</p>
+
+<div class="cpg_example">The content of your custom header include file could be:<br />
+<pre class="code">
+&lt;div style=&quot;background-color:blue&quot;&gt;
+  &lt;a href=&quot;/&quot;&gt;Site home page&lt;/a&gt; -
+  &lt;a href=&quot;/contact_form.htm&quot;&gt;Contact us&lt;/a&gt; -
+  &lt;a href=&quot;http://google.com&quot;&gt;Search the web&lt;/a&gt;
+&lt;/div&gt;
+</pre>
+</div>
+Subsequently, this overall navigation would appear at the top of every Coppermine page. So far so good you might say, but what's the benefit? Well, in itself, there is no great advantage here, as you could as well have added this piece of code to template.html - the result would be the same. However, you could use the custom include file from other, non-coppermine pages on your website as well (using PHP's <a href="http://www.php.net/manual/en/function.include.php" class="external" rel="phpnet">include</a>-command) to provide a unique, overall navigation for your entire website. If the navigation needs to be changed, you only need to change it once, in one file.</p>
+<h4>Dynamic content</h4>
+<p>Not too bad, but there are even better things you could do: you can have dynamic content, e.g. content based on certain conditions to be met (or not).<br />
+Often, you may want to display different content based on the visitor's status (registered user vs. guest), so let's come up with a simple switch:
+<pre class="code">&lt;?php
+  // The constant USER_ID is being populated by Coppermine.
+  // It is not defined if the visitor is a guest.
+  // It is set to the user's ID if he is a registered user and logged in.
+  if (!USER_ID) {
+    // here's what the guest will see:
+    echo 'Hello guest. Why not register (it is free!) to see even more pictures?';
+  }
+?&gt;</pre></p>
+
+<a name="php-content_theme"></a><h2>Theme-based dynamic content (theme.php)<a href="#php-content_theme" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>The most recommended method to come up with dynamic content is creating/modifying a custom theme. You can add PHP code to theme.php, but not to template.html! For details, refer to the <a href="theme.htm">theme section</a> of the documentation.</p>
+<p class="cpg_message_info">Note: people ask frequently how to add PHP codes into template.html - the answer always is the same: you can't! It doesn't matter what file name (or extension) you use: renaming template.html to template.php won't do anything particularly usefull, even if you changed the corresponding PHP code in the core. Coppermine simply doesn't work that way: you can't have PHP directly in template.html. You have to create a custom placeholder token and actually populate that placeholder with code that you have to come up with in theme.php. This is only meant for people with intermediate PHP skills - if you don't have those skills, go with one of the methods mentioned on this page.</p>
+
+<a name="php-content_core"></a><h2>Modifying core files<a href="#php-content_core" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Core files (PHP files that come with the Coppermine package) could be modified as well to achieve custom features. However, the dev team strongly recommends to use this option only if you're absolutely sure what you're doing: although that you may not be planning to update Coppermine in the near future, an update may become mandatory. The reason is quite simple: every non-trivial piece of software contains bugs. This certainly is the case for Coppermine as well. Although we try to deliver a flawless application, there will almost certainly be bugs that will be fixed in future maintenance releases. Therefore, it will be mandatory to keep your Coppermine-install up-to-date. Updating your Coppermine install will require you to replace all core files with the new ones that come with the maintenance release. Subsequently, your custom modifications of core files would be lost, so you would have to re-apply your hacks.<br />
+This being said, you should think twice before starting to modify core files: almost all custom modifications can be accomplished by performing the recommended method to create or modify a custom theme instead of modifying core files. If you must use core file hacks, make sure to comment your modifications and to take notes of them. After upgrading, you could use a diff viewer to re-apply your custom hacks easily.</p>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

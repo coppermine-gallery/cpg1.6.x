@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Adding config options - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="This part of the documentation is not meant for end users of Coppermine, but only for developers. There is no support for this section, it comes as-is." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="robots" content="noindex" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<div id="doc_en_only">No translation available</div>
+
+<a name="dev_config_add"></a><h1>Adding config options<a href="#dev_config_add" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>This page is supposed to explain how to add (or edit) a config option.</p>
+<a name="dev_config_add_target_audience"></a><h2>Target audience<a href="#dev_config_add_target_audience" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>This part of the documentation is not meant for end users of Coppermine, but only for developers. There is no support for this section, it comes as-is.</p>
+
+<a name="dev_config_history"></a><h2>History<a href="#dev_config_history" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>In versions prior to cpg1.5.x, the language file contained part of the logic how the config page looked and worked (section separation, help-icon links, input field type). This caused confusion for translators and kept the language fallback function from fully working as expected.</p>
+<p>Additionally, every new config option that displayed a link to another page or that was supposed to offer different text for radio buttons required devs to come up with a separate function that made the code of the config file become more and more bloated.</p>
+<p>In an effort to clean up the config screen and allow future enhancements, the config page (admin.php) has been re-coded.</p>
+
+<a name="dev_config_new_features"></a><h2>New features<a href="#dev_config_new_features" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>The end user will see little changes on the new config screen - most changes happened &quot;under the hood&quot;. Most obvious change is the regex check that is performed when the form is being submit: invalid entries are being caught and subsequently won't be written to the database. The end user will see a visualization what config setting needs review.</p>
+
+<a name="dev_config_step_by_step"></a><h2>Step by Step<a href="#dev_config_step_by_step" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Apply the following steps when adding a config option during the development stage:</p>
+
+
+<a name="dev_config_step_basiq_sql"></a><h3>Basic.sql<a href="#dev_config_step_basiq_sql" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Add the needed sql queries to sql/basic.sql for fresh installs. The config entries should exist in the same order they will be displayed on the config page. Find the line with the existing query that you want your entry to appear after and add it below.</p>
+<div class="cpg_example">
+If you want your new config option to be displayed beneath the &quot;Enable plugins&quot; entry, find <tt class="code">INSERT INTO CPG_config VALUES ('enable_plugins', '1');</tt> and add your new line beneath it.
+</div>
+
+<a name="dev_config_step_update_sql"></a><h3>Update.sql<a href="#dev_config_step_update_sql" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>To make sure your new config option is not only taken into account for fresh installs, but for updates as well, you will have to add your new query line that you already added to basic.sql to update.sql as well. The only difference is that you don't sort the entries in the same way they are supposed to appear on the config screen, but add them at the very bottom of update.sql</p>
+
+<a name="dev_config_step_array"></a><h3>Admin.inc.php<a href="#dev_config_step_array" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>As suggested above, the logic of the config entry has been moved from the language file to a separate, language-independent include file. Edit include/admin.inc.php and add a new line to the array definition there are suggested below.</p>
+<div class="cpg_example">
+If you want your new config option to be displayed beneath the &quot;Enable plugins&quot; entry, find <pre class="code">    'enable_plugins' => array(
+      'type' => 'radio',
+      'help_link' => 'f=configuration.htm&amp;as=admin_general_enable-plugins&amp;ae=admin_general_enable-plugins_end',
+      'options' => array($lang_common['no'],
+                         $lang_common['yes'].'&nbsp;&nbsp;(<a href="pluginmgr.php">'.$lang_admin_php['manage_plugins'].'</a>)'
+                         )
+    ),</pre> and add your new array definition below it (into a new line).
+</div>
+<p>Currently, the following array fields exist:</p>
+<table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra">
+  <tr>
+    <th valign="top" align="left">array key</th>
+    <th valign="top" align="left">Description</th>
+    <th valign="top" align="left">Needed?</th>
+    <th valign="top" align="left">Possible content</th>
+    <th valign="top" align="left">Dependancies</th>
+  </tr>
+  <tr>
+    <td valign="top">type</td>
+    <td valign="top">Determines the type of input field</td>
+    <td valign="top">mandatory</td>
+    <td valign="top">textfield, checkbox, radio, hidden, password, select, select_multiple</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top">default_value</td>
+    <td valign="top">Allow users to reset individual input fields to the default value (instead of resetting the entire config screen)</td>
+    <td valign="top">optional</td>
+    <td valign="top">Any valid config table content (text, numerals)</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top">help_link</td>
+    <td valign="top">When the help icon display is enabled, the content of this field determines what the help pop-up will contain.<br /><div class="cpg_example">Example content: <tt class="code">f=foo.htm&amp;as=bla&amp;ae=bar</tt></div></td>
+    <td valign="top">mandatory</td>
+    <td valign="top">The f-parameter determines the file name (needs to reside within the docs folder), the as-parameter determines the starting anchor and the ae-parameter the ending anchor.</td>
+    <td valign="top">none</td>
+  </tr>
+  <tr>
+    <td valign="top">width</td>
+    <td valign="top">Determines the width of text input fields.</td>
+    <td valign="top">optional</td>
+    <td valign="top">Any width entry that is CSS-valid, e.g. <tt class="code">70%</tt> (width in percent) or <tt class="code">20</tt> (width in pixels). Default (if no value is given) will be 100%.</td>
+    <td valign="top">Only applies for the types &quot;textfield&quot; and &quot;password&quot;. Possible interaction with the size key</td>
+  </tr>
+  <tr>
+    <td valign="top">size</td>
+    <td valign="top">Number of characters for the width of the text input fields.</td>
+    <td valign="top">optional</td>
+    <td valign="top">Can contain any valid entry for the size parameter of HTML's &lt;input type="text" /&gt;-field</td>
+    <td valign="top">Possible interaction with the width-key.</td>
+  </tr>
+  <tr>
+    <td valign="top">maxlength</td>
+    <td valign="top">Maximum number of characters allowed to enter into textfield</td>
+    <td valign="top">optional</td>
+    <td valign="top">Any valid entry for the maxlength attribute of HTML's &lt;input type="text" /&gt;-field</td>
+    <td valign="top">Regex-field</td>
+  </tr>
+  <tr>
+    <td valign="top">regex</td>
+    <td valign="top">Regular expression that the value entered will be checked against (using PHP's preg_match) when the form is being submit. If the regular expression returns false, the config field change will be rejected</td>
+    <td valign="top">optional</td>
+    <td valign="top"></td>
+    <td valign="top">maxlength-field</td>
+  </tr>
+  <tr>
+    <td valign="top">regex_not</td>
+    <td valign="top">Regular expression that the value entered will be checked against (using PHP's preg_match) when the form is being submit (similar to the field &quot;regex&quot;) with the difference/exception that the config value the user has entered will be rejected if the regular expression entered into &quot;regex_not&quot; <strong>does</strong> match the field.<br />
+    Use it to make sure the end user changes the content of a field once registered to something that makes sense (instead of keeping the default value).</td>
+    <td valign="top">optional</td>
+    <td valign="top"></td>
+    <td valign="top">none</td>
+  </tr>
+  <tr>
+    <td valign="top">bridged</td>
+    <td valign="top">Determine entries that are disabled / not being taken into account when coppermine is bridged</td>
+    <td valign="top">optional</td>
+    <td valign="top">If the entry is set to &quot;hide&quot;, the field will be greyed out and disabled.</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top">options</td>
+    <td valign="top">Sub-array determines the &lt;option&gt;-entries for a select field or the possible choices for radio buttons</td>
+    <td valign="top">mandatory for 'type' => 'select' and 'radio'</td>
+    <td valign="top"><strong>For radio buttons:</strong><br />
+    Non-associative array, that contains the possible options, starting from the option that corresponds to 0 onwards.<br /><div class="cpg_example"><tt class="code">$lang_common['no'],<br />
+$lang_common['yes'].': '.$lang_admin_php['debug_everyone'],<br />
+$lang_common['yes'].': '.$lang_admin_php['debug_admin']</tt></div><hr />
+    <strong>For select-fields:</strong><br />
+    Either an associative array with the scheme ('option_value' => 'option_label') or a non-associative array ('foo', 'bar', 'whatever').<br />
+    <div class="cpg_example"><tt class="code">'options' => array(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25)</tt></div>
+    </td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td valign="top">additional_description</td>
+    <td valign="top">Specifies additional text to be displayed after the actual config option name (in the left column of the table). This should allow shorter config options names and alternative ways of describing a config setting for those who are too lazy to click the help icon.</td>
+    <td valign="top">optional</td>
+    <td valign="top">Both hardcoded text as well as a reference to a language string.</td>
+    <td valign="top">none</td>
+  </tr>
+  <tr>
+    <td valign="top">end_description</td>
+    <td valign="top">Specifies additional text to be displayed after the input field. Should be used for short strings or links to other pages.</td>
+    <td valign="top">optional</td>
+    <td valign="top">Both hardcoded text as well as a reference to a language string.</td>
+    <td valign="top">none</td>
+  </tr>
+  <tr>
+    <td valign="top">preserve_when_resetting</td>
+    <td valign="top">If set to '1', the setting will remain as-is even if the entire config is reset to factory defaults. Currently only used for the legacy feature &quot;password encryption&quot;, as it is a one-way feature that can not be undone.</td>
+    <td valign="top">optional</td>
+    <td valign="top">1</td>
+    <td valign="top">none</td>
+  </tr>
+  <tr>
+    <td valign="top">only_display_if</td>
+    <td valign="top">Was used to make sure that the one-way setting &quot;enable_encrypted_passwords&quot; would be only displayed if the config value is zero. As the storage of unencrypted passwords has been dropped for cpg1.5.x, there is currently no use for this setting.</td>
+    <td valign="top">optional</td>
+    <td valign="top">Any valid content of the config field that it is checked against</td>
+    <td valign="top">none</td>
+  </tr>
+  <tr>
+    <td valign="top">only_display_if_not</td>
+    <td valign="top">Used to make sure that the one-way setting &quot;thumb_pfx&quot; will be only displayed if the config value differs from the given value, thus making sure that only upgraded galleries with different settings get displayed. If the value is default, it won't be displayed.</td>
+    <td valign="top">optional</td>
+    <td valign="top">Any valid content of the config field that it is checked against</td>
+    <td valign="top">none</td>
+  </tr>
+  <tr>
+    <td valign="top">linebreak</td>
+    <td valign="top">If set, the value of the entry will be added to the HTML output for all radio buttons after each option. Use it for option labels that need a lot of space to make the output better readable.</td>
+    <td valign="top">optional</td>
+    <td valign="top">&lt;br /&gt;</td>
+    <td valign="top">type = radio</td>
+  </tr>
+  <tr>
+    <td valign="top">warning</td>
+    <td valign="top">When set, a warning will be displayed that the config setting mustn't be changed when there are already pics in the database</td>
+    <td valign="top">optional</td>
+    <td valign="top">Any reference to the language file (or even hard-coded text) will do - it will be displayed in the JavaScript alert box and onmouseover.</td>
+    <td valign="top">none</td>
+  </tr>
+  <tr>
+    <td valign="top">min</td>
+    <td valign="top">If set, there will be spin buttons next to the field and the minimum value will be set to what you specify here. Additionally, the value will be checked when the form is submit.</td>
+    <td valign="top">optional</td>
+    <td valign="top">Numeric</td>
+    <td valign="top">type = textfield</td>
+  </tr>
+  <tr>
+    <td valign="top">max</td>
+    <td valign="top">If set, there will be spin buttons next to the field and the maximum value will be set to what you specify here. Additionally, the value will be checked when the form is submit.</td>
+    <td valign="top">optional</td>
+    <td valign="top">Numeric</td>
+    <td valign="top">type = textfield</td>
+  </tr>
+  <tr>
+    <td valign="top">step</td>
+    <td valign="top">If set, the step size of the spin buttons will differ (default is 1).</td>
+    <td valign="top">optional</td>
+    <td valign="top">Numeric</td>
+    <td valign="top">type = textfield, min or max set</td>
+  </tr>
+</table>
+
+<a name="dev_config_step_language_file"></a><h3>Language file<a href="#dev_config_step_language_file" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>During the development stage, only lang/english.php needs to be kept up to date. Edit the needed language strings to the array $lang_admin_php in the language file.</p>
+<p>Remember to tag your newly-added string with the comment that shows your line is new.</p>
+
+<a name="dev_config_step_documentation"></a><h3>Documentation<a href="#dev_config_step_documentation" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>The goal is to have a help icon available for all config settings. Subsequently, you should at least come up with a short section for the <a href="configuration.htm">config page</a> of the documentation that explains what the config setting you introduce does, what the default values are etc.<br />Remember to add the anchors for the help icon to work properly.</p>
+<p>This step is not mandatory in technical terms, but it will help both developers as well as end users to understand what your config option actually does. If your config options needs to be explained in more detail, consider creating a separate page within the documentation that covers details about the feature you added. Refer to the page <a href="dev_documentation.htm#dev_documentation_edit">Editing the documentation</a> for details.</p>
+
+<a name="dev_config_todo"></a><h2>To Do<a href="#dev_config_todo" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>There are some additional features for the config page that should be implemented in the near future</p>
+<ul>
+  <li>Change the data taken from include/admin.inc.php from an array definition to XML. Should be easy to implement once we have XML support</li>
+  <li>Add a config section for plugins: allow plugin authors to use the plugin page to control their plugin as well. End users will then have <strong>one</strong> config screen where they can configure their gallery, as a separation between a core config and a plugin config feels alien for most non-coders</li>
+  <li>Improve the regex checks</li>
+</ul>
+
+<br clear="all" />
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

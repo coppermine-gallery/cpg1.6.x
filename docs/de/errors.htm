@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Errors - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="robots" content="noindex" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<div id="doc_en_only">No translation available</div>
+
+<a name="errors"></a><h1>Errors<a href="#errors" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>As with all applications, you may encounter various error messages if something goes wrong with the script or if you (or your users) have made a mistake handling the application.</p>
+
+<a name="errors_types"></a><h2>Error types<a href="#errors_types" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>There are three types of errors that you may encounter:
+         <ul>
+             <li>Soft errors</li>
+             <li>Hard errors</li>
+             <li>Unhandled errors</li>
+         </ul>
+</p>
+
+<a name="errors_soft"></a><h3>Soft Errors<a href="#errors_soft" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Soft errors usually happen if you (or the end user) will make a handling mistake. Coppermine will display an error message, but you can continue to browse the gallery. The soft errors are fully localized (i.e. they will be displayed in the language the user has chosen), so the programmers of Coppermine have (more or less) anticipated that such an error may happen under certain circumstances.</p>
+<div class="cpg_example">
+     If you haven't set up at least one album where your uploads can go to and you click on the upload link, you will see there error message <tt class="code">Sorry there is no album where you are allowed to upload files</tt>.
+</div>
+<p>If you get a soft error and you're not sure what to do (maybe because the error message doesn't mean much to you), read up the corresponding section of this documentation and search the support board, as it is very likely that someone else has had the same issue you had.</p>
+<p>In some sections of the documentation there are trouble shooting tipps that you should read up first if you get an error message, for example when you have issues with <a href="upload_troubleshooting.htm#upload_trouble">uploads</a> or <a href="bridging.htm#integrating_support_start">bridging</a>.</p>
+
+<a name="errors_hard"></a><h3>Hard Errors<a href="#errors_hard" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Hard errors are messages that won't go away, usually because something is broken and needs fixing. This is usually the case if something is wrong with the database. As a result, you will see the dreaded &quot;<a href="#errors_fatal">Fatal Error</a>&quot; message that usually doesn't mean much to unexperienced users.</p>
+<p>If you obtain a hard error, you should act immediately and fix the error message <acronym title="as soon as possible">asap</acronym>.</p>
+<p>Hard errors usually indicate that something is wrong which the programmers of coppermine could not foresee, that's why only a generic error message is being displayed. Read on to find out what you need to do.</p>
+
+<a name="errors_unhandled"></a><h3>Unhandled Errors<a href="#errors_unhandled" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Unhandled errors are the ones that usually are most tricky to solve, as they make the application coppermine crash in mid-air, without a meaningfull error message that could tell users what is wrong. This is usually the case if you get a blank page or just a template error.</p>
+
+<a name="errors_fatal"></a><h2>Fatal error<a href="#errors_fatal" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>The message &quot;Fatal Error&quot; is a generic error message that just says that there is something wrong. It usually is a <a href="#errors_hard">hard error</a> - you won't be able to continue using coppermine unless you fix the reason for the error message. The reasons for such a generic error message are manifold. For security reasons (to make sure that a possible malevolent attacker of the site could not abuse potential vulnerabilities), the &quot;real&quot; error message is not being displayed by default, but only the generic &quot;Fatal Error&quot; message. For you as coppermine admin it's mandatory to find out what actually is wrong. To do so, you need to <a href="configuration.htm#debug_mode">enable debug_mode</a> in Coppermine's <a href="configuration.htm#admin">config</a>, as this will result in the &quot;real&quot; error message being displayed.</p>
+
+<a name="errors_debug_mode_config"></a><h3>Enabling debug_mode in Config<a href="#errors_debug_mode_config" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>To enable debug_mode, go to coppermine's config and enable debug_mode there by expanding the section &quot;<a href="configuration.htm#admin_misc">Miscellaneous settings</a>&quot;, scroll to the bottom of the screen and select &quot;<a href="configuration.htm#debug_mode">Enable debug mode</a>&quot; there. Leave &quot;<a href="configuration.htm#admin_misc_debug_notices">Notices display</a>&quot; turned off.</p>
+<p>In some cases, you might not be able to access the config page any longer to enable debug_mode as suggested in this section, so you will have to enable debug_mode manually. Refer to the next section to find out how this is being done.</p>
+
+<a name="errors_debug_mode_manual"></a><h3>Manually enabling debug_mode<a href="#errors_debug_mode_manual" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>If you need to enable debug_mode, but can no longer access the config screen (maybe because of the fatal error that stops the config page from displaying or maybe because your admin login doesn't work as expected no longer), you can enable debug_mode manually as well.</p>
+<p>To accomplish this, you will need a third-party tool like <a href="http://phpmyadmin.net" rel="external" class="external">phpMyAdmin</a> to directly manipulate your database. Many webhosts provide phpMyAdmin or a similar tool in their webcontrol panel. You may want to take a look there or ask your webhost if they provide it to you for free. If they don't, you should install that application, as it is helpful not only for troubleshooting coppermine, but all kinds of database administration purposes. Be aware though that this tool is very powerfull and directly manipulates the database and can therefore delete or otherwise damage your database if not used properly. Among other things, phpMyAdmin can be used to back up your database as well. Please refer to the phpMyAdmin documentation on all questions related to the install, setup and use of phpMyAdmin - the coppermine support board definitely is not the right place to ask questions how to set up phpMyAdmin.</p>
+<p>This being said, let's assume that you already have phpMyAdmin available or that you have successfully installed it right now. To actually enable debug mode manually, follow these steps:</p>
+<ul>
+    <li>Point your browser to the folder phpMyAdmin resides in on your server (e.g. <tt class="code">http://example.com/phpMyAdmin/</tt>)</li>
+    <li>Depending on the security mechanisms that you have set up during phpMyAdmin's initial configuration, you may have to authenticate your access. This authentication is very important to make sure that no unauthorized access to phpMyAdmin takes place; as suggested before, a malevolent user could ruin your entire site if he got access to a database manipulation tool like phpMyAdmin.</li>
+    <li>If you have more than one database available, choose it at the top of the left frame. If you have only one database, all tables that reside in your database will instantly be visible in the left frame</li>
+    <li>Click in the left frame on the database table that contains coppermine's configuration. The name of the table is &quot;cpg15x_config&quot; or similar (depending on the table prefix you chose during installation).</li>
+    <li>In the main frame of phpMyAdmin (the most right one), click on the tab &quot;Browse&quot; at the very top</li>
+    <li>The individual entries of the table should be displayed. Scroll down to see the line &quot;debug_mode&quot;. As phpMyAdmin usually only displays a particular number of rows per page, you might have to continue to the second or third page of entries, using the navigation at the top or bottom of the screen</li>
+    <li>Once you have found the row labelled &quot;debug_mode&quot;, click on the edit icon (the pencil icon) in that row.</li>
+    <li>On the edit screen, change the value from &quot;0&quot; (which means &quot;Don't display debug_mode&quot;) to &quot;1&quot; (which means &quot;Display debug_mode for everyone&quot;) and then save your changes by clicking on the &quot;Go&quot; button.</li>
+    <li>You can now leave phpMyAdmin and return to your coppermine screen - debug_mode should be enabled</li>
+    <li>With debug_mode enabled, reproduce the error message: this time, you should not only get the generic &quot;Fatal error&quot;-message, but an explanation as well what actually went wrong.</li>
+</ul>
+<p>Now you can use the actual error message that indicates what is wrong to troubleshoot - fix the error if you can. If you can't fix it by yourself, search the coppermine support board for the error message (the generic part, not the specific part that only applies to your database/site). It is very likely that someone else used to have the same issues you experience - heed the advice given on the thread that describes your error message.</p>
+<p>Once you're done and the error message has gone away, don't forget to turn debug_mode off again. If your gallery is fully operational again (it should be after having fixed the error), you can go to coppermine's config and turn debug_mode off. If you can't access coppermine's config (maybe because you have forgotten your admin account details), use the same method described above to turn debug_mode off manually (using phpMyAdmin): browse coppermine's config table, search for &quot;debug_mode&quot;, edit that entry and change &quot;<tt class="code">1</tt>&quot; back to &quot;<tt class="code">0</tt>&quot;.</p>
+
+<a name="errors_messages"></a><h2>Common error messages<a href="#errors_messages" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>There are some error messages that are often being encountered. Although they are more or less self-explanatory, some users appear not to be able to make heads or tails out of them, so here is an incomplete list with suggested fixes.</p>
+
+<a name="errors_messages_database"></a><h3>Database-related error messages<a href="#errors_messages_database" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra">
+  <tr>
+    <th align="left">Error message</th>
+    <th align="left">Possible cause</th>
+    <th align="left">Suggested fix</th>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="cant_read_write_to_file"></a><tt class="code">Can't create/write to file '/tmp/#sql_45d5_0.MYI'</tt><a href="#cant_read_write_to_file" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      MySQL can't create a temporary file for the result set in the given temporary directory.
+    </td>
+    <td valign="top">
+      Alter the tmpdir variable to point to a writable directory.  It requires changing the tmpdir line in the my.cnf file, usually in the [mysqld] section (tmpdir = /writable/dir, where /writable/dir is a directory to which you can write).<br />Ask your webhost to make the above changes.
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="cantOpenMYI"></a><tt class="code">Can't open file: 'yourPrefix_tableName.MYI'</tt><a href="#cantOpenMYI" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      Your database table is corrupted.
+    </td>
+    <td valign="top">
+      This is not a coppermine issue, but a mySQL issue. It just may affect a database table used by Coppermine.<br />
+      Use your website's Control Panel to repair the table, or use phpMyAdmin to execute this sql query: <tt class="code">REPAIR TABLE yourPrefix_tableName</tt><br />
+      (Replace yourPrefix_tableName with your table name, e.g. cpg145_pictures)<br />
+      <strong>If you don't understand the solution, ask your webhost to make the above changes.</strong>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="mySQL_error28StorageEngine"></a><tt class="code">Got error 28 from storage engine</tt><a href="#mySQL_error28StorageEngine" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      No space left on device, i.e. the hard disk where your database resides on is full.
+    </td>
+    <td valign="top">
+      This is not a coppermine issue, but a mySQL issue. Contact your webhost or the person who is in charge of running the server where your database resides. Tell that person about the error message you get - he/she should know what to do. Basically, you have to free up some space or clean the database. Please note that you can not do this on your own when webhosted - only the server operator can perform this action.
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="mySQL_crashedTable"></a><tt class="code">Table 'yourPrefix_tableName' is marked as crashed and should be repaired</tt><a href="#mySQL_crashedTable" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      Your database table is corrupted.
+    </td>
+    <td valign="top">
+      This is not a coppermine issue, but a mySQL issue. It just may affect a database table used by Coppermine.<br />
+      Use your website's Control Panel to repair the table, or use phpMyAdmin to execute this sql query: <tt class="code">REPAIR TABLE yourPrefix_tableName</tt><br />
+      (Replace yourPrefix_tableName with your table name, e.g. cpg145_pictures)<br />
+      <strong>If you don't understand the solution, ask your webhost to make the above changes.</strong> If this happens frequently, there is something fishy with your webserver - ask your webhost for support as well.
+    </td>
+  </tr>
+</table>
+
+<a name="common_php_errors"></a><h3>Common PHP errors<a href="#commonPHPerrors" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>There are a lot of people (especially PHP newbies) that post questions like <tt class="code">I get the error &quot;Parse error: parse error in XXX&quot;</tt> and don't know what to do about it. That's why I translated this list of common errors (and a solution how to fix them) from the original german article in <a href="http://www.drweb.de/" rel="external" class="external">Dr. Web</a></p>
+<table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra">
+  <tr>
+    <th align="left">Error message</th>
+    <th align="left">Possible cause</th>
+    <th align="left">Suggested fix</th>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="common_php_errors_parse"></a><tt class="code">Parse error: parse error in C:\Apache\htdocs\read.php on line 8</tt><a href="#common_php_errors_parse" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      This error message refers to an error in the PHP syntax.
+    </td>
+    <td valign="top">
+      You probably forgot to end a line with <tt class="code">;</tt> or you have too many brackets opened or closed (<tt class="code">{</tt>).
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="common_php_errors_unsupported_function"></a><tt class="code">Fatal error: Call to unsupported/undefined function ... in C:\Apache\htdocs\read.php on line 8</tt><a href="#common_php_errors_unsupported_function" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      This error means that the function your script was going to use isn't defined in the current PHP version with modules, or if you're using user-defined functions that your function hasn't been defined yet.
+    </td>
+    <td valign="top">
+      This is usually caused if you forgot to include the function definition.
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="common_php_errors_wrong_parameter"></a><tt class="code">Warning: Wrong parameter ... for ... in C:\Apache\htdocs\read.php on line 8</tt><a href="#common_php_errors_wrong_parameter" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      You have handed over too many (or the wrong) parameters to the function.
+    </td>
+    <td valign="top">
+      If it's a built-in php-function, check the <a href="http://www.php.net/manual/en/funcref.php" rel="external" class="phpnet"> manual; </a> to see if it's a user-defined function, then recheck your code.
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="common_php_errors_header"></a><tt class="code">Warning: Cannot add header information - header was already sent ... in C:\Apache\htdocs\read.php on line 4</tt><a href="#common_php_errors_header" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      You had some text output first (e.g. the doctype declaration or <tt class="code">&lt;html&gt;</tt>) and called the function header() afterwards.
+    </td>
+    <td valign="top">
+      This is most often the case when using cookie stuff. Remember you can not use header() twice!
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="common_php_errors_overflow"></a><tt class="code">Parse error: parser stack overflow in C:\Apache\htdocs\read.php</tt><a href="#common_php_errors_overflow" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      PHP is out of memory.
+    </td>
+    <td valign="top">
+      This usually happens if you built an eternal loop, especially when using include statements.
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="common_php_errors_no_such_file"></a><tt class="code">Warning: fopen("file.txt","r+") - No such file or directory</tt><a href="#common_php_errors_no_such_file" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      The requested file or directory doesn't exist.
+    </td>
+    <td valign="top">
+      Check the spelling (accuracy counts here).
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="common_php_errors_safe_mode"></a><tt class="code">SAFE MODE Restriction in effect. The script whose uid is XXX is not allowed to access...</tt><a href="#common_php_errors_safe_mode" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      The safe mode is switched on. Some functions in the upload systems can't be used.
+    </td>
+    <td valign="top">
+      Usually your webhost has put safe mode in place (often not correctly configured). Try switching <a href="configuration.htm#admin_picture_thumb_advanced_silly_safe_mode_start">silly_safe_mode</a> on.
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <a name="common_php_errors_bom"></a>Funny characters like <tt class="code">&iuml;&raquo;&iquest;</tt> shine through the output on some or all pages<a href="#common_php_errors_bom" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+    </td>
+    <td valign="top">
+      A <a href="http://en.wikipedia.org/wiki/Byte_order_mark" rel="external" class="external">Byte Order Mark</a> (BOM) has crept into one of your coppermine files
+    </td>
+    <td valign="top">
+      This usually happens if you edit unicode-encoded files (which is what coppermine's core files are) with an editor that is not designed to be used to edit Unicode files. Most notoriously notepad.exe (which comes with Microsoft's Windows). The BOM might shine through on the page that you have manually edited, but it may show as well on pages that you're not aware of. Undo your edit. If you can't remember what you have edited, search for the BOM in all of your files. Emurasoft's application <a href="http://www.emurasoft.com/replall/" rel="external" class="external">Replace in files</a> is a good tool to accomplish this on Windows-driven machines.
+    </td>
+  </tr>
+ </table>
+
+<a name="errors_messages_upload"></a><h3>Upload-related error messages<a href="#errors_messages_upload" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>There is an entire sub-section dedicated to <a href="upload_troubleshooting.htm#upload_error_messages">upload-related error messages</a> on the <a href="upload_troubleshooting.htm#upload_trouble">upload troubleshooting</a> page.</p>
+
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Uploading - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="There are several methods to upload files within Coppermine. You (as gallery admin) should use FTP-upload plus batch-add (only the admin can do this). Regular users are supposed to use the regular http upload or (if they have Windows XP) the XP Publisher." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+  $Date$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Inhoudstafel</a>
+</div>
+<div id="doc_en_only">No translation available</div>
+
+<a name="upload_http"></a><h1>Uploading by HTTP<a href="#upload_http" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>Regular HTTP uploads use the browser's built-in capabilities to upload files to a server. The maximum file size is determined by two basic factors: the speed and amount of data the web-browser can upload before timing out, and the allowed file size determined by server settings. Note that those settings are <strong>not</strong> determined by coppermine, but the server config (php.ini). Users who are webhosted usually can't edit php.ini, so they will have to live with the settings the webserver admin has set up. Those who actually run their own server and can edit php.ini should take a look at the settings that are being explained <a href="upload_troubleshooting.htm#upload_trouble_server-sided_restrictions">on the upload troubleshooting page</a> if (large) http uploads fail.</p>
+
+<p>It should be obvious that the files have to be uploaded somewhere (into some folder) on your webserver - this is the albums folder within the folder you installed coppermine on your server. The HTTP uploads go into subfolders of the "userpics" folder (which resides within the "albums" folder). Obviously, the coppermine upload script needs write permissions to upload the files there. This is why you have to change <a href="install_permissions.htm#permissions">permissions</a> on the albums folder and everything within it during coppermine install - make it writable for the user the webserver runs under. This is done using the CHMOD command on Unix/Linux based servers. If you experience issues with uploading, make sure that you have set the permissions correctly.</p>
+
+<a name="upload_http_interface"></a><h2>Upload interfaces<a href="#upload_http_interface" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Coppermine comes with two upload interfaces: a traditional one that is using plain HTML methods and allows uploading one file at a time and an advanced, flash-driven interface that allows several files to be uploaded from one screen.</p>
+
+<a name="upload_http_interface_flash"></a><h3>Flash-driven multiple-files upload interface<a href="#upload_http_interface_flash" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>The flash-driven interface offers more features and is easier to use, that's why it's recommended to use that interface as a default.</p>
+<a name="upload_http_interface_flash_usage"></a><h4>Usage<a href="#upload_http_interface_flash_usage" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<ol>
+	<li>Select an album from the album dropdown list</li>
+	<li>Click the "Browse" button and navigate to the file you want to upload</li>
+	<li>Select more files to upload by repeating step 3</li>
+	<li>Click the "Continue" button after having all files that you want to upload (The button will appear after you have uploaded at least one file).</li>
+	<li>You'll be sent to a screen where you can enter details about the uploaded files. After filling in, submit that form using the "Apply changes" button at the bottom of that form.</li>
+</ol>
+<a name="upload_http_interface_flash_end"></a>
+
+   
+<a name="upload_http_interface_html"></a><h3>HTML-driven single-file upload interface<a href="#upload_http_interface_html" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>The HTML-driven single uploads form is recommended for those who don't have Flash installed (for whatever reasons) and particularly to <a href="upload_troubleshooting.htm#upload_trouble">trouble-shoot upload issues</a>.</p>
+
+<a name="upload_http_interface_html_usage"></a><h4>Usage<a href="#upload_http_interface_html_usage" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<ol>
+	<li>Select an album from the album dropdown list</li>
+	<li>Click the "Browse" button and navigate to the file you want to upload</li>
+	<li>Enter file title, description and keywords into the corresponding fields if applicable</li>
+	<li>Click the "Upload file" button to submit the form and actually upload the file.</li>
+</ol>
+<a name="upload_http_interface_html_end"></a>
+
+<a name="upload_http_end"></a>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

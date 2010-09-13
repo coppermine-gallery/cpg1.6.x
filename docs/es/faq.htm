@@ -1,0 +1,280 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Frequently Asked Questions (FAQ) - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Frequently Asked Questions (FAQ)" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+  $Date$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<div id="doc_en_only">No translation available</div>
+
+<a name="faq"></a><h1>Frequently Asked Questions (FAQ)<a href="#faq" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>With thousands of users, it's not surprising that so many of the same questions are asked on the <a href="http://coppermine-gallery.net/forum/">support forums for Coppermine Photo Gallery</a>. So, to help facilitate your website development, we've  included this basic <acronym class="tool" title="FAQ=Frequently Asked Questions">FAQ</acronym> file on common issues. Please be sure to refer to this FAQ first before posting questions on the forum. Failure to do so will, could, well ... , reflect unkindly on you and could result in some negative "<em>karma</em>."</p>
+<p>This FAQ page is the <em>second best</em> resource to understand Coppermine - it's mandatory that you read the entire <a href="index.htm">documentation</a> first that comes with your Coppermine package before asking questions.</p>
+
+
+
+<a name="faq_toc"></a><h2>Table of contents:<a href="#faq_toc" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<ul>
+	<li><h3><a href="#faq_setup">Setup / Configuration</a></h3>
+		<ul>
+			<li><a class="content" href="configuration.htm#admin_album_list_content">I don't want to show the <strong>last uploads</strong> and/or <strong>random pictures</strong> on the start page. How do I edit what's shown on the start page of coppermine?</a></li>
+			<li><a class="content" href="albums.htm#album_createPublicAlbum">How do I create an <strong>album</strong> that <strong>anyone</strong> can add photos to?</a></li>
+			<li><a class="content" href="export.htm#backup_database">How can I <strong>backup</strong> my coppermine database?</a></li>
+			<li><a class="content" href="#noFullsizePopup">The <strong>fullsize-pic doesn't pop up</strong> when clicking on the intermediate size pic. What's wrong?</a></li>
+			<li><a class="content" href="#preventHotlinks">How can I prevent other sites linking directly to the pictures in my gallery instead of the gallery page?</a></li>
+			<li><a class="content" href="#onlyregisteredcomments">How do I let guests, not only registered users to put <strong>comments</strong> on pictures?</a></li>
+			<li><a class="content" href="upload_troubleshooting.htm#upload_trouble_server-sided_restrictions">I <strong>can't upload big pics</strong>. What's wrong?</a></li>
+			<li><a class="content" href="#cookie">I can't <strong>login</strong> to Coppermine. What's wrong?</a></li>
+			<li><a class="content" href="#sortAlbum">How can I change the <strong>sorting order of the albums</strong>?</a></li>
+			<li><a class="content" href="#deleteIntermediates">I don't use the <strong>intermediate pictures</strong> anymore. How can I <strong>delete</strong> them to gain disk space?</a></li>
+			<li><a class="content" href="albums.htm#album_howAlbumsFolderWork">How do <strong>albums and folders</strong> work in coppermine?</a></li>
+			<li><a class="content" href="albums.htm#album_howMoveAlbum">How can I <strong>move albums from one category to another</strong>?</a></li>
+			<li><a class="content" href="export.htm#moving">How do I <strong>move a gallery</strong>?</a></li>
+			<li><a class="content" href="#oneFileMultipleAlbums">How do I <strong>show the same file in multiple albums</strong>?</a></li>
+		</ul>
+	</li>
+	<li><h3><a href="#hacks">Add-ons / Modifications / Hacks</a></h3>
+		<ul>
+			<li><a class="content" href="#jumpToPrivateAlbum">How can I send a user <strong>directly to his private album</strong> once he logs in?</a></li>
+			<li><a class="content" href="#linksInCustomFields">How do I enable clickable <strong>links in custom user fields</strong>?</a></li>
+			<li><a class="content" href="#addFooterBeforePoweredBy">How can I <strong>add</strong> some output <strong>directly before</strong> the line &quot;Powered by Coppermine&quot;?</a></li>
+			<li><a class="content" href="errors.htm#common_php_errors">Common PHP errors (and how to get rid of them...)</a></li>
+			<li><a class="content" href="#renameTemplateHtml">Can I <strong>rename template.html to template.php</strong> to include <strong>PHP code</strong> in my template?</a></li>
+			<li><a class="content" href="#preventPictureStealing">How can I prevent users from saving (stealing) my pictures?</a></li>
+		</ul>
+	</li>
+	
+	<li><h3><a href="#support_board">Coppermine Support board</a></h3>
+		<ul>
+			<li><a class="content" href="#phpNewbie">I <strong>don't know</strong> PHP/mySQL...</a></li>
+			<li><a class="content" href="#lamesupport">I've posted my question a while ago, but <strong>nobody answers</strong>. What the...?</a></li>
+			<li><a class="content" href="#howtoask">How should I write my <strong>question</strong>?</a></li>
+			<li><a class="content" href="#firstSteps">I've run into trouble. What should I do first (<strong>before posting</strong> on the board)?</a></li>
+			<li><a class="content" href="#nonEnglishPosting">Hey, by looking at your profile I can see you're German/French/Whatever. Can I post a question in that <strong>language</strong>?</a></li>
+			<li><a class="content" href="#emailSupport">May I email/<acronym title="private message" class="tool">pm</acronym>/<acronym title="instant message" class="tool">im</acronym> you for <strong>support</strong>?</a></li>
+			<li><a class="content" href="#aboutTeam"><strong>Who</strong> are you anyway?</a></li>
+		</ul>
+	</li>
+</ul>
+
+<a name="faq_setup"></a><h2>Setup / Configuration<a href="#faq_setup" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+
+<a name="noFullsizePopup"></a>
+<h3>The <strong>fullsize-pic doesn't pop up</strong> when clicking on the intermediate size pic. What's wrong?<a href="#noFullsizePopup" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>If you are certain that your original file is larger in dimensions than the settings you selected for intermediate sized pictures, there's a good chance that you over-edited your theme's template.html file: make sure that the line <tt class="code">{JAVASCRIPT}</tt> inside /themes/yourtheme/template.html is still there to make the pop-up window work...<br />
+The &lt;head&gt;-part of your template file should look like this:<br />
+<pre>&lt;head&gt;
+&lt;title&gt;{TITLE}&lt;/title&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset={CHARSET}&quot; /&gt;
+{META}
+&lt;link rel=&quot;stylesheet&quot; href=&quot;themes/your_theme_name/style.css&quot; /&gt;
+{JAVASCRIPT}
+&lt;/head&gt;</pre>
+- If you're still unsure about this, just compare your theme's template.html with the default theme that comes with coppermine .</p><hr />
+<a name="preventHotlinks"></a>
+<h3>How can I prevent other sites from linking directly to the pictures in my gallery instead of the gallery page?<a href="#preventHotlinks" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>If your webhost supports the use of .htaccess files (you will need to ask them), you can prevent &quot;hotlinking&quot; by creating an .htaccess file in the albums folder.<br />
+Open your text editor and add the following lines, then save the file as .htaccess :
+<pre>SetEnvIfNoCase Referer &quot;^http://www.yourdomian.com/&quot; locally_linked=1
+SetEnvIfNoCase Referer &quot;^http://yourdomain.com/&quot; locally_linked=1
+SetEnvIf Referer &quot;^$&quot; locally_linked=1
+&lt;FilesMatch &quot;\.(gif|png|jpe?g)$&quot;&gt;
+  Order Allow,Deny
+  Allow from env=locally_linked
+&lt;/FilesMatch&gt;</pre>
+This will only work on linux/unix and apache servers AND only if you're allowed to use .htaccess files by your webhost or if you run your own server and &quot;mod_rewrite&quot; is enabled on your server . </p><hr />
+
+<a name="onlyregisteredcomments"></a>
+<h3>How do I allow all guests, not just registered users, to add <strong>comments</strong> to pictures?<a href="#onlyregisteredcomments" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<ul>
+    <li>log in as admin</li>
+    <li>admin controls enabled</li>
+    <li>groups</li>
+    <li>&quot;Anonymous&quot; - &quot;Can post comments&quot; - &quot;yes&quot;</li>
+    <li>Apply modifications</li>
+</ul>
+<p>To change the settings on a per album basis, first, complete the above steps, then:</p>
+<ul>
+    <li>Log in as admin</li>
+    <li>Confirm that you have admin controls enabled</li>
+    <li>In Category view, click on the album of choice</li>
+    <li>Select &quot;Properties&quot;</li>
+    <li>Set&quot;Permissions for this album&quot; - &quot;Visitors can post comments&quot; - &quot;Yes&quot;</li>
+    <li>&quot;Update album&quot;</li>
+</ul>
+<hr />
+
+<a name="cookie"></a>
+<h3>I can't <strong>login</strong> to Coppermine. What's wrong?<a href="#cookie" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>This is most likely a cookie issue:
+<ul>
+<li>If you're running Internet Explorer 6, you'll have to enable the acceptance of cookies. Click on &quot;Tools&quot; - &quot;Internet Options&quot; - &quot;Privacy&quot; and add your site to the list of sites that are trusted, or set the slider to a lower level.</li>
+<li>Sometimes IE will not handle Cookies properly. Close your browser, try deleting all local cookies manually and start your browser again</li>
+<li>Check if you're running a software that interferes with acceptance of cookies like personal firewalls (ZoneAlarm, Tiny, Cookie Washer etc.) and turn them off to see if cookies are accepted then</li>
+<li>Try using another browser (like <a href="http://www.opera.com/" class="external">Opera</a>, which is rather small to download and can be removed easily). It's a generally a good idea to have some different browsers on your local machine to check if your site is displayed correctly not only in your favourite browser</li>
+<li>If you're using subdomains and the dev version of coppermine or some mod on a different subdomain (like gallery.yoursite.com and board.yoursite.com) this could also cause problems: a subdomain is a different domain (in fact foo.com and bar.com are subdomains of the <acronym class="tool" title="top level domain">tld</acronym> &quot;.com&quot;, so regarding cookies they are as different domains as bbs.yoursite.com and comics.yoursite.com). Of course you can &quot;hack some sense&quot; into the scripts, but usually bbs are hard to trick to make them more hack-proof.</li>
+</ul></p><hr />
+
+<a name="sortAlbum"></a>
+<h3>How can I change the <strong>sorting order of the albums</strong>?<a href="#sortAlbum" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>By default the albums appear in the order they were created. If you want to adjust the sorting order, do the following:
+<ul>
+<li>Log in as admin;</li>
+<li>select &quot;Albums&quot; from the admin menu strip;</li>
+<li>choose the category whose albums you want to sort from the dropdown list;</li>
+<li>highlight an album by clicking on it once;</li>
+<li>then use the up and down buttons to change the position. </li>
+<li>Click &quot;apply modifications&quot;.</li>
+<li>Confirm the message &quot;Are you sure you want to make these modifications ?&quot; with &quot;OK&quot;</li>
+</ul></p><hr />
+
+<a name="deleteIntermediates"></a>
+<h3>I don't use the <strong>intermediate pictures</strong> anymore. How can I <strong>delete</strong> them to gain disk space?<a href="#deleteIntermediates" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Why would you want to do that? Deleting the intermediate pics would disable many of the great features that make coppermine what is today. The option to send ecards, to add comments to pics, to rate pics, to display exif information, just to name a few. If you really want to save space, opt to delete your original files using the Admin Tools menu option.  Doing this will allow your users to enjoy all of coppermine's features with the exception of viewing full-sized images.  In the end, it will probably save you more space as well.  Just be sure to set your intermediate sized picture settings in CONFIG to a size that you can live with.</p>
+<p>If you really must remove the intermediate sized pics, take a look at the section &quot;<a href="start.htm#getting_resizing_recommended_nointermediate">Allow full-size pop-ups with maximum space saving</a>&quot;.</p><hr />
+
+<a name="oneFileMultipleAlbums"></a>
+<h3>How do I <strong>show the same file in multiple albums</strong>?<a href="#oneFileMultipleAlbums" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>The <strong>Album Keyword</strong> in <a href="http://coppermine-gallery.net/demo/cpg14x/docs/index.htm#album_prop">Album Properties</a> is used to link images from one album into another. Using this method, files/images can be displayed in various albums while the file itself need only exists in one album on your webserver.  You simply upload a file to one album as you would normally do, then assign one or more keywords to the file. The keyword function reads blank spaces between words as a 'break' and assumes that these words are separate words.  If you must use phrases for your keywords, connect them with an underscore or by using the ascii space holder ctrl+Alt+0160 (NOTE: the latter option only works with latin based character sets.)  Each album can only have ONE (1) keyword or keyword phrase.  All pictures residing in different albums that you would like to be displayed in this album must have the same keyword or keyword phrase in their respective keyword fields.  Pictures, unlike albums, can have multiple keywords or keyword phrases separated by spaces. This provides you with the option to display pictures in many albums.  For the visitor of these albums, it will appear as if the file/image had been uploaded to each. </p>
+<p>If you use album keywords to display images/files in more than one album, enabling the Config option, Show number of linked files, will display additional information for the album stats. That is, if an album doesn't only contain &quot;regular&quot; files, but files linked via the "album keyword" option as well, the number of linked files will be displayed separately like this "3 files, last one added on Oct 07, 2004<em>, 3 linked files, 6 files total</em>".</p>
+<br /><div class="totop">[<a href="#top" class="nodeco">top of page</a>]</div><hr />
+
+<a name="hacks"></a><h2>Add-ons / Modifications / Hacks<a href="#hacks" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+
+
+<a name="jumpToPrivateAlbum"></a>
+<h3>How can I send a user <strong>directly to his private album</strong> once he logs in?<a href="#jumpToPrivateAlbum" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>edit<br /><tt class="code">login.php</tt><br />and search for<br />
+<tt class="code">pageheader($lang_login_php['login'],&quot;&lt;META http-equiv=\&quot;refresh\&quot; content=\&quot;3;url=$referer\&quot;&gt;&quot;);</tt><br />
+<br />and add <strong>before</strong> it<br />
+<tt class="code">$referer = 'index.php?cat='.(FIRST_USER_CAT+$USER_DATA['user_id']); </tt><br /></p><hr />
+<a name="linksInCustomFields"></a>
+<h3>How do I enable clickable <strong>links in custom user fields</strong>?<a href="#linksInCustomFields" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Edit displayimage.php and change<br />
+<tt class="code">$info[$CONFIG['user_field'.$i.'_name']] = make_clickable($CURRENT_PIC_DATA['user'.$i]); </tt><br />
+into<br />
+<tt class="code">$info[$CONFIG['user_field'.$i.'_name']] = bb_decode($CURRENT_PIC_DATA['user'.$i]); </tt><br />&nbsp;<br />
+This will allow you to use BBCodes in the custom fields: you can then have something like<br />
+<tt class="code">[url]http://www.somesite.com/foo/bar.php?whatever=42[/url]</tt><br />
+or<br />
+<tt class="code">[url=http://www.somesite.com/foo/bar.php?whatever=42]link to some site![/url]</tt><br />in your custom user fields (the display of which, of course, has to be enabled in the config page, begin with).<br /></p><hr />
+
+
+<a name="addFooterBeforePoweredBy"></a>
+<h3>How can I <strong>add</strong> some output <strong>directly before</strong> the line &quot;Powered by Coppermine&quot;?<a href="#addFooterBeforePoweredBy" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Edit /themes/yourtheme/theme.php, look for <tt class="code">echo $template_footer</tt> and add the stuff you want to output in a line <strong>before</strong> it, like <tt class="code">echo '&lt;span class=&quot;footer&quot;&gt;&lt;a href=&quot;http://www.mylink.com/foo.htm&quot;&gt;My Link&lt;/a&gt;&lt;/span&gt;';</tt></p>
+<p>Alternatively, <a href="theme_template.htm#theme_template_html">edit template.html</a> or even <a href="theme_copyright.htm">edit the credits tag</a> itself.
+<hr />
+
+<a name="renameTemplateHtml"></a>
+<h3>Can I rename template.html to template.php to include PHP code in my template?<a href="#renameTemplateHtml" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>No, this is simply not the way coppermine works; for &quot;normal&quot; pages the name of the extension tells the webserver whether the file should be parsed by the PHP interpreter. The template files within the themes folder are not being parsed this way - the extension .html was just chosen to make editing easier. You can not have PHP code in the template file, no matter how you name it - that's all there is to it!</p><hr />
+
+<a name="preventPictureStealing"></a>
+<h3>How can I prevent users from saving (stealing) my pictures?<a href="#preventPictureStealing" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>You can not completely prevent users from stealing your pics - that's the way the www works: if a picture is being displayed in the browser, the user already has a copy of it on his hard drive. There are however some methods to make it harder for newbie users to steal your pics:
+<ul>
+    <li>Add a watermark to your images before you upload them</li>
+    <li>Apply the built-in <a href="configuration.htm#admin_watermarking">watermark</a>. Please note that applying online-watermarks will result in a high server load.</li>
+    <li>Prevent Internet Explorer to show the image toolbar when a user hovers over a pic with the mouse. Edit themes/yourtheme/template.html, find <tt class="code">&lt;meta http-equiv="Pragma" content="no-cache" /&gt;</tt> and add after it <tt class="code">&lt;meta http-equiv="imagetoolbar" content="no" /&gt;</tt></li>
+    <li>Use one of the many &quot;no right-click&quot; scripts that are available. Be adviced though that those scripts are silly in the first place, as they will only keep unexperienced users away from stealing your pics. The dev team doesn't recommend applying no-right-click scripts.</li>
+</ul>
+<br /></p>
+<br />
+<div class="totop">[<a href="#top" class="nodeco">top of page</a>]</div><hr />
+
+
+
+<br />&nbsp;<br />
+<a name="support_board"></a><h2>Coppermine Support board<a href="#support_board" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+These are (alas) not-so-frequently-asked-questions on the <a href="http://forum.coppermine-gallery.net/">support board</a>. Before posting on the Support board (or, in fact, any board), please read this section:
+<a name="phpNewbie"></a>
+<h3>I <strong>don't know</strong> PHP/mySQL...<a href="#phpNewbie" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>No problem with that, everyone stars as a newbie. <strong></strong>Just don't start each and every posting by stating &quot;I'm a newbie&quot;, &quot;I don't know anything about PHP&quot; etc.<br />Usually, one can acertain that from your question itself. There's no need to apologize. Most of us can still remember when we were in your shoes.</p><hr />
+<a name="lamesupport"></a>
+<h3>I've posted my question a while ago, but <strong>nobody answers</strong>. What the...?<a href="#lamesupport" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>The support board is <strong>not</strong> a hotline. Although there are many visitors to the site, only a few do actually support - on a unpaid, voluntary basis. Yes, we don't receive remuneratio for our contributions and we each have a life, a job, family and more. We are away sometimes, as well. So, please, be patient, read the docs and search the boards while you are waiting.<br />If you don't get an answer to your question:
+<ul>
+<li>make sure you have given us enough time to react (days, not hours!)</li>
+<li>maybe nobody knows the answer to your problem</li>
+<li>maybe your question has been asked very often</li>
+<li>maybe your posting has been rude or impolite and you're ignored for that reason</li>
+<li>maybe you requested a feature that requires a lot of coding, and none of those who are able to do it have a need for the feature</li>
+</ul></p><hr />
+<a name="howtoask"></a>
+<h3>How should I write my <strong>question</strong>?<a href="#howtoask" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>If you have a question, make sure you provide as much information as possible:
+<ul>
+<li>a link to your gallery, with a test account ID and test account password, is most often the only way to help - provide it with your question, or even better: edit your profile on the support board and enter the url of your page there!</li>
+<li>when addressing server issues, make sure to provide information on your server (<acronym class="tool" title="operation system">OS</acronym>, server, PHP version, mySQL version, gd lib version, safe mode on/off?). Most information can be retrieved by <a href="#VersionGD">phpinfo()</a></li>
+<li>if it's a client issue, give us information at least to your client's <acronym class="tool" title="operation system">OS</acronym> and browser</li>
+<li>Give us a screenshot, if necessary</li>
+<li>use a proper subject line: state in the subject line what your question is actually about! Most supporters are reluctant to answer to a posting that has a silly subject line like &quot;I have a question&quot; or &quot;Install problem&quot; or &quot;feature request&quot; or &quot;help me pleeeeaaaase&quot;</li>
+</ul></p><hr />
+<a name="firstSteps"></a>
+<h3>I've run into trouble. What should I do first (<strong>before posting</strong> on the board)?<a href="#firstSteps" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p><ul>
+<li>read the readme that comes with the coppermine distribution</li>
+<li>read the documentation</li>
+<li>read this FAQ</li>
+<li><a href="http://coppermine-gallery.net/forum/index.php?action=search">Search</a> the support board</li>
+<li>enable debug mode (log in as admin, config, debug mode)</li>
+<li>choose the right support board: if you're running the phpnuke-port of coppermine, don't post in the support board for the standalone version and vice versa</li>
+</ul></p><hr />
+<a name="nonEnglishPosting"></a>
+<h3>Hey, by looking at your profile I can see you're German/French/Whatever. Can I post a question in that <strong>language</strong>?<a href="#nonEnglishPosting" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>If you are posting in the English support boards, please do not post in some other language - in this way, others may benefit from your question (and the answers you receive ), too. Don't be afraid to write &quot;poor english&quot; - no one will laugh at you, and most of our visitor's first language isn't english to begin with!</p>
+<p>We have <a href="http://coppermine-gallery.net/forum/index.php?board=37.0">language-specific support boards</a> for Chinese, French, German, Italian,Persian and Spanish.</p><hr />
+<a name="emailSupport"></a>
+<h3>May I email/<acronym title="private message" class="tool">pm</acronym>/<acronym title="instant message" class="tool">im</acronym> you for <strong>support</strong>?<a href="#emailSupport" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>No you mustn't! Post your question on the <a href="http://coppermine-gallery.net/forum/">Coppermine support board</a> (publicly) - if we (the community) don't find a solution <strong>and</strong> and individual supporter has the time <strong>and</strong> the individual supporter wants to do so, the supporter willll email/pm/im <em>you</em>!<br />
+</p><hr />
+
+<a name="aboutTeam"></a>
+<h3><strong>Who</strong> are you anyway?<a href="#aboutTeam" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>We are a group of people who decided to form a team to develop Coppermine further - check the <a href="http://coppermine-gallery.net/team/">team</a> page for details...</p><hr />
+
+
+<br />&nbsp;<br />
+
+<p>This FAQ is a work in progress, please contribute in the <a href="http://coppermine-gallery.net/forum/">Coppermine Photo Gallery Support Board</a> (don't contact dev team members or supporters to ask for fixes of your Coppermine install). Please report any bugs, typos etc.<br />Check the online-version of this document for updates!<br />Have fun!</p>
+
+
+
+
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>

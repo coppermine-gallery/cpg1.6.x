@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Categories - Coppermine Photo Gallery - Documentation &amp; manuel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="fr" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="Avec Coppermine, les fichiers téléchargés vont aller dans des albums. Les albums peuvent contenir des fichiers, mais pas sous-albums. Les albums peuvent aller dans d'autres catégories. Les catégories peuvent contenir des sous-catégories et des albums, mais ils ne peuvent pas contenir de fichiers. Par la suite, les catégories sont utilisées pour organiser votre galerie - utiliser les pour regrouper vos albums en unités logiques. C'est à vous en tant qu'administrateur de galerie d’organiser  une structure des catégories logique qui permettra à vos utilisateurs finaux une navigation aisée." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.5.9
+  $HeadURL$
+  $Revision$
+
+
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation et manuel</h1>
+<div id="toc">
+<a href="toc.htm">Table des matières</a>
+</div>
+
+<a name="cat"></a><h1>Categories<a href="#cat" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>Dans Coppermine, les <a href="files.htm">fichiers</a> téléchargés sont placés dans des <a href="albums.htm">albums</a>. Les albums peuvent contenir des fichiers, mais pas de sous-albums. Les albums être placés  dans d'autres catégories. Les catégories peuvent contenir des sous-catégories et des albums, mais ils ne peuvent <strong>pas</strong> contenir de fichiers.</p>
+<p>Par la suite, les catégories sont utilisées pour organiser votre galerie - utilisez les pour regrouper vos albums en unités logiques. C'est à vous en tant qu'administrateur de galerie d’organiser une structure des catégories logique qui permettra à vos utilisateurs finaux une navigation aisée.</p>
+<p>Si vous n'avez pas besoin de catégories, ne les utilisez pas: vous pouvez créer des albums à la racine de votre galerie (pas de catégorie).</p>
+<a name="cat_cp"></a><h2>Le panneau de configuration des catégories<a href="#cat_cp" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<img src="images/catmgr.png" border="0" width="400" height="291" alt="" title="Le panneau de contrôle des catégories" align="right" style="padding-left:5px;" />
+<p>Le gestionnaire de catégories est disponible pour les administrateurs. Seul l'administrateur peut créer des catégories.</p>
+<p>Ce gestionnaire vous permet d'éditer et de modifier vos catégories.</p>
+
+<a name="cat_cp_page_controls"></a><h3>Panneau de configuration<a href="#cat_cp_page_controls" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<p>Le panneau de configuration des catégories se compose de trois sections: la section ordre de tri tout en haut, la section <a href="#cat_cp_page_controls_categories">Gérer les catégories</a> au milieu, où vous pouvez modifier l'ordre de vos catégories,  les déplacer, et la dernière section &quot;Mettre à jour / créer la catégorie&quot; en bas, où vous spécifiez le nom et la description d'une catégorie.</p>
+
+<a name="cat_cp_page_controls_sort"></a><h4>La section du haut &quot;Classement des catégories par ordre alphabétique&quot;<a href="#cat_cp_page_controls_sort" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<p>Vous pouvez spécifier comment vous voulez que vos catégories soient triées dans Coppermine: par ordre alphabétique (au lieu d’un ordre personnalisé) mettez en face de &quot;<a href="configuration.htm#admin_album_list_alphasort_start">Classement des catégories par ordre alphabétique</a> le paramètre à &quot;Oui&quot;. Ce paramètre est disponible dans la <a href="configuration.htm">configuration</a> de Coppermine et le gestionnaire de catégories. Si vous activez le tri alphabétique, les flèches monter et descendre qui normalement, vous permettent de trier manuellement les catégories disparaissent. Désactivez cette fonction si vous souhaitez organiser vos catégories dans un autre ordre.</p>
+<p>Nous vous recommandons de mettre &quot;Non&quot;.</p>
+
+<a name="cat_cp_page_controls_categories"></a><h4>Section du milieu &quot;Gérer les catégories&quot;<a href="#cat_cp_page_controls_categories" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+
+<ul>
+	<li>Ce <img src="../images/edit.png" border="0" width="16" height="16" alt="" title="edit" /> bouton vous permet d'éditer titre, description et catégorie mère d'une catégorie existante. En cliquant sur cette icône, les données de la catégorie que vous souhaitez éditer ou modifier seront visibles, une fois le formulaire complété, validez le en cliquant sur le bouton du bas &quot;<a href="cat_cp_page_controls_create">Mettre à jour / créer la catégorie</a>&quot;</li>
+	<li>Ce <img src="../images/delete.png" border="0" width="16" height="16" alt="" title="delete" /> bouton vous permet de supprimer une catégorie. La suppression d'une catégorie ne supprime pas les albums et fichiers qu'elle contient. Au lieu de cela, ils sont déplacés vers la catégorie &quot;mère&quot;, si c’est est une sous-catégorie qui est supprimé ou à la racine de la liste des catégories si c’est est une catégorie parente qui est supprimé.</li>
+	<li>Ceci <img src="../images/up.png" border="0" width="16" height="16" alt="" title="up" /> et cela<img src="../images/down.png" border="0" width="16" height="16" alt="" title="down" /> vous permettent de commander l’ordre de vos catégories. Ils seront désactivés si vous mettez l'option &quot;<a href="#cat_cp_page_controls_sort">Classement des catégories par ordre alphabétique</a>&quot; à &quot;Oui&quot;.</li>
+	<li>Le &quot;<strong>Déplacer dans</strong>&quot; contient des listes déroulantes vous permettent de changer le parent d'une catégorie spécifique.</li>
+</ul>
+<a name="cat_cp_page_controls_categories_end"></a>
+
+<a name="cat_cp_page_controls_create"></a><h4>Section du bas &quot;Mettre à jour / créer la catégorie&quot;<a href="#cat_cp_page_controls_create" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+<p>Si le formulaire n'est pas rempli, vous pouvez entrer de nouvelles données dedans et soumettre le formulaire - cela vous permet de créer une nouvelle catégorie. Si vous avez cliqué sur l’icône &quot;Edition&quot; de la section du milieu &quot;<a href="cat_cp_page_controls_categories">Gérer les catégories</a>&quot;, les champs de la troisième section &quot;Mettre à jour / Créer une catégorie&quot; seront remplis avec les données existantes de la catégorie. Cela vous permet de modifier les catégories existantes.</p>
+<p>Le formulaire contient les champs suivants:</p>
+<ul>
+	<li>
+		<a name="cat_parent_category"></a><h5>Catégorie parente<a href="#cat_parent_category" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
+		Choisissez <tt class="code">* Pas de catégorie *</tt> pour créer / déplacer la catégorie actuelle à la racine de la galerie (pour par exemple n’être dans aucune catégorie parente).
+		<a name="cat_parent_category_end"></a>
+	</li>
+	<li>
+		<a name="cat_album_create"></a><h5>Groupe(s) autorisé(s) à créer des albums dans cette catégorie<a href="#cat_album_create" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
+		Dans les versions antérieures de Coppermine cpg1.5.x, seul l'administrateur était autorisé à créer des albums dans les galeries publics (c’était à l’administrateur de les créés) catégories. A partir de cpg1.5.x, cela a changé: par défaut, les utilisateurs non-administrateur ne peuvent pas créer des albums, mais l'administrateur peut décider de leur permettre la création d’albums. Ceci peut être paramétré par catégorie et par groupe d'utilisateurs, afin que vous puissiez permettre à vos utilisateurs de créer des albums dans la catégorie &quot;A&quot;, mais pas pour créer des albums dans la catégorie &quot;B&quot;. C'est pourquoi il y a une zone de liste supplémentaire dans le panneau de configuration des catégories, nommée &quot;Groupe(s) autorisé(s) à créer des albums dans cette catégorie&quot;, où vous (en tant qu'administrateur) pouvez préciser les groupes que vous souhaitez autoriser. Le groupe administrateur n'est pas listé ici,  car l'administrateur peut créer de toute façon des albums et n'a pas besoin d'autorisations spécifiques.<br />
+		Choisissez dans la catégorie que vous modifiez, un ou plusieurs groupes dans la liste, pour permettre à ces groupes de créer des albums. Pour sélectionner plusieurs groupes, maintenez la touche [Ctrl] enfoncée et cliquez sur les groupes. Pour désélectionner <em>tous</em> les groupes, utilisez la touche [Ctrl] puis cliquez sur le dernier groupe sélectionné.
+		<a name="cat_album_create_end"></a>
+	</li>
+	<li>
+		<a name="cat_title"></a><h5>Titre de la catégorie<a href="#cat_title" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
+		Théoriquement, le titre de la catégorie peut contenir jusqu'à 255 caractères, mais il est bien sûr recommandé d'en utiliser moins.
+		<a name="cat_title_end"></a>
+	</li>
+	<li>
+		<a name="cat_description"></a><h5>Description de la Catégorie<a href="#cat_description" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
+		La description de la catégorie que vous êtes en train d'éditer. La description sera visible sur la page d'index. Vous pouvez utiliser les <a href="bbcode.htm">BBCodes</a> dans votre description de la catégorie.
+		<a name="cat_description_end"></a>
+	</li>
+	<li>
+		<a name="cat_album_thumbnail"></a><h5>Vignette de la catégorie<a href="#cat_album_thumbnail" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
+		Vous ne pouvez attribuer une vignette pour la catégorie, que si vous avez un album avec des images dans cette catégorie. Par conséquent, lorsque vous créez une nouvelle catégorie, la possibilité de définir la vignette de la catégorie ne sera pas disponible. Après la création d'au moins un album et le transfert d'au moins un fichier dans cet album, vous pouvez retourner au panneau de configuration des catégories, modifier la catégorie à qui vous souhaitez attribuer une vignette et via la liste déroulante attribuer une vignette à la catégorie.
+		<a name="cat_album_thumbnail_end"></a>
+	</li>
+	<li>
+		<a name="cat_create_submit"></a><h5>Mettre à jour / Créer la catégorie<a href="#cat_create_submit" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
+		N'oubliez pas de soumettre le formulaire pour enregistrer vos modifications.
+		<a name="cat_create_submit_end"></a>
+	</li>
+</ul>
+<a name="cat_cp_page_controls_create_end"></a>
+<a name="cat_cp_end"></a>
+
+<a name="cat_user_galleries"></a><h2>Catégorie spéciale &quot;Galeries d’utilisateurs (User Gallery)&quot;<a href="#cat_user_galleries" title="Lien vers cette section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p class="cpg_message_warning">&quot;<strong>Galeries d’utilisateurs</strong>&quot; est une catégorie spéciale. Elle n'est pas visible, sauf si vous avez des utilisateurs qui ont créé leur propre galerie. Elle ne peut pas être supprimée mais vous pouvez modifier son titre et sa description en utilisant le bouton <img src="../images/edit.png" border="0" width="16" height="16" alt="" title="edition" />. Déterminer méthodiquement les utilisateurs qui sont autorisés à avoir des galeries personnelles qui apparaitront dans &quot;Galeries d’utilisateurs&quot; en utilisant le panneau de <a href="groups.htm#group_cp">configuration des groupes</a>.</p>
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>
