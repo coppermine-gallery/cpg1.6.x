@@ -12,7 +12,7 @@
 <!--
   SVN version info:
 
-  Coppermine version: 1.5.9
+  Coppermine version: 1.6.01
   $HeadURL$
   $Revision$
 
@@ -36,7 +36,7 @@
 <p>Dev-only issues related to versioncheck.</p>
 
 <a name="dev_versioncheck_hidden_features"></a><h2>Hidden features<a href="#dev_versioncheck_hidden_features" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
-<p>In versioncheck versions prior to cpg1.5.x it has been comparatively hard to update the version information when a new package was going to be released, as the packager had to go through all changes manually. In cpg1.5.x (revision 3977 and later), the packager can simply add the parameter <tt class="code">?output=create</tt> to the URL to force the script loop through the existing entries and update the version / revision / MD5 hashes. You only have to copy the output of the screen and paste it into include/cpg15x.files.xml</p>
+<p>In versioncheck versions prior to cpg1.5.x it has been comparatively hard to update the version information when a new package was going to be released, as the packager had to go through all changes manually. In cpg1.5.x (revision 3977 and later), the packager can simply add the parameter <tt class="code">?output=create</tt> to the URL to force the script loop through the existing entries and update the version / revision / MD5 hashes. You only have to copy the output of the screen and paste it into include/cpg16x.files.xml</p>
 <p>Another &quot;hidden&quot; feature is the option to embedd the output into another coppermine-driven page to allow an initial check to be performed during first install.</p>
 <p>However, something that needs to be done manually: if folders/files get added to the svn or are renamed, the change needs to be reflected in the XML file as well.</p>
 
