@@ -10,12 +10,12 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.5.9
+  Coppermine version: 1.6.01
   $HeadURL$
   $Revision$
 **********************************************/
 
-define('COPPERMINE_VERSION', '1.5.9');
+define('COPPERMINE_VERSION', '1.6.01');
 define('COPPERMINE_VERSION_STATUS', 'stable');
 
 if (!defined('IN_COPPERMINE')) {

@@ -13,7 +13,7 @@
 <!--
   SVN version info:
 
-  Coppermine version: 1.5.9
+  Coppermine version: 1.6.01
   $HeadURL$
   $Revision$
 -->
@@ -59,13 +59,13 @@
   as published by the Free Software Foundation.
   
   ********************************************
-  Coppermine version: 1.5.9
+  Coppermine version: 1.6.01
   &#36;HeadURL&#36;
   &#36;Revision&#36;
 **********************************************/</pre>For other file types (e.g. sql files), different comment symbols might apply.</li>
 	<li>Add the file to the SVN, using the add and then the commit command of your favorite SVN client</li>
 	<li>In your SVN client, make sure that the file you have added has the needed SVN-properties. In RapidSVN (Linux-Client), do a right-click, properties and make sure that the name/value pair "svn:keywords"/"Author Date Id Revision HeadURL" exists. If it doesn't exist, create such an entry (using the "new" button on the properties dialog). This will make sure that the placeholder SVN variables within $-signs are populated properly. Take a look at existing files to see how this is done.</li>
-	<li>Add an entry for your newly-created file in <tt class="code">includes/cpg15x.files.xml</tt>. Details can be found in the section <a href="dev_versioncheck.htm#dev_versioncheck_xml">Versioncheck : XML structure</a></li>
+	<li>Add an entry for your newly-created file in <tt class="code">includes/cpg16x.files.xml</tt>. Details can be found in the section <a href="dev_versioncheck.htm#dev_versioncheck_xml">Versioncheck : XML structure</a></li>
 	<li>If applicable, come up with instructions about your file in the documentation</li>
 </ul>
 <div class="indent">
@@ -82,7 +82,7 @@
         <li>Populate the array <tt class="code">$lang_translation_info</tt> if the translator hasn't done so already. If the translator hasn't supplied a website that he wants to be refered to in the credits section of the docs, refer to the user's profile page of the forum instead.</li>
         <li>Verify that the language file is in unicode (UTF-8 without a <abbr title="Byte Order Mark">BOM</abbr>) if you can.</li>
         <li>Edit the <a href="credits.htm#translators">translator credits</a> of the documentation. In an ideal world you'd be editing <em>all</em> credits files for <em>all</em> documentation languages (<tt class="code">docs/language_name/credits.htm</tt> and add the credits for the translator there, but of course this get's increasingly harder with a growing number of documentation languages. Therefore, it's acceptable if you just edit the English section of the documentation (<tt class="code">docs/en/credits.htm</tt>) accordingly and leave the rest to the maintainers of the individual documentation localizations.</a></li>
-        <li>As with all files, you need to edit <tt class="code">includes/cpg15x.files.xml</tt> as well to reflect the newly added file there.</li>
+        <li>As with all files, you need to edit <tt class="code">includes/cpg16x.files.xml</tt> as well to reflect the newly added file there.</li>
         <li>Next you need to figure out the status of completion of the language file contribution, i.e. if it's a full translation or only a partial translation. This is a very hard task that might not yield perfect results, so when in doubt, flag a translation as <em>partial translation</em>, which doesn't have an impact in a technical sense, but only serves as an information for end users.<br />
         Factors to help you determine if a language file is a full translation or a partial translation can be:
             <ul>
@@ -126,10 +126,10 @@
 <p>If a file name can not be kept (e.g. because of collision with naming conventions), it should be renamed instead of deleting the old one and creating a new one. The benfit of renaming is the fact that the version history will be kept in the Subversion repository.</p>
 <p>Once a file has been renamed in SVN, you will have to make additional edits:</p>
 <ul>
-	<li>Add an entry for your the new file name in <tt class="code">includes/cpg15x.files.xml</tt>. Details can be found in the section <a href="dev_versioncheck.htm#dev_versioncheck_xml">Versioncheck : XML structure</a></li>
+	<li>Add an entry for your the new file name in <tt class="code">includes/cpg16x.files.xml</tt>. Details can be found in the section <a href="dev_versioncheck.htm#dev_versioncheck_xml">Versioncheck : XML structure</a></li>
 	<li>If the old file name already has gone into a prvious public release, you need to make sure that end users will not have an outdated, leftover copy of the file with the old name when performing an update. To accomplish this, you should edit <tt class="code">update.php</tt>, find the definition of the array <tt class="code">$delete_file_array</tt> and add the old file name to it.<br />
-	Additionally, you should edit <tt class="code">includes/cpg15x.files.xml</tt> and flag the old name with the status "remove".</li>
-	<li>If the old file name has <em>not</em> gone into a previous release, it's enough to edit <tt class="code">includes/cpg15x.files.xml</tt> and just remove the record that refers to the old file name.</li>
+	Additionally, you should edit <tt class="code">includes/cpg16x.files.xml</tt> and flag the old name with the status "remove".</li>
+	<li>If the old file name has <em>not</em> gone into a previous release, it's enough to edit <tt class="code">includes/cpg16x.files.xml</tt> and just remove the record that refers to the old file name.</li>
 	<li>You have to search through all files (both PHP files as well as HTML files inside the documentation) for references to the old file name and change the references as well.</li>
 </ul>
 

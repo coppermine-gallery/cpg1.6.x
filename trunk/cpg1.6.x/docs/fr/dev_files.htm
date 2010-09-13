@@ -12,7 +12,7 @@
 <!--
   SVN version info:
 
-  Coppermine version: 1.5.9
+  Coppermine version: 1.6.01
   $HeadURL$
   $Revision$
 -->
@@ -56,13 +56,13 @@
   as published by the Free Software Foundation.
   
   ********************************************
-  Coppermine version: 1.5.9
+  Coppermine version: 1.6.01
   &#36;HeadURL&#36;
   &#36;Revision&#36;
 **********************************************/</pre>Pour les autres types de fichiers (comme les fichiers SQL par exemple) différents symboles de commentaires doivent être utilisés.</li>
 	<li>Ajoutez le fichier au SVN en utilisant la commande ajouter puis la commande commettre de votre client SVN favori</li>
 	<li>Dans votre client SVN, assurez vous que le fichier que vous avez ajouté à les propriétés du SVN nécessaires. Dans  RapidSVN (Linux-Client), faites un clic droit, propriétés et assurez vous que la paire nom/valeur "svn:keywords"/"Author Date Id Revision HeadURL" existe. Si ce n'est pas le cas créez une telle entrée (en utilisant le bouton "new" de la boite de dialogue propriétés). Cela permettra de s'assurer que les conteneurs de variables SVN avec les signes $ sont complétés correctement. Regardez un fichier existant pour voir comment c'est fait.</li>
-	<li>Ajoutez une entrée pour votre nouveau fichier dans <tt class="code">includes/cpg15x.files.xml</tt>. Des détails peuvent être trouvés dans la section <a href="dev_versioncheck.htm#dev_versioncheck_xml">Vérificateur de version : structure XML</a></li>
+	<li>Ajoutez une entrée pour votre nouveau fichier dans <tt class="code">includes/cpg16x.files.xml</tt>. Des détails peuvent être trouvés dans la section <a href="dev_versioncheck.htm#dev_versioncheck_xml">Vérificateur de version : structure XML</a></li>
 	<li>Si possible ajoutez des instructions concernant votre fichier dans la documentation</li>
 </ul>
 <div class="indent">
@@ -79,7 +79,7 @@
         <li>Renseignez le tableau <tt class="code">$lang_translation_info</tt> si le traducteur ne l'a pas déjà fait. Si le traducteur n'a pas indiqué de site qu'il souhaite faire apparaitre dans la section "crédits", mettez une référence à sa page de profil utilisateur du forum à la place.</li>
         <li>Vérifiez si vous le pouvez que le fichier langue est en Unicode (UTF-8 sans <abbr title="Byte Order Mark">BOM</abbr>).</li>
         <li>Modifiez les <a href="credits.htm#translators">crédits traducteurs</a> de la documentation. Dans un monde idéal, vous devriez modifier <em>tous</em> les fichiers crédits pour <em>toutes</em> les langues de la documentation (<tt class="code">docs/language_name/credits.htm</tt> et ajoutez les références du traducteur, mais bien entendu, cela deviendra un travail important avec un nombre important de traductions de la documentation. C'est pourquoi, il est admis que vous ne modifiez que le fichier de langue Anglaise de la documentation (<tt class="code">docs/en/credits.htm</tt>) et laissiez les autres aux personnes qui s'occupent de la maintenance  des documentations traduites.</a></li>
-        <li>Comme avec tous les autres fichiers, vous devez aussi modifier <tt class="code">includes/cpg15x.files.xml</tt> pour refléter les nouveaux fichiers ajoutés.</li>
+        <li>Comme avec tous les autres fichiers, vous devez aussi modifier <tt class="code">includes/cpg16x.files.xml</tt> pour refléter les nouveaux fichiers ajoutés.</li>
         <li>Ensuite vous devrez vérifier le degré de finition du fichier langue de cette contribution, par exemple s'il s'agit d'une traduction complète ou partielle. C'est un très gros travail qui peut amener à des résultats imparfaits, donc dans le doute, mettez un signet <em>traduction partielle</em>, ce qui n'a pas d'impact au niveau technique, mais qui sert uniquement d'information aux utilisateurs.<br />
         Les facteurs qui peuvent vous aider à déterminer si une traduction est complète ou partielle peuvent être:
             <ul>
@@ -126,10 +126,10 @@
 <p>Si un nom de fichier ne peut pas être géré (par exemple à cause d'un problème avec la convention de nommage), il doit être renommé au lieu d'effacer l'ancien et d'en crée un nouveau. Le bénéfice du renommage est de garder l'historique  des versions dans le référenciel SVN.</p>
 <p>Chaque fois qu'un fichier a été renommé sur le SVN vous devrez faire des modifications additionnelles:</p>
 <ul>
-	<li>Ajoutez une entrez pour le nouveau nom de fichier dans <tt class="code">includes/cpg15x.files.xml</tt>. Les détails peuvent être trouvés dans la section <a href="dev_versioncheck.htm#dev_versioncheck_xml">Vérificateur de version : structure XML</a></li>
+	<li>Ajoutez une entrez pour le nouveau nom de fichier dans <tt class="code">includes/cpg16x.files.xml</tt>. Les détails peuvent être trouvés dans la section <a href="dev_versioncheck.htm#dev_versioncheck_xml">Vérificateur de version : structure XML</a></li>
 	<li>Si un ancien nom de fichier a déjà été inclut dans une précédent publication publique, vous devrez vous assurez que l'utilisateur n'auras pas une version obsolète laissée avec l'ancien nom lors de la mise à jour. Pour cela, vous devrez ouvrir  <tt class="code">update.php</tt>, trouver la définition du tableau <tt class="code">$delete_file_array</tt> et y ajouter l'ancien nom de fichier.<br />
-	En plus, vous devrez ouvrir <tt class="code">includes/cpg15x.files.xml</tt> et assigner à l'ancien nom le statut "remove".</li>
-	<li>Si l'ancien nom de fichier <em>n'a pas</em> été utilisé dans une précédente version publique, il suffit d'ouvrir <tt class="code">includes/cpg15x.files.xml</tt> et d'effacer l'enregistrement se référant à l'ancien nom de fichier.</li>
+	En plus, vous devrez ouvrir <tt class="code">includes/cpg16x.files.xml</tt> et assigner à l'ancien nom le statut "remove".</li>
+	<li>Si l'ancien nom de fichier <em>n'a pas</em> été utilisé dans une précédente version publique, il suffit d'ouvrir <tt class="code">includes/cpg16x.files.xml</tt> et d'effacer l'enregistrement se référant à l'ancien nom de fichier.</li>
 	<li>Vous devrez chercher dans tous les fichiers (aussi bien les fichiers PHP que ceux HTML de la doc) la référence à l'ancien nom et la changer avec celle du nouveau nom.</li>
 </ul>
 

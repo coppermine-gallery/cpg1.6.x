@@ -12,7 +12,7 @@
 <!--
   SVN version info:
 
-  Coppermine version: 1.5.9
+  Coppermine version: 1.6.01
   $HeadURL$
   $Revision$
 -->
@@ -58,7 +58,7 @@
                 <li>
                     <a name="packaging_steps_loop_through_files_linux"></a><h4>Linux<a href="#packaging_steps_loop_through_files_linux" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
                     On most posix-compliant operating systems (like Unix, Linux, BSD etc.) you should have all needed tools at hand already. Basically you loop through all files with a given extension, search for the string inside it and replace it. The command that can be run in a console could look like this:
-                    <textarea class="code smaller" style="width:100%" rows="1">find /path/on/filesystem/level/to/your/working/copy/ -maxdepth 4 -name "*.php" | xargs sed -i 's/Coppermine version: 1.5.9/Coppermine version: 1.5.10/g'</textarea>
+                    <textarea class="code smaller" style="width:100%" rows="1">find /path/on/filesystem/level/to/your/working/copy/ -maxdepth 4 -name "*.php" | xargs sed -i 's/Coppermine version: 1.6.01/Coppermine version: 1.5.10/g'</textarea>
                     If you want to turn this into a shell script, don't forget the shebang at the start of the file (usually something like <tt class="code">#!/bin/sh</tt>).
                 </li>
                 <li>
@@ -101,33 +101,33 @@
         <li>
             <a name="packaging_steps_versioncheck"></a><h3>Update the versioncheck data<a href="#packaging_steps_versioncheck" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
             This is the most complicated step. It needs to be taken <em>after</em> having committed all other files to make sure that their revision numbers and hashes no longer are altered.<br />
-            Edit the file <tt class="code">include/cpg15x.files.xml</tt> inside your working copy of the subverion repository with a plain text file.
+            Edit the file <tt class="code">include/cpg16x.files.xml</tt> inside your working copy of the subverion repository with a plain text file.
             <ul>
                 <li>
                     <a name="packaging_steps_versioncheck_complete"></a><h4>Completeness<a href="#packaging_steps_versioncheck_complete" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
-                    In this step you need to make sure that the  XML file is complete. Loop through the changelog to check if all files (language files etc.) that have been <a href="dev_files.htm">added to the subversion repository</a> since the previous release have been added to <tt class="code">include/cpg15x.files.xml</tt> file as well. If all developers have done as suggested, there should be nothing left to do for you in this aspect. Save your changes (if any).
+                    In this step you need to make sure that the  XML file is complete. Loop through the changelog to check if all files (language files etc.) that have been <a href="dev_files.htm">added to the subversion repository</a> since the previous release have been added to <tt class="code">include/cpg16x.files.xml</tt> file as well. If all developers have done as suggested, there should be nothing left to do for you in this aspect. Save your changes (if any).
                 </li>
                 <li>
                     <a name="packaging_steps_versioncheck_update"></a><h4>Update revision numbers and hashes<a href="#packaging_steps_versioncheck_update" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
                     Coppermine is storing the checksums for each file to allow the user to check that a file hasn't been tampered with. In this step, the checksums (hashes) are being calculated.
                     <ul>
-                        <li>Run the versioncheck utility in your browser with the parameter <tt class="code">?output=create</tt> as suggested in <a href="dev_versioncheck.htm#dev_versioncheck_hidden_features">Versioncheck &rarr; Hidden features</a> while being logged in as admin (the URL in your browser's address bar looking like this: <tt class="code">http://yourtestbed.tld/your_coppermine_folder/versioncheck.php?output=create</tt>. The versioncheck tool will then loop through all files specified in <tt class="code">include/cpg15x.files.xml</tt> and re-calculate the hashes and outputs them again in XML.</li>
+                        <li>Run the versioncheck utility in your browser with the parameter <tt class="code">?output=create</tt> as suggested in <a href="dev_versioncheck.htm#dev_versioncheck_hidden_features">Versioncheck &rarr; Hidden features</a> while being logged in as admin (the URL in your browser's address bar looking like this: <tt class="code">http://yourtestbed.tld/your_coppermine_folder/versioncheck.php?output=create</tt>. The versioncheck tool will then loop through all files specified in <tt class="code">include/cpg16x.files.xml</tt> and re-calculate the hashes and outputs them again in XML.</li>
                         <li>There should be a huge textarea field that contains everything you need - just select the entire field's content,</li>
                         <li>copy to clipboard,</li>
-                        <li>go to your editor where you have <tt class="code">include/cpg15x.files.xml</tt> opened previously,</li>
+                        <li>go to your editor where you have <tt class="code">include/cpg16x.files.xml</tt> opened previously,</li>
                         <li>highlight everything in the editor window and delete the content there.</li>
-                        <li>Paste the content of the clipboard into the empty editor window that corresponds to <tt class="code">include/cpg15x.files.xml</tt>.</li>
+                        <li>Paste the content of the clipboard into the empty editor window that corresponds to <tt class="code">include/cpg16x.files.xml</tt>.</li>
                         <li>Then remove whitespace (if any) after the closing <tt class="code">&lt;/file_data&gt;</tt>-tag</li>
-                        <li>and finally save the changes in <tt class="code">include/cpg15x.files.xml</tt>.</li>
+                        <li>and finally save the changes in <tt class="code">include/cpg16x.files.xml</tt>.</li>
                         <li>Go back to your browser window and remove the parameter <tt class="code">?output=create</tt> from the address bar. Make sure <strong>not</strong> to connect to the online repository by ticking the corresponding checkbox to make sure that you're looking at the changed file. In all the three columns &quot;Version&quot;, &quot;Revision&quot; and &quot;Modified&quot; you should by now see green check icons that show everything is OK. There mustn't be any warnings in red. If tthis is the case, continue.</li>
-                        <li>Commit your changes applied to <tt class="code">include/cpg15x.files.xml</tt> to the subversion repository.</li>
+                        <li>Commit your changes applied to <tt class="code">include/cpg16x.files.xml</tt> to the subversion repository.</li>
                     </ul>
                 </li>
             </ul>
         </li>
         <li>
-            <a name="packaging_steps_xml_webspace"></a><h3>Update cpg15x.files.xml on the Coppermine home page<a href="#packaging_steps_xml_webspace" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-            The xml file that contains the information about the most recent stable release needs to be uploaded to the official web space, replacing the file http://coppermine-gallery.net/cpg15x.files.xml that clients will connect to when checking for upgrades with the one from the subversion repository (e.g. the file that corresponds to http://coppermine.svn.sourceforge.net/viewvc/coppermine/trunk/cpg1.5.x/include/cpg15x.files.xml). If you don't have access to the project's official webspace by FTP, ask a fellow developer to perform this task for you.
+            <a name="packaging_steps_xml_webspace"></a><h3>Update cpg16x.files.xml on the Coppermine home page<a href="#packaging_steps_xml_webspace" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+            The xml file that contains the information about the most recent stable release needs to be uploaded to the official web space, replacing the file http://coppermine-gallery.net/cpg16x.files.xml that clients will connect to when checking for upgrades with the one from the subversion repository (e.g. the file that corresponds to http://coppermine.svn.sourceforge.net/viewvc/coppermine/trunk/cpg1.5.x/include/cpg16x.files.xml). If you don't have access to the project's official webspace by FTP, ask a fellow developer to perform this task for you.
         </li>
         <li>
             <a name="packaging_steps_svn_export"></a><h3>Export from subversion<a href="#packaging_steps_svn_export" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
