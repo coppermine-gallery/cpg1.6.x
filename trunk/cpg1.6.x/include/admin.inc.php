@@ -37,25 +37,6 @@ $config_data = array(
       'regex_not' => '^Your gallery description here$',
       'default_value' => '',
     ),
-    'gallery_admin_email' => array(
-      'type'      => 'textfield',
-      'help_link' => 'f=configuration.htm&amp;as=admin_general_email&amp;ae=admin_general_email_end',
-      'regex'     => '^'
-                     .'('
-                     .'[a-zA-Z0-9]((\.|\-|\_){0,1}'
-                     .'[a-zA-Z0-9]){0,}'
-                     .')'
-                     .'@'
-                     .'('
-                     .'[a-zA-Z0-9]((\.|\-){0,1}'
-                     .'[a-zA-Z0-9]){0,}'
-                     .')'
-                     .'\.'
-                     .'([a-zA-Z]{2,4})'
-                     .'$',
-      'regex_not' => '^you@somewhere\.com$',
-      'default_value' => '',
-    ),
     'ecards_more_pic_target' => array(
       'type'      => 'textfield',
       'help_link' => 'f=configuration.htm&amp;as=admin_general_coppermine-url&amp;ae=admin_general_coppermine-url_end',
@@ -1473,6 +1454,25 @@ $config_data = array(
     ),
   ),
   'email_settings' => array(
+    'gallery_admin_email' => array(
+      'type'      => 'textfield',
+      'help_link' => 'f=configuration.htm&amp;as=admin_email_email&amp;ae=admin_email_email_end',
+      'regex'     => '^'
+                     .'('
+                     .'[a-zA-Z0-9]((\.|\-|\_){0,1}'
+                     .'[a-zA-Z0-9]){0,}'
+                     .')'
+                     .'@'
+                     .'('
+                     .'[a-zA-Z0-9]((\.|\-){0,1}'
+                     .'[a-zA-Z0-9]){0,}'
+                     .')'
+                     .'\.'
+                     .'([a-zA-Z]{2,4})'
+                     .'$',
+      'regex_not' => '^you@somewhere\.com$',
+      'default_value' => '',
+    ),
     'smtp_host' => array(
       'type'      => 'textfield',
       'default_value' => '',

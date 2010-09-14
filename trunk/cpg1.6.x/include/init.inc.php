@@ -190,7 +190,7 @@ if ($CONFIG['keyword_separator'] == '%20') {
 }
 
 if ($CONFIG['log_mode']) {
-    spring_cleaning('logs', CPG_DAY * 2, array('log_header.inc.php'));
+    spring_cleaning('logs', CPG_DAY * 2);
 }
 
 // Record User's IP address

@@ -929,7 +929,7 @@ function html_mysql_select_db()
     if (!$dbs) {
         $dbs = '<input type="text" class="textinput" name="db_name" value="' . $config['db_name'] . '" />';
     }
-    $db_prefix = isset($config['db_prefix']) ? $config['db_prefix'] : 'cpg15x_';
+    $db_prefix = isset($config['db_prefix']) ? $config['db_prefix'] : 'cpg16x_';
     echo <<<EOT
       <form action="install.php?step={$step_next}" name="cpgform" id="cpgform" method="post" style="margin:0px;padding:0px">
         <table width="100%" border="0" cellpadding="0" cellspacing="1" class="maintable">

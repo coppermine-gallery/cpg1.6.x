@@ -718,99 +718,7 @@ function delete_files()
 
     // Attempt to delete outdated files
     $delete_file_array = array(
-        'charsetmgr.php',
-        'config.php',
-        'editOnePic.php',
-        'faq.php',
-        'image_processor.php',
-        'picEditor.php',
-        'relocate_server.php',
-        'scripts.js',
-        'bridge/phpbb22.inc.php',
-        'bridge/punbb.inc.php',
-        'bridge/smf.inc.php',
-        'bridge/vbulletin.inc.php',
-        'bridge/vbulletin23.inc.php',
-        'bridge/vbulletin3gamma.inc.php',
-        'bridge/woltlab21.inc.php',
-        'bridge/yabbse.inc.php',
-        'albums/edit/index.htm',
-        'docs/COPYING',
-        'docs/faq.htm',
-        'docs/faq_de.htm',
-        'docs/faq_fr.htm',
-        'docs/index_es.htm',
-        'docs/index_fr.htm',
-        'docs/README.html',
-        'docs/showdoc.php',
-        'docs/tester-README.txt',
-        'docs/theme.htm',
-        'docs/translation.htm',
-        'docs/de/theme_upgrade_13x-14x.htm',
-        'docs/de/images/plugin_manager.gif',
-        'docs/de/tutorial/cpg1.5_plugin_hello_world_2-1.zip',
-        'docs/de/tutorial/cpg1.5_plugin_hello_world_2-2-1.zip',
-        'docs/de/tutorial/matching_theme/index.htm',
-        'docs/de/tutorial/matching_theme/screenshot_missing_menu.png',
-        'docs/de/tutorial/matching_theme/',
-        'docs/de/tutorial/',
-        'docs/en/theme_upgrade_13x-14x.htm',
-        'docs/en/images/plugin_manager.gif',
-        'docs/en/tutorial/cpg1.5_plugin_hello_world_2-1.zip',
-        'docs/en/tutorial/cpg1.5_plugin_hello_world_2-2-1.zip',
-        'docs/en/tutorial/matching_theme/index.htm',
-        'docs/en/tutorial/matching_theme/screenshot_missing_menu.png',
-        'docs/en/tutorial/matching_theme/',
-        'docs/en/tutorial/',
-        'docs/es/tutorial/cpg1.5_plugin_hello_world_2-1.zip',
-        'docs/es/tutorial/cpg1.5_plugin_hello_world_2-2-1.zip',
-        'docs/es/tutorial/matching_theme/index.htm',
-        'docs/es/tutorial/matching_theme/screenshot_missing_menu.png',
-        'docs/es/tutorial/matching_theme/',
-        'docs/es/tutorial/',
-        'docs/fr/theme_upgrade_13x-14x.htm',
-        'docs/fr/tutorial/cpg1.5_plugin_hello_world_2-1.zip',
-        'docs/fr/tutorial/cpg1.5_plugin_hello_world_2-2-1.zip',
-        'docs/fr/tutorial/matching_theme/index.htm',
-        'docs/fr/tutorial/matching_theme/screenshot_missing_menu.png',
-        'docs/fr/tutorial/matching_theme/',
-        'docs/fr/tutorial/',
-        'docs/nl/theme_upgrade_13x-14x.htm',
-        'docs/nl/images/plugin_manager.gif',
-        'docs/nl/tutorial/cpg1.5_plugin_hello_world_2-1.zip',
-        'docs/nl/tutorial/cpg1.5_plugin_hello_world_2-2-1.zip',
-        'docs/nl/tutorial/matching_theme/index.htm',
-        'docs/nl/tutorial/matching_theme/screenshot_missing_menu.png',
-        'docs/nl/tutorial/matching_theme/',
-        'docs/nl/tutorial/',
-        'docs/pics/',
-        'docs/theme/',
-        'images/smiles/icon_arrow.gif',
-        'images/smiles/icon_biggrin.gif',
-        'images/smiles/icon_confused.gif',
-        'images/smiles/icon_cool.gif',
-        'images/smiles/icon_cry.gif',
-        'images/smiles/icon_eek.gif',
-        'images/smiles/icon_evil.gif',
-        'images/smiles/icon_exclaim.gif',
-        'images/smiles/icon_frown.gif',
-        'images/smiles/icon_idea.gif',
-        'images/smiles/icon_lol.gif',
-        'images/smiles/icon_mad.gif',
-        'images/smiles/icon_mrgreen.gif',
-        'images/smiles/icon_neutral.gif',
-        'images/smiles/icon_question.gif',
-        'images/smiles/icon_razz.gif',
-        'images/smiles/icon_redface.gif',
-        'images/smiles/icon_rolleyes.gif',
-        'images/smiles/icon_sad.gif',
-        'images/smiles/icon_smile.gif',
-        'images/smiles/icon_surprised.gif',
-        'images/smiles/icon_twisted.gif',
-        'images/smiles/icon_wink.gif',
-        'include/imageObjectGD.class.php',
-        'include/imageObjectIM.class.php',
-        'include/index.html',
+        'logs/log_header.inc.php',
     );
 
     // Check if the file exists in the first place
@@ -938,19 +846,6 @@ EOT;
             } // foreach $thumbs
         } // foreach $folders
     } // if different thumb_pfx
-
-    /*
-    // Unnecessary for 1.5 since these thumbs are included with the system thumbs above
-    // If old images for nopic.jpg and private.jpg exist, delete the new ones
-    if (file_exists('images/nopic.jpg')) {
-        cpg_folder_file_delete('images/thumb_nopic.jpg');
-        @rename('images/nopic.jpg', 'images/' . $CONFIG['thumb_pfx'] . 'nopic.jpg');
-    }
-    if (file_exists('images/private.jpg')) {
-        cpg_folder_file_delete('images/thumb_private.jpg');
-        @rename('images/private.jpg', 'images/' . $CONFIG['thumb_pfx'] . 'private.jpg');
-    }
-    */
 }
 
 // function definitions --- end
