@@ -66,21 +66,6 @@
     <p>Similar to the <a href="#admin_general_name">Gallery name</a> field, the Gallery description field needs to be populated, even if your custom theme doesn't show that tag and even if you don't want to display that tag on your site: the field mustn't be empty and it mustn't be the default.</p>
     <a name="admin_general_description_end"></a>
     <br clear="all" style="clear:both;" />
-    <a name="admin_general_email"></a><h3>Gallery administrator email<a href="#admin_general_email" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-	<div class="cpg_summary">
-		Default value: <abbr title="not applicable">n/a</abbr><br />
-		Recommended value: <abbr title="not applicable">n/a</abbr><br />
-		Importance: mandatory<br />
-		Database record name: <tt class="code">gallery_admin_email</tt><br />
-		<img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: General settings &rarr; Gallery administrator email
-	</div>
-    <p>All emails sent by the gallery will be sent using this email address. This must be a valid email address.</p>
-    <p>Coppermine will use this address as "from"-address when sending emails (e.g. during registration). It's mandatory to have this email address populated properly. If you have your own domain, it might be a good idea to use an email account that correlates to your domain name.</p>
-    <p class="cpg_example">Example: if your domain name is &quot;<tt class="code">example.com</tt>&quot;, you should create an email address named <tt class="code">gallery@example.com</tt> and use that email address in coppermine's config. Coppermine does <strong>not</strong> create that email address for you!</p>
-    <p>Users sometimes ask on the support board if they can use another email, e.g. one from a freemail provider like GoogleMail, Hotmail or similar. The answer is: we can't tell you if your webhost will allow you to do this. Many webhosts disallow such things for reasons of spam prevention. Just keep in mind what the email address will be used for: the webserver will use that email address to send emails from. If you're not sure, ask your webhost for support.</p>
-    <p class="cpg_message_info">This email address must not be confused with the email address that correlates to the email address of the gallery administrator's user account. Those email addresses <em>can</em> be identical, but they don't necessarilly have to.</p>
-    <a name="admin_general_email_end"></a>
-    <br clear="all" style="clear:both;" />
     <a name="admin_general_coppermine-url"></a><h3>URL of your coppermine gallery folder<a href="#admin_general_coppermine-url" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
 	<div class="cpg_summary">
 		Default value: <abbr title="not applicable">n/a</abbr><br />
@@ -2601,8 +2586,23 @@ into the field number 6.
 <div class="backtotop"><a href="#top">Back to top</a></div>
 
 <a name="admin_email"></a><h2>Email settings<a href="#admin_email" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
-<p>Usually nothing has to be changed here; leave all fields blank when not sure. Only if you run into problems (e.g. if ecards, registration info or notifications don't get sent) you should change these settings. Coppermine itself doesn't come with an engine to send mails, it relies on a webserver being able to do so (using the built-in mechanisms of PHP). If you're not sure what to enter, ask your webhost for support.</p>
+<p>Usually nothing has to be changed here; leave all fields blank when not sure except the admin email address. Only if you run into problems (e.g. if ecards, registration info or notifications don't get sent) you should change these settings. Coppermine itself doesn't come with an engine to send mails, it relies on a webserver being able to do so (using the built-in mechanisms of PHP). If you're not sure what to enter, ask your webhost for support.</p>
 <div class="indent">
+    <a name="admin_email_email"></a><h3>Gallery administrator email<a href="#admin_email_email" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+	<div class="cpg_summary">
+		Default value: <abbr title="not applicable">n/a</abbr><br />
+		Recommended value: <abbr title="not applicable">n/a</abbr><br />
+		Importance: mandatory<br />
+		Database record name: <tt class="code">gallery_admin_email</tt><br />
+		<img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Email settings &rarr; Gallery administrator email
+	</div>
+    <p>All emails sent by the gallery will be sent using this email address. This must be a valid email address.</p>
+    <p>Coppermine will use this address as "from"-address when sending emails (e.g. during registration). It's mandatory to have this email address populated properly. If you have your own domain, it might be a good idea to use an email account that correlates to your domain name.</p>
+    <p class="cpg_example">Example: if your domain name is &quot;<tt class="code">example.com</tt>&quot;, you should create an email address named <tt class="code">gallery@example.com</tt> and use that email address in coppermine's config. Coppermine does <strong>not</strong> create that email address for you!</p>
+    <p>Users sometimes ask on the support board if they can use another email, e.g. one from a freemail provider like GoogleMail, Hotmail or similar. The answer is: we can't tell you if your webhost will allow you to do this. Many webhosts disallow such things for reasons of spam prevention. Just keep in mind what the email address will be used for: the webserver will use that email address to send emails from. If you're not sure, ask your webhost for support.</p>
+    <p class="cpg_message_info">This email address must not be confused with the email address that correlates to the email address of the gallery administrator's user account. Those email addresses <em>can</em> be identical, but they don't necessarilly have to.</p>
+    <a name="admin_email_email_end"></a>
+    <br clear="all" style="clear:both;" />
     
     <p><strong>Using SMTP to send emails</strong>: by default the script uses the PHP built-in <strong>mail</strong> function to send emails. In some cases, the PHP built-in function can't be used.</p>
     <p> If, in order to send emails with PHP, you are required to supply a <strong>hostname</strong>, a <strong>username</strong> and a <strong>password</strong>, you will need to edit the CONFIG menu section &quot;Email settings&quot; and insert the correct values there. If you don't need a username and password to connect to your SMTP server, just leave these lines blank. If you don't know what settings to enter, you will need to check with your webhost.</p>

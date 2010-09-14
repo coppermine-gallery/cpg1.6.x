@@ -51,7 +51,7 @@ function log_write($text, $log = null)
     $log = 'logs/' . $log . '.log.php';
 
     if (!file_exists($log)) {
-        $log_header = implode('', file('logs/log_header.inc.php'));
+        $log_header = implode('', file('include/log_header.inc.php'));
     } else {
         $log_header = '';
     }
