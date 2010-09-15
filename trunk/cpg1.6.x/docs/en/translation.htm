@@ -25,7 +25,7 @@
 <script src="script.js" type="text/javascript"></script>
 </head>
 <body>
-<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<h1 id="docheader">Coppermine Photo Gallery v1.6.x: Documentation and Manual</h1>
 <div id="toc">
 <a href="toc.htm">Table of Contents</a>
 </div>
@@ -246,7 +246,7 @@ $lang_meta_album_names['datebrowse'] = 'Browse by date'; //cpg1.5</pre></li>
 			The similar thing applies to toc.htm, which is the HTML-driven "table of contents"; again, you should translate the labels, but not the file names nor the anchor names.</li>
 			<li>There are some strings inside script.js that need to be translated as well: search for
 				<ul>
-					<li><tt class="code">$('#docheader').text('Coppermine Photo Gallery v1.5.x: Documentation and Manual');</tt> and replace the actual text in that line (<tt class="code">Documentation and Manual</tt>) with the translation into your language. The function definition for <tt class="code">cpgDocHeader</tt> contains the strings that are used to replace the existing placeholders in the header of the file.</li>
+					<li><tt class="code">$('#docheader').text('Coppermine Photo Gallery v1.6.x: Documentation and Manual');</tt> and replace the actual text in that line (<tt class="code">Documentation and Manual</tt>) with the translation into your language. The function definition for <tt class="code">cpgDocHeader</tt> contains the strings that are used to replace the existing placeholders in the header of the file.</li>
 					<li>The function definition for <tt class="code">cpgDocFooter</tt> determines how the &quot;Back to top&quot; at the bottom of each documentation page is being localized, so you should replace that string with the translation for your language. Find <tt class="code">overall_doc_footer += '&lt;a href="#top"&gt;Back to Top&lt;/a&gt;';</tt> and replace the actual text in that line (<tt class="code">Back to Top</tt>) with the translation into your language</li>
 					<li>The function definition for <tt clas="code">dateRevision</tt> contains some strings that need to be translated and other that need to be preserved, so you need to be extra carefull with that function. Find <tt class="code">$('#doc_last_changed').text('About this document: ' + 'last changed on ' + lastChangeDate);</tt> and replace the actual text in that line (<tt class="code">About this document</tt> and <tt class="code">last changed on</tt>, but not <tt class="code">lastChangeDate</tt>) with the translation into your language</li>
 					<li><tt class="code">$('#doc_revision').text(', SVN revision ' + revisionNumber);</tt> and replace the actual text in that line (<tt class="code">SVN revision</tt>) with the translation into your language. If you're not sure what a SVN revision is, leave that line alone!</li>
