@@ -25,23 +25,23 @@
 <script src="script.js" type="text/javascript"></script>
 </head>
 <body>
-<h1 id="docheader">Coppermine Photo Gallery v1.5.x: Documentation and Manual</h1>
+<h1 id="docheader">Coppermine Photo Gallery v1.6.x: Documentation and Manual</h1>
 <div id="toc">
 <a href="toc.htm">Table of Contents</a>
 </div>
 
 <a name="upgrade"></a><h1>Upgrading<a href="#upgrade" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
-<p>Please note: as there have been changes both in the coppermine files and the database from previous versions to cpg1.5.x, users of older versions than cpg1.5.0 will have to apply <strong>all</strong> steps mentioned below: both the files have to be replaced and the update.php script has to be run once.</p>
+<p>Please note: as there have been changes both in the coppermine files and the database from previous versions to cpg1.6.x, users of older versions than cpg1.6.01 will have to apply <strong>all</strong> steps mentioned below: both the files have to be replaced and the update.php script has to be run once.</p>
 <div class="indent">
 
     <a name="upgrade_why"></a><h2>Why upgrade?<a href="#upgrade_why" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
-    <p>There are major and minor releases of Coppermine. Major releases have so far been cpg1.0, cpg1.1, cpg1.2.x, cpg1.3.x and cpg1.4.x. The next major release will be cpg1.5.x (which currently is in the dev pipeline - no scheduled release date yet) -  you're just reading the preliminary docs for cpg1.5.x. Minor releases (the third number in the version numbering scheme) represent updates, also known as &quot;maintenance releases&quot;. Major releases contain new features (compared to the previous major release), minor releases do not contain new features, but only bug fixes and slight improvements (like additional language files).</p>
+    <p>There are major and minor releases of Coppermine. Major releases have so far been cpg1.0, cpg1.1, cpg1.2.x, cpg1.3.x, cpg1.4.x and cpg1.5.x. The next major release will be cpg1.6.x (which currently is in the dev pipeline - no scheduled release date yet) -  you're just reading the preliminary docs for cpg1.6.x. Minor releases (the third number in the version numbering scheme) represent updates, also known as &quot;maintenance releases&quot;. Major releases contain new features (compared to the previous major release), minor releases do not contain new features, but only bug fixes and slight improvements (like additional language files).</p>
     <p>To understand the release policy of the coppermine dev team you have to understand how bugs are being fixed: we maintain a repository where the core code of each major release is being constantly being improved. Major and minor bugs that are reported on the coppermine support board are being fixed in that repository. Once a new package is being bundled, all fixes that have been made in that repository go into the new maintenance release.</p>
     <p>There is a good reason for every new maintenance release: they are usually being packaged when a new bug or vulnerability is being discovered that is relevant in terms of security. As suggested above, there are several minor bugfixes that go into each new release as well, not only the one major bug or vulnerability that lead to the maintenance release. Therefore, it will not be enough to just fix the single vulnerability that has been the initial reason for a new package to be released. Instead, always upgrade to the most recent stable release as soon as it has been announced.</p>
 
     <div class="indent">
         <a name="upgrade_why_reasons"></a><h3>Reasons for package releases<a href="#upgrade_why_reasons" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-        <p>This is a list of minor releases of cpg1.5.x and the reason why they have been released. It is meant to explain why you should upgrade as soon as possible to the most recent stable release if you are running an outdated version.</p>
+        <p>This is a list of minor releases of cpg1.6.x and the reason why they have been released. It is meant to explain why you should upgrade as soon as possible to the most recent stable release if you are running an outdated version.</p>
         <span class="detail_head_collapsed">Details</span>
         <div class="detail_body">
             <table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra">
@@ -51,152 +51,10 @@
                 <th valign="top" align="left"><span class="small">Release Date</span></td>
               </tr>
               <tr>
-                <td valign="top">cpg1.5.8</td>
+                <td valign="top">cpg1.6.01</td>
                 <td valign="top">
                   <ul>
-                    <li>Maintenance release (stable)</li>
-                    <li><a href="http://forum.coppermine-gallery.net/index.php/topic,66417.0.html">Announcement thread</a></li>
-                    <li>Fixed setting default language with language manager (<a href="http://forum.coppermine-gallery.net/index.php/topic,66276.0.html">thread</a>)</li>
-                    <li>Changed form token generation - removed trouble maker parameters (<a href="http://forum.coppermine-gallery.net/index.php/topic,65918.0.html">thread</a>)</li>
-                    <li>Fixed language manager issue for language files with underscore (<a href="http://forum.coppermine-gallery.net/index.php/topic,66274.0.html">thread</a>)</li>
-                    <li>Set moderator group to '0' for all albums to avoid problems for people who used that feature before it was dropped (<a href="http://forum.coppermine-gallery.net/index.php/topic,66118.0.html">thread</a>)</li>
-                    <li>Fixed ecard if no intermediate picture is present (<a href="http://forum.coppermine-gallery.net/index.php/topic,66161.0.html">thread</a>)</li>
-                    <li>Added Estonian language file (user contribution)</li>
-                    <li>Update 'last visit' time if it's a 'remember me' session (<a href="http://forum.coppermine-gallery.net/index.php/topic,66145.0.html">thread</a>)</li>
-                    <li>Added Slovak language file (user contribution)</li>
-                    <li>While deleting non-images, delete the corresponding custom thumbnail if exists</li>
-                    <li>While renaming non-images, rename the corresponding custom thumbnail if exists</li>
-                    <li>While renaming files, check if there will be no conflicts before doing anything</li>
-                    <li>Added plugin hook 'token_criteria'</li>
-                    <li>Fixed missing CSS class cpg_summary and icon replacement leading to broken output of help boxes on config screen (<a href="http://forum.coppermine-gallery.net/index.php/topic,65994.0.html">thread</a> & <a href="http://forum.coppermine-gallery.net/index.php/topic,65996.0.html">thread</a>)</li>
-                    <li>Fixed possibility for users to edit their files in public galleries if disabled in config (<a href="http://forum.coppermine-gallery.net/index.php/topic,65693.0.html">thread</a>)</li>
-                    <li>Disable the possibility for guests to enter file details by default (<a href="http://forum.coppermine-gallery.net/index.php/topic,62522.0.html">thread</a>)</li>
-                    <li>Fixed error message when regular users try to delete their albums in public categories</li>
-                    <li>Re-organizing zip archives inside docs folder</li>
-                    <li>Adding documentation about plugin config options</li>
-                    <li>Fixed issue when reset file ratings (<a href="http://forum.coppermine-gallery.net/index.php/topic,65896.0.html">thread</a>)</li>
-                    <li>Fixed empty values for 'reason' in 'report to administrator' email (<a href="http://forum.coppermine-gallery.net/index.php/topic,65752.0.html">thread</a>)</li>
-                    <li>Fixed category view when albums with keywords are present (<a href="http://forum.coppermine-gallery.net/index.php/topic,64155.0.html">thread</a>)</li>
-                    <li>Changed type of plugin hooks 'theme_thumbnails_wrapper_start/end' from 'filter' to 'action' and adjusted English documentation accordingly (<a href="http://forum.coppermine-gallery.net/index.php/topic,58734.0.html">thread</a>)</li>
-                    <li>Added search terms to the title of the thumbnails page (<a href="http://forum.coppermine-gallery.net/index.php/topic,65840.0.html">thread</a>)</li>
-                    <li>Added Japanese language file (user contribution)</li>
-                    <li>Adding boxes to config documentation for defaults, max, min, recomended and record name</li>
-                    <li>Display Coppermine news always in an iframe (<a href="http://forum.coppermine-gallery.net/index.php/topic,65424.0.html">thread</a>)</li>
-                    <li>Fixed error message for non existing categories (<a href="http://forum.coppermine-gallery.net/index.php/topic,65763.0.html">thread</a>)</li>
-                    <li>Replaced wrong link in update.php (<a href="http://forum.coppermine-gallery.net/index.php/topic,65714.0.html">thread</a>)</li>
-                    <li>Added language table population section to update script to stop cpg1.4.x upgrades seing only Luxemburgish and Mexican as available langauges</li>
-                    <li>Updated Turkish language file (user contribution)</li>
-                    <li>Show password prompt if user tries to access file in password protected album directly</li>
-                    <li>Added Brazilian language file (user contribution)</li>
-                    <li>Fixed uploading to password protected albums in public categories (<a href="http://forum.coppermine-gallery.net/index.php/topic,65677.0.html">thread</a>)</li>
-                    <li>Changed default values for user galleries category (<a href="http://forum.coppermine-gallery.net/index.php/topic,65543.0.html">thread</a>)</li>
-                    <li>Fixed album visibility issue with user galleries (<a href="http://forum.coppermine-gallery.net/index.php/topic,65543.0.html">thread</a>)</li>
-                    <li>Changed fix for category alpha sorting</li>
-                    <li>Fixed a critical error with the most viewed meta album</li>
-                    <li>Updated French language file (improvement and corrections)</li>
-                    <li>Allow higher port numbers for the site url config setting</li>
-                    <li>Fixed display of swf files in Firefox (<a href="http://forum.coppermine-gallery.net/index.php/topic,63624.0.html">thread</a>)</li>
-                    <li>Fixed resizing of watermark backup images (<a href="http://forum.coppermine-gallery.net/index.php/topic,65531.0.html">thread</a>)</li>
-                    <li>Fixed category permissions for secondary user groups (<a href="http://forum.coppermine-gallery.net/index.php/topic,65551.0.html">thread</a>)</li>
-                    <li>Fixed issue when editing user albums (<a href="http://forum.coppermine-gallery.net/index.php/topic,65542.0.html">thread</a>)</li>
-                    <li>Fixed issues with usergal_alphatabs plugin (<a href="http://forum.coppermine-gallery.net/index.php/topic,65473.0.html">thread</a> & <a href="http://forum.coppermine-gallery.net/index.php/topic,65547.0.html">thread</a>)</li>
-                    <li>Fixed line breaks in contact form emails</li>
-                    <li>Removed outdated FAQ items</li>
-                    <li>Updated Hungarian language file (user contribution)</li>
-                    <li>Fixed pre-population of user name on comments form (<a href="http://forum.coppermine-gallery.net/index.php/topic,65293.0.html">thread</a>)</li>
-                    <li>Fixed timeout issue when fetching remote files (<a href="http://forum.coppermine-gallery.net/index.php/topic,65424.0.html">thread</a>)</li>
-                    <li>Fixed thumb sharpening (<a href="http://forum.coppermine-gallery.net/index.php/topic,65398.0.html">thread</a>)</li>
-                    <li>Place new comments form accordingly to sort order of comments (<a href="http://forum.coppermine-gallery.net/index.php/topic,65461.0.html">thread</a>)</li>
-                    <li>Added Danish language file (user contribution)</li>
-                    <li>Added default value for 'user_profile6' during user creation (<a href="http://forum.coppermine-gallery.net/index.php/topic,65451.0.html">thread</a>)</li>
-                    <li>Fixed HTML validation issue for german lang files - replaced & by &amp;amp;</li>
-                    <li>Updated plugin manager documentation (<a href="http://forum.coppermine-gallery.net/index.php/topic,65379.0.html">thread</a>)</li>
-                    <li>Added Hungarian language file (user contribution)</li>
-                    <li>Fixed pagination for user manager (<a href="http://forum.coppermine-gallery.net/index.php/topic,65365.0.html">thread</a>)</li>
-                    <li>Updated Finnish language file (user contribution)</li>
-                  </ul>
-                </td>
-                <td valign="top" align="right">2010-08-06</td>
-              </tr>
-              <tr>
-                <td valign="top">cpg1.5.7</td>
-                <td valign="top">
-                  This package was never released. In fact it never existed.
-                </td>
-                <td valign="top" align="right">-</td>
-              </tr>
-              <tr>
-                <td valign="top">cpg1.5.6</td>
-                <td valign="top">
-                  <ul>
-                    <li>Maintenance release (stable)</li>
-                    <li><a href="http://forum.coppermine-gallery.net/index.php/topic,65278.0.html">Announcement thread</a></li>
-                    <li>Fixed broken link (<a href="http://forum.coppermine-gallery.net/index.php/topic,65226.0.html">thread</a>)</li>
-                    <li>Extended lang_byte_units array for some language files (<a href="http://forum.coppermine-gallery.net/index.php/topic,65231.0.html">thread</a>)</li>
-                    <li>Fixed ip address duplicates in stat_details.php (<a href="http://forum.coppermine-gallery.net/index.php/topic,65230.0.html">thread</a>)</li>
-                    <li>Updated Czech language file (user contribution)</li>
-                    <li class="important">Fixed typo that caused the display of the 'not supported version' message box (<a href="http://forum.coppermine-gallery.net/index.php/topic,65224.0.html">thread</a>)</li>
-                    <li>Fixed issue when uploading plugins to Windows-driven galleries</li>
-                    <li>Removed cpg1.3.x theme upgrade guide, as a direct upgrade from cpg1.3.x to cpg1.5.x no longer is supported</li>
-                    <li>Create different log entries for user registrations and admin user creations in access log file (<a href="http://forum.coppermine-gallery.net/index.php/topic,65298.0.html">thread</a>)</li>
-                    <li>Fixed config value for path to ImageMagick when selecting GD during intallation (<a href="http://forum.coppermine-gallery.net/index.php/topic,65177.0.html">thread</a>)</li>
-                    <li>Fixed query for album moderation group (<a href="http://forum.coppermine-gallery.net/index.php/topic,65312.0.html">thread</a>)</li>
-                    <li>Fixed display of upload approval button (<a href="http://forum.coppermine-gallery.net/index.php/topic,65314.0.html">thread</a>)</li>
-                  </ul>
-                </td>
-                <td valign="top" align="right">2010-06-04</td>
-              </tr>
-              <tr>
-                <td valign="top">cpg1.5.5</td>
-                <td valign="top">
-                  This package was never released. In fact it never existed.
-                </td>
-                <td valign="top" align="right">-</td>
-              </tr>
-              <tr>
-                <td valign="top">cpg1.5.4</td>
-                <td valign="top">
-                  <ul>
-                    <li>Stable release</li>
-                    <li><a href="http://forum.coppermine-gallery.net/index.php/topic,65216.0.html">Announcement thread</a></li>
-                  </ul>
-                </td>
-                <td valign="top" align="right">2010-06-02</td>
-              </tr>
-              <tr>
-                <td valign="top">cpg1.5.3</td>
-                <td valign="top">
-                  <ul>
-                    <li>Release candidate</li>
-                    <li><a href="http://forum.coppermine-gallery.net/index.php/topic,63951.0.html">Announcement thread</a></li>
-                  </ul>
-                </td>
-                <td valign="top" align="right">2010-03-05</td>
-              </tr>
-              <tr>
-                <td valign="top">cpg1.5.2</td>
-                <td valign="top">
-                  <ul>
-                    <li>Beta release. First public release for testing and evaluation. Do not use for production! No support available yet.</li>
-                    <li><a href="http://forum.coppermine-gallery.net/index.php/topic,62505.0.html">Announcement thread</a></li>
-                  </ul>
-                </td>
-                <td valign="top" align="right">2009-11-16</td>
-              </tr>
-              <tr>
-                <td valign="top">cpg1.5.1</td>
-                <td valign="top">
-                  <ul>
-                    <li>Alpha release for testers and translators. This version is not a public release - it has only been released to a closed group of users for <a href="testing.htm">testing</a> and <a href="translation.htm#translation">translation</a> purposes.</li>
-                  </ul>
-                </td>
-                <td valign="top" align="right">2009-07-24</td>
-              </tr>
-              <tr>
-                <td valign="top">cpg1.5.0</td>
-                <td valign="top">
-                  <ul>
-                    <li>This version was never released as a package - the version number 1.5.0 was just reserved for the initial development stage of the cpg1.5.x series before the feature freeze stage started. There is no package available, nor has there ever been one - only <a href="dev_subversion.htm#subversion">Subversion</a> checkouts have been possible.</li>
+                    <li>This version was never released as a package - the version number 1.6.01 was just reserved for the initial development stage of the cpg1.6.x series before the feature freeze stage started. There is no package available, nor has there ever been one - only <a href="dev_subversion.htm#subversion">Subversion</a> checkouts have been possible.</li>
                   </ul>
                 </td>
                 <td valign="top" align="right">Never</td>
@@ -259,41 +117,33 @@
     <p>Depending on the version you're updating from, there are additional actions you need to perform:</p>
     
         <div class="indent">
-        <a name="upgrade_10"></a><a name="upgrade_12"></a><h3>Upgrading from version cpg1.0, cpg1.1, cpg1.2.x or cpg1.3.x to cpg1.5.x<a href="#upgrade_10" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+        <a name="upgrade_10"></a><a name="upgrade_12"></a><h3>Upgrading from version cpg1.0, cpg1.1, cpg1.2.x, cpg1.3.x or cpg1.4.x to cpg1.6.x<a href="#upgrade_10" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
         
         <p>Support for a direct upgrade from cpg1.0, cpg1.1, cpg1.2.x or cpg1.3.x to cpg1.5.x has been dropped - if you still have such an ancient version running, you will have to upgrade in a two-step-process (from your version to cpg1.4.x and then on to cpg1.5.x)</p>
         
         
         
-        <a name="upgrade_14"></a><h3>Upgrading from cpg1.4.x to version cpg1.5.x<a href="#upgrade_14" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+        <a name="upgrade_14"></a><h3>Upgrading from cpg1.5.x to version cpg1.6.x<a href="#upgrade_14" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
         <ul>
           <li>
               <a name="upgrade_14_plugins"></a><h4>Plugins<a href="#upgrade_14_plugins" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
-              Plugins made for cpg1.4.x usually can no longer be run on cpg1.5.x, so you'll need to <strong>turn them off</strong> while you're still running cpg1.4.x (<strong>before</strong> you start upgrading). Some features that have been a plugin for cpg1.4.x went into the core of cpg1.5.x, so you may not need your plugins any longer. The safest way to make sure that plugins don't interfere is by <a href="configuration.htm#admin_general_enable-plugins">disabling all plugins</a> using the corresponding config option and then removing the content of the plugin folder using your FTP app. After performing the upgrade, get the plugin versions designed for cpg1.5.x and upload them, then re-enable the new plugins one by one.
+              Plugins made for cpg1.4.x or cpg1.5.x usually can no longer be run on cpg1.6.x, so you'll need to <strong>turn them off</strong> while you're still running cpg1.5.x (<strong>before</strong> you start upgrading). Some features that have been a plugin for cpg1.5.x went into the core of cpg1.6.x, so you may not need your plugins any longer. The safest way to make sure that plugins don't interfere is by <a href="configuration.htm#admin_general_enable-plugins">disabling all plugins</a> using the corresponding config option and then removing the content of the plugin folder using your FTP app. After performing the upgrade, get the plugin versions designed for cpg1.6.x and upload them, then re-enable the new plugins one by one.
           </li>
           <li>
               <a name="upgrade_14_custom_theme"></a><h4>Custom theme<a href="#upgrade_14_custom_theme" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
-              If you have made a custom theme, apply the changes that were introduced in the themes structure to your custom-made theme - refer to the <a href="theme_upgrade_14x-15x.htm">theme-upgrade guide</a>. Please note that some themes that used to come with previous versions of Coppermine have been dropped in cpg1.5.x. Those dropped themes are available as separate downloads though.
+              If you have made a custom theme, apply the changes that were introduced in the themes structure to your custom-made theme - refer to the <a href="theme_upgrade_14x-15x.htm">theme-upgrade guide</a>. Please note that some themes that used to come with previous versions of Coppermine have been dropped in cpg1.6.x. Those dropped themes are available as separate downloads though.
           </li>
           <li>
               <a name="upgrade_14_language_files"></a><h4>Language files<a href="#upgrade_14_language_files" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
               You can not use language files from older versions of Coppermine as primary language (the language the admin will use) - make sure you only have the language files that come with this package inside of your lang folder (delete or rename all files from older versions within the lang folder).<br />
-              If you need to use a language that hasn't been translated for cpg1.5.x, you can try using the language file from cpg1.4.x, however there are certain caveats:
+              If you need to use a language that hasn't been translated for cpg1.6.x, you can try using the language file from cpg1.5.x, however there are certain caveats:
               <ul>
-                <li>cpg1.5.x-phrases that don't exist in your old language file will go untranslated or show in english</li>
-                <li>Coppermine can't be administered using an old language file - the admin needs to use a "true" cpg1.5.x language file</li>
+                <li>cpg1.6.x-phrases that don't exist in your old language file will go untranslated or show in english</li>
+                <li>Coppermine can't be administered using an old language file - the admin needs to use a "true" cpg1.6.x language file</li>
                 <li>You're free to try using old language files, however when running into issues or error messages, switch to US-English and see if the issue goes away then. Using outdated language files goes unsupported</li>
               </ul>
-              Ideally, you should just delete all files from cpg1.4.x inside the <tt class="filename">lang</tt>-folder (the folder that correlates to <tt class="filename">http://yoursite.tld/your_coppermine_folder/lang/</tt>) before performing the update, which will make sure that only language files that have been designed for cpg1.5.x will actually reside inside the language folder.<br />
+              Ideally, you should just delete all files from cpg1.5.x inside the <tt class="filename">lang</tt>-folder (the folder that correlates to <tt class="filename">http://yoursite.tld/your_coppermine_folder/lang/</tt>) before performing the update, which will make sure that only language files that have been designed for cpg1.6.x will actually reside inside the language folder.<br />
               After completing the update you should visit the new language manager and enable/disable the languages that you actually need or the ones you do not need. The language manager can be accessed by going to Coppermine's config, expanding the section "Language & Charset settings" and then clicking on the link labelled "Manage languages". Alternatively, you can directly go to <tt class="filename">http://yoursite.tld/your_coppermine_folder/langmgr.php</tt> in your browser's address bar.
-          </li>
-          <li>
-              <a name="upgrade_14_password_encryption"></a><h4>Password encryption<a href="#upgrade_14_password_encryption" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
-              In cpg1.3.x, the passwords for the users used to be stored in plain text inside the database. This has been changed in cpg1.4.x - out of the box, cpg1.4.x used to store the passwords encrypted. However, there used to be an option for those who upgraded from cpg1.3.x to cpg1.4.x to skip the step of encrypting the passwords. In cpg1.5.x, the plain-text storage of passwords is no longer an option. If you're running such an old gallery that first was updated from cpg1.3.x to cpg1.4.x and now on to cpg1.5.x, the updater will automatically encrypt all the passwords of your users (including your own admin account). You don't have to mind anything specifically - the updater will do this automatically.
-          </li>
-          <li>
-              <a name="upgrade_14_faq"></a><h4>Display FAQ<a href="#upgrade_14_faq" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
-              The option to display a FAQ page to end users (by ticking the corresponding config option) that existed in cpg1.3.x and cpg1.4.x has been removed from cpg1.5.x, because it was hardly every used and only caused additional workload for translators. If you belong to those few users who actually used the FAQ menu item in Coppermine's navigation menu, you can easily come up with a custom page that uses coppermine's header and footer and display your individual FAQ there.
           </li>
           <li>
               <a name="upgrade_14_outdated_files"></a><h4>Outdated files<a href="#upgrade_14_outdated_files" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
@@ -301,22 +151,13 @@
               Again, this is just a precaution to make sure that your new gallery doesn't contain flaws from outdated versions that would allow malevolent attackers to exploit weaknesses in older versions. To find out what files need to be removed manually, take a look at the output at the bottom of the update screen (<tt class="code">http://yourdomain.tld/your_coppermine_folder/update.php</tt>) - the updater will attempt to delete the files for you, but in most server setups it won't have the permission to do so, so you will have to manually delete the files using your FTP app. Another way to find out about the files that need to be deleted is the <a href="#versioncheck">versioncheck</a> page - the files that are scheduled for removal will be displayed there as well - the versioncheck page won't attempt to delete those files though.
           </li>
           <li>
-              <a name="upgrade_14_safe_mode"></a><h4>Safe mode<a href="#upgrade_14_safe_mode" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
-              If your webserver is running in safe_mode and you have enabled "SILLY_SAFE_MODE" in include/config.inc.php, you will have to go to coppermine's config after performing above mentioned steps and enable "<a href="configuration.htm#admin_picture_thumb_advanced_silly_safe_mode_start">silly safe mode</a>" there, as the setting in <tt class="code">include/config.inc.php</tt> is no longer being taken into account in cpg1.5.x. The silly_safe_mode setting has been turned into a <a href="configuration.htm#admin_picture_thumb_advanced_silly_safe_mode_start">config setting</a> instead.
-          </li>
-          <li>
-              <a name="upgrade_14_uri_upload"></a><h4>URI upload removed<a href="#upgrade_14_uri_upload" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
-              The <abbr title="Uniform Resource Identifier">URI</abbr> upload feature has been removed from cpg1.4.x to cpg1.5.x, as it wasn't actually doing what many users thought that it would do: when using URI uploads people expected the file to remain at the URI that they entered into the upload form and not be transfered to the webspace where their Coppermine gallery resided on. Subsequently, they thought that they could safe webspace. This was a misconception and in fact just wishfull thinking: using URI uploads in cpg1.4.x, the file actually was uploaded to the Coppermine webspace no matter what.<br />
-              Therefore, the actual feature "URI upload" was removed in cpg1.5.x. However (depending on the operating system of your client) you can (ab)use the regular http upload form to accomplish a similar thing in cpg1.5.x: when entering the URL of a file accepted by Coppermine into the http upload form, the file will get downloaded to your client's temporary folder and then a regular http upload from your client to your server will be performed. This is not actually a feature built into coppermine, but rather a feature of your <abbr title="operating system">OS</abbr>/browser and therefore it goes unsupported. However, there is no action required when performing the upgrade - this paragraph is just meant to inform you that the feature was dropped. 
-          </li>
-          <li>
               <a name="upgrade_14_new_features"></a><h4>Configure new features<a href="#upgrade_14_new_features" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
-              In comparison to cpg1.4.x, the new version cpg1.5.x comes with a load of new features. Some of them are enabled by default after performing the upgrade, which might not be what you want. Therefore, it's advisable that you (at least cursorily) read up the <a href="index.htm#features">features list</a> and check the <a href="configuration.htm#admin">config panel</a> and the <a href="groups.htm#group_cp">groups control panel</a> for the changes there. The way that Coppermine handles languages has been changed as well, that's why you need to visit the <a href="languages.htm#language_manager">language manager</a> at least once after the upgrade and configure language support there.
+              In comparison to cpg1.5.x, the new version cpg1.6.x comes with a load of new features. Some of them are enabled by default after performing the upgrade, which might not be what you want. Therefore, it's advisable that you (at least cursorily) read up the <a href="index.htm#features">features list</a> and check the <a href="configuration.htm#admin">config panel</a> and the <a href="groups.htm#group_cp">groups control panel</a> for the changes there.
           </li>
         </ul>
         
-        <a name="upgrade_15"></a><h3>Upgrading from older versions of cpg1.5.x to the most recent version of  cpg1.5.x<a href="#upgrade_15" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-        <p>There are no additional steps to follow when upgrading from an older version of cpg1.5.x to the most recent version of that family. Just performing the basic instructions discussed above in <a href="#upgrade_any">Steps needed to perform when upgrading Coppermine (from any version)</a> will be enough.</p>
+        <a name="upgrade_15"></a><h3>Upgrading from older versions of cpg1.6.x to the most recent version of  cpg1.6.x<a href="#upgrade_15" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+        <p>There are no additional steps to follow when upgrading from an older version of cpg1.6.x to the most recent version of that family. Just performing the basic instructions discussed above in <a href="#upgrade_any">Steps needed to perform when upgrading Coppermine (from any version)</a> will be enough.</p>
     </div><a name="upgrade_particular_end"></a>
     
     <a name="updater"></a><h2>The update script<a href="#updater" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
@@ -348,7 +189,7 @@
         </div><a name="updater_end"></a>
         
     <a name="versioncheck"></a><h2>The version check tool<a href="#versioncheck" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
-    <p>Since the release of cpg1.3.2 Coppermine comes with an additional version checking tool to help you resolve issues with upgrades and updates easily. To launch the versioncheck, simply add <tt>versioncheck.php</tt> to your browser's address bar after being logged into coppermine as admin (example: <tt>http://yourdomain.tld/your_coppermine_folder/versioncheck.php</tt>). With version 1.5.x, you can run the versioncheck utility from the <a href="admin_menu.htm#admin_menu">Admin menu</a>.</p>
+    <p>Since the release of cpg1.3.2 Coppermine comes with an additional version checking tool to help you resolve issues with upgrades and updates easily. To launch the versioncheck, simply add <tt>versioncheck.php</tt> to your browser's address bar after being logged into coppermine as admin (example: <tt>http://yourdomain.tld/your_coppermine_folder/versioncheck.php</tt>). You can run the versioncheck utility from the <a href="admin_menu.htm#admin_menu">Admin menu</a>.</p>
     <p class="cpg_message_info">The versioncheck tool does <strong>not</strong> perform an actual update: it does not download newer versions of coppermine for you, nor does it install any fixes - it just is meant to make you aware of newer versions and help you to determine wether you performed an upgrade correctly.</p>
     
     <div class="indent">
@@ -360,7 +201,6 @@
             <li>Use versioncheck to make sure that your coppermine version is up-to-date</li>
         </ul>
         <p>This script goes through the files on your webserver and tries to determine if the local file versions on your webserver are the identical to the ones at the repository of http://coppermine-gallery.net. Files that do not match are displayed and are the files you should update as well.</p>
-        <p>Compared to previous versions, the versioncheck page has been re-designed for cpg1.5.x both in terms of visuals as well as functionality.</p>
         <a name="versioncheck_description_end"></a>
         
         <a name="versioncheck_first_run"></a><h3>First run<a href="#versioncheck_first_run" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -476,7 +316,7 @@
         </ul>
         </li>
         <li><a name="upgrade_faq_difference_update_upgrade"></a><h3>What's the difference between <em>updating</em> and <em>upgrading</em>?<a href="#upgrade_faq_difference_update_upgrade" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-        The words "update" and "upgrade" are often being used as synonyms. There is a slight difference though in the definition of the coppermine developers: <strong>upgrading</strong> usually means increasing the <em>major</em> version number, e.g. from cpg1.<em>4</em>.x to cpg1.<em>5</em>.x; while <strong>updating</strong> usually refers to <em>minor</em> version increases, e.g. maintenance releases from cpg1.5.<em>x</em> to cpg1.5.<em>y</em>.<br />
+        The words "update" and "upgrade" are often being used as synonyms. There is a slight difference though in the definition of the coppermine developers: <strong>upgrading</strong> usually means increasing the <em>major</em> version number, e.g. from cpg1.<em>5</em>.x to cpg1.<em>6</em>.x; while <strong>updating</strong> usually refers to <em>minor</em> version increases, e.g. maintenance releases from cpg1.6.<em>x</em> to cpg1.6.<em>y</em>.<br />
         However, the usage is not that strict, so you might find places both in this document as well as other media (like the official coppermine forum) where the terms are being used the other way 'round. In fact, the words are pretty much synonyms as far as we're concerned.</li>
         <li>
             <a name="upgrade_faq_what_version"></a><h3>How do I find out what version of Coppermine I have?<a href="#upgrade_faq_what_version" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -490,10 +330,10 @@
     </ul>
 </div><a name="upgrade_end"></a>
 
-<a name="downgrading"></a><h2>Downgrading from cpg1.5.x to an older version<a href="#downgrading" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
-<p>CPG1.5.x incorporates many new features (compared to older versions), so we encourage all users to upgrade. However, there may be some who want to test cpg1.5.x and decide later that they want to go back to an older version. You have to keep in mind that a full upgrade changes the overall layout of coppermine's database that includes converting the encoding to unicode. This process can't be reverted: once you have done the conversion, the only way back is to restore a complete mySQL database dump (of course you have to create this backup <strong>before</strong> you upgraded in the first place). Creating mySQL dumps (backups) is recommended anyway, so you should do so <strong>now</strong>.</p>
-<p class="cpg_message_warning">To make this absolutely clear: you can <strong>only</strong> downgrade if you used to have cpg1.4.x before and upgraded this version to cpg1.5.x. If you have made a <strong>fresh</strong> install of cpg1.5.x, you <strong>can not</strong> downgrade at all!</p>
-<p>To actually perform the downgrade, replace all cpg1.5.x files on your server with the files from the older version (as if you were doing an upgrade, see above). Then restore your database dump that you must have made before upgrading. If you don't have a database dump (backup), you can't go back!</p>
+<a name="downgrading"></a><h2>Downgrading from cpg1.6.x to an older version<a href="#downgrading" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>CPG1.6.x incorporates many new features (compared to older versions), so we encourage all users to upgrade. However, there may be some who want to test cpg1.6.x and decide later that they want to go back to an older version. You have to keep in mind that a full upgrade changes the overall layout of coppermine's database that includes converting the encoding to unicode. This process can't be reverted: once you have done the conversion, the only way back is to restore a complete mySQL database dump (of course you have to create this backup <strong>before</strong> you upgraded in the first place). Creating mySQL dumps (backups) is recommended anyway, so you should do so <strong>now</strong>.</p>
+<p class="cpg_message_warning">To make this absolutely clear: you can <strong>only</strong> downgrade if you used to have cpg1.5.x before and upgraded this version to cpg1.6.x. If you have made a <strong>fresh</strong> install of cpg1.65.x, you <strong>can not</strong> downgrade at all!</p>
+<p>To actually perform the downgrade, replace all cpg1.6.x files on your server with the files from the older version (as if you were doing an upgrade, see above). Then restore your database dump that you must have made before upgrading. If you don't have a database dump (backup), you can't go back!</p>
 <a name="downgrading_end"></a>
 
 <div id="doc_footer">
