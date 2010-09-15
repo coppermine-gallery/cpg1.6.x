@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>Theme Upgrading from cpg1.4.x to cpg1.5.x - Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<meta name="copyright" content="Coppermine dev team" />
+<meta name="description" content="To make your custom made theme from cpg1.4.x work with cpg1.5.x, you will need to make some changes. Remember to back up your original files, so you can go back to a working version in case something goes wrong with the modifications." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!--
+  SVN version info:
+
+  Coppermine version: 1.6.01
+  $HeadURL$
+  $Revision$
+-->
+<link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../style/print.css" media="print" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.treeview.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="docheader">Coppermine Photo Gallery v1.6.x: Documentation and Manual</h1>
+<div id="toc">
+<a href="toc.htm">Table of Contents</a>
+</div>
+
+<a name="theme_convert"></a><h1>Converting cpg1.5.x themes to cpg1.6.x</h1>
+<p>To make your custom made theme from cpg1.4.x work with cpg1.5.x, you will need to make some changes. Remember to back up your original files, so you can go back to a working version in case something goes wrong with the modifications.</p>
+<p>The files to be edited would be in the particular folder of the theme in the themes folder. For example, the files for the "curve" theme could be found in themes/curve</p>
+<p>If you're using a default package that came with cpg1.4.x and comes with cpg1.5.x as well and if you haven't changed your theme files at all, you don't have to apply any changes and can savely skip this page. However, if you are using a custom theme or if you have edited one of the default themes (making it a custom theme this way) you need to read this page and do as suggested on this very page.</p>
+<p>Make sure that the folder name of your custom theme differs from the default theme that you have based your custom theme on, i.e. make sure to <a href="theme_create.htm#theme_create_rename">rename your theme first</a>.
+<p class="cpg_message_warning">You can <strong>not</strong> use a theme that was designed for cpg1.4.x with a cpg1.5.x driven gallery unless you apply the basic changes discussed on this page. This applies to all cpg1.4.x-themes.</p>
+<ul>
+  <li><a href="#theme_convert_style">Edit style.css</a></li>
+  <li><a href="#theme_convert_template">Edit template.html</a></li>
+  <li><a href="#theme_convert_theme">Edit theme.php</a></li>
+  <li><a href="#theme_convert_validation">Validation</a></li>
+</ul>
+
+<a name="theme_convert_style"></a><h2>Edit style.css<a href="#theme_convert_style" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>For all changes below, edit themes/your_custom_theme/style.css</p>
+
+<div class="indent">
+
+</div>
+<a name="theme_convert_style_end"></a>
+
+
+<a name="theme_convert_template"></a><h2>Edit template.html<a href="#theme_convert_template" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>There have been only minor changes to this file, so the changes should be easy to apply. However, if you fail to apply the changes in this file, your upgrade will be incomplete and your custom theme will not work for cpg1.6.x. Just follow the instructions in this section thoroughly. <br />
+Open <tt class="code">themes/your_theme/template.html</tt> with a plain text editor and edit as suggested below:</p>
+
+<div class="indent">
+
+
+</div>
+
+<a name="theme_convert_template_end"></a>
+
+<a name="theme_convert_theme"></a><h2>Edit theme.php<a href="#theme_convert_theme" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+
+<p>Many notable things have happened that will influence your modifications to your theme.php.</p>
+<p>If you can, empty your copy of theme.php (of course you should keep a backup somewhere safe as a precaution) and then re-add the changes you need as if you were creating your custom theme from scratch, copying the relevant bits you want to see changed from the sample theme (as suggested in &quot;<a href="theme_theme_php.htm#theme_sample">The sample theme - a template to copy from</a>&quot;) and then modifying your edits as you see fit.</p>
+<a name="theme_convert_theme_end"></a>
+
+<a name="theme_convert_validation"></a><h2>Validation Methodology<a href="#theme_convert_validation" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<p>Now that you have a functioning "style.css", "template.html" and  "theme.php" you should verify that it is generating valid output.</p>
+<ul>
+    <li>Suggestions to help you bring the theme you are editing up to XHTML 1.0 Transitional HTML
+      <ul>
+        <li>All ampersands (&amp;) that form part of a <strong>URL</strong> are to be coded '<tt class="code">&amp;amp;</tt>'. There are quite a few of these in the functions of theme.php.</li>
+        <li>All images to have the 'alt' attribute, and be closed '<tt class="code"> /&gt;</tt>'.</li>
+        <li>All meta tags should be closed '<tt class="code"> /&gt;</tt>'</li>
+        <li>All <tt class="code">&lt;hr&gt;</tt> and <tt class="code">&lt;br&gt;</tt> tags should be closed, i.e. instead of <tt class="code">&lt;hr&gt;</tt> you should write <tt class="code">&lt;hr /&gt;</tt> and instead of <tt class="code">&lt;br&gt;</tt> you should use <tt class="code">&lt;br /&gt;</tt></li>
+        <li>All background images/colors to be changed to CSS or style attributes. This depends on the layout.</li>
+        <li>Any existing tags or attributes in uppercase or partial uppercase (such as <tt class="code">onClick</tt>) to be changed to lowercase.</li>
+      </ul>
+    </li>
+    <li>Save all your open files and upload them to your webserver; test-drive both as admin and as "regular" user.</li>
+    <li>Use the following methodology to confirm that your theme generates valid XHTML 1.0 Transitional HTML.<br />
+    Each of the following pages needs to be <a href="http://validator.w3.org/">validated</a> as an anonymous user, registered user, and in admin mode:
+      <ul>
+        <li>index.php</li>
+        <li>thumbnails.php</li>
+        <li>displayimage.php</li>
+        <li>search.php</li>
+        <li>emailed HTML E-card.</li>
+      </ul>
+      &nbsp;<br />
+      To find help to validate your custom theme, review the section <a href="dev.htm#dev">Developer documentation</a> &rarr; <a href="dev_tools.htm#dev_tools">Tools recommended by the devs</a> &rarr; <a href="dev_tools.htm#dev_tools_web_development">Web development</a>
+    </li>
+</ul>
+<a name="validation_end"></a>
+
+
+<div id="doc_footer">
+	<div class="doc_info_wrapper">
+		<span id="doc_last_changed">$LastChangedDate$</span>
+		<span id="doc_revision">$Revision$</span>
+	</div>
+</div>
+</body>
+</html>
