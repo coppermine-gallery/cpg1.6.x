@@ -339,6 +339,7 @@ CREATE TABLE CPG_users (
   user_regdate datetime NOT NULL default '0000-00-00 00:00:00',
   user_group_list varchar(255) NOT NULL default '',
   user_email varchar(255) NOT NULL default '',
+  user_email_valid enum('YES','') NOT NULL default '',
   user_profile1 varchar(255) NOT NULL default '',
   user_profile2 varchar(255) NOT NULL default '',
   user_profile3 varchar(255) NOT NULL default '',
