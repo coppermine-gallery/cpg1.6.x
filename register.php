@@ -610,41 +610,34 @@ function check_user_info(&$error)
         cpg_db_query("INSERT INTO {$CONFIG['TABLE_ALBUMS']} (`title`, `category`) VALUES ('$user_name', $catid)");
     }
 
-    // Registrations must be activated by the user clicking a link in an email
+    // Registrations must be activated/verified by the user clicking a link in an email
     if ($CONFIG['reg_requires_valid_email']) {
-    
-        // If we don't require admin activation, just mail the user the activation link
-        if (!$CONFIG['admin_activation'] == 1) {
-        
-            $act_link = rtrim($CONFIG['site_url'], '/') . '/register.php?activate=' . $act_key;
+        // Mail the user the activation/verification link
+        $act_link = rtrim($CONFIG['site_url'], '/') . '/register.php?activate=' . $act_key;
 
-            $template_vars = array(
-                '{SITE_NAME}' => $CONFIG['gallery_name'],
-                '{USER_NAME}' => $user_name,
-                '{ACT_LINK}'  => $act_link,
-            );
+        $template_vars = array(
+            '{SITE_NAME}' => $CONFIG['gallery_name'],
+            '{USER_NAME}' => $user_name,
+            '{ACT_LINK}'  => $act_link,
+        );
 
-            if (!cpg_mail($email, sprintf($lang_register_php['confirm_email_subject'], $CONFIG['gallery_name']), nl2br(strtr($lang_register_php['confirm_email'], $template_vars)))) {
-                cpg_die(CRITICAL_ERROR, $lang_register_php['failed_sending_email'], __FILE__, __LINE__);
-            }
+        if (!cpg_mail($email, sprintf($lang_register_php['confirm_email_subject'], $CONFIG['gallery_name']), nl2br(strtr($lang_register_php['confirm_email'], $template_vars)))) {
+            cpg_die(CRITICAL_ERROR, $lang_register_php['failed_sending_email'], __FILE__, __LINE__);
         }
-        
-        // If we do require admin activation
-        if ($CONFIG['admin_activation'] == 1) {
+        msg_box($lang_register_php['information'], $lang_register_php['thank_you'], $lang_common['continue'], 'index.php');
+    } else {
+        if ($CONFIG['admin_activation']) {
+            // We need admin activation only
             msg_box($lang_register_php['information'], $lang_register_php['thank_you_admin_activation'], $lang_common['continue'], 'index.php');
         } else {
-            msg_box($lang_register_php['information'], $lang_register_php['thank_you'], $lang_common['continue'], 'index.php');
+            // No activation required, account is ready for login
+            msg_box($lang_register_php['information'], $lang_register_php['acct_active'], $lang_common['continue'], 'index.php');
         }
-        
-    } else {
-    
-        // No activation required, account is ready for login
-        msg_box($lang_register_php['information'], $lang_register_php['acct_active'], $lang_common['continue'], 'index.php');
     }
 
-    // email notification to admin
-    if ($CONFIG['reg_notify_admin_email']) {
-        if(UDB_INTEGRATION == 'coppermine'){
+    // email notification or actication link to admin
+    if ($CONFIG['reg_notify_admin_email'] || ($CONFIG['admin_activation'] && !$CONFIG['reg_requires_valid_email'])) {
+        if (UDB_INTEGRATION == 'coppermine') {
             // get default language in which to inform the admins
             $result = cpg_db_query("SELECT user_id, user_email, user_language FROM {$CONFIG['TABLE_USERS']} WHERE user_group = 1");
             while ( ($row = mysql_fetch_assoc($result)) ) {
@@ -652,23 +645,23 @@ function check_user_info(&$error)
                     $admins[$row['user_id']] = array('email' => $row['user_email'], 'lang' => $row['user_language']);
                 }
             }
-        }else{
+        } else {
             //@todo: is it possible to get the language from bridged installs?
             $admins[] = array('email' => $CONFIG['gallery_admin_email'], 'lang' => 'english');
         }
-        foreach($admins as $admin){
+        foreach($admins as $admin) {
             //check if the admin language is available
-            if(file_exists("lang/{$admin['lang']}.php")){
+            if (file_exists("lang/{$admin['lang']}.php")) {
                 $lang_register_php_def = cpg_get_default_lang_var('lang_register_php', $admin['lang']);
                 $lang_register_approve_email_def = cpg_get_default_lang_var('lang_register_approve_email', $admin['lang']);
-            }else{
+            } else {
                 $lang_register_php_def = cpg_get_default_lang_var('lang_register_php');
                 $lang_register_approve_email_def = cpg_get_default_lang_var('lang_register_approve_email');
             }
             
     
-            // if the admin has to activate the login, give them the link to do so
-            if ($CONFIG['admin_activation'] == 1) {
+            // if the admin has to activate the login, give them the link to do so; but only if users don't have to verify their email address 
+            if ($CONFIG['admin_activation'] && !$CONFIG['reg_requires_valid_email']) {
     
                 $act_link = rtrim($CONFIG['site_url'], '/') . '/register.php?activate=' . $act_key;
     
@@ -680,7 +673,7 @@ function check_user_info(&$error)
 
                 cpg_mail($admin['email'], sprintf($lang_register_php_def['notify_admin_request_email_subject'], $CONFIG['gallery_name']), nl2br(strtr($lang_register_approve_email_def, $template_vars)));
     
-            } else {
+            } elseif ($CONFIG['reg_notify_admin_email']) {
             
                 // otherwise, email is for information only
                 cpg_mail($admin['email'], sprintf($lang_register_php_def['notify_admin_email_subject'], $CONFIG['gallery_name']), sprintf($lang_register_php_def['notify_admin_email_body'], $user_name));
@@ -711,7 +704,7 @@ if ($superCage->get->keyExists('activate')) {
         cpg_die(ERROR, $lang_register_php['acct_act_failed'], __FILE__, __LINE__);
     }
 
-    $sql = "SELECT user_active, user_email, user_name FROM {$CONFIG['TABLE_USERS']} WHERE user_actkey = '$act_key' LIMIT 1";
+    $sql = "SELECT user_active, user_email, user_email_valid, user_name FROM {$CONFIG['TABLE_USERS']} WHERE user_actkey = '$act_key' LIMIT 1";
     $result = cpg_db_query($sql);
 
     if (!mysql_num_rows($result)) {
@@ -724,15 +717,33 @@ if ($superCage->get->keyExists('activate')) {
     if ($row['user_active'] == 'YES') {
         cpg_die(ERROR, $lang_register_php['acct_already_act'], __FILE__, __LINE__);
     }
-    
+
     pageheader($lang_register_php['page_title']);
 
-    $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET user_active = 'YES' WHERE user_actkey = '$act_key' LIMIT 1";
-    $result = cpg_db_query($sql);
+    if ($CONFIG['reg_requires_valid_email'] && !$CONFIG['admin_activation']) {
+         // activate user (by user)
+        $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET user_active = 'YES' WHERE user_actkey = '$act_key' LIMIT 1";
+        $user_status = 'active_user';
+    } elseif ($CONFIG['admin_activation'] && !$CONFIG['reg_requires_valid_email']) {
+        // activate user (by admin)
+        $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET user_active = 'YES' WHERE user_actkey = '$act_key' LIMIT 1";
+        $user_status = 'active_admin';
+    } else {
+        if ($row['user_email_valid'] == 'YES') {
+            // activate user (by admin)
+            $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET user_active = 'YES' WHERE user_actkey = '$act_key' LIMIT 1";
+            $user_status = 'active_admin';
+        } else {
+            // email validated by user, send activation link to admin
+            $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET user_email_valid = 'YES' WHERE user_actkey = '$act_key' LIMIT 1";
+            $user_status = 'valid';
+        }
+    }
+    cpg_db_query($sql);
     CPGPluginAPI::filter('register_user_activation', $act_key);
 
     //after admin approves, user receives email notification
-    if ($CONFIG['admin_activation'] == 1) {
+    if ($user_status == 'active_admin') {
     
         msg_box($lang_register_php['information'], $lang_register_php['acct_active_admin_activation'], $lang_common['continue'], 'index.php');
 
@@ -744,6 +755,43 @@ if ($superCage->get->keyExists('activate')) {
         
         cpg_mail($row['user_email'], sprintf($lang_register_php['notify_user_email_subject'], $CONFIG['gallery_name']), nl2br(strtr($lang_register_php['activated_email'], $template_vars)));
 
+    } elseif ($user_status == 'valid') {
+        // send activation link to admin
+
+        msg_box($lang_register_php['information'], $lang_register_php['thank_you_admin_activation'], $lang_common['continue'], 'index.php');
+
+        if (UDB_INTEGRATION == 'coppermine') {
+            // get default language in which to inform the admins
+            $result = cpg_db_query("SELECT user_id, user_email, user_language FROM {$CONFIG['TABLE_USERS']} WHERE user_group = 1");
+            while ( ($row = mysql_fetch_assoc($result)) ) {
+                if (!empty($row['user_email'])) {
+                    $admins[$row['user_id']] = array('email' => $row['user_email'], 'lang' => $row['user_language']);
+                }
+            }
+        } else {
+            //@todo: is it possible to get the language from bridged installs?
+            $admins[] = array('email' => $CONFIG['gallery_admin_email'], 'lang' => 'english');
+        }
+        foreach($admins as $admin) {
+            //check if the admin language is available
+            if (file_exists("lang/{$admin['lang']}.php")) {
+                $lang_register_php_def = cpg_get_default_lang_var('lang_register_php', $admin['lang']);
+                $lang_register_approve_email_def = cpg_get_default_lang_var('lang_register_approve_email', $admin['lang']);
+            } else {
+                $lang_register_php_def = cpg_get_default_lang_var('lang_register_php');
+                $lang_register_approve_email_def = cpg_get_default_lang_var('lang_register_approve_email');
+            }
+    
+            $act_link = rtrim($CONFIG['site_url'], '/') . '/register.php?activate=' . $act_key;
+
+            $template_vars = array(
+                '{SITE_NAME}' => $CONFIG['gallery_name'],
+                '{USER_NAME}' => $row['user_name'],
+                '{ACT_LINK}' => $act_link,
+            );
+
+            cpg_mail($admin['email'], sprintf($lang_register_php_def['notify_admin_request_email_subject'], $CONFIG['gallery_name']), nl2br(strtr($lang_register_approve_email_def, $template_vars)));
+        }
     } else {
         //user self-activated, gets message box that account was activated
         msg_box($lang_register_php['information'], $lang_register_php['acct_active'], $lang_common['continue'], 'index.php');
