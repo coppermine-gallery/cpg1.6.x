@@ -634,10 +634,11 @@ print '<input type="hidden" name="form_token" value="' . $form_token . '" />';
 print '<input type="hidden" name="timestamp" value="' . $timestamp . '" />';
 print <<< EOT
 </form>
+<!--
 <br />
 <form action="http://ws.arin.net/whois/" method="get" name="lookup" id="cpgform2" target="_blank">
 EOT;
-
+// IP address lookup is nowadays protected by Captcha or other methods - lookup script needs to be changed to a link only
 starttable('-2','','','');
 print <<< EOT
     <tr>
@@ -653,7 +654,7 @@ print <<< EOT
     </tr>
 EOT;
 endtable();
-print '</form>' . $LINEBREAK;
+print '</form>-->' . $LINEBREAK;
 
 pagefooter();
 
