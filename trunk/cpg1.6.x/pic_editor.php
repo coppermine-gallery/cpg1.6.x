@@ -254,7 +254,7 @@ $json_script = "<script type=\"text/javascript\">var js_vars = eval('($json_vars
     echo $json_script;
     ?>
     <script type="text/javascript" src="js/pic_editor.js"></script>
-    <script src="js/jquery-1.3.2.js" type="text/javascript"></script>
+    <script src="js/jquery-1.4.2.js" type="text/javascript"></script>
     <script src="js/scripts.js" type="text/javascript"></script>
 <?php }?>
     <style type="text/css">

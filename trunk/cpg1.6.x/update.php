@@ -718,6 +718,7 @@ function delete_files()
 
     // Attempt to delete outdated files
     $delete_file_array = array(
+        'js/jquery-1.3.2.js',
         'logs/log_header.inc.php',
     );
 

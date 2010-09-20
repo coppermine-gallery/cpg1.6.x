@@ -396,7 +396,7 @@ if (USER_ID > 0) {
 }
 
 // Include the jquery javascript library. Jquery will be included on all pages.
-js_include('js/jquery-1.3.2.js');
+js_include('js/jquery-1.4.2.js');
 
 // Include the scripts.js javascript library that contains coppermine-specific 
 // JavaScript that is being used on all pages.
