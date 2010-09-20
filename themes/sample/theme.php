@@ -1707,10 +1707,10 @@ EOT;
     // Check if we have any js includes
     if (!empty($JS['includes'])) {
         // Bring the jquery core library to the very top of the list 
-        if (in_array('js/jquery-1.3.2.js', $JS['includes']) == TRUE) {
-            $key = array_search('js/jquery-1.3.2.js', $JS['includes']);
+        if (in_array('js/jquery-1.4.2.js', $JS['includes']) == TRUE) {
+            $key = array_search('js/jquery-1.4.2.js', $JS['includes']);
             unset($JS['includes'][$key]);
-            array_unshift($JS['includes'], 'js/jquery-1.3.2.js');
+            array_unshift($JS['includes'], 'js/jquery-1.4.2.js');
         }
         $JS['includes'] = CPGPluginAPI::filter('javascript_includes',$JS['includes']);
         // Include all the files which were set using js_include() function
@@ -4133,7 +4133,7 @@ function theme_display_fullsize_pic()
             td { vertical-align: middle; text-align:center; }
         </style>
 
-        <script type="text/javascript" src="js/jquery-1.3.2.js"></script>
+        <script type="text/javascript" src="js/jquery-1.4.2.js"></script>
         <script type="text/javascript" src="js/jquery.dimensions.pack.js"></script>
         <script type="text/javascript" src="js/displayimage.fullsize.js"></script>
     </head>
@@ -4337,7 +4337,7 @@ $template_sidebar = <<<EOT
 <head>
 <meta http-equiv="content-type" content="text/html; charset={CHARSET}" />
 <title>{TITLE}</title>
-<script src="js/jquery-1.3.2.js" type="text/javascript"></script>
+<script src="js/jquery-1.4.2.js" type="text/javascript"></script>
 <script src="js/jquery.treeview.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(function() {

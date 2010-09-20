@@ -8981,7 +8981,7 @@
     <hash>a7c92cb79c16a35dfff6078f644db4ca</hash>
   </element>
   <element>
-    <fullpath>js/jquery-1.3.2.js</fullpath>
+    <fullpath>js/jquery-1.4.2.js</fullpath>
     <version>1.5.9</version>
     <revision>7805</revision>
     <status>mandatory</status>
