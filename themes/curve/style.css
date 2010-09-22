@@ -301,11 +301,14 @@ a:hover.button, a:hover.admin_menu {
     font-family: arial,helvetica,sans-serif;
     font-size: 1.1em;
     font-weight: bold;
-    background: url(images/main_block.png) no-repeat -10px -160px;
+    background-color:#A8B8CC;
+    background-image: url(images/main_block.png);
+    background-repeat: no-repeat;
+    background-position: -10px -160px;
 }
 
 .tableh2 {
-    background: #E7EAEF ;
+    background-color: #E7EAEF ;
     color : #000000;
     padding-top: 3px;
     padding-right: 10px;
