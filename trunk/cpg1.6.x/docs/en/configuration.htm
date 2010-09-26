@@ -1849,13 +1849,11 @@
 		Recommended value: <abbr title="not applicable">n/a</abbr><br />
 		Available options:
 		<input type="text" size="14" maxlength="14" class="textinput" value="Image Magick" /><br />
-		<input type="text" size="14" maxlength="14" class="textinput" value="GD version 1.x" /><br />
 		<input type="text" size="14" maxlength="14" class="textinput" value="GD version 2.x" /><br />
 		Database record name: <tt class="code">thumb_method</tt><br />
 		<img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings &rarr; Method for resizing images
 	</div>
-    <p><img src="../images/gd.png" border="0" alt="" width="148" height="93" title="GD" align="right" style="padding-left:20px" />Set this to the type of image library you have on your server (must be either GD1, GD2 or ImageMagick). GD2 is the recommended setting.</p>
-    <p>If you are using GD 1.x and the colors of your thumbnails or intermediate image do not display properly, then, chances are, you actually have GD2 on your server - switch this option to GD 2.x</p>
+    <p><img src="../images/gd.png" border="0" alt="" width="148" height="93" title="GD" align="right" style="padding-left:20px" />Set this to the type of image library you have on your server (must be either GD2 or ImageMagick). GD2 is the recommended setting.</p>
     <p>More recent distributions of PHP come pre-packaged with GD - if you're not sure what you have, set this option to GD2. You can also look at your PHP settings by pointing your browser to the phpinfo.php file in your gallery.  eg, <strong>http://www.yourgallery.com/your_cpg_folder/phpinfo.php</strong>. For more information on using PHP click on this link: <a href="http://www.php.net/phpinfo" rel="external" class="phpnet">phpinfo</a>.</p>
 
     <a name="admin_picture_thumb_advanced_resize_method_end"></a>
@@ -2124,7 +2122,7 @@
 		Database record name: <tt class="code">watermark_transparency_featherx</tt><br />
 		<img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Image watermarking &rarr; Set color transparent x
 	</div>
-    <p>This option is only available if you have set the <a href="configuration.htm#admin_picture_thumb_advanced_resize_method">method for resizing images</a> to GD2. If you have set it to GD1 or ImageMagick, this setting will not be taken into account at all. Specify the horizontal coordinate of the pixel that should represent the transparent color, seen from the left of the watermarking image.</p>
+    <p>This option is only available if you have set the <a href="configuration.htm#admin_picture_thumb_advanced_resize_method">method for resizing images</a> to GD2. If you have set it to ImageMagick, this setting will not be taken into account at all. Specify the horizontal coordinate of the pixel that should represent the transparent color, seen from the left of the watermarking image.</p>
     <p>The transparency setting is particularly usefull if you use a jpeg image as watermarking file or if you don't know how to set transparency up for your watermarking image inside the desktop app where you compose your custom watermark. Your best option (to go out of harms way) will be to use a png watermarking file with transparency - in this case, this setting will not be needed.</p>
 
     
@@ -2139,7 +2137,7 @@
 		Database record name: <tt class="code">watermark_transparency_feathery</tt><br />
 		<img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Image watermarking &rarr; Set color transparent y
 	</div>
-    <p>This option is only available if you have set the <a href="configuration.htm#admin_picture_thumb_advanced_resize_method">method for resizing images</a> to GD2. If you have set it to GD1 or ImageMagick, this setting will not be taken into account at all. Specify the vertical coordinate of the pixel that should represent the transparent color, seen from the top of the watermarking image.</p>
+    <p>This option is only available if you have set the <a href="configuration.htm#admin_picture_thumb_advanced_resize_method">method for resizing images</a> to GD2. If you have set it to ImageMagick, this setting will not be taken into account at all. Specify the vertical coordinate of the pixel that should represent the transparent color, seen from the top of the watermarking image.</p>
     <p>The transparency setting is particularly usefull if you use a jpeg image as watermarking file or if you don't know how to set transparency up for your watermarking image inside the desktop app where you compose your custom watermark. Your best option (to go out of harms way) will be to use a png watermarking file with transparency - in this case, this setting will not be needed.</p>
 
     <br clear="all" style="clear:both;" />    

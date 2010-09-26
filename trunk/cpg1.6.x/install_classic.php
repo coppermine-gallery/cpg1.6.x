@@ -150,10 +150,6 @@ function detect_img_package()
     global $errors, $notes, $DFLT, $im_installed;
 
     $no_img_package_detected = false;
-    $tst_image = "{$DFLT['alb_d']}/{$DFLT['upl_d']}/gd1.jpg";
-    $size = @getimagesize($tst_image);
-    @unlink($tst_image);
-    $gd1_installed = ($size[2] == 2);
 
     $tst_image = "{$DFLT['alb_d']}/{$DFLT['upl_d']}/gd2.jpg";
     $size = @getimagesize($tst_image);
@@ -164,16 +160,14 @@ function detect_img_package()
         $_POST['thumb_method'] = 'im';
     } elseif ($gd2_installed) {
         $_POST['thumb_method'] = 'gd2';
-    } elseif ($gd1_installed) {
-        $_POST['thumb_method'] = 'gd1';
     } else {
         $_POST['thumb_method'] = 'gd2';
         $no_img_package_detected = true;
         $notes .= "<hr /><br />Your installation of PHP does not seem to include the 'GD' graphic library extension and you have not indicated that you want to use ImageMagick. Coppermine has been configured to use GD2 because the automatic GD detection sometimes fail. If GD is installed on your system, the script should work else you will need to install ImageMagick.<br /><br />";
     }
 
-    if (!$no_img_package_detected) $notes .= "<br /><br />Your server supports the following image package(s): " . ($im_installed ? ' ImageMagick (im),':'') . ($gd1_installed ? ' GD Library version 1.x (gd1),':'') . ($gd2_installed ? ' GD Library version 2.x (gd2),':'') . " the installer selected '" . $_POST['thumb_method'] . "'.";
-    if ($_POST['thumb_method'] == 'gd1' || $_POST['thumb_method'] == 'gd2')
+    if (!$no_img_package_detected) $notes .= "<br /><br />Your server supports the following image package(s): " . ($im_installed ? ' ImageMagick (im),':'') . ($gd2_installed ? ' GD Library version 2.x (gd2),':'') . " the installer selected '" . $_POST['thumb_method'] . "'.";
+    if ($_POST['thumb_method'] == 'gd2')
         $notes .= "<br /><br /><strong>Important :</strong> older versions of the GD graphic library support only JPEG and PNG images. If this is the case for you, then the script will not be able to create thumbnails for GIF images.";
 }
 // ------------------------- HTML OUTPUT FUNCTIONS ------------------------- //
@@ -378,7 +372,7 @@ function html_input_config($error_msg = '')
           </td>
          </tr>
          <tr>
-          <td class="tableh2" colspan="2">Coppermine can use the <a href="http://www.imagemagick.org/" target="_blank">ImageMagick</a> 'convert' program to create thumbnails. Quality of images produced by ImageMagick is superior to GD1 but equivalent to GD2.<br /><br />
+          <td class="tableh2" colspan="2">Coppermine can use the <a href="http://www.imagemagick.org/" target="_blank">ImageMagick</a> 'convert' program to create thumbnails. Quality of images produced by ImageMagick is equivalent to GD2.<br /><br />
           If ImageMagick is installed on your system and you want to use it, you need to input the full path to the 'convert' program below. On Windows the path should look like 'c:/ImageMagick/' (use / not \ in the path) and should not contain any space, on Unix is it something like '/usr/bin/X11/'.<br />
           If you have no idea wether you have ImageMagick or not, leave this field empty - the installer will try to use GD2 then by default (which is what most users have). You can change this later as well (in Coppermine's config screen), so don't be afraid if you're not sure what to enter here - leave it blank.
           </td>
@@ -397,7 +391,6 @@ function html_input_config($error_msg = '')
          </tr>
         </table>
       </form>
-   <img src="install.php?test_gd1=1&amp;reload=<?php echo uniqid('') ?>" alt="" width="1" height="1" border="0" alt="" />
    <img src="install.php?test_gd2=1&amp;reload=<?php echo uniqid('') ?>" alt="" width="1" height="1" border="0" alt="" />
 <?php
 }
@@ -550,13 +543,7 @@ $DFLT = array('cfg_d' => 'include', // The config file dir
 $errors = '';
 $notes = '';
 
-if ($_GET['test_gd1']) { // GD1 test
-    $im = imagecreate(1, 1);
-    imagecolorallocate ($im, 255, 255, 255);
-    imagejpeg($im, "{$DFLT['alb_d']}/{$DFLT['upl_d']}/gd1.jpg");
-    header("Content-type: image/gif");
-    fpassthru(fopen('images/spacer.gif'));
-} elseif ($_GET['test_gd2']) { // GD2 test
+if ($_GET['test_gd2']) { // GD2 test
     $im = imagecreatetruecolor(1, 1);
     imagejpeg($im, "{$DFLT['alb_d']}/{$DFLT['upl_d']}/gd2.jpg");
     header("Content-type: image/gif");
