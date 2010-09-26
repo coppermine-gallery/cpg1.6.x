@@ -1800,18 +1800,6 @@
     <permission>read</permission>
   </element>
   <element>
-    <fullpath>docs/images/128x96gd1.jpg</fullpath>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>ee568d1ad170645a327ef47af04cfa6f</hash>
-  </element>
-  <element>
-    <fullpath>docs/images/128x96gd2.jpg</fullpath>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>bdcab542b6ff8a7903faa5a64e2f03b3</hash>
-  </element>
-  <element>
     <fullpath>docs/images/apache.gif</fullpath>
     <status>mandatory</status>
     <permission>read</permission>

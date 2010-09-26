@@ -39,8 +39,6 @@
     <li><a class="content" href="#MinimumRequirements">What are the <strong>minimum requirements</strong> for the installation and use of Coppermine 1.5.x ?</a></li>
     <li><a class="content" href="#whatIsImageMagick">What's <strong>ImageMagick</strong> and how can I get it?</a></li>
     <li><a class="content" href="#WhatIsGD">What's <strong>GD</strong> and how can I get it?</a></li>
-    <li><a class="content" href="#VersionGD">How do I find out <strong>which version of GD</strong> I have?</a></li>
-    <li><a class="content" href="#GD1vsGD2">What's the difference between <strong>GD1 and GD2</strong>?</a></li>
     <li><a class="content" href="#enableGD">How do I <strong>enable gd</strong> on my Windows server?</a></li>
     <li><a class="content" href="#enableIMonWindows">How do I <strong>enable ImageMagick</strong> on my Windows server?</a></li>
     <li><a class="content" href="#installIMwhenHosted">How can I <strong>install ImageMagick or GD</strong>?</a></li>
@@ -68,35 +66,12 @@
     
     <a name="WhatIsGD"></a>
     <h3>What's <strong>GD</strong> and how can I get it?<a href="#WhatIsGD" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-    <p><img src="../images/gd.png" border="0" alt="" width="148" height="93" title="GD" align="right" style="padding-left:20px" />GD is a graphical library which enables PHP to do image manipulation. The library was originally developped by <a href="http://www.boutell.com/" rel="external" class="external">Thomas Boutell</a> and is now maintained by <a href="http://blog.thepimp.net/" rel="external" class="external">Pierre-A. Joye</a> under the umbrella of <a href="http://www.php.net/" rel="external" class="phpnet">PHP.net</a>. If you are running your own webservem you can download it at <a href="http://libgd.org/" class="external">libgd.org</a>. You will need to recompile PHP on (L)Unix systems, depending on your setup Apache as well. Most recent versions of PHP come with GD - go for a package. On most windows systems, you can just enable it in the php.ini file. If you are subscribing to a webhost: find out through your webhost if GD/GD2 support is available on your site. If not, ask your webhost if you can have it or find yourself another webhost. GD/GD2 are pretty much a standard feature at most webhosting services.<br /></p><hr />
+    <p><img src="../images/gd.png" border="0" alt="" width="148" height="93" title="GD" align="right" style="padding-left:20px" />GD is a graphical library which enables PHP to do image manipulation. The library was originally developped by <a href="http://www.boutell.com/" rel="external" class="external">Thomas Boutell</a> and is now maintained by <a href="http://blog.thepimp.net/" rel="external" class="external">Pierre-A. Joye</a> under the umbrella of <a href="http://www.php.net/" rel="external" class="phpnet">PHP.net</a>. If you are running your own webserver you can download it at <a href="http://libgd.org/" class="external">libgd.org</a>. You will need to recompile PHP on (L)Unix systems, depending on your setup Apache as well. Most recent versions of PHP come with GD - go for a package. On most windows systems, you can just enable it in the php.ini file. If you are subscribing to a webhost: find out through your webhost if GD/GD2 support is available on your site. If not, ask your webhost if you can have it or find yourself another webhost. GD/GD2 are pretty much a standard feature at most webhosting services.<br /></p><hr />
     
     <a name="whatIsImageMagick"></a>
     <h3>What's ImageMagick and how can I get it?<a href="#whatIsImageMagick" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <p><img src="../images/imagemagick.png" border="0" alt="" width="130" height="54" title="ImageMagick" align="right" style="padding-left:20px" />ImageMagick is another graphical library like GD/GD2 for image manipulation. If you are running your own webserver, you can download it at <a href="http://www.imagemagick.org" class="external">imagemagick.org</a>. There are sources available for Unix, Linux, Mac and Windows executables, as well as binary packages for various server operating systems. You cannot install ImageMagick if you are subscribing to a webhost.
     </p>
-
-    <a name="VersionGD"></a>
-    <h3>How do I find out <strong>which version of GD</strong> I have?<a href="#VersionGD" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-    <p>If you haven't installed Coppermine, yet, create a blank file named "info.php", put this code into it: <tt class="code">&lt;?php phpinfo(); ?&gt;</tt>. Save the file and upload this file to your webserver, then run it in your browser (e.g. http://www.yourdomain.com/info.php). Look for a table like this:<br />
-    <div align="center" style="font-family: arial, helvetica, sans-serif; font-size: 14pt; font-weight: bold;">gd</div>
-    <table border="0" cellpadding="3" cellspacing="1" width="600" bgcolor="#000000" align="center">
-    <tr valign="baseline" bgcolor="#cccccc"><td bgcolor="#ccccff" ><strong>GD Support</strong></td><td align="left">enabled</td></tr>
-    <tr valign="baseline" bgcolor="#cccccc"><td bgcolor="#ccccff" ><strong>GD Version</strong></td><td align="left">1.6.2 or higher</td></tr>
-    <tr valign="baseline" bgcolor="#cccccc"><td bgcolor="#ccccff" ><strong>FreeType Support</strong></td><td align="left">enabled</td></tr>
-    <tr valign="baseline" bgcolor="#cccccc"><td bgcolor="#ccccff" ><strong>FreeType Linkage</strong></td><td align="left">with TTF library</td></tr>
-    <tr valign="baseline" bgcolor="#cccccc"><td bgcolor="#ccccff" ><strong>JPG Support</strong></td><td align="left">enabled</td></tr>
-    <tr valign="baseline" bgcolor="#cccccc"><td bgcolor="#ccccff" ><strong>PNG Support</strong></td><td align="left">enabled</td></tr>
-    <tr valign="baseline" bgcolor="#cccccc"><td bgcolor="#ccccff" ><strong>WBMP Support</strong></td><td align="left">enabled</td></tr>
-    </table>
-    <br /><br />Please note: leaving info.php on your server could be a security risk; either delete it after use or move it into a password protected directory!<br />&nbsp;<br />If you have already installed Coppermine, you will find a phpinfo file (phpinfo.php) within the coppermine folder. Log in to your Coppermine setup as the admin and simply point (type in the URL) your browser to http://yourdomain.tld/your_coppermine_folder/phpinfo.php. Then scoll down to the GD section of the display.</p>
-    <hr />
-    
-    <a name="GD1vsGD2"></a>
-    <h3>What's the difference between <strong>GD1 and GD2</strong>?<a href="#GD1vsGD2" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-    <p>GD2 is an updated version of GD1 and, as such, will create pictures with better quality (intermediate and thumbnails). <table border="0" class="frame2"><tr><td colspan="2"><span class="winzig">Here's an example taken from <a href="http://www.vddh.com/wnailer/index.php?pag=res&pic=1#comp" class="external">w-nailer: about resizing</a><br />(Original pic size: 1024 x 768 pixels):</span></td></tr><tr><td align="center"><img src="../images/128x96gd1.jpg" width="128" height="96" border="0" alt="" title="GD1"></td><td align="center"><img src="../images/128x96gd2.jpg" width="128" height="96" border="0" alt="" title="GD2"></td></tr><tr><td align="center"><span class="winzig">GD 1.8.4:<br />ImageCreate<br />ImageCopyResized<br />128 x 96 pixels</span></td><td align="center"><span class="winzig">GD 2.0.1:<br />ImageCreateTrueColor<br />ImageCopyResampled<br />128 x 96 pixels</span></td></tr></table>Upgrades of the GD lib after coppermine has already installed will not affect pictures that were previously created. It will only affect those created after the upgrade. <strong>Unless you are running your own webserver, you cannot upgrade nor install GD lib  - only your webhost can!</strong></p>
-    <p>The main difference between GD 1 and GD 2 lies in the color depth: GD1 only supported a limited color depth of 256 colors per image. This lead to very poor quality.</p>
-    <p class="cpg_message_info">By now, the GD1 library is totally outdated and should only be found on very old hardware. If you're webhosted, you should have GD2. If your webhost is still only offering GD1, it's probably time to look for another, better webhost.</p>
-    <hr />
     
     <a name="enableGD"></a>
     <h3>How do I <strong>enable GD</strong> on my Windows server?<a href="#enableGD" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>

@@ -406,34 +406,12 @@ function resize_image($src_file, $dest_file, $new_size, $method, $thumb_use, $wa
             }
             break;
 
-        case "gd1" :
-            if (!function_exists('imagecreatefromjpeg')) {
-                return array('error' => 'PHP running on your server does not support the GD image library, check with your webhost if ImageMagick is installed', 'halt_upload' => 1);
-            }
-            if ($imginfo[2] == GIS_JPG)
-                $src_img = imagecreatefromjpeg($src_file);
-            else
-                $src_img = imagecreatefrompng($src_file);
-            if (!$src_img) {
-                $ERROR = $lang_errors['invalid_image'];
-                return array('error' => $ERROR);
-            }
-            $dst_img = imagecreate($destWidth, $destHeight);
-            imagecopyresized($dst_img, $src_img, 0, 0, $xOffset, $yOffset, (int)$destWidth, (int)$destHeight, $srcWidth, $srcHeight);
-                        touch($dest_file);
-            $fh=fopen($dest_file,'w');
-            fclose($fh);
-            imagejpeg($dst_img, $dest_file, $CONFIG['jpeg_qual']);
-            imagedestroy($src_img);
-            imagedestroy($dst_img);
-            break;
-
         case "gd2" :
             if (!function_exists('imagecreatefromjpeg')) {
                 return array('error' => 'PHP running on your server does not support the GD image library, check with your webhost if ImageMagick is installed', 'halt_upload' => 1);
             }
             if (!function_exists('imagecreatetruecolor')) {
-                return array('error' => 'PHP running on your server does not support GD version 2.x, please switch to GD version 1.x on the admin page', 'halt_upload' => 1);
+                return array('error' => 'PHP running on your server does not support GD version 2.x', 'halt_upload' => 1);
             }
             if ($imginfo[2] == GIS_GIF && $CONFIG['GIF_support'] == 1)
                 $src_img = imagecreatefromgif($src_file);

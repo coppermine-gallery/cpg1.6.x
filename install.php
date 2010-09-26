@@ -288,13 +288,13 @@ switch($step) {
         
     case STEP_SELECT_IMG_PROC:     // Check available image processors & let user choose
         $page_title = $language['title_imp'];
-        $supported_processors = array('gd1' => 'GD1', 'gd2' => "GD2", 'im' => 'ImageMagick');
+        $supported_processors = array('gd2' => "GD2", 'im' => 'ImageMagick');
         $image_processors = checkImageProcessor();
         html_header();
         if ($error != '') {
             html_error();
         } 
-        if( !($error != '' && !isset($image_processors['gd2']) && !isset($image_processors['gd1'])) ) {
+        if( !($error != '' && !isset($image_processors['gd2'])) ) {
             setTmpConfig('step', STEP_TEST_IMG_PROC);
         }
             $content = $language['im_packages'] . '<br />';
@@ -304,11 +304,6 @@ switch($step) {
             $imp_list .= '<option value="gd2">GD2</option>';
             $content .= '<strong>GDlib</strong> Version 2. <br />';
             $selected = 'gd2';
-        } elseif (isset($image_processors['gd1'])) {
-            // gd1 is avilable, add it to the list
-            $imp_list .= '<option value="gd">GD</option>';
-            $content .= '<strong>GDlib</strong> Version 1. <br />';
-            $selected = 'gd1';
         }
         // check configuration options of im_path
         if (isset($image_processors['im'])) {
@@ -1354,23 +1349,12 @@ function checkImageProcessor()
     if ($im = getIM()) {
         $imagesProcessors['im'] = $im;
     }
-    $gd = getGDVersion();
-    switch($gd) {
-        case 1:
-            // check basic functionality
-            if (checkBasicGD(1)) {
-                $imagesProcessors['gd1'] = 'installed';
-            }
-            break;
-        case 2:
-            // check basic functionality
-            if (checkBasicGD()) {
-                $imagesProcessors['gd2'] = 'installed';
-            }
-            break;
-        default:
-            break;
+
+    // check basic functionality
+    if (checkBasicGD()) {
+        $imagesProcessors['gd2'] = 'installed';
     }
+
     return $imagesProcessors;
 }
 
@@ -1387,17 +1371,14 @@ function testImageProcessor()
     
     //check which library to use
     switch($config['thumb_method']) {
-        case 'gd1':
-            $image_processor = new GDtest(1);
-            break;
         case 'gd2':
-            $image_processor = new GDtest(2);
+            $image_processor = new GDtest();
             break;
         case 'im':
             $image_processor = new IMtest($config['im_path']);
             break;
         default:
-            $image_processor = new GDtest(2);
+            $image_processor = new GDtest();
             break;
     }
     $results = createImageTestResult($image_processor->testReadWrite());
@@ -1408,41 +1389,6 @@ function testImageProcessor()
     return $results;
 }
 
-
-/**
-* getGDVersion()
-*
-* Get which version of GD is installed, if any. 
-* Returns the version (1 or 2) of the GD extension.
-* 
-* @return int $version
-*/
-function getGDVersion() 
-{
-    // check if gd is loaded
-    if (!extension_loaded('gd')) {
-        $version = 0; 
-    } else {
-        // Use the gd_info() function if possible.
-        if (function_exists('gd_info')) {
-            $ver_info = gd_info();
-            preg_match('/\d/', $ver_info['GD Version'], $match);
-            $version = $match[0];
-        } else {
-            // get available gd functions to determine the version
-            $gd_functions = get_extension_funcs('gd');
-            if (in_array('imagecreatetruecolor', $gd_functions)) {
-                $version = 2;
-            } elseif (in_array('imagecreate', $gd_functions)) {
-                $version = 1;
-            } else {
-                $version = 0;
-            }
-        }
-    }
-    return $version;
-} 
-
 /*
 * checkBasicGD()
 *
@@ -1452,31 +1398,18 @@ function getGDVersion()
 *
 * @return bool
 */
-function checkBasicGD($gd_version = 2) 
+function checkBasicGD() 
 {
-    if ($gd_version == 1) {
-        $im = imagecreate(1, 1);
-        $tst_image = "albums/gd1.jpg";
-        imagejpeg($im, $tst_image);
-        $size = cpgGetimagesize($tst_image);
-        @unlink($tst_image);
-        if ($size[2] == 2) {
-            return true;
-        } else {
-            return false;
-        }
+    $im = imagecreatetruecolor(1, 1);
+    $tst_image = "albums/gd2.jpg";
+    imagejpeg($im, $tst_image);
+    $size = cpgGetimagesize($tst_image);
+    @unlink($tst_image);
+    if ($size[2] == 2) {
+        return true;
     } else {
-        $im = imagecreatetruecolor(1, 1);
-        $tst_image = "albums/gd2.jpg";
-        imagejpeg($im, $tst_image);
-        $size = cpgGetimagesize($tst_image);
-        @unlink($tst_image);
-        if ($size[2] == 2) {
-            return true;
-        } else {
-            return false;
-        }   
-    }
+        return false;
+    }   
 }
 
 /*
@@ -2068,20 +2001,18 @@ function cpgGetimagesize($image, $force_cpg_function = false)
 ########################
 class GDtest
 {
-    var $version = 1; //version of the GD lib to use
     var $image_path = 'albums/'; //path to store temp images
     
     /*
      * function GDtest()
      *
-     * Initializes the class with the version of GD to use.
+     * Initializes the class.
      *
      * @param int $version
      * @param string $image_path
      */
-    function GDtest($version = 1, $image_path = '')
+    function GDtest($image_path = '')
     {
-        $this->version = $version;
         if ($image_path != '') {
             $this->image_path = $image_path;
         }
@@ -2243,11 +2174,7 @@ class GDtest
      function testScale()
     {
         $image = imagecreatefromjpeg('images/install/jpgtest.jpg');
-        if ($this->version == 2) {
-            $generated = @imagecreatetruecolor(100, 57);
-        } else {
-            $generated = imagecreate(100, 57);
-        }
+        $generated = @imagecreatetruecolor(100, 57);
         $final = @imagecopyresampled($generated, $image, 0, 0, 0, 0, 100, 57, 200, 113);
         if (!$final) {
             $final = @imagecopyresized($generated, $image, 0, 0, 0, 0, 100, 57, 200, 113);
