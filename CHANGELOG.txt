@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2010-09-26 [O] No longer specify a MySQL engine - use the server default. {Nibbler}
 2010-09-20 [O] Updated jquery libraries 'elastic', 'datePicker', 'spinbox' {GauGau}
 2010-09-20 [O] Updated embedded jquery library from version 1.3.2 to 1.4.2 {GauGau}
 2010-09-16 [B] Fixed registration process if both email verification and admin activation enabled (thread ID 67095) {eenemeenemuu}
