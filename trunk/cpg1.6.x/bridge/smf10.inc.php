@@ -70,16 +70,16 @@ if (isset($bridge_lookup)) {
                             'password' => $db_passwd
                     );
 
-            // Derived full table names
-            if (strpos($db_prefix, '.') === false) {
-                $this->usertable = '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['users'];
-                $this->groupstable =  '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['groups'];
-                $this->sessionstable =  '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['sessions'];
-            } else {
-                $this->usertable = $this->db['prefix'] . $this->table['users'];
-                $this->groupstable = $this->db['prefix'] . $this->table['groups'];
-                $this->sessionstable =  '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['sessions'];
-            }
+                    // Derived full table names
+                    if (strpos($db_prefix, '.') === false) {
+                        $this->usertable =     '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['users'];
+                        $this->groupstable =   '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['groups'];
+                        $this->sessionstable = '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['sessions'];
+                    } else {
+                        $this->usertable =     $this->db['prefix'] . $this->table['users'];
+                        $this->groupstable =   $this->db['prefix'] . $this->table['groups'];
+                        $this->sessionstable = $this->db['prefix'] . $this->table['sessions'];
+                    }
 
                     // Table field names
                     $this->field = array(
