@@ -48,7 +48,8 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
                 $imagesize = cpg_getimagesize($image);
             } else {
                 @unlink($uploaded_pic);
-                cpg_die(ERROR, sprintf($lang_db_input_php['err_fsize_too_large'], $CONFIG['max_upl_width_height'], $CONFIG['max_upl_width_height']), __FILE__, __LINE__);
+                $msg = sprintf($lang_db_input_php['err_fsize_too_large'], $CONFIG['max_upl_width_height'], $CONFIG['max_upl_width_height']);
+                return array('error' => $msg, 'halt_upload' => 1);
             }
         }
 
@@ -125,10 +126,8 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
                 @unlink($normal);
                 @unlink($thumb);
             }
-            $msg = $lang_errors['quota_exceeded'] . '<br />&nbsp;<br />' . strtr($lang_errors['quota_exceeded_details'], array('[quota]' => ($USER_DATA['group_quota']),
-                '[space]' => ($total_space_used >> 10)));
+            $msg = $lang_errors['quota_exceeded'] . '<br />&nbsp;<br />' . strtr($lang_errors['quota_exceeded_details'], array('[quota]' => ($USER_DATA['group_quota']), '[space]' => ($total_space_used >> 10)));
             return array('error' => $msg, 'halt_upload' => 1);
-            //cpg_die(ERROR, $msg, __FILE__, __LINE__);
         }
     }
     // Test if picture requires approval
