@@ -23,7 +23,8 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
-2010-09-26 [M] Removed support for GD1 (threadID 66761) {Nibbler}
+2010-09-27 [C] Fixed error message if uploaded file exceeds dimension limit (thread ID 67282) {eenemeenemuu}
+2010-09-26 [M] Removed support for GD1 (thread ID 66761) {Nibbler}
 2010-09-26 [O] No longer specify a MySQL engine - use the server default. {Nibbler}
 2010-09-20 [O] Updated jquery libraries 'elastic', 'datePicker', 'spinbox' {GauGau}
 2010-09-20 [O] Updated embedded jquery library from version 1.3.2 to 1.4.2 {GauGau}
