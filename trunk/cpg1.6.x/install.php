@@ -62,7 +62,7 @@ if (!defined('COPPERMINE_VERSION')) { // we need to define the constant COPPERMI
     if ($handle == FALSE) {
         $page_title = 'Could not fopen';
         html_header();
-        echo 'Could not read the file inlucde/init.inc.php for reading. Make sure it exists and is readable, then try again.';
+        echo 'Could not open the file include/init.inc.php for reading. Make sure it exists and is readable, then try again.';
         html_footer();
         die;
     }
