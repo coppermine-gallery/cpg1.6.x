@@ -558,11 +558,7 @@ switch ($op) {
 
             require_once('./include/zip.lib.php');
 
-            if (version_compare(PHP_VERSION, '5.3.0') >= 0) {
-                $zip = new Zip();
-            } else {
-                $zip =& new Zip();
-            }
+            $zip = new Zip();
             $zip->Extract('./plugins/receive/'.$file['name'],'./plugins',array(-1));
 
             unlink('./plugins/receive/'.$file['name']);
