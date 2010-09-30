@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2010-09-30 [C] Fixed deprecated message on pluginmgr.php (thread ID 67308) {eenemeenemuu}
 2010-09-27 [B] Fixed session table name in SMF bridge files (thread ID 67169) {eenemeenemuu}
 2010-09-27 [C] Fixed error message if uploaded file exceeds dimension limit (thread ID 67282) {eenemeenemuu}
 2010-09-26 [M] Removed support for GD1 (thread ID 66761) {Nibbler}
