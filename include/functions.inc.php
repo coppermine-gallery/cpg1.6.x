@@ -310,7 +310,9 @@ function cpg_db_fetch_row($result)
 
 function cpg_db_last_insert_id()
 {
-    return mysql_insert_id();
+    global $CONFIG;
+    
+    return mysql_insert_id($CONFIG['LINK_ID']);
 }
 
 /**************************************************************************
