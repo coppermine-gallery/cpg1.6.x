@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2010-10-01 [B] Fixed use of mysql_insert_id (thread ID 67402) {Nibbler}
 2010-10-01 [B] Fixed critical error on memberlist when bridged (thread ID 64678) {eenemeenemuu}
 2010-09-30 [C] Fixed deprecated message on pluginmgr.php (thread ID 67308) {eenemeenemuu}
 2010-09-27 [B] Fixed session table name in SMF bridge files (thread ID 67169) {eenemeenemuu}
