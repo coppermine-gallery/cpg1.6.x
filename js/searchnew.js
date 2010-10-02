@@ -28,7 +28,10 @@ var qm = {
     
     // Selected album
     aid: 0,
-        
+
+    // Tracks if any files failed    
+    failed: false,
+    
     // Looks for a chance to start new jobs 
     step: function () {
 
@@ -67,7 +70,9 @@ var qm = {
     },
     
     queuedone: function () {
-        redirect('editpics.php?album=' + this.aid);
+        if (!this.failed) {
+            redirect('editpics.php?album=' + this.aid);
+        }
     }
 };
 
@@ -99,7 +104,7 @@ function job_start() {
 // Job is completed
 function job_done(response) {
 
-    var src;
+    var src = '';
     
     switch (response) {
     
@@ -111,23 +116,26 @@ function job_done(response) {
         src = 'images/batch/duplicate.png';
         break;
     
-    case 'PB':
-        src = 'images/batch/folder_locked.png';
-        break;      
+    default:
+        qm.failed = true;  
     }
 
-    var img = document.createElement('img');
-    img.setAttribute('src', src);
-    
-    this.obj.appendChild(img);
+    if (src) {
+        $(this.obj).append($('<img />').attr('src', src));
+    } else {
+        $(this.obj).text(response);
+    }
     
     // Notify the queue manager
     qm.notifydone();
 }
 
 // Job has failed (http request failed)
-function job_failed() {
-    job_done('PB');
+function job_failed(request) {
+    
+    qm.failed = true;
+    
+    job_done(request.statusText);
 }
 
 // Sends the http request
@@ -179,7 +187,7 @@ function process() {
     
     // Start the queue manager
     qm.step();
-    
+
     return false;
 }
 
