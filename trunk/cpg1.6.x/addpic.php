@@ -18,6 +18,7 @@
 define('IN_COPPERMINE', true);
 
 define('ADDPIC_PHP', true);
+define('DB_INPUT_PHP', true);
 
 require('include/init.inc.php');
 require('include/picmgmt.inc.php');
@@ -53,10 +54,10 @@ $result = cpg_db_query($sql);
 
 if (mysql_num_rows($result)) {
     $status = 'DUPE';
-} elseif (add_picture($aid, $dir_name, $sane_name) === true) {
+} elseif (($result = add_picture($aid, $dir_name, $sane_name)) === true) {
     $status = 'OK';
 } else {
-    $status = 'PB';
+    $status = $result['error'];
 }
 
 if (ob_get_length()) {
