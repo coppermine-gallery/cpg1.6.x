@@ -87,7 +87,7 @@ if (isset($bridge_lookup)) {
                 'password' => 'SHA1(CONCAT(passwd, password_salt))', // name of the password field in the users table
                 'email' => 'email_address', // name of 'email' field in users table
                 'regdate' => 'date_registered', // name of 'registered' field in users table
-                'lastvisit' => 'UNIX_TIMESTAMP(last_login)', // last time user logged in
+                'lastvisit' => 'last_login', // last time user logged in
                 'active' => 'is_activated', // is user account active?
                 'location' => 'location', // name of 'location' field in users table
                 'website' => 'website_url', // name of 'website' field in users table
