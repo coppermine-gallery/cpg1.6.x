@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2010-10-13 [B] Use IPTC headline instead of IPTC title as picture title according to docs (thread ID 61380) {eenemeenemuu}
 2010-10-13 [B] Fixed implementation of plugin hook 'ip_information' (thread ID 67187) {eenemeenemuu}
 2010-10-12 [B] Fixed last visit display in user manager when bridged with SMF2 (thread ID 67422) {eenemeenemuu}
 2010-10-03 [B] Fixed template placeholder bug that caused cut off tags {Nibbler}
