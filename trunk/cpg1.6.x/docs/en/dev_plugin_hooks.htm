@@ -72,7 +72,7 @@
     <td valign="top"><a name="plugin_hooks_banning_ip_information"></a><strong>ip_information</strong><a href="#plugin_hooks_banning_ip_information" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Filter</td>
     <td valign="top">Filters additional information to an IP address (empty out of the box). Use this hook to add information <em>after</em> the output of an IP address.</td>
-    <td valign="top"><textarea class="samplecode" style="width:100%">$row['ip_detail'] = CPGPluginAPI::filter('ip_information', $row['ip_addr']);</textarea></td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">list($row['ip_detail']) = CPGPluginAPI::filter('ip_information', array('', $row['ip_addr']));</textarea></td>
   </tr>
   <tr>
     <td valign="top">contact.php</td>
@@ -93,7 +93,7 @@
     <td valign="top"><a name="plugin_hooks_db_ecard_ip_information"></a><strong>ip_information</strong><a href="#plugin_hooks_db_ecard_ip_information" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Filter</td>
     <td valign="top">Filters additional information to an IP address (empty out of the box). Use this hook to add information <em>after</em> the output of an IP address.</td>
-    <td valign="top"><textarea class="samplecode" style="width:100%">$line['ip_detail'] = CPGPluginAPI::filter('ip_information', $line['sender_ip']);</textarea></td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">list($line['ip_detail']) = CPGPluginAPI::filter('ip_information', array('', $line['sender_ip']));</textarea></td>
   </tr>
   <tr>
     <td valign="top">db_input.php</td>
@@ -514,7 +514,7 @@ $pic_title = (is_array($pic_title)) ? $pic_title[0] : $pic_title;</textarea></td
     <td valign="top"><a name="plugin_hooks_filename_image_sharpen"></a><strong>image_sharpen</strong><a href="#plugin_hooks_filename_image_sharpen" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Filter</td>
     <td valign="top">called while uploading pictures. Toggles $sharpen, to e.g. enable image sharpening for intermediate pictures if thumbnail sharpening is enabled in the first place.</td>
-    <td valign="top"><textarea class="samplecode" style="width:100%">$sharpen = CPGPluginAPI::filter('image_sharpen', array($sharpen, $new_size));</textarea></td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">list($sharpen) = CPGPluginAPI::filter('image_sharpen', array($sharpen, $new_size));</textarea></td>
   </tr>
   <tr>
     <td valign="top">include/plugin_api.inc.php</td>

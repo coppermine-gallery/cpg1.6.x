@@ -336,8 +336,8 @@ $result = cpg_db_query("SELECT eid, sender_name, sender_email, recipient_name, r
 while ($line = mysql_fetch_assoc($result)) {
 
     $date = strftime($lang_date['lastcom'], $line['date']);
-	$line['ip_detail'] = CPGPluginAPI::filter('ip_information', $line['sender_ip']);
-        
+    list($line['ip_detail']) = CPGPluginAPI::filter('ip_information', array('', $line['sender_ip']));
+
     echo <<< EOT
     <tr>
         <td class="$tempClass" align="center">
