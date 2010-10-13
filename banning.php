@@ -211,7 +211,7 @@ EOT;
                 $username     = '';
                 $view_profile = '';
             }
-			$row['ip_detail'] = CPGPluginAPI::filter('ip_information', $row['ip_addr']);
+            list($row['ip_detail']) = CPGPluginAPI::filter('ip_information', array('', $row['ip_addr']));
 
             $expired = '';
             if ($row['expiry']) {

@@ -212,8 +212,7 @@ function resize_image($src_file, $dest_file, $new_size, $method, $thumb_use, $wa
     global $CONFIG, $ERROR;
     global $lang_errors;
 
-    $sharpen = CPGPluginAPI::filter('image_sharpen', array($sharpen, $new_size));
-    $sharpen = $sharpen[0];
+    list($sharpen) = CPGPluginAPI::filter('image_sharpen', array($sharpen, $new_size));
 
     //Make Cage
     $superCage = Inspekt::makeSuperCage();
