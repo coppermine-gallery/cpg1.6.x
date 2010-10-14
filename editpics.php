@@ -365,6 +365,9 @@ function process_post_data()
             CPGPluginAPI::filter('after_delete_file', $pic);
         } else {
             cpg_db_query("UPDATE {$CONFIG['TABLE_PICTURES']} SET $update WHERE pid = $pid");
+
+            // Executes after a file update is committed
+            CPGPluginAPI::action('after_edit_file', $pid);
         }
     }
 }

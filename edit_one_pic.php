@@ -165,6 +165,9 @@ function process_post_data()
     $query = "UPDATE {$CONFIG['TABLE_PICTURES']} SET $update WHERE pid='$pid' LIMIT 1";
     cpg_db_query($query);
 
+    // Executes after a file update is committed
+    CPGPluginAPI::action('after_edit_file', $pid);
+
     // rename a file
     if ($superCage->post->keyExists('filename')) {
         $post_filename = $superCage->post->getEscaped('filename');

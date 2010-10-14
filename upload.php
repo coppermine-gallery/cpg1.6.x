@@ -1018,6 +1018,8 @@ EOT;
         exit;
     }
 
+    CPGPluginAPI::action('upload_swf_pre_move', $path_to_image);
+
     // Move the picture into its final location
     if (rename($path_to_image, $uploaded_pic)) {
 
