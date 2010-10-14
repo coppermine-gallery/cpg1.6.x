@@ -1013,6 +1013,19 @@ echo <<<EOT
         </tr>
 EOT;
 
+$submit_icon = cpg_fetch_icon('ok', 0);
+
+$submit_button = <<<EOT
+        <tr>
+                <td colspan="3" align="center" class="tablef">
+                        <button type="submit" class="button" name="go" value="{$lang_common['apply_changes']}">{$submit_icon}{$lang_common['apply_changes']}</button>
+                </td>
+        </tr>
+
+EOT;
+
+echo $submit_button;
+
 while ($CURRENT_PIC = mysql_fetch_assoc($result)) {
 
     if (GALLERY_ADMIN_MODE && $CURRENT_PIC['owner_id'] != USER_ID) {
@@ -1037,16 +1050,7 @@ EOT;
 
 mysql_free_result($result);
 
-$submit_icon = cpg_fetch_icon('ok', 0);
-
-echo <<<EOT
-        <tr>
-                <td colspan="3" align="center" class="tablef">
-                        <button type="submit" class="button" name="go" value="{$lang_common['apply_changes']}">{$submit_icon}{$lang_common['apply_changes']}</button>
-                </td>
-        </tr>
-
-EOT;
+echo $submit_button;
 
 endtable();
 list($timestamp, $form_token) = getFormToken();
