@@ -3866,9 +3866,11 @@ function theme_html_comments($pid)
                 $row['msg_author'] = $row['msg_author'];
             }
 
-            $ip = CPGPluginAPI::filter('ip_information', $row['msg_hdr_ip']);
+            list($row['ip_detail']) = CPGPluginAPI::filter('ip_information', array('', $row['msg_hdr_ip']));
+            $ip = $row['msg_hdr_ip']. $row['ip_detail'];
             if ($row['msg_hdr_ip'] != $row['msg_raw_ip']) {
-                $ip .= ' [' . CPGPluginAPI::filter('ip_information', $row['msg_raw_ip']) . ']';
+                list($row['ip_detail']) = CPGPluginAPI::filter('ip_information', array('', $row['msg_raw_ip']));
+                $ip .= ' [' . $row['msg_raw_ip'] . $row['ip_detail'] . ']';
             }
 
             list($timestamp, $form_token) = getFormToken();
