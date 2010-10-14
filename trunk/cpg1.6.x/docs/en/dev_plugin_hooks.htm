@@ -103,6 +103,13 @@
     <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('captcha_comment_validate', null);</textarea></td>
   </tr>
   <tr>
+    <td valign="top">db_input.php</td>
+    <td valign="top"><a name="plugin_hooks_upload_html_pre_move"></a><strong>upload_html_pre_move</strong><a href="#plugin_hooks_upload_html_pre_move" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Action</td>
+    <td valign="top">executed before a file is moved to its final location</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('upload_html_pre_move', $superCage->files->getRaw("/userpicture/tmp_name"));</textarea></td>
+  </tr>
+  <tr>
     <td valign="top">delete.php</td>
     <td valign="top"><a name="plugin_hooks_filename_before_delete_file"></a><strong>before_delete_file</strong><a href="#plugin_hooks_filename_before_delete_file" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Filter</td>
@@ -143,6 +150,20 @@
     <td valign="top">Filter</td>
     <td valign="top">Plugin filter to be called after a file is deleted</td>
     <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::filter('after_delete_file', $pic);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">editpics.php</td>
+    <td valign="top"><a name="plugin_hooks_editpics_after_edit_file"></a><strong>after_edit_file</strong><a href="#plugin_hooks_editpics_after_edit_file" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Action</td>
+    <td valign="top">executed after a file update is committed</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('after_edit_file', $pid);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">edit_one_pic.php</td>
+    <td valign="top"><a name="plugin_hooks_edit_one_pic_after_edit_file"></a><strong>after_edit_file</strong><a href="#plugin_hooks_edit_one_pic_after_edit_file" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Action</td>
+    <td valign="top">executed after a file update is committed</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('after_edit_file', $pid);</textarea></td>
   </tr>
   <tr>
     <td valign="top">index.php</td>
@@ -282,6 +303,13 @@
     <td valign="top">Action</td>
     <td valign="top">used to processs alternate upload form - see <a href="#plugin_hook_example_upload_method">details and examples below</a></td>
     <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('upload_process',$upload_form);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">upload.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_upload_swf_pre_move"></a><strong>upload_swf_pre_move</strong><a href="#plugin_hooks_filename_upload_swf_pre_move" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Action</td>
+    <td valign="top">executed before a file is moved to its final location</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('upload_swf_pre_move', $path_to_image);</textarea></td>
   </tr>
   <tr>
     <td valign="top">usermgr.php</td>
@@ -735,6 +763,8 @@ echo $footer;</textarea></td>
                 <li class="floatleft"><a href="#plugin_hooks_filename_admin_menu">admin_menu</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_filename_after_delete_file">after_delete_file</a> (delete.php)</li>
                 <li class="floatleft"><a href="#plugin_hooks_editpics_after_delete_file">after_delete_file</a> (editpics.php)</li>
+                <li class="floatleft"><a href="#plugin_hooks_editpics_after_edit_file">after_edit_file</a> (editpics.php)</li>
+                <li class="floatleft"><a href="#plugin_hooks_edit_one_pic_after_edit_file">after_edit_file</a> (edit_one_pic.php)</li>
                 <li class="floatleft"><a href="#plugin_hooks_filename_anycontent">anycontent</a></li>
             </ul>
         </td>
@@ -817,7 +847,7 @@ echo $footer;</textarea></td>
                 <li class="floatleft"><a href="#plugin_hooks_db_ecard_ip_information">ip_information</a> (db_ecard.php)</li>
                 <li class="floatleft"><a href="#plugin_hooks_reviewcom_ip_information">ip_information</a> (reviewcom.php)</li>
                 <li class="floatleft"><a href="#plugin_hooks_stat_details_ip_information">ip_information</a> (stat_details.php)</li>
-                <li class="floatleft"><a href="#plugin_hooks_filename_theme_ip_information">ip_information</a> (include/themes.inc.php.php)</li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_theme_ip_information">ip_information</a> (include/themes.inc.php)</li>
             </ul>
         </td>
     </tr>
@@ -940,6 +970,8 @@ echo $footer;</textarea></td>
                 <li class="floatleft"><a href="#plugin_hooks_filename_user_caption_params">user_caption_params</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_filename_usermgr_footer">usermgr_footer</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_filename_usermgr_header">usermgr_header</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_upload_html_pre_move">upload_html_pre_move</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_upload_swf_pre_move">upload_swf_pre_move</a></li>
             </ul>
         </td>
     </tr>
