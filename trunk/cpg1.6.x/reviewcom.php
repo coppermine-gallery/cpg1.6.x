@@ -577,10 +577,11 @@ while ($row = mysql_fetch_array($result)) {
         $profile_link_end = '';
     }
     // Create the output of the IP address
-    if ($row['msg_raw_ip'] == $row['msg_hdr_ip']) {
-        $ip_address_output = CPGPluginAPI::filter('ip_information', $row['msg_raw_ip']);
-    } else {
-        $ip_address_output = CPGPluginAPI::filter('ip_information', $row['msg_raw_ip']) . '<br />' . CPGPluginAPI::filter('ip_information', $row['msg_hdr_ip']);
+    list($row['ip_detail']) = CPGPluginAPI::filter('ip_information', array('', $row['msg_raw_ip']));
+    $ip_address_output = $row['msg_raw_ip'] . $row['ip_detail'];
+    if ($row['msg_raw_ip'] != $row['msg_hdr_ip']) {
+        list($row['ip_detail']) = CPGPluginAPI::filter('ip_information', array('', $row['msg_hdr_ip']));
+        $ip_address_output .= '<br />' . $row['msg_hdr_ip'] . $row['ip_detail'];
     }
     // output the table rows
     echo <<<EOT

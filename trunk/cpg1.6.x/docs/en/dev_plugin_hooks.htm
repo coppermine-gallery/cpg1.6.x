@@ -260,7 +260,7 @@
     <td valign="top"><a name="plugin_hooks_reviewcom_ip_information"></a><strong>ip_information</strong><a href="#plugin_hooks_reviewcom_ip_information" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Filter</td>
     <td valign="top">Filters additional information to an IP address (empty out of the box). Use this hook to add information <em>after</em> the output of an IP address.</td>
-    <td valign="top"><textarea class="samplecode" style="width:100%">$ip_address_output = $row['msg_raw_ip'] . CPGPluginAPI::filter('ip_information', $row['msg_raw_ip']);</textarea></td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">list($row['ip_detail']) = CPGPluginAPI::filter('ip_information', array('', $row['msg_raw_ip']));</textarea></td>
   </tr>
   <tr>
     <td valign="top">search.php</td>
@@ -274,7 +274,7 @@
     <td valign="top"><a name="plugin_hooks_stat_details_ip_information"></a><strong>ip_information</strong><a href="#plugin_hooks_stat_details_ip_information" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Filter</td>
     <td valign="top">Filters additional information to an IP address (empty out of the box). Use this hook to add information <em>after</em> the output of an IP address.</td>
-    <td valign="top"><textarea class="samplecode" style="width:100%">print '      '. $row[$value] . CPGPluginAPI::filter('ip_information', $row[$value]) . $LINEBREAK;</textarea></td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">list($row['ip_detail']) = CPGPluginAPI::filter('ip_information', array('', $row[$value]));</textarea></td>
   </tr>
   <tr>
     <td valign="top">thumbnails.php</td>
@@ -744,7 +744,7 @@ echo $footer;</textarea></td>
     <td valign="top"><a name="plugin_hooks_filename_theme_ip_information"></a><strong>ip_information</strong><a href="#plugin_hooks_filename_theme_ip_information" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Filter</td>
     <td valign="top">Filters additional information to an IP address (empty out of the box). Use this hook to add information <em>after</em> the output of an IP address.</td>
-    <td valign="top"><textarea class="samplecode" style="width:100%">$ip = $row['msg_hdr_ip'] . CPGPluginAPI::filter('ip_information', $row['msg_hdr_ip']);</textarea></td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">list($row['ip_detail']) = CPGPluginAPI::filter('ip_information', array('', $row['msg_hdr_ip']));</textarea></td>
   </tr>
 </table>
 <p><a class="back" href="#top">Back to top</a></p><hr />
