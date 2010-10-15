@@ -217,7 +217,7 @@ function resize_image($src_file, $dest_file, $new_size, $method, $thumb_use, $wa
     //Make Cage
     $superCage = Inspekt::makeSuperCage();
 
-    $imginfo = getimagesize($src_file);
+    $imginfo = cpg_getimagesize($src_file);
     if ($imginfo == null) {
         return false;
     }
@@ -517,7 +517,7 @@ function resize_image($src_file, $dest_file, $new_size, $method, $thumb_use, $wa
     // Set mode of uploaded picture
     @chmod($dest_file, octdec($CONFIG['default_file_mode'])); //silence the output in case chmod is disabled
     // We check that the image is valid
-    $imginfo = getimagesize($dest_file);
+    $imginfo = cpg_getimagesize($dest_file);
     if ($imginfo == null) {
         $ERROR = $lang_errors['resize_failed'];
         @unlink($dest_file);
