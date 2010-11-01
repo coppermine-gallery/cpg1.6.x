@@ -240,25 +240,25 @@ function getfoldercontent($folder, &$dir_array, &$pic_array, &$expic_array)
             if (strncmp($file, $CONFIG['orig_pfx'], strlen($CONFIG['orig_pfx'])) != 0 && strncmp($file, $CONFIG['thumb_pfx'], strlen($CONFIG['thumb_pfx'])) != 0 && strncmp($file, $CONFIG['normal_pfx'], strlen($CONFIG['normal_pfx'])) != 0 && $file != 'index.php') {
                 $newfile = replace_forbidden($file);
                 if ($newfile != $file) {
-                  //File name has been changed, let's get a unique filename and rename the existing file.
-                  $matches = array();
-                  if (!preg_match("/(.+)\.(.*?)\Z/", $newfile, $matches)) {
-                      $matches[1] = 'invalid_fname';
-                      $matches[2] = 'xxx';
-                  }
+                    //File name has been changed, let's get a unique filename and rename the existing file.
+                    $matches = array();
+                    if (!preg_match("/(.+)\.(.*?)\Z/", $newfile, $matches)) {
+                        $matches[1] = 'invalid_fname';
+                        $matches[2] = 'xxx';
+                    }
 
-                  if ($matches[2] == '' || !is_known_filetype($matches)) {
-                      cpg_die(ERROR, sprintf($lang_db_input_php['err_invalid_fext'], $CONFIG['allowed_file_extensions']), __FILE__, __LINE__);
-                  }
+                    if ($matches[2] == '' || !is_known_filetype($matches)) {
+                        continue;
+                    }
 
-                  // Create a unique name for the uploaded file
-                  $nr = 0;
-                  $picture_name = $matches[1] . '.' . $matches[2];
-                  while (file_exists($CONFIG['fullpath'] . $folder . $picture_name)) {
-                    $picture_name = $matches[1] . '~' . $nr++ . '.' . $matches[2];
-                  }
-                  @rename($CONFIG['fullpath'] . $folder . $file, $CONFIG['fullpath'] . $folder . $picture_name);
-                  $file = $picture_name;
+                    // Create a unique name for the uploaded file
+                    $nr = 0;
+                    $picture_name = $matches[1] . '.' . $matches[2];
+                    while (file_exists($CONFIG['fullpath'] . $folder . $picture_name)) {
+                        $picture_name = $matches[1] . '~' . $nr++ . '.' . $matches[2];
+                    }
+                    @rename($CONFIG['fullpath'] . $folder . $file, $CONFIG['fullpath'] . $folder . $picture_name);
+                    $file = $picture_name;
                 }
                 $pic_array[] = $file;
             }
