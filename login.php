@@ -141,7 +141,7 @@ echo <<< EOT
                       <td class="tableb"><input type="password" class="textinput" name="password" style="width: 100%" tabindex="2" /></td>
                   </tr>
                   <tr>
-                      <td colspan="2" align="center" class="tableb">{$lang_login_php['remember_me']} <input name="remember_me" type="checkbox" class="checkbox" value="1" tabindex="3" /></td>
+                      <td colspan="2" align="center" class="tableb"><label for="remember_me">{$lang_login_php['remember_me']} </label><input name="remember_me" id="remember_me" type="checkbox" class="checkbox" value="1" tabindex="3" /></td>
                   </tr>
                   <tr>
                       <td align="center" class="tablef">
