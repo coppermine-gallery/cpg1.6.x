@@ -28,6 +28,7 @@ Changelog
 2010-11-04 [B] Removed value 'SERVER_PROTOCOL' from client ID generator (thread ID 59698) {eenemeenemuu}
 2010-11-02 [C] Added label for 'remember me' checkbox (thread ID 67840) {eenemeenemuu}
 2010-11-01 [B] Skip unknown file types during batch-add process (thread ID 67815) {eenemeenemuu}
+2010-10-22 [B] Fixed default selection of check boxes for batch-add (thread ID 67107) {eenemeenemuu}
 2010-10-14 [A] Added plugin hooks 'after_edit_file', 'upload_html_pre_move' and 'upload_swf_pre_move' (thread ID 60896) {eenemeenemuu}
 2010-10-14 [C] Added additional submit button on top of 'Edit files' form (thread ID 67563) {eenemeenemuu}
 2010-10-13 [B] Use IPTC headline instead of IPTC title as picture title according to docs (thread ID 61380) {eenemeenemuu}

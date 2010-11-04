@@ -378,6 +378,8 @@ function CPGscandir($dir, &$expic_array)
 {
     global $lang_search_new_php, $lang_common, $rowCounter, $icon_array;
     $dir = str_replace(".","" ,$dir);
+    $dir = str_replace('\\\\', '/', $dir);
+    $dir = str_replace('\\', '/', $dir);
     static $dir_id = 0;
     static $count = 0;
     static $pic_id = 0;
@@ -395,7 +397,7 @@ function CPGscandir($dir, &$expic_array)
                     <input type="checkbox" name="checkAll2" onclick="selectAll('cpgform');" class="checkbox" title="{$lang_common['check_uncheck_all']}" />
                 </td>
                 <td colspan="3" align="right" class="tablef">
-						<button type="submit" class="button" name="insert" id="submit_button" value="{$lang_search_new_php['insert_selected']}">{$icon_array['ok']}{$lang_search_new_php['insert_selected']}</button>
+                        <button type="submit" class="button" name="insert" id="submit_button" value="{$lang_search_new_php['insert_selected']}">{$icon_array['ok']}{$lang_search_new_php['insert_selected']}</button>
                 </td>
         </tr>
 EOT;
@@ -566,7 +568,7 @@ EOT;
                     <input type="checkbox" name="checkAll" onclick="selectAll('cpgform');" class="checkbox" title="{$lang_common['check_uncheck_all']}" />
                 </td>
                 <td colspan="3" align="right" class="tablef">
-						<button type="submit" class="button" name="insert" id="submit_button_bottom" value="{$lang_search_new_php['insert_selected']}">{$icon_array['ok']}{$lang_search_new_php['insert_selected']}</button>
+                        <button type="submit" class="button" name="insert" id="submit_button_bottom" value="{$lang_search_new_php['insert_selected']}">{$icon_array['ok']}{$lang_search_new_php['insert_selected']}</button>
                 </td>
         </tr>
 
