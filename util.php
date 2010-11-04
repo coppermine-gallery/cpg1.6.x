@@ -42,10 +42,10 @@ $icon_array = array(
     'back'       => cpg_fetch_icon('leftleft', 2),
     'delete_all' => cpg_fetch_icon('delete', 2),
     'ok'         => cpg_fetch_icon('ok', 2),
-	'stop'       => cpg_fetch_icon('stop', 2),
-	'cancel'     => cpg_fetch_icon('cancel', 2),
-	'info'       => cpg_fetch_icon('info', 2),
-	'util'       => cpg_fetch_icon('util', 2),
+    'stop'       => cpg_fetch_icon('stop', 2),
+    'cancel'     => cpg_fetch_icon('cancel', 2),
+    'info'       => cpg_fetch_icon('info', 2),
+    'util'       => cpg_fetch_icon('util', 2),
 );
 
 js_include('js/util.js');
@@ -267,9 +267,9 @@ if (array_key_exists($action, $tasks)) {
    
     list($timestamp, $form_token) = getFormToken();	
     echo <<< EOT
-	<input type="hidden" name="form_token" value="{$form_token}" />
+    <input type="hidden" name="form_token" value="{$form_token}" />
     <input type="hidden" name="timestamp" value="{$timestamp}" />
-	</form>
+    </form>
 EOT;
 }
 
@@ -421,7 +421,7 @@ function update_thumbs()
 
     while ($row = mysql_fetch_assoc($result)) {
     
-        if (is_image($row['filename'])) { // the file is an image --- end
+        if (is_image($row['filename'])) { // the file is an image --- start
  
             $loopCounter++;
             
@@ -445,7 +445,8 @@ function update_thumbs()
             }
 
             $imagesize = cpg_getimagesize($work_image);
-            
+
+            // Thumbnail
             if ($updatetype == 0 || $updatetype == 2 || $updatetype == 5) {
                 if (resize_image($work_image, $thumb, $CONFIG['thumb_width'], $CONFIG['thumb_method'], $CONFIG['thumb_use'], "false", 1)) {
                     echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $thumb .'</tt> '. $lang_util_php['updated_successfully'] . '</td></tr>';
@@ -454,10 +455,12 @@ function update_thumbs()
                 }
             }
 
+            // Intermediate size
             if ($updatetype == 1 || $updatetype == 2 || $updatetype == 3 || $updatetype == 5) {
-                ($CONFIG['enable_watermark'] == '1' && $CONFIG['which_files_to_watermark'] == 'both' || $CONFIG['which_files_to_watermark'] == 'resized') ? $watermark = "true" : $watermark = "false";
                 if (max($imagesize[0], $imagesize[1]) > $CONFIG['picture_width'] && $CONFIG['make_intermediate']) {
-                    if (resize_image($work_image, $normal, $CONFIG['picture_width'], $CONFIG['thumb_method'], $CONFIG['thumb_use'], $watermark)) {
+                    $resize_method = $CONFIG['picture_use'] == "thumb" ? ($CONFIG['thumb_use'] == "ex" ? "any" : $CONFIG['thumb_use']) : $CONFIG['picture_use'];
+                    $watermark = ($CONFIG['enable_watermark'] == '1' && ($CONFIG['which_files_to_watermark'] == 'both' || $CONFIG['which_files_to_watermark'] == 'resized')) ? 'true' : 'false';
+                    if (resize_image($work_image, $normal, $CONFIG['picture_width'], $CONFIG['thumb_method'], $resize_method, $watermark)) {
                         echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $normal . "</tt> " . $lang_util_php['updated_successfully'] . '!</td></tr>';
                     } else {
                         echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $normal . '</tt></td></tr>';
@@ -465,19 +468,20 @@ function update_thumbs()
                 }
             }
 
+            // Full sized
             if ($updatetype == 3 || $updatetype == 4 || $updatetype == 5) {
-                ($CONFIG['thumb_use'] == "ex") ? $resize_method = "any" : $resize_method = $CONFIG['thumb_use'];
 
-                if (((USER_IS_ADMIN && $CONFIG['auto_resize'] == 1) || (!USER_IS_ADMIN && $CONFIG['auto_resize'] > 0)) && max($imagesize[0], $imagesize[1]) > $CONFIG['max_upl_width_height']) {
+                if (max($imagesize[0], $imagesize[1]) > $CONFIG['max_upl_width_height'] && ((USER_IS_ADMIN && $CONFIG['auto_resize'] == 1) || (!USER_IS_ADMIN && $CONFIG['auto_resize'] > 0))) {
+                    $resize_method = 'any'; // hard-coded 'any' according to configuration string 'Max width or height for uploaded pictures'
                     $max_size_size = $CONFIG['max_upl_width_height'];
                 } else {
-                    $resize_method = "orig";
+                    $resize_method = 'orig';
                     $max_size_size = max($imagesize[0], $imagesize[1]);
                 }
 
                 if ($orig_true == false) {
                     if (copy($image, $orig)) {
-                        if ($CONFIG['enable_watermark'] == '1' && $CONFIG['which_files_to_watermark'] == 'both' || $CONFIG['which_files_to_watermark'] == 'original') {
+                        if ($CONFIG['enable_watermark'] == '1' && ($CONFIG['which_files_to_watermark'] == 'both' || $CONFIG['which_files_to_watermark'] == 'original')) {
                             if (resize_image($work_image, $image, $max_size_size, $CONFIG['thumb_method'], $resize_method, 'true')) {
                                 echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $image . "</tt> " . $lang_util_php['updated_successfully'] . '!' . '</td></tr>';
                             } else {
@@ -486,14 +490,14 @@ function update_thumbs()
                         }
                     }
                 } else {
-                    if ($CONFIG['enable_watermark'] == '1' && $CONFIG['which_files_to_watermark'] == 'both' || $CONFIG['which_files_to_watermark'] == 'original') {
+                    if ($CONFIG['enable_watermark'] == '1' && ($CONFIG['which_files_to_watermark'] == 'both' || $CONFIG['which_files_to_watermark'] == 'original')) {
                         if (resize_image($work_image, $image, $max_size_size, $CONFIG['thumb_method'], $resize_method, 'true')) {
                             echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $image . "</tt> " . $lang_util_php['updated_successfully'] . '!' . '</td></tr>';
                         } else {
                             echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $image . '</tt></td></tr>';
                         }
                     } else {
-                        if (((USER_IS_ADMIN && $CONFIG['auto_resize'] == 1) || (!USER_IS_ADMIN && $CONFIG['auto_resize'] > 0)) && max($imagesize[0], $imagesize[1]) > $CONFIG['max_upl_width_height']) {
+                        if (max($imagesize[0], $imagesize[1]) > $CONFIG['max_upl_width_height'] && ((USER_IS_ADMIN && $CONFIG['auto_resize'] == 1) || (!USER_IS_ADMIN && $CONFIG['auto_resize'] > 0))) {
                             if (resize_image($work_image, $image, $max_size_size, $CONFIG['thumb_method'], $resize_method, 'false')) {
                                 echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $image . "</tt> " . $lang_util_php['updated_successfully'] . '!' . '</td></tr>';
                             } else {
@@ -529,7 +533,7 @@ function update_thumbs()
             <meta http-equiv="refresh" content="1; URL=util.php?numpics={$numpics}&startpic={$startpic}&albumid={$albumid}&autorefresh={$autorefresh}&action=update_thumbs&updatetype={$updatetype}&form_token={$form_token}&timestamp={$timestamp}#admin_tool_thumb_update">
 EOT;
         } else {
-            	
+                
             print <<< EOT
             <tr>
                 <td class="tablef">
@@ -541,8 +545,8 @@ EOT;
                         <input type="hidden" name="albumid" value="{$albumid}" />
                         <input type="hidden" name="autorefresh" value="{$autorefresh}" />
                         <button type="submit" class="button" name="submit" id="submit" value="{$lang_util_php['continue']}">{$lang_util_php['continue']} {$icon_array['continue']}</button>
-                    	<input type="hidden" name="form_token" value="{$form_token}" />
-                    	<input type="hidden" name="timestamp" value="{$timestamp}" />
+                        <input type="hidden" name="form_token" value="{$form_token}" />
+                        <input type="hidden" name="timestamp" value="{$timestamp}" />
                     </form>
                 </td>
             </tr>
@@ -737,8 +741,8 @@ function del_orphans()
                         <input type="hidden" name="del" value="all" />
                         {$lang_util_php['delete_all_orphans']}
                         <button type="submit" class="button" name="submit" id="submit" value="{$lang_util_php['delete_all']}">{$lang_util_php['delete_all']} {$icon_array['delete_all']}</button>
-                		<input type="hidden" name="form_token" value="{$form_token}" />
-                		<input type="hidden" name="timestamp" value="{$timestamp}" />
+                        <input type="hidden" name="form_token" value="{$form_token}" />
+                        <input type="hidden" name="timestamp" value="{$timestamp}" />
                 </form>
 EOT;
         }
