@@ -47,7 +47,7 @@ if (isset($bridge_lookup)) {
                     }
 
                     // A hash that's a little specific to the client's configuration
-                    $this->client_id = md5($superCage->server->getRaw('HTTP_USER_AGENT').$superCage->server->getRaw('SERVER_PROTOCOL').$CONFIG['site_url']);
+                    $this->client_id = md5($superCage->server->getRaw('HTTP_USER_AGENT').$CONFIG['site_url']);
 
                     $this->multigroups = 1;
 
