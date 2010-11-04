@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2010-11-04 [B] Removed declaration of function 'cpg_folder_file_delete' from update.php (thread ID 65708) {eenemeenemuu}
 2010-11-04 [B] Fixed picture resizing via admin tools (thread ID 66802) {eenemeenemuu}
 2010-11-04 [B] Removed value 'SERVER_PROTOCOL' from client ID generator (thread ID 59698) {eenemeenemuu}
 2010-11-02 [C] Added label for 'remember me' checkbox (thread ID 67840) {eenemeenemuu}
