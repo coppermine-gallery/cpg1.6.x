@@ -1006,14 +1006,6 @@
     <hash>c58b180857a3f2eb50550a0794868207</hash>
   </element>
   <element>
-    <fullpath>docs/de/dev_package.htm</fullpath>
-    <version>1.5.9</version>
-    <revision>7805</revision>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>9887dc8f07e8c2ccd304e21961e089f0</hash>
-  </element>
-  <element>
     <fullpath>docs/en/dev_plugin_api.htm</fullpath>
     <version>1.5.9</version>
     <revision>7805</revision>
