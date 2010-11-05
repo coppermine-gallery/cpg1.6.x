@@ -383,7 +383,7 @@ if ($superCage->post->keyExists('change_profile') && USER_ID && UDB_INTEGRATION 
     if ($CONFIG['allow_email_change'] || GALLERY_ADMIN_MODE) {
         $email = $superCage->post->getEscaped('email');
         if (!Inspekt::isEmail($email)) {
-            $error = $lang_register_php['email_warning2'] . $email;
+            $error = $lang_register_php['email_warning2'] . ' [' . $email .']';
             //preg_match('#' . $adminDataValue['regex'] . '#i', $evaluate_value) == FALSE
         } elseif (!$CONFIG['allow_duplicate_emails_addr']) {
             $sql = "SELECT null FROM {$CONFIG['TABLE_USERS']} WHERE user_email = '$email' AND user_id <> " . USER_ID;

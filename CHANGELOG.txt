@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2010-11-05 [C] Fixed error message when entering invalid email address in profile manager (thread ID 67903) {eenemeenemuu}
 2010-11-05 [C] Fixed spelling of ImageMagick (thread ID 67902) {eenemeenemuu}
 2010-11-04 [B] Removed declaration of function 'cpg_folder_file_delete' from update.php (thread ID 65708) {eenemeenemuu}
 2010-11-04 [B] Fixed picture resizing via admin tools (thread ID 66802) {eenemeenemuu}
