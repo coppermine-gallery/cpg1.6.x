@@ -233,7 +233,7 @@ function resize_image($src_file, $dest_file, $new_size, $method, $thumb_use, $wa
         if ($new_size==$thb_width) {
             $crop = 1;
             switch ($CONFIG['thumb_method']) {
-                //cropping parameters for image magick
+                //cropping parameters for ImageMagick
                 case "im" :
                     $resize_commands="";
                     if ($srcWidth/$srcHeight > $thb_width/$thb_height) {

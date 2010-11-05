@@ -1036,7 +1036,7 @@ $config_data = array(
       'default_value' => 'gd2',
       'help_link'     => 'f=configuration.htm&amp;as=admin_picture_thumb_advanced_resize_method&amp;ae=admin_picture_thumb_advanced_resize_method_end',
       'options'       => array(
-                           'im' => 'Image Magick',
+                           'im' => 'ImageMagick',
                            'gd2' => 'GD version 2.x',
                          ),
     ),
