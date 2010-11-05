@@ -368,7 +368,7 @@ Warning: move_uploaded_file(/tmp/<span style="color:blue;">phpezCYKr</span>)
     <a name="upload_error_messages_exec_disabled_cause"></a><h4>Possible cause<a href="#upload_error_messages_exec_disabled_cause" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
     php.ini allows the server administrator to disable certain functions. Usually this is the case if your server is running in safe_mode. This is not a <a href="errors.htm#errors_soft">soft error</a> triggered by Coppermine, but a <a href="errors.htm#errors_hard">hard error</a> from PHP that shines through Coppermine from PHP.
     <a name="upload_error_messages_exec_disabled_fix"></a><h4>Suggested fix<a href="#upload_error_messages_exec_disabled_fix" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
-    If the server administrator has disabled exec() you will not be able to use Image Magick.<br />
+    If the server administrator has disabled exec() you will not be able to use ImageMagick.<br />
     You may try to replace exec() with passthru() in the entire core code of coppermine (not recommended) if it has not been disabled as well.  Otherwise, you can't use ImageMagick and must use GD. Change <a href="configuration.htm#admin_picture_thumb_advanced_resize_method">Method for resizing images</a> in config accordingly.
 </div>
 
