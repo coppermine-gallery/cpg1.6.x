@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2010-11-13 [O] Changed favourites zip download to build on disk instead of in memory {Nibbler}
 2010-11-10 [B] Fixed picture manager - show user created albums in public categories (thread ID 67937) {eenemeenemuu}
 2010-11-05 [C] Fixed error message when entering invalid email address in profile manager (thread ID 67903) {eenemeenemuu}
 2010-11-05 [C] Fixed spelling of ImageMagick (thread ID 67902) {eenemeenemuu}

@@ -76,26 +76,26 @@ EOT;
         }
     }
     
-    $zip = new zip_file('pictures.zip');
+    $filename = 'edit/pictures-' . uniqid() . '.zip';
+    $zip = new zip_file($filename);
     
     $options = array(
         'basedir'    => "./{$CONFIG['fullpath']}",
-        'inmemory'   => 1,
         'recurse'    => 0,
         'storepaths' => 0,
     );
-        
+   
     $zip->set_options($options);
     $zip->add_files($filelist);
     $zip->create_archive();
-    
-    ob_end_clean();
-    
-    $zip->download_file();
-    
+
     if ($CONFIG['enable_zipdownload'] == 2) {
         @unlink($CONFIG['fullpath'].'edit/'.$readme_filename);
     }
+    
+    ob_end_clean();
+    
+    header('Location: ' . $CONFIG['site_url'] . $CONFIG['fullpath'] . $filename);
 }
 
 ?>
