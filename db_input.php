@@ -106,7 +106,7 @@ case 'comment_update':
     if (GALLERY_ADMIN_MODE) {
         cpg_db_query("UPDATE {$CONFIG['TABLE_COMMENTS']} SET msg_body = '$msg_body' WHERE msg_id = '$msg_id'");
     } elseif (USER_ID) {
-        if ($CONFIG['comment_approval'] == 2) {
+        if ($CONFIG['comment_approval'] == 1) {
             cpg_db_query("UPDATE {$CONFIG['TABLE_COMMENTS']} SET msg_body = '$msg_body', approval = 'NO' WHERE msg_id = '$msg_id' AND author_id ='" . USER_ID . "' LIMIT 1");
         } else {
             cpg_db_query("UPDATE {$CONFIG['TABLE_COMMENTS']} SET msg_body = '$msg_body' WHERE msg_id = '$msg_id' AND author_id ='" . USER_ID . "' LIMIT 1");
