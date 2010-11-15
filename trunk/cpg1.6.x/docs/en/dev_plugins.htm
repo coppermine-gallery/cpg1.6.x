@@ -166,51 +166,51 @@ EOT;</div>
 <p>Even if you plan to write a plugin just for your purposes you should pay attention to the naming conventions for plugins to make sure that your plugin will not stop working as expected at a later stage (e.g. after an update).</p>
 <p>The naming conventions exist for two purposes: they enable Coppermine's developers to come with restrictive rules for Coppermine's core code to prevent hacking. Unsanitized user input can have a huge impact in hacking scenarios, that's why there are rules for plugins as well. Additionally, naming conventions are supposed to make maintenance and support easier, and finally, end users will find their way around easier as well.</p>
 <ul>
-	<li>
-		<a name="plugin_writing_naming_conventions_folders"></a><h3>Folders<a href="#plugin_writing_naming_conventions_folders" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-		Use web-safe names:
-		<ul>
-			<li>only alphanumerals</li>
-			<li>all lower-case</li>
-			<li>no special chars except underscore (_)</li>
-		</ul>
-		<div class="cpg_example"><tt class="code">your_coppermine_folder/plugins/coffee_maker/</tt></div>
-	</li>
-	<li>
-		<a name="plugin_writing_naming_conventions_files"></a><h3>Files<a href="#plugin_writing_naming_conventions_files" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-		Use web-safe names:
-		<ul>
-			<li>only alphanumerals</li>
-			<li>all lower-case</li>
-			<li>no special chars except underscore (_) and only one dot (.) to separate the actual file name from the extension</li>
-		</ul>
-		<div class="cpg_example"><tt class="code">your_coppermine_folder/plugins/coffee_maker/my_file.php</tt></div>
-	</li>
-	<li>
-		<a name="plugin_writing_naming_conventions_archives"></a><h3>Archives<a href="#plugin_writing_naming_conventions_archives" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-		You only need to worry about naming conventions for archives if you plan to release your plugin for the public. The zip-archives for plugin releases follow a naming convention - it's advisable to adopt to that convention to prevent confusion for end-users.
-		<ul>
-			<li>only alphanumerals</li>
-			<li>all lower-case</li>
-			<li>no special chars except underscore (_), hyphen (-) and dot (.)</li>
-			<li>All archives start with the official abbreviation "<tt class="code">cpg</tt>" to indicate that the archive is meant to be used with coppermine or is related to coppermine</li>
-			<li>The major version an archive is meant to be used with comes right after that - the minor version being replaced with an <tt class="code">x</tt>. Possible values for plugins can currently be <tt class="code">1.4.x</tt> and <tt class="code">1.5.x</tt>. The Coppermine version is being followed by an underscore</li>
-			<li>The word "plugin" to indicate that the archive contains a plugin (opposed to a theme or similar), followed by an underscore</li>
-			<li>The name of the actual plugin, preferably using the same name that has been used as folder name. The plugin name should usually consist of at least two words. Unlike the <a href="#plugin_writing_naming_conventions_folders">naming convention for folders</a>, the words in the archive name are being separated with hyphens (-) to make them distinguishable from the underscore that separates the components of the file name. In above example, where the folder name <tt class="code">coffee_maker</tt> was used, the corresponding part of the archive file name would be <tt class="code">coffee-maker</tt>.<br />
-			To separate the actual plugin name component in the file name from the rest, another underscore should be used</li>
-			<li>All plugins have versions. Even if you don't plan to create more versions after having released your initial plugin, others may want to do so. That's why you should always populate the version number inside <tt class="code">configuration.php</tt>. The same version should show through in the archive file name, with the letter "<tt class="code">v</tt>" prepended to indicate the word "version". Major and minor version numbers should be separated with dots. Coppermine itself currently features three digits for the version number. We advise plugin authors to use a two-digits version numbering scheme, where the first digit indicates the major version and the second digit indicates the minor version change (usually a maintenance release). <br />This two-digit version numbering scheme for plugins is not written in stone - plugin authors can use a three-digit notation as well if they desire.<br />
-			The Coppermine dev team suggests starting the numbering at version 1.0</li>
-			<li>The extension <tt class="code">zip</tt> can of course not be edited. We strongly suggest only to use zip and not some other archive format like <tt class="code">rar</tt> or <tt class="code">7z</tt> even if those other formats may have advantages. The archive-type <tt class="code">zip</tt> is most commonly used; everybody should have a tool to extract zip files.</li>
-		</ul>
-		<div class="cpg_example">
-			<strong>Example</strong>:<br />
-			<tt class="code">cpg1.5.x_plugin_coffee-maker_v1.0.zip</tt>
-		</div>
-	</li>
-	<li>
-		<a name="plugin_writing_naming_conventions_coding"></a><h3>Coding<a href="#plugin_writing_naming_conventions_coding" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-		<p>There are naming conventions as well as far as the stuff within your files is concerned: you should take a look at the <a href="dev_coding.htm#dev_coding_naming_conventions">coding guidelines</a> for Coppermine as well to get an idea how to name your functions, variables and constants.</p>
-	</li>
+    <li>
+        <a name="plugin_writing_naming_conventions_folders"></a><h3>Folders<a href="#plugin_writing_naming_conventions_folders" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+        Use web-safe names:
+        <ul>
+            <li>only alphanumerals</li>
+            <li>all lower-case</li>
+            <li>no special chars except underscore (_)</li>
+        </ul>
+        <div class="cpg_example"><tt class="code">your_coppermine_folder/plugins/coffee_maker/</tt></div>
+    </li>
+    <li>
+        <a name="plugin_writing_naming_conventions_files"></a><h3>Files<a href="#plugin_writing_naming_conventions_files" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+        Use web-safe names:
+        <ul>
+            <li>only alphanumerals</li>
+            <li>all lower-case</li>
+            <li>no special chars except underscore (_) and only one dot (.) to separate the actual file name from the extension</li>
+        </ul>
+        <div class="cpg_example"><tt class="code">your_coppermine_folder/plugins/coffee_maker/my_file.php</tt></div>
+    </li>
+    <li>
+        <a name="plugin_writing_naming_conventions_archives"></a><h3>Archives<a href="#plugin_writing_naming_conventions_archives" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+        You only need to worry about naming conventions for archives if you plan to release your plugin for the public. The zip-archives for plugin releases follow a naming convention - it's advisable to adopt to that convention to prevent confusion for end-users.
+        <ul>
+            <li>only alphanumerals</li>
+            <li>all lower-case</li>
+            <li>no special chars except underscore (_), hyphen (-) and dot (.)</li>
+            <li>All archives start with the official abbreviation "<tt class="code">cpg</tt>" to indicate that the archive is meant to be used with coppermine or is related to coppermine</li>
+            <li>The major version an archive is meant to be used with comes right after that - the minor version being replaced with an <tt class="code">x</tt>. Possible values for plugins can currently be <tt class="code">1.4.x</tt> and <tt class="code">1.5.x</tt>. The Coppermine version is being followed by an underscore</li>
+            <li>The word "plugin" to indicate that the archive contains a plugin (opposed to a theme or similar), followed by an underscore</li>
+            <li>The name of the actual plugin, preferably using the same name that has been used as folder name. The plugin name should usually consist of at least two words. Unlike the <a href="#plugin_writing_naming_conventions_folders">naming convention for folders</a>, the words in the archive name are being separated with hyphens (-) to make them distinguishable from the underscore that separates the components of the file name. In above example, where the folder name <tt class="code">coffee_maker</tt> was used, the corresponding part of the archive file name would be <tt class="code">coffee-maker</tt>.<br />
+            To separate the actual plugin name component in the file name from the rest, another underscore should be used</li>
+            <li>All plugins have versions. Even if you don't plan to create more versions after having released your initial plugin, others may want to do so. That's why you should always populate the version number inside <tt class="code">configuration.php</tt>. The same version should show through in the archive file name, with the letter "<tt class="code">v</tt>" prepended to indicate the word "version". Major and minor version numbers should be separated with dots. Coppermine itself currently features three digits for the version number. We advise plugin authors to use a two-digits version numbering scheme, where the first digit indicates the major version and the second digit indicates the minor version change (usually a maintenance release). <br />This two-digit version numbering scheme for plugins is not written in stone - plugin authors can use a three-digit notation as well if they desire.<br />
+            The Coppermine dev team suggests starting the numbering at version 1.0</li>
+            <li>The extension <tt class="code">zip</tt> can of course not be edited. We strongly suggest only to use zip and not some other archive format like <tt class="code">rar</tt> or <tt class="code">7z</tt> even if those other formats may have advantages. The archive-type <tt class="code">zip</tt> is most commonly used; everybody should have a tool to extract zip files.</li>
+        </ul>
+        <div class="cpg_example">
+            <strong>Example</strong>:<br />
+            <tt class="code">cpg1.5.x_plugin_coffee-maker_v1.0.zip</tt>
+        </div>
+    </li>
+    <li>
+        <a name="plugin_writing_naming_conventions_coding"></a><h3>Coding<a href="#plugin_writing_naming_conventions_coding" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+        <p>There are naming conventions as well as far as the stuff within your files is concerned: you should take a look at the <a href="dev_coding.htm#dev_coding_naming_conventions">coding guidelines</a> for Coppermine as well to get an idea how to name your functions, variables and constants.</p>
+    </li>
 </ul>
 
 <a name="plugin_writing_globals"></a><h2>Use of Superglobals<a href="#plugin_writing_globals" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
@@ -227,64 +227,64 @@ A plugin can access the database in the same manner that core code is accessing 
 <a name="plugin_writing_database_direct_queries"></a><h3>Direct queries<a href="#plugin_writing_database_direct_queries" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
 Don't use the native PHP commands (like <a href="http://www.php.net/manual/en/function.mysql-query.php" rel="external" class="phpnet">mysql_query</a>) to perform queries against the coppermine database tables. Instead, use the function <tt class="code">cpg_db_query</tt> built into coppermine. You don't need to explicitely open the connection - it is already established for you when using the plugin API.
 <div class="cpg_example">
-	<table border="0" cellspacing="0" cellpadding="0" width="100%" class="maintable">
-		<tr>
-			<td class="tableb">Bad example</td>
-			<td class="tableb cpg_message_validation code">$result = mysql_query("SELECT * WHERE 1=1");</td>
-		</tr>
-		<tr>
-			<td class="tableb tableb_alternate">Good example</td>
-			<td class="tableb cpg_message_success code">$result = cpg_db_query("SELECT * WHERE 1=1");</td>
-		</tr>
-	</table>
+    <table border="0" cellspacing="0" cellpadding="0" width="100%" class="maintable">
+        <tr>
+            <td class="tableb">Bad example</td>
+            <td class="tableb cpg_message_validation code">$result = mysql_query("SELECT * WHERE 1=1");</td>
+        </tr>
+        <tr>
+            <td class="tableb tableb_alternate">Good example</td>
+            <td class="tableb cpg_message_success code">$result = cpg_db_query("SELECT * WHERE 1=1");</td>
+        </tr>
+    </table>
 </div>
 
 <a name="plugin_writing_database_tables_access"></a><h3>Accessing database tables<a href="#plugin_writing_database_tables_access" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
 Don't hard-code table names into your custom queries, as your queries are bound to break if users have chosen another table prefix than the default one.<br />
 Instead, coppermine defines a variable <tt class="code">$CONFIG['TABLE_PREFIX']</tt> that contains the table prefix that you can (and should) use if you need to access a table within coppermine's database and using the prefix: use the prefix for custom tables for your plugin.
 <div class="cpg_example">
-	<table border="0" cellspacing="0" cellpadding="0" width="100%" class="maintable">
-		<tr>
-			<td class="tableb">Bad example</td>
-			<td class="tableb cpg_message_validation code">$result = cpg_db_query("SELECT * FROM cpg15x_plugin_example WHERE 1=1");</td>
-		</tr>
-		<tr>
-			<td class="tableb tableb_alternate">Good example</td>
-			<td class="tableb cpg_message_success code">$result = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_PREFIX']}plugin_example WHERE 1=1");</td>
-		</tr>
-	</table>
+    <table border="0" cellspacing="0" cellpadding="0" width="100%" class="maintable">
+        <tr>
+            <td class="tableb">Bad example</td>
+            <td class="tableb cpg_message_validation code">$result = cpg_db_query("SELECT * FROM cpg15x_plugin_example WHERE 1=1");</td>
+        </tr>
+        <tr>
+            <td class="tableb tableb_alternate">Good example</td>
+            <td class="tableb cpg_message_success code">$result = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_PREFIX']}plugin_example WHERE 1=1");</td>
+        </tr>
+    </table>
 </div>
 If you want to access an existing table (like the coppermine table that contains all categories), use the variables outlined in <a href="dev_database.htm#db_reference within_code">Database reference within coppermine code</a>.
 <div class="cpg_example">
-	<table border="0" cellspacing="0" cellpadding="0" width="100%" class="maintable">
-		<tr>
-			<td class="tableb">Bad example</td>
-			<td class="tableb cpg_message_validation code">$result = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_PREFIX']}categories WHERE 1=1");</td>
-		</tr>
-		<tr>
-			<td class="tableb tableb_alternate">Good example</td>
-			<td class="tableb cpg_message_success code">$result = cpg_db_query("SELECT * FROM $CONFIG['TABLE_CATEGORIES'] WHERE 1=1");</td>
-		</tr>
-	</table>
+    <table border="0" cellspacing="0" cellpadding="0" width="100%" class="maintable">
+        <tr>
+            <td class="tableb">Bad example</td>
+            <td class="tableb cpg_message_validation code">$result = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_PREFIX']}categories WHERE 1=1");</td>
+        </tr>
+        <tr>
+            <td class="tableb tableb_alternate">Good example</td>
+            <td class="tableb cpg_message_success code">$result = cpg_db_query("SELECT * FROM $CONFIG['TABLE_CATEGORIES'] WHERE 1=1");</td>
+        </tr>
+    </table>
 </div>
 
 <a name="plugin_writing_database_tables_create"></a><h3>Creating database tables<a href="#plugin_writing_database_tables_create" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
 If you need to expand the database schema of coppermine to add a table for your plugin, you should follow the following rules:
 <ul>
-	<li>Create your table within the same database that coppermine resides in</li>
-	<li>Respect the naming scheme by prefixing your table name with the table prefix that the user has chosen during install (stored in <tt class="code">$CONFIG['TABLE_PREFIX']</tt>), followed by the word "plugin" with an underscore, followed by the short name of your plugin (the &quot;<a href="#plugin_writing_naming_conventions_folders">folder name of your plugin</a>&quot;)
-	<div class="cpg_example">If your plugin folder name was "coffee_maker", your plugin's table name would be <tt class="code">$CONFIG['TABLE_PREFIX']</tt> . '_plugin_coffee_maker'
-	</div>
-	</li>
-	<li>During your plugin's install function, make sure that your table creation progress doesn't break if a user hasn't removed your plugin previously - it's recommended to use <tt class="code">CREATE TABLE IF NOT EXISTS</tt> instead of just using <tt class="code">CREATE TABLE</tt></li>
-	<li>Don't consume more resources than you need - define the types and dimensions of your plugin fields wisely</li>
+    <li>Create your table within the same database that coppermine resides in</li>
+    <li>Respect the naming scheme by prefixing your table name with the table prefix that the user has chosen during install (stored in <tt class="code">$CONFIG['TABLE_PREFIX']</tt>), followed by the word "plugin" with an underscore, followed by the short name of your plugin (the &quot;<a href="#plugin_writing_naming_conventions_folders">folder name of your plugin</a>&quot;)
+    <div class="cpg_example">If your plugin folder name was "coffee_maker", your plugin's table name would be <tt class="code">$CONFIG['TABLE_PREFIX']</tt> . '_plugin_coffee_maker'
+    </div>
+    </li>
+    <li>During your plugin's install function, make sure that your table creation progress doesn't break if a user hasn't removed your plugin previously - it's recommended to use <tt class="code">CREATE TABLE IF NOT EXISTS</tt> instead of just using <tt class="code">CREATE TABLE</tt></li>
+    <li>Don't consume more resources than you need - define the types and dimensions of your plugin fields wisely</li>
 </ul>
 This could be an example for a database table creation query inside your plugin's install function:
 <pre class="cpg_code code">$query = <<< EOT
-	CREATE TABLE IF NOT EXISTS `{$CONFIG['TABLE_PREFIX']}plugin_coffee_maker` (
-	  `cid` mediumint(10) NOT NULL default '0',
-	  `some_field` smallint(6) NOT NULL default '0'
-	) TYPE=MyISAM COMMENT='Your clever description of the table here';
+    CREATE TABLE IF NOT EXISTS `{$CONFIG['TABLE_PREFIX']}plugin_coffee_maker` (
+      `cid` mediumint(10) NOT NULL default '0',
+      `some_field` smallint(6) NOT NULL default '0'
+    ) COMMENT='Your clever description of the table here';
 EOT;
 $result = cpg_db_query($query);	</pre>
 
@@ -300,10 +300,10 @@ If you need just a few database records to store your plugin's config settings, 
 It's important though that it get's obvious what your config records are being used for and from which plugin they come from. That's why there is a strict naming schema for new records in coppermine's config that a plugin should adhere to: prefix the record with the word "plugin" followed by an underscore followed by your plugin's short name followed by an underscore followed by the actual config setting name.<br />
 To make sure that your script doesn't break if such a setting already exists (e.g. if the user re-installs your plugin that hasn't been uninstalled properly before) it's advisable to use <tt class="code">INSERT IGNORE</tt> instead of using an ordinary <tt class="code">INSERT</tt>.
 <div class="cpg_example">
-	If your plugin's short name is "coffee_maker" and you need to store a setting for the height of the coffee mug with the default value of 20, the corresponding setting record could be named <tt class="code">plugin_coffee_maker_mug_height</tt><br />
-	The query in the install section of your plugin could be something like
-	<pre clas="cpg_code">cpg_db_query("INSERT IGNORE INTO {$CONFIG['TABLE_CONFIG']} ( `name` , `value` ) VALUES ('plugin_coffee_maker_mug_height', '20')");</pre>and the corresponding line inside the uninstall section would be<pre clas="cpg_code">cpg_db_query("DELETE FROM {$CONFIG['TABLE_CONFIG']} WHERE name = 'plugin_coffee_maker_mug_height'");</pre>
-	The resulting element inside the <tt class="code">$CONFIG</tt> array would be <tt class="code">$CONFIG['plugin_coffee_maker_mug_height']</tt>
+    If your plugin's short name is "coffee_maker" and you need to store a setting for the height of the coffee mug with the default value of 20, the corresponding setting record could be named <tt class="code">plugin_coffee_maker_mug_height</tt><br />
+    The query in the install section of your plugin could be something like
+    <pre clas="cpg_code">cpg_db_query("INSERT IGNORE INTO {$CONFIG['TABLE_CONFIG']} ( `name` , `value` ) VALUES ('plugin_coffee_maker_mug_height', '20')");</pre>and the corresponding line inside the uninstall section would be<pre clas="cpg_code">cpg_db_query("DELETE FROM {$CONFIG['TABLE_CONFIG']} WHERE name = 'plugin_coffee_maker_mug_height'");</pre>
+    The resulting element inside the <tt class="code">$CONFIG</tt> array would be <tt class="code">$CONFIG['plugin_coffee_maker_mug_height']</tt>
 </div>
 
 
@@ -331,10 +331,10 @@ It is comparatively easy to come up with plugins that fall into the first catego
 <br clear="all" />
 
 <div id="doc_footer">
-	<div class="doc_info_wrapper">
-		<span id="doc_last_changed">$LastChangedDate$</span>
-		<span id="doc_revision">$Revision$</span>
-	</div>
+    <div class="doc_info_wrapper">
+        <span id="doc_last_changed">$LastChangedDate$</span>
+        <span id="doc_revision">$Revision$</span>
+    </div>
 </div>
 </body>
 </html>
