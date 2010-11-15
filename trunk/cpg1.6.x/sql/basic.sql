@@ -14,6 +14,8 @@
 ##  $Revision$
 ##  ********************************************
 
+START TRANSACTION;
+
 #
 # Dumping data for table `CPG_config`
 #
@@ -378,3 +380,7 @@ INSERT INTO CPG_bridge VALUES ('recovery_logon_timestamp', '');
 INSERT INTO CPG_languages (lang_id, english_name, native_name, flag, abbr, available, enabled, complete) VALUES ('english', 'English (US)', 'English (US)', 'us','en', 'YES', 'YES', 'YES');
 INSERT INTO CPG_languages (lang_id, english_name, native_name, flag, abbr, available, enabled, complete) VALUES ('french', 'French','Fran&ccedil;ais','fr','fr', 'YES', 'YES', 'YES');
 INSERT INTO CPG_languages (lang_id, english_name, native_name, flag, abbr, available, enabled, complete) VALUES ('german', 'German (informal)', 'Deutsch (Du)', 'de','de', 'YES', 'YES', 'YES');
+
+
+# Add new statements above this line
+COMMIT;
