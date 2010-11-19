@@ -300,7 +300,7 @@ if ($CONFIG['allow_private_albums'] == 0 || !in_array($album, $FORBIDDEN_SET_DAT
     }
 }
 
-CPGPluginAPI::filter('post_breadcrumb', null);
+CPGPluginAPI::action('post_breadcrumb', null);
 
 if (!$valid) {
     form_albpw();

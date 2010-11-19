@@ -99,7 +99,7 @@ function delete_picture($pid, $tablecellstyle = 'tableb')
     }
     
     // Plugin filter to be called before deleting a file
-    CPGPluginAPI::filter('before_delete_file', $pic);
+    CPGPluginAPI::action('before_delete_file', $pic);
     
     echo '<tr>';
     echo "<td class=\"".$tablecellstyle."\">" . htmlspecialchars($file) . "</td>";
@@ -172,7 +172,7 @@ function delete_picture($pid, $tablecellstyle = 'tableb')
     echo '</tr>' . $LINEBREAK;
     
     // Plugin filter to be called after a file is deleted
-    CPGPluginAPI::filter('after_delete_file', $pic);
+    CPGPluginAPI::action('after_delete_file', $pic);
     
     return $aid;
 }

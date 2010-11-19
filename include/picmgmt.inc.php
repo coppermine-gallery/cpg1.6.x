@@ -169,7 +169,7 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
     
     // Put the pid in current_pic_data and call the plugin filter for file data success
     $CURRENT_PIC_DATA['pid'] = mysql_insert_id($CONFIG['LINK_ID']);
-    CPGPluginAPI::filter('add_file_data_success',$CURRENT_PIC_DATA);
+    CPGPluginAPI::action('add_file_data_success', $CURRENT_PIC_DATA);
     
     //return $result;
     return true;
@@ -329,9 +329,10 @@ function resize_image($src_file, $dest_file, $new_size, $method, $thumb_use, $wa
              * By Aditya Mooley <aditya@sanisoft.com>
              */
             if ($sharpen==1 && $CONFIG['enable_unsharp']==1) {
-            $unsharp_mask = " -unsharp ".$CONFIG['unsharp_radius']."x".sqrt($CONFIG['unsharp_radius'])."+".($CONFIG['unsharp_amount']/100)."+".($CONFIG['unsharp_threshold']/100)." ";
-             }
-            else $unsharp_mask = "";
+                $unsharp_mask = " -unsharp ".$CONFIG['unsharp_radius']."x".sqrt($CONFIG['unsharp_radius'])."+".($CONFIG['unsharp_amount']/100)."+".($CONFIG['unsharp_threshold']/100)." ";
+            } else {
+                $unsharp_mask = "";
+            }
 
             if ($superCage->env->getMatched('OS', '/win/i')) {
                 $cmd = "\"".str_replace("\\","/", $CONFIG['impath'])."convert\" -quality {$CONFIG['jpeg_qual']} {$CONFIG['im_options']} ".$resize_commands." ".$unsharp_mask." ".str_replace("\\","/" ,$src_file )." ".str_replace("\\","/" ,$im_dest_file );

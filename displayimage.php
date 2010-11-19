@@ -500,7 +500,7 @@ if ($superCage->get->keyExists('fullsize')) {
         theme_display_breadcrumb($breadcrumb, $cat_data);
     }
 
-    CPGPluginAPI::filter('post_breadcrumb', null);
+    CPGPluginAPI::action('post_breadcrumb', null);
     
     theme_display_image($nav_menu, $picture, $votes, $pic_info, $comments, $film_strip);
 

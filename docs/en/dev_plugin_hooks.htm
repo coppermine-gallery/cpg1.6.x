@@ -112,16 +112,16 @@
   <tr>
     <td valign="top">delete.php</td>
     <td valign="top"><a name="plugin_hooks_filename_before_delete_file"></a><strong>before_delete_file</strong><a href="#plugin_hooks_filename_before_delete_file" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
-    <td valign="top">Filter</td>
-    <td valign="top">Plugin filter to be called before deleting a file</td>
-    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::filter('before_delete_file', $pic);</textarea></td>
+    <td valign="top">Action</td>
+    <td valign="top">Plugin action to be called before deleting a file</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('before_delete_file', $pic);</textarea></td>
   </tr>
   <tr>
     <td valign="top">delete.php</td>
     <td valign="top"><a name="plugin_hooks_filename_after_delete_file"></a><strong>after_delete_file</strong><a href="#plugin_hooks_filename_after_delete_file" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
-    <td valign="top">Filter</td>
-    <td valign="top">Plugin filter to be called after a file is deleted</td>
-    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::filter('after_delete_file', $pic);</textarea></td>
+    <td valign="top">Action</td>
+    <td valign="top">Plugin action to be called after a file is deleted</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('after_delete_file', $pic);</textarea></td>
   </tr>
   <tr>
     <td valign="top">displayimage.php</td>
@@ -133,23 +133,23 @@
   <tr>
     <td valign="top">displayimage.php</td>
     <td valign="top"><a name="plugin_hooks_filename_post_breadcrumb"></a><strong>post_breadcrumb</strong><a href="#plugin_hooks_filename_post_breadcrumb" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
-    <td valign="top">Filter</td>
+    <td valign="top">Action</td>
     <td valign="top">only on thumbnails.php and displayimage.php</td>
-    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::filter('post_breadcrumb',null);</textarea></td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('post_breadcrumb',null);</textarea></td>
   </tr>
   <tr>
     <td valign="top">editpics.php</td>
     <td valign="top"><a name="plugin_hooks_editpics_before_delete_file"></a><strong>before_delete_file</strong><a href="#plugin_hooks_editpics_before_delete_file" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
-    <td valign="top">Filter</td>
-    <td valign="top">Plugin filter to be called before deleting a file</td>
-    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::filter('before_delete_file', $pic);</textarea></td>
+    <td valign="top">Action</td>
+    <td valign="top">Plugin action to be called before deleting a file</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('before_delete_file', $pic);</textarea></td>
   </tr>
   <tr>
     <td valign="top">editpics.php</td>
     <td valign="top"><a name="plugin_hooks_editpics_after_delete_file"></a><strong>after_delete_file</strong><a href="#plugin_hooks_editpics_after_delete_file" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
-    <td valign="top">Filter</td>
-    <td valign="top">Plugin filter to be called after a file is deleted</td>
-    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::filter('after_delete_file', $pic);</textarea></td>
+    <td valign="top">Action</td>
+    <td valign="top">Plugin action to be called after a file is deleted</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('after_delete_file', $pic);</textarea></td>
   </tr>
   <tr>
     <td valign="top">editpics.php</td>
@@ -244,16 +244,16 @@
    <tr>
     <td valign="top">register.php</td>
     <td valign="top"><a name="plugin_hooks_register_form_submit"></a><strong>register_form_submit</strong><a href="#plugin_hooks_register_form_submit" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
-    <td valign="top">Filter</td>
+    <td valign="top">Action</td>
     <td valign="top">Perform an action corresponding to the submit registration form data</td>
-    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::filter('register_form_submit', $user_array);</textarea></td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('register_form_submit', $user_array);</textarea></td>
   </tr>
   <tr>
     <td valign="top">register.php</td>
     <td valign="top"><a name="plugin_hooks_register_user_activation"></a><strong>register_user_activation</strong><a href="#plugin_hooks_register_user_activation" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
-    <td valign="top">Filter</td>
+    <td valign="top">Action</td>
     <td valign="top">Perform an action when the user account is activated</td>
-    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::filter('register_user_activation', $act_key);</textarea></td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('register_user_activation', $act_key);</textarea></td>
   </tr>
   <tr>
     <td valign="top">reviewcom.php</td>
@@ -279,9 +279,9 @@
   <tr>
     <td valign="top">thumbnails.php</td>
     <td valign="top"><a name="plugin_hooks_thumbnails_post_breadcrumb"></a><strong>post_breadcrumb</strong><a href="#plugin_hooks_thumbnails_post_breadcrumb" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
-    <td valign="top">Filter</td>
+    <td valign="top">Action</td>
     <td valign="top">only on thumbnails.php and displayimage.php</td>
-    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::filter('post_breadcrumb',null);</textarea></td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('post_breadcrumb',null);</textarea></td>
   </tr>
   <tr>
     <td valign="top">upload.php</td>
@@ -463,16 +463,14 @@
     <td valign="top"><a name="plugin_hooks_thumb_html_title"></a><strong>thumb_html_title</strong><a href="#plugin_hooks_thumb_html_title" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Filter</td>
     <td valign="top">allows to modify the thumb html title using data from $row</td>
-    <td valign="top"><textarea class="samplecode" style="width:100%">$pic_title = CPGPluginAPI::filter('thumb_html_title', array($pic_title, $row));
-$pic_title = (is_array($pic_title)) ? $pic_title[0] : $pic_title;</textarea></td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">list($pic_title) = CPGPluginAPI::filter('thumb_html_title', array($pic_title, $row));</textarea></td>
   </tr>
   <tr>
     <td valign="top">include/functions.inc.php</td>
     <td valign="top"><a name="plugin_hooks_thumb_strip_html_title"></a><strong>thumb_strip_html_title</strong><a href="#plugin_hooks_thumb_strip_html_title" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Filter</td>
     <td valign="top">allows to modify the thumb html title using data from $row for filmstrip thumbs</td>
-    <td valign="top"><textarea class="samplecode" style="width:100%">$pic_title = CPGPluginAPI::filter('thumb_strip_html_title', array($pic_title, $row));
-$pic_title = (is_array($pic_title)) ? $pic_title[0] : $pic_title;</textarea></td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">list($pic_title) = CPGPluginAPI::filter('thumb_strip_html_title', array($pic_title, $row));</textarea></td>
   </tr>
   <tr>
     <td valign="top">include/functions.inc.php</td>
@@ -533,9 +531,9 @@ $pic_title = (is_array($pic_title)) ? $pic_title[0] : $pic_title;</textarea></td
   <tr>
     <td valign="top">include/picmgmt.inc.php</td>
     <td valign="top"><a name="plugin_hooks_filename_add_file_data_success"></a><strong>add_file_data_success</strong><a href="#plugin_hooks_filename_add_file_data_success" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
-    <td valign="top">Filter</td>
+    <td valign="top">Action</td>
     <td valign="top">called right after a new file's data is written to the database. $CURRENT_PIC_DATA holds the pid of new file along with other data.</td>
-    <td valign="top"><textarea class="samplecode" style="width:100%">$CURRENT_PIC_DATA = CPGPluginAPI::filter('add_file_data_success',$CURRENT_PIC_DATA);</textarea></td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$CURRENT_PIC_DATA = CPGPluginAPI::action('add_file_data_success', $CURRENT_PIC_DATA);</textarea></td>
   </tr>
   <tr>
     <td valign="top">include/picmgmt.inc.php</td>
@@ -1022,8 +1020,8 @@ $rowset = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumb_caption_ra
 $rowset = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumb_caption_search">thumb_caption_search</a>',$rowset);<br />
 $rowset = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumb_caption_lastalb">thumb_caption_lastalb</a>',$rowset);<br />
 $rowset = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumb_caption_favpics">thumb_caption_favpics</a>',$rowset);<br />
-$pic_title = CPGPluginAPI::filter('<a href="#plugin_hooks_thumb_html_title">thumb_html_title</a>', $row);<br />
-$pic_title = CPGPluginAPI::filter('<a href="#plugin_hooks_thumb_strip_html_title">thumb_strip_html_title</a>', $row);<br />
+list($pic_title) = CPGPluginAPI::filter('<a href="#plugin_hooks_thumb_html_title">thumb_html_title</a>', array($pic_title, $row));<br />
+list($pic_title) = CPGPluginAPI::filter('<a href="#plugin_hooks_thumb_strip_html_title">thumb_strip_html_title</a>', array($pic_title, $row));<br />
 $pic_row = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumb_data">thumb_data</a>',$pic_row);<br />
 $params = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumbnail_params">theme_display_thumbnails_params</a>', $params);<br />
 $footer = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_theme_thumbnails_footer">theme_thumbnails_footer</a>', $footer);<br />
@@ -1039,9 +1037,9 @@ $pic_html = CPGPluginAPI::filter('html_picture_image',$pic_html);<br />
 $pic_html = CPGPluginAPI::filter('html_picture_document',$pic_html);<br />
 $pic_html = CPGPluginAPI::filter('html_picture_other_media',$pic_html);</div>
 <p>If you want to do something (like converting the video to flv, taking a backup of file to remote server etc..) after a file is uploaded then this hook can be used.</p>
-<div class="cpg_code code">$CURRENT_PIC_DATA = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_add_file_data_success">add_file_data_success</a>',$CURRENT_PIC_DATA);</div>
+<div class="cpg_code code">$CURRENT_PIC_DATA = CPGPluginAPI::action('<a href="#plugin_hooks_filename_add_file_data_success">add_file_data_success</a>', $CURRENT_PIC_DATA);</div>
 <p>The breadcrumb plugin:</p>
-<div class="cpg_code code">CPGPluginAPI::filter('<a href="#plugin_hooks_filename_post_breadcrumb">post_breadcrumb</a>',null);</div>
+<div class="cpg_code code">CPGPluginAPI::action('<a href="#plugin_hooks_filename_post_breadcrumb">post_breadcrumb</a>',null);</div>
 <p>This plugin is very powerful because it gives access to the entire body of HTML that will be then directly returned to the user.  This filter can be used to remove parts of code or modify links for example.</p>
 <div class="cpg_code code">return CPGPluginAPI::filter('<a href="#plugin_hooks_filename_page_html">page_html</a>',$html);</div>
 <p>These two filters relate to headers.</p>
@@ -1050,9 +1048,9 @@ $template_header .= CPGPluginAPI::filter('<a href="#plugin_hooks_filename_galler
 <p>These two filters relate to footers.</p>
 <div class="cpg_code code">echo CPGPluginAPI::filter('<a href="#plugin_hooks_filename_usermgr_footer">usermgr_footer</a>','');<br />
 $template_footer = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_gallery_footer">gallery_footer</a>','').substr($template, $gallery_pos);</div>
-<p>These two filters are meant for cleanup purposes. If there is any additional data related to a file and you want that data to be removed when a file is deleted then use these hooks.</p>
-<div class="cpg_code code">CPGPluginAPI::filter('<a href="#plugin_hooks_filename_before_delete_file">before_delete_file</a>', $pic);<br />
-CPGPluginAPI::filter('<a href="#plugin_hooks_filename_after_delete_file">after_delete_file</a>', $pic);</div>
+<p>These two action hooks are meant for cleanup purposes. If there is any additional data related to a file and you want that data to be removed when a file is deleted then use these hooks.</p>
+<div class="cpg_code code">CPGPluginAPI::action('<a href="#plugin_hooks_filename_before_delete_file">before_delete_file</a>', $pic);<br />
+CPGPluginAPI::action('<a href="#plugin_hooks_filename_after_delete_file">after_delete_file</a>', $pic);</div>
 <p>This filter is a special one to add or modify meta albums</p>
 <div class="cpg_code code">$meta_album_params = CPGPluginAPI::filter('<a href="#plugin_hooks_meta_album">meta_album</a>', $meta_album_passto);</div>
 It works like this:
