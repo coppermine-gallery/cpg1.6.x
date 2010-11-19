@@ -597,7 +597,7 @@ function check_user_info(&$error)
     $user_array['user_name'] = $user_name;
     $user_array['user_email'] = $email;
     $user_array['user_active'] = $active;
-    CPGPluginAPI::filter('register_form_submit', $user_array);
+    CPGPluginAPI::action('register_form_submit', $user_array);
 
     if ($CONFIG['log_mode']) {
         log_write('New user "'.$user_name.'" registered', CPG_ACCESS_LOG);
@@ -740,7 +740,7 @@ if ($superCage->get->keyExists('activate')) {
         }
     }
     cpg_db_query($sql);
-    CPGPluginAPI::filter('register_user_activation', $act_key);
+    CPGPluginAPI::action('register_user_activation', $act_key);
 
     //after admin approves, user receives email notification
     if ($user_status == 'active_admin') {

@@ -2975,8 +2975,7 @@ function display_thumbnails($album, $cat, $page, $thumbcols, $thumbrows, $displa
                 $lang_display_thumbnails['dimensions'] . $row['pwidth'] . "x" . $row['pheight'] . $LINEBREAK .
                 $lang_display_thumbnails['date_added'] . localised_date($row['ctime'], $lang_date['album']);
 
-                $pic_title = CPGPluginAPI::filter('thumb_html_title', array($pic_title, $row));
-                $pic_title = (is_array($pic_title)) ? $pic_title[0] : $pic_title;
+            list($pic_title) = CPGPluginAPI::filter('thumb_html_title', array($pic_title, $row));
 
             $pic_url = get_pic_url($row, 'thumb');
 
@@ -3248,9 +3247,7 @@ function display_film_strip($album, $cat, $pos,$ajax_call)
                 $lang_display_thumbnails['dimensions'] . $row['pwidth'] . "x" . $row['pheight'] . $LINEBREAK .
                 $lang_display_thumbnails['date_added'] . localised_date($row['ctime'], $lang_date['album']);
                 
-            $pic_title = CPGPluginAPI::filter('thumb_strip_html_title', array($pic_title, $row));
-            $pic_title = (is_array($pic_title)) ? $pic_title[0] : $pic_title;
-
+            list($pic_title) = CPGPluginAPI::filter('thumb_strip_html_title', array($pic_title, $row));
 
             $pic_url = get_pic_url($row, 'thumb');
 
