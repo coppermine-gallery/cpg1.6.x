@@ -263,10 +263,10 @@ EOT;
                         &nbsp;&nbsp;&nbsp;
                         <button type="button" id="add_new_album" name="add_new_album" class="button" value="{$lang_albmgr_php['new_album']}">{$icon_array['new']}{$lang_albmgr_php['new_album']}</button>
                         <img id="loading" class="icon" src="{$prefix}images/loader.gif" style="margin-left: 10px; display: none;" alt="" />
-                        <input type="text" id="add-name" name="add-name" size="27" maxlength="80" class="textinput" value="" onkeypress="return Sort.disableEnterKey(event)" style="display: none;" />
+                        <input type="text" id="add-name" name="add-name" size="27" maxlength="255" class="textinput" value="" onkeypress="return Sort.disableEnterKey(event)" style="display: none;" />
                         <button type="submit" id="addEvent" class="button" name="addEvent" value="{$lang_common['ok']}" style="display: none;">{$icon_array['ok']}{$lang_common['ok']}</button>
                         <button type="button" id="cancelEvent" name="cancelEvent" class="button add_cancel close" value="{$lang_albmgr_php['cancel']}" style="display: none;">{$icon_array['cancel']}{$lang_albmgr_php['cancel']}</button>
-                        <input type="text" id="edit-name" name="edit-name" size="27" maxlength="80" class="textinput" value="" onkeypress="return Sort.disableEnterKey(event)" style="display: none;" />
+                        <input type="text" id="edit-name" name="edit-name" size="27" maxlength="255" class="textinput" value="" onkeypress="return Sort.disableEnterKey(event)" style="display: none;" />
                         <button type="submit" id="updateEvent" class="button" name="updateEvent" value="{$lang_common['ok']}" style="display: none;">{$icon_array['ok']}{$lang_common['ok']}</button>
                         <button type="button" id="updateCancel" name="updateCancel" class="button album_cancel close" value="{$lang_albmgr_php['cancel']}" style="display: none;">{$icon_array['cancel']}{$lang_albmgr_php['cancel']}</button>
                     </td>

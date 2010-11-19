@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2010-11-19 [O] Adjusted/added maxlength parameter for album title/keyword according to database types (thread ID 67671) {eenemeenemuu}
 2010-11-19 [O] Consistent use of plugin hook types 'action' and 'filter' (thread ID 67630) {eenemeenemuu}
 2010-11-14 [B] Fixed comment approval when editing comments (thread ID 68066) {Nibbler}
 2010-11-13 [O] Changed favourites zip download to build on disk instead of in memory {Nibbler}
