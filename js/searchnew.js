@@ -14,6 +14,9 @@
   $Revision$
 **********************************************/
 
+var error_occured = false;
+var already_submitted = false;
+
 // Queue manager object - manages the queue
 var qm = {
 
@@ -28,9 +31,6 @@ var qm = {
     
     // Selected album
     aid: 0,
-
-    // Tracks if any files failed    
-    failed: false,
     
     // Looks for a chance to start new jobs 
     step: function () {
@@ -70,7 +70,10 @@ var qm = {
     },
     
     queuedone: function () {
-        if (!this.failed) {
+        if (error_occured) {
+            $('#submit_button').html('<img src="images/message/error.png" border="0" alt="" width="16" height="16" class="icon" />');
+            $('#submit_button_bottom').html('<img src="images/icons/ok.png" border="0" alt="" width="16" height="16" class="icon" />' + js_vars.lang_continue).removeAttr('disabled').click(function(){redirect('editpics.php?album=' + qm.aid);});
+        } else {
             redirect('editpics.php?album=' + this.aid);
         }
     }
@@ -104,27 +107,33 @@ function job_start() {
 // Job is completed
 function job_done(response) {
 
-    var src = '';
+    var src;
+    var title = '';
     
-    switch (response) {
-    
-    case 'OK':
-        src = 'images/batch/ok.png';
-        break;
-
-    case 'DUPE':
-        src = 'images/batch/duplicate.png';
-        break;
-    
-    default:
-        qm.failed = true;  
-    }
-
-    if (src) {
-        $(this.obj).append($('<img />').attr('src', src));
+    if (response.match(/(Fatal error).*(Allowed memory size of)/)) {
+        src = 'images/message/stop.png';
+        title = strip_tags(response);
+        error_occured = true;
     } else {
-        $(this.obj).text(response);
+        switch (response) {
+    
+        case 'OK':
+            src = 'images/batch/ok.png';
+            break;
+
+        case 'DUPE':
+            src = 'images/batch/duplicate.png';
+            break;
+    
+        default:
+            src = 'images/batch/unknown.png';
+            title = strip_tags(response);
+            error_occured = true;
+            break;
+        }
     }
+
+    $(this.obj).append($('<img />').attr('src', src).attr('title', title));
     
     // Notify the queue manager
     qm.notifydone();
@@ -133,7 +142,7 @@ function job_done(response) {
 // Job has failed (http request failed)
 function job_failed(request) {
     
-    qm.failed = true;
+    error_occured = true;
     
     job_done(request.statusText);
 }
@@ -187,6 +196,12 @@ function process() {
     
     // Start the queue manager
     qm.step();
+
+    // Disable buttons and show loader image
+    if (!already_submitted) {
+        $('#submit_button, #submit_button_bottom').html('<img src="images/loader.gif" border="0" alt="" width="16" height="16" class="icon" />').attr('disabled', 'disabled');
+    }
+    already_submitted = true;
 
     return false;
 }
