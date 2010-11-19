@@ -127,7 +127,21 @@ function form_input($text, $name)
     $disabled = '';
     
     if ($name == 'keyword' && !GALLERY_ADMIN_MODE && $CONFIG['allow_user_album_keyword'] != 1) {
-        $disabled = 'disabled="disabled" style="background-color:InactiveCaptionText;color:GrayText"';
+        $disabled = ' disabled="disabled" style="background-color:InactiveCaptionText;color:GrayText"';
+    }
+    
+    switch ($name) {
+        case 'title': 
+            $maxlength = ' maxlength="255"';
+            break;
+        
+        case 'keyword':
+            $maxlength = ' maxlength="50"';
+            break;
+
+        default:
+            $maxlength = '';
+            break;
     }
     
     echo <<< EOT
@@ -136,7 +150,7 @@ function form_input($text, $name)
             $text
         </td>
         <td width="60%" valign="top">
-            <input type="text" style="width: 98%" name="$name" value="$value" class="textinput" $disabled />
+            <input type="text" style="width: 98%" name="$name" value="$value" class="textinput"{$maxlength}{$disabled} />
         </td>
     </tr>   
 
