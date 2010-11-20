@@ -3245,20 +3245,6 @@ function theme_html_picture()
         array_push($USER['liv'], $pid);
     }
 
-    // The weird comparision is because only picture_width is stored
-    if ($CONFIG['thumb_use']=='ht' && $CURRENT_PIC_DATA['pheight'] > $CONFIG['picture_width'] ) {
-        $condition = true;
-    } elseif ($CONFIG['thumb_use']=='wd' && $CURRENT_PIC_DATA['pwidth'] > $CONFIG['picture_width']) {
-        $condition = true;
-    } elseif ($CONFIG['thumb_use']=='any' && max($CURRENT_PIC_DATA['pwidth'], $CURRENT_PIC_DATA['pheight']) > $CONFIG['picture_width']) {
-        $condition = true;
-        //thumb cropping
-    } elseif ($CONFIG['thumb_use']=='ex' && max($CURRENT_PIC_DATA['pwidth'], $CURRENT_PIC_DATA['pheight']) > $CONFIG['picture_width']) {
-        $condition = true;
-    } else {
-        $condition = false;
-    }
-
     if ($CURRENT_PIC_DATA['title'] != '') {
         $pic_title .= $CURRENT_PIC_DATA['title'] . $LINEBREAK;
     }
@@ -3284,7 +3270,19 @@ function theme_html_picture()
 
     $image_size = array();
 
-    if ($CONFIG['make_intermediate'] && $condition ) {
+    // The weird comparision is because only picture_width is stored
+    $resize_method = $CONFIG['picture_use'] == "thumb" ? ($CONFIG['thumb_use'] == "ex" ? "any" : $CONFIG['thumb_use']) : $CONFIG['picture_use'];
+    if ($resize_method == 'ht' && $CURRENT_PIC_DATA['pheight'] > $CONFIG['picture_width']) {
+        $use_intermediate = true;
+    } elseif ($resize_method == 'wd' && $CURRENT_PIC_DATA['pwidth'] > $CONFIG['picture_width']) {
+        $use_intermediate = true;
+    } elseif ($resize_method == 'any' && max($CURRENT_PIC_DATA['pwidth'], $CURRENT_PIC_DATA['pheight']) > $CONFIG['picture_width']) {
+        $use_intermediate = true;
+    } else {
+        $use_intermediate = false;
+    }
+
+    if ($CONFIG['make_intermediate'] && $use_intermediate) {
         $picture_url = get_pic_url($CURRENT_PIC_DATA, 'normal');
     } else {
         $picture_url = get_pic_url($CURRENT_PIC_DATA, 'fullsize');
