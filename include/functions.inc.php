@@ -3366,22 +3366,21 @@ function& display_slideshow($pos, $ajax_show = 0)
     
     foreach ($pic_data as $picture) {
 
-        if ($CONFIG['thumb_use'] == 'ht' && $picture['pheight'] > $CONFIG['picture_width']) { // The wierd comparision is because only picture_width is stored
-            $condition = true;
-        } elseif ($CONFIG['thumb_use'] == 'wd' && $picture['pwidth'] > $CONFIG['picture_width']) {
-            $condition = true;
-        } elseif ($CONFIG['thumb_use'] == 'any' && max($picture['pwidth'], $picture['pheight']) > $CONFIG['picture_width']) {
-            $condition = true;
-            //thumb cropping
-        } elseif ($CONFIG['thumb_use'] == 'ex' && max($picture['pwidth'], $picture['pheight']) > $CONFIG['picture_width']) {
-            $condition = true;
-        } else {
-            $condition = false;
-        }
-
         if (is_image($picture['filename'])) {
 
-            if ($CONFIG['make_intermediate'] && $condition) {
+            // The weird comparision is because only picture_width is stored
+            $resize_method = $CONFIG['picture_use'] == "thumb" ? ($CONFIG['thumb_use'] == "ex" ? "any" : $CONFIG['thumb_use']) : $CONFIG['picture_use'];
+            if ($resize_method == 'ht' && $picture['pheight'] > $CONFIG['picture_width']) {
+                $use_intermediate = true;
+            } elseif ($resize_method == 'wd' && $picture['pwidth'] > $CONFIG['picture_width']) {
+                $use_intermediate = true;
+            } elseif ($resize_method == 'any' && max($picture['pwidth'], $picture['pheight']) > $CONFIG['picture_width']) {
+                $use_intermediate = true;
+            } else {
+                $use_intermediate = false;
+            }
+
+            if ($CONFIG['make_intermediate'] && $use_intermediate) {
                 $picture_url = get_pic_url($picture, 'normal');
             } else {
                 $picture_url = get_pic_url($picture, 'fullsize');
