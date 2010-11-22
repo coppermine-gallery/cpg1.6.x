@@ -41,11 +41,24 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
 
         $imagesize = cpg_getimagesize($image);
 
+        if ($CONFIG['read_iptc_data']) {
+            // read IPTC data
+            $iptc = get_IPTC($image);
+            if (is_array($iptc) && !$title && !$caption && !$keywords) {  //if any of those 3 are filled out we don't want to override them, they may be blank on purpose.
+                $title = (isset($iptc['Headline'])) ? $iptc['Headline'] : $title;
+                $caption = (isset($iptc['Caption'])) ? $iptc['Caption'] : $caption;
+                $keywords = (isset($iptc['Keywords'])) ? implode($CONFIG['keyword_separator'], $iptc['Keywords']) : $keywords;
+            }
+        }
+
         // resize picture if it's bigger than the max width or height for uploaded pictures 
         if (max($imagesize[0], $imagesize[1]) > $CONFIG['max_upl_width_height']) {
             if ((USER_IS_ADMIN && $CONFIG['auto_resize'] == 1) || (!USER_IS_ADMIN && $CONFIG['auto_resize'] > 0)) {
                 resize_image($image, $image, $CONFIG['max_upl_width_height'], $CONFIG['thumb_method'], 'any', 'false'); // hard-coded 'any' according to configuration string 'Max width or height for uploaded pictures'
                 $imagesize = cpg_getimagesize($image);
+            } elseif (USER_IS_ADMIN) {
+                // skip resizing for admin
+                $picture_original_size = true;
             } else {
                 @unlink($uploaded_pic);
                 $msg = sprintf($lang_db_input_php['err_fsize_too_large'], $CONFIG['max_upl_width_height'], $CONFIG['max_upl_width_height']);
@@ -59,16 +72,6 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
                 return false;
             } else {
                 $work_image = $orig;
-            }
-        }
-
-        if ($CONFIG['read_iptc_data']) {
-            // read IPTC data
-            $iptc = get_IPTC($image);
-            if (is_array($iptc) && !$title && !$caption && !$keywords) {  //if any of those 3 are filled out we don't want to override them, they may be blank on purpose.
-                $title = (isset($iptc['Headline'])) ? $iptc['Headline'] : $title;
-                $caption = (isset($iptc['Caption'])) ? $iptc['Caption'] : $caption;
-                $keywords = (isset($iptc['Keywords'])) ? implode($CONFIG['keyword_separator'], $iptc['Keywords']) : $keywords;
             }
         }
 
@@ -90,7 +93,8 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
 
         // watermark full sized picture
         if ($CONFIG['enable_watermark'] == '1' && ($CONFIG['which_files_to_watermark'] == 'both' || $CONFIG['which_files_to_watermark'] == 'original')) {
-            if (($result = resize_image($work_image, $image, $CONFIG['max_upl_width_height'], $CONFIG['thumb_method'], 'any', 'true')) !== true) {
+            $wm_max_upl_width_height = $picture_original_size ? max($imagesize[0], $imagesize[1]) : $CONFIG['max_upl_width_height']; // use max aspect of original image if it hasn't been resized earlier
+            if (($result = resize_image($work_image, $image, $wm_max_upl_width_height, $CONFIG['thumb_method'], 'any', 'true')) !== true) {
                 return $result;
             }
         }

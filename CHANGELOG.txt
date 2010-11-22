@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2010-11-22 [B] No error message for admin during upload if image dimension exceeds configuration value (thread ID 68240) {eenemeenemuu}
 2010-11-22 [A] Added plugin hook 'replace_forbidden_conditions' (thread ID 67987) {eenemeenemuu}
 2010-11-22 [C] Theme 'curve': remove drop-down menu leftover if empty (thread ID 68243) {eenemeenemuu}
 2010-11-20 [B] Fixed use of intermediate-sized image (thread ID 67894) {eenemeenemuu}
