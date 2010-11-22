@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2010-11-22 [C] Theme 'curve': remove drop-down menu leftover if empty (thread ID 68243) {eenemeenemuu}
 2010-11-20 [B] Fixed use of intermediate-sized image (thread ID 67894) {eenemeenemuu}
 2010-11-19 [O] Adjusted/added maxlength parameter for album title/keyword according to database types (thread ID 67671) {eenemeenemuu}
 2010-11-19 [O] Consistent use of plugin hook types 'action' and 'filter' (thread ID 67630) {eenemeenemuu}
