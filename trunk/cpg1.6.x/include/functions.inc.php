@@ -4722,16 +4722,26 @@ function replace_forbidden($str)
 
     $return = str_replace($forbidden_chars[0], '_', $str);
 
+    $condition = array (
+        'transliteration' => true,
+        'special_chars' => true
+    );
+    $condition = CPGPluginAPI::filter('replace_forbidden_conditions', $condition);
+
     /**
      * Transliteration
      */
-    require_once('include/transliteration.inc.php');
-    $return = transliteration_process($return, '_');
+    if ($condition['transliteration']) {
+        require_once('include/transliteration.inc.php');
+        $return = transliteration_process($return, '_');
+    }
 
     /**
      * Replace special chars
      */
-    $return = str_replace('%', '', rawurlencode($return));
+    if ($condition['special_chars']) {
+        $return = str_replace('%', '', rawurlencode($return));
+    }
 
     /**
      * Fix the obscure, misdocumented "feature" in Apache that causes the server

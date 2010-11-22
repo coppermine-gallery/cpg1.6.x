@@ -488,6 +488,13 @@
   </tr>
   <tr>
     <td valign="top">include/functions.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_replace_forbidden_conditions"></a><strong>replace_forbidden_conditions</strong><a href="#plugin_hooks_replace_forbidden_conditions" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">allows to modify the conditions if special chars in file names are replaced by transliteraion and/or in general</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$condition = CPGPluginAPI::filter('replace_forbidden_conditions', $condition);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/functions.inc.php</td>
     <td valign="top"><a name="plugin_hooks_token_criteria"></a><strong>token_criteria</strong><a href="#plugin_hooks_token_criteria" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Filter</td>
     <td valign="top">allows to modify the token criteria array. You can add new criteria or remove existing criteria if you don't want to use them to create the token</td>
@@ -903,6 +910,7 @@ echo $footer;</textarea></td>
                 <li class="floatleft"><a href="#plugin_hooks_register_form_create">register_form_create</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_register_form_submit">register_form_submit</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_register_user_activation">register_user_activation</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_replace_forbidden_conditions">replace_forbidden_conditions</a></li>
             </ul>
         </td>
     </tr>
@@ -1030,12 +1038,12 @@ $params = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_theme_thumbnails
 <div class="cpg_code code">$CURRENT_PIC_DATA = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_add_file_data">add_file_data</a>',$CURRENT_PIC_DATA);<br />
 $CURRENT_PIC_DATA = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_file_data">file_data</a>',$CURRENT_PIC_DATA);</div>
 <p>These six filters allow you to modify the output html to display media.</p>
-<div class="cpg_code code">$pic_html = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_html_image_reduced_overlay">html_picture_image_reduced_overlay</a>',$pic_html);<br />
-$pic_html = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_html_image_reduced">html_picture_image_reduced</a>',$pic_html);<br />
-$pic_html = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_html_image_overlay">html_picture_image_overlay</a>',$pic_html);<br />
-$pic_html = CPGPluginAPI::filter('html_picture_image',$pic_html);<br />
-$pic_html = CPGPluginAPI::filter('html_picture_document',$pic_html);<br />
-$pic_html = CPGPluginAPI::filter('html_picture_other_media',$pic_html);</div>
+<div class="cpg_code code">$pic_html = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_html_image_reduced_overlay">html_image_reduced_overlay</a>',$pic_html);<br />
+$pic_html = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_html_image_reduced">html_image_reduced</a>',$pic_html);<br />
+$pic_html = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_html_image_overlay">html_image_overlay</a>',$pic_html);<br />
+$pic_html = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_html_image">html_image</a>',$pic_html);<br />
+$pic_html = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_html_document">html_document</a>',$pic_html);<br />
+$pic_html = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_html_other_media">html_other_media</a>',$pic_html);</div>
 <p>If you want to do something (like converting the video to flv, taking a backup of file to remote server etc..) after a file is uploaded then this hook can be used.</p>
 <div class="cpg_code code">$CURRENT_PIC_DATA = CPGPluginAPI::action('<a href="#plugin_hooks_filename_add_file_data_success">add_file_data_success</a>', $CURRENT_PIC_DATA);</div>
 <p>The breadcrumb plugin:</p>
