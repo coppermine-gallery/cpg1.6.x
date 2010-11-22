@@ -407,4 +407,233 @@ EOT;
 ** Section <<<$template_breadcrumb>>> - END
 ******************************************************************************/
 
+
+/******************************************************************************
+** Section <<<theme_main_menu>>> - START
+******************************************************************************/
+function theme_main_menu($which)
+{
+    global $AUTHORIZED, $CONFIG, $album, $actual_cat, $cat, $REFERER, $CPG_PHP_SELF;
+    global $lang_main_menu, $template_sys_menu, $template_sub_menu, $lang_gallery_admin_menu;
+
+    static $sys_menu = '', $sub_menu = '';
+    if ($$which != '') {
+        return $$which;
+    }
+
+    //Check whether user has permission to upload file to the current album if any
+    $upload_allowed = false;
+    if (isset($album) && is_numeric($album)) {
+        if (GALLERY_ADMIN_MODE) {
+            $upload_allowed = true;
+        } else {
+            if (USER_ID) {
+                $query = "SELECT null FROM {$CONFIG['TABLE_ALBUMS']} WHERE category='" . (FIRST_USER_CAT + USER_ID) . "' AND aid = '$album'";
+                $user_albums = cpg_db_query($query);
+                if (mysql_num_rows($user_albums)) {
+                    $upload_allowed = true;
+                } else {
+                    $upload_allowed = false;
+                }
+            }
+
+            if (!$upload_allowed) {
+                $query = "SELECT null FROM {$CONFIG['TABLE_ALBUMS']} WHERE category < " . FIRST_USER_CAT . " AND uploads='YES' AND (visibility = '0' OR visibility IN ".USER_GROUP_SET.") AND aid = '$album'";
+                $public_albums = cpg_db_query($query);
+
+                if (mysql_num_rows($public_albums)) {
+                    $upload_allowed = true;
+                } else {
+                    $upload_allowed = false;
+                }
+            }
+        }
+    }
+
+    $album_l = isset($album) ? "?album=$album" : '';
+    $album_12 = ($upload_allowed) ? "?album=$album" : '';
+    $cat_l = (isset($actual_cat))? "?cat=$actual_cat" : (isset($cat) ? "?cat=$cat" : '?cat=0');
+    $cat_l2 = isset($cat) ? "&amp;cat=$cat" : '';
+    $my_gallery_id = FIRST_USER_CAT + USER_ID;
+
+  if ($which == 'sys_menu' ) {
+    if (USER_ID) { // visitor is logged in
+        template_extract_block($template_sys_menu, 'login');
+        if ($CONFIG['contact_form_registered_enable'] == 0) {
+          template_extract_block($template_sys_menu, 'contact');
+        }
+        if ($CONFIG['display_sidebar_user'] != 2) {
+          template_extract_block($template_sys_menu, 'sidebar');
+        }
+        
+        list($timestamp, $form_token) = getFormToken();
+        
+    } else { // visitor is not logged in
+        if ($CONFIG['contact_form_guest_enable'] == 0) {
+          template_extract_block($template_sys_menu, 'contact');
+        }
+        if ($CONFIG['display_sidebar_guest'] != 2) {
+          template_extract_block($template_sys_menu, 'sidebar');
+        }
+        template_extract_block($template_sys_menu, 'logout');
+        template_extract_block($template_sys_menu, 'my_profile');
+        
+        $timestamp = $form_token = '';
+    }
+
+    if (!USER_IS_ADMIN) {
+        template_extract_block($template_sys_menu, 'enter_admin_mode');
+        template_extract_block($template_sys_menu, 'leave_admin_mode');
+    } else {
+        if (GALLERY_ADMIN_MODE) {
+            template_extract_block($template_sys_menu, 'enter_admin_mode');
+        } else {
+            template_extract_block($template_sys_menu, 'leave_admin_mode');
+        }
+    }
+
+    if (!USER_CAN_CREATE_ALBUMS) {
+        template_extract_block($template_sys_menu, 'my_gallery');
+    }
+
+    if (USER_CAN_CREATE_ALBUMS && USER_ID) { // block 'my_profile' has already been removed for guests
+        template_extract_block($template_sys_menu, 'my_profile');
+    }
+
+    if (!USER_CAN_UPLOAD_PICTURES && !USER_CAN_CREATE_ALBUMS) {
+        template_extract_block($template_sys_menu, 'upload_pic');
+    }
+
+    if (USER_ID || !$CONFIG['allow_user_registration']) {
+        template_extract_block($template_sys_menu, 'register');
+    }
+
+    if (!USER_ID || !$CONFIG['allow_memberlist']) {
+        template_extract_block($template_sys_menu, 'allow_memberlist');
+    }
+
+    // Remove drop-down menu, if empty
+    $template_sys_menu = preg_replace('/<ul>[\s]+<\/ul>/Usi', '', $template_sys_menu);
+
+    $param = array(
+        '{HOME_TGT}' => $CONFIG['home_target'],
+        '{HOME_ICO}' => cpg_fetch_icon('home', 1),
+        '{HOME_TITLE}' => $lang_main_menu['home_title'],
+        '{HOME_LNK}' => $lang_main_menu['home_lnk'],
+        '{CONTACT_TGT}' => "contact.php",
+        '{CONTACT_ICO}' => cpg_fetch_icon('contact', 1),
+        '{CONTACT_TITLE}' => sprintf($lang_main_menu['contact_title'], $CONFIG['gallery_name']),
+        '{CONTACT_LNK}' => $lang_main_menu['contact_lnk'],
+        '{MY_GAL_TGT}' => "index.php?cat=$my_gallery_id",
+        '{MY_GAL_ICO}' => cpg_fetch_icon('my_gallery', 1),
+        '{MY_GAL_TITLE}' => $lang_main_menu['my_gal_title'],
+        '{MY_GAL_LNK}' => $lang_main_menu['my_gal_lnk'],
+        '{MEMBERLIST_TGT}' => "usermgr.php",
+        '{MEMBERLIST_ICO}' => cpg_fetch_icon('memberlist', 1),
+        '{MEMBERLIST_TITLE}' => $lang_main_menu['memberlist_title'],
+        '{MEMBERLIST_LNK}' => $lang_main_menu['memberlist_lnk'],
+        '{MY_PROF_TGT}' => "profile.php?op=edit_profile",
+        '{MY_PROF_ICO}' => cpg_fetch_icon('my_profile', 1),
+        '{MY_PROF_TITLE}' => $lang_main_menu['my_prof_title'],
+        '{MY_PROF_LNK}' => $lang_main_menu['my_prof_lnk'],
+        '{ADM_MODE_TGT}' => "mode.php?admin_mode=1&amp;referer=$REFERER",
+        '{ADM_MODE_ICO}' => cpg_fetch_icon('admin_mode_on', 1),
+        '{ADM_MODE_TITLE}' => $lang_main_menu['adm_mode_title'],
+        '{ADM_MODE_LNK}' => $lang_main_menu['adm_mode_lnk'],
+        '{USR_MODE_TGT}' => "mode.php?admin_mode=0&amp;referer=$REFERER",
+        '{USR_MODE_ICO}' => cpg_fetch_icon('admin_mode_off', 1),
+        '{USR_MODE_TITLE}' => $lang_main_menu['usr_mode_title'],
+        '{USR_MODE_LNK}' => $lang_main_menu['usr_mode_lnk'],
+        '{SIDEBAR_TGT}' => "sidebar.php?action=install",
+        '{SIDEBAR_TITLE}' => $lang_main_menu['sidebar_title'],
+        '{SIDEBAR_LNK}' => $lang_main_menu['sidebar_lnk'],
+        '{SIDEBAR_ICO}' => cpg_fetch_icon('sidebar', 1),
+        '{UPL_PIC_TGT}' => "upload.php$album_12",
+        '{UPL_PIC_TITLE}' => $lang_main_menu['upload_pic_title'],
+        '{UPL_PIC_LNK}' => $lang_main_menu['upload_pic_lnk'],
+        '{UPL_PIC_ICO}' => cpg_fetch_icon('upload', 1),
+        '{REGISTER_TGT}' => "register.php",
+        '{REGISTER_TITLE}' => $lang_main_menu['register_title'],
+        '{REGISTER_LNK}' => $lang_main_menu['register_lnk'],
+        '{REGISTER_ICO}' => cpg_fetch_icon('add_user', 1),
+        '{LOGIN_TGT}' => "login.php",
+        '{LOGIN_TITLE}' => $lang_main_menu['login_title'],
+        '{LOGIN_LNK}' => $lang_main_menu['login_lnk'],
+        '{LOGIN_ICO}' => cpg_fetch_icon('login', 1),
+        '{LOGOUT_TGT}' => "logout.php?form_token=$form_token&amp;timestamp=$timestamp&amp;referer=$REFERER",
+        '{LOGOUT_TITLE}' => $lang_main_menu['logout_title'],
+        '{LOGOUT_LNK}' => $lang_main_menu['logout_lnk'] . " [" . stripslashes(USER_NAME) . "]",
+        '{LOGOUT_ICO}' => cpg_fetch_icon('logout', 1),
+        '{UPL_APP_LNK}' => $lang_gallery_admin_menu['upl_app_lnk'],
+        '{UPL_APP_TGT}' => "editpics.php?mode=upload_approval",
+        '{UPL_APP_TITLE}' => $lang_gallery_admin_menu['upl_app_lnk'],
+        '{UPL_APP_ICO}' => cpg_fetch_icon('file_approval', 1),
+        );
+
+        if ($CPG_PHP_SELF != 'login.php' && strpos($REFERER, 'login.php') === FALSE) {
+            $param['{LOGIN_TGT}'] .= "?referer=$REFERER";
+        }
+
+        if ($CPG_PHP_SELF != 'contact.php' && strpos($REFERER, 'contact.php') === FALSE) {
+            $param['{CONTACT_TGT}'] .= "?referer=$REFERER";
+        }
+
+        $sys_menu = template_eval($template_sys_menu, $param);
+  } else {
+
+    if (!$CONFIG['custom_lnk_url']) {
+        template_extract_block($template_sub_menu, 'custom_link');
+    }
+
+    $param = array(
+        '{ALB_LIST_TGT}' => "index.php$cat_l",
+        '{ALB_LIST_TITLE}' => $lang_main_menu['alb_list_title'],
+        '{ALB_LIST_LNK}' => $lang_main_menu['alb_list_lnk'],
+        '{ALB_LIST_ICO}' => cpg_fetch_icon('alb_mgr', 1),
+        '{CUSTOM_LNK_TGT}' => $CONFIG['custom_lnk_url'],
+        '{CUSTOM_LNK_TITLE}' => $CONFIG['custom_lnk_name'],
+        '{CUSTOM_LNK_LNK}' => $CONFIG['custom_lnk_name'],
+        '{CUSTOM_ICO}' => cpg_fetch_icon('online', 1),
+        '{LASTUP_TGT}' => "thumbnails.php?album=lastup$cat_l2",
+        '{LASTUP_TITLE}' => $lang_main_menu['lastup_title'],
+        '{LASTUP_LNK}' => $lang_main_menu['lastup_lnk'],
+        '{LASTUP_ICO}' => cpg_fetch_icon('last_uploads', 1),
+        '{LASTCOM_TGT}' => "thumbnails.php?album=lastcom$cat_l2",
+        '{LASTCOM_TITLE}' => $lang_main_menu['lastcom_title'],
+        '{LASTCOM_LNK}' => $lang_main_menu['lastcom_lnk'],
+        '{LASTCOM_ICO}' => cpg_fetch_icon('comment', 1),
+        '{TOPN_TGT}' => "thumbnails.php?album=topn$cat_l2",
+        '{TOPN_TITLE}' => $lang_main_menu['topn_title'],
+        '{TOPN_LNK}' => $lang_main_menu['topn_lnk'],
+        '{TOPN_ICO}' => cpg_fetch_icon('most_viewed', 1),
+        '{TOPRATED_TGT}' => "thumbnails.php?album=toprated$cat_l2",
+        '{TOPRATED_TITLE}' => $lang_main_menu['toprated_title'],
+        '{TOPRATED_LNK}' => $lang_main_menu['toprated_lnk'],
+        '{TOPRATED_ICO}' => cpg_fetch_icon('top_rated', 1),
+        '{FAV_TGT}' => "thumbnails.php?album=favpics",
+        '{FAV_TITLE}' => $lang_main_menu['fav_title'],
+        '{FAV_LNK}' => $lang_main_menu['fav_lnk'],
+        '{FAV_ICO}' => cpg_fetch_icon('favorites', 1),
+        '{BROWSEBYDATE_TGT}' => 'calendar.php',
+        '{BROWSEBYDATE_LNK}' => $lang_main_menu['browse_by_date_lnk'],
+        '{BROWSEBYDATE_TITLE}' => $lang_main_menu['browse_by_date_title'],
+        '{BROWSEBYDATE_ICO}' => cpg_fetch_icon('calendar', 1),
+        '{SEARCH_TGT}' => "search.php",
+        '{SEARCH_TITLE}' => $lang_main_menu['search_title'],
+        '{SEARCH_LNK}' => $lang_main_menu['search_lnk'],
+        '{SEARCH_ICO}' => cpg_fetch_icon('search', 1),
+        '{UPL_APP_LNK}' => $lang_gallery_admin_menu['upl_app_lnk'],
+        '{UPL_APP_TGT}' => "editpics.php?mode=upload_approval",
+        '{UPL_APP_TITLE}' => $lang_gallery_admin_menu['upl_app_lnk'],
+        '{UPL_APP_ICO}' => cpg_fetch_icon('file_approval', 1),
+        );
+    $sub_menu = template_eval($template_sub_menu, $param);
+  }
+
+    return $$which;
+}
+/******************************************************************************
+** Section <<<theme_main_menu>>> - END
+******************************************************************************/
+
 ?>
