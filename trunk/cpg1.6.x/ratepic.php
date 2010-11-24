@@ -128,7 +128,7 @@ $sql = "UPDATE {$CONFIG['TABLE_PICTURES']} SET pic_rating = $new_rating, votes =
 $result = cpg_db_query($sql);
 
 // Update the votes table
-$sql = "INSERT INTO {$CONFIG['TABLE_VOTES']} (pic_id, user_md5_id, vote_time) VALUES ($pic, '$user_md5_id', UNIX_TIMESTAMP())";
+$sql = "INSERT INTO {$CONFIG['TABLE_VOTES']} (pic_id, user_md5_id, vote_time) VALUES ($pic, '$user_md5_id', ".time().")";
 $result = cpg_db_query($sql);
 
 //
@@ -145,7 +145,7 @@ if ($CONFIG['vote_details']) {
     $referer = urlencode($superCage->post->getEscaped('HTTP_REFERER'));
 
     // Insert the record in database
-    $query = "INSERT INTO {$CONFIG['TABLE_VOTE_STATS']} (pid, rating, Ip, sdate, referer, browser, os, uid) VALUES ($pic, $rate, '$raw_ip', UNIX_TIMESTAMP(), '$referer', '{$client_details['browser']}', '{$client_details['os']}', $voteUserId)";
+    $query = "INSERT INTO {$CONFIG['TABLE_VOTE_STATS']} (pid, rating, Ip, sdate, referer, browser, os, uid) VALUES ($pic, $rate, '$raw_ip', ".time().", '$referer', '{$client_details['browser']}', '{$client_details['os']}', $voteUserId)";
     cpg_db_query($query);
 }
 

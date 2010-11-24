@@ -93,8 +93,8 @@ if (UPLOAD_APPROVAL_MODE && !GALLERY_ADMIN_MODE && !MODERATOR_MODE) {
 // Remove outdated guest tokens every hour at maximum
 if ($CONFIG['guest_token_cleanup'] < time() - 3600) {
     $guest_token_lifetime = $CONFIG['form_token_lifetime'] * 5;
-    cpg_db_query("UPDATE {$CONFIG['TABLE_PICTURES']} SET guest_token = '' WHERE ctime < UNIX_TIMESTAMP() - {$guest_token_lifetime}");
-    cpg_db_query("UPDATE {$CONFIG['TABLE_CONFIG']} SET value = UNIX_TIMESTAMP() WHERE name = 'guest_token_cleanup'");
+    cpg_db_query("UPDATE {$CONFIG['TABLE_PICTURES']} SET guest_token = '' WHERE ctime < ".time()." - {$guest_token_lifetime}");
+    cpg_db_query("UPDATE {$CONFIG['TABLE_CONFIG']} SET value = ".time()." WHERE name = 'guest_token_cleanup'");
 }
 
 if (EDIT_PICTURES_MODE) {

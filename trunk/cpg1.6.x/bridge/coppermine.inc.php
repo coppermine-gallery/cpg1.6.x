@@ -252,7 +252,7 @@ if (isset($bridge_lookup)) {
                     cpg_db_query($sql, $this->link_id);
                     
                     // Update database entry
-                    $sql = "UPDATE {$CONFIG['TABLE_CONFIG']} SET value = UNIX_TIMESTAMP() WHERE name = 'session_cleanup'";
+                    $sql = "UPDATE {$CONFIG['TABLE_CONFIG']} SET value = ".time()." WHERE name = 'session_cleanup'";
                     cpg_db_query($sql, $this->link_id);
                 }
 
@@ -317,7 +317,7 @@ if (isset($bridge_lookup)) {
                     }
 
                     $session_id = $this->session_id.$this->client_id;
-                    $sql = "UPDATE {$this->sessionstable} SET time = UNIX_TIMESTAMP() WHERE session_id = '" . md5($session_id) . "'";
+                    $sql = "UPDATE {$this->sessionstable} SET time = ".time()." WHERE session_id = '" . md5($session_id) . "'";
                     cpg_db_query($sql);
 
                     if (USER_ID > 0) {
@@ -342,7 +342,7 @@ if (isset($bridge_lookup)) {
                     $this->session_id = $this->generateId();
                     $session_id = $this->session_id.$this->client_id;
 
-                    $sql = "INSERT INTO {$this->sessionstable} (session_id, time) VALUES ('" . md5($session_id) . "', UNIX_TIMESTAMP())";
+                    $sql = "INSERT INTO {$this->sessionstable} (session_id, time) VALUES ('" . md5($session_id) . "', ".time().")";
 
                     // insert the guest session
                     cpg_db_query($sql, $this->link_id);

@@ -103,8 +103,8 @@ if ($search_string && isset($search_params['params'])) {
                 $sql .= count($sections) ? '(' . implode($type, $sections) . ')' : '0';
         }
 
-        $sql .= $superCage->get->getInt('newer_than') ? ' AND ( ctime > UNIX_TIMESTAMP() - '.( $superCage->get->getInt('newer_than') * 60*60*24).')' : '';
-        $sql .= $superCage->get->getInt('older_than') ? ' AND ( ctime < UNIX_TIMESTAMP() - '.( $superCage->get->getInt('older_than') * 60*60*24).')' : '';
+        $sql .= $superCage->get->getInt('newer_than') ? ' AND ( ctime > '.time().' - '.( $superCage->get->getInt('newer_than') * 60*60*24).')' : '';
+        $sql .= $superCage->get->getInt('older_than') ? ' AND ( ctime < '.time().' - '.( $superCage->get->getInt('older_than') * 60*60*24).')' : '';
         $sql .=  " AND approved = 'YES' $FORBIDDEN_SET";
 
         if ($superCage->get->keyExists('album_title')) {
