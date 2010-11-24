@@ -180,7 +180,7 @@ function online_mainpage()
                 $CONFIG['record_online_users'] = $num_online;
 
                 $result = cpg_db_query("UPDATE {$CONFIG['TABLE_CONFIG']} SET value = '$num_online' WHERE name = 'record_online_users'");
-                $result = cpg_db_query("UPDATE {$CONFIG['TABLE_CONFIG']} SET value = UNIX_TIMESTAMP() WHERE name = 'record_online_date'");
+                $result = cpg_db_query("UPDATE {$CONFIG['TABLE_CONFIG']} SET value = ".time()." WHERE name = 'record_online_date'");
         }
 
        starttable("100%", cpg_fetch_icon('online', 2) . $lang_plugin_php['onlinestats_name']);
