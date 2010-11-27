@@ -31,155 +31,153 @@ $thisplugin->add_action('plugin_configure','visiblehookpoints_configure');
 
 if ($superCage->get->keyExists('hookpoints') || $CONFIG['plugin_visiblehookpoints_display'] == 1 || ($CONFIG['plugin_visiblehookpoints_display'] == 2 && GALLERY_ADMIN_MODE)) {
 
-	$thisplugin->add_filter('anycontent','vhp_anycontent'); // ( anycontent page + plugin accessible content )
-	$thisplugin->add_filter('gallery_header','vhp_gallery_header'); // (shows just above the gallery)
-	$thisplugin->add_filter('gallery_footer','vhp_gallery_footer'); // (allows data just above the &quot;powered by coppermine&quot; notice)
-	$thisplugin->add_filter('file_header','vhp_file_header'); // (displays above file on displayimage page)
-	$thisplugin->add_filter('file_footer','vhp_file_footer'); // (displays below file on displayimage page)
-	$thisplugin->add_filter('thumb_header','vhp_thumb_header'); // (displays above thumbs on index, thumbnails, and displayimage pages) ?
-	$thisplugin->add_filter('thumb_footer','vhp_thumb_footer'); // (displays below thumbs on index, thumbnails, and displayimage pages) ?
-	$thisplugin->add_filter('plugin_block','vhp_plugin_block'); // (filters main page blocks) //output one for each block
-	$thisplugin->add_filter('thumb_caption','vhp_thumb_caption'); // (executed before the more specific &quot;thumb_caption_*&quot; plugins.)
-	$thisplugin->add_filter('thumb_caption_regular','vhp_thumb_caption_regular'); //
-	$thisplugin->add_filter('thumb_caption_lastcom','vhp_thumb_caption_lastcom'); //
-	$thisplugin->add_filter('thumb_caption_lastcomby','vhp_thumb_caption_lastcomby'); //
-	$thisplugin->add_filter('thumb_caption_lastup','vhp_thumb_caption_lastup'); //
-	$thisplugin->add_filter('thumb_caption_topn','vhp_thumb_caption_topn'); //
-	$thisplugin->add_filter('thumb_caption_toprated','vhp_thumb_caption_toprated'); //
-	$thisplugin->add_filter('thumb_caption_lasthits','vhp_thumb_caption_lasthits'); //
-	$thisplugin->add_filter('thumb_caption_random','vhp_thumb_caption_random'); //
-	$thisplugin->add_filter('thumb_caption_search','vhp_thumb_caption_search'); //
-	$thisplugin->add_filter('thumb_caption_lastalb','vhp_thumb_caption_lastalb'); //
-	$thisplugin->add_filter('thumb_caption_favpics','vhp_thumb_caption_favpics'); //
-	$thisplugin->add_filter('post_breadcrumb','vhp_post_breadcrumb'); //(only on thumbnails.php and displayimage.php)
-	$thisplugin->add_filter('user_caption_params','vhp_user_caption_params');
-	$thisplugin->add_filter('thumb_data','vhp_thumb_data');
-	$thisplugin->add_filter('file_data','vhp_file_data');
-	$thisplugin->add_filter('usermgr_header','vhp_usermgr_header');
-	$thisplugin->add_filter('usermgr_footer','vhp_usermgr_footer');
-	$thisplugin->add_filter('page_html','vhp_page_html');
-	$thisplugin->add_filter('page_meta','vhp_page_meta');
-	$thisplugin->add_action('page_start','vhp_page_start');
-	$thisplugin->add_action('page_end','vhp_page_end');
-	$thisplugin->add_action('plugin_wakeup','vhp_plugin_wakeup'); // ( ...when initialized )
-	$thisplugin->add_action('plugin_sleep','vhp_plugin_sleep'); // ( ...when shutdown )
+    $action_hooks = array(
+        //'add_file_data_success',
+        //'after_delete_file',
+        //'after_edit_file',
+        //'before_delete_file',
+        //'captcha_contact_validate',
+        //'captcha_comment_validate',
+        'page_end',
+        'page_start',
+        'plugin_sleep',
+        'plugin_wakeup',
+        'post_breadcrumb',
+        //'register_form_submit',
+        //'register_user_activation',
+        //'theme_thumbnails_wrapper_end',
+        //'theme_thumbnails_wrapper_start',
+        //'upload_form',
+        //'upload_html_pre_move',
+        //'upload_process',
+        //'upload_swf_pre_move',
+    );
+
+    $filter_hooks = array(
+        'add_file_data',
+        'admin_menu',
+        'anycontent',
+        'bbcode',
+        'captcha_comment_print',
+        'captcha_contact_print',
+        'captcha_register_print',
+        'captcha_register_validate',
+        'cpg_mail_sender_email',
+        'cpg_mail_to_email',
+        'file_data',
+        'file_info',
+        'fullsize_html',
+        'gallery_footer',
+        'gallery_header',
+        'html_document',
+        'html_image',
+        'html_image_overlay',
+        'html_image_reduced',
+        'html_image_reduced_overlay',
+        'html_other_media',
+        'image_sharpen',
+        'ip_information',
+        'javascript_includes',
+        'main_page_layout',
+        'meta_album',
+        'meta_album_get_pic_pos',
+        'page_html',
+        'page_meta',
+        'picture_url',
+        'plugin_block',
+        'plugin_cleanup',
+        'plugin_configure',
+        'plugin_install',
+        'profile_add_data',
+        'register_form_create',
+        'replace_forbidden_conditions',
+        'search_form',
+        'smilies_display',
+        'smilies_process',
+        'sub_menu',
+        'sys_menu',
+        'template_html',
+        'theme_add_comment',
+        'theme_display_thumbnails_params',
+        'theme_edit_comment',
+        'theme_pageheader_params',
+        'theme_thumbnails_album_types',
+        'theme_thumbnails_footer',
+        'theme_thumbnails_title',
+        'thumb_caption',
+        'thumb_caption_favpics',
+        'thumb_caption_lastalb',
+        'thumb_caption_lastcom',
+        'thumb_caption_lastcomby',
+        'thumb_caption_lasthits',
+        'thumb_caption_lastup',
+        'thumb_caption_lastupby',
+        'thumb_caption_random',
+        'thumb_caption_regular',
+        'thumb_caption_search',
+        'thumb_caption_topn',
+        'thumb_caption_toprated',
+        'thumb_data',
+        'thumb_html_title',
+        'thumb_strip_html_title',
+        'token_criteria',
+        'upload_options',
+        'user_caption_params',
+        'usermgr_footer',
+        'usermgr_header'
+    );
+
+    foreach ($action_hooks as $name) {
+        switch ($name) {
+            case 'plugin_sleep':
+                $thisplugin->add_action($name, 'vhp_'.$name);
+                break;
+
+            default:
+                $thisplugin->add_action($name, 'vhp_return_var');
+                break;
+        }
+    }
+
+    foreach ($filter_hooks as $name) {
+        switch ($name) {
+            case 'page_meta':
+            case 'plugin_block':
+                $thisplugin->add_filter($name, 'vhp_'.$name);
+                break;
+
+            default:
+                $thisplugin->add_filter($name, 'vhp_return_var');
+                break;
+        }
+    }
+
 }
 
-function vhp_plugin_wakeup()
-{
-        return vhp_echo_marker('plugin_wakeup',true);
-}
-
-function vhp_page_end()
-{
-        return vhp_echo_marker('page_end',true);
-}
-
-function vhp_page_start() {
-        return vhp_echo_marker('page_start',true);
+function vhp_return_var($var) {
+    global $hook_name; 
+    return vhp_echo_marker($hook_name, $var);
 }
 
 function vhp_page_meta($var) {
-	global $JS, $LINEBREAK; // Don't forget to make that variable global when using from inside functions
-	$JS['includes'][] = 'plugins/visiblehookpoints/js/script.js';
-    $var = vhp_echo_marker('page_meta',$var);
+    global $JS, $LINEBREAK;
+    $JS['includes'][] = 'plugins/visiblehookpoints/js/script.js';
+    $var = vhp_echo_marker('page_meta', $var);
     $var = '<link rel="stylesheet" href="plugins/visiblehookpoints/css/style.css" type="text/css" />' . $LINEBREAK . $var;
     return $var;
 }
 
-function vhp_file_data($var) {
-        return vhp_echo_marker('file_data',$var);
+function vhp_plugin_block($var) { 
+    return vhp_echo_marker('plugin_block_'.$var[1],$var);
 }
 
-function vhp_usermgr_footer($var) {
-        return vhp_echo_marker('usermgr_footer',$var);
+function vhp_plugin_sleep($var) {
+        vhp_echo_marker('plugin_sleep', $var);
+        echo vhp_stats();
+        return true;
 }
 
-function vhp_anycontent($var) {
-        return vhp_echo_marker('anycontent',$var);
-}
-function vhp_gallery_header($var) {
-        return vhp_echo_marker('gallery_header',$var);
-}
-
-function vhp_gallery_footer($var) {
-        return vhp_echo_marker('gallery_footer',$var);
-}
-function vhp_file_header($var) {
-        return vhp_echo_marker('file_header',$var);
-}
-
-function vhp_file_footer($var) {
-        return vhp_echo_marker('file_footer',$var);
-}
-
-function vhp_thumb_header($var) {
-        return vhp_echo_marker('thumb_header',$var);
-}
-function vhp_thumb_footer($var) {
-        return vhp_echo_marker('thumb_footer',$var);
-}
-function vhp_thumb_caption($var) {
-        return vhp_echo_marker('thumb_caption',$var);
-}
-
-function vhp_thumb_caption_regular($var) {
-        return vhp_echo_marker('thumb_caption_regular',$var);
-}
-function vhp_thumb_caption_lastcom($var) {
-        return vhp_echo_marker('thumb_caption_lastcom',$var);
-}
-
-function vhp_thumb_caption_lastcomby($var) {
-        return vhp_echo_marker('thumb_caption_lastcomby',$var);
-}
-function vhp_thumb_caption_lastup($var) {
-        return vhp_echo_marker('thumb_caption_lastup',$var);
-}
-function vhp_thumb_caption_topn($var) {
-        return vhp_echo_marker('thumb_caption_topn',$var);
-}
-
-function vhp_thumb_caption_toprated($var) {
-        return vhp_echo_marker('thumb_caption_toprated',$var);
-}
-function vhp_thumb_caption_lasthits($var) {
-        return vhp_echo_marker('thumb_caption_lasthits',$var);
-}
-function vhp_thumb_caption_random($var) {
-        return vhp_echo_marker('thumb_caption_random',$var);
-}
-
-function vhp_thumb_caption_search($var) {
-        return vhp_echo_marker('thumb_caption_search',$var);
-}
-function vhp_thumb_caption_lastalb($var) {
-        return vhp_echo_marker('thumb_caption_lastalb',$var);
-}
-function vhp_thumb_caption_favpics($var) {
-        return vhp_echo_marker('thumb_caption_favpics',$var);
-}
-
-function vhp_post_breadcrumb($var) {
-        return vhp_echo_marker('post_breadcrumb',$var);
-}
-function vhp_user_caption_params($var) {
-        return vhp_echo_marker('user_caption_params',$var);
-}
-
-function vhp_thumb_data($var) {
-        return vhp_echo_marker('thumb_data',$var);
-}
-
-function vhp_plugin_block($var) {
-        return vhp_echo_marker('plugin_block_'.$var[1],$var);
-}
-function vhp_page_html($var) {
-    return vhp_echo_marker('page_html',$var);
-}
-
-function vhp_echo_marker($marker,$var)
-{
+function vhp_echo_marker($marker,$var) {
 
     global $VHP,$cpg_time_start;
 
@@ -196,15 +194,7 @@ function vhp_echo_marker($marker,$var)
         return $var;
 }
 
-function vhp_plugin_sleep($var)
-{
-        vhp_echo_marker('plugin_sleep',$var);
-        echo vhp_stats();
-        return true;
-}
-
-function vhp_stat_table($title,$status)
-{
+function vhp_stat_table($title,$status) {
     global $LINEBREAK, $vhp_tableHeaderCounter;
     $vhp_tableHeaderCounter++;
     //$column1=ceil(count($status)/3);
@@ -242,8 +232,7 @@ EOT;
     return $html;
 }
 
-function vhp_stats()
-{
+function vhp_stats() {
     global $VHP;
     $html ='';
     $marks=$times=$counts=array();
@@ -639,12 +628,12 @@ if (!class_exists('dBug')) {
 // Install function
 function visiblehookpoints_install() {
     global $CONFIG;
-	$superCage = Inspekt::makeSuperCage();
-	if ($superCage->post->keyExists('visiblehookpoints_display')) {
+    $superCage = Inspekt::makeSuperCage();
+    if ($superCage->post->keyExists('visiblehookpoints_display')) {
         // Perform database queries
-		if ($superCage->post->getInt('visiblehookpoints_display') == 1) {
+        if ($superCage->post->getInt('visiblehookpoints_display') == 1) {
           $value = 1;
-		} elseif ($superCage->post->getInt('visiblehookpoints_display') == 0) {
+        } elseif ($superCage->post->getInt('visiblehookpoints_display') == 0) {
           $value = 0;
         } elseif ($superCage->post->getInt('visiblehookpoints_display') == 2) {
           $value = 2;
@@ -677,9 +666,9 @@ function visiblehookpoints_uninstall() {
 // Displays the form
 function visiblehookpoints_configure() {
     global $CONFIG;
-	$superCage = Inspekt::makeSuperCage();
-	$req_uri = $superCage->server->getMatched('REQUEST_URI', '/([^\/]+\.php)$/');
-	$req_uri = $req_uri[1];
+    $superCage = Inspekt::makeSuperCage();
+    $req_uri = $superCage->server->getMatched('REQUEST_URI', '/([^\/]+\.php)$/');
+    $req_uri = $req_uri[1];
     if ($CONFIG['plugin_visiblehookpoints_display'] == 1) {
       $invisible = '';
       $visible = 'checked="checked"';
