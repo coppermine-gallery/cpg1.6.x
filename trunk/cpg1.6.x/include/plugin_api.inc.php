@@ -158,6 +158,9 @@ class CPGPluginAPI {
     function& filter( $key, $value, $execute_scope = CPG_EXEC_ALL ) {
         global $CPG_PLUGINS,$CONFIG,$USER_DATA,$thisplugin;
 
+        global $hook_name;
+        $hook_name = $key;
+
         if(is_numeric($execute_scope)) {
 
             $plugin_id = $execute_scope;
@@ -242,6 +245,9 @@ class CPGPluginAPI {
 
     function& action( $key, $value, $execute_scope = CPG_EXEC_ALL ) {
         global $CPG_PLUGINS,$CONFIG,$USER_DATA,$thisplugin;
+
+        global $hook_name;
+        $hook_name = $key;
 
         if(is_numeric($execute_scope)) {
 
