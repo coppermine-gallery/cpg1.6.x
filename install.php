@@ -861,9 +861,9 @@ EOT;
 
 EOT;
     }
-    $db_host     = isset($config['db_host']) ? $config['db_host'] : 'localhost';
-    $db_user     = isset($config['db_user']) ? $config['db_user'] : '';
-    $db_password = isset($config['db_password']) ? $config['db_password'] : '';
+    $db_host     = isset($config['db_host']) && $mysql_connected ? $config['db_host'] : 'localhost';
+    $db_user     = isset($config['db_user']) && $mysql_connected ? $config['db_user'] : '';
+    $db_password = isset($config['db_password']) && $mysql_connected ? $config['db_password'] : '';
     echo <<<EOT
          <tr>
           <td align="right">{$language['mysql_host']}</td>

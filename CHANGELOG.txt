@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2010-11-27 [S] Fixed potential security issue during installation (thread ID 68285) {eenemeenemuu}
 2010-11-25 [A] Added missing/new plugin hooks to visiblehookpoints plugin {eenemeenemuu}
 2010-11-24 [O] Always use PHP time when querying the database (thread ID 67015) {eenemeenemuu}
 2010-11-22 [B] No error message for admin during upload if image dimension exceeds configuration value (thread ID 68240) {eenemeenemuu}
