@@ -143,7 +143,7 @@ if ($superCage->post->keyExists('submit')) {
             </td>
         </tr>
 EOT;
-        endtable;
+        endtable();
         print '<br />'.$LINEBREAK;
     }
 }
@@ -441,7 +441,6 @@ EOT;
         <td class="{$cellstyle}">
             <img src="{$flag_path}" width="16" height="11" border="0" alt="" name="image_{$loopCounter}" style="float:left" />
             <select id="flag_{$language['lang_id']}" name="flag_{$language['lang_id']}" size="1" onchange="if(document.images) document.images['image_{$loopCounter}'].src='images/flags/'+this.options[this.selectedIndex].value+'.png';" class="listbox_lang" style="width:60px">
->
 EOT;
         if ($language['flag'] == '') {
             print '            <option value="">'.$lang_langmgr_php['pick_a_flag'].'</option>'.$LINEBREAK;
@@ -455,7 +454,7 @@ EOT;
             print '            <option style="background-image:url(images/flags/' . $flags . '.png);background-repeat:no-repeat;text-indent:16px;width:20px;" value="' . $flags . '" '.$flag_selected.'>' . $flags . '</option>'.$LINEBREAK;
         }
         print <<< EOT
-            </ul>    
+            </select>
         </td>
 EOT;
         print <<< EOT
