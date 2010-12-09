@@ -1282,10 +1282,10 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         list($ASC, $DESC, $limit, $flipped) = get_pic_data_ordering($count, $limit1, $limit2);
 
         $sort_array = array(
-            'na' => "filename $ASC",
-            'nd' => "filename $DESC",
-            'ta' => "title $ASC",
-            'td' => "title $DESC",
+            'na' => "filename $ASC, pid $ASC",
+            'nd' => "filename $DESC, pid $DESC",
+            'ta' => "title $ASC, pid $ASC",
+            'td' => "title $DESC, pid $DESC",
             'da' => "pid $ASC",
             'dd' => "pid $DESC",
             'pa' => "position $ASC, pid $ASC",
