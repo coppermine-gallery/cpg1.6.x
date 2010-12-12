@@ -251,7 +251,7 @@ function get_subcat_data(&$cat_data)
     global $CONFIG, $HIDE_USER_CAT, $cpg_show_private_album;
     global $lft, $rgt, $RESTRICTEDWHERE, $CURRENT_CAT_DEPTH, $FORBIDDEN_SET_DATA, $PAGE;
 
-    $ident = "</td><td><img src=\"images/spacer.gif\" width=\"20\" height=\"1\" border=\"0\" alt=\"\" /></td><td>";
+    $indent = "</td><td><img src=\"images/spacer.gif\" width=\"20\" height=\"1\" border=\"0\" alt=\"\" /></td><td>";
 
     // TODO: support private album icon data
     // just ignore the restriction and let the display code handle things
@@ -443,7 +443,7 @@ function get_subcat_data(&$cat_data)
             $cat['subalbums'] = array_slice_preserve_keys($cat['subalbums'], 0, $CONFIG['albums_per_page'], true);
         }
 
-        $cat['details']['description'] = preg_replace("/<br.*?>[\r\n]*/i", '<br />' . str_repeat($ident, $level-1), bb_decode($cat['details']['description']));
+        $cat['details']['description'] = preg_replace("/<br.*?>[\r\n]*/i", '<br />', bb_decode($cat['details']['description']));
 
         if ($cid == USER_GAL_CAT) {
 
@@ -452,9 +452,9 @@ function get_subcat_data(&$cat_data)
                 //ob_start();
                 //list_users(); 
                 //$users = ob_get_clean();
-                $link = str_repeat($ident, $level - 1) . "<a href=\"index.php?cat={$cid}\">{$cat['details']['name']}</a>";
+                $link = str_repeat($indent, $level - 1) . "<a href=\"index.php?cat={$cid}\">{$cat['details']['name']}</a>";
                 $users         = '';
-                $cat_data[]    = array($link, str_repeat($ident, $level-1) . $cat['details']['description'], $album_count, $pic_count, 'cat_albums' => $users);
+                $cat_data[]    = array($link, str_repeat($indent, $level-1) . $cat['details']['description'], $album_count, $pic_count, 'cat_albums' => $users);
                 $HIDE_USER_CAT = 0;
             } else {
                 $HIDE_USER_CAT = 1;
@@ -485,9 +485,9 @@ function get_subcat_data(&$cat_data)
             }
 
             $link = "<a href=\"index.php?cat={$cid}\">{$cat['details']['name']}</a>";
-            $user_thumb = str_repeat($ident, $level-1) . $user_thumb;
+            $user_thumb = str_repeat($indent, $level-1) . $user_thumb;
             if ($pic_count == 0 && $album_count == 0) {
-                $user_thumb = str_repeat($ident, $level-1);
+                $user_thumb = str_repeat($indent, $level-1);
                 $cat_data[] = array($link, $cat['details']['description'], 'cat_thumb' => $user_thumb);
             } else {
                 // Check if you need to show subcat_level
