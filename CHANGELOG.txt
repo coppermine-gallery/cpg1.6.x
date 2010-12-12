@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2010-12-12 [C] Fixed indent for subcategories (thread ID 68764) {eenemeenemuu}
 2010-12-09 [B] Fixed film strip issue (thread ID 68585) {eenemeenemuu}
 2010-11-30 [B] Fixed issue with language manager (thread ID 68309) {eenemeenemuu}
 2010-11-27 [S] Fixed potential security issue during installation (thread ID 68285) {eenemeenemuu}
