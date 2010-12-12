@@ -4698,7 +4698,7 @@ function utf_ucfirst($str)
 */
 function utf_replace($str)
 {
-    return preg_replace('#[\xC2\xA0]|[\xE3][\x80][\x80]#', ' ', $str);
+    return preg_replace('#[\xC2][\xA0]|[\xE3][\x80][\x80]#', ' ', $str);
 } // function utf_replace
 
 function replace_forbidden($str)
