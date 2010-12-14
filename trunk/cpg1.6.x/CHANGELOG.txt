@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2010-12-14 [B] Fixed custom thumbnail for files with uppercase extension (thread ID 68809) {eenemeenemuu}
 2010-12-12 [B] Fixed function 'utf_replace' (thread ID 68753) {eenemeenemuu}
 2010-12-12 [C] Fixed indent for subcategories (thread ID 68764) {eenemeenemuu}
 2010-12-09 [B] Fixed film strip issue (thread ID 68585) {eenemeenemuu}
