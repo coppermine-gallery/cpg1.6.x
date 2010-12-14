@@ -3512,7 +3512,7 @@ function& get_pic_url(&$pic_row, $mode, $system_pic = false)
 
         $custom_thumb_path .= $pic_row['filepath'] . (array_key_exists($mode, $pic_prefix) ? $pic_prefix[$mode] : '');
 
-        $file_base_name = str_replace('.' . $mime_content['extension'], '', basename($pic_row['filename']));
+        $file_base_name = str_ireplace('.' . $mime_content['extension'], '', basename($pic_row['filename']));
 
         // Check for file-specific thumbs
         foreach ($thumb_extensions as $extension) {
