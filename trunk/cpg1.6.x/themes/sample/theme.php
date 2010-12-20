@@ -3782,8 +3782,10 @@ function theme_html_comments($pid)
             $page = $superCage->get->getInt('page');
             $page = min($page, $max);
             $page = max(0, $page);
+        } else if ($CONFIG['comments_sort_descending'] == 1) {
+            $page = 1;
         } else {
-          $page = $max;
+            $page = $max;
         }
 
         $start = max(0, $num - (($max-($page-1))*$limit));
