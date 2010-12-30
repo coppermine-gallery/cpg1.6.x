@@ -1139,7 +1139,7 @@ $template_add_your_comment = <<<EOT
                                                         </tr>
 <!-- BEGIN comment_captcha -->
                                                         <tr>
-                                <td class="tableb tableb_alternate" colspan="2">
+                                <td class="tableb tableb_alternate" colspan="3">
                                   {CONFIRM}
                                 </td>
                                 <td class="tableb tableb_alternate" colspan="2">
@@ -3921,7 +3921,7 @@ function theme_html_comments($pid)
     }
     if (USER_CAN_POST_COMMENTS && $CURRENT_ALBUM_DATA['comments'] == 'YES') {
         if (USER_ID) {
-            $user_name_input = '<tr><td><input type="hidden" name="msg_author" value="' . stripslashes(USER_NAME) . '" /></td>';
+            $user_name_input = '<tr><td colspan="2"><input type="hidden" name="msg_author" value="' . stripslashes(USER_NAME) . '" /></td>';
             template_extract_block($template_add_your_comment, 'user_name_input', $user_name_input);
             $user_name = '';
         } else {
