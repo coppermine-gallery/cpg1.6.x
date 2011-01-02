@@ -174,8 +174,9 @@ $string = str_replace('<a internalAnchorLinkTempReplacement', '<a href="' . 'doc
 
 
 if ($header != '') {
-    $content = '<h1>'.$header.'</h1>';
-    $content .= $text;
+    $content = '<h1>'.strip_tags($header).'</h1>';
+    $content .= strip_tags($text);
+    $content = str_replace(strip_tags($lang_bbcode_help), $lang_bbcode_help, $content);
 } else {
     $content = '';
 }

@@ -462,7 +462,7 @@ EOT;
         $matches = $superCage->post->getMatched('picfile_'.$pic_id, '/^[a-zA-A0-9=]+$/');
         $picfile = $superCage->post->getAlnum('picfile_'.$pic_id);
         //$pic_file = base64_decode($_POST['picfile_' . $pic_id]);
-        $pic_file = base64_decode($picfile);
+        $pic_file = strip_tags(base64_decode($picfile));
         $dir_name = dirname($pic_file) . "/";
         $file_name = basename($pic_file);
 
