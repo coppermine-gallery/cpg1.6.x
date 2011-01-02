@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2011-01-02 [B] Fixed PHP session name for captcha (thread ID 69293) {eenemeenemuu}
 2010-12-30 [C] Fixed colspan for guest comments when captcha is enabled (thread ID 69330) {eenemeenemuu}
 2010-12-15 [B] Fixed memberlist issue when database name contains a dash (thread ID 68843) {eenemeenemuu}
 2010-12-14 [B] Fixed custom thumbnail for files with uppercase extension (thread ID 68809) {eenemeenemuu}
