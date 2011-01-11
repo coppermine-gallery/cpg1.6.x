@@ -763,11 +763,12 @@ if ($superCage->get->keyExists('activate')) {
         if (UDB_INTEGRATION == 'coppermine') {
             // get default language in which to inform the admins
             $result = cpg_db_query("SELECT user_id, user_email, user_language FROM {$CONFIG['TABLE_USERS']} WHERE user_group = 1");
-            while ( ($row = mysql_fetch_assoc($result)) ) {
-                if (!empty($row['user_email'])) {
-                    $admins[$row['user_id']] = array('email' => $row['user_email'], 'lang' => $row['user_language']);
+            while ($row2 = mysql_fetch_assoc($result)) {
+                if (!empty($row2['user_email'])) {
+                    $admins[$row2['user_id']] = array('email' => $row2['user_email'], 'lang' => $row2['user_language']);
                 }
             }
+            mysql_free_result($result);
         } else {
             //@todo: is it possible to get the language from bridged installs?
             $admins[] = array('email' => $CONFIG['gallery_admin_email'], 'lang' => 'english');

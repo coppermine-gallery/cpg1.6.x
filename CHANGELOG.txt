@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2011-01-11 [B] Fixed username in activation mail (thread ID 69555) {eenemeenemuu}
 2011-01-02 [S] Fixed XSS issues (thread ID 69327) {eenemeenemuu}
 2011-01-02 [B] Fixed playback of Windows Media Player videos (thread ID 68537) {eenemeenemuu}
 2011-01-02 [B] Fixed PHP session name for captcha (thread ID 69293) {eenemeenemuu}
