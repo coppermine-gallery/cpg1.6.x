@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2011-01-20 [B] Fixed album thumbnail for keyword albums without physical files when link_pic_count is disabled (thread ID 69449) {eenemeenemuu}
 2011-01-11 [B] Fixed username in activation mail (thread ID 69555) {eenemeenemuu}
 2011-01-02 [S] Fixed XSS issues (thread ID 69327) {eenemeenemuu}
 2011-01-02 [B] Fixed playback of Windows Media Player videos (thread ID 68537) {eenemeenemuu}
