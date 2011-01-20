@@ -472,7 +472,7 @@ function update_thumbs()
             if ($updatetype == 3 || $updatetype == 4 || $updatetype == 5) {
 
                 if (max($imagesize[0], $imagesize[1]) > $CONFIG['max_upl_width_height'] && ((USER_IS_ADMIN && $CONFIG['auto_resize'] == 1) || (!USER_IS_ADMIN && $CONFIG['auto_resize'] > 0))) {
-                    $resize_method = 'any'; // hard-coded 'any' according to configuration string 'Max width or height for uploaded pictures'
+                    $resize_method = $CONFIG['picture_use'] == "thumb" ? ($CONFIG['thumb_use'] == "ex" ? "any" : $CONFIG['thumb_use']) : $CONFIG['picture_use'];
                     $max_size_size = $CONFIG['max_upl_width_height'];
                 } else {
                     $resize_method = 'orig';

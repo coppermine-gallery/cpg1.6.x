@@ -54,7 +54,8 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
         // resize picture if it's bigger than the max width or height for uploaded pictures 
         if (max($imagesize[0], $imagesize[1]) > $CONFIG['max_upl_width_height']) {
             if ((USER_IS_ADMIN && $CONFIG['auto_resize'] == 1) || (!USER_IS_ADMIN && $CONFIG['auto_resize'] > 0)) {
-                resize_image($image, $image, $CONFIG['max_upl_width_height'], $CONFIG['thumb_method'], 'any', 'false'); // hard-coded 'any' according to configuration string 'Max width or height for uploaded pictures'
+                $resize_method = $CONFIG['picture_use'] == "thumb" ? ($CONFIG['thumb_use'] == "ex" ? "any" : $CONFIG['thumb_use']) : $CONFIG['picture_use'];
+                resize_image($image, $image, $CONFIG['max_upl_width_height'], $CONFIG['thumb_method'], $resize_method, 'false');
                 $imagesize = cpg_getimagesize($image);
             } elseif (USER_IS_ADMIN) {
                 // skip resizing for admin
