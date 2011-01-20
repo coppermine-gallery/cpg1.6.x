@@ -789,7 +789,7 @@ function list_albums()
 
     foreach ($alb_stats as $key => $value) {
         $cross_ref[$value['aid']] = &$alb_stats[$key];
-        if ($CONFIG['link_pic_count'] == 1) {
+        if ($CONFIG['link_pic_count'] == 1 || $value['pic_count'] == 0) {
             if (!empty($value['keyword'])) {
                 $keyword = ($value['keyword'] ? "AND (keywords like '%".addslashes($value['keyword'])."%' $forbidden_set_string )" : '');
                 $query = "SELECT count(pid) AS link_pic_count, max(pid) AS link_last_pid "
@@ -1000,7 +1000,7 @@ function list_cat_albums($cat, $catdata)
         $approved = ' AND approved=\'YES\'';
         $forbidden_set_string = ((count($FORBIDDEN_SET_DATA) > 0) ? ' AND aid NOT IN (' . implode(', ', $FORBIDDEN_SET_DATA) . ')' : '');
         $keyword = ($album['keyword'] ? "AND (keywords like '%".addslashes($album['keyword'])."%' $forbidden_set_string)" : '');
-        if ($CONFIG['link_pic_count'] == 1) {
+        if ($CONFIG['link_pic_count'] == 1 || $album['pic_count'] == 0) {
 
             if (!empty($album['keyword'])) {
                 $query = "SELECT count(pid) AS link_pic_count, max(pid) AS link_last_pid "
