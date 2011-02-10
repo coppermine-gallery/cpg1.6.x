@@ -1044,7 +1044,7 @@ $config_data = array(
       'type'          => 'textfield',
       'default_value' => '',
       'help_link'     => 'f=configuration.htm&amp;as=admin_picture_thumb_advanced_im_path&amp;ae=admin_picture_thumb_advanced_im_path_end',
-      'regex'         => '/$',
+      'regex'         => '/$|^$',
     ),
     'im_options' => array(
       'type'          => 'textfield',
