@@ -4182,7 +4182,7 @@ EOT;
         $fullsize_html .=  '<a href="javascript: window.close()"><img src="'
         . htmlspecialchars($imagedata['path']) . '" '
         . $imagedata['geometry']
-        . 'id="fullsize_image" alt="'
+        . ' id="fullsize_image" alt="'
         . htmlspecialchars($imagedata['name'])
         . '" title="'
         . htmlspecialchars($imagedata['name'])
