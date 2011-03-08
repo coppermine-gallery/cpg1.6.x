@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2011-03-08 [B] Added missing jump label 'top_display_media' to theme 'eyeball' (thread ID 71017) {eenemeenemuu}
 2011-02-10 [B] Fixed validation of ImageMagick path in config {eenemeenemuu}
 2011-01-20 [B] Use the intermediate picture 'use dimension' setting when resizing full-sized pictures during the upload process {eenemeenemuu}
 2011-01-20 [B] Fixed album thumbnail for keyword albums without physical files when link_pic_count is disabled (thread ID 69449) {eenemeenemuu}
