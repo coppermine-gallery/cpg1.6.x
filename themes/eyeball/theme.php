@@ -226,6 +226,7 @@ function theme_display_image($nav_menu, $picture, $votes, $pic_info, $comments, 
 EOT;
 
     echo '        <img src="images/spacer.gif" width="1" height="25" alt="" /><br />' . $LINEBREAK;
+    echo '        <a name="top_display_media"></a>';
     starttable();
     echo $nav_menu;
     endtable();
