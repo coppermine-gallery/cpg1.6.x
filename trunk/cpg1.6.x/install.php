@@ -245,10 +245,8 @@ switch($step) {
         }
         
         //use versioncheck to check file versions
-        require_once('include/versioncheck.inc.php');
-        
         $lang_versioncheck_php = $language['versioncheck'];
-        
+        require_once('include/versioncheck.inc.php');
         
         // TODO: need to deal with connection failing and skip this step (and maybe allow a retry)
 
