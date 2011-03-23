@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2011-03-23 [B] Fixed detection of intermediate-sized pictures when renaming files (thread ID 67894) {eenemeenemuu}
 2011-03-22 [B] Fixed some missing icons in help pages (thread ID 71725) {eenemeenemuu}
 2011-03-14 [B] Fixed PHP notices 'Undefined variable' and 'Use of undefined constant' during install step 2 (thread ID 71384) {eenemeenemuu}
 2011-03-08 [B] Added missing jump label 'top_display_media' to theme 'eyeball' (thread ID 71017) {eenemeenemuu}

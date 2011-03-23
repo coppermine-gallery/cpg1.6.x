@@ -175,17 +175,19 @@ function process_post_data()
 
     if ($post_filename != $pic['filename']) {
 
-        if ($CONFIG['thumb_use'] == 'ht' && $pic['pheight'] > $CONFIG['picture_width']) {
-            $condition = true;
-        } elseif ($CONFIG['thumb_use'] == 'wd' && $pic['pwidth'] > $CONFIG['picture_width']) {
-            $condition = true;
-        } elseif ($CONFIG['thumb_use'] == 'any' && max($pic['pwidth'], $pic['pheight']) > $CONFIG['picture_width']) {
-            $condition = true;
+        // The weird comparision is because only picture_width is stored
+        $resize_method = $CONFIG['picture_use'] == "thumb" ? ($CONFIG['thumb_use'] == "ex" ? "any" : $CONFIG['thumb_use']) : $CONFIG['picture_use'];
+        if ($resize_method == 'ht' && $pic['pheight'] > $CONFIG['picture_width']) {
+            $use_intermediate = true;
+        } elseif ($resize_method == 'wd' && $pic['pwidth'] > $CONFIG['picture_width']) {
+            $use_intermediate = true;
+        } elseif ($resize_method == 'any' && max($pic['pwidth'], $pic['pheight']) > $CONFIG['picture_width']) {
+            $use_intermediate = true;
         } else {
-            $condition = false;
+            $use_intermediate = false;
         }
 
-        if ($CONFIG['make_intermediate'] && $condition) {
+        if ($CONFIG['make_intermediate'] && $use_intermediate) {
             $prefixes = array('fullsize', 'normal', 'thumb');
         } else {
             $prefixes = array('fullsize', 'thumb');
