@@ -3404,7 +3404,8 @@ function theme_html_picture()
                                     'mime' => 'type="video/x-quicktime" '
                                    );
             $players['SWF'] = array('id' => 'SWFlash',
-                                    'clsid' => ' classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" ',
+                                    //'clsid' => ' classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" ',
+                                    'clsid' => '',
                                     'codebase' => '',
                                     'mime' => 'type="application/x-shockwave-flash" ',
                                     'data' => 'data="'.$picture_url.'" '
