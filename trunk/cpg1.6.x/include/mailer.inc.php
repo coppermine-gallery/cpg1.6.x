@@ -577,7 +577,7 @@ class cpg_PHPMailer {
 
     $toArr = split(',', $to);
     
-    if ($this->Sender != '' && strtolower(ini_get('safe_mode')) != 'on') {
+    if ($this->Sender != '' && strtolower(ini_get('safe_mode')) != 'on' && ini_get('safe_mode') != 1) {
       $old_from = ini_get('sendmail_from');
       ini_set('sendmail_from', $this->Sender);
       $params = sprintf("-oi -f %s", $this->Sender);
