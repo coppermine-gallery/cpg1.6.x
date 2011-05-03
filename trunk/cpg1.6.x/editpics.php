@@ -210,7 +210,7 @@ function process_post_data()
     }
 
     if ($superCage->post->keyExists('galleryicon')) {
-        $galleryincon = $superCage->post->getInt('galleryicon');
+        $galleryicon = $superCage->post->getInt('galleryicon');
     } else {
         $galleryicon = '';
     }
