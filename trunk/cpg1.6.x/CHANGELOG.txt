@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2011-05-09 [B] Fixed display of random album thumbnail in sub-category if album keyword is set (thread ID 72302) {eenemeenemuu}
 2011-05-03 [B] Fixed selection of gallery icon for user categories (thread ID 72274) {eenemeenemuu}
 2011-04-27 [B] Fixed safe_mode check when sending emails {eenemeenemuu}
 2011-04-18 [B] Fixed embedding of SWF files (thread ID 72138) {eenemeenemuu}

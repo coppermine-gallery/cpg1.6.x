@@ -1017,6 +1017,7 @@ function list_cat_albums($cat, $catdata)
         // Inserts a thumbnail if the album contains 1 or more images
         //unused code {SaWey}
         //$visibility = $album['visibility'];
+        $keyword = ($album['keyword'] ? "OR (keywords like '%".addslashes($album['keyword'])."%' $forbidden_set_string)" : '');
         if (!in_array($aid, $FORBIDDEN_SET_DATA) || $CONFIG['allow_private_albums'] == 0) { //test for visibility
             if ($album['pic_count'] > 0  || !empty($album['link_pic_count'])) { 
                 // Inserts a thumbnail if the album contains 1 or more images
