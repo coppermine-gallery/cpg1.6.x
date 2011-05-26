@@ -517,7 +517,7 @@ EOT;
         // create files bar
         $file_quota_output = theme_display_bar($user['pic_count'],$totalPictureCount,60,'', '', '','red','');
         // Look up banned table
-        if (mysql_num_rows(cpg_db_query("SELECT user_name FROM {$CONFIG['TABLE_BANNED']} WHERE user_name = '{$user['user_name']}' AND brute_force=0 LIMIT 1"))){
+        if (mysql_num_rows(cpg_db_query("SELECT user_name FROM {$CONFIG['TABLE_BANNED']} WHERE user_name = '" . addslashes($user['user_name']) . "' AND brute_force=0 LIMIT 1"))) {
             $ban_user_link = '<a href="banning.php">' . cpg_fetch_icon('ban_user_disabled', 0, $lang_usermgr_php['user_is_banned']) . '</a>';
             $ban_memberlist = cpg_fetch_icon('ban_user_disabled', 0, $lang_usermgr_php['user_is_banned']);
         } else {
@@ -761,7 +761,7 @@ function edit_user($user_id)
         $user_data = mysql_fetch_array($result);
         mysql_free_result($result);
 
-        if (mysql_num_rows(cpg_db_query("SELECT user_name FROM {$CONFIG['TABLE_BANNED']} WHERE user_name = '" . $user_data['user_name'] . "' AND brute_force=0 LIMIT 1"))){
+        if (mysql_num_rows(cpg_db_query("SELECT user_name FROM {$CONFIG['TABLE_BANNED']} WHERE user_name = '" . addslashes($user_data['user_name']) . "' AND brute_force=0 LIMIT 1"))){
             $user_status = $lang_usermgr_php['user_is_banned'];
         } elseif ($user_data['user_active'] == 'YES') {
             $user_status = $lang_usermgr_php['status_active'];

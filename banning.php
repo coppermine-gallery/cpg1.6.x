@@ -271,7 +271,7 @@ if ($superCage->post->keyExists('submit')) {
 
     while ($row = mysql_fetch_assoc($result)) {
         $ban_database[$row['ban_id']]['user_id']   = $row['user_id'];
-        $ban_database[$row['ban_id']]['user_name'] = $row['user_name'];
+        $ban_database[$row['ban_id']]['user_name'] = addslashes($row['user_name']);
         $ban_database[$row['ban_id']]['email']     = $row['email'];
         $ban_database[$row['ban_id']]['ip_addr']   = $row['ip_addr'];
         $ban_database[$row['ban_id']]['expiry']    = $row['expiry'];
