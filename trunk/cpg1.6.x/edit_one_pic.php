@@ -107,6 +107,14 @@ function process_post_data()
     $new_alb = mysql_fetch_assoc($result);
     mysql_free_result($result);
 
+    $keywords = explode($CONFIG['keyword_separator'], trim(html_entity_decode($keywords)));
+    foreach ($keywords as $word) {
+        if (trim($word)) {
+            $keywords_new[] = trim($word);
+        }
+    }
+    $keywords = implode($CONFIG['keyword_separator'], $keywords_new);
+
     $update  = "aid = '{$aid}'";
 
     if (is_movie($pic['filename'])) {

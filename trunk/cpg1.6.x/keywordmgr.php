@@ -76,7 +76,7 @@ case 'display':
 
     while (list($keywords) = mysql_fetch_row($result)) {
 
-        $array = explode($keysep, $keywords);
+        $array = explode($keysep, html_entity_decode($keywords));
 
         foreach ($array as $word) {
         
@@ -85,7 +85,7 @@ case 'display':
             }
 
             $orig_word       = $word;
-            $orig_word_param = addslashes(str_replace(' ', '+', $orig_word));
+            $orig_word_param = urlencode(addslashes(str_replace(' ', '+', $orig_word)));
             $orig_word_label = addslashes($orig_word);
             $lowercase_word  = utf_strtolower($orig_word);
             $lowercase_word  = addslashes($lowercase_word);
@@ -171,17 +171,17 @@ case 'changeword':
        
             $array_new = array();
 
-            $array_old = explode($keysep, addslashes(trim($keywords)));
+            $array_old = explode($keysep, addslashes(trim(html_entity_decode($keywords))));
 
             foreach ($array_old as $word) {
 
                 // convert old to new if it's the same word
-                if (utf_strtolower($word) == $keywordEdit) {
+                if (utf_strtolower(htmlentities($word)) == $keywordEdit) {
                     $word = addslashes($request_newword);
                 }
 
                 // rebuild array to reprocess it
-                $array_new[] = $word;
+                $array_new[] = trim($word);
             }
 
             $keywords = implode($keysep, $array_new);
@@ -191,6 +191,7 @@ case 'changeword':
     }
 
     $newquerys[] = "UPDATE {$CONFIG['TABLE_PICTURES']} SET keywords = TRIM(REPLACE(keywords, '{$keysep}{$keysep}', '{$keysep}'))";
+    $newquerys[] = "UPDATE {$CONFIG['TABLE_PICTURES']} SET keywords = '' WHERE keywords = '{$keysep}'";
 
     foreach ($newquerys as $query) {
         $result = cpg_db_query($query);
@@ -211,6 +212,8 @@ case 'delete':
         $remove = $superCage->post->getEscaped('remove');
     }
 
+    $remove = urldecode($remove);
+
     $query = "SELECT pid, keywords FROM {$CONFIG['TABLE_PICTURES']} WHERE CONCAT('$keysep', keywords, '$keysep') LIKE '%{$keysep}{$remove}{$keysep}%'";
 
     $result = cpg_db_query($query);
@@ -218,17 +221,17 @@ case 'delete':
     while (list($id, $keywords) = mysql_fetch_row($result)) {
 
         $array_new = array();
-        $array_old = explode($keysep, addslashes(trim($keywords)));
+        $array_old = explode($keysep, addslashes(trim(html_entity_decode($keywords))));
 
         foreach ($array_old as $word) {
 
             // convert old to new if it's the same word
-            if (utf_strtolower($word) == utf_strtolower($remove)) {
+            if (utf_strtolower(htmlentities($word)) == utf_strtolower($remove)) {
                 $word = '';
             }
 
             // rebuild array to reprocess it
-            $array_new[] = $word;
+            $array_new[] = trim($word);
         }
 
         $keywords = implode($keysep, $array_new);
@@ -237,6 +240,7 @@ case 'delete':
     }
 
     $newquerys[] = "UPDATE {$CONFIG['TABLE_PICTURES']} SET keywords = TRIM(REPLACE(keywords, '{$keysep}{$keysep}', '{$keysep}'))";
+    $newquerys[] = "UPDATE {$CONFIG['TABLE_PICTURES']} SET keywords = '' WHERE keywords = '{$keysep}'";
 
     foreach ($newquerys as $query) {
         $result = cpg_db_query($query);
