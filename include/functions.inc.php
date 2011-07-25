@@ -6174,17 +6174,17 @@ function checkFormToken()
 {
     global $CONFIG;
     $superCage = Inspekt::makeSuperCage();
-    
+
     if ($superCage->post->keyExists('form_token') || $superCage->get->keyExists('form_token')){
         // check if the token is valid
         $received_token = ($superCage->post->keyExists('form_token')) ? $superCage->post->getAlNum('form_token') : $superCage->get->getAlNum('form_token');
         $received_timestamp = ($superCage->post->keyExists('timestamp')) ? $superCage->post->getInt('timestamp') : $superCage->get->getInt('timestamp');
-        
+
         //first check if the timestamp hasn't expired yet
-        if( ($received_timestamp + (int)$CONFIG['form_token_lifetime']) < time() ){
+        if( ($received_timestamp + (int)$CONFIG['form_token_lifetime']) < time() && !defined('LOGOUT_PHP') ){
             return false;
         }
-        
+
         $token = getFormToken($received_timestamp);
         if ($received_token === $token[1]) {
             return true;

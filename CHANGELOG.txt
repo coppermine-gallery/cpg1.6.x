@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2011-07-25 [B] Fixed valid token issue during logout (thread ID 61186) {eenemeenemuu}
 2011-07-21 [B] Fixed several keywords issues (issues with ampersands and spaces, leftover keyword separators) (thread ID 73161) {eenemeenemuu}
 2011-05-26 [B] Fixed user manager issue (thread ID 72070) {eenemeenemuu}
 2011-05-09 [B] Fixed display of random album thumbnail in sub-category if album keyword is set (thread ID 72302) {eenemeenemuu}
