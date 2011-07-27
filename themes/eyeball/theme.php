@@ -145,16 +145,20 @@ EOT;
 }
 
 // Function to start a 'standard' table
-function starttable($width = '-1', $title = '', $title_colspan = '1', $zebra_class = '')
+function starttable($width = '-1', $title = '', $title_colspan = '1', $zebra_class = '', $return = false)
 {
     global $CONFIG;
-    global $table_need_close;
 
     if ($width == '-1') $width = $CONFIG['picture_table_width'];
     if ($width == '100%') $width = $CONFIG['main_table_width'];
+    $text = <<<EOT
+
+<!-- Start standard table -->
+<table align="center" width="$width" cellspacing="0" cellpadding="0" class="maintable $zebra_class">
+
+EOT;
     if ($title) {
-        $table_need_close = true;
-        echo <<<EOT
+        $title2 = <<<EOT
 <!-- Start standard table title -->
 <table align="center" width="$width" cellspacing="0" cellpadding="0" class="maintablea">
         <tr>
@@ -169,44 +173,13 @@ function starttable($width = '-1', $title = '', $title_colspan = '1', $zebra_cla
                 </td>
         </tr>
 </table>
-<!-- Start standard table -->
-<table align="center" width="$width" cellspacing="0" cellpadding="0">
-  <tr>
-   <td><img src="images/spacer.gif" width="20" height="1" border="0" alt="" /></td>
-        <td width="100%"><table width="100%" cellspacing="1" cellpadding="0" class="maintableb $zebra_class">
-
 EOT;
-    } else {
-        echo <<<EOT
-
-<!-- Start standard table -->
-<table align="center" width="$width" cellspacing="0" cellpadding="0" class="maintable $zebra_class">
-
-EOT;
+        $text = $title2.$text;
     }
-}
-
-function endtable()
-{
-    global $table_need_close;
-
-    if ($table_need_close) {
-        $table_need_close = false;
-        echo <<<EOT
-        </table>
-   </td>
-   <td><img src="images/spacer.gif" width="20" height="1" border="0" alt="" /></td>
-  </tr>
-</table>
-<!-- End standard table -->
-
-EOT;
+    if (!$return) {
+        echo $text;
     } else {
-        echo <<<EOT
-</table>
-<!-- End standard table -->
-
-EOT;
+        return $text;
     }
 }
 
