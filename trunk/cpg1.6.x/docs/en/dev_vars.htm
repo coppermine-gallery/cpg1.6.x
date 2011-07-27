@@ -427,8 +427,8 @@
 		</td>
 		<td>
 			The &quot;user admin mode&quot; hardly is used any longer - it's a relict from cpg1.3.x and might be dropped in future versions. The definition is
-			<pre>define('USER_ADMIN_MODE', USER_ID && USER_CAN_CREATE_ALBUMS && $USER['am'] && !GALLERY_ADMIN_MODE);</pre>
-			so it get's populated if a user is logged in and has permission to have personal albums. The constant does not get populated if an admin is logged in.
+			<pre>define('USER_ADMIN_MODE', USER_ID && USER_CAN_CREATE_ALBUMS && !GALLERY_ADMIN_MODE);</pre>
+			so it get's populated if a user is logged in and has permission to have personal albums. The constant does not get populated if an admin is logged in, unless he hides the admin controls.
 		</td>
 	</tr>
 	<tr>

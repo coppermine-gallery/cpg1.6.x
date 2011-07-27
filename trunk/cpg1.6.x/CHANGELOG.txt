@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2011-07-27 [B] Fixed permission issue if admin tries to create a personal album (thread ID 72009) {eenemeenemuu}
 2011-07-26 [D] Display exact character encoding in config (thread ID 73209) {eenemeenemuu}
 2011-07-25 [B] Fixed valid token issue during logout (thread ID 61186) {eenemeenemuu}
 2011-07-21 [B] Fixed several keywords issues (issues with ampersands and spaces, leftover keyword separators) (thread ID 73161) {eenemeenemuu}
