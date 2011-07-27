@@ -2009,6 +2009,7 @@ $lang_search_new_php['insert_selected'] = 'Insert selected files';
 $lang_search_new_php['no_pic_found'] = 'No new file was found';
 $lang_search_new_php['be_patient'] = 'Please be patient, the script needs time to add the files';
 $lang_search_new_php['no_album'] = 'no album selected';
+$lang_search_new_php['no_file'] = 'no file selected'; // cpg1.6.x
 $lang_search_new_php['result_icon'] = 'click for details or to reload';
 $lang_search_new_php['notes'] = <<< EOT
     <ul>
