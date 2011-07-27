@@ -1859,17 +1859,18 @@ function theme_create_tabs($items, $curr_page, $total_pages, $template)
 
     if ($CONFIG['tabs_dropdown']) {
         // Dropdown list for all pages
+        preg_match('/cat=([\d]+)/', $template['page_link'], $matches);
         $tabs_dropdown_js = <<< EOT
-            <span id="tabs_dropdown_span"></span>
+            <span id="tabs_dropdown_span{$matches[1]}"></span>
             <script type="text/javascript"><!--
-                $('#tabs_dropdown_span').html('{$lang_create_tabs['jump_to_page']} <select id="tabs_dropdown_select" onchange="if (this.options[this.selectedIndex].value != -1) { window.location.href = this.options[this.selectedIndex].value; }"><\/select>');
+                $('#tabs_dropdown_span{$matches[1]}').html('{$lang_create_tabs['jump_to_page']} <select id="tabs_dropdown_select{$matches[1]}" onchange="if (this.options[this.selectedIndex].value != -1) { window.location.href = this.options[this.selectedIndex].value; }"><\/select>');
                 for (page = 1; page <= $total_pages; page++) {
                     var page_link = '{$template['page_link']}';
                     var selected = '';
                     if (page == $curr_page) {
                         selected = ' selected="selected"';
                     }
-                    $('#tabs_dropdown_select').append('<option value="' + page_link.replace( /%d/, page ) + '"' + selected + '>' + page + '<\/option>');
+                    $('#tabs_dropdown_select{$matches[1]}').append('<option value="' + page_link.replace( /%d/, page ) + '"' + selected + '>' + page + '<\/option>');
                 }
          --></script>
 EOT;

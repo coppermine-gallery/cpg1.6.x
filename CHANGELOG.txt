@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2011-07-27 [B] Fixed thumbnail pages dropdown list on album list (thread ID 69511) {eenemeenemuu}
 2011-07-27 [C] Fixed admin tools format in eyeball theme (thread ID 69705) {eenemeenemuu}
 2011-07-27 [B] Fixed visibility issue when setting an album password with IE (thread ID 70248) {eenemeenemuu}
 2011-07-27 [B] Fixed batch-add issue if no file is selected (thread ID 70342) {eenemeenemuu}
