@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2011-07-27 [B] Fixed visibility issue when setting an album password with IE (thread ID 70248) {eenemeenemuu}
 2011-07-27 [B] Fixed batch-add issue if no file is selected (thread ID 70342) {eenemeenemuu}
 2011-07-27 [B] Fixed permission issue if admin tries to create a personal album (thread ID 72009) {eenemeenemuu}
 2011-07-26 [D] Display exact character encoding in config (thread ID 73209) {eenemeenemuu}
