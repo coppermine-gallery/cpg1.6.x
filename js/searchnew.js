@@ -178,6 +178,7 @@ function process() {
     // Collect object that represent jobs from the html list
     var queuelist = document.getElementById('queue');
     var objects = queuelist.getElementsByTagName('p');
+    var selected_files = 0;
 
     // Cycle through the objects, making jobs from them, adding them to the queue manager
     for (var i = 0; i < objects.length; i++) {
@@ -185,13 +186,20 @@ function process() {
         // if this is image is not selected then skip it
         if (document.getElementById('checkbox_' + objects[i].id).checked === false) {
             continue;
-        }   
+        }
+        
+        selected_files++;
         
         // add job to queue
         qm.add(new Job(objects[i]));
         
         // clear the display from any previous run
         objects[i].innerHTML = '';
+    }
+    
+    if (selected_files == 0) {
+        alert(js_vars.no_file_selected);
+        return false;
     }
     
     // Start the queue manager
