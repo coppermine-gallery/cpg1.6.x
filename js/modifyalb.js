@@ -67,8 +67,17 @@ $(document).ready(function() {
     
     // Bind the onclick event to password protect checkbox
     $('#password_protect').click(function() {
-       // Toggle the display of password fields
-        $('#password_protect').parent().parent().next().toggle();
-        $('#password_protect').parent().parent().next().next().toggle();
+        // Toggle the display of password fields // doesn't work with IE and jQuery 1.3.2 -> use another approach)
+        //$('#password_protect').parent().parent().next().toggle();
+        //$('#password_protect').parent().parent().next().next().toggle();
+        if ($('#password_protect:checked').val() != null) {
+            // If password protect checkbox is checked then show the password related fields
+            $('#password_protect').parent().parent().next().show();
+            $('#password_protect').parent().parent().next().next().show();
+        } else {
+            // Else hide the password related fields
+            $('#password_protect').parent().parent().next().hide();
+            $('#password_protect').parent().parent().next().next().hide();
+        }
     });
 });
