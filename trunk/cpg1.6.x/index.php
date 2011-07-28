@@ -1026,6 +1026,12 @@ function list_cat_albums($cat, $catdata)
                             ." FROM {$CONFIG['TABLE_PICTURES']} WHERE pid='{$album['thumb']}'";
                     $result = cpg_db_query($sql);
                     $picture = mysql_fetch_assoc($result);
+                    if (!is_array($picture)) {
+                        $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight " 
+                            . "FROM {$CONFIG['TABLE_PICTURES']} WHERE pid='{$album['last_pid']}'";
+                        $result = cpg_db_query($sql);
+                        $picture = mysql_fetch_assoc($result);
+                    }
                     mysql_free_result($result);
                 } elseif ($album['thumb'] < 0) {
                     $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight " 
