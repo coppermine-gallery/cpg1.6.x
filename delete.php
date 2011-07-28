@@ -160,7 +160,7 @@ function delete_picture($pid, $tablecellstyle = 'tableb')
     $query = "DELETE FROM {$CONFIG['TABLE_PICTURES']} WHERE pid='$pid' LIMIT 1";
     cpg_db_query($query);
     
-    $query = "UPDATE {$CONFIG['TABLE_ALBUMS']} SET thumb = '0' WHERE thumb = '$pid' LIMIT 1";
+    $query = "UPDATE {$CONFIG['TABLE_ALBUMS']} SET thumb = '0' WHERE thumb = '$pid'";
     cpg_db_query($query);
     
     echo "<td class=\"".$tablecellstyle."\" align=\"center\">";
