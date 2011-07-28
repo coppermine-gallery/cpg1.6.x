@@ -1024,7 +1024,7 @@ function build_caption(&$rowset, $must_have = array(), $mode = 'files')
             $caption .= '<span class="thumb_caption">' . strip_tags(bb_decode($row['caption'])) . '</span>';
         }
 
-        if ($CONFIG['display_comment_count']) {
+        if ($CONFIG['display_comment_count'] && $row['pid']) {
             $comments_nr = count_pic_comments($row['pid']);
             if ($comments_nr > 0) {
                 $caption .= '<span class="thumb_num_comments">' . sprintf($lang_get_pic_data['n_comments'], $comments_nr) . '</span>';
@@ -1864,11 +1864,32 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         // For 'lastalb' album, only use approved photos for album thumbnails
         $approved = 'AND approved=\'YES\'';
 
+        // Preparation for check if album thumbnail exists
         $album_thumbs = array();
         foreach ($rowset_aid as $index => $row) {
             if ($row['thumb'] > 0) {
                 $album_thumbs[] = $row['thumb'];
+            }
+        }
+        if (count($album_thumbs)) {
+            $query = "SELECT pid FROM {$CONFIG['TABLE_PICTURES']} WHERE pid IN (".implode(',', $album_thumbs).")";
+            $result = cpg_db_query($query);
+            while ($row = mysql_fetch_assoc($result)) {
+                $rowset_available_pids[] = $row['pid'];
+            }
+            mysql_free_result($result);
+        }
 
+        $album_thumbs = array();
+        foreach ($rowset_aid as $index => $row) {
+
+            // Check if album thumbnail exists, if not, set to random
+            if ($row['thumb'] > 0 && !in_array($rowset_available_pids, $row['thumb'])) {
+                $row['thumb'] = 0;
+            }
+
+            if ($row['thumb'] > 0) {
+                $album_thumbs[] = $row['thumb'];
             } elseif ($row['thumb'] < 0) {
                 // random file from album
                 $keyword = ($row['keyword'] ? "OR (keywords like '%".addslashes($row['keyword'])."%' $forbidden_set_string )" : '');
@@ -1878,7 +1899,6 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
                 mysql_free_result($result);
                 $album_thumbs[] = $pid_random;
                 $rowset_aid[$index]['thumb'] = $pid_random;
-
             } else {  // thumb = 0
                 // last uploaded file from album
                 $keyword = ($row['keyword'] ? "OR (keywords like '%".addslashes($row['keyword'])."%' $forbidden_set_string )" : '');

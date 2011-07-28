@@ -369,6 +369,7 @@ function process_post_data()
             CPGPluginAPI::action('before_delete_file', $pic);
 
             cpg_db_query("DELETE FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid");
+            cpg_db_query("UPDATE {$CONFIG['TABLE_ALBUMS']} SET thumb = '0' WHERE thumb = '$pid'");
 
             // Plugin filter to be called after a file is deleted
             CPGPluginAPI::action('after_delete_file', $pic);
