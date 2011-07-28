@@ -168,10 +168,11 @@ This will only work on linux/unix and apache servers AND only if you're allowed 
 
 <a name="jumpToPrivateAlbum"></a>
 <h3>How can I send a user <strong>directly to his private album</strong> once he logs in?<a href="#jumpToPrivateAlbum" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-<p>edit<br /><tt class="code">login.php</tt><br />and search for<br />
-<tt class="code">pageheader($lang_login_php['login'],&quot;&lt;META http-equiv=\&quot;refresh\&quot; content=\&quot;3;url=$referer\&quot;&gt;&quot;);</tt><br />
-<br />and add <strong>before</strong> it<br />
-<tt class="code">$referer = 'index.php?cat='.(FIRST_USER_CAT+$USER_DATA['user_id']); </tt><br /></p><hr />
+<p>Edit<br /><tt class="code">login.php</tt><br />and change<br />
+<tt class="code">$redirect = ($CPG_REFERER &amp;&amp; (strpos($CPG_REFERER, 'login.php') === false)) ? $CPG_REFERER : 'index.php';</tt><br />
+into<br />
+<tt class="code">$redirect = 'index.php?cat='.(FIRST_USER_CAT+$USER_DATA['user_id']); </tt><br /></p><hr />
+
 <a name="linksInCustomFields"></a>
 <h3>How do I enable clickable <strong>links in custom user fields</strong>?<a href="#linksInCustomFields" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
 <p>Edit displayimage.php and change<br />
@@ -182,7 +183,6 @@ This will allow you to use BBCodes in the custom fields: you can then have somet
 <tt class="code">[url]http://www.somesite.com/foo/bar.php?whatever=42[/url]</tt><br />
 or<br />
 <tt class="code">[url=http://www.somesite.com/foo/bar.php?whatever=42]link to some site![/url]</tt><br />in your custom user fields (the display of which, of course, has to be enabled in the config page, begin with).<br /></p><hr />
-
 
 <a name="addFooterBeforePoweredBy"></a>
 <h3>How can I <strong>add</strong> some output <strong>directly before</strong> the line &quot;Powered by Coppermine&quot;?<a href="#addFooterBeforePoweredBy" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
