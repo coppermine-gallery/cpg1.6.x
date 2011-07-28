@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2011-07-28 [B] Fixed critical error message for meta album 'lastalb' if thumbnail image doesn't exist (thread ID 67596) {eenemeenemuu}
 2011-07-28 [D] Adjusted part of documentation to reflect cpg1.5.x code change (thread ID 71932) {eenemeenemuu}
 2011-07-27 [B] Fixed thumbnail pages dropdown list on album list (thread ID 69511) {eenemeenemuu}
 2011-07-27 [C] Fixed admin tools format in eyeball theme (thread ID 69705) {eenemeenemuu}
