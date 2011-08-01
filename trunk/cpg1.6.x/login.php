@@ -95,6 +95,12 @@ EOT;
 }
 
 if (!$superCage->cookie->keyExists($CONFIG['cookie_name'] . '_data')) {
+
+    if (!$superCage->get->keyExists('reload_once')) {
+        $ref = $CPG_REFERER ? '?referer='.urlencode($CPG_REFERER) : '';
+        cpgRedirectPage('login.php'.$ref);
+    }
+
     $cookie_warning = <<<EOT
                   <tr>
                       <td colspan="2" align="center" class="tableh2">
