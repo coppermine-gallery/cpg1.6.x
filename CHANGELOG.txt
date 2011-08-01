@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2011-08-01 [C] Moved memberlist button to home menu drop-down for theme 'curve' (thread ID 73255) {eenemeenemuu}
 2011-07-28 [B] Fixed first level album thumbnails if thumbnail image doesn't exist {eenemeenemuu}
 2011-07-28 [B] Fixed critical error message for meta album 'lastalb' if thumbnail image doesn't exist (thread ID 67596) {eenemeenemuu}
 2011-07-28 [D] Adjusted part of documentation to reflect cpg1.5.x code change (thread ID 71932) {eenemeenemuu}
