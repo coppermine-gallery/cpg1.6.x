@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2011-08-01 [B] Added workaround for delayed cookie issue during login (thread ID 73016) {eenemeenemuu}
 2011-08-01 [C] Moved memberlist button to home menu drop-down for theme 'curve' (thread ID 73255) {eenemeenemuu}
 2011-07-28 [B] Fixed first level album thumbnails if thumbnail image doesn't exist {eenemeenemuu}
 2011-07-28 [B] Fixed critical error message for meta album 'lastalb' if thumbnail image doesn't exist (thread ID 67596) {eenemeenemuu}
