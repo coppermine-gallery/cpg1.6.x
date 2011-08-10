@@ -481,6 +481,16 @@ case 'album_reset':
 
     } // if reset_rating end
 
+    if ($delete_comments) { // if delete_comments start
+    
+        cpg_db_query("DELETE FROM c USING {$CONFIG['TABLE_COMMENTS']} AS c INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.pid = c.pid WHERE p.aid = $aid");
+
+        if (mysql_affected_rows($CONFIG['LINK_ID'])) {
+            $counter_affected_rows++;
+        }
+        
+    } // if delete_comments end
+
     if ($delete_files) { // if delete_files start
     
         cpg_db_query("DELETE FROM {$CONFIG['TABLE_PICTURES']} WHERE aid = $aid");
