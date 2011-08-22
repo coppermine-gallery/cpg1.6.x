@@ -731,8 +731,14 @@ if ($superCage->get->keyExists('activate')) {
     } else {
         if ($row['user_email_valid'] == 'YES') {
             // activate user (by admin)
-            $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET user_active = 'YES' WHERE user_actkey = '$act_key' LIMIT 1";
-            $user_status = 'active_admin';
+            if (GALLERY_ADMIN_MODE) {
+                $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET user_active = 'YES' WHERE user_actkey = '$act_key' LIMIT 1";
+                $user_status = 'active_admin';
+            } else {
+                msg_box($lang_register_php['information'], $lang_register_php['thank_you_admin_activation'], $lang_common['continue'], 'index.php');
+                pagefooter();
+                exit;
+            }
         } else {
             // email validated by user, send activation link to admin
             $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET user_email_valid = 'YES' WHERE user_actkey = '$act_key' LIMIT 1";

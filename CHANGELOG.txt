@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2011-08-22 [B] Fixed issue with registration process if both email verification and admin activation are enabled {eenemeenemuu}
 2011-08-10 [B] Fixed 'delete all comments' function in album properties {eenemeenemuu}
 2011-08-01 [B] Added workaround for delayed cookie issue during login (thread ID 73016) {eenemeenemuu}
 2011-08-01 [C] Moved memberlist button to home menu drop-down for theme 'curve' (thread ID 73255) {eenemeenemuu}
