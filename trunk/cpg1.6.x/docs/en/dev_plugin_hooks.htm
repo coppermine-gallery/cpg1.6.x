@@ -227,7 +227,7 @@
     <td valign="top">filters $captcha_print when CAPTCHA is enabled and allows you to override the standard CAPTCHA for registrations</td>
     <td valign="top"><textarea class="samplecode" style="width:100%">$captcha_print = CPGPluginAPI::filter('captcha_register_print',$captcha_print);</textarea></td>
   </tr>
-   <tr>
+  <tr>
     <td valign="top">register.php</td>
     <td valign="top"><a name="plugin_hooks_captcha_register_validate"></a><strong>captcha_register_validate</strong><a href="#plugin_hooks_captcha_register_validate" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Filter</td>
@@ -236,12 +236,19 @@
   </tr>
   <tr>
     <td valign="top">register.php</td>
+    <td valign="top"><a name="plugin_hooks_register_form_validate"></a><strong>register_form_validate</strong><a href="#plugin_hooks_register_form_validate" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $error to validate additional submitted registration form data</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$error = CPGPluginAPI::filter('register_form_validate', $error);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">register.php</td>
     <td valign="top"><a name="plugin_hooks_register_form_create"></a><strong>register_form_create</strong><a href="#plugin_hooks_register_form_create" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Filter</td>
     <td valign="top">Add more fields to the registration form</td>
     <td valign="top"><textarea class="samplecode" style="width:100%">$form_data = CPGPluginAPI::filter('register_form_create', $form_data);</textarea></td>
   </tr>
-   <tr>
+  <tr>
     <td valign="top">register.php</td>
     <td valign="top"><a name="plugin_hooks_register_form_submit"></a><strong>register_form_submit</strong><a href="#plugin_hooks_register_form_submit" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Action</td>
@@ -909,6 +916,7 @@ echo $footer;</textarea></td>
             <ul>
                 <li class="floatleft"><a href="#plugin_hooks_register_form_create">register_form_create</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_register_form_submit">register_form_submit</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_register_form_validate">register_form_validate</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_register_user_activation">register_user_activation</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_replace_forbidden_conditions">replace_forbidden_conditions</a></li>
             </ul>

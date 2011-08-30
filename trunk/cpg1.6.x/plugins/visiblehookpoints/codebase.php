@@ -90,6 +90,7 @@ if ($superCage->get->keyExists('hookpoints') || $CONFIG['plugin_visiblehookpoint
         'plugin_install',
         'profile_add_data',
         'register_form_create',
+        'register_form_validate',
         'replace_forbidden_conditions',
         'search_form',
         'smilies_display',

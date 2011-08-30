@@ -571,6 +571,8 @@ function check_user_info(&$error)
         mysql_free_result($result);
     }
 
+    $error = CPGPluginAPI::filter('register_form_validate', $error);
+
     if ($error != '') {
         return false;
     }
