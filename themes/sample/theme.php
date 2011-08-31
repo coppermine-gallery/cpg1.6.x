@@ -4119,9 +4119,28 @@ function theme_display_fullsize_pic()
             cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
         }
         $row = mysql_fetch_assoc($result);
-        $pic_url = get_pic_url($row, 'fullsize');
-        $geom = 'width="' . $row['pwidth'] . '" height="' . $row['pheight'] . '"';
-        $imagedata = array('name' => $row['filename'], 'path' => $pic_url, 'geometry' => $geom);
+        if (is_image($row['filename'])) {
+            $pic_url = get_pic_url($row, 'fullsize');
+            $geom = 'width="' . $row['pwidth'] . '" height="' . $row['pheight'] . '"';
+            $imagedata = array('name' => $row['filename'], 'path' => $pic_url, 'geometry' => $geom);
+        } else {
+            $pic_html = theme_html_picture();
+            if (is_movie($row['filename'])) {
+                $mime_content = cpg_get_type($row['filename']);
+                $ctrl_offset['mov']=15;
+                $ctrl_offset['wmv']=45;
+                $ctrl_offset['swf']=0;
+                $ctrl_offset['rm']=0;
+                $ctrl_offset_default=45;
+                $ctrl_height = (isset($ctrl_offset[$mime_content['extension']]))?($ctrl_offset[$mime_content['extension']]):$ctrl_offset_default;
+                preg_match('/width="([0-9]+)".*height="([0-9]+)"/', $pic_html, $matches);
+                $width = $matches[1] + $CONFIG['fullsize_padding_x'];
+                $height = $matches[2] + $CONFIG['fullsize_padding_y']+ $ctrl_height;
+                $resize_window = '<script type="text/javascript">window.resizeTo('.$width.', '.$height.')</script>';
+            }
+            preg_match('/<td align="center" style="{SLIDESHOW_STYLE}">.*(.*)<\/td>/Us', $pic_html, $matches);
+            $pic_html = $matches[1].$resize_window;
+        }
     }
     if ((!USER_ID && $CONFIG['allow_unlogged_access'] <= 2) || (USER_ID && USER_ACCESS_LEVEL <= 2)) {
         // adjust the size of the window if we don't have to catter for a full-size pop-up, but only a text message
@@ -4151,43 +4170,47 @@ function theme_display_fullsize_pic()
     <body style="margin:0px; padding:0px; background-color: gray;">
 
 EOT;
-    if ($CONFIG['transparent_overlay'] == 1) {
-        $fullsize_html .= <<<EOT
-        <table cellpadding="0" cellspacing="0" align="center" style="padding:0px;">
-            <tr>
-
-EOT;
-        $fullsize_html .=  '<td align="center" valign="middle" background="' . htmlspecialchars($imagedata['path']) . '" ' . $imagedata['geometry'] . ' class="image">';
-        $fullsize_html .=  '<div id="content">';
-        $fullsize_html .=  '<a href="javascript: window.close()" style="border:none"><img src="images/image.gif?id='
-                . floor(rand()*1000+rand())
-                . '&amp;fullsize=yes" '
-                . $imagedata['geometry']
-                . ' alt="'
-                . htmlspecialchars($imagedata['name'])
-                . '" title="'
-                . htmlspecialchars($imagedata['name'])
-                . $LINEBREAK . $lang_fullsize_popup['click_to_close']
-                . '" /></a><br />' . $LINEBREAK;
-        $fullsize_html .=  <<<EOT
-                    </div>
-                </td>
-            </tr>
-        </table>
-
-EOT;
+    if ($pic_html) {
+        $fullsize_html .= $pic_html;
     } else {
-        $fullsize_html .=  '        <div id="content">'.$LINEBREAK;
-        $fullsize_html .=  '<a href="javascript: window.close()"><img src="'
-        . htmlspecialchars($imagedata['path']) . '" '
-        . $imagedata['geometry']
-        . ' id="fullsize_image" alt="'
-        . htmlspecialchars($imagedata['name'])
-        . '" title="'
-        . htmlspecialchars($imagedata['name'])
-        . $LINEBREAK . $lang_fullsize_popup['click_to_close']
-        . '" /></a><br />' . $LINEBREAK
-        . '        </div>'.$LINEBREAK;
+        if ($CONFIG['transparent_overlay'] == 1) {
+            $fullsize_html .= <<<EOT
+            <table cellpadding="0" cellspacing="0" align="center" style="padding:0px;">
+                <tr>
+
+EOT;
+            $fullsize_html .=  '<td align="center" valign="middle" background="' . htmlspecialchars($imagedata['path']) . '" ' . $imagedata['geometry'] . ' class="image">';
+            $fullsize_html .=  '<div id="content">';
+            $fullsize_html .=  '<a href="javascript: window.close()" style="border:none"><img src="images/image.gif?id='
+                    . floor(rand()*1000+rand())
+                    . '&amp;fullsize=yes" '
+                    . $imagedata['geometry']
+                    . ' alt="'
+                    . htmlspecialchars($imagedata['name'])
+                    . '" title="'
+                    . htmlspecialchars($imagedata['name'])
+                    . $LINEBREAK . $lang_fullsize_popup['click_to_close']
+                    . '" /></a><br />' . $LINEBREAK;
+            $fullsize_html .=  <<<EOT
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+EOT;
+        } else {
+            $fullsize_html .=  '        <div id="content">'.$LINEBREAK;
+            $fullsize_html .=  '<a href="javascript: window.close()"><img src="'
+            . htmlspecialchars($imagedata['path']) . '" '
+            . $imagedata['geometry']
+            . ' id="fullsize_image" alt="'
+            . htmlspecialchars($imagedata['name'])
+            . '" title="'
+            . htmlspecialchars($imagedata['name'])
+            . $LINEBREAK . $lang_fullsize_popup['click_to_close']
+            . '" /></a><br />' . $LINEBREAK
+            . '        </div>'.$LINEBREAK;
+        }
     }
     $fullsize_html .= <<<EOT
   </body>
