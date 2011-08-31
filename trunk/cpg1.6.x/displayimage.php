@@ -451,6 +451,7 @@ if (isset($CURRENT_PIC_DATA)) {
     
 if ($superCage->get->keyExists('fullsize')) {
 
+    $CURRENT_PIC_DATA = mysql_fetch_assoc(cpg_db_query("SELECT * FROM {$CONFIG['TABLE_PICTURES']} AS p " . "WHERE pid='$pid' $FORBIDDEN_SET"));
     theme_display_fullsize_pic();
 
 } elseif ($superCage->get->keyExists('slideshow')) {
