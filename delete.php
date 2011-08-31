@@ -18,6 +18,7 @@
 define('IN_COPPERMINE', true);
 define('DELETE_PHP', true);
 define('ALBMGR_PHP', true);
+define('PROFILE_PHP', true);
 
 require('include/init.inc.php');
 
@@ -878,7 +879,7 @@ case 'user':
 
             foreach ($users_scheduled_for_action as $key) {
             
-                $result = cpg_db_query("SELECT user_name, user_active FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '$key'");
+                $result = cpg_db_query("SELECT user_name, user_active, user_email, user_actkey FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '$key'");
 
                 if (!mysql_num_rows($result)) {
                     print '<tr><td class="tableb" colspan="2">'.$lang_delete_php['err_unknown_user'].'</td>';
@@ -897,8 +898,21 @@ case 'user':
                         print $lang_delete_php['user_already_active'];
                     } else {
                         // activate this user
-                        cpg_db_query("UPDATE {$CONFIG['TABLE_USERS']} SET user_active = 'YES' WHERE user_id = '$key'");
+                        cpg_db_query("UPDATE {$CONFIG['TABLE_USERS']} SET user_active = 'YES', user_actkey = '' WHERE user_id = '$key'");
                         print $lang_delete_php['activated'];
+                        
+                        if ($user_data['user_actkey']) {
+                            // send activation confirmation email (only once)
+                            require('include/mailer.inc.php');
+                            
+                            $template_vars = array(
+                                '{SITE_LINK}' => $CONFIG['site_url'],
+                                '{USER_NAME}' => $user_data['user_name'],
+                                '{SITE_NAME}' => $CONFIG['gallery_name'],
+                            );
+                            
+                            cpg_mail($user_data['user_email'], sprintf($lang_register_php['notify_user_email_subject'], $CONFIG['gallery_name']), nl2br(strtr($lang_register_php['activated_email'], $template_vars)));
+                        }
                     }
                     
                     print '</strong></td>';
