@@ -1013,6 +1013,9 @@ function update_user($user_id)
     if (utf_strlen($user_name) < 2) cpg_die(ERROR, $lang_register_php['username_warning2'], __FILE__, __LINE__);
         if ($user_password && utf_strlen($user_password) < 2) cpg_die(ERROR, $lang_register_php['password_warning1'], __FILE__, __LINE__);
 
+    // Save old user data (we need it later to determine if we need to send the activation confirmation email)
+    $user_data = mysql_fetch_assoc(cpg_db_query("SELECT user_name, user_active, user_email, user_actkey FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '$user_id'"));
+
     if (is_array($group_list)) {
         $user_group_list = '';
         foreach($group_list as $group) $user_group_list .= ($group != $user_group) ? $group . ',' : '';
@@ -1035,6 +1038,7 @@ function update_user($user_id)
           "user_group_list = '$user_group_list'";
 
     if (!empty($user_password)) $sql_update .= ", user_password = '".(md5($user_password))."'";
+    if ($user_active == 'YES') $sql_update .= ", user_actkey = ''";
     $sql_update .= " WHERE user_id = '$user_id'";
 
     cpg_db_query($sql_update);
@@ -1055,6 +1059,17 @@ function update_user($user_id)
         if (!cpg_mail(trim($user_email), $lang_usermgr_php['send_login_email_subject'], nl2br(strtr($lang_usermgr_php['send_login_data_email'], $template_vars)))) {
             cpg_die(CRITICAL_ERROR, $lang_usermgr_php['failed_sending_email'], __FILE__, __LINE__);
         }
+    } elseif ($user_data['user_actkey'] && $user_data['user_active'] == 'NO' && $user_active == 'YES') {
+        // send activation confirmation email (only once)
+        require('include/mailer.inc.php');
+        
+        $template_vars = array(
+            '{SITE_LINK}' => $CONFIG['site_url'],
+            '{USER_NAME}' => $user_data['user_name'],
+            '{SITE_NAME}' => $CONFIG['gallery_name'],
+        );
+        
+        cpg_mail($user_data['user_email'], sprintf($lang_register_php['notify_user_email_subject'], $CONFIG['gallery_name']), nl2br(strtr($lang_register_php['activated_email'], $template_vars)));
     }
 }
 

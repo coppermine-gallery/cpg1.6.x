@@ -724,17 +724,17 @@ if ($superCage->get->keyExists('activate')) {
 
     if ($CONFIG['reg_requires_valid_email'] && !$CONFIG['admin_activation']) {
          // activate user (by user)
-        $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET user_active = 'YES' WHERE user_actkey = '$act_key' LIMIT 1";
+        $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET user_active = 'YES', user_actkey = '' WHERE user_actkey = '$act_key' LIMIT 1";
         $user_status = 'active_user';
     } elseif ($CONFIG['admin_activation'] && !$CONFIG['reg_requires_valid_email']) {
         // activate user (by admin)
-        $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET user_active = 'YES' WHERE user_actkey = '$act_key' LIMIT 1";
+        $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET user_active = 'YES', user_actkey = '' WHERE user_actkey = '$act_key' LIMIT 1";
         $user_status = 'active_admin';
     } else {
         if ($row['user_email_valid'] == 'YES') {
             // activate user (by admin)
             if (GALLERY_ADMIN_MODE) {
-                $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET user_active = 'YES' WHERE user_actkey = '$act_key' LIMIT 1";
+                $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET user_active = 'YES', user_actkey = '' WHERE user_actkey = '$act_key' LIMIT 1";
                 $user_status = 'active_admin';
             } else {
                 msg_box($lang_register_php['information'], $lang_register_php['thank_you_admin_activation'], $lang_common['continue'], 'index.php');
