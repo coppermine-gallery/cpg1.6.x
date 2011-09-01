@@ -26,7 +26,7 @@ Changelog
 2011-08-31 [A] Also send activation confirmation email if the user has been activated via the user manager (thread ID 69706) {eenemeenemuu}
 2011-08-31 [B] Fixed display of non-image files when 'Go directly from thumbnail to full-sized image' is enabled in config (thread ID 72456) {eenemeenemuu}
 2011-08-30 [A] Added plugin hook 'register_form_validate' {eenemeenemuu}
-2011-08-22 [B] Fixed issue with registration process if both email verification and admin activation are enabled {eenemeenemuu}
+2011-08-22 [S] Fixed issue with registration process if both email verification and admin activation are enabled {eenemeenemuu}
 2011-08-10 [B] Fixed 'delete all comments' function in album properties {eenemeenemuu}
 2011-08-01 [B] Added workaround for delayed cookie issue during login (thread ID 73016) {eenemeenemuu}
 2011-08-01 [C] Moved memberlist button to home menu drop-down for theme 'curve' (thread ID 73255) {eenemeenemuu}
