@@ -605,6 +605,8 @@ case 'picture':
         $picture_name = $superCage->files->getRaw("/userpicture/name");
     }
 
+    $picture_name = CPGPluginAPI::filter('upload_file_name', $picture_name);
+
     // Replace forbidden chars (including white spaces and special chars) with underscores
     $picture_name = replace_forbidden($picture_name);
 
