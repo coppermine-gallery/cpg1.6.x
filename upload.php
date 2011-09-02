@@ -878,6 +878,8 @@ EOT;
         $picture_name = $superCage->files->getRaw("/Filedata/name");
     }
 
+    $picture_name = CPGPluginAPI::filter('upload_file_name', $picture_name);
+
     // Create the holder $picture_name by translating the file name. Translate any forbidden character into an underscore.
     $picture_name = replace_forbidden($picture_name);
 
