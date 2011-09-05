@@ -47,9 +47,9 @@ $icon_array['config']  = cpg_fetch_icon('config', 2);
 pageheader($lang_pluginmgr_php['configure_plugin'] . ': ' . $lang_plugin_php['onlinestats_name']);
 $contentOfTheMainpage_array = explode('/',$CONFIG['main_page_layout']);
 if (in_array('onlinestats', $contentOfTheMainpage_array) != TRUE){
-	$CONFIG['main_page_layout'] .= '/onlinestats';
-	cpg_db_query("UPDATE {$CONFIG['TABLE_CONFIG']} SET value='{$CONFIG['main_page_layout']}' WHERE name='main_page_layout'");
-	msg_box('', $lang_plugin_php['onlinestats_config_extra'], '', '', 'warning');
+    $CONFIG['main_page_layout'] .= '/onlinestats';
+    cpg_db_query("UPDATE {$CONFIG['TABLE_CONFIG']} SET value='{$CONFIG['main_page_layout']}' WHERE name='main_page_layout'");
+    msg_box('', $lang_plugin_php['onlinestats_config_extra'], '', '', 'warning');
 }
 if ($changes_message != '') {
     msg_box('', $changes_message, '', '', 'success');

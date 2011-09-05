@@ -21,4 +21,4 @@ CREATE TABLE IF NOT EXISTS `CPG_mod_online` (
   `last_action` datetime default NULL,
 PRIMARY KEY  (`user_id`,`user_ip`(15))
 );
-INSERT IGNORE INTO CPG_config ( `name` , `value` ) VALUES ('record_online_users', ''), ('record_online_date', '');
+INSERT IGNORE INTO CPG_config ( `name` , `value` ) VALUES ('record_online_users', '1'), ('record_online_date', UNIX_TIMESTAMP());
