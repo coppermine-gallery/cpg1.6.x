@@ -514,7 +514,7 @@ case 'album_reset':
 
 case 'picture':
 
-    if (!USER_CAN_UPLOAD_PICTURES) {
+    if (!USER_CAN_UPLOAD_PICTURES && !USER_CAN_CREATE_ALBUMS) {
         if ($CONFIG['log_mode'] != 0) {
                 log_write('Denied privileged access to db_input.php (upload picture) for user '.$USER_DATA['user_name'].' at ' . $hdr_ip, CPG_SECURITY_LOG);
         }
