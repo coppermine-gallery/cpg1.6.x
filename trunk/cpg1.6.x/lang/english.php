@@ -422,6 +422,7 @@ $lang_albmgr_php['category_change'] = 'If you change the category, your changes 
 $lang_albmgr_php['page_change'] = 'If you follow this link, your changes will be lost!';
 $lang_albmgr_php['cancel'] = 'Cancel';
 $lang_albmgr_php['submit_reminder'] = 'Sorting changes are not saved until you click &quot;Apply changes&quot;.';
+$lang_albmgr_php['upload_files'] = 'Upload files to this album'; // cpg1.6.x
 }
 
 // ------------------------------------------------------------------------- //
@@ -2009,7 +2010,7 @@ $lang_search_new_php['insert_selected'] = 'Insert selected files';
 $lang_search_new_php['no_pic_found'] = 'No new file was found';
 $lang_search_new_php['be_patient'] = 'Please be patient, the script needs time to add the files';
 $lang_search_new_php['no_album'] = 'no album selected';
-$lang_search_new_php['no_file'] = 'no file selected'; // cpg1.6.x
+$lang_search_new_php['no_file'] = 'no file selected'; //cpg1.6
 $lang_search_new_php['result_icon'] = 'click for details or to reload';
 $lang_search_new_php['notes'] = <<< EOT
     <ul>
