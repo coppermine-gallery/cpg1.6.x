@@ -985,6 +985,21 @@ EOT;
             fwrite($fp, ' ');
             fclose($fp);
         }
+        if ($CONFIG['upload_create_album_directory']) {
+            $filepath .= '/'.$album;
+            $dest_dir .= '/'.$album;
+            if (!is_dir($dest_dir)) {
+                mkdir($dest_dir, octdec($CONFIG['default_dir_mode']));
+                if (!is_dir($dest_dir)) {
+                    echo sprintf('error|'.$lang_db_input_php['err_mkdir'].'|1', $dest_dir);
+                    exit;
+                }
+                @chmod($dest_dir, octdec($CONFIG['default_dir_mode'])); //silence the output in case chmod is disabled
+                $fp = fopen($dest_dir . '/index.php', 'w');
+                fwrite($fp, ' ');
+                fclose($fp);
+            }
+        }
         $dest_dir .= '/';
         $filepath .= '/';
     } else {
