@@ -206,6 +206,7 @@ INSERT INTO CPG_config VALUES ('unsharp_amount', '120');
 INSERT INTO CPG_config VALUES ('unsharp_radius', '0.5');
 INSERT INTO CPG_config VALUES ('unsharp_threshold', '3');
 INSERT INTO CPG_config VALUES ('upl_notify_admin_email', '0');
+INSERT INTO CPG_config VALUES ('upload_create_album_directory', '1');
 INSERT INTO CPG_config VALUES ('upload_mechanism', 'swfupload');
 INSERT INTO CPG_config VALUES ('user_field1_name', '');
 INSERT INTO CPG_config VALUES ('user_field2_name', '');

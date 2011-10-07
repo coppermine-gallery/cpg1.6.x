@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2011-10-07 [A] Create sub-directory named according to the album ID in users' upload directories during HTTP upload {eenemeenemuu}
 2011-10-07 [B] Updated embedded jQuery library from version 1.4.2 to 1.4.4 {eenemeenemuu}
 2011-10-07 [A] Added upload button after each album name in album manager {eenemeenemuu}
 2011-09-16 [B] Fixed simple upload process when users can just upload to their personal gallery (thread ID 73570) {eenemeenemuu}

@@ -16,3 +16,5 @@
 
 # The following line has to be removed when the moderator group feature will be re-enabled!
 UPDATE CPG_albums SET moderator_group = 0;
+
+INSERT INTO CPG_config VALUES ('upload_create_album_directory', '1');
