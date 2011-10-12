@@ -168,6 +168,7 @@ EOT;
             echo <<<EOT
         <tr>
             <td width="90%" class="{$row_style_class}">
+                <a name="{$pluginPath}" />
                 <table border="0" width="100%" cellspacing="0" cellpadding="0" class="maintable">
                     <tr>
                         <td colspan="2" class="tableh1">{$name} ({$pluginPath}): {$lang_pluginmgr_php['vers']}$version</td>
@@ -200,7 +201,7 @@ EOT;
                 $up = cpg_fetch_icon('up', 0);
                 echo <<<EOT
             <td width="3%" align="center" valign="middle">
-                <a href="pluginmgr.php?op=moveu&amp;p={$thisplugin['plugin_id']}&amp;form_token={$form_token}&amp;timestamp={$timestamp}">{$up}</a>
+                <a href="pluginmgr.php?op=moveu&amp;p={$thisplugin['plugin_id']}&amp;form_token={$form_token}&amp;timestamp={$timestamp}#{$pluginPath}">{$up}</a>
             </td>
 EOT;
             } else {
@@ -211,7 +212,7 @@ EOT;
                 $down = cpg_fetch_icon('down', 0); 
                 echo <<<EOT
             <td width="3%" align="center" valign="middle">
-                <a href="pluginmgr.php?op=moved&amp;p={$thisplugin['plugin_id']}&amp;form_token={$form_token}&amp;timestamp={$timestamp}">{$down}</a>
+                <a href="pluginmgr.php?op=moved&amp;p={$thisplugin['plugin_id']}&amp;form_token={$form_token}&amp;timestamp={$timestamp}#{$pluginPath}">{$down}</a>
             </td>
 EOT;
             } else {
