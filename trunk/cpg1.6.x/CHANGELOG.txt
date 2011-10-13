@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2011-10-13 [B] Fixed infinite loop for delayed cookie issue workaround {eenemeenemuu}
 2011-10-12 [A] Added anchors on plugin manager {eenemeenemuu}
 2011-10-07 [A] Create sub-directory named according to the album ID in users' upload directories during HTTP upload {eenemeenemuu}
 2011-10-07 [B] Updated embedded jQuery library from version 1.4.2 to 1.4.4 {eenemeenemuu}

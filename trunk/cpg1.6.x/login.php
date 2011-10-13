@@ -97,7 +97,7 @@ EOT;
 if (!$superCage->cookie->keyExists($CONFIG['cookie_name'] . '_data')) {
 
     if (!$superCage->get->keyExists('reload_once')) {
-        $ref = $CPG_REFERER ? '?referer='.urlencode($CPG_REFERER) : '';
+        $ref = $CPG_REFERER ? '?reload_once&referer='.urlencode($CPG_REFERER) : '?reload_once';
         cpgRedirectPage('login.php'.$ref);
     }
 
