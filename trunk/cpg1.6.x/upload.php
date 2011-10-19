@@ -616,7 +616,7 @@ if (!count($public_albums_list) && !count($user_albums_list)) {
 }
 
 // Assign maximum file size for browser controls.
-$max_file_size = $CONFIG['max_upl_size'] << 10;
+$max_file_size = $CONFIG['max_upl_size'] * 1024;
 
 // If no form inputs to process, create the upload forms using the upload congfiguration.
 if (!$superCage->post->keyExists('process') && !$superCage->post->keyExists('plugin_process')) {
