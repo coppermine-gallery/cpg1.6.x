@@ -745,7 +745,7 @@ function list_albums()
     $limit = "LIMIT " . $lower_limit . "," . ($upper_limit - $lower_limit);
 
     if (USER_ADMIN_MODE && $cat == (USER_ID + FIRST_USER_CAT)) {
-        $sql = 'SELECT a.aid, a.title, a.description, a.thumb, category, visibility, a.owner, a.keyword, filepath, ' . 'filename, url_prefix, pwidth, pheight ' . 'FROM ' . $CONFIG['TABLE_ALBUMS'] . ' as a ' . 'LEFT JOIN ' . $CONFIG['TABLE_PICTURES'] . ' as p ' . 'ON a.thumb=p.pid ' . 'WHERE a.owner=' . $USER_DATA['user_id'] . $album_filter . ' ORDER BY a.category DESC , a.pos ' . $limit;
+        $sql = 'SELECT a.aid, a.title, a.description, a.thumb, a.keyword, category, visibility, filepath, filename, url_prefix, pwidth, pheight, a.owner FROM ' . $CONFIG['TABLE_ALBUMS'] . ' AS a LEFT JOIN ' . $CONFIG['TABLE_PICTURES'] . ' AS p ON a.thumb=p.pid WHERE a.owner=' . $USER_DATA['user_id'] . $album_filter . ' ORDER BY a.category DESC , a.pos ' . $limit;
         $alb_thumbs_q = cpg_db_query($sql);
         $alb_thumbs = cpg_db_fetch_rowset($alb_thumbs_q);
         mysql_free_result($alb_thumbs_q);
@@ -762,27 +762,36 @@ function list_albums()
                 $alb_thumbs[$key]['title'] = $cat_names[$key]['cat_name'];
             }
         }
+
+        //This query will fetch album stats and keywords for the albums
+        $sql = "SELECT a.aid, count( p.pid ) AS pic_count, max( p.pid ) AS last_pid, max( p.ctime ) AS last_upload, a.keyword, a.alb_hits"
+                ." FROM {$CONFIG['TABLE_ALBUMS']} AS a "
+                ." LEFT JOIN {$CONFIG['TABLE_PICTURES']} AS p ON a.aid = p.aid AND p.approved = 'YES' "
+                ." WHERE a.owner = {$USER_DATA['user_id']} $album_filter GROUP BY a.aid ORDER BY a.pos, a.aid $limit";
+        $alb_stats_q = cpg_db_query($sql);
+        $alb_stats = cpg_db_fetch_rowset($alb_stats_q);
+        mysql_free_result($alb_stats_q);
     } else {
         $sql = 'SELECT a.aid, a.title, a.description, a.thumb, a.keyword, category, visibility, filepath, filename, url_prefix, pwidth, pheight, a.owner ' 
-            . ' FROM ' . $CONFIG['TABLE_ALBUMS'] . ' as a ' 
-            . ' LEFT JOIN ' . $CONFIG['TABLE_PICTURES'] . ' as p ' . 'ON a.thumb=p.pid ' 
+            . ' FROM ' . $CONFIG['TABLE_ALBUMS'] . ' AS a ' 
+            . ' LEFT JOIN ' . $CONFIG['TABLE_PICTURES'] . ' AS p ' . 'ON a.thumb=p.pid ' 
             . ' WHERE a.category=' . $cat . $album_filter 
             . ' ORDER BY a.pos, a.aid ' . $limit;
         $alb_thumbs_q = cpg_db_query($sql);
         $alb_thumbs = cpg_db_fetch_rowset($alb_thumbs_q);
         mysql_free_result($alb_thumbs_q);
+
+        //This query will fetch album stats and keywords for the albums
+        $sql = "SELECT a.aid, count( p.pid ) AS pic_count, max( p.pid ) AS last_pid, max( p.ctime ) AS last_upload, a.keyword, a.alb_hits"
+                ." FROM {$CONFIG['TABLE_ALBUMS']} AS a "
+                ." LEFT JOIN {$CONFIG['TABLE_PICTURES']} AS p ON a.aid = p.aid AND p.approved = 'YES' "
+                ." WHERE a.category = $cat $album_filter GROUP BY a.aid ORDER BY a.pos, a.aid $limit";
+        $alb_stats_q = cpg_db_query($sql);
+        $alb_stats = cpg_db_fetch_rowset($alb_stats_q);
+        mysql_free_result($alb_stats_q);
     }
 
     $disp_album_count = count($alb_thumbs);
-
-    //This query will fetch album stats and keywords for the albums
-    $sql = "SELECT a.aid, count( p.pid ) AS pic_count, max( p.pid ) AS last_pid, max( p.ctime ) AS last_upload, a.keyword, a.alb_hits"
-            ." FROM {$CONFIG['TABLE_ALBUMS']} AS a "
-            ." LEFT JOIN {$CONFIG['TABLE_PICTURES']} AS p ON a.aid = p.aid AND p.approved = 'YES' "
-            ." WHERE a.category = $cat $album_filter GROUP BY a.aid ORDER BY a.pos, a.aid $limit";
-    $alb_stats_q = cpg_db_query($sql);
-    $alb_stats = cpg_db_fetch_rowset($alb_stats_q);
-    mysql_free_result($alb_stats_q);
 
     $approved = 'AND approved=\'YES\'';
     $forbidden_set_string = ((count($FORBIDDEN_SET_DATA) > 0) ? ' AND aid NOT IN (' . implode(', ', $FORBIDDEN_SET_DATA) . ')' : '');
