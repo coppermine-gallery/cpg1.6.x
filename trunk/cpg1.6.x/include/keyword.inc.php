@@ -70,7 +70,7 @@ if (mysql_num_rows($result)) {
     if ($keywords_array[$i]) {     // Eliminates Null Keywords
 
         $fontSize = (10 + ($keyword_count[$keywords_array[$i]] - $minQuantity) * $step);
-        $keyword_param = urlencode(str_replace(' ','+',$keywords_array[$i]));
+        $keyword_param = urlencode($keywords_array[$i]);
         echo "<a href=\"thumbnails.php?album=search&amp;keywords=on&amp;search=".$keyword_param."\" style=\"font-size: {$fontSize}px;\">$keywords_array[$i]</a>";
         if ($i<$count-1) {                     // Don't keep space after last keyword
             echo " ";
