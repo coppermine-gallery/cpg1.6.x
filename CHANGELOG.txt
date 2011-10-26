@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2011-10-26 [B] Fixed clickable keywords with spaces (thread ID 73804) {eenemeenemuu}
 2011-10-19 [B] Fixed album thumbnails for public albums in 'My gallery' view for regular users {eenemeenemuu}
 2011-10-19 [B] Fixed issue with very big 'Max size for uploaded files' values (thread ID 73722) {eenemeenemuu}
 2011-10-17 [B] Disallow dots in cookie name (thread ID 73655) {eenemeenemuu}
