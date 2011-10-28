@@ -2269,8 +2269,9 @@ function get_pic_pos($album, $pid)
             INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS r ON r.aid = p.aid
             $RESTRICTEDWHERE
             AND approved = 'YES'
-            AND mtime > '$mtime'
-            OR mtime = '$mtime' AND pid < $pid";
+            AND hits > 0
+            AND (mtime > '$mtime'
+            OR mtime = '$mtime' AND pid < $pid)";
 
             $result = cpg_db_query($query);
 
