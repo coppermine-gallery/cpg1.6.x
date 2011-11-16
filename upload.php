@@ -740,7 +740,7 @@ EOT;
         $form_array = array(
             sprintf($lang_upload_php['max_fsize'], cpg_format_bytes($CONFIG['max_upl_size'] * 1024)),
             array($lang_common['album'], 'album', 2),
-            array('MAX_FILE_SIZE', $max_file_size, 4),
+            //array('MAX_FILE_SIZE', $max_file_size, 4), // removed to avoid misleading error message (thread ID 61711)
             array($lang_upload_php['picture'], 'userpicture', 1, 1)
         );
         if (USER_ID > 0 || $CONFIG['allow_guests_enter_file_details'] == 1) {

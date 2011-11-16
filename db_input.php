@@ -665,7 +665,7 @@ case 'picture':
 
     // Get picture information
     // Check that picture file size is lower than the maximum allowed
-    if (filesize($uploaded_pic) > ($CONFIG['max_upl_size'] << 10)) {
+    if (filesize($uploaded_pic) > ($CONFIG['max_upl_size'] * 1024)) {
 
         @unlink($uploaded_pic);
         cpg_die(ERROR, sprintf($lang_db_input_php['err_imgsize_too_large'], $CONFIG['max_upl_size']), __FILE__, __LINE__);
