@@ -985,6 +985,7 @@ EOT;
             fwrite($fp, ' ');
             fclose($fp);
         }
+        // Upload pictures in a sub-directory named according to the album ID
         if ($CONFIG['upload_create_album_directory']) {
             $filepath .= '/'.$album;
             $dest_dir .= '/'.$album;

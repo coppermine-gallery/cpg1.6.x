@@ -584,7 +584,8 @@ case 'picture':
             fwrite($fp, ' ');
             fclose($fp);
         }
-        
+
+        // Upload pictures in a sub-directory named according to the album ID
         if ($CONFIG['upload_create_album_directory']) {
             $filepath .= '/'.$album;
             $dest_dir .= '/'.$album;
@@ -612,8 +613,6 @@ case 'picture':
         $filepath = $CONFIG['userpics'];
         $dest_dir = $CONFIG['fullpath'] . $filepath;
     }
-
-    // Upload pictures in a sub-folder
 
     // Check that target dir is writable
     if (!is_writable($dest_dir)) {
