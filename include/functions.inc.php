@@ -1883,8 +1883,8 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         $album_thumbs = array();
         foreach ($rowset_aid as $index => $row) {
 
-            // Check if album thumbnail exists, if not, set to random
-            if ($row['thumb'] > 0 && !in_array($rowset_available_pids, $row['thumb'])) {
+            // Check if album thumbnail exists, if not, set to last uploaded
+            if ($row['thumb'] > 0 && !in_array($row['thumb'], $rowset_available_pids)) {
                 $row['thumb'] = 0;
             }
 
