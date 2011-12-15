@@ -999,6 +999,12 @@ function update_user($user_id)
         cpg_db_query("INSERT INTO {$CONFIG['TABLE_USERS']} (user_regdate, user_profile6) VALUES (NOW(), '')");
         $user_id = mysql_insert_id();
         log_write('New user "'.$user_name.'" created', CPG_ACCESS_LOG);
+
+        // Create a personal album if corresponding option is enabled
+        if ($CONFIG['personal_album_on_registration'] == 1) {
+            $catid = $user_id + FIRST_USER_CAT;
+            cpg_db_query("INSERT INTO {$CONFIG['TABLE_ALBUMS']} (`title`, `category`) VALUES ('$user_name', $catid)");
+        }
     }
 
     $sql = "SELECT user_id FROM {$CONFIG['TABLE_USERS']} WHERE user_name = '$user_name' AND user_id != $user_id";

@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2011-12-15 [A] Create user album in personal gallery when user is created via the user manager (thread ID 74013) {eenemeenemuu}
 2011-11-24 [A] Use selected album thumbnail for 'lastup' meta album (thread ID 73946) {eenemeenemuu}
 2011-11-16 [B] Fixed misleading error message when uploading files that exceed the file size limit with the simple upload form (thread ID 61711) {eenemeenemuu}
 2011-10-28 [B] Fixed critical error for 'lasthits' meta album (thread ID 73801) {eenemeenemuu}
