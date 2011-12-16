@@ -552,7 +552,7 @@ $config_data = array(
     'ecard_captcha' => array(
       'type'          => 'radio',
       'default_value' => '1',
-      'help_link'     => 'f=configuration.htm&amp;as=admin_comment_captcha_start&amp;ae=admin_comment_captcha_end',
+      'help_link'     => 'f=configuration.htm&amp;as=admin_ecard_captcha_start&amp;ae=admin_ecard_captcha_end',
       'options'       => array(
                            $lang_common['no'],
                            $lang_common['yes'].': '.$lang_admin_php['debug_everyone'],
