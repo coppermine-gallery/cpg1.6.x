@@ -18,3 +18,4 @@
 UPDATE CPG_albums SET moderator_group = 0;
 
 INSERT INTO CPG_config VALUES ('upload_create_album_directory', '1');
+INSERT INTO CPG_config VALUES ('ecard_captcha', '0');
