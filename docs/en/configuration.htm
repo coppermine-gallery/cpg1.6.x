@@ -907,6 +907,20 @@
 
     <a name="admin_image_slideshow_hits_end"></a>
     <br clear="all" style="clear:both;" />
+    <a name="admin_image_ecard_captcha_start"></a><h3>Display Captcha (Visual Confirmation) for sending Ecards<a href="#admin_image_ecard_captcha_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <div class="cpg_summary">
+        Default value: <input type="radio" class="radio" checked="checked" id="comment_captcha" /><label for="comment_captcha" class="clickable_option">Yes: Everyone</label><br />
+        Recommended value: <input type="radio" class="radio" checked="checked" id="comment_captcha_r" /><label for="comment_captcha_r" class="clickable_option">Yes: Everyone</label><br />
+        Database record name: <tt class="code">ecard_captcha</tt><br />
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Comment settings &rarr; Display Captcha (Visual Confirmation) for sending Ecards
+    </div>
+    <p>To prevent spam ecards sent by bots (automated scripts), this toggle will display an image at the ecard form with some random letters on it. The visitor is required to enter those letters into a textfield to prove that he's actually a human and not just some dumb bot that drops spam. It's recommended to enable Captchas for anonymous comments (guests who are not logged in).</p>
+    <p>Note: this setting doesn't determine if guests can actually send ecards at all (this is instead being determined on the groups page).</p>
+    <p class="cpg_message_validation">Captchas will only work if GD2 is available on your server with FreeType support enabled.</p>
+
+    
+    <a name="admin_image_ecard_captcha_end"></a>
+    <br clear="all" style="clear:both;" />
     <a name="admin_image_ecard_flash_start"></a><h3>Allow Flash in Ecards<a href="#admin_image_ecard_flash_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
