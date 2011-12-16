@@ -549,6 +549,16 @@ $config_data = array(
       'default_value' => '1',
       'help_link'     => 'f=configuration.htm&amp;as=admin_image_slideshow_hits&amp;ae=admin_image_slideshow_hits_end',
     ),
+    'ecard_captcha' => array(
+      'type'          => 'radio',
+      'default_value' => '1',
+      'help_link'     => 'f=configuration.htm&amp;as=admin_comment_captcha_start&amp;ae=admin_comment_captcha_end',
+      'options'       => array(
+                           $lang_common['no'],
+                           $lang_common['yes'].': '.$lang_admin_php['debug_everyone'],
+                           $lang_common['yes'].': '.$lang_admin_php['guests_only'],
+                         ),
+    ),
     'ecard_flash' => array(
       'type'            => 'checkbox',
       'default_value'   => '0',

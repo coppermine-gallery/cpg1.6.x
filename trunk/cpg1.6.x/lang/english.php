@@ -737,6 +737,7 @@ $lang_admin_php['slideshow_interval'] = 'Slideshow interval';
 $lang_admin_php['milliseconds'] = 'milliseconds';
 $lang_admin_php['slideshow_interval_detail'] = '1 second = 1000 milliseconds';
 $lang_admin_php['slideshow_hits'] = 'Count hits in slideshow';
+$lang_admin_php['ecard_captcha'] = 'Display Captcha (Visual Confirmation) for sending Ecards'; // cpg 1.6
 $lang_admin_php['ecard_flash'] = 'Allow Flash in Ecards';
 $lang_admin_php['not_recommended'] = 'not recommended';
 $lang_admin_php['recommended'] = 'recommended';

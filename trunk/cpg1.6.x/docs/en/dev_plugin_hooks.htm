@@ -145,6 +145,20 @@
     <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('post_breadcrumb',null);</textarea></td>
   </tr>
   <tr>
+    <td valign="top">ecard.php</td>
+    <td valign="top"><a name="plugin_hooks_captcha_ecard_print"></a><strong>captcha_ecard_print</strong><a href="#plugin_hooks_captcha_ecard_print" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $captcha_print when CAPTCHA is enabled and allows you to override the standard CAPTCHA for ecards</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$captcha_print = CPGPluginAPI::filter('captcha_ecard_print', $captcha_print);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">ecard.php</td>
+    <td valign="top"><a name="plugin_hooks_captcha_ecard_validate"></a><strong>captcha_ecard_validate</strong><a href="#plugin_hooks_captcha_ecard_validate" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Action</td>
+    <td valign="top">action when CAPTCHA is enabled and allows you to override the standard CAPTCHA validation for ecards</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('captcha_ecard_validate', null);</textarea></td>
+  </tr>
+  <tr>
     <td valign="top">editpics.php</td>
     <td valign="top"><a name="plugin_hooks_editpics_before_delete_file"></a><strong>before_delete_file</strong><a href="#plugin_hooks_editpics_before_delete_file" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Action</td>
@@ -817,6 +831,8 @@ echo $footer;</textarea></td>
                 <li class="floatleft"><a href="#plugin_hooks_captcha_comment_validate">captcha_comment_validate</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_captcha_contact_print">captcha_contact_print</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_captcha_contact_validate">captcha_contact_validate</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_captcha_ecard_print">captcha_ecard_print</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_captcha_ecard_validate">captcha_ecard_validate</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_captcha_register_print">captcha_register_print</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_captcha_register_validate">captcha_register_validate</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_filename_cpg_mail_sender_email">cpg_mail_sender_email</a></li>

@@ -758,6 +758,7 @@ $lang_admin_php['slideshow_interval'] = 'Diashow-Intervall'; // cpg1.5
 $lang_admin_php['milliseconds'] = 'Millisekunden'; // cpg1.5
 $lang_admin_php['slideshow_interval_detail'] = '1 Sekunde = 1000 Millisekunden'; // cpg1.5
 $lang_admin_php['slideshow_hits'] = 'Treffer während Diashow zählen'; // cpg1.5
+$lang_admin_php['ecard_captcha'] = 'Captcha (Visuelle Bestätigung) für Versenden von Ecards notwendig'; // cpg 1.6
 $lang_admin_php['ecard_flash'] = 'Flash in Ecards anzeigen'; // cpg1.5
 $lang_admin_php['not_recommended'] = 'nicht empfohlen'; // cpg1.5
 $lang_admin_php['recommended'] = 'empfohlen'; // cpg1.5

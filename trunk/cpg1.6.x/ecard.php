@@ -156,6 +156,22 @@ if ($superCage->post->keyExists('submit')) {
     }
     // Create and send the e-card
     if ($superCage->post->keyExists('sender_name') && $valid_sender_email && $valid_recipient_email) {
+
+        if (($CONFIG['ecard_captcha'] == 1) || ($CONFIG['ecard_captcha'] == 2 && !USER_ID)) {
+            if (!captcha_plugin_enabled()) {
+                require("include/captcha.inc.php");
+                $matches = $superCage->post->getMatched('confirmCode', '/^[a-zA-Z0-9]+$/');
+
+                if (!$matches[0] || !PhpCaptcha::Validate($matches[0])) {
+                    if ($CONFIG['log_mode'] != 0) {
+                        log_write('Captcha authentication for ecard failed for user '.$USER_DATA['user_name'].' at ' . $hdr_ip, CPG_SECURITY_LOG);
+                    }
+                    cpg_die(ERROR, $lang_errors['captcha_error'], __FILE__, __LINE__);
+                }
+            } else {
+                CPGPluginAPI::action('captcha_ecard_validate', null);
+            }
+        }
     
         require('include/mailer.inc.php');
     
@@ -422,6 +438,28 @@ echo <<<EOT
             $smilies
         </td>
     </tr>
+EOT;
+// captcha code
+if (($CONFIG['ecard_captcha'] == 1) || ($CONFIG['ecard_captcha'] == 2 && !USER_ID)) {
+
+    $help = cpg_display_help('f=empty.htm&amp;base=64&amp;h='.urlencode(base64_encode(serialize($lang_common['captcha_help_title']))).'&amp;t='.urlencode(base64_encode(serialize($lang_common['captcha_help']))), 470, 245);
+
+    $captcha_print = <<< EOT
+    <tr>
+        <td class="tableb">
+            {$lang_common['confirm']}&nbsp;{$help}
+        </td>
+        <td class="tableb" colspan="2">
+            <input type="text" name="confirmCode" id="confirmCode" size="5" maxlength="5" class="textinput" />
+            <img src="captcha.php" align="middle" border="0" alt="" />
+        </td>
+</tr>
+EOT;
+
+    $captcha_print = CPGPluginAPI::filter('captcha_ecard_print', $captcha_print);
+    echo $captcha_print;
+}
+echo <<< EOT
     <tr>
         <td colspan="3" align="center" class="tablef">
             <button type="submit" class="button" name="preview" id="preview" value="{$lang_ecard_php['preview_button']}">{$icon_array['preview']}{$lang_ecard_php['preview_button']}</button>
