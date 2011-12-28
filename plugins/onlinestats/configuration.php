@@ -14,7 +14,7 @@
   $HeadURL$
   $Revision$
 **********************************************/
-
+if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 global $lang_pluginmgr_php;
 
 $icon_array['config']  = cpg_fetch_icon('config', 2);

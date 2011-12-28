@@ -14,7 +14,7 @@
   $HeadURL$
   $Revision$
 **********************************************/
-
+if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 if (!GALLERY_ADMIN_MODE) {
     cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
 }

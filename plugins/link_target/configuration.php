@@ -14,7 +14,7 @@
   $HeadURL$
   $Revision$
 **********************************************/
-
+if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 $name = $lang_plugin_php['link_target_name'];
 $description = $lang_plugin_php['link_target_description'] . '&nbsp;' . cpg_display_help('f=plugins.htm&amp;as=plugin_bundled_link_target&amp;ae=plugin_bundled_link_target_end', '400', '200');
 
