@@ -1,7 +1,7 @@
 ************************
 Coppermine Photo Gallery
 ************************
-Copyright (c) 2003-2010 Coppermine Dev Team
+Copyright (c) 2003-2012 Coppermine Dev Team
 v1.0 originally written by Gregory Demar
 
 This program is free software; you can redistribute it and/or modify
@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2012-01-10 [M] Updated header information to reflect new year {eenemeenemuu}
 2011-12-28 [S] Fixed a potential path disclosure vulnerability in core plugin configuration files (thread ID 74125) {Abbas}
 2011-12-16 [A] Added captcha for ecards feature (thread ID 71501) {eenemeenemuu}
 2011-12-15 [A] Create user album in personal gallery when user is created via the user manager (thread ID 74013) {eenemeenemuu}
