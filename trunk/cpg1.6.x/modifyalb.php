@@ -241,7 +241,7 @@ EOT;
 EOT;
 
     foreach ($CAT_LIST as $category) {
-        echo '                <option value="' . $category[0] . '"' . ($ALBUM_DATA['category'] == $category[0] ? ' selected="selected"': '') . ">" . $category[1] . '</option>' . $LINEBREAK;
+        echo '                <option value="' . $category[0] . '"' . ($ALBUM_DATA['category'] == $category[0] ? ' selected="selected"': '') . ($category[0] == USER_GAL_CAT ? ' disabled="disabled"' : '') . ">" . $category[1] . '</option>' . $LINEBREAK;
     }
 
     echo <<< EOT
