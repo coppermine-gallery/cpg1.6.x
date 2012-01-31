@@ -353,7 +353,7 @@ while ($line = mysql_fetch_assoc($result)) {
         </td>
         <td class="$tempClass">
             <span class="thumb_caption">
-                <a href="http://ws.arin.net/cgi-bin/whois.pl?queryinput={$line['sender_ip']}">{$line['sender_ip']}</a>{$line['ip_detail']}
+                <a href="http://whois.domaintools.com/{$line['sender_ip']}">{$line['sender_ip']}</a>{$line['ip_detail']}
             </span>
         </td>
         <td class="$tempClass">

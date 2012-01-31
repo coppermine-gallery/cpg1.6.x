@@ -27,6 +27,11 @@ if (!GALLERY_ADMIN_MODE) {
     cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
 }
 
+if ($superCage->post->keyExists('ip_lookup')) {
+    header("Location: http://whois.domaintools.com/".$superCage->post->getRaw('ip_lookup'));
+    exit;
+}
+
 js_include('js/date.js');
 js_include('js/jquery.datePicker.js');
 js_include('js/banning.js');
@@ -634,11 +639,10 @@ print '<input type="hidden" name="form_token" value="' . $form_token . '" />';
 print '<input type="hidden" name="timestamp" value="' . $timestamp . '" />';
 print <<< EOT
 </form>
-<!--
 <br />
-<form action="http://ws.arin.net/whois/" method="get" name="lookup" id="cpgform2" target="_blank">
+<form action="{$CPG_PHP_SELF}" method="post" name="lookup" id="cpgform2" target="_blank">
 EOT;
-// IP address lookup is nowadays protected by Captcha or other methods - lookup script needs to be changed to a link only
+
 starttable('-2','','','');
 print <<< EOT
     <tr>
@@ -646,7 +650,7 @@ print <<< EOT
             <strong>{$lang_banning_php['lookup_ip']}</strong>{$help_array['ip_lookup']}
         </td>
         <td class="tableb">
-            <input type="text" class="textinput" size="20" name="queryinput" value="{$comm_info['msg_ip']}" maxlength="15" />
+            <input type="text" class="textinput" size="20" name="ip_lookup" value="{$comm_info['msg_ip']}" maxlength="15" />
         </td>
         <td class="tableb">
             <button type="submit" class="button" name="submit" id="submit_lookup" value="{$lang_common['ok']}" style="display:block">{$icon_array['go']}{$lang_common['ok']}</button>
@@ -654,7 +658,7 @@ print <<< EOT
     </tr>
 EOT;
 endtable();
-print '</form>-->' . $LINEBREAK;
+print '</form>' . $LINEBREAK;
 
 pagefooter();
 
