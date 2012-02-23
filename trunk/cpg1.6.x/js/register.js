@@ -50,7 +50,7 @@ function checkRegisterFormSubmit() {
         $('#email_warning1').show();
         errors++;
     } else {
-        if ($('#email').val().search(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/) == -1) {
+        if ($('#email').val().search(/^\w+((-|\.|\+)\w+)*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/) == -1) {
             $('#email_warning2').show();
             errors++;
         }
