@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2012-02-27 [D] Changed status in credits section to 'retired' {GauGau}
 2012-02-23 [B] Fixed email validation for registration process (thread ID 74388) {eenemeenemuu}
 2012-01-31 [B] Fixed broken IP address lookup (thread ID 74346) {eenemeenemuu}
 2012-01-27 [B] Disabled possibility to move albums to root level of user category (thread ID 74323) {eenemeenemuu}
