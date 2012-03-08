@@ -810,8 +810,10 @@ if ($superCage->get->keyExists('count')) {
     $count = 25;
 }
 
-$next_target = $CPG_PHP_SELF . '?album=' . $album_id . '&amp;start=' . ($start + $count) . '&amp;count=' . $count . (UPLOAD_APPROVAL_MODE ? '&amp;mode=upload_approval' : '');
-$prev_target = $CPG_PHP_SELF . '?album=' . $album_id . '&amp;start=' . max(0, $start - $count) . '&amp;count=' . $count . (UPLOAD_APPROVAL_MODE ? '&amp;mode=upload_approval' : '');
+$newer_than = $superCage->get->keyExists('newer_than') ? "&amp;newer_than=".$superCage->get->getInt('newer_than') : '';
+
+$next_target = $CPG_PHP_SELF . '?album=' . $album_id . '&amp;start=' . ($start + $count) . '&amp;count=' . $count . (UPLOAD_APPROVAL_MODE ? '&amp;mode=upload_approval' : '') . $newer_than;
+$prev_target = $CPG_PHP_SELF . '?album=' . $album_id . '&amp;start=' . max(0, $start - $count) . '&amp;count=' . $count . (UPLOAD_APPROVAL_MODE ? '&amp;mode=upload_approval' : '') . $newer_than;
 
 $s50 = $count == 50 ? 'selected="selected"' : '';
 $s75 = $count == 75 ? 'selected="selected"' : '';
@@ -872,6 +874,11 @@ if (UPLOAD_APPROVAL_MODE) {
         $owner_str = '';
     }
 
+    // Display only the uploaded files from the last queue after flash upload
+    if ($superCage->get->keyExists('newer_than')) {
+        $owner_str .= " AND ctime > '".$superCage->get->getInt('newer_than')."'";
+    }
+
     $result = cpg_db_query($sql . $owner_str);
 
     list($pic_count) = mysql_fetch_row($result);
@@ -885,7 +892,7 @@ if (UPLOAD_APPROVAL_MODE) {
 
     $result = cpg_db_query($sql);
 
-    $form_target = $CPG_PHP_SELF . '?album=' . $album_id . '&amp;start=' . $start . '&amp;count=' . $count;
+    $form_target = $CPG_PHP_SELF . '?album=' . $album_id . '&amp;start=' . $start . '&amp;count=' . $count . $newer_than;
     $title = $lang_editpics_php['edit_pics'];
     $help = '&nbsp;' . cpg_display_help('f=files.htm&amp;as=edit_pics&amp;ae=edit_pics_end&amp;top=1', '800', '500');
 }
@@ -966,7 +973,7 @@ echo <<<EOT
                         $prev_link
                         $next_link
                         <strong>{$lang_editpics_php['n_of_pic_to_disp']}</strong>
-                        <select onchange="if(this.options[this.selectedIndex].value) window.location.href='{$CPG_PHP_SELF}?album=$album_id$mode&amp;start=$start&amp;count='+this.options[this.selectedIndex].value;"  name="count" class="listbox">
+                        <select onchange="if(this.options[this.selectedIndex].value) window.location.href='{$CPG_PHP_SELF}?album=$album_id$mode&amp;start=$start&amp;count='+this.options[this.selectedIndex].value+'$newer_than'"  name="count" class="listbox">
                                 <option value="25">25</option>
                                 <option value="50" $s50>50</option>
                                 <option value="75" $s75>75</option>
