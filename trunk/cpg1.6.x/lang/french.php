@@ -1,18 +1,18 @@
 <?php
 /*************************
- Coppermine Photo gallery
- ************************
- Copyright (c) 2003-2012 Coppermine Dev Team
- v1.0 originally written by Gregory Demar
+  Coppermine Photo Gallery
+  ************************
+  Copyright (c) 2003-2012 Coppermine Dev Team
+  v1.0 originally written by Gregory Demar
 
- This program is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License version 3
- as published by the Free Software Foundation.
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License version 3
+  as published by the Free Software Foundation.
 
- ********************************************
- Coppermine version: 1.6.01
- $HeadURL$
- $Revision$
+  ********************************************
+  Coppermine version: 1.6.01
+  $HeadURL$
+  $Revision$
 **********************************************/
 
 if (!defined('IN_COPPERMINE')) { die('Not in Coppermine...');}
@@ -115,6 +115,7 @@ $lang_common['keywords_insert1'] = 'Mots-clés (séparés par un(e) %s)';
 $lang_common['keywords_insert2'] = 'Insérer depuis une liste';
 $lang_common['keyword_separator'] = 'Séparateur de mots-clés';
 $lang_common['keyword_separators'] = array(' '=>'espace', ','=>'virgule', ';'=>'point-virgule');
+$lang_common['owner_name'] = 'Nom du propriétaire';
 $lang_common['filename'] = 'Nom du fichier';
 $lang_common['filesize'] = 'Taille du fichier';
 $lang_common['album'] = 'Album';
@@ -2246,10 +2247,10 @@ $lang_usermgr_php['u_user_on_p_pages'] = '%d utilisateur (s) sur %d page (s)';
  $lang_usermgr_php['user_profile5'] = '$user_profile5';
  $lang_usermgr_php['user_profile6'] = '$user_profile6';
 $lang_usermgr_php['latest_upload'] = 'Derniers téléchargements';
-$lang_usermgr_php['no_latest_upload'] = 'N\'a téléchargé aucun fichier'; // cpg1.5
-$lang_usermgr_php['last_comments'] = 'Derniers commentaires'; // cpg1.5
-$lang_usermgr_php['no_last_comments'] = 'N\'a fait aucun commentaire'; // cpg1.5
-$lang_usermgr_php['comments'] = 'Commentaires'; // cpg1.5
+$lang_usermgr_php['no_latest_upload'] = 'N\'a téléchargé aucun fichier';
+$lang_usermgr_php['last_comments'] = 'Derniers commentaires';
+$lang_usermgr_php['no_last_comments'] = 'N\'a fait aucun commentaire';
+$lang_usermgr_php['comments'] = 'Commentaires';
 $lang_usermgr_php['never'] = 'jamais';
 $lang_usermgr_php['search'] = 'Rechercher un utilisateur';
 $lang_usermgr_php['submit'] = 'Valider';
