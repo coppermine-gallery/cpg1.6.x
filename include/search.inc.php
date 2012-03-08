@@ -29,6 +29,13 @@ $sort_order = isset($sort_array[$sort_code]) ? $sort_array[$sort_code] : $sort_a
 
 $allowed = array('title', 'caption', 'keywords', 'filename', 'pic_raw_ip', 'pic_hdr_ip', 'user1', 'user2', 'user3', 'user4');
 
+global $cpg_udb;
+// Use actual column name for search by owner name
+if ($USER['search']['params']['owner_name']) {
+    $USER['search']['params'][$cpg_udb->field['username']] = true;
+    $allowed[] = $cpg_udb->field['username'];
+}
+
 $mb_charset = stristr($multibyte_charset, $charset);
 
 $search_string = str_replace('&quot;', '"', $search_string);
@@ -199,7 +206,7 @@ if ($search_string && isset($search_params['params'])) {
                         endtable();
                         echo '<br/>';
                 }
-        }                                              
+        }
 
         // Make sure they selected some parameter other than album/category
         $other = 0;
@@ -239,6 +246,7 @@ if ($search_string && isset($search_params['params'])) {
             $sort_order = "$criteria $direction '$criteria_pid' OR $criteria = '$criteria_pid' AND pid < $pid";
 
             $query = "SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} AS p
+                LEFT JOIN {$cpg_udb->usertable} AS u ON p.owner_id = u.{$cpg_udb->field['user_id']}
                 WHERE $sql
                 AND ($sort_order)";
 
@@ -249,9 +257,11 @@ if ($search_string && isset($search_params['params'])) {
 
         } else {
 
-            $query = "SELECT * FROM {$CONFIG['TABLE_PICTURES']} AS p WHERE " . $sql;
+            $query = "SELECT p.*, u.{$cpg_udb->field['username']} AS owner_name FROM {$CONFIG['TABLE_PICTURES']} AS p 
+            LEFT JOIN {$cpg_udb->usertable} AS u ON p.owner_id = u.{$cpg_udb->field['user_id']} 
+            WHERE " . $sql;
 
-            $temp = str_replace('SELECT *', 'SELECT COUNT(*)', $query);
+            $temp = str_replace("SELECT p.*, u.{$cpg_udb->field['username']} AS owner_name", 'SELECT COUNT(*)', $query);
             $result = cpg_db_query($temp);
             $row = mysql_fetch_row($result);
             $count = $row[0];

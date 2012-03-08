@@ -72,7 +72,7 @@ $text .= <<< EOT
         <tr>
             <td class="tableb" align="center">
                 <input type="text" style="width: 80%" name="search" maxlength="255" value="" class="textinput" />
-				<button type="submit" class="button" name="submit" id="submit" value="{$lang_search_php['submit_search']}">{$icon_array['search']}{$lang_search_php['submit_search']}</button>
+                <button type="submit" class="button" name="submit" id="submit" value="{$lang_search_php['submit_search']}">{$icon_array['search']}{$lang_search_php['submit_search']}</button>
                 <input type="hidden" name="album" value="search" />
             </td>
         </tr>
@@ -105,6 +105,10 @@ $text .= <<< EOT
                                                                         <option value="regex">{$lang_search_php['regex']}</option>
                                                                     </select>
                                                 </td>
+                                        </tr>
+                                        <tr>
+                                                <td><input type="checkbox" name="owner_name" id="owner_name" class="checkbox" /><label for="owner_name" class="clickable_option">{$lang_common['owner_name']}</label></td>
+                                                <td>&nbsp;</td>
                                         </tr>
 $customs
 $ip

@@ -26,13 +26,12 @@ $lang_translation_info['trans_email'] = '';
 $lang_translation_info['trans_website'] = 'http://coppermine-gallery.net/';
 $lang_translation_info['trans_date'] = '2009-01-09';
 
-
 $lang_charset = 'utf-8';
 $lang_text_dir = 'ltr'; // ('ltr' for left to right, 'rtl' for right to left)
 
 // shortcuts for Bytes, Kibibytes, Mebibytes, Gibibytes
 $lang_byte_units = array('Bytes', 'KiB', 'MiB', 'GiB');
-$lang_decimal_separator = array(',', '.'); //cpg1.5 // symbol used to separate thousands from hundreds and rounded number from decimal place
+$lang_decimal_separator = array(',', '.'); // symbol used to separate thousands from hundreds and rounded number from decimal place
 
 // Day of weeks and months
 $lang_day_of_week = array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
@@ -63,15 +62,15 @@ $lang_meta_album_names['search'] = 'Image search results';
 $lang_meta_album_names['album_search'] = 'Album search results';
 $lang_meta_album_names['category_search'] = 'Category search results';
 $lang_meta_album_names['favpics'] = 'Favorite files';
-$lang_meta_album_names['datebrowse'] = 'Browse by date'; //cpg1.5
+$lang_meta_album_names['datebrowse'] = 'Browse by date';
 
 $lang_errors['access_denied'] = 'You don\'t have permission to access this page.';
-$lang_errors['invalid_form_token'] = 'A valid form token could not be found.'; //cpg1.5
+$lang_errors['invalid_form_token'] = 'A valid form token could not be found.';
 $lang_errors['perm_denied'] = 'You don\'t have permission to perform this operation.';
 $lang_errors['param_missing'] = 'Script called without the required parameter(s).';
 $lang_errors['non_exist_ap'] = 'The selected album/file does not exist!';
-$lang_errors['quota_exceeded'] = 'Disk quota exceeded.'; //cpg1.5
-$lang_errors['quota_exceeded_details'] = 'You have a space quota of [quota]K, your files currently use [space]K, adding this file would make you exceed your quota.'; //cpg1.5
+$lang_errors['quota_exceeded'] = 'Disk quota exceeded.';
+$lang_errors['quota_exceeded_details'] = 'You have a space quota of [quota]K, your files currently use [space]K, adding this file would make you exceed your quota.';
 $lang_errors['gd_file_type_err'] = 'When using the GD image library allowed image types are only JPEG and PNG.';
 $lang_errors['invalid_image'] = 'The image you have uploaded is corrupted or can\'t be handled by the GD library';
 $lang_errors['resize_failed'] = 'Unable to create thumbnail or reduced size image.';
@@ -92,8 +91,8 @@ $lang_errors['critical_error'] = 'Critical error';
 $lang_errors['access_thumbnail_only'] = 'You are only allowed to view thumbnail images.';
 $lang_errors['access_intermediate_only'] = 'You are not allowed to view full-size images.';
 $lang_errors['access_none'] = 'You are not allowed to view any images.';
-$lang_errors['register_globals_title'] = 'Register Globals on!';// cpg1.5
-$lang_errors['register_globals_warning'] = 'The PHP setting register_globals is enabled on your server, which is a bad idea in terms of security. It\'s strongly recommended to turn it off.'; //cpg1.5
+$lang_errors['register_globals_title'] = 'Register Globals on!';
+$lang_errors['register_globals_warning'] = 'The PHP setting register_globals is enabled on your server, which is a bad idea in terms of security. It\'s strongly recommended to turn it off.';
 
 $lang_bbcode_help_title = 'BBCode help';
 $lang_bbcode_help = 'You can add clickable links and some formatting to this field by using BBCode tags: <li>[b]Bold[/b] =&gt; <strong>Bold</strong></li><li>[i]Italic[/i] =&gt; <i>Italic</i></li><li>[url=http://yoursite.com/]Url Text[/url] =&gt; <a href="http://yoursite.com">Url Text</a></li><li>[email]user@domain.com[/email] =&gt; <a href="mailto:user@domain.com">user@domain.com</a></li><li>[color=red]some text[/color] =&gt; <span style="color:red">some text</span></li><li>[img]http://documentation.coppermine-gallery.net/images/browser.png[/img] =&gt; <img src="docs/images/browser.png" border="0" alt="" /></li>';
@@ -113,8 +112,9 @@ $lang_common['caption'] = 'Caption';
 $lang_common['keywords'] = 'Keywords';
 $lang_common['keywords_insert1'] = 'Keywords (separate with %s)';
 $lang_common['keywords_insert2'] = 'Insert from list';
-$lang_common['keyword_separator'] = 'Keyword separator'; //cpg1.5
+$lang_common['keyword_separator'] = 'Keyword separator';
 $lang_common['keyword_separators'] = array(' '=>'space', ','=>'comma', ';'=>'semicolon');
+$lang_common['owner_name'] = 'Owner name';
 $lang_common['filename'] = 'Filename';
 $lang_common['filesize'] = 'Filesize';
 $lang_common['album'] = 'Album';
@@ -924,7 +924,7 @@ $lang_admin_php['manage_languages'] = 'Manage languages';
 $lang_admin_php['form_token_lifetime'] = 'Form token lifetime';
 $lang_admin_php['seconds'] = 'Seconds';
 $lang_admin_php['display_reset_boxes_in_config'] = 'Display reset boxes in config';
-$lang_admin_php['upd_not_needed'] = 'Update not needed.'; // cpg 1.5
+$lang_admin_php['upd_not_needed'] = 'Update not needed.';
 }
 
 
@@ -1238,9 +1238,9 @@ $lang_report_php['invalid_data'] = 'The data for the report you are trying to ac
 if (defined('EDITPICS_PHP')) {
 $lang_editpics_php['pic_info'] = 'File info';
 $lang_editpics_php['desc'] = 'Description';
-$lang_editpics_php['approval'] = 'Approval'; //cpg 1.5
-$lang_editpics_php['approved'] = 'Approved'; // cpg 1.5
-$lang_editpics_php['unapproved'] = 'Unapproved'; // cpg 1.5
+$lang_editpics_php['approval'] = 'Approval';
+$lang_editpics_php['approved'] = 'Approved';
+$lang_editpics_php['unapproved'] = 'Unapproved';
 $lang_editpics_php['new_keyword'] = 'New keyword';
 $lang_editpics_php['new_keywords'] = 'New keywords found';
 $lang_editpics_php['existing_keyword'] = 'Existing keyword';
@@ -1258,7 +1258,7 @@ $lang_editpics_php['del_comm'] = 'Delete comments';
 $lang_editpics_php['del_all_comm'] = 'Delete ALL comments';
 $lang_editpics_php['upl_approval'] = 'Upload approval';
 $lang_editpics_php['edit_pics'] = 'Edit files';
-$lang_editpics_php['edit_pic'] = 'Edit file'; // cpg 1.5
+$lang_editpics_php['edit_pic'] = 'Edit file';
 $lang_editpics_php['see_next'] = 'See next files';
 $lang_editpics_php['see_prev'] = 'See previous files';
 $lang_editpics_php['n_pic'] = '%s files';
@@ -1278,20 +1278,20 @@ $lang_editpics_php['rename_failed'] = 'Failed to rename \'%s\' to \'%s\'.';
 $lang_editpics_php['src_file_missing'] = 'Source file \'%s\' is missing.';
 $lang_editpics_php['mime_conv'] = 'Cannot convert file from \'%s\' to \'%s\'';
 $lang_editpics_php['forb_ext'] = 'Forbidden file extension.';
-$lang_editpics_php['error_editor_class'] = 'Editor class for your resize method not implemented'; // cpg 1.5
-$lang_editpics_php['error_document_size'] = 'Document has no width or height'; // cpg 1.5 // js-alert
+$lang_editpics_php['error_editor_class'] = 'Editor class for your resize method not implemented';
+$lang_editpics_php['error_document_size'] = 'Document has no width or height'; // js-alert
 $lang_editpics_php['success_picture'] = 'Picture successfully saved - you can %sclose%s this window now'; // do not translate "%s" here
 $lang_editpics_php['success_thumb'] = 'Thumbnail successfully saved - you can %sclose%s this window now'; // do not translate "%s" here
-$lang_editpics_php['rotate'] = 'Rotate'; // cpg 1.5
-$lang_editpics_php['mirror'] = 'Mirror'; // cpg 1.5
-$lang_editpics_php['scale'] = 'Scale'; // cpg 1.5
-$lang_editpics_php['new_width'] = 'New width'; // cpg 1.5
-$lang_editpics_php['new_height'] = 'New height'; // cpg 1.5
-$lang_editpics_php['enable_clipping'] = 'Enable clipping, apply to crop'; // cpg 1.5
-$lang_editpics_php['jpeg_quality'] = 'JPEG Output Quality'; // cpg 1.5
-$lang_editpics_php['or'] = 'OR'; // cpg 1.5
-$lang_editpics_php['approve_pic'] = 'Approve file'; // cpg 1.5
-$lang_editpics_php['approve_all'] = 'Approve ALL files'; // cpg 1.5
+$lang_editpics_php['rotate'] = 'Rotate';
+$lang_editpics_php['mirror'] = 'Mirror';
+$lang_editpics_php['scale'] = 'Scale';
+$lang_editpics_php['new_width'] = 'New width';
+$lang_editpics_php['new_height'] = 'New height';
+$lang_editpics_php['enable_clipping'] = 'Enable clipping, apply to crop';
+$lang_editpics_php['jpeg_quality'] = 'JPEG Output Quality';
+$lang_editpics_php['or'] = 'OR';
+$lang_editpics_php['approve_pic'] = 'Approve file';
+$lang_editpics_php['approve_all'] = 'Approve ALL files';
 $lang_editpics_php['error_empty'] = 'Album is empty';
 $lang_editpics_php['error_approval_empty'] = 'No more pictures to approve';
 $lang_editpics_php['error_linked_only'] = 'Album only contains linked files, which you cannot edit here';
@@ -1533,7 +1533,7 @@ $lang_install['imp_test_error'] = 'There was an error in one or more of the test
 $lang_install['writable'] = 'Writable';
 $lang_install['not_writable'] = 'Not writable';
 $lang_install['not_exist'] = 'Does not exist';
-$lang_install['old_install'] = 'This is the new install wizard. Click %shere%s for the classic install screen.'; //cpg1.5
+$lang_install['old_install'] = 'This is the new install wizard. Click %shere%s for the classic install screen.';
 
 }
 
@@ -1658,7 +1658,7 @@ $lang_modifyalb_php['can_upload'] = 'Visitors can upload files';
 $lang_modifyalb_php['can_post_comments'] = 'Visitors can post comments';
 $lang_modifyalb_php['can_rate'] = 'Visitors can rate files';
 $lang_modifyalb_php['user_gal'] = 'User Gallery';
-$lang_modifyalb_php['my_gal'] = '* My Gallery *'; // cpg 1.5
+$lang_modifyalb_php['my_gal'] = '* My Gallery *';
 $lang_modifyalb_php['no_cat'] = '* No category *';
 $lang_modifyalb_php['alb_empty'] = 'Album is empty';
 $lang_modifyalb_php['last_uploaded'] = 'Last uploaded';
@@ -1680,15 +1680,15 @@ $lang_modifyalb_php['files'] = 'files';
 $lang_modifyalb_php['submit_reset'] = 'submit changes';
 $lang_modifyalb_php['reset_views_confirm'] = 'I\'m sure';
 $lang_modifyalb_php['notice1'] = '(*) depending on %sgroups%s settings'; // do not translate the %s placeholders
-$lang_modifyalb_php['can_moderate'] = 'Album can be moderated by'; // cpg 1.5
-$lang_modifyalb_php['admins_only'] = 'Admins only'; // cpg 1.5
+$lang_modifyalb_php['can_moderate'] = 'Album can be moderated by';
+$lang_modifyalb_php['admins_only'] = 'Admins only';
 $lang_modifyalb_php['alb_password'] = 'Album password (New password)';
 $lang_modifyalb_php['alb_password_hint'] = 'Album password hint';
 $lang_modifyalb_php['edit_files'] = 'Edit files';
 $lang_modifyalb_php['parent_category'] = 'Parent category';
 $lang_modifyalb_php['thumbnail_view'] = 'Thumbnail view';
-$lang_modifyalb_php['random_image'] = 'Random Image'; // cpg 1.5
-$lang_modifyalb_php['password_protect'] = 'Password protect this album (Tick for yes)'; //cpg1.5
+$lang_modifyalb_php['random_image'] = 'Random Image';
+$lang_modifyalb_php['password_protect'] = 'Password protect this album (Tick for yes)';
 }
 
 // ------------------------------------------------------------------------- //
@@ -2123,8 +2123,8 @@ $lang_upload_php['up_instr_5'] = 'You\'ll be sent to a screen where you can ente
 $lang_upload_php['restriction_zip'] = 'ZIP files uploaded will remain compressed, they will not be extracted on the server.';
 $lang_upload_php['restriction_filesize'] = 'The size of files uploaded from your client to the server must not exceed %s each.';
 $lang_upload_php['reg_instr_1'] = 'Invalid action for form creation.';
-$lang_upload_php['no_name'] = 'Filename unavailable'; // cpg 1.5
-$lang_upload_php['no_tmp_name'] = 'Unable to upload'; // cpg 1.5
+$lang_upload_php['no_name'] = 'Filename unavailable';
+$lang_upload_php['no_tmp_name'] = 'Unable to upload';
 $lang_upload_php['no_post'] = 'File not uploaded by POST.';
 $lang_upload_php['forb_ext'] = 'Forbidden file extension.';
 $lang_upload_php['exc_php_ini'] = 'Exceeded filesize allowed in php.ini.';
@@ -2161,29 +2161,29 @@ $lang_upload_php['err_alternate_method'] = 'Alternately you can use the <a href=
 $lang_upload_php['err_flash_version'] = 'Upload interface could not load. You may need to install or upgrade Flash Player. Visit the <a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">Adobe website</a> to get the Flash Player.';
 $lang_upload_php['flash_loading'] = 'Upload interface is loading. Please wait a moment...';
 
-$lang_upload_swf_php['browse'] = 'Browse...'; //cpg1.5
-$lang_upload_swf_php['cancel_all'] = 'Cancel all uploads'; //cpg1.5
-$lang_upload_swf_php['upload_queue'] = 'Upload Queue'; //cpg1.5
-$lang_upload_swf_php['files_uploaded'] = 'files uploaded'; //cpg1.5
-$lang_upload_swf_php['all_files'] = 'All Files'; //cpg1.5
-$lang_upload_swf_php['status_pending'] = 'Pending...'; //cpg1.5
-$lang_upload_swf_php['status_uploading'] = 'Uploading...'; //cpg1.5
-$lang_upload_swf_php['status_complete'] = 'Complete.'; //cpg1.5
-$lang_upload_swf_php['status_cancelled'] = 'Cancelled.'; //cpg1.5
-$lang_upload_swf_php['status_stopped'] = 'Stopped.'; //cpg1.5
-$lang_upload_swf_php['status_failed'] = 'Upload Failed.'; //cpg1.5
-$lang_upload_swf_php['status_too_big'] = 'File is too big.'; //cpg1.5
-$lang_upload_swf_php['status_zero_byte'] = 'Cannot upload Zero Byte files.'; //cpg1.5
-$lang_upload_swf_php['status_invalid_type'] = 'Invalid File Type.'; //cpg1.5
-$lang_upload_swf_php['status_unhandled'] = 'Unhandled Error'; //cpg1.5
-$lang_upload_swf_php['status_upload_error'] = 'Upload Error: '; //cpg1.5
-$lang_upload_swf_php['status_server_error'] = 'Server (IO) Error'; //cpg1.5
-$lang_upload_swf_php['status_security_error'] = 'Security Error'; //cpg1.5
-$lang_upload_swf_php['status_upload_limit'] = 'Upload limit exceeded.'; //cpg1.5
-$lang_upload_swf_php['status_validation_failed'] = 'Failed Validation. Upload skipped.'; //cpg1.5
-$lang_upload_swf_php['queue_limit'] = 'You have attempted to queue too many files.'; //cpg1.5
-$lang_upload_swf_php['upload_limit_1'] = 'You have reached the upload limit.'; //cpg1.5
-$lang_upload_swf_php['upload_limit_2'] = 'You may select up to %s file(s)'; //cpg1.5
+$lang_upload_swf_php['browse'] = 'Browse...';
+$lang_upload_swf_php['cancel_all'] = 'Cancel all uploads';
+$lang_upload_swf_php['upload_queue'] = 'Upload Queue';
+$lang_upload_swf_php['files_uploaded'] = 'files uploaded';
+$lang_upload_swf_php['all_files'] = 'All Files';
+$lang_upload_swf_php['status_pending'] = 'Pending...';
+$lang_upload_swf_php['status_uploading'] = 'Uploading...';
+$lang_upload_swf_php['status_complete'] = 'Complete.';
+$lang_upload_swf_php['status_cancelled'] = 'Cancelled.';
+$lang_upload_swf_php['status_stopped'] = 'Stopped.';
+$lang_upload_swf_php['status_failed'] = 'Upload Failed.';
+$lang_upload_swf_php['status_too_big'] = 'File is too big.';
+$lang_upload_swf_php['status_zero_byte'] = 'Cannot upload Zero Byte files.';
+$lang_upload_swf_php['status_invalid_type'] = 'Invalid File Type.';
+$lang_upload_swf_php['status_unhandled'] = 'Unhandled Error';
+$lang_upload_swf_php['status_upload_error'] = 'Upload Error: ';
+$lang_upload_swf_php['status_server_error'] = 'Server (IO) Error';
+$lang_upload_swf_php['status_security_error'] = 'Security Error';
+$lang_upload_swf_php['status_upload_limit'] = 'Upload limit exceeded.';
+$lang_upload_swf_php['status_validation_failed'] = 'Failed Validation. Upload skipped.';
+$lang_upload_swf_php['queue_limit'] = 'You have attempted to queue too many files.';
+$lang_upload_swf_php['upload_limit_1'] = 'You have reached the upload limit.';
+$lang_upload_swf_php['upload_limit_2'] = 'You may select up to %s file(s)';
 }
 // ------------------------------------------------------------------------- //
 // File usermgr.php
