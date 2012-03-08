@@ -93,6 +93,7 @@ if ('swfupload' == $upload_form) {
     
     set_js_var('notify_admin', $CONFIG['upl_notify_admin_email']);
     set_js_var('max_upl_size', $CONFIG['max_upl_size']);
+    set_js_var('timestamp', time());
 }
 js_include('js/upload.js');
 
