@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2012-03-14 [A] Added plugin hook 'theme_album_params' {eenemeenemuu}
 2012-03-14 [B] Fixed behavior of "Show first level album thumbnails in categories" setting (thread ID 74568) {eenemeenemuu}
 2012-03-08 [A] New feature: display only the uploaded files from the last queue after flash upload (thread ID 73826) {eenemeenemuu}
 2012-03-08 [A] Re-added 'search by owner name' checkbox to search form (thread ID 66818 & 67757) {eenemeenemuu}
