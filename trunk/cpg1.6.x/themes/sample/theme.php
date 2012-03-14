@@ -2681,6 +2681,7 @@ function theme_display_album_list(&$alb_list, $nbAlb, $cat, $page, $total_pages)
                 '{ALB_INFOS}' => $album['album_info'],
                 '{ALB_HITS}' => $album['alb_hits'],
                 );
+            $params = CPGPluginAPI::filter('theme_album_params', $params);
 
             echo template_eval($album_cell, $params);
 
