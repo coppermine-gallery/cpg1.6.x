@@ -464,6 +464,9 @@ EOT;
         }
         $group_quota_separator = '/';
         if ($user['group_quota']) {
+            if ($user['user_group_list']) {
+                $user['group_quota'] = mysql_result(cpg_db_query("SELECT MAX(group_quota) FROM {$CONFIG['TABLE_USERGROUPS']} WHERE group_id IN ({$user['user_group_list']})"), 0);
+            }
             $disk_usage_output = theme_display_bar($user['disk_usage'],$user['group_quota'],150,'', '', $group_quota_separator.$user['group_quota'].'&nbsp;'.$lang_byte_units[1],'red','green');
         } else {
             $disk_usage_output = theme_display_bar($user['disk_usage'],$user['group_quota'],150,'', '', '&nbsp;'.$lang_byte_units[1],'green','green');
@@ -893,11 +896,7 @@ EOT;
                 $group_cb = '';
                 foreach($group_list as $group) {
                     echo '                        <option value="' . $group['group_id'] . '"' . ($group['group_id'] == $sel_group || ($op == 'new_user' && $group['group_id'] == 2) ? ' selected="selected"' : '') . '>' . $group['group_name'] . '</option>' . $LINEBREAK;
-    
-                    /**
-                     * Only show 'real' groups; skip admin, registered, anonymous
-                     */
-                    if ($group['group_id'] > 3) {
+                    if ($group['group_id'] != 3) {
                       $checked = strpos(' ' . $user_group_list, ',' . $group['group_id'] . ',') ? 'checked="checked"' : '';
                       $group_cb .= '<input name="group_list[]" type="checkbox" value="' . $group['group_id'] . '" ' . $checked . ' />' . $group['group_name'] . '<br />' . $LINEBREAK;
                     }
