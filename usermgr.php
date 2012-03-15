@@ -463,10 +463,21 @@ EOT;
             $user['disk_usage'] = 0;
         }
         $group_quota_separator = '/';
+        // Determine actual quota if user belongs to more than one user group
+        $f = $cpg_udb->field;
+        if (isset($cpg_udb->usergroupstable)){
+            $sql = "SELECT u.{$f['user_id']} AS id, ug.{$f['usertbl_group_id']} AS group_id "
+                    . "FROM {$cpg_udb->usertable} AS u, {$cpg_udb->usergroupstable} AS ug "
+                    . "WHERE u.{$f['user_id']}=ug.{$f['user_id']} AND u.{$f['user_id']}='{$user['user_id']}'";
+        } else {
+            $sql = "SELECT u.{$f['user_id']} AS id, u.{$f['usertbl_group_id']} AS group_id "
+                    . "FROM {$cpg_udb->usertable} AS u "
+                    . "WHERE u.{$f['user_id']}='{$user['user_id']}'";
+        }
+        $groups = $cpg_udb->get_groups(mysql_fetch_assoc(cpg_db_query($sql)));
+        $quota = mysql_fetch_assoc(cpg_db_query("SELECT MIN(group_quota) AS min, MAX(group_quota) AS max FROM {$CONFIG['TABLE_USERGROUPS']} WHERE group_quota >= 0 AND group_id IN (".implode(", ", $groups).")"));
+        $user['group_quota'] = $quota['min'] == 0 ? $quota['min'] : $quota['max'];
         if ($user['group_quota']) {
-            if ($user['user_group_list']) {
-                $user['group_quota'] = mysql_result(cpg_db_query("SELECT MAX(group_quota) FROM {$CONFIG['TABLE_USERGROUPS']} WHERE group_id IN ({$user['user_group_list']})"), 0);
-            }
             $disk_usage_output = theme_display_bar($user['disk_usage'],$user['group_quota'],150,'', '', $group_quota_separator.$user['group_quota'].'&nbsp;'.$lang_byte_units[1],'red','green');
         } else {
             $disk_usage_output = theme_display_bar($user['disk_usage'],$user['group_quota'],150,'', '', '&nbsp;'.$lang_byte_units[1],'green','green');
