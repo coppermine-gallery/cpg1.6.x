@@ -219,7 +219,7 @@ class core_udb {
 
         // Build SQL table, should work with all bridges
         $sql = "SELECT {$f['user_id']} AS user_id, {$f['username']} AS user_name, {$f['email']} AS user_email, {$f['regdate']} AS user_regdate, {$f['lastvisit']} AS user_lastvisit, {$f['active']} AS user_active, "
-               . "COUNT(pid) AS pic_count, ROUND(SUM(total_filesize)/1024) AS disk_usage, group_name, group_quota "
+               . "COUNT(pid) AS pic_count, ROUND(SUM(total_filesize)/1024) AS disk_usage, group_name, group_quota, user_group_list "
                . "FROM {$this->usertable} AS u "
                . "INNER JOIN `{$C['dbname']}`.{$C['TABLE_USERGROUPS']} AS g ON u.{$f['usertbl_group_id']} = g.group_id "
                . "LEFT JOIN `{$C['dbname']}`.{$C['TABLE_PICTURES']} AS p ON p.owner_id = u.{$f['user_id']} "
