@@ -6499,4 +6499,26 @@ function cpg_pw_protected_album_access($aid) {
     }
 }
 
+
+/**
+ * Get all user group IDs for a particular user
+ * 
+ * @param integer $user_id
+ * @return array
+ */
+function cpg_get_groups($user_id) {
+    global $cpg_udb;
+    $f = $cpg_udb->field;
+    if (isset($cpg_udb->usergroupstable)){
+        $sql = "SELECT u.{$f['user_id']} AS id, ug.{$f['usertbl_group_id']} AS group_id "
+                . "FROM {$cpg_udb->usertable} AS u, {$cpg_udb->usergroupstable} AS ug "
+                . "WHERE u.{$f['user_id']}=ug.{$f['user_id']} AND u.{$f['user_id']}='{$user_id}'";
+    } else {
+        $sql = "SELECT u.{$f['user_id']} AS id, u.{$f['usertbl_group_id']} AS group_id "
+                . "FROM {$cpg_udb->usertable} AS u "
+                . "WHERE u.{$f['user_id']}='{$user_id}'";
+    }
+    return $cpg_udb->get_groups(mysql_fetch_assoc(cpg_db_query($sql)));
+}
+
 ?>
