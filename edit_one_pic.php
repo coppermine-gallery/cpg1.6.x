@@ -108,6 +108,7 @@ function process_post_data()
     mysql_free_result($result);
 
     $keywords = explode($CONFIG['keyword_separator'], trim(html_entity_decode($keywords)));
+    $keywords_new = array();
     foreach ($keywords as $word) {
         if (trim($word)) {
             $keywords_new[] = trim($word);

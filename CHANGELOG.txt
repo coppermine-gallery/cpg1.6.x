@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2012-03-23 [B] Fixed error message at "Edit file information" form (thread ID 74648) {eenemeenemuu}
 2012-03-20 [C] Added Opera compatibility for rounded corners to theme 'curve' (thread ID 74598) {eenemeenemuu}
 2012-03-16 [O] Moved code from usermgr.php to function 'cpg_get_groups' {eenemeenemuu}
 2012-03-15 [A] Display default groups "Administrators" and "Registered" on modify user page (thread ID 74391) {eenemeenemuu}
