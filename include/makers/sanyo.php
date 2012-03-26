@@ -14,11 +14,14 @@
   $HeadURL$
   $Revision$
 **********************************************/
+//================================================================================================
+//================================================================================================
+//================================================================================================
 /*
 	Exifer
 	Extracts EXIF information from digital photos.
 	
-	Copyright © 2003 Jake Olefsky
+	Copyright Â© 2003 Jake Olefsky
 	http://www.offsky.com/software/exif/index.php
 	jake@olefsky.com
 	
@@ -67,31 +70,22 @@ function formatSanyoData($type,$tag,$intel,$data) {
 		
 		
 	} else if($type=="URATIONAL" || $type=="SRATIONAL") {
-		$data = bin2hex($data);
-		if($intel==1) $data = intel2Moto($data);
-		$top = hexdec(substr($data,8,8));
-		$bottom = hexdec(substr($data,0,8));
-		if($bottom!=0) $data=$top/$bottom;
-		else if($top==0) $data = 0;
-		else $data=$top."/".$bottom;
-	
+		$data = unRational($data,$type,$intel);	
 		
 	} else if($type=="USHORT" || $type=="SSHORT" || $type=="ULONG" || $type=="SLONG" || $type=="FLOAT" || $type=="DOUBLE") {
-		$data = bin2hex($data);
-		if($intel==1) $data = intel2Moto($data);
-		$data=hexdec($data);
+		$data = rational($data,$type,$intel);
 		
 		if($tag=="0200") { //SpecialMode
-			if($data == 0) $data = "Normal";
-			else $data = "Unknown: ".$data;
+			if($data == 0) $data = gettext("Normal");
+			else $data = gettext("Unknown").": ".$data;
 		}
 		if($tag=="0201") { //Quality
-			if($data == 2) $data = "High";
-			else $data = "Unknown: ".$data;
+			if($data == 2) $data = gettext("High");
+			else $data = gettext("Unknown").": ".$data;
 		}
 		if($tag=="0202") { //Macro
-			if($data == 0) $data = "Normal";
-			else $data = "Unknown: ".$data;
+			if($data == 0) $data = gettext("Normal");
+			else $data = gettext("Unknown").": ".$data;
 		}
 	} else if($type=="UNDEFINED") {
 		
