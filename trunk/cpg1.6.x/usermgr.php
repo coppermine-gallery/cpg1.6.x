@@ -177,11 +177,7 @@ function list_users($search = '')
     }
 
     $user_per_page = 25;
-    if ($superCage->get->keyExists('page')) {
-        $page = $superCage->get->getInt('page');
-    } else {
-        $page = 1;
-    }
+    $page = $superCage->get->testInt('page') ? $superCage->get->getInt('page') : 1;    $lower_limit = ($page-1) * $user_per_page;
     $lower_limit = ($page-1) * $user_per_page;
     
     if ($search) {

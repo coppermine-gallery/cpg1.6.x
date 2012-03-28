@@ -52,7 +52,7 @@ if ($superCage->get->keyExists('sort')) {
     $USER['sort'] = $superCage->get->getAlpha('sort');
 }
 
-if ($superCage->get->keyExists('cat')) {
+if ($superCage->get->testInt('cat')) {
     $cat = $superCage->get->getInt('cat');
 }
 
@@ -87,11 +87,7 @@ if ($superCage->get->keyExists('search')) {
     $album = 'search';
 }
 
-if ($superCage->get->keyExists('page')) {
-    $page = max($superCage->get->getInt('page'), 1);
-} else {
-    $page = 1;
-}
+$page = $superCage->get->testInt('page') ? max($superCage->get->getInt('page'), 1) : 1;
 
 $breadcrumb = '';
 $breadcrumb_text = '';
