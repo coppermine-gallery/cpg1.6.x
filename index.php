@@ -32,7 +32,7 @@ if ($superCage->get->keyExists('page')) {
     $page = $superCage->get->getInt('page');
 }
 
-if ($superCage->get->keyExists('cat')) {
+if ($superCage->get->testInt('cat')) {
     $cat = $superCage->get->getInt('cat');
 }
 

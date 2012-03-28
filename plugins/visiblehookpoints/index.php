@@ -16,12 +16,10 @@
   
 **********************************************/
 
+if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
 // Call basic functions, etc.
 require_once('include/init.inc.php');
-
-if (!defined('IN_COPPERMINE')) { die('Not in Coppermine...');}
-
 
 //####################################################################################################
 //#############################  INIT OF SCRIPT VARIABLES  ###########################################
