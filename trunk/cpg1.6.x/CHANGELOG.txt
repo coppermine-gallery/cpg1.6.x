@@ -23,8 +23,10 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
-2012-03-29 [S] Fixed XSS issue {eenemeenemuu}
-2012-03-28 [S] Fixed several path disclosure vulnerabilities {eenemeenemuu}
+2012-03-29 [B] Fixed search results when searching for specific characters (thread ID 74678) {eenemeenemuu}
+2012-03-29 [B] Fixed clickable keywords in file information box at intermediate view (thread ID 74678) {eenemeenemuu}
+2012-03-29 [S] Fixed XSS issue (thread ID 74678) {eenemeenemuu}
+2012-03-28 [S] Fixed several path disclosure vulnerabilities (thread ID 74678) {eenemeenemuu}
 2012-03-26 [O] Updated EXIF library (thread ID 74671) {eenemeenemuu}
 2012-03-23 [B] Fixed error message at "Edit file information" form (thread ID 74648) {eenemeenemuu}
 2012-03-20 [C] Added Opera compatibility for rounded corners to theme 'curve' (thread ID 74598) {eenemeenemuu}
