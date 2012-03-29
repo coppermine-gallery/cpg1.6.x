@@ -272,14 +272,7 @@ function process_post_data()
             }
         }
 
-        $keywords_new = array();
-        $keywords = explode($CONFIG['keyword_separator'], trim(html_entity_decode($keywords)));
-        foreach ($keywords as $word) {
-            if (trim($word)) {
-                $keywords_new[] = trim($word);
-            }
-        }
-        $keywords = implode($CONFIG['keyword_separator'], $keywords_new);
+        cpg_trim_keywords($keywords);
 
         $update  = "aid = '$aid'";
         $update .= ", title = '$title'";
