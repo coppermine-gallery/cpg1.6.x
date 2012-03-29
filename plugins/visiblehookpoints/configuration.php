@@ -13,9 +13,8 @@
   Coppermine version: 1.6.01
   $HeadURL$
   $Revision$
-  
-
 **********************************************/
+
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 $name = 'Visible HookPoints';
 $description =  <<< EOT

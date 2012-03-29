@@ -15,7 +15,7 @@
   $Revision$
 **********************************************/
 
-if (!defined('IN_COPPERMINE')) { die('Not in Coppermine...');}
+if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
 if($CONFIG['read_iptc_data'] ){
     include("include/iptc.inc.php");

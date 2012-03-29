@@ -15,7 +15,6 @@
   $Revision$
 **********************************************/
 
-if (!defined('IN_COPPERMINE')) {
-        die();
-}
+if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
+
 ?>

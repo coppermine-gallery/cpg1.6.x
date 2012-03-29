@@ -1,4 +1,3 @@
-
 <?php
 /*************************
   Coppermine Photo Gallery

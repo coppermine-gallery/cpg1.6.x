@@ -13,7 +13,6 @@
   Coppermine version: 1.6.01
   $HeadURL$
   $Revision$
-
 **********************************************/
 
  /***************************************************************/
@@ -24,9 +23,7 @@
  /* Last Updated: 26th November 2005                            */
  /***************************************************************/
 
-if (!defined('IN_COPPERMINE')) {
-    die('Not in Coppermine...');
-}
+if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
    // start a PHP session - this class uses sessions to store the generated
    // code. Comment out if you are calling already from your application

@@ -14,6 +14,7 @@
   $HeadURL$
   $Revision$
 **********************************************/
+
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 global $lang_pluginmgr_php;
 
