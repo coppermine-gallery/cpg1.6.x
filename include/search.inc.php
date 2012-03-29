@@ -41,6 +41,7 @@ $mb_charset = stristr($multibyte_charset, $charset);
 $search_string = str_replace('&quot;', '"', $search_string);
 $search_string = str_replace('\'', '"', $search_string);
 $search_string = preg_replace('/&.*;/i', '', $search_string);
+$search_string = Inspekt::getEscaped($search_string);
 
 if (!$mb_charset) {
     $search_string = preg_replace('/[^0-9a-z %]/i', '', $search_string);

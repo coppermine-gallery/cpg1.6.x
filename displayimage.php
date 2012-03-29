@@ -175,24 +175,11 @@ function html_picinfo()
     }
 
     if ($CURRENT_PIC_DATA['keywords'] != '') {
-        if ($CONFIG['keyword_separator'] == ' ') {
-            $info[$lang_common['keywords']] = '<span class="alblink">' 
-                . preg_replace("/([^{$CONFIG['keyword_separator']}]+)/"
-                        , '<a href="thumbnails.php?album=search&amp;keywords=on&amp;search=$1">$1</a>'
-                        , $CURRENT_PIC_DATA['keywords'])
-                . '</span>';
-        } else {
-            $keyword_links = '';
-            foreach (explode($CONFIG['keyword_separator'], $CURRENT_PIC_DATA['keywords']) as $keyword) {
-                $keyword_links .= ($keyword_links ? ' '.$CONFIG['keyword_separator'].' ' : '')
-                        . '<a href="thumbnails.php?album=search&amp;keywords=on&amp;search='
-                        . str_replace(' ', '+', $keyword)
-                        . '">' . $keyword . '</a>';
-            }
-            $info[$lang_common['keywords']] = '<span class="alblink">' 
-                . $keyword_links
-                . '</span>';
+        $keyword_links = array();
+        foreach (explode($CONFIG['keyword_separator'], html_entity_decode($CURRENT_PIC_DATA['keywords'])) as $keyword) {
+            $keyword_links[] = '<a href="thumbnails.php?album=search&amp;keywords=on&amp;search=' . urlencode($keyword) . '">' . $keyword . '</a>';
         }
+        $info[$lang_common['keywords']] = '<span class="alblink">' . implode(' / ', $keyword_links) . '</span>';
     }
 
     for ($i = 1; $i <= 4; $i++) {
