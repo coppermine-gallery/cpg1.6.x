@@ -29,7 +29,7 @@ Further discussion should be led on the dev board.
 Joachim 2008-08-08
 */
 
-if (!defined('IN_COPPERMINE')) { die('Not in Coppermine...');}
+if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
 // define some vars
 $textFileExtensions_array = array(

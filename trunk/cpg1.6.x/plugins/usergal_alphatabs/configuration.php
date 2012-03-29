@@ -13,9 +13,8 @@
   Coppermine version: 1.6.01
   $HeadURL$
   $Revision$
-  
-
 **********************************************/
+
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 $name = $lang_plugin_php['usergal_alphatabs_config_name'];
 $description = $lang_plugin_php['usergal_alphatabs_config_description'] . '&nbsp;' . cpg_display_help('f=plugins.htm&amp;as=plugin_bundled_usergal_alphatabs&amp;ae=plugin_bundled_usergal_alphatabs_end', '400', '200');

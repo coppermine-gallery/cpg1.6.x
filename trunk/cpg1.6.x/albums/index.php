@@ -12,8 +12,6 @@
   Coppermine version: 1.6.01
   $HeadURL$
   $Revision$
-  $LastChangedBy: gaugau $
-  $Date$
 -->
 </head>
 <body>

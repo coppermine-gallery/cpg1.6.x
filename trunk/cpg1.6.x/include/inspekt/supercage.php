@@ -23,9 +23,7 @@
  * @package Inspekt
  */
 
-if (!defined('IN_COPPERMINE')) {
-	die('Not in Coppermine...');
-}
+if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
 /**
  * require main Inspekt class

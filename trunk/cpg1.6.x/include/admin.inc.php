@@ -19,9 +19,7 @@
   Defines the scope of configuration variables
 **********************************************/
 
-if (!defined('IN_COPPERMINE')) {
-    die('Not in Coppermine...');
-}
+if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
 $config_data = array(
   'general_settings' => array(

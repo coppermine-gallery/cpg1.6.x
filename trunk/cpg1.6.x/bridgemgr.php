@@ -15,7 +15,6 @@
   $Revision$
 **********************************************/
 
-
 define('IN_COPPERMINE', true);
 define('BRIDGEMGR_PHP', true);
 

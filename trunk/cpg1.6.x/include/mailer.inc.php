@@ -13,7 +13,6 @@
   Coppermine version: 1.6.01
   $HeadURL$
   $Revision$
-
 **********************************************/
 
 // Custom mail function

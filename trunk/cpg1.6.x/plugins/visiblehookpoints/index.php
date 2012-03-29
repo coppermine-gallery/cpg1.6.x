@@ -13,7 +13,6 @@
   Coppermine version: 1.6.01
   $HeadURL$
   $Revision$
-  
 **********************************************/
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -29,9 +28,9 @@ require_once('include/init.inc.php');
 //$action = isset($_POST['action']) ? $_POST['action']: $_GET['action'];
 //$superCage->get->getInt('hookpoints'){gaugau}
 if($superCage->post->keyExists('action')){
-	$action = $superCage->post->getAlpha('action');
+    $action = $superCage->post->getAlpha('action');
 }else{
-	$action = $superCage->get->getAlpha('action');
+    $action = $superCage->get->getAlpha('action');
 }
 
 
@@ -51,8 +50,8 @@ if (!GALLERY_ADMIN_MODE) {
 
 switch ($action) {
   case 'config':
-	if ($superCage->post->keyExists('visiblehookpoints_display')) {
-	  if ($superCage->post->getInt('visiblehookpoints_display') == 1) {
+    if ($superCage->post->keyExists('visiblehookpoints_display')) {
+      if ($superCage->post->getInt('visiblehookpoints_display') == 1) {
         $value = 1;
       } elseif ($superCage->post->getInt('visiblehookpoints_display') == 0) {
           $value = 0;
