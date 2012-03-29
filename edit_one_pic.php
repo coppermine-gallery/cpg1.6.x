@@ -107,14 +107,7 @@ function process_post_data()
     $new_alb = mysql_fetch_assoc($result);
     mysql_free_result($result);
 
-    $keywords = explode($CONFIG['keyword_separator'], trim(html_entity_decode($keywords)));
-    $keywords_new = array();
-    foreach ($keywords as $word) {
-        if (trim($word)) {
-            $keywords_new[] = trim($word);
-        }
-    }
-    $keywords = implode($CONFIG['keyword_separator'], $keywords_new);
+    cpg_trim_keywords($keywords);
 
     $update  = "aid = '{$aid}'";
 

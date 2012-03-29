@@ -6521,4 +6521,22 @@ function cpg_get_groups($user_id) {
     return $cpg_udb->get_groups(mysql_fetch_assoc(cpg_db_query($sql)));
 }
 
+
+/**
+ * Strip whitespaces from the beginning and end of each keyword
+ * 
+ * @param string $keywords
+  */
+function cpg_trim_keywords(&$keywords) {
+    global $CONFIG;
+
+    $keywords_new = array();
+    $keywords = explode($CONFIG['keyword_separator'], trim(html_entity_decode($keywords)));
+    foreach ($keywords as $word) {
+        if (trim($word)) {
+            $keywords_new[] = trim(Inspekt::getEscaped($word));
+        }
+    }
+    $keywords = implode($CONFIG['keyword_separator'], $keywords_new);
+}
 ?>
