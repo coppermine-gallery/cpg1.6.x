@@ -903,7 +903,7 @@ case 'user':
                         
                         if ($user_data['user_actkey']) {
                             // send activation confirmation email (only once)
-                            require('include/mailer.inc.php');
+                            require_once('include/mailer.inc.php');
                             
                             $template_vars = array(
                                 '{SITE_LINK}' => $CONFIG['site_url'],

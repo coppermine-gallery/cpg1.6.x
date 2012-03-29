@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2012-03-29 [B] Fixed error message when activating more than one user in the user manager (thread ID 74326) {eenemeenemuu}
 2012-03-29 [B] Fixed search results when searching for specific characters (thread ID 74678) {eenemeenemuu}
 2012-03-29 [B] Fixed clickable keywords in file information box at intermediate view (thread ID 74678) {eenemeenemuu}
 2012-03-29 [S] Fixed XSS issue (thread ID 74678) {eenemeenemuu}
