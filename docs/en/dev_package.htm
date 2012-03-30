@@ -50,6 +50,14 @@
             As with all subversion operations, you need to perform a checkout to make sure that your working copy of the subversion repository is up-to-date.
         </li>
         <li>
+            <a name="packaging_steps_version_number"></a><h3>Edit the version number<a href="#packaging_steps_version_number" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+            To edit the version number of the Coppermine release, you will need to edit several files:
+            <ul>
+                <li>The actual version number is being stored in the file <tt class="code">include/init.inc.php</tt>, so you will need to edit that file with a plain text editor and find <input type="text" readonly="readonly" value="define('COPPERMINE_VERSION', '1.5.X');" size="38" maxlength="38" class="code smaller" />, where X corresponds to the current minor version count that needs to be counted up.</li>
+                <li>The version number output of all pages of the documentation is being replaced using the JavaScript file behind each localization folder; that's why you need to loop through all language folders within the <tt class="code">docs</tt>-folder, edit <tt class="code">script.js</tt>, find the definition for the function <tt class="code">cpgDocHeader</tt> and inside that definition change the localization line that corresponds to <input type="text" readonly="readonly" value="$('#docheader').text('Coppermine Photo Gallery v1.5.X: Documentation and Manual');" size="82" maxlength="82" class="code smaller" />, where X stands for the minor version number.</li>
+            </ul>
+        </li>
+        <li>
             <a name="packaging_steps_loop_through_files"></a><h3>Replace version number in all files<a href="#packaging_steps_loop_through_files" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
             You need to loop through all text files (file extensions <tt class="code">.php</tt>, <tt class="code">.css</tt>, <tt class="code">.js</tt>, <tt class="code">.txt</tt>, <tt class="code">.sql</tt>, <tt class="code">.htm</tt>) and replace the version number in the header with the version number of the new release. Prior, you have to replace the version number of the next release with that version number plus 1 in <tt class="code">dev_package.htm</tt>, to keep <a href="#packaging_steps_loop_through_files_linux">that example</a> intact.<br />
             <div class="cpg_example">You will have to find <input type="text" readonly="readonly" value="Coppermine version: 1.5.X" size="25" maxlength="25" class="code smaller" /> and replace with <input type="text" readonly="readonly" value="Coppermine version: 1.5.Y" size="25" maxlength="25" class="code smaller" /></div>
@@ -87,14 +95,6 @@
             Add at least one line to the changelog that explains the version number change that you're about to commit. Add a line as well that mentions the release date.
         </li>
         <li>
-            <a name="packaging_steps_version_number"></a><h3>Edit the version number<a href="#packaging_steps_version_number" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-            To edit the version number of the Coppermine release, you will need to edit several files:
-            <ul>
-                <li>The actual version number is being stored in the file <tt class="code">include/init.inc.php</tt>, so you will need to edit that file with a plain text editor and find <input type="text" readonly="readonly" value="define('COPPERMINE_VERSION', '1.5.X');" size="38" maxlength="38" class="code smaller" />, where X corresponds to the current minor version count that needs to be counted up.</li>
-                <li>The version number output of all pages of the documentation is being replaced using the JavaScript file behind each localization folder; that's why you need to loop through all language folders within the <tt class="code">docs</tt>-folder, edit <tt class="code">script.js</tt>, find the definition for the function <tt class="code">cpgDocHeader</tt> and inside that definition change the localization line that corresponds to <input type="text" readonly="readonly" value="$('#docheader').text('Coppermine Photo Gallery v1.5.X: Documentation and Manual');" size="82" maxlength="82" class="code smaller" />, where X stands for the minor version number.</li>
-            </ul>
-        </li>
-        <li>
             <a name="packaging_steps_svn_commit"></a><h3>Commit your changes<a href="#packaging_steps_svn_commit" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
             Of course you need to commit all your changes to the subversion repository, using your subversion client.
         </li>
@@ -124,10 +124,6 @@
                     </ul>
                 </li>
             </ul>
-        </li>
-        <li>
-            <a name="packaging_steps_xml_webspace"></a><h3>Update cpg16x.files.xml on the Coppermine home page<a href="#packaging_steps_xml_webspace" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-            The xml file that contains the information about the most recent stable release needs to be uploaded to the official web space, replacing the file http://coppermine-gallery.net/cpg16x.files.xml that clients will connect to when checking for upgrades with the one from the subversion repository (e.g. the file that corresponds to http://coppermine.svn.sourceforge.net/viewvc/coppermine/trunk/cpg1.5.x/include/cpg16x.files.xml). If you don't have access to the project's official webspace by FTP, ask a fellow developer to perform this task for you.
         </li>
         <li>
             <a name="packaging_steps_svn_export"></a><h3>Export from subversion<a href="#packaging_steps_svn_export" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -203,6 +199,10 @@
         <li>
             <a name="packaging_steps_move_announcement"></a><h3>Publish announcement thread<a href="#packaging_steps_move_announcement" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
             Move the announcement thread from the dev-only board to the announcement board. You will need moderator capabilities on forum level.
+        </li>
+        <li>
+            <a name="packaging_steps_xml_webspace"></a><h3>Update cpg16x.files.xml on the Coppermine home page<a href="#packaging_steps_xml_webspace" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+            The xml file that contains the information about the most recent stable release needs to be uploaded to the official web space, replacing the file http://coppermine-gallery.net/cpg16x.files.xml that clients will connect to when checking for upgrades with the one from the subversion repository (e.g. the file that corresponds to http://coppermine.svn.sourceforge.net/viewvc/coppermine/trunk/cpg1.5.x/include/cpg16x.files.xml). If you don't have access to the project's official webspace by FTP, ask a fellow developer to perform this task for you.
         </li>
         <li>
             <a name="packaging_steps_news"></a><h3>Create news items<a href="#packaging_steps_news" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
