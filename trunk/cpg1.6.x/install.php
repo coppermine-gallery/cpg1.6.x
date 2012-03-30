@@ -110,7 +110,7 @@ $icon = array();
 $icon['submit'] = '<img src="images/icons/right.png" border="0" alt="" width="16" height="16" class="icon" />';
 $icon['lang'] = '<img src="images/icons/babelfish.png" border="0" alt="" width="16" height="16" class="icon" />';
 $icon['test'] = '<img src="images/icons/reload.png" border="0" alt="" width="16" height="16" class="icon" />';
-$icon['retry'] = '<img src="images/icons/left.png" border="0" alt="" width="16" height="16" class="icon" />';
+$icon['retry'] = '<img src="images/icons/reload.png" border="0" alt="" width="16" height="16" class="icon" />';
 $icon['add'] = '<img src="images/icons/add.png" border="0" alt="" width="16" height="16" class="icon" />';
 
 
@@ -376,7 +376,7 @@ switch($step) {
         }
         html_header();
         if ($error != '') {
-            html_error();
+            html_error(false /*false to not include a button*/);
         } else {
             if (isset($config['db_password'])) {
                 setTmpConfig('step', STEP_DB_SELECT);
