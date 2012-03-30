@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2012-03-30 [B] Select newly created database during Coppermine installation {eenemeenemuu}
 2012-03-30 [D] Re-arrenged packaging steps in English docs {eenemeenemuu}
 2012-03-29 [B] Fixed different gallery behavior for register_globals on/off setting (thread ID 74360) {eenemeenemuu}
 2012-03-29 [B] Fixed error message when activating more than one user in the user manager (thread ID 74326) {eenemeenemuu}
