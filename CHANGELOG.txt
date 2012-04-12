@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2012-04-12 [B] Fixed 'album has been locked for editing' message for secondary group memberships (thread ID 74756) {eenemeenemuu}
 2012-03-30 [C] Changed icon for 'retry' button on installer {eenemeenemuu}
 2012-03-30 [B] Select newly created database during Coppermine installation {eenemeenemuu}
 2012-03-30 [D] Re-arrenged packaging steps in English docs {eenemeenemuu}
