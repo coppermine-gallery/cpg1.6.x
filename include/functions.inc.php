@@ -6539,4 +6539,29 @@ function cpg_trim_keywords(&$keywords) {
     }
     $keywords = implode($CONFIG['keyword_separator'], $keywords_new);
 }
+
+
+/**
+ * Determine if an intermediate-sized picture should be used
+ * The weird comparision is because only 'picture_width' is stored as config value
+ * 
+ * @param integer $pwidth
+ * @param integer $pheight
+ * @return bool
+ */
+function cpg_picture_dimension_exceeds_intermediate_limit($pwidth, $pheight) {
+    global $CONFIG;
+
+    $resize_method = $CONFIG['picture_use'] == "thumb" ? ($CONFIG['thumb_use'] == "ex" ? "any" : $CONFIG['thumb_use']) : $CONFIG['picture_use'];
+    if ($resize_method == 'ht' && $pheight > $CONFIG['picture_width']) {
+        return true;
+    } elseif ($resize_method == 'wd' && $pwidth > $CONFIG['picture_width']) {
+        return true;
+    } elseif ($resize_method == 'any' && max($pwidth, $pheight) > $CONFIG['picture_width']) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 ?>

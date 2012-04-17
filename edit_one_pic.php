@@ -177,19 +177,7 @@ function process_post_data()
 
     if ($post_filename != $pic['filename']) {
 
-        // The weird comparision is because only picture_width is stored
-        $resize_method = $CONFIG['picture_use'] == "thumb" ? ($CONFIG['thumb_use'] == "ex" ? "any" : $CONFIG['thumb_use']) : $CONFIG['picture_use'];
-        if ($resize_method == 'ht' && $pic['pheight'] > $CONFIG['picture_width']) {
-            $use_intermediate = true;
-        } elseif ($resize_method == 'wd' && $pic['pwidth'] > $CONFIG['picture_width']) {
-            $use_intermediate = true;
-        } elseif ($resize_method == 'any' && max($pic['pwidth'], $pic['pheight']) > $CONFIG['picture_width']) {
-            $use_intermediate = true;
-        } else {
-            $use_intermediate = false;
-        }
-
-        if ($CONFIG['make_intermediate'] && $use_intermediate) {
+        if ($CONFIG['make_intermediate'] && cpg_picture_dimension_exceeds_intermediate_limit($pic['pwidth'], $pic['pheight'])) {
             $prefixes = array('fullsize', 'normal', 'thumb');
         } else {
             $prefixes = array('fullsize', 'thumb');
