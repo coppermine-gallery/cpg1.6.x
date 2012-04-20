@@ -2426,6 +2426,7 @@ $lang_util_php['keyword_replace_before'] = 'Before conversion, replace %s with %
 $lang_util_php['keyword_replace_after'] = 'After conversion, replace %s with %s';
 $lang_util_php['keyword_replace_values'] = array('_'=>'underscore', '-'=>'hyphen', '~'=>'tilde');
 $lang_util_php['keyword_explanation'] = 'This will convert the keyword separator for all your files from one value to another value. See the help documentation for details.';
+$lang_util_php['not_needed'] = 'not needed'; //cpg1.6
 }
 
 // ------------------------------------------------------------------------- //

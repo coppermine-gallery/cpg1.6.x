@@ -449,22 +449,33 @@ function update_thumbs()
             // Thumbnail
             if ($updatetype == 0 || $updatetype == 2 || $updatetype == 5) {
                 if (resize_image($work_image, $thumb, $CONFIG['thumb_width'], $CONFIG['thumb_method'], $CONFIG['thumb_use'], "false", 1)) {
-                    echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $thumb .'</tt> '. $lang_util_php['updated_successfully'] . '</td></tr>';
+                    echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $thumb .'</tt> '. $lang_util_php['updated_successfully'] . '!</td></tr>';
                 } else {
-                    echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $thumb.'</tt></td></tr>';
+                    echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $thumb.'</tt>!</td></tr>';
                 }
             }
 
             // Intermediate size
             if ($updatetype == 1 || $updatetype == 2 || $updatetype == 3 || $updatetype == 5) {
-                if (max($imagesize[0], $imagesize[1]) > $CONFIG['picture_width'] && $CONFIG['make_intermediate']) {
+                if ($CONFIG['make_intermediate'] && cpg_picture_dimension_exceeds_intermediate_limit($imagesize[0], $imagesize[1])) {
+                    // intermediate sized picture is needed - create/update it
                     $resize_method = $CONFIG['picture_use'] == "thumb" ? ($CONFIG['thumb_use'] == "ex" ? "any" : $CONFIG['thumb_use']) : $CONFIG['picture_use'];
                     $watermark = ($CONFIG['enable_watermark'] == '1' && ($CONFIG['which_files_to_watermark'] == 'both' || $CONFIG['which_files_to_watermark'] == 'resized')) ? 'true' : 'false';
                     if (resize_image($work_image, $normal, $CONFIG['picture_width'], $CONFIG['thumb_method'], $resize_method, $watermark)) {
-                        echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $normal . "</tt> " . $lang_util_php['updated_successfully'] . '!</td></tr>';
+                        echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $normal . '</tt> ' . $lang_util_php['updated_successfully'] . '!</td></tr>';
                     } else {
-                        echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $normal . '</tt></td></tr>';
+                        echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $normal . '</tt>!</td></tr>';
                     }
+                } elseif (file_exists($normal)) {
+                    // intermediate sized picture isn't needed but exists - delete it
+                    if (unlink($normal)) {
+                        echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . sprintf(str_replace('%s', '<tt>%s</tt>', $lang_util_php['del_intermediate']), $normal) . '!</td></tr>';
+                    } else {
+                        echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . sprintf(str_replace('%s', '<tt>%s</tt>', $lang_util_php['del_error']), $normal) . '</td></tr>';
+                    }
+                } else {
+                    // intermediate sized picture isn't needed and doesn't exists
+                    echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $normal . '</tt> ' . $lang_util_php['not_needed'] . '!</td></tr>';
                 }
             }
 
@@ -485,7 +496,7 @@ function update_thumbs()
                             if (resize_image($work_image, $image, $max_size_size, $CONFIG['thumb_method'], $resize_method, 'true')) {
                                 echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $image . "</tt> " . $lang_util_php['updated_successfully'] . '!' . '</td></tr>';
                             } else {
-                                echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $image . '</tt></td></tr>';
+                                echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $image . '</tt>!</td></tr>';
                             }
                         }
                     }
@@ -494,19 +505,19 @@ function update_thumbs()
                         if (resize_image($work_image, $image, $max_size_size, $CONFIG['thumb_method'], $resize_method, 'true')) {
                             echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $image . "</tt> " . $lang_util_php['updated_successfully'] . '!' . '</td></tr>';
                         } else {
-                            echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $image . '</tt></td></tr>';
+                            echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $image . '</tt>!</td></tr>';
                         }
                     } else {
                         if (max($imagesize[0], $imagesize[1]) > $CONFIG['max_upl_width_height'] && ((USER_IS_ADMIN && $CONFIG['auto_resize'] == 1) || (!USER_IS_ADMIN && $CONFIG['auto_resize'] > 0))) {
                             if (resize_image($work_image, $image, $max_size_size, $CONFIG['thumb_method'], $resize_method, 'false')) {
-                                echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $image . "</tt> " . $lang_util_php['updated_successfully'] . '!' . '</td></tr>';
+                                echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $image . "</tt> " . $lang_util_php['updated_successfully'] . '!</td></tr>';
                             } else {
-                                echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $image . '</tt></td></tr>';
+                                echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $image . '</tt>!</td></tr>';
                             }
                         } elseif (copy($orig, $image)) {
-                            echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $orig . "</tt> " . $lang_util_php['updated_successfully'] . '!' . '</td></tr>';
+                            echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $orig . "</tt> " . $lang_util_php['updated_successfully'] . '!</td></tr>';
                         } else {
-                            echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $image . '</tt></td></tr>';
+                            echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $image . '</tt>!</td></tr>';
                         }
                     }
                 }
