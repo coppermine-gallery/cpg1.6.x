@@ -83,7 +83,7 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
             }
         }
 
-        if (max($imagesize[0], $imagesize[1]) > $CONFIG['picture_width'] && $CONFIG['make_intermediate'] && !file_exists($normal)) {
+        if ($CONFIG['make_intermediate'] && cpg_picture_dimension_exceeds_intermediate_limit($imagesize[0], $imagesize[1]) && !file_exists($normal)) {
             // create intermediate sized picture
             $resize_method = $CONFIG['picture_use'] == "thumb" ? ($CONFIG['thumb_use'] == "ex" ? "any" : $CONFIG['thumb_use']) : $CONFIG['picture_use'];
             $watermark = ($CONFIG['enable_watermark'] == '1' && ($CONFIG['which_files_to_watermark'] == 'both' || $CONFIG['which_files_to_watermark'] == 'resized')) ? 'true' : 'false';
