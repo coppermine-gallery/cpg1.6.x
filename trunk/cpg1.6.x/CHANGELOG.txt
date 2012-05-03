@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2012-05-03 [C] Fixed several table width layout issues {eenemeenemuu}
 2012-04-26 [C] Fixed named anchors in plugin manager {eenemeenemuu}
 2012-04-20 [B] Fixed handling of intermediate-sized files in admin tools and during upload (thread ID 74769) {eenemeenemuu}
 2012-04-20 [B] Fixed "newer/older than" search feature {eenemeenemuu}

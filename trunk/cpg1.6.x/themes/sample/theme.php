@@ -2751,7 +2751,7 @@ function theme_display_album_list_cat(&$alb_list, $nbAlb, $cat, $page, $total_pa
     $column_width = ceil(100 / $columns);
     $thumb_cell_width = $CONFIG['alb_list_thumb_size'] + 2;
 
-    starttable('100%');
+    starttable('99%'); // '100%' destroys the layout if $CONFIG['main_table_width'] is a pixel value
 
     if ($STATS_IN_ALB_LIST) {
         $params = array('{STATISTICS}' => $statistics,
@@ -3669,7 +3669,7 @@ function theme_html_rating_box()
             '{TITLE}'      => $rate_title,
             '{VOTES}'      => $votes,
             '{LOCATION}'   => $location,
-            '{WIDTH}'      => $CONFIG['picture_table_width'],
+            '{WIDTH}'      => $CONFIG['picture_table_width'] == "100%" ? $CONFIG['main_table_width'] : $CONFIG['picture_table_width'],
         );
 
         if ($CONFIG['old_style_rating']) {
@@ -3905,7 +3905,7 @@ function theme_html_comments($pid)
                 '{IP}' => $ip,
                 '{REPORT_COMMENT_TITLE}' => &$lang_display_comments['report_comment_title'],
                 '{REPORT_COMMENT_ICON}' => cpg_fetch_icon('report', 0),
-                '{WIDTH}' => $CONFIG['picture_table_width'],
+                '{WIDTH}' => $CONFIG['picture_table_width'] == "100%" ? $CONFIG['main_table_width'] : $CONFIG['picture_table_width'],
                 '{FORM_TOKEN}' => $form_token,
                 '{TIMESTAMP}' => $timestamp,
                 );
@@ -3954,7 +3954,7 @@ function theme_html_comments($pid)
             '{DEFAULT_USERNAME}' => $lang_display_comments['your_name'],
             '{DEFAULT_USERNAME_MESSAGE}' => $lang_display_comments['default_username_message'],
             '{SMILIES}' => '',
-            '{WIDTH}' => $CONFIG['picture_table_width'],
+            '{WIDTH}' => $CONFIG['picture_table_width'] == "100%" ? $CONFIG['main_table_width'] : $CONFIG['picture_table_width'],
             '{HELP_ICON}' => $captionLabel,
             '{FORM_TOKEN}' => $form_token,
             '{TIMESTAMP}' => $timestamp,
@@ -3984,7 +3984,7 @@ function theme_html_comments($pid)
             template_extract_block($template_add_your_comment, 'smilies');
             template_extract_block($template_add_your_comment, 'submit');
             $params = array('{ADD_YOUR_COMMENT}' => $lang_display_comments['add_your_comment'],
-                '{WIDTH}' => $CONFIG['picture_table_width'],
+                '{WIDTH}' => $CONFIG['picture_table_width'] == "100%" ? $CONFIG['main_table_width'] : $CONFIG['picture_table_width'],
                 '{LOGIN_TO_COMMENT}' => sprintf($lang_display_comments['log_in_to_comment'], '<a href="login.php?referer='.$REFERER.'">', '</a>'),
                 '{HELP_ICON}' => '',
                 );
