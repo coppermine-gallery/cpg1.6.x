@@ -6508,6 +6508,11 @@ function cpg_pw_protected_album_access($aid) {
  */
 function cpg_get_groups($user_id) {
     global $cpg_udb;
+
+    if (!$cpg_udb->can_join_tables) {
+        return false;
+    }
+
     $f = $cpg_udb->field;
     if (isset($cpg_udb->usergroupstable)){
         $sql = "SELECT u.{$f['user_id']} AS id, ug.{$f['usertbl_group_id']} AS group_id "

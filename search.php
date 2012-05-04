@@ -50,6 +50,17 @@ $ip = GALLERY_ADMIN_MODE ? '
 
 $customs = '';
 
+if ($cpg_udb->can_join_tables) {
+    $owner_name = <<<EOT
+        <tr>
+                <td><input type="checkbox" name="owner_name" id="owner_name" class="checkbox" /><label for="owner_name" class="clickable_option">{$lang_common['owner_name']}</label></td>
+                <td>&nbsp;</td>
+        </tr>
+EOT;
+} else {
+    $owner_name = '';
+}
+
 foreach (range(1, 4) as $i) {
 
     $value = $CONFIG["user_field{$i}_name"];
@@ -106,10 +117,7 @@ $text .= <<< EOT
                                                                     </select>
                                                 </td>
                                         </tr>
-                                        <tr>
-                                                <td><input type="checkbox" name="owner_name" id="owner_name" class="checkbox" /><label for="owner_name" class="clickable_option">{$lang_common['owner_name']}</label></td>
-                                                <td>&nbsp;</td>
-                                        </tr>
+$owner_name
 $customs
 $ip
                                         <tr>
