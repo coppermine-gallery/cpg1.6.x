@@ -27,8 +27,8 @@ class core_udb {
     {
         global $CONFIG;
 
-        // Define whether we can join tables or not in SQL queries (same host & same db or user)
-        $this->can_join_tables = ($this->db['host'] == $CONFIG['dbserver'] && ($this->db['name'] == $CONFIG['dbname'] || $this->db['user'] == $CONFIG['dbuser']));
+        // Define whether we can join tables or not in SQL queries (same host & same db or user or positive check)
+        $this->can_join_tables = ($this->db['host'] == $CONFIG['dbserver'] && ($this->db['name'] == $CONFIG['dbname'] || $this->db['user'] == $CONFIG['dbuser'] || mysql_query("SELECT NULL FROM ".$this->usertable." LIMIT 1")));
 
         if ($id){
             $this->link_id = $id;

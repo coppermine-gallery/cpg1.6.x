@@ -31,7 +31,7 @@ $allowed = array('title', 'caption', 'keywords', 'filename', 'pic_raw_ip', 'pic_
 
 global $cpg_udb;
 // Use actual column name for search by owner name
-if ($USER['search']['params']['owner_name']) {
+if ($cpg_udb->can_join_tables && $USER['search']['params']['owner_name']) {
     $USER['search']['params'][$cpg_udb->field['username']] = true;
     $allowed[] = $cpg_udb->field['username'];
 }
@@ -222,7 +222,8 @@ if ($search_string && isset($search_params['params'])) {
             $sql = '0';
         }
 
-
+        $join_user_table = $cpg_udb->can_join_tables ? "LEFT JOIN {$cpg_udb->usertable} AS u ON p.owner_id = u.{$cpg_udb->field['user_id']}" : "";
+        $user_column = $cpg_udb->can_join_tables ? ", u.{$cpg_udb->field['username']} AS owner_name" : "";
         if (defined('DISPLAYIMAGE_PHP') && $get_pic_pos == true) {
 
             $sort_order_parts = explode(" ", $sort_order);
@@ -247,7 +248,7 @@ if ($search_string && isset($search_params['params'])) {
             $sort_order = "$criteria $direction '$criteria_pid' OR $criteria = '$criteria_pid' AND pid < $pid";
 
             $query = "SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} AS p
-                LEFT JOIN {$cpg_udb->usertable} AS u ON p.owner_id = u.{$cpg_udb->field['user_id']}
+                $join_user_table
                 WHERE $sql
                 AND ($sort_order)";
 
@@ -258,11 +259,11 @@ if ($search_string && isset($search_params['params'])) {
 
         } else {
 
-            $query = "SELECT p.*, u.{$cpg_udb->field['username']} AS owner_name FROM {$CONFIG['TABLE_PICTURES']} AS p 
-            LEFT JOIN {$cpg_udb->usertable} AS u ON p.owner_id = u.{$cpg_udb->field['user_id']} 
+            $query = "SELECT p.*{$user_column} FROM {$CONFIG['TABLE_PICTURES']} AS p 
+            $join_user_table
             WHERE " . $sql;
 
-            $temp = str_replace("SELECT p.*, u.{$cpg_udb->field['username']} AS owner_name", 'SELECT COUNT(*)', $query);
+            $temp = str_replace("SELECT p.*{$user_column}", 'SELECT COUNT(*)', $query);
             $result = cpg_db_query($temp);
             $row = mysql_fetch_row($result);
             $count = $row[0];

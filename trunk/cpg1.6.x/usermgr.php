@@ -460,8 +460,10 @@ EOT;
         }
         $group_quota_separator = '/';
         // Determine actual quota if user belongs to more than one user group
-        $quota = mysql_fetch_assoc(cpg_db_query("SELECT MAX(group_quota) AS disk_max, MIN(group_quota) AS disk_min FROM {$CONFIG['TABLE_USERGROUPS']} WHERE group_quota >= 0 AND group_id IN (".implode(", ", cpg_get_groups($user['user_id'])).")"));
-        $user['group_quota'] = $quota["disk_min"] ? $quota["disk_max"] : 0;
+        if ($user_groups = cpg_get_groups($user['user_id'])) {
+            $quota = mysql_fetch_assoc(cpg_db_query("SELECT MAX(group_quota) AS disk_max, MIN(group_quota) AS disk_min FROM {$CONFIG['TABLE_USERGROUPS']} WHERE group_quota >= 0 AND group_id IN (".implode(", ", $user_groups).")"));
+            $user['group_quota'] = $quota["disk_min"] ? $quota["disk_max"] : 0;
+        }
         if ($user['group_quota']) {
             $disk_usage_output = theme_display_bar($user['disk_usage'],$user['group_quota'],150,'', '', $group_quota_separator.$user['group_quota'].'&nbsp;'.$lang_byte_units[1],'red','green');
         } else {
