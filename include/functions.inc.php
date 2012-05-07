@@ -6569,4 +6569,18 @@ function cpg_picture_dimension_exceeds_intermediate_limit($pwidth, $pheight) {
     }
 }
 
+
+/**
+ * Dummy function to avoid error message when using the EXIF library on some systems
+ * 
+ * @param string $str
+ * @return string
+ */
+if (!function_exists('gettext')) {
+    function gettext($str) {
+        return $str;
+    }
+}
+
+?>
 ?>
