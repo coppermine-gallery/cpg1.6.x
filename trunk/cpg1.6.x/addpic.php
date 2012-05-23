@@ -43,8 +43,9 @@ $dir_name = str_replace('\\', '/', $dir_name);
 
 // Create the holder $picture_name by translating the file name.
 // Translate any forbidden character into an underscore.
-$sane_name = replace_forbidden($file_name);
 $source    = './' . $CONFIG['fullpath'] . $dir_name . $file_name;
+$file_name = CPGPluginAPI::filter('upload_file_name', $file_name);
+$sane_name = replace_forbidden($file_name);
 
 rename($source, './' . $CONFIG['fullpath'] . $dir_name . $sane_name);
 
