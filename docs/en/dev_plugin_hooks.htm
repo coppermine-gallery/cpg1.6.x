@@ -68,6 +68,13 @@
     <th valign="top" align="left" width="30%">Code</td>
   </tr>
   <tr>
+    <td valign="top">addpic.php</td>
+    <td valign="top"><a name="plugin_hooks_db_input_upload_file_name_addpic"></a><strong>upload_file_name</strong><a href="#plugin_hooks_db_input_upload_file_name_addpic" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters the file name before it will be processed by the replace_forbidden function during batch-add</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$file_name = CPGPluginAPI::filter('upload_file_name', $file_name);</textarea></td>
+  </tr>
+  <tr>
     <td valign="top">banning.php</td>
     <td valign="top"><a name="plugin_hooks_banning_ip_information"></a><strong>ip_information</strong><a href="#plugin_hooks_banning_ip_information" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Filter</td>
@@ -104,9 +111,9 @@
   </tr>
   <tr>
     <td valign="top">db_input.php</td>
-    <td valign="top"><a name="plugin_hooks_db_input_upload_file_name"></a><strong>upload_file_name</strong><a href="#plugin_hooks_db_input_upload_file_name" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top"><a name="plugin_hooks_db_input_upload_file_name_db_input"></a><strong>upload_file_name</strong><a href="#plugin_hooks_db_input_upload_file_name_db_input" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Filter</td>
-    <td valign="top">filters the file name before it will be processed by the replace_forbidden function</td>
+    <td valign="top">filters the file name before it will be processed by the replace_forbidden function during HTTP flash upload</td>
     <td valign="top"><textarea class="samplecode" style="width:100%">$picture_name = CPGPluginAPI::filter('upload_file_name', $picture_name);</textarea></td>
   </tr>
   <tr>
@@ -334,9 +341,9 @@
   </tr>
   <tr>
     <td valign="top">upload.php</td>
-    <td valign="top"><a name="plugin_hooks_upload_upload_file_name"></a><strong>upload_file_name</strong><a href="#plugin_hooks_upload_upload_file_name" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top"><a name="plugin_hooks_upload_upload_file_name_upload"></a><strong>upload_file_name</strong><a href="#plugin_hooks_upload_upload_file_name_upload" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Filter</td>
-    <td valign="top">filters the file name before it will be processed by the replace_forbidden function</td>
+    <td valign="top">filters the file name before it will be processed by the replace_forbidden function during simple HTTP upload</td>
     <td valign="top"><textarea class="samplecode" style="width:100%">$picture_name = CPGPluginAPI::filter('upload_file_name', $picture_name);</textarea></td>
   </tr>
   <tr>
@@ -1016,8 +1023,9 @@ echo $footer;</textarea></td>
         </td>
         <td>
             <ul>
-                <li class="floatleft"><a href="#plugin_hooks_db_input_upload_file_name">upload_file_name</a> (db_input.php)</li>
-                <li class="floatleft"><a href="#plugin_hooks_upload_upload_file_name">upload_file_name</a> (upload.php)</li>
+                <li class="floatleft"><a href="#plugin_hooks_db_input_upload_file_name_addpic">upload_file_name</a> (addpic.php)</li>
+                <li class="floatleft"><a href="#plugin_hooks_db_input_upload_file_name_db_input">upload_file_name</a> (db_input.php)</li>
+                <li class="floatleft"><a href="#plugin_hooks_upload_upload_file_name_upload">upload_file_name</a> (upload.php)</li>
                 <li class="floatleft"><a href="#plugin_hooks_filename_upload_form">upload_form</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_upload_html_pre_move">upload_html_pre_move</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_filename_upload_options">upload_options</a></li>
