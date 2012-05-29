@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2012-05-29 [A] Prepared code for user cookie consent (thread ID 74961) {eenemeenemuu}
 2012-05-23 [A] Added plugin hook 'upload_file_name' to batch-add interface {eenemeenemuu}
 2012-05-07 [B] Fixed error message 'undefined function gettext()' when using EXIF library (thread ID 74818) {eenemeenemuu}
 2012-05-04 [B] Fixed several possible MySQL permission issues for bridged galleries {eenemeenemuu}

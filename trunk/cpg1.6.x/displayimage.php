@@ -300,6 +300,12 @@ if ($cat < 0) {
     mysql_free_result($result);
 }
 
+if ($CONFIG['cookies_need_consent'] && !$superCage->cookie->keyExists($CONFIG['cookie_name'].'_accept_cookies')) {
+    set_js_var('cookies_allowed', false);
+} else {
+    set_js_var('cookies_allowed', true);
+}
+
 get_meta_album_set($cat);
 
 if (!$superCage->get->keyExists('fullsize') && ($pos < 0 || $pid > 0)) {
