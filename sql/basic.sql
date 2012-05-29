@@ -72,6 +72,7 @@ INSERT INTO CPG_config VALUES ('contact_form_subject_content', 'Coppermine galle
 INSERT INTO CPG_config VALUES ('contact_form_subject_field', '0');
 INSERT INTO CPG_config VALUES ('cookie_name', 'cpg15x');
 INSERT INTO CPG_config VALUES ('cookie_path', '/');
+INSERT INTO CPG_config VALUES ('cookies_need_consent', '0');
 INSERT INTO CPG_config VALUES ('count_admin_hits', '0');
 INSERT INTO CPG_config VALUES ('count_album_hits', '1');
 INSERT INTO CPG_config VALUES ('count_file_hits', '1');

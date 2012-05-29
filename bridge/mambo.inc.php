@@ -351,7 +351,7 @@ if (isset($bridge_lookup)) {
             cpg_db_query($sql);
     
             // set the session cookie
-            setcookie("sessioncookie", $sessioncookie, time() + 43200, "/");
+            cpg_setcookie("sessioncookie", $sessioncookie, time() + (CPG_DAY*0.5), "/");
         }
     
         /** taken from Mambo session class */

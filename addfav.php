@@ -45,7 +45,7 @@ if (!in_array($pid, $FAVPICS)) {
 }
 
 $data = base64_encode(serialize($FAVPICS));
-setcookie($CONFIG['cookie_name'] . '_fav', $data, time() + 86400 * 30, $CONFIG['cookie_path']);
+cpg_setcookie($CONFIG['cookie_name'].'_fav', $data, time() + (CPG_DAY*30), $CONFIG['cookie_path']);
 
 // If the user is logged in then put it in the DB
 if (USER_ID > 0) {

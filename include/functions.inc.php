@@ -159,7 +159,7 @@ function user_save_profile()
      * e.g. $encoded_string_with_md5 = "asdfkhasdf987we89rfadfjhasdfklj@^@".md5("asdfkhasdf987we89rfadfjhasdfklj".$secret_salt)
      */
     $data = base64_encode(serialize($USER));
-    setcookie($CONFIG['cookie_name'].'_data', $data, time()+86400*30, $CONFIG['cookie_path']);
+    cpg_setcookie($CONFIG['cookie_name'].'_data', $data, time() + (CPG_DAY*30), $CONFIG['cookie_path']);
 }
 
 /**************************************************************************
@@ -6579,6 +6579,23 @@ function cpg_picture_dimension_exceeds_intermediate_limit($pwidth, $pheight) {
 if (!function_exists('gettext')) {
     function gettext($str) {
         return $str;
+    }
+}
+
+
+
+function cpg_setcookie($name, $value, $expire = 0, $path = false) {
+    global $CONFIG;
+    $superCage = Inspekt::makeSuperCage();
+
+    if ($CONFIG['cookies_need_consent'] && !$superCage->cookie->keyExists($CONFIG['cookie_name'].'_accept_cookies')) {
+        return -1;
+    }
+
+    if ($path) {
+        return setcookie($name, $value, $expire, $path);
+    } else {
+        return setcookie($name, $value, $expire);
     }
 }
 

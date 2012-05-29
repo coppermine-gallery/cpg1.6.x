@@ -32,11 +32,14 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 }
 
 function writeCookie(name, data, noDays) {
-    var cookieStr = name + "="+ data;
-    if (writeCookie.arguments.length > 2){
-     cookieStr += "; expires=" + getCookieExpireDate(noDays);
-     }
-    document.cookie = cookieStr;
+    if (js_vars.cookies_allowed == true) {
+        alert('accept');
+        var cookieStr = name + "="+ data;
+        if (writeCookie.arguments.length > 2){
+            cookieStr += "; expires=" + getCookieExpireDate(noDays);
+        }
+        document.cookie = cookieStr;
+    }
 }
 
 function readCookie(cookieName) {
@@ -45,7 +48,7 @@ function readCookie(cookieName) {
     var start = cookies.indexOf(cookieName);
     if (start == -1){ // cookie not found
         return "";
-        }
+    }
     start += searchName.length; //start of the cookie data
     var end = cookies.indexOf(";", start);
     if (end == -1){
