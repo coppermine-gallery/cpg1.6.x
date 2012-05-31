@@ -858,11 +858,12 @@ function reset_views()
     } else {
         $albumid = 0;
     }
-    
+
     $albstr = $albumid ? "WHERE aid = $albumid" : '';
 
     cpg_db_query("UPDATE {$CONFIG['TABLE_PICTURES']} SET hits = 0 $albstr");
-    
+    cpg_db_query("UPDATE {$CONFIG['TABLE_ALBUMS']} SET alb_hits = 0 $albstr");
+
     echo $lang_util_php['reset_success'];
 }
 
