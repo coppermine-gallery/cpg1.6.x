@@ -182,6 +182,9 @@ while ( ($row = mysql_fetch_assoc($result)) ) {
 } // while
 mysql_free_result($result);
 
+// Check if Coppermine is allowed to store cookies (cookie consent is required and user has agreed to store cookies)
+define('CPG_COOKIES_ALLOWED', ($CONFIG['cookies_need_consent'] && !$superCage->cookie->keyExists($CONFIG['cookie_name'].'_cookies_allowed') ? false : true));
+
 // A space cannot be stored in the config table since the value field is VARCHAR, so %20 is used instead.
 if ($CONFIG['keyword_separator'] == '%20') {
     $CONFIG['keyword_separator'] = ' ';
