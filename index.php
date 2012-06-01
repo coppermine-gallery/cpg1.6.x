@@ -87,7 +87,9 @@ if (!$file) {
         // Anonymous access to site is not allowed, so need to redirect to login page
         // First try to set cookie so login page doesn't show 'cookie_warning' even when no problem
         $data = base64_encode(serialize($USER));
-        cpg_setcookie($CONFIG['cookie_name'].'_data', $data, time() + (CPG_DAY*30), $CONFIG['cookie_path']);
+        if (CPG_COOKIES_ALLOWED) {
+            setcookie($CONFIG['cookie_name'].'_data', $data, time() + (CPG_DAY*30), $CONFIG['cookie_path']);
+        }
         // Now redirect to login page
         $redirect = 'login.php';
         header("Location: $redirect");

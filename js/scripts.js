@@ -33,7 +33,6 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 
 function writeCookie(name, data, noDays) {
     if (js_vars.cookies_allowed == true) {
-        alert('accept');
         var cookieStr = name + "="+ data;
         if (writeCookie.arguments.length > 2){
             cookieStr += "; expires=" + getCookieExpireDate(noDays);

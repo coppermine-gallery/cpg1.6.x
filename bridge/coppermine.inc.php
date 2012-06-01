@@ -160,11 +160,15 @@ if (isset($bridge_lookup)) {
                             if ($remember) {
                                     $remember_sql = ",remember = '1' ";
                                     // Change cookie life time to 2 weeks
-                                    cpg_setcookie( $this->client_id, $this->session_id, time() + (CPG_WEEK*2), $CONFIG['cookie_path'] );
+                                    if (CPG_COOKIES_ALLOWED) {
+                                        setcookie( $this->client_id, $this->session_id, time() + (CPG_WEEK*2), $CONFIG['cookie_path'] );
+                                    }
                             } else {
                                     $remember_sql = '';
                                     // Kill the cookie when closing the browser
-                                    cpg_setcookie( $this->client_id, $this->session_id, 0, $CONFIG['cookie_path'] );
+                                    if (CPG_COOKIES_ALLOWED) {
+                                        setcookie( $this->client_id, $this->session_id, 0, $CONFIG['cookie_path'] );
+                                    }
                             }
 
                             // Update guest session with user's information
@@ -347,7 +351,9 @@ if (isset($bridge_lookup)) {
                     cpg_db_query($sql, $this->link_id);
 
                     // set the session cookie
-                    cpg_setcookie( $this->client_id, $this->session_id, time() + (CPG_WEEK*2), $CONFIG['cookie_path'] );
+                    if (CPG_COOKIES_ALLOWED) {
+                        setcookie( $this->client_id, $this->session_id, time() + (CPG_WEEK*2), $CONFIG['cookie_path'] );
+                    }
             }
 
 
