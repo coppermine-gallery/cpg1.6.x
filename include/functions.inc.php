@@ -6584,5 +6584,35 @@ if (!function_exists('gettext')) {
     }
 }
 
+
+/**
+ * Strip unneeded EXIF data
+ * 
+ * @param array $exifRawData
+ * @param array $exif_names
+ * @return array
+ */
+function cpg_exif_strip_data($exifRawData, $exif_names) {
+    $exif = array();
+    if (is_array($exifRawData['IFD0'])) {
+        $exif = array_merge($exif, $exifRawData['IFD0']);
+    }
+    if (is_array($exifRawData['SubIFD'])) {
+        $exif = array_merge($exif, $exifRawData['SubIFD']);
+    }
+    if (is_array($exifRawData['SubIFD']['MakerNote'])) {
+        $exif = array_merge($exif, $exifRawData['SubIFD']['MakerNote']);
+    }
+    if (isset($exifRawData['IFD1OffSet'])) {
+        $exif['IFD1OffSet'] = $exifRawData['IFD1OffSet'];
+    }
+    foreach ($exif as $key => $value) {
+        if (!in_array($key, $exif_names)) {
+            unset($exif[$key]);
+        }
+    }
+    return $exif;
+}
+
 ?>
 ?>
