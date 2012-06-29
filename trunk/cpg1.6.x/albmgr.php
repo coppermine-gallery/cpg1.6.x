@@ -218,7 +218,7 @@ if (count($rowset) > 0) {
         echo <<< EOT
                 <tr id="sort-{$album['aid']}">
                     <td class="dragHandle"></td>
-                    <td class="album_text" width="96%"><span class="albumName">{$title}&nbsp;<a href="upload.php?album={$album['aid']}"><img src="images/icons/upload.png" title="{$lang_albmgr_php['upload_files']}" /></a><span class="editAlbum">{$icon_array['edit']}{$lang_common['edit']}</span></td>
+                    <td class="album_text" width="96%"><span class="albumName">{$title}</span>&nbsp;<a href="upload.php?album={$album['aid']}"><img src="images/icons/upload.png" title="{$lang_albmgr_php['upload_files']}" /></a><span class="editAlbum">{$icon_array['edit']}{$lang_common['edit']}</span></td>
                 </tr>
 EOT;
     }
