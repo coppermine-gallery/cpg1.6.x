@@ -371,6 +371,18 @@ $config_data = array(
       'help_link'              => 'f=configuration.htm&amp;as=admin_album_list_alphasort_start&amp;ae=admin_album_list_alphasort_end',
       'additional_description' => $lang_admin_php['categories_alpha_sort_details'],
     ),
+    'album_sort_order' => array(
+      'type'          => 'select',
+      'default_value' => 'pa',
+      'help_link'     => 'f=configuration.htm&amp;as=admin_album_sort_order_start&amp;ae=admin_album_sort_order_end',
+      'options'       => array('ta' => $lang_admin_php['title_a'],
+                           'td' => $lang_admin_php['title_d'],
+                           'da' => $lang_admin_php['date_a'],
+                           'dd' => $lang_admin_php['date_d'],
+                           'pa' => $lang_admin_php['pos_a'],
+                           'pd' => $lang_admin_php['pos_d'],
+                         ),
+    ),
     'link_pic_count' => array(
       'type'          => 'checkbox',
       'default_value' => '1',

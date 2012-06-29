@@ -774,20 +774,34 @@ function list_albums()
         $alb_stats = cpg_db_fetch_rowset($alb_stats_q);
         mysql_free_result($alb_stats_q);
     } else {
-        $sql = 'SELECT a.aid, a.title, a.description, a.thumb, a.keyword, category, visibility, filepath, filename, url_prefix, pwidth, pheight, a.owner ' 
-            . ' FROM ' . $CONFIG['TABLE_ALBUMS'] . ' AS a ' 
-            . ' LEFT JOIN ' . $CONFIG['TABLE_PICTURES'] . ' AS p ' . 'ON a.thumb=p.pid ' 
-            . ' WHERE a.category=' . $cat . $album_filter 
-            . ' ORDER BY a.pos, a.aid ' . $limit;
+        $sort_array = array(
+            'ta' => "a.title ASC, a.aid ASC",
+            'td' => "a.title DESC, a.aid DESC",
+            'da' => "a.aid ASC",
+            'dd' => "a.aid DESC",
+            'pa' => "a.pos ASC, a.aid ASC",
+            'pd' => "a.pos DESC, a.aid DESC",
+        );
+        // TODO: add user defined sort order for albums
+        //$sort_code  = isset($USER['sort'])? $USER['sort'] : $CONFIG['album_sort_order'];
+        //$sort_order = isset($sort_array[$sort_code]) ? $sort_array[$sort_code] : $sort_array[$CONFIG['album_sort_order']];
+        $sort_order = $sort_array[$CONFIG['album_sort_order']];
+
+        $sql = "SELECT a.aid, a.title, a.description, a.thumb, a.keyword, category, visibility, filepath, filename, url_prefix, pwidth, pheight, a.owner "
+            . " FROM {$CONFIG['TABLE_ALBUMS']} AS a "
+            . " LEFT JOIN {$CONFIG['TABLE_PICTURES']} AS p ON a.thumb=p.pid "
+            . " WHERE a.category = $cat $album_filter "
+            . " ORDER BY $sort_order $limit";
         $alb_thumbs_q = cpg_db_query($sql);
         $alb_thumbs = cpg_db_fetch_rowset($alb_thumbs_q);
         mysql_free_result($alb_thumbs_q);
 
         //This query will fetch album stats and keywords for the albums
         $sql = "SELECT a.aid, count( p.pid ) AS pic_count, max( p.pid ) AS last_pid, max( p.ctime ) AS last_upload, a.keyword, a.alb_hits"
-                ." FROM {$CONFIG['TABLE_ALBUMS']} AS a "
-                ." LEFT JOIN {$CONFIG['TABLE_PICTURES']} AS p ON a.aid = p.aid AND p.approved = 'YES' "
-                ." WHERE a.category = $cat $album_filter GROUP BY a.aid ORDER BY a.pos, a.aid $limit";
+            . " FROM {$CONFIG['TABLE_ALBUMS']} AS a "
+            . " LEFT JOIN {$CONFIG['TABLE_PICTURES']} AS p ON a.aid = p.aid AND p.approved = 'YES' "
+            . " WHERE a.category = $cat $album_filter GROUP BY a.aid "
+            . " ORDER BY $sort_order $limit";
         $alb_stats_q = cpg_db_query($sql);
         $alb_stats = cpg_db_fetch_rowset($alb_stats_q);
         mysql_free_result($alb_stats_q);

@@ -710,6 +710,7 @@ $lang_admin_php['main_page_layout'] = 'The content of the main page';
 $lang_admin_php['first_level'] = 'Show first level album thumbnails in categories';
 $lang_admin_php['categories_alpha_sort'] = 'Sort categories alphabetically';
 $lang_admin_php['categories_alpha_sort_details'] = '(instead of custom sort order)';
+$lang_admin_php['album_sort_order'] = 'Sort order for albums';
 $lang_admin_php['link_pic_count'] = 'Show number of linked files';
 $lang_admin_php['thumbcols'] = 'Number of columns on thumbnail page';
 $lang_admin_php['thumbrows'] = 'Number of rows on thumbnail page';
