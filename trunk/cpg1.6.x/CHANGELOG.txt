@@ -23,7 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
-2012-06-29 [B] Fixed preselection of album name when editing albums at the album manager {eenemeenemuu}
+2012-06-29 [B] Fixed predefined album name when editing albums at the album manager {eenemeenemuu}
 2012-06-07 [O] Strip unneeded EXIF data before storing it in the database (thread ID 75011) {eenemeenemuu}
 2012-05-31 [A] Also reset album views when "Reset view counters" is chosen at the admin tools (thread ID 74958) {eenemeenemuu}
 2012-05-29 [A] Prepared code for user cookie consent (thread ID 74961) {eenemeenemuu}
