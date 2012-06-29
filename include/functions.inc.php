@@ -6615,4 +6615,3 @@ function cpg_exif_strip_data($exifRawData, $exif_names) {
 }
 
 ?>
-?>
