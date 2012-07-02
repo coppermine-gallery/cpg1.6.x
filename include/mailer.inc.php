@@ -25,6 +25,9 @@ function cpg_mail($to, $subject, $msg_body = '', $type = 'text/plain', $sender_n
         $msg_body_plaintext = strip_tags($msg_body);
     }
 
+    // convert possible special HTML entities to characters
+    $subject = htmlspecialchars_decode($subject, ENT_QUOTES);
+
     // send mails to ALL admins - not bridged only
     if ($to == 'admin') {
         if (UDB_INTEGRATION == 'coppermine') {
