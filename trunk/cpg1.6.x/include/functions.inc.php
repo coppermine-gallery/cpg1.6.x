@@ -3784,27 +3784,27 @@ EOT;
 EOT;
     echo "USER: ";
     echo $debug_underline;
-    print_r($USER);
+    echo htmlentities(print_r($USER, true));
     echo $debug_separate;
     echo "USER DATA:";
     echo $debug_underline;
-    print_r($USER_DATA);
+    echo htmlentities(print_r($USER_DATA, true));
     echo $debug_separate;
     echo "Queries:";
     echo $debug_underline;
-    print_r($queries);
+    echo htmlentities(print_r($queries, true));
     echo $debug_separate;
     echo "GET :";
     echo $debug_underline;
-    print_r($superCage->get->_source);
+    echo htmlentities(print_r($superCage->get->_source, true));
     echo $debug_separate;
     echo "POST :";
     echo $debug_underline;
-    print_r($superCage->post->_source);
+    echo htmlentities(print_r($superCage->post->_source, true));
     echo $debug_separate;
     echo "COOKIE :";
     echo $debug_underline;
-    print_r($superCage->cookie->_source);
+    echo htmlentities(print_r($superCage->cookie->_source, true));
     echo $debug_separate;
 
     if ($superCage->cookie->keyExists('PHPSESSID')) {
@@ -3814,7 +3814,7 @@ EOT;
             session_id($superCage->cookie->getAlnum('PHPSESSID'));
             session_start();
         }
-        print_r($_SESSION);
+        echo htmlentities(print_r($_SESSION, true));
         echo $debug_separate;
     }
 
