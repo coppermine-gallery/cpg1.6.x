@@ -763,13 +763,14 @@ function list_albums()
             if ($cat_names[$key]['cat_name'] != '') {
                 $alb_thumbs[$key]['title'] = $cat_names[$key]['cat_name'];
             }
+            $current_albums[] = $value['aid'];
         }
 
         //This query will fetch album stats and keywords for the albums
         $sql = "SELECT a.aid, count( p.pid ) AS pic_count, max( p.pid ) AS last_pid, max( p.ctime ) AS last_upload, a.keyword, a.alb_hits"
                 ." FROM {$CONFIG['TABLE_ALBUMS']} AS a "
                 ." LEFT JOIN {$CONFIG['TABLE_PICTURES']} AS p ON a.aid = p.aid AND p.approved = 'YES' "
-                ." WHERE a.owner = {$USER_DATA['user_id']} $album_filter GROUP BY a.aid ORDER BY a.pos, a.aid $limit";
+                ." WHERE a.owner = {$USER_DATA['user_id']} $album_filter AND a.aid IN (".implode(', ', $current_albums).") GROUP BY a.aid $limit";
         $alb_stats_q = cpg_db_query($sql);
         $alb_stats = cpg_db_fetch_rowset($alb_stats_q);
         mysql_free_result($alb_stats_q);
@@ -943,7 +944,6 @@ function album_adm_menu($aid, $cat, $owner)
         if ($cat == USER_ID + FIRST_USER_CAT) {
             return html_albummenu($aid);
         }
-        
         if ($owner == USER_ID) {
             //check if admin allows editing after closing category
             if ($CONFIG['allow_user_edit_after_cat_close'] == 0) {
