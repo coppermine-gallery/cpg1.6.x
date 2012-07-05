@@ -2049,44 +2049,14 @@ function get_pic_pos($album, $pid)
     global $USER, $CONFIG, $CURRENT_ALBUM_KEYWORD, $FORBIDDEN_SET_DATA, $USER_DATA;
     global $RESTRICTEDWHERE, $FORBIDDEN_SET;
 
-    //$superCage = Inspekt::makeSuperCage();
-
-    $sort_array = array(
-        //'na' => 'filename <',
-        //'nd' => 'filename >',
-        //'ta' => 'title <',
-        //'td' => 'title >',
-        'da' => 'pid <',
-        'dd' => 'pid >',
-        //'pa' => 'position <',
-        //'pd' => 'position >',
-    );
-
-    $sort_code  = isset($USER['sort'])? $USER['sort'] : $CONFIG['default_sort_order'];
-
-    if (is_numeric($album)) {
-        if (isset($sort_array[$sort_code])) {
-            $comp_order = $sort_array[$sort_code];
-        } else {
-            return false;   
-        }
-    }
-
-    if (count($FORBIDDEN_SET_DATA) > 0) {
-        $forbidden_set_string = ' AND aid NOT IN (' . implode(', ', $FORBIDDEN_SET_DATA) . ')';
-    } else {
-        $forbidden_set_string = '';
-    }
-
-    // Keyword
-    if (!empty($CURRENT_ALBUM_KEYWORD)) {
-        $keyword = "OR (keywords like '%$CURRENT_ALBUM_KEYWORD%' $forbidden_set_string )";
-    } else {
-        $keyword = '';
-    }
-
     // Regular albums
     if (is_numeric($album)) {
+
+        if (count($FORBIDDEN_SET_DATA) > 0) {
+            $forbidden_set_string = ' AND aid NOT IN (' . implode(', ', $FORBIDDEN_SET_DATA) . ')';
+        } else {
+            $forbidden_set_string = '';
+        }
 
         $album_name_keyword = get_album_name($album);
         //$album_name         = $album_name_keyword['title'];
@@ -2098,24 +2068,28 @@ function get_pic_pos($album, $pid)
             $keyword = '';
         }
 
-        if (array_key_exists('allowed_albums', $USER_DATA) && is_array($USER_DATA['allowed_albums'])
-                && in_array($album, $USER_DATA['allowed_albums'])) {
-            $approved = '';
-        } else {
-            $approved = GALLERY_ADMIN_MODE ? '' : 'AND approved=\'YES\'';
-        }
-
         $approved = GALLERY_ADMIN_MODE ? '' : 'AND approved=\'YES\'';
-
-        list($param) = explode(' ', $comp_order);
 
         $result = cpg_db_query("SELECT filename, title, pid, position FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid");
 
         $pic = mysql_fetch_assoc($result);
 
+        $sort_array = array(
+            'na' => "(filename < '{$pic['filename']}' OR filename = '{$pic['filename']}' AND pid < {$pic['pid']})",
+            'nd' => "(filename > '{$pic['filename']}' OR filename = '{$pic['filename']}' AND pid > {$pic['pid']})",
+            'ta' => "(title < '{$pic['title']}' OR title = '{$pic['title']}' AND pid < {$pic['pid']})",
+            'td' => "(title > '{$pic['title']}' OR title = '{$pic['title']}' AND pid > {$pic['pid']})",
+            'da' => "pid < {$pic['pid']}",
+            'dd' => "pid > {$pic['pid']}",
+            'pa' => "(position < {$pic['position']} OR position = {$pic['position']} AND pid < {$pic['pid']})",
+            'pd' => "(position > {$pic['position']} OR position = {$pic['position']} AND pid > {$pic['pid']})",
+        );
+        $sort_code  = isset($USER['sort']) ? $USER['sort'] : $CONFIG['default_sort_order'];
+        $sort_order = isset($sort_array[$sort_code]) ? $sort_array[$sort_code] : $sort_array[$CONFIG['default_sort_order']];
+
         $query = "SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']}
-                    WHERE ((aid='$album' $forbidden_set_string ) $keyword) $approved
-                    AND $comp_order '{$pic[$param]}'";
+                    WHERE ((aid='$album' $forbidden_set_string) $keyword) $approved
+                    AND $sort_order";
 
         $result = cpg_db_query($query);
 

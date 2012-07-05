@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2012-07-05 [O] Optimized function 'get_pic_pos' {eenemeenemuu}
 2012-07-04 [C] Made debug output W3C conform (thread ID 75049) {eenemeenemuu}
 2012-07-04 [B] Fixed "My gallery" view for user admin mode {eenemeenemuu}
 2012-07-02 [C] Replaced special HTML entities with characters on email subject (thread ID 75052) {eenemeenemuu}
