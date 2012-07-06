@@ -482,6 +482,11 @@ $config_data = array(
                            'pd' => $lang_admin_php['pos_d'],
                          ),
     ),
+    'custom_sortorder_thumbs' => array(
+      'type'          => 'checkbox',
+      'default_value' => '1',
+      'help_link'     => 'f=configuration.htm&amp;as=admin_thumbnail_custom_sortorder_thumbs&amp;ae=admin_thumbnail_custom_sortorder_thumbs_end',
+    ),
     'min_votes_for_rating' => array(
       'type'          => 'textfield',
       'min'           => '0',
