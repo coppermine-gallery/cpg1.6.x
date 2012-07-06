@@ -40,7 +40,7 @@ Changelog
 2012-04-26 [C] Fixed named anchors in plugin manager {eenemeenemuu}
 2012-04-20 [B] Fixed handling of intermediate-sized files in admin tools and during upload (thread ID 74769) {eenemeenemuu}
 2012-04-20 [B] Fixed "newer/older than" search feature {eenemeenemuu}
-2012-04-17 [O] Moved comparision from several places to function 'cpg_picture_dimension_exceeds_intermediate_limit' {eenemeenemuu}
+2012-04-17 [O] Moved comparison from several places to function 'cpg_picture_dimension_exceeds_intermediate_limit' {eenemeenemuu}
 2012-04-12 [B] Fixed 'album has been locked for editing' message for secondary group memberships (thread ID 74756) {eenemeenemuu}
 2012-03-30 [C] Changed icon for 'retry' button on installer {eenemeenemuu}
 2012-03-30 [B] Select newly created database during Coppermine installation {eenemeenemuu}
