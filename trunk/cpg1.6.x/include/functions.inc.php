@@ -1280,7 +1280,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         } else {
             $count = $pic_count;
         }
-        
+
         list($ASC, $DESC, $limit, $flipped) = get_pic_data_ordering($count, $limit1, $limit2);
 
         $sort_array = array(
@@ -1293,10 +1293,10 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
             'pa' => "position $ASC, pid $ASC",
             'pd' => "position $DESC, pid $DESC",
         );
-    
-        $sort_code  = isset($USER['sort'])? $USER['sort'] : $CONFIG['default_sort_order'];
+
+        $sort_code  = isset($USER['sort']) && $CONFIG['custom_sortorder_thumbs'] ? $USER['sort'] : $CONFIG['default_sort_order'];
         $sort_order = isset($sort_array[$sort_code]) ? $sort_array[$sort_code] : $sort_array[$CONFIG['default_sort_order']];
-            
+
         $select_columns = implode(', ', $select_column_list);
 
         $query = "SELECT $select_columns FROM {$CONFIG['TABLE_PICTURES']} AS r
@@ -1311,7 +1311,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         if ($flipped) {
             $rowset = array_reverse($rowset);
         }
-        
+
         // Set picture caption
         if ($set_caption) {
             if ($CONFIG['display_thumbnail_rating'] == 1) {
@@ -1323,7 +1323,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         $rowset = CPGPluginAPI::filter('thumb_caption_regular', $rowset);
         return $rowset;
     }
-    
+
     $meta_album_passto = array (
         'album' => $album,
         'limit' => $limit,
@@ -2084,7 +2084,7 @@ function get_pic_pos($album, $pid)
             'pa' => "(position < {$pic['position']} OR position = {$pic['position']} AND pid < {$pic['pid']})",
             'pd' => "(position > {$pic['position']} OR position = {$pic['position']} AND pid > {$pic['pid']})",
         );
-        $sort_code  = isset($USER['sort']) ? $USER['sort'] : $CONFIG['default_sort_order'];
+        $sort_code  = isset($USER['sort']) && $CONFIG['custom_sortorder_thumbs'] ? $USER['sort'] : $CONFIG['default_sort_order'];
         $sort_order = isset($sort_array[$sort_code]) ? $sort_array[$sort_code] : $sort_array[$CONFIG['default_sort_order']];
 
         $query = "SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']}

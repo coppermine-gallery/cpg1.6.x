@@ -81,6 +81,7 @@ INSERT INTO CPG_config VALUES ('custom_footer_path', '');
 INSERT INTO CPG_config VALUES ('custom_header_path', '');
 INSERT INTO CPG_config VALUES ('custom_lnk_name', '');
 INSERT INTO CPG_config VALUES ('custom_lnk_url', '');
+INSERT INTO CPG_config VALUES ('custom_sortorder_thumbs', '1');
 INSERT INTO CPG_config VALUES ('debug_mode', '0');
 INSERT INTO CPG_config VALUES ('debug_notice', '0');
 INSERT INTO CPG_config VALUES ('default_dir_mode', '0755');

@@ -726,6 +726,7 @@ $lang_admin_php['display_thumbnail_rating'] = 'Display rating below the thumbnai
 $lang_admin_php['alb_desc_thumb'] = 'Display album description';
 $lang_admin_php['thumbnail_to_fullsize'] = 'Go directly from thumbnail to full-sized image';
 $lang_admin_php['default_sort_order'] = 'Default sort order for files';
+$lang_admin_php['custom_sortorder_thumbs'] = 'Display sort buttons on thumbnail page';
 $lang_admin_php['min_votes_for_rating'] = 'Minimum number of votes for a file to appear in the \'top rated\' list';
 $lang_admin_php['picture_table_width'] = 'Width of the table for file display';
 $lang_admin_php['display_pic_info'] = 'File information is visible by default';
