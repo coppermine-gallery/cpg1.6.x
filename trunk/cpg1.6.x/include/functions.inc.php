@@ -3365,19 +3365,7 @@ function& display_slideshow($pos, $ajax_show = 0)
 
         if (is_image($picture['filename'])) {
 
-            // The weird comparision is because only picture_width is stored
-            $resize_method = $CONFIG['picture_use'] == "thumb" ? ($CONFIG['thumb_use'] == "ex" ? "any" : $CONFIG['thumb_use']) : $CONFIG['picture_use'];
-            if ($resize_method == 'ht' && $picture['pheight'] > $CONFIG['picture_width']) {
-                $use_intermediate = true;
-            } elseif ($resize_method == 'wd' && $picture['pwidth'] > $CONFIG['picture_width']) {
-                $use_intermediate = true;
-            } elseif ($resize_method == 'any' && max($picture['pwidth'], $picture['pheight']) > $CONFIG['picture_width']) {
-                $use_intermediate = true;
-            } else {
-                $use_intermediate = false;
-            }
-
-            if ($CONFIG['make_intermediate'] && $use_intermediate) {
+            if ($CONFIG['make_intermediate'] && cpg_picture_dimension_exceeds_intermediate_limit($picture['pwidth'], $picture['pheight'])) {
                 $picture_url = get_pic_url($picture, 'normal');
             } else {
                 $picture_url = get_pic_url($picture, 'fullsize');
