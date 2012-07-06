@@ -1288,8 +1288,8 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
             'nd' => "filename $DESC, pid $DESC",
             'ta' => "title $ASC, pid $ASC",
             'td' => "title $DESC, pid $DESC",
-            'da' => "pid $ASC",
-            'dd' => "pid $DESC",
+            'da' => "ctime $ASC, pid $ASC",
+            'dd' => "ctime $DESC, pid $DESC",
             'pa' => "position $ASC, pid $ASC",
             'pd' => "position $DESC, pid $DESC",
         );
@@ -1498,7 +1498,8 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
                 INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS a ON a.aid = r.aid
                 $RESTRICTEDWHERE
                 AND approved = 'YES'
-                ORDER BY r.pid $DESC $limit";
+                ORDER BY ctime $DESC, pid $DESC
+                $limit";
 
         $result = cpg_db_query($query);
         $rowset = cpg_db_fetch_rowset($result);
@@ -1555,7 +1556,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
                 $RESTRICTEDWHERE
                 AND r.owner_id = '$uid'
                 AND approved = 'YES'
-                ORDER BY pid $DESC
+                ORDER BY ctime $DESC, pid $DESC
                 $limit";
 
         $result = cpg_db_query($query);
@@ -2023,7 +2024,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
                 $RESTRICTEDWHERE
                 AND approved = 'YES'
                 AND substring(from_unixtime(ctime),1,10) = '" . substr($date, 0, 10) . "'
-                ORDER BY pid $ASC
+                ORDER BY ctime $ASC, pid $ASC
                 $limit";
 
         $result = cpg_db_query($query);
@@ -2070,7 +2071,7 @@ function get_pic_pos($album, $pid)
 
         $approved = GALLERY_ADMIN_MODE ? '' : 'AND approved=\'YES\'';
 
-        $result = cpg_db_query("SELECT filename, title, pid, position FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid");
+        $result = cpg_db_query("SELECT filename, title, pid, position, ctime FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid");
 
         $pic = mysql_fetch_assoc($result);
 
@@ -2079,8 +2080,8 @@ function get_pic_pos($album, $pid)
             'nd' => "(filename > '{$pic['filename']}' OR filename = '{$pic['filename']}' AND pid > {$pic['pid']})",
             'ta' => "(title < '{$pic['title']}' OR title = '{$pic['title']}' AND pid < {$pic['pid']})",
             'td' => "(title > '{$pic['title']}' OR title = '{$pic['title']}' AND pid > {$pic['pid']})",
-            'da' => "pid < {$pic['pid']}",
-            'dd' => "pid > {$pic['pid']}",
+            'da' => "(ctime < '{$pic['ctime']}' OR ctime = '{$pic['ctime']}' AND pid < {$pic['pid']})",
+            'dd' => "(ctime > '{$pic['ctime']}' OR ctime = '{$pic['ctime']}' AND pid > {$pic['pid']})",
             'pa' => "(position < {$pic['position']} OR position = {$pic['position']} AND pid < {$pic['pid']})",
             'pd' => "(position > {$pic['position']} OR position = {$pic['position']} AND pid > {$pic['pid']})",
         );
@@ -2151,11 +2152,17 @@ function get_pic_pos($album, $pid)
 
     case 'lastup': // Latest (most recent) uploads
 
+        $query = "SELECT ctime FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid";
+        $result = cpg_db_query($query);
+        $ctime = mysql_result($result, 0);
+        mysql_free_result($result);
+
         $query = "SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} AS p
             INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS r ON r.aid = p.aid
             $RESTRICTEDWHERE
             AND approved = 'YES'
-            AND pid > $pid";
+            AND (ctime > $ctime
+            OR ctime = $ctime AND pid > $pid)";
 
             $result = cpg_db_query($query);
 
@@ -2173,12 +2180,18 @@ function get_pic_pos($album, $pid)
             $uid = -1;
         }
 
+        $query = "SELECT ctime FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid";
+        $result = cpg_db_query($query);
+        $ctime = mysql_result($result, 0);
+        mysql_free_result($result);
+
         $query = "SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} AS p
             INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS r ON r.aid = p.aid
             $RESTRICTEDWHERE
             AND p.owner_id = $uid
             AND approved = 'YES'
-            AND pid > $pid";
+            AND (ctime > $ctime
+            OR ctime = $ctime AND pid > $pid)";
 
             $result = cpg_db_query($query);
 
