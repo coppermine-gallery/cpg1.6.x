@@ -5916,8 +5916,6 @@ function album_selection_options($selected = 0)
     global $CONFIG, $lang_common, $cpg_udb, $LINEBREAK;
     // html string of options to be returned    
     $options = '';
-    // Padding to indicate level
-    $padding = 8;
     $albums = array();
     // load all albums
     
@@ -5932,10 +5930,11 @@ function album_selection_options($selected = 0)
     }
     if (!empty($albums[0])) {
         // Albums in no category
-        $options .= '<option style="padding-left: 0px; color: black; font-weight: bold" disabled="disabled">' . $lang_common['albums_no_category'] . '</option>';
+        $options .= '<optgroup label="' . $lang_common['albums_no_category'] . '">';
         foreach ($albums[0] as $aid => $title) {
-            $options .= sprintf('<option style="padding-left: %dpx" value="%d"%s>%s</option>'.$LINEBREAK, $padding, $aid, $aid == $selected ? ' selected="selected"' : '', $title);
+            $options .= sprintf('<option value="%d"%s>%s</option>'.$LINEBREAK, $aid, $aid == $selected ? ' selected="selected"' : '', $title);
         }
+        $options .= '</optgroup>';
     }
     // Load all categories
     if (GALLERY_ADMIN_MODE) {
@@ -5957,7 +5956,7 @@ function album_selection_options($selected = 0)
         // Add this category to the hierarchy
         if ($row['cid'] == USER_GAL_CAT) {
             // User galleries
-            $options .= '<option style="padding-left: 0px; color: black; font-weight: bold" disabled="disabled">' . $lang_common['personal_albums'] . '</option>' . $LINEBREAK;
+            $options .= '<optgroup label="' . $lang_common['personal_albums'] . '">' . $LINEBREAK;
 
             if (GALLERY_ADMIN_MODE) {
                 $result2 = cpg_db_query("SELECT {$cpg_udb->field['user_id']} AS user_id, {$cpg_udb->field['username']} AS user_name "
@@ -5970,13 +5969,14 @@ function album_selection_options($selected = 0)
             
             foreach ($users as $user) {
                 if (!empty($albums[$user['user_id'] + FIRST_USER_CAT])) {
-                    $options .= '<option style="padding-left: ' . $padding . 'px; color: black; font-weight: bold" disabled="disabled">' 
-                        . $user['user_name'] . '</option>' . $LINEBREAK;
+                    $options .= '<optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;' . $user['user_name'] . '">' . $LINEBREAK;
                     foreach ($albums[$user['user_id'] + FIRST_USER_CAT] as $aid => $title) {
-                        $options .= sprintf('<option style="padding-left: %dpx" value="%d"%s>%s</option>' . $LINEBREAK, $padding * 2, $aid, $aid == $selected ? ' selected="selected"' : '', $title);
+                        $options .= sprintf('<option value="%d"%s>%s</option>' . $LINEBREAK, $aid, $aid == $selected ? ' selected="selected"' : '', '&nbsp;&nbsp;&nbsp;&nbsp;'.$title);
                     }
+                    $options .= '</optgroup>';
                 }
             }
+            $options .= '</optgroup>';
             unset($users);
             continue;
         }
@@ -5985,18 +5985,19 @@ function album_selection_options($selected = 0)
         foreach ($cats as $cat) {
             $elements[] = $cat['name'];
         }
-        $heirarchy = implode(' - ', $elements);
-        // calculate padding for this level
-        $p = (count($elements) - 1) * $padding;
+        $hierarchy = implode(' - ', $elements);
+        // calculate indent for this level
+        $indent = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', (count($elements) - 1));
         // albums in the category
         if (!empty($albums[$row['cid']])) {
             // category header
-            $options .= '<option style="padding-left: '.$p.'px; color: black; font-weight: bold" disabled="disabled">' . $LINEBREAK
-            . $heirarchy . '</option>' . $LINEBREAK;
+            $options .= '<optgroup label="' . $indent . $hierarchy . '">' . $LINEBREAK;
             
             foreach ($albums[$row['cid']] as $aid => $title) {
-                $options .= sprintf('<option style="padding-left: %dpx" value="%d"%s>%s</option>' . $LINEBREAK, $p + $padding, $aid, $aid == $selected ? ' selected="selected"' : '', $title);
+                $options .= sprintf('<option value="%d"%s>%s</option>' . $LINEBREAK, $aid, $aid == $selected ? ' selected="selected"' : '', $indent . $title);
             }
+            
+            $options .= '</optgroup>';
         }
     }
     return $options;
