@@ -2136,7 +2136,7 @@ function theme_main_menu($which)
         }
     }
 
-    if (!USER_CAN_CREATE_ALBUMS) {
+    if (!USER_CAN_CREATE_ALBUMS || !USER_ID) {
         template_extract_block($template_sys_menu, 'my_gallery');
     }
 
