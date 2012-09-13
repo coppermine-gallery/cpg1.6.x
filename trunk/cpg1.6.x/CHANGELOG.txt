@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2012-09-13 [B] Don't list administrator and guest groups in category manager's "allowed to create albums" dropdown box {eenemeenemuu}
 2012-07-17 [C] Optical improvement of dropdown box at batch-add interface (thread ID 75178) {eenemeenemuu}
 2012-07-06 [A] Order pictures by 'ctime' instead of by 'pid' (thread ID 65676) {eenemeenemuu}
 2012-07-06 [A] Added config option to toggle the display of the sort buttons on the thumbnail page {eenemeenemuu}
