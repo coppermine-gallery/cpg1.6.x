@@ -160,10 +160,17 @@ function cat_list_box($cid, &$parent, $on_change_refresh = true)
  **/
 function usergroup_list_box($cid)
 {
-    global $CONFIG, $LINEBREAK;
+    global $CONFIG, $LINEBREAK, $cpg_udb;
+    
+    $add = $cpg_udb->use_post_based_groups ? 100 : 0;
+    $exclude_groups = array($cpg_udb->guestgroup + $add);
+    foreach ($cpg_udb->admingroups as $id) {
+        $exclude_groups[] = $id + $add;
+    }
     
     //get the category info from the db
     $sql = "SELECT ug.group_name AS name, ug.group_id AS id, catm.group_id AS catm_gid FROM {$CONFIG['TABLE_USERGROUPS']} AS ug LEFT JOIN {$CONFIG['TABLE_CATMAP']} AS catm ON catm.group_id = ug.group_id AND catm.cid = $cid";
+    $sql .= " HAVING id NOT IN (".implode(', ', $exclude_groups).")"; // don't list administrator and guest groups
     $result = cpg_db_query($sql);
     $rowset = cpg_db_fetch_rowset($result);
     
@@ -182,10 +189,7 @@ function usergroup_list_box($cid)
     
     //loop through all groups
     foreach ($groups as $id => $values) {
-        //make sure the administrator group isn't listed here.
-        if ($id != 1) {
-            $usergroup_listbox .= '    <option value="' . $id . '"' . ($values['selected'] == 'true'? 'selected="selected"' : '') . ' >' . $values['name'] . '</option>' . $LINEBREAK;
-        }
+        $usergroup_listbox .= '    <option value="' . $id . '"' . ($values['selected'] == 'true'? 'selected="selected"' : '') . ' >' . $values['name'] . '</option>' . $LINEBREAK;
     }
     
     $usergroup_listbox .= '</select>' . $LINEBREAK;
