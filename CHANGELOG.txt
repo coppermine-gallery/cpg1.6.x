@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2012-10-23 [B] Fixed upload for guests (thread ID 75559) {eenemeenemuu}
 2012-10-08 [B] Added form token check to flash uploader (thread ID 75503) {eenemeenemuu}
 2012-09-13 [C] Hide "My gallery" button for guests (thread ID 75399) {eenemeenemuu}
 2012-09-13 [C] Hide upload button for guests with upload permission if there's no album with uploads enabled {eenemeenemuu}
