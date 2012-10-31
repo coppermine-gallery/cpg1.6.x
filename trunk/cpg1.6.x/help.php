@@ -176,9 +176,16 @@ $string = str_replace('<a internalAnchorLinkTempReplacement', '<a href="' . 'doc
 
 
 if ($header != '') {
-    $content = '<h1>'.strip_tags($header).'</h1>';
-    $content .= strip_tags($text);
-    $content = str_replace(strip_tags($lang_bbcode_help), $lang_bbcode_help, $content);
+    function cpg_sanitize_help_data($str) {
+        // Remove all HTML tag attributes
+        $str = preg_replace('/<([A-Za-z]+) .*>/Us', '<\\1>', $str);
+        // Remove all script tags
+        $str = preg_replace('/(<script.*>|<\/script.*>)/Usi', '', $str);
+        return $str;
+    }
+    $content = '<h1>'.cpg_sanitize_help_data($header).'</h1>';
+    $content .= cpg_sanitize_help_data($text);
+    $content = str_replace(cpg_sanitize_help_data($lang_bbcode_help), $lang_bbcode_help, $content);
 } else {
     $content = '';
 }
