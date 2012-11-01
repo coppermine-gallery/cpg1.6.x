@@ -207,43 +207,45 @@ function html_picinfo()
     // Read the iptc and EXIF data from original pic (if watermarked)
     $metadata_path = file_exists($path_to_orig_pic) ? $path_to_orig_pic : $path_to_pic;
     
-    if ($CONFIG['read_exif_data']) {
-    
-        $exif = exif_parse_file($metadata_path, $CURRENT_PIC_DATA['pid']);
-    
-        if (is_array($exif)) {
-            array_walk($exif, 'sanitize_data');
-            $info = array_merge($info, $exif);
-        }
-    }
-    
-    // Read the iptc data
-    if ($CONFIG['read_iptc_data']) {
-          
-        $iptc = get_IPTC($metadata_path);
-    
-        if (is_array($iptc)) {
+    if (is_image($CURRENT_PIC_DATA['filename'])) {
+        if ($CONFIG['read_exif_data']) {
         
-            array_walk($iptc, 'sanitize_data');
-            
-            if (!empty($iptc['Title'])) {
-                $info[$lang_picinfo['iptcTitle']] = $iptc['Title'];
+            $exif = exif_parse_file($metadata_path, $CURRENT_PIC_DATA['pid']);
+        
+            if (is_array($exif)) {
+                array_walk($exif, 'sanitize_data');
+                $info = array_merge($info, $exif);
             }
+        }
+        
+        // Read the iptc data
+        if ($CONFIG['read_iptc_data']) {
+              
+            $iptc = get_IPTC($metadata_path);
+        
+            if (is_array($iptc)) {
             
-            if (!empty($iptc['Copyright'])) {
-                $info[$lang_picinfo['iptcCopyright']] = $iptc['Copyright'];
-            }
-            
-            if (!empty($iptc['Keywords'])) {
-                $info[$lang_picinfo['iptcKeywords']] = implode(' ', $iptc['Keywords']);
-            }
-            
-            if (!empty($iptc['Category'])) {
-                $info[$lang_picinfo['iptcCategory']] = $iptc['Category'];
-            }
-            
-            if (!empty($iptc['SubCategories'])) {
-                $info[$lang_picinfo['iptcSubCategories']] = implode(' ', $iptc['SubCategories']);
+                array_walk($iptc, 'sanitize_data');
+                
+                if (!empty($iptc['Title'])) {
+                    $info[$lang_picinfo['iptcTitle']] = $iptc['Title'];
+                }
+                
+                if (!empty($iptc['Copyright'])) {
+                    $info[$lang_picinfo['iptcCopyright']] = $iptc['Copyright'];
+                }
+                
+                if (!empty($iptc['Keywords'])) {
+                    $info[$lang_picinfo['iptcKeywords']] = implode(' ', $iptc['Keywords']);
+                }
+                
+                if (!empty($iptc['Category'])) {
+                    $info[$lang_picinfo['iptcCategory']] = $iptc['Category'];
+                }
+                
+                if (!empty($iptc['SubCategories'])) {
+                    $info[$lang_picinfo['iptcSubCategories']] = implode(' ', $iptc['SubCategories']);
+                }
             }
         }
     }
