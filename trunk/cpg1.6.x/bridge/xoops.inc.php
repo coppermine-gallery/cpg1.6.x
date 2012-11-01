@@ -8,7 +8,7 @@
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
-  
+
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
@@ -55,7 +55,7 @@ if (isset($bridge_lookup)) {
             global $BRIDGE, $xoopsDB;
 
             $this->use_post_based_groups = $BRIDGE['use_post_based_groups'];
-            
+
             $this->boardurl =  XOOPS_URL;
             $this->multigroups = 1;
             $this->group_overrride = 0;
@@ -74,12 +74,12 @@ if (isset($bridge_lookup)) {
                 'host' =>XOOPS_DB_HOST,
                 'user' => XOOPS_DB_USER
             );
-            
+
             // Derived full table names
             $this->usertable = '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['users'];
             $this->groupstable =  '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['groups'];
             $this->usergroupstable = '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['usergroups'];
-            
+
             // Table field names
             $this->field = array(
                 'username' => 'uname', // name of 'username' field in users table
@@ -95,22 +95,22 @@ if (isset($bridge_lookup)) {
                 'grouptbl_group_id' => 'groupid', // name of 'group id' field in groups table
                 'grouptbl_group_name' => 'name' // name of 'group name' field in groups table
             );
-            
+
             // Pages to redirect to
             $this->page = array(
                 'register' => '/register.php',
                 'editusers' => '/index.php?action=mlist',
                 'edituserprofile' => '/userinfo.php?uid='
             );
-            
+
             // Group ids - admin and guest only.
             $this->admingroups = array(XOOPS_GROUP_ADMIN);
             $this->guestgroup = XOOPS_GROUP_ANONYMOUS;
-            
+
             // Connect to db - or supply a connection id to be used instead of making own connection.
             $this->connect($xoopsDB->conn);
         }
-        
+
         function get_groups($row)
         {
             if ($this->use_post_based_groups){
@@ -122,29 +122,29 @@ if (isset($bridge_lookup)) {
             }
             return array($_SESSION['xoopsUserGroups'][0]);
         }
-        
+
         // definition of how to extract id, name, group from a session cookie
         function session_extraction()
         {
             return array($_SESSION['xoopsUserId'], 'fudge');
         }
-        
+
         // definition of how to extract an id and password hash from a cookie
         function cookie_extraction()
         {
             return false; //unused
         }
-        
+
         // definition of actions required to convert a password from user database form to cookie form
         function udb_hash_db($password)
         {
             return 'fudge';
         }
-        
+
         function login_page()
         {
             global $CONFIG;
-            
+
             $parts = parse_url($CONFIG['site_url']);
             $path = $parts['path'];
             $this->redirect("/user.php?xoops_redirect=$path");
@@ -153,17 +153,17 @@ if (isset($bridge_lookup)) {
         function logout_page()
         {
             global $CONFIG;
-            
+
             $parts = parse_url($CONFIG['site_url']);
             $path = $parts['path'];
             $this->redirect("/user.php?op=logout&xoops_redirect=$path");
         }
-        
+
         function view_users()
         {
 
         }
-        
+
         function get_users($options = array())
         {
             global $CONFIG;
@@ -171,7 +171,7 @@ if (isset($bridge_lookup)) {
             // Copy UDB fields and config variables (just to make it easier to read)
             $f =& $this->field;
             $C =& $CONFIG;
-            
+
             // Sort codes
             $sort_codes = array('name_a' => 'user_name ASC',
                                 'name_d' => 'user_name DESC',
@@ -191,7 +191,7 @@ if (isset($bridge_lookup)) {
             if ($CONFIG['bridge_enable']) {
                 $f['usertbl_group_id'] .= '+100';
             }
-            
+
             // Build WHERE clause, if this is a username search
             if ($options['search']) {
                 $options['search'] = 'WHERE u.'.$f['username'].' LIKE "'.$options['search'].'" ';
@@ -201,7 +201,7 @@ if (isset($bridge_lookup)) {
             $sql = "SELECT u.{$f['user_id']} as user_id, {$f['username']} as user_name, {$f['email']} as user_email, {$f['regdate']} as user_regdate, {$f['lastvisit']} as user_lastvisit, '' as user_active, ".
                    "COUNT(pid) as pic_count, ROUND(SUM(total_filesize)/1024) as disk_usage, group_name, group_quota ".
                    "FROM {$this->usertable} AS u ".
-                   "INNER JOIN {$this->usergroupstable} AS ug ON u.uid = ug.uid ".   
+                   "INNER JOIN {$this->usergroupstable} AS ug ON u.uid = ug.uid ".
                    " INNER JOIN {$C['TABLE_USERGROUPS']} AS g ".
                    "ON  g.group_id = ug.{$f['grouptbl_group_id']} LEFT JOIN {$C['TABLE_PICTURES']} AS p ON p.owner_id = u.{$f['user_id']} ".
                    $options['search'].
@@ -209,16 +209,16 @@ if (isset($bridge_lookup)) {
                    "LIMIT {$options['lower_limit']}, {$options['users_per_page']};";
 
             $result = cpg_db_query($sql);
-            
+
             // If no records, return empty value
             if (!$result) {
                 return array();
             }
-            
+
             // Extract user list to an array
             while ($user = mysql_fetch_assoc($result)) {
                 $userlist[] = $user;
-            }   
+            }
 
             return $userlist;
         }

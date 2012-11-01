@@ -90,16 +90,16 @@ $pic_caption = $row['caption'];
 if (!is_image($row['filename'])) {
 
     if (!is_flash($row['filename'])) {
-    
+
         // The file is neither image nor flash
         if ($CONFIG['ecard_flash'] != 0) {
             cpg_die(ERROR, $lang_ecard_php['error_not_image_flash'], __FILE__, __LINE__);
         } else {
             cpg_die(ERROR, $lang_ecard_php['error_not_image'], __FILE__, __LINE__);
         }
-        
+
     } elseif ($CONFIG['ecard_flash'] == 0) {
-    
+
         // The file IS flash, but flash ecards are not enabled
         cpg_die(ERROR, $lang_ecard_php['error_not_image'], __FILE__, __LINE__);
     }
@@ -112,11 +112,11 @@ $thumb_size = compute_img_size($row['pwidth'], $row['pheight'], $CONFIG['thumb_w
 if (is_flash($row['filename'])) {
 
     $markup_picname = get_pic_url($row, 'fullsize');
-    
+
     if (!stristr($markup_picname, 'http:')) {
         $markup_picname = $gallery_url_prefix . $markup_picname;
     }
-    
+
     $pic_markup = <<<EOT
     <object id="SWFlash"  classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" type="application/x-shockwave-flash" width="{$thumb_size['width']}" height="{$thumb_size['height']}">
         <param name="autostart" value="true" />
@@ -129,7 +129,7 @@ EOT;
     if (!stristr($normal_pic_url, 'http:')) {
         $normal_pic_url = $gallery_url_prefix . $normal_pic_url;
     }
-    
+
     $pic_markup = '<img src="'.$normal_pic_url.'" alt="" vspace="8" border="0" class="image" />';
 }
 
@@ -172,21 +172,21 @@ if ($superCage->post->keyExists('submit')) {
                 CPGPluginAPI::action('captcha_ecard_validate', null);
             }
         }
-    
+
         require('include/mailer.inc.php');
-    
+
         if ($CONFIG['make_intermediate'] && max($row['pwidth'], $row['pheight']) > $CONFIG['picture_width']) {
             $n_picname = get_pic_url($row, 'normal');
         } else {
             $n_picname = get_pic_url($row, 'fullsize');
         }
-    
+
         if (!stristr($n_picname, 'http:')) {
             $n_picname = $gallery_url_prefix . $n_picname;
         }
-        
+
         $msg_content = process_smilies($message, $gallery_url_prefix);
-    
+
         $data = array(
             'rn'  => $superCage->post->noTags('recipient_name'),
             'sn'  => $superCage->post->noTags('sender_name'),
@@ -198,9 +198,9 @@ if ($superCage->post->keyExists('submit')) {
             'pt'  => $pic_title,
             'pc'  => $pic_caption,
         );
-    
+
         $encoded_data = urlencode(base64_encode(serialize($data)));
-    
+
         $params = array(
             '{LANG_DIR}'                 => $lang_text_dir,
             '{TITLE}'                    => sprintf($lang_ecard_php['ecard_title'], $sender_name),
@@ -222,31 +222,31 @@ if ($superCage->post->keyExists('submit')) {
             '{PIC_CAPTION}'              => bb_decode($pic_caption),
             '{PIC_MARKUP}'               => $pic_markup,
         );
-    
+
         $message = template_eval($template_ecard, $params);
         $plaintext_message = template_eval($template_ecard_plaintext, $params);
-    
+
         $tempTime = time();
-        
+
         $message .= sprintf($lang_ecard_php['ecards_footer'], $sender_name, $raw_ip, localised_date(-1, $lang_date['comment']));
         $subject = sprintf($lang_ecard_php['ecard_title'], $sender_name);
 
         $result = cpg_mail($recipient_email, $subject, $message, 'text/html', $sender_name, $sender_email, $plaintext_message);
-    
+
         if (!USER_ID) {
             $USER['name'] = $sender_name;
             $USER['email'] = $sender_email;
         }
-    
+
         if ($result) {
-        
+
             // write ecard log, only if mail was sent
             if ($CONFIG['log_ecards'] == 1) {
                 $sender_name = addslashes($sender_name);
                 $recipient_name = addslashes($recipient_name);
                 cpg_db_query("INSERT INTO {$CONFIG['TABLE_ECARDS']} (sender_name, sender_email, recipient_name, recipient_email, link, date, sender_ip) VALUES ('$sender_name', '$sender_email', '$recipient_name', '$recipient_email', '$encoded_data', '$tempTime', '$raw_ip')");
             }
-        
+
             msg_box($lang_common['information'], $lang_ecard_php['send_success'], $lang_common['continue'], "displayimage.php?album=$album&amp;pid=$pid");
             echo '<br />';
             starttable('100%', $icon_array['preview_table'] . $lang_ecard_php['preview']);
@@ -256,7 +256,7 @@ if ($superCage->post->keyExists('submit')) {
             endtable();
             pagefooter();
             exit;
-            
+
         } else {
             if ($CONFIG['log_mode'] != 0) {
                 log_write("Sending an ecard failed (sender name: $sender_name, sender email address: $sender_email, recipient name: $recipient_name, recipient email address: $recipient_email, IP: $raw_ip", CPG_MAIL_LOG);
@@ -272,11 +272,11 @@ if ($superCage->post->keyExists('submit')) {
     } else {
         $n_picname = get_pic_url($row, 'fullsize');
     }
-    
+
     if (!stristr($n_picname, 'http:')) {
         $n_picname = $gallery_url_prefix . $n_picname;
     }
-    
+
     $msg_content = process_smilies($message, $gallery_url_prefix);
 
     $data = array(
@@ -313,7 +313,7 @@ if ($superCage->post->keyExists('submit')) {
     );
 
     $eccontent = template_eval($template_ecard, $params);
-    
+
     if (preg_match('#<body[^>]*>(.*)</body>#s', $eccontent, $matches)) {
         $eccontent = $matches[1];
     }
@@ -323,7 +323,7 @@ if ($superCage->post->keyExists('submit')) {
     echo $eccontent;
     echo '</td></tr>';
     endtable();
-    echo '<br />';   
+    echo '<br />';
 }
 
 if ($CONFIG['show_bbcode_help']) {
@@ -354,7 +354,7 @@ EOT;
 if (is_flash($row['filename'])) {
 
     $n_picname = get_pic_url($row, 'fullsize');
-  
+
     echo <<< EOT
             <object id="SWFlash"  classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" type="application/x-shockwave-flash" width="{$thumb_size['width']}" height="{$thumb_size['height']}">
                 <param name="autostart" value="true" />

@@ -40,24 +40,24 @@
     <a name="backup"></a><a name="backup_export"></a><h2>Backing up your gallery<a href="#backup" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
     <p>This page is meant to explain how to back up a coppermine-driven gallery.</p>
     <p>Backups can be used to restore your gallery somewhere in case something goes wrong (i.e. server hard-drive crash, hacking, own mistake) or if you want to <a href="#moving">move</a> (move servers, move to another webhost, use another application).</p>
-    
+
     <p>Coppermine stores content both on file system level (i.e. on your webspace - that's the hard drive of your webserver) as well as on database level. Think of the database as a giant array of tables that are connected one with the other. Although the database is (technically) being stored in files as well, you can't just backup the file that represents the database. This is being caused by the way that a database works. Additionally, you usually don't have access to the file that represents the database (but don't start the wicth hunt and try to find it - you wouldn't be able to use it anyway). That's why the backup process needs to be two-fold: you need to back up your files and you need to back up your database. Only backing up one of them without the other will result in an incomplete backup that hardly can be usefull.</p>
-    
+
     <div class="indent">
-    
+
         <a name="backup_file"></a><h3>File Backup<a href="#backup_file" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
         <p>The backup on file system level is pretty straightforward and you already should be familiar with the technology, assuming that you have installed coppermine in the way the coppermine dev team recommends: using your favorite <a href="dev_tools.htm#dev_tools_ftp_client">FTP application</a>. Do not trust buggy tools integrated into <abbr title="What You See Is What You Get">WYSIWYG</abbr> editors. Do not trust wannabe &quot;web-FTP&quot; clients: you need the real thing - a genuine FTP client. If you don't have one already, get one first before continuing.</p>
-        
+
         <a name="backup_file_complete"></a><h4>Complete File Backup<a href="#backup_file_complete" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
         <p>The term "complete file backup" means in this case "a file backup of the entire coppermine gallery". It's advisable to perform this at least once, so you have a full backup for disaster recovery.</p>
         <p>To actually perform such a backup, create a folder on your local hard drive first. Of course you need to make sure in advance that there is enough room left on the storage device you use (your internal or external hard drive in most cases) to hold the entire gallery once the backup is done. If you're short on disk space on your client, you could burn the contents of your backup to a CD or DVD once your backup is complete and then free the precious hard drive space once you have copied everything to CD/DVD.</p>
-        
+
         <a name="backup_file_partial"></a><h4>Partial File Backup<a href="#backup_file_partial" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
         <p>If you perform frequent backups you don't have to make a complete file backup each time, as the coppermine core code will (i.e. all the files that make coppermine work on the server) will not change from one backup to the other. That's why you can then perform a partial back, i.e. only the contents of the albums folder of coppermine that corresponds to <tt class="code">http://example.com/your_coppermine_folder/albums/</tt>. If you need to perform a restore later, you will have to restore your complete backup first and then restore your partial backup that was created later and therfor is more accurate and recent.</p>
-        
+
         <a name="backup_file_incremental"></a><h4>Incremental File Backup<a href="#backup_file_incremental" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
-        <p>There are nifty tools available from third parties that will perform an incremental backup by FTP, i.e. they will only backup the files that are new or have changed since the last time the backup was performed. This will reduce the time needed to perform a backup dramatically, but on the other hand will make restoring after a disaster a bit trickier - you should only use that option if you know what you're doing.</p> 
-        
+        <p>There are nifty tools available from third parties that will perform an incremental backup by FTP, i.e. they will only backup the files that are new or have changed since the last time the backup was performed. This will reduce the time needed to perform a backup dramatically, but on the other hand will make restoring after a disaster a bit trickier - you should only use that option if you know what you're doing.</p>
+
         <a name="backup_database"></a><h3>Database Backup<a href="#backup_database" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
         <p>Coppermine creates during initial install several database tables that are being used to store the content:</p>
         <ul>
@@ -67,7 +67,7 @@
         	<li>...</li>
         </ul>
         <p>There are many other tables that store specific aspects of the content of your gallery - for a complete list of all tables and the structure within them, take a look at the <a href="dev_database.htm#db_intro">database schema</a>. All relevant tables of a coppermine gallery have the same prefix - the one you chose during initial install. To perform a database backup, make sure to backup <strong>all</strong> coppermine tables, i.e. all that have the prefix you chose during install. If you're not sure about the prefix, download the file include/config.inc.php with your FTP app to your client and then edit/view it using a plain text editor (notepad.exe is fine): the prefix should be named there. By default, the prefix name is <tt class="code">cpg15x_</tt>.</p>
-        
+
         <a name="backup_database_what"></a><h4>Database Backup: what needs to be backed up?<a href="#backup_database_what" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
         <p>The wording may differ, depending on the tool and it's version you use to perform the backup, you you need to know what exactly to backup.</p>
         <p>A full database backup contains both the <em>structure</em> of the database table definitions (i.e. the "instructions" needed to create the empty tables if they have been lost or need to be created on another server) as well as the data (i.e. the actual table content).</p>
@@ -78,7 +78,7 @@
             <li>The table <a href="dev_database.htm#db_temp_messages">cpg15x_temp_messages</a> is used to store messages from one page to the other - the content is very short-lived and will be purged frequently, so the table doesn't need to be preserved when performing frquent backups.</li>
         </ul>
         <p>Keep in mind though that coppermine will complain (i.e. there will be an error message) if a table is <strong>missing</strong>, so you need to create the above-mentioned tables in the first place, but they can be empty.</p>
-        
+
         <a name="backup_database_tools"></a><h4>Database Backup Tools<a href="#backup_database_tools" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
         <p>Coppermine does <strong>not</strong> come with a database backup tool - you need to find one by yourself and use that. However, there is a list of tools the dev team recommends:</p>
         <ul>
@@ -122,18 +122,18 @@
         	    [<a href="http://dev.mysql.com/doc/refman/5.0/en/mysqlhotcopy.html" rel="external" class="external">more</a>]
         	</li>
         </ul>
-        
+
         <a name="backup_database_after"></a><h4>After the database backup<a href="#backup_database_after" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
         <p>After performing the manual database backup it's important to make sure that the dump you just created works as expected. Therefore, you should really try to open the dump file first and see if it not broken. Ideally, you should perform a restore on a testbed to make sure everything works as expected.</p>
         <p>There have been many users already who relied on their backup without ever having tested it once: if you never test your backup strategy, you will never know if it will enable you to perform the restore in case of a disaster. Since there are many things that can go wrong, it's really recommended to test your backup.</p>
-    
+
     </div>
-    
+
     <a name="moving"></a><h2>Moving your gallery<a href="#moving" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
     <p>Your coppermine-driven gallery can be moved around on your webserver as well as from one webspace to the other. Here's how you accomplish those tasks:</p>
-    
+
     <div class="indent">
-    
+
         <a name="moving_folder"></a><h3>Moving on your webserver<a href="#moving_folder" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
         Moving your gallery on your webserver (e.g. from a particular folder to the webroot or vice versa) is comparatively easy. Coppermine consists of two components:
         <ul>
@@ -231,7 +231,7 @@
         		What folder is the source folder and the target folder doesn't matter at all, nor does it matter how deep the coppermine folder is nested within the folder structure on your webserver. The steps needed to perform when moving coppermine from a folder to the webroot or vice versa don't differ at all: the webroot in fact just is represented by a folder on webserver file system level, and you move the content of a folder around.
         	</li>
         </ul>
-        
+
         <a name="moving_server"></a><h3>Moving from one webserver to the other<a href="#moving_server" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
         <p>This scenario usually applies when switching from one webhost to the other. In fact you create a copy of your files (a <a href="export.htm#backup_file_complete">complete file backup</a>) and a copy of your database (complete <a href="export.htm#backup_database">database dump</a>) on the old server and restore those copies on the new server.</p>
         <p>You're encouraged to create and maintain frequent backups in case anything goes wrong, so you really should have a backup already. However, if you don't have one, you should create one <strong>now</strong>. You need to keep in mind that there might be a downtime of your site when moving from one webhost to the other. Ideally, the downtime will be neglible, but you usually won't be able to access the gallery on the old server and the gallery on the new server under the same URL at the same time. Therefore, you need to backup the old server while you still can, i.e. before your old webhosting contract expires and you no longer can access the old server to create the backup. If you don't have a backup and your webserver is no longer accessible you will be out of luck: nobody will be able to help you recover your gallery - it's absolutely mandatory to have a working backup both of your files as well as your database.</p>
@@ -279,9 +279,9 @@
         		Test every facet of your gallery: try to log on as regular (non-admin) user, try to use <a href="uploading_http.htm#upload_http">http uploads</a>, post a comment etc.
         	</li>
         </ul>
-        
-        
-        
+
+
+
         <a name="moving_disadvantages"></a><h3>Disadvantages of renaming<a href="#moving_disadvantages" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
         <div class="cpg_message_warning">
         	There are several disadvantages when changing the URL of your gallery:
@@ -291,8 +291,8 @@
         	</ul>
         </div>
         Tim Berners-Lee (the &quot;inventor&quot; of the <abbr title="world wide web">www</abbr>) coined the motto &quot;<a href="http://www.w3.org/Provider/Style/URI" rel="external" class="external">Cool URIs don't change</a>&quot; that still applies, so you better think twice before renaming your coppermine folder once it has been established. It's better to choose a clever folder name in the first place (when initially installing Coppermine). Anyway, if you <em>must</em> change the URI of your gallery (or in fact any other URL), you should at least set up some redirector that takes care of the change: on Apache-driven servers (and provided that your webserver supports that feature), you could set up a redirection using a <tt class="code">.htaccess file</tt> with the <a href="http://httpd.apache.org/docs/1.3/mod/mod_alias.html#redirect" rel="external" class="external">redirect directive</a>.
-        
-        
+
+
         <a name="moving_config_url"></a><h3>Changing Coppermine's URL in config<a href="#moving_config_url" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
         <div class="cpg_message_validation">
         	Whenever the URL of your gallery changes (i.e. after having moved your gallery around on your webserver or after renaming the folder it resided in), you have to reflect the changed URL in coppermine's config:
@@ -306,9 +306,9 @@
         		<li>Scroll to the bottom of the config panel</li>
         		<li>Save your changes by submitting the form using the corresponding button at the bottom of the page</li>
         	</ul>
-    
+
     </div>
-    
+
 </div>
 <a name="export_end"></a><a name="backup_end"></a>
 

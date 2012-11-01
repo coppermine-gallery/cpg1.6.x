@@ -263,7 +263,7 @@ a:active {
 .button, .admin_menu {
     font-family: Verdana, Arial, Helvetica, sans-serif;
     color: white;
-    background-color:#5A6C85;    
+    background-color:#5A6C85;
     border: 1px solid #5A6C85;
     cursor:pointer;
     padding-left:0px;
@@ -862,7 +862,7 @@ a.progressCancel:hover {
 }
 
 /**styles for photo manager*/
-table#pic_sort tr td { 
+table#pic_sort tr td {
     padding: 4px;
     border-bottom: 1px solid #CCCCCC;
 }

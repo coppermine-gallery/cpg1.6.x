@@ -83,7 +83,7 @@ if ($superCage->get->getInt('no_modification_check') == '1') {
   $displayOption_array['no_modification_check'] = 0;
 }
 // Sanitize the GET vars and populate the optionsArray --- end
-  
+
 
 // Connect to the repository
 if ($displayOption_array['output'] != 'options') {
@@ -114,7 +114,7 @@ EOT;
 
 if ($displayOption_array['output'] == 'create') {
 
-    // create data 
+    // create data
     $file_data_count = cpg_versioncheckCreateXml($file_data_array);
 
 } else if ($displayOption_array['output'] == 'textarea') {
@@ -151,7 +151,7 @@ EOT;
         </td>
     </tr>
 EOT;
-   
+
 }
 
 endtable();

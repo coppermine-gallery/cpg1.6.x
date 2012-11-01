@@ -41,7 +41,7 @@ $template_sys_menu = <<<EOT
                                 <li>
                                     <a href="{CONTACT_TGT}" title="{CONTACT_TITLE}"><span>{CONTACT_ICO}{CONTACT_LNK}</span></a>
                                 </li>
-                    <!-- END contact --> 
+                    <!-- END contact -->
                     <!-- BEGIN sidebar -->
                                     <li>
                                         <a href="{SIDEBAR_TGT}" title="{SIDEBAR_TITLE}"><span>{SIDEBAR_ICO}{SIDEBAR_LNK}</span></a>
@@ -161,7 +161,7 @@ $template_sub_menu = <<<EOT
                 </li>
 <!-- END search -->
 </ul>
-                
+
 EOT;
 
 // HTML template for gallery admin menu
@@ -258,7 +258,7 @@ $template_gallery_admin_menu = <<<EOT
                                 </li>
                             <!-- END usermgr -->
                             </ul>
-                            
+
 EOT;
 
 // HTML template for user admin menu
@@ -457,9 +457,9 @@ function theme_main_menu($which)
         if ($CONFIG['display_sidebar_user'] != 2) {
           template_extract_block($template_sys_menu, 'sidebar');
         }
-        
+
         list($timestamp, $form_token) = getFormToken();
-        
+
     } else { // visitor is not logged in
         if ($CONFIG['contact_form_guest_enable'] == 0) {
           template_extract_block($template_sys_menu, 'contact');
@@ -469,7 +469,7 @@ function theme_main_menu($which)
         }
         template_extract_block($template_sys_menu, 'logout');
         template_extract_block($template_sys_menu, 'my_profile');
-        
+
         $timestamp = $form_token = '';
     }
 

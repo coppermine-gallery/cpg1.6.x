@@ -8,7 +8,7 @@
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
-  
+
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
@@ -65,7 +65,7 @@ if (isset($bridge_lookup)) {
                 'groups' => 'groups',
                 'usergroups' => 'user_group_xref'
             );
-        
+
             // Database connection settings
             $this->db = array(
                 'name' => $PHORUM['DBCONFIG']['name'],
@@ -74,12 +74,12 @@ if (isset($bridge_lookup)) {
                 'password' => $PHORUM['DBCONFIG']['password'],
                 'prefix' =>$PHORUM['DBCONFIG']['table_prefix'] . '_'
             );
-            
+
             // Derived full table names
             $this->usertable = '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['users'];
             $this->groupstable =  '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['groups'];
             $this->usergroupstable = '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['usergroups'];
-            
+
             // Table field names
             $this->field = array(
                 'username' => 'username', // name of 'username' field in users table
@@ -95,18 +95,18 @@ if (isset($bridge_lookup)) {
                 'grouptbl_group_id' => 'group_id', // name of 'group id' field in groups table
                 'grouptbl_group_name' => 'name' // name of 'group name' field in groups table
             );
-            
+
             // Pages to redirect to
             $this->page = array(
                 'register' => '/register.php?1',
                 'editusers' => '/admin.php?module=users',
                 'edituserprofile' => '/profile.php?1,',
             );
-            
+
             // Group ids - admin and guest only.
             $this->admingroups = array(1);
             $this->guestgroup = 3;
-            
+
             // Connect to db - or supply a connection id to be used instead of making own connection.
             $this->connect();
         }
@@ -115,21 +115,21 @@ if (isset($bridge_lookup)) {
         function authenticate()
         {
             global $PHORUM,  $USER_DATA;
-            
+
             if (!$PHORUM['user']['user_id']){
                $this->load_guest_data();
             } else {
                 $this->load_user_data(array('id' => $PHORUM['user']['user_id'], 'username' => $PHORUM['user']['username']));
-            
-            
+
+
             $USER_DATA['groups'] = array();
-            
+
             if ($PHORUM['user']['admin']){
                 $USER_DATA['groups'][] = 1;
             } else {
                 $USER_DATA['groups'][] = 2;
-            }   
-            
+            }
+
             if ($this->use_post_based_groups){
                 foreach ($PHORUM['user']['groups'] as $group){
                     $USER_DATA['groups'][] = $group + 100;
@@ -137,19 +137,19 @@ if (isset($bridge_lookup)) {
             }
             }
             $user_group_set = '(' . implode(',', $USER_DATA['groups']) . ')';
-            
+
             $USER_DATA = array_merge($USER_DATA, $this->get_user_data($USER_DATA['groups'][0], $USER_DATA['groups'], $this->guestgroup));
 
             $USER_DATA['has_admin_access'] =  (int) $PHORUM['user']['admin'];
-            
+
             $USER_DATA['can_see_all_albums'] = $USER_DATA['has_admin_access'];
-            
+
             // avoids a template error
             if (!$USER_DATA['user_id']) $USER_DATA['can_create_albums'] = 0;
-            
+
             // For error checking
             $CONFIG['TABLE_USERS'] = '**ERROR**';
-                
+
             define('USER_ID', $USER_DATA['user_id']);
             define('USER_NAME', addslashes($USER_DATA['user_name']));
             define('USER_GROUP', $USER_DATA['group_name']);
@@ -162,18 +162,18 @@ if (isset($bridge_lookup)) {
             define('USER_CAN_CREATE_ALBUMS', (int)$USER_DATA['can_create_albums']);
             define('USER_ACCESS_LEVEL', (int)$USER_DATA['access_level']);
 
-            
+
             $this->session_update();
         }
-        
+
         function collect_groups()
         {
             $sql ="SELECT * FROM {$this->groupstable}";
-        
+
             $result = cpg_db_query($sql, $this->link_id);
-            
+
             $udb_groups = array(1=>'Administrators', 2=>'Registered', 3 => 'Guests');
-                
+
             while ($row = mysql_fetch_assoc($result))
             {
                 $udb_groups[$row[$this->field['grouptbl_group_id']]+100] = utf_ucfirst(utf_strtolower($row[$this->field['grouptbl_group_name']]));
@@ -181,11 +181,11 @@ if (isset($bridge_lookup)) {
 
             return $udb_groups;
         }
-        
+
         function login_page()
         {
             global $CONFIG;
-            
+
             $this->redirect('/login.php');
         }
 

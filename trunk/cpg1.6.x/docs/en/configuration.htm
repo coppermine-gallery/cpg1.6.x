@@ -72,7 +72,7 @@
         Recommended value: <abbr title="not applicable">n/a</abbr><br />
         Importance: mandatory<br />
         Database record name: <tt class="code">ecards_more_pic_target</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: General settings &rarr; URL of your coppermine gallery folder 
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: General settings &rarr; URL of your coppermine gallery folder
     </div>
     <p>This is the URL where a user will be directed to when s/he clicks on the &quot;See more pictures&quot; link in an e-card. This <em>must</em> be the URL to the root of your coppermine installation followed by a forward slash (just the path to your coppermine folder, e.g. <em>http://yourdomain.tld/coppermine/</em>). Do not specify a specific file (such as index.php) or subfolder within the coppermine gallery in this field.</p>
     <p>In previous versions of Coppermine, this field was called &quot;Target address for the 'See more pictures' link in e-cards&quot;, but as this url is now being used for other functions in coppermine, it has been changed, appropriately.</p>
@@ -144,7 +144,7 @@
     <div class="cpg_summary">
         Default value: <input type="text" size="10" maxlength="10" class="textinput" value="semicolon" /><br />
         Recommended value: <input type="text" size="10" maxlength="10" class="textinput" value="semicolon" /><br />
-        Available options: 
+        Available options:
         <input type="text" size="10" maxlength="10" class="textinput" value="space" /> ("<tt class="code">&nbsp;</tt>")<br />
         <input type="text" size="10" maxlength="10" class="textinput" value="comma" /> ("<tt class="code">,</tt>")<br />
         <input type="text" size="10" maxlength="10" class="textinput" value="semicolon" /> ("<tt class="code">;</tt>")<br />
@@ -167,7 +167,7 @@
     <p>Enable or disable <a href="plugins.htm#plugin">plugins</a>, with a link to the <a href="plugins.htm#plugin_manager">plugin manager</a>. This feature allows advanced copperminers to create plug-ins that can control the way coppermine looks and behaves without modifying the inherent code of the script itself. There are many exciting, user-contributed, plug-ins available on the Coppermine forum.  More details can be found in the <a href="plugins.htm#plugin_start">plugins section of this documentation</a>.  Since plugins add on to the core Coppermine system, if you are having problems, try to disable all plugins using this setting to see if a plugin may be at fault.  If so, you can then enable all plugins here, then uninstall or install one plugin at a time in the <a href="plugins.htm#plugin_manager">plugin manager</a> to figure out which one is at fault.</p>
     <a name="admin_general_enable-plugins_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_general_browsable_batch_add"></a><h3>Browsable batch-add interface<a href="#admin_general_browsable_batch_add" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
@@ -178,7 +178,7 @@
     <p>When <a href="uploading_batch-add.htm#batch_add_pics">batch-adding</a> files (that you have uploaded using a <acronym title="File Transfer Protocol">FTP</acronym> before) to your gallery, you have the option to switch between a browsable list, where you can scroll through the directory structure in your <tt class="code">albums</tt>-folder, or to display the whole directory structure at once. Enable this option if you have a larger structure of directories and subdirectories you want to browse through (this requires your browser to be capable of displaying <a href="http://www.w3schools.com/tags/tag_iframe.asp" class="external" rel="external">iframes</a>). Set this option to &quot;No&quot; (disabled) if you want to use the &quot;classic&quot; coppermine interface that shows a complete list of the structure at once.<br />
     Should you have difficulties using one, try the other. You can toggle between these options on the <a href="uploading_batch-add.htm#batch_add_pics">batch-add</a> page as well.</p>
     <a name="admin_general_browsable_batch_add_end"></a>
-    
+
     <a name="admin_general_batch_proc_limit"></a><h3>Process concurrency for batch-add interface<a href="#admin_general_batch_proc_limit" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="text" size="2" maxlength="2" class="numberinput" value="2" /><br />
@@ -191,7 +191,7 @@
     <p>When <a href="uploading_batch-add.htm#batch_add_pics">batch-adding</a> files (that you have uploaded using a <acronym title="File Transfer Protocol">FTP</acronym> before) to your gallery, Coppermine will process multiple images at the same time. This makes the process a lot faster, and avoids timeouts commonly associated with long running scripts. This setting specifies the maximum number of images Coppermine should process concurrently. To force images to be processed one by one you can set this to 1. If you have a powerful dedicated sever then you can set this to match the number of processing cores available. The default of 2 should strike a good balance between speed and processor usage.</p>
     <p>In versions of Coppermine prior to 1.5 this option was not available, and the number of images processed at the same time depended on server and browser settings that were not easily controlled by a gallery administrator.</p>
     <a name="admin_general_batch_proc_limit_end"></a>
-    
+
     <a name="admin_general_display_thumbs_batch_add"></a><h3>Display preview thumbnails on batch-add interface<a href="#admin_general_display_thumbs_batch_add" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" checked="checked" /><br />
@@ -203,7 +203,7 @@
     You can toggle between these options (enabled or disabled) on the <a href="uploading_batch-add.htm#batch_add_pics">batch-add</a> page as well.</p>
     <p>When starting with your gallery, you should leave this option enabled until you're convinced that batch-adding works as expected. You can then turn this option off. If you later discover that something goes wrong with your uploads, re-enable this feature once more.</p>
     <a name="admin_general_display_thumbs_batch_add_end"></a>
-    
+
     <a name="admin_general_form_token_lifetime"></a><h3>Lifetime of the form tokens<a href="#admin_general_form_token_lifetime" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="text" size="6" maxlength="6" class="numberinput" value="900" /><br />
@@ -225,7 +225,7 @@
     <p>This the the config section where you can set up the language settings. Make sure to read this section carefully before changing anything here.</p>
     <p>All language files are stored in the <strong>lang</strong> directory on your server.</p>
     <p>Languages and internationalization (often refered to as i18n) is a complicated and complex thing. You (as Coppermine admin) probably don't want to go into details, so this documentation skips the in-depth issues existing with i18n and just gives you an overview how Coppermine handles languages.</p>
-    
+
     <a name="admin_language_language"></a><h3>Default Language<a href="#admin_language_language" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="text" size="12" maxlength="12" class="textinput" value="English (US)" /><br />
@@ -235,10 +235,10 @@
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Language &amp; Charset settings &rarr; Default Language
     </div>
     <p>This sets the default language for your gallery.</p>
-    <p>Next to this selector, you will find a link to the language manager that allows a more granular control over the language files available and how the gallery should use them.</p> 
+    <p>Next to this selector, you will find a link to the language manager that allows a more granular control over the language files available and how the gallery should use them.</p>
     <a name="admin_language_language_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_language_autodetect"></a><h3>Autodetect language<a href="#admin_language_autodetect" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" checked="checked" /><br />
@@ -251,7 +251,7 @@
     <p>Details on how Coppermine handles languages can be found in the section <a href="languages.htm#translating">Languages</a> of the docs</p>
     <a name="admin_language_autodetect_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_language_charset"></a><h3>Character encoding<a href="#admin_language_charset" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="text" size="30" maxlength="30" class="textinput" value="Unicode (utf-8)" /><br />
@@ -332,7 +332,7 @@
     <p>Make sure to set the sidebar options up so that they make sense: it is not a bright idea to allow guests to access the sidebar, but deny access to registered users; registered users would be "punished" for registering. It is advisable to test the sidebar feature thoroughly before allowing your visitors to access it.</p>
     <p>How the sidebar is installed greatly differs from browser to browser. Sadly, the most complicated version is the sidebar for Internet Explorer, which is the most popular browser. In the past, it has been comparatively easy to add anything to IE's favorites and to come up with a "real" sidebar. However, as Microsoft had some bad press for releasing a browser with severe security holes, the options for developers to create a working sidebar that end users can add easily have been reduced deliberately by Microsoft when releasing patches for their browser and operating system. Therefore, you might have issues with the sidebar, depending on which version of Windows and IE you are using.</p>
     <p>If you want to edit the text that explains the install of the sidebar, edit the file <tt class="code">http://yoursite.tld/your_coppermine_folder/lang/yourlanguage.php</tt> with a plain text editor.</p>
-    
+
     <a name="admin_sidebar_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_theme_custom_lnk_name"></a><h3>Custom menu link name<a href="#admin_theme_custom_lnk_name" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -386,7 +386,7 @@
     <p>When enabled, this will display the <a href="bbcode.htm#bbcode">bulletin board codes</a> that may be used in description fields to help with the formatting of text, images and links.</p>
     <a name="admin_theme_bbcode_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_theme_include_path_start"></a>
     <a name="admin_theme_custom_header_path_start"></a><h3>Path to custom header include<a href="#admin_theme_custom_header_path_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
@@ -575,7 +575,7 @@
     <div class="cpg_summary">
         Default value: <input type="text" size="20" maxlength="20" class="textinput" value="Position ascending" /><br />
         Recommended value: <input type="text" size="20" maxlength="20" class="textinput" value="Position ascending" /><br />
-        Available options: 
+        Available options:
         <input type="text" size="20" maxlength="20" class="textinput" value="Title ascending" /> ("<tt class="code">ta</tt>")<br />
         <input type="text" size="20" maxlength="20" class="textinput" value="Title descending" /> ("<tt class="code">td</tt>")<br />
         <input type="text" size="20" maxlength="20" class="textinput" value="Date ascending" /> ("<tt class="code">da</tt>")<br />
@@ -703,7 +703,7 @@
     <p>Again, this setting only makes sense if your gallery is mostly community-driven and there is not just a single admin uploader, but the uploads come from many different visitors.</p>
     <!--<p>Keep in mind though that enabling this option will <strong>only</strong> display the name of the uploader underneath the thumbnail if the uploader is <strong>not</strong> an admin. If you want to accomplish the same thing that  this setting does for admin uploaders as well, take a look at the next option &quot;<a href="#admin_thumbnail_display_admin_uploader">Display names of admin uploaders below the thumbnail</a>&quot;.</p>-->
 
-    
+
     <a name="admin_thumbnail_display_uploader_end"></a>
     <br clear="all" style="clear:both;" />
     <!--Apparently this option has been disabled for reasons that I'm not aware of. JM-->
@@ -775,14 +775,14 @@
     </ul>
     <p>This option has been added because a lot of coppermine users have asked for it. However, the dev team does <strong>not</strong> recommend using it.</p>
 
-    
+
     <a name="admin_thumbnail_to_fullsize_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_thumbnail_default_sortorder"></a><h3>Default sort order for files<a href="#admin_thumbnail_default_sortorder" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="text" size="20" maxlength="20" class="textinput" value="Name ascending" /><br />
         Recommended value: <input type="text" size="20" maxlength="20" class="textinput" value="Name ascending" /><br />
-        Available options: 
+        Available options:
         <input type="text" size="20" maxlength="20" class="textinput" value="Title ascending" /> ("<tt class="code">ta</tt>")<br />
         <input type="text" size="20" maxlength="20" class="textinput" value="Title descending" /> ("<tt class="code">td</tt>")<br />
         <input type="text" size="20" maxlength="20" class="textinput" value="Name ascending" /> ("<tt class="code">na</tt>")<br />
@@ -859,7 +859,7 @@
 
     <a name="admin_image_comment_info_visible_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_image_movie_download_link_visible"></a><h3>Display movie download link in the file information area<a href="#admin_image_movie_download_link_visible" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" checked="checked" /><br />
@@ -871,7 +871,7 @@
 
     <a name="admin_image_movie_download_link_visible_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_image_comment_descr_length"></a><h3>Max length for an image description<a href="#admin_image_comment_descr_length" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="text" size="5" maxlength="5" class="numberinput" value="512" /><br />
@@ -895,7 +895,7 @@
     </div>
     <p><img src="images/filmstrip.jpg" border="0" width="" height="" alt="" title="Film strip displayed underneath the actual image" class="img_embed_right" />Toggles display of a "film strip" showing thumbnails of prior and subsequent files in the album.</p>
 
-    
+
     <a name="admin_image_comment_filmstrip_toggle_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_image_comment_filmstrip_number"></a><h3>Number of items in film strip<a href="#admin_image_comment_filmstrip_number" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -947,7 +947,7 @@
     <p>Note: this setting doesn't determine if guests can actually send ecards at all (this is instead being determined on the groups page).</p>
     <p class="cpg_message_validation">Captchas will only work if GD2 is available on your server with FreeType support enabled.</p>
 
-    
+
     <a name="admin_image_ecard_captcha_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_image_ecard_flash_start"></a><h3>Allow Flash in Ecards<a href="#admin_image_ecard_flash_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -960,9 +960,9 @@
     <p>When enabled, you can not only send images as ecards, but flash files as well. This feature has been added because many users requested it. However, it is not recommended at all, simply because most email clients will not display Flash embedded into emails or (even worse) will show messages that may confuse the recipient.<br />
     You have to understand that this setting does <strong>not</strong> determine the ability of users to send ecards in the first place (this is being configured on the <a href="#group_cp">groups page</a> instead). <strong>Only</strong> if a user is allowed to send ecards (i.e. belongs to a group that is allowed to do so), this setting is being taken into account.</p>
 
-    
+
     <a name="admin_image_ecard_flash_end"></a>
-    
+
     <br clear="all" style="clear:both;" />
     <a name="admin_image_transparent_overlay_start"></a><h3>Insert a transparent overlay to minimize image theft<a href="#admin_image_transparent_overlay_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
@@ -973,7 +973,7 @@
     </div>
     <p>When enabled, a transparent gif will be inserted "over" the pics displayed in your gallery (intermediate sized and full-size pics). Subsequently, if a user right-clicks the image and uses the "save as..." context menu of his browser, only the transparent gif will be saved on his PC, but not the actual image he tried to save. This option will reduce the number of users who are capable to steal your images, but it will only fool newbie users. There is no effective method to completely avoid image theft, but the transparent overlay method is much better than any no-right-click script that keeps users from the legitimate use of the right mouse button and subsequently makes them shy away. Please note that the transparent overlay is being added by using the deprecated HTML attribute "background" to avoid the context menu entry "save background image" that would appear if the overlay image was added using standards-compliant CSS methods. Subsequently, your pages will not contain valid, standards-compliant HTML output if this option is enabled.<br />Recommended (and default) setting for this option is "off".</p>
 
-    
+
     <a name="admin_image_transparent_overlay_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_image_old_style_rating_start"></a><h3>Go back to old rating system<a href="#admin_image_old_style_rating_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -986,7 +986,7 @@
     </div>
     <p>If you want to use the old rating system instead of the new one, you have to check this option. <br />This will not allow you to set a custom amount of rating stars as it defaults back to 5</p>
 
-    
+
     <a name="admin_image_old_style_rating_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_image_rating_stars_amount_start"></a><h3>Amount of rating stars to be used to vote<a href="#admin_image_rating_stars_amount_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -1164,7 +1164,7 @@
     <p>With this toggle you can determine if the admin will see only the comments that actually need approval on the &quot;Review Comments&quot; page. You can toggle this option in config or on the actual &quot;Review Comments&quot; page - it won't hurt to toggle this setting frequently when reviewing comments.</p>
     <p>This option does not have any impact on the visibility of comments, but only on the &quot;Review Comments&quot; page display.</p>
 
-    
+
     <a name="admin_comment_display_comment_approval_only_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_comment_display_placeholder_start"></a><h3>Display placeholder text to end users for comments waiting for admin approval<a href="#admin_comment_display_placeholder_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -1177,9 +1177,9 @@
     <p>When enabled, the non-admin end user will see a placeholder text saying <tt class="code">Someone has posted a comment here. It will be visible after admin approval.</tt> instead of the comment. When disabled, the comment that needs approval will be completely invisible for the end user.</p>
     <p>This setting is only being taken into account for non-admin users, so you won't notice any difference when being logged in as admin.</p>
 
-    
+
     <a name="admin_comment_display_placeholder_end"></a>
-    
+
     <br clear="all" style="clear:both;" />
     <a name="admin_comment_user_edit_start"></a><h3>Allow users to edit their comments<a href="#admin_comment_user_edit_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
@@ -1191,10 +1191,10 @@
     <p>When enabled, users are allowed to edit or delete their comments after submitting them.</p>
     <p>Note: this setting doesn't determine if users can actually post comments at all (this is instead being determined on the groups page). Instead, it just displays an edit and delete icon next to a comment that turns the comment into an input field when being clicked.<br />The admin is not affected at all - he can edit any comment no matter what.</p>
 
-    
+
     <a name="admin_comment_user_edit_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_comment_captcha_start"></a><h3>Display Captcha (Visual Confirmation) for adding comments<a href="#admin_comment_captcha_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="radio" class="radio" checked="checked" id="comment_captcha" /><label for="comment_captcha" class="clickable_option">Yes: Everyone</label><br />
@@ -1208,7 +1208,7 @@
 
     <a name="admin_comment_captcha_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_comment_akismet_api_key"></a><h3>Akismet API key<a href="#admin_comment_akismet_api_key" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="text" size="1" maxlength="1" class="textinput" value="" /><br />
@@ -1226,7 +1226,7 @@
 
     <a name="admin_comment_akismet_api_key_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_comment_akismet_enable"></a><h3>Akismet Options<a href="#admin_comment_akismet_enable" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="radio" class="radio" checked="checked" id="comment_akismet_enable" /><label for="comment_akismet_enable" class="clickable_option">Allow comments that fail to pass Akismet, but mark them unapproved</label><br />
@@ -1248,7 +1248,7 @@
 
     <a name="admin_comment_akismet_enable_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_comment_akismet_group"></a><h3>Apply Akismet for comments made by<a href="#admin_comment_akismet_group" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="radio" class="radio" checked="checked" id="comment_akismet_group" /><label for="comment_akismet_group" class="clickable_option">Everyone</label><br />
@@ -1264,7 +1264,7 @@
 
     <a name="admin_comment_akismet_group_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_comment_promote_registration_start"></a><h3>Ask guests to log in to post comments<a href="#admin_comment_promote_registration_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
@@ -1397,7 +1397,7 @@
     <p>Subject line for the emails generated by the contact form. Will be put in front of the custom subject line the user can enter (if &quot;<a href="#admin_contact_subject_field">Display subject field</a>&quot; is enabled).</p>
     <a name="admin_contact_subject_content_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_contact_subject_field"></a><h3>Display subject field<a href="#admin_contact_subject_field" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="radio" class="radio" checked="checked" id="contact_form_subject_field" /><label for="contact_form_subject_field" class="clickable_option">No</label><br />
@@ -1424,7 +1424,7 @@
 
     <a name="admin_contact_subject_field_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_contact_sender_email"></a><h3>Use the sender's email address as &quot;from&quot;-address<a href="#admin_contact_sender_email" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" checked="checked" /><br />
@@ -1496,12 +1496,12 @@
         <td valign="top">Parts of the content of the original image may not be visible on the thumbnail page because cropping has been applied, so your thumbnails may not attract the attention of the visitor.</td>
       </tr>
     </table>
-    
+
     <p class="cpg_message_info">When changing this setting, only files that are added after the change will be affected. Therefore, it is advisable that this setting not be changed after photos have already been added to the gallery. You can, however, apply the changes to the existing pictures with the &quot;admin tools (resize pictures)&quot; utility from the admin menu.</p>
 
     <a name="admin_picture_thumbnail_use-dimension_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_picture_thumbnail_max-dimension"></a><h3>Max dimension of a thumbnail<a href="#admin_picture_thumbnail_max-dimension" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="text" size="4" maxlength="4" class="numberinput" value="128" /><br />
@@ -1517,7 +1517,7 @@
 
     <a name="admin_picture_thumbnail_max-dimension_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_picture_thumbnail_height"></a><h3>Height of a thumbnail<a href="#admin_picture_thumbnail_height" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="text" size="4" maxlength="4" class="numberinput" value="128" /><br />
@@ -1533,7 +1533,7 @@
 
     <a name="admin_picture_thumbnail_height_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_picture_thumb_advanced_thumbs_prefix"></a><h3>The prefix for thumbnails<a href="#admin_picture_thumb_advanced_thumbs_prefix" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="text" size="6" maxlength="6" class="textinput" value="thumb_" /><br />
@@ -1548,7 +1548,7 @@
 
     <a name="admin_picture_thumb_advanced_thumbs_prefix_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_picture_thumb_sharpening_enable"></a><h3>Thumb Sharpening: enable Unsharp Mask<a href="#admin_picture_thumb_sharpening_enable" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
@@ -1561,7 +1561,7 @@
 
     <a name="admin_picture_thumb_sharpening_enable_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_picture_thumb_sharpening_amount"></a><h3>Thumb Sharpening amount<a href="#admin_picture_thumb_sharpening_amount" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="text" size="3" maxlength="3" class="numberinput" value="120" /><br />
@@ -1577,7 +1577,7 @@
 
     <a name="admin_picture_thumb_sharpening_amount_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_picture_thumb_sharpening_radius"></a><h3>Thumb Sharpening radius<a href="#admin_picture_thumb_sharpening_radius" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="text" size="3" maxlength="3" class="numberinput" value="0.5" /><br />
@@ -1594,7 +1594,7 @@
 
     <a name="admin_picture_thumb_sharpening_radius_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_picture_thumb_sharpening_threshold"></a><h3>Thumb Sharpening threshold<a href="#admin_picture_thumb_sharpening_threshold" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="text" size="3" maxlength="3" class="numberinput" value="3" /><br />
@@ -1717,7 +1717,7 @@
         <li>Yes: User only - Enabled only for regular users</li>
     </ul>
 
-    
+
     <a name="admin_picture_thumbnail_auto-resize_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_picture_thumbnail_fullsize_padding_x"></a><h3>Horizontal padding for full-size pop-up<a href="#admin_picture_thumbnail_fullsize_padding_x" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -1731,7 +1731,7 @@
     </div>
     <p>This setting is used to determine the width of a full-size pop-up, as most major browsers mysteriously add some padding to pics opened in a pop-up. It's recommended to leave this set to the default 5 pixels unless you know what you're doing.</p>
 
-    
+
     <a name="admin_picture_thumbnail_fullsize_padding_x_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_picture_thumbnail_fullsize_padding_y"></a><h3>Vertical padding for full-size pop-up<a href="#admin_picture_thumbnail_fullsize_padding_y" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -1745,11 +1745,11 @@
     </div>
     <p>This setting is used to determine the height of a full-size pop-up, as most major browsers mysteriously add some padding to pics opened in a pop-up. It's recommended to leave this set to the default 3 pixels unless you know what you're doing.</p>
 
-    
+
     <a name="admin_picture_thumbnail_fullsize_padding_y_end"></a>
     <a name="admin_picture_thumbnail_end"></a>
-    
-    
+
+
     <a name="admin_picture_thumb_advanced"></a>
     <a name="admin_picture_thumb_advanced_private_toggle"></a><h3>Albums can be private<a href="#admin_picture_thumb_advanced_private_toggle" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
@@ -1862,7 +1862,7 @@
     mp3/midi/mid/wma/wav/ogg</p>
     <p>In Coppermine versions prior to cpg1.5.0, the option &quot;ALL&quot; used to be available as well for this field - it has been removed, as it caused users to think that this actually meant &quot;all sound file types that exist&quot;.</p>
 
-    
+
     <a name="admin_picture_thumb_advanced_audio_extensions_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_picture_thumb_advanced_doc_extensions"></a><h3>Allowed document types<a href="#admin_picture_thumb_advanced_doc_extensions" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -1885,7 +1885,7 @@
     <p>For security reasons coppermine doesn't enable all document types by default. Before adding more file types, make sure that the file types are supported on your webserver.</p>
     <p>In Coppermine versions prior to cpg1.5.0, the option &quot;ALL&quot; used to be available as well for this field - it has been removed, as it caused users to think that this actually meant &quot;all document file types that exist&quot;.</p>
 
-    
+
     <a name="admin_picture_thumb_advanced_doc_extensions_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_picture_thumb_advanced_resize_method"></a><h3>Method for resizing images<a href="#admin_picture_thumb_advanced_resize_method" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -1912,9 +1912,9 @@
     </div>
     <p><img src="../images/imagemagick.png" border="0" alt="" width="130" height="54" title="ImageMagick" align="right" style="padding-left:20px" />If you intend using ImageMagick's convert executable to resize your pictures, you must enter the <em>absolute path</em> to the name of the <strong>directory</strong> where the convert program is located in this line. Don't forget the trailing &quot;<tt class="code">/</tt>&quot; to close the path. This path must only indicate the <strong>directory</strong> where the convert executable is located, it should not point directly to the convert executable itself.</p>
     <p>The path you specify here will only be taken into account if you set the <a href="#admin_picture_thumb_advanced_resize_method">Method for resizing images</a> to &quot;ImageMagick&quot;. If you specify anything else there, the Path to ImageMagick's "convert" executable will not be taken into account. You need to make sure to specify a valid path with a traling slash no matter what - the config form will complain if you don't.</p>
-    
+
     <p class="cpg_message_error">ImageMagick will <strong>not</strong> work properly if PHP on your server is running in <a href="http://www.php.net/phpinfo" rel="external" class="phpnet">safe mode</a> and it is a real challenge to get it running under Windows. Please consider using GD (see <a href="install_faq.htm#WhatIsGD">What's GD and how can I get it?</a> in these cases and don't waste your time asking for support in the forum with ImageMagick installation questions. There are just too many things that can prevent ImageMagick from working properly and without physical access to your server it is extremely difficult to guess what is wrong.</p>
-    
+
     <p>Also refer to: <a href="install_faq.htm#whatIsImageMagick">What's ImageMagick and how can I get it?</a> and <a href="install_faq.htm#enableIMonWindows">How do I enable ImageMagick on my Windows server?</a>.</p>
     <div class="indent">
         <a name="admin_picture_thumb_advanced_im_path_windows"></a><h4>ImageMagick on Windows-driven servers<a href="#admin_picture_thumb_advanced_im_path_windows" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
@@ -1948,7 +1948,7 @@
     <p>With this option turned on, the script will read the EXIF data stored by digicams in JPEG files. For cpg1.x to cpg1.2.1, this option will work only if PHP was compiled with the EXIF extension. Coppermine 1.3.0 (or better) comes with built-in EXIF support even if the webserver itself doesn't have EXIF support, as it uses a <a href="http://www.offsky.com/software/exif/index.php" class="external">separate EXIF class</a>.</p>
     <p>Since cpg1.4.x there is even an <a href="exif.htm">EXIF-manager</a> available that will allow you to determine what exif fields are supposed to be displayed.</p>
 
-    
+
     <a name="admin_picture_thumb_advanced_exif_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_picture_thumb_advanced_iptc"></a><h3>Read IPTC data in JPEG files<a href="#admin_picture_thumb_advanced_iptc" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -1961,7 +1961,7 @@
     <p>With this option turned on, the script will read the <a href="http://www.iptc.org/" class="external" rel="external">IPTC</a> data stored by digicams in picture files.</p>
     <p>Please note: IPTC does not support unicode encoding. Therefore, it may collide with coppermine if you use special, non-latin characters in your IPTC tags.</p>
 
-    
+
     <a name="admin_picture_thumb_advanced_iptc_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_picture_thumb_advanced_albums_dir"></a><h3>The album directory<a href="#admin_picture_thumb_advanced_albums_dir" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2052,7 +2052,7 @@
     You can use the <a href="admin-tools.htm#admin_tools">admin tools</a> to get rid of this copy as well, ,but you have to keep in mind then that there is not turning back in this case: if you delete the unmarked original, you can never go back or apply another watermark.</p>
     <p class="cpg_message_warning">When enabling this option, you have to understand that watermarks are not automatically being applied to all files that already exist in your gallery. When enabled, only images that get uploaded from that point on will become watermarked. If you want to apply watermarking to all the images that already existed in your coppermine gallery before you enabled watermarking, take a look at the corresponding section of the admin tools. However, before applying your new watermark permanently to all your images, perform some test uploads first to see if watermarking works as expected for you.</p>
 
-    
+
     <a name="admin_watermarking_enable_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_watermarking_custom_thumb"></a><h3>Watermark custom thumbs (movie, audio, document)<a href="#admin_watermarking_custom_thumb" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2064,7 +2064,7 @@
     </div>
     <p>When enabled, custom thumbnails will be watermarked as well.</p>
     <p>If you don't use custom thumbnails, don't worry about this option.</p>
-        
+
     <a name="admin_watermarking_custom_thumb_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_watermarking_orientation"></a><h3>Where to place the watermark<a href="#admin_watermarking_orientation" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2089,7 +2089,7 @@
       <li>Center</li>
     </ul>
 
-    
+
     <a name="admin_watermarking_orientation_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_watermarking_filetype"></a><h3>Which files to watermark<a href="#admin_watermarking_filetype" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2111,7 +2111,7 @@
     </ul>
     <p>All three options make sense in different environments: if you want to use watermarking to encourage your users to register, you should apply the watermark to resized image (intermediate images) only and only allow registered users to access the original (full-sized) images. On the other hand, if you only want to make sure that your high-resolution full-size images are not being stolen, apply the watermark to the original only.</p>
 
-    
+
     <a name="admin_watermarking_filetype_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_watermarking_filepath"></a><h3>Which file to use for watermark<a href="#admin_watermarking_filepath" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2125,7 +2125,7 @@
     <p>Coppermine only comes with a sample watermarking file that you should not apply lightheartedly, as it is only meant for testing purposes and to give you an idea how the watermarking file could look like. You have to come up with your custom watermark file and FTP-upload that file to your webserver. It's a good idea to name it accordingly, e.g. "custom_watermark.png" and upload it to the <tt class="code">images</tt> folder (<tt class="code">http://your_domain.tld/your_coppermine_folder/images/</tt>). All you then have to do is change the setting for "Which file to use for watermark" to <tt class="code">images/custom_watermark.png</tt>.</p>
     <p>Coming up with a custom watermark can be tricky: it should work well both for dark as well as light backgrounds. You have to find a good compromise: the watermarked files should be still OK to look at, while on the other hand potential image thieves should get discouraged to steal your watermarked images.</p>
 
-    
+
     <a name="admin_watermarking_filepath_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_watermarking_transparency"></a><h3>Transparency 0-100 for entire image<a href="#admin_watermarking_transparency" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2139,7 +2139,7 @@
     </div>
     <p>Determines the transparency level for the watermark. By setting transparency you can make your image blend nicely into the pictures you upload that get watermarked.</p>
 
-    
+
     <a name="admin_watermarking_transparency_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_watermarking_downsize"></a><h3>Downsize watermark if width of an picture is smaller than entered value<a href="#admin_watermarking_downsize" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2155,7 +2155,7 @@
     <p>Keep in mind that images might get uploaded by your users (if you allow uploads by others than the admin) that you might not have made up your mind about: the image uploaded may be smaller in resolution. If the dimension of the image uploaded is smaller than the dimension of your watermark file, the watermarking would get cut off and look silly. That's why this option exists: you can specify that images that are smaller than a particular size will have the watermarking applied in a resized manner, making the watermark again fit on the uploaded image. It's a good idea to set this option to the horizontal dimension of your watermarking image.</p>
     <div class="cpg_example">Example:<br />Let's assume that your custom watermarking image has got the same dimensions as the sample one that comes with the coppermine package: 300 x 51 pixels. Subsequently, if you set the option "Downsize watermark if width of an picture is smaller than entered value" to 300, you should be fine: if someone uploads an image that is only 250 x 100 pixels, the resulting watermarked image will be 250 x 100 pixels as well, but the watermarking image will have been resized to 250 x 43 before being applied as a watermark, so it will fit on the original file that was uploaded.</div>
 
-    
+
     <a name="admin_watermarking_downsize_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_watermarking_transparent_x"></a><h3>Set color transparent x<a href="#admin_watermarking_transparent_x" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2170,7 +2170,7 @@
     <p>This option is only available if you have set the <a href="configuration.htm#admin_picture_thumb_advanced_resize_method">method for resizing images</a> to GD2. If you have set it to ImageMagick, this setting will not be taken into account at all. Specify the horizontal coordinate of the pixel that should represent the transparent color, seen from the left of the watermarking image.</p>
     <p>The transparency setting is particularly usefull if you use a jpeg image as watermarking file or if you don't know how to set transparency up for your watermarking image inside the desktop app where you compose your custom watermark. Your best option (to go out of harms way) will be to use a png watermarking file with transparency - in this case, this setting will not be needed.</p>
 
-    
+
     <a name="admin_watermarking_transparent_x_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_watermarking_transparent_y"></a><h3>Set color transparent y<a href="#admin_watermarking_transparent_y" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2185,7 +2185,7 @@
     <p>This option is only available if you have set the <a href="configuration.htm#admin_picture_thumb_advanced_resize_method">method for resizing images</a> to GD2. If you have set it to ImageMagick, this setting will not be taken into account at all. Specify the vertical coordinate of the pixel that should represent the transparent color, seen from the top of the watermarking image.</p>
     <p>The transparency setting is particularly usefull if you use a jpeg image as watermarking file or if you don't know how to set transparency up for your watermarking image inside the desktop app where you compose your custom watermark. Your best option (to go out of harms way) will be to use a png watermarking file with transparency - in this case, this setting will not be needed.</p>
 
-    <br clear="all" style="clear:both;" />    
+    <br clear="all" style="clear:both;" />
     <a name="admin_watermarking_transparent_y_end"></a>
 </div>
 <a name="admin_watermarking_end"></a>
@@ -2227,7 +2227,7 @@
     <p>Toggles wether users will see the disclaimer on the registration page. You have the option not to display the disclaimer at all, display it as separate page before the actual registration page or inline on the registration page.<br />
     This setting only applies if coppermine is not bridged.</p>
 
-    
+
     <a name="admin_user_registration_disclaimer_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_registration_captcha_start"></a><h3>Display Captcha (Visual Confirmation) on registration page<a href="#admin_registration_captcha_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2241,7 +2241,7 @@
     <p>Note: this setting isn't being taken into account when coppermine is bridged.</p>
     <p class="cpg_message_info">Captchas will only work if <a href="install_faq.htm#WhatIsGD">GD2</a> is available on your server.</p>
 
-    
+
     <a name="admin_registration_captcha_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_registration_verify"></a><h3>User registration requires email verification<a href="#admin_registration_verify" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2264,7 +2264,7 @@
     </div>
     <p>If set to YES an email will be sent to the gallery admin when a new user registers.</p>
 
-    
+
     <a name="admin_registration_notify_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_activation"></a><h3>Admin Activation<a href="#admin_activation" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2277,7 +2277,7 @@
     <p>Enable admin activation. When set to yes, a gallery administrator must first activate the new registration before the user can log-in and take advantage of any registered user privileges.</p>
     <p>By default, it is set to no, so users would activate their own accounts upon registering.</p>
 
-    
+
     <a name="admin_activation_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_personal_album_on_registration"></a><h3>Create user album in personal gallery on registration<a href="#admin_personal_album_on_registration" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2290,7 +2290,7 @@
     <p>When enabled, each user will have a personal album created during the registration process, even if your permissions for the group new users are in do not allow this (i.e. if you have <a href="#group_cp">allowed personal galleries</a> for members of the registered group disabled). Warning: usually, only a small percentage of registered users actually upload files - when this option is enabled, a lot of unneeded user galleries will be created, severely cluttering the database (which has an impact on performance). Don't enable this option if you don't know what it actually does!</p>
     <p>This option is disabled when being bridged.</p>
 
-    <br clear="all" style="clear:both;" />    
+    <br clear="all" style="clear:both;" />
     <a name="admin_personal_album_on_registration_end"></a>
 </div>
 <a name="admin_registration_end"></a>
@@ -2319,7 +2319,7 @@
     </ul>
     <p>Keep in mind that search engine spiders will be treated as non-registered guests as well, so if you restrict the accessibility for guests, search engine spiders will not index whatever you hide from your guests.</p>
 
-    
+
     <a name="admin_allow_unlogged_access_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_upload_mechanism"></a><h3>Default upload method<a href="#admin_upload_mechanism" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2341,7 +2341,7 @@
     <p>Since it is your users who will run into these problems, you may want to allow your users to choose the upload method themselves.  See the configuration setting "<a href="#admin_allow_user_upload_choice">Allow users to choose the upload method</a>".</p>
     <p>The flash-driven interface is the most elegant solution for most, but of course it has got several drawbacks as well, with the most serious drawback being that those who don't have flash support won't be able to upload at all. Don't take for granted that everybody will have flash: users on a corporate PC where the admin has disallowed flash won't be able to use it, nor do all mobile gadgets (like PDAs, smart phones, game consoles etc.) have flash support.</p>
 
-    
+
     <a name="admin_upload_mechanism_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_allow_user_upload_choice"></a><h3>Allow users to choose the upload method<a href="#admin_allow_user_upload_choice" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2353,7 +2353,7 @@
     </div>
     <p>When enabled, users can choose the upload method themselves.  This is recommended so that if some users have an issue with their web browsers or operating systems, they can choose another upload method that works better.  At the very least, they can use the simple, one file at-a-time, upload method.</p>
 
-    
+
     <a name="admin_allow_user_upload_choice_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_allow_duplicate_emails_addr"></a><h3>Allow two users to have the same email address<a href="#admin_allow_duplicate_emails_addr" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2377,7 +2377,7 @@
     </div>
     <p>When enabled, the gallery admin receives an email notification of all pics that await for his/her approval (depends on the approval settings in &quot;<a href="groups.htm#group_cp">groups</a>&quot;). The email is sent to the address specified in &quot;<a href="#admin_general">General settings</a>&quot;.</p><p>This option is only recommended for websites with low or medium traffic (where users only upload every now and then).</p>
 
-    
+
     <a name="admin_approval_notify_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_user_memberlist"></a><h3>Allow logged in users to view memberlist<a href="#admin_user_memberlist" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2390,7 +2390,7 @@
     <p>When enabled, an additional menu item &quot;Memberlist&quot; is displayed in the coppermine main menu if a user is logged in, to let him see a list of all users, with stats on their last visits, uploads and quota usage.</p>
     <p>Recommended setting is 'no', especially if you're concerned about your user's privacy.</p>
 
-    
+
     <a name="admin_user_memberlist_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_user_allow_email_change"></a><h3>Allow users to change their email address in profile<a href="#admin_user_allow_email_change" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2439,7 +2439,7 @@
 
     <a name="admin_user_allow_album_move_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_allow_user_edit_after_cat_close"></a><h3>Allow users to edit their albums when it is in a locked category<a href="#admin_allow_user_edit_after_cat_close" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
@@ -2462,8 +2462,8 @@
 
     <a name="admin_allow_user_album_keyword_end"></a>
     <br clear="all" style="clear:both;" />
-    
-    
+
+
     <a name="admin_user_login_start"></a>
     <a name="admin_user_login_method_start"></a><h3>How do you want your users to be able to login<a href="#admin_user_login_method_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
@@ -2478,7 +2478,7 @@
     </div>
     <p>You can have your users login with their username, email address or let them choose themselves. <br />Select the option you want in the dropdown.</p>
 
-    
+
     <a name="admin_user_login_method_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_user_login_threshold_start"></a><h3>Number of failed login attempts until temporary ban (to avoid brute force attacks)<a href="#admin_user_login_threshold_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2495,7 +2495,7 @@
     <p>Keep in mind that this setting will definitely have an impact on your legitimate ability to log in as well: if you mis-type your password too often or if someone else has tried to brute-force your admin account, you will be banned temporarily as well. The ban will of course go away after the time set below, but during the ban phase you will be locked out from administration just as well as an attacker would be logged out.</p>
     <p>Default and recommended value is <tt class="code">5</tt>. Value can range between 1 and 20 (as 0 would mean that zero logins are allowed, which would lock you (as admin) out permanently as well.</p>
 
-    
+
     <a name="admin_user_login_threshold_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_user_login_expiry_start"></a><h3>Duration of a temporary ban after failed logins<a href="#admin_user_login_expiry_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2513,9 +2513,9 @@
 
     <a name="admin_user_login_expiry_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_user_login_end"></a>
-    
+
     <a name="admin_user_purge_expired_bans"></a><h3>Automatically purge expired bans<a href="#admin_user_purge_expired_bans" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
@@ -2528,8 +2528,8 @@
 
     <a name="admin_user_purge_expired_bans_end"></a>
     <br clear="all" style="clear:both;" />
-    
-    
+
+
     <a name="admin_user_enable_report"></a><h3>Enable reports<a href="#admin_user_enable_report" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
@@ -2544,10 +2544,10 @@
     <p>It's advisable to enable this feature on larger, community-driven galleries that don't require admin-approval for uploaded pics, as it gives your community the chance to alert you of potential issues and keep your gallery clean.</p>
     <p>As a drawback, the feature can be abused by spammers to send emails to the admin, so it's advisable to only allow reports for registered users.</p>
 
-    
+
     <a name="admin_user_enable_report_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_user_rate_own_files_start"></a><h3>Users can rate their own files<a href="#admin_image_rate_own_files_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="radio" class="radio" checked="checked" id="rate_own_files" /><label for="rate_own_files" class="clickable_option">No</label><br />
@@ -2566,7 +2566,7 @@
 
 <a name="admin_custom"></a><h2>Custom fields for user profile<a href="#admin_custom" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
     <div class="cpg_summary">
-        Default values: 
+        Default values:
         Profile 1 name: <input type="text" size="10" maxlength="10" class="textinput" value="Location" /><br />
         Profile 2 name: <input type="text" size="10" maxlength="10" class="textinput" value="Interests" /><br />
         Profile 3 name: <input type="text" size="10" maxlength="10" class="textinput" value="Website" /><br />
@@ -2646,11 +2646,11 @@ into the field number 6.
     <p class="cpg_message_info">This email address must not be confused with the email address that correlates to the email address of the gallery administrator's user account. Those email addresses <em>can</em> be identical, but they don't necessarilly have to.</p>
     <a name="admin_email_email_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <p><strong>Using SMTP to send emails</strong>: by default the script uses the PHP built-in <strong>mail</strong> function to send emails. In some cases, the PHP built-in function can't be used.</p>
     <p> If, in order to send emails with PHP, you are required to supply a <strong>hostname</strong>, a <strong>username</strong> and a <strong>password</strong>, you will need to edit the CONFIG menu section &quot;Email settings&quot; and insert the correct values there. If you don't need a username and password to connect to your SMTP server, just leave these lines blank. If you don't know what settings to enter, you will need to check with your webhost.</p>
-    
-    
+
+
     <h3>SMTP Host</h3>
     <div class="cpg_summary">
         Default value: <input type="text" size="1" maxlength="1" class="textinput" value="" /><br />
@@ -2662,7 +2662,7 @@ into the field number 6.
     If you leave this blank, sendmail (or a surrogate) will be used to send emails from your server. Sendmail exists on most Unix/Linux webservers. If you specify a SMTP hostname, Coppermine will try to send emails using SMTP (this usually is needed on Windows webservers).</p>
     <p>To specify a non-default port number enter it after the hostname with a colon, for example <strong>yourdomain.com:26</strong> to use port 26. To use SSL or TLS add a prefix to the hostname, for example <strong>ssl://yourdomain.com</strong> to use an SSL encrypted connection. You must have OpenSSL support enabled in PHP and the SMTP server must support SSL connections for this to work. You can use both an SSL prefix and a port number if neccessary. To use gmail's SMTP server you would use <strong>ssl://smtp.gmail.com:465</strong></p>
 
-    
+
     <br clear="all" style="clear:both;" />
     <h3>SMTP Username</h3>
     <div class="cpg_summary">
@@ -2673,7 +2673,7 @@ into the field number 6.
     </div>
     <p>The username needed to authenticate on the SMTP server (this is <strong>not</strong> your coppermine admin username).</p>
 
-    
+
     <br clear="all" style="clear:both;" />
     <h3>SMTP Password</h3>
     <div class="cpg_summary">
@@ -2702,7 +2702,7 @@ into the field number 6.
     All log files are written in english</p>
     <p>You have to understand that this option does not toggle the recording of what your site visitors do. Instead, you log particularly what <strong>admins</strong> do.</p>
 
-    
+
     <a name="admin_logging_log_mode_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_general_log_ecards"></a><h3>Log ecards<a href="#admin_general_log_ecards" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2714,7 +2714,7 @@ into the field number 6.
     </div>
     <p>When enabled, all ecards that are being sent are as well written into the database, where the coppermine admin can view them. Before switching this option on, make sure that logging is legal in your country. It is also advisable to notify your users that all ecards are being logged (preferrably on the registration screen).</p>
 
-    
+
     <a name="admin_general_log_ecards_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_logging_votedetails"></a><h3>Keep detailed vote statistics<a href="#admin_logging_votedetails" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2926,7 +2926,7 @@ into the field number 6.
     <a name="admin_misc_debug_notices_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="debug_mode_end"></a>
-    
+
     <a name="admin_general_offline"></a><h3>Gallery is offline<a href="#admin_general_offline" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
@@ -2951,7 +2951,7 @@ into the field number 6.
 
     <a name="admin_general_coppermine_news_end"></a>
     <br clear="all" style="clear:both;" />
-    
+
     <a name="admin_misc_reset_boxes"></a><h3>Display reset boxes in config<a href="#admin_misc_reset_boxes" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />

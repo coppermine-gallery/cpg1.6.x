@@ -847,7 +847,7 @@ function process_picture()
     //using getRaw as it will be sanitized in the code below in the preg_match. {SaWey}
      $filename = $superCage->files->getRaw('/userpicture/name');
      if (get_magic_quotes_gpc()){
-        $filename = stripslashes($filename); 
+        $filename = stripslashes($filename);
      }
     // Replace forbidden chars with underscores
     //$picture_name = replace_forbidden($_FILES['userpicture']['name']);

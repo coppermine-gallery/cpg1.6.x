@@ -59,32 +59,32 @@ function cpgUserThumb($uid)
     mysql_free_result($result);
 
     $user_thumb = '';
-    
+
     if ($picture_count) {
-    
+
         $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $thumb_pid";
         $result = cpg_db_query($sql);
- 
+
         if (mysql_num_rows($result)) {
-        
+
             $picture = mysql_fetch_assoc($result);
-            
+
             $pic_url = get_pic_url($picture, 'thumb');
-            
+
             if (!is_image($picture['filename'])) {
                 $image_info = cpg_getimagesize(urldecode($pic_url));
                 $picture['pwidth'] = $image_info[0];
                 $picture['pheight'] = $image_info[1];
             }
-            
+
             $image_size = compute_img_size($picture['pwidth'], $picture['pheight'], $CONFIG['thumb_width']);
 
             $user_thumb = '<img src="' . $pic_url . '" class="image"' . $image_size['geom'] . ' border="0" alt="" />';
         }
-        
+
         mysql_free_result($result);
     }
-    
+
     return $user_thumb;
 }
 
@@ -99,24 +99,24 @@ function cpgUserLastComment($uid)
     $lastComArray = array(
         'count' => 0
     );
-    
+
     if ($comment_count) {
-    
+
         $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight, msg_author, UNIX_TIMESTAMP(msg_date) as msg_date, msg_body FROM {$CONFIG['TABLE_COMMENTS']} AS c INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.pid = c.pid WHERE msg_id = $lastcom_id";
         $result = cpg_db_query($sql);
-        
+
         if (mysql_num_rows($result)) {
-        
+
             $row = mysql_fetch_assoc($result);
-            
+
             $pic_url = get_pic_url($row, 'thumb');
-            
+
             if (!is_image($row['filename'])) {
                 $image_info = cpg_getimagesize(urldecode($pic_url));
                 $row['pwidth'] = $image_info[0];
                 $row['pheight'] = $image_info[1];
             }
-            
+
             $image_size = compute_img_size($row['pwidth'], $row['pheight'], $CONFIG['thumb_width']);
 
             $lastcom = '<img src="' . $pic_url . '" class="image"' . $image_size['geom'] . ' border="0" alt="" />';
@@ -128,10 +128,10 @@ function cpgUserLastComment($uid)
                 'count'    => $comment_count,
             );
         }
-        
+
         mysql_free_result($result);
     }
-    
+
     return $lastComArray;
 }
 
@@ -207,7 +207,7 @@ function make_form($form_param, $form_data)
     global $CONFIG, $lang_register_php;
 
     $loopCounter = 0;
-    
+
     foreach ($form_param as $element) {
 
         if ($loopCounter / 2 == floor($loopCounter / 2)) {
@@ -217,9 +217,9 @@ function make_form($form_param, $form_data)
         }
 
         switch ($element[0]) {
-        
+
         case 'label':
-        
+
             echo <<<EOT
     <tr>
         <td colspan="2" class="{$cellStyle}" valign="top">
@@ -231,11 +231,11 @@ EOT;
             break;
 
         case 'text':
-        
+
             if ($form_data[$element[1]] == '') {
                 break;
             }
-            
+
             echo <<<EOT
     <tr>
         <td width="40%" class="{$cellStyle}" height="25" valign="top">
@@ -249,13 +249,13 @@ EOT;
 EOT;
 
             break;
-            
+
         case 'input':
-        
+
             $value = $form_data[$element[1]];
 
             if ($element[2]) {
-            
+
                 echo <<< EOT
     <tr>
         <td width="40%" class="{$cellStyle}" height="25" valign="top">
@@ -269,15 +269,15 @@ EOT;
 
 EOT;
             }
-            
+
             break;
 
         case 'textarea':
-        
+
             $value = $form_data[$element[1]];
 
             if ($element[2]) {
-            
+
                 echo <<< EOT
         <tr>
             <td width="40%" class="{$cellStyle}"  height="25" valign="top">
@@ -291,11 +291,11 @@ EOT;
 
 EOT;
             }
-            
+
             break;
 
         case 'password':
-        
+
             echo <<< EOT
     <tr>
         <td width="40%" class="{$cellStyle}" valign="top">
@@ -308,13 +308,13 @@ EOT;
 
 EOT;
             break;
-            
+
         case 'thumb':
-        
+
             $value = $form_data[$element[1]];
 
             if ($value) {
-            
+
                 echo <<< EOT
     <tr>
         <td valign="top" colspan="2" class="{$cellStyle}" align="center">
@@ -329,13 +329,13 @@ EOT;
     </tr>
 EOT;
             }
-            
+
             break;
 
         default:
             cpg_die(CRITICAL_ERROR, 'Invalid action for form creation ' . $element[0], __FILE__, __LINE__);
         }
-      
+
         $loopCounter++;
     }
 }
@@ -396,7 +396,7 @@ if ($superCage->post->keyExists('change_profile') && USER_ID && UDB_INTEGRATION 
 
     $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET user_profile1 = '$profile1', user_profile2 = '$profile2', user_profile3 = '$profile3', user_profile4 = '$profile4', user_profile5 = '$profile5', user_profile6 = '$profile6'" . (($CONFIG['allow_email_change'] || GALLERY_ADMIN_MODE) && !$error ? ", user_email = '$email'" : "") . " WHERE user_id = '" . USER_ID . "'";
     $result = cpg_db_query($sql);
-    
+
     CPGPluginAPI::action('profile_submit_form', null);
 
     $title = sprintf($lang_register_php['x_s_profile'], stripslashes(USER_NAME));
@@ -427,7 +427,7 @@ if ($superCage->post->keyExists('change_password') && USER_ID && UDB_INTEGRATION
     if (utf_strlen($new_pass) < 2) {
         cpg_die(ERROR, $lang_register_php['password_warning1'], __FILE__, __LINE__);
     }
-    
+
     if ($new_pass != $new_pass_again) {
         cpg_die(ERROR, $lang_register_php['password_verification_warning1'], __FILE__, __LINE__);
     }
@@ -437,7 +437,7 @@ if ($superCage->post->keyExists('change_password') && USER_ID && UDB_INTEGRATION
 
     $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET user_password = '$new_pass' WHERE user_id = '" . USER_ID . "' AND BINARY user_password = '$current_pass'";
     $result = cpg_db_query($sql);
-    
+
     if (!mysql_affected_rows($CONFIG['LINK_ID'])) {
         cpg_die(ERROR, $lang_register_php['pass_chg_error'], __FILE__, __LINE__);
     }
@@ -464,14 +464,14 @@ case 'edit_profile' :
     if (!mysql_num_rows($result)) {
         cpg_die(ERROR, $lang_register_php['err_unk_user'], __FILE__, __LINE__);
     }
-    
+
     $user_data = mysql_fetch_assoc($result);
     mysql_free_result($result);
 
     $group_list = '';
-    
+
     if ($user_data['user_group_list'] != '') {
-    
+
         $sql = "SELECT group_name " . "FROM {$CONFIG['TABLE_USERGROUPS']} " . "WHERE group_id IN ({$user_data['user_group_list']}) AND group_id != {$user_data['user_group']} " . "ORDER BY group_name";
         $result = cpg_db_query($sql);
 
@@ -480,10 +480,10 @@ case 'edit_profile' :
         }
 
         mysql_free_result($result);
-        
+
         $group_list = '<br /><em>(' . substr($group_list, 0, -2) . ')</em>';
     }
-    
+
     if ($user_data['user_active'] == 'YES') {
         $user_status = $lang_usermgr_php['status_active'];
     } else {
@@ -495,22 +495,22 @@ case 'edit_profile' :
     } else {
         $disk_usage = 0;
     }
-    
+
     $group_quota = '0';
     $group_quota_separator = '';
-    
+
     if ($user_data['group_quota']) {
         $group_quota = $user_data['group_quota'];
         $group_quota_separator = '/';
     }
-    
+
     if (!GALLERY_ADMIN_MODE && $group_quota > 0) {
         $disk_usage = ceil($disk_usage / 1024);
         $disk_usage_output = theme_display_bar($disk_usage, $group_quota, 300, '', '', $group_quota_separator . $group_quota . $lang_byte_units[1], 'red', 'green');
     } else {
         $disk_usage_output = cpg_format_bytes($disk_usage);
     }
-    
+
     $form_data = array(
         'username'      => $user_data['user_name'],
         'reg_date'      => localised_date($user_data['user_regdate'], $lang_date['register']),
@@ -535,7 +535,7 @@ case 'edit_profile' :
 EOT;
 
     starttable(-1, cpg_fetch_icon('my_profile', 2) . $title, 2);
-    
+
     make_form($edit_profile_form_param, $form_data);
 
     $pic_count = cpgUserPicCount(USER_ID);
@@ -544,7 +544,7 @@ EOT;
     $lastComArray = cpgUserLastComment(USER_ID);
 
     if ($lastComArray['count'] > 0) {
-    
+
         $lastComByText = '&nbsp;<a href="thumbnails.php?album=lastcomby&amp;uid='.$userID.'">'.
                        cpg_fetch_icon('comment_approval', 0, sprintf($lang_register_php['last_comments_detail'], $lang_register_php['you'])).
                        '</a>';
@@ -559,9 +559,9 @@ EOT;
     } else {
         $lastComText = $lang_register_php['none'];
     }
-    
+
     if ($pic_count > 0) {
-    
+
         $lastUploadByText = '&nbsp;<a href="thumbnails.php?album=lastupby&amp;uid='.$userID.'">'.
                         cpg_fetch_icon('last_uploads', 0, sprintf($lang_register_php['last_uploads_detail'], $lang_register_php['you'])).
                         '</a>';
@@ -573,7 +573,7 @@ EOT;
     } else {
         $lastUploadText = $lang_register_php['none'];
     }
-    
+
     echo <<< EOT
 <tr>
     <td align="left" valign="top" class="tableb tableb_alternate">
@@ -616,11 +616,11 @@ EOT;
 </tr>
 EOT;
     endtable();
-    
+
     list($timestamp, $form_token) = getFormToken();	
     echo "<input type=\"hidden\" name=\"form_token\" value=\"{$form_token}\" />
     <input type=\"hidden\" name=\"timestamp\" value=\"{$timestamp}\" /></form>";
-    
+
     if ($CONFIG['allow_user_account_delete'] != 0) { // user is allowed to delete his account --- start
 
         print <<< EOT
@@ -681,7 +681,7 @@ EOT;
         echo "<input type=\"hidden\" name=\"form_token\" value=\"{$form_token}\" />
         <input type=\"hidden\" name=\"timestamp\" value=\"{$timestamp}\" /></form>";
     } // user is allowed to delete his account --- end
-    
+
     pagefooter();
 
     break;
@@ -699,7 +699,7 @@ case 'change_pass' :
 
     $title = $lang_register_php['change_pass'];
     pageheader($title);
-    
+
     echo <<<EOT
      <form name="cpgform" id="cpgform" method="post" action="{$CPG_PHP_SELF}">
 EOT;
@@ -728,9 +728,9 @@ default:
 
     $user_data = $cpg_udb->get_user_infos($uid);
     $user_thumb = cpgUserThumb($uid);
-    
+
     $result = cpg_db_query("SELECT null FROM {$CONFIG['TABLE_BANNED']} WHERE user_id = '$uid' AND brute_force = 0 LIMIT 1");
-    
+
     if (mysql_num_rows($result)) {
         $user_status = $lang_register_php['banned'];
     } elseif (isset($user_data['user_active']) && $user_data['user_active'] == 'YES') {
@@ -740,7 +740,7 @@ default:
     } else {
         $user_status = '';
     }
-    
+
     if ($user_thumb != '') {
         $user_thumb = '<td width="50%" valign="top" align="center">'
                   . '<a href="thumbnails.php?album=lastupby&amp;uid=' . $uid . '">'
@@ -748,9 +748,9 @@ default:
                   . $user_thumb
                   . '</a></td>';
     }
-    
+
     $lastComArray = cpgUserLastComment($uid);
-    
+
     if ($lastComArray['count'] != 0) {
             $lastcom = '<td width="50%" valign="top" align="center">'
                 . '<a href="thumbnails.php?album=lastcomby&amp;uid=' . $uid . '">'
@@ -789,14 +789,14 @@ default:
 
     $title = sprintf($lang_register_php['x_s_profile'], $user_data['user_name']);
     pageheader($title);
-    
+
     // Displays the profile of any user
 
     starttable(-1, cpg_fetch_icon('my_profile', 2) . $title, 2);
     $profile_data = CPGPluginAPI::filter('profile_add_data', array ( 0 => $display_profile_form_param, 1 => $form_data ));
     make_form($display_profile_form_param, $form_data);
     endtable();
-    
+
 
     pagefooter();
 

@@ -580,7 +580,7 @@ Changelog
 2009-06-13 [M] Remove image_processor.php {Nibbler}
 2009-06-12 [B] Fixed checkAll function calling who doesn't work in reviewcom.php  {Frantz}
 2009-06-11 [C] Added help icons and alternative layout to category manager {GauGau}
-2009-06-10 [A] Added parameter to starttable function to allow easy adding of alternating row colors in the future {GauGau} 
+2009-06-10 [A] Added parameter to starttable function to allow easy adding of alternating row colors in the future {GauGau}
 2009-06-09 [C] Replaced hard-coded lang strings with lang variables ind delete.php {Frantz}
 2009-06-09 [A] Added support for HTML5 <video> and <audio> tags {Nibbler}
 2009-06-09 [O] Changed keyword-insertion from list from pop-up to greybox {GauGau}
@@ -672,7 +672,7 @@ Changelog
 2009-04-16 [D] Added expandable detail boxes to documentation {GauGau}
 2009-04-13 [B] Fixed minibrowser when magic_quotes is on {Paver}
 2009-04-12 [O] Replaced sidebar library dtree with treeview plugin for jquery {GauGau}
-2009-03-31 [O] Removed css class variants that hardly made a difference to the original classes {GauGau} 
+2009-03-31 [O] Removed css class variants that hardly made a difference to the original classes {GauGau}
 2009-03-31 [M] Upgraded SwfUpload to v2.2.0.1 Stable version. {Abbas}
 2009-03-31 [D] Added document about style.css (work in progress) {GauGau}
 2009-03-30 [M] Upgraded jquery to version 1.3.2 {Abbas}
@@ -705,7 +705,7 @@ Changelog
 2009-01-10 [A] Implemented admin tool to convert keyword separator {Paver}
 2009-01-10 [O] Added heredoc to install.php and cleaned up code {Paver}
 2009-01-10 [C] Corrected non Internationalized string in jquery.sort.js {Frantz}
-2009-01-10 [C] Fixed typo in french.php and corrected the file accordingly to the english.php {Frantz} 
+2009-01-10 [C] Fixed typo in french.php and corrected the file accordingly to the english.php {Frantz}
 2009-01-10 [B] Fixed missing 'abbr' field for languages table in basic.sql {Paver}
 2009-01-09 [O] Cleaned up album/picture manager and language files {Paver}
 2009-01-08 [A] Added language keys for admin tool to convert keyword separator {Paver}
@@ -750,7 +750,7 @@ Changelog
 2008-12-18 [O] Replace inline js of util.php & db_ecard.php with external jQuery code {SaWey}
 2008-12-18 [B] Fixed the merging of upload mechanisms array {Abbas}
 2008-12-18 [M] Removed api folder {GauGau}
-2008-12-18 [B] Fixed filmstrip work for odd number of thumbnail in filmstrip 
+2008-12-18 [B] Fixed filmstrip work for odd number of thumbnail in filmstrip
 2008-12-18 [A] Added 6 new plugin hooks to be able to add custom CAPTCHA {SaWey}
 2008-12-17 [O] Added code to disable the browse button if no album is selected on upload page {Abbas}
 2008-12-17 [O] Added the disabled button to the swfupload button sprite image {Abbas}

@@ -8,7 +8,7 @@
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
-  
+
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
@@ -29,12 +29,12 @@
 	
 	------------
 	
-	This program is free software; you can redistribute it and/or modify it under the terms of 
-	the GNU General Public License as published by the Free Software Foundation; either version 2 
+	This program is free software; you can redistribute it and/or modify it under the terms of
+	the GNU General Public License as published by the Free Software Foundation; either version 2
 	of the License, or (at your option) any later version.
 
-	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
-	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
+	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	See the GNU General Public License for more details. http://www.gnu.org/copyleft/gpl.html
 */
 //================================================================================================
@@ -97,7 +97,7 @@ function formatPanasonicData($type,$tag,$intel,$data) {
 			else if($data == 16) $data = gettext("1-area-focusing");
 			else if($data == 1) $data = gettext("Spot-focusing");
 			else $data = "Unknown (".$data.")";
-		} 
+		}
 	
 	} else if($type=="URATIONAL" || $type=="SRATIONAL") {
 		$data = unRational($data,$type,$intel);
@@ -172,7 +172,7 @@ function formatPanasonicData($type,$tag,$intel,$data) {
 		}
 		if($tag=="0023") { //White Balance Bias
 			$data=$data." EV";
-		} 
+		}
 		if($tag=="0024") { //Flash Bias
 			$data = $data;
 		}
@@ -221,7 +221,7 @@ function formatPanasonicData($type,$tag,$intel,$data) {
 		}
 		if($tag=="0036") { //Travel Day
 			$data=$data;
-		} 
+		}
 	} else if($type=="UNDEFINED") {
 
 	} else {

@@ -43,7 +43,7 @@
                  <li><a href="#errors_unhandled">Unhandled errors</a></li>
              </ul>
     </p>
-    
+
     <a name="errors_soft"></a><h3>Soft Errors<a href="#errors_soft" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <p>Soft errors usually happen if you (or the end user) will make a handling mistake. Coppermine will display an error message, but you can continue to browse the gallery. The soft errors are fully localized (i.e. they will be displayed in the language the user has chosen), so the programmers of Coppermine have (more or less) anticipated that such an error may happen under certain circumstances.</p>
     <div class="cpg_example">
@@ -51,12 +51,12 @@
     </div>
     <p>If you get a soft error and you're not sure what to do (maybe because the error message doesn't mean much to you), read up the corresponding section of this documentation and search the support board, as it is very likely that someone else has had the same issue you had.</p>
     <p>In some sections of the documentation there are trouble shooting tipps that you should read up first if you get an error message, for example when you have issues with <a href="upload_troubleshooting.htm#upload_trouble">uploads</a> or <a href="bridging.htm#integrating_support_start">bridging</a>.</p>
-    
+
     <a name="errors_hard"></a><h3>Hard Errors<a href="#errors_hard" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <p>Hard errors are messages that won't go away, usually because something is broken and needs fixing. This is usually the case if something is wrong with the database. As a result, you will see the dreaded &quot;<a href="#errors_fatal">Fatal Error</a>&quot; message that usually doesn't mean much to unexperienced users.</p>
     <p>If you obtain a hard error, you should act immediately and fix the error message <acronym title="as soon as possible">asap</acronym>.</p>
     <p>Hard errors usually indicate that something is wrong which the programmers of coppermine could not foresee, that's why only a generic error message is being displayed. Read on to find out what you need to do.</p>
-    
+
     <a name="errors_unhandled"></a><h3>Unhandled Errors<a href="#errors_unhandled" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <p>Unhandled errors are the ones that usually are most tricky to solve, as they make the application coppermine crash in mid-air, without a meaningfull error message that could tell users what is wrong. This is usually the case if you get a blank page or just a template error.</p>
 </div>
@@ -68,7 +68,7 @@
     <a name="errors_debug_mode_config"></a><h3>Enabling debug_mode in Config<a href="#errors_debug_mode_config" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <p>To enable debug_mode, go to coppermine's config and enable debug_mode there by expanding the section &quot;<a href="configuration.htm#admin_misc">Miscellaneous settings</a>&quot;, scroll to the bottom of the screen and select &quot;<a href="configuration.htm#debug_mode">Enable debug mode</a>&quot; there. Leave &quot;<a href="configuration.htm#admin_misc_debug_notices">Notices display</a>&quot; turned off.</p>
     <p>In some cases, you might not be able to access the config page any longer to enable debug_mode as suggested in this section, so you will have to enable debug_mode manually. Refer to the next section to find out how this is being done.</p>
-    
+
     <a name="errors_debug_mode_manual"></a><h3>Manually enabling debug_mode<a href="#errors_debug_mode_manual" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <p>If you need to enable debug_mode, but can no longer access the config screen (maybe because of the fatal error that stops the config page from displaying or maybe because your admin login doesn't work as expected no longer), you can enable debug_mode manually as well.</p>
     <p>To accomplish this, you will need a third-party tool like <a href="http://phpmyadmin.net" rel="external" class="external">phpMyAdmin</a> to directly manipulate your database. Many webhosts provide phpMyAdmin or a similar tool in their webcontrol panel. You may want to take a look there or ask your webhost if they provide it to you for free. If they don't, you should install that application, as it is helpful not only for troubleshooting coppermine, but all kinds of database administration purposes. Be aware though that this tool is very powerfull and directly manipulates the database and can therefore delete or otherwise damage your database if not used properly. Among other things, phpMyAdmin can be used to back up your database as well. Please refer to the phpMyAdmin documentation on all questions related to the install, setup and use of phpMyAdmin - the coppermine support board definitely is not the right place to ask questions how to set up phpMyAdmin.</p>
@@ -87,7 +87,7 @@
     </ul>
     <p>Now you can use the actual error message that indicates what is wrong to troubleshoot - fix the error if you can. If you can't fix it by yourself, search the coppermine support board for the error message (the generic part, not the specific part that only applies to your database/site). It is very likely that someone else used to have the same issues you experience - heed the advice given on the thread that describes your error message.</p>
     <p>Once you're done and the error message has gone away, don't forget to turn debug_mode off again. If your gallery is fully operational again (it should be after having fixed the error), you can go to coppermine's config and turn debug_mode off. If you can't access coppermine's config (maybe because you have forgotten your admin account details), use the same method described above to turn debug_mode off manually (using phpMyAdmin): browse coppermine's config table, search for &quot;debug_mode&quot;, edit that entry and change &quot;<tt class="code">1</tt>&quot; back to &quot;<tt class="code">0</tt>&quot;.</p>
-    
+
     <a name="errors_debug_mode_off"></a><h3>Turning debug_mode off<a href="#errors_debug_mode_off" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <p>The debug_mode output itself is <strong>not</strong> an error message. Just the debug_output being there without an actual error message showing through the debug_output doesn't mean that there is something wrong: by default, debug_mode is off. If you don't have any particular problems with your gallery and there are no actual errors to fix, turn debug_mode off in config or manually, just the same way you turned it on in the first place.</p>
 </div>
@@ -156,7 +156,7 @@
       </tr>
     </table>
     <p>For a complete list of mySQL error messages shining through Coppermine's output, refer to <a href="http://dev.mysql.com/doc/refman/5.1/en/error-messages-server.html" rel="external" class="external">MySQL 5.1 Reference Manual &rarr; B Errors, Error Codes, and Common Problems &rarr; B.3 Server Error Codes and Messages</a>.</p>
-    
+
     <a name="common_php_errors"></a><h3>Common PHP errors<a href="#commonPHPerrors" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <p>There are a lot of people (especially PHP newbies) that post questions like <tt class="code">I get the error &quot;Parse error: parse error in XXX&quot;</tt> and don't know what to do about it. That's why I translated this list of common errors (and a solution how to fix them) from the original german article in <a href="http://www.drweb.de/" rel="external" class="external">Dr. Web</a></p>
     <table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra">
@@ -254,10 +254,10 @@
         </td>
       </tr>
      </table>
-    
+
     <a name="errors_messages_upload"></a><h3>Upload-related error messages<a href="#errors_messages_upload" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <p>There is an entire sub-section dedicated to <a href="upload_troubleshooting.htm#upload_error_messages">upload-related error messages</a> on the <a href="upload_troubleshooting.htm#upload_trouble">upload troubleshooting</a> page.</p>
-    
+
     <a name="errors_messages_webserver"></a><h3>Webserver response codes<a href="#errors_messages_webserver" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     Most internet sites are driven by Apache webservers, that's why the term &quot;Apache server response codes&quot; is quite well known as well. Most web surfers are familiar with the dreaded <em>404 not found</em> and <em>500 internal server error</em> messages. In most cases, those errors are not related to Coppermine in itself. Below is a list of apache webserver response codes and an explanation of those codes. Please understand that a response code in itself doesn not mean that there is something wrong - most codes are silent, i.e. an end user doesn't see them, as they are part of the handshake between the server and the client. The list below is incomplete and only shows actual error messages.
     <p class="cpg_message_info">Please understand that this section of the docs goes unsupported on the Coppermine support board - if you need more details on the webserver response codes, read up the excellent <a href="http://httpd.apache.org/docs/" rel="external" class="external">apache documentation</a> or the <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes" rel="external" class="external">Wikipedia list of HTTP status codes</a>.</p>
@@ -383,7 +383,7 @@
             <td class="valign_top">This status code, while used by many servers, is not specified in any RFCs. Apache bw/limited extension.</td>
             <td class="valign_top">Ask your webhost for support!</td>
         </tr>
-    </table> 
+    </table>
 </div>
 
 <div id="doc_footer">

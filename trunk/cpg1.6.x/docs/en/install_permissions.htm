@@ -212,17 +212,17 @@ Additionally, Coppermine needs <em>write access</em> to a number of files and fo
         </li>
     </ul>
     <a name="chmod_end"></a>
-    
-    
-    
+
+
+
     <a name="apache_windows"></a><h3>Apache on Windows<a href="#apache_windows" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <p>You have to understand that there is no such thing as CHMOD on Windows operating systems - this command is available on Unix/Linux only, even if your FTP application displays a CHMOD option. If you try to apply CHMOD on Windows, the command will simply be ignored and do nothing. However, there are permissions on Windows as well.</p>
     <p>The apache webserver service runs under a particular user - if you have full access to the server, check the services control to find out which one it is. If you can't do this, ask your webhost.</p>
     <p>As a temporary workaround, set permissions on folder and file level as suggested in the section <a href="#iis">IIS on Windows</a>, but not for the IUSR (which only exists on IIS), but for "everyone". However, allowing "everyone" to have read, write and execute permissions might be a security risk and is not recommended at all.</p>
     <a name="apache_windows_end"></a>
-    
-    
-    
+
+
+
     <a name="iis"></a><h3>IIS on Windows<a href="#iis" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <p>Pre-requisites: you will need full admin privileges over your server to execute this process. If you do not run the webserver yourself, your webhost has probably set up a web-based interface to let you change permissions. If you're not sure, contact your webhost.</p>
     <p>The dialogs may differ slightly depending on the Windows version you have:</p>

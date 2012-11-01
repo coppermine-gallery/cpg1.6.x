@@ -80,7 +80,7 @@ if ($superCage->get->keyExists('search')) {
             unset($USER['search']['params'][$key]);
         }
     }
-    
+
     //here again the use of getRaw, but it will be sanitized in search.inc.php
     $USER['search']['search'] = utf_replace($superCage->get->getRaw('search'));
     $USER['search']['search'] = str_replace('&quot;', '\'', $USER['search']['search']);
@@ -134,7 +134,7 @@ if (isset($album) && is_numeric($album)) {
 
     // Meta albums, we need to restrict the albums to the current category
     // except lastupby and lastcomby as CPG currently restricts these to the user's albums
-} elseif (isset($cat) && $album != 'lastupby' && $album != 'lastcomby') { 
+} elseif (isset($cat) && $album != 'lastupby' && $album != 'lastcomby') {
 
     if ($cat < 0) {
         $result = cpg_db_query("SELECT category, title, aid, keyword, description, alb_password_hint FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid = " . (- $cat));
@@ -145,7 +145,7 @@ if (isset($album) && is_numeric($album)) {
         }
         mysql_free_result($result);
         get_meta_album_set($cat);
-        
+
         breadcrumb($actual_cat, $breadcrumb, $breadcrumb_text);
         $CURRENT_CAT_NAME = $CURRENT_ALBUM_DATA['title'];
         $CURRENT_ALBUM_KEYWORD = $CURRENT_ALBUM_DATA['keyword'];
@@ -222,7 +222,7 @@ function form_albpw()
     $superCage = Inspekt::makeSuperCage();
 
     starttable('-1', $lang_thumb_view['enter_alb_pass'], 2);
-    
+
     if ($superCage->post->keyExists('validate_album')) {
         $login_failed = "<tr><td class='tableh2' colspan='2' align='center'>
                                <span style='color:red'>{$lang_thumb_view['invalid_pass']}</span></td></tr>

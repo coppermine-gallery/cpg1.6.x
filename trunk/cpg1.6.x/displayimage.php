@@ -39,7 +39,7 @@ if (USER_ID && (USER_ACCESS_LEVEL <= 1)) {
 }
 
 if (!$superCage->get->keyExists('slideshow')) {
-    js_include('js/displayimage.js');   
+    js_include('js/displayimage.js');
 }
 
 if ($CONFIG['enable_smilies']) {
@@ -76,13 +76,13 @@ function sanitize_data(&$value, $key)
 function html_picture_menu()
 {
     global $lang_display_image_php, $CURRENT_PIC_DATA, $CURRENT_ALBUM_DATA, $CONFIG;
-    
+
     if ((USER_ADMIN_MODE && $CURRENT_ALBUM_DATA['category'] == FIRST_USER_CAT + USER_ID) || ($CONFIG['users_can_edit_pics'] && $CURRENT_PIC_DATA['owner_id'] == USER_ID && USER_ID != 0) || GALLERY_ADMIN_MODE) {
 
         $delete_icon = cpg_fetch_icon('delete', 1);
         $edit_icon   = cpg_fetch_icon('edit', 1);
-        $rotate_icon = cpg_fetch_icon('rotate_ccw', 1); 
-        
+        $rotate_icon = cpg_fetch_icon('rotate_ccw', 1);
+
         list($timestamp, $form_token) = getFormToken();
         $picmenu = <<< EOT
     <div class="buttonlist align_right">
@@ -129,17 +129,17 @@ function html_picinfo()
 
     $info[$lang_common['filename']] = htmlspecialchars($CURRENT_PIC_DATA['filename']);
     $info[$lang_picinfo['Album name']] = '<span class="alblink">' . $owner_link . $ipinfo . '<a href="thumbnails.php?album=' . $CURRENT_PIC_DATA['aid'] . '">' . $CURRENT_ALBUM_DATA['title'] . '</a></span>';
-    
+
     $votedetailsunhidetoggle_onload_added = false;
-    
+
     if ($CURRENT_PIC_DATA['votes'] > 0) {
-    
+
         if (defined('THEME_HAS_RATING_GRAPHICS')) {
             $prefix = $THEME_DIR;
         } else {
             $prefix = '';
         }
-        
+
         if (GALLERY_ADMIN_MODE) {
             $width = 800;
             $height = 700;
@@ -147,19 +147,19 @@ function html_picinfo()
             $width = 400;
             $height = 250;
         }
-        
+
         if ($CONFIG['vote_details'] == 1) {
             $stat_link = "stat_details.php?type=vote&amp;pid={$CURRENT_PIC_DATA['pid']}&amp;sort=sdate&amp;dir=&amp;sdate=1&amp;ip=1&amp;rating=1&amp;referer=0&amp;browser=0&amp;os=0&amp;uid=1";
             $detailsLink_votes = '(<a href="' . $stat_link . '" class="greybox">' . $lang_picinfo['show_details'] . '</a>)';
         } else {
             $detailsLink_votes = '';
         }
-        
+
         //calculate required amount of stars in picinfo
         $i = 1;
         $rating = round(($CURRENT_PIC_DATA['pic_rating'] / 2000) / (5 / $CONFIG['rating_stars_amount']));
         $rating_images = '';
- 
+
         while ($i <= $CONFIG['rating_stars_amount']) {
 
             if ($i <= $rating) {
@@ -167,10 +167,10 @@ function html_picinfo()
             } else {
                 $rating_images .= '<img src="' . $prefix . 'images/rate_empty.png" align="left" alt="' . $rating . '"/>';
             }
-            
+
             $i++;
         }
-        
+
         $info[sprintf($lang_picinfo['Rating'], $CURRENT_PIC_DATA['votes'])] = $rating_images . $detailsLink_votes;
     }
 
@@ -206,56 +206,56 @@ function html_picinfo()
 
     // Read the iptc and EXIF data from original pic (if watermarked)
     $metadata_path = file_exists($path_to_orig_pic) ? $path_to_orig_pic : $path_to_pic;
-    
+
     if (is_image($CURRENT_PIC_DATA['filename'])) {
         if ($CONFIG['read_exif_data']) {
-        
+
             $exif = exif_parse_file($metadata_path, $CURRENT_PIC_DATA['pid']);
-        
+
             if (is_array($exif)) {
                 array_walk($exif, 'sanitize_data');
                 $info = array_merge($info, $exif);
             }
         }
-        
+
         // Read the iptc data
         if ($CONFIG['read_iptc_data']) {
-              
+
             $iptc = get_IPTC($metadata_path);
-        
+
             if (is_array($iptc)) {
-            
+
                 array_walk($iptc, 'sanitize_data');
-                
+
                 if (!empty($iptc['Title'])) {
                     $info[$lang_picinfo['iptcTitle']] = $iptc['Title'];
                 }
-                
+
                 if (!empty($iptc['Copyright'])) {
                     $info[$lang_picinfo['iptcCopyright']] = $iptc['Copyright'];
                 }
-                
+
                 if (!empty($iptc['Keywords'])) {
                     $info[$lang_picinfo['iptcKeywords']] = implode(' ', $iptc['Keywords']);
                 }
-                
+
                 if (!empty($iptc['Category'])) {
                     $info[$lang_picinfo['iptcCategory']] = $iptc['Category'];
                 }
-                
+
                 if (!empty($iptc['SubCategories'])) {
                     $info[$lang_picinfo['iptcSubCategories']] = implode(' ', $iptc['SubCategories']);
                 }
             }
         }
     }
-    
+
     // Create the absolute URL for display in info
     $info[$lang_picinfo['URL']] = '<a href="' . $CONFIG["ecards_more_pic_target"] . (substr($CONFIG["ecards_more_pic_target"], -1) == '/' ? '' : '/') .basename($CPG_PHP_SELF) . "?pid={$CURRENT_PIC_DATA['pid']}" . '" >' . $CONFIG["ecards_more_pic_target"] . (substr($CONFIG["ecards_more_pic_target"], -1) == '/' ? '' : '/') . basename($CPG_PHP_SELF) . "?pid={$CURRENT_PIC_DATA['pid']}" . '</a>';
 
     // Create the add to fav link
     $ref = $REFERER ? "&amp;referer=$REFERER" : '';
-    
+
     if (!in_array($CURRENT_PIC_DATA['pid'], $FAVPICS)) {
         $info[$lang_picinfo['addFavPhrase']] = "<a href=\"addfav.php?pid=" . $CURRENT_PIC_DATA['pid'] . $ref . "\" >" . $lang_picinfo['addFav'] . '</a>';
     } else {
@@ -309,9 +309,9 @@ get_meta_album_set($cat);
 if (!$superCage->get->keyExists('fullsize') && ($pos < 0 || $pid > 0)) {
 
     $pid = ($pos < 0) ? -$pos : $pid;
-    
+
     if (!$album) {
-        
+
         $result = cpg_db_query("SELECT aid FROM {$CONFIG['TABLE_PICTURES']} AS p WHERE pid='$pid' $FORBIDDEN_SET LIMIT 1");
 
         if (mysql_num_rows($result) == 0) {
@@ -330,32 +330,32 @@ if (!$superCage->get->keyExists('fullsize') && ($pos < 0 || $pid > 0)) {
     }
 
     $album = (!$album) ? $row['aid'] : $album;
-    
+
     // attempt to determine the position directly
     $pos = get_pic_pos($album, $pid);
-    
+
     if ($pos === FALSE) {
-    
+
         $pic_data = get_pic_data($album, $pic_count, $album_name, -1, -1, false);
-        
+
         for ($pos = 0; $pic_data[$pos]['pid'] != $pid && $pos < $pic_count; $pos++);
-        
+
         reset($pic_data);
-        
+
         $CURRENT_PIC_DATA = $pic_data[$pos];
-    
+
     } else {
-    
+
         // load current pic details
         $pic_data = get_pic_data($album, $pic_count, $album_name, $pos, 1, false);
         $CURRENT_PIC_DATA = $pic_data[0];
-  
+
         // load prev, next, start and end for the navbar
         if ($pos > 0) {
             $prev = get_pic_data($album, $pic_count, $album_name, $pos - 1, 1, false, 'pidonly');
             $pic_data[$pos - 1] = $prev[0];
         }
-  
+
         if ($pos < ($pic_count -1)) {
             $next = get_pic_data($album, $pic_count, $album_name, $pos + 1, 1, false, 'pidonly');
             $pic_data[$pos + 1] = $next[0];
@@ -363,7 +363,7 @@ if (!$superCage->get->keyExists('fullsize') && ($pos < 0 || $pid > 0)) {
 
         $start = get_pic_data($album, $pic_count, $album_name, 0, 1, false, 'pidonly');
         $pic_data[0] = $start[0];
-     
+
         $end = get_pic_data($album, $pic_count, $album_name, $pic_count - 1, 1, false, 'pidonly');
         $pic_data[$pic_count - 1] = $end[0];
     }
@@ -371,7 +371,7 @@ if (!$superCage->get->keyExists('fullsize') && ($pos < 0 || $pid > 0)) {
     //$pic_data = get_pic_data($album, $pic_count, $album_name, $pos, 1, false);
     //We must get all the data here as well, otherwise the prev/next breaks.
     $pic_data = get_pic_data($album, $pic_count, $album_name, -1, -1, false);
- 
+
     if ($pic_count == 0) {
         cpg_die(INFORMATION, $lang_errors['no_img_to_display'], __FILE__, __LINE__);
     } elseif (count($pic_data) == 0 && $pos >= $pic_count) {
@@ -379,7 +379,7 @@ if (!$superCage->get->keyExists('fullsize') && ($pos < 0 || $pid > 0)) {
         $human_pos = $pos + 1;
         $pic_data = get_pic_data($album, $pic_count, $album_name, $pos, 1, false);
     }
- 
+
     $CURRENT_PIC_DATA = $pic_data[$pos];
 }
 
@@ -410,7 +410,7 @@ if ($superCage->get->keyExists('film_strip')) {
 }
 
 /** if there is value for ajax_show key in GET then it means this is an ajax call to display sideshow. */
-if ($superCage->get->keyExists('ajax_show')) {  
+if ($superCage->get->keyExists('ajax_show')) {
     display_slideshow($pos, $ajax_show);
     exit;
 }
@@ -425,10 +425,10 @@ if (isset($CURRENT_PIC_DATA)) {
     if (!mysql_num_rows($result)) {
         cpg_die(CRITICAL_ERROR, sprintf($lang_errors['pic_in_invalid_album'], $CURRENT_PIC_DATA['aid']), __FILE__, __LINE__);
     }
-    
+
     $CURRENT_ALBUM_DATA = mysql_fetch_assoc($result);
     mysql_free_result($result);
-    
+
     if (is_numeric($album)) {
         $cat = - $album;
         $actual_cat = $CURRENT_ALBUM_DATA['category'];
@@ -439,7 +439,7 @@ if (isset($CURRENT_PIC_DATA)) {
         breadcrumb($actual_cat, $breadcrumb, $breadcrumb_text);
     }
 }
-    
+
 if ($superCage->get->keyExists('fullsize')) {
 
     $CURRENT_PIC_DATA = mysql_fetch_assoc(cpg_db_query("SELECT * FROM {$CONFIG['TABLE_PICTURES']} AS p " . "WHERE pid='$pid' $FORBIDDEN_SET"));
@@ -448,15 +448,15 @@ if ($superCage->get->keyExists('fullsize')) {
 } elseif ($superCage->get->keyExists('slideshow')) {
 
     $slideshow = $superCage->get->getInt('slideshow');
-    set_js_var('run_slideshow', 'true'); 
+    set_js_var('run_slideshow', 'true');
     display_slideshow($pos);
-    
+
 } else {
 
     if (!$pos && !$pid) {
         cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
     }
-    
+
     $picture_title = $CURRENT_PIC_DATA['title'] ? $CURRENT_PIC_DATA['title'] : strtr(preg_replace("/(.+)\..*?\Z/", "\\1", htmlspecialchars($CURRENT_PIC_DATA['filename'])), "_", " ");
 
     $nav_menu = theme_html_img_nav_menu();
@@ -464,9 +464,9 @@ if ($superCage->get->keyExists('fullsize')) {
     $votes = theme_html_rating_box();
     $pic_info = html_picinfo();
     $comments = theme_html_comments($CURRENT_PIC_DATA['pid']);
-    
+
     $meta_keywords = '';
-    
+
     if ($CURRENT_PIC_DATA['keywords']) {
         $meta_keywords .= '<meta name="keywords" content="' . str_replace($CONFIG['keyword_separator'], ',', $CURRENT_PIC_DATA['keywords']) . '" />' . $LINEBREAK;
     }
@@ -477,7 +477,7 @@ if ($superCage->get->keyExists('fullsize')) {
     }
 
     $meta_keywords .= $meta_nav;
-    
+
     // Display Filmstrip if the album is not search -- commented out due to thread ID 64312
     //if ($album != 'search') {
         $film_strip = display_film_strip($album, (isset($cat) ? $cat : 0), $pos, true);
@@ -486,14 +486,14 @@ if ($superCage->get->keyExists('fullsize')) {
     // Set the picture id for use in js
     set_js_var('picture_id', $CURRENT_PIC_DATA['pid']);
     pageheader($album_name . ' - ' . $picture_title, $meta_keywords, false);
-    
+
     // Display Breadcrumbs
     if ($breadcrumb && strpos($CONFIG['main_page_layout'], 'breadcrumb') !== false) {
         theme_display_breadcrumb($breadcrumb, $cat_data);
     }
 
     CPGPluginAPI::action('post_breadcrumb', null);
-    
+
     theme_display_image($nav_menu, $picture, $votes, $pic_info, $comments, $film_strip);
 
     pagefooter();

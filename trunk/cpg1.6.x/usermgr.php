@@ -140,7 +140,7 @@ function list_users($search = '')
     global $USER_DATA;
 
     $superCage = Inspekt::makeSuperCage();
-    
+
     list($timestamp, $form_token) = getFormToken();
 
     $number_of_columns_minus_one = $number_of_columns - 1;
@@ -179,7 +179,7 @@ function list_users($search = '')
     $user_per_page = 25;
     $page = $superCage->get->testInt('page') ? $superCage->get->getInt('page') : 1;    $lower_limit = ($page-1) * $user_per_page;
     $lower_limit = ($page-1) * $user_per_page;
-    
+
     if ($search) {
         $username = '&amp;username='.$search;
 
@@ -196,7 +196,7 @@ function list_users($search = '')
 
     $tab_tmpl = $template_tab_display;
     $tab_tmpl['page_link'] = strtr($tab_tmpl['page_link'], array('{LINK}' => 'usermgr.php?sort=' . $sort . '&amp;page=%d'.$username));
-    $tab_tmpl['left_text'] = strtr($tab_tmpl['left_text'], array('{LEFT_TEXT}' => $lang_usermgr_php['u_user_on_p_pages']));  
+    $tab_tmpl['left_text'] = strtr($tab_tmpl['left_text'], array('{LEFT_TEXT}' => $lang_usermgr_php['u_user_on_p_pages']));
 
     $users = $cpg_udb->get_users(
                                   array(
@@ -420,7 +420,7 @@ EOT;
     }
 
     $loop_counter = 0;
-    
+
     // query total number of files uploaded
     $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} LIMIT 1");
     $tempPicCount = mysql_fetch_array($result);
@@ -428,7 +428,7 @@ EOT;
     $totalPictureCount_fmt = cpg_float2decimal($totalPictureCount);
     mysql_free_result($result);
     unset($tempPicCount);
-    
+
     // query total space used
     $result = cpg_db_query("SELECT SUM(total_filesize) FROM {$CONFIG['TABLE_PICTURES']} LIMIT 1");
     $tempSpaceCount = mysql_fetch_array($result);
@@ -436,7 +436,7 @@ EOT;
     $totalSpaceCount_fmt = cpg_format_bytes($totalSpaceCount);
     mysql_free_result($result);
     unset($tempSpaceCount);
-    
+
     // query total number of comments posted
     $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_COMMENTS']} LIMIT 1");
     $tempCommentCount = mysql_fetch_array($result);
@@ -627,7 +627,7 @@ EOT;
 
         $create_new_user_icon = cpg_fetch_icon('add_user', 2);
         list($timestamp, $form_token) = getFormToken();	
-        
+
         echo <<<EOT
                               </select>
                             <select name="delete_files" size="1" class="listbox" style="display:none">
@@ -652,11 +652,11 @@ EOT;
 EOT;
 
         endtable();
-    
+
         echo '</form>';
-    
+
         starttable('100%');
-    
+
 echo <<< EOT
 
         <tr>
@@ -702,7 +702,7 @@ EOT;
     echo CPGPluginAPI::filter('usermgr_footer','');
 
     if ($tabs) {
-        
+
         echo <<<EOT
         <tr>
                 <td colspan="$number_of_columns" style="padding: 0px;">
@@ -716,7 +716,7 @@ EOT;
 
 EOT;
     }
-    
+
     endtable();
 }
 
@@ -816,15 +816,15 @@ EOT;
                     <input type="text" style="width: 100%" name="{$element[1]}" maxlength="{$element[3]}" value="{$user_data[$element[1]]}" class="textinput" />
                     </td>
             </tr>
-    
-    
+
+
 EOT;
                 break;
-    
+
             case 'textarea' :
-    
+
                $value = $user_data[$element[1]];
-    
+
                if ($element[2]) echo <<<EOT
             <tr>
                 <td width="40%" class="{$row_style_class}" height="25" valign="top">
@@ -834,11 +834,11 @@ EOT;
                     <textarea name="{$element[1]}" rows="7" cols="40" class="textinput" style="width: 100%">$value</textarea>
                     </td>
             </tr>
-    
-    
+
+
 EOT;
                 break;
-    
+
             case 'password' :
                 echo <<<EOT
             <tr>
@@ -849,10 +849,10 @@ EOT;
                     <input type="password" style="width: 100%" name="{$element[1]}" maxlength="{$element[3]}" value="" class="textinput" />
                     </td>
             </tr>
-    
+
 EOT;
                 break;
-    
+
             case 'yesno' :
                 $value = $user_data[$element[1]];
                 $yes_selected = ($value == 'YES' || $op == 'new_user') ? 'checked="checked"' : '';
@@ -869,19 +869,19 @@ EOT;
                         <input type="radio" id="no" name="{$element[1]}" value="NO" $no_selected /><label for="no" class="clickable_option">{$lang_common['no']}</label>
                     </td>
             </tr>
-    
+
 EOT;
                 break;
-    
+
             case 'group_list' :
                 $sql = "SELECT group_id, group_name FROM {$CONFIG['TABLE_USERGROUPS']} ORDER BY group_name";
                 $result = cpg_db_query($sql);
                 $group_list = cpg_db_fetch_rowset($result);
                 mysql_free_result($result);
-    
+
                 $sel_group = $user_data[$element[1]];
                 $user_group_list = ($user_data['user_group_list'] == '') ? ',' . $sel_group . ',' : ',' . $user_data['user_group_list'] . ',' . $sel_group . ',';
-    
+
                 echo <<<EOT
             <tr>
                 <td class="{$row_style_class}" valign="top">
@@ -889,7 +889,7 @@ EOT;
             </td>
             <td class="{$row_style_class}" valign="top">
                     <select name="{$element[1]}" class="listbox">
-    
+
 EOT;
                 $group_cb = '';
                 foreach($group_list as $group) {
@@ -906,13 +906,13 @@ EOT;
                             <br />
                             <a href="usermgr.php?op=groups_alb_access&amp;form_token={$form_token}&amp;timestamp={$timestamp}" class="admin_menu">{$lang_usermgr_php['groups_alb_access']}</a>
                             {$assignedGroupsHelp}
-    
+
               </td>
             </tr>
-    
+
 EOT;
                 break;
-    
+
             case 'checkbox':
                 echo <<< EOT
             <tr>
@@ -923,10 +923,10 @@ EOT;
                         <input type="checkbox" id="send_login_data" name="{$element[1]}" value="YES" />
                     </td>
             </tr>
-    
+
 EOT;
                 break;
-    
+
             default:
                 cpg_die(CRITICAL_ERROR, 'Invalid action for form creation ' . $element[0], __FILE__, __LINE__);
         }
@@ -968,7 +968,7 @@ EOT;
 EOT;
     }
     endtable();
-    
+
     echo '</form>';
 }
 
@@ -1047,7 +1047,7 @@ function update_user($user_id)
     cpg_db_query($sql_update);
 
     // Update comments' author name
-    cpg_db_query("UPDATE {$CONFIG['TABLE_COMMENTS']} SET msg_author = '$user_name' WHERE author_id = $user_id");    
+    cpg_db_query("UPDATE {$CONFIG['TABLE_COMMENTS']} SET msg_author = '$user_name' WHERE author_id = $user_id");
 
     // If send login data checkbox is checked then send the username and password to the user in an email
     if ($superCage->post->keyExists('send_login_data') && trim($user_email)) {
@@ -1065,13 +1065,13 @@ function update_user($user_id)
     } elseif ($user_data['user_actkey'] && $user_data['user_active'] == 'NO' && $user_active == 'YES') {
         // send activation confirmation email (only once)
         require('include/mailer.inc.php');
-        
+
         $template_vars = array(
             '{SITE_LINK}' => $CONFIG['site_url'],
             '{USER_NAME}' => $user_data['user_name'],
             '{SITE_NAME}' => $CONFIG['gallery_name'],
         );
-        
+
         cpg_mail($user_data['user_email'], sprintf($lang_register_php['notify_user_email_subject'], $CONFIG['gallery_name']), nl2br(strtr($lang_register_php['activated_email'], $template_vars)));
     }
 }

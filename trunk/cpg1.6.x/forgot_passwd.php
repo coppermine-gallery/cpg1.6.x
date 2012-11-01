@@ -50,7 +50,7 @@ if (isset($CLEAN['email'])) {
     $sql = "SELECT user_id, user_group, user_active, user_name, user_password, user_email FROM {$CONFIG['TABLE_USERS']} WHERE user_email = '{$CLEAN['email']}' AND user_active = 'YES'";
 
     $results = cpg_db_query($sql);
-    
+
     if (mysql_num_rows($results)) { // something has been found start
 
         $USER_DATA = mysql_fetch_assoc($results);

@@ -107,7 +107,7 @@ EOT;
 
     // Check if we have any js includes
     if (isset($JS['includes']) && count($JS['includes'])) {
-    	// Bring the jquery core library to the very top of the list 
+    	// Bring the jquery core library to the very top of the list
     	if (in_array('js/jquery-1.4.2.js', $JS['includes']) == TRUE) {
     		$key = array_search('js/jquery-1.4.2.js', $JS['includes']);
     		unset($JS['includes'][$key]);
@@ -186,7 +186,7 @@ EOT;
 function theme_display_image($nav_menu, $picture, $votes, $pic_info, $comments, $film_strip)
 {
     global $CONFIG, $LINEBREAK;
-    
+
     $superCage = Inspekt::makeSuperCage();
 
     $spacer = <<<EOT

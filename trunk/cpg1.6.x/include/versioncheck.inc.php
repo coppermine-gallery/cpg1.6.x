@@ -16,16 +16,16 @@
 **********************************************/
 
 /*
-Dev note: I had to re-design the versioncheck page to make the code less cluttered. 
-As a result, the changes applied by Sander to make this page fit into the new installer 
-are gone. Please do not re-introduce those changes: they were bad in the first place. 
-Instead, the installer needs to be reviewed. I updated the installer a little bit to make 
-sure it doesn't break entirely, however I suggest re-designing the installer without the 
-OO-approach: only use OO where it makes sense and if you have no dependencies. 
-This is not the case: coppermine has been built the old-school way (without OO), and there 
-is little benefit in the OO-tech of the new installer. It doesn't have to be re-built from 
-scratch though. 
-Further discussion should be led on the dev board. 
+Dev note: I had to re-design the versioncheck page to make the code less cluttered.
+As a result, the changes applied by Sander to make this page fit into the new installer
+are gone. Please do not re-introduce those changes: they were bad in the first place.
+Instead, the installer needs to be reviewed. I updated the installer a little bit to make
+sure it doesn't break entirely, however I suggest re-designing the installer without the
+OO-approach: only use OO where it makes sense and if you have no dependencies.
+This is not the case: coppermine has been built the old-school way (without OO), and there
+is little benefit in the OO-tech of the new installer. It doesn't have to be re-built from
+scratch though.
+Further discussion should be led on the dev board.
 Joachim 2008-08-08
 */
 
@@ -243,7 +243,7 @@ function cpg_versioncheckPopulateArray($file_data_array) {
         if (!isset($file_data_array[$file_data_key]['txt_folderfile'])) {
             $file_data_array[$file_data_key]['txt_folderfile'] = '';
         }
-        
+
         // Replace the placeholders with actual content --- start
         $file_data_array[$file_data_key]['fullpath'] = str_replace('**fullpath**', rtrim($CONFIG['fullpath'], '/'), $file_data_array[$file_data_key]['fullpath']);
         $file_data_array[$file_data_key]['fullpath'] = str_replace('**userpics**', rtrim($CONFIG['userpics'], '/'), $file_data_array[$file_data_key]['fullpath']);
@@ -277,7 +277,7 @@ function cpg_versioncheckPopulateArray($file_data_array) {
             } else {
                 $file_data_array[$file_data_key]['icon'] = '<img src="'.$extensionMatrix_array['unknown'].'" border="0" width="16" height="16" alt="'.$file_data_array[$file_data_key]['extension'].'" style="margin-left:'. (16 * $file_data_array[$file_data_key]['folderDepth']) . 'px" />';
             }
-            // determine the icon representing the file -- end            
+            // determine the icon representing the file -- end
             // we have a file here --- end
         }
         // Determine the icon -- end
@@ -303,7 +303,7 @@ function cpg_versioncheckPopulateArray($file_data_array) {
               $maxLength_array['exist'] = strlen($file_data_array[$file_data_key]['txt_missing']);
             } // The folder/file is missing --- end
         } else { // The folder/file exists --- start
-            if ($file_data_array[$file_data_key]['file'] == '') { 
+            if ($file_data_array[$file_data_key]['file'] == '') {
               // we have a folder here --- start
               $file_data_array[$file_data_key]['txt_folderfile'] = $lang_versioncheck_php['folder'];
               // no version or revision number for folder names
@@ -428,7 +428,7 @@ function cpg_versioncheckPopulateArray($file_data_array) {
                         // Do we have an md5-hash that we could compare against? -- start
                         if ($file_data_array[$file_data_key]['hash'] != '') {
                             // only perform the md5-check if the versions and revisions match anyway - we'd be comparing apples with bananas if we checked the hashes otherwise -- start
-                            if ($file_data_array[$file_data_key]['version'] == $file_data_array[$file_data_key]['local_version'] && $file_data_array[$file_data_key]['revision'] == $file_data_array[$file_data_key]['local_revision']) { 
+                            if ($file_data_array[$file_data_key]['version'] == $file_data_array[$file_data_key]['local_version'] && $file_data_array[$file_data_key]['revision'] == $file_data_array[$file_data_key]['local_revision']) {
                                 $file_data_array[$file_data_key]['local_hash'] = md5_file($file_data_values['fullpath']);
                                 if ($file_data_array[$file_data_key]['local_hash'] == $file_data_array[$file_data_key]['hash']) {
                                     $file_data_array[$file_data_key]['unmodified'] = 1;
@@ -447,7 +447,7 @@ function cpg_versioncheckPopulateArray($file_data_array) {
                     }
                     // Is the option "no_modification_check" not populated --- end
                 }
-                // check the md5 hashes --- end                
+                // check the md5 hashes --- end
                 if ($file_data_array[$file_data_key]['status'] == 'remove') {
                     // should the file have been removed ? --- start
                         $file_data_array[$file_data_key]['txt_missing'] = $lang_versioncheck_php['existing'];
@@ -485,7 +485,7 @@ function cpg_versioncheckPopulateArray($file_data_array) {
         }
         if (strlen($file_data_array[$file_data_key]['txt_revision']) > $maxLength_array['revision']) {
             $maxLength_array['revision'] = strlen($file_data_array[$file_data_key]['txt_revision']);
-        }  
+        }
         if (strlen($file_data_array[$file_data_key]['local_revision'] . $file_data_array[$file_data_key]['txt_revision']) > $maxLength_array['revision']) {
           $maxLength_array['revision'] = strlen($file_data_array[$file_data_key]['local_revision'] . $file_data_array[$file_data_key]['txt_revision']);
         }
@@ -494,7 +494,7 @@ function cpg_versioncheckPopulateArray($file_data_array) {
         }
         if (strlen($file_data_array[$file_data_key]['txt_modified']) > $maxLength_array['modified']) {
             $maxLength_array['modified'] = strlen($file_data_array[$file_data_key]['txt_modified']);
-        } 
+        }
         //  Adapt the maxLength array -- end
     } // end the foreach loop
     return $file_data_array;
@@ -612,7 +612,7 @@ function cpg_versioncheckCreateTextOnlyOutput($file_data_array) {
       <a href="javascript:HighlightAll('versioncheckdisplay.versioncheck_text')" class="admin_menu">
       {$lang_versioncheck_php['select_all']}
       </a><br />
-      
+
 EOT;
       print '<form name="versioncheckdisplay"><textarea name="versioncheck_text" rows="'.($file_data_count + 5).'" cols="60" class="textinput debug_text" style="width:98%;font-family:\'Courier New\',Courier,monospace;font-size:9px;">';
     }

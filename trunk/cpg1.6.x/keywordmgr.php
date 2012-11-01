@@ -67,7 +67,7 @@ case 'display':
     $edit_icon   = cpg_fetch_icon('edit', 2);
     $delete_icon = cpg_fetch_icon('delete', 2);
     $search_icon = cpg_fetch_icon('search', 2);
-    
+
     // Find unique keywords
     $total_array = array();
     $lowercase_word_array = array();
@@ -79,7 +79,7 @@ case 'display':
         $array = explode($keysep, html_entity_decode($keywords));
 
         foreach ($array as $word) {
-        
+
             if ($word == '.' || $word == '' || $word == ' ' || $word == $keysep ) {
                 continue;
             }
@@ -168,7 +168,7 @@ case 'changeword':
         $result = cpg_db_query($query);
 
         while (list($id, $keywords) = mysql_fetch_row($result)) {
-       
+
             $array_new = array();
 
             $array_old = explode($keysep, addslashes(trim(html_entity_decode($keywords))));

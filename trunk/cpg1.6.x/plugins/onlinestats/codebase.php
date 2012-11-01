@@ -60,7 +60,7 @@ function online_configure() {
     if (in_array('onlinestats', $contentOfTheMainpage_array) == TRUE) {
         // We have a winner
     }
-    
+
     $icon_array['ok']  = cpg_fetch_icon('ok', 2);
     $icon_array['config']  = cpg_fetch_icon('config', 2);
     if (isset($CONFIG['mod_updates_duration']) != TRUE) {
@@ -145,7 +145,7 @@ function online_mainpage() {
     if($matches[1] != 'onlinestats') {
       return $matches;
     }
-    
+
     $num_users = $cpg_udb->get_user_count();
 
     $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_ONLINE']}");
@@ -153,7 +153,7 @@ function online_mainpage() {
 
     $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_ONLINE']} WHERE user_id <> 0");
     list($num_reg_online) = mysql_fetch_row($result);
-    
+
     $result = cpg_db_query("SELECT {$cpg_udb->field['user_id']} AS user_id, {$cpg_udb->field['username']} AS user_name FROM {$cpg_udb->usertable} ORDER BY user_id DESC LIMIT 1", $cpg_udb->link_id);
     $newest = mysql_fetch_assoc($result);
 
@@ -234,11 +234,11 @@ function online_install() {
         $sql_query[] = "INSERT IGNORE INTO {$CONFIG['TABLE_CONFIG']} (name, value) VALUES ('mod_updates_duration', '{$duration}')";
 
         foreach($sql_query as $q) cpg_db_query($q);
-        
+
         // Add the string "onlinestats" to "the content of the main page" if it doesn't exist
         if (strpos($CONFIG['main_page_layout'], 'onlinestats') === FALSE) {
             $contentOfTheMainpage = rtrim($CONFIG['main_page_layout'], '/').'/onlinestats';
-            cpg_db_query("UPDATE {$CONFIG['TABLE_CONFIG']} SET value = '$contentOfTheMainpage' WHERE name = 'main_page_layout'"); 
+            cpg_db_query("UPDATE {$CONFIG['TABLE_CONFIG']} SET value = '$contentOfTheMainpage' WHERE name = 'main_page_layout'");
         }
 
        return true;
@@ -262,7 +262,7 @@ function online_uninstall() {
         cpg_db_query("DELETE FROM {$CONFIG['TABLE_CONFIG']} WHERE name = 'record_online_users'");
         cpg_db_query("DELETE FROM {$CONFIG['TABLE_CONFIG']} WHERE name = 'record_online_date'");
     }
-    
+
     // Remove the string "onlinestats" from the config option "content of the main page"
     $contentOfTheMainpage = str_replace('/onlinestats', '', $CONFIG['main_page_layout']);
     $contentOfTheMainpage = str_replace('onlinestats/', '', $contentOfTheMainpage);

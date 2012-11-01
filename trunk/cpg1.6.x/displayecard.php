@@ -70,19 +70,19 @@ if (is_array($CLEAN['data'])) {
     if (!mysql_num_rows($result)) {
         cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
     }
-    
+
     $row = mysql_fetch_assoc($result);
     mysql_free_result($result);
-    
+
     if ($row['pwidth'] != 0 && $row['pheight'] != 0) {
         $image_size = compute_img_size($row['pwidth'], $row['pheight'], $CONFIG['picture_width'], 'normal');
         $dimensions = $image_size['geom'];
     } else {
         $dimensions = '';
     }
-    
+
     if (is_flash($CLEAN['data']['p'])) {
-    
+
         $pic_markup = <<<EOT
         <object id="SWFlash" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" type="application/x-shockwave-flash" {$dimensions}>
             <param name="autostart" value="true" />
@@ -93,7 +93,7 @@ EOT;
     } else {
         $pic_markup = '<img src="'.$CLEAN['data']['p'].'" '.$dimensions.' alt="" vspace="8" border="0" class="image" />';
     }
-    
+
     // Load template parameters
     $params = array(
         '{LANG_DIR}'       => $lang_text_dir,
@@ -114,7 +114,7 @@ EOT;
         '{PIC_CAPTION}'    => bb_decode($CLEAN['data']['pc']),
         '{PIC_MARKUP}'     => $pic_markup,
     );
-    
+
     // Parse template
     echo template_eval($template_ecard, $params);
 

@@ -144,7 +144,7 @@ This page is meant to give plugin authors step-by-step directions how to create 
                     <li>'max' -> maximum value</li>
                 </ul>
             </td>
-            <td valign="top"><pre class="smallcode">'plugin_coffee_maker_donut' => 
+            <td valign="top"><pre class="smallcode">'plugin_coffee_maker_donut' =>
 array('type' => 'checkbox', 'min' => '0', 'max' => '1'),</pre></td>
         </tr>
         <tr>
@@ -161,7 +161,7 @@ array('type' => 'checkbox', 'min' => '0', 'max' => '1'),</pre></td>
                     <li>'max' -> maximum value</li>
                 </ul>
             </td>
-            <td valign="top"><pre class="smallcode">'plugin_coffee_maker_lumps' => 
+            <td valign="top"><pre class="smallcode">'plugin_coffee_maker_lumps' =>
 array('type' => 'int', 'min' => '0', 'max' => '9'),</pre></td>
         </tr>
         <tr>
@@ -176,9 +176,9 @@ array('type' => 'int', 'min' => '0', 'max' => '9'),</pre></td>
             <td valign="top">
                 <ul>
                     <li>'regex_ok' -> <a href="dev_superglobals.htm#superglobals_sanitization_howto_regex">regular expression</a> that the submit data needs to match against</li>
-                </ul>                
+                </ul>
             </td>
-            <td valign="top"><pre class="smallcode">'plugin_coffee_maker_customer_name' => 
+            <td valign="top"><pre class="smallcode">'plugin_coffee_maker_customer_name' =>
 array('type' => 'raw', 'regex' => '/^[A-Za-z ]+$/'),</pre></td>
         </tr>
         <tr>
@@ -195,22 +195,22 @@ array('type' => 'raw', 'regex' => '/^[A-Za-z ]+$/'),</pre></td>
                     <li>'delimiter' -> character that is being used to delimit one array element from the other inside the string, e.g. a slash</li>
                 </ul>
             </td>
-            <td valign="top"><pre class="smallcode">'plugin_coffee_maker_ingredients' => 
+            <td valign="top"><pre class="smallcode">'plugin_coffee_maker_ingredients' =>
 array('type' => 'array', 'regex' => '/^[A-Za-z ]+$/', 'delimiter' => '|'),</pre></td>
         </tr>
     </table>
     As you can see in the table above, the scope selection "checkbox" does not only apply for the form field item checkbox, but as well for radio buttons and select dropdowns with one selectable item. Subsequently, if you plan to implement a radion button with three possible selections (e.g. for a selector that let's visitors choose the strength of their coffee from "weak" to "normal" to "strong"), the scope definition would be something like
     <pre class="cpg_code code">'<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with">plugin_coffee_maker_strength</span>' => array(<span style="color:red;font-weight:bolder;">'type' => 'checkbox', 'min' => '0', 'max' => '2'</span>),</pre>
     with the possible options "0" corresponding to "weak", "1" to "normal" and "2" to "strong" (but we're going to determine that in a later step; for now, we'll just set the possible number of options to choose from).
-    
+
 		<a name="steps_config_form_options"></a><h3>6. Populate form options<a href="#steps_config_form_options" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-		The radio buttons, checkboxes and select dropdowns need to be populated with values based on the corresponding values. That's why you need to keep on editing <tt class="filename">c:\mysite\plugins\coffee_maker\admin.php</tt>, find 
+		The radio buttons, checkboxes and select dropdowns need to be populated with values based on the corresponding values. That's why you need to keep on editing <tt class="filename">c:\mysite\plugins\coffee_maker\admin.php</tt>, find
 		<pre class="cpg_code code">// Set the option output stuff </pre>
 		and add below it into a line of it's own a small code block that determines the state of the radio button, checkbox or select dropdown. The code differs slightly, depending on the number of possible states: a checkbox can only have two states (checked or not checked). A radio buttons can have two or more states.<br />
 		For our example from above that is meant to create a checkbox that toggles on or off wether the coffee will be served with a donut or not, the code you would have to add would be:
 		<pre class="cpg_code code">if ($CONFIG['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_donut</span>'] == '1') {
 	$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_donut</span>'] = 'checked="checked"';
-} else { 
+} else {
 	$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_donut</span>'] = '';
 }</pre>
     Once more, you need of course to edit the section <span style="color:orange;font-weight:bolder;">highlighted in orange</span> in the line above in a similar manner as for the install and the other sections above - that section needs to correspond to the config record name that you have chosen when you decided for a plugin record name.<br />
@@ -219,11 +219,11 @@ array('type' => 'array', 'regex' => '/^[A-Za-z ]+$/', 'delimiter' => '|'),</pre>
 	$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span>'][<span style="color:navy;font-weight:bolder;">0</span>] = 'checked="checked"';
 	$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span>'][<span style="color:navy;font-weight:bolder;">1</span>] = '';
 	$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span>'][<span style="color:navy;font-weight:bolder;">2</span>] = '';
-} elseif ($CONFIG['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span>'] == '1') { 
+} elseif ($CONFIG['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span>'] == '1') {
 	$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span>'][<span style="color:navy;font-weight:bolder;">0</span>] = '';
 	$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span>'][<span style="color:navy;font-weight:bolder;">1</span>] = 'checked="checked"';
 	$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span>'][<span style="color:navy;font-weight:bolder;">2</span>] = '';
-} elseif ($CONFIG['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span>'] == '2') { 
+} elseif ($CONFIG['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span>'] == '2') {
 	$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span>'][<span style="color:navy;font-weight:bolder;">0</span>] = '';
 	$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span>'][<span style="color:navy;font-weight:bolder;">1</span>] = '';
 	$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span>'][<span style="color:navy;font-weight:bolder;">2</span>] = 'checked="checked"';
@@ -231,7 +231,7 @@ array('type' => 'array', 'regex' => '/^[A-Za-z ]+$/', 'delimiter' => '|'),</pre>
 		
 		<a name="steps_config_rows"></a><h3>7. Output the form elements (rows)<a href="#steps_config_rows" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
 		In this step we finally output the actual form element - one for each plugin config option. The output basically is in HTML, with the PHP variables that we populated in the previous step shining through our HTML. That's why the entire code block that we're going to edit is using the <a href="http://www.php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc" rel="external" class="phpnet">heredoc syntax</a>, which is the recommended method as per <a href="dev_coding.htm#dev_coding_html_nesting">Coppermine coding guidelines</a>. Subsequently, all PHP variables that are meant to shine through the HTML output are being put into curly brackets.<br />
-		As the HTML in itself will differ substantially depending on the option type you have chosen in the <a href="#steps_config_option_type">initial step</a> of this set of instructions, here's a list of code blocks that you need to paste into <tt class="filename">c:\mysite\plugins\coffee_maker\admin.php</tt> into a new line of it's own below 
+		As the HTML in itself will differ substantially depending on the option type you have chosen in the <a href="#steps_config_option_type">initial step</a> of this set of instructions, here's a list of code blocks that you need to paste into <tt class="filename">c:\mysite\plugins\coffee_maker\admin.php</tt> into a new line of it's own below
 		<pre class="cpg_code code">&lt;!-- insert config option form code start --&gt;</pre>
 		<div class="indent">
 		    <a name="steps_config_rows_checkbox"></a><h4>a. Checkbox<a href="#steps_config_rows_checkbox" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
@@ -244,7 +244,7 @@ array('type' => 'array', 'regex' => '/^[A-Za-z ]+$/', 'delimiter' => '|'),</pre>
 			&lt;label for="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_donut</span>" class="clickable_option"&gt;{<span style="color:red;font-weight:bolder;">$lang_common['yes']</span>}&lt;/label&gt;
 		&lt;/td&gt;
 	&lt;/tr&gt;</pre>
-		    
+		
 		    <a name="steps_config_rows_radio"></a><h4>b. Radio button<a href="#steps_config_rows_radio" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
 		    <pre class="code">	&lt;tr&gt;
 		&lt;td style="vertical-align:top;"&gt;
@@ -260,7 +260,7 @@ array('type' => 'array', 'regex' => '/^[A-Za-z ]+$/', 'delimiter' => '|'),</pre>
 		&lt;/td&gt;
 	&lt;/tr&gt;</pre>
     The example above of course will only work if you have three radio buttons; if your number of radio buttons differs, you have to add/remove lines, keeping an eye on the index numbers at the end of the strings (highlighted in <span style="color:navy;font-weight:bolder;">dark blue</span> in the example above).
-		    
+		
 		    <a name="steps_config_rows_dropdown"></a><h4>c. Dropdown (select/option list)<a href="#steps_config_rows_dropdown" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
 		    <pre class="code">	&lt;tr&gt;
 		&lt;td valign="top"&gt;
@@ -274,7 +274,7 @@ array('type' => 'array', 'regex' => '/^[A-Za-z ]+$/', 'delimiter' => '|'),</pre>
 			&lt;/select&gt;
 		&lt;/td&gt;
 	&lt;/tr&gt;</pre>
-		    
+		
 	    <a name="steps_config_rows_textinput"></a><h4>d. Text input field (one line), both for numerical input (integers) as well as any other textual input<a href="#steps_config_rows_textinput" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
 		    <pre class="code">	&lt;tr&gt;
 		&lt;td valign="top"&gt;
@@ -285,7 +285,7 @@ array('type' => 'array', 'regex' => '/^[A-Za-z ]+$/', 'delimiter' => '|'),</pre>
 			{$lang_<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker</span>['<span style="color:red;font-weight:bolder;">pieces</span>']}
 		&lt;/td&gt;
 	&lt;/tr&gt;</pre>
-		    
+		
 		    <a name="steps_config_rows_textarea"></a><h4>e. Text input field (multiple lines, <abbr title="also known as">aka</abbr> textarea)<a href="#steps_config_rows_textarea" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
 		    <pre class="code">	&lt;tr&gt;
 		&lt;td valign="top"&gt;

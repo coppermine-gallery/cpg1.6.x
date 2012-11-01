@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*************************
   Coppermine Photo Gallery
   ************************
@@ -8,7 +8,7 @@
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
-  
+
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
@@ -29,12 +29,12 @@
 	
 	------------
 	
-	This program is free software; you can redistribute it and/or modify it under the terms of 
-	the GNU General Public License as published by the Free Software Foundation; either version 2 
+	This program is free software; you can redistribute it and/or modify it under the terms of
+	the GNU General Public License as published by the Free Software Foundation; either version 2
 	of the License, or (at your option) any later version.
 
-	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
-	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
+	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	See the GNU General Public License for more details. http://www.gnu.org/copyleft/gpl.html
 */
 //================================================================================================
@@ -104,7 +104,7 @@ function lookup_Nikon_tag($tag,$model) {
 			case "0082": $tag = "Adapter";break;
 			case "0083": $tag = "LensType";break;
 			case "0084": $tag = "LensInfo";break;
-			case "0085": $tag = "ManualFocusDistance";break; 
+			case "0085": $tag = "ManualFocusDistance";break;
 			case "0086": $tag = "DigitalZoom";break;
 			case "0087": $tag = "FlashUsed";break;
 			case "0088": $tag = "AFFocusPosition";break;
@@ -121,7 +121,7 @@ function lookup_Nikon_tag($tag,$model) {
 			
 			default: $tag = "unknown:".$tag;break;
 		}
-	} 
+	}
 	
 	return $tag;
 }

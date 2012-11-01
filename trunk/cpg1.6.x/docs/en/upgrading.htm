@@ -63,13 +63,13 @@
         </div>
         <p>As you can see, the coppermine dev team is constantly fixing and improving coppermine. Every non-trivial piece of software contains bugs, so there is no guarantee that the version that currently is the most recent one will be the final, ultimately bug-free version to be released in the cpg1.5.x series. It is absolutely vital that you perform regular updates as soon as new packages are being released.</p>
         <a name="upgrade_why_reasons_end"></a>
-        
+
         <a name="upgrade_why_changelog"></a><h3>Changelog<a href="#upgrade_why_changelog" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
         <p>Details on the changes that went into a release can be found in the changelog that comes with each package. The changelog file can be found in the root directory of the coppermine package. The changelog contains more information on additional languages and the time and date of the fix as well.</p>
         <p>The changelog is a plain-text file that can be read using a simple editor - on Windows-driven machines, notepad.exe is fine.</p>
         <a name="upgrade_why_changelog_end"></a>
     </div><a name="upgrade_why_end"></a>
-    
+
     <a name="upgrade_any"></a><h2>Steps needed to perform when upgrading Coppermine (from any version)<a href="#upgrade_any" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
     <p>The instructions here apply for <strong>all</strong> Coppermine udpates/upgrades, so please read them carefully.</p>
     <ul>
@@ -108,21 +108,21 @@
     </ul>
     <p>To make this absolutely clear:</p>
     <p class="cpg_message_error">there is no such thing as a separate upgrade package - coppermine always comes as a complete package that can be used both for a fresh install as well as an upgrade.</p>
-    
-    
-    
-    
-    
+
+
+
+
+
     <a name="upgrade_particular"></a><h2>Additional actions for updating from particular versions<a href="#upgrade_particular" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
     <p>Depending on the version you're updating from, there are additional actions you need to perform:</p>
-    
+
         <div class="indent">
         <a name="upgrade_10"></a><a name="upgrade_12"></a><h3>Upgrading from version cpg1.0, cpg1.1, cpg1.2.x, cpg1.3.x or cpg1.4.x to cpg1.6.x<a href="#upgrade_10" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-        
+
         <p>Support for a direct upgrade from cpg1.0, cpg1.1, cpg1.2.x or cpg1.3.x to cpg1.5.x has been dropped - if you still have such an ancient version running, you will have to upgrade in a two-step-process (from your version to cpg1.4.x and then on to cpg1.5.x)</p>
-        
-        
-        
+
+
+
         <a name="upgrade_14"></a><h3>Upgrading from cpg1.5.x to version cpg1.6.x<a href="#upgrade_14" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
         <ul>
           <li>
@@ -155,11 +155,11 @@
               In comparison to cpg1.5.x, the new version cpg1.6.x comes with a load of new features. Some of them are enabled by default after performing the upgrade, which might not be what you want. Therefore, it's advisable that you (at least cursorily) read up the <a href="index.htm#features">features list</a> and check the <a href="configuration.htm#admin">config panel</a> and the <a href="groups.htm#group_cp">groups control panel</a> for the changes there.
           </li>
         </ul>
-        
+
         <a name="upgrade_15"></a><h3>Upgrading from older versions of cpg1.6.x to the most recent version of  cpg1.6.x<a href="#upgrade_15" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
         <p>There are no additional steps to follow when upgrading from an older version of cpg1.6.x to the most recent version of that family. Just performing the basic instructions discussed above in <a href="#upgrade_any">Steps needed to perform when upgrading Coppermine (from any version)</a> will be enough.</p>
     </div><a name="upgrade_particular_end"></a>
-    
+
     <a name="updater"></a><h2>The update script<a href="#updater" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
     <p>The updater is a script that will update your database and delete leftover files from outdated versions that are no longer used in your version. It can be accessed by clicking on the corresponding link inside the admin menu or by entering the URL into the address bar of your browser.</p>
     <p class="cpg_example">You can run the updater by entering <tt class="code">http://yoursite.tld/your_coppermine_folder/update.php</tt> into your browser's address bar.</p>
@@ -187,13 +187,13 @@
             <p>You need to run the updater every time you upgrade/update, i.e. each time the file <tt class="code">sql/update.sql</tt> is being replaced with a new version.</p>
             <p>It doesn't hurt to run the updater several times in a row, so if you're in doubt, run it again.</p>
         </div><a name="updater_end"></a>
-        
+
     <a name="versioncheck"></a><h2>The version check tool<a href="#versioncheck" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
     <p>Since the release of cpg1.3.2 Coppermine comes with an additional version checking tool to help you resolve issues with upgrades and updates easily. To launch the versioncheck, simply add <tt>versioncheck.php</tt> to your browser's address bar after being logged into coppermine as admin (example: <tt>http://yourdomain.tld/your_coppermine_folder/versioncheck.php</tt>). You can run the versioncheck utility from the <a href="admin_menu.htm#admin_menu">Admin menu</a>.</p>
     <p class="cpg_message_info">The versioncheck tool does <strong>not</strong> perform an actual update: it does not download newer versions of coppermine for you, nor does it install any fixes - it just is meant to make you aware of newer versions and help you to determine wether you performed an upgrade correctly.</p>
-    
+
     <div class="indent">
-    
+
         <a name="versioncheck_description_start"></a><h3>What it does<a href="#versioncheck_description_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
         <p>The script &quot;versioncheck&quot; is meant for two purposes:</p>
         <ul>
@@ -202,13 +202,13 @@
         </ul>
         <p>This script goes through the files on your webserver and tries to determine if the local file versions on your webserver are the identical to the ones at the repository of http://coppermine-gallery.net. Files that do not match are displayed and are the files you should update as well.</p>
         <a name="versioncheck_description_end"></a>
-        
+
         <a name="versioncheck_first_run"></a><h3>First run<a href="#versioncheck_first_run" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
         <p>When run for the first time, you will see the <a href"versioncheck_options_start">option</a> screen first. For a start, default options should be OK, so just submit the form. The script will then determine the coppermine version you're currently running, an try to look up the XML file on the coppermine repository that corresponds to your version. If successfull, it will compare all files that exist on your server against the most recent files that are recommended to use (trying to obtain that data from the repository). Subsequently, you should see a list of folders and files that are supposed to exist on your server and an explanation if the file versions you have are the most recent. For details how to interpret the output, read on.</p>
-        
-        
-        
-        
+
+
+
+
         <a name="versioncheck_options_start"></a><h3>Options<a href="#versioncheck_options_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
         <img src="images/versioncheck_options.png" alt="" border="0" width="386" height="120" title="Options for the version check screen" align="right" />
         <p>There is a small number of options available on the versioncheck page that should be pretty self-explanatory:</p>
@@ -243,8 +243,8 @@
         </ul>
         <p>The options screen lets you configure the versioncheck, or rather what is being displayed. The options aren't saved anywhere, so you will have to adjust them each time you run versioncheck. The default options should be OK for most users - only change them if you have good reasons to do so.</p>
         <a name="versioncheck_options_end"></a>
-        
-         
+
+
         <a name="versioncheck_comparison_start"></a><h3>Version comparison<a href="#versioncheck_comparison_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
         <img src="images/versioncheck_output.png" border="0" width="400" height="191" alt="" title="Output generated by version check" align="right" />
         <p>There is a lot of information packed into a small space. Here's an example of a possible output and what the output means:</p>
@@ -283,7 +283,7 @@
             The link to the SVN repository (web SVN) is meant as an additional feature for power-users and developers. Read the <a href="dev_subversion.htm#subversion">subversion repository</a> instructions to find out more. If everything is fine, you don't have to worry about the link anyway.</li>
         </ul>
         <a name="versioncheck_comparison_end"></a>
-        
+
         <a name="versioncheck_problems"></a><h3>Things that could go wrong using versioncheck<a href="#versioncheck_problems" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
         <p>As the actions performed by the versioncheck script are complex, there are several things that can go wrong, depending on your webserver setup:</p>
         <ul>
@@ -297,14 +297,14 @@
         </ul>
         <p>Versioncheck is being provided as a courtesy to end users. As there are several factors that have an impact on it, it may or may not work on your server setup. If the versioncheck tool does nothing at all, this is probably the case for you - you don't have to be alarmed in this case: just make sure to keep your coppermine install up-to-date, preferably by enabling the config option "<a href="configuration.htm#admin_general_coppermine_news">Display news from coppermine-gallery.net</a>". Only if individual issues are being reported by the version check tool (i.e. only if <em>some</em> lines contain a remark in the comments column), you should be alarmed and take a closer look.</p>
         <a name="versioncheck_problems_end"></a>
-        
+
         <a name="versioncheck_expect"></a><h3>Wrong expectations<a href="#versioncheck_expect" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
         <p>To some this may sound trivial, for others it might be an important piece of information: naturally, files that you have not replaced during the upgrading process (e.g. <tt class="code">anycontent.php</tt>) will show as outdated in versioncheck's output. This is of course to be expected. It doesn't hurt if you performed the upgrade exactly as suggested, as the files you're supposed to keep during that process don't actually contain code that needs updating. As an example, <tt class="code">anycontent.php</tt> doesn't actually contain code at all (at least the file that comes with coppermine out of the box). It <em>can</em> contain custom code if you decide to use it. For details on the usage of <tt class="code">anycontent.php</tt>, refer to the section &quot;<a href="php-content.htm#php-content_anycontent">Using anycontent.php</a>&quot;.</p>
         <p>The versioncheck tool doesn't actually <em>download</em> newer file versions from the internet - it just <em>checks</em> the files you have on your server against a list of most recent files. The versioncheck tool doesn't check nor sanitize your site against hacking.</p>
-        
+
     </div><a name="versioncheck_end"></a>
-    
-    
+
+
     <a name="upgrade_faq"></a><h2>Upgrading FAQ<a href="#upgrade_faq" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
     <ul>
         <li><a name="upgrade_faq_new_releases_alert"></a><h3>How do I find out about new Coppermine releases?<a href="#upgrade_faq_new_releases_alert" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>

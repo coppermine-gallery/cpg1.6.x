@@ -14,7 +14,7 @@
   $HeadURL$
   $Revision$
 **********************************************/
- 
+
 define('IN_COPPERMINE', true);
 define('ADMIN_PHP', true);
 
@@ -67,7 +67,7 @@ if ($superCage->post->keyExists('restore_config')) { // user has chosen to facto
 				if (!empty($value['preserve_when_resetting'])) {
 					continue;
 				}
-				if (isset($value['default_value'])) {               
+				if (isset($value['default_value'])) {
 					cpg_config_set($name, $value['default_value']);
 				}
 			}
@@ -155,7 +155,7 @@ foreach ($config_data as $config_section_key => $config_section_value) { // Loop
         if ( $superCage->post->keyExists('update_config') && ($regexValidation == '1') && ($evaluate_value != $CONFIG[$adminDataKey]) && ($CONFIG[$adminDataKey] !== stripslashes($evaluate_value)) ) {
 
             // A space cannot be stored in the config table since the value field is VARCHAR, so %20 is used instead.
-            if (($adminDataKey == 'keyword_separator') && ($evaluate_value == ' ')) { 
+            if (($adminDataKey == 'keyword_separator') && ($evaluate_value == ' ')) {
                 $evaluate_value = '%20';
             }
             //  finally, all criteria have been met - let's write the updated data to the database
@@ -248,10 +248,10 @@ if ($userMessage != '') {
     </tr>
 EOT;
     endtable();
-    
+
     $admin_page .= ob_get_contents();
     ob_end_clean();
-    
+
     $admin_page .= '<br />'.$LINEBREAK;
 }
 
@@ -539,7 +539,7 @@ EOT;
 			$defaultValueField = '';
 			if ($CONFIG['display_reset_boxes_in_config'] == 1) { // display of reset checkboxes is enabled --- start
 				if (isset($value['default_value'])) { // we have a default value
-					if ($value['default_value'] == $admin_data_array[$key]) { 
+					if ($value['default_value'] == $admin_data_array[$key]) {
 						// the default value equals the current config setting - hide the "reset to default" checkbox
 						$resetCheckbox = '<input type="checkbox" name="reset_default_'.$key.'" id="reset_default_'.$key.'" value="'.$value['default_value'].'" class="checkbox" checked="checked" title="'.$lang_admin_php['reset_to_default'].'" onclick="resetToDefault(\''.$key.'\', \''.$value['type'].'\', \''.($optionLoopCounter - 1).'\');" style="display:none;" />';
 					} else {
@@ -632,7 +632,7 @@ if ($javascriptOutput != '') {
     echo <<< EOT
 <script type="text/javascript">
     $(document).ready(function() {
-    
+
         {$javascriptOutput}
     });
 </script>

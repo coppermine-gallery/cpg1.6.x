@@ -205,7 +205,7 @@
     <td valign="top"><a name="plugin_hooks_filename_user_caption_params"></a><strong>user_caption_params</strong><a href="#plugin_hooks_filename_user_caption_params" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Filter</td>
     <td valign="top"></td>
-    <td valign="top"><textarea class="samplecode" style="width:100%">$params = CPGPluginAPI::filter('user_caption_params', 
+    <td valign="top"><textarea class="samplecode" style="width:100%">$params = CPGPluginAPI::filter('user_caption_params',
                                array('{USER_NAME}' => $user['user_name'],
                                      '{USER_ID}' => $user['user_id'],
                                      '{ALBUMS}' => $albums_txt,
@@ -499,7 +499,7 @@
     <td valign="top">Filter</td>
     <td valign="top">executed after the more general "thumb_caption" plugin</td>
     <td valign="top"><textarea class="samplecode" style="width:100%">$rowset = CPGPluginAPI::filter('thumb_caption_favpics',$rowset);</textarea></td>
-  </tr>  
+  </tr>
   <tr>
     <td valign="top">include/functions.inc.php</td>
     <td valign="top"><a name="plugin_hooks_thumb_html_title"></a><strong>thumb_html_title</strong><a href="#plugin_hooks_thumb_html_title" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
@@ -1146,8 +1146,8 @@ $thisplugin-&gt;add_filter('<a href="#plugin_hooks_filename_admin_menu">admin_me
 function add_admin_button($admin_menu){
     $new_button = '&lt;div class="admin_menu admin_float"&gt;&lt;a href="./menu_link.php" title="menu link"&gt;MENU LINK&lt;/a&gt;&lt;/div&gt;';
     $look_for = '&lt;!-- END export --&gt;';
-    $admin_menu = str_replace($look_for, $look_for . $new_button, $admin_menu); 
-    
+    $admin_menu = str_replace($look_for, $look_for . $new_button, $admin_menu);
+
     return $admin_menu;
 }</pre><br />
 For the sys &amp; sub menus you have to take another approach:<br />
@@ -1210,7 +1210,7 @@ $upload_choices = CPGPluginAPI::filter('upload_options',$upload_choices);
 </pre>
 <p>The key for your upload method must be a simple key (with no spaces or special characters) that can be used as a GET parameter to select your upload form.  The value that corresponds to this key is the label shown on the dropdown list.  Here's an example of a plugin function that uses this hook to add an upload choice to the dropdown box:</p>
 <pre class="cpg_code">
-function myfunction_add_upload_option($upload_choices) 
+function myfunction_add_upload_option($upload_choices)
 {
     $more_upload_choices = array('alt_upload' => 'Alternate Upload Mechanism');
     return array_merge($upload_choices, $more_upload_choices);
@@ -1229,7 +1229,7 @@ function myfunction_add_upload_option($upload_choices)
 </pre>
 <p>Here is a complete example of a plugin function that displays an upload form:</p>
 <pre class="cpg_code">
-function myfunction_display_upload_form($upload_settings) 
+function myfunction_display_upload_form($upload_settings)
 {
     list($upload_form, $upload_select) = $upload_settings;
     if ($upload_form != 'alt_upload') {
@@ -1261,7 +1261,7 @@ EOT;
 </pre>
 <p>As with 'upload_form', $upload_form is the choice of upload method.  Check this for your upload method, then respond appropriately.  You should also exit once you have processed your upload form.  Here is an example plugin function:</p>
 <pre class="cpg_code">
-function myfunction_process_upload_form($upload_form) 
+function myfunction_process_upload_form($upload_form)
 {
     if ($upload_form != 'alt_upload') {
         return;
@@ -1292,7 +1292,7 @@ $params = CPGPluginAPI::filter('theme_display_thumbnails_params', $params);
 </pre>
 <p>Here's an example of a plugin function that adds more thumbnail information that can be tagged in $template_thumbnail_view:</p>
 <pre class="cpg_code">
-function myfunction_add_params($params) 
+function myfunction_add_params($params)
 {
     global $thumb;
     $more_params = array(

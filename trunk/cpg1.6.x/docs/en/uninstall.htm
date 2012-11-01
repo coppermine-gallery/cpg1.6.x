@@ -41,10 +41,10 @@ Alternatively (if you don't have phpMyAdmin available), create a PHP file (using
 <pre>&lt;?php
 // add the mysql connection stuff here
 
-DROP TABLE `cpg15x_albums`, `cpg15x_banned`, `cpg15x_bridge`, `cpg15x_categories`, 
-`cpg15x_comments`, `cpg15x_config`, `cpg15x_dict`, `cpg15x_ecards`, `cpg15x_exif`, 
-`cpg15x_favpics`, `cpg15x_filetypes`, `cpg15x_hit_stats`, `cpg15x_pictures`, `cpg15x_plugins`, 
-`cpg15x_sessions`, `cpg15x_temp_data`, `cpg15x_temp_messages`, `cpg15x_usergroups`, 
+DROP TABLE `cpg15x_albums`, `cpg15x_banned`, `cpg15x_bridge`, `cpg15x_categories`,
+`cpg15x_comments`, `cpg15x_config`, `cpg15x_dict`, `cpg15x_ecards`, `cpg15x_exif`,
+`cpg15x_favpics`, `cpg15x_filetypes`, `cpg15x_hit_stats`, `cpg15x_pictures`, `cpg15x_plugins`,
+`cpg15x_sessions`, `cpg15x_temp_data`, `cpg15x_temp_messages`, `cpg15x_usergroups`,
 `cpg15x_users`, `cpg15x_votes`, `cpg15x_vote_stats`;
 ?&gt;</pre>
 safe the file as "droptables.php" and upload that file (using your FTP app) to the folder your coppermine gallery resides in. Then run the file you just uploaded in your browser by going to the URL <tt class="code">http://yourdomain.tld/your_coppermine_folder/droptables.php</tt>

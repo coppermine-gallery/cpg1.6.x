@@ -47,12 +47,12 @@ $icon_array['batch_add'] = cpg_fetch_icon('searchnew', 2);
  */
 
 
-function albumselect($id = "album") 
+function albumselect($id = "album")
 {
     global $lang_common;
 
     $options = album_selection_options();
-    
+
     return <<< EOT
         <select id="aid" name="$id" class="listbox">
             <option value="0" selected="selected">{$lang_common['select_album']}</option>
@@ -109,11 +109,11 @@ function picrow($picfile, $picid, $albid)
     $pic_dirname = dirname($picname);
 
     $thumb_file = dirname($picname) . '/' . $CONFIG['thumb_pfx'] . $pic_fname;
-    
+
     if ($CONFIG['display_thumbs_batch_add'] == 1) {
-    
+
         if (file_exists($thumb_file)) {
-        
+
             $thumb_info = cpg_getimagesize($picname);
             $thumb_size = compute_img_size($thumb_info[0], $thumb_info[1], 48);
 
@@ -124,14 +124,14 @@ function picrow($picfile, $picid, $albid)
             $img = '<img src="showthumb.php?picfile=' . $pic_url . '&amp;size=48" class="thumbnail" border="0" alt="" />';
 
         } else {
-        
+
             $file['filepath'] = $pic_dirname.'/';
             $file['filename'] = $pic_fname;
             $filepathname = get_pic_url($file,'thumb');
 
             $img = '<img src="'.$filepathname.'" class="thumbnail" width="48" border="0" alt="" />';
-        }  
-    
+        }
+
     } else {
         $img = '';
     }
@@ -139,7 +139,7 @@ function picrow($picfile, $picid, $albid)
     if (filesize($picname) && is_readable($picname)) {
         // for video support, maybe check: http://www.getid3.org/
         // for now, hack in something that works (don't check !$fullimagesize)
-        $fullimagesize = cpg_getimagesize($picname); 
+        $fullimagesize = cpg_getimagesize($picname);
         $winsizeX = ($fullimagesize[0] + 16);
         $winsizeY = ($fullimagesize[1] + 16);
         // $checked = isset($expic_array[$picfile]) || !$fullimagesize ? '' : 'checked';
@@ -180,7 +180,7 @@ EOT;
         $return .= <<<EOT
                         $img</a><br />
                 </td>
-                
+
                 <td class="$rowStyle" valign="middle" width="100" height="40">
                     <p id="p_{$picid}" name="addpic.php?pic_file=$encoded_picfile"></p>
                 </td>
@@ -502,7 +502,7 @@ EOT;
       $edit_pics_content .= '<br />';
     }
     $add_more_folder = '<a href="'.$CPG_PHP_SELF.'?startdir='.rtrim($dir_name, '/').'" class="admin_menu">'.sprintf($lang_search_new_php['add_more_folder'], '&laquo;'.rtrim($dir_name, '/').'&raquo;').'</a>';
-    $notes = sprintf($lang_search_new_php['notes'], 
+    $notes = sprintf($lang_search_new_php['notes'],
                     '<img src="images/batch/ok_small.png" border="0" width="16" height="16" alt="" />',
                     '<img src="images/batch/duplicate_small.png" border="0" width="16" height="16" alt="" />',
                     '<img src="images/batch/folder_locked_small.png" border="0" width="16" height="16" alt="" />',
@@ -539,20 +539,20 @@ EOT;
 //} elseif (isset($_GET['startdir'])) {
 } elseif ($superCage->get->keyExists('startdir') && $matches = $superCage->get->getMatched('startdir', '/^[0-9A-Za-z\/\\\\_-\s]+$/')) {
     $startdir = $matches[0];
-    
+
     set_js_var('no_album_selected', $lang_search_new_php['no_album']);
     set_js_var('no_file_selected', $lang_search_new_php['no_file']);
     set_js_var('proc_limit', $CONFIG['batch_proc_limit']);
-    
+
     pageheader($lang_search_new_php['page_title']);
-    
+
     $help = '&nbsp;'.cpg_display_help('f=uploading.htm&amp;as=ftp&amp;ae=ftp_end&amp;top=1#ftp_select_file', '550', '400');
     echo <<<EOT
         <form method="post" action="{$CPG_PHP_SELF}?insert=1" name="selectPics" id="cpgform" style="margin:0px;padding:0px">
 EOT;
-    
+
     echo '<div id="queue">';
-    
+
     starttable("100%");
     echo <<<EOT
         <tr>
@@ -622,7 +622,7 @@ EOT;
     }
 
     $iframe_startfolder = str_replace('searchnew.php', '', __FILE__) . rtrim($CONFIG['fullpath'],'/') . $folder_sep;
-    
+
     echo '    <tr>'.$LINEBREAK;
     echo '        <td class="tableb" align="center">'.$LINEBREAK;
 
@@ -633,7 +633,7 @@ EOT;
         display_dir_tree('', '');
         echo '</table>';
     }
-    
+
     echo '        </td>'.$LINEBREAK;
     echo '    </tr>'.$LINEBREAK;
 

@@ -86,7 +86,7 @@ if ($get_data_rejected==0) { // individual approval start
     if (!checkFormToken()) {
         cpg_die(ERROR, $lang_errors['invalid_form_token'], __FILE__, __LINE__);
     }
-    
+
     pageheader($lang_reviewcom_php['title']);
 
     // Normally, we could trust this input, as only the admin should have gotten that far.
@@ -238,7 +238,7 @@ if ($superCage->post->keyExists('cid_array')) {
         }
     }
     $cid_set .= ')';
-    
+
     //Check if the form token is valid
     if(!checkFormToken()){
         cpg_die(ERROR, $lang_errors['invalid_form_token'], __FILE__, __LINE__);
@@ -626,8 +626,8 @@ echo <<<EOT
                 <input type="checkbox" name="checkAll2" onclick="selectAll('cpgform2');" class="checkbox" title="{$lang_common['check_uncheck_all']}" />
             </td>
             <td class="tablef" valign="middle" align="left">
-                {$lang_reviewcom_php['with_selected']}:</td> 
-            <td colspan="4" class="tablef" valign="middle" align="left"> 
+                {$lang_reviewcom_php['with_selected']}:</td>
+            <td colspan="4" class="tablef" valign="middle" align="left">
               <input name="with_selected" id="do_nothing" type="radio" value="do_nothing" {$default_action_with_selected['do_nothing']} />
               <label for="do_nothing">{$lang_reviewcom_php['do_nothing']}</label>
                 &nbsp;
@@ -650,7 +650,7 @@ EOT;
 endtable();
 list($timestamp, $form_token) = getFormToken();	
 echo "<input type=\"hidden\" name=\"form_token\" value=\"{$form_token}\" />
-     <input type=\"hidden\" name=\"timestamp\" value=\"{$timestamp}\" /></form>";    
+     <input type=\"hidden\" name=\"timestamp\" value=\"{$timestamp}\" /></form>";
 
 if ($CONFIG['comment_akismet_api_key'] != '') {
     print '<br /><a name="akismet"></a>';

@@ -8,7 +8,7 @@
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
-  
+
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
@@ -43,7 +43,7 @@ if (isset($bridge_lookup)) {
         function cpg_udb()
         {
             global $BRIDGE;
-            
+
             if (!USE_BRIDGEMGR) { // the vars that are used when bridgemgr is disabled
 
                 // URL of your punbb
@@ -57,9 +57,9 @@ if (isset($bridge_lookup)) {
                 require_once($BRIDGE['relative_path_to_config_file'] . 'config.php');
                 $this->use_post_based_groups = $BRIDGE['use_post_based_groups'];
             }
-            
+
             $this->multigroups = 1;
-            
+
             // Database connection settings
             $this->db = array(
                 'name'     => $dbname,
@@ -68,7 +68,7 @@ if (isset($bridge_lookup)) {
                 'password' => $dbpasswd,
                 'prefix'   => $table_prefix
             );
-            
+
             // Board table names
             $this->table = array(
                 'users'      => 'users',
@@ -82,7 +82,7 @@ if (isset($bridge_lookup)) {
             $this->groupstable =  '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['groups'];
             $this->sessionstable =  '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['sessions'];
             $this->usergroupstable =  '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['usergroups'];
-           
+
             // Table field names
             $this->field = array(
                 'username' => 'username', // name of 'username' field in users table
@@ -98,7 +98,7 @@ if (isset($bridge_lookup)) {
                 'grouptbl_group_id' => 'group_id', // name of 'group id' field in groups table
                 'grouptbl_group_name' => 'group_name' // name of 'group name' field in groups table
             );
-            
+
             // Pages to redirect to
             $this->page = array(
                 'register' => '/ucp.php?mode=register',
@@ -109,10 +109,10 @@ if (isset($bridge_lookup)) {
             // Group ids
             $this->admingroups = array(5);
             $this->guestgroup = 1;
-            
+
             // Cookie settings - used in following functions only
             $this->cookie_name = $BRIDGE['cookie_prefix'];
-            
+
             // Connect to db
             $this->connect();
         }
@@ -123,13 +123,13 @@ if (isset($bridge_lookup)) {
             $superCage = Inspekt::makeSuperCage();
 
             if ($superCage->cookie->keyExists($this->cookie_name . '_sid')) {
-                
+
                 $this->session_id = $superCage->cookie->getEscaped($this->cookie_name . '_sid');
-                
+
                 $sql = "SELECT user_id, user_password, group_id FROM {$this->sessionstable} INNER JOIN {$this->usertable} ON session_user_id = user_id WHERE session_id = '{$this->session_id}'";
-                
+
                 $result = cpg_db_query($sql, $this->link_id);
-                
+
                 if (mysql_num_rows($result)){
                     $row = mysql_fetch_array($result);
                     $this->primary_group = array_pop($row);
@@ -139,13 +139,13 @@ if (isset($bridge_lookup)) {
                 }
             }
         }
-        
+
         // definition of how to extract an id and password hash from a cookie
         function cookie_extraction()
         {
             return false;
         }
-        
+
         // definition of actions required to convert a password from user database form to cookie form
         function udb_hash_db($password)
         {
@@ -158,29 +158,29 @@ if (isset($bridge_lookup)) {
     		$data = array();
 
     		if ($this->use_post_based_groups) {
-    		    
+    		
     		    $data[] = $this->primary_group + 100;
-    		    
+    		
     		    $sql = "SELECT group_id FROM {$this->usergroupstable} WHERE user_id = {$row['id']}";
     		    $result = cpg_db_query($sql, $this->link_id);
-    		    
+    		
     		    while ($group = mysql_fetch_assoc($result)) {
         		    $data[] = $group['group_id'] + 100;
     		    }
-    
+
                 $data = array_unique($data);
-                
+
     		} else {
     			$data[0] = (in_array($this->primary_group, $this->admingroups)) ? 1 : 2;
     		}
     		
     		return $data;
     	}
-    	        
+    	
         function login_page()
         {
             global $CONFIG;
-            
+
             $redirect = urlencode($CONFIG['site_url']);
             $this->redirect("/ucp.php?mode=login&redirect=$redirect");
         }
@@ -188,20 +188,20 @@ if (isset($bridge_lookup)) {
         function logout_page()
         {
             global $CONFIG;
-            
+
             $redirect = urlencode($CONFIG['site_url']);
             $this->redirect("/ucp.php?mode=logout&redirect=$redirect&sid=" . $this->session_id);
         }
-       
+
         function view_users()
         {
             $this->redirect($this->page['editusers']);
         }
-        
+
         function get_users($options = array())
         {
         }
-        
+
         function view_profile($uid)
         {
         }

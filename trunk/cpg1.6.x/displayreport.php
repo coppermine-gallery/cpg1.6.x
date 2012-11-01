@@ -48,7 +48,7 @@ if (is_array($data)) {
 
     // Load template parameters
     if ($data['t'] == 'comment') {
-    
+
         $params = array(
             '{LANG_DIR}'         => $lang_text_dir,
             '{TITLE}'            => sprintf($lang_report_php['report_subject'], $data['sn'], $data['t']),
@@ -70,12 +70,12 @@ if (is_array($data)) {
             '{COMMENT_TGT}'      => "{$CONFIG['ecards_more_pic_target']}displayimage.php?pid=" . $data['pid'] . "#comment" . $data['cid'],
             '{PID}'              => $data['pid'],
         );
-        
+
         // Parse template if report is on a comment
         echo template_eval($template_report_comment, $params);
 
     } else {
-        
+
         $params = array(
             '{LANG_DIR}'        => $lang_text_dir,
             '{TITLE}'           => sprintf($lang_report_php['report_subject'], $data['sn'], $data['t']),
@@ -94,7 +94,7 @@ if (is_array($data)) {
             '{REASON}'          => $data['r'],
             '{PID}'             => $data['pid'],
         );
-        
+
         // Parse template
         echo template_eval($template_report, $params);
     }

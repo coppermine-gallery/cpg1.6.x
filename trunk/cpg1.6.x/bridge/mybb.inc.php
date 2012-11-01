@@ -8,7 +8,7 @@
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
-  
+
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
@@ -41,7 +41,7 @@ if (isset($bridge_lookup)) {
         function cpg_udb()
         {
             global $BRIDGE;
-            
+
             if (!USE_BRIDGEMGR) { // the vars that are used when bridgemgr is disabled
 
                 // URL of your punbb
@@ -49,7 +49,7 @@ if (isset($bridge_lookup)) {
 
                 // local path to your punbb config file
                 require_once('../mybb/inc/config.php');
-                
+
                 $this->use_post_based_groups = 1;
 
             } else { // the vars from the bridgemgr
@@ -57,10 +57,10 @@ if (isset($bridge_lookup)) {
                 require_once($BRIDGE['relative_path_to_config_file'] . 'config.php');
                 $this->use_post_based_groups = $BRIDGE['use_post_based_groups'];
             }
-            
+
             $this->multigroups = 1;
             $this->group_overrride = 0;
-            
+
             // Database connection settings
             $this->db = array(
                 'name'     => $config['database']['database'],
@@ -69,7 +69,7 @@ if (isset($bridge_lookup)) {
                 'password' => $config['database']['password'],
                 'prefix'   => $config['database']['table_prefix'],
             );
-            
+
             // Board table names
             $this->table = array(
                 'users'    => 'users',
@@ -81,7 +81,7 @@ if (isset($bridge_lookup)) {
             $this->usertable = '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['users'];
             $this->groupstable =  '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['groups'];
             $this->sessionstable =  '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['sessions'];
-            
+
             // Table field names
             $this->field = array(
                 'username' => 'username', // name of 'username' field in users table
@@ -95,18 +95,18 @@ if (isset($bridge_lookup)) {
                 'grouptbl_group_id' => 'gid', // name of 'group id' field in groups table
                 'grouptbl_group_name' => 'title' // name of 'group name' field in groups table
             );
-            
+
             // Pages to redirect to
             $this->page = array(
                 'register'        => '/member.php?action=register',
                 'editusers'       => '/memberlist.php',
                 'edituserprofile' => "/member.php?action=profile&uid="
             );
-            
+
             // Group ids
             $this->admingroups = array(4);
             $this->guestgroup  = 1;
-            
+
             // Connect to db
             $this->connect();
         }
@@ -119,35 +119,35 @@ if (isset($bridge_lookup)) {
             if (!$superCage->cookie->keyExists('sid')) {
                 return false;
             }
-            
+
             $this->sid = $superCage->cookie->getEscaped('sid');
-            
+
             if (!$this->sid) {
                 return false;
             }
-            
+
             $result = cpg_db_query("SELECT u.{$this->field['user_id']}, u.{$this->field['password']}, additionalgroups
                 FROM {$this->sessionstable} AS s
                 INNER JOIN {$this->usertable} AS u ON u.uid = s.uid
                 WHERE sid = '" . $this->sid . "'", $this->link_id);
-            
+
             if (!mysql_num_rows($result)) {
                 return false;
             }
-                        
+
             $row = mysql_fetch_row($result);
 
             $this->additionalgroups = array_pop($row);
             $this->logoutkey = md5($row[1]);
-            
-            return $row; 
+
+            return $row;
         }
-        
+
         // definition of how to extract an id and password hash from a cookie
         function cookie_extraction()
         {
             $superCage = Inspekt::makeSuperCage();
-            
+
             if ($superCage->cookie->keyExists('mybbuser')) {
                 return array_map('addslashes', explode("_", $superCage->cookie->getRaw('mybbuser'), 2));
             } else {
@@ -161,15 +161,15 @@ if (isset($bridge_lookup)) {
     		$data = array();
     		
     		if ($this->use_post_based_groups) {
-    		    
+    		
     		    $data[] = $row['group_id'] + 100;
-    		    
+    		
     		    $additionalgroups = explode(',', $this->additionalgroups);
-    		    
+    		
     		    foreach ($additionalgroups as $g) {
     		        $data[] = $g + 100;
     		    }
-    
+
     		} else {
     			$data[0] = (in_array($row['group_id'], $this->admingroups)) ? 1 : 2;
     		}
@@ -182,7 +182,7 @@ if (isset($bridge_lookup)) {
         {
             return $password;
         }
-        
+
         // Login
         function login_page()
         {
@@ -194,16 +194,16 @@ if (isset($bridge_lookup)) {
         {
             $this->redirect('/member.php?action=logout&logoutkey=' . $this->logoutkey);
         }
-        
+
         function view_users()
         {
             $this->redirect($this->page['editusers']);
         }
-        
+
         function get_users($options = array())
         {
         }
-        
+
         function view_profile($uid)
         {
         }

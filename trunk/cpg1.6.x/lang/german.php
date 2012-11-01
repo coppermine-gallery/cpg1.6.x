@@ -8,7 +8,7 @@
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
-  
+
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
@@ -1641,7 +1641,7 @@ $lang_logout_php['err_not_loged_in'] = 'Du bist nicht angemeldet!';
 }
 
 // ------------------------------------------------------------------------- //
-// File minibrowser.php 
+// File minibrowser.php
 // ------------------------------------------------------------------------- //
 if (defined('MINIBROWSER_PHP')) {
 $lang_minibrowser_php['up'] = 'eine Ebene höher';
@@ -2506,7 +2506,7 @@ $lang_versioncheck_php['not_applicable'] = 'n.z.';
 }
 
 // ------------------------------------------------------------------------- //
-// File view_log.php 
+// File view_log.php
 // ------------------------------------------------------------------------- //
 if (defined('VIEWLOG_PHP')) {
 $lang_viewlog_php['delete_all'] = 'Alle Logs löschen';

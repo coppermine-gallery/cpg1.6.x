@@ -7,7 +7,7 @@
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
-  
+
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
@@ -22,7 +22,7 @@
 /* featured at http://www.alistapart.com/articles/boom             */
 
 
-html { 
+html {
 	margin: 0;
 	font: 10pt/1.26 "Gill Sans", Verdana, Arial, sans-serif;
 }
@@ -39,19 +39,19 @@ h1, h2, h3, h4, h5, h6 {
     margin: 2em 0 0.5em 0;
 }
 
-h1 { 
+h1 {
 	margin: 0;
 	font-size: 2.0em;
 	font-weight: bold;
 }
 
-h2 { 
+h2 {
 	font-size: 1.8em;
 	text-transform: uppercase;
 	font-weight: bold;
 }
 
-h3 { 
+h3 {
 	font-size: 1.6em;
 	font-weight: bold;
 }
@@ -238,9 +238,9 @@ table.lined td, table.lined th {
 @page :right {
   @top-right {
     font: 11pt "Gill Sans", serif;
-    content: string(header, first); 
+    content: string(header, first);
     vertical-align: bottom;
-    padding-bottom: 2em; 
+    padding-bottom: 2em;
   }
 
   @bottom-right {
@@ -273,9 +273,9 @@ table.lined td, table.lined th {
 @page frontmatter :right {
   @top-right {
     font: 11pt "Gill Sans", serif;
-    content: string(header, first); 
+    content: string(header, first);
     vertical-align: bottom;
-    padding-bottom: 2em; 
+    padding-bottom: 2em;
   }
 
   @bottom-right {
@@ -338,7 +338,7 @@ table.lined td, table.lined th {
     preface: preface, including acknowledgements
     chapter: each chapter is given its own DIV element
     references: contains list of references
-    appendix: each appendix is given its own 
+    appendix: each appendix is given its own
     bibliography
     glossary
     index
@@ -359,9 +359,9 @@ div.foreword, div.toc, div.preface { page: frontmatter }
 
 div.frontcover, div.halftitlepage, div.titlepage { page-break-before: right }
 div.imprint { page-break-before: always }
-div.dedication, div.foreword, div.toc, div.preface, div.chapter, div.reference, 
-div.appendix, div.bibliography, div.glossary, div.index, div.colophon { 
-  page-break-before: always 
+div.dedication, div.foreword, div.toc, div.preface, div.chapter, div.reference,
+div.appendix, div.bibliography, div.glossary, div.index, div.colophon {
+  page-break-before: always
 }
 div.backcover { page-break-before: left }
 
@@ -418,7 +418,7 @@ div.frontcover p {
 div.titlepage h1, div.halftitlepage h1 { margin-bottom: 2em; }
 div.titlepage h2, div.halftitlepage h2 { font-size: 1.2em; margin-bottom: 3em; }
 div.titlepage h3, div.halftitlepage h3 { font-size: 1em; margin-bottom: 3em; }
-div.titlepage p, div.halftitlepage p { 
+div.titlepage p, div.halftitlepage p {
   font-size: 1.4em;
   font-weight: bold;
   margin: 0; padding: 0;
@@ -427,7 +427,7 @@ div.titlepage p, div.halftitlepage p {
 
 /* TOC */
 
-ul.toc, ul.toc ul { 
+ul.toc, ul.toc ul {
   list-style-type: none;
   margin: 0; padding: 0;
 }
@@ -435,7 +435,7 @@ ul.toc ul {
   margin-left: 1em;
   font-weight: normal;
 }
-ul.toc > li { 
+ul.toc > li {
   font-weight: bold;
   margin-bottom: 0.5em;
 }
@@ -482,7 +482,7 @@ div.chapter h1 { string-set: header "Chapter " counter(chapter) ": " content(); 
 
 /* index */
 
-ul.index { 
+ul.index {
   list-style-type: none;
   margin: 0; padding: 0;
   column-count: 2;
@@ -506,7 +506,7 @@ code, span.css, span.value, span.declaration {
 @media screen, handheld {
   html { margin: 1em; font: 14px "Gill Sans", sans-serif; }
   h1 { margin-bottom: 0.5em }
-  div.frontcover, div.halftitlepage, div.titlepage, div.imprint, 
+  div.frontcover, div.halftitlepage, div.titlepage, div.imprint,
   div.dedication, div.foreword, div.toc, div.index { display: none }
 }
 

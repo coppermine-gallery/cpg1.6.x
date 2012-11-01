@@ -198,7 +198,7 @@ function html_albummenu($id)
 function html_albummenu3($id)
 {
     global $lang_album_admin_menu;
-  
+
     /**
      * This template variable can be defined in theme.php of respective theme.
      * This is done here for simplicity.
@@ -216,7 +216,7 @@ function html_albummenu3($id)
         </div>
         <div class="clearer"></div>
 EOT;
-  
+
     static $template = '';
 
     if ($template == '') {
@@ -265,13 +265,13 @@ function get_subcat_data(&$cat_data)
 
     $categories     = array();
     $user_galleries = array();
-         
+
     // collect info about the user galleries category
     $result = cpg_db_query("SELECT name, description, thumb FROM {$CONFIG['TABLE_CATEGORIES']} WHERE cid = " . USER_GAL_CAT);
-    
+
     $row = mysql_fetch_assoc($result);
     mysql_free_result($result);
-    
+
     $user_galleries['details'] = array(
         'name'        => $row['name'],
         'description' => $row['description'],
@@ -286,19 +286,19 @@ function get_subcat_data(&$cat_data)
         INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.aid = a.aid
         WHERE a.category > " . FIRST_USER_CAT . "
         AND approved = 'YES'";
-        
+
     if ($FORBIDDEN_SET_DATA) {
         $sql .= 'AND a.aid NOT IN (' . implode(', ', $FORBIDDEN_SET_DATA) . ')';
     }
 
     $result = cpg_db_query($sql);
-    
+
     $row = mysql_fetch_assoc($result);
     mysql_free_result($result);
-    
+
     $user_galleries['details']['alb_count']      = $row['alb_count'];
     $user_galleries['subalbums'][0]['pic_count'] = $row['pic_count'];
-    
+
     //TODO: optimize this for when first level album thumbs are disabled
     // all we need then is a count
 
@@ -320,11 +320,11 @@ function get_subcat_data(&$cat_data)
     while ( ($row = mysql_fetch_assoc($result)) ) {
 
         if ($row['cid'] == 1) {
-        
+
             if (!empty($user_galleries)) {
                 $categories[$row['cid']] = $user_galleries;
             }
-            
+
             continue;
         }
 
@@ -338,7 +338,7 @@ function get_subcat_data(&$cat_data)
     } // while
 
     mysql_free_result($result);
-    
+
     // collect album counts for categories that are visible
     $sql = "SELECT category, COUNT(*) AS num
         FROM {$CONFIG['TABLE_ALBUMS']} AS a
@@ -353,7 +353,7 @@ function get_subcat_data(&$cat_data)
     if (!$CONFIG['show_private'] && $FORBIDDEN_SET_DATA) {
         $sql .= ' AND a.aid NOT IN (' . implode(', ', $FORBIDDEN_SET_DATA) . ')';
     }
-    
+
     // we don't care about the order
     $sql .= "\nGROUP BY category ORDER BY NULL";
 
@@ -364,7 +364,7 @@ function get_subcat_data(&$cat_data)
     }
 
     mysql_free_result($result);
-    
+
     // collect album info
     $sql = "SELECT title, r.description, keyword, category, aid, alb_hits, visibility, r.thumb, r.owner
         FROM {$CONFIG['TABLE_CATEGORIES']} AS c
@@ -377,7 +377,7 @@ function get_subcat_data(&$cat_data)
     }
 
     $sql .= "\nORDER BY r.pos, r.aid";
-     
+
     $result = cpg_db_query($sql);
 
     while ( ($row = mysql_fetch_assoc($result)) ) {
@@ -385,7 +385,7 @@ function get_subcat_data(&$cat_data)
         if (!$CONFIG['show_private'] && in_array($row['aid'], $FORBIDDEN_SET_DATA)) {
             continue;
         }
-        
+
         $categories[$row['category']]['subalbums'][$row['aid']] = array(
             'aid'         => $row['aid'],
             'title'       => $row['title'],
@@ -427,7 +427,7 @@ function get_subcat_data(&$cat_data)
 
         $level = $cat['details']['level'] - $CURRENT_CAT_DEPTH;
 
-        if ($level == 0) { 
+        if ($level == 0) {
             continue;
         }
 
@@ -449,10 +449,10 @@ function get_subcat_data(&$cat_data)
 
         if ($cid == USER_GAL_CAT) {
 
- 
+
             if ($pic_count) {
                 //ob_start();
-                //list_users(); 
+                //list_users();
                 //$users = ob_get_clean();
                 $link = str_repeat($indent, $level - 1) . "<a href=\"index.php?cat={$cid}\">{$cat['details']['name']}</a>";
                 $users         = '';
@@ -560,11 +560,11 @@ function get_cat_list(&$breadcrumb, &$cat_data, &$statistics)
             mysql_free_result($result);
 
             $sql = "SELECT COUNT(*) FROM {$CONFIG['TABLE_COMMENTS']}";
-            
+
             if ($pic_filter) {
                 $sql .= " AS c INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.pid = c.pid INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS a ON a.aid = p.aid WHERE 1 $pic_filter";
             }
-            
+
             if ($CONFIG['comment_approval']) {
                 if ($pic_filter) {
                     $sql .= " AND approval = 'YES'";
@@ -572,7 +572,7 @@ function get_cat_list(&$breadcrumb, &$cat_data, &$statistics)
                     $sql .= " WHERE approval = 'YES'";
                 }
             }
-            
+
             $result = cpg_db_query($sql);
             $nbEnr = mysql_fetch_row($result);
             $comment_count = $nbEnr[0];
@@ -591,7 +591,7 @@ function get_cat_list(&$breadcrumb, &$cat_data, &$statistics)
             } else {
                 $sql .= " WHERE approved = 'YES'";
             }
-            
+
             $result = cpg_db_query($sql);
             $nbEnr = mysql_fetch_row($result);
             $hit_count = (int)$nbEnr[0];
@@ -739,7 +739,7 @@ function list_albums()
 
     $totalPages = ceil($nbAlb / $alb_per_page);
 
-    if ($PAGE > $totalPages) { 
+    if ($PAGE > $totalPages) {
         $PAGE = 1;
     }
     $lower_limit = ($PAGE-1) * $alb_per_page;
@@ -852,7 +852,7 @@ function list_albums()
                 if (!empty($alb_thumb['filename'])) {
                     $picture = &$alb_thumb;
                 } elseif ($alb_thumb['thumb'] < 0) {
-                    $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight " 
+                    $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight "
                         . "FROM {$CONFIG['TABLE_PICTURES']} "
                         . "WHERE ((aid = '{$alb_thumb['aid']}' $forbidden_set_string) $keyword) $approved "
                         . "ORDER BY RAND() LIMIT 0,1";
@@ -860,7 +860,7 @@ function list_albums()
                     $picture = mysql_fetch_assoc($result);
                     mysql_free_result($result);
                 } else {
-                    $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight " 
+                    $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight "
                         . "FROM {$CONFIG['TABLE_PICTURES']} WHERE pid='{$alb_stat['last_pid']}'";
                     $result = cpg_db_query($sql);
                     $picture = mysql_fetch_assoc($result);
@@ -960,7 +960,7 @@ function album_adm_menu($aid, $cat, $owner)
             } else {
                 //return whole menu
                 return html_albummenu($aid);
-            }  
+            }
         } else {
             return '';
         }
@@ -998,7 +998,7 @@ function list_cat_albums($cat, $catdata)
     $cpg_privatepic_data = cpg_get_system_thumb('private.jpg', $cat_owner_id);
 
     $alb_per_page = $CONFIG['albums_per_page'];
-    
+
     //unused code {SaWey}
     /*$maxTab = $CONFIG['max_tabs'];
 
@@ -1044,29 +1044,29 @@ function list_cat_albums($cat, $catdata)
         //$visibility = $album['visibility'];
         $keyword = ($album['keyword'] ? "OR (keywords like '%".addslashes($album['keyword'])."%' $forbidden_set_string)" : '');
         if (!in_array($aid, $FORBIDDEN_SET_DATA) || $CONFIG['allow_private_albums'] == 0) { //test for visibility
-            if ($album['pic_count'] > 0  || !empty($album['link_pic_count'])) { 
+            if ($album['pic_count'] > 0  || !empty($album['link_pic_count'])) {
                 // Inserts a thumbnail if the album contains 1 or more images
                 if ($album['thumb'] > 0) {
-                    $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight " 
+                    $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight "
                             ." FROM {$CONFIG['TABLE_PICTURES']} WHERE pid='{$album['thumb']}'";
                     $result = cpg_db_query($sql);
                     $picture = mysql_fetch_assoc($result);
                     if (!is_array($picture)) {
-                        $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight " 
+                        $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight "
                             . "FROM {$CONFIG['TABLE_PICTURES']} WHERE pid='{$album['last_pid']}'";
                         $result = cpg_db_query($sql);
                         $picture = mysql_fetch_assoc($result);
                     }
                     mysql_free_result($result);
                 } elseif ($album['thumb'] < 0) {
-                    $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight " 
+                    $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight "
                         . "FROM {$CONFIG['TABLE_PICTURES']} WHERE ((aid = '$aid' $forbidden_set_string) $keyword) $approved "
                         . "ORDER BY RAND() LIMIT 0,1";
                     $result = cpg_db_query($sql);
                     $picture = mysql_fetch_assoc($result);
                     mysql_free_result($result);
                 } else {
-                    $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight " 
+                    $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight "
                         . "FROM {$CONFIG['TABLE_PICTURES']} WHERE pid='{$album['last_pid']}'";
                     $result = cpg_db_query($sql);
                     $picture = mysql_fetch_assoc($result);
@@ -1209,7 +1209,7 @@ if (!$file) {
                         echo $anycontent;
                     }
                     break;
-                
+
                 default:
                     // all meta albums caught here
                     display_thumbnails($matches[1], $cat, 1, $CONFIG['thumbcols'], max(1, $matches[2]), false);

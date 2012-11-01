@@ -97,7 +97,7 @@ class core_udb {
         $USER_DATA['can_see_all_albums'] = $USER_DATA['has_admin_access'];
 
         // avoids a template error
-        if (!$USER_DATA['user_id']) { 
+        if (!$USER_DATA['user_id']) {
             $USER_DATA['can_create_albums'] = 0;
         }
 
@@ -249,9 +249,9 @@ class core_udb {
     function get_user_name($uid)
     {
         static $cache = array();
-        
+
         if (!isset($cache[$uid])) {
-        
+
             $sql = "SELECT {$this->field['username']} as user_name FROM {$this->usertable} WHERE {$this->field['user_id']} = '$uid'";
             $result = cpg_db_query($sql, $this->link_id);
 
@@ -261,7 +261,7 @@ class core_udb {
                 $cache[$uid] = $row['user_name'];
             } else {
                 $cache[$uid] = '';
-            }           
+            }
         }
 
         return $cache[$uid];
@@ -315,8 +315,8 @@ class core_udb {
 
         $result = cpg_db_query("SELECT MAX(group_quota) AS disk_max, MIN(group_quota) AS disk_min, "
                         . "MAX(can_rate_pictures) AS can_rate_pictures, MAX(can_send_ecards) AS can_send_ecards, "
-                        . "MAX(can_post_comments) AS can_post_comments, MAX(can_upload_pictures) AS can_upload_pictures, " 
-                        . "MAX(can_create_albums) AS can_create_albums, " 
+                        . "MAX(can_post_comments) AS can_post_comments, MAX(can_upload_pictures) AS can_upload_pictures, "
+                        . "MAX(can_create_albums) AS can_create_albums, "
                         . "MAX(has_admin_access) AS has_admin_access, "
                         . "MAX(access_level) AS access_level, "
                         . "MIN(pub_upl_need_approval) AS pub_upl_need_approval, MIN( priv_upl_need_approval) AS  priv_upl_need_approval "
@@ -683,7 +683,7 @@ class core_udb {
      * This is a special case used only on upload page (swfupload)
      * @return mixed Array with id and pass hash or false
      */
-    function post_extraction() 
+    function post_extraction()
     {
         // Get the super cage instance
         $superCage = Inspekt::makeSuperCage();
@@ -702,7 +702,7 @@ class core_udb {
     // Simple login by specified username and pass.
     // Used for xp publisher login
     // Needs override for any BBS that is more complex than straight md5(password)
-    function login( $username = null, $password = null, $remember = false ) 
+    function login( $username = null, $password = null, $remember = false )
     {
 
         $encpassword = md5($password);
@@ -732,7 +732,7 @@ class core_udb {
     }
     // end function adv_sort
 
-    function get_user_pass($user_id) 
+    function get_user_pass($user_id)
     {
         $sql =  "SELECT {$this->field['user_id']} AS user_id, {$this->field['password']} AS pass_hash "
             . "FROM {$this->usertable} "

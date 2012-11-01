@@ -8,7 +8,7 @@
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
-  
+
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
@@ -43,7 +43,7 @@ if (isset($bridge_lookup)) {
         function phpbb2018_udb()
         {
             global $BRIDGE;
-            
+
             if (!USE_BRIDGEMGR) {
                 $this->boardurl = 'http://www.yousite.com/phpBB2';
                 require_once('../phpBB2/config.php');
@@ -55,7 +55,7 @@ if (isset($bridge_lookup)) {
             }
             $this->use_post_based_groups = 0;
             $this->multigroups = 1;
-            
+
             // Database connection settings
             $this->db = array(
                 'name' => $dbname,
@@ -64,7 +64,7 @@ if (isset($bridge_lookup)) {
                 'password' => $dbpasswd,
                 'prefix' =>$table_prefix
             );
-            
+
             // Board table names
             $this->table = array(
                 'users' => 'users',
@@ -80,7 +80,7 @@ if (isset($bridge_lookup)) {
             $this->sessionstable =  '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['sessions'];
             $this->usergroupstable = '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['usergroups'];
             $this->sessionskeystable = '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['sessionskeys'];
-            
+
             // Table field names
             $this->field = array(
                 'username' => 'username', // name of 'username' field in users table
@@ -96,24 +96,24 @@ if (isset($bridge_lookup)) {
                 'grouptbl_group_id' => 'group_id', // name of 'group id' field in groups table
                 'grouptbl_group_name' => 'group_name' // name of 'group name' field in groups table
             );
-            
+
             // Pages to redirect to
             $this->page = array(
                 'register' => '/profile.php?mode=register',
                 'editusers' => '/memberlist.php',
                 'edituserprofile' => "/profile.php?mode=viewprofile&u=",
             );
-            
+
             // Group ids - admin and guest only.
             $this->admingroups = array(2);
             $this->guestgroup = 3;
-            
+
             // Use a special function to collect groups for cpg groups table
             $this->group_overrride = 1;
-            
+
             // Cookie settings - used in following functions only
             $this->cookie_name = $BRIDGE['cookie_prefix'];
-            
+
             // Connect to db
             $this->connect();
         }
@@ -121,18 +121,18 @@ if (isset($bridge_lookup)) {
         function collect_groups()
         {
             $sql ="SELECT * FROM {$this->groupstable} WHERE group_single_user = 0";
-        
+
             $result = cpg_db_query($sql, $this->link_id);
-            
+
             $udb_groups = array(102 =>'Administrators', 2=> 'Registered', 3=>'Guests');
-                
+
             while ($row = mysql_fetch_assoc($result))
             {
                 $udb_groups[$row[$this->field['grouptbl_group_id']]+100] = utf_ucfirst(utf_strtolower($row[$this->field['grouptbl_group_name']]));
             }
 
             return $udb_groups;
-            
+
         }
         // definition of how to extract id, name, group from a session cookie
         function session_extraction()
@@ -155,12 +155,12 @@ if (isset($bridge_lookup)) {
                 }
             }
         }
-        
+
         // Get groups of which user is member
         function get_groups($row)
         {
             $data = array();
-            
+
             if ($this->use_post_based_groups){
 
                 $sql = "SELECT ug.{$this->field['usertbl_group_id']}+100 AS group_id FROM {$this->usertable} AS u, {$this->usergroupstable} AS ug, {$this->groupstable} as g WHERE u.{$this->field['user_id']}=ug.{$this->field['user_id']} AND u.{$this->field['user_id']}='{$row['id']}' AND g.{$this->field['grouptbl_group_id']} = ug.{$this->field['grouptbl_group_id']}";
@@ -176,10 +176,10 @@ if (isset($bridge_lookup)) {
             } else {
                 $data[0] = ($this->userlevel == 1 || in_array($row[$this->field['usertbl_group_id']] , $this->admingroups)) ? 1 : 2;
             }
-            
+
             return $data;
         }
-        
+
         // definition of how to extract an id and password hash from a cookie
         function cookie_extraction()
         {
@@ -193,16 +193,16 @@ if (isset($bridge_lookup)) {
                 $sessiondata = unserialize($superCage->cookie->getRaw($this->cookie_name.'_data'));
                 $cookieid = $sessiondata['userid'] > 1 ? intval($sessiondata['userid']) : 0;
                 $cookiepass = (isset($sessiondata['autologinid'])) ? addslashes($sessiondata['autologinid']) : '';
-                $sql = "SELECT u.user_id, u.user_password FROM {$this->sessionskeystable} AS s 
+                $sql = "SELECT u.user_id, u.user_password FROM {$this->sessionskeystable} AS s
                                 INNER JOIN {$this->usertable} AS u ON s.user_id = u.user_id WHERE u.user_id = '$cookieid' AND u.user_active = 1 AND s.key_id = MD5('$cookiepass')";
                 $result = cpg_db_query($sql, $this->link_id);
                 list($id, $pass) = mysql_fetch_row($result);
                 $this->sid = 0;
             }
-            
+
             return ($id) ? array($id, $pass) : false;
         }
-        
+
         // definition of actions required to convert a password from user database form to cookie form
         function udb_hash_db($password)
         {
@@ -212,7 +212,7 @@ if (isset($bridge_lookup)) {
         function login_page()
         {
             global $CONFIG;
-            
+
             $cpg = parse_url($CONFIG['site_url']);
             $bb = parse_url($this->boardurl);
             $levels = count(explode('/', $bb['path'])) - 1;
@@ -224,28 +224,28 @@ if (isset($bridge_lookup)) {
         function logout_page()
         {
             global $CONFIG;
-            
+
             $cpg = parse_url($CONFIG['site_url']);
             $bb = parse_url($this->boardurl);
             $levels = count(explode('/', $bb['path'])) - 1;
             $redirect = str_repeat('../', $levels) . trim($cpg['path'], '/') . '/';
-            
+
             $this->redirect("/login.php?logout=true&sid={$this->sid}&redirect=$redirect");
         }
 
         function view_users() {}
         function view_profile() {}
-        
-        
+
+
         function get_users($options = array())
         {
             global $CONFIG;
-            
+
 
             // Copy UDB fields and config variables (just to make it easier to read)
             $f =& $this->field;
             $C =& $CONFIG;
-            
+
             // Sort codes
             $sort_codes = array('name_a' => 'user_name ASC',
                                 'name_d' => 'user_name DESC',
@@ -260,15 +260,15 @@ if (isset($bridge_lookup)) {
                                 'lv_a' => 'user_lastvisit ASC',
                                 'lv_d' => 'user_lastvisit DESC',
                                );
-            
+
             if (in_array($options['sort'], array('group_a', 'group_d', 'pic_a', 'pic_d', 'disku_a', 'disku_d'))){
-                
+
                 $sort = '';
                 list($this->sortfield, $this->sortdir) = explode(' ', $sort_codes[$options['sort']]);
                 $this->adv_sort = true;
-                
+
             } else {
-                
+
                 $sort = "ORDER BY " . $sort_codes[$options['sort']];
                 $this->adv_sort = false;
             }
@@ -281,18 +281,18 @@ if (isset($bridge_lookup)) {
             $sql = "SELECT group_id, group_name, group_quota FROM {$C['TABLE_USERGROUPS']}";
 
             $result = cpg_db_query($sql);
-            
+
             $groups = array();
-        
+
             while ($row = mysql_fetch_assoc($result)) {
                 $groups[$row['group_id']] = $row;
             }
-            
+
             $sql ="SELECT group_id FROM {$this->groupstable} WHERE group_single_user = 0";
-        
+
             $result = cpg_db_query($sql, $this->link_id);
             $udb_groups = array();
-            
+
             while ($row = mysql_fetch_assoc($result)) {
                 $udb_groups[] = $row['group_id'];
             }
@@ -300,13 +300,13 @@ if (isset($bridge_lookup)) {
 
             $sql = "SELECT u.{$f['user_id']} as user_id, MIN(ug.{$f['grouptbl_group_id']}) AS user_group, {$f['username']} as user_name, {$f['email']} as user_email, {$f['regdate']} as user_regdate, {$f['lastvisit']} as user_lastvisit, '' as user_active, 0 as pic_count, 0 as disk_usage ".
                    "FROM {$this->usertable} AS u ".
-                   "INNER JOIN {$this->usergroupstable} AS ug ON u.{$this->field['user_id']}=ug.{$this->field['user_id']}    ".   
+                   "INNER JOIN {$this->usergroupstable} AS ug ON u.{$this->field['user_id']}=ug.{$this->field['user_id']}    ".
                    "WHERE u.{$f['user_id']} > 0 " . $options['search'].
                    "GROUP BY ug.{$f['user_id']} " . $sort .
                    " LIMIT {$options['lower_limit']}, {$options['users_per_page']};";
 
             $result = cpg_db_query($sql, $this->link_id);
-            
+
             // If no records, return empty value
             if (!mysql_num_rows($result)) {
                 return array();
@@ -314,13 +314,13 @@ if (isset($bridge_lookup)) {
 
             // Extract user list to an array
             while ($user = mysql_fetch_assoc($result)) {
-                
+
                 $gid = 2;
 
                 if ($this->use_post_based_groups){
                     if (in_array($user['user_group'], $udb_groups)){
                         $gid = $user['user_group'] + 100;
-            
+
                     } elseif ($user['user_level'] == 1 || in_array($user['user_group'], $this->admingroups)){
                         $gid = 102;
                     }
@@ -333,9 +333,9 @@ if (isset($bridge_lookup)) {
                 $userlist[$user['user_id']] = array_merge($user, $groups[$gid]);
                 $users[] = $user['user_id'];
             }
-            
+
             $user_list_string = implode(', ', $users);
-            
+
             $sql = "SELECT owner_id, COUNT(pid) as pic_count, ROUND(SUM(total_filesize)/1024) as disk_usage FROM {$C['TABLE_PICTURES']} WHERE owner_id IN ($user_list_string) GROUP BY owner_id";
 
             $result = cpg_db_query($sql);
@@ -349,7 +349,7 @@ if (isset($bridge_lookup)) {
 
             return $userlist;
         }
-        
+
         function adv_sort($a, $b)
         {
             if ($this->sortdir == 'ASC'){

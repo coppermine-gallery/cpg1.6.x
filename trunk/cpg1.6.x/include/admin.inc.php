@@ -173,7 +173,7 @@ $config_data = array(
       'type'          => 'select',
       'default_value' => 'utf-8',
       'help_link'     => 'f=configuration.htm&amp;as=admin_language_charset&amp;ae=admin_language_charset_end',
-      'options'       => array( 
+      'options'       => array(
                            'language file' => 'Default (not recommended)',
                            'iso-8859-6' => 'Arabic (iso-8859-6)',
                            'iso-8859-4' => 'Baltic (iso-8859-4)',
@@ -641,7 +641,7 @@ $config_data = array(
       'size'          => '5',
       'width'         => '75',
       'maxlength'     => '5',
-      
+
     ),
     'max_com_wlength' => array(
       'type'          => 'textfield',

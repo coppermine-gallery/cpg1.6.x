@@ -122,7 +122,7 @@ EOT;
                 print '</a>';
             }
         }
-        
+
         list($timestamp, $form_token) = getFormToken();
         $assignedGroupsHelp = cpg_display_help('f=groups.htm&amp;as=group_cp_assigned&amp;ae=group_cp_assigned_end', '450', '300');
         echo <<< EOT
@@ -136,7 +136,7 @@ EOT;
             $value = $group[$field_name];
             $yes_selected = ($value == 1) ? 'checked="checked"' : '';
             $no_selected = ($value == 0) ? 'checked="checked"' : '';
-            
+
             if ($field_name == 'can_rate_pictures') {
                 echo $table_start.$tr_start.$td_start.$lang_groupmgr_php['rating'].$td_end;
             } elseif ($field_name == 'can_send_ecards') {
@@ -152,7 +152,7 @@ EOT;
             } elseif ($field_name == 'priv_upl_need_approval') {
                 echo $tr_start.$td_start.$lang_groupmgr_php['approval'].$td_end;
             }
-            
+
             if ($group['group_id'] == 3 && $CONFIG['allow_unlogged_access'] == 0) {
                 $disabled_yes = 'disabled="disabled"';
                 $disabled_no = 'disabled="disabled"';
@@ -160,7 +160,7 @@ EOT;
                 $disabled_yes = '';
                 $disabled_no = '';
             }
-            
+
             echo <<< EOT
             $td_start
             <input type="radio" id="{$field_name}_{$group['group_id']}1" name="{$field_name}_{$group['group_id']}" value="1" $yes_selected $disabled_yes /><label for="{$field_name}_{$group['group_id']}1" class="clickable_option">{$lang_common['yes']}</label>
@@ -171,7 +171,7 @@ EOT;
                         $tr_end
 
 EOT;
-            if ($field_name== 'can_post_comments' || $field_name== 'pub_upl_need_approval') { 
+            if ($field_name== 'can_post_comments' || $field_name== 'pub_upl_need_approval') {
                 echo $table_end . "</td><td class=\"$table_background\" align=\"left\" valign=\"top\">";
             } else {
                 echo "<!--<br />-->";
@@ -220,7 +220,7 @@ function process_post_data()
 {
     global $CONFIG, $lang_errors;
     $superCage = Inspekt::makeSuperCage();
-    
+
     //Check if the form token is valid
     if(!checkFormToken()){
         cpg_die(ERROR, $lang_errors['invalid_form_token'], __FILE__, __LINE__);

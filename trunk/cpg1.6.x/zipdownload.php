@@ -8,7 +8,7 @@
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
-  
+
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
@@ -38,7 +38,7 @@ EOT;
 } else {
     // zipdownload allowed, go ahead...
     $filelist = array();
-    
+
     if (count($FAVPICS) > 0) {
         if ($CONFIG['enable_zipdownload'] == 2) {
             $params = array(
@@ -65,26 +65,26 @@ EOT;
                 // We'll continue anyway.
             }
         }
-                
+
         $favs = implode(', ', $FAVPICS);
 
         $result = cpg_db_query("SELECT filepath, filename FROM {$CONFIG['TABLE_PICTURES']} WHERE approved = 'YES' AND pid IN ($favs)");
         $rowset = cpg_db_fetch_rowset($result);
-        
+
         foreach ($rowset as $key => $row) {
                 $filelist[] = $rowset[$key]['filepath'].$rowset[$key]['filename'];
         }
     }
-    
+
     $filename = 'edit/pictures-' . uniqid() . '.zip';
     $zip = new zip_file($filename);
-    
+
     $options = array(
         'basedir'    => "./{$CONFIG['fullpath']}",
         'recurse'    => 0,
         'storepaths' => 0,
     );
-   
+
     $zip->set_options($options);
     $zip->add_files($filelist);
     $zip->create_archive();
@@ -92,9 +92,9 @@ EOT;
     if ($CONFIG['enable_zipdownload'] == 2) {
         @unlink($CONFIG['fullpath'].'edit/'.$readme_filename);
     }
-    
+
     ob_end_clean();
-    
+
     header('Location: ' . $CONFIG['site_url'] . $CONFIG['fullpath'] . $filename);
 }
 

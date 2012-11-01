@@ -8,7 +8,7 @@
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
-  
+
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
@@ -75,7 +75,7 @@ if ($search_string && isset($search_params['params'])) {
                 $fields = array();
                 $search_string = preg_replace('/[^\w\+\*\?\{\,\}\|\(\)\\\^\$\[\]\:\<\>\-\.]/','',$search_string);
                 $search_string = addslashes($search_string);
-                if ($superCage->get->keyExists('album_title') || $superCage->get->keyExists('category_title')) $albcat_terms[] = " REGEXP '$search_string'";                
+                if ($superCage->get->keyExists('album_title') || $superCage->get->keyExists('category_title')) $albcat_terms[] = " REGEXP '$search_string'";
                 foreach ($search_params['params'] as $param => $value) {
                         if (in_array($param, $allowed)) $fields[] = "$param REGEXP '$search_string'";
                 }
@@ -87,11 +87,11 @@ if ($search_string && isset($search_params['params'])) {
                 foreach ($split_search as $index => $string) {
                         if (($index & 1) && strlen($string)) {
                                 $fields = array();
-                                if ($superCage->get->keyExists('album_title') || $superCage->get->keyExists('category_title')) $albcat_terms[] = " LIKE '%$string%'";                                
+                                if ($superCage->get->keyExists('album_title') || $superCage->get->keyExists('category_title')) $albcat_terms[] = " LIKE '%$string%'";
                                 foreach ($search_params['params'] as $param => $value) {
                                         if (in_array($param, $allowed)) $fields[] = "$param LIKE '%$string%'";
                                 }
-                                $sections[] = count($fields) ? '(' . implode(' OR ', $fields) . ')' : '';  
+                                $sections[] = count($fields) ? '(' . implode(' OR ', $fields) . ')' : '';
                         } elseif (strlen($string)) {
                                 $words = explode(' ', $string);
                                 foreach ($words as $word) {
@@ -102,12 +102,12 @@ if ($search_string && isset($search_params['params'])) {
                                                 foreach ($search_params['params'] as $param => $value) {
                                                         if (in_array($param, $allowed)) $fields[] = "$param LIKE '%$word%'";
                                                 }
-                                                $sections[] = count($fields) ? '(' . implode(' OR ', $fields) . ')' : '';  
+                                                $sections[] = count($fields) ? '(' . implode(' OR ', $fields) . ')' : '';
                                         }
                                 }
                         }
                 }
-                
+
                 $sql .= count($sections) ? '(' . implode($type, $sections) . ')' : '0';
         }
 
@@ -137,16 +137,16 @@ if ($search_string && isset($search_params['params'])) {
                                 <tr>
                                   <td colspan="3" height="1" valign="top" class="tableh2">
                                     <span class="alblink"><a href="<?php printf("thumbnails.php?album=%u", $alb['aid']); ?>"><?php echo $alb['title'] ?></a></span>
-                                  </td>  
+                                  </td>
                                 </tr>
                                 <tr>
                                         <td colspan="3">
                                                 <img src="images/spacer.gif" width="1" height="1" border="0" alt="" /><br />
                                         </td>
-                                </tr>                                
+                                </tr>
                                 <tr>
                                   <td>
-                                    <a href="<?php printf("thumbnails.php?album=%u", $alb['aid']); ?> "> 
+                                    <a href="<?php printf("thumbnails.php?album=%u", $alb['aid']); ?> ">
                                         <img src="<?php echo $thumb_url?>"  class="image" <?php echo $thumb_size['geom'] ?> border="0" alt="<?php echo $thumb['filename'] ?>">
                                     </a>
                                   </td>
@@ -157,10 +157,10 @@ if ($search_string && isset($search_params['params'])) {
                                 <?php
                         }
                         endtable();
-                        echo '<br/>';                        
+                        echo '<br/>';
                 }
         }
-                                              
+
         if ($superCage->get->keyExists('category_title')) {
                 $category_query = "SELECT cid, name FROM `{$CONFIG['TABLE_CATEGORIES']}` WHERE (`name` " . implode(" $type `name` ",$albcat_terms) . ')';
                 $result = cpg_db_query($category_query);
@@ -186,16 +186,16 @@ if ($search_string && isset($search_params['params'])) {
                                 <tr>
                                   <td colspan="3" height="1" valign="top" class="tableh2">
                                     <span class="alblink"><a href="<?php printf("index.php?cat=%u", $cat['cid']); ?>"><?php echo $cat['name'] ?></a></span>
-                                  </td>  
+                                  </td>
                                 </tr>
                                 <tr>
                                         <td colspan="3">
                                                 <img src="images/spacer.gif" width="1" height="1" border="0" alt="" /><br />
                                         </td>
-                                </tr>                                
+                                </tr>
                                 <tr>
                                   <td>
-                                    <a href="<?php printf("thumbnails.php?album=%u", $album['aid']); ?> "> 
+                                    <a href="<?php printf("thumbnails.php?album=%u", $album['aid']); ?> ">
                                         <img src="<?php echo $thumb_url?>"  class="image" <?php echo $thumb_size['geom'] ?> border="0" alt="<?php echo $thumb['filename'] ?>"><br/>
                                         <?php if ($album['title'] == "") { echo '&nbsp;'; } else { printf("<a href='thumbnails.php?album=%u'>{$album['title']}</a>", $album['aid']); } ?>
                                     </a>
@@ -216,8 +216,8 @@ if ($search_string && isset($search_params['params'])) {
                 $other = 1;
             }
         }
-        
-        
+
+
         if (!$other) {
             $sql = '0';
         }
@@ -236,7 +236,7 @@ if ($search_string && isset($search_params['params'])) {
             $result = cpg_db_query($query);
             $criteria_pid = mysql_result($result, 0);
             mysql_free_result($result);
-            
+
             if ($direction == "ASC") {
                 $direction = "<";
             } elseif ($direction == "DESC") {
@@ -259,7 +259,7 @@ if ($search_string && isset($search_params['params'])) {
 
         } else {
 
-            $query = "SELECT p.*{$user_column} FROM {$CONFIG['TABLE_PICTURES']} AS p 
+            $query = "SELECT p.*{$user_column} FROM {$CONFIG['TABLE_PICTURES']} AS p
             $join_user_table
             WHERE " . $sql;
 
