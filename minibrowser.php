@@ -161,7 +161,7 @@ EOT;
 
 starttable(-2, $lang_minibrowser_php['select_directory'], 2);
 if (!GALLERY_ADMIN_MODE) {
-    cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__); 
+    cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
 }
 
 // Remove $base_folder because it doesn't appear necessary and breaks on Windows servers

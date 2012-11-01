@@ -81,11 +81,11 @@ function alb_get_subcat_data($parent, $ident = '')
 }
 
 
-list($timestamp, $form_token) = getFormToken(); 
+list($timestamp, $form_token) = getFormToken();
 
 // Set the message variables for the javascript file
 // confirm album modifications
-set_js_var('confirm_modifs', $lang_albmgr_php['confirm_modifs']);  
+set_js_var('confirm_modifs', $lang_albmgr_php['confirm_modifs']);
 // confirm album delete
 set_js_var("confirm_delete", $lang_albmgr_php['confirm_delete1'] . "\n" . $lang_albmgr_php['confirm_delete2']);
 // alert when try to delete album without an album selected
@@ -146,7 +146,7 @@ starttable('100%', cpg_fetch_icon('alb_mgr', 2).$lang_albmgr_php['title'].'&nbsp
     <tr>
         <td>
 EOT;
-    
+
 if (GALLERY_ADMIN_MODE) {
     $result = cpg_db_query("SELECT aid, title FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = $cat ORDER BY pos ASC");
 } elseif (USER_ADMIN_MODE) {
@@ -205,11 +205,11 @@ EOT;
         </td>
     </tr>
     <tr>
-        <td class="tableb"> 
+        <td class="tableb">
             <div id="sort">
 EOT;
 
-if (count($rowset) > 0) { 
+if (count($rowset) > 0) {
 
     echo '              <table id="album_sort" cellspacing="0" cellpadding="0" border="0">';
 
@@ -235,18 +235,18 @@ EOT;
             <table class="tableb album_operate" cellspacing="0" cellpadding="0" border="0" width="100%">
                 <tr>
                     <td id="control">
-      
+
 EOT;
 // Only show move-buttons when admin or in user's private category.
 // Sorting is also prevented in delete.php when user doesn't have the rights.
 if (GALLERY_ADMIN_MODE || ($cat == USER_ID + FIRST_USER_CAT)) {
-    
+
     if (defined('THEME_HAS_PROGRESS_GRAPHICS')) {
         $prefix = $THEME_DIR;
     } else {
         $prefix = '';
-    }   
-    
+    }
+
     echo <<< EOT
                         <button type="button" id="upup_click" name="upup_click" class="button" value="{$lang_common['move_top']}" disabled="disabled" title="{$lang_common['move_top']}">{$icon_array['upup']}</button>
                         <button type="button" id="up_click" name="up_click" class="button" value="{$lang_common['move_up']}" disabled="disabled" title="{$lang_common['move_up']}">{$icon_array['up']}</button>
@@ -254,7 +254,7 @@ if (GALLERY_ADMIN_MODE || ($cat == USER_ID + FIRST_USER_CAT)) {
                         <button type="button" id="downdown_click" name="downdown_click" class="button" value="{$lang_common['move_bottom']}" disabled="disabled" title="{$lang_common['move_bottom']}">{$icon_array['downdown']}</button>
 EOT;
 
-} 
+}
     //we still need to show buttons to add/edit albums
     echo <<< EOT
                         <button type="button" id="delete_album" name="delete_album" class="button" value="{$lang_albmgr_php['delete_album']}" disabled="disabled" title="{$lang_albmgr_php['delete_album']}">{$icon_array['delete']}</button>
@@ -287,7 +287,7 @@ EOT;
     </tr>
 
 EOT;
-    
+
 endtable();
 echo '</form>';
 pagefooter();

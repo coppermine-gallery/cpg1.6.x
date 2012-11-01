@@ -89,7 +89,7 @@ if ( !isset($_POST['userid']) ) {
     echo 'Cannot access input via $_POST -- use the cage object';
 }</pre>
     <p>We can see from the above example that after making a cage for <tt class="code">$_POST</tt>, it is not accessible directly. One must use the methods provided by Inspekt to get the data in correct data type and format.</p>
-    
+
     <a name="superglobals_sanitization_howto_inspekt_in_coppermine"></a><h3>Inspekt in Coppermine<a href="#superglobals_sanitization_howto_inspekt_in_coppermine" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <p>Inspekt has been used in CPG by including it in init.inc.php file at the very beginning and creating a <strong>supercage</strong> immediately after its inclusion.</p>
     <pre class="cpg_code">set_include_path(get_include_path().PATH_SEPARATOR.dirname(__FILE__).PATH_SEPARATOR.'Inspekt');
@@ -123,10 +123,10 @@ $title = $superCage->post->getAlpha('title');</pre>
         </tr>
     </table>
     <p>Every dev is encouraged to download the latest tarball of Inspekt and checkout the API documentation for the list of <a href="#superglobals_sanitization_inspekt_accessor_methods">available methods for accessing data from cages</a>. In addition to this, there is a bunch of test functions which will test a value of a given key against a pre-determined datatype or format.</p>
-    
+
     <a name="superglobals_sanitization_howto_consider_methods"></a><h3>Consider the methods to use<a href="#superglobals_sanitization_howto_consider_methods" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <p>Before using a particular method, make up your mind what kind of data you expect to retrieve: is the data you expect just an integer (e.g. &quot;0&quot; or &quot;1&quot; used in a parameter to toggle an option on or off) - then use <tt class="code">getInt</tt>. Do you expect an alphanumeric string (with only alphanumeric data, no spaces, no special chars nor non-latin characters), like the parameter of a pre-determined action (e.g. &quot;delete&quot;, &quot;update&quot; or &quot;add&quot;), then use <tt class="code">getAlnum</tt> or <tt class="code">getAlpha</tt>. If the parameter you're trying to fetch <em>may</em> contain something else (e.g. a filename that may only contain latin characters, but that may as well contain utf-8 encoded non-latin characters like Umlauts), then use getMatched and perform a match against a regular expression - you may even have to sanitize the value even more after fetching it.</p>
-    
+
     <a name="superglobals_sanitization_howto_examples"></a><h3>Examples<a href="#superglobals_sanitization_howto_examples" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <p>Here are some real-world examples of how code used to look initially (before Inspekt was introduced) and what was changed to make it work with Inspekt.</p>
 <table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra">

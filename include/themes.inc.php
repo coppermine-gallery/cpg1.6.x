@@ -71,7 +71,7 @@ if (!function_exists('assemble_template_buttons')) {  //{THEMES}
 ******************************************************************************/
 // Creates buttons from a template using an array of tokens
 // this function is used in this file it needs to be declared before being called.
-function assemble_template_buttons($template_buttons,$buttons) 
+function assemble_template_buttons($template_buttons,$buttons)
 {
     $counter=0;
     $output='';
@@ -107,7 +107,7 @@ if (!function_exists('addbutton')) {  //{THEMES}
 ******************************************************************************/
 // Creates an array of tokens to be used with function assemble_template_buttons
 // this function is used in this file it needs to be declared before being called.
-function addbutton(&$menu,$href_lnk,$href_title,$href_tgt,$block_id,$spacer,$href_attrib='') 
+function addbutton(&$menu,$href_lnk,$href_title,$href_tgt,$block_id,$spacer,$href_attrib='')
 {
     $menu[]=array($href_lnk,$href_title,$href_tgt,$block_id,$spacer,$href_attrib);
 }
@@ -1061,7 +1061,7 @@ $template_image_comments = <<<EOT
                 <form name="f{MSG_ID}" id="f{MSG_ID}" method="POST" action="db_input.php">
                     <table width="100%" cellpadding="0" cellspacing="0">
                         <tr>
-                            <td>    
+                            <td>
                                 <input type="hidden" name="event" value="comment_update" />
                                 <input type="hidden" name="msg_id" value="{MSG_ID}" />
                             </td>
@@ -1574,7 +1574,7 @@ function pageheader($section, $meta = '')
         '{JAVASCRIPT}' => theme_javascript_head(),
         '{MESSAGE_BLOCK}' => theme_display_message_block(),
     );
-    
+
     $template_vars = CPGPluginAPI::filter('theme_pageheader_params', $template_vars);
     echo template_eval($template_header, $template_vars);
 
@@ -1696,7 +1696,7 @@ function theme_javascript_head()
     global $JS, $LINEBREAK;
 
     $return = '';
-    
+
     // Check if we have any variables being set using set_js_vars function
     if (!empty($JS['vars'])) {
         // Convert the $JS['vars'] array to json object string
@@ -1714,7 +1714,7 @@ EOT;
 
     // Check if we have any js includes
     if (!empty($JS['includes'])) {
-        // Bring the jquery core library to the very top of the list 
+        // Bring the jquery core library to the very top of the list
         if (in_array('js/jquery-1.4.2.js', $JS['includes']) == TRUE) {
             $key = array_search('js/jquery-1.4.2.js', $JS['includes']);
             unset($JS['includes'][$key]);
@@ -1726,7 +1726,7 @@ EOT;
             $return .= js_include($js_file, true) . $LINEBREAK;
         }
     }
-    
+
     return $return;
 }
 /******************************************************************************
@@ -2109,9 +2109,9 @@ function theme_main_menu($which)
         if ($CONFIG['display_sidebar_user'] != 2) {
           template_extract_block($template_sys_menu, 'sidebar');
         }
-        
+
         list($timestamp, $form_token) = getFormToken();
-        
+
     } else { // visitor is not logged in
         if ($CONFIG['contact_form_guest_enable'] == 0) {
           template_extract_block($template_sys_menu, 'contact');
@@ -2121,7 +2121,7 @@ function theme_main_menu($which)
         }
         template_extract_block($template_sys_menu, 'logout');
         template_extract_block($template_sys_menu, 'my_profile');
-        
+
         $timestamp = $form_token = '';
     }
 
@@ -2902,7 +2902,7 @@ function theme_display_thumbnails(&$thumb_list, $nbThumb, $album_name, $aid, $ca
             '{DOWNLOAD_ZIP}' => cpg_fetch_icon ('zip', 2) . $lang_thumb_view['download_zip'],
         );
         // Plugin Filter: allow plugin to modify or add tags to process
-        $param = CPGPluginAPI::filter('theme_thumbnails_title', $param);        
+        $param = CPGPluginAPI::filter('theme_thumbnails_title', $param);
         $title = template_eval($template_fav_thumb_view_title_row, $param);
     } else {
         $title = $album_name;
@@ -2986,7 +2986,7 @@ function theme_display_thumbnails(&$thumb_list, $nbThumb, $album_name, $aid, $ca
     for (;($i % $thumbcols); $i++) {
         echo $empty_cell;
     }
-    $footer = CPGPluginAPI::filter('theme_thumbnails_footer', $footer); 
+    $footer = CPGPluginAPI::filter('theme_thumbnails_footer', $footer);
     echo $footer;
 
     if ($display_tabs) {
@@ -3288,7 +3288,7 @@ function theme_html_picture()
             if ($resize_method == 'ht') {
                 $pwidth = $CONFIG['picture_width']*4/3;
                 $pheight = $CONFIG['picture_width'];
-            } else { 
+            } else {
                 $pwidth = $CONFIG['picture_width'];
                 $pheight = $CONFIG['picture_width']*3/4;
             }
@@ -3562,7 +3562,7 @@ function theme_html_img_nav_menu() {
     $report_tgt = '';
     if (($CONFIG['report_post']==1) && (USER_CAN_SEND_ECARDS)) {
         $report_tgt = "report_file.php?album=$album$cat_link$date_link&amp;pid=$pid&amp;pos=$pos";
-    } else { 
+    } else {
         // remove button if report toggle is off
         template_extract_block($template_img_navbar, 'report_file_button');
     }
@@ -3795,7 +3795,7 @@ function theme_html_comments($pid)
         echo '<br />';
         starttable();
 
-        
+
         echo '<tr><td class="tableh2"><div style="float: left">'.$lang_display_comments['comment'].' '.sprintf($lang_display_comments['comment_x_to_y_of_z'], ($start+1), min($num, $start+$limit), $num).'</div>';
         echo '<div style="float: right">'.$lang_display_comments['page'].': ';
         $links = array();
@@ -4249,8 +4249,8 @@ if (!function_exists('theme_display_bar')) {  //{THEMES}
 /**
 * theme_display_bar()
 *
-* Display a bar graph. 
-* For a list of possible valid color names, look up the function definition of 
+* Display a bar graph.
+* For a list of possible valid color names, look up the function definition of
 * cpgValidateColor in include/functions.inc.php
 *
 * @param float $actualValue
@@ -4271,7 +4271,7 @@ function theme_display_bar(
                        $textUnit = '',
                        $leftBar = 'red',
                        $rightBar = ''
-                       ) 
+                       )
 {
     global $lang_errors;
     // Validate parameters
@@ -4341,7 +4341,7 @@ if (!function_exists('theme_page_title')) { //{THEMES}
 ******************************************************************************/
 // Creates the title tag for each page
 // For the sake of search engine friendliness, the dynamic part $section should come first
-function theme_page_title($section) 
+function theme_page_title($section)
 {
     global $CONFIG;
     $return = strip_tags(bb_decode($section)) . ' - ' . $CONFIG['gallery_name'];

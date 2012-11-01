@@ -19,16 +19,16 @@
     The category manager needs to be able to work with hundreds of categories
     without hitting the PHP memory limit. The way it does this is to delay
     populating the dropdown boxes until they are actually clicked on.
-    
+
     It loads the list of categories using javascript from the main selector
     at the bottom of the screen. All other selectors contain only the current
     parent category until clicked on.
-    
+
     This means the page is much smaller and is usable with lots of categories.
-    
+
     Without this, the dropdown boxes grow exponentially as each category has the
     option to be moved into all other categories.
-    
+
     If you make major changes to this page, please test with 200-300 categories
     nested several levels deep.
 */
@@ -64,30 +64,30 @@ function get_subcat_data($parent, $ident = '')
 {
     global $CONFIG, $CAT_LIST;
 
-    $sql = "SELECT rgt, cid, parent, name, pos FROM {$CONFIG['TABLE_CATEGORIES']} ORDER BY lft ASC"; 
+    $sql = "SELECT rgt, cid, parent, name, pos FROM {$CONFIG['TABLE_CATEGORIES']} ORDER BY lft ASC";
     $result = cpg_db_query($sql);
 
     if (mysql_num_rows($result) > 0) {
         $rowset = cpg_db_fetch_rowset($result);
-        
-        $right = array(); 
-        
+
+        $right = array();
+
         foreach ($rowset as $subcat) {
-        
+
             if (count($right) > 0) {
-            
+
                 // check if we should remove a node from the stack
                 while ($right && $right[count($right) - 1]['rgt'] < $subcat['rgt']) {
                     $prev = array_pop($right);
                     $last_index = $prev_cid = $prev['cid'];
                 }
             }
-                
+
             $ident = str_repeat('&nbsp;&nbsp;&nbsp;', count($right));
-            $right[] = $subcat; 
-               
+            $right[] = $subcat;
+
             if ($subcat['pos'] > 0) {
-            
+
                 $CAT_LIST[$subcat['cid']] = array(
                     'cid'       => $subcat['cid'],
                     'parent'    => $subcat['parent'],
@@ -96,11 +96,11 @@ function get_subcat_data($parent, $ident = '')
                     'cat_count' => 0,
                     'name'      => $ident . $subcat['name'],
                 );
-                
+
                 $CAT_LIST[$last_index]['next'] = $subcat['cid'];
-                
+
             } else {
-            
+
                 $CAT_LIST[$subcat['cid']] = array(
                     'cid'       => $subcat['cid'],
                     'parent'    => $subcat['parent'],
@@ -109,7 +109,7 @@ function get_subcat_data($parent, $ident = '')
                     'name'      => $ident . $subcat['name'],
                 );
             }
-            
+
             $CAT_LIST[$subcat['parent']]['cat_count']++;
         }
     }
@@ -144,7 +144,7 @@ function cat_list_box($cid, &$parent, $on_change_refresh = true)
                 $lb .= '    <option value="' . $category['cid'] . '"' . ($parent == $category['cid'] ? '" selected="selected"': '') . ">" . $category['name'] . '</option>' . $LINEBREAK;
             }
         }
-        
+
         $lb .= '</select>';
     }
 
@@ -161,19 +161,19 @@ function cat_list_box($cid, &$parent, $on_change_refresh = true)
 function usergroup_list_box($cid)
 {
     global $CONFIG, $LINEBREAK, $cpg_udb;
-    
+
     $add = $cpg_udb->use_post_based_groups ? 100 : 0;
     $exclude_groups = array($cpg_udb->guestgroup + $add);
     foreach ($cpg_udb->admingroups as $id) {
         $exclude_groups[] = $id + $add;
     }
-    
+
     //get the category info from the db
     $sql = "SELECT ug.group_name AS name, ug.group_id AS id, catm.group_id AS catm_gid FROM {$CONFIG['TABLE_USERGROUPS']} AS ug LEFT JOIN {$CONFIG['TABLE_CATMAP']} AS catm ON catm.group_id = ug.group_id AND catm.cid = $cid";
     $sql .= " HAVING id NOT IN (".implode(', ', $exclude_groups).")"; // don't list administrator and guest groups
     $result = cpg_db_query($sql);
     $rowset = cpg_db_fetch_rowset($result);
-    
+
     //put the values in an array for ease of use and clean code for now
     foreach ($rowset as $row) {
         $groups[$row['id']]['name'] = $row['name'];
@@ -183,17 +183,17 @@ function usergroup_list_box($cid)
             $groups[$row['id']]['selected'] = 'false';
         }
     }
-    
+
     //create listbox
     $usergroup_listbox = '<select name="user_groups[]" class="listbox" multiple="multiple">' . $LINEBREAK;
-    
+
     //loop through all groups
     foreach ($groups as $id => $values) {
         $usergroup_listbox .= '    <option value="' . $id . '"' . ($values['selected'] == 'true'? 'selected="selected"' : '') . ' >' . $values['name'] . '</option>' . $LINEBREAK;
     }
-    
+
     $usergroup_listbox .= '</select>' . $LINEBREAK;
-    
+
     //return listbox
     return $usergroup_listbox;
 }
@@ -201,11 +201,11 @@ function usergroup_list_box($cid)
 function form_alb_thumb()
 {
     global $CONFIG, $lang_catmgr_php, $lang_modifyalb_php, $current_category, $cid, $USER_DATA;
-    
+
     $results = cpg_db_query("SELECT pid, filepath, filename, url_prefix FROM {$CONFIG['TABLE_PICTURES']} AS p INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS a ON a.aid = p.aid WHERE a.category = $cid AND approved = 'YES' ORDER BY filename");
 
     if (mysql_num_rows($results) == 0) {
-    
+
         echo <<<EOT
 
         <tr>
@@ -221,12 +221,12 @@ function form_alb_thumb()
 EOT;
         return;
     }
-    
+
     $cpg_nopic_data = cpg_get_system_thumb('nopic.jpg', $USER_DATA['user_id']);
     $initial_thumb_url = $cpg_nopic_data['thumb']; //'images/nopic.jpg';
 
     echo <<< EOT
-    
+
 <script language="JavaScript" type="text/JavaScript">
 var Pic = new Array()
 
@@ -235,20 +235,20 @@ Pic[0] = '$initial_thumb_url'
 EOT;
 
     $img_list = array(0 => $lang_modifyalb_php['last_uploaded']);
-    
+
     while ($picture = mysql_fetch_assoc($results)) {
-    
+
         $thumb_url = get_pic_url($picture, 'thumb');
-        
+
         echo "Pic[{$picture['pid']}] = '" . $thumb_url . "'\n";
-        
+
         if ($picture['pid'] == $current_category['thumb']) {
             $initial_thumb_url = $thumb_url;
         }
-        
+
         $img_list[$picture['pid']] = htmlspecialchars($picture['filename']);
     } // while
-    
+
     echo <<< EOT
 
 </script>
@@ -275,7 +275,7 @@ EOT;
     foreach ($img_list as $pid => $pic_name) {
         echo '                            <option value="' . $pid . '"' . (!empty($current_category['thumb']) && $pid == $current_category['thumb'] ? ' selected':'') . '>' . $pic_name . '</option>' . $LINEBREAK;
     }
-    
+
     echo <<<EOT
                         </select>
                 </td>
@@ -287,27 +287,27 @@ EOT;
 function display_cat_list()
 {
     global $CAT_LIST, $CONFIG, $lang_catmgr_php, $lang_common, $CPG_PHP_SELF, $LINEBREAK;
-    
+
     $CAT_LIST3 = $CAT_LIST;
 
     $loop_counter = 0;
-    
+
     list($timestamp, $form_token) = getFormToken();
     $form_token = "&amp;form_token={$form_token}&amp;timestamp={$timestamp}";
-    
+
 
     foreach ($CAT_LIST3 as $key => $category) {
-    
+
         if ($category['cid'] == 0) {
             continue;
         }
-          
+
         if ($loop_counter == 0) {
             $row_style_class = 'tableb';
         } else {
             $row_style_class = 'tableb tableb_alternate';
         }
-        
+
         $loop_counter++;
 
         if ($loop_counter > 1) {
@@ -367,17 +367,17 @@ if ($superCage->post->keyExists('update_config')) {
     if(!checkFormToken()){
         cpg_die(ERROR, $lang_errors['invalid_form_token'], __FILE__, __LINE__);
     }
-    
+
     $value = $superCage->post->getInt('categories_alpha_sort');
-    
+
     cpg_config_set('categories_alpha_sort', $value);
-    
+
     rebuild_tree();
 }
 
 if ($superCage->get->keyExists('op')) {
     $op = $superCage->get->getAlpha('op');
-    
+
     //Check if the form token is valid
     if(!checkFormToken()){
         cpg_die(ERROR, $lang_errors['invalid_form_token'], __FILE__, __LINE__);
@@ -446,7 +446,7 @@ case 'movetop':
         $iCID = $jCID;
         $iPos = $jPos;
     }
-    
+
     break;
 
 case 'movebottom':
@@ -505,7 +505,7 @@ case 'setparent':
     } else {
         cpg_die(ERROR, "You cannot move a category into its own child", __FILE__, __LINE__);
     }
-    
+
     break;
 
 case 'editcat':
@@ -515,15 +515,15 @@ case 'editcat':
     }
 
     $cid = $superCage->get->getInt('cid');
-    
+
     $result = cpg_db_query("SELECT cid, name, parent, description, thumb FROM {$CONFIG['TABLE_CATEGORIES']} WHERE cid = $cid");
 
     if (!mysql_num_rows($result)) {
         cpg_die(ERROR, $lang_catmgr_php['unknown_cat'], __FILE__, __LINE__);
     }
-    
+
     $current_category = mysql_fetch_assoc($result);
-    
+
     break;
 
 case 'updatecat':
@@ -535,8 +535,8 @@ case 'updatecat':
     if ($superCage->post->keyExists('name')) {
         $name = $superCage->post->getEscaped('name');
         $name = trim($name);
-    } 
-    
+    }
+
     if (empty($name)){
         $name = '&lt;???&gt;';
         break;
@@ -545,11 +545,11 @@ case 'updatecat':
     $cid    = $superCage->post->getInt('cid');
     $parent = $superCage->post->getInt('parent');
     $thumb  = $superCage->post->getInt('thumb');
- 
+
     $description = $superCage->post->getEscaped('description');
 
     $children = array();
-    
+
     verify_children($cid, $cid);
 
     if (!in_array($parent, $children)) {
@@ -557,18 +557,18 @@ case 'updatecat':
     } else {
         cpg_db_query("UPDATE {$CONFIG['TABLE_CATEGORIES']} SET name = '$name', description = '$description', thumb = $thumb, lft = 0 WHERE cid = $cid");
     }
-            
+
     //insert in categorymap
     //first delete all of this category in categorymap
     cpg_db_query("DELETE FROM {$CONFIG['TABLE_CATMAP']} WHERE cid = $cid");
-    
+
     //then add the new ones
     if ($superCage->post->keyExists('user_groups')) {
         foreach ($superCage->post->getInt('user_groups') as $key) {
             cpg_db_query("INSERT INTO {$CONFIG['TABLE_CATMAP']} (cid, group_id) VALUES ($cid, $key)");
         }
     }
-    
+
     break;
 
 case 'createcat':
@@ -579,7 +579,7 @@ case 'createcat':
     if ($superCage->post->keyExists('name')) {
         $name = $superCage->post->getEscaped('name');
         $name = trim($name);
-    } 
+    }
 
     if (empty($name)) {
         $name = '&lt;???&gt;';
@@ -591,16 +591,16 @@ case 'createcat':
     $description = $superCage->post->getEscaped('description');
 
     cpg_db_query("INSERT INTO {$CONFIG['TABLE_CATEGORIES']} (pos, parent, name, description) VALUES (10000, $parent, '$name', '$description')");
-    
+
     //insert in categorymap
     $cid = cpg_db_last_insert_id();
-    
+
     if ($superCage->post->keyExists('user_groups')) {
         foreach ($superCage->post->getInt('user_groups') as $key) {
             cpg_db_query("INSERT INTO {$CONFIG['TABLE_CATMAP']} (cid, group_id) VALUES ($cid, $key)");
         }
     }
-    
+
     break;
 
 case 'deletecat':
@@ -614,20 +614,20 @@ case 'deletecat':
     if ($cid == 1) {
         cpg_die(ERROR, $lang_catmgr_php['usergal_cat_ro'], __FILE__, __LINE__);
     }
-    
+
     $result = cpg_db_query("SELECT parent FROM {$CONFIG['TABLE_CATEGORIES']} WHERE cid = $cid");
-    
+
     if (!mysql_num_rows($result)) {
         cpg_die(ERROR, $lang_catmgr_php['unknown_cat'], __FILE__, __LINE__);
     }
-    
+
     $del_category = mysql_fetch_assoc($result);
     $parent = $del_category['parent'];
-    
+
     cpg_db_query("UPDATE {$CONFIG['TABLE_CATEGORIES']} SET parent = $parent, lft = 0 WHERE parent = $cid");
     cpg_db_query("UPDATE {$CONFIG['TABLE_ALBUMS']} SET category = $parent WHERE category = $cid");
     cpg_db_query("DELETE FROM {$CONFIG['TABLE_CATEGORIES']} WHERE cid = $cid");
-    
+
     //delete from categorymap
     cpg_db_query("DELETE FROM {$CONFIG['TABLE_CATMAP']} WHERE cid = $cid");
 
@@ -698,7 +698,7 @@ echo <<<EOT
                 <th colspan="6" class="tableh1" align="center"><strong><span class="statlink">{$lang_catmgr_php['operations']}</span></strong></th>
                 <th class="tableh1" align="center"><strong><span class="statlink">{$lang_catmgr_php['move_into']}</span></strong></th>
         </tr>
-        
+
 EOT;
 
 display_cat_list();
@@ -728,7 +728,7 @@ $description_help = '&nbsp;' . cpg_display_help('f=categories.htm&amp;as=cat_alb
 $albumCreateHelp = '&nbsp;' . cpg_display_help('f=categories.htm&amp;as=cat_album_create&amp;ae=cat_album_create_end&amp;top=1', '600', '250');
 
 echo <<<EOT
-        
+
         <tr>
             <td width="40%" class="tableb">
                 {$lang_catmgr_php['parent_cat']}

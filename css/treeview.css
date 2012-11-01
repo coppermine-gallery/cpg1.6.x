@@ -22,7 +22,7 @@ body {
     margin: 0px;
 }
 
-.treeview, .treeview ul { 
+.treeview, .treeview ul {
     padding: 0;
     margin: 0;
     list-style: none;
@@ -47,7 +47,7 @@ body {
     float:none;
 }
 
-.treeview li { 
+.treeview li {
     margin: 0;
     padding: 3px 0pt 3px 16px;
 	list-style-type: none;
@@ -67,7 +67,7 @@ body {
 .treeview .expandable-hitarea { background-position: -80px -3px; }
 
 .treeview li.last { background-position: 0 -1766px }
-.treeview li.lastCollapsable, .treeview li.lastExpandable { background-image: url(../images/tree/treeview-default.gif); }  
+.treeview li.lastCollapsable, .treeview li.lastExpandable { background-image: url(../images/tree/treeview-default.gif); }
 .treeview li.lastCollapsable { background-position: 0 -111px }
 .treeview li.lastExpandable { background-position: -32px -67px }
 

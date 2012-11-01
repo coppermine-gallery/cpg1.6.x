@@ -121,7 +121,7 @@ right in front of the closing <tt class="code">&lt;/body&gt;</tt>-tag mustn't be
 			<li><a href="example.htm" class="nolink" style="text-decoration:none;">Foo bar</a></li>
 		</ul>
 	</div>
-	Go ahead and click the link to see what happens then: nothing. Keep in mind that this will only work if JavaScript is enabled. If it is disabled, the link will of course lead to it's target no matter what. 
+	Go ahead and click the link to see what happens then: nothing. Keep in mind that this will only work if JavaScript is enabled. If it is disabled, the link will of course lead to it's target no matter what.
 </div>
 <p>If particular anchor targets haven't been finished yet, you can use the CSS class <tt class="code">cancel</tt> to display a cancel icon like this:</p>
 <div class="cpg_example">
@@ -166,7 +166,7 @@ right in front of the closing <tt class="code">&lt;/body&gt;</tt>-tag mustn't be
 <div class="cpg_example">The minimum code to display help would be
 <pre>$my_help =  cpg_display_help('f=empty.htm&amp;h=' .
             urlencode('Hello world') . '&amp;t=' .
-            urlencode('This is the detailed text of the help window'), 
+            urlencode('This is the detailed text of the help window'),
             200, 100);
 echo &lt;&lt;&lt; EOT
 Foo bar {$my_help}
@@ -174,16 +174,16 @@ EOT;</pre>
 In case the amount of of characters might get bigger we should disguise the URL a little, using this code
 <pre>$my_help =  cpg_display_help('f=empty.htm&amp;base=64&amp;h=' .
             urlencode(base64_encode(serialize('Hello world'))) . '&amp;t=' .
-            urlencode(base64_encode(serialize('This is the detailed text of the help window'))), 
+            urlencode(base64_encode(serialize('This is the detailed text of the help window'))),
             200, 100);
 echo &lt;&lt;&lt; EOT
 Foo bar {$my_help}
 EOT;</pre>
 should do the trick.<br />
 This is of course not a real life example, as there mustn't be hard-coded text in the code, so the result would look like this:
-<pre>$my_help =  cpg_display_help('f=empty.htm&amp;base=64&amp;h=' . 
-            urlencode(base64_encode(serialize($lang_example['hello_world']))) . '&amp;t=' . 
-            urlencode(base64_encode(serialize($lang_example['hello_world_details']))), 
+<pre>$my_help =  cpg_display_help('f=empty.htm&amp;base=64&amp;h=' .
+            urlencode(base64_encode(serialize($lang_example['hello_world']))) . '&amp;t=' .
+            urlencode(base64_encode(serialize($lang_example['hello_world_details']))),
             200, 100);
 echo &lt;&lt;&lt; EOT
 {$lang_example['bla']} {$my_help}

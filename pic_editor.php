@@ -8,7 +8,7 @@
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
-  
+
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
@@ -82,9 +82,9 @@ if ($pid > 0) {
     $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid = '{$CURRENT_PIC['aid']}'");
     $CURRENT_ALBUM = mysql_fetch_assoc($result);
     mysql_free_result($result);
-        
+
 } else {
-    cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__); 
+    cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
 }
 
 if (!(GALLERY_ADMIN_MODE || ($CONFIG['users_can_edit_pics'] && $CURRENT_PIC['owner_id'] == USER_ID) || ($CURRENT_ALBUM['category'] == FIRST_USER_CAT + USER_ID)) || !USER_ID) {
@@ -142,7 +142,7 @@ if ($superCage->get->getInt('id')) {
       }*/
       if ($superCage->post->keyExists('quality')) {
          $imgObj->quality = $superCage->post->getInt('quality');
-      }  
+      }
 
       if ($imgObj->imgRes){
           /*if ($_POST['clipval'] && $_POST['cropping']==true){
@@ -289,7 +289,7 @@ $json_script = "<script type=\"text/javascript\">var js_vars = eval('($json_vars
     margin-left:auto;
     margin-right:auto;
     z-index:0;
-    <?php 
+    <?php
         if (!$imgObj->imgRes) {
             echo 'visibility:hidden;' . $LINEBREAK;
         }

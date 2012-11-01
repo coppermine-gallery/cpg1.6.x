@@ -36,7 +36,7 @@ $login_failed   = '';
 $cookie_warning = '';
 
 if ($superCage->post->keyExists('submitted')) {
-    
+
     if ($USER_DATA = $cpg_udb->login($superCage->post->getEscaped('username'), $superCage->post->getEscaped('password'), $superCage->post->getInt('remember_me'))) {
         //$referer=preg_replace("'&amp;'","&",$referer);
 
@@ -44,7 +44,7 @@ if ($superCage->post->keyExists('submitted')) {
         if ($CONFIG['log_mode'] == CPG_LOG_ALL) {
             log_write('The user ' . $USER_DATA['user_name'] . ' (user ID ' . $USER_DATA['user_id'] . ") logged in.", CPG_ACCESS_LOG);
         }
-        
+
         // Set the language preference
         $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET user_language = '{$USER['lang']}' WHERE user_id = {$USER_DATA['user_id']}";
         $result = cpg_db_query($sql);

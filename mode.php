@@ -25,7 +25,7 @@ if ($superCage->get->getAlpha('what') == 'news') {
     if (!GALLERY_ADMIN_MODE) {
         cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
     }
-    
+
     if ($CONFIG['display_coppermine_news'] == 0) {
         $value = 1;
         $message = $lang_mode_php['news_show'];
@@ -51,7 +51,7 @@ if ($superCage->get->getAlpha('what') == 'news') {
     $admin_mode = $superCage->get->getInt('admin_mode')? 1 : 0;
 
     $USER['am'] = $admin_mode;
-    
+
     if (!$admin_mode) {
         $CPG_REFERER = 'index.php';
     }

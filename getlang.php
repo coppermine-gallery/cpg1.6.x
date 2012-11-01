@@ -8,7 +8,7 @@
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
-  
+
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
@@ -35,7 +35,7 @@ asort($lang_files);
 /*if (isset($_GET['get'])) {
     $file_index = (int)$_GET['get'];*/
 if ($superCage->get->keyExists('get')) {
-    $file_index = $superCage->get->getInt('get');   
+    $file_index = $superCage->get->getInt('get');
     if (isset($lang_files[$file_index])) {
         header("Content-type: application/php");
         header("Content-Disposition: attachment; filename={$lang_files[$file_index]}");

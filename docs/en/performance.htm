@@ -94,7 +94,7 @@ The general advice is to disable any feature you don't actually make use of and 
     	Disabling this will help keep the database small.
     </li>
     <li>
-    <a name="perf_config_general_hit_stats"></a><h4><a href="configuration.htm#admin_logging_hitdetails">Keep detailed hit statistics</a><a href="#perf_config_general_hit_stats" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4> 
+    <a name="perf_config_general_hit_stats"></a><h4><a href="configuration.htm#admin_logging_hitdetails">Keep detailed hit statistics</a><a href="#perf_config_general_hit_stats" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
     Disabling this will help keep the database small. If this feature get's enabled, your database will increase dramatically if your gallery is busy. Instead of enabling the hit stats you should consider implementing a full stats tool like <a href="http://www.google.com/analytics/" rel="external" class="external">Google Analytics</a> that can easily be integrated into your coppermine gallery.
     </li>
     <li>
@@ -190,7 +190,7 @@ The general advice is to disable any feature you don't actually make use of and 
     	This helps both reduce server load and page load time.
     </li>
     <li>
-    	<a name="perf_server_mysql_tune"></a><h4>Tune the configuration<a href="#perf_server_mysql_tune" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4> 
+    	<a name="perf_server_mysql_tune"></a><h4>Tune the configuration<a href="#perf_server_mysql_tune" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
     	Use a tool like <a href="http://wiki.mysqltuner.com/MySQLTuner" rel="external" class="external">MySQLTuner</a> or <a href="http://www.day32.com/MySQL/" rel="external" class="external">tuning-primer.sh</a> to tweak MySQL for your usage patterns.
     </li>
     <li>
@@ -211,7 +211,7 @@ The general advice is to disable any feature you don't actually make use of and 
     <li>
         <a name="perf_yslow_header"></a><h4>3. Add an Expires header<a href="#perf_yslow_header" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
         <pre class="cpg_code code">
-        
+
 &lt;IfModule mod_expires.c&gt;
     ExpiresActive on
     ExpiresDefault &quot;access plus 2 weeks&quot;
@@ -221,18 +221,18 @@ The general advice is to disable any feature you don't actually make use of and 
     <li>
         <a name="perf_yslow_gzip"></a><h4>4. Gzip components<a href="#perf_yslow_gzip" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
         <pre class="cpg_code code">
-        
+
 &lt;IfModule mod_deflate.c&gt;
 	AddOutputFilterByType DEFLATE application/x-javascript text/javascript text/css text/html text/xml
 &lt;/IfModule&gt;</pre>
 Coppermine doesn't work very well with output compression, as it was not built with that in mind: it jumps in and out of output buffering quite frequently, that's why it probably doesn't work very well with output compression.
-    </li>    
+    </li>
     <li>
         <a name="perf_yslow_etag"></a><h4>13. Configure ETags<a href="#perf_yslow_etag" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
         <pre class="cpg_code code">
-        
+
 FileETag none</pre>
-    </li>      
+    </li>
  </ul>
 
 

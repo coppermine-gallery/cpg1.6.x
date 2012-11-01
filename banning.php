@@ -83,7 +83,7 @@ $sort_translation = array(
     'ip_a'        => $lang_banning_php['ip_address'].' '.$lang_banning_php['ascending'],
     'ip_d'        => $lang_banning_php['ip_address'].' '.$lang_banning_php['descending'],
     'expiry_a'    => $lang_banning_php['expiry_date'].' '.$lang_banning_php['ascending'],
-    'expiry_d'    => $lang_banning_php['expiry_date'].' '.$lang_banning_php['descending'],    
+    'expiry_d'    => $lang_banning_php['expiry_date'].' '.$lang_banning_php['descending'],
 );
 
 $sort        = 'ban_id ASC';
@@ -204,7 +204,7 @@ EOT;
     if ($count > 0) {
 
         $row_counter  = 0;
-       
+
         while ( ($row = mysql_fetch_assoc($result)) ) {
             if ($row['user_id']) {
                 $username     = get_username($row['user_id']);
@@ -294,7 +294,7 @@ if ($superCage->post->keyExists('submit')) {
         $post_temp_array = $superCage->post->getMatched('ip_addr_'.$posted_ban_id, '/^\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b$/');
         $post_ip         = $post_temp_array[0];
         $post_temp_array = $superCage->post->getMatched('expiration_'.$posted_ban_id, '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/');
-        
+
         list($year, $month, $day) = explode('-', $post_temp_array[0]);
 
         if (checkdate($month, $day, $year)) {
@@ -330,7 +330,7 @@ if ($superCage->post->keyExists('submit')) {
             // Load the record set that we're going to delete into memory
             unset($delete_ban_record_array);
             $delete_ban_record_array = array();
-            
+
             $result = cpg_db_query("SELECT null FROM {$CONFIG['TABLE_BANNED']} WHERE ban_id = '$posted_ban_id' LIMIT 1");
             if (mysql_num_rows($result)) {
                 // Delete the actual ban record
@@ -365,13 +365,13 @@ if ($superCage->post->keyExists('submit')) {
         if ($post_user_name == '' && $post_email == '' && $post_ip == '') {
             $change = 0; // Don't write back records that have been deleted by emptying all relevant input fields - we have taken care of them already and emptied them before.
         }
-        if ($change != 0) { 
+        if ($change != 0) {
             // There has been an actual change of the database record - let's write it back --- start
             // Look up if the given user name matches a user id --- start
             $post_user_id = get_userid($post_user_name);
             if ($post_user_id == 0) {
                 $post_user_id = 'NULL';
-            } 
+            }
             // Look up if the given user name matches a user id --- end
             if ($post_ip == '') {// NULL the if address if empty
                 $post_ip = 'NULL';
@@ -445,8 +445,8 @@ if ($superCage->post->keyExists('submit')) {
             $action_output .= '<li style="list-style-image:url(images/icons/stop.png)">' . sprintf($lang_banning_php['ban_record_x_already_exists'], $post_ip) . ' ' . $lang_banning_php['skipping'] . '</li>';
             $post_ip        = '';
         }
-    } 
-    // Double record control - make sure that the record doesn't already exist in the database --- end    
+    }
+    // Double record control - make sure that the record doesn't already exist in the database --- end
     // Write the new record into the database --- start
     // Determine wether form data for a new ban has been submit --- start
     if ($post_user_name != '' || $post_email != '' || $post_ip != '') {
@@ -455,7 +455,7 @@ if ($superCage->post->keyExists('submit')) {
         $post_user_id = get_userid($post_user_name);
         if ($post_user_id == 0) {
             $post_user_id = 'NULL';
-        } 
+        }
         // Look up if the given user name matches a user id --- end
         if ($post_ip == '') {// NULL the if address if empty
             $post_ip = 'NULL';
@@ -468,10 +468,10 @@ if ($superCage->post->keyExists('submit')) {
             $delete_what = $superCage->post->getInt('delete_comment');
             if ($delete_what == 1) { // delete the current comment only
                 $comm_id = $superCage->post->getInt('comment_id');
-                
+
                 cpg_db_query("DELETE FROM {$CONFIG['TABLE_COMMENTS']} WHERE msg_id = $comm_id");
                 $nb_com_del = mysql_affected_rows();
-                
+
                 $action_output .= '<li style="list-style-image:url(images/icons/ok.png)">' . sprintf($lang_banning_php['comment_deleted'], $nb_com_del, $post_user_name) . '.</li>';
             } elseif ($delete_what == 2) { //delete all comments by this author
 
@@ -480,13 +480,13 @@ if ($superCage->post->keyExists('submit')) {
 
                 if ($nb_com_del != 0 && $post_user_name != '') {
                     $action_output .= '<li style="list-style-image:url(images/icons/ok.png)">' . sprintf($lang_banning_php['comment_deleted'], $nb_com_del, $post_user_name) . '.</li>';
-                } 
+                }
             } //no need for an "else" - we don't delete a comment if else, i.e. if "none" has been selected
         }
         // Form fields for a new database record have been submit - let's create a new record --- end
     }
     // Determine wether form data for a new ban has been submit --- end
-    // Write the new record into the database --- end    
+    // Write the new record into the database --- end
 }
 // Processing of form data --- end
 
@@ -509,9 +509,9 @@ if ($superCage->get->keyExists('ban_user') && $superCage->get->getInt('ban_user'
         $comm_info['msg_author'] = '';
     } else {
         $user_data = mysql_fetch_assoc($result);
-        
+
         $comm_info['msg_author'] = $user_data['user_name'];
-        
+
         unset($user_data);
     }
     mysql_free_result($result);
@@ -610,12 +610,12 @@ echo <<<EOT
     </tr>
     <tr>
         <td class="tablef" valign="middle" colspan="4">
-            {$lang_banning_php['delete_comments']}: 
+            {$lang_banning_php['delete_comments']}:
             <input type="radio" id="single" name="delete_comment" value="1" {$checked_single} /><label for="single" class="clickable_option">{$lang_banning_php['current']}</label>&nbsp;&nbsp;
             <input type="radio" id="all" name="delete_comment" value="2" {$checked_all} /><label for="all" class="clickable_option">{$lang_banning_php['all']}</label> {$see_all_comments}&nbsp;&nbsp;
             <input type="radio" id="none" name="delete_comment" value="0" {$checked_none} /><label for="none" class="clickable_option">{$lang_banning_php['none']}</label>
             <input type="hidden" name="comment_id" value="{$comm_id}"/>
-        </td>    
+        </td>
     </tr>
     <tr>
         <td class="tablef" align="center" valign="middle" colspan="6">

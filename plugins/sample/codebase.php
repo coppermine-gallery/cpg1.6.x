@@ -47,7 +47,7 @@ function sample_block_mgr($block) {
 // Install function
 // Checks if uid is 'foo' and pwd is 'bar'; If so, then install the plugin
 function sample_install() {
-    
+
     // Create the super cage
     $superCage = Inspekt::makeSuperCage();
     // Install

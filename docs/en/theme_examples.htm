@@ -74,7 +74,7 @@
 <div class="indent">
 
 <a name="theme_examples_content_thumbnail"></a><h3>Additional content on the thumbnail page<a href="#theme_examples_content_thumbnail" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-<p>Modifications that will have an impact on the display of the thumbnail pages.</p> 
+<p>Modifications that will have an impact on the display of the thumbnail pages.</p>
 
 <div class="indent">
     <a name="theme_examples_content_thumbnail_extra_row"></a><h4>Extra row between thumbnail rows<a href="#theme_examples_content_thumbnail_extra_row" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
@@ -95,7 +95,7 @@
             &lt;/tr&gt;
             &lt;tr&gt;
     &lt;!-- END row_separator --&gt;</pre>
-    
+
     <a name="theme_examples_content_thumbnail_cell"></a><h4>Extra table cell on each thumbnail page<a href="#theme_examples_content_thumbnail_cell" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
     <p>This is a more advanced mod that will require more editing. What it does though is more subtle: it doesn't add an entire row or column to the thumbnail page, but replaces one of the thumbnails on each thumbnail page with a cell with your custom content (e.g. your advert).</p>
     Edit <tt class="filename">themes/yourtheme/theme.php</tt> using a <a href="dev_tools.htm#dev_tools_editor">plain-text editor</a>, find <tt class="code">$template_thumbnail_view</tt> and modify as suggested below. If <tt class="code">$template_thumbnail_view</tt> doesn't exist in your custom theme, copy that section from the sample theme first.<br />
@@ -128,7 +128,7 @@
     <pre class="cpg_code">    static $advert = '';</pre><br />
     Next, find
     <pre class="cpg_code">        $spacer = template_extract_block($template_thumbnail_view, 'spacer');</pre>
-    and add after it into a new line 
+    and add after it into a new line
     <pre class="cpg_code">        $advert = template_extract_block($template_thumbnail_view, 'advert');</pre><br />
     After that, find
     <pre class="cpg_code">    $thumbcols = $CONFIG['thumbcols'];</pre>
@@ -143,7 +143,7 @@
     Scroll down and find
     <pre class="cpg_code">        echo template_eval($thumb_cell, $params);</pre>
     and <strong>replace</strong> that line with
-    <pre class="cpg_code">        // Add the advert cell 
+    <pre class="cpg_code">        // Add the advert cell
             if (defined('DISPLAY_ADS_FOR_META_ALBUMS') || is_numeric($aid) == TRUE) {
             	$display_advert = 1;
             } else {
@@ -155,9 +155,9 @@
     	        	//print_r($thumb_list);
     	        	$thumb_list[($number_of_thumbs+1)] = $thumb;
     	        	echo template_eval($advert, $params);
-    		    } else { // We do not have room for the extra advert cell, 
-    		             // so we'll have to replace one (i.e. drop the 
-    		             // content of the thumb that should usually reside 
+    		    } else { // We do not have room for the extra advert cell,
+    		             // so we'll have to replace one (i.e. drop the
+    		             // content of the thumb that should usually reside
     		             // here without the ad)
     		    	echo template_eval($advert, $params);
     		    }
@@ -226,7 +226,7 @@ EOT;
     echo template_eval($template, $params);
     endtable();
     echo '&lt;/div&gt;';</pre>
-    
+
 </div>
 
 <hr />
@@ -255,7 +255,7 @@ Edit it as you see fit - you will have to increase the variable's value by the a
 to
 <pre class="cpg_code">            $winsizeX = $CURRENT_PIC_DATA['pwidth'] + $CONFIG['fullsize_padding_x'];  //the +'s are the mysterious FF and IE paddings
             $winsizeY = $CURRENT_PIC_DATA['pheight'] + $CONFIG['fullsize_padding_y'] + 200; //the +'s are the mysterious FF and IE paddings</pre>
-            
+
     <a name="theme_examples_content_menu"></a><h3>Additional menu items<a href="#theme_examples_content_menu" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     This section explains how to add more menu items to your custom menu. If you only need one extra menu item (not two or three of them), your best option is to use the config options &quot;<a href="configuration.htm#admin_theme_custom_lnk_name">Custom menu link name</a>&quot;/&quot;<a href="configuration.htm#admin_language_custom_lnk_url">Custom menu link URL</a>&quot;, as that method doesn't require you to edit files and is therefore less complicated. If you're happy to have just <em>one</em> extra menu item, there's no need to read on on this page - instead, follow the links above that explain the config options. If you're <a href="dev_plugins.htm">writing a plugin</a> of your own and not a custom theme, you should read up &quot;<a href="dev_plugin_api.htm#plugin_api_tutorial_button">Adding a Button to Coppermine</a>&quot;, as the method to add a menu item using a plugin differs from the method to add a menu items when designing a theme of your own.<br />
     You're still reading on, so this means you need more custom menu items or you need more granular control over your menu items.<br />
@@ -465,13 +465,13 @@ EOT;</textarea>
                             &lt;li&gt;
                                     &lt;a href="../forum/" title="go to the forum"&gt;Forum&lt;/a&gt;
                             &lt;/li&gt;
-    &lt;!-- END custom_forum_link --&gt;</pre> 
+    &lt;!-- END custom_forum_link --&gt;</pre>
         Save your changes and upload them from your local copy to your webserver if applicable - you should see the changes immediately. If you're happy with what you got, you can stop reading on - you just figured out how to add a custom menu item to your theme.<br />
         If you want more features (i.e. if the link is not meant to show up no matter what, but only if a certain condition applies, e.g. if the visitor is logged in) or if you want to fully internationalize the link to catter for visitors from different countried with different languages, read on - we'll try to explain how to accomplish all that.<br />
-        In order to understand what is going on, we'll have to take another look &quot;under the hood&quot; of Coppermine to see how it works: the "regular" menu items contain (as suggested above) placeholder tokens that get populated somewhere else.                                  
+        In order to understand what is going on, we'll have to take another look &quot;under the hood&quot; of Coppermine to see how it works: the "regular" menu items contain (as suggested above) placeholder tokens that get populated somewhere else.
         <br /><abbr title="to be continued">tbc</abbr>...
-    </div> 
-            
+    </div>
+
 </div>
 
 <div id="doc_footer">

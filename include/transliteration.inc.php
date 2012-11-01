@@ -17,7 +17,7 @@
 
 /**************************************************
   The transliteration folder has been adopted from
-  the corresponding module from the Drupal project, 
+  the corresponding module from the Drupal project,
   which is being released under GNU GPL.
   http://drupal.org/project/transliteration
 ***************************************************/

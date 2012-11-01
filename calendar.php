@@ -23,7 +23,7 @@ require('include/init.inc.php');
 // function definitions
 
 class MyCalendar extends Calendar {
-    
+
     function getCalendarLink($month, $year)
     {
         return "calendar.php?month=$month&amp;year=$year";
@@ -34,7 +34,7 @@ class MyCalendar extends Calendar {
         global $CONFIG, $lang_calendar_php, $FORBIDDEN_SET;
 
         $date = sprintf('%d-%02d-%02d', $year, $month, $day);
-      
+
         $sql = "SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} AS p WHERE approved = 'YES' AND DATE(FROM_UNIXTIME(ctime)) = '$date' $FORBIDDEN_SET";
         $result = cpg_db_query($sql);
         list($nb_pics) = mysql_fetch_row($result);
@@ -44,7 +44,7 @@ class MyCalendar extends Calendar {
         } else {
             $link = '';
         }
-      
+
         return $link;
     }
 }

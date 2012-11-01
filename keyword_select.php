@@ -52,13 +52,13 @@ $keyword_separator = $CONFIG['keyword_separator'];
 if ($total > 0) {
 
     $options = '';
-    
+
     foreach ($keywords as $keyword) {
         $options .= '              <option value="'.$keyword.'">'.$keyword.'</option>' . $LINEBREAK;
     }
-    
+
     echo <<< EOT
-    
+
     <script type="text/javascript">
     <!--
     var str;
@@ -89,7 +89,7 @@ if ($total > 0) {
 EOT;
 
 } else {
-    
+
     echo <<< EOT
     <tr>
         <td class="tablef" align="center">

@@ -156,7 +156,7 @@ EOT;
     }
 
     $form_data = CPGPluginAPI::filter('register_form_create', $form_data);
-    
+
     if ($CONFIG['user_registration_disclaimer'] == 2) {
         $form_data[] = array('label', $lang_register_php['term_cond']);
         $form_data[] = array('checkbox', 'agree', $inline_disclaimer, $lang_register_php['i_agree'], 1);
@@ -165,25 +165,25 @@ EOT;
     }
 
     $loopCounter = 0;
-    
+
     foreach ($form_data as $element) {
-    
+
         if (empty($element)) {
             continue;
         }
-      
+
         if ($loopCounter / 2 == floor($loopCounter / 2)) {
             $row_style = 'tableb';
         } else {
             $row_style = 'tableb tableb_alternate';
         }
-      
+
         $loopCounter++;
-      
+
         switch ($element[0]) {
-      
+
         case 'label':
-        
+
               echo <<< EOT
     <tr>
         <td colspan="2" class="tableh2">
@@ -195,27 +195,27 @@ EOT;
             break;
 
         case 'input':
-         
+
             if ($superCage->post->keyExists($element[1])) {
                 $value = $superCage->post->getEscaped($element[1]);
             } else {
                 $value = '';
             }
-            
+
             if (isset($lang_register_php[$element[1].'_warning1'])) {
                 $warning1 = '<div id="'.$element[1].'_warning1" class="cpg_message_validation formFieldWarning" style="display:none;">' . $lang_register_php[$element[1].'_warning1'] . '</div>';
             } else {
                 $warning1 = '';
             }
-            
+
             if (isset($lang_register_php[$element[1].'_warning2']) == TRUE) {
                 $warning2 = '<div id="'.$element[1].'_warning2" class="cpg_message_validation formFieldWarning" style="display:none;">' . $lang_register_php[$element[1].'_warning2'] . '</div>';
             } else {
                 $warning2 = '';
             }
-            
+
             if ($element[2]) {
-            
+
                 echo <<< EOT
     <tr>
         <td width="40%" class="{$row_style}">
@@ -230,23 +230,23 @@ EOT;
 
 EOT;
             }
-            
+
             break;
 
         case 'radio':
-          
+
             // added the radio option for possible future use. The array definition would have to look like this:
             // array('radio', 'user_var', 'Text label', 'option 1','option 2'),
             // enabling this option requires changes in profile.php and usermgr.php as well
-         
+
             if ($superCage->post->keyExists($element[1])) {
                 $value = $superCage->post->getAlnum($element[1]);
             } else {
                 $value = '';
             }
-                
+
             if ($element[2]) {
-            
+
                 echo <<< EOT
     <tr>
         <td width="40%" class="{$row_style}"  height="25">
@@ -262,11 +262,11 @@ EOT;
 
 EOT;
             }
-            
+
             break;
 
         case 'checkbox':
-          
+
             // added the checkbox option for possible future use. The array definition would have to look like this:
             // array('checkbox', 'user_var', 'preceeding text', 'Text label', 'value', 'Number of columns', 'attribute'),
             // enabling this option requires changes in profile.php and usermgr.php as well
@@ -279,9 +279,9 @@ EOT;
             } else {
                 $value = '';
             }
-            
+
             if ($element[3]) {
-            
+
                 if ($element[5] == 2) {
                     echo <<<EOT
     <tr>
@@ -319,9 +319,9 @@ EOT;
             } else {
                 $value = '';
             }
-              
+
             if ($element[2]) {
-            
+
                 echo <<< EOT
     <tr>
         <td width="40%" class="{$row_style}">
@@ -338,19 +338,19 @@ EOT;
             break;
 
         case 'password':
-          
+
             if (isset($lang_register_php[$element[1].'_warning1'])) {
                 $warning1 = '<div id="'.$element[1].'_warning1" class="cpg_message_validation formFieldWarning" style="display:none;">' . $lang_register_php[$element[1].'_warning1'] . '</div>';
             } else {
                 $warning1 = '';
             }
-              
+
             if (isset($lang_register_php[$element[1].'_warning2'])) {
                 $warning2 = '<div id="'.$element[1].'_warning2" class="cpg_message_validation formFieldWarning" style="display:none;">' . $lang_register_php[$element[1].'_warning2'] . '</div>';
             } else {
                 $warning2 = '';
             }
-                          
+
             echo <<< EOT
     <tr>
         <td width="40%" class="{$row_style}">
@@ -368,7 +368,7 @@ EOT;
             break;
 
         case 'hidden':
-        
+
             echo <<< EOT
     <tr>
         <td colspan="2" class="{$row_style}">
@@ -386,7 +386,7 @@ EOT;
     }
 
     if ($errors) {
-    
+
         echo <<< EOT
     <tr>
         <td colspan="2" class="tableh2">
@@ -404,7 +404,7 @@ EOT;
 
     // captcha code
     if ($CONFIG['registration_captcha'] != 0) {
-    
+
         $help = cpg_display_help('f=empty.htm&amp;base=64&amp;h='.urlencode(base64_encode(serialize($lang_common['captcha_help_title']))).'&amp;t='.urlencode(base64_encode(serialize($lang_common['captcha_help']))), 470, 245);
 
         $captcha_print = <<< EOT
@@ -459,7 +459,7 @@ function get_post_var($var)
     if (!$superCage->post->keyExists($var) || !trim($superCage->post->getEscaped($var))) {
         cpg_die(CRITICAL_ERROR, $lang_errors['param_missing'] . " ($var)", __FILE__, __LINE__);
     }
-    
+
     return $superCage->post->getEscaped($var);
 }
 
@@ -491,17 +491,17 @@ function check_user_info(&$error)
         $error = '<li style="list-style-image:url(images/icons/stop.png)">' . $lang_register_php['err_user_exists'] . '</li>';
         return false;
     }
-    
+
     mysql_free_result($result);
 
     if (utf_strlen($user_name) < 2) {
         $error .= '<li style="list-style-image:url(images/icons/stop.png)">' . $lang_register_php['username_warning2'] . '</li>';
     }
-    
+
     if (!empty($CONFIG['global_registration_pw'])) {
-    
+
         $global_registration_pw = get_post_var('global_registration_pw');
-      
+
         if ($global_registration_pw != $CONFIG['global_registration_pw']) {
             $error .= '<li style="list-style-image:url(images/icons/stop.png)">' . $lang_register_php['err_global_pw'] . '</li>';
         } elseif ($password == $CONFIG['global_registration_pw']) {
@@ -512,23 +512,23 @@ function check_user_info(&$error)
     if (utf_strlen($password) < 2) {
         $error .= '<li style="list-style-image:url(images/icons/stop.png)">' . $lang_register_php['password_warning1'] . '</li>';
     }
-    
+
     if ($password == $user_name) {
         $error .= '<li style="list-style-image:url(images/icons/stop.png)">' . $lang_register_php['password_warning2'] . '</li>';
     }
-    
+
     if ($password != $password_again) {
         $error .= '<li style="list-style-image:url(images/icons/stop.png)">' . $lang_register_php['password_verification_warning1'] . '</li>';
     }
-    
+
     if (!Inspekt::isEmail($email)) {
         $error .= '<li style="list-style-image:url(images/icons/stop.png)">' . $lang_register_php['email_warning2'] . '</li>';
     }
-    
+
     if ($CONFIG['user_registration_disclaimer'] == 2 && $agree_disclaimer != 1) {
         $error .= '<li style="list-style-image:url(images/icons/stop.png)">' . $lang_register_php['err_disclaimer'] . '</li>';
     }
-    
+
     // Perform the ban check against email address and username
     $result = cpg_db_query("SELECT null FROM {$CONFIG['TABLE_BANNED']} WHERE user_name = '$user_name' AND brute_force = 0 LIMIT 1");
 
@@ -537,7 +537,7 @@ function check_user_info(&$error)
     }
 
     mysql_free_result($result);
-    
+
     $result = cpg_db_query("SELECT null FROM {$CONFIG['TABLE_BANNED']} WHERE email = '$email' AND brute_force = 0 LIMIT 1");
 
     if (mysql_num_rows($result)) {
@@ -545,10 +545,10 @@ function check_user_info(&$error)
     }
 
     mysql_free_result($result);
-    
+
     // check captcha
     if ($CONFIG['registration_captcha'] != 0) {
-    
+
         if (!captcha_plugin_enabled()) {
             require("include/captcha.inc.php");
             if (!PhpCaptcha::Validate($captcha_confirmation)) {
@@ -558,9 +558,9 @@ function check_user_info(&$error)
             $error = CPGPluginAPI::filter('captcha_register_validate', $error);
         }
     }
-    
+
     if (!$CONFIG['allow_duplicate_emails_addr']) {
-    
+
         $sql = "SELECT null FROM {$CONFIG['TABLE_USERS']} WHERE user_email = '$email'";
         $result = cpg_db_query($sql);
 
@@ -576,7 +576,7 @@ function check_user_info(&$error)
     if ($error != '') {
         return false;
     }
-    
+
     if ($CONFIG['reg_requires_valid_email'] || $CONFIG['admin_activation']) {
         $active = 'NO';
         list($usec, $sec) = explode(' ', microtime());
@@ -589,7 +589,7 @@ function check_user_info(&$error)
     }
 
     $encpassword = md5($password);
-    
+
     $user_language = $CONFIG['lang'];
 
     $sql = "INSERT INTO {$CONFIG['TABLE_USERS']} (user_regdate, user_active, user_actkey, user_name, user_password, user_email, user_profile1, user_profile2, user_profile3, user_profile4, user_profile5, user_profile6, user_language) VALUES (NOW(), '$active', '$act_key', '$user_name', '$encpassword', '$email', '$profile1', '$profile2', '$profile3', '$profile4', '$profile5', '$profile6', '$user_language')";
@@ -604,7 +604,7 @@ function check_user_info(&$error)
     if ($CONFIG['log_mode']) {
         log_write('New user "'.$user_name.'" registered', CPG_ACCESS_LOG);
     }
-    
+
     // Create a personal album if corresponding option is enabled
     if ($CONFIG['personal_album_on_registration'] == 1) {
 
@@ -660,13 +660,13 @@ function check_user_info(&$error)
                 $lang_register_php_def = cpg_get_default_lang_var('lang_register_php');
                 $lang_register_approve_email_def = cpg_get_default_lang_var('lang_register_approve_email');
             }
-            
-    
-            // if the admin has to activate the login, give them the link to do so; but only if users don't have to verify their email address 
+
+
+            // if the admin has to activate the login, give them the link to do so; but only if users don't have to verify their email address
             if ($CONFIG['admin_activation'] && !$CONFIG['reg_requires_valid_email']) {
-    
+
                 $act_link = rtrim($CONFIG['site_url'], '/') . '/register.php?activate=' . $act_key;
-    
+
                 $template_vars = array(
                     '{SITE_NAME}' => $CONFIG['gallery_name'],
                     '{USER_NAME}' => $user_name,
@@ -674,9 +674,9 @@ function check_user_info(&$error)
                 );
 
                 cpg_mail($admin['email'], sprintf($lang_register_php_def['notify_admin_request_email_subject'], $CONFIG['gallery_name']), nl2br(strtr($lang_register_approve_email_def, $template_vars)));
-    
+
             } elseif ($CONFIG['reg_notify_admin_email']) {
-            
+
                 // otherwise, email is for information only
                 cpg_mail($admin['email'], sprintf($lang_register_php_def['notify_admin_email_subject'], $CONFIG['gallery_name']), sprintf($lang_register_php_def['notify_admin_email_body'], $user_name));
             }
@@ -701,7 +701,7 @@ function check_user_info(&$error)
 if ($superCage->get->keyExists('activate')) {
 
     $act_key = $superCage->get->getAlnum('activate');
-    
+
     if (strlen($act_key) != 32) {
         cpg_die(ERROR, $lang_register_php['acct_act_failed'], __FILE__, __LINE__);
     }
@@ -712,7 +712,7 @@ if ($superCage->get->keyExists('activate')) {
     if (!mysql_num_rows($result)) {
         cpg_die(ERROR, $lang_register_php['acct_act_failed'], __FILE__, __LINE__);
     }
-    
+
     $row = mysql_fetch_assoc($result);
     mysql_free_result($result);
 
@@ -752,7 +752,7 @@ if ($superCage->get->keyExists('activate')) {
 
     //after admin approves, user receives email notification
     if ($user_status == 'active_admin') {
-    
+
         msg_box($lang_register_php['information'], $lang_register_php['acct_active_admin_activation'], $lang_common['continue'], 'index.php');
 
         $template_vars = array(
@@ -760,7 +760,7 @@ if ($superCage->get->keyExists('activate')) {
             '{USER_NAME}' => $row['user_name'],
             '{SITE_NAME}' => $CONFIG['gallery_name'],
         );
-        
+
         cpg_mail($row['user_email'], sprintf($lang_register_php['notify_user_email_subject'], $CONFIG['gallery_name']), nl2br(strtr($lang_register_php['activated_email'], $template_vars)));
 
     } elseif ($user_status == 'valid') {
@@ -790,7 +790,7 @@ if ($superCage->get->keyExists('activate')) {
                 $lang_register_php_def = cpg_get_default_lang_var('lang_register_php');
                 $lang_register_approve_email_def = cpg_get_default_lang_var('lang_register_approve_email');
             }
-    
+
             $act_link = rtrim($CONFIG['site_url'], '/') . '/register.php?activate=' . $act_key;
 
             $template_vars = array(
@@ -809,7 +809,7 @@ if ($superCage->get->keyExists('activate')) {
 } else {
 
     pageheader($lang_register_php['page_title']);
-  
+
     if ($CONFIG['user_registration_disclaimer'] == 1 && !$superCage->post->keyExists('submit') && !$superCage->post->keyExists('agree')) {
 
         // display the disclaimer page

@@ -155,7 +155,7 @@ if ($superCage->get->keyExists('hookpoints') || $CONFIG['plugin_visiblehookpoint
 }
 
 function vhp_return_var($var) {
-    global $hook_name; 
+    global $hook_name;
     return vhp_echo_marker($hook_name, $var);
 }
 
@@ -167,7 +167,7 @@ function vhp_page_meta($var) {
     return $var;
 }
 
-function vhp_plugin_block($var) { 
+function vhp_plugin_block($var) {
     return vhp_echo_marker('plugin_block_'.$var[1],$var);
 }
 
@@ -347,7 +347,7 @@ if (!class_exists('dBug')) {
                     echo '<div id="vhp_cell_'.$vhp_tableHeaderCounter.'" class="vhp_cell" style="display:none"><table cellspacing="2" cellpadding="3" class="dBug_'.$type.'">';
             }
 
-            //create the table row header 
+            //create the table row header
             function makeTDHeader($type,$header) {
                     echo "<tr>
                                     <td valign=\"top\" onclick=\"dBug_toggleRow(this)\" style=\"cursor:hand\" class=\"dBug_".$type."Key\">".$header."</td>

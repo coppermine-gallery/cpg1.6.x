@@ -30,7 +30,7 @@ if (!$superCage->get->keyExists('pic') || !$superCage->get->keyExists('rate')) {
         'status' => 'error',
         'msg'    => $lang_errors['param_missing'],
     );
-    
+
     echo json_encode($send_back);
     exit;
 }
@@ -54,7 +54,7 @@ if (!mysql_num_rows($result)) {
         'status' => 'error',
         'msg'    => $lang_errors['non_exist_ap'],
     );
-    
+
     echo json_encode($send_back);
     exit;
 }
@@ -65,7 +65,7 @@ if(!checkFormToken()){
         'status' => 'error',
         'msg'    => $lang_errors['invalid_form_token'],
     );
-    
+
     echo json_encode($send_back);
     exit;
 }
@@ -74,13 +74,13 @@ $row = mysql_fetch_assoc($result);
 mysql_free_result($result);
 
 if (!USER_CAN_RATE_PICTURES || $row['votes_allowed'] == 'NO') {
- 
+
     //send back voting failure to ajax request
     $send_back = array(
         'status' => 'error',
         'msg'    => $lang_errors['perm_denied'],
     );
-    
+
     echo json_encode($send_back);
     exit;
 }
@@ -95,7 +95,7 @@ $user_md5_id = USER_ID ? md5(USER_ID) : $USER['ID'];
 $sql = "SELECT null FROM {$CONFIG['TABLE_VOTES']} WHERE pic_id = $pic AND user_md5_id = '$user_md5_id'";
 $result = cpg_db_query($sql);
 
-if (mysql_num_rows($result)) { 
+if (mysql_num_rows($result)) {
 
     // user has already rated this file
     $send_back = array(
@@ -103,7 +103,7 @@ if (mysql_num_rows($result)) {
         'msg'    => $lang_rate_pic_php['already_rated'],
         'a'      => $USER,
     );
-    
+
     echo json_encode($send_back);
     exit;
 }
@@ -117,7 +117,7 @@ if (!empty($user_id) && $user_id == $row['owner_id'] && ($CONFIG['rate_own_files
         'status' => 'error',
         'msg'    => $lang_rate_pic_php['forbidden'],
     );
-    
+
     echo json_encode($send_back);
     exit;
 }

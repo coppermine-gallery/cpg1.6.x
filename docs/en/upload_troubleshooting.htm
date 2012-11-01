@@ -252,7 +252,7 @@ To make this absolutely clear: the above mentioned steps are absolutely <strong>
     	</li>
     </ul>
     <a name="upload_support_step-by-step_end"></a>
-    
+
     <a name="upload_support_example"></a><h3>Example support request<a href="#upload_support_example" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_example">
     	<p>This is how your support request posting could look like (make sure that you populated the stuff in red with actual content from your case):</p>
@@ -351,7 +351,7 @@ Warning: move_uploaded_file(/tmp/<span style="color:blue;">phpezCYKr</span>)
     There is (at least in theory) no limit <em>in Coppermine</em> to the file size or dimensions that the script can handle. However, there is at least one limit existing on the webserver: resizing images (to create intermediate images and/or thumbnails) consumes memory and burns CPU cylces. To prevent the server from crashing, the server admin has to restrict the amount of memory that a PHP script is allowed to consume. The error message mentioned above means that the limit imposed by the server admin has been reached, i.e. the image that the script tried to process consumed to much memory.
     <ul>
         <li><strong>Alternative 1 (ideal):</strong><br />
-        Increase the memory limit allocation in php.ini as suggested in <a href="upload_troubleshooting.htm#upload_trouble_memory_usage">Memory usage during resizing</a>. 
+        Increase the memory limit allocation in php.ini as suggested in <a href="upload_troubleshooting.htm#upload_trouble_memory_usage">Memory usage during resizing</a>.
         If you cannot change php.ini, you should read alternatives 2 and 3.</li>
          <li><strong>Alternative 2 (sensible):</strong><br />
          Resize your images before uploading if you do not require high resolution images.  This saves upload bandwidth and time for you.</li>
@@ -445,9 +445,9 @@ Warning: move_uploaded_file(/tmp/<span style="color:blue;">phpezCYKr</span>)
     <a name="upload_trouble_server-sided_restrictions_php_ini"></a><h3>The PHP configuration file php.ini<a href="#upload_trouble_server-sided_restrictions_php_ini" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_message_info">
     Please understand that the settings in php.ini can only be changed if the server is yours to administer (i.e. if you run a webserver of your own). If you are webhosted, you will have to ask your webhost if he's willing to change those settings for you, which usually equals allowing you to use more resources on the server. Usually, your webhost will <strong>not</strong> accept this for sheer economical reasons: granting you to use more resources will mean that he can host less presences on one shared server.</div>
-    
+
     <div class="cpg_message_error">Please don't ask questions on the coppermine support board what the actual settings are supposed to be or how you can change them - as suggested above: you usually won't be able to change them at all when you're webhosted.<br />If you're actually <a href="requirements.htm#what_minimum_self-hosting">self-hosted</a> (which is something we can not recommend at all as running and maintaining a webserver requires constant monitoring and maintenance as well as a huge amount of experience and a high skill level), don't bother to ask trivial questions like &quot;Where can I find my php.ini file&quot; - if you don't know the answer to this question, you fall into the category &quot;self-hosting not recommended due to lack of experience&quot; and will be ignored on the coppermine support board.</div>
-    
+
     <a name="upload_trouble_server-sided_restrictions_check"></a><h3>Things to check<a href="#upload_trouble_server-sided_restrictions_check" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <p>If you are webhosted, you will need to consult with your webhost regarding the following settings. You can review (although not change) those settings on your <a href="admin_menu.htm#phpinfo">phpinfo page</a>.</p>
     <ol>
@@ -481,8 +481,8 @@ Warning: move_uploaded_file(/tmp/<span style="color:blue;">phpezCYKr</span>)
           The most common issue caused by this setting is an open_basedir warning.  In this situation, your server administrator has restricted the files that PHP can work with to a certain directory.  If he does not create and specify a temporary directory within the open_basedir restriction, PHP will attempt to use the OS temporary directory, and it will be rebuffed by the open_basedir restriction.
       </li>
     </ol>
-    
-    
+
+
     <a name="upload_trouble_methods"></a><h3>Upload mechanisms/methods<a href="#upload_trouble_methods" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <p><strong>Some notes about the different types of upload mechanisms available since cpg1.3.x (or better):</strong></p>
     <p>Multiple HTTP uploads are designed to handle a small number of files.  Therefore, they are not well suited for the uploading of large numbers of files unless you are running your own webserver or have control over the php.ini configuration.</p>
@@ -490,7 +490,7 @@ Warning: move_uploaded_file(/tmp/<span style="color:blue;">phpezCYKr</span>)
     <p>The batch add process is fast, but it creates quite a load on the server and, as a result, you may experience timeouts causing your uploads to terminate prematurely.  XP Publisher, on the other hand, is considerably slower, but it limits the load on the server.  It also circumvents many of the pitfalls caused by limitations set in the php.ini configuration by uploading each file in the batch being uploaded as an individual post request.</p>
     <p>Other alternative upload mechanisms (like Client-based agents as JUpload or similar) may be provided as third-party contributions - you're encouraged to look at them as well, but please keep in mind that the coppermine developers can only provide limited support for third-party contributions.</p>
     <p>Keep in mind though that before trying any alternative upload mechanism, you have to make sure that the initial upload method &quot;http uploads&quot; works as expected - if it doesn't, you have to fix that first; it doesn't make sense to try alternative upload mechanisms if the core upload mechanism doesn't work.</p>
-    
+
     <a name="upload_trouble_memory_usage"></a><h3>Memory usage during resizing<a href="#upload_trouble_memory_usage" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <p>There is (at least in theory) no limit in Coppermine to the file size or dimensions that the script can handle. However, there is at least one limit existing on the webserver: resizing images (to create intermediate images and/or thumbnails) consumes memory and burns CPU cylces.</p>
     <p>If the resizing process is eating up too much memory, you usually get the error message <a href="upload_troubleshooting.htm#ErrorAllowedMemorySize"><tt class="code">Fatal error: Allowed memory size of XXXXXXX bytes exhausted at (null):0 (tried to allocate XXXX bytes) in /var/www/html/include/picmgmt.inc.php</tt></a> or similar.</p>
@@ -647,10 +647,10 @@ Warning: move_uploaded_file(/tmp/<span style="color:blue;">phpezCYKr</span>)
 max_execution_time = 30     ; Maximum execution time of each script, in seconds
 max_input_time = 60        ; Maximum amount of time each script may spend parsing request data
 memory_limit = 8M      ; Maximum amount of memory a script may consume (8MB)</pre>
-    
+
     <p>Now you increase the memory limit to fit your needs. 9 to 16 MB should handle most requirements.</p>
     <p></p>If you are unable to change php.ini settings yourself, you can always ask your server administrator to change this for you.  However, most administrators (especially on shared webhosting) will be reluctant to do so, as this setting will affect everyone on a shared server. A higher memory limit requires reducing the number of people who can be hosted on the same server in order to maintain server stability. This reduces profitability, etc.</p>
-    
+
     <div class="cpg_message_error">Do <strong>not</strong> ask questions on the Coppermine support board how to configure your webserver; it's beyond the scope of the Coppermine support board to explain webserver setups. Usually (if you're on shared webhosting, which is the case for the vast majority of Coppermine users), you can't change webserver settings anyway. Only the person who actually administers the webserver (i.e. the webhost's admin) can change webserver settings.<br />
     Therefore, you better ask <strong>your webhost</strong> for support if you have issues with ressource limitations or other questions that related to webserver setup. If you're self-hosted (which is something the coppermine dev team doesn't recommend), you should read up your issue in the documentation that comes with your webserver.</div>
 

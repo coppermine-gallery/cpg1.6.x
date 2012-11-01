@@ -58,21 +58,21 @@
         <li>mySQL 3.23.23 or better (4.1 recommended). Don't confuse the client api version (which is shown in phpinfo) with the mySQL version!</li>
     </ul>
     <hr />
-    
+
 <a name="image_libraries"></a>
 <h2>Image libraries<a href="#image_libraries" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
 
 <div class="indent">
-    
+
     <a name="WhatIsGD"></a>
     <h3>What's <strong>GD</strong> and how can I get it?<a href="#WhatIsGD" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <p><img src="../images/gd.png" border="0" alt="" width="148" height="93" title="GD" align="right" style="padding-left:20px" />GD is a graphical library which enables PHP to do image manipulation. The library was originally developped by <a href="http://www.boutell.com/" rel="external" class="external">Thomas Boutell</a> and is now maintained by <a href="http://blog.thepimp.net/" rel="external" class="external">Pierre-A. Joye</a> under the umbrella of <a href="http://www.php.net/" rel="external" class="phpnet">PHP.net</a>. If you are running your own webserver you can download it at <a href="http://libgd.org/" class="external">libgd.org</a>. You will need to recompile PHP on (L)Unix systems, depending on your setup Apache as well. Most recent versions of PHP come with GD - go for a package. On most windows systems, you can just enable it in the php.ini file. If you are subscribing to a webhost: find out through your webhost if GD/GD2 support is available on your site. If not, ask your webhost if you can have it or find yourself another webhost. GD/GD2 are pretty much a standard feature at most webhosting services.<br /></p><hr />
-    
+
     <a name="whatIsImageMagick"></a>
     <h3>What's ImageMagick and how can I get it?<a href="#whatIsImageMagick" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <p><img src="../images/imagemagick.png" border="0" alt="" width="130" height="54" title="ImageMagick" align="right" style="padding-left:20px" />ImageMagick is another graphical library like GD/GD2 for image manipulation. If you are running your own webserver, you can download it at <a href="http://www.imagemagick.org" class="external">imagemagick.org</a>. There are sources available for Unix, Linux, Mac and Windows executables, as well as binary packages for various server operating systems. You cannot install ImageMagick if you are subscribing to a webhost.
     </p>
-    
+
     <a name="enableGD"></a>
     <h3>How do I <strong>enable GD</strong> on my Windows server?<a href="#enableGD" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <p>GD 1.x 2.x are normally part of all standard PHP distributions under Windows<br />
@@ -88,7 +88,7 @@
     <p>ImageMagick is quite complicated to set up on Windows. There are several things to be taken into account. The Coppermine support board is <strong>not</strong> the right place to ask for help on installing it, as it deals with Coppermine, not &quot;How to set up a server&quot; (most people on the Coppermine boards don't run their own webserver, but they have webspace by a webhost). Instead, try to find support boards on the internet that deal with this special topic.</p>
     <p>The path to ImageMagick mustn't contain spaces or special characters. You have to make sure that the user the webserver runs under actually has the needed permissions to run the ImageMagick executables.</p>
     <hr />
-    
+
     <a name="installIMwhenHosted"></a>
     <h3>How can I <strong>install ImageMagick or GD</strong>?<a href="#installIMwhenHosted" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <p>You can only <a href="#enableIMonWindows">install ImageMagic or GD if you're running your own server</a> or if you have at least shell access to your webserver. If your site is being hosted by a webhost you can only contact your webhost and ask them to install it for you. If they refuse choose another webhost or use GD instead.<br /></p>

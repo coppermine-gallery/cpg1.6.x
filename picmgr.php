@@ -93,14 +93,14 @@ echo <<< EOT
         <td class="tableh2" valign="top" >
            <input type="hidden" name="album_id" value="{$aid}" />
            <input type="hidden" id="sort_order" name="sort_order" value="{$sort_order}" />
-           <input type="hidden" id="picture_order" name="picture_order" value="" />  
+           <input type="hidden" id="picture_order" name="picture_order" value="" />
 
 EOT;
 
 if (GALLERY_ADMIN_MODE || USER_ADMIN_MODE) {
 
     $options = album_selection_options($aid);
-    
+
     echo <<<EOT
             <select name="aid" class="listbox">
                 <option value="0">{$lang_common['select_album']}</option>
@@ -111,11 +111,11 @@ if (GALLERY_ADMIN_MODE || USER_ADMIN_MODE) {
     </tr>
     <tr>
         <td>
-    
+
 EOT;
 }
 
-/** create a table to sort the picture*/  
+/** create a table to sort the picture*/
 echo <<< EOT
             <div id="sort">
                 <table id="pic_sort" cellspacing="0" cellpadding="0" border="0" width=100%>
@@ -191,7 +191,7 @@ EOT;
     </tr>
 EOT;
    endtable();
-   list($timestamp, $form_token) = getFormToken();  
+   list($timestamp, $form_token) = getFormToken();
    echo <<< EOT
 <input type="hidden" name="form_token" value="{$form_token}" />
 <input type="hidden" name="timestamp" value="{$timestamp}" />

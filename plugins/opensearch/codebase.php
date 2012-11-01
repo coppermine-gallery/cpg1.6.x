@@ -27,7 +27,7 @@ $thisplugin->add_action('plugin_uninstall','opensearch_uninstall');
 $thisplugin->add_filter('page_meta','opensearch_meta');
 
 function opensearch_meta(){
-    
+
     global $CONFIG, $lang_plugin_php;
 
     return '<link rel="search" href="plugins/opensearch/osd.xml" type="application/opensearchdescription+xml" title="' . sprintf($lang_plugin_php['opensearch_search'], $CONFIG['gallery_name']).'" />';
@@ -58,9 +58,9 @@ EOT;
         fclose($handle);
         return 1;
     }
-    
+
     fclose($handle);
-    
+
     return true;
 }
 
@@ -68,22 +68,22 @@ function opensearch_install() {
 
     global $CONFIG, $lang_plugin_php;
     $superCage = Inspekt::makeSuperCage();
-    
+
     $osd = 'plugins/opensearch/osd.xml';
-    
+
     $handle = fopen($osd, "r+");
-    
+
     if (!$handle) {
         echo '<p style="color: red; text-align: center">'.sprintf($lang_plugin_php['opensearch_failed_to_open_file'], $osd).'.</p>';
         return 1;
     }
-    
+
     //if (empty($_POST['os_submit'])) return 1;
     if ($superCage->post->keyExists('os_submit')) {
     } else {
         return 1;
     }
-    
+
     $content = fread($handle, filesize($osd));
 
     // There's no real sanitization here yet (should be added) - we only rely on this screen being admin-only
@@ -92,9 +92,9 @@ function opensearch_install() {
         '{DESCRIPTION}' => substr($superCage->post->getRaw('os_desc'), 0, 1024),
         '{SITE_URL}' => $superCage->post->getRaw('os_url'),
     );
-    
+
     $content = str_replace(array_keys($data), array_values($data), $content);
-    
+
     rewind($handle);
 
     $written = fwrite($handle, $content);
@@ -104,9 +104,9 @@ function opensearch_install() {
         fclose($handle);
         return 1;
     }
-    
+
     fclose($handle);
-    
+
     return true;
 }
 
@@ -115,7 +115,7 @@ function opensearch_configure() {
     global $CONFIG, $lang_plugin_php, $lang_common;
     $superCage = Inspekt::makeSuperCage();
     $action = $superCage->server->getEscaped('REQUEST_URI');
-    
+
     $nameLimit = sprintf($lang_plugin_php['opensearch_character_limit'], '16');
     $descriptionLimit = sprintf($lang_plugin_php['opensearch_character_limit'], '1024');
     echo <<< EOT
@@ -156,7 +156,7 @@ function opensearch_configure() {
                 </td>
               </tr>
             </table>
-    </form>    
+    </form>
 EOT;
 }
 ?>

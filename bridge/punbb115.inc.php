@@ -8,7 +8,7 @@
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
-  
+
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
@@ -40,7 +40,7 @@ if (isset($bridge_lookup)) {
         function cpg_udb()
         {
             global $BRIDGE;
-            
+
             if (!USE_BRIDGEMGR) { // the vars that are used when bridgemgr is disabled
 
                 // URL of your punbb
@@ -54,10 +54,10 @@ if (isset($bridge_lookup)) {
                 require_once($BRIDGE['relative_path_to_config_file'] . 'config.php');
                 $this->use_post_based_groups = $BRIDGE['use_post_based_groups'];
             }
-            
+
             $this->multigroups = 0;
             $this->group_overrride = 0;
-            
+
             // Database connection settings
             $this->db = array(
                 'name' => $db_name,
@@ -66,7 +66,7 @@ if (isset($bridge_lookup)) {
                 'password' => $db_password,
                 'prefix' =>$db_prefix
             );
-            
+
             // Board table names
             $this->table = array(
                 'users' => 'users',
@@ -74,7 +74,7 @@ if (isset($bridge_lookup)) {
 
             // Derived full table names
             $this->usertable = '`' . $this->db['name'] . '`.' . $this->db['prefix'] . $this->table['users'];
-            
+
             // Table field names
             $this->field = array(
                 'username' => 'username', // name of 'username' field in users table
@@ -86,31 +86,31 @@ if (isset($bridge_lookup)) {
                 'website' => 'url', // name of 'website' field in users table
                 'usertbl_group_id' => 'status', // name of 'group id' field in users table
             );
-            
+
             // Pages to redirect to
             $this->page = array(
                 'register' => '/register.php',
                 'editusers' => '/userlist.php',
                 'edituserprofile' => "/profile.php?id="
             );
-            
+
             // Group ids
             $this->admingroups = array(2);
             $this->guestgroup = -1;
-            
+
             // Cookie settings - used in following functions only
             $this->cookie_name = $cookie_name;
-            
+
             // Connect to db
             $this->connect();
         }
-            
+
         // definition of how to extract id, name, group from a session cookie
         function session_extraction()
         {
             $superCage = Inspekt::makeSuperCage();
             $row = false; //array('id' => 0, 'username' => 'Guest', 'status' => -1);
-            
+
             //if (isset($_COOKIE[$this->cookie_name])) {
             //  list($username, $pass_hash) = unserialize($_COOKIE[$this->cookie_name]);
             if ($superCage->cookie->keyExists($this->cookie_name)) {
@@ -121,10 +121,10 @@ if (isset($bridge_lookup)) {
                     $row = mysql_fetch_assoc($result);
                 }
             }
-            
+
             return $row;
         }
-        
+
         // definition of how to extract an id and password hash from a cookie
         function cookie_extraction()
         {
@@ -136,12 +136,12 @@ if (isset($bridge_lookup)) {
         {
             return $password;
         }
-        
+
         // Login
         function login_page()
         {
             global $CONFIG;
-            
+
             $this->redirect('/login.php?action=in&redir='.$CONFIG['site_url']);
         }
 

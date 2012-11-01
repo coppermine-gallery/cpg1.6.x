@@ -8,7 +8,7 @@
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
-  
+
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
@@ -57,8 +57,8 @@ if (mysql_num_rows($result)) {
     mysql_free_result($result);
 }
 
-if ($output) { 
-    echo "<p>{$lang_editpics_php['new_keywords']}: $i</p>"; 
+if ($output) {
+    echo "<p>{$lang_editpics_php['new_keywords']}: $i</p>";
     pagefooter_mini();
 } else {
     header("Location: $CPG_REFERER");

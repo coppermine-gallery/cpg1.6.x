@@ -109,7 +109,7 @@ $bar = array(
         'two'   => 2,
         'three' => 3,
        );
-       
+
 $multi = array(
           'first'  => 'one',
           'second' => array('2'), // Since it is just one value in array, it can be declared in same line
@@ -136,7 +136,7 @@ $multi = array(
     		<pre class="cpg_code code">$bla_array['foo Bar'] = 'some string';</pre>
     		Good:
     		<pre class="cpg_code code">$bla_array['foo_bar'] = 'some string';</pre>
-    	</div>    
+    	</div>
     </li>
 </ul>
 
@@ -146,12 +146,12 @@ $multi = array(
     <li>Control statements should have one space between the control keyword and opening parenthesis, to distinguish them from function calls</li>
     <li>Always use curly braces, even in situations where they are technically optional - having them increases readability and decreases the likelihood of logic errors being introduced when new lines are added</li>
     <li>Always have a newline before an opening or closing brace<br />
-    <div class="cpg_example">Bad example:<pre class="cpg_code code">if ($foo = 'bar') { echo 'Hello world'; }</pre>Bad example:<pre class="cpg_code code">if ($foo = 'bar') 
-{ echo 'Hello world'; }</pre>Good example:<pre class="cpg_code code">if ($foo = 'bar') { 
-    echo 'Hello world'; 
+    <div class="cpg_example">Bad example:<pre class="cpg_code code">if ($foo = 'bar') { echo 'Hello world'; }</pre>Bad example:<pre class="cpg_code code">if ($foo = 'bar')
+{ echo 'Hello world'; }</pre>Good example:<pre class="cpg_code code">if ($foo = 'bar') {
+    echo 'Hello world';
 }</pre>Good example:<pre class="cpg_code code">if ($foo = 'bar')
-{ 
-    echo 'Hello world'; 
+{
+    echo 'Hello world';
 }</pre></div></li>
 </ul>
 
@@ -164,8 +164,8 @@ $multi = array(
 <a name="dev_coding_function_definitions"></a><h3>Function Definitions<a href="#dev_coding_function_definitions" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
 <ul>
     <li>Function definitions follow the "one true brace" convention:<pre class="cpg_code code">&lt;?php
-    
-    
+
+
 function fooFunction($arg1, $arg2 = '')
 {
     if (condition) {
@@ -218,7 +218,7 @@ echo '&lt;p&gt;foo bar&lt;/p&gt;';
 <pre class="cpg_code code">echo "&lt;h1&gt;Hello world&lt;/h1&gt;\n";
 echo '&lt;p&gt;foo bar&lt;/p&gt;';
 }</pre>
-</div> 
+</div>
 
 <hr />
 
@@ -255,7 +255,7 @@ echo '&lt;p&gt;foo bar&lt;/p&gt;';
 <ul>
     <li>Keep correct inline documentation at the tops of files</li>
     <li>Keep the documentation/comments at the tops of files limited to a width of 80 characters</li>
-    <li>Start each comment line with a capital letter, and use proper grammar. (periods at the end and all!)</li> 
+    <li>Start each comment line with a capital letter, and use proper grammar. (periods at the end and all!)</li>
     <li>There is a sub-section of the developer documentation that deals with <a href="dev_documentation.htm">editing the documentation</a> - please pay attention to it</li>
     <li>There are special steps required when <a href="dev_config.htm">adding a config option</a> - please pay attention to the corresponding section of the docs.</li>
 </ul>
@@ -317,7 +317,7 @@ Good coding skills are important, but it's as well important to code efficiently
 
 <a name="dev_coding_usability_forms"></a><h3>Forms<a href="#dev_coding_usability_forms" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
 <a name="dev_coding_usability_forms_less_clicks"></a><h4>Less clicks are better<a href="#dev_coding_usability_forms_less_clicks" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
-Dropdown lists are great if there are a lot of options to choose from, but they are bad if there are only two or three options: the user needs to click on the dropdown list to find out what options exist. 
+Dropdown lists are great if there are a lot of options to choose from, but they are bad if there are only two or three options: the user needs to click on the dropdown list to find out what options exist.
 <div class="cpg_example">
     Instead of coming up with a select box like
     <div class="border1">
@@ -341,7 +341,7 @@ Dropdown lists are great if there are a lot of options to choose from, but they 
     </div>
     instead of
     <div class="border1">
-        Display graph: 
+        Display graph:
         <input type="radio" name="option_display_graph" id="option_display_graph0" value="0" class="radio" checked="checked" /><label for="option_display_graph0" class="clickable_option">Yes</label>
         <input type="radio" name="option_display_graph" id="option_display_graph1" value="1" class="radio" /><label for="option_display_graph1" class="clickable_option">No</label>
     </div>

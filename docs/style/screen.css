@@ -427,7 +427,7 @@ dt {
     float:right;
 }
 
-.treeview, .treeview ul { 
+.treeview, .treeview ul {
     padding: 0;
     margin: 0;
     list-style: none;
@@ -452,7 +452,7 @@ dt {
     float:none;
 }
 
-.treeview li { 
+.treeview li {
     margin: 0;
     padding: 3px 0pt 3px 16px;
 }
@@ -471,97 +471,97 @@ dt {
 .treeview .expandable-hitarea { background-position: -80px -3px; }
 
 .treeview li.last { background-position: 0 -1766px }
-.treeview li.lastCollapsable, .treeview li.lastExpandable { background-image: url(../../images/tree/treeview-default.gif); }  
+.treeview li.lastCollapsable, .treeview li.lastExpandable { background-image: url(../../images/tree/treeview-default.gif); }
 .treeview li.lastCollapsable { background-position: 0 -111px }
 .treeview li.lastExpandable { background-position: -32px -67px }
 
 .treeview div.lastCollapsable-hitarea, .treeview div.lastExpandable-hitarea { background-position: 0; }
-.treeview a.cancel { 
+.treeview a.cancel {
 	background-image: url(../../images/icons/cancel.png);
 	background-repeat:no-repeat;
 	background-position:2px 0px;
-	padding: 1px 0 1px 20px; 
-	display: block; 
+	padding: 1px 0 1px 20px;
+	display: block;
 }
 
-.treeview a.de { 
+.treeview a.de {
 	background-image: url(../../images/flags/de.png);
 	background-repeat:no-repeat;
 	background-position:2px 2px;
-	padding: 1px 0 1px 20px; 
-	display: block; 
+	padding: 1px 0 1px 20px;
+	display: block;
 }
 
-.treeview a.en { 
+.treeview a.en {
 	background-image: url(../../images/flags/us.png);
 	background-repeat:no-repeat;
 	background-position:2px 2px;
-	padding: 1px 0 1px 20px; 
-	display: block; 
+	padding: 1px 0 1px 20px;
+	display: block;
 }
 
-.treeview a.es { 
+.treeview a.es {
 	background-image: url(../../images/flags/es.png);
 	background-repeat:no-repeat;
 	background-position:2px 2px;
-	padding: 1px 0 1px 20px; 
-	display: block; 
+	padding: 1px 0 1px 20px;
+	display: block;
 }
 
-.treeview a.fr { 
+.treeview a.fr {
 	background-image: url(../../images/flags/fr.png);
 	background-repeat:no-repeat;
 	background-position:2px 2px;
-	padding: 1px 0 1px 20px; 
-	display: block; 
+	padding: 1px 0 1px 20px;
+	display: block;
 }
 
-.treeview a.nl { 
+.treeview a.nl {
 	background-image: url(../../images/flags/nl.png);
 	background-repeat:no-repeat;
 	background-position:2px 2px;
-	padding: 1px 0 1px 20px; 
-	display: block; 
+	padding: 1px 0 1px 20px;
+	display: block;
 }
 
-.treeview a.us_de { 
+.treeview a.us_de {
 	background-image: url(../../images/flags/us_de.png);
 	background-repeat:no-repeat;
 	background-position:2px 2px;
-	padding: 1px 0 1px 20px; 
-	display: block; 
+	padding: 1px 0 1px 20px;
+	display: block;
 }
 
-.treeview a.us_es { 
+.treeview a.us_es {
 	background-image: url(../../images/flags/us_es.png);
 	background-repeat:no-repeat;
 	background-position:2px 2px;
-	padding: 1px 0 1px 20px; 
-	display: block; 
+	padding: 1px 0 1px 20px;
+	display: block;
 }
 
-.treeview a.us_fr { 
+.treeview a.us_fr {
 	background-image: url(../../images/flags/us_fr.png);
 	background-repeat:no-repeat;
 	background-position:2px 2px;
-	padding: 1px 0 1px 20px; 
-	display: block; 
+	padding: 1px 0 1px 20px;
+	display: block;
 }
 
-.treeview a.us_gb { 
+.treeview a.us_gb {
 	background-image: url(../../images/flags/us_gb.png);
 	background-repeat:no-repeat;
 	background-position:2px 2px;
-	padding: 1px 0 1px 20px; 
-	display: block; 
+	padding: 1px 0 1px 20px;
+	display: block;
 }
 
-.treeview a.us_nl { 
+.treeview a.us_nl {
 	background-image: url(../../images/flags/us_nl.png);
 	background-repeat:no-repeat;
 	background-position:2px 2px;
-	padding: 1px 0 1px 20px; 
-	display: block; 
+	padding: 1px 0 1px 20px;
+	display: block;
 }
 
 .filetree li { padding: 3px 0 2px 16px; }

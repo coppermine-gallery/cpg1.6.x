@@ -87,10 +87,10 @@ if ('swfupload' == $upload_form) {
     js_include('js/swfupload/fileprogress.js');
     js_include('js/swfupload/handlers.js');
     js_include('js/setup_swf_upload.js');
-    
+
     // Set the lang_upload_swf_php language array for use in js
     set_js_var('lang_upload_swf_php', $lang_upload_swf_php);
-    
+
     set_js_var('notify_admin', $CONFIG['upl_notify_admin_email']);
     set_js_var('max_upl_size', $CONFIG['max_upl_size']);
 
@@ -477,12 +477,12 @@ EOT;
 function open_form($path)
 {
     global $upload_form;
-    
+
     $on_submit = '';
     if ('swfupload' == $upload_form) {
         $on_submit = 'onsubmit="cpgUploadToggleProgressBar();"';
     }
-    
+
     echo <<<EOT
     <script language="javascript" type="text/javascript">
     function textCounter(field, maxlimit) {
@@ -690,7 +690,7 @@ if (!$superCage->post->keyExists('process') && !$superCage->post->keyExists('plu
         } else {
             $allowed_doc_types = '';
         }
-    
+
         $help_page = <<< EOT
 <ul>
     <li>{$lang_upload_php['up_instr_1']}</li>
@@ -716,7 +716,7 @@ if (!$superCage->post->keyExists('process') && !$superCage->post->keyExists('plu
 EOT;
         $upload_help = cpg_display_help('f=empty.htm&amp;base=64&amp;h='.urlencode(base64_encode(serialize($lang_upload_php['title']))).'&amp;t='.urlencode(base64_encode(serialize($help_page))),470,245);
     }
-    
+
     $upload_table_header = <<< EOT
     <table border="0" cellspacing="0" cellpadding="0" width="100%">
         <tr>
@@ -769,7 +769,7 @@ EOT;
         create_form_simple($form_array);
         // Close the form with an submit button
         close_form($lang_upload_php['title'],1, 'ok');
-        list($timestamp, $form_token) = getFormToken(); 
+        list($timestamp, $form_token) = getFormToken();
         echo <<< EOT
         <input type="hidden" name="form_token" value="{$form_token}" />
         <input type="hidden" name="timestamp" value="{$timestamp}" />
@@ -816,10 +816,10 @@ EOT;
 
 // Process the SWF upload form submission
 } elseif ($superCage->post->keyExists('process')) {
-    
+
     // Make sure there is no output yet
     ob_clean();
-    
+
     header("Content-Type: text/plain");
 
     if (!checkFormToken()) {
@@ -867,7 +867,7 @@ EOT;
         echo "error|{$lang_upload_php['no_post']}|0";
         exit;
     }
-    
+
     // Check the size of the file if $max_file_size is set to greater than 0
     if ($max_file_size && filesize($superCage->files->getRaw('/Filedata/tmp_name')) > $max_file_size) {
         // We reject this files as file size exceeds the value set in config
@@ -946,7 +946,7 @@ EOT;
     // Create a testing alias.
     $picture_alias = $matches[1].".".$matches[2];
 
-    
+
 
     // Check if user selected an album to upload picture to. If not, die with error.
     // added by frogfoot

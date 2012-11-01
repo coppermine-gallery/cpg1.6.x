@@ -14,7 +14,7 @@
   $HeadURL$
   $Revision$
 **********************************************/
- 
+
 define('IN_COPPERMINE', true);
 define('ADMIN_PHP', true);
 define('LANGMGR_PHP', true);
@@ -57,7 +57,7 @@ $show_icon = cpg_fetch_icon('show_table_row', 2);
 
 // Form has been submit --- start
 if ($superCage->post->keyExists('submit')) {
-    $posted_lang_id_array = $superCage->post->getEscaped('lang_id'); 
+    $posted_lang_id_array = $superCage->post->getEscaped('lang_id');
     foreach ($posted_lang_id_array as $posted_lang_id) {
         // Create the query
         if ($superCage->post->getAlpha('new_'.$posted_lang_id) == 'YES') {
@@ -285,7 +285,7 @@ foreach ($lang_language_data as $language) {
                 $file_lookup_errors++;
             }
             if ($language['native_name'] == '') {
-                $language['native_name'] = $language['file_native']; // Populate the native name field from the file if emtpy 
+                $language['native_name'] = $language['file_native']; // Populate the native name field from the file if emtpy
             }
             if ($language['file_native'] != $language['native_name'] && $language['file_native'] != '') {
                 $reset_native = '<a href="javascript:;" title="' . sprintf($lang_langmgr_php['replace_x_with_y'], '&quot;'.$language['native_name'].'&quot;', '&quot;'.$language['file_native'].'&quot;') . '" id="reset_native_'.$loopCounter.'" onclick="document.getElementById(\'native_name_'.$language['lang_id'].'\').value = \''.$language['file_native'].'\';document.getElementById(\'reset_native_'.$loopCounter.'\').style.display = \'none\';">' . cpg_fetch_icon('undo',0) . '</a>';
@@ -298,7 +298,7 @@ foreach ($lang_language_data as $language) {
                 $file_lookup_errors++;
             }
             if ($language['english_name'] == '') {
-                $language['english_name'] = $language['file_english']; // Populate the english name field from the file if emtpy 
+                $language['english_name'] = $language['file_english']; // Populate the english name field from the file if emtpy
             }
             if ($language['file_english'] != $language['english_name'] && $language['file_english'] != '') {
                 $reset_english = '<a href="javascript:;" title="' . sprintf($lang_langmgr_php['replace_x_with_y'], '&quot;'.$language['english_name'].'&quot;', '&quot;'.$language['file_english'].'&quot;') . '" id="reset_english_'.$loopCounter.'" onclick="document.getElementById(\'english_name_'.$language['lang_id'].'\').value = \''.$language['file_english'].'\';document.getElementById(\'reset_english_'.$loopCounter.'\').style.display = \'none\';">' . cpg_fetch_icon('undo',0) . '</a>';
@@ -419,25 +419,25 @@ foreach ($lang_language_data as $language) {
         </td>
 EOT;
         print <<< EOT
-        
+
         <td class="{$cellstyle}">
           <input type="text" name="english_name_{$language['lang_id']}" id="english_name_{$language['lang_id']}" class="textinput" value="{$language['english_name']}" />{$reset_english}
         </td>
 EOT;
         print <<< EOT
-        
+
         <td class="{$cellstyle}">
           <input type="text" name="native_name_{$language['lang_id']}" id="native_name_{$language['lang_id']}" class="textinput" value="{$language['native_name']}" />{$reset_native}
         </td>
 EOT;
         print <<< EOT
-        
+
         <td class="{$cellstyle}">
           <input type="text" name="custom_name_{$language['lang_id']}" id="custom_name_{$language['lang_id']}" class="textinput" value="{$language['custom_name']}" />
         </td>
 EOT;
         print <<< EOT
-        
+
         <td class="{$cellstyle}">
             <img src="{$flag_path}" width="16" height="11" border="0" alt="" name="image_{$loopCounter}" style="float:left" />
             <select id="flag_{$language['lang_id']}" name="flag_{$language['lang_id']}" size="1" onchange="if(document.images) document.images['image_{$loopCounter}'].src='images/flags/'+this.options[this.selectedIndex].value+'.png';" class="listbox_lang" style="width:60px">
@@ -458,19 +458,19 @@ EOT;
         </td>
 EOT;
         print <<< EOT
-        
+
         <td class="{$cellstyle}">
             {$availability_output}{$new_output}
         </td>
 EOT;
         print <<< EOT
-        
+
         <td class="{$cellstyle}">
           {$completeness_output}
         </td>
 EOT;
         print <<< EOT
-        
+
         <td class="{$cellstyle}">
 EOT;
         if ($language['enabled'] == 'YES') {
@@ -491,7 +491,7 @@ EOT;
                     {$filesize_output}
                     {$additional_output}
                 </ul>
-            </span> 
+            </span>
         </td>
     </tr>
 EOT;

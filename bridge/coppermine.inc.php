@@ -130,7 +130,7 @@ if (isset($bridge_lookup)) {
                             $sql .= "user_name = '$username' AND BINARY user_password = '$encpassword' AND user_active = 'YES'";
                             break;
                     }
-                   
+
                     $results = cpg_db_query($sql);
 
                     // If exists update lastvisit value, session, and login
@@ -253,7 +253,7 @@ if (isset($bridge_lookup)) {
                     // Delete stale 'remember me' sessions
                     $sql = "DELETE FROM {$this->sessionstable} WHERE time < $rememberme_life_time";
                     cpg_db_query($sql, $this->link_id);
-                    
+
                     // Update database entry
                     $sql = "UPDATE {$CONFIG['TABLE_CONFIG']} SET value = ".time()." WHERE name = 'session_cleanup'";
                     cpg_db_query($sql, $this->link_id);

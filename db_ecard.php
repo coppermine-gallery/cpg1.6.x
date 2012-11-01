@@ -28,15 +28,15 @@ if (!GALLERY_ADMIN_MODE) {
 function cpgGetUrlVars($exception)
 {
     global $CPG_PHP_SELF, $eid;
-    
+
     $cpgGetUrl = $CPG_PHP_SELF . '?';
-    
+
     foreach ($eid as $key => $value) {
         if ($key != $exception) {
             $cpgGetUrl .= $key . '=' . $value . '&';
         }
     }
-    
+
     return $cpgGetUrl;
 }
 
@@ -115,7 +115,7 @@ case 'sed':
     $sortDirection = 'DESC';
     $sortText = $lang_db_ecard_php['ecard_by_sender_email'];
     break;
-    
+
 case 'sea':
     $sortBy = 'sender_email';
     $sortDirection = 'ASC';
@@ -213,7 +213,7 @@ for ($page = 1; $page <= $pageTotal; $page++) {
             $currentEnd = $totalEcards;
         }
     }
-    
+
     $tabOutput .= $page;
 
     if ($page != $startFrom / $countTo + 1) {
@@ -305,7 +305,7 @@ print <<< EOT
             <a href="{$urlWithoutSort}sort=id">
                 <img src="images/descending.png" width="9" height="9" border="0" alt="" title="{$lang_db_ecard_php['ecard_descending']}" />
             </a>
-        </th>    
+        </th>
         <th class="tableh1" align="left" valign="bottom">{$lang_db_ecard_php['ecard_name']}
             <a href="{$urlWithoutSort}sort=rna">
                 <img src="images/ascending.png" width="9" height="9" border="0" alt="" title="{$lang_db_ecard_php['ecard_ascending']}" />

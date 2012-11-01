@@ -220,9 +220,9 @@ function cpg_db_query($query, $use_link_id = 0)
     }
 
     $query_start = cpgGetMicroTime();
-    
+
     $result = mysql_query($query, $link_id);
-    
+
     $query_end = cpgGetMicroTime();
 
     if (!isset($CONFIG['debug_mode']) || $CONFIG['debug_mode'] == 1 || $CONFIG['debug_mode'] == 2) {
@@ -262,7 +262,7 @@ function cpg_db_error($the_error, $link_id)
     global $CONFIG, $lang_errors, $LINEBREAK;
 
     log_write("$the_error the following error was encountered: $LINEBREAK" . mysql_error($link_id), CPG_DATABASE_LOG);
-    
+
     if ($CONFIG['debug_mode'] === '0' || ($CONFIG['debug_mode'] === '2' && !GALLERY_ADMIN_MODE)) {
         cpg_die(CRITICAL_ERROR, $lang_errors['database_query'], __FILE__, __LINE__);
     } else {
@@ -320,7 +320,7 @@ function cpg_db_fetch_row($result)
 function cpg_db_last_insert_id()
 {
     global $CONFIG;
-    
+
     return mysql_insert_id($CONFIG['LINK_ID']);
 }
 
@@ -375,12 +375,12 @@ function cpg_die($msg_code, $msg_text,  $error_file, $error_line, $output_buffer
     if ($msg_text == $lang_errors['access_denied'] && $CONFIG['log_mode'] != 0) {
         log_write("Denied privileged access to " . basename($error_file) . " by user {$USER_DATA['user_name']} at IP $hdr_ip", CPG_SECURITY_LOG);
     }
-    
+
     // Record invalid form token messages to the log
     if ($msg_text == $lang_errors['invalid_form_token'] && $CONFIG['log_mode'] != 0) {
         log_write("Invalid form token encountered for " . basename($error_file) . " by user {$USER_DATA['user_name']} at IP $hdr_ip", CPG_SECURITY_LOG);
-    }    
-    
+    }
+
     if ($msg_code == INFORMATION) {
         //$msg_icon = 'info'; not used anymore?
         $css_class = 'cpg_message_info';
@@ -792,7 +792,7 @@ function load_template()
     if ($gallery_pos) {
         $template    = str_replace('{THEME_SELECT_LIST}', themeSelect('list'), $template);
     }
-    
+
     // Failsafe-option if JAVASCRIPT-token is missing from custom theme
     if (strpos($template, '{JAVASCRIPT}') === FALSE) {
         if (stripos($template, '</head>') !== FALSE) {
@@ -953,8 +953,8 @@ function get_private_album_set($aid_str="")
         } elseif ($cat > 0) {
             //$CURRENT_CAT_DEPTH isn't used
             //$result = cpg_db_query("SELECT rgt, lft, depth FROM {$CONFIG['TABLE_CATEGORIES']} WHERE cid = $cat LIMIT 1");
-            //list($rgt, $lft, $CURRENT_CAT_DEPTH) = mysql_fetch_row($result); 
-            
+            //list($rgt, $lft, $CURRENT_CAT_DEPTH) = mysql_fetch_row($result);
+
             $result = cpg_db_query("SELECT rgt, lft FROM {$CONFIG['TABLE_CATEGORIES']} WHERE cid = $cat LIMIT 1");
             if (mysql_num_rows($result) == 0) {
                 cpg_die(CRITICAL_ERROR, $lang_errors['non_exist_cat'], __FILE__, __LINE__);
@@ -1115,11 +1115,11 @@ function get_pic_data_ordering($total, $offset, $row_count)
 {
     // Determine if we are over halfway through the album
     if ($offset > $total / 2) {
-        
+
         // If so, switch the sort direction
         $ASC = 'DESC';
         $DESC = 'ASC';
-        
+
         // If we are on the last page, we need a partial result
         if ($offset + $row_count > $total) {
             $row_count = $total - $offset;
@@ -1127,22 +1127,22 @@ function get_pic_data_ordering($total, $offset, $row_count)
         } else {
             $offset = $total - $offset - $row_count;
         }
-        
+
         // Flag so that we know to reverse the results later
         $flipped = true;
-        
+
     } else {
-        
+
         // Else, carry on as usual
         $ASC = 'ASC';
         $DESC = 'DESC';
         $flipped = false;
     }
- 
+
     // Generate the new LIMIT clause
     $limit = ($offset != -1) ? ' LIMIT ' . $offset : '';
     $limit .= ($row_count != -1) ? ' ,' . $row_count : '';
-     
+
     return array($ASC, $DESC, $limit, $flipped);
 }
 
@@ -1173,7 +1173,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
 
     $limit = ($limit1 != -1) ? ' LIMIT ' . $limit1 : '';
     $limit .= ($limit2 != -1) ? ' ,' . $limit2 : '';
-    
+
     if ($mode == 'pidonly') {
         $select_column_list = array('r.pid');
 
@@ -1204,7 +1204,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
             'ctime',
             'r.title',
             'r.keywords',
-            'r.votes', 
+            'r.votes',
             'pic_rating'
         );
 
@@ -1366,7 +1366,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         mysql_free_result($result);
 
         list($ASC, $DESC, $limit, $flipped) = get_pic_data_ordering($count, $limit1, $limit2);
-        
+
         $select_column_list[] = 'UNIX_TIMESTAMP(msg_date) AS msg_date';
         $select_column_list[] = 'msg_body';
         $select_column_list[] = 'author_id';
@@ -1392,7 +1392,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         if ($flipped) {
             $rowset = array_reverse($rowset);
         }
-        
+
         if ($set_caption) {
             build_caption($rowset, array('msg_body', 'msg_date'));
         }
@@ -1433,7 +1433,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         mysql_free_result($result);
 
         list($ASC, $DESC, $limit, $flipped) = get_pic_data_ordering($count, $limit1, $limit2);
-        
+
         $select_column_list[] = 'UNIX_TIMESTAMP(msg_date) AS msg_date';
         $select_column_list[] = 'msg_body';
         $select_column_list[] = 'author_id';
@@ -1464,7 +1464,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         if ($flipped) {
             $rowset = array_reverse($rowset);
         }
-        
+
         $rowset = CPGPluginAPI::filter('thumb_caption_lastcomby', $rowset);
 
         return $rowset;
@@ -1508,7 +1508,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         if ($flipped) {
             $rowset = array_reverse($rowset);
         }
-        
+
         if ($set_caption) {
             build_caption($rowset, array('ctime'));
         }
@@ -1547,7 +1547,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         mysql_free_result($result);
 
         list($ASC, $DESC, $limit, $flipped) = get_pic_data_ordering($count, $limit1, $limit2);
-        
+
         $select_columns = implode(', ', $select_column_list);
 
         $query = "SELECT $select_columns
@@ -1566,7 +1566,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         if ($flipped) {
             $rowset = array_reverse($rowset);
         }
-        
+
         if ($set_caption) {
             build_caption($rowset, array('ctime'));
         }
@@ -1597,7 +1597,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         mysql_free_result($result);
 
         list($ASC, $DESC, $limit, $flipped) = get_pic_data_ordering($count, $limit1, $limit2);
-        
+
         $select_columns = implode(', ', $select_column_list);
 
         $query = "SELECT $select_columns
@@ -1616,7 +1616,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         if ($flipped) {
             $rowset = array_reverse($rowset);
         }
-        
+
         if ($set_caption) {
             build_caption($rowset, array('hits'));
         }
@@ -1647,7 +1647,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         mysql_free_result($result);
 
         list($ASC, $DESC, $limit, $flipped) = get_pic_data_ordering($count, $limit1, $limit2);
-        
+
         $select_columns = implode(', ', $select_column_list);
 
         $query = "SELECT $select_columns
@@ -1666,7 +1666,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         if ($flipped) {
             $rowset = array_reverse($rowset);
         }
-        
+
         if ($set_caption) {
             build_caption($rowset, array('pic_rating'));
         }
@@ -1697,7 +1697,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         mysql_free_result($result);
 
         list($ASC, $DESC, $limit, $flipped) = get_pic_data_ordering($count, $limit1, $limit2);
-        
+
         $select_column_list[] = 'UNIX_TIMESTAMP(mtime) AS mtime';
 
         if (GALLERY_ADMIN_MODE) {
@@ -1722,7 +1722,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         if ($flipped) {
             $rowset = array_reverse($rowset);
         }
-        
+
         if ($set_caption) {
             build_caption($rowset, array('mtime', 'hits'));
         }
@@ -2015,7 +2015,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         mysql_free_result($result);
 
         list($ASC, $DESC, $limit, $flipped) = get_pic_data_ordering($count, $limit1, $limit2);
-        
+
         $select_columns = implode(', ', $select_column_list);
 
         $query = "SELECT $select_columns
@@ -2034,7 +2034,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         if ($flipped) {
             $rowset = array_reverse($rowset);
         }
-        
+
         if ($set_caption) {
             build_caption($rowset, array('ctime'));
         }
@@ -2288,13 +2288,13 @@ function get_pic_pos($album, $pid)
     case 'favpics': // Favorite Files
 
         global $FAVPICS;
-        
+
         if (empty($FAVPICS)) {
             return 0;
         }
-        
+
         $favs = implode(', ', $FAVPICS);
-    
+
         $query = "SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} AS p
             INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS r ON r.aid = p.aid
             $RESTRICTEDWHERE
@@ -2547,8 +2547,8 @@ function cpg_determine_client()
     } elseif (preg_match('#BeOS#i', $server_agent)) {
         $os = 'beOS';
     }
-    
-    
+
+
 
     $browser = 'Unknown';
     if (preg_match('#MSIE#i', $server_agent)) {
@@ -3256,7 +3256,7 @@ function display_film_strip($album, $cat, $pos,$ajax_call)
                 $lang_common['filesize'] . '=' . ($row['filesize'] >> 10) . $lang_byte_units[1] . $LINEBREAK .
                 $lang_display_thumbnails['dimensions'] . $row['pwidth'] . "x" . $row['pheight'] . $LINEBREAK .
                 $lang_display_thumbnails['date_added'] . localised_date($row['ctime'], $lang_date['album']);
-                
+
             list($pic_title) = CPGPluginAPI::filter('thumb_strip_html_title', array($pic_title, $row));
 
             $pic_url = get_pic_url($row, 'thumb');
@@ -3373,7 +3373,7 @@ function& display_slideshow($pos, $ajax_show = 0)
     if ($ajax_show == 0) {
         set_js_var('Pic_count', $pic_count);
     }
-    
+
     foreach ($pic_data as $picture) {
 
         if (is_image($picture['filename'])) {
@@ -3592,9 +3592,9 @@ function& get_pic_url(&$pic_row, $mode, $system_pic = false)
     }
 
     if (is_null($filepathname)) {
-        
+
         $localpath = $pic_row['filepath'] . $pic_prefix[$mode] . $pic_row['filename'];
-        
+
         // Check here that the filename we are going to return exists
         // If it doesn't exist we return a placeholder image
         // We then log the missing file for the admin's attention
@@ -3703,7 +3703,7 @@ function cpg_debug_output()
     global $USER, $USER_DATA, $CONFIG, $cpg_time_start, $query_stats, $queries, $lang_cpg_debug_output, $CPG_PHP_SELF, $superCage, $CPG_PLUGINS, $LINEBREAK;
     if ($CONFIG['performance_timestamp'] == 0 || (date('Y-m-d', $CONFIG['performance_timestamp']) < date('Y-m-d'))) {
         // The metering data in the config table are outdated, let's write fresh values.
-        // Currently happens each day. To extend the metering period to a whole week, 
+        // Currently happens each day. To extend the metering period to a whole week,
         // use 'Y-m-W' for both date functions above. Use 'Y-m' to extend the period over
         // one month and subsequently 'Y' for an entire year.
         $CONFIG['performance_timestamp'] = time();
@@ -3747,7 +3747,7 @@ EOT;
     echo <<< EOT
     <tr>
         <td>
-            
+
         </td>
     </tr>
     <tr>
@@ -3897,7 +3897,7 @@ EOT;
         echo cpg_fill_string_array_with_spaces($table, ' ', 'left', 'string');
         unset ($table);
         echo $LINEBREAK . $debug_separate;
-        
+
         echo 'Page (performance)';
         echo $debug_underline;
         $table = array();
@@ -3922,7 +3922,7 @@ EOT;
             </span>
         </td>
     </tr>
-    
+
 EOT;
 
     if ($CONFIG['debug_notice'] != 0) {
@@ -4365,7 +4365,7 @@ function cpg_display_help($reference = 'f=empty.htm', $width = '600', $height = 
     if (isset($USER['theme'])) {
         $help_theme = $USER['theme'];
     }
-    
+
     if($icon != '*' && $icon != '?') {
         $icon = '<img src="images/help.gif" width="13" height="11" border="0" alt="" />';
     }
@@ -5235,19 +5235,19 @@ function user_is_allowed($include_upload_permissions = true)
     // We should also whether user has upload permission to the current album. but do this only if album id is set
     if ($album_id && $include_upload_permissions) {
         $public_albums = cpg_db_query("SELECT aid FROM {$CONFIG['TABLE_ALBUMS']} INNER JOIN {$CONFIG['TABLE_CATEGORIES']} ON cid = category WHERE category < " . FIRST_USER_CAT . " AND ((uploads='YES' AND (visibility = '0' OR visibility IN ".USER_GROUP_SET." OR alb_password != '')) OR (owner=".USER_ID.")) AND aid=$album_id");
-        
+
         if (count(cpg_db_fetch_rowset($public_albums))) {
             $check_approve = true;
             define('USER_UPLOAD_ALLOWED', 1);
         } else {
             //select albums that don't belong to a category
             $public_albums_no_cat = cpg_db_query("SELECT aid FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = 0 AND ((uploads='YES' AND (visibility = '0' OR visibility IN ".USER_GROUP_SET.")) OR (owner=".USER_ID.")) AND aid=$album_id");
-            
+
             if (count(cpg_db_fetch_rowset($public_albums_no_cat))) {
                 $check_approve = true;
                 define('USER_UPLOAD_ALLOWED', 1);
             }
-        }        
+        }
     }
 
     //check if admin allows editing after closing category
@@ -5752,7 +5752,7 @@ function cpg_config_set($name, $value)
     if ($CONFIG['log_mode'] != 0) {
         log_write("Setting for '$name' changed from '{$CONFIG[$name]}' to '$value' by user " . USER_NAME, CPG_CONFIG_LOG);
     }
-    
+
     $CONFIG[$name] = $value;
 }
 
@@ -5875,16 +5875,16 @@ function captcha_plugin_enabled()
 function get_cat_data()
 {
     global $CONFIG, $CAT_LIST, $USER_DATA, $cpg_udb;
-    
+
     if (GALLERY_ADMIN_MODE) {
-        $sql = "SELECT rgt, cid, name FROM {$CONFIG['TABLE_CATEGORIES']} ORDER BY lft ASC"; 
+        $sql = "SELECT rgt, cid, name FROM {$CONFIG['TABLE_CATEGORIES']} ORDER BY lft ASC";
     } else {
         $sql = "SELECT rgt, c.cid, name FROM {$CONFIG['TABLE_CATEGORIES']} AS c NATURAL JOIN {$CONFIG['TABLE_CATMAP']} WHERE group_id IN (" . implode(', ', $USER_DATA['groups']) . ") ORDER BY lft ASC";
     }
     $result = cpg_db_query($sql);
     if (mysql_num_rows($result) > 0) {
         $rowset = cpg_db_fetch_rowset($result);
-        $right = array(); 
+        $right = array();
         foreach ($rowset as $subcat) {
             if (count($right) > 0) {
                 // check if we should remove a node from the stack
@@ -5893,7 +5893,7 @@ function get_cat_data()
                 }
             }
             $ident = str_repeat('&nbsp;&nbsp;&nbsp;', count($right));
-            $right[] = $subcat['rgt']; 
+            $right[] = $subcat['rgt'];
             $CAT_LIST[] = array($subcat['cid'], $ident . $subcat['name']);
             // add user categories
             if ($subcat['cid'] == 1 && GALLERY_ADMIN_MODE) {
@@ -5914,17 +5914,17 @@ function get_cat_data()
 function album_selection_options($selected = 0)
 {
     global $CONFIG, $lang_common, $cpg_udb, $LINEBREAK;
-    // html string of options to be returned    
+    // html string of options to be returned
     $options = '';
     $albums = array();
     // load all albums
-    
+
     if (GALLERY_ADMIN_MODE) {
         $result = cpg_db_query("SELECT aid, title, category FROM {$CONFIG['TABLE_ALBUMS']} ORDER BY pos");
     } elseif (USER_ID) {
         $result = cpg_db_query("SELECT aid, title, category FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = " . (FIRST_USER_CAT + USER_ID) . " OR owner = " . USER_ID . " ORDER BY pos");
     }
-    
+
     while ( ($row = mysql_fetch_assoc($result)) ) {
         $albums[$row['category']][$row['aid']] = $row['title'];
     }
@@ -5942,7 +5942,7 @@ function album_selection_options($selected = 0)
     } else {
         $result = cpg_db_query("SELECT c.cid, c.rgt, c.name FROM {$CONFIG['TABLE_ALBUMS']} AS a RIGHT JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON a.category = c.cid WHERE c.cid = " . USER_GAL_CAT . " OR a.owner = ". USER_ID . " ORDER BY lft");
     }
-    
+
     $cats = array();
     // Loop through all categories
     while ( ($row = mysql_fetch_assoc($result))) {
@@ -5966,7 +5966,7 @@ function album_selection_options($selected = 0)
             } else {
                 $users = array(array('user_id' => USER_ID, 'user_name' => USER_NAME));
             }
-            
+
             foreach ($users as $user) {
                 if (!empty($albums[$user['user_id'] + FIRST_USER_CAT])) {
                     $options .= '<optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;' . $user['user_name'] . '">' . $LINEBREAK;
@@ -5992,11 +5992,11 @@ function album_selection_options($selected = 0)
         if (!empty($albums[$row['cid']])) {
             // category header
             $options .= '<optgroup label="' . $indent . $hierarchy . '">' . $LINEBREAK;
-            
+
             foreach ($albums[$row['cid']] as $aid => $title) {
                 $options .= sprintf('<option value="%d"%s>%s</option>' . $LINEBREAK, $aid, $aid == $selected ? ' selected="selected"' : '', $indent . $title);
             }
-            
+
             $options .= '</optgroup>';
         }
     }
@@ -6016,7 +6016,7 @@ function album_selection_options($selected = 0)
 * @param $path full-path or relative path to folder
 * @return array(success(T)/failure(F), debug output)
 */
-function cpg_folder_file_delete($path) 
+function cpg_folder_file_delete($path)
 {
     global $CONFIG;
 
@@ -6052,7 +6052,7 @@ function cpg_folder_file_delete($path)
         } else {
             return array(false,'');
         }
-    }   
+    }
     if (is_dir($path)) {
         if (version_compare(PHP_VERSION, '5.0.0') < 0) {
             $entries = array();
@@ -6133,7 +6133,7 @@ function cpg_folder_file_delete($path)
 
 /**
  * Get the form token and timestamp for the current user
- * this is calculated 
+ * this is calculated
  *
  * @return array ($timestamp, $token)
  */
@@ -6141,7 +6141,7 @@ function getFormToken($timestamp = null)
 {
     global $raw_ip, $CONFIG;
     $superCage = Inspekt::makeSuperCage();
-    
+
     if($timestamp == null){
         $timestamp = time();
     }
@@ -6197,7 +6197,7 @@ function checkFormToken()
 /**
  * array_slice with preserve_keys for every php version
  * (see: http://www.php.net/manual/en/function.array-slice.php#70913)
- * 
+ *
  *
  * @param array $array Input array
  * @param int $offset Start offset
@@ -6211,7 +6211,7 @@ function array_slice_preserve_keys($array, $offset, $length = null, $preserve_ke
     if((int)str_replace('.', '', phpversion()) >= 502){
         return(array_slice($array, $offset, $length, $preserve_keys));
     }
-    
+
     if(!$preserve_keys){
         return(array_slice($array, $offset, $length));
     }else{
@@ -6228,7 +6228,7 @@ function array_slice_preserve_keys($array, $offset, $length = null, $preserve_ke
         }else{
             $endOffset = count($array);
         }
-        
+
         // collect elements
         foreach($array as $key=>$value){
             if($i >= $offset && $i < $endOffset){
@@ -6244,7 +6244,7 @@ function array_slice_preserve_keys($array, $offset, $length = null, $preserve_ke
 /**
  * memory_get_usage
  * (see comments on http://www.php.net/manual/en/function.memory-get-usage.php)
- * 
+ *
  *
  * @return amount of memory allocated to PHP in bytes
  */
@@ -6281,7 +6281,7 @@ if (!function_exists('memory_get_usage')) {
             } else {
                 unset($output);
                 $output = array();
-                exec("ps -o rss -p $pid", $output); 
+                exec("ps -o rss -p $pid", $output);
                 return $output[1] *1024;
             }
         }
@@ -6308,7 +6308,7 @@ function cpg_fillArrayFieldWithSpaces($text, $maxchars, $fillUpOn = 'right') {
 
 /**
  * cpg_fill_string_array_with_spaces
- * 
+ *
  * @param array $table (can be variable or array)
  * @param string $align alignment of the cells (left or right)
  * @param string $return_value desired return value (string or array)
@@ -6388,7 +6388,7 @@ function cpg_get_comment_page_number($msg_id) {
     $result = cpg_db_query("SELECT COUNT(msg_id) FROM {$CONFIG['TABLE_COMMENTS']} WHERE pid='$pid'");
     list($num) = mysql_fetch_row($result);
     $page_count = ceil($num / $CONFIG['comments_per_page']);
-    
+
     $comment_sort_order = ($CONFIG['comments_sort_descending'] == 1) ? 'ASC' : 'DESC'; // we need to count reversed
     $result = cpg_db_query("SELECT msg_id FROM {$CONFIG['TABLE_COMMENTS']} WHERE pid='$pid' ORDER BY msg_id $comment_sort_order");
     $i = 0;
@@ -6408,7 +6408,7 @@ function cpg_get_comment_page_number($msg_id) {
 
 /**
  * cpg_lang_name2code
- * 
+ *
  * @param string $lang_name the name of a language file
  * @return string $return language code (flag name)
  */
@@ -6436,7 +6436,7 @@ function cpg_get_guest_token() {
 
 /**
  * str_ireplace
- * 
+ *
  * PHP4-replacement, taken from the user comments at http://theserverpages.com/php/manual/en/function.str-ireplace.php
  */
 if (!function_exists('str_ireplace')) {
@@ -6480,7 +6480,7 @@ function cpg_pw_protected_album_access($aid) {
 
 /**
  * Get all user group IDs for a particular user
- * 
+ *
  * @param integer $user_id
  * @return array
  */
@@ -6507,7 +6507,7 @@ function cpg_get_groups($user_id) {
 
 /**
  * Strip whitespaces from the beginning and end of each keyword
- * 
+ *
  * @param string $keywords
   */
 function cpg_trim_keywords(&$keywords) {
@@ -6527,7 +6527,7 @@ function cpg_trim_keywords(&$keywords) {
 /**
  * Determine if an intermediate-sized picture should be used
  * The weird comparision is because only 'picture_width' is stored as config value
- * 
+ *
  * @param integer $pwidth
  * @param integer $pheight
  * @return bool
@@ -6550,7 +6550,7 @@ function cpg_picture_dimension_exceeds_intermediate_limit($pwidth, $pheight) {
 
 /**
  * Dummy function to avoid error message when using the EXIF library on some systems
- * 
+ *
  * @param string $str
  * @return string
  */
@@ -6563,7 +6563,7 @@ if (!function_exists('gettext')) {
 
 /**
  * Strip unneeded EXIF data
- * 
+ *
  * @param array $exifRawData
  * @param array $exif_names
  * @return array

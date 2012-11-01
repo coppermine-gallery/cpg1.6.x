@@ -41,9 +41,9 @@ if ($superCage->post->keyExists('update_config')) {
     }
 
     $value = $superCage->post->getInt('enable_plugins');
-    
+
     cpg_config_set('enable_plugins', $value);
-    
+
     header('Location: pluginmgr.php');
 }
 
@@ -209,7 +209,7 @@ EOT;
             }
 
             if ($thisplugin['index'] < ($plugins_count - 1)) {
-                $down = cpg_fetch_icon('down', 0); 
+                $down = cpg_fetch_icon('down', 0);
                 echo <<<EOT
             <td width="3%" align="center" valign="middle">
                 <a href="pluginmgr.php?op=moved&amp;p={$thisplugin['plugin_id']}&amp;form_token={$form_token}&amp;timestamp={$timestamp}#{$pluginPath}">{$down}</a>
@@ -368,7 +368,7 @@ EOT;
                 <table border="0" width="100%" cellspacing="0" cellpadding="0">
                 <tr>
                     <td width="5%" align="center" valign="top">
-                        
+
                     </td>
                     <td width="5%" align="center" valign="top">
                         {$install_button}

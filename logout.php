@@ -30,7 +30,7 @@ if (!USER_ID) {
 if (!checkFormToken()) {
     cpg_die(ERROR, $lang_errors['invalid_form_token'], __FILE__, __LINE__);
 }
-    
+
 if ($CONFIG['log_mode'] == CPG_LOG_ALL) {
     log_write('The user ' . $USER_DATA['user_name'] . ' (user ID ' . $USER_DATA['user_id'] . ") logged out.", CPG_ACCESS_LOG);
 }
@@ -39,6 +39,6 @@ if (defined('UDB_INTEGRATION')) {
     $cpg_udb->logout_page();
 }
 
-cpgRedirectPage('index.php', $lang_logout_php['logout'], sprintf($lang_logout_php['bye'], stripslashes(USER_NAME)), 3); // Replace 'index.php' with $CPG_REFERER to redirect the user to the page he came from, with the drawback that the visitor will get an error message if he came from a page that is not accesible for guests 
+cpgRedirectPage('index.php', $lang_logout_php['logout'], sprintf($lang_logout_php['bye'], stripslashes(USER_NAME)), 3); // Replace 'index.php' with $CPG_REFERER to redirect the user to the page he came from, with the drawback that the visitor will get an error message if he came from a page that is not accesible for guests
 
 ?>

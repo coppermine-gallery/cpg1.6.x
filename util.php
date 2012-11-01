@@ -62,7 +62,7 @@ if ($CONFIG['make_intermediate'] == 1) {
 // Set up labels for keyword separator conversion
 $keyword_select = $LINEBREAK . '                <select size="1" name="%s" class="listbox">';
 foreach ($lang_common['keyword_separators'] as $key_value=>$key_label) {
-    $keyword_select .= '<option value="' . htmlentities($key_value) . '">' . $key_label . '</option>';  
+    $keyword_select .= '<option value="' . htmlentities($key_value) . '">' . $key_label . '</option>';
 }
 $keyword_select .= '</select>' . $LINEBREAK . '                ';
 $keyword_from_to = sprintf(
@@ -74,7 +74,7 @@ $keyword_set = $lang_util_php['keyword_set'];
 $replace_options = array_merge($lang_common['keyword_separators'],$lang_util_php['keyword_replace_values']);
 $replace_select = $LINEBREAK . '                <select size="1" name="%s" class="listbox">';
 foreach ($replace_options as $key_value=>$key_label) {
-    $replace_select .= '<option value="' . htmlentities($key_value) . '">' . $key_label . '</option>';  
+    $replace_select .= '<option value="' . htmlentities($key_value) . '">' . $key_label . '</option>';
 }
 $replace_select .= '</select>' . $LINEBREAK . '                ';
 $keyword_replace1 = sprintf(
@@ -175,7 +175,7 @@ $tasks = array(
     ),
 
     'keyword_convert' => array(
-        'keyword_convert', 
+        'keyword_convert',
         $lang_util_php['keyword_convert'],'
                 <strong>' . $keyword_from_to . ' (2)</strong><br />
                 <input type="checkbox" name="keyword_set" checked="checked" value="1" class="nobg" />' . $keyword_set . '<br />
@@ -220,22 +220,22 @@ if (array_key_exists($action, $tasks)) {
 
         print '  <tr>'.$LINEBREAK;
         print '    <td class="tableh2">'.$LINEBREAK;
-        
+
         if ($name) {
             print '      <input type="radio" name="action" value="'.$name.'" id="'.$name.'" class="nobg" /><label for="'.$name.'" class="clickable_option">'.$title.'</label>'.$LINEBREAK;
         } else {
             print '      '.$title;
         }
-        
+
         print '    </td>'.$LINEBREAK;
         print '  </tr>'.$LINEBREAK;
         print '  <tr>'.$LINEBREAK;
         print '    <td>'.$LINEBREAK;
         print '      <div id="'.$name.'_wrapper">'.$LINEBREAK;
         print '        '.$LINEBREAK;
-        
+
         starttable('100%', '', 2);
-        
+
         print '          <tr>'.$LINEBREAK;
         print '            <td class="tableb">'.$LINEBREAK;
         print '            </td>'.$LINEBREAK;
@@ -244,18 +244,18 @@ if (array_key_exists($action, $tasks)) {
         print '            </td>'.$LINEBREAK;
         print '          </tr>'.$LINEBREAK;
         print '        '.$LINEBREAK;
-        
+
         endtable();
-        
+
         print '      </div>'.$LINEBREAK;
         print '    </td>'.$LINEBREAK;
         print '  </tr>'.$LINEBREAK;
-        
+
         $loopCounter++;
     }
-    
+
     endtable();
-    
+
     $help_select = '&nbsp;' . cpg_display_help('f=admin-tools.htm&amp;as=admin_tools_usage&amp;ae=admin_tools_usage_end&amp;top=1', '600', '400');
 
     starttable('100%', $lang_common['select_album'] . $help_select);
@@ -264,7 +264,7 @@ if (array_key_exists($action, $tasks)) {
     $cpg_udb->util_filloptions();
     echo '<br /></td></tr>';
     endtable();
-   
+
     list($timestamp, $form_token) = getFormToken();	
     echo <<< EOT
     <input type="hidden" name="form_token" value="{$form_token}" />
@@ -310,7 +310,7 @@ function filename_to_title()
     if ($superCage->post->getInt('notitle') == 1) {
         $albstr = $albumid ? " WHERE aid = $albumid AND title = ''" : "WHERE title = ''";
     } else {
-        $albstr = $albumid ? " WHERE aid = $albumid " : '';   
+        $albstr = $albumid ? " WHERE aid = $albumid " : '';
     }
 
     $parsemode = $superCage->post->getInt('parsemode');
@@ -320,12 +320,12 @@ function filename_to_title()
     echo "<h2>{$lang_util_php['titles_wait']}</h2>";
 
     $file_count = 0;
-    
+
     while ($row = mysql_fetch_assoc($result)) {
 
         $filename = $row['filename'];
         $pid = $row['pid'];
-        
+
         // //////////////////////////////////////////
         // ADD YOUR OWN PARSEMODES HERE //
         // /////////////////////////////////////////
@@ -337,35 +337,35 @@ function filename_to_title()
             $newtitle = preg_replace('/\.\w+$/i', '', $filename);
             $newtitle = str_replace(array("%20","_"), " ", $newtitle);
             break;
-            
+
         case 1: // CHANGE 2003_11_23_13_20_20.jpg TO 23/11/2003 13:20
             $newtitle = str_replace("%20", " ", $filename);
             $replacement = "$5/$3/$1 $7:$9";
             $newtitle = preg_replace($pattern, $replacement, $newtitle);
             break;
-            
+
         case 2: // CHANGE 2003_11_23_13_20_20.jpg TO 11/23/2003 13:20
             $newtitle = str_replace("%20", " ", $filename);
             $replacement = "$3/$5/$1 $7:$9";
             $newtitle = preg_replace($pattern, $replacement, $newtitle);
             break;
-            
+
         case 3: // CHANGE 2003_11_23_13_20_20.jpg TO 13:20
             $newtitle = str_replace("%20", " ", $filename);
             $replacement = "$7:$9";
             $newtitle = preg_replace($pattern, $replacement, $newtitle);
             break;
-            
+
         } // end switch
 
         cpg_db_query("UPDATE {$CONFIG['TABLE_PICTURES']} SET title = '" . addslashes($newtitle). "' WHERE pid = $pid");
 
         $file_count++;
-        
+
         echo "{$lang_util_php['file']} : <strong>$filename</strong> {$lang_util_php['title_set_to']} : <strong>$newtitle</strong><br />" . $LINEBREAK;
 
     } // end while
-    
+
     echo '<br />' . $LINEBREAK . sprintf($lang_util_php['titles_updated'], $file_count) . '<br />' . $LINEBREAK;
 }
 
@@ -420,17 +420,17 @@ function update_thumbs()
     $loopCounter = 0;
 
     while ($row = mysql_fetch_assoc($result)) {
-    
+
         if (is_image($row['filename'])) { // the file is an image --- start
- 
+
             $loopCounter++;
-            
+
             if ($loopCounter / 2 == floor($loopCounter / 2)) {
                 $tablestyle = 'tableb tableb_alternate';
             } else {
                 $tablestyle = 'tableb';
             }
-            
+
             $image = $CONFIG['fullpath'] . $row['filepath'] . $row['filename'];
             $normal = $CONFIG['fullpath'] . $row['filepath'] . $CONFIG['normal_pfx'] . $row['filename'];
             $thumb = $CONFIG['fullpath'] . $row['filepath'] . $CONFIG['thumb_pfx'] . $row['filename'];
@@ -536,15 +536,15 @@ function update_thumbs()
     if ($count == $numpics) {
 
         $startpic += $numpics;
-        
+
         list($timestamp, $form_token) = getFormToken();
-        
+
         if ($autorefresh) {
             echo <<< EOT
             <meta http-equiv="refresh" content="1; URL=util.php?numpics={$numpics}&startpic={$startpic}&albumid={$albumid}&autorefresh={$autorefresh}&action=update_thumbs&updatetype={$updatetype}&form_token={$form_token}&timestamp={$timestamp}#admin_tool_thumb_update">
 EOT;
         } else {
-                
+
             print <<< EOT
             <tr>
                 <td class="tablef">
@@ -572,9 +572,9 @@ EOT;
 function deletebackup_img()
 {
     global $CONFIG, $lang_util_php;
-    
+
     $superCage = Inspekt::makeSuperCage();
-    
+
     if ($superCage->post->keyExists('albumid')) {
         $albumid = $superCage->post->getInt('albumid');
     } else {
@@ -586,7 +586,7 @@ function deletebackup_img()
     $result = cpg_db_query("SELECT filepath, filename FROM {$CONFIG['TABLE_PICTURES']} $albstr");
 
     while ( ($row = mysql_fetch_assoc($result)) ) {
-    
+
         $back = $CONFIG['fullpath'] . $row['filepath'] . $CONFIG['orig_pfx'] . $row['filename'];
 
         if (file_exists($back)) {
@@ -598,7 +598,7 @@ function deletebackup_img()
         } else {
             printf($lang_util_php['error_not_found'], $back);
         }
-        
+
         echo '<br />';
     }
 
@@ -610,19 +610,19 @@ function del_orig()
     global $CONFIG, $lang_util_php;
 
     $superCage = Inspekt::makeSuperCage();
- 
+
     if ($superCage->post->keyExists('albumid')) {
         $albumid = $superCage->post->getInt('albumid');
     } else {
         $albumid = 0;
     }
- 
+
     $albstr = $albumid ? "WHERE aid = $albumid" : '';
 
     echo "<h2>{$lang_util_php['replace_wait']}</h2>";
 
     $result = cpg_db_query("SELECT pid, filepath, filename FROM {$CONFIG['TABLE_PICTURES']} $albstr");
- 
+
     while ($row = mysql_fetch_assoc($result)) {
 
         $pid = $row['pid'];
@@ -631,30 +631,30 @@ function del_orig()
         $thumb = $CONFIG['fullpath'] . $row['filepath'] . $CONFIG['thumb_pfx'] . $row['filename'];
 
         if (file_exists($normal)) {
-        
+
             $deleted = unlink($image);
             $renamed = rename($normal, $image);
-            
+
             if ($deleted && $renamed) {
-            
+
                 $imagesize = cpg_getimagesize($image); // dimensions
                 $image_filesize = filesize($image); // bytes
                 $total_filesize = $image_filesize + filesize($thumb);
-                        
+
                 cpg_db_query("UPDATE {$CONFIG['TABLE_PICTURES']} SET filesize = '$image_filesize', total_filesize = '$total_filesize', pwidth = '{$imagesize[0]}', pheight = '{$imagesize[1]}' WHERE pid = $pid");
 
                 printf($lang_util_php['main_success'], $normal);
-                
+
             } elseif (!$renamed) {
                 printf($lang_util_php['error_rename'], $normal, $image);
             } else {
                 printf($lang_util_php['error_deleting'], $image);
             }
-            
+
         } else {
             printf($lang_util_php['error_not_found'], $normal);
         }
-        
+
         echo '<br />';
     }
 
@@ -687,11 +687,11 @@ function del_norm()
         $thumb = $CONFIG['fullpath'] . $row['filepath'] . $CONFIG['thumb_pfx'] . $row['filename'];
 
         if (file_exists($normal)) {
-        
+
             if (unlink($normal)) {
-            
+
                 $total_filesize = filesize($image) + filesize($thumb);
-                
+
                 cpg_db_query("UPDATE {$CONFIG['TABLE_PICTURES']} SET total_filesize = '$total_filesize' WHERE pid = $pid");
 
                 printf($lang_util_php['del_intermediate'], $normal);
@@ -701,10 +701,10 @@ function del_norm()
         } else {
             printf($lang_util_php['error_not_found'], $normal);
         }
-        
+
         echo '<br />';
     }
-    
+
     mysql_free_result($result);
 }
 
@@ -726,7 +726,7 @@ function del_orphans()
     $result = cpg_db_query("SELECT c.pid, msg_id, msg_body FROM {$CONFIG['TABLE_COMMENTS']} AS c LEFT JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.pid = c.pid WHERE p.pid IS NULL");
 
     while ($row = mysql_fetch_assoc($result)) {
-    
+
         $pid = $row['pid'];
         $msg_id = $row['msg_id'];
         $msg_body = $row['msg_body'];
@@ -737,13 +737,13 @@ function del_orphans()
             echo "{$lang_util_php['comment']} $msg_body {$lang_util_php['nonexist']} $pid - <a href=\"util.php?action=del_orphans&amp;single=$msg_id\">{$lang_common['delete']}</a><br />";
         }
     }
-    
+
     if (!$superCage->post->keyExists('del')) {
-    
+
         $count = mysql_num_rows($result);
-        
+
         echo "<br /><br />$count {$lang_util_php['orphan_comment']}<br /><br />";
-        
+
         list($timestamp, $form_token) = getFormToken();
         if ($count > 1) {
             echo <<< EOT
@@ -758,18 +758,18 @@ function del_orphans()
 EOT;
         }
     }
-    
+
     mysql_free_result($result);
 }
 
 function del_old()
 {
     global $CONFIG, $lang_util_php;
-    
+
     $superCage = Inspekt::makeSuperCage();
 
     $days = $superCage->post->getInt('day_number');
-    
+
     $start = time() - ($days * 60 * 60 * 24);
 
     $delete_counter = 0;
@@ -785,14 +785,14 @@ function del_old()
     echo "<h2>{$lang_util_php['deleting_old']}</h2>";
 
     $result = cpg_db_query("SELECT pid, filepath, filename FROM {$CONFIG['TABLE_PICTURES']} WHERE ctime <= $start $albstr");
- 
+
     while ($row = mysql_fetch_assoc($result)) {
-    
+
         $pid = $row['pid'];
         $image = $CONFIG['fullpath'] . $row['filepath'] . $row['filename'];
         $normal = $CONFIG['fullpath'] . $row['filepath'] . $CONFIG['normal_pfx'] . $row['filename'];
         $thumb = $CONFIG['fullpath'] . $row['filepath'] . $CONFIG['thumb_pfx'] . $row['filename'];
-  
+
         if (file_exists($normal)) {
 
             if (unlink($normal)) {
@@ -800,13 +800,13 @@ function del_old()
             } else {
                 printf($lang_util_php['del_error'], $normal);
             }
-  
+
         } else {
             printf($lang_util_php['error_not_found'], $normal);
         }
-        
+
         echo '<br />';
-        
+
         if (file_exists($image)) {
 
             if (unlink($image)) {
@@ -814,13 +814,13 @@ function del_old()
             } else {
                 printf($lang_util_php['del_error'], $image);
             }
-  
+
         } else {
             printf($lang_util_php['error_not_found'], $image);
         }
-        
+
         echo '<br />';
-        
+
         if (file_exists($thumb)) {
 
             if (unlink($thumb)) {
@@ -828,22 +828,22 @@ function del_old()
             } else {
                 printf($lang_util_php['del_error'], $thumb);
             }
-  
+
         } else {
             printf($lang_util_php['error_not_found'], '&laquo;'.$thumb.'&raquo;');
         }
-      
+
         echo '<br />';
-      
+
         cpg_db_query("DELETE FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid");
         cpg_db_query("DELETE FROM {$CONFIG['TABLE_COMMENTS']} WHERE pid = $pid");
         cpg_db_query("DELETE FROM {$CONFIG['TABLE_EXIF']} WHERE pid = $pid");
 
         $delete_counter++;
     }
-    
+
     mysql_free_result($result);
-    
+
     printf($lang_util_php['affected_records'], $delete_counter);
 }
 
@@ -894,7 +894,7 @@ function refresh_db()
     echo "<tr><th class=\"tableh2\">{$lang_util_php['file']}</th><th class=\"tableh2\">{$lang_util_php['problem']}</th><th class=\"tableh2\">{$lang_util_php['status']}</th></tr>";
 
     $outcome = 'none';
-    
+
     $result = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_PICTURES']} $albstr ORDER BY pid ASC LIMIT $startpic, $numpics");
     $count = mysql_num_rows($result);
     $found = 0;
@@ -933,26 +933,26 @@ function refresh_db()
                     cpg_db_query("UPDATE {$CONFIG['TABLE_PICTURES']} SET filesize = '$filesize' WHERE pid = '$db_pid' LIMIT 1");
                     $outcome = $lang_util_php['updated'];
                 }
-                
+
             } else {
                     $prob .= $lang_util_php['filesize_error'] . '<br />';
                     $outcome = $lang_util_php['skipped'];
             }
 
             if ($dimensions) {
-            
+
                 if ($dimensions[0] <> $db_pwidth || $dimensions[1] <> $db_pheight) {
 
                     $prob .= "{$lang_util_php['incorect_dimension']}<br />{$lang_util_php['database']}{$db_pwidth}x{$db_pheight}<br />{$lang_util_php['actual']}{$dimensions[0]}x{$dimensions[1]}<br />";
                     cpg_db_query("UPDATE {$CONFIG['TABLE_PICTURES']} SET pwidth = '{$dimensions[0]}', pheight = '{$dimensions[1]}' WHERE pid = '$db_pid' LIMIT 1");
                     $outcome = $lang_util_php['updated'];
                 }
-                
+
             } else {
                 $prob .= $lang_util_php['dimension_error'] . '<br />';
                 $outcome = $lang_util_php['skipped'];
             }
-            
+
         } else {
             $prob .= sprintf($lang_util_php['fullpic_error'], $full_pic_url) . '<br />';
             $outcome = $lang_util_php['cannot_fix'];
@@ -970,11 +970,11 @@ function refresh_db()
     if ($outcome == 'none') {
         echo $lang_util_php['no_prob_found'];
     }
-    
+
     if ($count == $numpics) {
-    
+
         $startpic += $numpics;
-        
+
         list($timestamp, $form_token) = getFormToken();
         echo <<< EOT
                     <form name="cpgform4" id="cpgform4" action="util.php" method="post">
@@ -988,7 +988,7 @@ function refresh_db()
                     </form>
 EOT;
     }
-    
+
     mysql_free_result($result);
 }
 
@@ -1040,7 +1040,7 @@ function keyword_convert()
     }
     if ($set_config) {
         cpg_config_set('keyword_separator', $replace_to);
-        echo "{$lang_util_php['keyword_set']} (<strong>" 
+        echo "{$lang_util_php['keyword_set']} (<strong>"
             . $lang_common['keyword_separators'][$replace_to]
             . '</strong>): ' . $lang_common['done'] . '<br /><br />' . $LINEBREAK;
     }

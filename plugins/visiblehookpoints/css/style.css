@@ -57,7 +57,7 @@ table.dBug_xml td.dBug_xmlHeader { background-color:#AAAAAA; }
 table.dBug_xml td.dBug_xmlKey { background-color:#DDDDDD; }
 
 .vhp_head {
-    position:relative; 
+    position:relative;
     z-index:3;
     display:inline-block;
     background-color:#CCFFCC;
@@ -69,7 +69,7 @@ table.dBug_xml td.dBug_xmlKey { background-color:#DDDDDD; }
 }
 
 .vhp_cell {
-    position:absolute; 
+    position:absolute;
     top:18px;
     left:0px;
     z-index:4;

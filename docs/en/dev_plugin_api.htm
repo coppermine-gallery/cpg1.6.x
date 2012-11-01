@@ -82,7 +82,7 @@
         Plugin summary page on the official Coppermine site that lists all plugins known to the coppermine dev team.</li>
 		<!--<li><strong>Coppermine Contrib</strong> - <span class="small">[<a href="http://cpg-contrib.org/"  rel="external" class="external">home page</a>]</span><br />
         Web site for Coppermine contributors - announcements, discussion forum, CVS - Commented out, as the site is currently down and has remained in  this stage for more than a year, so it's more than likely that the cpg-contrib team is in permanent hiatus (Joachim)</li>-->
-    </ul>    
+    </ul>
 <p><a class="back" href="#top">Back to top</a></p><hr />
 
 <!--
@@ -373,7 +373,7 @@ function coffee_maker_cleanup_function($action) {
 	// Initialize language and icons
 	require_once './plugins/coffee_maker/init.inc.php';
 	$coffee_maker_init_array = coffee_maker_initialize();
-	$lang_plugin_coffee_maker = $coffee_maker_init_array['language']; 
+	$lang_plugin_coffee_maker = $coffee_maker_init_array['language'];
 	$coffee_maker_icon_array = $coffee_maker_init_array['icon'];
     $superCage = Inspekt::makeSuperCage();
     $cleanup = $superCage-&gt;server-&gt;getEscaped('REQUEST_URI');
@@ -643,7 +643,7 @@ We only need to sanitize the form data if the form has actually been submit, so 
                       cpg_db_query("UPDATE {$CONFIG['TABLE_CONFIG']} SET value='{$CONFIG[$san_key]}' WHERE name='$san_key'");
                       $config_changes_counter++;
                   }
-              } // type is raw --- end              if ($san_value['type'] == 'array') { // type is array --- start                                $evaluate_value = $superCage->post->getRaw($san_key);
+              } // type is raw --- end              if ($san_value['type'] == 'array') { // type is array --- start                  $evaluate_value = $superCage->post->getRaw($san_key);
                   if (is_array($evaluate_value) && isset($san_value['regex_ok']) == TRUE && isset($san_value['delimiter']) == TRUE) {
                       $temp = '';
                       for ($i = 0; $i <= count($evaluate_value); $i++) {
@@ -667,7 +667,7 @@ We only need to sanitize the form data if the form has actually been submit, so 
 The radio buttons and checkboxes need to be populated with values based on the corresponding values:
 <pre class="cpg_code code">if ($CONFIG['plugin_coffee_maker_enabled'] == '1') {
 	$option_output['plugin_coffee_maker_enabled'] = 'checked="checked"';
-} else { 
+} else {
 	$option_output['plugin_coffee_maker_enabled'] = '';
 }</pre>
 

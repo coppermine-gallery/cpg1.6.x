@@ -8,7 +8,7 @@
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
-  
+
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
@@ -61,7 +61,7 @@ function exif_parse_file($filename, $pid)
     $exifParsed = array();
     $exifCurrentData = array_keys(array_filter(explode("|", $CONFIG['show_which_exif'])));
 
-    foreach ($exifCurrentData as $i) { 
+    foreach ($exifCurrentData as $i) {
         $name = $exif_names[$i];
         if (isset($exif[$name])) {
             $exifParsed[$lang_picinfo[$name]] = $exif[$name];

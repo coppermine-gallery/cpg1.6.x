@@ -302,7 +302,7 @@ function get_tree_subcat_data($parent, $dtree_parent = 0) {
                 if ($parent == 0) {
                         get_tree_album_data($parent,0);
                 }
-                
+
         }
 }
 

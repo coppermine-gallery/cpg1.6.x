@@ -8,7 +8,7 @@
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
-  
+
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
@@ -79,7 +79,7 @@ function lang_detect_q($available_languages)
     // We can use the getRaw method here because the data is not used directly
     $HTTP_ACCEPT_LANGUAGE = $superCage->server->getRaw('HTTP_ACCEPT_LANGUAGE');
     $HTTP_USER_AGENT = $superCage->server->getRaw('HTTP_USER_AGENT');
-    
+
     if (!empty($HTTP_ACCEPT_LANGUAGE)) {
         $language_tokens = explode(',', $HTTP_ACCEPT_LANGUAGE);
         // loop through each Accept-Language token and find quality level (i.e. q=0.8)
@@ -98,7 +98,7 @@ function lang_detect_q($available_languages)
         arsort($quality_tag);
         // loop throuh every quality_tag array
         foreach ($quality_tag as $q_key => $q_val) {
-            // loop through each available_languages 
+            // loop through each available_languages
             foreach ($available_languages as $language) {
                 if (preg_match('#^(?:'. $language[0] .')#i', $lang_tag[$q_key])) {
                     // exit function on first match.
@@ -108,8 +108,8 @@ function lang_detect_q($available_languages)
         }
 
         // if Accept-Language not present in the client's http header, we try the User-Agent string
-    } elseif (!empty($HTTP_USER_AGENT)) {      
-        // once again, loop through each available_languages 
+    } elseif (!empty($HTTP_USER_AGENT)) {
+        // once again, loop through each available_languages
         foreach ($available_languages as $language) {
             if (preg_match('#[(,; [](?:'. $language[0] .')[]),;]#i', $HTTP_USER_AGENT)) {
                 // exit function on first match.

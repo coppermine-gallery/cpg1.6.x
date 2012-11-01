@@ -120,7 +120,7 @@ class CPGPluginAPI {
 
         // If the plugin doesn't exist in the array get its information from the database
         if (!isset($installed_array[$plugin_folder])) {
-            
+
             $sql = "SELECT plugin_id FROM {$CONFIG['TABLE_PLUGINS']} WHERE path = '$plugin_folder'";
             $result = cpg_db_query($sql);
 
@@ -693,6 +693,6 @@ function& cpg_get_dir_list($folder) {
 
 function pluginapi_sleep_wrapper() {
     CPGPluginAPI::sleep();
-}    
-    
+}
+
 ?>

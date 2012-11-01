@@ -275,7 +275,7 @@ if ($type == 'vote' && $pid != '') { // type == vote start
           $totalVotesSum = $totalVotesSum + $row['totalVotes'];
           $loopCounter = 0;
     }
-    
+
     if (defined('THEME_HAS_RATING_GRAPHICS')) {
         $prefix = $THEME_DIR;
     } else {

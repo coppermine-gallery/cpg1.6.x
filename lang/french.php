@@ -63,7 +63,7 @@ $lang_meta_album_names['album_search'] = 'Résultat de la recherche dans les alb
 $lang_meta_album_names['category_search'] = 'Résultat de la recherche dans les catégories';
 $lang_meta_album_names['favpics'] = 'Photos préférées';
 $lang_meta_album_names['datebrowse'] = 'Navigation par date';
- 
+
 $lang_errors['access_denied'] = 'Vous n\'avez pas la permission d\'accéder à cette page.';
 $lang_errors['invalid_form_token'] = 'Une balise de formulaire valise n\'a pas pu être trouvée.';
 $lang_errors['perm_denied'] = 'Vous n\'avez pas la permission d\'effectuer cette opération.';
@@ -251,8 +251,8 @@ $lang_cat_list['albums'] = 'Albums';
 $lang_cat_list['pictures'] = 'Fichiers';
 
 $lang_album_list['album_on_page'] = '%d albums sur %d page (s)';
- 
-$lang_thumb_view['date'] = 'DATE'; 
+
+$lang_thumb_view['date'] = 'DATE';
  //Sort by filename and title
 $lang_thumb_view['name'] = 'Nom du fichier';
 $lang_thumb_view['sort_da'] = 'Classement ascendant par date';
@@ -289,7 +289,7 @@ $lang_img_nav_bar['go_album_start'] = 'Retourner au début';
 
 $lang_rate_pic['rate_this_pic'] = 'Noter cette image ';
 $lang_rate_pic['no_votes'] = '(pas encore de note)';
-$lang_rate_pic['rating'] = '(note actuelle : %s / %s pour %s votes)'; 
+$lang_rate_pic['rating'] = '(note actuelle : %s / %s pour %s votes)';
 $lang_rate_pic['rubbish'] = 'Très mauvais';
 $lang_rate_pic['poor'] = 'Mauvais';
 $lang_rate_pic['fair'] = 'Moyen';
@@ -407,14 +407,14 @@ $lang_smilies_inc_php['Mr. Green'] = 'Mr Green';
 // File albmgr.php
 // ----------------------- //
 if (defined('ALBMGR_PHP')) {
-$lang_albmgr_php['title'] = 'Gestionnaire d\'albums'; 
+$lang_albmgr_php['title'] = 'Gestionnaire d\'albums';
 $lang_albmgr_php['alb_need_name'] = 'Les albums doivent avoir un nom';
-$lang_albmgr_php['confirm_modifs'] = 'Voulez-vous vraiment effectuer ces modifications ?'; 
+$lang_albmgr_php['confirm_modifs'] = 'Voulez-vous vraiment effectuer ces modifications ?';
 $lang_albmgr_php['no_change'] = 'vous n\'avez effectué aucun changement';
 $lang_albmgr_php['new_album'] = 'Nouvel album';
 $lang_albmgr_php['delete_album'] = 'Effacer l\'album';
-$lang_albmgr_php['confirm_delete1'] = 'Voulez-vous vraiment supprimer cet album ?'; 
-$lang_albmgr_php['confirm_delete2'] = 'Toutes vos images et tous les commentaires seront perdus'; 
+$lang_albmgr_php['confirm_delete1'] = 'Voulez-vous vraiment supprimer cet album ?';
+$lang_albmgr_php['confirm_delete2'] = 'Toutes vos images et tous les commentaires seront perdus';
 $lang_albmgr_php['select_first'] = 'Sélectionner un album avant';
 $lang_albmgr_php['my_gallery'] = '* Ma galerie *';
 $lang_albmgr_php['no_category'] = '* Pas de catégorie *';
@@ -572,12 +572,12 @@ if (defined('CONTACT_PHP')) {
  $lang_contact_php['your_email'] = 'Votre adresse courriel';
  $lang_contact_php['subject'] = 'Objet';
  $lang_contact_php['your_message'] = 'Votre message';
- $lang_contact_php['name_field_mandatory'] = 'Veuillez entrer votre nom'; 
- $lang_contact_php['name_field_invalid'] = 'Veuillez entrer votre nom'; 
- $lang_contact_php['email_field_mandatory'] = 'Veuillez entrer votre adresse courriel'; 
- $lang_contact_php['email_field_invalid'] = 'Veuillez entre une adresse courriel valide'; 
- $lang_contact_php['subject_field_mandatory'] = 'Veuillez entrer un objet précis'; 
- $lang_contact_php['message_field_mandatory'] = 'Veuillez entrer votre message'; 
+ $lang_contact_php['name_field_mandatory'] = 'Veuillez entrer votre nom';
+ $lang_contact_php['name_field_invalid'] = 'Veuillez entrer votre nom';
+ $lang_contact_php['email_field_mandatory'] = 'Veuillez entrer votre adresse courriel';
+ $lang_contact_php['email_field_invalid'] = 'Veuillez entre une adresse courriel valide';
+ $lang_contact_php['subject_field_mandatory'] = 'Veuillez entrer un objet précis';
+ $lang_contact_php['message_field_mandatory'] = 'Veuillez entrer votre message';
  $lang_contact_php['confirmation'] = 'Confirmation';
  $lang_contact_php['email_headline'] = 'Le %s, ce courriel a été envoyé à %s en utilisant le formulaire de contact depuis l\'adresse IP %s';
  $lang_contact_php['registered_user'] = 'Utilisateur enregistré';
@@ -615,7 +615,7 @@ $lang_admin_php['manage_exif'] = 'Administrer l\'affichage des EXIFS';
 $lang_admin_php['manage_plugins'] = 'Administrer les plugins';
 $lang_admin_php['manage_keyword'] = 'Administrer les mots-clés';
 $lang_admin_php['restore_cfg'] = 'Restaurer les paramètres d\'origine';
-$lang_admin_php['restore_cfg_confirm'] = 'Voulez-vous réellement restaurer tous les paramètres de la configuration avec les valeurs par défaut ? Cette action ne peut pas être annulée'; 
+$lang_admin_php['restore_cfg_confirm'] = 'Voulez-vous réellement restaurer tous les paramètres de la configuration avec les valeurs par défaut ? Cette action ne peut pas être annulée';
 $lang_admin_php['save_cfg'] = 'Sauvegarder la nouvelle configuration';
 $lang_admin_php['notes'] = 'Notes';
 $lang_admin_php['info'] = 'Information';
@@ -1144,7 +1144,7 @@ if (defined('DISPLAYIMAGE_PHP')){
  $lang_display_comments['page'] = 'Page';
  $lang_display_comments['edit_title'] = 'Modifier ce commentaire';
  $lang_display_comments['delete_title'] = 'Effacer ce commentaire';
- $lang_display_comments['confirm_delete'] = 'Etes vous sur de vouloir effacer ce commentaire ?'; 
+ $lang_display_comments['confirm_delete'] = 'Etes vous sur de vouloir effacer ce commentaire ?';
  $lang_display_comments['add_your_comment'] = 'Ajouter votre commentaire';
  $lang_display_comments['name']='Nom';
  $lang_display_comments['comment']='Commentaire';
@@ -1197,7 +1197,7 @@ if (defined('ECARDS_PHP')) {
 // File report_file.php
 // ----------------------- //
 
-if (defined('REPORT_FILE_PHP')) { 
+if (defined('REPORT_FILE_PHP')) {
  $lang_report_php['title'] = 'Rapport à l\'administrateur';
  $lang_report_php['invalid_email'] = 'Attention, adresse courriel invalide ';
  $lang_report_php['report_subject'] = 'Un rapport de %s de la galerie %s';
@@ -1280,7 +1280,7 @@ if (defined('EDITPICS_PHP')) {
  $lang_editpics_php['mime_conv'] = 'Impossible de convertir le fichier de \'%s\' en \'%s\'';
  $lang_editpics_php['forb_ext'] = 'Type d\'extension de fichier non autorisée.';
  $lang_editpics_php['error_editor_class'] = 'la classe de l\'éditeur pour votre méthode de redimmensionnement n\'est pas implémentée';
- $lang_editpics_php['error_document_size'] = 'Le document n\\\'a pas de largeur oÃ¹ de de hauteur'; 
+ $lang_editpics_php['error_document_size'] = 'Le document n\\\'a pas de largeur oÃ¹ de de hauteur';
  $lang_editpics_php['success_picture'] = 'Image sauvegardée avec succès. Vous pouvez %sfermer%s cette fenêtre maintenant';
  $lang_editpics_php['success_thumb'] = 'Vignette sauvegardée avec succès. Vous pouvez %sfermer%s cette fenêtre maintenant';
  $lang_editpics_php['rotate'] = 'Rotation';
@@ -1299,7 +1299,7 @@ if (defined('EDITPICS_PHP')) {
  $lang_editpics_php['note_approve_public'] = 'Les fichier déplacés vers un album publique doivent être approuvés par un administrateur.';
  $lang_editpics_php['note_approve_private'] = 'Les fichiers déplacés vers un album privé doivent être approuvés par un administrateur.' ;
  $lang_editpics_php['note_edit_control'] = 'Les fichiers déplacés vers un album public ne peuvent plus être modifiés.';
- $lang_editpics_php['confirm_move_control'] = 'Vous n\'êtes pas autorisé à modifier les fichiers dans les albums publics.\\nEtes-vous sôr de vouloir déplacer ce fichier vers un album public ?'; 
+ $lang_editpics_php['confirm_move_control'] = 'Vous n\'êtes pas autorisé à modifier les fichiers dans les albums publics.\\nEtes-vous sôr de vouloir déplacer ce fichier vers un album public ?';
  $lang_editpics_php['success_changes'] = 'Modifications sauvegardées avec succès';
 }
 
@@ -1613,7 +1613,7 @@ if (defined('LOGIN_PHP')) {
 // File logout.php
 // ----------------------- //
 
-if (defined('LOGOUT_PHP')) { 
+if (defined('LOGOUT_PHP')) {
  $lang_logout_php['logout'] = 'Déconnexion';
  $lang_logout_php['bye'] = 'Au revoir %s';
  $lang_logout_php['err_not_loged_in'] = 'Vous n\'êtes pas identifié (e)';
@@ -1646,7 +1646,7 @@ if (defined('MODE_PHP')) {
 if (defined('MODIFYALB_PHP')) {
 $lang_modifyalb_php['upd_alb_n'] = 'Mettre à jour l\'album %s';
 $lang_modifyalb_php['related_tasks'] = 'Tâches relatives';
-$lang_modifyalb_php['choose_album'] = 'Choisir un album'; 
+$lang_modifyalb_php['choose_album'] = 'Choisir un album';
 $lang_modifyalb_php['general_settings'] = 'Paramètres généraux';
 $lang_modifyalb_php['alb_title'] = 'Titre de l\'album';
 $lang_modifyalb_php['alb_cat'] = 'Catégorie de l\'album';
@@ -1939,7 +1939,7 @@ if (defined('REVIEWCOM_PHP')) {
 // ------------------------------------------------------------------------- //
 // File sidebar.php
 // ------------------------------------------------------------------------- //
-if (defined('SIDEBAR_PHP')) { 
+if (defined('SIDEBAR_PHP')) {
  $lang_sidebar_php['sidebar'] = 'Marque page';
  $lang_sidebar_php['install'] = 'installation';
  $lang_sidebar_php['install_explain'] = 'Parmi les méthodes d\'accès rapide aux informations du site, nous vous proposons des signets pour la plupart des navigateurs utilisés par les systèmes d\'exploitation pour accéder rapidement à une page. Vous trouverez ici les informations d\'installation et de paramétrage pour les navigateurs supportés.';
@@ -2024,7 +2024,7 @@ if (defined('SEARCHNEW_PHP')) {
   <li>Si votre navigateur rencontre un \'TimeOut\', cliquez sur le bouton recharger</li>
  </ul>
 EOT;
-// Note pour les traducteurs : ne traduisez pas les balises %s placeholders ; elles sont remplacées par les icônes 
+// Note pour les traducteurs : ne traduisez pas les balises %s placeholders ; elles sont remplacées par les icônes
  $lang_search_new_php['check_all'] = 'Tout cocher';
  $lang_search_new_php['uncheck_all'] = 'Tout décocher';
  $lang_search_new_php['no_folders'] = 'Il n\'y a actuellement pas de sous-répertoire dans le répertoire &quot;Albums&quot;. Vérifiez que vous avez bien créé un sous-répertoire dans le répertoire &quot;Albums&quot; et téléchargez-y vos fichiers avec votre client FTP (FileZilla ou SmartFTP). Vous ne devez pas télécharger dans les répertoires &quot;userpics&quot; ou &quot;edit&quot; ; ils sont réservés pour les téléchargements en HTML ou pour des traitements internes.';
@@ -2119,7 +2119,7 @@ $lang_upload_php['up_instr_3'] = 'Sélectionnez d\'autres fichiers à téléchar
 $lang_upload_php['up_instr_4'] = 'Lorsque vous avez téléchargé les fichiers, cliquez sur le bouton &quot;Continuer&quot;. Note : le bouton n\'apparaîtra qu\'après avoir téléchargé au moins un fichier.';
 $lang_upload_php['up_instr_5'] = 'Vous serez dirigé vers un écran vous permettant d\'enter les détails concernant les fichiers téléchargés. Après avoir complété le formulaire, soumettez-le en utilisant le bouton &quot;Appliquer les changements&quot; au bas du formulaire.';
 $lang_upload_php['restriction_zip'] = 'Les fichiers ZIP téléchargés resteront compressés.';
-$lang_upload_php['restriction_filesize'] = 'La taille des fichiers téléchargés sur votre serveur ne doivent pas avoir plus de %s chacuns.'; 
+$lang_upload_php['restriction_filesize'] = 'La taille des fichiers téléchargés sur votre serveur ne doivent pas avoir plus de %s chacuns.';
 $lang_upload_php['reg_instr_1'] = 'Action invalide pour la création du formulaire.';
 $lang_upload_php['no_name'] = 'Nom de fichier introuvable.';
 $lang_upload_php['no_tmp_name'] = 'Impossible de télécharger';
@@ -2225,7 +2225,7 @@ $lang_usermgr_php['memberlist'] = 'Liste des membres';
  $lang_usermgr_php['registered_on'] = 'Enregistré le';
  $lang_usermgr_php['last_visit'] = 'Dernière visite';
 $lang_usermgr_php['u_user_on_p_pages'] = '%d utilisateur (s) sur %d page (s)';
- $lang_usermgr_php['confirm_del'] = 'Voulez-vous vraiment supprimer cet utilisateur?\\nToutes ses photos et albums seront également supprimés.'; 
+ $lang_usermgr_php['confirm_del'] = 'Voulez-vous vraiment supprimer cet utilisateur?\\nToutes ses photos et albums seront également supprimés.';
  $lang_usermgr_php['mail'] = 'MAIL';
  $lang_usermgr_php['err_unknown_user'] = 'L\'utilisateur sélectionné n\'existe pas';
  $lang_usermgr_php['modify_user'] = 'Modifier l\'utilisateur';
@@ -2392,15 +2392,15 @@ if (defined('UTIL_PHP')) {
  $lang_util_php['delete_all_orphans'] = 'Supprimez tous les commentaires orphelins ?';
  $lang_util_php['comment'] = 'Commentaire : ';
  $lang_util_php['nonexist'] = 'Lié à un fichier inexistant # ';
- $lang_util_php['delete_old'] = 'Effacer les fichiers plus anciens qu\'un nombre de jours déterminé'; 
- $lang_util_php['delete_old_explanation'] = 'Cela va effacer les fichiers plus anciens que le nombre de jours que vous avez déterminé (images normales, intermédiaires, vignettes). Utilisez cette fonction pour gagner le l\'espace disque.'; 
- $lang_util_php['delete_old_warning'] = 'Attention : les fichiers sélectionnés seront effacés définitivement sans autres avertissements '; 
- $lang_util_php['deleting_old'] = 'Effacement des images anciennes, merci de patienter...'; 
- $lang_util_php['older_than'] = 'Effacer les fichiers plus anciens que %s jours'; 
- $lang_util_php['del_orig'] = 'L\'image originale %s a été effacée avec succès'; 
- $lang_util_php['del_intermediate'] = 'L\'image intermédiaire %s a été supprimée avec succès'; 
- $lang_util_php['del_thumb'] = 'La vignette %s a été supprimée avec succès'; 
- $lang_util_php['del_error'] = 'Erreur d\'effacement de %s '; 
+ $lang_util_php['delete_old'] = 'Effacer les fichiers plus anciens qu\'un nombre de jours déterminé';
+ $lang_util_php['delete_old_explanation'] = 'Cela va effacer les fichiers plus anciens que le nombre de jours que vous avez déterminé (images normales, intermédiaires, vignettes). Utilisez cette fonction pour gagner le l\'espace disque.';
+ $lang_util_php['delete_old_warning'] = 'Attention : les fichiers sélectionnés seront effacés définitivement sans autres avertissements ';
+ $lang_util_php['deleting_old'] = 'Effacement des images anciennes, merci de patienter...';
+ $lang_util_php['older_than'] = 'Effacer les fichiers plus anciens que %s jours';
+ $lang_util_php['del_orig'] = 'L\'image originale %s a été effacée avec succès';
+ $lang_util_php['del_intermediate'] = 'L\'image intermédiaire %s a été supprimée avec succès';
+ $lang_util_php['del_thumb'] = 'La vignette %s a été supprimée avec succès';
+ $lang_util_php['del_error'] = 'Erreur d\'effacement de %s ';
  $lang_util_php['affected_records'] = '%s enregistrements affectés.';
  $lang_util_php['all_albums'] = 'Tous les albums';
  $lang_util_php['update_result'] = 'Résultats de la mise à jour';
@@ -2479,7 +2479,7 @@ if (defined('VERSIONCHECK_PHP')) {
  $lang_versioncheck_php['read'] = 'Lire';
  $lang_versioncheck_php['write'] = 'Ecrire';
  $lang_versioncheck_php['warning'] = 'Avertissement';
- $lang_versioncheck_php['not_applicable'] = 'n/a'; 
+ $lang_versioncheck_php['not_applicable'] = 'n/a';
 }
 
 // ----------------------- //
@@ -2498,7 +2498,7 @@ if (defined('VIEWLOG_PHP')) {
 // ----------------------- //
 if (defined('XP_PUBLISH_PHP')) {
  $lang_xp_publish_php['title'] = 'Coppermine - Assistant de Publication Web XP';
- $lang_xp_publish_php['client_header'] = 'Assistant de publication Web XP'; 
+ $lang_xp_publish_php['client_header'] = 'Assistant de publication Web XP';
  $lang_xp_publish_php['requirements'] = 'Requis';
  $lang_xp_publish_php['windows_xp'] = 'Windows XP / Vista';
  $lang_xp_publish_php['no_windows_xp'] = 'Vous semblez utiliser un autre système d\'exploitation non supporté';
@@ -2514,8 +2514,8 @@ if (defined('XP_PUBLISH_PHP')) {
  $lang_xp_publish_php['howto_install'] = 'Comment installer';
  $lang_xp_publish_php['install_right_click'] = 'Faites un click droit sur %sce lien%s et sélectionnez &quot;enregistre la cible sous...&quot;';
  $lang_xp_publish_php['install_save'] = 'Sauvegardez ce fichier sur votre client. Lors de la sauvegarde du fichier, assurez-vous que le nom proposé est <tt>cpg_###.reg</tt> ( ### représente un horodatage numérique). Modifiez de cette manière si nécessaire (laissez les chiffres)';
- $lang_xp_publish_php['install_execute'] = 'Une fois le téléchargement terminé, lancez le fichier en double-cliquant dessus afin d\'Enregistrez votre serveur avec l\'assistant de publication web'; 
- $lang_xp_publish_php['usage'] = 'Utilisation'; 
+ $lang_xp_publish_php['install_execute'] = 'Une fois le téléchargement terminé, lancez le fichier en double-cliquant dessus afin d\'Enregistrez votre serveur avec l\'assistant de publication web';
+ $lang_xp_publish_php['usage'] = 'Utilisation';
  $lang_xp_publish_php['select_files'] = 'Dans l\'explorateur Windows, sélectionnez les fichiers que vous voulez télécharger';
  $lang_xp_publish_php['display_tasks'] = 'Assurez-vous que les répertoires ne sont pas affichés dans le panneau latéral de l\'explorateur';
  $lang_xp_publish_php['publish_on_the_web'] = 'cliquez sur &quot;Publier xxx sur le web&quot; dans le panneau de gauche';

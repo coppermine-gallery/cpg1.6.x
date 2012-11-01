@@ -59,39 +59,39 @@
               <li>uncomment the line <tt class="code">/* min-height: 95px; */</tt> in <tt class="code">themes/curve/style.css</tt> by replacing it with <tt class="code">min-height: 95px;</tt>.</li>
           </ul>
             </div>
-    
+
           <a name="theme_builtin_eyeball"></a><h3>Eyeball<a href="#theme_builtin_eyeball" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
           <img src="../images/themes/thumb_eyeball.png" width="100" height="75" border="0" alt="" title="Eyeball" align="left" style="margin-right:5px" />
           A theme with a dark background and a horizontal menu that expands for user interaction features
           <br clear="all" />
-    
+
           <a name="theme_builtin_hardwired"></a><h3>Hardwired<a href="#theme_builtin_hardwired" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
           <img src="../images/themes/thumb_hardwired.png" width="100" height="75" border="0" alt="" title="Hardwired" align="left" style="margin-right:5px" />
           A theme with a dark background and a smallish font size that works well for narrow space and smaller resolutions. Comes with two horizontal menus
           <br clear="all" />
-    
+
           <a name="theme_builtin_rainy_day"></a><h3>Rainy Day<a href="#theme_builtin_rainy_day" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
           <img src="../images/themes/thumb_rainy_day.png" width="100" height="75" border="0" alt="" title="Rainy Day" align="left" style="margin-right:5px" />
           A theme with dark background and rounded edges
           <br clear="all" />
-    
+
           <a name="theme_builtin_sample"></a><h3>Sample<a href="#theme_builtin_sample" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
           The sample theme would look identical to the water_drop theme. It will not be displayed using the theme selector - it is just meant as <a href="theme_theme_php.htm#theme_sample">a template to copy from</a> when creating or modifying your own theme.
           <br clear="all" />
-    
+
           <a name="theme_builtin_waterdrop"></a><h3>Waterdrop<a href="#theme_builtin_waterdrop" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
           <img src="../images/themes/thumb_water_drop.png" width="100" height="75" border="0" alt="" title="Waterdrop" align="left" style="margin-right:5px" />
           A theme with a light background and a &quot;conventional&quot; horizontal menu
           <br clear="all" />
     </div>
-    
+
     <a name="theme_upgrading"></a><h2>Upgrading your custom theme<a href="#theme_upgrading" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
     <p>To upgrade an existing custom theme from cpg1.5.x to version 1.6.x, read the <a href="theme_upgrade.htm">theme upgrade documentation</a>.</p>
     <p>If you are upgrading from cpg1.4.x to cpg1.6.x, you will have to perform your theme upgrade in two steps: first, you need to upgrade your custom theme from cpg1.4.x to cpg1.5.x and then on <a href="theme_upgrade.htm">from cpg1.5.x to cpg1.6.x</a></p>
     <p>You only have to upgrade your custom theme when upgrading between major versions (e.g. from cpg1.4.x to cpg1.5.x or from cpg1.5.x to cpg1.6.x), as from one major version to the next, the theming engine is subject to changes. When only upgrading from minor versions to the next (e.g. from cpg1.5.x to cpg1.5.y), you don't have to update your custom theme.</p>
     <p>The core themes that come with Coppermine packages don't need to be updated, as they should be replaced during the upgrade and therefore will contain all needed changes. However: if you have based your custom theme on one of the core themes that come with coppermine (e.g. the classic theme), pay attention to possible changes. As suggested below, it's advisable to rename your custom theme to make sure that it doesn't accidentally get overwritten when upgrading.</p>
     <a name="theme_upgrading_end"></a>
-    
+
     <a name="theme_files"></a><h2>Content of a theme<a href="#theme_files" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
     <p>Coppermine themes are stored in the &quot;<strong>themes</strong>&quot; directory, each consists of 3 primary files : </p>
     <ul>
@@ -101,12 +101,12 @@
     </ul>
     <p>Additionally, there usually is a folder named &quot;images&quot; that resides within the theme folder (themes/theme_name/images/) that contains the images used by the particular theme (logos, bullets, backgrounds and other graphical resources needed).</p>
     <a name="theme_files_end"></a>
-    
+
     <a name="theme_engine"></a><h2>How the theme engine works<a href="#theme_engine" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
     <p>When a Coppermine page is being parsed, the core code will call theme functions. If those functions exist in your custom theme, they will be taken into account. If a particular function does <strong>not</strong> exist in your custom theme, the core function will be used. The core functions (the default theme behaviour if you want to put it that way) reside in <tt class="filename">includes/themes.inc.php</tt>.</p>
     <p class="cpg_message_error">Therefore, you <strong>mustn't</strong> edit <tt class="filename">includes/themes.inc.php</tt>, under no circumstances, as all your changes will be lost when upgrading in the future. Everything that possibly could be accomplished by editing <tt class="filename">include/themes.inc.php</tt> can be accomplished by editing <tt class="filename">themes/yourtheme/<a href="theme_theme_php.htm">theme.php</a></tt> as well - stuff defined in your custom theme will take precedence over the core theme functions.</p>
     <a name="theme_engine_end"></a>
-    
+
     <a name="theme_whats_next"></a><h2>What's next?<a href="#theme_whats_next" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
     <p>There are step-by-step instructions provided in the section &quot;<a href="theme_create.htm">Creating your custom theme</a>&quot; that you should read for details. If you're looking for examples how to modify your custom theme, you should read the page &quot;<a href="theme_examples.htm">Theme examples</a>&quot; thoroughly, as it contains solutions ready for copy'n paste that allow you to modify your custom theme dramatically, especially as far as <a href="theme_examples.htm#theme_examples_content">additional content</a> is concerned. Pay attention as well to the sections that deal with the &quot;<a href="theme_copyright.htm">copyright-disclaimer in footer</a>&quot; and the section &quot;<a href="php-content.htm">Dynamic (PHP-driven) content</a>&quot;.</p>
 
