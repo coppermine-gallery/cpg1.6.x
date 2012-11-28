@@ -868,7 +868,7 @@ if (UPLOAD_APPROVAL_MODE) {
     }
 
     // Display only the uploaded files from the last queue after flash upload
-    if ($superCage->get->keyExists('newer_than')) {
+    if ($superCage->get->keyExists('newer_than') && $CONFIG['editpics_ignore_newer_than'] != 1) {
         $owner_str .= " AND ctime > '".$superCage->get->getInt('newer_than')."'";
     }
 
