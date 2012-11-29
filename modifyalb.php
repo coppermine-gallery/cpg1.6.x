@@ -629,13 +629,10 @@ function alb_list_box()
         mysql_free_result($result);
 
     } else {
-
         //Only list the albums owned by the user
-        $cat = USER_ID + FIRST_USER_CAT;
-        $user_id = USER_ID;
 
         //get albums in "my albums"
-        $result = cpg_db_query("SELECT aid, title FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = $cat");
+        $result = cpg_db_query("SELECT aid, title FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = ".(USER_ID + FIRST_USER_CAT)." AND owner = ".USER_ID);
 
         while ($row = mysql_fetch_assoc($result)) {
             // Add to multi-dim array for later sorting
@@ -649,12 +646,26 @@ function alb_list_box()
         mysql_free_result($result);
 
         //get public albums
-        $result = cpg_db_query("SELECT a.aid, a.title, c.name FROM {$CONFIG['TABLE_ALBUMS']} AS a INNER JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON a.category = c.cid WHERE a.owner = '$user_id'");
+        $result = cpg_db_query("SELECT a.aid, a.title, c.name FROM {$CONFIG['TABLE_ALBUMS']} AS a INNER JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON a.category = c.cid WHERE a.owner = ".USER_ID);
 
         while ($row = mysql_fetch_assoc($result)) {
             // Add to multi-dim array for later sorting
             $rowset[] = array(
                 'cat'   => $row['name'],
+                'aid'   => $row['aid'],
+                'title' => $row['title'],
+            );
+        }
+
+        mysql_free_result($result);
+
+        //now we need to select the albums without a category
+        $result = cpg_db_query("SELECT aid, title FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = 0 AND owner = ".USER_ID);
+
+        while ($row = mysql_fetch_assoc($result)) {
+            // Add to multi-dim array for later sorting
+            $rowset[] = array(
+                'cat'   => $lang_modifyalb_php['no_cat'],
                 'aid'   => $row['aid'],
                 'title' => $row['title'],
             );

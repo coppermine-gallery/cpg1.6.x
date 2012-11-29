@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2012-11-29 [B] Fixed album properties "Choose album" drop-down list for regular users {eenemeenemuu}
 2012-11-28 [A] Added hidden config option to display all files after flash upload (thread ID 75588) {eenemeenemuu}
 2012-11-01 [B] Fixed performance issue on intermediate-sized view for large files (thread ID 75589) {eenemeenemuu}
 2012-10-31 [C] Fixed formatting of some help pages (thread ID 75476) {eenemeenemuu}
