@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2013-01-09 [B] Don't use pictures from password protected albums as user gallery icon (thread ID 75780) {eenemeenemuu}
 2013-01-09 [B] Removed possible category dupes from album drop-down box at several places (only occur in user mode) {eenemeenemuu}
 2013-01-09 [C] Removed category hierarchy string from album drop-down box at several places {eenemeenemuu}
 2012-12-07 [D] Updated docs to reflect changes of Subversion repository {eenemeenemuu}
