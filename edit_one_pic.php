@@ -64,6 +64,13 @@ function process_post_data()
         cpg_die(ERROR, $lang_errors['invalid_form_token'], __FILE__, __LINE__);
     }
 
+    $user_album_set = array();
+    $result = cpg_db_query("SELECT aid FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = " . (FIRST_USER_CAT + USER_ID) . " OR owner = " . USER_ID . " OR uploads = 'YES'");
+    while ($row = mysql_fetch_assoc($result)) {
+        $user_album_set[$row['aid']] = 1;
+    }
+    mysql_free_result($result);
+
     $pid = $superCage->post->getInt('id');
     $aid = $superCage->post->getInt('aid');
     $pwidth = $superCage->post->getInt('pwidth');
@@ -90,6 +97,17 @@ function process_post_data()
     }
     $pic = mysql_fetch_assoc($result);
     mysql_free_result($result);
+
+    if (!GALLERY_ADMIN_MODE && !MODERATOR_MODE && !USER_ADMIN_MODE && !user_is_allowed() && !$CONFIG['users_can_edit_pics'] ) {
+
+        if ($pic['category'] != FIRST_USER_CAT + USER_ID) {
+            cpg_die(ERROR, $lang_errors['perm_denied'], __FILE__, __LINE__);
+        }
+
+        if (!isset($user_album_set[$aid])) {
+            cpg_die(ERROR, $lang_errors['perm_denied'], __FILE__, __LINE__);
+        }
+    }
 
     if (!USER_ID
         || !(GALLERY_ADMIN_MODE
@@ -269,38 +287,13 @@ function process_post_data()
 } // end function process_post_data
 
 
-function get_user_albums($user_id = 0)
-{
-    global $CONFIG, $USER_ALBUMS_ARRAY, $user_albums_list;
-
-    if ($user_id) {
-        $or = " OR category = " . (FIRST_USER_CAT + $user_id);
-    } else {
-        $or = '';
-    }
-
-    if (!isset($USER_ALBUMS_ARRAY[USER_ID])) {
-        $user_albums = cpg_db_query("SELECT aid, title FROM {$CONFIG['TABLE_ALBUMS']} WHERE category='".(FIRST_USER_CAT + USER_ID)."' $or ORDER BY title");
-
-        if (mysql_num_rows($user_albums)) {
-            $user_albums_list = cpg_db_fetch_rowset($user_albums);
-        } else {
-            $user_albums_list = array();
-        }
-        mysql_free_result($user_albums);
-        $USER_ALBUMS_ARRAY[USER_ID] = $user_albums_list;
-    } else {
-        $user_albums_list = &$USER_ALBUMS_ARRAY[USER_ID];
-    }
-} // end function get_user_albums
-
-
 function form_alb_list_box()
 {
-    global $CONFIG, $CURRENT_PIC, $LINEBREAK;
-    global $user_albums_list, $public_albums_list, $lang_common, $icon_array;
+    global $CURRENT_PIC;
+    global $lang_common, $icon_array;
 
-    $sel_album = $CURRENT_PIC['aid'];
+    $options = album_selection_options($CURRENT_PIC['aid']);
+    $icon_warning = cpg_fetch_icon('warning');
 
     echo <<< EOT
 
@@ -311,28 +304,8 @@ function form_alb_list_box()
         <td class="tableb" valign="top">
             {$icon_array['move']}
             <select name="aid" id="album" class="listbox">
-
-EOT;
-    $hidden_public = '';
-    foreach ($public_albums_list as $album) {
-        echo '                <option value="' . $album['aid'] . '"'
-            . ($album['aid'] == $sel_album ? ' selected="selected"' : '') . '>'
-            . $album['cat_title'] . '</option>' . $LINEBREAK;
-        $hidden_public .= ($hidden_public ? ',' : '') . $album['aid'];
-    }
-    $hidden_private = '';
-    foreach ($user_albums_list as $album) {
-        echo '                <option value="' . $album['aid'] . '"'
-            . ($album['aid'] == $sel_album ? ' selected="selected"' : '') . '>* '
-            . $album['title'] . '</option>' . $LINEBREAK;
-        $hidden_private .= ($hidden_private ? ',' : '') . $album['aid'];
-    }
-
-    $icon_warning = cpg_fetch_icon('warning');
-    echo <<< EOT
+            $options
             </select>
-            <input type="hidden" name="public_albums" id="public_albums" value="{$hidden_public}" />
-            <input type="hidden" name="private_albums" id="private_albums" value="{$hidden_private}" />
             <table id="wrapper_permissions" style="display:none; padding-top:6px;" cellspacing="0" cellpadding="0" border="0">
                 <tr>
                     <td>$icon_warning</td>
@@ -382,25 +355,6 @@ if ($CONFIG['user_field3_name'] != '') {
 }
 if ($CONFIG['user_field4_name'] != '') {
     $THUMB_ROWSPAN++;
-}
-
-if (GALLERY_ADMIN_MODE) {
-    $public_albums = cpg_db_query("SELECT aid, title, IF(category = 0, CONCAT('&gt; ', title), CONCAT(name,' &lt; ',title)) AS cat_title FROM {$CONFIG['TABLE_ALBUMS']} LEFT JOIN {$CONFIG['TABLE_CATEGORIES']} ON category = cid WHERE category < '" . FIRST_USER_CAT . "' ORDER BY cat_title");
-} else {
-    $forbidden_set_alt = $FORBIDDEN_SET ? str_replace('p.', '', $FORBIDDEN_SET) : '';
-    $public_albums = cpg_db_query("SELECT aid, title, IF(category = 0, CONCAT('&gt; ', title), CONCAT(name,' &lt; ',title)) AS cat_title FROM {$CONFIG['TABLE_ALBUMS']} LEFT JOIN {$CONFIG['TABLE_CATEGORIES']} ON category = cid WHERE (category < '" . FIRST_USER_CAT . "' AND ((uploads = 'YES' $forbidden_set_alt) OR aid = '{$CURRENT_PIC['aid']}')) ORDER BY cat_title");
-}
-
-if (mysql_num_rows($public_albums)) {
-    $public_albums_list = cpg_db_fetch_rowset($public_albums);
-} else {
-    $public_albums_list = array();
-}
-
-if (GALLERY_ADMIN_MODE && $CURRENT_PIC['owner_id'] != USER_ID) {
-    get_user_albums($CURRENT_PIC['owner_id']);
-} else {
-    get_user_albums();
 }
 
 $public_can_edit_pics = GALLERY_ADMIN_MODE ? 1 : $CONFIG['users_can_edit_pics'];
