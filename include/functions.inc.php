@@ -5940,7 +5940,7 @@ function album_selection_options($selected = 0)
     if (GALLERY_ADMIN_MODE) {
         $result = cpg_db_query("SELECT cid, rgt, name FROM {$CONFIG['TABLE_CATEGORIES']} ORDER BY lft");
     } else {
-        $result = cpg_db_query("SELECT c.cid, c.rgt, c.name FROM {$CONFIG['TABLE_ALBUMS']} AS a RIGHT JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON a.category = c.cid WHERE c.cid = " . USER_GAL_CAT . " OR a.owner = ". USER_ID . " ORDER BY lft");
+        $result = cpg_db_query("SELECT DISTINCT c.cid, c.rgt, c.name FROM {$CONFIG['TABLE_ALBUMS']} AS a RIGHT JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON a.category = c.cid WHERE c.cid = " . USER_GAL_CAT . " OR a.owner = ". USER_ID . " ORDER BY lft");
     }
 
     $cats = array();
@@ -5980,18 +5980,12 @@ function album_selection_options($selected = 0)
             unset($users);
             continue;
         }
-        // construct a category hierarchy string breadcrumb style
-        $elements = array();
-        foreach ($cats as $cat) {
-            $elements[] = $cat['name'];
-        }
-        $hierarchy = implode(' - ', $elements);
         // calculate indent for this level
-        $indent = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', (count($elements) - 1));
+        $indent = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', (count($cats) - 1));
         // albums in the category
         if (!empty($albums[$row['cid']])) {
             // category header
-            $options .= '<optgroup label="' . $indent . $hierarchy . '">' . $LINEBREAK;
+            $options .= '<optgroup label="' . $indent . $row['name'] . '">' . $LINEBREAK;
 
             foreach ($albums[$row['cid']] as $aid => $title) {
                 $options .= sprintf('<option value="%d"%s>%s</option>' . $LINEBREAK, $aid, $aid == $selected ? ' selected="selected"' : '', $indent . $title);
