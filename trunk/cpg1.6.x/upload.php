@@ -219,23 +219,19 @@ EOT;
 // Creates the album list drop down
 function form_alb_list_box($text, $name)
 {
+    global $lang_common;
+
     $superCage = Inspekt::makeSuperCage();
-    // Pull the $CONFIG array and the GET array into the function
-    global $CONFIG, $lang_upload_php, $lang_common, $LINEBREAK;
 
-    // Also pull the album lists into the function
-    global $user_albums_list, $public_albums_list;
-
-    // Check to see if an album has been preselected by URL addition or the last selected album. If so, make $sel_album the album number. Otherwise, make $sel_album 0.
     if ($superCage->get->keyExists('album')) {
-      $sel_album = $superCage->get->getInt('album');
+        $sel_album = $superCage->get->getInt('album');
     } elseif ($superCage->post->keyExists('album')) {
-      $sel_album = $superCage->post->getInt('album');
+        $sel_album = $superCage->post->getInt('album');
     } else {
-      $sel_album = 0;
+        $sel_album = 0;
     }
+    $options = album_selection_options($sel_album);
 
-    // Create the opening of the drop down box
     echo <<<EOT
     <tr>
         <td class="tableb tableb_alternate" width="50">
@@ -243,87 +239,8 @@ function form_alb_list_box($text, $name)
         </td>
         <td class="tableb tableb_alternate" valign="top">
             <select name="$name" class="listbox">
-
-EOT;
-
-    // Get the ancestry of the categories
-    $vQuery = "SELECT cid, parent, name FROM {$CONFIG['TABLE_CATEGORIES']} WHERE 1";
-    $vResult = cpg_db_query($vQuery);
-    $vRes = cpg_db_fetch_rowset($vResult);
-    mysql_free_result($vResult);
-    foreach ($vRes as $vResI => $vResV) {
-        $vResRow = $vRes[$vResI];
-        $catParent[$vResRow['cid']] = $vResRow['parent'];
-        $catName[$vResRow['cid']] = $vResRow['name'];
-    }
-    $catAnces = array();
-    foreach ($catParent as $cid => $cid_parent) {
-        $catAnces[$cid] = '';
-        while ($cid_parent != 0) {
-            $catAnces[$cid] = $catName[$cid_parent] . ($catAnces[$cid]?' - '.$catAnces[$cid]:'');
-            $cid_parent = $catParent[$cid_parent];
-        }
-    }
-
-    // Reset counter
-    $list_count = 0;
-
-    // Cycle through the User albums
-    foreach($user_albums_list as $album) {
-
-        // Add to multi-dim array for later sorting
-        $listArray[$list_count]['cat'] = $lang_common['personal_albums'];
-        $listArray[$list_count]['aid'] = $album['aid'];
-        $listArray[$list_count]['title'] = $album['title'];
-        $listArray[$list_count]['cid'] = -1;
-        $list_count++;
-    }
-
-    // Cycle through the public albums
-    foreach($public_albums_list as $album) {
-
-        // Set $album_id to the actual album ID
-        $album_id = $album['aid'];
-
-        // Add to multi-dim array for sorting later
-        if (isset($album['name']) && $album['name']) {
-            $listArray[$list_count]['cat'] = $catAnces[$album['cid']] . ($catAnces[$album['cid']]?' - ':'') . $album['name'];
-            $listArray[$list_count]['cid'] = $album['cid'];
-        } else {
-            $listArray[$list_count]['cat'] = $lang_common['albums_no_category'];
-            $listArray[$list_count]['cid'] = 0;
-        }
-        $listArray[$list_count]['aid'] = $album['aid'];
-        $listArray[$list_count]['title'] = $album['title'];
-        $list_count++;
-    }
-
-    // Sort the pulldown options by category and album name
-    $listArray = array_csort($listArray,'cat','title');     // alphabetically by category name
-    // $listArray = array_csort($listArray,'cid','title');  // numerically by category ID
-    // print_r($listArray); exit;
-
-    // Finally, print out the nicely sorted and formatted drop down list
-    // $alb_cat = '';
-    $alb_cid = '';
-    echo '                <option value="">' . $lang_common['select_album'] . '</option>' . $LINEBREAK;
-    foreach ($listArray as $val) {
-        //if ($val['cat'] != $alb_cat) {  // old method compared names which might not be unique
-        if ($val['cid'] !== $alb_cid) {
-            if ($alb_cid) {
-                echo '                </optgroup>' . $LINEBREAK;
-            }
-            echo '                <optgroup label="' . $val['cat'] . '">' . $LINEBREAK;
-            $alb_cid = $val['cid'];
-        }
-        echo '                <option value="' . $val['aid'] . '"' . ($val['aid'] == $sel_album ? ' selected' : '') . '>   ' . $val['title'] . '</option>' . $LINEBREAK;
-    }
-    if ($alb_cid) {
-        echo '                </optgroup>' . $LINEBREAK;
-    }
-
-    // Close the drop down
-    echo <<<EOT
+            <option value="">{$lang_common['select_album']}</option>
+            $options
             </select>
         </td>
     </tr>

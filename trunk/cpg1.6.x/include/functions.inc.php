@@ -5919,10 +5919,12 @@ function album_selection_options($selected = 0)
     $albums = array();
     // load all albums
 
+    $uploads_yes = defined('EDITPICS_PHP') || defined('UPLOAD_PHP') ? ' OR uploads = "YES"' : '';
+
     if (GALLERY_ADMIN_MODE) {
         $result = cpg_db_query("SELECT aid, title, category FROM {$CONFIG['TABLE_ALBUMS']} ORDER BY pos");
     } elseif (USER_ID) {
-        $result = cpg_db_query("SELECT aid, title, category FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = " . (FIRST_USER_CAT + USER_ID) . " OR owner = " . USER_ID . " ORDER BY pos");
+        $result = cpg_db_query("SELECT aid, title, category FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = " . (FIRST_USER_CAT + USER_ID) . " OR owner = " . USER_ID . $uploads_yes . " ORDER BY pos");
     }
 
     while ( ($row = mysql_fetch_assoc($result)) ) {
@@ -5940,7 +5942,7 @@ function album_selection_options($selected = 0)
     if (GALLERY_ADMIN_MODE) {
         $result = cpg_db_query("SELECT cid, rgt, name FROM {$CONFIG['TABLE_CATEGORIES']} ORDER BY lft");
     } else {
-        $result = cpg_db_query("SELECT DISTINCT c.cid, c.rgt, c.name FROM {$CONFIG['TABLE_ALBUMS']} AS a RIGHT JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON a.category = c.cid WHERE c.cid = " . USER_GAL_CAT . " OR a.owner = ". USER_ID . " ORDER BY lft");
+        $result = cpg_db_query("SELECT DISTINCT c.cid, c.rgt, c.name FROM {$CONFIG['TABLE_ALBUMS']} AS a RIGHT JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON a.category = c.cid WHERE c.cid = " . USER_GAL_CAT . " OR a.owner = ". USER_ID . $uploads_yes . " ORDER BY lft");
     }
 
     $cats = array();
