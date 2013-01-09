@@ -445,33 +445,21 @@ class core_udb {
     // Query used to list users
     function list_users_query(&$user_count)
     {
-        global $CONFIG, $FORBIDDEN_SET, $PAGE, $cpg_show_private_album;
-
-        $f =& $this->field;
-
-        if (!$cpg_show_private_album && $FORBIDDEN_SET != "") {
-            // $forbidden_with_icon = "$FORBIDDEN_SET or p.galleryicon=p.pid";
-            $forbidden_with_icon = "$FORBIDDEN_SET";
-            $forbidden = "$FORBIDDEN_SET";
-        } else {
-            $forbidden_with_icon = '';
-            $forbidden = '';
-        }
+        global $CONFIG, $FORBIDDEN_SET, $PAGE;
 
         // Get the total number of users with albums
         $sql  = "SELECT NULL "
                 . "FROM {$CONFIG['TABLE_ALBUMS']} AS p "
                 . " INNER JOIN {$CONFIG['TABLE_PICTURES']} AS pics ON pics.aid = p.aid "
-                . "WHERE ( category > " . FIRST_USER_CAT . " $forbidden) "
+                . "WHERE ( category > " . FIRST_USER_CAT . " $FORBIDDEN_SET) "
                 . "GROUP BY category;";
         $result = cpg_db_query($sql);
         $user_count = mysql_num_rows($result);
+        mysql_free_result($result);
 
         if ($user_count == 0) {
             return false;
         }
-
-        mysql_free_result($result);
 
         $users_per_page = $CONFIG['thumbcols'] * $CONFIG['thumbrows'];
         $totalPages = ceil($user_count / $users_per_page);
@@ -479,6 +467,7 @@ class core_udb {
         $lower_limit = ($PAGE-1) * $users_per_page;
 
         if ($this->can_join_tables) {
+            $f =& $this->field;
             $sql  = "SELECT {$f['user_id']} AS user_id,"
                         . "{$f['username']} AS user_name,"
                         . "COUNT(DISTINCT a.aid) AS alb_count,"
@@ -488,7 +477,7 @@ class core_udb {
                     . "FROM {$CONFIG['TABLE_ALBUMS']} AS a "
                         . "INNER JOIN {$this->usertable} AS u ON u.{$f['user_id']} = a.category - " . FIRST_USER_CAT . " "
                         . "INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.aid = a.aid "
-                    . "WHERE ((isnull(approved) or approved='YES') AND category > " . FIRST_USER_CAT . ") $forbidden_with_icon GROUP BY user_id "
+                    . "WHERE ((ISNULL(approved) OR approved='YES') AND category > " . FIRST_USER_CAT . ") $FORBIDDEN_SET GROUP BY user_id "
                     . "ORDER BY category "
                     . "LIMIT $lower_limit, $users_per_page ";
             $result = cpg_db_query($sql);
@@ -505,7 +494,7 @@ class core_udb {
                     . "FROM {$CONFIG['TABLE_ALBUMS']} AS a "
                         . "INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.aid = a.aid "
                     . "WHERE ((ISNULL(approved) OR approved='YES') "
-                        . "AND category > " . FIRST_USER_CAT . ") $forbidden_with_icon "
+                        . "AND category > " . FIRST_USER_CAT . ") $FORBIDDEN_SET "
                     . "GROUP BY category "
                     . "LIMIT $lower_limit, $users_per_page ";
             $result = cpg_db_query($sql);
@@ -536,7 +525,7 @@ class core_udb {
                         . "MAX(galleryicon) AS gallery_pid "
                     . "FROM {$CONFIG['TABLE_ALBUMS']} AS a "
                         . "INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.aid = a.aid "
-                    . "WHERE ((ISNULL(approved) OR approved='YES') AND category > " . FIRST_USER_CAT . ") $forbidden_with_icon "
+                    . "WHERE ((ISNULL(approved) OR approved='YES') AND category > " . FIRST_USER_CAT . ") $FORBIDDEN_SET "
                     . "GROUP BY user_id "
                     . "ORDER BY category "
                     . "LIMIT $lower_limit, $users_per_page ";
