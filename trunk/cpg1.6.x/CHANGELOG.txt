@@ -23,7 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
-2013-01-10 [B] Fixed album ownership of automatically created user albums during registration (thread ID 74187) {eenemeenemuu}
+2013-01-10 [B] Fixed album ownership of automatically created user albums during user registration (thread ID 74187) {eenemeenemuu}
 2013-01-10 [B] Added button if user is allowed to edit files in public albums (thread ID 75545) {eenemeenemuu}
 2013-01-09 [B] Fixed check if user is allowed to edit files in public albums {eenemeenemuu}
 2013-01-09 [C] Unified album drop-down boxes (thread ID 75840) {eenemeenemuu}
