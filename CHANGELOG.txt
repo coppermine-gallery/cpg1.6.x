@@ -1,7 +1,7 @@
 ************************
 Coppermine Photo Gallery
 ************************
-Copyright (c) 2003-2012 Coppermine Dev Team
+Copyright (c) 2003-2013 Coppermine Dev Team
 v1.0 originally written by Gregory Demar
 
 This program is free software; you can redistribute it and/or modify
@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2013-01-10 [M] Updated header information to reflect new year {eenemeenemuu}
 2013-01-10 [B] Fixed album ownership of automatically created user albums during user registration (thread ID 74187) {eenemeenemuu}
 2013-01-10 [B] Added button if user is allowed to edit files in public albums (thread ID 75545) {eenemeenemuu}
 2013-01-09 [B] Fixed check if user is allowed to edit files in public albums {eenemeenemuu}
