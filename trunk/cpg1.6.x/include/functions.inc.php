@@ -191,7 +191,7 @@ function cpg_db_connect()
     }
 
     if (!empty($CONFIG['dbcharset'])) {
-        mysql_query("SET NAMES '{$CONFIG['dbcharset']}'", $result);
+        cpg_db_query("SET NAMES '{$CONFIG['dbcharset']}'", $result);
     }
 
     return $result;
@@ -230,9 +230,9 @@ function cpg_db_query($query, $use_link_id = 0)
         $last = $trace[0];
         $localfile = str_replace(realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR , '', $last['file']);
 
-        $duration      = round(($query_end - $query_start) * 1000);
+        $duration      = ($query_end - $query_start) * 1000;
         $query_stats[] = $duration;
-        $queries[]     = "$query [$localfile:{$last['line']}] ({$duration} ms)";
+        $queries[]     = "$query [$localfile:{$last['line']}] (".round($duration, 2)." ms)";
     }
 
     if (!$result && !defined('UPDATE_PHP')) {
@@ -3713,13 +3713,13 @@ function cpg_debug_output()
         $CONFIG['performance_page_query_count'] = 0;
     }
     $time_end         = cpgGetMicroTime();
-    $time             = round(($time_end - $cpg_time_start) * 1000);
+    $time             = round(($time_end - $cpg_time_start) * 1000, 2);
     if ($CONFIG['performance_page_generation_time'] < $time) {
         $CONFIG['performance_page_generation_time'] = $time;
         cpg_config_set('performance_page_generation_time', $CONFIG['performance_page_generation_time']);
     }
     $query_count      = count($query_stats);
-    $total_query_time = array_sum($query_stats);
+    $total_query_time = round(array_sum($query_stats), 2);
     if ($CONFIG['performance_page_query_time'] < $total_query_time) {
         $CONFIG['performance_page_query_time'] = $total_query_time;
         cpg_config_set('performance_page_query_time', $CONFIG['performance_page_query_time']);
