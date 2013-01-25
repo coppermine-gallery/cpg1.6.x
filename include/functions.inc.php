@@ -2988,6 +2988,7 @@ function display_thumbnails($album, $cat, $page, $thumbcols, $thumbrows, $displa
             list($pic_title) = CPGPluginAPI::filter('thumb_html_title', array($pic_title, $row));
 
             $pic_url = get_pic_url($row, 'thumb');
+            $type = cpg_get_type($row['filename']);
 
             if (!is_image($row['filename'])) {
                 $image_info     = cpg_getimagesize(urldecode($pic_url));
@@ -3004,7 +3005,7 @@ function display_thumbnails($album, $cat, $page, $thumbcols, $thumbrows, $displa
 
             $thumb_list[$i]['pos']          = $key < 0 ? $key : $i - 1 + $lower_limit;
             $thumb_list[$i]['pid']          = $row['pid'];
-            $thumb_list[$i]['image']        = '<img src="' . $pic_url . '" class="image" ' . $image_size['geom'] . ' border="0" alt="' . $row['filename'] . '" title="' . $pic_title . '" />';
+            $thumb_list[$i]['image']        = '<img src="' . $pic_url . '" class="image thumbnail_type_' . $type['content'] . ' thumbnail_extension_' . $type['extension'] . '" ' . $image_size['geom'] . ' border="0" alt="' . $row['filename'] . '" title="' . $pic_title . '" />';
             $thumb_list[$i]['caption']      = bb_decode($row['caption_text']);
             $thumb_list[$i]['admin_menu']   = '';
             $thumb_list[$i]['aid']          = $row['aid'];
@@ -3260,8 +3261,9 @@ function display_film_strip($album, $cat, $pos,$ajax_call)
             list($pic_title) = CPGPluginAPI::filter('thumb_strip_html_title', array($pic_title, $row));
 
             $pic_url = get_pic_url($row, 'thumb');
+            $type = cpg_get_type($row['filename']);
 
-            if (!is_image($row['filename'])) {
+            /*if (!is_image($row['filename'])) {
 
                 $image_info = cpg_getimagesize(urldecode($pic_url));
 
@@ -3274,13 +3276,13 @@ function display_film_strip($album, $cat, $pos,$ajax_call)
                 $image_size = compute_img_size($row['pwidth'], $row['pheight'], $CONFIG['thumb_width'], true);
             } else {
                 $image_size = compute_img_size($row['pwidth'], $row['pheight'], $CONFIG['thumb_width']);
-            }*/ //'$image_size' is never used
+            }*/ // values never used
 
             $p = $i - 1 + $lower_limit;
             $p = ($p < 0 ? 0 : $p);
 
             $thumb_list[$i]['pos']        = $key < 0 ? $key : $p;
-            $thumb_list[$i]['image']      = '<img src="' . $pic_url . '" class="strip_image" border="0" alt="' . $row['filename'] . '" title="' . $pic_title . '" />';
+            $thumb_list[$i]['image']      = '<img src="' . $pic_url . '" class="strip_image thumbnail_type_' . $type['content'] . ' thumbnail_extension_' . $type['extension'] . '" border="0" alt="' . $row['filename'] . '" title="' . $pic_title . '" />';
             $thumb_list[$i]['admin_menu'] = '';
             $thumb_list[$i]['pid']        = $row['pid'];
             $thumb_list[$i]['msg_id']     = isset($row['msg_id']) ? $row['msg_id'] : ''; // needed for get_pic_pos()

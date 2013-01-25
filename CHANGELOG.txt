@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2013-01-25 [A] Added file type specific CSS classes to thumbnail pictures (thread ID 75077) {eenemeenemuu}
 2013-01-24 [A] More precise database query times in debug output (thread ID 75864) {eenemeenemuu}
 2013-01-10 [M] Updated header information to reflect new year {eenemeenemuu}
 2013-01-10 [B] Fixed album ownership of automatically created user albums during user registration (thread ID 74187) {eenemeenemuu}
