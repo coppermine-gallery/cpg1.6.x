@@ -279,6 +279,7 @@ function swfUploadLoaded() {
     $("#divLoadingContent").hide();
     $("#divLongLoading").hide();
     $("#divAlternateContent").hide();
+    $("#divMaxFilesize").show();
     
     $("#button_cancel").click(function () { self.cancelQueue(); });
     

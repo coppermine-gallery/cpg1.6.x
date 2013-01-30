@@ -251,11 +251,13 @@ EOT;
 
 function form_instructions()
 {
-    global $CONFIG, $lang_upload_php, $upload_form, $max_file_size, $LINEBREAK;
+    global $lang_upload_php, $max_file_size;
+
+    $max_fsize = sprintf($lang_upload_php['max_fsize'], cpg_format_bytes($max_file_size));
 
     echo <<< EOT
     <tr>
-        <td colspan="2" class="tableb">
+        <td colspan="2" class="tableh2">
             <noscript>
                     <div class="cpg_message_error">{$lang_upload_php['err_js_disabled']}<br />
                     {$lang_upload_php['err_alternate_method']}</div>
@@ -263,6 +265,7 @@ function form_instructions()
             <div id="divLoadingContent" class="cpg_message_info" style="display: none;">{$lang_upload_php['flash_loading']}</div>
             <div id="divLongLoading" class="cpg_message_warning" style="display: none;">{$lang_upload_php['err_flash_disabled']}<br />{$lang_upload_php['err_alternate_method']}</div>
             <div id="divAlternateContent" class="cpg_message_error" style="display: none;">{$lang_upload_php['err_flash_version']}<br />{$lang_upload_php['err_alternate_method']}</div>
+            <div id="divMaxFilesize" style="display: none;"><strong>{$max_fsize}</strong></div>
            </td>
        </tr>
 EOT;
@@ -586,7 +589,7 @@ if (!$superCage->post->keyExists('process') && !$superCage->post->keyExists('plu
             echo '</div>';
         }
 
-        $restriction_filesize = sprintf($lang_upload_php['restriction_filesize'], '<strong>' . cpg_format_bytes($CONFIG['max_upl_size'] * 1024) . '</strong>');
+        $restriction_filesize = sprintf($lang_upload_php['restriction_filesize'], '<strong>' . cpg_format_bytes($max_file_size) . '</strong>');
         if ($CONFIG['allowed_img_types'] != '') {
             $allowed_img_types = '<li>' . sprintf ($lang_upload_php['allowed_img_types'], $CONFIG['allowed_img_types']) . '</li>';
         } else {
@@ -659,7 +662,7 @@ EOT;
             . '<br /><a href="keyword_select.php" class="greybox">' . $lang_common['keywords_insert2'] .'</a>';
         if ($CONFIG['show_bbcode_help']) {$captionLabel .= '&nbsp;'. cpg_display_help('f=empty.htm&amp;base=64&amp;h='.urlencode(base64_encode(serialize($lang_bbcode_help_title))).'&amp;t='.urlencode(base64_encode(serialize($lang_bbcode_help))),470,245);}
         $form_array = array(
-            sprintf($lang_upload_php['max_fsize'], cpg_format_bytes($CONFIG['max_upl_size'] * 1024)),
+            sprintf($lang_upload_php['max_fsize'], cpg_format_bytes($max_file_size)),
             array($lang_common['album'], 'album', 2),
             //array('MAX_FILE_SIZE', $max_file_size, 4), // removed to avoid misleading error message (thread ID 61711)
             array($lang_upload_php['picture'], 'userpicture', 1, 1)
