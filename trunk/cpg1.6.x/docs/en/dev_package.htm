@@ -79,7 +79,7 @@
         </li>
         <li>
             <a name="packaging_steps_bom"></a><h3>Remove Byte Order Marks<a href="#packaging_steps_bom" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-            As Coppermine is a community effort and there are many developers who have write access to the subversion repository it might happen that a Byte Order Mark (BOM) has crept into non-binary files. This happens without the developer being aware of it and shouldn't cause a lot of fuzz among the dev team, yet it can cause serious issues after the release, with the byte order mark shining through on some or all pages and especially with authentification issues, as the pre-mature start of the output (even if it's just the accidental output of the BOM) will interact with the browser's ability to receive the header and subseuqently the cookie.<br />
+            As Coppermine is a community effort and there are many developers who have write access to the subversion repository it might happen that a Byte Order Mark (BOM) has crept into non-binary files. This happens without the developer being aware of it and shouldn't cause a lot of fuzz among the dev team, yet it can cause serious issues after the release, with the byte order mark shining through on some or all pages and especially with authentification issues, as the pre-mature start of the output (even if it's just the accidental output of the BOM) will interact with the browser's ability to receive the header and subsequently the cookie.<br />
             That's the reason why it's a good idea to scan the non-binary files (file extensions <tt class="code">.php</tt>, <tt class="code">.css</tt>, <tt class="code">.js</tt>, <tt class="code">.txt</tt>, <tt class="code">.sql</tt>, <tt class="code">.htm</tt>) once more for the existance of a BOM and get rid of it if present. On Windows-driven computers, the BOM usually manifests with "funny" charcters - usually <tt class="code">&iuml;&raquo;&iquest;</tt>, so you should loop through all text-only files for that string and get rid of that string by replacing it with "" (nothing), using exactly the same tool used for the version number replacement above.
         </li>
         <li>
@@ -119,8 +119,27 @@
                         <li>Paste the content of the clipboard into the empty editor window that corresponds to <tt class="code">include/cpg16x.files.xml</tt>.</li>
                         <li>Then remove whitespace (if any) after the closing <tt class="code">&lt;/file_data&gt;</tt>-tag</li>
                         <li>and finally save the changes in <tt class="code">include/cpg16x.files.xml</tt>.</li>
-                        <li>Go back to your browser window and remove the parameter <tt class="code">?output=create</tt> from the address bar. Make sure <strong>not</strong> to connect to the online repository by ticking the corresponding checkbox to make sure that you're looking at the changed file. In all the three columns &quot;Version&quot;, &quot;Revision&quot; and &quot;Modified&quot; you should by now see green check icons that show everything is OK. There mustn't be any warnings in red. If tthis is the case, continue.</li>
+                        <li>Go back to your browser window and remove the parameter <tt class="code">?output=create</tt> from the address bar. Make sure <strong>not</strong> to connect to the online repository by ticking the corresponding checkbox to make sure that you're looking at the changed file. In all the three columns &quot;Version&quot;, &quot;Revision&quot; and &quot;Modified&quot; you should by now see green check icons that show everything is OK. There mustn't be any warnings in red. If this is the case, continue.</li>
                         <li>Commit your changes applied to <tt class="code">include/cpg16x.files.xml</tt> to the subversion repository.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a name="packaging_steps_create_tag"></a><h3>Create a tag in subversion<a href="#packaging_steps_create_tag" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+            Create a tag using your svn application. The target directory name will be the abbreviation <tt class="code">cpg</tt> followed by the exact version number. So the target URL will be <tt class="code">https://svn.code.sf.net/p/coppermine/code/tags/cpg1.5.X</tt>, where X represents the minor version number that you're about to tag.
+            <ul>
+                <li>
+                    <a name="packaging_steps_create_tag_rapidsvn"></a><h4>RapidSVN<a href="#packaging_steps_create_tag_rapidsvn" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+                    tbc
+                </li>
+                <li>
+                    <a name="packaging_steps_create_tag_tortoisesvn"></a><h4>Tortoise SVN<a href="#packaging_steps_create_tag_tortoisesvn" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+                    <ul>
+                        <li>In the left frame that represents the folder view, highlight the folder that represents the root of cpg1.5.x</li>
+                        <li>Click on the menu entry "TortoiseSVN" - "Branch/tag..."</li>
+                        <li>In the copy dialog, modify the "To URL" accordingly (see above).</li>
+                        <li>Select "HEAD revision in the repository" as source and click on the "OK" button.</li>
                     </ul>
                 </li>
             </ul>
@@ -153,47 +172,27 @@
                     <ul>
                         <li>In the left frame that represents the folder view, highlight the folder that represents the root of cpg1.5.x</li>
                         <li>Click on the menu entry "TortoiseSVN" - "Export..."</li>
-                        <li>In the export dialog, make sure that you <strong>uncheck</strong> "Export unversioned files too" and "Omit externals".</li>
+                        <li>In the export dialog, make sure to <strong>uncheck</strong> "Export unversioned files too" and "Omit externals".</li>
                         <li>Select the destination directory and click on the "OK" button.</li>
                     </ul>
                 </li>
             </ul>
         </li>
         <li>
-            <a name="packaging_steps_create_tag"></a><h3>Create a tag in subversion<a href="#packaging_steps_create_tag" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-            Create a tag using your svn application. The target directory name will be the abbreviation <tt class="code">cpg</tt> followed by the exact version number. So the target URL will be <tt class="code">https://coppermine.svn.sourceforge.net/svnroot/coppermine/tags/cpg1.5.X</tt>, where X represents the minor version number that you're about to tag.
-            <ul>
-                <li>
-                    <a name="packaging_steps_create_tag_rapidsvn"></a><h4>RapidSVN<a href="#packaging_steps_create_tag_rapidsvn" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
-                    tbc
-                </li>
-                <li>
-                    <a name="packaging_steps_create_tag_tortoisesvn"></a><h4>Tortoise SVN<a href="#packaging_steps_create_tag_tortoisesvn" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
-                    <ul>
-                        <li>In the left frame that represents the folder view, highlight the folder that represents the root of cpg1.5.x</li>
-                        <li>Click on the menu entry "TortoiseSVN" - "Branch/tag..."</li>
-                        <li>In the copy dialog, modify the "To URL" accordingly (see above).</li>
-                        <li>Select "Working copy" as source and click on the "OK" button.</li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li>
             <a name="packaging_steps_create_zip"></a><h3>Create the archive<a href="#packaging_steps_create_zip" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-            Create an archive according to the <a href="dev_plugins.htm#plugin_writing_naming_conventions">naming conventions</a>, using your favorite archiver (on Windows, 7-Zip is recommended). The naming convention for package releases is pretty straightforward: it's just the abbreviation <tt class="code">cpg</tt> followed by the exact version number. Subseuqently, your archive should be named <tt class="code">cpg1.5.X.zip</tt>, where X represents the minor version number that you're about to package. Its'mandatory to come up with a  <tt class="code">zip</tt> archive, but you can come up with additional archives as well (e.g. <tt class="code">.7z</tt>, <tt class="code">.tar.gz</tt> or <tt class="code">.tar.bz2</tt>) to make things easier for users on alternative operating systems.
+            Create an archive according to the <a href="dev_plugins.htm#plugin_writing_naming_conventions">naming conventions</a>, using your favorite archiver (on Windows, 7-Zip is recommended). The naming convention for package releases is pretty straightforward: it's just the abbreviation <tt class="code">cpg</tt> followed by the exact version number. Subsequently, your archive should be named <tt class="code">cpg1.5.X.zip</tt>, where X represents the minor version number that you're about to package. Its'mandatory to come up with a  <tt class="code">zip</tt> archive, but you can come up with additional archives as well (e.g. <tt class="code">.7z</tt>, <tt class="code">.tar.gz</tt> or <tt class="code">.tar.bz2</tt>) to make things easier for users on alternative operating systems.
         </li>
         <li>
             <a name="packaging_steps_upload_zip"></a><h3>Upload the archive<a href="#packaging_steps_upload_zip" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
             The archive(s) created in the previous step are meant to go into the download repository at <a href="https://sourceforge.net/projects/coppermine/files/" rel="external" class="external">https://sourceforge.net/projects/coppermine/files/</a>. You will need packager privileges on the Coppermine project pages that reside on the sourceforge.net webspace.
             <ul>
                 <li><a href="https://sourceforge.net/account/login.php" rel="external" class="external">Log in</a> into your account on sf.net</li>
-                <li>go to the <a href="https://sourceforge.net/project/admin/explorer.php?group_id=89658" rel="external" class="external">File Manager</a></li>
-                <li>expand the folder labelled "Coppermine" and then click on the gear icon in front of the folder "Coppermine"</li>
-                <li>From the menu that will show, select "new folder" and then create a folder that corresponds to your release number, e.g. something like <tt class="code">cpg1.5.X (stable)</tt>, where X corresponds to the minor version number of the package you're about to release.</li>
-                <li>Click on the gear icon in front of the new folder you created</li>
-                <li>Choose "upload here" from the menu that pops up</li>
+                <li>Go to the <a href="https://sourceforge.net/projects/coppermine/files/" rel="external" class="external">File Manager</a></li>
+                <li>Expand the folder labelled "Coppermine"</li>
+                <li>Expand the folder labelled "1.5.x"</li>
+                <li>Click the "Add File" button</li>
                 <li>Browse to your package on your client and select it for upload</li>
-                <li>After uploading has finished, move the package that used to be the most recent release before you just uploaded the new package into the folder <tt class="code">1.5.x (outdated)</tt>, using the gear icon in front of the previous release and selecting "cut" there. From the context menu of the target folder, select "paste" to complete the move. After moving the previous release, delete the orphaned folder it used to reside in</li>
+                <li>After uploading has finished click on the "i" icon in the uploaded package's row and set it as default download for all operating systems</li>
             </ul>
         </li>
         <li>
@@ -205,12 +204,16 @@
             The xml file that contains the information about the most recent stable release needs to be uploaded to the official web space, replacing the file http://coppermine-gallery.net/cpg16x.files.xml that clients will connect to when checking for upgrades with the one from the subversion repository (e.g. the file that corresponds to https://svn.code.sf.net/p/coppermine/code/trunk/cpg1.6.x/include/cpg16x.files.xml). If you don't have access to the project's official webspace by FTP, ask a fellow developer to perform this task for you.
         </li>
         <li>
+            <a name="packaging_steps_download_button"></a><h3>Update the download button on the Coppermine home page<a href="#packaging_steps_download_button" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+            On our <a href="http://coppermine-gallery.net/" rel="external" class="external">Coppermine home page</a> you need to update the URL and title of the download link as well as updating the <a href="http://coppermine-gallery.net/images/download_cpg15x.png" rel="external" class="external">button image</a> itself.
+        </li>
+        <li>
             <a name="packaging_steps_news"></a><h3>Create news items<a href="#packaging_steps_news" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
             There are various news items that need to be created. They can all be filled with similar or even identical content, as they catter for different media or different ways to access the news.
             <ul>
                 <li>
                     <a name="packaging_steps_news_sf"></a><h4>News item on sf.net<a href="#packaging_steps_news_sf" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
-                    Create a news article on sf.net that contains a link to the announcement thread. To accomplish this, select, "<a href="https://sourceforge.net/news/?group_id=89658" rel="external" class="external">News</a>" from the "Develop" menu while being logged in with your sourceforge.net account. On the news page, use the "Submit" link to create a news item. The news item should contain a link to the announcement thread on the forum.
+                    Create a news article on sf.net that contains a link to the announcement thread. To accomplish this, select, "<a href="https://sourceforge.net/p/coppermine/news/" rel="external" class="external">News</a>" from the "Develop" menu while being logged in with your sourceforge.net account. On the news page, use the "Submit" link to create a news item. The news item should contain a link to the announcement thread on the forum.
                 </li>
                 <li>
                     <a name="packaging_steps_news_forum"></a><h4>News item on forum<a href="#packaging_steps_news_forum" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
@@ -218,7 +221,7 @@
                 </li>
                 <li>
                     <a name="packaging_steps_news_homepage"></a><h4>News item on home page<a href="#packaging_steps_news_homepage" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
-                    On the <a href="http://coppermine-gallery.net/" rel="external" class="external">Coppermine home page</a>, create a news item that contains a link to the announcement thread.
+                    On the <a href="http://coppermine-gallery.net/" rel="external" class="external">Coppermine home page</a>, create a news item that contains a link to the announcement thread. Move outdated news items to the <a href="http://coppermine-gallery.net/archive.php" rel="external" class="external">news archive</a>.
                 </li>
                 <li>
                     <a name="packaging_steps_news_embedded"></a><h4>News embedded into existing galleries<a href="#packaging_steps_news_embedded" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>

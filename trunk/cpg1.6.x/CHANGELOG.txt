@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2013-02-01 [D] Updated packaging docs {eenemeenemuu}
 2013-01-30 [A] Display maximum allowed file size when using the Flash-driven uploader {eenemeenemuu}
 2013-01-25 [B] Fixed album drop-down box options for guests (thread ID 75905) {eenemeenemuu}
 2013-01-25 [A] Added file type specific CSS classes to thumbnail pictures (thread ID 75077) {eenemeenemuu}
