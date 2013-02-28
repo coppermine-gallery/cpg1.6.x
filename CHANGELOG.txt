@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2013-02-28 [B] Fixed edit files button next to public albums if user isn't allowed to create albums, but can upload files (thread ID 75545) {eenemeenemuu}
 2013-02-01 [D] Updated packaging docs {eenemeenemuu}
 2013-01-30 [A] Display maximum allowed file size when using the Flash-driven uploader {eenemeenemuu}
 2013-01-25 [B] Fixed album drop-down box options for guests (thread ID 75905) {eenemeenemuu}

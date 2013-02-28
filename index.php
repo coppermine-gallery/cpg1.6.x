@@ -938,6 +938,10 @@ function album_adm_menu($aid, $cat, $owner)
 {
     global $CONFIG, $USER_DATA, $lang_album_admin_menu;
 
+    if (GALLERY_ADMIN_MODE) {
+        return html_albummenu($aid);
+    }
+
     static $public_album_uploads = null;
     if ($public_album_uploads === null) {
         $public_album_uploads = array();
@@ -948,42 +952,40 @@ function album_adm_menu($aid, $cat, $owner)
         mysql_free_result($result);
     }
 
-    //check if user is allowed to edit album
     if (USER_ADMIN_MODE) {
-        //check if it is the user's gallery
         if ($cat == USER_ID + FIRST_USER_CAT) {
             return html_albummenu($aid);
-        } elseif ($owner == USER_ID) {
-            //check if admin allows editing after closing category
+        }
+        if ($owner == USER_ID) {
             if ($CONFIG['allow_user_edit_after_cat_close'] == 0) {
-                //Disallowed -> Check if album is in such a category
                 $result = cpg_db_query("SELECT DISTINCT alb.category FROM {$CONFIG['TABLE_ALBUMS']} AS alb INNER JOIN {$CONFIG['TABLE_CATMAP']} AS catm ON alb.category=catm.cid WHERE alb.owner = '" . $USER_DATA['user_id'] . "' AND alb.aid='$aid' AND catm.group_id IN (" . implode(', ', $USER_DATA['groups']) . ")");
                 $allowed_albums = cpg_db_fetch_rowset($result);
                 if (!$allowed_albums || ($allowed_albums[0]['category'] == '')) {
-                    return "<strong>" . $lang_album_admin_menu['cat_locked'] . "</strong>";
+                    if ($CONFIG['users_can_edit_pics'] && in_array($aid, $public_album_uploads)) {
+                        return html_albummenu2($aid);
+                    } else {
+                        return "<strong>" . $lang_album_admin_menu['cat_locked'] . "</strong>";
+                    }
                 }
             }
             if (!$CONFIG['users_can_edit_pics']) {
-                //return menu without edit pics button
                 return html_albummenu3($aid);
             } else {
-                //return whole menu
                 return html_albummenu($aid);
             }
-        } elseif (in_array($aid, $public_album_uploads)) {
-            return html_albummenu2($aid);
-        } else {
-            return '';
         }
-    } elseif (GALLERY_ADMIN_MODE) {
-        return html_albummenu($aid);
-    } elseif (in_array($aid, $USER_DATA['allowed_albums'])) {
-
-        //check for moderator rights
-        return html_albummenu2($aid);
-    } else {
-        return '';
     }
+
+    if (MODERATOR_MODE && in_array($aid, $USER_DATA['allowed_albums'])) {
+        return html_albummenu2($aid);
+    }
+
+    if (USER_CAN_UPLOAD_PICTURES && $CONFIG['users_can_edit_pics'] && in_array($aid, $public_album_uploads)) {
+        return html_albummenu2($aid);
+    }
+
+    return '';
+
 } // function album_adm_menu
 
 
