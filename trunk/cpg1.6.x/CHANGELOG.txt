@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2313-03-20 [B] Fixed registration process if "personal_album_on_registration" is enabled (related to thread ID 74187) {eenemeenemuu}
 2013-02-28 [B] Fixed edit files button next to public albums if user isn't allowed to create albums, but can upload files (thread ID 75545) {eenemeenemuu}
 2013-02-01 [D] Updated packaging docs {eenemeenemuu}
 2013-01-30 [A] Display maximum allowed file size when using the Flash-driven uploader {eenemeenemuu}

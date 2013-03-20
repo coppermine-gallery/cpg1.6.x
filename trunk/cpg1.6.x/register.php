@@ -607,9 +607,9 @@ function check_user_info(&$error)
 
     // Create a personal album if corresponding option is enabled
     if ($CONFIG['personal_album_on_registration'] == 1) {
-
-        $catid = mysql_insert_id() + FIRST_USER_CAT;
-        cpg_db_query("INSERT INTO {$CONFIG['TABLE_ALBUMS']} (`title`, `category`) VALUES ('$user_name', $catid)");
+        $user_id = mysql_insert_id();
+        $catid = $user_id + FIRST_USER_CAT;
+        cpg_db_query("INSERT INTO {$CONFIG['TABLE_ALBUMS']} (`title`, `category`, `owner`) VALUES ('$user_name', $catid, $user_id)");
     }
 
     // Registrations must be activated/verified by the user clicking a link in an email
