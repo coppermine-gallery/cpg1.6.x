@@ -224,7 +224,7 @@ switch($step) {
             $error .= $language['no_cookie'] . '<br />';
         }
         //JAVASCRIPT CHECK
-        if ($superCage->post->getAlpha('javascript_check') != 'passed' && !$config['javascript_test_passed']) {
+        if ($superCage->post->keyExists('javascript_check') && $superCage->post->getAlpha('javascript_check') != 'passed' && !$config['javascript_test_passed']) {
             //javascripts seems to be disabled, send them the message...
             $error .= $language['no_javascript'] . '<br />';
         } else {
@@ -1522,7 +1522,7 @@ function checkSqlConnection()
 {
     global $config, $language;
     // we only need 1 connection
-    if ($GLOBALS['mysql_connected']) {
+    if (isset($GLOBALS['mysql_connected']) && $GLOBALS['mysql_connected']) {
         return true;
     } else {
         if (isset($config['db_name'])) {
@@ -1689,7 +1689,7 @@ function populateMysqlDb()
 
     // Set configuration values for image package
     $sql_query .= "REPLACE INTO CPG_config VALUES ('thumb_method', '{$config['thumb_method']}');\n";
-    if ($config['im_path']) {
+    if (isset($config['im_path']) && $config['im_path']) {
         $sql_query .= "REPLACE INTO CPG_config VALUES ('impath', '{$config['im_path']}');\n";
     }
     $sql_query .= "REPLACE INTO CPG_config VALUES ('ecards_more_pic_target', '$gallery_url_prefix');\n";
@@ -1709,7 +1709,11 @@ function populateMysqlDb()
     $sql_query = remove_remarks($sql_query);
     $sql_query = split_sql_file($sql_query, ';');
 
-    $GLOBALS['temp_data'] .= '<tr><td>';
+    if (isset($GLOBALS['temp_data'])) {
+        $GLOBALS['temp_data'] .= '<tr><td>';
+    } else {
+        $GLOBALS['temp_data'] = '<tr><td>';
+    }
     foreach($sql_query as $q) {
         $is_table = false;
         //check if we are creating a table so we can add it to the output
@@ -1752,7 +1756,7 @@ function createAdmin()
     if (!isset($config['admin_email']) || $config['admin_email'] == '')  { $GLOBALS['error'] = $language['no_admin_email'];     return false;}
 
     // Insert the admin account
-    $sql_query .= "INSERT INTO {$config['db_prefix']}users "
+    $sql_query = "INSERT INTO {$config['db_prefix']}users "
         . "(user_group, user_active, user_name, user_password, user_lastvisit, "
         . " user_regdate, user_group_list, user_email, user_profile1, user_profile2, user_profile3, "
         . " user_profile4, user_profile5, user_profile6, user_actkey ) "
