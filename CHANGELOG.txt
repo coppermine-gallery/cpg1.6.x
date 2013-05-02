@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2013-05-02 [A] Don't check unsupported/disallowed file types at the batch-add upload form (thread ID 76084) {eenemeenemuu}
 2013-04-26 [C] Fixed PHP notices during install (thread ID 64257) {eenemeenemuu}
 2013-04-10 [B] Fixed possible missing parameter error during registration process (thread ID 76112) {eenemeenemuu}
 2013-03-20 [B] Fixed registration process if "personal_album_on_registration" is enabled (related to thread ID 74187) {eenemeenemuu}
