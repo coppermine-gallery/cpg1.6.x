@@ -145,7 +145,7 @@ function picrow($picfile, $picid, $albid)
         $winsizeY = ($fullimagesize[1] + 16);
         // $checked = isset($expic_array[$picfile]) || !$fullimagesize ? '' : 'checked';
         $picfile_replaced_forbidden = dirname($picfile).'/'.replace_forbidden(basename($picfile));
-        $checked = isset($expic_array[$picfile_replaced_forbidden]) ? '' : 'checked="checked"';
+        $checked = isset($expic_array[$picfile_replaced_forbidden]) || !is_known_filetype($pic_fname) ? '' : 'checked="checked"';
         $return = <<< EOT
         <tr>
                 <td class="{$rowStyle}" valign="middle" width="30">
