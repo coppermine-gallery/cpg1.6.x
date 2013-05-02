@@ -25,6 +25,7 @@ if (!GALLERY_ADMIN_MODE) {
     cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
 }
 
+set_js_var('lang_continue', $lang_common['continue']);
 js_include('js/searchnew.js');
 
 $rowCounter = 0;
@@ -143,7 +144,8 @@ function picrow($picfile, $picid, $albid)
         $winsizeX = ($fullimagesize[0] + 16);
         $winsizeY = ($fullimagesize[1] + 16);
         // $checked = isset($expic_array[$picfile]) || !$fullimagesize ? '' : 'checked';
-        $checked = isset($expic_array[$picfile]) ? '' : 'checked="checked"';
+        $picfile_replaced_forbidden = dirname($picfile).'/'.replace_forbidden(basename($picfile));
+        $checked = isset($expic_array[$picfile_replaced_forbidden]) ? '' : 'checked="checked"';
         $return = <<< EOT
         <tr>
                 <td class="{$rowStyle}" valign="middle" width="30">
@@ -239,7 +241,7 @@ function getfoldercontent($folder, &$dir_array, &$pic_array, &$expic_array)
         if (is_file($CONFIG['fullpath'] . $folder . $file) && !in_array($file, $pic_array)) {
             if (strncmp($file, $CONFIG['orig_pfx'], strlen($CONFIG['orig_pfx'])) != 0 && strncmp($file, $CONFIG['thumb_pfx'], strlen($CONFIG['thumb_pfx'])) != 0 && strncmp($file, $CONFIG['normal_pfx'], strlen($CONFIG['normal_pfx'])) != 0 && $file != 'index.php') {
                 $newfile = replace_forbidden($file);
-                if ($newfile != $file) {
+                if ($newfile != $file && !isset($expic_array[$folder.$newfile])) {
                     //File name has been changed, let's get a unique filename and rename the existing file.
                     $matches = array();
                     if (!preg_match("/(.+)\.(.*?)\Z/", $newfile, $matches)) {
@@ -335,7 +337,7 @@ function getallpicindb(&$pic_array, $startdir)
     $sql = "SELECT filepath, filename " . "FROM {$CONFIG['TABLE_PICTURES']} " . "WHERE filepath LIKE '$startdir%'";
     $result = cpg_db_query($sql);
     while ($row = mysql_fetch_array($result)) {
-        $pic_file = $row['filepath'] . $row['filename'];
+        $pic_file = $row['filepath'] . replace_forbidden($row['filename']);
         $pic_array[$pic_file] = 1;
     }
     mysql_free_result($result);
