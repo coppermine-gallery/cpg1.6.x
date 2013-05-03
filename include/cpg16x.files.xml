@@ -6095,6 +6095,12 @@
     <hash>ed5efb0d904fd599ec8110eef5341c66</hash>
   </element>
   <element>
+    <fullpath>images/os/win8.png</fullpath>
+    <status>mandatory</status>
+    <permission>read</permission>
+    <hash>ed5efb0d904fd599ec8110eef5341c66</hash>
+  </element>
+  <element>
     <fullpath>images/os/winxp.png</fullpath>
     <status>mandatory</status>
     <permission>read</permission>

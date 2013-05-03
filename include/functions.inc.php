@@ -2508,6 +2508,8 @@ function cpg_determine_client()
         $os = 'Windows Vista';
     } elseif (preg_match('#Windows NT 6\.1#i', $server_agent)) {
         $os = 'Windows 7';
+    } elseif (preg_match('#Windows NT 6\.2#i', $server_agent)) {
+        $os = 'Windows 8';
     } elseif (preg_match('#Windows CE#i', $server_agent)) {
         $os = 'Windows CE';
     } elseif (preg_match('#Windows#i', $server_agent)) {
