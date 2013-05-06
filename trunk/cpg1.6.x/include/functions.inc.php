@@ -2554,7 +2554,11 @@ function cpg_determine_client()
 
     $browser = 'Unknown';
     if (preg_match('#MSIE#i', $server_agent)) {
-        if (preg_match('#MSIE 8\.0#i', $server_agent)) {
+        if (preg_match('#MSIE 10\.0#i', $server_agent)) {
+            $browser = 'IE10';
+        } elseif (preg_match('#MSIE 9\.0#i', $server_agent)) {
+            $browser = 'IE9';
+        } elseif (preg_match('#MSIE 8\.0#i', $server_agent)) {
             $browser = 'IE8';
         } elseif (preg_match('#MSIE 7\.0#i', $server_agent)) {
             $browser = 'IE7';
