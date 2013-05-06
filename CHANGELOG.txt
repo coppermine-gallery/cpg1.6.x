@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2013-05-06 [A] Added support for Internet Explorer 9 & 10 to statistic details page (thread ID 76221) {eenemeenemuu}
 2013-05-03 [A] Added Windows 8 support to statistic details page (thread ID 76221) {eenemeenemuu}
 2013-05-02 [A] Don't check unsupported/disallowed file types at the batch-add upload form (thread ID 76084) {eenemeenemuu}
 2013-04-26 [C] Fixed PHP notices during install (thread ID 64257) {eenemeenemuu}
