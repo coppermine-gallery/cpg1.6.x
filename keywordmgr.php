@@ -176,12 +176,12 @@ case 'changeword':
             foreach ($array_old as $word) {
 
                 // convert old to new if it's the same word
-                if (utf_strtolower(htmlentities($word)) == $keywordEdit) {
-                    $word = addslashes($request_newword);
+                if (utf_strtolower(Inspekt::getEscaped($word)) == $keywordEdit) {
+                    $word = addslashes(html_entity_decode($request_newword));
                 }
 
                 // rebuild array to reprocess it
-                $array_new[] = trim($word);
+                $array_new[] = Inspekt::getEscaped(trim($word));
             }
 
             $keywords = implode($keysep, $array_new);
@@ -226,12 +226,12 @@ case 'delete':
         foreach ($array_old as $word) {
 
             // convert old to new if it's the same word
-            if (utf_strtolower(htmlentities($word)) == utf_strtolower($remove)) {
+            if (utf_strtolower(Inspekt::getEscaped($word)) == utf_strtolower($remove)) {
                 $word = '';
             }
 
             // rebuild array to reprocess it
-            $array_new[] = trim($word);
+            $array_new[] = Inspekt::getEscaped(trim($word));
         }
 
         $keywords = implode($keysep, $array_new);
