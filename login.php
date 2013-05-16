@@ -62,7 +62,7 @@ if ($superCage->post->keyExists('submitted')) {
 
     } else {
         // Write the log entry
-        log_write("Failed login attempt with Username: " . $superCage->post->getEscaped('username'), CPG_SECURITY_LOG);
+        log_write("Failed login attempt at IP $hdr_ip with Username: " . $superCage->post->getEscaped('username'), CPG_SECURITY_LOG);
 
         $login_failed = <<<EOT
                   <tr>
