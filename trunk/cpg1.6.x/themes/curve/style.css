@@ -1025,6 +1025,20 @@ main_menu {
     padding: 8px;
 }
 
+.dropmenu li li a.firstlevel span.firstlevel {
+    left: 0 !important;
+}
+
+.dropmenu li li a.firstlevel {
+    margin-right: 0 !important;
+}
+
+.dropmenu li li a.firstlevel:hover span.firstlevel {
+    background: #D4DBE4 !important;
+    color: #000 !important;
+    text-decoration: none !important;
+}
+
 .dropmenu li ul ul {
     margin: -1.8em 0 0 13em;
 }
