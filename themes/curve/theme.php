@@ -20,149 +20,235 @@
 define('THEME_HAS_PROGRESS_GRAPHICS', 1);
 define('THEME_HAS_FILM_STRIP_GRAPHICS', 1);
 
-// HTML template for template  sub menu buttons
-$template_sys_menu_button = $template_sub_menu_button = <<<EOT
-<!-- BEGIN {BLOCK_ID} -->
-    <li>
-        <a href="{HREF_TGT}" title="{HREF_TITLE}" class="firstlevel"><span class="firstlevel">{HREF_LNK}</span></a>
-    </li>
-<!-- END {BLOCK_ID} -->
-EOT;
 
-// HTML template for sys menu
-$template_sys_menu = <<<EOT
+/******************************************************************************
+** Section <<<assemble_template_buttons>>> - START
+******************************************************************************/
+// Creates buttons from a template using an array of tokens
+// this function is used in this file it needs to be declared before being called.
+function assemble_template_buttons($template_buttons,$buttons)
+{
+    global $openulid;
 
-<ul class="dropmenu">
-<!-- BEGIN home -->
-                <li>
-                    <a href="{HOME_TGT}" title="{HOME_TITLE}" class="firstlevel"><span class="firstlevel">{HOME_ICO}{HOME_LNK}</span></a>
-                    <ul>
-                    <!-- BEGIN contact -->
-                                <li>
-                                    <a href="{CONTACT_TGT}" title="{CONTACT_TITLE}"><span>{CONTACT_ICO}{CONTACT_LNK}</span></a>
-                                </li>
-                    <!-- END contact -->
-                    <!-- BEGIN sidebar -->
-                                    <li>
-                                        <a href="{SIDEBAR_TGT}" title="{SIDEBAR_TITLE}"><span>{SIDEBAR_ICO}{SIDEBAR_LNK}</span></a>
-                                    </li>
-                    <!-- END sidebar -->
-                    <!-- BEGIN my_profile -->
-                                    <li>
-                                        <a href="{MY_PROF_TGT}" title="{MY_PROF_LNK}"><span>{MY_PROF_ICO}{MY_PROF_LNK}</span></a>
-                                    </li>
-                    <!-- END my_profile -->
-                    <!-- BEGIN allow_memberlist -->
-                                    <li>
-                                        <a href="{MEMBERLIST_TGT}" title="{MEMBERLIST_TITLE}"><span>{MEMBERLIST_ICO}{MEMBERLIST_LNK}</span></a>
-                                    </li>
-                    <!-- END allow_memberlist -->
-                    </ul>
-                </li>
-<!-- END home -->
-<!-- BEGIN my_gallery -->
-                <li>
-                    <a href="{MY_GAL_TGT}" title="{MY_GAL_TITLE}" class="firstlevel"><span class="firstlevel">{MY_GAL_ICO}{MY_GAL_LNK}</span></a>
-                    <ul>
-                    <!-- BEGIN enter_admin_mode -->
-                                    <li>
-                                    <a href="{ADM_MODE_TGT}" title="{ADM_MODE_TITLE}"><span>{ADM_MODE_ICO}{ADM_MODE_LNK}</span></a>
-                                    </li>
-                    <!-- END enter_admin_mode -->
-                    <!-- BEGIN leave_admin_mode -->
-                                    <li>
-                                        <a href="{USR_MODE_TGT}" title="{USR_MODE_TITLE}"><span>{USR_MODE_ICO}{USR_MODE_LNK}</span></a>
-                                    </li>
-                    <!-- END leave_admin_mode -->
-                    </ul>
-                </li>
-<!-- END my_gallery -->
-<!-- BEGIN upload_pic -->
-                <li>
-                    <a href="{UPL_PIC_TGT}" title="{UPL_PIC_TITLE}" class="firstlevel"><span class="firstlevel">{UPL_PIC_ICO}{UPL_PIC_LNK}</span></a>
-                </li>
-<!-- END upload_pic -->
-<!-- BEGIN register -->
-                <li>
-                    <a href="{REGISTER_TGT}" title="{REGISTER_TITLE}" class="firstlevel"><span class="firstlevel">{REGISTER_ICO}{REGISTER_LNK}</span></a>
-                </li>
-<!-- END register -->
-<!-- BEGIN login -->
-                <li>
-                    <a href="{LOGIN_TGT}" title="{LOGIN_LNK}" class="firstlevel"><span class="firstlevel">{LOGIN_ICO}{LOGIN_LNK}</span></a>
-                </li>
-<!-- END login -->
-<!-- BEGIN logout -->
-                <li>
-                    <a href="{LOGOUT_TGT}" title="{LOGOUT_LNK}" class="firstlevel"><span class="firstlevel">{LOGOUT_ICO}{LOGOUT_LNK}</span></a>
-                </li>
-<!-- END logout -->
-</ul>
+    $counter=0;
+    $output='';
 
-EOT;
+    foreach ($buttons as $button) {
 
+        if (isset($button[4]) && !isset($button[7])) {
+            $spacer=$button[4];
+        } else {
+            $spacer='';
+        }
 
-// HTML template for sub menu
-if ($CONFIG['browse_by_date'] != 0) {
-    $browsebydatebutton = <<< EOT
-                        <li>
-                            <a href="{BROWSEBYDATE_TGT}" title="{BROWSEBYDATE_TITLE}" rel="nofollow" class="greybox"><span>{BROWSEBYDATE_ICO}{BROWSEBYDATE_LNK}</span></a>
-                        </li>
-EOT;
-} else {
-    $browsebydatebutton = '';
+        if (isset($button[6])) {
+            $ico=$button[6];
+        } else {
+            $ico='';
+        }
+
+        $params = array(
+            '{SPACER}'     => $spacer,
+            '{BLOCK_ID}'   => $button[3],
+            '{HREF_TGT}'   => $button[2],
+            '{HREF_TITLE}' => $button[1],
+            '{HREF_LNK}'   => $button[0],
+            '{HREF_ATTRIBUTES}'   => $button[5],
+            '{HREF_ICO}'   => $ico,
+            );
+
+        if (isset($openulid)) {
+            $params['{OPEN_BLOCK_ID}'] = $openulid;
+        }
+
+        if (isset($button[7])) {
+            $dropdown_template = add_dropdown_structure($button[7], $button[3]);
+            $output.=template_eval($dropdown_template, $params);
+        } else {
+            $output.=template_eval($template_buttons, $params);
+        }
+    }
+    return $output;
 }
-$template_sub_menu = <<<EOT
+/******************************************************************************
+** Section <<<assemble_template_buttons>>> - END
+******************************************************************************/
 
+
+/******************************************************************************
+** Section <<<addbutton>>> - START
+******************************************************************************/
+// Creates an array of tokens to be used with function assemble_template_buttons
+// this function is used in this file it needs to be declared before being called.
+function addbutton(&$menu,$href_lnk,$href_title,$href_tgt,$block_id,$spacer,$href_attrib='',$ico='',$ddtype='')
+{
+    $menu[]=array($href_lnk,$href_title,$href_tgt,$block_id,$spacer,$href_attrib,$ico,$ddtype);
+}
+/******************************************************************************
+** Section <<<addbutton>>> - END
+******************************************************************************/
+
+
+/******************************************************************************
+** Section <<<add_dropdown_structure>>> - START
+******************************************************************************/
+// Replaces standard template with dropdown template.
+function add_dropdown_structure($type, $blockid){
+    global $openulid;
+    switch ($type) {
+        case 'standaloneli':
+            return '
+                        <!-- BEGIN {BLOCK_ID} -->
+                        <li>
+                            <a href="{HREF_TGT}" title="{HREF_TITLE}"  class="firstlevel" {HREF_ATTRIBUTES}><span class="firstlevel">{HREF_ICO}{HREF_LNK}</span></a>
+                        </li>
+                        <!-- END {BLOCK_ID} -->';
+
+        case 'openul':
+            $openulid = $blockid;
+            return '
+                        <!-- BEGIN {BLOCK_ID} -->
+                        <li>
+                            <a href="{HREF_TGT}" title="{HREF_TITLE}" class="firstlevel" {HREF_ATTRIBUTES}><span class="firstlevel">{HREF_ICO}{HREF_LNK}</span></a>
+                            <ul>';
+
+        case 'innerli':
+            return '
+                                <!-- BEGIN {BLOCK_ID} -->
+                                <li>
+                                    <a href="{HREF_TGT}" title="{HREF_TITLE}" {HREF_ATTRIBUTES}><span>{HREF_ICO}{HREF_LNK}</span></a>
+                                </li>
+                                <!-- END {BLOCK_ID} -->';
+
+        case 'closeul':
+            return '
+                                <!-- BEGIN {BLOCK_ID} -->
+                                <li>
+                                    <a href="{HREF_TGT}" title="{HREF_TITLE}" {HREF_ATTRIBUTES}><span>{HREF_ICO}{HREF_LNK}</span></a>
+                                </li>
+                                <!-- END {BLOCK_ID} -->
+                            </ul>
+                        </li>
+                        <!-- END {OPEN_BLOCK_ID} -->';
+    }
+}
+/******************************************************************************
+** Section <<<$add_dropdown_structure>>> - END
+******************************************************************************/
+
+
+/******************************************************************************
+** Section <<<$template_sys_menu>>> - START
+******************************************************************************/
+// HTML template for sys_menu
+$template_sys_menu = <<<EOT
 <ul class="dropmenu">
-<!-- BEGIN custom_link -->
-                <li>
-                    <a href="{CUSTOM_LNK_TGT}" title="{CUSTOM_LNK_TITLE}" class="firstlevel"><span class="firstlevel">{CUSTOM_LNK_LNK}</span></a>
-                </li>
-<!-- END custom_link -->
-<!-- BEGIN album_list -->
-                <li>
-                    <a href="{ALB_LIST_TGT}" title="{ALB_LIST_TITLE}" class="firstlevel"><span class="firstlevel">{ALB_LIST_ICO}{ALB_LIST_LNK}</span></a>
-                    <ul>
-<!-- BEGIN lastup -->
-                        <li>
-                            <a href="{LASTUP_TGT}" title="{LASTUP_LNK}" rel="nofollow"><span>{LASTUP_ICO}{LASTUP_LNK}</span></a>
-                        </li>
-<!-- END lastup -->
-<!-- BEGIN lastcom -->
-                        <li>
-                            <a href="{LASTCOM_TGT}" title="{LASTCOM_LNK}" rel="nofollow" ><span>{LASTCOM_ICO}{LASTCOM_LNK}</span></a>
-                        </li>
-<!-- END lastcom -->
-<!-- BEGIN topn -->
-                        <li>
-                            <a href="{TOPN_TGT}" title="{TOPN_LNK}" rel="nofollow"><span>{TOPN_ICO}{TOPN_LNK}</span></a>
-                        </li>
-<!-- END topn -->
-<!-- BEGIN toprated -->
-                        <li>
-                            <a href="{TOPRATED_TGT}" title="{TOPRATED_LNK}" rel="nofollow"><span>{TOPRATED_ICO}{TOPRATED_LNK}</span></a>
-                        </li>
-<!-- END toprated -->
-<!-- BEGIN favpics -->
-                        <li>
-                            <a href="{FAV_TGT}" title="{FAV_LNK}" rel="nofollow"><span>{FAV_ICO}{FAV_LNK}</span></a>
-                        </li>
-<!-- END favpics -->
-<!-- BEGIN browse_by_date -->
-                        $browsebydatebutton
-<!-- END browse_by_date -->
-                    </ul>
-                </li>
-<!-- END album_list -->
-<!-- BEGIN search -->
-                <li>
-                    <a href="{SEARCH_TGT}" title="{SEARCH_LNK}" class="firstlevel"><span class="firstlevel">{SEARCH_ICO}{SEARCH_LNK}</span></a>
-                </li>
-<!-- END search -->
+          {BUTTONS}
 </ul>
-
 EOT;
+/******************************************************************************
+** Section <<<$template_sys_menu>>> - END
+******************************************************************************/
+
+
+/******************************************************************************
+** Section <<<$template_sub_menu>>> - START
+******************************************************************************/
+// HTML template for sub_menu
+$template_sub_menu = $template_sys_menu;
+/******************************************************************************
+** Section <<<$template_sub_menu>>> - END
+******************************************************************************/
+
+
+/******************************************************************************
+** Section <<<THEME_HAS_NO_SYS_MENU_BUTTONS>>> - START
+******************************************************************************/
+if (!defined('THEME_HAS_NO_SYS_MENU_BUTTONS')) {
+
+  // HTML template for template sys_menu spacer
+
+  $template_sys_menu_spacer = '';
+
+  // HTML template for template sys_menu buttons
+
+  $template_sys_menu_button = <<<EOT
+    <!-- BEGIN {BLOCK_ID} -->
+    <li>
+        <a href="{HREF_TGT}" title="{HREF_TITLE}" class="firstlevel" {HREF_ATTRIBUTES}><span class="firstlevel">{HREF_ICO}{HREF_LNK}</span></a>
+    </li>
+    <!-- END {BLOCK_ID} -->
+EOT;
+
+    // {HREF_LNK}{HREF_TITLE}{HREF_TGT}{BLOCK_ID}{SPACER}{HREF_ATTRIBUTES}
+    addbutton($sys_menu_buttons,'{HOME_LNK}','{HOME_TITLE}','{HOME_TGT}','home',$template_sys_menu_spacer,'','{HOME_ICO}','openul');
+    addbutton($sys_menu_buttons,'{CONTACT_LNK}','{CONTACT_TITLE}','{CONTACT_TGT}','contact',$template_sys_menu_spacer,'','{CONTACT_ICO}','innerli');
+    addbutton($sys_menu_buttons,'{SIDEBAR_LNK}','{SIDEBAR_TITLE}','{SIDEBAR_TGT}','sidebar',$template_sys_menu_spacer,'','{SIDEBAR_ICO}','innerli');
+    addbutton($sys_menu_buttons,'{MY_PROF_LNK}','{MY_PROF_TITLE}','{MY_PROF_TGT}','my_profile',$template_sys_menu_spacer,'','{MY_PROF_ICO}','innerli');
+    addbutton($sys_menu_buttons,'{MEMBERLIST_LNK}','{MEMBERLIST_TITLE}','{MEMBERLIST_TGT}','allow_memberlist',$template_sys_menu_spacer,'','{MEMBERLIST_ICO}','closeul');
+    addbutton($sys_menu_buttons,'{MY_GAL_LNK}','{MY_GAL_TITLE}','{MY_GAL_TGT}','my_gallery',$template_sys_menu_spacer,'','{MY_GAL_ICO}','openul');
+    addbutton($sys_menu_buttons,'{USR_MODE_LNK}','{USR_MODE_TITLE}','{USR_MODE_TGT}','leave_admin_mode',$template_sys_menu_spacer,'','{USR_MODE_ICO}','innerli');
+    addbutton($sys_menu_buttons,'{ADM_MODE_LNK}','{ADM_MODE_TITLE}','{ADM_MODE_TGT}','enter_admin_mode',$template_sys_menu_spacer,'','{ADM_MODE_ICO}','closeul');
+    if (array_key_exists('allowed_albums', $USER_DATA) && is_array($USER_DATA['allowed_albums']) && count($USER_DATA['allowed_albums'])) {
+        addbutton($sys_menu_buttons,'{UPL_APP_LNK}','{UPL_APP_TITLE}','{UPL_APP_TGT}','upload_approval',$template_sys_menu_spacer,'','{UPL_APP_ICO}','standaloneli');
+    }
+    addbutton($sys_menu_buttons,'{UPL_PIC_LNK}','{UPL_PIC_TITLE}','{UPL_PIC_TGT}','upload_pic',$template_sys_menu_spacer,'','{UPL_PIC_ICO}','standaloneli');
+    addbutton($sys_menu_buttons,'{REGISTER_LNK}','{REGISTER_TITLE}','{REGISTER_TGT}','register',$template_sys_menu_spacer,'','{REGISTER_ICO}','standaloneli');
+    addbutton($sys_menu_buttons,'{LOGIN_LNK}','{LOGIN_TITLE}','{LOGIN_TGT}','login','','','{LOGIN_ICO}','standaloneli');
+    addbutton($sys_menu_buttons,'{LOGOUT_LNK}','{LOGOUT_TITLE}','{LOGOUT_TGT}','logout','','','{LOGOUT_ICO}','standaloneli');
+    // Login and Logout don't have a spacer as only one is shown, and either would be the last option.
+
+  $sys_menu_buttons = CPGPluginAPI::filter('sys_menu',$sys_menu_buttons);
+  $params = array('{BUTTONS}' => assemble_template_buttons($template_sys_menu_button,$sys_menu_buttons));
+  $template_sys_menu = template_eval($template_sys_menu,$params);
+}
+/******************************************************************************
+** Section <<<THEME_HAS_NO_SYS_MENU_BUTTONS>>> - END
+******************************************************************************/
+
+
+/******************************************************************************
+** Section <<<THEME_HAS_NO_SUB_MENU_BUTTONS>>> - START
+******************************************************************************/
+if (!defined('THEME_HAS_NO_SUB_MENU_BUTTONS')) {
+
+    // HTML template for template sub_menu spacer
+
+    $template_sub_menu_spacer = $template_sys_menu_spacer;
+
+    // HTML template for template sub_menu buttons
+
+    $template_sub_menu_button = <<<EOT
+    <!-- BEGIN {BLOCK_ID} -->
+    <li>
+        <a href="{HREF_TGT}" title="{HREF_TITLE}" class="firstlevel" {HREF_ATTRIBUTES}><span class="firstlevel">{HREF_ICO}{HREF_LNK}</span></a>
+    </li>
+    <!-- END {BLOCK_ID} -->
+EOT;
+
+    // HTML template for template sub_menu buttons
+
+    // {HREF_LNK}{HREF_TITLE}{HREF_TGT}{BLOCK_ID}{SPACER}{HREF_ATTRIBUTES}
+    addbutton($sub_menu_buttons,'{CUSTOM_LNK_LNK}','{CUSTOM_LNK_TITLE}','{CUSTOM_LNK_TGT}','custom_link',$template_sub_menu_spacer,'','{CUSTOM_LNK_ICO}','standaloneli');
+    addbutton($sub_menu_buttons,'{ALB_LIST_LNK}','{ALB_LIST_TITLE}','{ALB_LIST_TGT}','album_list',$template_sub_menu_spacer,'','{ALB_LIST_ICO}','openul');
+    addbutton($sub_menu_buttons,'{LASTUP_LNK}','{LASTUP_TITLE}','{LASTUP_TGT}','lastup',$template_sub_menu_spacer,'rel="nofollow"','{LASTUP_ICO}','innerli');
+    addbutton($sub_menu_buttons,'{LASTCOM_LNK}','{LASTCOM_TITLE}','{LASTCOM_TGT}','lastcom',$template_sub_menu_spacer,'rel="nofollow"','{LASTCOM_ICO}','innerli');
+    addbutton($sub_menu_buttons,'{TOPN_LNK}','{TOPN_TITLE}','{TOPN_TGT}','topn',$template_sub_menu_spacer,'rel="nofollow"','{TOPN_ICO}','innerli');
+    addbutton($sub_menu_buttons,'{TOPRATED_LNK}','{TOPRATED_TITLE}','{TOPRATED_TGT}','toprated',$template_sub_menu_spacer,'rel="nofollow"','{TOPRATED_ICO}','innerli');
+    if ($CONFIG['browse_by_date'] != 0) {
+        addbutton($sub_menu_buttons, '{BROWSEBYDATE_LNK}', '{BROWSEBYDATE_TITLE}', '{BROWSEBYDATE_TGT}', 'browse_by_date', $template_sub_menu_spacer, 'rel="nofollow" class="greybox"','{BROWSEBYDATE_ICO}','innerli');
+    }
+    addbutton($sub_menu_buttons,'{FAV_LNK}','{FAV_TITLE}','{FAV_TGT}','favpics',$template_sub_menu_spacer,'rel="nofollow"','{FAV_ICO}','closeul');
+    addbutton($sub_menu_buttons,'{SEARCH_LNK}','{SEARCH_TITLE}','{SEARCH_TGT}','search','','','{SEARCH_ICO}','standaloneli');
+
+    $sub_menu_buttons = CPGPluginAPI::filter('sub_menu',$sub_menu_buttons);
+    $params = array('{BUTTONS}' => assemble_template_buttons($template_sub_menu_button,$sub_menu_buttons));
+    $template_sub_menu = template_eval($template_sub_menu,$params);
+}
+/******************************************************************************
+** Section <<<THEME_HAS_NO_SUB_MENU_BUTTONS>>> - END
+******************************************************************************/
+
 
 // HTML template for gallery admin menu
 $template_gallery_admin_menu = <<<EOT
