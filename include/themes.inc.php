@@ -2234,7 +2234,7 @@ function theme_main_menu($which)
         '{CUSTOM_LNK_TGT}' => $CONFIG['custom_lnk_url'],
         '{CUSTOM_LNK_TITLE}' => $CONFIG['custom_lnk_name'],
         '{CUSTOM_LNK_LNK}' => $CONFIG['custom_lnk_name'],
-        '{CUSTOM_ICO}' => cpg_fetch_icon('online', 1),
+        '{CUSTOM_LNK_ICO}' => cpg_fetch_icon('online', 1),
         '{LASTUP_TGT}' => "thumbnails.php?album=lastup$cat_l2",
         '{LASTUP_TITLE}' => $lang_main_menu['lastup_title'],
         '{LASTUP_LNK}' => $lang_main_menu['lastup_lnk'],
