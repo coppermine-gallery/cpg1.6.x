@@ -100,7 +100,7 @@ if ($search_string && isset($search_params['params'])) {
                                                 $fields = array();
                                                 if ($superCage->get->keyExists('album_title') || $superCage->get->keyExists('category_title')) $albcat_terms[] = " LIKE '%$word%'";
                                                 foreach ($search_params['params'] as $param => $value) {
-                                                        if (in_array($param, $allowed)) $fields[] = "$param LIKE '%$word%'";
+                                                        if (in_array($param, $allowed)) $fields[] = ($param == 'title' ? 'p.title' : $param)." LIKE '%$word%'";
                                                 }
                                                 $sections[] = count($fields) ? '(' . implode(' OR ', $fields) . ')' : '';
                                         }
