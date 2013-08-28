@@ -422,7 +422,7 @@ $lang_albmgr_php['category_change'] = 'If you change the category, your changes 
 $lang_albmgr_php['page_change'] = 'If you follow this link, your changes will be lost!';
 $lang_albmgr_php['cancel'] = 'Cancel';
 $lang_albmgr_php['submit_reminder'] = 'Sorting changes are not saved until you click &quot;Apply changes&quot;.';
-$lang_albmgr_php['upload_files'] = 'Upload files to this album'; // cpg1.6.x
+$lang_albmgr_php['upload_files'] = 'Upload files to this album'; // cpg1.6
 }
 
 // ------------------------------------------------------------------------- //
@@ -739,7 +739,7 @@ $lang_admin_php['slideshow_interval'] = 'Slideshow interval';
 $lang_admin_php['milliseconds'] = 'milliseconds';
 $lang_admin_php['slideshow_interval_detail'] = '1 second = 1000 milliseconds';
 $lang_admin_php['slideshow_hits'] = 'Count hits in slideshow';
-$lang_admin_php['ecard_captcha'] = 'Display Captcha (Visual Confirmation) for sending Ecards'; // cpg 1.6
+$lang_admin_php['ecard_captcha'] = 'Display captcha (visual confirmation) for sending ecards'; // cpg1.6
 $lang_admin_php['ecard_flash'] = 'Allow Flash in Ecards';
 $lang_admin_php['not_recommended'] = 'not recommended';
 $lang_admin_php['recommended'] = 'recommended';
@@ -2013,7 +2013,7 @@ $lang_search_new_php['insert_selected'] = 'Insert selected files';
 $lang_search_new_php['no_pic_found'] = 'No new file was found';
 $lang_search_new_php['be_patient'] = 'Please be patient, the script needs time to add the files';
 $lang_search_new_php['no_album'] = 'no album selected';
-$lang_search_new_php['no_file'] = 'no file selected'; //cpg1.6
+$lang_search_new_php['no_file'] = 'no file selected'; // cpg1.6
 $lang_search_new_php['result_icon'] = 'click for details or to reload';
 $lang_search_new_php['notes'] = <<< EOT
     <ul>
@@ -2428,7 +2428,7 @@ $lang_util_php['keyword_replace_before'] = 'Before conversion, replace %s with %
 $lang_util_php['keyword_replace_after'] = 'After conversion, replace %s with %s';
 $lang_util_php['keyword_replace_values'] = array('_'=>'underscore', '-'=>'hyphen', '~'=>'tilde');
 $lang_util_php['keyword_explanation'] = 'This will convert the keyword separator for all your files from one value to another value. See the help documentation for details.';
-$lang_util_php['not_needed'] = 'not needed'; //cpg1.6
+$lang_util_php['nothing_deleted'] = 'There was nothing to delete.'; // cpg1.6
 }
 
 // ------------------------------------------------------------------------- //

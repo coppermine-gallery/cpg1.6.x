@@ -737,7 +737,6 @@ $lang_admin_php['slideshow_interval'] = 'Intervalle du diaporama (en millisecond
 $lang_admin_php['milliseconds'] = 'millisecondes';
 $lang_admin_php['slideshow_interval_detail'] = '(1 seconde = 1 000 millisecondes)';
 $lang_admin_php['slideshow_hits'] = 'Compter les hits dans le diaporama';
-$lang_admin_php['ecard_captcha'] = 'Display Captcha (Visual Confirmation) for sending Ecards'; // cpg 1.6
 $lang_admin_php['ecard_flash'] = 'Accepter le Flash dans les cartes électroniques';
 $lang_admin_php['not_recommended'] = 'non-recommandé';
 $lang_admin_php['recommended'] = 'recommandé';
