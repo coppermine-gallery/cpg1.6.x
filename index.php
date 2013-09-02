@@ -267,7 +267,7 @@ function get_subcat_data(&$cat_data)
     $user_galleries = array();
 
     // collect info about the user galleries category
-    $result = cpg_db_query("SELECT name, description, thumb FROM {$CONFIG['TABLE_CATEGORIES']} WHERE cid = " . USER_GAL_CAT);
+    $result = cpg_db_query("SELECT name, description, thumb, depth FROM {$CONFIG['TABLE_CATEGORIES']} WHERE cid = " . USER_GAL_CAT);
 
     $row = mysql_fetch_assoc($result);
     mysql_free_result($result);
@@ -276,7 +276,7 @@ function get_subcat_data(&$cat_data)
         'name'        => $row['name'],
         'description' => $row['description'],
         'thumb'       => $row['thumb'],
-        'level'       => 1,
+        'level'       => $row['depth'],
     );
 
     // collect stats for albums in the user galleries category
@@ -319,7 +319,7 @@ function get_subcat_data(&$cat_data)
 
     while ( ($row = mysql_fetch_assoc($result)) ) {
 
-        if ($row['cid'] == 1) {
+        if ($row['cid'] == USER_GAL_CAT) {
 
             if (!empty($user_galleries)) {
                 $categories[$row['cid']] = $user_galleries;
@@ -447,61 +447,44 @@ function get_subcat_data(&$cat_data)
 
         $cat['details']['description'] = preg_replace("/<br.*?>[\r\n]*/i", '<br />', bb_decode($cat['details']['description']));
 
-        if ($cid == USER_GAL_CAT) {
-
-
-            if ($pic_count) {
-                //ob_start();
-                //list_users();
-                //$users = ob_get_clean();
-                $link = str_repeat($indent, $level - 1) . "<a href=\"index.php?cat={$cid}\">{$cat['details']['name']}</a>";
-                $users         = '';
-                $cat_data[]    = array($link, str_repeat($indent, $level-1) . $cat['details']['description'], $album_count, $pic_count, 'cat_albums' => $users);
-                $HIDE_USER_CAT = 0;
-            } else {
-                $HIDE_USER_CAT = 1;
-            }
-
-        } else {
-
-            if ($cat['details']['thumb'] > 0) {
-                $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight FROM {$CONFIG['TABLE_PICTURES']} AS p WHERE pid = {$cat['details']['thumb']} $FORBIDDEN_SET";
-                $result = cpg_db_query($sql);
-                if (mysql_num_rows($result)) {
-                    $picture = mysql_fetch_assoc($result);
-                    mysql_free_result($result);
-                    $pic_url = get_pic_url($picture, 'thumb');
-                    if (!is_image($picture['filename'])) {
-                        $image_info = getimagesize(urldecode($pic_url));
-                        $picture['pwidth'] = $image_info[0];
-                        $picture['pheight'] = $image_info[1];
-                    }
-                    $image_size = compute_img_size($picture['pwidth'], $picture['pheight'], $CONFIG['alb_list_thumb_size']);
-                    $user_thumb = "<img src=\"" . $pic_url . "\" class=\"image\" {$image_size['geom']} border=\"0\" alt=\"\" />";
-                    $user_thumb = "<a href=\"index.php?cat={$cid}\">" . $user_thumb . "</a>";
-                } else {
-                    $user_thumb = "";
+        if ($cat['details']['thumb'] > 0) {
+            $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight FROM {$CONFIG['TABLE_PICTURES']} AS p WHERE pid = {$cat['details']['thumb']} $FORBIDDEN_SET";
+            $result = cpg_db_query($sql);
+            if (mysql_num_rows($result)) {
+                $picture = mysql_fetch_assoc($result);
+                mysql_free_result($result);
+                $pic_url = get_pic_url($picture, 'thumb');
+                if (!is_image($picture['filename'])) {
+                    $image_info = getimagesize(urldecode($pic_url));
+                    $picture['pwidth'] = $image_info[0];
+                    $picture['pheight'] = $image_info[1];
                 }
+                $image_size = compute_img_size($picture['pwidth'], $picture['pheight'], $CONFIG['alb_list_thumb_size']);
+                $user_thumb = "<img src=\"" . $pic_url . "\" class=\"image\" {$image_size['geom']} border=\"0\" alt=\"\" />";
+                $user_thumb = "<a href=\"index.php?cat={$cid}\">" . $user_thumb . "</a>";
             } else {
                 $user_thumb = "";
             }
+        } else {
+            $user_thumb = "";
+        }
 
-            $link = "<a href=\"index.php?cat={$cid}\">{$cat['details']['name']}</a>";
-            $user_thumb = str_repeat($indent, $level-1) . $user_thumb;
-            if ($pic_count == 0 && $album_count == 0) {
-                $user_thumb = str_repeat($indent, $level-1);
-                $cat_data[] = array($link, $cat['details']['description'], 'cat_thumb' => $user_thumb);
+        $link = "<a href=\"index.php?cat={$cid}\">{$cat['details']['name']}</a>";
+        $user_thumb = str_repeat($indent, $level-1) . $user_thumb;
+        if ($cid == USER_GAL_CAT && $pic_count == 0) {
+            $HIDE_USER_CAT = 1;
+        } elseif ($pic_count == 0 && $album_count == 0) {
+            $user_thumb = str_repeat($indent, $level-1);
+            $cat_data[] = array($link, $cat['details']['description'], 'cat_thumb' => $user_thumb);
+        } else {
+            // Check if you need to show first level album thumbnails
+            if ($CONFIG['first_level'] && $cid != USER_GAL_CAT && $level <= $CONFIG['subcat_level']) {
+                $cat_albums = list_cat_albums($cid, $cat);
             } else {
-                // Check if you need to show first level album thumbnails
-                if ($CONFIG['first_level'] && $level <= $CONFIG['subcat_level']) {
-                    $cat_albums = list_cat_albums($cid, $cat);
-                } else {
-                    $cat_albums = '';
-                }
-                $cat_data[] = array($link, $cat['details']['description'], $album_count, $pic_count, 'cat_albums' => $cat_albums, 'cat_thumb' => $user_thumb);
+                $cat_albums = '';
             }
-
-        } // else CID != USER_GAL_CAT
+            $cat_data[] = array($link, $cat['details']['description'], $album_count, $pic_count, 'cat_albums' => $cat_albums, 'cat_thumb' => $user_thumb);
+        }
 
     } // foreach categories
 
