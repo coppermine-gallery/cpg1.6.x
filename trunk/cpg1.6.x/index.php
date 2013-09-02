@@ -493,7 +493,7 @@ function get_subcat_data(&$cat_data)
                 $cat_data[] = array($link, $cat['details']['description'], 'cat_thumb' => $user_thumb);
             } else {
                 // Check if you need to show first level album thumbnails
-                if ($level <= $CONFIG['subcat_level']) {
+                if ($CONFIG['first_level'] && $level <= $CONFIG['subcat_level']) {
                     $cat_albums = list_cat_albums($cid, $cat);
                 } else {
                     $cat_albums = '';

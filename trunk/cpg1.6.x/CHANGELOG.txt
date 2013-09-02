@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2013-09-02 [O] Optimized code if 'Show first level album thumbnails in categories' is disabled (thread ID 76466) {eenemeenemuu}
 2013-08-28 [O] Optimized admin tools "Update thumbs and/or resized photos" and "Delete original image backup for watermarked images" (thread ID 75189) {eenemeenemuu}
 2013-08-26 [B] Fixed possible issue when searching for image titles (thread ID 76393) {eenemeenemuu}
 2013-08-26 [B] Fixed error message when removing favorite pictures (thread ID 76549) {eenemeenemuu}
