@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2013-09-05 [B] Fixed display of quota on profile page if user belongs to more than one group {eenemeenemuu}
 2013-09-02 [A] Added possibility to choose category thumbnail for user galleries category (thread ID 76604) {eenemeenemuu}
 2013-09-02 [O] Optimized code if 'Show first level album thumbnails in categories' is disabled (thread ID 76466) {eenemeenemuu}
 2013-08-28 [O] Optimized admin tools "Update thumbs and/or resized photos" and "Delete original image backup for watermarked images" (thread ID 75189) {eenemeenemuu}
