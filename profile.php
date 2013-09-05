@@ -499,8 +499,8 @@ case 'edit_profile' :
     $group_quota = '0';
     $group_quota_separator = '';
 
-    if ($user_data['group_quota']) {
-        $group_quota = $user_data['group_quota'];
+    if ($USER_DATA['group_quota']) {
+        $group_quota = $USER_DATA['group_quota'];
         $group_quota_separator = '/';
     }
 
