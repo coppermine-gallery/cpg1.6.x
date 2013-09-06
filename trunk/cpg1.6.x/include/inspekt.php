@@ -114,7 +114,7 @@ class Inspekt
      * @param boolean $strict whether or not to nullify the superglobal array
      * @return Inspekt_Cage
      */
-    function makeServerCage($strict=TRUE) {
+    public static function makeServerCage($strict=TRUE) {
         /**
          * @staticvar $_instance
          */
@@ -137,7 +137,7 @@ class Inspekt
      * @return Inspekt_Cage
      * @static
      */
-    function makeGetCage($strict=TRUE) {
+    public static function makeGetCage($strict=TRUE) {
         /**
          * @staticvar $_instance
          */
@@ -160,7 +160,7 @@ class Inspekt
      * @return Inspekt_Cage
      * @static
      */
-    function makePostCage($strict=TRUE) {
+    public static function makePostCage($strict=TRUE) {
         /**
          * @staticvar $_instance
          */
@@ -182,7 +182,7 @@ class Inspekt
      * @return Inspekt_Cage
      * @static
      */
-    function makeCookieCage($strict=TRUE) {
+    public static function makeCookieCage($strict=TRUE) {
         /**
          * @staticvar $_instance
          */
@@ -205,7 +205,7 @@ class Inspekt
      * @return Inspekt_Cage
      * @static
      */
-    function makeEnvCage($strict=TRUE) {
+    public static function makeEnvCage($strict=TRUE) {
         /**
          * @staticvar $_instance
          */
@@ -228,7 +228,7 @@ class Inspekt
      * @return Inspekt_Cage
      * @static
      */
-    function makeFilesCage($strict=TRUE) {
+    public static function makeFilesCage($strict=TRUE) {
         /**
          * @staticvar $_instance
          */
@@ -251,7 +251,7 @@ class Inspekt
      * @return Inspekt_Cage
      * @static
      */
-    function makeSessionCage($strict=TRUE) {
+    public static function makeSessionCage($strict=TRUE) {
         /**
          * @staticvar $_instance
          */
@@ -272,7 +272,7 @@ class Inspekt
      * @return Inspekt_Supercage
      * @static
      */
-    function makeSuperCage($strict=TRUE) {
+    public static function makeSuperCage($strict=TRUE) {
         /**
          * @staticvar $_instance
          */

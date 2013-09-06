@@ -72,7 +72,7 @@ class Inspekt_Cage
      *
      * @static
      */
-    function Factory(&$source, $strict = TRUE) {
+    public static function Factory(&$source, $strict = TRUE) {
 
         if (!is_array($source)) {
             Inspekt_Error::raiseError('$source is not an array', E_USER_ERROR);

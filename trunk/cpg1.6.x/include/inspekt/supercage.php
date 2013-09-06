@@ -100,7 +100,7 @@ Class Inspekt_Supercage {
 	 * @param boolean $strict
 	 * @return Inspekt_Supercage
 	 */
-	function Factory($strict = TRUE) {
+	public static function Factory($strict = TRUE) {
 
 		$sc	= new Inspekt_Supercage();
 		$sc->_makeCages($strict);
