@@ -481,7 +481,9 @@ case 'edit_profile' :
 
         mysql_free_result($result);
 
-        $group_list = '<br /><em>(' . substr($group_list, 0, -2) . ')</em>';
+        if ($group_list) {
+            $group_list = '<br /><em>(' . substr($group_list, 0, -2) . ')</em>';
+        }
     }
 
     if ($user_data['user_active'] == 'YES') {
