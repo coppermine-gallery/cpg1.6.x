@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2013-10-04 [B] Added PHP4-replacement of function htmlspecialchars_decode to fix email issues (thread ID 76665) {eenemeenemuu}
 2013-09-06 [B] Fixed strict standards warning messages (thread ID 76493) {eenemeenemuu}
 2013-09-06 [C] Fixed display of additional groups on profile page if user doesn't belong to more than one group {eenemeenemuu}
 2013-09-05 [C] Fixed display of quota on profile page if user belongs to more than one group {eenemeenemuu}

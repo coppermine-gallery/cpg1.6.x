@@ -6591,4 +6591,19 @@ function cpg_exif_strip_data($exifRawData, $exif_names) {
     return $exif;
 }
 
+
+/**
+ * htmlspecialchars_decode
+ *
+ * PHP4-replacement, taken from the user comments at http://www.php.net/manual/en/function.htmlspecialchars-decode.php
+ *
+ * @param string $str
+ * @return string
+ */
+if (!function_exists('htmlspecialchars_decode')) {
+    function htmlspecialchars_decode($str)     {
+        return strtr($str, array_flip(get_html_translation_table(HTML_SPECIALCHARS)));
+    }
+}
+
 ?>
