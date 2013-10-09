@@ -549,7 +549,7 @@ function check_user_info(&$error)
     // check captcha
     if ($CONFIG['registration_captcha'] != 0) {
 
-        if (!captcha_plugin_enabled()) {
+        if (!captcha_plugin_enabled('register')) {
             require("include/captcha.inc.php");
             if (!PhpCaptcha::Validate($captcha_confirmation)) {
                 $error .= '<li style="list-style-image:url(images/icons/stop.png)">' . $lang_errors['captcha_error'] . '</li>';

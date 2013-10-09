@@ -158,7 +158,7 @@ if ($superCage->post->keyExists('submit')) {
     if ($superCage->post->keyExists('sender_name') && $valid_sender_email && $valid_recipient_email) {
 
         if (($CONFIG['ecard_captcha'] == 1) || ($CONFIG['ecard_captcha'] == 2 && !USER_ID)) {
-            if (!captcha_plugin_enabled()) {
+            if (!captcha_plugin_enabled('ecard')) {
                 require("include/captcha.inc.php");
                 $matches = $superCage->post->getMatched('confirmCode', '/^[a-zA-Z0-9]+$/');
 

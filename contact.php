@@ -76,7 +76,7 @@ if ($superCage->post->keyExists('submit')) {
 
     // check captcha
     if ((!USER_ID && $CONFIG['contact_form_guest_enable'] == 1) || (USER_ID && $CONFIG['contact_form_registered_enable'] == 1)) {
-        if (!captcha_plugin_enabled()) {
+        if (!captcha_plugin_enabled('contact')) {
             require_once("include/captcha.inc.php");
             if (!PhpCaptcha::Validate($captcha)) {
                 $captcha_remark = $lang_errors['captcha_error'];
