@@ -5847,15 +5847,15 @@ function is_known_filetype($file)
 }
 
 /**
-* Check if a plugin is used to diplay captcha
+* Check if a plugin is used to display captcha
 **/
-function captcha_plugin_enabled()
+function captcha_plugin_enabled($section = 'contact')
 {
     global $CPG_PLUGINS;
 
     if (!empty($CPG_PLUGINS)) {
         foreach ($CPG_PLUGINS as $plugin) {
-            if (isset($plugin->filters['captcha_contact_print'])) {
+            if (isset($plugin->filters['captcha_'.$section.'_print'])) {
                 return true;
             }
         }

@@ -145,7 +145,7 @@ case 'comment':
     }
 
     if (($CONFIG['comment_captcha'] == 1) || ($CONFIG['comment_captcha'] == 2 && !USER_ID)) {
-        if (!captcha_plugin_enabled()) {
+        if (!captcha_plugin_enabled('comment')) {
             require("include/captcha.inc.php");
             $matches = $superCage->post->getMatched('confirmCode', '/^[a-zA-Z0-9]+$/');
 
