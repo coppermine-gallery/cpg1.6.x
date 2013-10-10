@@ -796,6 +796,9 @@ function list_albums()
     $approved = 'AND approved=\'YES\'';
     $forbidden_set_string = ((count($FORBIDDEN_SET_DATA) > 0) ? ' AND aid NOT IN (' . implode(', ', $FORBIDDEN_SET_DATA) . ')' : '');
 
+    $last_pids = array();
+    $last_pid_data = array();
+
     foreach ($alb_stats as $key => $value) {
         $cross_ref[$value['aid']] = &$alb_stats[$key];
         if ($CONFIG['link_pic_count'] == 1 || $value['pic_count'] == 0) {
@@ -811,7 +814,20 @@ function list_albums()
                 $alb_stats[$key]['last_pid'] = ($alb_stats[$key]['last_pid'] > $link_stat['link_last_pid']) ? $alb_stats[$key]['last_pid'] : $link_stat['link_last_pid'];
             }
         }
+        if ($alb_stats[$key]['last_pid']) {
+            $last_pids[] = $alb_stats[$key]['last_pid'];
+        }
     }
+
+    if (count($last_pids)) {
+        $result = cpg_db_query("SELECT pid, filepath, filename, url_prefix, pwidth, pheight FROM {$CONFIG['TABLE_PICTURES']} WHERE pid IN (".implode(',', $last_pids).")");
+        while ($row = mysql_fetch_assoc($result)) {
+            $last_pid_data[$row['pid']] = $row;
+            unset($last_pid_data[$row['pid']]['pid']);
+        }
+        mysql_free_result($result);
+    }
+    unset($last_pids);
 
     for ($alb_idx = 0; $alb_idx < $disp_album_count; $alb_idx++) {
         $alb_thumb = &$alb_thumbs[$alb_idx];
@@ -843,11 +859,7 @@ function list_albums()
                     $picture = mysql_fetch_assoc($result);
                     mysql_free_result($result);
                 } else {
-                    $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight "
-                        . "FROM {$CONFIG['TABLE_PICTURES']} WHERE pid='{$alb_stat['last_pid']}'";
-                    $result = cpg_db_query($sql);
-                    $picture = mysql_fetch_assoc($result);
-                    mysql_free_result($result);
+                    $picture = $last_pid_data[$alb_stat['last_pid']];
                 }
 
                 $pic_url = get_pic_url($picture, 'thumb');
@@ -1017,44 +1029,53 @@ function list_cat_albums($cat, $catdata)
 
     $alb_list = array();
 
+    $approved = ' AND approved=\'YES\'';
+    $forbidden_set_string = ((count($FORBIDDEN_SET_DATA) > 0) ? ' AND aid NOT IN (' . implode(', ', $FORBIDDEN_SET_DATA) . ')' : '');
+
+    $last_pids = array();
+    $last_pid_data = array();
+
     foreach ($catdata['subalbums'] as $aid => $album) {
-
-        $approved = ' AND approved=\'YES\'';
-        $forbidden_set_string = ((count($FORBIDDEN_SET_DATA) > 0) ? ' AND aid NOT IN (' . implode(', ', $FORBIDDEN_SET_DATA) . ')' : '');
-        $keyword = ($album['keyword'] ? "AND (keywords like '%".addslashes($album['keyword'])."%' $forbidden_set_string)" : '');
         if ($CONFIG['link_pic_count'] == 1 || $album['pic_count'] == 0) {
-
             if (!empty($album['keyword'])) {
+                $keyword = ($album['keyword'] ? "AND (keywords like '%".addslashes($album['keyword'])."%' $forbidden_set_string)" : '');
                 $query = "SELECT count(pid) AS link_pic_count, max(pid) AS link_last_pid "
                         ." FROM {$CONFIG['TABLE_PICTURES']} "
                         ." WHERE ((aid != '$aid' $forbidden_set_string) $keyword) $approved";
                 $result = cpg_db_query($query);
                 $link_stat = mysql_fetch_assoc($result);
                 mysql_free_result($result);
-                $album['link_pic_count'] = $link_stat['link_pic_count'];
-                $album['last_pid'] = !empty($album['last_pid']) && ($album['last_pid'] > $link_stat['link_last_pid']) ? $album['last_pid'] : $link_stat['link_last_pid'];
+                $catdata['subalbums'][$aid]['link_pic_count'] = $link_stat['link_pic_count'];
+                $catdata['subalbums'][$aid]['last_pid'] = !empty($album['last_pid']) && ($album['last_pid'] > $link_stat['link_last_pid']) ? $album['last_pid'] : $link_stat['link_last_pid'];
             }
         }
+        if ($catdata['subalbums'][$aid]['last_pid']) {
+            $last_pids[] = $catdata['subalbums'][$aid]['last_pid'];
+        }
+        if ($album['thumb'] > 0) {
+            $last_pids[] = $album['thumb'];
+        }
+    }
 
+    if (count($last_pids)) {
+        $result = cpg_db_query("SELECT pid, filepath, filename, url_prefix, pwidth, pheight FROM {$CONFIG['TABLE_PICTURES']} WHERE pid IN (".implode(',', $last_pids).")");
+        while ($row = mysql_fetch_assoc($result)) {
+            $last_pid_data[$row['pid']] = $row;
+            unset($last_pid_data[$row['pid']]['pid']);
+        }
+        mysql_free_result($result);
+    }
+    unset($last_pids);
+
+    foreach ($catdata['subalbums'] as $aid => $album) {
         // Inserts a thumbnail if the album contains 1 or more images
         //unused code {SaWey}
         //$visibility = $album['visibility'];
         $keyword = ($album['keyword'] ? "OR (keywords like '%".addslashes($album['keyword'])."%' $forbidden_set_string)" : '');
         if (!in_array($aid, $FORBIDDEN_SET_DATA) || $CONFIG['allow_private_albums'] == 0) { //test for visibility
             if ($album['pic_count'] > 0  || !empty($album['link_pic_count'])) {
-                // Inserts a thumbnail if the album contains 1 or more images
-                if ($album['thumb'] > 0) {
-                    $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight "
-                            ." FROM {$CONFIG['TABLE_PICTURES']} WHERE pid='{$album['thumb']}'";
-                    $result = cpg_db_query($sql);
-                    $picture = mysql_fetch_assoc($result);
-                    if (!is_array($picture)) {
-                        $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight "
-                            . "FROM {$CONFIG['TABLE_PICTURES']} WHERE pid='{$album['last_pid']}'";
-                        $result = cpg_db_query($sql);
-                        $picture = mysql_fetch_assoc($result);
-                    }
-                    mysql_free_result($result);
+                if (!empty($last_pid_data[$album['thumb']]['filename'])) {
+                    $picture = $last_pid_data[$album['thumb']];
                 } elseif ($album['thumb'] < 0) {
                     $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight "
                         . "FROM {$CONFIG['TABLE_PICTURES']} WHERE ((aid = '$aid' $forbidden_set_string) $keyword) $approved "
@@ -1063,11 +1084,7 @@ function list_cat_albums($cat, $catdata)
                     $picture = mysql_fetch_assoc($result);
                     mysql_free_result($result);
                 } else {
-                    $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight "
-                        . "FROM {$CONFIG['TABLE_PICTURES']} WHERE pid='{$album['last_pid']}'";
-                    $result = cpg_db_query($sql);
-                    $picture = mysql_fetch_assoc($result);
-                    mysql_free_result($result);
+                    $picture = $last_pid_data[$album['last_pid']];
                 }
                 $pic_url = get_pic_url($picture, 'thumb');
                 if (!is_image($picture['filename'])) {
