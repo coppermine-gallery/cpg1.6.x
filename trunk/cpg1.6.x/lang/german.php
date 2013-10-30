@@ -1372,7 +1372,7 @@ EOT;
 // File groupmgr.php
 // ------------------------------------------------------------------------- //
 if (defined('GROUPMGR_PHP')) {
-$lang_groupmgr_php['group_manager'] = 'Gruppen-Manager';.x
+$lang_groupmgr_php['group_manager'] = 'Gruppen-Manager';
 $lang_groupmgr_php['group_name'] = 'Gruppen-Name';
 $lang_groupmgr_php['permissions'] = 'Berechtigungen';
 $lang_groupmgr_php['public_albums'] = 'Upload in öffentliche Alben';
@@ -1409,7 +1409,7 @@ $lang_album_admin_menu['confirm_delete'] = 'Willst Du dieses Album wirklich LÖS
 $lang_album_admin_menu['delete'] = 'löschen';
 $lang_album_admin_menu['modify'] = 'Eigenschaften';
 $lang_album_admin_menu['edit_pics'] = 'Dateien bearbeiten';
-$lang_album_admin_menu['cat_locked'] = 'Dieses Album wurde zur Überarbeitung gesperrt';.x
+$lang_album_admin_menu['cat_locked'] = 'Dieses Album wurde zur Überarbeitung gesperrt';
 
 $lang_list_categories['home'] = 'Galerie';
 $lang_list_categories['stat1'] = '[pictures] Dateien in [albums] Alben und [cat] Kategorien mit [comments] Kommentaren, [views] mal angesehen'; // Ausdrücke in eckigen Klammern nicht übersetzen!
