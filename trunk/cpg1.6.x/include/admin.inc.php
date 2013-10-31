@@ -357,7 +357,7 @@ $config_data = array(
                          .'([0-9]){1,2}' // numerical expression
                          .'){0,1}'  // end of optional number that must be separated with a coma
                          .')'
-                         .'){1,}'
+                         .'){0,}'
                          .'$',
     ),
     'first_level' => array(
