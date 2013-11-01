@@ -1762,13 +1762,10 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         $result = cpg_db_query($query);
 
         $pidlist = array();
-
-        while ( ($row = mysql_fetch_assoc($result)) ) {
+        while ($row = mysql_fetch_assoc($result)) {
             $pidlist[] = $row['pid'];
         }
         mysql_free_result($result);
-
-        sort($pidlist);
 
         $select_columns = implode(', ', $select_column_list);
 
@@ -1777,19 +1774,11 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
                 INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS a ON a.aid = r.aid
                 WHERE pid IN (" . implode(', ', $pidlist) . ")";
 
-        $rowset = array();
+        $result = cpg_db_query($query);
+        $rowset = cpg_db_fetch_rowset($result);
+        mysql_free_result($result);
 
-        // Fire the query if at least one pid is in pidlist array
-        if (count($pidlist)) {
-
-            $result = cpg_db_query($query);
-
-            while ( ($row = mysql_fetch_assoc($result)) ) {
-                $rowset[-$row['pid']] = $row;
-            }
-
-            mysql_free_result($result);
-        }
+        shuffle($rowset);
 
         if ($set_caption) {
             build_caption($rowset);
