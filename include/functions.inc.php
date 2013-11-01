@@ -1767,18 +1767,22 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         }
         mysql_free_result($result);
 
-        $select_columns = implode(', ', $select_column_list);
+        if (count($pidlist)) {
+            $select_columns = implode(', ', $select_column_list);
 
-        $query = "SELECT $select_columns
-                FROM {$CONFIG['TABLE_PICTURES']} AS r
-                INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS a ON a.aid = r.aid
-                WHERE pid IN (" . implode(', ', $pidlist) . ")";
+            $query = "SELECT $select_columns
+                    FROM {$CONFIG['TABLE_PICTURES']} AS r
+                    INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS a ON a.aid = r.aid
+                    WHERE pid IN (" . implode(', ', $pidlist) . ")";
 
-        $result = cpg_db_query($query);
-        $rowset = cpg_db_fetch_rowset($result);
-        mysql_free_result($result);
+            $result = cpg_db_query($query);
+            $rowset = cpg_db_fetch_rowset($result);
+            mysql_free_result($result);
 
-        shuffle($rowset);
+            shuffle($rowset);
+        } else {
+            $rowset = array();
+        }
 
         if ($set_caption) {
             build_caption($rowset);
