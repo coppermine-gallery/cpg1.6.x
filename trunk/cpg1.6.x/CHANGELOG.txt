@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2013-11-05 [A] Added CSS class "thumbnail" to thumbnail images on thumbnails.php pages (thread ID 76662) {eenemeenemuu}
 2013-11-05 [D] Fixed docs regarding user quota (thread ID 76773) {eenemeenemuu}
 2013-11-01 [C] Shuffled thumbnails for meta album "random" instead of sorting them by pid (thread ID 76742) {eenemeenemuu}
 2013-10-31 [B] Fixed regex check for "The content of the main page" in config (thread ID 76317) {eenemeenemuu}

@@ -3003,7 +3003,7 @@ function display_thumbnails($album, $cat, $page, $thumbcols, $thumbrows, $displa
 
             $thumb_list[$i]['pos']          = $key < 0 ? $key : $i - 1 + $lower_limit;
             $thumb_list[$i]['pid']          = $row['pid'];
-            $thumb_list[$i]['image']        = '<img src="' . $pic_url . '" class="image" ' . $image_size['geom'] . ' border="0" alt="' . $row['filename'] . '" title="' . $pic_title . '" />';
+            $thumb_list[$i]['image']        = '<img src="' . $pic_url . '" class="image thumbnail" ' . $image_size['geom'] . ' border="0" alt="' . $row['filename'] . '" title="' . $pic_title . '" />';
             $thumb_list[$i]['caption']      = bb_decode($row['caption_text']);
             $thumb_list[$i]['admin_menu']   = '';
             $thumb_list[$i]['aid']          = $row['aid'];
