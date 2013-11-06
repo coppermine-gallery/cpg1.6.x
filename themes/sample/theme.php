@@ -18,7 +18,7 @@
 // ------------------------------------------------------------------------- //
 // This theme has all CORE items that are available.                         //
 // Do NOT copy the entire contents of this theme into your custom theme,     //
-// but only the sections you want to see changed - this will make ugrading   //
+// but only the sections you want to see changed - this will make upgrading  //
 // easier and results in slightly better performance as well.                //
 // The individual sections are marked accordingly with                       //
       /***********************************
@@ -32,30 +32,6 @@
 // fit.                                                                      //
 // ------------------------------------------------------------------------- //
 
-
-// The following terms can be defined in theme.php
-// ('THEME_HAS_RATING_GRAPHICS', 1) : The location for the ratings graphics will
-//    be directed to the themes images folder.
-//('THEME_HAS_NAVBAR_GRAPHICS', 1); : The location for the navbar graphics will
-//    be directed to the themes images folder.
-//    Back to thumbnails   : images/navbar/thumbnails.png
-//    Picture Information  : images/navbar/info.png
-//    Slideshow            : images/navbar/slideshow.png
-//    Report to admin      : images/navbar/report.png
-//    Ecard                : images/navbar/ecard.png
-//    Previous             : images/navbar/prev.png
-//    Next                 : images/navbar/next.png
-// ('THEME_HAS_FILM_STRIP_GRAPHIC', 1) : The location for the film strip graphics will
-//    be directed to the themes images folder.
-//    tile                 : images/tile.gif
-// ('THEME_HAS_FILM_STRIP_GRAPHICS', 1) : The location for the film strip graphics will
-//    be directed to the themes images folder.
-//    tile on the top      : images/tile1.gif
-//    tile on the bottom   : images/tile2.gif
-//  ('THEME_HAS_NO_SYS_MENU_BUTTONS', 1) : When present the system won't attempt to replace {BUTTONS} in the SYS_MENU template
-//    The entire block needs to be present like in Coppermine 1.3 themes
-//  ('THEME_HAS_NO_SUB_MENU_BUTTONS', 1) When present the system won't attempt to replace {BUTTONS} in the SUB_MENU template
-//    The entire block needs to be present like in Coppermine 1.3 themes
 define('THEME_HAS_PROGRESS_GRAPHICS', 1);
 
 /******************************************************************************
@@ -1655,7 +1631,7 @@ function pagefooter()
         '{CUSTOM_HEADER}' => $custom_header,
         '{JAVASCRIPT}' => theme_javascript_head(),
         '{CUSTOM_FOOTER}' => $custom_footer,
-        '{VANITY}' => (defined('THEME_IS_XHTML10_TRANSITIONAL')) ? theme_vanity() : '',
+        '{VANITY}' => theme_vanity(),
         '{CREDITS}' => theme_credits(),
     );
 
@@ -4222,15 +4198,7 @@ EOT;
 ******************************************************************************/
 function theme_vanity()
 {
-    global $THEME_DIR, $template_vanity ;
-
-    if (defined('THEME_HAS_VANITY_GRAPHICS')) {
-        $location= $THEME_DIR;
-    } else {
-        $location= '';
-    }
-
-    $params = array('{LOCATION}' => $location);
+    global $template_vanity ;
 
     return template_eval($template_vanity, $params);
 }

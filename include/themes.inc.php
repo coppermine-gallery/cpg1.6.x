@@ -41,30 +41,6 @@
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');         //{THEMES}//
 
-// The following terms can be defined in theme.php
-// ('THEME_HAS_RATING_GRAPHICS', 1) : The location for the ratings graphics will
-//    be directed to the themes images folder.
-//('THEME_HAS_NAVBAR_GRAPHICS', 1); : The location for the navbar graphics will
-//    be directed to the themes images folder.
-//    Back to thumbnails   : images/navbar/thumbnails.png
-//    Picture Information  : images/navbar/info.png
-//    Slideshow            : images/navbar/slideshow.png
-//    Report to admin      : images/navbar/report.png
-//    Ecard                : images/navbar/ecard.png
-//    Previous             : images/navbar/prev.png
-//    Next                 : images/navbar/next.png
-// ('THEME_HAS_FILM_STRIP_GRAPHIC', 1) : The location for the film strip graphics will
-//    be directed to the themes images folder.
-//    tile                 : images/tile.gif
-// ('THEME_HAS_FILM_STRIP_GRAPHICS', 1) : The location for the film strip graphics will
-//    be directed to the themes images folder.
-//    tile on the top      : images/tile1.gif
-//    tile on the bottom   : images/tile2.gif
-//  ('THEME_HAS_NO_SYS_MENU_BUTTONS', 1) : When present the system won't attempt to replace {BUTTONS} in the SYS_MENU template
-//    The entire block needs to be present like in Coppermine 1.3 themes
-//  ('THEME_HAS_NO_SUB_MENU_BUTTONS', 1) When present the system won't attempt to replace {BUTTONS} in the SUB_MENU template
-//    The entire block needs to be present like in Coppermine 1.3 themes
-
 if (!function_exists('assemble_template_buttons')) {  //{THEMES}
 /******************************************************************************
 ** Section <<<assemble_template_buttons>>> - START
@@ -1657,7 +1633,7 @@ function pagefooter()
         '{CUSTOM_HEADER}' => $custom_header,
         '{JAVASCRIPT}' => theme_javascript_head(),
         '{CUSTOM_FOOTER}' => $custom_footer,
-        '{VANITY}' => (defined('THEME_IS_XHTML10_TRANSITIONAL')) ? theme_vanity() : '',
+        '{VANITY}' => theme_vanity(),
         '{CREDITS}' => theme_credits(),
     );
 
@@ -4225,15 +4201,7 @@ if (!function_exists('theme_vanity')) {  //{THEMES}
 ******************************************************************************/
 function theme_vanity()
 {
-    global $THEME_DIR, $template_vanity ;
-
-    if (defined('THEME_HAS_VANITY_GRAPHICS')) {
-        $location= $THEME_DIR;
-    } else {
-        $location= '';
-    }
-
-    $params = array('{LOCATION}' => $location);
+    global $template_vanity ;
 
     return template_eval($template_vanity, $params);
 }
