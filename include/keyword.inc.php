@@ -21,7 +21,8 @@ if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
 $icon_array['edit'] = cpg_fetch_icon('ok', 2);
 
-$result = cpg_db_query("SELECT keywords FROM {$CONFIG['TABLE_PICTURES']} WHERE keywords <> '' $ALBUM_SET");
+get_meta_album_set(0);
+$result = cpg_db_query("SELECT keywords FROM {$CONFIG['TABLE_PICTURES']} AS r $RESTRICTEDWHERE AND keywords <> '' $ALBUM_SET");
 if (mysql_num_rows($result)) {
 
     // Grab all keywords

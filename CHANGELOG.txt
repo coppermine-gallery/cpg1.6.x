@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2013-11-06 [B] Fixed clickable keyword list content (thread ID 76793) {eenemeenemuu}
 2013-11-06 [A] Added CSS class "thumbnail" to album thumbnails (thread ID 76662) {eenemeenemuu}
 2013-11-05 [A] Added CSS class "thumbnail" to thumbnail images on thumbnails.php pages (thread ID 76662) {eenemeenemuu}
 2013-11-05 [D] Fixed docs regarding user quota (thread ID 76773) {eenemeenemuu}
