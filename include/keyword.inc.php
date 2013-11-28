@@ -70,24 +70,24 @@ if (mysql_num_rows($result)) {
 
             $fontSize = (10 + ($keyword_count[$keywords_array[$i]] - $minQuantity) * $step);
             $keyword_param = urlencode($keywords_array[$i]);
-            echo "<a href=\"thumbnails.php?album=search&amp;keywords=on&amp;search=".$keyword_param."\" style=\"font-size: {$fontSize}px;\">$keywords_array[$i]</a>";
+            echo '<a href="thumbnails.php?album=search&amp;keywords=on&amp;search='.$keyword_param.'" style="font-size: {$fontSize}px;">'.htmlentities($keywords_array[$i]).'</a>';
             if ($i<$count-1) { // Don't keep space after last keyword
-                echo " ";
+                echo ' ';
             }
         }
     }
-    echo "</td></tr>" ;
+    echo '</td></tr>';
     if (GALLERY_ADMIN_MODE == true) {
         $url = basename($CPG_PHP_SELF);
-        if ($url != "keywordmgr.php"){
+        if ($url != 'keywordmgr.php'){
             echo '<tr><td class="tableb" align="center">';
             echo '<a href="keywordmgr.php" class="button">' . $icon_array['edit'] . $lang_search_php['edit_keywords'] . '</a>';
-            echo "</td></tr>" ;
+            echo '</td></tr>';
         }
     } else {
         echo '<tr><td class="tableb" align="center">';
         echo $lang_search_php['keyword_msg'];
-        echo "</td></tr>" ;
+        echo '</td></tr>';
     }
 
     endtable();
