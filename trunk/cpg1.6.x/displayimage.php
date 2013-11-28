@@ -177,7 +177,7 @@ function html_picinfo()
     if ($CURRENT_PIC_DATA['keywords'] != '') {
         $keyword_links = array();
         foreach (explode($CONFIG['keyword_separator'], html_entity_decode($CURRENT_PIC_DATA['keywords'])) as $keyword) {
-            $keyword_links[] = '<a href="thumbnails.php?album=search&amp;keywords=on&amp;search=' . urlencode($keyword) . '">' . $keyword . '</a>';
+            $keyword_links[] = '<a href="thumbnails.php?album=search&amp;keywords=on&amp;search=' . urlencode($keyword) . '">' . htmlentities($keyword) . '</a>';
         }
         $info[$lang_common['keywords']] = '<span class="alblink">' . implode(' / ', $keyword_links) . '</span>';
     }
