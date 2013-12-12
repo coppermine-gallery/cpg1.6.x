@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2013-12-12 [A] Added CSS classes "thumb_title_title", "thumb_title_views", "thumb_title_owner", "thumb_caption_caption", "thumb_caption_msg_date", "thumb_caption_author", "thumb_caption_ctime", "thumb_caption_rating", "thumb_caption_mtime" to thumbnail meta data on thumbnails.php pages (thread ID 76902) {eenemeenemuu}
 2013-11-28 [S] Fixed XSS issue (thread ID 76830) {eenemeenemuu}
 2013-11-06 [B] Removed references to constants THEME_HAS_VANITY_GRAPHICS and THEME_IS_XHTML10_TRANSITIONAL, as they didn't worked as intended {eenemeenemuu}
 2013-11-06 [B] Fixed clickable keyword list content (thread ID 76793) {eenemeenemuu}
