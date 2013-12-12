@@ -3708,7 +3708,7 @@ function theme_html_rating_box()
 // Displays comments for a specific picture
 function theme_html_comments($pid)
 {
-    global $CONFIG, $USER, $CURRENT_ALBUM_DATA, $lang_date, $HTML_SUBST;
+    global $CONFIG, $USER, $CURRENT_ALBUM_DATA, $lang_date, $HTML_SUBST, $THEME_DIR;
     global $template_image_comments, $template_add_your_comment, $lang_display_comments, $lang_common, $REFERER, $lang_bbcode_help_title, $lang_bbcode_help;
 
     $superCage = Inspekt::makeSuperCage();
@@ -3764,10 +3764,11 @@ function theme_html_comments($pid)
 
         $start = max(0, $num - (($max-($page-1))*$limit));
 
+        $location = defined('THEME_HAS_COMMENT_GRAPHICS') ? $THEME_DIR: '';
+
         ob_start();
         echo '<br />';
         starttable();
-
 
         echo '<tr><td class="tableh2"><div style="float: left">'.$lang_display_comments['comment'].' '.sprintf($lang_display_comments['comment_x_to_y_of_z'], ($start+1), min($num, $start+$limit), $num).'</div>';
         echo '<div style="float: right">'.$lang_display_comments['page'].': ';
@@ -3806,14 +3807,14 @@ function theme_html_comments($pid)
             if (USER_IS_ADMIN) {
                 //display the selector approve/disapprove
                 if ($row['approval'] == 'NO') {
-                    $pending_approval = cpg_fetch_icon('comment_disapprove_disabled', 0) . '<a href="reviewcom.php?pos=-{PID}&amp;msg_id={MSG_ID}&amp;form_token={FORM_TOKEN}&amp;timestamp={TIMESTAMP}&amp;what=approve" title="' . $lang_display_comments['approve'] . '">' . cpg_fetch_icon('comment_approve', 0) . '</a>';
+                    $pending_approval = '<img src="' . $location . 'images/icons/comment_disapprove_disabled.png" border="0" alt="" width="16" height="16" class="icon" /><a href="reviewcom.php?pos=-{PID}&amp;msg_id={MSG_ID}&amp;form_token={FORM_TOKEN}&amp;timestamp={TIMESTAMP}&amp;what=approve" title="' . $lang_display_comments['approve'] . '"><img src="' . $location . 'images/icons/comment_approve.png" border="0" alt="" width="16" height="16" class="icon" /></a>';
                 } else {
-                    $pending_approval = '<a href="reviewcom.php?pos=-{PID}&amp;msg_id={MSG_ID}&amp;form_token={FORM_TOKEN}&amp;timestamp={TIMESTAMP}&amp;what=disapprove" title="' . $lang_display_comments['disapprove'] . '">' . cpg_fetch_icon('comment_disapprove', 0) . '</a>' . cpg_fetch_icon('comment_approve_disabled', 0);
+                    $pending_approval = '<a href="reviewcom.php?pos=-{PID}&amp;msg_id={MSG_ID}&amp;form_token={FORM_TOKEN}&amp;timestamp={TIMESTAMP}&amp;what=disapprove" title="' . $lang_display_comments['disapprove'] . '"><img src="' . $location . 'images/icons/comment_disapprove.png" border="0" alt="" width="16" height="16" class="icon" /></a><img src="' . $location . 'images/icons/comment_approve_disabled.png" border="0" alt="" width="16" height="16" class="icon" />';
                 }
             } else { // user or guest is logged in - start
                 if ($row['approval'] == 'NO') { // the comment is not approved - start
                     if ($user_can_edit) { // the comment comes from the current visitor, display it with a warning that it needs admin approval
-                        $pending_approval = cpg_fetch_icon('comment_approval', 0, $lang_display_comments['pending_approval']);
+                        $pending_approval = '<img src="' . $location . 'images/icons/comment_approval.png" border="0" alt="" width="16" height="16" title="' . $lang_display_comments['pending_approval'] . '" class="icon" />';
                     } else { // the comment comes from someone else - don't display it at all
                         if ($CONFIG['comment_placeholder'] == 0) {
                             $hide_comment = 1;
@@ -3870,8 +3871,8 @@ function theme_html_comments($pid)
                 '{PID}' => $row['pid'],
                 '{EDIT_TITLE}' => &$lang_display_comments['edit_title'],
                 '{DELETE_TITLE}' => &$lang_display_comments['delete_title'],
-                '{DELETE_ICON}' => cpg_fetch_icon('delete', 0),
-                '{EDIT_ICON}' => cpg_fetch_icon('edit', 0),
+                '{DELETE_ICON}' => '<img src="' . $location . 'images/icons/delete.png" border="0" alt="" width="16" height="16" class="icon" />',
+                '{EDIT_ICON}' => '<img src="' . $location . 'images/icons/edit.png" border="0" alt="" width="16" height="16" class="icon" />',
                 '{CONFIRM_DELETE}' => &$lang_display_comments['confirm_delete'],
                 '{MSG_DATE}' => localised_date($row['msg_date'], $lang_date['comment']),
                 '{MSG_BODY}' => bb_decode($comment_body),
@@ -3880,7 +3881,7 @@ function theme_html_comments($pid)
                 '{SMILIES}' => $smilies,
                 '{IP}' => $ip,
                 '{REPORT_COMMENT_TITLE}' => &$lang_display_comments['report_comment_title'],
-                '{REPORT_COMMENT_ICON}' => cpg_fetch_icon('report', 0),
+                '{REPORT_COMMENT_ICON}' => '<img src="' . $location . 'images/icons/report.png" border="0" alt="" width="16" height="16" class="icon" />',
                 '{WIDTH}' => $CONFIG['picture_table_width'] == "100%" ? $CONFIG['main_table_width'] : $CONFIG['picture_table_width'],
                 '{FORM_TOKEN}' => $form_token,
                 '{TIMESTAMP}' => $timestamp,

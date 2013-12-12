@@ -15,7 +15,8 @@
   Coppermine version: 1.6.01
   $HeadURL$
   $Revision$
-
+
+
 -->
 <link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
 <link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
@@ -81,23 +82,23 @@ where the name of the section (<tt class="code">section_name</tt> in above examp
 <a name="theme_php_method"></a><h2>Method<a href="#theme_php_method" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
 <p>The method behind all theme.php editing is really quite easy - just follow these simple steps:</p>
 <ul>
-	<li><strong>Determine what section needs to be edited</strong><br />
-		There are many different ways how to find that out:
-		<ul>
-			<li>You found a corresponding posting on the Coppermine support board</li>
-			<li>You figured out by looking at the table &quot;<a href="theme_php_list">List of items in theme.php</a>&quot;</li>
-			<li>Another part of this documentation says so</li>
-			<li>A friend told you so</li>
-			<li>...</li>
-		</ul>
-	</li>
-	<li><strong>Find out if that section already exists in your custom theme:</strong><br />
-		(Your favorite <a href="dev_tools.htm#dev_tools_editor">plain-text editor</a> should have a search function. Notepad.exe has got one as well)
-		<ul>
-			<li>If yes, edit themes/yourtheme/theme.php. No copying from the sample theme needed</li>
-			<li>If no, open themes/sample/theme.php with a <a href="dev_tools.htm#dev_tools_editor">plain-text editor</a>, find the section that needs editing, highlight and copy it, then paste it into a new line before <tt class="code">?&gt;</tt> of <tt class="code">themes/yourtheme/theme.php</tt>. Then edit the stuff you pasted in as you see fit.</li>
-		</ul>
-	</li>
+    <li><strong>Determine what section needs to be edited</strong><br />
+        There are many different ways how to find that out:
+        <ul>
+            <li>You found a corresponding posting on the Coppermine support board</li>
+            <li>You figured out by looking at the table &quot;<a href="theme_php_list">List of items in theme.php</a>&quot;</li>
+            <li>Another part of this documentation says so</li>
+            <li>A friend told you so</li>
+            <li>...</li>
+        </ul>
+    </li>
+    <li><strong>Find out if that section already exists in your custom theme:</strong><br />
+        (Your favorite <a href="dev_tools.htm#dev_tools_editor">plain-text editor</a> should have a search function. Notepad.exe has got one as well)
+        <ul>
+            <li>If yes, edit themes/yourtheme/theme.php. No copying from the sample theme needed</li>
+            <li>If no, open themes/sample/theme.php with a <a href="dev_tools.htm#dev_tools_editor">plain-text editor</a>, find the section that needs editing, highlight and copy it, then paste it into a new line before <tt class="code">?&gt;</tt> of <tt class="code">themes/yourtheme/theme.php</tt>. Then edit the stuff you pasted in as you see fit.</li>
+        </ul>
+    </li>
 </ul>
 
 <a name="theme_php_scope"></a><h2>Scope<a href="#theme_php_scope" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
@@ -121,9 +122,17 @@ where the name of the section (<tt class="code">section_name</tt> in above examp
   <tr>
     <td valign="top"><a name="theme_create_theme_rating_graphic"></a>define('<strong>THEME_HAS_RATING_GRAPHICS</strong>',1);<a href="#theme_create_theme_rating_graphic" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">constant</td>
-    <td valign="top">The location for the ratings graphics. When the constant is set, the script will be directed to the theme's images folder, i.e. themes/yourtheme/images/ and look for the rating images there. If not defined (default), the rating images will be taken from the images-folder that resides in Coppermine's root folder.</td>
+    <td valign="top">The location for the ratings graphics. When the constant is set, the script will be directed to the theme's images folder, i.e. <tt class="code">themes/yourtheme/images/</tt>and look for the rating images there. If not defined (default), the rating images will be taken from the images-folder that resides in Coppermine's root folder.</td>
     <td valign="top">
-		<a href="theme_graphics.htm#theme_graphics_rating">Graphic resources in themes &rarr; Rating images</a>
+        <a href="theme_graphics.htm#theme_graphics_rating">Graphic resources in themes &rarr; Rating images</a>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top"><a name="theme_create_theme_comment_graphic"></a>define('<strong>THEME_HAS_COMMENT_GRAPHICS</strong>',1);<a href="#theme_create_theme_comment_graphic" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">constant</td>
+    <td valign="top">The location for the comment management graphics. When the constant is set, the script will be directed to the theme's images folder, subfolder 'icons', i.e. <tt class="code">themes/yourtheme/images/icons/</tt> and look for the comment management images there. If not defined (default), the comment management images will be taken from <tt class="code">images/icons/</tt>.</td>
+    <td valign="top">
+        <a href="theme_graphics.htm#theme_graphics_comment">Graphic resources in themes &rarr; Comment management images</a>
     </td>
   </tr>
   <tr>
@@ -137,7 +146,7 @@ where the name of the section (<tt class="code">section_name</tt> in above examp
     <td valign="top">constant</td>
     <td valign="top">The location for the navbar graphics (&quot;ecard&quot;, &quot;slideshow&quot;, &quot;previous&quot;/&quot;next&quot;). When the constant is set, the script will be directed to the theme's images folder, i.e. themes/yourtheme/images/ and look for the navbar images there. If not defined (default), the navbar images will be taken from the images-folder that resides in Coppermine's root folder.</td>
     <td valign="top">
-    	<a href="theme_graphics.htm#theme_graphics_nav_bar">Graphic resources in themes &rarr; Image Navigation bar</a>
+        <a href="theme_graphics.htm#theme_graphics_nav_bar">Graphic resources in themes &rarr; Image Navigation bar</a>
     </td>
   </tr>
   <tr>
@@ -145,7 +154,7 @@ where the name of the section (<tt class="code">section_name</tt> in above examp
     <td valign="top">constant</td>
     <td valign="top">The location for the film strip graphics. When the constant is set, the script will be directed to the theme's images folder, i.e. themes/yourtheme/images/ and look for the film strip images (tile.gif) there. If not defined (default), the film strip images will be taken from the images-folder that resides in Coppermine's root folder.</td>
     <td valign="top">
-    	If defined, a file named <tt class="code">tile.gif</tt> needs to reside in the theme's images folder. [<a href="theme_graphics.htm#theme_graphics_film_strip">Details</a>]
+        If defined, a file named <tt class="code">tile.gif</tt> needs to reside in the theme's images folder. [<a href="theme_graphics.htm#theme_graphics_film_strip">Details</a>]
     </td>
   </tr>
   <tr>
@@ -153,7 +162,7 @@ where the name of the section (<tt class="code">section_name</tt> in above examp
     <td valign="top">constant</td>
     <td valign="top">The location for the film strip graphics. When the constant is set, the script will be directed to the theme's images folder, i.e. themes/yourtheme/images/ and look for the film strip images (tile1.gif for the top tile and tile2.gif for the bottom tile) there. If not defined (default), the film strip images will be taken from the images-folder that resides in Coppermine's root folder.</td>
     <td valign="top">
-    	If defined, a file named <tt class="code">tile1.gif</tt> and a file named <tt class="code">tile2.gif</tt> need to reside in the theme's images folder. [<a href="theme_graphics.htm#theme_graphics_film_strip">Details</a>]
+        If defined, a file named <tt class="code">tile1.gif</tt> and a file named <tt class="code">tile2.gif</tt> need to reside in the theme's images folder. [<a href="theme_graphics.htm#theme_graphics_film_strip">Details</a>]
     </td>
   </tr>
   <tr>
@@ -366,7 +375,7 @@ where the name of the section (<tt class="code">section_name</tt> in above examp
     <td valign="top">Edit this to add/change CSS classes for the sys-menu links.<br />
     Default content is<pre class="cpg_code code">  &lt;!-- BEGIN {BLOCK_ID} --&gt;
         &lt;a href=&quot;{HREF_TGT}&quot; title=&quot;{HREF_TITLE}&quot;&gt;{HREF_LNK}&lt;/a&gt;
-		{SPACER}
+        {SPACER}
   &lt;!-- END {BLOCK_ID} --&gt;</pre></td>
     <td valign="top"></td>
   </tr>
@@ -573,10 +582,10 @@ where the name of the section (<tt class="code">section_name</tt> in above examp
 
 
 <div id="doc_footer">
-	<div class="doc_info_wrapper">
-		<span id="doc_last_changed">$LastChangedDate$</span>
-		<span id="doc_revision">$Revision$</span>
-	</div>
+    <div class="doc_info_wrapper">
+        <span id="doc_last_changed">$LastChangedDate$</span>
+        <span id="doc_revision">$Revision$</span>
+    </div>
 </div>
 </body>
 </html>
