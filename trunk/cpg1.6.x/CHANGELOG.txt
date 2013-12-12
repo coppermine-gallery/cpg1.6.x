@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2013-12-12 [A] Added constant THEME_HAS_COMMENT_GRAPHICS to use theme-depended images for approve/disapprove/delete/edit/report comments (thread ID 76746) {eenemeenemuu}
 2013-12-12 [B] Fixed smiley detection in theme directory (thread ID 76746) {eenemeenemuu}
 2013-12-12 [A] Added CSS classes "thumb_title_title", "thumb_title_views", "thumb_title_owner", "thumb_caption_caption", "thumb_caption_msg_date", "thumb_caption_author", "thumb_caption_ctime", "thumb_caption_rating", "thumb_caption_mtime" to thumbnail meta data on thumbnails.php pages (thread ID 76902) {eenemeenemuu}
 2013-11-28 [S] Fixed XSS issue (thread ID 76830) {eenemeenemuu}
