@@ -113,12 +113,12 @@ function process_smilies($message, $url_prefix = '')
 
         $smilies = get_smilies_table1();
 
-        $paths = array($THEME_DIR.'/smiles/', 'images/smiles/');
+        $paths = array($THEME_DIR.'smiles/', 'images/smiles/');
 
-        for ($i = 0; $i < count($smilies); $i++) {
-            $orig[] = "/(?<=.\W|\W.|^\W)" . preg_quote($smilies[$i][0], "/") . "(?=.\W|\W.|\W$)/";
-            $smile_path = (file_exists($paths[0].$smilies[$i][1]))?($paths[0]):($paths[1]);
-            $repl[] = '<img src="' . $url_prefix . $smile_path . ($smilies[$i][1]) . '" alt="' . ($smilies[$i][2]) . '"  />';
+        foreach ($smilies as $smiley) {
+            $smile_path = file_exists($paths[0].$smiley[1]) ? $paths[0] : $paths[1];
+            $orig[] = "/(?<=.\W|\W.|^\W)" . preg_quote($smiley[0], "/") . "(?=.\W|\W.|\W$)/";
+            $repl[] = '<img src="' . $url_prefix . $smile_path . $smiley[1] . '" alt="' . $smiley[2] . '" />';
         }
     }
 
@@ -136,7 +136,7 @@ function generate_smilies($form = 'post', $field = 'message')
 {
     global $THEME_DIR, $LINEBREAK;
     $smilies = get_smilies_table2();
-    $paths = array($THEME_DIR.'/smiles/', 'images/smiles/');
+    $paths = array($THEME_DIR.'smiles/', 'images/smiles/');
 
     if (function_exists('theme_generate_smilies')) {
         $html = theme_generate_smilies($smilies, $form);
@@ -145,11 +145,11 @@ function generate_smilies($form = 'post', $field = 'message')
         $html = '<table width="100%" border="0" cellspacing="0" cellpadding="0">' . $LINEBREAK . '        <tr align="center" valign="middle">' . $LINEBREAK;
 
         foreach ($smilies as $smiley) {
-            $smile_path = (file_exists($paths[0].$smiley[1]))?($paths[0]):($paths[1]);
+            $smile_path = file_exists($paths[0].$smiley[1]) ? $paths[0] : $paths[1];
             $caption = $smiley[2] . " " . $smiley[0];
-            if (file_exists('images/smiles/' . $smiley[1]) == TRUE) {
-				$html .= '                <td width="5%"><img src="images/smiles/' . $smiley[1] . '" alt="' . $caption . '" border="0" style="cursor:pointer;" title="' . $caption . '" onclick="javascript:emot' . $form . '(\'' . $smiley[0] . '\')" /></td>' . $LINEBREAK;
-			}
+            if (file_exists($smile_path . $smiley[1]) == TRUE) {
+                $html .= '                <td width="5%"><img src="' . $smile_path . $smiley[1] . '" alt="' . $caption . '" border="0" style="cursor:pointer;" title="' . $caption . '" onclick="javascript:emot' . $form . '(\'' . $smiley[0] . '\')" /></td>' . $LINEBREAK;
+            }
         }
 
         $html .= '        </tr>' . $LINEBREAK . '</table>' . $LINEBREAK;
