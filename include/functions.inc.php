@@ -1014,16 +1014,16 @@ function build_caption(&$rowset, $must_have = array(), $mode = 'files')
         }
 
         if (!empty($row['title'])) {
-            $caption .= '<span class="thumb_title">' . $row['title'] . '</span>';
+            $caption .= '<span class="thumb_title thumb_title_title">' . $row['title'] . '</span>';
         }
 
         if ($CONFIG['views_in_thumbview'] || in_array('hits', $must_have)) {
             $views = ($mode == 'albums') ? $row['alb_hits'] : $row['hits'];
-            $caption .= '<span class="thumb_title">' . sprintf($lang_get_pic_data['n_views'], $views) . '</span>';
+            $caption .= '<span class="thumb_title thumb_title_views">' . sprintf($lang_get_pic_data['n_views'], $views) . '</span>';
         }
 
         if ($CONFIG['caption_in_thumbview'] && !empty($row['caption'])) {
-            $caption .= '<span class="thumb_caption">' . strip_tags(bb_decode($row['caption'])) . '</span>';
+            $caption .= '<span class="thumb_caption thumb_caption_caption">' . strip_tags(bb_decode($row['caption'])) . '</span>';
         }
 
         if ($CONFIG['display_comment_count'] && $row['pid']) {
@@ -1035,12 +1035,12 @@ function build_caption(&$rowset, $must_have = array(), $mode = 'files')
 
         if ($CONFIG['display_uploader']) {
             if ($row['owner_id']) {
-                $caption .= '<span class="thumb_title"><a href="profile.php?uid=' . $row['owner_id'] . '">' . $cpg_udb->get_user_name($row['owner_id']) . '</a></span>';
+                $caption .= '<span class="thumb_title thumb_title_owner"><a href="profile.php?uid=' . $row['owner_id'] . '">' . $cpg_udb->get_user_name($row['owner_id']) . '</a></span>';
             }
         }
 
         if (in_array('msg_date', $must_have)) {
-            $caption .= '<span class="thumb_caption">' . localised_date($row['msg_date'], $lang_date['lastcom']) . '</span>';
+            $caption .= '<span class="thumb_caption thumb_caption_msg_date">' . localised_date($row['msg_date'], $lang_date['lastcom']) . '</span>';
         }
 
         if (in_array('msg_body', $must_have)) {
@@ -1053,14 +1053,14 @@ function build_caption(&$rowset, $must_have = array(), $mode = 'files')
             }
 
             if ($row['author_id']) {
-                $caption .= '<span class="thumb_caption"><a href="profile.php?uid=' . $row['author_id'] . '">' . $row['msg_author'] . '</a>: ' . $msg_body . '</span>';
+                $caption .= '<span class="thumb_caption thumb_caption_author"><a href="profile.php?uid=' . $row['author_id'] . '">' . $row['msg_author'] . '</a>: ' . $msg_body . '</span>';
             } else {
-                $caption .= '<span class="thumb_caption">' . $row['msg_author'] . ': ' . $msg_body . '</span>';
+                $caption .= '<span class="thumb_caption thumb_caption_author">' . $row['msg_author'] . ': ' . $msg_body . '</span>';
             }
         }
 
         if (in_array('ctime', $must_have)) {
-            $caption .= '<span class="thumb_caption">' . localised_date($row['ctime'], $lang_date['lastup']) . '</span>';
+            $caption .= '<span class="thumb_caption thumb_caption_ctime">' . localised_date($row['ctime'], $lang_date['lastup']) . '</span>';
         }
 
         if (in_array('pic_rating', $must_have)) {
@@ -1084,12 +1084,12 @@ function build_caption(&$rowset, $must_have = array(), $mode = 'files')
                 }
             }
 
-            $caption .= '<span class="thumb_caption">' . $rating_images . '<br />' . sprintf($lang_get_pic_data['n_votes'], $row['votes']) . '</span>';
+            $caption .= '<span class="thumb_caption thumb_caption_rating">' . $rating_images . '<br />' . sprintf($lang_get_pic_data['n_votes'], $row['votes']) . '</span>';
         }
 
         if (in_array('mtime', $must_have)) {
 
-            $caption .= '<span class="thumb_caption">' . localised_date($row['mtime'], $lang_date['lasthit']);
+            $caption .= '<span class="thumb_caption thumb_caption_mtime">' . localised_date($row['mtime'], $lang_date['lasthit']);
 
             if (GALLERY_ADMIN_MODE) {
                 $caption .= '<br />' . $row['lasthit_ip'];
