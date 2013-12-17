@@ -545,6 +545,7 @@ case 'albmgr':
             $dataArray = array(
                 'message' => 'true',
                 'newAid'  => $getAid,
+                'album_name' => $get_album_name,
             );
         } else {
             $dataArray = array(

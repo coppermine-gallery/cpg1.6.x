@@ -125,7 +125,7 @@ var Sort = {
                         $('div#sort').html('<table id="album_sort" cellspacing="0" cellpadding="0" border="0"></table>');
                     }
 
-                    var album_tr = '<tr id="sort-'+data['newAid']+'" ><td class="dragHandle"></td><td class="album_text" width="96%"><span class="albumName">'+addedName+'</span>&nbsp;<a href="upload.php?album='+data['newAid']+'"><img src="images/icons/upload.png" title="'+js_vars.upload_file+'" /></a><span class="editAlbum"><img width="16" height="16" border="0" class="icon" alt="" src="images/icons/edit.png">'+js_vars.lang_edit+'</span></td></tr>';
+                    var album_tr = '<tr id="sort-'+data['newAid']+'"><td class="dragHandle"></td><td class="album_text" width="96%"><span class="albumName">'+data['album_name']+'</span>&nbsp;<a href="upload.php?album='+data['newAid']+'"><img src="images/icons/upload.png" title="'+js_vars.upload_file+'" /></a><span class="editAlbum"><img width="16" height="16" border="0" class="icon" alt="" src="images/icons/edit.png">'+js_vars.lang_edit+'</span></td></tr>';
                     $("#album_sort").append(album_tr);
                     // call the function to add the new TR on more action
                     jQuery.tableDnD.currentTable = document.getElementById("album_sort");
