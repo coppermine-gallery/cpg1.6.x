@@ -39,7 +39,7 @@ SWFUpload.onload = function () {
         button_height: "20",
         button_image_url: "images/browse_swf.png",
         button_placeholder_id: "browse_button_place_holder",
-        button_text: '<span id="browse_button" class="browse">' + js_vars.lang_upload_swf_php.browse + '</span>',
+        button_text: js_vars.lang_upload_swf_php.browse,
         button_text_style: button_disabled_style,
         button_text_left_padding: 30,
         // By default browse button will be disabled. It will get enabled when some album is chosen

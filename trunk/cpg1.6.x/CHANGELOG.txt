@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2013-12-18 [S] Updated SWFUpload to fix several XSS issues (thread ID 76930) {eenemeenemuu}
 2013-12-17 [S] Fixed XSS issue (thread ID 76930) {eenemeenemuu}
 2013-12-12 [A] Added constant THEME_HAS_COMMENT_GRAPHICS to use theme-depended images for approve/disapprove/delete/edit/report comments (thread ID 76746) {eenemeenemuu}
 2013-12-12 [B] Fixed smiley detection in theme directory (thread ID 76746) {eenemeenemuu}
