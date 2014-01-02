@@ -1,7 +1,7 @@
 ************************
 Coppermine Photo Gallery
 ************************
-Copyright (c) 2003-2013 Coppermine Dev Team
+Copyright (c) 2003-2014 Coppermine Dev Team
 v1.0 originally written by Gregory Demar
 
 This program is free software; you can redistribute it and/or modify
@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2014-01-02 [M] Updated header information to reflect new year {eenemeenemuu}
 2013-12-18 [S] Updated SWFUpload to fix several XSS issues (thread ID 76930) {eenemeenemuu}
 2013-12-17 [S] Fixed XSS issue (thread ID 76930) {eenemeenemuu}
 2013-12-12 [A] Added constant THEME_HAS_COMMENT_GRAPHICS to use theme-depended images for approve/disapprove/delete/edit/report comments (thread ID 76746) {eenemeenemuu}
