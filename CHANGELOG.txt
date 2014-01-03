@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2014-01-03 [S] Fixed permission check if users aren't allowed to upload to public albums (thread ID 76979) {eenemeenemuu}
 2014-01-02 [M] Updated header information to reflect new year {eenemeenemuu}
 2013-12-18 [S] Updated SWFUpload to fix several XSS issues (thread ID 76930) {eenemeenemuu}
 2013-12-17 [S] Fixed XSS issue (thread ID 76930) {eenemeenemuu}
