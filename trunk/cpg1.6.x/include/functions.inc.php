@@ -5911,7 +5911,7 @@ function album_selection_options($selected = 0)
     $albums = array();
     // load all albums
 
-    $uploads_yes = defined('EDITPICS_PHP') || defined('UPLOAD_PHP') ? ' OR uploads = "YES"' : '';
+    $uploads_yes = (defined('EDITPICS_PHP') || defined('UPLOAD_PHP')) && USER_CAN_UPLOAD_PICTURES  ? ' OR uploads = "YES"' : '';
 
     if (GALLERY_ADMIN_MODE) {
         $result = cpg_db_query("SELECT aid, title, category FROM {$CONFIG['TABLE_ALBUMS']} ORDER BY pos");

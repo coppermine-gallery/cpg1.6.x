@@ -880,7 +880,7 @@ EOT;
 
     // Check if the album id provided is valid
     if (!GALLERY_ADMIN_MODE) {
-        $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid='$album' and (uploads = 'YES' OR category = '" . (USER_ID + FIRST_USER_CAT) . "' OR owner = '" . USER_ID . "')");
+        $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid = $album AND (owner = " . USER_ID . " OR category = " . (USER_ID + FIRST_USER_CAT) . (USER_CAN_UPLOAD_PICTURES  ? ' OR uploads = "YES"' : '') . ")");
         if (mysql_num_rows($result) == 0) {
             echo "error|{$lang_db_input_php['unknown_album']}|1";
             exit;

@@ -533,7 +533,7 @@ case 'picture':
     // Check if the album id provided is valid
     if (!(GALLERY_ADMIN_MODE || user_is_allowed())) {
 
-        $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid = $album AND (uploads = 'YES' OR owner = " . USER_ID . " OR category = " . (USER_ID + FIRST_USER_CAT) . ")");
+        $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid = $album AND (owner = " . USER_ID . " OR category = " . (USER_ID + FIRST_USER_CAT) . (USER_CAN_UPLOAD_PICTURES  ? ' OR uploads = "YES"' : '') . ")");
 
         if (mysql_num_rows($result) == 0) {
             cpg_die(ERROR, $lang_db_input_php['unknown_album'], __FILE__, __LINE__);
