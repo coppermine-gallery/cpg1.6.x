@@ -2494,7 +2494,6 @@ EOT;
         }
     }
     if (GALLERY_ADMIN_MODE) {
-        cpgCleanTempMessage(); // garbage collection: when the admin is logged in, old messages that failed to display for whatever reason are being removed to keep the temp_messages table clean
         $return .= cpg_alert_dev_version();
         // $return .= cpg_display_rss(); //add RSS feed from coppermine-gallery.net later
     } else { // not in admin mode
