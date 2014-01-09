@@ -25,6 +25,11 @@ define('RESTRICTED_PRIV', true);
 
 require('include/init.inc.php');
 
+// garbage collection: when the admin is logged in, old messages that failed to display for whatever reason are being removed to keep the temp_messages table clean
+if (GALLERY_ADMIN_MODE) {
+    cpgCleanTempMessage();
+}
+
 /**
  * Clean up GPC and other Globals here
  */
