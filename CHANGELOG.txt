@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2014-01-20 [C] Removed duplicate page header if error occurs when deleting an album {eenemeenemuu}
 2014-01-17 [C] Fixed display of keywords with special characters (thread ID 76830) {eenemeenemuu}
 2014-01-09 [B] Fixed misleading template error message {eenemeenemuu}
 2014-01-03 [S] Fixed permission check if users aren't allowed to upload to public albums (thread ID 76979) {eenemeenemuu}

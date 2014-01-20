@@ -802,12 +802,12 @@ case 'album':
     }
 
     $aid = $superCage->get->getInt('id');
+    $del_alb_return = delete_album($aid);
 
     pageheader($lang_delete_php['del_alb']);
+
     starttable("100%", $lang_delete_php['del_alb'], 7);
-
-    print delete_album($aid);
-
+    echo $del_alb_return;
     echo '<tr><td colspan="7" class="tablef" align="center">' . $LINEBREAK;
     echo '<span class="admin_menu"><a href="index.php">'.$icon_array['ok'] . $lang_common['continue'].'</a></span>' . $LINEBREAK;
     echo '</td></tr>';
