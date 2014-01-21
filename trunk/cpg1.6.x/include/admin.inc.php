@@ -1303,7 +1303,7 @@ $config_data = array(
     'allow_user_upload_choice' => array(
       'type'          => 'checkbox',
       'default_value' => '1',
-      'help_link'     => 'f=configuration.htm&amp;as=admin_allow_user_upload_choice_start&amp;ae=admin_allow_user_upload_choice_end',
+      'help_link'     => 'f=configuration.htm&amp;as=admin_allow_user_upload_choice&amp;ae=admin_allow_user_upload_choice_end',
     ),
     'editpics_ignore_newer_than' => array(
       'type'          => 'checkbox',
