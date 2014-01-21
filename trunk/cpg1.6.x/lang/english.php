@@ -712,6 +712,7 @@ $lang_admin_php['categories_alpha_sort'] = 'Sort categories alphabetically';
 $lang_admin_php['categories_alpha_sort_details'] = '(instead of custom sort order)';
 $lang_admin_php['album_sort_order'] = 'Sort order for albums';
 $lang_admin_php['link_pic_count'] = 'Show number of linked files';
+$lang_admin_php['link_last_upload'] = 'Regard upload time of linked files in album info'; // cpg1.6
 $lang_admin_php['thumbcols'] = 'Number of columns on thumbnail page';
 $lang_admin_php['thumbrows'] = 'Number of rows on thumbnail page';
 $lang_admin_php['max_tabs'] = 'Maximum number of tabs to display';

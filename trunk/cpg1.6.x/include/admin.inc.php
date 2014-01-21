@@ -388,6 +388,11 @@ $config_data = array(
       'default_value' => '1',
       'help_link'     => 'f=configuration.htm&amp;as=admin_album_linked_files_start&amp;ae=admin_album_linked_files_end',
     ),
+    'link_last_upload' => array(
+      'type'          => 'checkbox',
+      'default_value' => '0',
+      'help_link'     => 'f=configuration.htm&amp;as=admin_album_linked_files_upload_time_start&amp;ae=admin_album_linked_files_upload_time_end',
+    ),
   ),
   'thumbnail_view' => array(
     'thumbcols' => array(

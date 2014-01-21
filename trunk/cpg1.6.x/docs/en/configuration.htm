@@ -600,6 +600,17 @@
     <p>If you use <a href="keywords.htm#keywords_album">album keywords</a> to display images/files in more than one album, enabling this option will display additional information for the album stats: if an album doesn't only contain &quot;regular&quot; files, but files linked via the &quot;<a href="albums.htm#album_prop_keyword_start">album keyword</a>&quot; option as well, the number of linked files will be displayed separately like this "3 files, last one added on Oct 07, 2004<em>, 3 linked files, 6 files total</em>".</p>
 
     <a name="admin_album_linked_files_end"></a>
+    <br clear="all" style="clear:both;" />
+    <a name="admin_album_linked_files_upload_time_start"></a><h3>Regard upload time of linked files in album info<a href="#admin_album_linked_files_upload_time_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <div class="cpg_summary">
+        Default value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
+        Recommended value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
+        Database record name: <tt class="code">link_last_upload</tt><br />
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Album list view &rarr; Regard upload time of linked files in album info
+    </div>
+    <p>If the config option &quot;<a href="configuration.htm#admin_album_linked_files_start">Show number of linked files</a>&quot; is enabled, the upload times of linked files are taken into account: if an album doesn't only contain &quot;regular&quot; files, but files linked via the &quot;<a href="albums.htm#album_prop_keyword_start">album keyword</a>&quot; option as well, which have been uploaded more recent, their upload time will be used as last addition in the album info. Additionally, the display will be re-arranged from something like &quot;3 files<em>, last one added on Oct 07, 2004</em>, 3 linked files, 6 files total&quot; to &quot;3 files, 3 linked files, 6 files total<em>, last one added on Oct 07, 2004</em>&quot;.</p>
+
+    <a name="admin_album_linked_files_upload_time_end"></a>
 </div>
 <a name="admin_album_list_end"></a>
 <div class="backtotop"><a href="#top">Back to top</a></div>
