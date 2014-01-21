@@ -1300,6 +1300,11 @@ $config_data = array(
       'default_value' => '1',
       'help_link'     => 'f=configuration.htm&amp;as=admin_allow_user_upload_choice_start&amp;ae=admin_allow_user_upload_choice_end',
     ),
+    'editpics_ignore_newer_than' => array(
+      'type'          => 'checkbox',
+      'default_value' => '0',
+      'help_link'     => 'f=configuration.htm&amp;as=admin_editpics_ignore_newer_than_start&amp;ae=admin_editpics_ignore_newer_than_end',
+    ),
     'allow_duplicate_emails_addr' => array(
       'type'            => 'checkbox',
       'default_value'   => '0',

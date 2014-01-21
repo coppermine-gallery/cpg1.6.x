@@ -23,3 +23,4 @@ INSERT INTO CPG_config VALUES ('cookies_need_consent', '0');
 INSERT INTO CPG_config VALUES ('album_sort_order', 'pa');
 INSERT INTO CPG_config VALUES ('custom_sortorder_thumbs', '1');
 INSERT INTO CPG_config VALUES ('link_last_upload', '0');
+INSERT INTO CPG_config VALUES ('editpics_ignore_newer_than', '0');

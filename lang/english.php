@@ -846,6 +846,7 @@ $lang_admin_php['upload_mechanism'] = 'Default upload method';
 $lang_admin_php['upload_swf'] = 'advanced - multiple files, Flash-driven (recommended)';
 $lang_admin_php['upload_single'] = 'simple - one file at a time';
 $lang_admin_php['allow_user_upload_choice'] = 'Allow users to choose the upload method';
+$lang_admin_php['editpics_ignore_newer_than'] = 'Show previously uploaded files at edit files form after flash upload';
 $lang_admin_php['allow_duplicate_emails_addr'] = 'Allow two users to have the same email address';
 $lang_admin_php['upl_notify_admin_email'] = 'Notify admin of user upload awaiting approval';
 $lang_admin_php['allow_memberlist'] = 'Allow logged in users to view the memberlist';
