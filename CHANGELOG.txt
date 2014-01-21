@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2014-01-21 [D] Fixed various documentation glitches {eenemeenemuu}
 2014-01-21 [B] Fixed reference to documentation in config {eenemeenemuu}
 2014-01-21 [A] Added config option to regard upload time of linked files in album info (thread ID 77021) {eenemeenemuu}
 2014-01-20 [C] Removed duplicate page header if error occurs when deleting an album {eenemeenemuu}

@@ -31,9 +31,9 @@
 </div>
 
 <a name="admin"></a><h1>The gallery configuration page<a href="#admin" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
-<p>This is where you will configure the most important parts of your coppermine gallery. Some settings have an impact on the files you upload - changing those options after you have alreaded added a large number of files in your gallery can be a difficult undertaking. For this reason, it is important that you spend time with your coppermine setup at the early stages of gallery development to get those settings exactly the way you want them, before actually uploading too many pics or listing the gallery to the general public.</p>
+<p>This is where you will configure the most important parts of your Coppermine gallery. Some settings have an impact on the files you upload - changing those options after you have alreaded added a large number of files in your gallery can be a difficult undertaking. For this reason, it is important that you spend time with your Coppermine setup at the early stages of gallery development to get those settings exactly the way you want them, before actually uploading too many pics or listing the gallery to the general public.</p>
 <p>Most config option fields have a checkbox at the very right that allows you to reset that option to the default (or rather: recommended) option. This checkbox will only be displayed if your setting differs from the default or if there is no particular default setting (there can for example not be a default admin email address, as this entirely depends on your server setup) and if you have enabled the config option &quot;<a href="#admin_misc_reset_boxes">Display reset boxes in config</a>&quot;.</p>
-<p>Please note that the config page does not contain all coppermine options - some options are being assigned per group, so you will find them on the <a href="groups.htm#group_cp">groups control panel</a>.</p>
+<p>Please note that the config page does not contain all Coppermine options - some options are being assigned per group, so you will find them on the <a href="groups.htm#group_cp">groups control panel</a>.</p>
 
 
 
@@ -66,16 +66,16 @@
     <p>Similar to the <a href="#admin_general_name">Gallery name</a> field, the Gallery description field needs to be populated, even if your custom theme doesn't show that tag and even if you don't want to display that tag on your site: the field mustn't be empty and it mustn't be the default.</p>
     <a name="admin_general_description_end"></a>
     <br clear="all" style="clear:both;" />
-    <a name="admin_general_coppermine-url"></a><h3>URL of your coppermine gallery folder<a href="#admin_general_coppermine-url" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <a name="admin_general_coppermine-url"></a><h3>URL of your Coppermine gallery folder<a href="#admin_general_coppermine-url" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <abbr title="not applicable">n/a</abbr><br />
         Recommended value: <abbr title="not applicable">n/a</abbr><br />
         Importance: mandatory<br />
         Database record name: <tt class="code">ecards_more_pic_target</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: General settings &rarr; URL of your coppermine gallery folder
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: General settings &rarr; URL of your Coppermine gallery folder
     </div>
-    <p>This is the URL where a user will be directed to when s/he clicks on the &quot;See more pictures&quot; link in an e-card. This <em>must</em> be the URL to the root of your coppermine installation followed by a forward slash (just the path to your coppermine folder, e.g. <em>http://yourdomain.tld/coppermine/</em>). Do not specify a specific file (such as index.php) or subfolder within the coppermine gallery in this field.</p>
-    <p>In previous versions of Coppermine, this field was called &quot;Target address for the 'See more pictures' link in e-cards&quot;, but as this url is now being used for other functions in coppermine, it has been changed, appropriately.</p>
+    <p>This is the URL where a user will be directed to when s/he clicks on the &quot;See more pictures&quot; link in an e-card. This <em>must</em> be the URL to the root of your Coppermine installation followed by a forward slash (just the path to your Coppermine folder, e.g. <em>http://yourdomain.tld/coppermine/</em>). Do not specify a specific file (such as index.php) or subfolder within the Coppermine gallery in this field.</p>
+    <p>In previous versions of Coppermine, this field was called &quot;Target address for the 'See more pictures' link in e-cards&quot;, but as this url is now being used for other functions in Coppermine, it has been changed, appropriately.</p>
     <p class="cpg_message_warning">It is absolutely <strong>mandatory</strong> that you enter the gallery URL setting properly - if you don't, you will almost certainly experience "funny" behaviours of your gallery.</p>
     <a name="admin_general_coppermine-url_end"></a>
     <br clear="all" style="clear:both;" />
@@ -124,9 +124,9 @@
         Database record name: <tt class="code">enable_help</tt><br />
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: General settings &rarr; Enable help-icons
     </div>
-    <p>Enables the display of help icons in various sections of the coppermine admin pages. When enabled, make sure you have also uploaded the "docs" folder into your coppermine folder on your webserver.</p>
+    <p>Enables the display of help icons in various sections of the Coppermine admin pages. When enabled, make sure you have also uploaded the "docs" folder into your Coppermine folder on your webserver.</p>
     <p>If you choose to set this to &quot;Yes: everyone&quot;, logged in (registered) users will be able to see the help icons in strategic locations as well, e.g. when creating a user gallery.</p>
-    <p>As the help text is based on the documentation that comes with coppermine, it is not available in all languages. If the native language of your user(s) is not among the number of translated documentations, it is advisable to set this option to &quot;Yes: admin only&quot; to avoid confusion among your users.</p>
+    <p>As the help text is based on the documentation that comes with Coppermine, it is not available in all languages. If the native language of your user(s) is not among the number of translated documentations, it is advisable to set this option to &quot;Yes: admin only&quot; to avoid confusion among your users.</p>
     <p class="cpg_message_success">It is <strong>strongly</strong> recommended that you do <strong>not</strong> disable the help icons altogether: even though you feel that you know your way around in your Coppermine install, the help icons might help you with the functions of a new or unfamiliar option later.</p>
     <a name="admin_general_help_end"></a>
     <br clear="all" style="clear:both;" />
@@ -149,7 +149,7 @@
         <input type="text" size="10" maxlength="10" class="textinput" value="comma" /> ("<tt class="code">,</tt>")<br />
         <input type="text" size="10" maxlength="10" class="textinput" value="semicolon" /> ("<tt class="code">;</tt>")<br />
         Database record name: <tt class="code">keyword_separator</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: General settings &rarr; Enable clickable keywords in search
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: General settings &rarr; Keyword separator
     </div>
     <p>For an image or a file, you can specify keywords that describe it.  Choose a character here to separate keywords.  Do not choose a character you want to include in a single keyword.  If you only want single-word keywords, you can safely choose a space.  If you want multi-word keywords, choose a different character.  The safest option is the semicolon because that is seldom used in a keyword.</p>
     <p>The default keyword separator for new installations of Coppermine 1.5 is the semicolon.  For upgrades from Coppermine 1.4 or earlier, the space is retained as the keyword separator.  You can convert the keyword separator for current keywords to another value by using the tool on the <a href="admin-tools.htm#admin_tools_options_keyword_convert">Admin Tools</a> page.</p>
@@ -164,7 +164,7 @@
         Database record name: <tt class="code">enable_plugins</tt><br />
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: General settings &rarr; Enable plugins
     </div>
-    <p>Enable or disable <a href="plugins.htm#plugin">plugins</a>, with a link to the <a href="plugins.htm#plugin_manager">plugin manager</a>. This feature allows advanced copperminers to create plug-ins that can control the way coppermine looks and behaves without modifying the inherent code of the script itself. There are many exciting, user-contributed, plug-ins available on the Coppermine forum.  More details can be found in the <a href="plugins.htm#plugin_start">plugins section of this documentation</a>.  Since plugins add on to the core Coppermine system, if you are having problems, try to disable all plugins using this setting to see if a plugin may be at fault.  If so, you can then enable all plugins here, then uninstall or install one plugin at a time in the <a href="plugins.htm#plugin_manager">plugin manager</a> to figure out which one is at fault.</p>
+    <p>Enable or disable <a href="plugins.htm#plugin">plugins</a>, with a link to the <a href="plugins.htm#plugin_manager">plugin manager</a>. This feature allows advanced Coppermine users to create plug-ins that can control the way Coppermine looks and behaves without modifying the inherent code of the script itself. There are many exciting, user-contributed, plug-ins available on the Coppermine forum.  More details can be found in the <a href="plugins.htm#plugin_start">plugins section of this documentation</a>.  Since plugins add on to the core Coppermine system, if you are having problems, try to disable all plugins using this setting to see if a plugin may be at fault.  If so, you can then enable all plugins here, then uninstall or install one plugin at a time in the <a href="plugins.htm#plugin_manager">plugin manager</a> to figure out which one is at fault.</p>
     <a name="admin_general_enable-plugins_end"></a>
     <br clear="all" style="clear:both;" />
 
@@ -175,10 +175,11 @@
         Database record name: <tt class="code">browse_batch_add</tt><br />
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: General settings &rarr; Browsable batch-add interface
     </div>
-    <p>When <a href="uploading_batch-add.htm#batch_add_pics">batch-adding</a> files (that you have uploaded using a <acronym title="File Transfer Protocol">FTP</acronym> before) to your gallery, you have the option to switch between a browsable list, where you can scroll through the directory structure in your <tt class="code">albums</tt>-folder, or to display the whole directory structure at once. Enable this option if you have a larger structure of directories and subdirectories you want to browse through (this requires your browser to be capable of displaying <a href="http://www.w3schools.com/tags/tag_iframe.asp" class="external" rel="external">iframes</a>). Set this option to &quot;No&quot; (disabled) if you want to use the &quot;classic&quot; coppermine interface that shows a complete list of the structure at once.<br />
+    <p>When <a href="uploading_batch-add.htm#batch_add_pics">batch-adding</a> files (that you have uploaded using a <acronym title="File Transfer Protocol">FTP</acronym> before) to your gallery, you have the option to switch between a browsable list, where you can scroll through the directory structure in your <tt class="code">albums</tt>-folder, or to display the whole directory structure at once. Enable this option if you have a larger structure of directories and subdirectories you want to browse through (this requires your browser to be capable of displaying <a href="http://www.w3schools.com/tags/tag_iframe.asp" class="external" rel="external">iframes</a>). Set this option to &quot;No&quot; (disabled) if you want to use the &quot;classic&quot; Coppermine interface that shows a complete list of the structure at once.<br />
     Should you have difficulties using one, try the other. You can toggle between these options on the <a href="uploading_batch-add.htm#batch_add_pics">batch-add</a> page as well.</p>
     <a name="admin_general_browsable_batch_add_end"></a>
 
+    <br clear="all" style="clear:both;" />
     <a name="admin_general_batch_proc_limit"></a><h3>Process concurrency for batch-add interface<a href="#admin_general_batch_proc_limit" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="text" size="2" maxlength="2" class="numberinput" value="2" /><br />
@@ -192,6 +193,7 @@
     <p>In versions of Coppermine prior to 1.5 this option was not available, and the number of images processed at the same time depended on server and browser settings that were not easily controlled by a gallery administrator.</p>
     <a name="admin_general_batch_proc_limit_end"></a>
 
+    <br clear="all" style="clear:both;" />
     <a name="admin_general_display_thumbs_batch_add"></a><h3>Display preview thumbnails on batch-add interface<a href="#admin_general_display_thumbs_batch_add" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" checked="checked" /><br />
@@ -204,6 +206,7 @@
     <p>When starting with your gallery, you should leave this option enabled until you're convinced that batch-adding works as expected. You can then turn this option off. If you later discover that something goes wrong with your uploads, re-enable this feature once more.</p>
     <a name="admin_general_display_thumbs_batch_add_end"></a>
 
+    <br clear="all" style="clear:both;" />
     <a name="admin_general_form_token_lifetime"></a><h3>Lifetime of the form tokens<a href="#admin_general_form_token_lifetime" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="text" size="6" maxlength="6" class="numberinput" value="900" /><br />
@@ -214,7 +217,7 @@
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: General settings &rarr; Lifetime of the form tokens
     </div>
     <p>This option will set the lifetime of the form tokens in seconds. Don't set this value too low as it could interupt with large uploads (default is 15 min). Also keep in mind that it could take some time entering a lot of data (title, description, keywords) after you uploaded several files. If you exceed the lifetime of the token, you won't be able to submit the form and all entered data is lost. That applies to all forms (and some links) in Coppermine!</p>
-    <p class="cpg_message_info">Form tokens were introduced into cpg1.5.x to fight the <a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery" rel="external" class="external">Cross-Site Request Forgery</a> potential that existed in previous versions and that lead to the removal of the bbcode tags [img] and [url] back in cpg1.4.21<br />
+    <p class="cpg_message_info">Form tokens were introduced into cpg1.5.x to fight the <a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery" rel="external" class="external">Cross-Site Request Forgery</a> potential that existed in previous versions and that lead to the removal of the BBCode tags [img] and [url] back in cpg1.4.21<br />
     Think of the form token as an additional check of a link or a form that is performed to make sure that the link's origin hasn't been tampered with.</p>
     <a name="admin_general_form_token_lifetime_end"></a>
 </div>
@@ -246,7 +249,7 @@
         Database record name: <tt class="code">language_autodetect</tt><br />
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Language &amp; Charset settings &rarr; Autodetect language
     </div>
-    <p>If enabled, Coppermine will try to determine the language of the site visitor based on the language preference settings in the visitor's browser. If the detected language exists as language file for coppermine, that language will be used for the particular visitor. If the language detection doesn't yield a result, the <a href="#admin_language_language">default language</a> set up in Config will be used instead.</p>
+    <p>If enabled, Coppermine will try to determine the language of the site visitor based on the language preference settings in the visitor's browser. If the detected language exists as language file for Coppermine, that language will be used for the particular visitor. If the language detection doesn't yield a result, the <a href="#admin_language_language">default language</a> set up in Config will be used instead.</p>
     <p>Recommended setting is "Yes".</p>
     <p>Details on how Coppermine handles languages can be found in the section <a href="languages.htm#translating">Languages</a> of the docs</p>
     <a name="admin_language_autodetect_end"></a>
@@ -306,11 +309,11 @@
         Default value: <input type="radio" class="radio" checked="checked" id="display_sidebar_user" /><label for="display_sidebar_user" class="clickable_option">Yes: allow, but don't display link</label><br />
         Recommended value: <input type="radio" class="radio" checked="checked" id="display_sidebar_user_r" /><label for="display_sidebar_user_r" class="clickable_option">Yes: allow and promote it by displaying a link</label><br />
         Database record name: <tt class="code">display_sidebar_guest</tt> / <tt class="code">display_sidebar_user</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Themes settings &rarr; Sidebar for registered users / Sidebar for guests
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Themes settings &rarr; Sidebar for users / guests
     </div>
     <p>Determines wether a sidebar for browsers will be available for members of the admin group, registered users group and guest group.</p>
-    <p>The sidebar is a minimalistic interface to control your coppermine-driven gallery. Think of it as a sort of snap-in for your favorite browser. If you enabled the sidebar, the control structure of your gallery (with all categories/subcategories and albums) will be available in a separate panel in the browser for faster navigation.</p>
-    <p>It is recommended that you try this option first for the admin only: play with it and decide if it would be a helpful feature for your site's visitors. If yes, enable/promote the sidebar for the registered users and/or guests as well. It's up to you if you want to promote the usage of the sidebar by displaying a link to it in coppermine's menu or if you want to promote it by some other mechanism (e.g. by telling your users about it on a non-coppermine driven page of your website).</p>
+    <p>The sidebar is a minimalistic interface to control your Coppermine-driven gallery. Think of it as a sort of snap-in for your favorite browser. If you enabled the sidebar, the control structure of your gallery (with all categories/subcategories and albums) will be available in a separate panel in the browser for faster navigation.</p>
+    <p>It is recommended that you try this option first for the admin only: play with it and decide if it would be a helpful feature for your site's visitors. If yes, enable/promote the sidebar for the registered users and/or guests as well. It's up to you if you want to promote the usage of the sidebar by displaying a link to it in Coppermine's menu or if you want to promote it by some other mechanism (e.g. by telling your users about it on a non-Coppermine driven page of your website).</p>
     <p>The sidebar is helpful for users who return to your page often. It provides an alternative method of browsing your gallery by displaying a tree structure of your categories, subcategories and albums. It is meant for advanced users who understand how their browser works.</p>
     <p>The sidebar install screen tries to auto-detect the operating system and browser that the visitor is using and offers the corresponding option to install the sidebar (as those methods differ from browser to browser). Some browsers are capable of appearing as different browsers, which will make the auto-detection routine fail. Subsequently, there is an option on the install screen as well to skip auto-detection and make the visitor select his browser.</p>
     <p>Group membership is being determined if a visitor is logged in or not: if he is not logged in, he is a member of the guest group and the corresponding option set up for guests (anonymous) is being taken into account. If the visitor is logged in, he is automatically a member of the registered group.</p>
@@ -325,9 +328,9 @@
       <li><strong>No</strong><br />
       Don't display a link to the sidebar install screen. Don't allow access to the sidebar nor the sidebar install screen at all.</li>
       <li><strong>Yes: allow, but don't display link</strong><br />
-      Allow access to the sidebar and the corresponding install screen, but do not promote the sidebar. There will be no link in coppermine's menu that will send the user to the sidebar install page, so your visitors will not be aware of it. You will have to promote it by some other means (e.g. by telling your power-users about it in a newsletter). If you decide to manually promote the use of the sidebar, send your visitors to <tt class="code">http://yoursite.tld/your_coppermine_folder/sidebar.php?action=install</tt></li>
+      Allow access to the sidebar and the corresponding install screen, but do not promote the sidebar. There will be no link in Coppermine's menu that will send the user to the sidebar install page, so your visitors will not be aware of it. You will have to promote it by some other means (e.g. by telling your power-users about it in a newsletter). If you decide to manually promote the use of the sidebar, send your visitors to <tt class="code">http://yoursite.tld/your_coppermine_folder/sidebar.php?action=install</tt></li>
       <li><strong>Yes: allow and promote it by displaying a link</strong><br />
-      Allow access to the sidebar and promote the sidebar by displaying a link to the sidebar installer screen in coppermine's menu</li>
+      Allow access to the sidebar and promote the sidebar by displaying a link to the sidebar installer screen in Coppermine's menu</li>
     </ul>
     <p>Make sure to set the sidebar options up so that they make sense: it is not a bright idea to allow guests to access the sidebar, but deny access to registered users; registered users would be "punished" for registering. It is advisable to test the sidebar feature thoroughly before allowing your visitors to access it.</p>
     <p>How the sidebar is installed greatly differs from browser to browser. Sadly, the most complicated version is the sidebar for Internet Explorer, which is the most popular browser. In the past, it has been comparatively easy to add anything to IE's favorites and to come up with a "real" sidebar. However, as Microsoft had some bad press for releasing a browser with severe security holes, the options for developers to create a working sidebar that end users can add easily have been reduced deliberately by Microsoft when releasing patches for their browser and operating system. Therefore, you might have issues with the sidebar, depending on which version of Windows and IE you are using.</p>
@@ -369,21 +372,21 @@
     <ul>
         <li>No</li>
         <li>Yes: menu only<br />
-        This will mean that only icons in the admin menu will be displayed. The icons are meant to allow the admin to easily find his way around in the admin menu that is getting more and more populated with all the new features in coppermine.</li>
+        This will mean that only icons in the admin menu will be displayed. The icons are meant to allow the admin to easily find his way around in the admin menu that is getting more and more populated with all the new features in Coppermine.</li>
         <li>Yes: everywhere<br />
-        This is the recommended option that will make the output of coppermine more colorful, with icons all over the place (visible both for the admin as well as the visitor of the site).</li>
+        This is the recommended option that will make the output of Coppermine more colorful, with icons all over the place (visible both for the admin as well as the visitor of the site).</li>
     </ul>
     <p>The menu icons are themeable, so there can be different icon sets with different themes.</p>
     <a name="admin_enable_menu_icons_end"></a>
     <br clear="all" style="clear:both;" />
-    <a name="admin_theme_bbcode"></a><h3>Display bbcode help<a href="#admin_theme_bbcode" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <a name="admin_theme_bbcode"></a><h3>Display BBCode help<a href="#admin_theme_bbcode" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" checked="checked" /><br />
         Recommended value: <abbr title="not applicable">n/a</abbr><br />
         Database record name: <tt class="code">show_bbcode_help</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Themes settings &rarr; Display bbcode help
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Themes settings &rarr; Display BBCode help
     </div>
-    <p>When enabled, this will display the <a href="bbcode.htm#bbcode">bulletin board codes</a> that may be used in description fields to help with the formatting of text, images and links.</p>
+    <p>When enabled, this will display the <a href="bbcode.htm#bbcode">Bulletin Board Codes</a> that may be used in description fields to help with the formatting of text, images and links.</p>
     <a name="admin_theme_bbcode_end"></a>
     <br clear="all" style="clear:both;" />
 
@@ -395,12 +398,12 @@
         Database record name: <tt class="code">custom_header_path</tt><br />
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Themes settings &rarr; Path to custom header include
     </div>
-    <p>Optional relative path to a custom header file. Using this option, you can include non-coppermine code bits to be included into your theme, e.g. an overall navigation that gets included on your whole website. You can only add a relative path (seen from the root path of your coppermine install) - not an absolute one, nor a http include from another website. This option is only meant for experienced users who have some PHP know-how. </p>
-    <p class="cpg_message_warning">Warning: you mustn't include full html pages that contain an html header or footer (tags like <tt class="code">&lt;head&gt;</tt> or <tt class="code">&lt;body&gt;</tt>), nor can the included file do file header manipulation, e.g. reading another (non-coppermine) cookie.</p>
+    <p>Optional relative path to a custom header file. Using this option, you can include non-Coppermine code bits to be included into your theme, e.g. an overall navigation that gets included on your whole website. You can only add a relative path (seen from the root path of your Coppermine install) - not an absolute one, nor a http include from another website. This option is only meant for experienced users who have some PHP know-how. </p>
+    <p class="cpg_message_warning">Warning: you mustn't include full html pages that contain an html header or footer (tags like <tt class="code">&lt;head&gt;</tt> or <tt class="code">&lt;body&gt;</tt>), nor can the included file do file header manipulation, e.g. reading another (non-Coppermine) cookie.</p>
     <p>For details on the include files, refer to the section <a href="php-content.htm#php-content_header_footer">Custom header and footer</a></p>
     <div class="cpg_example"><h4>Example</h4>
-    If your Coppermine install resides in http://yourdomain.tld/your_coppermine_folder/ and your include file is supposed to be http://yourdomain.tld/my_overall_navigation/my_custom_header.php, you need to specify <tt class="code">../my_overall_navigation/my_custom_header.php</tt> (the relative path to your include file, seen from the folder coppermine resides in) as &quot;Path to custom header include&quot;.</div>
-    <p>The custom include files are an answer to the <abbr title="Frequently Asked Question">FAQ</abbr> &quot;<em>How can I include Coppermine into an existing web site?</em>&quot;: although the primary answer to the question is &quot;<em>You can't include Coppermine into another page by using the PHP commands include or require at all.</em>&quot;. This looks like a contradiction in terms, but you need to see the idea behind this: everybody who has been using includes agrees that they can be an easy method to efficiently maintain a site without having to edit many files to accomplish only a minor change on all or many pages. You just need to figure this out differently: include your overall site's navigation into coppermine instead of trying to integrate coppermine into an existing site (because you can't do that for technical reasons).</p>
+    If your Coppermine install resides in http://yourdomain.tld/your_coppermine_folder/ and your include file is supposed to be http://yourdomain.tld/my_overall_navigation/my_custom_header.php, you need to specify <tt class="code">../my_overall_navigation/my_custom_header.php</tt> (the relative path to your include file, seen from the folder Coppermine resides in) as &quot;Path to custom header include&quot;.</div>
+    <p>The custom include files are an answer to the <abbr title="Frequently Asked Question">FAQ</abbr> &quot;<em>How can I include Coppermine into an existing web site?</em>&quot;: although the primary answer to the question is &quot;<em>You can't include Coppermine into another page by using the PHP commands include or require at all.</em>&quot;. This looks like a contradiction in terms, but you need to see the idea behind this: everybody who has been using includes agrees that they can be an easy method to efficiently maintain a site without having to edit many files to accomplish only a minor change on all or many pages. You just need to figure this out differently: include your overall site's navigation into Coppermine instead of trying to integrate Coppermine into an existing site (because you can't do that for technical reasons).</p>
     <a name="admin_theme_custom_header_path_end"></a>
     <a name="admin_theme_custom_footer_path_start"></a><h3>Path to custom footer include<a href="#admin_theme_custom_footer_path_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
@@ -567,7 +570,7 @@
         Database record name: <tt class="code">categories_alpha_sort</tt><br />
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Album list view &rarr; Sort categories alphabetically
     </div>
-    <p>You can dictate that coppermine sort all categories alphabetically (instead of in a custom order) by setting &quot;Sort categories alphabetically&quot; to &quot;Yes&quot;. This setting is accessible both in the coppermine config menu and in the <a href="categories.htm#cat_cp">category manager</a>. If you enable alphabetical sorting, the up and down arrows that normally let you move  categories up and down in the custom sorting list will disappear.</p>
+    <p>You can dictate that Coppermine sort all categories alphabetically (instead of in a custom order) by setting &quot;Sort categories alphabetically&quot; to &quot;Yes&quot;. This setting is accessible both in the Coppermine config menu and in the <a href="categories.htm#cat_cp">category manager</a>. If you enable alphabetical sorting, the up and down arrows that normally let you move  categories up and down in the custom sorting list will disappear.</p>
 
     <a name="admin_album_list_alphasort_end"></a>
     <br clear="all" style="clear:both;" />
@@ -624,7 +627,7 @@
         Minimum: <input type="text" size="2" maxlength="2" class="numberinput" value="1" /><br />
         Maximum: <input type="text" size="2" maxlength="2" class="numberinput" value="20" /><br />
         Database record name: <tt class="code">thumbcols</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Thumbnail view &rarr; Number of columns on thumbnail page for the album he is in
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Thumbnail view &rarr; Number of columns on thumbnail page
     </div>
     <p>Default value is 4 this means that each row will show 4 thumbnails. There can be no general recommendation on the number of thumbnail columns you should use, as the optimal setting depends on your <a href="#admin_picture_thumbnail_max-dimension">thumbnail width</a> setting, the <a href="#admin_theme_theme">theme</a> you use, the <a href="#admin_album_table-width">width of the main table</a> and especially the display resolution of your site visitor.</p>
 
@@ -784,7 +787,7 @@
         <li>visitors might not see the full-sized pic at all if they have a pop-up blocker in place and forget to disable it for your site</li>
         <li>the views counter will not increase</li>
     </ul>
-    <p>This option has been added because a lot of coppermine users have asked for it. However, the dev team does <strong>not</strong> recommend using it.</p>
+    <p>This option has been added because a lot of Coppermine users have asked for it. However, the dev team does <strong>not</strong> recommend using it.</p>
 
 
     <a name="admin_thumbnail_to_fullsize_end"></a>
@@ -952,7 +955,7 @@
         Default value: <input type="radio" class="radio" checked="checked" id="comment_captcha" /><label for="comment_captcha" class="clickable_option">Yes: Everyone</label><br />
         Recommended value: <input type="radio" class="radio" checked="checked" id="comment_captcha_r" /><label for="comment_captcha_r" class="clickable_option">Yes: Everyone</label><br />
         Database record name: <tt class="code">ecard_captcha</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Comment settings &rarr; Display Captcha (Visual Confirmation) for sending Ecards
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Image view &rarr; Display Captcha (Visual Confirmation) for sending Ecards
     </div>
     <p>To prevent spam ecards sent by bots (automated scripts), this toggle will display an image at the ecard form with some random letters on it. The visitor is required to enter those letters into a textfield to prove that he's actually a human and not just some dumb bot that drops spam. It's recommended to enable Captchas for anonymous comments (guests who are not logged in).</p>
     <p>Note: this setting doesn't determine if guests can actually send ecards at all (this is instead being determined on the groups page).</p>
@@ -1662,7 +1665,7 @@
         <input type="text" size="16" maxlength="16" class="textinput" value="Width" /> ("<tt class="code">wd</tt>")<br />
         <input type="text" size="16" maxlength="16" class="textinput" value="Like thumbnail" /> ("<tt class="code">thumb</tt>")<br />
         Database record name: <tt class="code">picture_use</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Thumbnails settings &rarr; Use dimension
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings &rarr; Use dimension
     </div>
     <p>Sets the dimension (<em>width</em> or <em>height</em> or <em>max aspect</em> or <em>like thumbnail</em>) on which the maximum pixel size limitation should apply to for the intermediate picture.</p>
     <p>The options <tt class="code">width</tt> or <tt class="code">height</tt> should be pretty self-explanatory: if you specify the value <tt class="code">width</tt> for the setting &quot;Use dimension&quot;, all intermediate pictures will have <strong>exactly</strong> the <em>width</em> (in pixels) that you specify in the setting &quot;<a href="#admin_picture_thumbnail_intermediate_dimension">Max width or height of an intermediate picture</a>&quot;.</p>
@@ -1680,7 +1683,7 @@
         Minimum: <input type="text" size="5" maxlength="5" class="numberinput" value="0" /><br />
         Maximum: <input type="text" size="5" maxlength="5" class="numberinput" value="10000" /><br />
         Database record name: <tt class="code">picture_width</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Configuration &rarr; Picture and thumbnail settings &rarr; Max width or height of an intermediate picture
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings &rarr; Max width or height of an intermediate picture
     </div>
     <p>The intermediate pictures are those that appears when you click on a thumbnail. The default value is 400, it means that the intermediate picture will be created to fit inside a square of 400x400 pixels. NOTE: Currently, 33% of your users have monitors set at 800 pixels wide, another 33% have their settings at 1024 pixels, the rest have settings less than or greater than these two numbers. Therefore a setting of 600 or less would fit the screens of most users.  Keep in mind,however, that setting this size larger than 400 impacts the file size of your intermediate pictures and the time it takes to download and display on slower connections.</p>
     <p>If you disable the <a href="#admin_picture_thumbnail_intermediate_toggle">creation of intermediate images</a>, the value specified for &quot;Max width or height of an intermediate picture&quot; will still have an impact: the full-size image will then be resized using the width and height attributes of the &lt;img&gt;-tag on the intermediate image display pages (displayimage.php), resizing the full-size pic that way to fit on the page.</p>
@@ -1693,9 +1696,9 @@
         Minimum: <input type="text" size="7" maxlength="7" class="numberinput" value="1" /><br />
         Maximum: <input type="text" size="7" maxlength="7" class="numberinput" value="9999999" /><br />
         Database record name: <tt class="code">max_upl_size</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Configuration &rarr; Picture and thumbnail settings &rarr; Max size for uploaded files
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings &rarr; Max size for uploaded files
     </div>
-    <p>Any file with a file size larger than this value will be rejected by the coppermine script. Setting this option to a higher value than what is actually supported by your webserver will only result in "funny" webserver error messages in lieu of "regular" coppermine error messages. Therefore, it is recommended that you set this value to a size that is slightly lower or equal to the max file size that your server is set to handle. The actual size your server can handle cannot be determined by Coppermine (or any PHP script) - when in doubt, contact your webhost.</p> <p>Prior to an FTP upload of files, it is recommended that the admin use their imaging software to resize (individually or by batch processing) larger files to a more practical size. This will facilitate the FTP process and the creation of intermediate pictures and thumbnails.</p>
+    <p>Any file with a file size larger than this value will be rejected by the Coppermine script. Setting this option to a higher value than what is actually supported by your webserver will only result in "funny" webserver error messages in lieu of "regular" Coppermine error messages. Therefore, it is recommended that you set this value to a size that is slightly lower or equal to the max file size that your server is set to handle. The actual size your server can handle cannot be determined by Coppermine (or any PHP script) - when in doubt, contact your webhost.</p> <p>Prior to an FTP upload of files, it is recommended that the admin use their imaging software to resize (individually or by batch processing) larger files to a more practical size. This will facilitate the FTP process and the creation of intermediate pictures and thumbnails.</p>
         <a name="admin_picture_thumbnail_max_upload_size_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_picture_thumbnail_max_upload_dimension"></a><h3>Max width or height for uploaded pictures (pixels)<a href="#admin_picture_thumbnail_max_upload_dimension" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -1719,7 +1722,7 @@
         Database record name: <tt class="code">auto_resize</tt><br />
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings &rarr; Auto resize images that are larger than max width or height
     </div>
-    <p>During the upload process, if images are larger than the maximum width or height allowed they will automatically be resized to the maximum allowable size. Users with especially large files should be advised to resize their pictures outside of coppermine before uploading as this process also consumes considerable resources when processed online.</p>
+    <p>During the upload process, if images are larger than the maximum width or height allowed they will automatically be resized to the maximum allowable size. Users with especially large files should be advised to resize their pictures outside of Coppermine before uploading as this process also consumes considerable resources when processed online.</p>
     <p><strong>Note:</strong> How the image is resized (width/height/max aspect) is set in the admin option &quot;<a href="#admin_picture_thumbnail_intermediate_use-dimension">Use dimension (width or height or max aspect for an intermediate picture)</a>&quot;</p>
     <p>There are three options:</p>
     <ul>
@@ -1759,6 +1762,7 @@
 
     <a name="admin_picture_thumbnail_fullsize_padding_y_end"></a>
     <a name="admin_picture_thumbnail_end"></a>
+    <br clear="all" style="clear:both;" />
 
 
     <a name="admin_picture_thumb_advanced"></a>
@@ -1776,12 +1780,12 @@
 
     <a name="admin_picture_thumb_advanced_private_toggle_end"></a>
     <br clear="all" style="clear:both;" />
-    <a name="admin_picture_thumb_advanced_private_icon_show"></a><h3>Show private album Icon to unlogged user<a href="#admin_picture_thumb_advanced_private_icon_show" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <a name="admin_picture_thumb_advanced_private_icon_show"></a><h3>Show private album icon to unlogged user<a href="#admin_picture_thumb_advanced_private_icon_show" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
         Recommended value: <abbr title="not applicable">n/a</abbr><br />
         Database record name: <tt class="code">show_private</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings &rarr; Show private album Icon to unlogged user
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings &rarr; Show private album icon to unlogged user
     </div>
     <p>Toggles the display of the private album icons to unlogged users.<br />Set to 'NO', the album is completely hidden from unauthorised users.<br />Set to 'YES', the album name, description and statistics are shown, but not the thumbnails or files contained within.</p>
     <p>It is recommended to enable this option especially if you want to encourage visitors to register (this does of course only make sense if you allow registered users to see albums that guests are not allowed to see).</p>
@@ -1808,7 +1812,7 @@
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings &rarr; Enable "silly safe mode"
     </div>
     <p>A significant number of webhosts on the Internet run PHP in <a href="http://www.php.net/phpinfo" rel="external" class="phpnet">safe mode</a>. Coppermine runs without any problem in safe mode and with the "open basedir restriction" active, provided safe mode is properly configured. Unfortunately, on many hosts, safe mode is not configured properly.<br />
-    If you have issues uploading pics, find out if safe_mode is enabled on your webserver by searching for it on your phpinfo page (go to admin tools -&gt; phpinfo). If safe_mode is enabled there, coppermine might be able to workaround the misconfiguration of your server if you enable coppermine's "silly safe mode" option.</p>
+    If you have issues uploading pics, find out if safe_mode is enabled on your webserver by searching for it on your phpinfo page (go to admin tools -&gt; phpinfo). If safe_mode is enabled there, Coppermine might be able to workaround the misconfiguration of your server if you enable Coppermine's "silly safe mode" option.</p>
     <p>What "silly safe mode" does: if you enable this option, Coppermine will not try to create sub-folders for each user, but upload all files into the root of the userpics folder. There might be a slight performance impact for larger galleries, but then you probably won't be running a large gallery on a "crippled" webserver that is not configured properly.</p>
     <p>Before playing with the silly safe mode option, make sure that you have <a href="install_permissions.htm#permissions">set permissions</a> on the albums folder and everything within it as suggested.</p>
     <p>Don't change this if uploading works just fine for you. Do not enable the Coppermine setting "silly safe mode" if your webserver is not running in safe mode in the first place.</p>
@@ -1893,7 +1897,7 @@
     Archives: zip/rar/gz/001/7z/arj/bz2/cab/lzh/rpm/tar/z<br />
     OpenDocument (OpenOffice 2.x): odt/ods/odp/odg/odc/odf/odi/odm/ott/ots/otp/otg/otc/otf/oti/oth<br />
     OpenOffice 1.x / StarOffice 6.x: sxw/stw/sxc/stc/sxd/std/sxi/sti/sxg/sxm</p>
-    <p>For security reasons coppermine doesn't enable all document types by default. Before adding more file types, make sure that the file types are supported on your webserver.</p>
+    <p>For security reasons Coppermine doesn't enable all document types by default. Before adding more file types, make sure that the file types are supported on your webserver.</p>
     <p>In Coppermine versions prior to cpg1.5.0, the option &quot;ALL&quot; used to be available as well for this field - it has been removed, as it caused users to think that this actually meant &quot;all document file types that exist&quot;.</p>
 
 
@@ -1970,7 +1974,7 @@
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings &rarr; Read IPTC data in JPEG files
     </div>
     <p>With this option turned on, the script will read the <a href="http://www.iptc.org/" class="external" rel="external">IPTC</a> data stored by digicams in picture files.</p>
-    <p>Please note: IPTC does not support unicode encoding. Therefore, it may collide with coppermine if you use special, non-latin characters in your IPTC tags.</p>
+    <p>Please note: IPTC does not support unicode encoding. Therefore, it may collide with Coppermine if you use special, non-latin characters in your IPTC tags.</p>
 
 
     <a name="admin_picture_thumb_advanced_iptc_end"></a>
@@ -1995,7 +1999,7 @@
         Default value: <input type="text" size="9" maxlength="9" class="textinput" value="userpics/" /><br />
         Recommended value: <input type="text" size="7" maxlength="7" class="textinput" value="albums/" /><br />
         Database record name: <tt class="code">userpics</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Configuration &rarr; Picture and thumbnail settings &rarr; The directory for user files
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings &rarr; The directory for user files
     </div>
     <p>This is the directory where files uploaded using the web interface (URL/URI) are stored. This directory is a subdirectory of the album directory. It's recommended that you leave this setting as is. Should you decide to change it, keep in mind that the folder must exist within the albums folder and the path should be relative to it.</p>
     <p>The same remarks as above apply.</p>
@@ -2037,8 +2041,8 @@
         Database record name: <tt class="code">default_dir_mode</tt><br />
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings &rarr; Default mode for directories
     </div>
-    <p>If, and only if, during the file upload or batch add process, the installer complains about the directory not having the right permissions, try setting this to <strong>0777</strong> . Failure to do so may prevent you from being able to delete directories created by the script with your FTP client should you ever decide it necessary to uninstall the coppermine script.</p>
-    <p><strong>Note</strong>: setting this option doesn't CHMOD the files or folders that are being uploaded. Instead, the setting is used when coppermine, itself, creates <strong>new</strong> folders for user uploads (within the userpics directory). If you experienced problems during the initial Coppermine setup related to permissions, this option is <strong>not</strong> what you have been looking for nor should it be changed (for more information regarding CHMOD, see the <a href="install_permissions.htm#permissions">permissions</a> section of this document and the <a href="faq.htm">FAQ</a> section).</p>
+    <p>If, and only if, during the file upload or batch add process, the installer complains about the directory not having the right permissions, try setting this to <strong>0777</strong> . Failure to do so may prevent you from being able to delete directories created by the script with your FTP client should you ever decide it necessary to uninstall the Coppermine script.</p>
+    <p><strong>Note</strong>: setting this option doesn't CHMOD the files or folders that are being uploaded. Instead, the setting is used when Coppermine, itself, creates <strong>new</strong> folders for user uploads (within the userpics directory). If you experienced problems during the initial Coppermine setup related to permissions, this option is <strong>not</strong> what you have been looking for nor should it be changed (for more information regarding CHMOD, see the <a href="install_permissions.htm#permissions">permissions</a> section of this document and the <a href="faq.htm">FAQ</a> section).</p>
 
     <a name="admin_picture_thumb_advanced_chmod_folder_end"></a>
     <br clear="all" style="clear:both;" />
@@ -2050,7 +2054,7 @@
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings &rarr; Default mode for files
     </div>
     <p>If, and only if, during the file upload or batch add process, the installer complains about the directory not having the right permissions, try setting this to <strong>0666</strong>.</p>
-    <p><strong>Note</strong>: setting this option doesn't CHMOD the files or folders that are being uploaded. Instead, the setting is used when coppermine, itself, creates <strong>new</strong> folders for user uploads (within the userpics directory). If you experienced problems during the initial Coppermine setup related to permissions, this option is <strong>not</strong> what you have been looking for nor should it be changed (for more information regarding CHMOD, see the <a href="#permissions">permissions</a> section of this document and the <a href="faq.htm">FAQ.htm</a> document located in the DOCS folder of this installation package).</p>
+    <p><strong>Note</strong>: setting this option doesn't CHMOD the files or folders that are being uploaded. Instead, the setting is used when Coppermine, itself, creates <strong>new</strong> folders for user uploads (within the userpics directory). If you experienced problems during the initial Coppermine setup related to permissions, this option is <strong>not</strong> what you have been looking for nor should it be changed (for more information regarding CHMOD, see the <a href="#permissions">permissions</a> section of this document and the <a href="faq.htm">FAQ.htm</a> document located in the DOCS folder of this installation package).</p>
 
     <a name="admin_picture_thumb_advanced_chmod_files_end"></a>
 </div>
@@ -2062,19 +2066,19 @@
 <p>Details on <a href="watermarking.htm#watermark">watermarking</a> can be found on the corresponding article in the docs.</p>
 <br clear="all" style="clear:both;" />
 <div class="indent">
-    <a name="admin_watermarking_enable"></a><h3>Watermark Images<a href="#admin_watermarking_enable" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <a name="admin_watermarking_enable"></a><h3>Watermark images<a href="#admin_watermarking_enable" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
         Recommended value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
         Database record name: <tt class="code">enable_watermark</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Image watermarking &rarr; Watermark Image
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Image watermarking &rarr; Watermark images
     </div>
     <p>General toggle that determines if watermarking should be enabled or disabled. By default, it is disabled.</p>
     <p class="cpg_message_info">As watermarking actually means that each picture needs to be re-calculated during the upload stage, there may be issues with memory consumption and speed. If you experience issues with watermarking, turn it off or ask your webhost to increase server-sided settings that have an impact on watermarking.<br />
     Also keep in mind that the re-calculation of the image will result in a loss of quality.</p>
-    <p>Remember as well that watermarking will not only have an impact on the quality and recources consumption (in turns of burning CPU cycles on the server), but as well in the consumption of webspace: when watermarking is enabled, coppermine will keep a safe, unmodified copy of the orginal image (prefixed with "orig_") in the same folder your watermarked file will reside and thus consume additional webspace.<br />
+    <p>Remember as well that watermarking will not only have an impact on the quality and recources consumption (in turns of burning CPU cycles on the server), but as well in the consumption of webspace: when watermarking is enabled, Coppermine will keep a safe, unmodified copy of the orginal image (prefixed with "orig_") in the same folder your watermarked file will reside and thus consume additional webspace.<br />
     You can use the <a href="admin-tools.htm#admin_tools">admin tools</a> to get rid of this copy as well, ,but you have to keep in mind then that there is not turning back in this case: if you delete the unmarked original, you can never go back or apply another watermark.</p>
-    <p class="cpg_message_warning">When enabling this option, you have to understand that watermarks are not automatically being applied to all files that already exist in your gallery. When enabled, only images that get uploaded from that point on will become watermarked. If you want to apply watermarking to all the images that already existed in your coppermine gallery before you enabled watermarking, take a look at the corresponding section of the admin tools. However, before applying your new watermark permanently to all your images, perform some test uploads first to see if watermarking works as expected for you.</p>
+    <p class="cpg_message_warning">When enabling this option, you have to understand that watermarks are not automatically being applied to all files that already exist in your gallery. When enabled, only images that get uploaded from that point on will become watermarked. If you want to apply watermarking to all the images that already existed in your Coppermine gallery before you enabled watermarking, take a look at the corresponding section of the admin tools. However, before applying your new watermark permanently to all your images, perform some test uploads first to see if watermarking works as expected for you.</p>
 
 
     <a name="admin_watermarking_enable_end"></a>
@@ -2084,7 +2088,7 @@
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
         Recommended value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
         Database record name: <tt class="code">enable_thumb_watermark</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Configuration &rarr; Image watermarking &rarr; Watermark custom thumbs
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Image watermarking &rarr; Watermark custom thumbs
     </div>
     <p>When enabled, custom thumbnails will be watermarked as well.</p>
     <p>If you don't use custom thumbnails, don't worry about this option.</p>
@@ -2145,7 +2149,7 @@
         Database record name: <tt class="code">watermark_file</tt><br />
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Image watermarking &rarr; Which file to use for watermark
     </div>
-    <p><img src="../../images/watermark.png" border="0" width="300" height="51" alt="" align="left" style="margin-right:20px;" />Specify the relative path to the watermark file, seen from the root folder of your coppermine-gallery. Default value: <tt class="code">images/watermark.png</tt>. You can (and are even encouraged) to come up with a watermarking file of your own - only a standard desktop drawing application is needed, e.g. MS Paint.</p>
+    <p><img src="../../images/watermark.png" border="0" width="300" height="51" alt="" align="left" style="margin-right:20px;" />Specify the relative path to the watermark file, seen from the root folder of your Coppermine gallery. Default value: <tt class="code">images/watermark.png</tt>. You can (and are even encouraged) to come up with a watermarking file of your own - only a standard desktop drawing application is needed, e.g. MS Paint.</p>
     <p>Coppermine only comes with a sample watermarking file that you should not apply lightheartedly, as it is only meant for testing purposes and to give you an idea how the watermarking file could look like. You have to come up with your custom watermark file and FTP-upload that file to your webserver. It's a good idea to name it accordingly, e.g. "custom_watermark.png" and upload it to the <tt class="code">images</tt> folder (<tt class="code">http://your_domain.tld/your_coppermine_folder/images/</tt>). All you then have to do is change the setting for "Which file to use for watermark" to <tt class="code">images/custom_watermark.png</tt>.</p>
     <p>Coming up with a custom watermark can be tricky: it should work well both for dark as well as light backgrounds. You have to find a good compromise: the watermarked files should be still OK to look at, while on the other hand potential image thieves should get discouraged to steal your watermarked images.</p>
 
@@ -2177,7 +2181,7 @@
     </div>
     <p>That is the 100% reference point. Resizing of the watermark is linear (0 to disable).</p>
     <p>Keep in mind that images might get uploaded by your users (if you allow uploads by others than the admin) that you might not have made up your mind about: the image uploaded may be smaller in resolution. If the dimension of the image uploaded is smaller than the dimension of your watermark file, the watermarking would get cut off and look silly. That's why this option exists: you can specify that images that are smaller than a particular size will have the watermarking applied in a resized manner, making the watermark again fit on the uploaded image. It's a good idea to set this option to the horizontal dimension of your watermarking image.</p>
-    <div class="cpg_example">Example:<br />Let's assume that your custom watermarking image has got the same dimensions as the sample one that comes with the coppermine package: 300 x 51 pixels. Subsequently, if you set the option "Downsize watermark if width of an picture is smaller than entered value" to 300, you should be fine: if someone uploads an image that is only 250 x 100 pixels, the resulting watermarked image will be 250 x 100 pixels as well, but the watermarking image will have been resized to 250 x 43 before being applied as a watermark, so it will fit on the original file that was uploaded.</div>
+    <div class="cpg_example">Example:<br />Let's assume that your custom watermarking image has got the same dimensions as the sample one that comes with the Coppermine package: 300 x 51 pixels. Subsequently, if you set the option "Downsize watermark if width of an picture is smaller than entered value" to 300, you should be fine: if someone uploads an image that is only 250 x 100 pixels, the resulting watermarked image will be 250 x 100 pixels as well, but the watermarking image will have been resized to 250 x 43 before being applied as a watermark, so it will fit on the original file that was uploaded.</div>
 
 
     <a name="admin_watermarking_downsize_end"></a>
@@ -2249,7 +2253,7 @@
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Registration &rarr; Display disclaimer on user registration
     </div>
     <p>Toggles wether users will see the disclaimer on the registration page. You have the option not to display the disclaimer at all, display it as separate page before the actual registration page or inline on the registration page.<br />
-    This setting only applies if coppermine is not bridged.</p>
+    This setting only applies if Coppermine is not bridged.</p>
 
 
     <a name="admin_user_registration_disclaimer_end"></a>
@@ -2262,7 +2266,7 @@
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Registration &rarr; Display Captcha (Visual Confirmation) on registration page
     </div>
     <p>To prevent automated registration by bots (automated scripts), this toggle will display an image on the registration page with some random letters on it. The visitor who is trying to register is required to enter those letters into a textfield to prove that he's actually a human and not just some dumb bot.</p>
-    <p>Note: this setting isn't being taken into account when coppermine is bridged.</p>
+    <p>Note: this setting isn't being taken into account when Coppermine is bridged.</p>
     <p class="cpg_message_info">Captchas will only work if <a href="install_faq.htm#WhatIsGD">GD2</a> is available on your server.</p>
 
 
@@ -2373,7 +2377,7 @@
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" checked="checked" /><br />
         Recommended value: <input type="checkbox" disabled="disabled" class="checkbox" checked="checked" /><br />
         Database record name: <tt class="code">allow_user_upload_choice</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: User settings &rarr; Default upload mechanism
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: User settings &rarr; Allow users to choose the upload method
     </div>
     <p>When enabled, users can choose the upload method themselves.  This is recommended so that if some users have an issue with their web browsers or operating systems, they can choose another upload method that works better.  At the very least, they can use the simple, one file at-a-time, upload method.</p>
 
@@ -2385,7 +2389,7 @@
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
         Recommended value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
         Database record name: <tt class="code">editpics_ignore_newer_than</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: User settings &rarr; Default upload mechanism
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: User settings &rarr; Show previously uploaded files at edit files form after flash upload
     </div>
     <p>When enabled, users will see all uploaded files at the edit files form instead of just the recently uploaded files. Users will always be redirected to that form after they hit the &quot;Continue&quot; button at the flash-driven uploader.</p>
 
@@ -2423,7 +2427,7 @@
         Database record name: <tt class="code">allow_memberlist</tt><br />
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: User settings &rarr; Allow logged in users to view memberlist
     </div>
-    <p>When enabled, an additional menu item &quot;Memberlist&quot; is displayed in the coppermine main menu if a user is logged in, to let him see a list of all users, with stats on their last visits, uploads and quota usage.</p>
+    <p>When enabled, an additional menu item &quot;Memberlist&quot; is displayed in the Coppermine main menu if a user is logged in, to let him see a list of all users, with stats on their last visits, uploads and quota usage.</p>
     <p>Recommended setting is 'no', especially if you're concerned about your user's privacy.</p>
 
 
@@ -2453,12 +2457,12 @@
 
     <a name="admin_user_allow_account_delete_end"></a>
     <br clear="all" style="clear:both;" />
-    <a name="admin_user_editpics_public_start"></a><h3>Allow users to retain control over their pics in public galleries<a href="#admin_user_editpics_public_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <a name="admin_user_editpics_public_start"></a><h3>Allow users to retain control over their files in public galleries<a href="#admin_user_editpics_public_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
         Recommended value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
         Database record name: <tt class="code">users_can_edit_pics</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: User settings &rarr; Allow users to retain control over their pics in public galleries
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: User settings &rarr; Allow users to retain control over their files in public galleries
     </div>
     <p>When enabled, both the admin and the uploading user can edit and delete files that were uploaded to a public gallery. Of course the user must have permissions to upload to the public gallery in the first place (see the <a href="groups.htm#group_cp">groups control panel</a>) before this option will have any effect.</p>
 
@@ -2526,7 +2530,7 @@
         Database record name: <tt class="code">login_threshold</tt><br />
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: User settings &rarr; Number of failed login attempts until temporary ban
     </div>
-    <p>To make brute force attacks (where a hostile script tries to log into coppermine as admin by running through all possible combinations of username and password automatically) less effective Coppermine temporarily bans the IP address of a possible attacker after a certain amount of failed logins. This way, the brute force attack would need way to long to try all possible combinations.</p>
+    <p>To make brute force attacks (where a hostile script tries to log into Coppermine as admin by running through all possible combinations of username and password automatically) less effective Coppermine temporarily bans the IP address of a possible attacker after a certain amount of failed logins. This way, the brute force attack would need way to long to try all possible combinations.</p>
     <p>With this setting you specify the maximum number of failed log-in attempts before the IP address of the user is temporarily banned.</p>
     <p>Keep in mind that this setting will definitely have an impact on your legitimate ability to log in as well: if you mis-type your password too often or if someone else has tried to brute-force your admin account, you will be banned temporarily as well. The ban will of course go away after the time set below, but during the ban phase you will be locked out from administration just as well as an attacker would be logged out.</p>
     <p>Default and recommended value is <tt class="code">5</tt>. Value can range between 1 and 20 (as 0 would mean that zero logins are allowed, which would lock you (as admin) out permanently as well.</p>
@@ -2615,7 +2619,7 @@
     </div>
 <p>Leave blank if unused. Use Profile 6 for long entries, such as biographies</p>
 <p>These fields are displayed within the &quot;user profile&quot; area. They will appear only if you assign a name to the field. As instructed in the heading, use field 6 for long entries, such as biographies, or if you want to include the use of bb code.</p>
-<p>You can also use field 6 for avatars.  To show an avatar in the profile, it should be entered in bbcode. Determine the full URL of the image you want to use as an avatar and wrap that URL into the bbcode tags for images.</p>
+<p>You can also use field 6 for avatars. To show an avatar in the profile, it should be entered in BBCode. Determine the full URL of the image you want to use as an avatar and wrap that URL into the BBCode tags for images.</p>
 <div class="cpg_example">If you want to use the file <tt class="code">avatar.png</tt> that is stored in a sub-folder of your web root that is named <tt class="code">images</tt>, the full URL would be something like <tt class="code">http://www.example.com/images/avatar.png</tt>. Subsequently, you'd have to insert
 <pre class="cpg_code code">[img]http://www.example.com/images/avatar.png[/img]</pre>
 into the field number 6.
@@ -2637,16 +2641,16 @@ into the field number 6.
 
 <a name="admin_cookie"></a><h2>Cookie settings<a href="#admin_cookie" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
 <div class="indent">
-    <a name="admin_cookie_name"></a><h3>Name of the cookie used by coppermine<a href="#admin_cookie_name" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <a name="admin_cookie_name"></a><h3>Name of the cookie used by Coppermine<a href="#admin_cookie_name" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="text" size="6" maxlength="6" class="textinput" value="cpg15x" /><br />
         Recommended value: <input type="text" size="6" maxlength="6" class="textinput" value="cpg15x" /><br />
         Database record name: <tt class="code">cookie_settings</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Cookie settings &rarr; Name of the cookie used by coppermine
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Cookie settings &rarr; Name of the cookie used by Coppermine
     </div>
     <p>Default value is something like &quot;cpg15x&quot;. Even if you have multiple instances of the script running on the same server you can keep the default value.</p>
     <p class="cpg_message_warning">When using <a href="bridging.htm">bridging</a>, make sure it <strong>differs</strong> from the bridge app's cookie name.</p>
-    <p>This has to be a valid cookie name (no special chars, particularly no dots!) - this setting should best be left alone unless you really know your way around. After all, the cookie name doesn't matter and doesn't mean anything to the end user anyway. Let me repeat: there are many users who blindly change the cookie name to something that just doesn't make sense at all and then complain on the coppermine support board that things are not working as expected. Do <strong>not</strong> use special chars in the cookie name! In fact, don't change it at all unless you must.</p>
+    <p>This has to be a valid cookie name (no special chars, particularly no dots!) - this setting should best be left alone unless you really know your way around. After all, the cookie name doesn't matter and doesn't mean anything to the end user anyway. Let me repeat: there are many users who blindly change the cookie name to something that just doesn't make sense at all and then complain on the Coppermine support board that things are not working as expected. Do <strong>not</strong> use special chars in the cookie name! In fact, don't change it at all unless you must.</p>
 
     <a name="admin_cookie_name_end"></a>
     <a name="admin_cookie_path"></a><h3>Path of the cookie used by the script<a href="#admin_cookie_path" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2658,7 +2662,7 @@ into the field number 6.
     </div>
     <p>Default value is "/". Don't change this unless you know what you are doing. This may prevent you from logging in.</p>
     <p>If you have broken your gallery by modifying this value, use phpMyAdmin to edit the xxxx_config table in your database and restore the default value. </p>
-    <p>When using bbs integration into Coppermine (<abbr title="also known as">aka</abbr> bridging), make sure to use <strong>different</strong> cookie names for coppermine and your bridging app! The paths in both applications have to be set so coppermine is able to read both. Usually the default value &quot;<tt class="code">/</tt>&quot; should be set as path both for coppermine install and the <abbr title="Bulletin Board System">BBS</abbr> app you bridge with.</p>
+    <p>When using bbs integration into Coppermine (<abbr title="also known as">aka</abbr> bridging), make sure to use <strong>different</strong> cookie names for Coppermine and your bridging app! The paths in both applications have to be set so Coppermine is able to read both. Usually the default value &quot;<tt class="code">/</tt>&quot; should be set as path both for Coppermine install and the <abbr title="Bulletin Board System">BBS</abbr> app you bridge with.</p>
 
     <a name="admin_cookie_path_end"></a>
 </div>
@@ -2677,7 +2681,7 @@ into the field number 6.
     </div>
     <p>All emails sent by the gallery will be sent using this email address. This must be a valid email address.</p>
     <p>Coppermine will use this address as "from"-address when sending emails (e.g. during registration). It's mandatory to have this email address populated properly. If you have your own domain, it might be a good idea to use an email account that correlates to your domain name.</p>
-    <p class="cpg_example">Example: if your domain name is &quot;<tt class="code">example.com</tt>&quot;, you should create an email address named <tt class="code">gallery@example.com</tt> and use that email address in coppermine's config. Coppermine does <strong>not</strong> create that email address for you!</p>
+    <p class="cpg_example">Example: if your domain name is &quot;<tt class="code">example.com</tt>&quot;, you should create an email address named <tt class="code">gallery@example.com</tt> and use that email address in Coppermine's config. Coppermine does <strong>not</strong> create that email address for you!</p>
     <p>Users sometimes ask on the support board if they can use another email, e.g. one from a freemail provider like GoogleMail, Hotmail or similar. The answer is: we can't tell you if your webhost will allow you to do this. Many webhosts disallow such things for reasons of spam prevention. Just keep in mind what the email address will be used for: the webserver will use that email address to send emails from. If you're not sure, ask your webhost for support.</p>
     <p class="cpg_message_info">This email address must not be confused with the email address that correlates to the email address of the gallery administrator's user account. Those email addresses <em>can</em> be identical, but they don't necessarilly have to.</p>
     <a name="admin_email_email_end"></a>
@@ -2707,7 +2711,7 @@ into the field number 6.
         Database record name: <tt class="code">smtp_username</tt><br />
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Email settings &rarr; SMTP Username
     </div>
-    <p>The username needed to authenticate on the SMTP server (this is <strong>not</strong> your coppermine admin username).</p>
+    <p>The username needed to authenticate on the SMTP server (this is <strong>not</strong> your Coppermine admin username).</p>
 
 
     <br clear="all" style="clear:both;" />
@@ -2718,7 +2722,7 @@ into the field number 6.
         Database record name: <tt class="code">smtp_password</tt><br />
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Email settings &rarr; SMTP Password
     </div>
-    <p>The password that goes with above mentioned username (<strong>not</strong> identical to your coppermine admin password).</p>
+    <p>The password that goes with above mentioned username (<strong>not</strong> identical to your Coppermine admin password).</p>
 
 </div>
 <a name="admin_email_end"></a>
@@ -2734,7 +2738,7 @@ into the field number 6.
         Database record name: <tt class="code">log_mode</tt><br />
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Logging &amp; statistics &rarr; Logging mode
     </div>
-    <p>Set, what kind of logging you want to enable. This feature records all changes that are done in coppermine's database, which is especially helpful if you're trying to debug or if there are various admins on a gallery.<br />
+    <p>Set, what kind of logging you want to enable. This feature records all changes that are done in Coppermine's database, which is especially helpful if you're trying to debug or if there are various admins on a gallery.<br />
     All log files are written in english</p>
     <p>You have to understand that this option does not toggle the recording of what your site visitors do. Instead, you log particularly what <strong>admins</strong> do.</p>
 
@@ -2748,7 +2752,7 @@ into the field number 6.
         Database record name: <tt class="code">log_ecards</tt><br />
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Logging &amp; statistics &rarr; Log ecards
     </div>
-    <p>When enabled, all ecards that are being sent are as well written into the database, where the coppermine admin can view them. Before switching this option on, make sure that logging is legal in your country. It is also advisable to notify your users that all ecards are being logged (preferrably on the registration screen).</p>
+    <p>When enabled, all ecards that are being sent are as well written into the database, where the Coppermine admin can view them. Before switching this option on, make sure that logging is legal in your country. It is also advisable to notify your users that all ecards are being logged (preferrably on the registration screen).</p>
 
 
     <a name="admin_general_log_ecards_end"></a>
@@ -2859,10 +2863,10 @@ into the field number 6.
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Maintenance settings &rarr; Enable debug mode
     </div>
     <p>Coppermine will show error messages which are normally suppressed. This is helpful in troubleshooting problems with your gallery or when asking for help on the <a href="http://coppermine-gallery.net/forum/">CPG Support Forums</a>. Turn this feature <strong>off</strong> if you don't experience problems.</p>
-    <p>Turn it on (option &quot;Everyone&quot;) if you are requesting help on the <a href="http://coppermine-gallery.net/forum/">coppermine support board</a>, so the supporters can have a look at the debug output as well. Choose the option &quot;Admin only&quot; when troubleshooting on your own - debug output will be only visible when you're logged in as admin, regular users or guests won't see the debug output.</p>
+    <p>Turn it on (option &quot;Everyone&quot;) if you are requesting help on the <a href="http://coppermine-gallery.net/forum/">Coppermine support board</a>, so the supporters can have a look at the debug output as well. Choose the option &quot;Admin only&quot; when troubleshooting on your own - debug output will be only visible when you're logged in as admin, regular users or guests won't see the debug output.</p>
     <p class="cpg_message_error">
     <a name="debug_mode_do_not_post_unless_requested"></a>
-        Do <strong>not</strong> post debug_output on the coppermine support board unless a supporter explicitely asks for it!<a href="#debug_mode_do_not_post_unless_requested" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+        Do <strong>not</strong> post debug_output on the Coppermine support board unless a supporter explicitely asks for it!<a href="#debug_mode_do_not_post_unless_requested" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
     </p>
     <span class="detail_head_collapsed">Details</span>
     <div class="detail_body border1">
@@ -2918,11 +2922,11 @@ into the field number 6.
             </li>
             <li>
                 <a name="debug_mode_suhosin"></a><h5>Suhosin settings<a href="configuration.htm?expand_all=1#debug_mode_suhosin" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
-                The relevant <a href="http://www.hardened-php.net/suhosin/" rel="external" class="external">Suhosin</a> settings will be displayed when Suhosin is enabled on your server. Suhosin is a protection system designed to protect PHP applications from flaws within applications or PHP itself. Under certain circumstances, Suhosin can (if set up too restrictively) keep Coppermine from working as expected. If that's the case for you, contact the admin of your webserver (usually your webhost). Do not ask for support on the coppermine support board - Suhosin is not part of coppermine, but part of your webserver setup and therefore can not be changed on Coppermine level.
+                The relevant <a href="http://www.hardened-php.net/suhosin/" rel="external" class="external">Suhosin</a> settings will be displayed when Suhosin is enabled on your server. Suhosin is a protection system designed to protect PHP applications from flaws within applications or PHP itself. Under certain circumstances, Suhosin can (if set up too restrictively) keep Coppermine from working as expected. If that's the case for you, contact the admin of your webserver (usually your webhost). Do not ask for support on the Coppermine support board - Suhosin is not part of Coppermine, but part of your webserver setup and therefore can not be changed on Coppermine level.
             </li>
             <li>
                 <a name="debug_mode_performance"></a><h5>Page (performance)<a href="configuration.htm?expand_all=1#debug_mode_performance" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
-                The output of the page performance section will display how good coppermine did performance-wise to generate the page you're looking at. The left result column shows the current data, the right one shows the peak value. Smaller values are better in terms of performance.<br />
+                The output of the page performance section will display how good Coppermine did performance-wise to generate the page you're looking at. The left result column shows the current data, the right one shows the peak value. Smaller values are better in terms of performance.<br />
                 The following values are being taken into account:
                 <ul>
                     <li>
@@ -2935,14 +2939,14 @@ into the field number 6.
                     </li>
                     <li>
                         <a name="debug_mode_performance_page_query_time"></a><h6>Page query time<a href="configuration.htm?expand_all=1#debug_mode_performance_page_query_time" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h6>
-                        The time in milliseconds it took to run the database queries to generate the page you're looking at is being displayed in the left column; the right column contains the peak value recorded so far today. If you experience high results here (above 1000 milliseonds) and your page load feels slow, you should consider reducing the number of queries by reducing the detail level of your coppermine-driven pages<sup><a href="configuration.htm?expand_all=1#debug_mode_performance_peak">[1]</a></sup>.
+                        The time in milliseconds it took to run the database queries to generate the page you're looking at is being displayed in the left column; the right column contains the peak value recorded so far today. If you experience high results here (above 1000 milliseonds) and your page load feels slow, you should consider reducing the number of queries by reducing the detail level of your Coppermine-driven pages<sup><a href="configuration.htm?expand_all=1#debug_mode_performance_peak">[1]</a></sup>.
                     </li>
                     <li>
                         <a name="debug_mode_performance_page_query_total"></a><h6>Page query total<a href="configuration.htm?expand_all=1#debug_mode_performance_page_query_total" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h6>
                         The total number of database queries it took to generate the page you're looking at is being displayed in the left column; the right column contains the peak value recorded so far today. The number of queries has got a direct impact on the page query time<sup><a href="configuration.htm?expand_all=1#debug_mode_performance_peak">[1]</a></sup>.
                     </li>
                 </ul>
-                <a name="debug_mode_performance_peak"></a>[1]: Today's peak values are being generated each time a coppermine-driven page is being run with debug_mode enabled. The recording starts from scratch each day at midnight. If you have little traffic or if you have enabled debug_mode for the admin only, the peaks that get recorded will of course be the peaks <em>you</em> generated.<a href="configuration.htm?expand_all=1#debug_mode_performance_peak" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
+                <a name="debug_mode_performance_peak"></a>[1]: Today's peak values are being generated each time a Coppermine-driven page is being run with debug_mode enabled. The recording starts from scratch each day at midnight. If you have little traffic or if you have enabled debug_mode for the admin only, the peaks that get recorded will of course be the peaks <em>you</em> generated.<a href="configuration.htm?expand_all=1#debug_mode_performance_peak" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a>
             </li>
         </ul>
     </div>
@@ -2955,8 +2959,8 @@ into the field number 6.
         Database record name: <tt class="code">debug_notice</tt><br />
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Maintenance settings &rarr; Display notices in debug mode
     </div>
-    <p>May be helpful to troubleshoot problems with your coppermine install - only recommended if you know a little PHP and you can understand the additional error messages this option shows. Notices being displayed don't actually mean that there is something wrong with your gallery. This option only applies if debug mode is enabled.</p>
-    <p>If you enable this option, you will see notices all over your coppermine-driven pages. This does <strong>not</strong> mean that there is actually something wrong with your install. As suggested above: leave notices_display off if it doesn't mean anything to you. In fact this can be considered a dev-only feature that merely exists to help the Coppermine dev team members to troublehsoot particular issues when coding.</p>
+    <p>May be helpful to troubleshoot problems with your Coppermine install - only recommended if you know a little PHP and you can understand the additional error messages this option shows. Notices being displayed don't actually mean that there is something wrong with your gallery. This option only applies if debug mode is enabled.</p>
+    <p>If you enable this option, you will see notices all over your Coppermine-driven pages. This does <strong>not</strong> mean that there is actually something wrong with your install. As suggested above: leave notices_display off if it doesn't mean anything to you. In fact this can be considered a dev-only feature that merely exists to help the Coppermine dev team members to troublehsoot particular issues when coding.</p>
     <p>The supporters on the Coppermine support board are not very keen to see posting where people complain that "funny output" resides on their gallery when it later turns out that the output they don't understand just is notices output, so if you have been sent here directly from a posting made by a supporter you should feel a little bit guilty for not reading first.</p>
 
     <a name="admin_misc_debug_notices_end"></a>
@@ -2982,8 +2986,8 @@ into the field number 6.
         Database record name: <tt class="code">display_coppermine_news</tt><br />
         <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Maintenance settings &rarr; Display news from coppermine-gallery.net
     </div>
-    <p>Starting with cpg1.5.0 there is a feed from coppermine-gallery.net that is being displayed for the gallery admin (and for the gallery-admin only) on each and every coppermine page to alert him of potential security issues and upgrades. You can toggle this option on and off in Coppermine's config (default is &quot;on&quot;). It is recommended to leave it enabled to make sure your coppermine install is always up-to-date.</p>
-    <p>This is meant as a service for gallery admins; you're of course welcome to disable this option at any time. Coppermine-gallery.net will <strong>not</strong> collect data from your site (although this would be technically possible to a certain extent). If you're concerned about this option, then disable it or review the code used. We (the Coppermine dev team) are not trying to spy on our users - the feed is only being used to alert you of issues related to coppermine - that's all.</p>
+    <p>Starting with cpg1.5.0 there is a feed from coppermine-gallery.net that is being displayed for the gallery admin (and for the gallery-admin only) on each and every Coppermine page to alert him of potential security issues and upgrades. You can toggle this option on and off in Coppermine's config (default is &quot;on&quot;). It is recommended to leave it enabled to make sure your Coppermine install is always up-to-date.</p>
+    <p>This is meant as a service for gallery admins; you're of course welcome to disable this option at any time. coppermine-gallery.net will <strong>not</strong> collect data from your site (although this would be technically possible to a certain extent). If you're concerned about this option, then disable it or review the code used. We (the Coppermine dev team) are not trying to spy on our users - the feed is only being used to alert you of issues related to Coppermine - that's all.</p>
 
     <a name="admin_general_coppermine_news_end"></a>
     <br clear="all" style="clear:both;" />
@@ -3012,7 +3016,7 @@ into the field number 6.
 </ul>
 
 <a name="admin_reset_entire_config"></a><h2>Restore factory defaults<a href="#admin_reset_entire_config" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
-<p>There is a hidden option to reset the entire configuration and restore the factory defaults. You can't access that option using a button in Coppermine's user interface to make sure it isn't being tampered with lightheartedly out of curiosity. To restore the entire coppermine config to factory defaults, you need to go to the config panel and then add the parameter <tt class="code">?restore</tt> to the URL.
+<p>There is a hidden option to reset the entire configuration and restore the factory defaults. You can't access that option using a button in Coppermine's user interface to make sure it isn't being tampered with lightheartedly out of curiosity. To restore the entire Coppermine config to factory defaults, you need to go to the config panel and then add the parameter <tt class="code">?restore</tt> to the URL.
 <div class="cpg_example">If your gallery resides at <tt class="code">http://yoursite.tld/your_coppermine_folder/</tt>, your "regular" config panel's URL is <tt class="code">http://yoursite.tld/your_coppermine_folder/admin.php</tt>. To go to the page where you can reset your configuration to factory defaults, go to <tt class="code">http://yoursite.tld/your_coppermine_folder/admin.php?restore</tt></div>
 <p>On that "restore factory defaults" page, you need to tick the confirmation checkbox and submit the form by clicking on the button at the bottom.</p>
 <p class="cpg_message_error">Resetting the configuration can not be undone! Make sure that you understand the impact before restoring the config!</p>
