@@ -1106,6 +1106,11 @@ $config_data = array(
       'warning'                => $lang_admin_php['warning_exist'],
       'additional_description' => '<br />('.$lang_admin_php['warning_exist'].')',
     ),
+    'upload_create_album_directory' => array(
+      'type'                   => 'checkbox',
+      'default_value'          => '1',
+      'help_link'              => 'f=configuration.htm&amp;as=admin_picture_upload_create_album_directory&amp;ae=admin_picture_upload_create_album_directory_end',
+    ),
     'normal_pfx' => array(
       'type'                   => 'textfield',
       'default_value'          => 'normal_',
