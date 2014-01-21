@@ -816,6 +816,7 @@ $lang_admin_php['read_exif_data'] = 'Read EXIF data from JPEG files';
 $lang_admin_php['read_iptc_data'] = 'Read IPTC data from JPEG files';
 $lang_admin_php['fullpath'] = 'The album directory';
 $lang_admin_php['userpics'] = 'The directory for user files';
+$lang_admin_php['upload_create_album_directory'] = 'Create sub-directory for each album in users\' upload directories'; // cpg1.6
 $lang_admin_php['normal_pfx'] = 'The prefix for intermediate pictures';
 $lang_admin_php['default_dir_mode'] = 'Default mode for directories';
 $lang_admin_php['default_file_mode'] = 'Default mode for files';

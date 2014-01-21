@@ -2001,7 +2001,20 @@
     <p>The same remarks as above apply.</p>
     <p>When you upload files by FTP, store them in a subdirectory (folder) of the "album directory" and not inside the &quot;directory for user files&quot;. </p>
     <p>This setting mustn't be changed if you already have files in your database. If you do, all reference to previously existing files will no longer be valid.</p>
-        <a name="admin_picture_thumb_advanced_userpics_dir_end"></a>
+    <a name="admin_picture_thumb_advanced_userpics_dir_end"></a>
+    <br clear="all" style="clear:both;" />
+    <a name="admin_picture_upload_create_album_directory"></a><h3>Create sub-directory for each album in users' upload directories<a href="#admin_picture_upload_create_album_directory" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <div class="cpg_summary">
+        Default value: <input type="checkbox" disabled="disabled" class="checkbox" checked="checked" /><br />
+        Recommended value: <input type="checkbox" disabled="disabled" class="checkbox" checked="checked" /><br />
+        Database record name: <tt class="code">upload_create_album_directory</tt><br />
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings  &rarr; Create sub-directory for each album in users' upload directories
+    </div>
+    <p>If enabled, Coppermine will create a sub-directory named according to the album ID in users' upload directories during HTTP upload.</p>
+    <p>E.g. if the user with the ID &quot;23&quot; uploads new files/pictures to the album with the ID &quot;42&quot;, the directory &quot;userpics/10023/42/&quot; will be created and all uploaded files from that user to that album will be stored in it.</p>
+    <p>This option should be enabled if you or your users upload a lot of files via the built-in HTTP uploaders, as there are file system (performance) limits if you try to store several thousand files in the same directory.</p>
+    <p>This option just applies to newly uploaded files. Files that already exist in your gallery or will be moved between albums won't get moved on file system level!</p>
+    <a name="admin_picture_upload_create_album_directory_end"></a>
     <br clear="all" style="clear:both;" />
     <a name="admin_picture_thumb_advanced_intermediate_prefix"></a><h3>The prefix for intermediate pictures<a href="#admin_picture_thumb_advanced_intermediate_prefix" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
