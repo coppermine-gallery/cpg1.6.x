@@ -269,47 +269,13 @@ function get_subcat_data(&$cat_data)
     }
 
     $categories     = array();
-    $user_galleries = array();
-
-    // collect info about the user galleries category
-    $result = cpg_db_query("SELECT name, description, thumb, depth FROM {$CONFIG['TABLE_CATEGORIES']} WHERE cid = " . USER_GAL_CAT);
-
-    $row = mysql_fetch_assoc($result);
-    mysql_free_result($result);
-
-    $user_galleries['details'] = array(
-        'name'        => $row['name'],
-        'description' => $row['description'],
-        'thumb'       => $row['thumb'],
-        'level'       => $row['depth'],
-    );
-
-    // collect stats for albums in the user galleries category
-    // all we need here is the total number of albums and pictures
-    $sql = "SELECT COUNT(DISTINCT(p.aid)) AS alb_count, COUNT(*) AS pic_count
-        FROM {$CONFIG['TABLE_ALBUMS']} AS a
-        INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.aid = a.aid
-        WHERE a.category > " . FIRST_USER_CAT . "
-        AND approved = 'YES'";
-
-    if ($FORBIDDEN_SET_DATA) {
-        $sql .= 'AND a.aid NOT IN (' . implode(', ', $FORBIDDEN_SET_DATA) . ')';
-    }
-
-    $result = cpg_db_query($sql);
-
-    $row = mysql_fetch_assoc($result);
-    mysql_free_result($result);
-
-    $user_galleries['details']['alb_count']      = $row['alb_count'];
-    $user_galleries['subalbums'][0]['pic_count'] = $row['pic_count'];
 
     //TODO: optimize this for when first level album thumbs are disabled
     // all we need then is a count
 
     // collect info about all normal categories
     // restrict to 'subcat_level' categories deeper than current depth
-    $sql = "SELECT name, description, cid, thumb, depth, lft
+    $sql = "SELECT name, description, cid, thumb, depth AS level, lft
         FROM {$CONFIG['TABLE_CATEGORIES']} AS c
         WHERE depth BETWEEN $CURRENT_CAT_DEPTH + 1 AND $CURRENT_CAT_DEPTH + {$CONFIG['subcat_level']}";
 
@@ -324,22 +290,29 @@ function get_subcat_data(&$cat_data)
 
     while ( ($row = mysql_fetch_assoc($result)) ) {
 
-        if ($row['cid'] == USER_GAL_CAT) {
+        $categories[$row['cid']]['details'] = $row;
 
-            if (!empty($user_galleries)) {
-                $categories[$row['cid']] = $user_galleries;
+        if ($row['cid'] == USER_GAL_CAT) {
+            // collect stats for albums in the user galleries category
+            // all we need here is the total number of albums and pictures
+            $sql = "SELECT COUNT(DISTINCT(p.aid)) AS alb_count, COUNT(*) AS pic_count
+                FROM {$CONFIG['TABLE_ALBUMS']} AS a
+                INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.aid = a.aid
+                WHERE a.category > " . FIRST_USER_CAT . "
+                AND approved = 'YES'";
+
+            if ($FORBIDDEN_SET_DATA) {
+                $sql .= 'AND a.aid NOT IN (' . implode(', ', $FORBIDDEN_SET_DATA) . ')';
             }
 
-            continue;
-        }
+            $result2 = cpg_db_query($sql);
 
-        $categories[$row['cid']]['details'] = array(
-            'name'        => $row['name'],
-            'description' => $row['description'],
-            'thumb'       => $row['thumb'],
-            'level'       => $row['depth'],
-            'alb_count'   => 0,
-        );
+            $row2 = mysql_fetch_assoc($result2);
+            mysql_free_result($result2);
+
+            $categories[$row['cid']]['details']['alb_count']      = $row2['alb_count'];
+            $categories[$row['cid']]['subalbums'][0]['pic_count'] = $row2['pic_count'];
+        }
     } // while
 
     mysql_free_result($result);
