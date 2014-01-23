@@ -275,7 +275,7 @@ function get_subcat_data(&$cat_data)
 
     // collect info about all normal categories
     // restrict to 'subcat_level' categories deeper than current depth
-    $sql = "SELECT name, description, cid, thumb, depth AS level, lft
+    $sql = "SELECT name, description, thumb, depth AS level, '0' AS alb_count, cid
         FROM {$CONFIG['TABLE_CATEGORIES']} AS c
         WHERE depth BETWEEN $CURRENT_CAT_DEPTH + 1 AND $CURRENT_CAT_DEPTH + {$CONFIG['subcat_level']}";
 
@@ -291,6 +291,7 @@ function get_subcat_data(&$cat_data)
     while ( ($row = mysql_fetch_assoc($result)) ) {
 
         $categories[$row['cid']]['details'] = $row;
+        unset($categories[$row['cid']]['details']['cid']);
 
         if ($row['cid'] == USER_GAL_CAT) {
             // collect stats for albums in the user galleries category
@@ -317,34 +318,8 @@ function get_subcat_data(&$cat_data)
 
     mysql_free_result($result);
 
-    // collect album counts for categories that are visible
-    $sql = "SELECT category, COUNT(*) AS num
-        FROM {$CONFIG['TABLE_ALBUMS']} AS a
-        INNER JOIN {$CONFIG['TABLE_CATEGORIES']} ON cid = category
-        WHERE depth BETWEEN $CURRENT_CAT_DEPTH + 1 AND $CURRENT_CAT_DEPTH + {$CONFIG['subcat_level']}";
-
-    // if we are in a category, restrict info to children
-    if ($rgt) {
-        $sql .= "\nAND lft BETWEEN $lft AND $rgt";
-    }
-
-    if (!$CONFIG['show_private'] && $FORBIDDEN_SET_DATA) {
-        $sql .= ' AND a.aid NOT IN (' . implode(', ', $FORBIDDEN_SET_DATA) . ')';
-    }
-
-    // we don't care about the order
-    $sql .= "\nGROUP BY category ORDER BY NULL";
-
-    $result = cpg_db_query($sql);
-
-    while ( ($row = mysql_fetch_assoc($result)) ) {
-        $categories[$row['category']]['details']['alb_count'] = $row['num'];
-    }
-
-    mysql_free_result($result);
-
-    // collect album info
-    $sql = "SELECT title, r.description, keyword, category, aid, alb_hits, visibility, r.thumb, r.owner
+    // collect album info and album counts for categories that are visible
+    $sql = "SELECT aid, title, r.description, keyword, alb_hits, category, visibility, r.thumb, r.owner, '0' AS pic_count
         FROM {$CONFIG['TABLE_CATEGORIES']} AS c
         INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS r ON r.category = c.cid
         WHERE c.depth BETWEEN $CURRENT_CAT_DEPTH + 1 AND $CURRENT_CAT_DEPTH + {$CONFIG['subcat_level']}";
@@ -364,18 +339,8 @@ function get_subcat_data(&$cat_data)
             continue;
         }
 
-        $categories[$row['category']]['subalbums'][$row['aid']] = array(
-            'aid'         => $row['aid'],
-            'title'       => $row['title'],
-            'description' => $row['description'],
-            'keyword'     => $row['keyword'],
-            'alb_hits'    => $row['alb_hits'],
-            'category'    => $row['category'],
-            'visibility'  => $row['visibility'],
-            'thumb'       => $row['thumb'],
-            'pic_count'   => 0,
-            'owner'       => $row['owner'],
-        );
+        $categories[$row['category']]['details']['alb_count']++;
+        $categories[$row['category']]['subalbums'][$row['aid']] = $row;
     } // while
 
     mysql_free_result($result);
