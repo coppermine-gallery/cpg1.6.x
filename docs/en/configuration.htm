@@ -550,6 +550,30 @@
     <p>You can <strong>not</strong> use a code more than once inside this field: a string like <tt class="code">breadcrumb/catlist/alblist/breadcrumb</tt> will <strong>not</strong> work as expected and may have undesired side-effects.</p>
     <a name="admin_album_list_content_end"></a>
     <br clear="all" style="clear:both;" />
+    <a name="admin_picture_thumb_advanced_private_toggle"></a><h3>Albums can be private<a href="#admin_picture_thumb_advanced_private_toggle" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <div class="cpg_summary">
+        Default value: <input type="checkbox" disabled="disabled" class="checkbox" checked="checked" /><br />
+        Recommended value: <input type="checkbox" disabled="disabled" class="checkbox" checked="checked" /><br />
+        Database record name: <tt class="code">allow_private_albums</tt><br />
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Album list view &rarr; Albums can be private
+    </div>
+    <p>If set to YES then your gallery can contain albums that are visible only to users that belong to a specified group. This is ideal for creating albums that contain files that you want accessible to only a select group of people.  You could also create a userID and password and inform specific users/customers of the ID and password needed to view these files. </p>
+    <p>If a user is a member of a group that can have its own gallery and this option is turned on then this user will have the permission to hide any of his/her albums from other users.</p>
+    <p>This option does <strong>not</strong> determine whether users can have personal galleries at all, <strong>nor</strong> does it determine who is allowed to upload and who is not (these settings are accessible in the <a href="groups.htm#group_cp">groups manager</a>). You should only set this option to NO if you really know what you're doing (by default, it is set to YES).</p>
+    <p class="cpg_message_error">Note: if you switch from 'yes' to 'no' all currently private albums will become public! Do not set this option to 'no' unless you understand what this option actually does!</p>
+    <a name="admin_picture_thumb_advanced_private_toggle_end"></a>
+    <br clear="all" style="clear:both;" />
+    <a name="admin_picture_thumb_advanced_private_icon_show"></a><h3>Show private album icon to unlogged user<a href="#admin_picture_thumb_advanced_private_icon_show" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <div class="cpg_summary">
+        Default value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
+        Recommended value: <abbr title="not applicable">n/a</abbr><br />
+        Database record name: <tt class="code">show_private</tt><br />
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Album list view &rarr; Show private album icon to unlogged user
+    </div>
+    <p>Toggles the display of the private album icons to unlogged users.<br />Set to 'NO', the album is completely hidden from unauthorised users.<br />Set to 'YES', the album name, description and statistics are shown, but not the thumbnails or files contained within.</p>
+    <p>It is recommended to enable this option especially if you want to encourage visitors to register (this does of course only make sense if you allow registered users to see albums that guests are not allowed to see).</p>
+    <a name="admin_picture_thumb_advanced_private_icon_show_end"></a>
+    <br clear="all" style="clear:both;" />
     <a name="admin_album_first-level_thumbs"></a><h3>Show first level album thumbnails in categories<a href="#admin_album_first-level_thumbs" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" checked="checked" /><br />
@@ -1016,7 +1040,36 @@
     <p>It's highly recommended not to change this at all.</p>
     <p>Keep in mind that changing this option while you already have votes in your database may have undesired results. If you change this setting, you should reset all votes as well.</p>
 
+
     <a name="admin_image_rating_stars_amount_end"></a>
+    <br clear="all" style="clear:both;" />
+    <a name="admin_picture_thumbnail_fullsize_padding_x"></a><h3>Horizontal padding for full-size pop-up<a href="#admin_picture_thumbnail_fullsize_padding_x" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <div class="cpg_summary">
+        Default value: <input type="text" size="3" maxlength="3" class="numberinput" value="5" /><br />
+        Recommended value: <input type="text" size="3" maxlength="3" class="numberinput" value="5" /><br />
+        Minimum: <input type="text" size="3" maxlength="3" class="numberinput" value="0" /><br />
+        Maximum: <input type="text" size="3" maxlength="3" class="numberinput" value="100" /><br />
+        Database record name: <tt class="code">fullsize_padding_x</tt><br />
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Image view &rarr; Horizontal padding for full-size pop-up
+    </div>
+    <p>This setting is used to determine the width of a full-size pop-up, as most major browsers mysteriously add some padding to pics opened in a pop-up. It's recommended to leave this set to the default 5 pixels unless you know what you're doing.</p>
+
+
+    <a name="admin_picture_thumbnail_fullsize_padding_x_end"></a>
+    <br clear="all" style="clear:both;" />
+    <a name="admin_picture_thumbnail_fullsize_padding_y"></a><h3>Vertical padding for full-size pop-up<a href="#admin_picture_thumbnail_fullsize_padding_y" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <div class="cpg_summary">
+        Default value: <input type="text" size="3" maxlength="3" class="numberinput" value="5" /><br />
+        Recommended value: <input type="text" size="3" maxlength="3" class="numberinput" value="5" /><br />
+        Minimum: <input type="text" size="3" maxlength="3" class="numberinput" value="0" /><br />
+        Maximum: <input type="text" size="3" maxlength="3" class="numberinput" value="100" /><br />
+        Database record name: <tt class="code">fullsize_padding_y</tt><br />
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: Image view &rarr; Vertical padding for full-size pop-up
+    </div>
+    <p>This setting is used to determine the height of a full-size pop-up, as most major browsers mysteriously add some padding to pics opened in a pop-up. It's recommended to leave this set to the default 3 pixels unless you know what you're doing.</p>
+
+
+    <a name="admin_picture_thumbnail_fullsize_padding_y_end"></a>
     <br clear="all" style="clear:both;" />
 </div>
 <a name="admin_image_comment_end"></a>
@@ -1733,65 +1786,11 @@
 
 
     <a name="admin_picture_thumbnail_auto-resize_end"></a>
-    <br clear="all" style="clear:both;" />
-    <a name="admin_picture_thumbnail_fullsize_padding_x"></a><h3>Horizontal padding for full-size pop-up<a href="#admin_picture_thumbnail_fullsize_padding_x" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-    <div class="cpg_summary">
-        Default value: <input type="text" size="3" maxlength="3" class="numberinput" value="5" /><br />
-        Recommended value: <input type="text" size="3" maxlength="3" class="numberinput" value="5" /><br />
-        Minimum: <input type="text" size="3" maxlength="3" class="numberinput" value="0" /><br />
-        Maximum: <input type="text" size="3" maxlength="3" class="numberinput" value="100" /><br />
-        Database record name: <tt class="code">fullsize_padding_x</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings &rarr; Horizontal padding for full-size pop-up
-    </div>
-    <p>This setting is used to determine the width of a full-size pop-up, as most major browsers mysteriously add some padding to pics opened in a pop-up. It's recommended to leave this set to the default 5 pixels unless you know what you're doing.</p>
-
-
-    <a name="admin_picture_thumbnail_fullsize_padding_x_end"></a>
-    <br clear="all" style="clear:both;" />
-    <a name="admin_picture_thumbnail_fullsize_padding_y"></a><h3>Vertical padding for full-size pop-up<a href="#admin_picture_thumbnail_fullsize_padding_y" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-    <div class="cpg_summary">
-        Default value: <input type="text" size="3" maxlength="3" class="numberinput" value="5" /><br />
-        Recommended value: <input type="text" size="3" maxlength="3" class="numberinput" value="5" /><br />
-        Minimum: <input type="text" size="3" maxlength="3" class="numberinput" value="0" /><br />
-        Maximum: <input type="text" size="3" maxlength="3" class="numberinput" value="100" /><br />
-        Database record name: <tt class="code">fullsize_padding_y</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings &rarr; Vertical padding for full-size pop-up
-    </div>
-    <p>This setting is used to determine the height of a full-size pop-up, as most major browsers mysteriously add some padding to pics opened in a pop-up. It's recommended to leave this set to the default 3 pixels unless you know what you're doing.</p>
-
-
-    <a name="admin_picture_thumbnail_fullsize_padding_y_end"></a>
     <a name="admin_picture_thumbnail_end"></a>
     <br clear="all" style="clear:both;" />
 
 
     <a name="admin_picture_thumb_advanced"></a>
-    <a name="admin_picture_thumb_advanced_private_toggle"></a><h3>Albums can be private<a href="#admin_picture_thumb_advanced_private_toggle" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-    <div class="cpg_summary">
-        Default value: <input type="checkbox" disabled="disabled" class="checkbox" checked="checked" /><br />
-        Recommended value: <input type="checkbox" disabled="disabled" class="checkbox" checked="checked" /><br />
-        Database record name: <tt class="code">allow_private_albums</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings &rarr; Albums can be private
-    </div>
-    <p>If set to YES then your gallery can contain albums that are visible only to users that belong to a specified group. This is ideal for creating albums that contain files that you want accessible to only a select group of people.  You could also create a userID and password and inform specific users/customers of the ID and password needed to view these files. </p>
-    <p>If a user is a member of a group that can have its own gallery and this option is turned on then this user will have the permission to hide any of his/her albums from other users.</p>
-    <p>This option does <strong>not</strong> determine whether users can have personal galleries at all, <strong>nor</strong> does it determine who is allowed to upload and who is not (these settings are accessible in the <a href="groups.htm#group_cp">groups manager</a>). You should only set this option to NO if you really know what you're doing (by default, it is set to YES).</p>
-    <p class="cpg_message_error">Note: if you switch from 'yes' to 'no' all currently private albums will become public! Do not set this option to 'no' unless you understand what this option actually does!</p>
-
-    <a name="admin_picture_thumb_advanced_private_toggle_end"></a>
-    <br clear="all" style="clear:both;" />
-    <a name="admin_picture_thumb_advanced_private_icon_show"></a><h3>Show private album icon to unlogged user<a href="#admin_picture_thumb_advanced_private_icon_show" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-    <div class="cpg_summary">
-        Default value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
-        Recommended value: <abbr title="not applicable">n/a</abbr><br />
-        Database record name: <tt class="code">show_private</tt><br />
-        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings &rarr; Show private album icon to unlogged user
-    </div>
-    <p>Toggles the display of the private album icons to unlogged users.<br />Set to 'NO', the album is completely hidden from unauthorised users.<br />Set to 'YES', the album name, description and statistics are shown, but not the thumbnails or files contained within.</p>
-    <p>It is recommended to enable this option especially if you want to encourage visitors to register (this does of course only make sense if you allow registered users to see albums that guests are not allowed to see).</p>
-
-    <a name="admin_picture_thumb_advanced_private_icon_show_end"></a>
-    <br clear="all" style="clear:both;" />
     <a name="admin_picture_thumb_advanced_filename_forbidden_chars"></a><h3>Characters forbidden in filenames<a href="#admin_picture_thumb_advanced_filename_forbidden_chars" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="text" size="18" maxlength="18" class="textinput" value="$/\:*?&quot;&#039;&lt;&gt;|` &amp;#@" /><br />
