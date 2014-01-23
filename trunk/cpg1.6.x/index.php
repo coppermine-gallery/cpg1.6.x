@@ -268,6 +268,23 @@ function get_subcat_data(&$cat_data)
         return false;
     }
 
+    function cpg_get_last_visible_cid($categories, $lft) {
+        global $CONFIG, $CURRENT_CAT_DEPTH;
+
+        static $lft_cid_map = array();
+
+        if (array_key_exists($lft, $lft_cid_map)) {
+            return $lft_cid_map[$lft];
+        }
+
+        foreach ($categories as $cid => $cat) {
+            if ($cat['details']['level'] == $CURRENT_CAT_DEPTH + $CONFIG['subcat_level'] && $lft > $cat['details']['lft'] && $lft < $cat['details']['rgt']) {
+                $lft_cid_map[$lft] = $cid;
+                return $cid;
+            }
+        }
+    }
+
     $categories    = array();
     $forbidden_set = (!$CONFIG['show_private'] && $FORBIDDEN_SET_DATA) ? "AND r.aid NOT IN (" . implode(', ', $FORBIDDEN_SET_DATA) . ")" : "";
     $lft_rgt       = $rgt ? "AND lft BETWEEN $lft AND $rgt" : "";
@@ -277,7 +294,7 @@ function get_subcat_data(&$cat_data)
 
     // collect info about all normal categories
     // restrict to 'subcat_level' categories deeper than current depth
-    $sql = "SELECT cid, name, description, thumb, depth AS level, '0' AS alb_count
+    $sql = "SELECT cid, lft, rgt, name, description, thumb, depth AS level, '0' AS alb_count
         FROM {$CONFIG['TABLE_CATEGORIES']}
         WHERE depth BETWEEN $CURRENT_CAT_DEPTH + 1 AND $CURRENT_CAT_DEPTH + {$CONFIG['subcat_level']}
         $lft_rgt
@@ -309,11 +326,11 @@ function get_subcat_data(&$cat_data)
 
     mysql_free_result($result);
 
-    // collect album info and album counts for categories that are visible
-    $sql = "SELECT aid, title, r.description, keyword, alb_hits, category, visibility, r.thumb, r.owner, '0' AS pic_count
+    // collect album info and album counts
+    $sql = "SELECT aid, title, r.description, keyword, alb_hits, category, visibility, r.thumb, r.owner, depth AS level, lft, '0' AS pic_count
         FROM {$CONFIG['TABLE_CATEGORIES']} AS c
         INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS r ON r.category = c.cid
-        WHERE c.depth BETWEEN $CURRENT_CAT_DEPTH + 1 AND $CURRENT_CAT_DEPTH + {$CONFIG['subcat_level']}
+        WHERE c.depth >= $CURRENT_CAT_DEPTH + 1
         $forbidden_set
         $lft_rgt
         ORDER BY r.pos, r.aid";
@@ -321,18 +338,23 @@ function get_subcat_data(&$cat_data)
     $result = cpg_db_query($sql);
 
     while ($row = mysql_fetch_assoc($result)) {
-        $categories[$row['category']]['subalbums'][$row['aid']] = $row;
-        $categories[$row['category']]['details']['alb_count']++;
+        if ($row['level'] > $CURRENT_CAT_DEPTH + $CONFIG['subcat_level']) {
+            // add album count for invisible sub-categories to last visible category
+            $categories[cpg_get_last_visible_cid($categories, $row['lft'])]['details']['alb_count']++;
+        } else {
+            $categories[$row['category']]['subalbums'][$row['aid']] = $row;
+            $categories[$row['category']]['details']['alb_count']++;
+        }
     }
 
     mysql_free_result($result);
 
     // album stats for regular albums
-    $sql = "SELECT c.cid, r.aid, COUNT(pid) AS pic_count, MAX(pid) AS last_pid, MAX(ctime) AS last_upload
+    $sql = "SELECT c.cid, r.aid, COUNT(pid) AS pic_count, MAX(pid) AS last_pid, MAX(ctime) AS last_upload, depth AS level, lft
         FROM {$CONFIG['TABLE_CATEGORIES']} AS c
         INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS r ON r.category = c.cid
         INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.aid = r.aid
-        WHERE c.depth BETWEEN $CURRENT_CAT_DEPTH + 1 AND $CURRENT_CAT_DEPTH + {$CONFIG['subcat_level']}
+        WHERE c.depth >= $CURRENT_CAT_DEPTH + 1
         AND approved = 'YES'
         $forbidden_set
         GROUP BY r.aid
@@ -341,9 +363,14 @@ function get_subcat_data(&$cat_data)
     $result = cpg_db_query($sql);
 
     while ($row = mysql_fetch_assoc($result)) {
-        $categories[$row['cid']]['subalbums'][$row['aid']]['pic_count']   = $row['pic_count'];
-        $categories[$row['cid']]['subalbums'][$row['aid']]['last_pid']    = $row['last_pid'];
-        $categories[$row['cid']]['subalbums'][$row['aid']]['last_upload'] = $row['last_upload'];
+        if ($row['level'] > $CURRENT_CAT_DEPTH + $CONFIG['subcat_level']) {
+            // add picture count for invisible sub-categories to last visible category
+            $categories[cpg_get_last_visible_cid($categories, $row['lft'])]['subalbums'][$row['aid']]['pic_count'] += $row['pic_count'];
+        } else {
+            $categories[$row['cid']]['subalbums'][$row['aid']]['pic_count']   = $row['pic_count'];
+            $categories[$row['cid']]['subalbums'][$row['aid']]['last_pid']    = $row['last_pid'];
+            $categories[$row['cid']]['subalbums'][$row['aid']]['last_upload'] = $row['last_upload'];
+        }
     }
 
     mysql_free_result($result);
@@ -364,7 +391,7 @@ function get_subcat_data(&$cat_data)
             foreach ($cat['subalbums'] as $alb) {
                 $pic_count += $alb['pic_count'];
             }
-        } // if
+        }
 
         if (!empty($cat['subalbums'])) {
             $cat['subalbums'] = array_slice_preserve_keys($cat['subalbums'], 0, $CONFIG['albums_per_page'], true);
