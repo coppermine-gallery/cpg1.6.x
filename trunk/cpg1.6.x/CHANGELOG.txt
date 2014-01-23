@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2014-01-23 [D] Updated known issues page {eenemeenemuu}
 2014-01-23 [B] Fixed album and file count if category contains private albums {eenemeenemuu}
 2014-01-22 [O] Optimized main page code to reduce database query count {eenemeenemuu}
 2014-01-21 [D] Fixed various documentation glitches {eenemeenemuu}
