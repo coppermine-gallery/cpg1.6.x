@@ -269,6 +269,7 @@ function get_subcat_data(&$cat_data)
     }
 
     $categories     = array();
+    $forbidden_set = (!$CONFIG['show_private'] && $FORBIDDEN_SET_DATA) ? "AND r.aid NOT IN (" . implode(', ', $FORBIDDEN_SET_DATA) . ")" : "";
 
     //TODO: optimize this for when first level album thumbs are disabled
     // all we need then is a count
@@ -289,7 +290,6 @@ function get_subcat_data(&$cat_data)
     $result = cpg_db_query($sql);
 
     while ( ($row = mysql_fetch_assoc($result)) ) {
-
         $categories[$row['cid']]['details'] = $row;
         unset($categories[$row['cid']]['details']['cid']);
 
@@ -297,14 +297,11 @@ function get_subcat_data(&$cat_data)
             // collect stats for albums in the user galleries category
             // all we need here is the total number of albums and pictures
             $sql = "SELECT COUNT(DISTINCT(p.aid)) AS alb_count, COUNT(*) AS pic_count
-                FROM {$CONFIG['TABLE_ALBUMS']} AS a
-                INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.aid = a.aid
-                WHERE a.category > " . FIRST_USER_CAT . "
-                AND approved = 'YES'";
-
-            if ($FORBIDDEN_SET_DATA) {
-                $sql .= 'AND a.aid NOT IN (' . implode(', ', $FORBIDDEN_SET_DATA) . ')';
-            }
+                FROM {$CONFIG['TABLE_ALBUMS']} AS r
+                INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.aid = r.aid
+                WHERE r.category > " . FIRST_USER_CAT . "
+                AND approved = 'YES'
+                $forbidden_set";
 
             $result2 = cpg_db_query($sql);
 
@@ -322,7 +319,8 @@ function get_subcat_data(&$cat_data)
     $sql = "SELECT aid, title, r.description, keyword, alb_hits, category, visibility, r.thumb, r.owner, '0' AS pic_count
         FROM {$CONFIG['TABLE_CATEGORIES']} AS c
         INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS r ON r.category = c.cid
-        WHERE c.depth BETWEEN $CURRENT_CAT_DEPTH + 1 AND $CURRENT_CAT_DEPTH + {$CONFIG['subcat_level']}";
+        WHERE c.depth BETWEEN $CURRENT_CAT_DEPTH + 1 AND $CURRENT_CAT_DEPTH + {$CONFIG['subcat_level']}
+        $forbidden_set";
 
     // if we are in a cat only get info for albums in that cat
     if ($rgt) {
@@ -334,14 +332,9 @@ function get_subcat_data(&$cat_data)
     $result = cpg_db_query($sql);
 
     while ( ($row = mysql_fetch_assoc($result)) ) {
-
-        if (!$CONFIG['show_private'] && in_array($row['aid'], $FORBIDDEN_SET_DATA)) {
-            continue;
-        }
-
         $categories[$row['category']]['details']['alb_count']++;
         $categories[$row['category']]['subalbums'][$row['aid']] = $row;
-    } // while
+    }
 
     mysql_free_result($result);
 
@@ -350,9 +343,9 @@ function get_subcat_data(&$cat_data)
         FROM {$CONFIG['TABLE_CATEGORIES']} AS c
         INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS r ON r.category = c.cid
         INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.aid = r.aid
-        $RESTRICTEDWHERE
+        WHERE c.depth BETWEEN $CURRENT_CAT_DEPTH + 1 AND $CURRENT_CAT_DEPTH + {$CONFIG['subcat_level']}
         AND approved = 'YES'
-        AND c.depth BETWEEN $CURRENT_CAT_DEPTH + 1 AND $CURRENT_CAT_DEPTH + {$CONFIG['subcat_level']}
+        $forbidden_set
         GROUP BY r.aid
         ORDER BY NULL";
 
