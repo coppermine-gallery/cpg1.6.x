@@ -28,7 +28,7 @@ if (defined('UDB_INTEGRATION')) {
     $cpg_udb->login_page();
 }
 
-if (strpos($CPG_REFERER, "logout.php") !== false) {
+if (strpos($CPG_REFERER, "logout.php") !== false || strpos($CPG_REFERER, "register.php") !== false) {
     $CPG_REFERER = "index.php";
 }
 
