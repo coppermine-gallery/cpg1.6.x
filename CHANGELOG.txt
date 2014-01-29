@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2014-01-29 [B] Fixed function 'starttable' in theme 'curve' to make fully compatible with plugin hook 'search_form' {eenemeenemuu}
 2014-01-29 [A] Added possibility to use pictures linked to albums via album keyword as category thumbnail (thread ID 77008) {eenemeenemuu}
 2014-01-28 [B] Don't redirect to registration form after login (thread ID 77140) {eenemeenemuu}
 2014-01-23 [C] Moved config options "Horizontal/vertical padding for full-size pop-up", "Albums can be private" and "Show private album icon to unlogged user" to other groups {eenemeenemuu}

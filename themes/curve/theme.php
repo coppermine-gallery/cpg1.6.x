@@ -363,20 +363,20 @@ $template_user_admin_menu = <<<EOT
 EOT;
 
 // Function to start a 'standard' table
-function starttable($width = '-1', $title = '', $title_colspan = '1', $zebra_class = '')
+function starttable($width = '-1', $title = '', $title_colspan = '1', $zebra_class = '', $return = false)
 {
     global $CONFIG;
 
     if ($width == '-1') $width = $CONFIG['picture_table_width'];
     if ($width == '100%') $width = $CONFIG['main_table_width'];
-    echo <<<EOT
+    $text = <<<EOT
 
 <!-- Start standard table -->
 <table align="center" width="$width" cellspacing="1" cellpadding="0" class="maintable $zebra_class">
 
 EOT;
     if ($title) {
-        echo <<<EOT
+        $text .= <<<EOT
         <tr>
                 <td class="" colspan="$title_colspan">
                     <div class="cpg_starttable_outer">
@@ -388,7 +388,11 @@ EOT;
         </tr>
 
 EOT;
+    }
+    if (!$return) {
+        echo $text;
     } else {
+        return $text;
     }
 }
 
