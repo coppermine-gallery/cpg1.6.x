@@ -61,14 +61,14 @@ if (mysql_num_rows($result)) {
         $spread = 1;
     }
 
-    $step = ((25 - 10) / $spread);
+    $step = (25 - 10) / sqrt($spread);
 
     // Result to table
     echo '<tr><td class="tableb">';
     for ($i = 0; $i < $count; $i++) {
         if ($keywords_array[$i]) { // Eliminates Null Keywords
 
-            $fontSize = (10 + ($keyword_count[$keywords_array[$i]] - $minQuantity) * $step);
+            $fontSize = round(10 + sqrt($keyword_count[$keywords_array[$i]] - $minQuantity) * $step);
             $keyword_param = urlencode($keywords_array[$i]);
             echo '<a href="thumbnails.php?album=search&amp;keywords=on&amp;search='.$keyword_param.'" style="font-size: '.$fontSize.'px;">'.htmlspecialchars($keywords_array[$i]).'</a>';
             if ($i<$count-1) { // Don't keep space after last keyword
