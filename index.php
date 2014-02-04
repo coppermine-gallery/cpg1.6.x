@@ -357,6 +357,7 @@ function get_subcat_data(&$cat_data)
         WHERE c.depth >= $CURRENT_CAT_DEPTH + 1
         AND approved = 'YES'
         $forbidden_set
+        $lft_rgt
         GROUP BY r.aid
         ORDER BY NULL";
 
