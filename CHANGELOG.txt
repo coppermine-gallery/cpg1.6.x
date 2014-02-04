@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2014-02-04 [O] Replaced some jQuery code with plain JavaScript code to make admin tools compatible with later jQuery versions, in case users want to upgrade (thread ID 76858) {eenemeenemuu}
 2014-01-29 [C] Altered font size calculation of clickable keyword list (thread ID 76928) {eenemeenemuu}
 2014-01-29 [B] Fixed function 'starttable' in theme 'curve' to make fully compatible with plugin hook 'search_form' {eenemeenemuu}
 2014-01-29 [A] Added possibility to use pictures linked to albums via album keyword as category thumbnail (thread ID 77008) {eenemeenemuu}
