@@ -88,7 +88,7 @@ define ('ISPK_URI_ALLOW_COMMON', 1);
  * regex used to define what we're calling a valid domain name
  *
  */
-define ('ISPK_DNS_VALID', '/^(?:[^\W_]((?:[^\W_]|-){0,61}[^\W_])?\.)+[a-zA-Z]{2,6}\.?$/');
+define ('ISPK_DNS_VALID', '/^(?:[^\W_]((?:[^\W_]|-){0,61}[^\W_])?\.)+[a-zA-Z]{2,63}\.?$/');
 
 /**
  * regex used to define what we're calling a valid email
@@ -98,7 +98,7 @@ define ('ISPK_DNS_VALID', '/^(?:[^\W_]((?:[^\W_]|-){0,61}[^\W_])?\.)+[a-zA-Z]{2,
  *
  * @see http://www.regular-expressions.info/email.html
  */
-define ('ISPK_EMAIL_VALID', '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/');
+define ('ISPK_EMAIL_VALID', '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$/');
 
 /**
  * @package    Inspekt
