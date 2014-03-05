@@ -150,11 +150,18 @@ if ($get_data_rejected==0) { // individual approval start
         if ($single_approval_array['what'] == 'approve') {
             $query_approval = 'YES';
             $title = $lang_reviewcom_php['comment_approved'];
+            $approved_yes_set = $single_approval_array['msg_id'];
+            $approved_no_set = '';
         } else {
             $query_approval = 'NO';
             $title = $lang_reviewcom_php['comment_unapproved'];
+            $approved_no_set = $single_approval_array['msg_id'];
+            $approved_yes_set = '';
         }
         cpg_db_query("UPDATE {$CONFIG['TABLE_COMMENTS']} SET `approval` = '{$query_approval}' WHERE msg_id = {$single_approval_array['msg_id']}");
+
+        CPGPluginAPI::action('comment_approve', array('approved_yes_set' => $approved_yes_set, 'approved_no_set' => $approved_no_set));
+
         starttable('-2', $title, 2);
         print <<< EOT
         <tr>
@@ -224,6 +231,8 @@ if ($superCage->post->keyExists('total_message_id_collector')) {
         cpg_db_query("UPDATE {$CONFIG['TABLE_COMMENTS']} SET `approval` = 'NO' WHERE msg_id IN ($approved_no_set)");
         $nb_com_no = mysql_affected_rows();
     }
+
+    CPGPluginAPI::action('comment_approve', array('approved_yes_set' => $approved_yes_set, 'approved_no_set' => $approved_no_set));
 }
 
 $nb_com_del = 0;
@@ -648,7 +657,7 @@ echo <<<EOT
 
 EOT;
 endtable();
-list($timestamp, $form_token) = getFormToken();	
+list($timestamp, $form_token) = getFormToken();
 echo "<input type=\"hidden\" name=\"form_token\" value=\"{$form_token}\" />
      <input type=\"hidden\" name=\"timestamp\" value=\"{$timestamp}\" /></form>";
 

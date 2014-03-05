@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2014-03-05 [A] Added plugin hooks 'comment_update', 'comment_add' and 'comment_approve' (thread ID 60896) {eenemeenemuu}
 2014-03-05 [A] Added plugin hook 'theme_thumbnails_header' {eenemeenemuu}
 2014-02-04 [O] Replaced some jQuery code with plain JavaScript code to make admin tools compatible with later jQuery versions, in case users want to upgrade (thread ID 76858) {eenemeenemuu}
 2014-01-29 [C] Altered font size calculation of clickable keyword list (thread ID 76928) {eenemeenemuu}

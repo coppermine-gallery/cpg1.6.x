@@ -118,6 +118,7 @@ case 'comment_update':
             cpg_db_query("UPDATE {$CONFIG['TABLE_COMMENTS']} SET msg_body = '$msg_body' WHERE msg_id = '$msg_id' AND author_md5_id = '{$USER['ID']}' AND author_id = 0 LIMIT 1");
         }
     }
+    CPGPluginAPI::action('comment_update', $msg_id);
 
     $header_location = (@preg_match('/Microsoft|WebSTAR|Xitami/', getenv('SERVER_SOFTWARE'))) ? 'Refresh: 0; URL=' : 'Location: ';
 
@@ -298,6 +299,8 @@ case 'comment':
 
         $USER['name'] = $msg_author;
 
+        CPGPluginAPI::action('comment_add', array('msg_id' => cpg_db_last_insert_id(), 'pid' => $pid, 'msg_author' => $msg_author, 'author_id' => '0', 'msg_body' => $msg_body, 'approval' => $app));
+
         $redirect = "displayimage.php?pid=$pid";
 
         if ($CONFIG['email_comment_notification']) {
@@ -345,6 +348,8 @@ case 'comment':
         }
 
         cpg_db_query("INSERT INTO {$CONFIG['TABLE_COMMENTS']} (pid, msg_author, msg_body, msg_date, author_md5_id, author_id, msg_raw_ip, msg_hdr_ip, approval, spam) VALUES ('$pid', '" . addslashes(USER_NAME) . "', '$msg_body', NOW(), '', '" . USER_ID . "', '$raw_ip', '$hdr_ip', '$app', '$spam')");
+
+        CPGPluginAPI::action('comment_add', array('msg_id' => cpg_db_last_insert_id(), 'pid' => $pid, 'msg_author' => $msg_author, 'author_id' => USER_ID, 'msg_body' => $msg_body, 'approval' => $app));
 
         $redirect = "displayimage.php?pid=$pid";
 
