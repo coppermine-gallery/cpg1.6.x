@@ -747,16 +747,22 @@ $template_image_comments = CPGPluginAPI::filter('theme_edit_comment', $template_
     <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
     <td valign="top"><a name="plugin_hooks_filename_theme_thumbnails_wrapper_start"></a><strong>theme_thumbnails_wrapper_start</strong><a href="#plugin_hooks_filename_theme_thumbnails_wrapper_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Action</td>
-    <td valign="top">Allows plugin authors to output content before the thumbnail table starts, which is particularly helpfull top start a &lt;form&gt;-tag.</td>
+    <td valign="top">Allows plugin authors to output content before the thumbnail table starts, which is particularly helpful top start a &lt;form&gt;-tag.</td>
     <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('theme_thumbnails_wrapper_start', null);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
+    <td valign="top"><a name="plugin_hooks_filename_theme_thumbnails_header"></a><strong>theme_thumbnails_header</strong><a href="#plugin_hooks_filename_theme_thumbnails_header" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">Allows plugin authors to output content before the first row of thumbnails, after the opening table tag. Can be used to add a header row to the table.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$header = CPGPluginAPI::filter('theme_thumbnails_header', $header);</textarea></td>
   </tr>
   <tr>
     <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
     <td valign="top"><a name="plugin_hooks_filename_theme_thumbnails_footer"></a><strong>theme_thumbnails_footer</strong><a href="#plugin_hooks_filename_theme_thumbnails_footer" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Filter</td>
-    <td valign="top">Allows plugin authors to output content after the last row of thumbnails, before the closing table tag. Can be used to add a footer row of the table</td>
-    <td valign="top"><textarea class="samplecode" style="width:100%">$footer = CPGPluginAPI::filter('theme_thumbnails_footer', $footer);
-echo $footer;</textarea></td>
+    <td valign="top">Allows plugin authors to output content after the last row of thumbnails, before the closing table tag. Can be used to add a footer row to the table.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$footer = CPGPluginAPI::filter('theme_thumbnails_footer', $footer);</textarea></td>
   </tr>
   <tr>
     <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
@@ -994,6 +1000,7 @@ echo $footer;</textarea></td>
                 <li class="floatleft"><a href="#plugin_hooks_filename_theme_pageheader_params">theme_pageheader_params</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_theme_thumbnails_album_types">theme_thumbnails_album_types</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_filename_theme_thumbnails_footer">theme_thumbnails_footer</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_filename_theme_thumbnails_header">theme_thumbnails_header</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_filename_theme_thumbnails_title">theme_thumbnails_title</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_filename_theme_thumbnails_wrapper_end">theme_thumbnails_wrapper_end</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_filename_theme_thumbnails_wrapper_start">theme_thumbnails_wrapper_start</a></li>
@@ -1088,6 +1095,7 @@ list($pic_title) = CPGPluginAPI::filter('<a href="#plugin_hooks_thumb_html_title
 list($pic_title) = CPGPluginAPI::filter('<a href="#plugin_hooks_thumb_strip_html_title">thumb_strip_html_title</a>', array($pic_title, $row));<br />
 $pic_row = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumb_data">thumb_data</a>',$pic_row);<br />
 $params = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_thumbnail_params">theme_display_thumbnails_params</a>', $params);<br />
+$header = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_theme_thumbnails_header">theme_thumbnails_header</a>', $header);<br />
 $footer = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_theme_thumbnails_footer">theme_thumbnails_footer</a>', $footer);<br />
 $params = CPGPluginAPI::filter('<a href="#plugin_hooks_filename_theme_thumbnails_title">theme_thumbnails_title</a>', $param);</div>
 <p>These two filters are used specifically to manipulate the data of a picture.</p>
