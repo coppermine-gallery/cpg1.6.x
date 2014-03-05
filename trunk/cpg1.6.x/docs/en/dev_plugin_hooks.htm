@@ -104,10 +104,25 @@
   </tr>
   <tr>
     <td valign="top">db_input.php</td>
+    <td valign="top"><a name="plugin_hooks_comment_update"></a><strong>comment_update</strong><a href="#plugin_hooks_comment_update" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Action</td>
+    <td valign="top">Plugin action to be called when comment is updated</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('comment_update', $msg_id);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">db_input.php</td>
     <td valign="top"><a name="plugin_hooks_captcha_comment_validate"></a><strong>captcha_comment_validate</strong><a href="#plugin_hooks_captcha_comment_validate" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Action</td>
-    <td valign="top">action when CAPTCHA is enabled and allows you to override the standard CAPTCHA validation for comments</td>
+    <td valign="top">Plugin action to be called if CAPTCHA is enabled - allows you to override the standard CAPTCHA validation for comments</td>
     <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('captcha_comment_validate', null);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">db_input.php</td>
+    <td valign="top"><a name="plugin_hooks_comment_add"></a><strong>comment_add</strong><a href="#plugin_hooks_comment_add" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Action</td>
+    <td valign="top">Plugin action to be called when comment is added</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('comment_add', array('msg_id' => cpg_db_last_insert_id(), 'pid' => $pid, 'msg_author' => $msg_author, 'author_id' => '0', 'msg_body' => $msg_body, 'approval' => $app));
+    CPGPluginAPI::action('comment_add', array('msg_id' => cpg_db_last_insert_id(), 'pid' => $pid, 'msg_author' => $msg_author, 'author_id' => USER_ID, 'msg_body' => $msg_body, 'approval' => $app));</textarea></td>
   </tr>
   <tr>
     <td valign="top">db_input.php</td>
@@ -289,6 +304,13 @@
     <td valign="top">Action</td>
     <td valign="top">Perform an action when the user account is activated</td>
     <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('register_user_activation', $act_key);</textarea></td>
+  </tr>
+  <tr>
+    <td valign="top">reviewcom.php</td>
+    <td valign="top"><a name="plugin_hooks_reviewcom_comment_approve"></a><strong>comment_approve</strong><a href="#plugin_hooks_reviewcom_comment_approve" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Action</td>
+    <td valign="top">Plugin action to be called when one or more comments are approved</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">CPGPluginAPI::action('comment_approve', array('approved_yes_set' => $approved_yes_set, 'approved_no_set' => $approved_no_set));</textarea></td>
   </tr>
   <tr>
     <td valign="top">reviewcom.php</td>
@@ -855,6 +877,9 @@ $template_image_comments = CPGPluginAPI::filter('theme_edit_comment', $template_
                 <li class="floatleft"><a href="#plugin_hooks_captcha_ecard_validate">captcha_ecard_validate</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_captcha_register_print">captcha_register_print</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_captcha_register_validate">captcha_register_validate</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_comment_add">comment_add</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_reviewcom_comment_approve">comment_approve</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_comment_update">comment_update</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_filename_cpg_mail_sender_email">cpg_mail_sender_email</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_filename_cpg_mail_to_email">cpg_mail_to_email</a></li>
             </ul>
