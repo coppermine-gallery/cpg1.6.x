@@ -2891,6 +2891,7 @@ function theme_display_thumbnails(&$thumb_list, $nbThumb, $album_name, $aid, $ca
         starttable('100%');
     }
 
+    $header = CPGPluginAPI::filter('theme_thumbnails_header', $header);
     echo $header;
 
     $i = 0;
