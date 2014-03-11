@@ -84,31 +84,30 @@ case 'display':
                 continue;
             }
 
-            $orig_word       = $word;
-            $orig_word_param = urlencode(addslashes(str_replace(' ', '+', $orig_word)));
-            $orig_word_label = addslashes($orig_word);
-            $lowercase_word  = utf_strtolower($orig_word);
-            $lowercase_word  = addslashes($lowercase_word);
-            $confirm_delete  = sprintf($lang_keywordmgr_php['confirm_delete'], '&quot;' . $orig_word_label . '&quot;');
-            $title           = sprintf($lang_keywordmgr_php['keyword_del'], '&quot;' . $orig_word . '&quot;');
-            $search_link     = sprintf($lang_keywordmgr_php['keyword_test_search'], '&quot;' . $orig_word . '&quot;');
+            $word_escaped    = htmlspecialchars($word);
+            $word_param      = urlencode($word);
+            $word_label      = addslashes($word_escaped);
+            $lowercase_word  = addslashes(utf_strtolower($word_escaped));
+            $confirm_delete  = sprintf($lang_keywordmgr_php['confirm_delete'], '&quot;' . $word_label . '&quot;');
+            $title           = sprintf($lang_keywordmgr_php['keyword_del'], '&quot;' . $word_escaped . '&quot;');
+            $search_link     = sprintf($lang_keywordmgr_php['keyword_test_search'], '&quot;' . $word_escaped . '&quot;');
 
             $word = <<<EOT
 
     <tr>
         <td class="tableb">
-            <input type="radio" class="radio" name="keywordEdit" value="$lowercase_word" onclick="document.keywordForm.newword.value='$orig_word_label'" id="keyword{$i}" />
-            <label for="keyword{$i}" class="clickable_option" title="{$lang_common['edit']} &quot;{$orig_word}&quot;">
-                 $edit_icon $orig_word
+            <input type="radio" class="radio" name="keywordEdit" value="$lowercase_word" onclick="document.keywordForm.newword.value='$word_label'" id="keyword{$i}" />
+            <label for="keyword{$i}" class="clickable_option" title="{$lang_common['edit']} &quot;{$word_escaped}&quot;">
+                 $edit_icon $word_escaped
             </label>
         </td>
         <td class="tableb">
-            <a href="keywordmgr.php?page=delete&amp;remove=$orig_word_param&amp;form_token={$form_token}&amp;timestamp={$timestamp}" onclick="return confirm('$confirm_delete')" title="$title">
-                $delete_icon $orig_word
+            <a href="keywordmgr.php?page=delete&amp;remove=$word_param&amp;form_token={$form_token}&amp;timestamp={$timestamp}" onclick="return confirm('$confirm_delete')" title="$title">
+                $delete_icon $word_escaped
             </a>
         </td>
         <td class="tableb">
-            <a href="thumbnails.php?album=search&amp;keywords=on&amp;search=$orig_word_param" target="_blank">
+            <a href="thumbnails.php?album=search&amp;keywords=on&amp;search=$word_param" target="_blank">
                 $search_icon $search_link
             </a>
         </td>
@@ -161,7 +160,7 @@ case 'changeword':
 
     if ($request_keywordEdit && $request_newword) {
 
-        $keywordEdit = addslashes($request_keywordEdit);
+        $keywordEdit = $request_keywordEdit;
 
         $query = "SELECT pid, keywords FROM {$CONFIG['TABLE_PICTURES']} WHERE CONCAT('$keysep', `keywords`, '$keysep') LIKE '%{$keysep}{$keywordEdit}{$keysep}%'";
 
@@ -171,13 +170,15 @@ case 'changeword':
 
             $array_new = array();
 
-            $array_old = explode($keysep, addslashes(trim(html_entity_decode($keywords))));
+            $array_old = explode($keysep, trim(html_entity_decode($keywords)));
 
             foreach ($array_old as $word) {
 
                 // convert old to new if it's the same word
-                if (utf_strtolower(Inspekt::getEscaped($word)) == $keywordEdit) {
-                    $word = addslashes(html_entity_decode($request_newword));
+                if (utf_strtolower(Inspekt::getEscaped($word)) == utf_strtolower($keywordEdit)) {
+                    echo $word = html_entity_decode($request_newword);
+                } elseif (utf_strtolower(addslashes(Inspekt::getEscaped($word))) == utf_strtolower($keywordEdit)) { // needed to detect previously added keywords with spare slashes
+                    $word = html_entity_decode($request_newword);
                 }
 
                 // rebuild array to reprocess it
@@ -212,8 +213,6 @@ case 'delete':
         $remove = $superCage->post->getEscaped('remove');
     }
 
-    $remove = urldecode($remove);
-
     $query = "SELECT pid, keywords FROM {$CONFIG['TABLE_PICTURES']} WHERE CONCAT('$keysep', keywords, '$keysep') LIKE '%{$keysep}{$remove}{$keysep}%'";
 
     $result = cpg_db_query($query);
@@ -221,7 +220,7 @@ case 'delete':
     while (list($id, $keywords) = mysql_fetch_row($result)) {
 
         $array_new = array();
-        $array_old = explode($keysep, addslashes(trim(html_entity_decode($keywords))));
+        $array_old = explode($keysep, trim(html_entity_decode($keywords)));
 
         foreach ($array_old as $word) {
 
