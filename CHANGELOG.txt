@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2014-03-11 [A] Added function 'theme_album_info' to make information which is displayed next to each album themeable {eenemeenemuu}
 2014-03-05 [A] Increased character limit to allow recently released top level domains (thread ID 77183) {eenemeenemuu}
 2014-03-05 [A] Added plugin hooks 'comment_update', 'comment_add' and 'comment_approve' (thread ID 60896) {eenemeenemuu}
 2014-03-05 [A] Added plugin hook 'theme_thumbnails_header' {eenemeenemuu}

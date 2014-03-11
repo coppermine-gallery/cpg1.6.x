@@ -4195,7 +4195,6 @@ EOT;
 ******************************************************************************/
 }  //{THEMES}
 
-
 if (!function_exists('theme_vanity')) {  //{THEMES}
 /******************************************************************************
 ** Section <<<theme_vanity>>> - START
@@ -4389,6 +4388,28 @@ function adminmessages()
 }
 /******************************************************************************
 ** Section <<<adminmessages>>> - END
+******************************************************************************/
+} //{THEMES}
+
+if (!function_exists('theme_album_info')) { //{THEMES}
+/******************************************************************************
+** Section <<<theme_album_info>>> - START
+******************************************************************************/
+// Format information which is displayed next to each album
+function theme_album_info($pic_count, $link_pic_count, $last_upload_date)
+{
+    global $CONFIG, $lang_list_albums;
+
+    if ($CONFIG['link_last_upload']) {
+        $album_info = sprintf($lang_list_albums['n_pictures'], $pic_count) . (($CONFIG['link_pic_count'] && $link_pic_count > 0 ) ? sprintf(", {$lang_list_albums['n_link_pictures']}, {$lang_list_albums['total_pictures']}", $link_pic_count, $pic_count + $link_pic_count) : "") . (($pic_count || ($CONFIG['link_pic_count'] && $link_pic_count > 0 )) ? sprintf($lang_list_albums['last_added'], $last_upload_date) : "");
+    } else {
+        $album_info = sprintf($lang_list_albums['n_pictures'], $pic_count) . ($pic_count ? sprintf($lang_list_albums['last_added'], $last_upload_date) : "") . (($CONFIG['link_pic_count'] && $link_pic_count > 0) ? sprintf(", {$lang_list_albums['n_link_pictures']}, {$lang_list_albums['total_pictures']}", $link_pic_count, $pic_count + $link_pic_count) : "");
+    }
+
+    return $album_info;
+}
+/******************************************************************************
+** Section <<<theme_album_info>>> - END
 ******************************************************************************/
 } //{THEMES}
 ?>
