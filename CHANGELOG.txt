@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2014-03-12 [A] Added language string 'announcement_thread' to English language file {eenemeenemuu}
 2014-03-11 [S] Fixed XSS issue {eenemeenemuu}
 2014-03-11 [B] Fixed several issues with keywords manager {eenemeenemuu}
 2014-03-11 [A] Added function 'theme_album_info' to make information which is displayed next to each album themeable {eenemeenemuu}
