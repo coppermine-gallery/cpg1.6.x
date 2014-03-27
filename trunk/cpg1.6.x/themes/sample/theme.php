@@ -3017,7 +3017,7 @@ function theme_display_film_strip(&$thumb_list, $nbThumb, $album_name, $aid, $ca
         $i++;
         if ($mode == 'thumb') {
             if ($thumb['pos'] == $pos && !$superCage->get->keyExists('film_strip')) {
-                $thumb['image'] = str_replace('class="image"', 'class="image middlethumb"', $thumb['image']);
+                $thumb['image'] = str_replace('class="strip_image"', 'class="strip_image middlethumb"', $thumb['image']);
             }
             // determine if thumbnail link targets should open in a pop-up
             if ($CONFIG['thumbnail_to_fullsize'] == 1) { // code for full-size pop-up
