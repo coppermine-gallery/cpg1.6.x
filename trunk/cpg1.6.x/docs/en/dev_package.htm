@@ -66,7 +66,7 @@
                 <li>
                     <a name="packaging_steps_loop_through_files_linux"></a><h4>Linux<a href="#packaging_steps_loop_through_files_linux" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
                     On most posix-compliant operating systems (like Unix, Linux, BSD etc.) you should have all needed tools at hand already. Basically you loop through all files with a given extension, search for the string inside it and replace it. The command that can be run in a console could look like this:
-                    <textarea class="code smaller" style="width:100%" rows="1">find /path/on/filesystem/level/to/your/working/copy/ -maxdepth 4 -name "*.php" | xargs sed -i 's/Coppermine version: 1.6.X/Coppermine version: 1.6.Y/g'</textarea>
+                    <textarea class="code smaller" style="width:100%" rows="1">find /path/on/filesystem/level/to/your/working/copy/ -maxdepth 4 -name "*.php" -o -name "*.css" -o -name "*.js" -o -name "*.txt" -o -name "*.sql" -o -name "*.htm" | xargs sed -i 's/Coppermine version: 1.6.X/Coppermine version: 1.6.Y/g'</textarea>
                     If you want to turn this into a shell script, don't forget the shebang at the start of the file (usually something like <tt class="code">#!/bin/sh</tt>).
                 </li>
                 <li>
