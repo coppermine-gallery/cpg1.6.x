@@ -31,12 +31,12 @@
 </div>
 
 <a name="packaging"></a><h1>Packaging a new release<a href="#packaging" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
-<p>This section of the documentation is meant to explain the <a href="#packaging_steps">steps</a> needed to perform by the maintainer of the coppermine package each time a new package release is being made.</p>
+<p>This section of the documentation is meant to explain the <a href="#packaging_steps">steps</a> needed to perform by the maintainer of the Coppermine package each time a new package release is being made.</p>
 <p>This page does <strong>not</strong> deal with the steps that end users need to make when a new package comes out.</p>
 
 <div class="indent">
     <a name="packaging_target_audience"></a><h2>Target audience<a href="#packaging_target_audience" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
-    <p>This part of the documentation is not meant for end users of Coppermine, but <strong>only</strong> for developers. There is absolutely no support for this section, it comes as-is. If you're not a member of the coppermine dev team, then the contents of this page are not meant for you; go away.</p>
+    <p>This part of the documentation is not meant for end users of Coppermine, but <strong>only</strong> for developers. There is absolutely no support for this section, it comes as-is. If you're not a member of the Coppermine dev team, then the contents of this page are not meant for you.</p>
     <a name="packaging_target_audience_end"></a>
 
     <a name="packaging_subversion"></a><h2>Subversion repository<a href="#packaging_subversion" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
@@ -53,20 +53,20 @@
             <a name="packaging_steps_version_number"></a><h3>Edit the version number<a href="#packaging_steps_version_number" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
             To edit the version number of the Coppermine release, you will need to edit several files:
             <ul>
-                <li>The actual version number is being stored in the file <tt class="code">include/init.inc.php</tt>, so you will need to edit that file with a plain text editor and find <input type="text" readonly="readonly" value="define('COPPERMINE_VERSION', '1.5.X');" size="38" maxlength="38" class="code smaller" />, where X corresponds to the current minor version count that needs to be counted up.</li>
-                <li>The version number output of all pages of the documentation is being replaced using the JavaScript file behind each localization folder; that's why you need to loop through all language folders within the <tt class="code">docs</tt>-folder, edit <tt class="code">script.js</tt>, find the definition for the function <tt class="code">cpgDocHeader</tt> and inside that definition change the localization line that corresponds to <input type="text" readonly="readonly" value="$('#docheader').text('Coppermine Photo Gallery v1.5.X: Documentation and Manual');" size="82" maxlength="82" class="code smaller" />, where X stands for the minor version number.</li>
+                <li>The actual version number is being stored in the file <tt class="code">include/init.inc.php</tt>, so you will need to edit that file with a plain text editor and find <input type="text" readonly="readonly" value="define('COPPERMINE_VERSION', '1.6.X');" size="38" maxlength="38" class="code smaller" />, where X corresponds to the current minor version count that needs to be counted up.</li>
+                <li>The version number output of all pages of the documentation is being replaced using the JavaScript file behind each localization folder; that's why you need to loop through all language folders within the <tt class="code">docs</tt>-folder, edit <tt class="code">script.js</tt>, find the definition for the function <tt class="code">cpgDocHeader</tt> and inside that definition change the localization line that corresponds to <input type="text" readonly="readonly" value="$('#docheader').text('Coppermine Photo Gallery v1.6.X: Documentation and Manual');" size="82" maxlength="82" class="code smaller" />, where X stands for the minor version number.</li>
             </ul>
         </li>
         <li>
             <a name="packaging_steps_loop_through_files"></a><h3>Replace version number in all files<a href="#packaging_steps_loop_through_files" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-            You need to loop through all text files (file extensions <tt class="code">.php</tt>, <tt class="code">.css</tt>, <tt class="code">.js</tt>, <tt class="code">.txt</tt>, <tt class="code">.sql</tt>, <tt class="code">.htm</tt>) and replace the version number in the header with the version number of the new release. Prior, you have to replace the version number of the next release with that version number plus 1 in <tt class="code">dev_package.htm</tt>, to keep <a href="#packaging_steps_loop_through_files_linux">that example</a> intact.<br />
-            <div class="cpg_example">You will have to find <input type="text" readonly="readonly" value="Coppermine version: 1.5.X" size="25" maxlength="25" class="code smaller" /> and replace with <input type="text" readonly="readonly" value="Coppermine version: 1.5.Y" size="25" maxlength="25" class="code smaller" /></div>
+            You need to loop through all text files (file extensions <tt class="code">.php</tt>, <tt class="code">.css</tt>, <tt class="code">.js</tt>, <tt class="code">.txt</tt>, <tt class="code">.sql</tt>, <tt class="code">.htm</tt>) and replace the version number in the header with the version number of the new release.<br />
+            <div class="cpg_example">You will have to find <input type="text" readonly="readonly" value="Coppermine version: 1.6.X" size="25" maxlength="25" class="code smaller" /> and replace with <input type="text" readonly="readonly" value="Coppermine version: 1.6.Y" size="25" maxlength="25" class="code smaller" /></div>
             To accomplish this, you will need a tool that can batch-replace in files:
             <ul>
                 <li>
                     <a name="packaging_steps_loop_through_files_linux"></a><h4>Linux<a href="#packaging_steps_loop_through_files_linux" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
                     On most posix-compliant operating systems (like Unix, Linux, BSD etc.) you should have all needed tools at hand already. Basically you loop through all files with a given extension, search for the string inside it and replace it. The command that can be run in a console could look like this:
-                    <textarea class="code smaller" style="width:100%" rows="1">find /path/on/filesystem/level/to/your/working/copy/ -maxdepth 4 -name "*.php" | xargs sed -i 's/Coppermine version: 1.6.01/Coppermine version: 1.6.02/g'</textarea>
+                    <textarea class="code smaller" style="width:100%" rows="1">find /path/on/filesystem/level/to/your/working/copy/ -maxdepth 4 -name "*.php" | xargs sed -i 's/Coppermine version: 1.6.X/Coppermine version: 1.6.Y/g'</textarea>
                     If you want to turn this into a shell script, don't forget the shebang at the start of the file (usually something like <tt class="code">#!/bin/sh</tt>).
                 </li>
                 <li>
@@ -84,7 +84,7 @@
         </li>
         <li>
             <a name="packaging_steps_write_announcement_thread"></a><h3>Prepare an announcement thread<a href="#packaging_steps_write_announcement_thread" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-            Prepare an announcement thread in advance (before you actually release) inside the dev-only sub-board of the coppermine forum. This thread can be empty - you can fill it later, or have another dev team member fill it. You need to create it in advance in order to be able to refer to the thread from within the documentation that will ship with the release.
+            Prepare an announcement thread in advance (before you actually release) inside the dev-only sub-board of the Coppermine forum. This thread can be empty - you can fill it later, or have another dev team member fill it. You need to create it in advance in order to be able to refer to the thread from within the documentation that will ship with the release.
         </li>
         <li>
             <a name="packaging_steps_docs_upgrade"></a><h3>Edit the upgrade section of the docs<a href="#packaging_steps_docs_upgrade" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -127,7 +127,7 @@
         </li>
         <li>
             <a name="packaging_steps_create_tag"></a><h3>Create a tag in subversion<a href="#packaging_steps_create_tag" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-            Create a tag using your svn application. The target directory name will be the abbreviation <tt class="code">cpg</tt> followed by the exact version number. So the target URL will be <tt class="code">https://svn.code.sf.net/p/coppermine/code/tags/cpg1.5.X</tt>, where X represents the minor version number that you're about to tag.
+            Create a tag using your svn application. The target directory name will be the abbreviation <tt class="code">cpg</tt> followed by the exact version number. So the target URL will be <tt class="code">https://svn.code.sf.net/p/coppermine/code/tags/cpg1.6.X</tt>, where X represents the minor version number that you're about to tag.
             <ul>
                 <li>
                     <a name="packaging_steps_create_tag_rapidsvn"></a><h4>RapidSVN<a href="#packaging_steps_create_tag_rapidsvn" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
@@ -136,7 +136,7 @@
                 <li>
                     <a name="packaging_steps_create_tag_tortoisesvn"></a><h4>Tortoise SVN<a href="#packaging_steps_create_tag_tortoisesvn" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
                     <ul>
-                        <li>In the left frame that represents the folder view, highlight the folder that represents the root of cpg1.5.x</li>
+                        <li>In the left frame that represents the folder view, highlight the folder that represents the root of cpg1.6.x</li>
                         <li>Click on the menu entry "TortoiseSVN" - "Branch/tag..."</li>
                         <li>In the copy dialog, modify the "To URL" accordingly (see above).</li>
                         <li>Select "HEAD revision in the repository" as source and click on the "OK" button.</li>
@@ -154,7 +154,7 @@
                     <a name="packaging_steps_rapidsvn"></a><h4>RapidSVN<a href="#packaging_steps_rapidsvn" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
                     The subversion client <a href="http://rapidsvn.tigris.org/" rel="external" class="external">RapidSVN</a> is available for many platforms (Linux, Windows, Mac OS/X, Solaris, etc.) and in many languages (English, German, French, Italian, Portuguese, Russian, Ukrainian, Simplified Chinese, Japanese). The Coppermine dev team recommends it as graphical client on Linux-driven systems.
                     <ul>
-                        <li>In the left frame that represents the folder view, highlight the folder that represents the root of cpg1.5.x</li>
+                        <li>In the left frame that represents the folder view, highlight the folder that represents the root of cpg1.6.x</li>
                         <li>Click on the menu entry "Repository" - "Export..."</li>
                         <li>In the export dialog, make sure that as revision the "Use latest" checkbox is ticked and that the "Recursive" checkbox is ticked as well.</li>
                         <li>As Destination directory, you need to specify a folder name that <em>doesn't</em> already exist within a folder that <em>does</em> exist. This dialog is a little bit unusual, so here's a detailed example, assuming that you're on Linux and that your user name is <tt class="code">johndoe</tt>:
@@ -170,7 +170,7 @@
                 <li>
                     <a name="packaging_steps_tortoisesvn"></a><h4>Tortoise SVN<a href="#packaging_steps_tortoisesvn" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
                     <ul>
-                        <li>In the left frame that represents the folder view, highlight the folder that represents the root of cpg1.5.x</li>
+                        <li>In the left frame that represents the folder view, highlight the folder that represents the root of cpg1.6.x</li>
                         <li>Click on the menu entry "TortoiseSVN" - "Export..."</li>
                         <li>In the export dialog, make sure to <strong>uncheck</strong> "Export unversioned files too" and "Omit externals".</li>
                         <li>Select the destination directory and click on the "OK" button.</li>
@@ -180,7 +180,7 @@
         </li>
         <li>
             <a name="packaging_steps_create_zip"></a><h3>Create the archive<a href="#packaging_steps_create_zip" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-            Create an archive according to the <a href="dev_plugins.htm#plugin_writing_naming_conventions">naming conventions</a>, using your favorite archiver (on Windows, 7-Zip is recommended). The naming convention for package releases is pretty straightforward: it's just the abbreviation <tt class="code">cpg</tt> followed by the exact version number. Subsequently, your archive should be named <tt class="code">cpg1.5.X.zip</tt>, where X represents the minor version number that you're about to package. Its'mandatory to come up with a  <tt class="code">zip</tt> archive, but you can come up with additional archives as well (e.g. <tt class="code">.7z</tt>, <tt class="code">.tar.gz</tt> or <tt class="code">.tar.bz2</tt>) to make things easier for users on alternative operating systems.
+            Create an archive according to the <a href="dev_plugins.htm#plugin_writing_naming_conventions">naming conventions</a>, using your favorite archiver (on Windows, 7-Zip is recommended). The naming convention for package releases is pretty straightforward: it's just the abbreviation <tt class="code">cpg</tt> followed by the exact version number. Subsequently, your archive should be named <tt class="code">cpg1.6.X.zip</tt>, where X represents the minor version number that you're about to package. Its'mandatory to come up with a  <tt class="code">zip</tt> archive, but you can come up with additional archives as well (e.g. <tt class="code">.7z</tt>, <tt class="code">.tar.gz</tt> or <tt class="code">.tar.bz2</tt>) to make things easier for users on alternative operating systems.
         </li>
         <li>
             <a name="packaging_steps_upload_zip"></a><h3>Upload the archive<a href="#packaging_steps_upload_zip" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -189,7 +189,7 @@
                 <li><a href="https://sourceforge.net/account/login.php" rel="external" class="external">Log in</a> into your account on sf.net</li>
                 <li>Go to the <a href="https://sourceforge.net/projects/coppermine/files/" rel="external" class="external">File Manager</a></li>
                 <li>Expand the folder labelled "Coppermine"</li>
-                <li>Expand the folder labelled "1.5.x"</li>
+                <li>Expand the folder labelled "1.6.x"</li>
                 <li>Click the "Add File" button</li>
                 <li>Browse to your package on your client and select it for upload</li>
                 <li>After uploading has finished click on the "i" icon in the uploaded package's row and set it as default download for all operating systems</li>
@@ -225,13 +225,13 @@
                 </li>
                 <li>
                     <a name="packaging_steps_news_embedded"></a><h4>News embedded into existing galleries<a href="#packaging_steps_news_embedded" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
-                    To make users of existing galleries aware of the new release, edit <a href="http://coppermine-gallery.net/cpg15x_news.htm" rel="external" class="external">http://coppermine-gallery.net/cpg15x_news.htm</a>. This file is the source for the news item that is displayed for Coppermine admins on their galleries if the option <a href="configuration.htm#admin_general_coppermine_news">Display news from coppermine-gallery.net</a> is enabled.
+                    To make users of existing galleries aware of the new release, edit <a href="http://coppermine-gallery.net/cpg15x_news.htm" rel="external" class="external">http://coppermine-gallery.net/cpg15x_news.htm</a>. This file is the source for the news item that is displayed for Coppermine admins on their galleries if the option <a href="configuration.htm#admin_general_coppermine_news">Display news from Coppermine-gallery.net</a> is enabled.
                 </li>
             </ul>
         </li>
         <li>
             <a name="packaging_steps_demo"></a><h3>Update the demo<a href="#packaging_steps_demo" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-            Use your favorite FTP app to update the demo on the coppermine home page. You will of course need FTP access to the corresponding web space.<br />
+            Use your favorite FTP app to update the demo on the Coppermine home page. You will of course need FTP access to the corresponding web space.<br />
             Make sure not to overwrite the custom anycontent.<br />
             Keep in mind that you need to apply changes to the JavaScript file <tt class="code">script.js</tt> inside the localizations of the docs folder - they compose the site navigation.
         </li>
