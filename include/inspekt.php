@@ -1008,7 +1008,7 @@ class Inspekt
             return Inspekt::_walkArray($value, 'getEscaped');
         } elseif (!empty($value)) {
             global $CONFIG;
-            if ($CONFIG['LINK_ID']) {
+            if (isset($CONFIG['LINK_ID']) && $CONFIG['LINK_ID']) {
                 return mysql_real_escape_string(htmlspecialchars($value, ENT_QUOTES), $CONFIG['LINK_ID']);
             } else {
                 return mysql_real_escape_string(htmlspecialchars($value, ENT_QUOTES));
