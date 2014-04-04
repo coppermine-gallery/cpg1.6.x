@@ -115,7 +115,7 @@ $icon['add'] = '<img src="images/icons/add.png" border="0" alt="" width="16" hei
 
 
 // get installation step
-if ($superCage->get->keyExists('step') && is_array($config['steps_done'])
+if ($superCage->get->keyExists('step') && isset($config['steps_done']) && is_array($config['steps_done'])
         &&  in_array($superCage->get->getInt('step'), $config['steps_done']))
 {
     $step = $superCage->get->getInt('step');
@@ -315,6 +315,7 @@ switch($step) {
             }
             $im_not_found = '';
         } else {
+            $path = '';
             $im_not_found = '<br /><fieldset style="width:90%" title="ImageMagick">' . $language['im_not_found'] .'</fieldset>';
         }
         // check configuration options
@@ -620,7 +621,7 @@ function html_stepper()
     for($i = 1; $i < 11; $i++) {
         if ($i == $step) {
             $stepper .= sprintf($tpl_step_current, $i, $i);
-        } elseif (is_array($config['steps_done']) && in_array($i, $config['steps_done'])) {
+        } elseif (isset($config['steps_done']) && is_array($config['steps_done']) && in_array($i, $config['steps_done'])) {
             $stepper .= sprintf($tpl_step_done, $i, $i, $i, $i);
         } else {
             $stepper .= sprintf($tpl_step_notyet, $i, $i);
