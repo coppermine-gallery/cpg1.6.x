@@ -23,7 +23,8 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
-2014-02-04 [C] Removed some PHP notices during installation {eenemeenemuu}
+2014-04-29 [B] Fixed wrong display of albums in not displayed sub categories (thread ID 77464 & 77470) {eenemeenemuu}
+2014-04-04 [C] Removed some PHP notices during installation {eenemeenemuu}
 2014-04-02 [D] Updated packaging docs {eenemeenemuu}
 2014-03-27 [B] Fixed utilization of CSS class 'middlethumb' on film strip (thread ID 77353) {eenemeenemuu}
 2014-03-12 [A] Added language string 'announcement_thread' to English language file {eenemeenemuu}

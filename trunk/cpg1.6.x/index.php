@@ -341,6 +341,7 @@ function get_subcat_data(&$cat_data)
         if ($row['level'] > $CURRENT_CAT_DEPTH + $CONFIG['subcat_level']) {
             // add album count for invisible sub-categories to last visible category
             $categories[cpg_get_last_visible_cid($categories, $row['lft'])]['details']['alb_count']++;
+            $categories[cpg_get_last_visible_cid($categories, $row['lft'])]['details']['subalb_count']++;
         } else {
             $categories[$row['category']]['subalbums'][$row['aid']] = $row;
             $categories[$row['category']]['details']['alb_count']++;
@@ -366,7 +367,7 @@ function get_subcat_data(&$cat_data)
     while ($row = mysql_fetch_assoc($result)) {
         if ($row['level'] > $CURRENT_CAT_DEPTH + $CONFIG['subcat_level']) {
             // add picture count for invisible sub-categories to last visible category
-            $categories[cpg_get_last_visible_cid($categories, $row['lft'])]['subalbums'][$row['aid']]['pic_count'] += $row['pic_count'];
+            $categories[cpg_get_last_visible_cid($categories, $row['lft'])]['subalbums'][-1]['pic_count'] += $row['pic_count'];
         } else {
             $categories[$row['cid']]['subalbums'][$row['aid']]['pic_count']   = $row['pic_count'];
             $categories[$row['cid']]['subalbums'][$row['aid']]['last_pid']    = $row['last_pid'];
@@ -393,6 +394,12 @@ function get_subcat_data(&$cat_data)
                 $pic_count += $alb['pic_count'];
             }
         }
+
+        // Remove albums in not displayed sub categories from the output
+        if (isset($cat['subalbums'][-1])) {
+            unset($cat['subalbums'][-1]);
+        }
+        $cat['details']['alb_count'] -= $cat['details']['subalb_count'];
 
         if (!empty($cat['subalbums'])) {
             $cat['subalbums'] = array_slice_preserve_keys($cat['subalbums'], 0, $CONFIG['albums_per_page'], true);
