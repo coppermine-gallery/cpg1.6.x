@@ -67,7 +67,7 @@ EOT;
         <td class="tableb" style="padding: 10px;">
 
 EOT;
-    echo str_replace('{SITE_NAME}', $CONFIG['gallery_name'], $lang_register_php['disclamer']);
+    echo str_replace('{SITE_NAME}', $CONFIG['gallery_name'], $lang_register_php['disclaimer']);
 
     echo <<< EOT
         </td>
@@ -115,7 +115,7 @@ EOT;
 
 EOT;
 
-    $inline_disclaimer = str_replace('{SITE_NAME}', $CONFIG['gallery_name'], $lang_register_php['disclamer']);
+    $inline_disclaimer = str_replace('{SITE_NAME}', $CONFIG['gallery_name'], $lang_register_php['disclaimer']);
 
     $form_data = array(
         array('label', $lang_register_php['required_info']),

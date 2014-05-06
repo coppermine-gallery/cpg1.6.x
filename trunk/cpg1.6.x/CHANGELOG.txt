@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2014-05-06 [C] Fixed typo (thread ID 77494) {eenemeenemuu}
 2014-04-29 [B] Fixed wrong display of albums in not displayed sub categories (thread ID 77464 & 77470) {eenemeenemuu}
 2014-04-04 [C] Removed some PHP notices during installation {eenemeenemuu}
 2014-04-02 [D] Updated packaging docs {eenemeenemuu}
