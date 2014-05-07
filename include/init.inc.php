@@ -472,7 +472,7 @@ if (!GALLERY_ADMIN_MODE && $CONFIG['allow_private_albums']) {
     get_private_album_set();
 }
 
-if (!USER_IS_ADMIN && $CONFIG['offline'] && !strstr($CPG_PHP_SELF, 'login')) {
+if (!USER_IS_ADMIN && $CONFIG['offline'] && $CPG_PHP_SELF != 'login.php' && $CPG_PHP_SELF != 'update.php') {
     pageheader($lang_errors['offline_title']);
     msg_box($lang_errors['offline_title'], $lang_errors['offline_text']);
     pagefooter();
