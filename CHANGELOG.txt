@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2014-06-19 [C] Fixed pagination after deleting all hit stats (thread ID 77606) {eenemeenemuu}
 2014-05-07 [B] Allow access to update.php if gallery is in offline mode (thread ID 77485) {eenemeenemuu}
 2014-05-06 [C] Fixed typo (thread ID 77494) {eenemeenemuu}
 2014-04-29 [B] Fixed wrong display of albums in not displayed sub categories (thread ID 77464 & 77470) {eenemeenemuu}

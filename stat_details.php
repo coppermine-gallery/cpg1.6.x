@@ -391,7 +391,7 @@ EOT;
       mysql_free_result($result);
 
       // Calculation for pagination tabs and query limit
-      $numPages = ceil($count/$amount);
+      $numPages = max(1, ceil($count/$amount));
       $start = ($page - 1) * $amount;
       if ($start < 0) {
           $start = 0;
