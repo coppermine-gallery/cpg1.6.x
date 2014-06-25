@@ -176,7 +176,7 @@ case 'changeword':
 
                 // convert old to new if it's the same word
                 if (utf_strtolower(Inspekt::getEscaped($word)) == utf_strtolower($keywordEdit)) {
-                    echo $word = html_entity_decode($request_newword);
+                    $word = html_entity_decode($request_newword);
                 } elseif (utf_strtolower(addslashes(Inspekt::getEscaped($word))) == utf_strtolower($keywordEdit)) { // needed to detect previously added keywords with spare slashes
                     $word = html_entity_decode($request_newword);
                 }
