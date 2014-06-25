@@ -459,8 +459,10 @@ function create_tables()
             }
     }
 
+    require 'include/passwordhash.inc.php';
+
     // Insert the admin account
-    $sql_query .= "INSERT INTO CPG_users (user_id, user_group, user_active, user_name, user_password, user_lastvisit, user_regdate, user_group_list, user_email, user_profile1, user_profile2, user_profile3, user_profile4, user_profile5, user_profile6, user_actkey ) VALUES (1, 1, 'YES', '{$_POST['admin_username']}', md5('{$_POST['admin_password']}'), NOW(), NOW(), '', '{$_POST['admin_email']}', '', '', '', '', '', '', '');\n";
+    $sql_query .= "INSERT INTO CPG_users (user_id, user_group, user_active, user_name, user_passwordhash, user_lastvisit, user_regdate, user_group_list, user_email, user_profile1, user_profile2, user_profile3, user_profile4, user_profile5, user_profile6, user_actkey ) VALUES (1, 1, 'YES', '{$_POST['admin_username']}', '".cpg_password_create_hash($_POST['admin_password'])."', NOW(), NOW(), '', '{$_POST['admin_email']}', '', '', '', '', '', '', '');\n";
     // Set configuration values for image package
     $sql_query .= "REPLACE INTO CPG_config VALUES ('thumb_method', '{$_POST['thumb_method']}');\n";
     $sql_query .= "REPLACE INTO CPG_config VALUES ('impath', '{$_POST['impath']}');\n";

@@ -133,7 +133,7 @@ if (isset($bridge_lookup)) {
                         return false;
                     }
 
-                    require('include/passwordhash.inc.php');
+                    require 'include/passwordhash.inc.php';
 
                     $password_info = mysql_fetch_assoc($result);
                     mysql_free_result($result);

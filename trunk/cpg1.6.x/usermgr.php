@@ -1040,7 +1040,10 @@ function update_user($user_id)
           "user_profile6 = '$profile6', " .
           "user_group_list = '$user_group_list'";
 
-    if (!empty($user_password)) $sql_update .= ", user_password = '".(md5($user_password))."'";
+    if (!empty($user_password)) {
+        require 'include/passwordhash.inc.php';
+        $sql_update .= ", user_passwordhash = '".cpg_password_create_hash($user_password)."'";
+    }
     if ($user_active == 'YES') $sql_update .= ", user_actkey = ''";
     $sql_update .= " WHERE user_id = '$user_id'";
 

@@ -588,11 +588,9 @@ function check_user_info(&$error)
         $act_key = '';
     }
 
-    $encpassword = md5($password);
+    require 'include/passwordhash.inc.php';
 
-    $user_language = $CONFIG['lang'];
-
-    $sql = "INSERT INTO {$CONFIG['TABLE_USERS']} (user_regdate, user_active, user_actkey, user_name, user_password, user_email, user_profile1, user_profile2, user_profile3, user_profile4, user_profile5, user_profile6, user_language) VALUES (NOW(), '$active', '$act_key', '$user_name', '$encpassword', '$email', '$profile1', '$profile2', '$profile3', '$profile4', '$profile5', '$profile6', '$user_language')";
+    $sql = "INSERT INTO {$CONFIG['TABLE_USERS']} (user_regdate, user_active, user_actkey, user_name, user_passwordhash, user_email, user_profile1, user_profile2, user_profile3, user_profile4, user_profile5, user_profile6, user_language) VALUES (NOW(), '$active', '$act_key', '$user_name', '".cpg_password_create_hash($password)."', '$email', '$profile1', '$profile2', '$profile3', '$profile4', '$profile5', '$profile6', '{$CONFIG['lang']}')";
     $result = cpg_db_query($sql);
     $user_array = array();
     $user_array['user_id'] = mysql_insert_id();
