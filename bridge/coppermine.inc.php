@@ -142,8 +142,10 @@ if (isset($bridge_lookup)) {
                     $sql = "SELECT user_id, user_name, user_password FROM {$this->usertable} WHERE $sql_user_email ";
                     if (!$password_info['user_passwordhash']) {
                         $sql .= "AND BINARY user_password = '".md5($password)."'";
-                    } elseif (cpg_password_validate($password, $password_info['user_password'])) {
-                        $sql .= "AND BINARY user_passwordhash = '{$password_info['user_password']}'";
+                    } else {
+                        if (!cpg_password_validate($password, $password_info['user_passwordhash'])) {
+                            return false;
+                        }
                     }
                     $sql .= " AND user_active = 'YES' LIMIT 1";
 
@@ -157,7 +159,7 @@ if (isset($bridge_lookup)) {
                     mysql_free_result($result);
 
                     if (!$password_info['user_passwordhash']) {
-                        $sql = "UPDATE {$this->usertable} SET user_password = '', user_passwordhash = '".cpg_password_create_hash($password)."'WHERE user_id = {$USER_DATA['user_id']}";
+                        $sql = "UPDATE {$this->usertable} SET user_password = '', user_passwordhash = '".cpg_password_create_hash($password)."' WHERE user_id = {$USER_DATA['user_id']}";
                         cpg_db_query($sql, $this->link_id);
                     }
 

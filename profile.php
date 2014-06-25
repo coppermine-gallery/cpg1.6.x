@@ -432,10 +432,20 @@ if ($superCage->post->keyExists('change_password') && USER_ID && UDB_INTEGRATION
         cpg_die(ERROR, $lang_register_php['password_verification_warning1'], __FILE__, __LINE__);
     }
 
-    $new_pass = md5($new_pass);
-    $current_pass = md5($current_pass);
+    require 'include/passwordhash.inc.php';
+    $sql = "SELECT user_password, user_passwordhash FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '" . USER_ID . "' LIMIT 1";
+    $result = cpg_db_query($sql);
+    $password_info = mysql_fetch_assoc($result);
+    mysql_free_result($result);
 
-    $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET user_password = '$new_pass' WHERE user_id = '" . USER_ID . "' AND BINARY user_password = '$current_pass'";
+    $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET user_password = '', user_passwordhash = '".cpg_password_create_hash($new_pass)."' WHERE user_id = '" . USER_ID . "' ";
+    if (!$password_info['user_passwordhash']) {
+        $sql .= "AND BINARY user_password = '".md5($current_pass)."'";
+    } else {
+        if (!cpg_password_validate($current_pass, $password_info['user_passwordhash'])) {
+            cpg_die(ERROR, $lang_register_php['pass_chg_error'], __FILE__, __LINE__);
+        }
+    }
     $result = cpg_db_query($sql);
 
     if (!mysql_affected_rows($CONFIG['LINK_ID'])) {
