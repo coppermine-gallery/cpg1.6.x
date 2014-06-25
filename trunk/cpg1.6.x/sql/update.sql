@@ -24,5 +24,9 @@ INSERT INTO CPG_config VALUES ('album_sort_order', 'pa');
 INSERT INTO CPG_config VALUES ('custom_sortorder_thumbs', '1');
 INSERT INTO CPG_config VALUES ('link_last_upload', '0');
 INSERT INTO CPG_config VALUES ('editpics_ignore_newer_than', '0');
+INSERT INTO CPG_config VALUES ('pbkdf2_hash_algorithm', 'sha256');
+INSERT INTO CPG_config VALUES ('pbkdf2_hash_byte_size', '24');
+INSERT INTO CPG_config VALUES ('pbkdf2_iterations', '1000');
+INSERT INTO CPG_config VALUES ('pbkdf2_salt_byte_size', '24');
 
 ALTER TABLE CPG_users ADD user_passwordhash varchar(255) NOT NULL default '';
