@@ -112,77 +112,82 @@ if (isset($bridge_lookup)) {
                     // Create the session_id from concat(cookievalue,client_id)
                     $session_id = $this->session_id.$this->client_id;
 
-                    $encpassword = md5($password);
-
-
-                    // Check for user in users table
-                    $sql =  "SELECT user_id, user_name, user_password FROM {$this->usertable} WHERE ";
-                    //Check the login method (username, email address or both)
-                    switch($CONFIG['login_method']){
+                    // Check the login method (username, email address or both)
+                    switch($CONFIG['login_method']) {
                         case 'both':
-                            $sql .= "(user_name = '$username' OR user_email = '$username') AND BINARY user_password = '$encpassword' AND user_active = 'YES'";
+                            $sql_user_email = "(user_name = '$username' OR user_email = '$username')";
                             break;
                         case 'email':
-                            $sql .= "user_email = '$username' AND BINARY user_password = '$encpassword' AND user_active = 'YES'";
+                            $sql_user_email = "user_email = '$username'";
                             break;
                         case 'username':
                         default:
-                            $sql .= "user_name = '$username' AND BINARY user_password = '$encpassword' AND user_active = 'YES'";
+                            $sql_user_email = "user_name = '$username'";
                             break;
                     }
 
-                    $results = cpg_db_query($sql);
+                    $sql = "SELECT user_password, user_passwordhash FROM {$this->usertable} WHERE $sql_user_email AND user_active = 'YES' LIMIT 1";
+                    $result = cpg_db_query($sql, $this->link_id);
 
-                    // If exists update lastvisit value, session, and login
-                    if (mysql_num_rows($results)) {
-
-                            // Update lastvisit value
-                            $sql =  "UPDATE {$this->usertable} SET user_lastvisit = NOW() ";
-                            //Check the login method (username, email address or both)
-                            switch($CONFIG['login_method']){
-                                case 'both':
-                                    $sql .= "WHERE (user_name = '$username' OR user_email = '$username') AND BINARY user_password = '$encpassword' AND user_active = 'YES'";
-                                    break;
-                                case 'email':
-                                    $sql .= "WHERE user_email = '$username' AND BINARY user_password = '$encpassword' AND user_active = 'YES'";
-                                    break;
-                                case 'username':
-                                default:
-                                    $sql .= "WHERE user_name = '$username' AND BINARY user_password = '$encpassword' AND user_active = 'YES'";
-                                    break;
-                            }
-                            cpg_db_query($sql, $this->link_id);
-
-                            $USER_DATA = mysql_fetch_assoc($results);
-                            mysql_free_result($results);
-
-                            // If this is a 'remember me' login set the remember field to true
-                            if ($remember) {
-                                    $remember_sql = ",remember = '1' ";
-                                    // Change cookie life time to 2 weeks
-                                    if (CPG_COOKIES_ALLOWED) {
-                                        setcookie( $this->client_id, $this->session_id, time() + (CPG_WEEK*2), $CONFIG['cookie_path'] );
-                                    }
-                            } else {
-                                    $remember_sql = '';
-                                    // Kill the cookie when closing the browser
-                                    if (CPG_COOKIES_ALLOWED) {
-                                        setcookie( $this->client_id, $this->session_id, 0, $CONFIG['cookie_path'] );
-                                    }
-                            }
-
-                            // Update guest session with user's information
-                            $sql  = "UPDATE {$this->sessionstable} SET ";
-                            $sql .= "user_id = {$USER_DATA['user_id']} ";
-                            $sql .= $remember_sql;
-                            $sql .= "WHERE session_id = '" . md5($session_id) . "'";
-                            cpg_db_query($sql, $this->link_id);
-
-                            return $USER_DATA;
-                    } else {
-
-                            return false;
+                    if (!mysql_num_rows($result)) {
+                        return false;
                     }
+
+                    require('include/passwordhash.inc.php');
+
+                    $password_info = mysql_fetch_assoc($result);
+                    mysql_free_result($result);
+
+                    // Check for user in users table
+                    $sql = "SELECT user_id, user_name, user_password FROM {$this->usertable} WHERE $sql_user_email ";
+                    if (!$password_info['user_passwordhash']) {
+                        $sql .= "AND BINARY user_password = '".md5($password)."'";
+                    } elseif (cpg_password_validate($password, $password_info['user_password'])) {
+                        $sql .= "AND BINARY user_passwordhash = '{$password_info['user_password']}'";
+                    }
+                    $sql .= " AND user_active = 'YES' LIMIT 1";
+
+                    $result = cpg_db_query($sql, $this->link_id);
+
+                    if (!mysql_num_rows($result)) {
+                        return false;
+                    }
+
+                    $USER_DATA = mysql_fetch_assoc($result);
+                    mysql_free_result($result);
+
+                    if (!$password_info['user_passwordhash']) {
+                        $sql = "UPDATE {$this->usertable} SET user_password = '', user_passwordhash = '".cpg_password_create_hash($password)."'WHERE user_id = {$USER_DATA['user_id']}";
+                        cpg_db_query($sql, $this->link_id);
+                    }
+
+                    // Update lastvisit value
+                    $sql = "UPDATE {$this->usertable} SET user_lastvisit = NOW() WHERE user_id = {$USER_DATA['user_id']}";
+                    cpg_db_query($sql, $this->link_id);
+
+                    // If this is a 'remember me' login set the remember field to true
+                    if ($remember) {
+                            $remember_sql = ",remember = '1' ";
+                            // Change cookie life time to 2 weeks
+                            if (CPG_COOKIES_ALLOWED) {
+                                setcookie( $this->client_id, $this->session_id, time() + (CPG_WEEK*2), $CONFIG['cookie_path'] );
+                            }
+                    } else {
+                            $remember_sql = '';
+                            // Kill the cookie when closing the browser
+                            if (CPG_COOKIES_ALLOWED) {
+                                setcookie( $this->client_id, $this->session_id, 0, $CONFIG['cookie_path'] );
+                            }
+                    }
+
+                    // Update guest session with user's information
+                    $sql  = "UPDATE {$this->sessionstable} SET ";
+                    $sql .= "user_id = {$USER_DATA['user_id']} ";
+                    $sql .= $remember_sql;
+                    $sql .= "WHERE session_id = '" . md5($session_id) . "'";
+                    cpg_db_query($sql, $this->link_id);
+
+                    return $USER_DATA;
             }
 
 
