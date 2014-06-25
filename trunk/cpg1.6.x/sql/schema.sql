@@ -334,7 +334,6 @@ CREATE TABLE CPG_users (
   user_group int(11) NOT NULL default '2',
   user_active enum('YES','NO') NOT NULL default 'NO',
   user_name varchar(25) NOT NULL default '',
-  user_password varchar(40) NOT NULL default '',
   user_passwordhash varchar(255) NOT NULL default '',
   user_lastvisit datetime NOT NULL default '0000-00-00 00:00:00',
   user_regdate datetime NOT NULL default '0000-00-00 00:00:00',
