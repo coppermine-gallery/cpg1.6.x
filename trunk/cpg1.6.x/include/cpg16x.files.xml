@@ -7142,6 +7142,14 @@
     <hash>cb9944b01efef8bbd5c7fb9bed64abb7</hash>
   </element>
   <element>
+    <fullpath>include/passwordhash.inc.php</fullpath>
+    <version>1.5.9</version>
+    <revision>7805</revision>
+    <status>mandatory</status>
+    <permission>read</permission>
+    <hash>5b71e3cd799ed76184044bc5f27e6ac7</hash>
+  </element>
+  <element>
     <fullpath>include/picmgmt.inc.php</fullpath>
     <version>1.5.9</version>
     <revision>7805</revision>
