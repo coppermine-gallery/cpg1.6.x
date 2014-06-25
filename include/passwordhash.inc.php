@@ -44,10 +44,10 @@
  */
 
 // These constants may be changed without breaking existing hashes.
-define("PBKDF2_HASH_ALGORITHM", "sha256");
-define("PBKDF2_ITERATIONS", 1000);
-define("PBKDF2_SALT_BYTE_SIZE", 24);
-define("PBKDF2_HASH_BYTE_SIZE", 24);
+define("PBKDF2_HASH_ALGORITHM", $CONFIG['pbkdf2_hash_algorithm']);
+define("PBKDF2_ITERATIONS", $CONFIG['pbkdf2_iterations']);
+define("PBKDF2_SALT_BYTE_SIZE", $CONFIG['pbkdf2_salt_byte_size']);
+define("PBKDF2_HASH_BYTE_SIZE", $CONFIG['pbkdf2_hash_byte_size']);
 
 define("HASH_SECTIONS", 4);
 define("HASH_ALGORITHM_INDEX", 0);
