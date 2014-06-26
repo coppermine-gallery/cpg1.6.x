@@ -30,7 +30,10 @@ if (!defined('SKIP_AUTHENTICATION')) { // try to include init.inc.php to get the
     //echo $output; // For troubleshooting purposes, echo $output
 }
 session_start();
-set_magic_quotes_runtime(0);
+
+if(get_magic_quotes_runtime()) {
+    set_magic_quotes_runtime(0);
+}
 
 if (!function_exists('cpgGetMicroTime')) {
 function cpgGetMicroTime()
@@ -66,31 +69,32 @@ if (!defined('SKIP_AUTHENTICATION') && defined('COPPERMINE_VERSION') && GALLERY_
     $_SESSION['auth'] = true;
 } else { // we need to populate the language array "manually"
     $lang_common['ok'] = 'OK';
-    $lang_update_php = array(
-      'title' => 'Updater', // cpg1.5
-      'welcome_updater' => 'Welcome to Coppermine update', // cpg1.5
-      'could_not_authenticate' => 'Could not authenticate you', // cpg1.5
-      'provide_admin_account' => 'Please provide your coppermine admin account details or your mySQL account data', // cpg1.5
-      'try_again' => 'Try again', // cpg1.5
-      'mysql_connect_error' => 'Could not create a mySQL connection', // cpg1.5
-      'mysql_database_error' => 'mySQL could not locate a database called %s', // cpg1.5
-      'mysql_said' => 'MySQL said', // cpg1.5
-      'check_config_file' => 'Please check the SQL values in %s', // cpg1.5
-      'performing_database_updates' => 'Performing Database Updates', // cpg1.5
-      'already_done' => 'Already Done', // cpg1.5
-      'password_encryption' => 'Encryption of passwords', // cpg1.5
-      'alb_password_encryption' => 'Encryption of album passwords', // cpg1.5
-      'category_tree' => 'Category tree', // cpg1.5
-      'authentication_needed' => 'Authentication needed', // cpg1.5
-      'username' => 'Username', // cpg1.5
-      'password' => 'Password', // cpg1.5
-      'update_completed' => 'Update completed', // cpg1.5
-      'check_versions' => 'It\'s recommended to %scheck your file versions%s if you just upgraded from an older version of coppermine', // cpg1.5 // Leave the %s untouched when translating - it wraps the link
-      'start_page' => 'If you didn\'t (or you don\'t want to check), you can go to %syour gallery\'s start page%s', // cpg1.5 // Leave the %s untouched when translating - it wraps the link
-      'errors_encountered' => 'The following errors were encountered and need to be corrected first', // cpg1.5
-      'delete_file' => 'Delete %s', // cpg1.5
-      'could_not_delete' => 'Could not delete due to missing permissions. Delete the file manually!', // cpg1.5
-    );
+    $lang_update_php['title'] = 'Updater';
+    $lang_update_php['welcome_updater'] = 'Welcome to Coppermine update';
+    $lang_update_php['could_not_authenticate'] = 'Could not authenticate you';
+    $lang_update_php['provide_admin_account'] = 'Please provide your Coppermine admin account details or your MySQL account data';
+    $lang_update_php['try_again'] = 'Try again';
+    $lang_update_php['mysql_connect_error'] = 'Could not create a MySQL connection';
+    $lang_update_php['mysql_database_error'] = 'MySQL could not locate a database called %s';
+    $lang_update_php['mysql_said'] = 'MySQL said';
+    $lang_update_php['check_config_file'] = 'Please check the MySQL details in %s';
+    $lang_update_php['performing_database_updates'] = 'Performing Database Updates';
+    $lang_update_php['performing_file_updates'] = 'Performing File Updates';
+    $lang_update_php['already_done'] = 'Already Done';
+    $lang_update_php['password_encryption'] = 'Encryption of passwords';
+    $lang_update_php['alb_password_encryption'] = 'Encryption of album passwords';
+    $lang_update_php['category_tree'] = 'Category tree';
+    $lang_update_php['authentication_needed'] = 'Authentication needed';
+    $lang_update_php['username'] = 'Username';
+    $lang_update_php['password'] = 'Password';
+    $lang_update_php['update_completed'] = 'Update completed';
+    $lang_update_php['check_versions'] = 'It\'s recommended to %scheck your file versions%s if you just upgraded from an older version of Coppermine'; // Leave the %s untouched when translating - it wraps the link
+    $lang_update_php['start_page'] = 'If you didn\'t (or you don\'t want to check), you can go to %syour gallery\'s start page%s'; // Leave the %s untouched when translating - it wraps the link
+    $lang_update_php['errors_encountered'] = 'The following errors were encountered and need to be corrected first';
+    $lang_update_php['delete_file'] = 'Delete %s';
+    $lang_update_php['could_not_delete'] = 'Could not delete due to missing permissions. Delete the file manually!';
+    $lang_update_php['rename_file'] = 'Rename %s to %s';
+    $lang_update_php['could_not_rename'] = 'Could not rename due to missing permissions. Rename the file manually!';
 }
 
 if (!function_exists('cpg_display_help')) {
@@ -118,20 +122,40 @@ if (!defined('SKIP_AUTHENTICATION') && !$_SESSION['auth']) {
         test_sql_connection();
         $user = $superCage->post->getEscaped('user');
         $pass = $superCage->post->getEscaped('pass');
-        $pass2 = md5($pass);
-        $sql = "SELECT user_active FROM {$CONFIG['TABLE_PREFIX']}users WHERE user_group = 1 AND user_name = '$user' AND (user_password = '$pass' OR user_password = '$pass2')";
-        $result = @mysql_query($sql);
-        if (!@mysql_num_rows($result)) {
+
+        // Check if column 'user_passwordhash' exists in user table
+        $result = mysql_query("SELECT * FROM {$CONFIG['TABLE_PREFIX']}users LIMIT 1");
+        $row = mysql_fetch_array($result); 
+        $col_user_passwordhash_exists = isset($row['user_passwordhash']) ? true : false;
+        mysql_free_result($result);
+
+        if ($col_user_passwordhash_exists) {
+            require 'include/passwordhash.inc.php';
+            $sql = "SELECT user_password, user_passwordhash FROM {$CONFIG['TABLE_PREFIX']}users WHERE user_group = 1 AND user_name = '$user'";
+            $result = mysql_query($sql);
+            $password_info = mysql_fetch_assoc($result);
+            mysql_free_result($result);
+        }
+
+        if (!$col_user_passwordhash_exists || !$password_info['user_passwordhash']) {
+            $sql = "SELECT user_active FROM {$CONFIG['TABLE_PREFIX']}users WHERE user_group = 1 AND user_name = '$user' AND (user_password = '$pass' OR user_password = '".md5($pass)."')";
+            $result = @mysql_query($sql);
+            if (!@mysql_num_rows($result)) {
+                //not authenticated, try mysql account details
+                html_auth_box('MySQL');
+                die();
+            }
+        } elseif (!cpg_password_validate($pass, $password_info['user_passwordhash'])) {
             //not authenticated, try mysql account details
             html_auth_box('MySQL');
-        } else {
-            //authenticated, do the update
-            $_SESSION['auth'] = true;
-            start_update();
+            die();
         }
+        //authenticated, do the update
+        $_SESSION['auth'] = true;
+        start_update();
     } else {
         //try to autenticate via MySQL details (in configuration)
-        if ($superCage->post->getEscaped('user')  == $CONFIG['dbuser'] && $superCage->post->getEscaped('pass') == $CONFIG['dbpass']) {
+        if ($superCage->post->getEscaped('user') == $CONFIG['dbuser'] && $superCage->post->getEscaped('pass') == $CONFIG['dbpass']) {
             //authenticated, do the update
             $_SESSION['auth'] = true;
             start_update();
