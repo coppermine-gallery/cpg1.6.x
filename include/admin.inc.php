@@ -47,7 +47,7 @@ $config_data = array(
                      .'(' // domain start
                      .'([0-9a-z_!~*\'()-]+\.)*' // tertiary domain(s)- www.
                      .'([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]\.' // second level domain
-                     .'[a-z]{2,6}' // first level domain- .com or .museum
+                     .'[a-z]{2,63}' // first level domain- .com or .museum
                      .')' // domain end
                      .'|' // allows either IP or domain or localhost
                      .'(localhost)' // allow localhost
@@ -1512,13 +1512,13 @@ $config_data = array(
                      .'$',
       'regex_not' => '^you@somewhere\.com$',
       'default_value' => '',
-                     .'(' // domain start
-                     .'([0-9a-z_!~*\'()-]+\.)*' // tertiary domain(s)- www.
-                     .'([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]\.' // second level domain
-                     .'[a-z]{2,63}' // first level domain- .com or .museum
-                     .')' // domain end
-                     .'|' // allows either IP or domain or localhost
-                     .'(localhost)' // allow localhost
+    ),
+    'smtp_host' => array(
+      'type'      => 'textfield',
+      'default_value' => '',
+      'help_link' => 'f=configuration.htm&amp;as=admin_email&amp;ae=admin_email_end',
+    ),
+    'smtp_username' => array(
       'type'      => 'textfield',
       'default_value' => '',
       'help_link' => '',
