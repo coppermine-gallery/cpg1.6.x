@@ -2303,7 +2303,8 @@ if (defined('UPDATE_PHP')) {
 $lang_update_php['title'] = 'Updater';
 $lang_update_php['welcome_updater'] = 'Welcome to Coppermine update';
 $lang_update_php['could_not_authenticate'] = 'Could not authenticate you';
-$lang_update_php['provide_admin_account'] = 'Please provide your Coppermine admin account details or your MySQL account data';
+$lang_update_php['provide_admin_account_cpg'] = 'Please provide your Coppermine admin account data'; // cpg1.6
+$lang_update_php['provide_admin_account_mysql'] = 'Please provide your MySQL account data'; // cpg1.6
 $lang_update_php['try_again'] = 'Try again';
 $lang_update_php['mysql_connect_error'] = 'Could not create a MySQL connection';
 $lang_update_php['mysql_database_error'] = 'MySQL could not locate a database called %s';

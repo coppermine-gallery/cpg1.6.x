@@ -31,7 +31,7 @@ if (!defined('SKIP_AUTHENTICATION')) { // try to include init.inc.php to get the
 }
 session_start();
 
-if(get_magic_quotes_runtime()) {
+if (get_magic_quotes_runtime()) {
     set_magic_quotes_runtime(0);
 }
 
@@ -135,7 +135,7 @@ if (!defined('SKIP_AUTHENTICATION') && !$_SESSION['auth']) {
             start_update();
         } else {
             //no go, try again
-            html_error($lang_update_php['could_not_authenticate'] . ' -  <a href="update.php">' . $lang_update_php['try_again'] .'</a>');
+            html_error($lang_update_php['could_not_authenticate'] . ' - <a href="update.php">' . $lang_update_php['try_again'] .'</a>');
         }
     }
     html_footer();
@@ -280,9 +280,9 @@ function html_auth_box($method)
 
 EOT;
     if ($method == 'MySQL') {
-        echo $lang_update_php['could_not_authenticate']. '. <a href="update.php">' . $lang_update_php['try_again'] . '</a>';
+        echo $lang_update_php['could_not_authenticate']. '. '.$lang_update_php['provide_admin_account_mysql'].'. <a href="update.php">' . $lang_update_php['try_again'] . '</a>.';
     } else {
-        echo $lang_update_php['provide_admin_account'];
+        echo $lang_update_php['provide_admin_account_cpg'].'.';
     }
 
     echo <<< EOT
