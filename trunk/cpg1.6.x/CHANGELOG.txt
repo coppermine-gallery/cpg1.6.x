@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2014-06-27 [O] Don't populate language array manually, but load English language file if authentification is skipped in update.php {eenemeenemuu}
 2014-06-25 [A] Salt user passwords (thread ID 76021) {eenemeenemuu}
 2014-06-19 [C] Fixed pagination after deleting all hit stats (thread ID 77606) {eenemeenemuu}
 2014-05-07 [B] Allow access to update.php if gallery is in offline mode (thread ID 77485) {eenemeenemuu}

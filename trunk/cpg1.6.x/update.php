@@ -67,34 +67,8 @@ $superCage = Inspekt::makeSuperCage();
 // If including includes/init.inc.php has worked as expected, the constants should be populated, so let's check that first
 if (!defined('SKIP_AUTHENTICATION') && defined('COPPERMINE_VERSION') && GALLERY_ADMIN_MODE) {
     $_SESSION['auth'] = true;
-} else { // we need to populate the language array "manually"
-    $lang_common['ok'] = 'OK';
-    $lang_update_php['title'] = 'Updater';
-    $lang_update_php['welcome_updater'] = 'Welcome to Coppermine update';
-    $lang_update_php['could_not_authenticate'] = 'Could not authenticate you';
-    $lang_update_php['provide_admin_account'] = 'Please provide your Coppermine admin account details or your MySQL account data';
-    $lang_update_php['try_again'] = 'Try again';
-    $lang_update_php['mysql_connect_error'] = 'Could not create a MySQL connection';
-    $lang_update_php['mysql_database_error'] = 'MySQL could not locate a database called %s';
-    $lang_update_php['mysql_said'] = 'MySQL said';
-    $lang_update_php['check_config_file'] = 'Please check the MySQL details in %s';
-    $lang_update_php['performing_database_updates'] = 'Performing Database Updates';
-    $lang_update_php['performing_file_updates'] = 'Performing File Updates';
-    $lang_update_php['already_done'] = 'Already Done';
-    $lang_update_php['password_encryption'] = 'Encryption of passwords';
-    $lang_update_php['alb_password_encryption'] = 'Encryption of album passwords';
-    $lang_update_php['category_tree'] = 'Category tree';
-    $lang_update_php['authentication_needed'] = 'Authentication needed';
-    $lang_update_php['username'] = 'Username';
-    $lang_update_php['password'] = 'Password';
-    $lang_update_php['update_completed'] = 'Update completed';
-    $lang_update_php['check_versions'] = 'It\'s recommended to %scheck your file versions%s if you just upgraded from an older version of Coppermine'; // Leave the %s untouched when translating - it wraps the link
-    $lang_update_php['start_page'] = 'If you didn\'t (or you don\'t want to check), you can go to %syour gallery\'s start page%s'; // Leave the %s untouched when translating - it wraps the link
-    $lang_update_php['errors_encountered'] = 'The following errors were encountered and need to be corrected first';
-    $lang_update_php['delete_file'] = 'Delete %s';
-    $lang_update_php['could_not_delete'] = 'Could not delete due to missing permissions. Delete the file manually!';
-    $lang_update_php['rename_file'] = 'Rename %s to %s';
-    $lang_update_php['could_not_rename'] = 'Could not rename due to missing permissions. Rename the file manually!';
+} else { // we need to populate the language array
+    require 'lang/english.php';
 }
 
 if (!function_exists('cpg_display_help')) {
