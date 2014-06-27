@@ -1042,7 +1042,7 @@ function update_user($user_id)
 
     if (!empty($user_password)) {
         require 'include/passwordhash.inc.php';
-        $sql_update .= ", user_passwordhash = '".cpg_password_create_hash($user_password)."'";
+        $sql_update .= ', '.cpg_password_create_update_string($password);
     }
     if ($user_active == 'YES') $sql_update .= ", user_actkey = ''";
     $sql_update .= " WHERE user_id = '$user_id'";

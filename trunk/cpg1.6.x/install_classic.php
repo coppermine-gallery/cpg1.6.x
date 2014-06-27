@@ -73,7 +73,7 @@ function test_sql_connection()
         if (!function_exists('mysql_connect')){
                 $errors .= "<hr /><br />PHP does not have MySQL support enabled.<br /><br />";
          } elseif (! $connect_id = @mysql_connect($_POST['dbserver'], $_POST['dbuser'], $_POST['dbpass'])) {
-        $errors .= "<hr /><br />Could not create a mySQL connection, please check the SQL values entered<br /><br />MySQL error was : " . mysql_error() . "<br /><br />";
+        $errors .= "<hr /><br />Could not create a MySQL connection, please check the SQL values entered<br /><br />MySQL error was : " . mysql_error() . "<br /><br />";
     } elseif (! mysql_select_db($_POST['dbname'], $connect_id)) {
         $errors .= "<hr /><br />MySQL could not locate a database called '{$_POST['dbname']}' please check the value entered for this<br /><br />";
     }
@@ -460,9 +460,10 @@ function create_tables()
     }
 
     require 'include/passwordhash.inc.php';
+    $password_params = explode(':', cpg_password_create_hash($_POST['admin_password']));
 
     // Insert the admin account
-    $sql_query .= "INSERT INTO CPG_users (user_id, user_group, user_active, user_name, user_passwordhash, user_lastvisit, user_regdate, user_group_list, user_email, user_profile1, user_profile2, user_profile3, user_profile4, user_profile5, user_profile6, user_actkey ) VALUES (1, 1, 'YES', '{$_POST['admin_username']}', '".cpg_password_create_hash($_POST['admin_password'])."', NOW(), NOW(), '', '{$_POST['admin_email']}', '', '', '', '', '', '', '');\n";
+    $sql_query .= "INSERT INTO CPG_users (user_id, user_group, user_active, user_name, user_password, user_password_salt, user_password_hash_algorithm, user_password_iterations, user_lastvisit, user_regdate, user_group_list, user_email, user_profile1, user_profile2, user_profile3, user_profile4, user_profile5, user_profile6, user_actkey ) VALUES (1, 1, 'YES', '{$_POST['admin_username']}', '{$password_params[HASH_PBKDF2_INDEX]}', '{$password_params[HASH_SALT_INDEX]}', '{$password_params[HASH_ALGORITHM_INDEX]}', '{$password_params[HASH_ITERATION_INDEX]}', NOW(), NOW(), '', '{$_POST['admin_email']}', '', '', '', '', '', '', '');\n";
     // Set configuration values for image package
     $sql_query .= "REPLACE INTO CPG_config VALUES ('thumb_method', '{$_POST['thumb_method']}');\n";
     $sql_query .= "REPLACE INTO CPG_config VALUES ('impath', '{$_POST['impath']}');\n";
@@ -485,7 +486,7 @@ function create_tables()
 
     foreach($sql_query as $q) {
         if (! mysql_query($q)) {
-            $errors .= "mySQL Error: " . mysql_error() . " on query '$q'<br /><br />";
+            $errors .= "MySQL Error: " . mysql_error() . " on query '$q'<br /><br />";
             return;
         }
     }

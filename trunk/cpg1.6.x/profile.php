@@ -433,18 +433,16 @@ if ($superCage->post->keyExists('change_password') && USER_ID && UDB_INTEGRATION
     }
 
     require 'include/passwordhash.inc.php';
-    $sql = "SELECT user_password, user_passwordhash FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '" . USER_ID . "' LIMIT 1";
+    $sql = "SELECT user_password, user_password_salt, user_password_hash_algorithm, user_password_iterations FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '" . USER_ID . "' LIMIT 1";
     $result = cpg_db_query($sql);
-    $password_info = mysql_fetch_assoc($result);
+    $password_params = mysql_fetch_assoc($result);
     mysql_free_result($result);
 
-    $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET user_password = '', user_passwordhash = '".cpg_password_create_hash($new_pass)."' WHERE user_id = '" . USER_ID . "' ";
-    if (!$password_info['user_passwordhash']) {
+    $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET ".cpg_password_create_update_string($new_pass)." WHERE user_id = '" . USER_ID . "' ";
+    if (!$password_params['user_password_salt']) {
         $sql .= "AND BINARY user_password = '".md5($current_pass)."'";
-    } else {
-        if (!cpg_password_validate($current_pass, $password_info['user_passwordhash'])) {
-            cpg_die(ERROR, $lang_register_php['pass_chg_error'], __FILE__, __LINE__);
-        }
+    } elseif (!cpg_password_validate($current_pass, $password_params)) {
+        cpg_die(ERROR, $lang_register_php['pass_chg_error'], __FILE__, __LINE__);
     }
     $result = cpg_db_query($sql);
 

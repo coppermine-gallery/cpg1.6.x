@@ -589,8 +589,9 @@ function check_user_info(&$error)
     }
 
     require 'include/passwordhash.inc.php';
+    $password_params = explode(':', cpg_password_create_hash($password));
 
-    $sql = "INSERT INTO {$CONFIG['TABLE_USERS']} (user_regdate, user_active, user_actkey, user_name, user_passwordhash, user_email, user_profile1, user_profile2, user_profile3, user_profile4, user_profile5, user_profile6, user_language) VALUES (NOW(), '$active', '$act_key', '$user_name', '".cpg_password_create_hash($password)."', '$email', '$profile1', '$profile2', '$profile3', '$profile4', '$profile5', '$profile6', '{$CONFIG['lang']}')";
+    $sql = "INSERT INTO {$CONFIG['TABLE_USERS']} (user_regdate, user_active, user_actkey, user_name, user_password, user_password_salt, user_password_hash_algorithm, user_password_iterations, user_email, user_profile1, user_profile2, user_profile3, user_profile4, user_profile5, user_profile6, user_language) VALUES (NOW(), '$active', '$act_key', '$user_name', '{$password_params[HASH_PBKDF2_INDEX]}', '{$password_params[HASH_SALT_INDEX]}', '{$password_params[HASH_ALGORITHM_INDEX]}', '{$password_params[HASH_ITERATION_INDEX]}', '$email', '$profile1', '$profile2', '$profile3', '$profile4', '$profile5', '$profile6', '{$CONFIG['lang']}')";
     $result = cpg_db_query($sql);
     $user_array = array();
     $user_array['user_id'] = mysql_insert_id();

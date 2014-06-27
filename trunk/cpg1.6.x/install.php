@@ -1757,16 +1757,18 @@ function createAdmin()
     if (!isset($config['admin_email']) || $config['admin_email'] == '')  { $GLOBALS['error'] = $language['no_admin_email'];     return false;}
 
     require 'include/passwordhash.inc.php';
+    $password_params = explode(':', cpg_password_create_hash($config['admin_password']));
 
     // Insert the admin account
     $sql_query = "INSERT INTO {$config['db_prefix']}users "
-        . "(user_group, user_active, user_name, user_passwordhash, user_lastvisit, "
-        . " user_regdate, user_group_list, user_email, user_profile1, user_profile2, user_profile3, "
-        . " user_profile4, user_profile5, user_profile6, user_actkey ) "
+        . "(user_group, user_active, user_name, user_password, user_password_salt, "
+        . " user_password_hash_algorithm, user_password_iterations, user_lastvisit, "
+        . " user_regdate, user_group_list, user_email, user_profile1, user_profile2, "
+        . " user_profile3, user_profile4, user_profile5, user_profile6, user_actkey) "
         . "VALUES "
-        . "(1, 'YES', '{$config['admin_username']}', "
-        . " '".cpg_password_create_hash($config['admin_password'])."', NOW(), NOW(), '', "
-        . " '{$config['admin_email']}', '', '', '', '', '', '', '');\n";
+        . "(1, 'YES', '{$config['admin_username']}', '{$password_params[HASH_PBKDF2_INDEX]}', "
+        . " '{$password_params[HASH_SALT_INDEX]}', '{$password_params[HASH_ALGORITHM_INDEX]}', '{$password_params[HASH_ITERATION_INDEX]}', "
+        . " NOW(), NOW(), '', '{$config['admin_email']}', '', '', '', '', '', '', '');\n";
 
     // Set gallery admin mail
     $sql_query .= "REPLACE INTO CPG_config VALUES ('gallery_admin_email', '{$config['admin_email']}');\n";
