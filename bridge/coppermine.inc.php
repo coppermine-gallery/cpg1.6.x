@@ -126,7 +126,7 @@ if (isset($bridge_lookup)) {
                             break;
                     }
 
-                    $sql = "SELECT user_password, user_passwordhash FROM {$this->usertable} WHERE $sql_user_email AND user_active = 'YES' LIMIT 1";
+                    $sql = "SELECT user_password, user_password_salt, user_password_hash_algorithm, user_password_iterations FROM {$this->usertable} WHERE $sql_user_email AND user_active = 'YES' LIMIT 1";
                     $result = cpg_db_query($sql, $this->link_id);
 
                     if (!mysql_num_rows($result)) {
@@ -134,15 +134,14 @@ if (isset($bridge_lookup)) {
                     }
 
                     require 'include/passwordhash.inc.php';
-
-                    $password_info = mysql_fetch_assoc($result);
+                    $password_params = mysql_fetch_assoc($result);
                     mysql_free_result($result);
 
                     // Check for user in users table
                     $sql = "SELECT user_id, user_name, user_password FROM {$this->usertable} WHERE $sql_user_email ";
-                    if (!$password_info['user_passwordhash']) {
+                    if (!$password_params['user_password_salt']) {
                         $sql .= "AND BINARY user_password = '".md5($password)."'";
-                    } elseif (!cpg_password_validate($password, $password_info['user_passwordhash'])) {
+                    } elseif (!cpg_password_validate($password, $password_params)) {
                         return false;
                     }
                     $sql .= " AND user_active = 'YES' LIMIT 1";
@@ -157,7 +156,7 @@ if (isset($bridge_lookup)) {
                     mysql_free_result($result);
 
                     // Update lastvisit value and salt password if needed
-                    $salt_password = !$password_info['user_passwordhash'] ? ", user_password = '', user_passwordhash = '".cpg_password_create_hash($password)."'" : '';
+                    $salt_password = !$password_params['user_password_salt'] ? ', '.cpg_password_create_update_string($password) : '';
                     $sql = "UPDATE {$this->usertable} SET user_lastvisit = NOW() $salt_password WHERE user_id = {$USER_DATA['user_id']}";
                     cpg_db_query($sql, $this->link_id);
 

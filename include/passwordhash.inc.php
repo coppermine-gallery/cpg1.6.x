@@ -72,7 +72,16 @@ function cpg_password_create_hash($password)
 
 function cpg_password_validate($password, $correct_hash)
 {
-    $params = explode(":", $correct_hash);
+    if (is_array($correct_hash)) {
+        $params = array(
+            HASH_ALGORITHM_INDEX => $correct_hash['user_password_hash_algorithm'],
+            HASH_ITERATION_INDEX => $correct_hash['user_password_iterations'],
+            HASH_SALT_INDEX => $correct_hash['user_password_salt'],
+            HASH_PBKDF2_INDEX => $correct_hash['user_password'],
+        );
+    } else {
+        $params = explode(":", $correct_hash);
+    }
     if(count($params) < HASH_SECTIONS)
        return false; 
     $pbkdf2 = base64_decode($params[HASH_PBKDF2_INDEX]);
@@ -87,6 +96,12 @@ function cpg_password_validate($password, $correct_hash)
             true
         )
     );
+}
+
+function cpg_password_create_update_string($password)
+{
+    $password_params = explode(':', cpg_password_create_hash($password));
+    return "user_password = '{$password_params[HASH_PBKDF2_INDEX]}', user_password_salt = '{$password_params[HASH_SALT_INDEX]}', user_password_hash_algorithm = '{$password_params[HASH_ALGORITHM_INDEX]}', user_password_iterations = '{$password_params[HASH_ITERATION_INDEX]}'";
 }
 
 // Compares two strings $a and $b in length-constant time.

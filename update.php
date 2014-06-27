@@ -97,21 +97,21 @@ if (!defined('SKIP_AUTHENTICATION') && !$_SESSION['auth']) {
         $user = $superCage->post->getEscaped('user');
         $pass = $superCage->post->getEscaped('pass');
 
-        // Check if column 'user_passwordhash' exists in user table
+        // Check if column 'user_password_salt' exists in user table
         $result = mysql_query("SELECT * FROM {$CONFIG['TABLE_PREFIX']}users LIMIT 1");
         $row = mysql_fetch_array($result); 
-        $col_user_passwordhash_exists = isset($row['user_passwordhash']) ? true : false;
+        $col_user_password_salt_exists = isset($row['user_password_salt']) ? true : false;
         mysql_free_result($result);
 
-        if ($col_user_passwordhash_exists) {
+        if ($col_user_password_salt_exists) {
             require 'include/passwordhash.inc.php';
-            $sql = "SELECT user_password, user_passwordhash FROM {$CONFIG['TABLE_PREFIX']}users WHERE user_group = 1 AND user_name = '$user'";
+            $sql = "SELECT user_password, user_password_salt, user_password_hash_algorithm, user_password_iterations FROM {$CONFIG['TABLE_PREFIX']}users WHERE user_group = 1 AND user_name = '$user'";
             $result = mysql_query($sql);
-            $password_info = mysql_fetch_assoc($result);
+            $password_params = mysql_fetch_assoc($result);
             mysql_free_result($result);
         }
 
-        if (!$col_user_passwordhash_exists || !$password_info['user_passwordhash']) {
+        if (!$col_user_password_salt_exists || !$password_params['user_password_salt']) {
             $sql = "SELECT user_active FROM {$CONFIG['TABLE_PREFIX']}users WHERE user_group = 1 AND user_name = '$user' AND (user_password = '$pass' OR user_password = '".md5($pass)."')";
             $result = @mysql_query($sql);
             if (!@mysql_num_rows($result)) {
@@ -119,7 +119,7 @@ if (!defined('SKIP_AUTHENTICATION') && !$_SESSION['auth']) {
                 html_auth_box('MySQL');
                 die();
             }
-        } elseif (!cpg_password_validate($pass, $password_info['user_passwordhash'])) {
+        } elseif (!cpg_password_validate($pass, $password_params)) {
             //not authenticated, try mysql account details
             html_auth_box('MySQL');
             die();
