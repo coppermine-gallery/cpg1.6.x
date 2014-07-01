@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2014-07-01 [B] Fixed batch add interface issue when selecting folder (thread ID 77442) {eenemeenemuu}
 2014-06-27 [C] Display exactly which account data needs to be entered to authenticate in update.php {eenemeenemuu}
 2014-06-27 [O] Don't populate language array manually, but load English language file if authentification is skipped in update.php {eenemeenemuu}
 2014-06-25 [A] Salt user passwords (thread ID 76021) {eenemeenemuu}
