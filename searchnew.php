@@ -539,7 +539,7 @@ EOT;
     endtable();
     pagefooter();
 //} elseif (isset($_GET['startdir'])) {
-} elseif ($superCage->get->keyExists('startdir') && $matches = $superCage->get->getMatched('startdir', '/^[0-9A-Za-z\/\\\\_-\s]+$/')) {
+} elseif ($superCage->get->keyExists('startdir') && $matches = $superCage->get->getMatched('startdir', '/^[0-9A-Za-z\/\\\_\-\s]+$/')) {
     $startdir = $matches[0];
 
     set_js_var('no_album_selected', $lang_search_new_php['no_album']);
