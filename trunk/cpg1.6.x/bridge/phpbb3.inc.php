@@ -107,7 +107,7 @@ if (isset($bridge_lookup)) {
             );
 
             // Group ids
-            $this->admingroups = array(5);
+            $this->admingroups = $BRIDGE['admingroups_phpbb3'] ? explode(',', $BRIDGE['admingroups_phpbb3']) : array(5); // workaround - store admin and guest group IDs in bridge database in cpg1.6.x
             $this->guestgroup = 1;
 
             // Cookie settings - used in following functions only
