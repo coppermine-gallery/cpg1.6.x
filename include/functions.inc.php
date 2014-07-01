@@ -5762,7 +5762,7 @@ function cpg_format_bytes($bytes)
 
 function cpg_get_type($filename,$filter=null)
 {
-    global $CONFIG;
+    global $CONFIG, $CPG_PHP_SELF;
 
     static $FILE_TYPES = array();
 
@@ -5785,6 +5785,8 @@ function cpg_get_type($filename,$filter=null)
             if ($CONFIG[$content_types_to_vars[$row['content']]] == 'ALL' || is_int(strpos('/' . $CONFIG[$content_types_to_vars[$row['content']]] . '/', '/' . $row['extension'] . '/'))) {
                 $FILE_TYPES[$row['extension']]      = $row;
                 $CONFIG['allowed_file_extensions'] .= '/' . $row['extension'];
+            } elseif ($CPG_PHP_SELF == 'displayimage.php') {
+                $FILE_TYPES[$row['extension']] = $row;
             }
         }
 
