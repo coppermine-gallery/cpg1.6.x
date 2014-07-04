@@ -29,3 +29,7 @@ ALTER TABLE CPG_users ADD user_password_salt varchar(255) NOT NULL default '';
 ALTER TABLE CPG_users ADD user_password_hash_algorithm varchar(25) NOT NULL default '';
 ALTER TABLE CPG_users ADD user_password_iterations varchar(25) NOT NULL default '';
 
+ALTER TABLE CPG_comments CHANGE `msg_date` `msg_date` datetime NOT NULL default '1000-01-01 00:00:00';
+ALTER TABLE CPG_pictures CHANGE `mtime` `mtime` datetime NOT NULL default '1000-01-01 00:00:00';
+ALTER TABLE CPG_users CHANGE `user_lastvisit` `user_lastvisit` datetime NOT NULL default '1000-01-01 00:00:00';
+ALTER TABLE CPG_users CHANGE `user_regdate` `user_regdate` datetime NOT NULL default '1000-01-01 00:00:00';
