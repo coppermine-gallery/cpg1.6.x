@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2014-08-18 [B] Fixed displaying wrong image issue (thread ID 77705) {eenemeenemuu}
 2014-07-04 [B] Fixed default value for columns that use the MySQL datatype "datetime" (thread ID 77646) {eenemeenemuu}
 2014-07-01 [B] Fixed display of not allowed file types that already exist in the gallery (thread ID 77381) {eenemeenemuu}
 2014-07-01 [D] Fixed misleading "URL of the bridge app" help box regarding trailing slash (thread ID 76286) {eenemeenemuu}
