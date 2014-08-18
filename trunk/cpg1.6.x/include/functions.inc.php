@@ -2067,6 +2067,7 @@ function get_pic_pos($album, $pid)
         $result = cpg_db_query("SELECT filename, title, pid, position, ctime FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid");
 
         $pic = mysql_fetch_assoc($result);
+        $pic['title'] = mysql_real_escape_string($pic['title']);
 
         $sort_array = array(
             'na' => "(filename < '{$pic['filename']}' OR filename = '{$pic['filename']}' AND pid < {$pic['pid']})",
