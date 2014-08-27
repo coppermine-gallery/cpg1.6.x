@@ -998,7 +998,7 @@ EOT;
         if (isset($result['error'])) {
             if (isset($result['halt_upload'])) {
                 echo "error|{$result['error']}|{$result['halt_upload']}";
-        } else {
+            } else {
                 echo "error|{$result['error']}|0";
             }
         } else {
