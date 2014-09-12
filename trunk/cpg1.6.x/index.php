@@ -713,7 +713,7 @@ function list_albums()
         $sql = "SELECT a.aid, count( p.pid ) AS pic_count, max( p.pid ) AS last_pid, max( p.ctime ) AS last_upload, a.keyword, a.alb_hits"
                 ." FROM {$CONFIG['TABLE_ALBUMS']} AS a "
                 ." LEFT JOIN {$CONFIG['TABLE_PICTURES']} AS p ON a.aid = p.aid AND p.approved = 'YES' "
-                ." WHERE a.owner = {$USER_DATA['user_id']} $album_filter AND a.aid IN (".implode(', ', $current_albums).") GROUP BY a.aid $limit";
+                ." WHERE a.owner = {$USER_DATA['user_id']} $album_filter AND a.aid IN (".implode(', ', $current_albums).") GROUP BY a.aid";
         $alb_stats_q = cpg_db_query($sql);
         $alb_stats = cpg_db_fetch_rowset($alb_stats_q);
         mysql_free_result($alb_stats_q);
