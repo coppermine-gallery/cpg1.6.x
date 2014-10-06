@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2014-10-06 [A] Added hidden feature to hide already existing files on batch-add interface (thread ID 77671) {eenemeenemuu}
 2014-09-12 [B] Fixed issue with user gallery pagination (thread ID 77790) {eenemeenemuu}
 2014-08-18 [B] Fixed displaying wrong image issue (thread ID 77705) {eenemeenemuu}
 2014-07-04 [B] Fixed default value for columns that use the MySQL datatype "datetime" (thread ID 77646) {eenemeenemuu}
