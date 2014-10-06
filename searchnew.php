@@ -97,7 +97,7 @@ function picrow($picfile, $picid, $albid)
 {
     global $CONFIG, $expic_array, $picrowCounter;
 
-    $encoded_picfile = base64_encode($picfile);
+    $encoded_picfile = urlencode(base64_encode($picfile)); 
     $picname = $CONFIG['fullpath'] . $picfile;
     $pic_url = urlencode($picfile);
     $pic_fname = basename($picfile);
