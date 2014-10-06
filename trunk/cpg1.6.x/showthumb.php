@@ -119,7 +119,7 @@ function makethumbnail($src_file, $newSize, $method)
     }
 }
 
-$matches = $superCage->get->getMatched('picfile', '/^[0-9A-Za-z\/\\\\_.-\s]+$/');
+$matches = $superCage->get->getMatched('picfile', '/^[0-9A-Za-z~\/\\\\_.-\s]+$/');
 
 makethumbnail($CONFIG['fullpath'] . $matches[0], $superCage->get->getInt('size'), $CONFIG['thumb_method']);
 

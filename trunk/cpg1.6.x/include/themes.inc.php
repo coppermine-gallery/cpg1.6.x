@@ -4076,7 +4076,7 @@ function theme_display_fullsize_pic()
         }
         //$picfile = $_GET['picfile'];
         //$picfile = $superCage->get->getPath('picfile'); // doesn't work with HTML entities
-        $matches = $superCage->get->getMatched('picfile', '/^[0-9A-Za-z\/_.-]+$/');
+        $matches = $superCage->get->getMatched('picfile', '/^[0-9A-Za-z~ \/_.-]+$/');
         $picfile = $matches[0];
         $picname = $CONFIG['fullpath'] . $picfile;
         $imagesize = @getimagesize($picname);
