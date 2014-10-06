@@ -96,12 +96,6 @@ function dirheader($dir, $dirid)
 function picrow($picfile, $picid, $albid)
 {
     global $CONFIG, $expic_array, $picrowCounter;
-    $picrowCounter++;
-    if ( ($picrowCounter / 2) == floor($picrowCounter / 2) ) {
-      $rowStyle = 'tableb';
-    } else {
-      $rowStyle = 'tableb tableb_alternate';
-    }
 
     $encoded_picfile = base64_encode($picfile);
     $picname = $CONFIG['fullpath'] . $picfile;
@@ -145,6 +139,14 @@ function picrow($picfile, $picid, $albid)
         $winsizeY = ($fullimagesize[1] + 16);
         // $checked = isset($expic_array[$picfile]) || !$fullimagesize ? '' : 'checked';
         $picfile_replaced_forbidden = dirname($picfile).'/'.replace_forbidden(basename($picfile));
+        if ($CONFIG['batch_add_hide_existing_files'] && isset($expic_array[$picfile_replaced_forbidden])) {
+            return;
+        }
+        if ($picrowCounter++ % 2) {
+            $rowStyle = 'tableb';
+        } else {
+            $rowStyle = 'tableb tableb_alternate';
+        }
         $checked = isset($expic_array[$picfile_replaced_forbidden]) || !is_known_filetype($pic_fname) ? '' : 'checked="checked"';
         $return = <<< EOT
         <tr>
