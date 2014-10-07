@@ -1077,7 +1077,7 @@ if (!isset($template_add_your_comment)) { //{THEMES}
 ** Section <<<$template_add_your_comment>>> - START
 ******************************************************************************/
 $template_add_your_comment = <<<EOT
-        <form method="post" name="post" id="post" action="db_input.php">
+        <form method="post" name="post" id="post" onsubmit="return notDefaultUsername(this, '{DEFAULT_USERNAME}', '{DEFAULT_USERNAME_MESSAGE}');" action="db_input.php">
                 <table align="center" width="{WIDTH}" cellspacing="1" cellpadding="0" class="maintable">
                         <tr>
                                         <td width="100%" class="tableh2">{ADD_YOUR_COMMENT}{HELP_ICON}</td>
@@ -1088,7 +1088,7 @@ $template_add_your_comment = <<<EOT
 
 <!-- BEGIN user_name_input -->
                                                         <tr>
-                               <td class="tableb tableb_alternate">
+                                <td class="tableb tableb_alternate">
                                         {NAME}
                                 </td>
                                 <td class="tableb tableb_alternate">
@@ -1115,7 +1115,7 @@ $template_add_your_comment = <<<EOT
                                 <td class="tableb tableb_alternate">
                                 <input type="hidden" name="event" value="comment" />
                                 <input type="hidden" name="pid" value="{PIC_ID}" />
-                                <button type="submit" class="button" name="submit" value="{OK}"  onclick="return notDefaultUsername(this.form, '{DEFAULT_USERNAME}', '{DEFAULT_USERNAME_MESSAGE}');">{OK_ICON}{OK}</button>
+                                <button type="submit" class="button" name="submit" value="{OK}">{OK_ICON}{OK}</button>
                                 <input type="hidden" name="form_token" value="{FORM_TOKEN}" />
                                 <input type="hidden" name="timestamp" value="{TIMESTAMP}" />
                                 </td>
