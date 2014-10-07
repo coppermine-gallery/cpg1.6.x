@@ -5917,7 +5917,12 @@ function album_selection_options($selected = 0)
     $uploads_yes = (defined('EDITPICS_PHP') || defined('UPLOAD_PHP')) && USER_CAN_UPLOAD_PICTURES  ? ' OR uploads = "YES"' : '';
 
     if (GALLERY_ADMIN_MODE) {
-        $result = cpg_db_query("SELECT aid, title, category FROM {$CONFIG['TABLE_ALBUMS']} ORDER BY pos");
+        $superCage = Inspekt::makeSuperCage();
+        if ($superCage->get->keyExists('only_empty_albums')) {
+            $result = cpg_db_query("SELECT aid, title, category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid NOT IN (SELECT aid FROM {$CONFIG['TABLE_PICTURES']}) ORDER BY pos");
+        } else {
+            $result = cpg_db_query("SELECT aid, title, category FROM {$CONFIG['TABLE_ALBUMS']} ORDER BY pos");
+        }
     } elseif (USER_ID) {
         $result = cpg_db_query("SELECT aid, title, category FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = " . (FIRST_USER_CAT + USER_ID) . " OR owner = " . USER_ID . $uploads_yes . " ORDER BY pos");
     } else {
