@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2014-10-07 [B] Fixed comment form submit for Android browser {eenemeenemuu}
 2014-10-07 [A] Added hidden feature to display only empty albums on batch-add (thread ID 77824) {eenemeenemuu}
 2014-10-06 [B] Fixed several issues with file path names on batch-add (thread ID 77820 & 77823) {eenemeenemuu}
 2014-10-06 [B] Fixed pre-selection of files for Windows driven systems on batch-add interface (thread ID 77834) {eenemeenemuu}
