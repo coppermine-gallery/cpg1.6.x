@@ -178,9 +178,11 @@ $string = str_replace('<a internalAnchorLinkTempReplacement', '<a href="' . 'doc
 if ($header != '') {
     function cpg_sanitize_help_data($str) {
         // Remove all HTML tag attributes
-        $str = preg_replace('/<([A-Za-z]+) .*>/Us', '<\\1>', $str);
+        $str = preg_replace('/<([A-Za-z]+)[\s].*>/Us', '<\\1>', $str);
         // Remove all script tags
         $str = preg_replace('/(<script.*>|<\/script.*>)/Usi', '', $str);
+        // Fix unclosed HTML tags
+        $str = preg_replace('/<([A-Za-z]+)[\s]/Us', '<\\1>', $str);
         return $str;
     }
     $content = '<h1>'.cpg_sanitize_help_data($header).'</h1>';
