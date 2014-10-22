@@ -16,29 +16,21 @@
 **********************************************/
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
-$name = 'Visible HookPoints';
-$description =  <<< EOT
-Tool for plugin developers to locate plugin entry points (plugin hooks) and array information. Do not enable this plugin unless you want to start developing your own plugin.
-EOT;
-$description .= '&nbsp;' . cpg_display_help('f=plugins.htm&amp;as=plugin_bundled_visiblehookpoints&amp;ae=plugin_bundled_visiblehookpoints_end', '400', '200');
+
+$name = $lang_plugin_php['visiblehookpoints_config_name'];
+$description =  $lang_plugin_php['visiblehookpoints_config_description'] . '&nbsp;' . cpg_display_help('f=plugins.htm&amp;as=plugin_bundled_visiblehookpoints&amp;ae=plugin_bundled_visiblehookpoints_end', '400', '200');
+$config_icon = cpg_fetch_icon('config', 1);
 $extra_info = <<<EOT
-    <table border="0" cellspacing="0" cellpadding="0">
-    <tr>
-        <td class="admin_menu">
-          <a href="index.php?file=visiblehookpoints/index&action=config" title="Configuration">Visible HookPoints configuration</a>
-        </td>
-        <td>&nbsp;</td>
-        <td class="admin_menu">
-          <a href="http://cpg-contrib.org/board/index.php?board=27.0" title="Support">Plugin support</a>
-        </td>
-    </tr>
-    </table>
+    <a href="index.php?file=visiblehookpoints/index&action=config" class="admin_menu">{$config_icon}{$lang_plugin_php['visiblehookpoints_plugin_config']}</a>
+    <a href="http://forum.coppermine-gallery.net/index.php?board=97.0" class="admin_menu">{$lang_plugin_php['visiblehookpoints_plugin_support']}</a>
+    
 EOT;
-$install_info = 'Plugin comes with a configuration page (accessible via the config manager) that will allow you to specify if the hookpoints should be displayed only if the parameter &quot;hookpoints&quot; is set in the URL or if they are supposed to be display always to every visitor. Second option is only meant for plugin development on testbeds - do not use on production sites, as this plugin will output information about the hookpoints directly on all pages.';
+$install_info = $lang_plugin_php['visiblehookpoints_config_install'];
 $author = <<< EOT
 Donnoman from <a href="http://cpg-contrib.org">cpg-contrib.org</a> (v1.x and 2.x)<br />
-Plugin config section added, ported to cpg1.5.x, added hovering boxes: by <a href="http://coppermine-gallery.net/forum/index.php?action=profile;u=2" rel="external" class="external">Joachim M&uuml;ller</a> (v3.0)
+Plugin config section added, ported to cpg1.5.x, added hovering boxes: by <a href="http://coppermine-gallery.net/forum/index.php?action=profile;u=2" rel="external" class="external">Joachim M&uuml;ller</a> (v3.0)<br />
+Added i18n support: by <a href="http://forum.coppermine-gallery.net/index.php?action=profile;u=24278" rel="external" class="external">eenemeenemuu</a> (v4.0)
 EOT;
-$version='3.4';
-$plugin_cpg_version = array('min' => '1.5');
+$version='4.0';
+$plugin_cpg_version = array('min' => '1.5.34');
 ?>
