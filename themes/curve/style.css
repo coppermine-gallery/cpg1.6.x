@@ -27,6 +27,10 @@ body {
     padding-left: 5%;
 }
 
+body.nobgimage {
+    background: none;
+}
+
 #cpg_logo_block_outer  {
     background-color: #fefefe;
     background-image: url(images/main_block.png);

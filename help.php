@@ -246,7 +246,7 @@ echo <<< EOT
         <script src="docs/js/jquery.js" type="text/javascript"></script>
         <script src="docs/js/help.js" type="text/javascript"></script>
     </head>
-    <body>
+    <body class="nobgimage">
         <div id="cpg_main_block">
             $string
             $content
