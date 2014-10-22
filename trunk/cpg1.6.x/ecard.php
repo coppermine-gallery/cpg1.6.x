@@ -327,7 +327,7 @@ if ($superCage->post->keyExists('submit')) {
 }
 
 if ($CONFIG['show_bbcode_help']) {
-    $captionLabel = '&nbsp;'. cpg_display_help('f=empty.htm&amp;base=64&amp;h='.urlencode(base64_encode(serialize($lang_bbcode_help_title))).'&amp;t='.urlencode(base64_encode(serialize($lang_bbcode_help))), 470, 245);
+    $captionLabel = '&nbsp;'. cpg_display_help('f=empty.htm&amp;h=lang_bbcode_help_title&amp;t=lang_bbcode_help', 470, 245);
 }
 
 if ($row['pwidth'] == 0 || $row['pheight'] == 0) {
@@ -442,7 +442,7 @@ EOT;
 // captcha code
 if (($CONFIG['ecard_captcha'] == 1) || ($CONFIG['ecard_captcha'] == 2 && !USER_ID)) {
 
-    $help = cpg_display_help('f=empty.htm&amp;base=64&amp;h='.urlencode(base64_encode(serialize($lang_common['captcha_help_title']))).'&amp;t='.urlencode(base64_encode(serialize($lang_common['captcha_help']))), 470, 245);
+    $help = cpg_display_help('f=empty.htm&amp;h=lang_common[captcha_help_title]&amp;t=lang_common[captcha_help]', 470, 245);
 
     $captcha_print = <<< EOT
     <tr>

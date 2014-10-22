@@ -360,7 +360,7 @@ EOT;
 			}
 			if (!empty($value['warning'])) { // set warning text
 				$warningText  = $value['warning'];
-				$warningPopUp = cpg_display_help('f=empty.htm&amp;base=64&amp;h='.urlencode(base64_encode(serialize($lang_admin_php[$key]))).'&amp;t='.urlencode(base64_encode(serialize(htmlspecialchars($value['warning'])))), 500, 250, '*');
+				$warningPopUp = cpg_display_help('f=empty.htm&amp;h=lang_admin_php['.$key.']&amp;t='.$value['warning'], 500, 250, '*');
 			} else {
 				$warningText  = '';
 				$warningPopUp = '';

@@ -41,13 +41,7 @@ set_js_var('change_album', $lang_picmgr_php['change_album']);
 set_js_var('confirm_modifs', $lang_picmgr_php['confirm_modifs']);
 
 if ($CONFIG['default_sort_order'] != 'pa' && $CONFIG['default_sort_order'] != 'pd') {
-    $help_picture_manager = <<< EOT
-            <ul>
-                <li>{$lang_picmgr_php['explanation1']}</li>
-                <li>{$lang_picmgr_php['explanation2']}</li>
-            </ul>
-EOT;
-    $help_picture_manager = '&nbsp;'. cpg_display_help('f=empty.html&amp;base=64&amp;h=' . urlencode(base64_encode(serialize($lang_picmgr_php['explanation_header'] . ':&nbsp;'))) . '&amp;t=' . urlencode(base64_encode(serialize($help_picture_manager))), 500, 300);
+    $help_picture_manager = '&nbsp;'. cpg_display_help('f=empty.html&amp;h=lang_picmgr_php[explanation_header]&amp;t=lang_tmp_picture_manager', 500, 300);
  } else {
     $help_picture_manager = '';
  }

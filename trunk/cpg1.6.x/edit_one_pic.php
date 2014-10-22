@@ -436,7 +436,7 @@ EOT;
 form_alb_list_box();
 
 if ($CONFIG['show_bbcode_help']) {
-    $captionLabel = '&nbsp;'. cpg_display_help('f=index.html&amp;base=64&amp;h='.urlencode(base64_encode(serialize($lang_bbcode_help_title))).'&amp;t='.urlencode(base64_encode(serialize($lang_bbcode_help))), 470, 245);
+    $captionLabel = '&nbsp;'. cpg_display_help('f=empty.html&amp;h=lang_bbcode_help_title&amp;t=lang_bbcode_help', 470, 245);
 }
 
 $keywords_insert1 = sprintf($lang_common['keywords_insert1'], $lang_common['keyword_separators'][$CONFIG['keyword_separator']]);

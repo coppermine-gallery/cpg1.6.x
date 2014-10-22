@@ -589,52 +589,7 @@ if (!$superCage->post->keyExists('process') && !$superCage->post->keyExists('plu
             echo '</div>';
         }
 
-        $restriction_filesize = sprintf($lang_upload_php['restriction_filesize'], '<strong>' . cpg_format_bytes($max_file_size) . '</strong>');
-        if ($CONFIG['allowed_img_types'] != '') {
-            $allowed_img_types = '<li>' . sprintf ($lang_upload_php['allowed_img_types'], $CONFIG['allowed_img_types']) . '</li>';
-        } else {
-            $allowed_img_types = '';
-        }
-        if ($CONFIG['allowed_mov_types'] != '') {
-            $allowed_mov_types = '<li>' . sprintf ($lang_upload_php['allowed_mov_types'], $CONFIG['allowed_mov_types']) . '</li>';
-        } else {
-            $allowed_mov_types = '';
-        }
-        if ($CONFIG['allowed_snd_types'] != '') {
-            $allowed_snd_types = '<li>' . sprintf ($lang_upload_php['allowed_snd_types'], $CONFIG['allowed_snd_types']) . '</li>';
-        } else {
-            $allowed_snd_types = '';
-        }
-        if ($CONFIG['allowed_doc_types'] != '') {
-            $allowed_doc_types = '<li>' . sprintf ($lang_upload_php['allowed_doc_types'], $CONFIG['allowed_doc_types']) . '</li>';
-        } else {
-            $allowed_doc_types = '';
-        }
-
-        $help_page = <<< EOT
-<ul>
-    <li>{$lang_upload_php['up_instr_1']}</li>
-    <li>{$lang_upload_php['up_instr_2']}</li>
-    <li>{$lang_upload_php['up_instr_3']}</li>
-    <li>{$lang_upload_php['up_instr_4']}</li>
-    <li>{$lang_upload_php['up_instr_5']}</li>
-</ul>
-
-<h2>{$lang_upload_php['restrictions']}</h2>
-<ul>
-    <li>{$restriction_filesize}</li>
-    <li>{$lang_upload_php['restriction_zip']}</li>
-    <li>{$lang_upload_php['allowed_types']}
-        <ul>
-            {$allowed_img_types}
-            {$allowed_mov_types}
-            {$allowed_snd_types}
-            {$allowed_doc_types}
-        </ul>
-    </li>
-</ul>
-EOT;
-        $upload_help = cpg_display_help('f=empty.htm&amp;base=64&amp;h='.urlencode(base64_encode(serialize($lang_upload_php['title']))).'&amp;t='.urlencode(base64_encode(serialize($help_page))),470,245);
+        $upload_help = cpg_display_help('f=empty.htm&amp;h=lang_upload_php[title]&amp;t=lang_tmp_upload',470,245);
     }
 
     $upload_table_header = <<< EOT
@@ -660,7 +615,7 @@ EOT;
         $captionLabel = $lang_upload_php['description'];
         $keywordLabel = sprintf($lang_common['keywords_insert1'],$lang_common['keyword_separators'][$CONFIG['keyword_separator']])
             . '<br /><a href="keyword_select.php" class="greybox">' . $lang_common['keywords_insert2'] .'</a>';
-        if ($CONFIG['show_bbcode_help']) {$captionLabel .= '&nbsp;'. cpg_display_help('f=empty.htm&amp;base=64&amp;h='.urlencode(base64_encode(serialize($lang_bbcode_help_title))).'&amp;t='.urlencode(base64_encode(serialize($lang_bbcode_help))),470,245);}
+        if ($CONFIG['show_bbcode_help']) {$captionLabel .= '&nbsp;'. cpg_display_help('f=empty.htm&amp;h=lang_bbcode_help_title&amp;t=lang_bbcode_help',470,245);}
         $form_array = array(
             sprintf($lang_upload_php['max_fsize'], cpg_format_bytes($max_file_size)),
             array($lang_common['album'], 'album', 2),

@@ -163,33 +163,21 @@ right in front of the closing <tt class="code">&lt;/body&gt;</tt>-tag mustn't be
 
 <a name="dev_documentation_help"></a><h2>Help<a href="#dev_documentation_help" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
 <p>Obviously, the content of the docs folder within coppermine is the place where the documentation is being kept. But apart from that, the docs serve as core for the help system that resides in Coppermine itself (help for the actual application, embedded into the actual application). This being said, here's how the help system currently works: from any PHP-driven file within Coppermine, the help is being populated using the function <tt class="code">cpg_display_help</tt> that is being defined in <tt class="code">include/functions.inc.php</tt>. This function creates the needed output and determines wether the gallery admin has enabled help or not.</p>
-<div class="cpg_example">The minimum code to display help would be
-<pre>$my_help =  cpg_display_help('f=empty.htm&amp;h=' .
-            urlencode('Hello world') . '&amp;t=' .
-            urlencode('This is the detailed text of the help window'),
-            200, 100);
-echo &lt;&lt;&lt; EOT
-Foo bar {$my_help}
-EOT;</pre>
-In case the amount of of characters might get bigger we should disguise the URL a little, using this code
-<pre>$my_help =  cpg_display_help('f=empty.htm&amp;base=64&amp;h=' .
-            urlencode(base64_encode(serialize('Hello world'))) . '&amp;t=' .
-            urlencode(base64_encode(serialize('This is the detailed text of the help window'))),
-            200, 100);
-echo &lt;&lt;&lt; EOT
-Foo bar {$my_help}
-EOT;</pre>
-should do the trick.<br />
-This is of course not a real life example, as there mustn't be hard-coded text in the code, so the result would look like this:
-<pre>$my_help =  cpg_display_help('f=empty.htm&amp;base=64&amp;h=' .
-            urlencode(base64_encode(serialize($lang_example['hello_world']))) . '&amp;t=' .
-            urlencode(base64_encode(serialize($lang_example['hello_world_details']))),
-            200, 100);
+<p>The first way to display help is by refering to the available strings in the language files. With this coding, the help text would come from the language file, so this option only applies for very short help section.</p>
+<div class="cpg_example">To refer to an availabe language string, you have to pass the variable name to <tt class="code">cpg_display_help</tt>
+<pre>$my_help = cpg_display_help('f=empty.htm&amp;h=<strong>lang_my_variable</strong>&amp;t=<strong>lang_my_variable_details</strong>', 200, 100);
 echo &lt;&lt;&lt; EOT
 {$lang_example['bla']} {$my_help}
 EOT;</pre>
-With this coding, the help text would come from the language file, so this option only applies for very short help section.
+Of course you can also use language strings in arrays, like this
+<pre>$my_help = cpg_display_help('f=empty.htm&amp;h=<strong>lang_my_array[help_header]</strong>&amp;t=<strong>lang_my_array[help_text]</strong>', 200, 100);
+echo &lt;&lt;&lt; EOT
+{$lang_example['bla']} {$my_help}
+EOT;</pre>
+The parameter &quot;h&quot; will be the help header, the parameter &quot;t&quot; will be the actual help text body.
+<p>Note, that there are <strong>no</strong> dollar signs before the variable/array names and there <strong>mustn't</strong> be apostrophes around the array keys!</p>
 </div>
+<div class="cpg_message_warning">In earlier versions of Coppermine it was possible to pass custom text to <tt class="code">help.php</tt>. This feature has been dropped, as it caused security flaws several times.</div>
 The second (and recommended) way to display help is by refering to the documentation - the function <tt class="code">cpg_display_help</tt> and the subsequent file <tt class="code">help.php</tt> are designed for exactly that purpose. All you have to do in your function call is refering to the file name of the documentation section that you want to refer to and the anchor tags that you refer to:
 <pre>$help = '&nbsp;' . cpg_display_help('f=your_file.htm&amp;as=foo_start&amp;ae=foo_end&amp;top=1', '600', '300');</pre>
 Would refer to the file <tt class="class">./docs/en/your_file.htm</tt> and inside that file to the section between

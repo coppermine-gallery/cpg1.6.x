@@ -3732,7 +3732,7 @@ function cpg_debug_output()
     $debug_underline   = '&#0010;------------------&#0010;';
     $debug_separate    = '&#0010;==========================&#0010;';
     $debug_toggle_link = $lang_cpg_debug_output['debug_output'] . ': <span class="detail_head_collapsed">'. $lang_cpg_debug_output['show_hide'].'</span>';
-    $debug_help = '&nbsp;'. cpg_display_help('f=empty.htm&amp;base=64&amp;h='.urlencode(base64_encode(serialize($lang_cpg_debug_output['debug_output_explain']))).'&amp;t='.urlencode(base64_encode(serialize($lang_cpg_debug_output['copy_and_paste_instructions']))), 470, 245);
+    $debug_help = '&nbsp;'. cpg_display_help('f=empty.htm&amp;h=lang_cpg_debug_output[debug_output_explain]&amp;t=lang_cpg_debug_output[copy_and_paste_instructions]', 470, 245);
     $debug_phpinfo_link = GALLERY_ADMIN_MODE ? '<a href="phpinfo.php" class="admin_menu">' . cpg_fetch_icon('phpinfo', 1) . $lang_cpg_debug_output['phpinfo'] . '</a> ' : '';
 
     echo <<< EOT
@@ -3931,11 +3931,11 @@ EOT;
         $report = $cpgdebugger->stop();
         //$debug_notices_icon = cpg_fetch_icon('text_left', 2);
         if (GALLERY_ADMIN_MODE) {
-            $notices_help =  $lang_cpg_debug_output['notices_help_admin'];
+            $notices_help =  'notices_help_admin';
         } else {
-            $notices_help =  $lang_cpg_debug_output['notices_help_non_admin'];
+            $notices_help =  'notices_help_non_admin';
         }
-        $notices_help = '&nbsp;' . cpg_display_help('f=empty.htm&amp;base=64&amp;h=' . urlencode(base64_encode(serialize($lang_cpg_debug_output['notices']))) . '&amp;t=' . urlencode(base64_encode(serialize($notices_help))), 470, 245);
+        $notices_help = '&nbsp;' . cpg_display_help('f=empty.htm&amp;h=lang_cpg_debug_output[notices]&amp;t=lang_cpg_debug_output['.$notices_help.']', 470, 245);
         if (is_array($report)) {
             echo <<< EOT
             <tr>

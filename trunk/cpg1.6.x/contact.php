@@ -348,7 +348,7 @@ EOT;
 // captcha field
 if ((!USER_ID && $CONFIG['contact_form_guest_enable'] == 1) || (USER_ID && $CONFIG['contact_form_registered_enable'] == 1)) {
 
-    $captcha_help = cpg_display_help('f=empty.htm&amp;base=64&amp;h='.urlencode(base64_encode(serialize($lang_common['captcha_help_title']))).'&amp;t='.urlencode(base64_encode(serialize($lang_common['captcha_help']))), 470, 245);
+    $captcha_help = cpg_display_help('f=empty.htm&amp;h=lang_common[captcha_help_title]&amp;t=lang_common[captcha_help]', 470, 245);
 
     if (in_array('captcha_remark', $expand_array)) {
         $captcha_remark_visibility = 'block';

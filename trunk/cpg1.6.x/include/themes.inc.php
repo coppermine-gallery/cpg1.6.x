@@ -3917,7 +3917,7 @@ function theme_html_comments($pid)
         }
 
         if ($CONFIG['show_bbcode_help']) {
-            $captionLabel = '&nbsp;'. cpg_display_help('f=empty.htm&amp;base=64&amp;h='.urlencode(base64_encode(serialize($lang_bbcode_help_title))).'&amp;t='.urlencode(base64_encode(serialize($lang_bbcode_help))),470,245);
+            $captionLabel = '&nbsp;'. cpg_display_help('f=empty.htm&amp;h=lang_bbcode_help_title&amp;t=lang_bbcode_help',470,245);
         }
 
         list($timestamp, $form_token) = getFormToken();
@@ -3925,7 +3925,7 @@ function theme_html_comments($pid)
             // Modified Name and comment field
             '{NAME}' => $lang_display_comments['name'],
             '{COMMENT}' => $lang_display_comments['comment'],
-            '{CONFIRM}' => $lang_common['confirm'].'&nbsp;'. cpg_display_help('f=empty.htm&amp;base=64&amp;h='.urlencode(base64_encode(serialize($lang_common['captcha_help_title']))).'&amp;t='.urlencode(base64_encode(serialize($lang_common['captcha_help']))),470,245),
+            '{CONFIRM}' => $lang_common['confirm'].'&nbsp;'. cpg_display_help('f=empty.htm&amp;h=lang_common[captcha_help_title]&amp;t=lang_common[captcha_help]',470,245),
             '{PIC_ID}' => $pid,
             '{USER_NAME}' => $user_name,
             '{MAX_COM_LENGTH}' => $CONFIG['max_com_size'],
