@@ -405,7 +405,7 @@ EOT;
     // captcha code
     if ($CONFIG['registration_captcha'] != 0) {
 
-        $help = cpg_display_help('f=empty.htm&amp;base=64&amp;h='.urlencode(base64_encode(serialize($lang_common['captcha_help_title']))).'&amp;t='.urlencode(base64_encode(serialize($lang_common['captcha_help']))), 470, 245);
+        $help = cpg_display_help('f=empty.htm&amp;h=lang_common[captcha_help_title]&amp;t=lang_common[captcha_help]', 470, 245);
 
         $captcha_print = <<< EOT
     <tr>

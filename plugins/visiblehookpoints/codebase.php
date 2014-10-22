@@ -686,8 +686,8 @@ function visiblehookpoints_configure() {
       $visible = '';
       $admin_only = 'checked="checked"';
     }
-    $help_invisible = '&nbsp;'.cpg_display_help('f=empty.htm&amp;base=64&amp;h='.urlencode(base64_encode(serialize($lang_plugin_php['visiblehookpoints_help_invisible_header']))).'&amp;t='.urlencode(base64_encode(serialize($lang_plugin_php['visiblehookpoints_help_invisible_text']))),470,245);
-    $help_visible = '&nbsp;'.cpg_display_help('f=empty.htm&amp;base=64&amp;h='.urlencode(base64_encode(serialize($lang_plugin_php['visiblehookpoints_help_visible_header']))).'&amp;t='.urlencode(base64_encode(serialize($lang_plugin_php['visiblehookpoints_help_visible_text']))),470,245);
+    $help_invisible = '&nbsp;'.cpg_display_help('f=empty.htm&amp;h=lang_plugin_php[visiblehookpoints_help_invisible_header]&amp;t=lang_plugin_php[visiblehookpoints_help_invisible_text]',470,245);
+    $help_visible = '&nbsp;'.cpg_display_help('f=empty.htm&amp;h=lang_plugin_php[visiblehookpoints_help_visible_header]&amp;t=lang_plugin_php[visiblehookpoints_help_visible_text]',470,245);
     echo <<< EOT
     <form name="cpgform" id="cpgform" action="{$req_uri}" method="post">
 EOT;

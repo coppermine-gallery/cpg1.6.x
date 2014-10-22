@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2014-10-22 [S] Fixed XSS issue (thread ID 77880) {eenemeenemuu}
 2014-10-22 [A] Added i18n support for visiblehookpoints plugin {eenemeenemuu}
 2014-10-07 [S] Fixed XSS issue (thread ID 77831) {eenemeenemuu}
 2014-10-07 [B] Fixed comment form submit for Android browser {eenemeenemuu}

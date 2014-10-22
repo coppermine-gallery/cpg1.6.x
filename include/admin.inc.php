@@ -867,7 +867,7 @@ $config_data = array(
                      'ex' => $lang_admin_php['th_ex'],
                    ),
       'additional_description' => $lang_admin_php['thumb_use_detail'],
-      'warning'                => $lang_admin_php['warning_change'],
+      'warning'                => 'lang_admin_php[warning_change]',
     ),
     'thumb_width' => array(
       'type'            => 'textfield',
@@ -879,7 +879,7 @@ $config_data = array(
       'size'            => '4',
       'width'           => '75',
       'maxlength'       => '4',
-      'warning'         => $lang_admin_php['warning_change'],
+      'warning'         => 'lang_admin_php[warning_change]',
       'end_description' => $lang_admin_php['pixels'],
     ),
     'thumb_height' => array(
@@ -893,7 +893,7 @@ $config_data = array(
       'width'                  => '75',
       'maxlength'              => '4',
       'additional_description' => $lang_admin_php['thumb_height_detail'],
-      'warning'                => $lang_admin_php['warning_change'],
+      'warning'                => 'lang_admin_php[warning_change]',
       'end_description'        => $lang_admin_php['pixels'],
     ),
     'thumb_pfx' => array(
@@ -901,7 +901,7 @@ $config_data = array(
       'default_value'       => 'thumb_',
       'only_display_if_not' => 'thumb_',
       'help_link'           => 'f=configuration.htm&amp;as=admin_picture_thumb_advanced_thumbs_prefix&amp;ae=admin_picture_thumb_advanced_thumbs_prefix_end',
-      'warning'             => $lang_admin_php['warning_change'],
+      'warning'             => 'lang_admin_php[warning_change]',
     ),
     'enable_unsharp' => array(
       'type'          => 'checkbox',
@@ -968,7 +968,7 @@ $config_data = array(
                      'thumb' => $lang_admin_php['picture_use_thumb'],
                      ),
       'additional_description' => $lang_admin_php['picture_use_detail'],
-      'warning'                => $lang_admin_php['warning_change'],
+      'warning'                => 'lang_admin_php[warning_change]',
     ),
     'picture_width' => array(
       'type'            => 'textfield',
@@ -980,7 +980,7 @@ $config_data = array(
       'size'            => '5',
       'width'           => '75',
       'maxlength'       => '5',
-      'warning'         => $lang_admin_php['warning_change'],
+      'warning'         => 'lang_admin_php[warning_change]',
       'end_description' => $lang_admin_php['pixels'],
     ),
     'max_upl_size' => array(
@@ -1096,14 +1096,14 @@ $config_data = array(
       'type'                   => 'textfield',
       'default_value'          => 'albums/',
       'help_link'              => 'f=configuration.htm&amp;as=admin_picture_thumb_advanced_albums_dir&amp;ae=admin_picture_thumb_advanced_albums_dir_end',
-      'warning'                => $lang_admin_php['warning_exist'],
+      'warning'                => 'lang_admin_php[warning_exist]',
       'additional_description' => '<br />('.$lang_admin_php['warning_exist'].')',
     ),
     'userpics' => array(
       'type'                   => 'textfield',
       'default_value'          => 'userpics/',
       'help_link'              => 'f=configuration.htm&amp;as=admin_picture_thumb_advanced_userpics_dir&amp;ae=admin_picture_thumb_advanced_userpics_dir_end',
-      'warning'                => $lang_admin_php['warning_exist'],
+      'warning'                => 'lang_admin_php[warning_exist]',
       'additional_description' => '<br />('.$lang_admin_php['warning_exist'].')',
     ),
     'upload_create_album_directory' => array(
@@ -1116,7 +1116,7 @@ $config_data = array(
       'default_value'          => 'normal_',
       'only_display_if_not'    => 'normal_',
       'help_link'              => 'f=configuration.htm&amp;as=admin_picture_thumb_advanced_intermediate_prefix&amp;ae=admin_picture_thumb_advanced_intermediate_prefix_end',
-      'warning'                => $lang_admin_php['warning_exist'],
+      'warning'                => 'lang_admin_php[warning_exist]',
       'additional_description' => '<br />('.$lang_admin_php['warning_exist'].')',
     ),
     'default_dir_mode' => array(

@@ -101,7 +101,7 @@ EOT;
         // disable row if applicable
         if ($group['group_id'] == 3 && $CONFIG['allow_unlogged_access'] == 0) {
             $disabled = 'disabled="disabled" style="background-color:InactiveCaptionText;color:GrayText"';
-            $explain_greyedout = '&nbsp;'.cpg_display_help('f=empty.htm&amp;base=64&h='.urlencode(base64_encode(serialize($lang_groupmgr_php['explain_greyed_out_title']))).'&amp;t='.urlencode(base64_encode(serialize(sprintf($lang_groupmgr_php['explain_guests_greyed_out_text'], '<em>'.$group['group_name'].'</em>')))), '450', '300');
+            $explain_greyedout = '&nbsp;'.cpg_display_help('f=empty.htm&amp;h=lang_groupmgr_php[explain_greyed_out_title]&amp;t=lang_groupmgr_php[explain_guests_greyed_out_text]', '450', '300');
         } else {
             $disabled = '';
             $explain_greyedout = '';
