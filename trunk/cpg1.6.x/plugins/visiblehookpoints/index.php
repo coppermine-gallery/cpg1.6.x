@@ -65,22 +65,22 @@ switch ($action) {
             $redirect = "index.php?file=visiblehookpoints/index&action=config";
             header($header_location . $redirect);
             pageheader('Information', "<meta http-equiv=\"refresh\" content=\"0;url=$redirect\" />");
-            msg_box('Information', 'Settings changed for Visible Hookpoints Plugin', 'continue', $redirect);
+            msg_box('Information', $lang_plugin_php['visiblehookpoints_settings_saved'], 'continue', $redirect);
             pagefooter();
             ob_end_flush();
             exit;
         } else {
-            cpgRedirectPage('index.php?file=visiblehookpoints/index&action=config', $lang_common['information'], 'Settings changed for Visible Hookpoints Plugin', 1);
+            cpgRedirectPage('index.php?file=visiblehookpoints/index&action=config', $lang_common['information'], $lang_plugin_php['visiblehookpoints_settings_saved'], 1);
         }
       }
     } else {
       $message_id = '';
     }
-    pageheader('Configuration of plugin &quot;Visible HookPoints&quot;');
+    pageheader($lang_plugin_php['visiblehookpoints_config_name'] . ' - ' . $lang_plugin_php['visiblehookpoints_plugin_config']);
     visiblehookpoints_configure();
           break;
   default:
-          cpg_die (ERROR, 'Plugin &quot;Visible HookPoints&quot;: Unknown action value', __FILE__, __LINE__);
+          cpg_die (ERROR, $lang_plugin_php['visiblehookpoints_error'], __FILE__, __LINE__);
 }
 
 pagefooter();
