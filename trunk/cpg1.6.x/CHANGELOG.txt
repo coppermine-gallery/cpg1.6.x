@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2015-01-08 [C] Strip whitespace from imported IPTC title and caption (thread ID 77981) {eenemeenemuu}
 2014-10-22 [C] Better contrast for help boxes when using the theme "curve" (thread ID 77851) {eenemeenemuu}
 2014-10-22 [S] Fixed XSS issue (thread ID 77880) {eenemeenemuu}
 2014-10-22 [A] Added i18n support for visiblehookpoints plugin {eenemeenemuu}

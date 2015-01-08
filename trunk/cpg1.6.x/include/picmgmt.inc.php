@@ -45,8 +45,8 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
             // read IPTC data
             $iptc = get_IPTC($image);
             if (is_array($iptc) && !$title && !$caption && !$keywords) {  //if any of those 3 are filled out we don't want to override them, they may be blank on purpose.
-                $title = (isset($iptc['Headline'])) ? $iptc['Headline'] : $title;
-                $caption = (isset($iptc['Caption'])) ? $iptc['Caption'] : $caption;
+                $title = (isset($iptc['Headline'])) ? trim($iptc['Headline']) : $title;
+                $caption = (isset($iptc['Caption'])) ? trim($iptc['Caption']) : $caption;
                 $keywords = (isset($iptc['Keywords'])) ? implode($CONFIG['keyword_separator'], $iptc['Keywords']) : $keywords;
             }
         }
