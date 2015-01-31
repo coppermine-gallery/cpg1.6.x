@@ -166,8 +166,8 @@
     </div>
     <p>Enable or disable <a href="plugins.htm#plugin">plugins</a>, with a link to the <a href="plugins.htm#plugin_manager">plugin manager</a>. This feature allows advanced Coppermine users to create plug-ins that can control the way Coppermine looks and behaves without modifying the inherent code of the script itself. There are many exciting, user-contributed, plug-ins available on the Coppermine forum.  More details can be found in the <a href="plugins.htm#plugin_start">plugins section of this documentation</a>.  Since plugins add on to the core Coppermine system, if you are having problems, try to disable all plugins using this setting to see if a plugin may be at fault.  If so, you can then enable all plugins here, then uninstall or install one plugin at a time in the <a href="plugins.htm#plugin_manager">plugin manager</a> to figure out which one is at fault.</p>
     <a name="admin_general_enable-plugins_end"></a>
-    <br clear="all" style="clear:both;" />
 
+    <br clear="all" style="clear:both;" />
     <a name="admin_general_browsable_batch_add"></a><h3>Browsable batch-add interface<a href="#admin_general_browsable_batch_add" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
@@ -178,6 +178,17 @@
     <p>When <a href="uploading_batch-add.htm#batch_add_pics">batch-adding</a> files (that you have uploaded using a <acronym title="File Transfer Protocol">FTP</acronym> before) to your gallery, you have the option to switch between a browsable list, where you can scroll through the directory structure in your <tt class="code">albums</tt>-folder, or to display the whole directory structure at once. Enable this option if you have a larger structure of directories and subdirectories you want to browse through (this requires your browser to be capable of displaying <a href="http://www.w3schools.com/tags/tag_iframe.asp" class="external" rel="external">iframes</a>). Set this option to &quot;No&quot; (disabled) if you want to use the &quot;classic&quot; Coppermine interface that shows a complete list of the structure at once.<br />
     Should you have difficulties using one, try the other. You can toggle between these options on the <a href="uploading_batch-add.htm#batch_add_pics">batch-add</a> page as well.</p>
     <a name="admin_general_browsable_batch_add_end"></a>
+
+    <br clear="all" style="clear:both;" />
+    <a name="admin_general_batch_add_hide_existing_files"></a><h3>Hide already added files in batch-add interface<a href="#admin_general_batch_add_hide_existing_files" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <div class="cpg_summary">
+        Default value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
+        Recommended value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
+        Database record name: <tt class="code">batch_add_hide_existing_files</tt><br />
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: General settings &rarr; Hide already added files in batch-add interface
+    </div>
+    <p>When <a href="uploading_batch-add.htm#batch_add_pics">batch-adding</a> files (that you have uploaded using a <acronym title="File Transfer Protocol">FTP</acronym> before) to your gallery, Coppermine displays all files in the selected directory by default, though it always just selects new files. Enable this option if you have directories which contain a lot of files. This will save you some bandwith and server processing time and will make the list clearer, as less rows are displayed for directories which contain already added files.</p>
+    <a name="admin_general_batch_add_hide_existing_files_end"></a>
 
     <br clear="all" style="clear:both;" />
     <a name="admin_general_batch_proc_limit"></a><h3>Process concurrency for batch-add interface<a href="#admin_general_batch_proc_limit" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
