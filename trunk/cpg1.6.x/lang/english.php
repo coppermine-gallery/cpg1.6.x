@@ -682,6 +682,7 @@ $lang_admin_php['keyword_convert'] = 'Convert keyword separator';
 $lang_admin_php['enable_plugins'] = 'Enable plugins';
 $lang_admin_php['purge_expired_bans'] = 'Automatically purge expired bans';
 $lang_admin_php['browse_batch_add'] = 'Browsable batch-add interface';
+$lang_admin_php['batch_add_hide_existing_files'] = 'Hide already added files in batch-add interface';
 $lang_admin_php['batch_proc_limit'] = 'Process concurrency for batch-add interface';
 $lang_admin_php['display_thumbs_batch_add'] = 'Display preview thumbnails on batch-add interface';
 $lang_admin_php['lang'] = 'Default language';

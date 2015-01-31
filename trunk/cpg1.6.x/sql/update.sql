@@ -33,3 +33,5 @@ ALTER TABLE CPG_comments CHANGE `msg_date` `msg_date` datetime NOT NULL default 
 ALTER TABLE CPG_pictures CHANGE `mtime` `mtime` datetime NOT NULL default '1000-01-01 00:00:00';
 ALTER TABLE CPG_users CHANGE `user_lastvisit` `user_lastvisit` datetime NOT NULL default '1000-01-01 00:00:00';
 ALTER TABLE CPG_users CHANGE `user_regdate` `user_regdate` datetime NOT NULL default '1000-01-01 00:00:00';
+
+INSERT INTO CPG_config VALUES ('batch_add_hide_existing_files', '0');

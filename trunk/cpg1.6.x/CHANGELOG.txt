@@ -32,7 +32,7 @@ Changelog
 2014-10-07 [A] Added hidden feature to display only empty albums on batch-add (thread ID 77824) {eenemeenemuu}
 2014-10-06 [B] Fixed several issues with file path names on batch-add (thread ID 77820 & 77823) {eenemeenemuu}
 2014-10-06 [B] Fixed pre-selection of files for Windows driven systems on batch-add interface (thread ID 77834) {eenemeenemuu}
-2014-10-06 [A] Added hidden feature to hide already existing files on batch-add interface (thread ID 77671) {eenemeenemuu}
+2014-10-06 [A] Added config option to hide already existing files on batch-add interface (thread ID 77671) {eenemeenemuu}
 2014-09-12 [B] Fixed issue with user gallery pagination (thread ID 77790) {eenemeenemuu}
 2014-08-18 [B] Fixed displaying wrong image issue (thread ID 77705) {eenemeenemuu}
 2014-07-04 [B] Fixed default value for columns that use the MySQL datatype "datetime" (thread ID 77646) {eenemeenemuu}

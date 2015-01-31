@@ -125,6 +125,11 @@ $config_data = array(
       'default_value' => '1',
       'help_link'     => 'f=configuration.htm&amp;as=admin_general_browsable_batch_add&amp;ae=admin_general_browsable_batch_add_end',
     ),
+    'batch_add_hide_existing_files' => array(
+      'type'          => 'checkbox',
+      'default_value' => '0',
+      'help_link'     => 'f=configuration.htm&amp;as=admin_general_batch_add_hide_existing_files&amp;ae=admin_general_batch_add_hide_existing_files_end',
+    ),
     'batch_proc_limit' => array(
       'type'          => 'textfield',
       'min'           => '1',
