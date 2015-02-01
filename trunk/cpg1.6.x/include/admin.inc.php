@@ -120,6 +120,16 @@ $config_data = array(
       'help_link'       => 'f=configuration.htm&amp;as=admin_general_enable-plugins&amp;ae=admin_general_enable-plugins_end',
       'end_description' => '&nbsp;&nbsp;(<a href="pluginmgr.php">'.$lang_admin_php['manage_plugins'].'</a>)',
     ),
+    'only_empty_albums' => array(
+      'type'          => 'radio',
+      'default_value' => '0',
+      'help_link'     => 'f=configuration.htm&amp;as=admin_general_only_empty_albums&amp;ae=admin_general_only_empty_albums_end',
+      'options'       => array(
+                           $lang_common['no'],
+                           $lang_common['yes'] . ': ' . $lang_admin_php['debug_everyone'],
+                           $lang_common['yes'] . ': ' . $lang_admin_php['debug_admin'],
+                         ),
+    ),
     'browse_batch_add' => array(
       'type'          => 'checkbox',
       'default_value' => '1',

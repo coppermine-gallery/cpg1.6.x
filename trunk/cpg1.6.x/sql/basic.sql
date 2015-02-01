@@ -161,6 +161,7 @@ INSERT INTO CPG_config VALUES ('media_autostart', '1');
 INSERT INTO CPG_config VALUES ('min_votes_for_rating', '1');
 INSERT INTO CPG_config VALUES ('normal_pfx', 'normal_');
 INSERT INTO CPG_config VALUES ('offline', '0');
+INSERT INTO CPG_config VALUES ('only_empty_albums', '0');
 INSERT INTO CPG_config VALUES ('old_style_rating', '0');
 INSERT INTO CPG_config VALUES ('orig_pfx', 'orig_');
 INSERT INTO CPG_config VALUES ('performance_page_generation_time', '0');

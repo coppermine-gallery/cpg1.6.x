@@ -53,12 +53,14 @@ function albumselect($id = "album")
     global $lang_common;
 
     $options = album_selection_options();
+    $only_empty_albums = only_empty_albums_button();
 
     return <<< EOT
         <select id="aid" name="$id" class="listbox">
             <option value="0" selected="selected">{$lang_common['select_album']}</option>
             $options
         </select>
+        $only_empty_albums
 EOT;
 }
 

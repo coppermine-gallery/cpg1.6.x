@@ -231,6 +231,7 @@ function form_alb_list_box($text, $name)
         $sel_album = 0;
     }
     $options = album_selection_options($sel_album);
+    $only_empty_albums = only_empty_albums_button();
 
     echo <<<EOT
     <tr>
@@ -242,6 +243,7 @@ function form_alb_list_box($text, $name)
             <option value="">{$lang_common['select_album']}</option>
             $options
             </select>
+            $only_empty_albums
         </td>
     </tr>
 

@@ -5909,24 +5909,26 @@ function get_cat_data()
 function album_selection_options($selected = 0)
 {
     global $CONFIG, $lang_common, $cpg_udb, $LINEBREAK;
+    $superCage = Inspekt::makeSuperCage();
     // html string of options to be returned
     $options = '';
     $albums = array();
     // load all albums
 
-    $uploads_yes = (defined('EDITPICS_PHP') || defined('UPLOAD_PHP')) && USER_CAN_UPLOAD_PICTURES  ? ' OR uploads = "YES"' : '';
+    $uploads_yes = (defined('EDITPICS_PHP') || defined('UPLOAD_PHP')) && USER_CAN_UPLOAD_PICTURES  ? 'OR uploads = "YES"' : '';
+
+    if ($superCage->get->keyExists('only_empty_albums')) { // don't check for permissions, as it's not security related
+        $only_empty_albums = "AND aid NOT IN (SELECT aid FROM {$CONFIG['TABLE_PICTURES']})";
+    } else {
+        $only_empty_albums = '';
+    }
 
     if (GALLERY_ADMIN_MODE) {
-        $superCage = Inspekt::makeSuperCage();
-        if ($superCage->get->keyExists('only_empty_albums')) {
-            $result = cpg_db_query("SELECT aid, title, category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid NOT IN (SELECT aid FROM {$CONFIG['TABLE_PICTURES']}) ORDER BY pos");
-        } else {
-            $result = cpg_db_query("SELECT aid, title, category FROM {$CONFIG['TABLE_ALBUMS']} ORDER BY pos");
-        }
+        $result = cpg_db_query("SELECT aid, title, category FROM {$CONFIG['TABLE_ALBUMS']} WHERE 1 $only_empty_albums ORDER BY pos");
     } elseif (USER_ID) {
-        $result = cpg_db_query("SELECT aid, title, category FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = " . (FIRST_USER_CAT + USER_ID) . " OR owner = " . USER_ID . $uploads_yes . " ORDER BY pos");
+        $result = cpg_db_query("SELECT aid, title, category FROM {$CONFIG['TABLE_ALBUMS']} WHERE (category = " . (FIRST_USER_CAT + USER_ID) . " OR owner = " . USER_ID . " $uploads_yes) $only_empty_albums ORDER BY pos");
     } else {
-        $result = cpg_db_query("SELECT aid, title, category FROM {$CONFIG['TABLE_ALBUMS']} WHERE 0 " . $uploads_yes . " ORDER BY pos");
+        $result = cpg_db_query("SELECT aid, title, category FROM {$CONFIG['TABLE_ALBUMS']} WHERE (0 $uploads_yes) $only_empty_albums ORDER BY pos");
     }
 
     while ( ($row = mysql_fetch_assoc($result)) ) {
@@ -6602,9 +6604,28 @@ function cpg_exif_strip_data($exifRawData, $exif_names) {
  * @return string
  */
 if (!function_exists('htmlspecialchars_decode')) {
-    function htmlspecialchars_decode($str)     {
+    function htmlspecialchars_decode($str) {
         return strtr($str, array_flip(get_html_translation_table(HTML_SPECIALCHARS)));
     }
+}
+
+
+function only_empty_albums_button() {
+    global $CONFIG, $CPG_PHP_SELF, $lang_alb_select_box;
+    $superCage = Inspekt::makeSuperCage();
+
+    if ($CONFIG['only_empty_albums'] == 1 || ($CONFIG['only_empty_albums'] == 2 && GALLERY_ADMIN_MODE)) {
+        $sep = strpos($superCage->server->getRaw('REQUEST_URI'), '?') ? '&amp;' : '?';
+        if ($superCage->get->keyExists('only_empty_albums')) {
+            $only_empty_albums = '<a href="'.preg_replace('/[\?&]only_empty_albums/', '', $superCage->server->getRaw('REQUEST_URI')).'" class="button">'.$lang_alb_select_box['all_albums'].'</a>';
+        } else {
+            $only_empty_albums = '<a href="'.$superCage->server->getRaw('REQUEST_URI').$sep.'only_empty_albums" class="button">'.$lang_alb_select_box['only_empty_albums'].'</a>';
+        }
+    } else {
+        $only_empty_albums = '';
+    }
+
+    return $only_empty_albums;
 }
 
 ?>
