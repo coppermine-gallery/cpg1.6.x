@@ -5915,7 +5915,7 @@ function album_selection_options($selected = 0)
     $albums = array();
     // load all albums
 
-    $uploads_yes = (defined('EDITPICS_PHP') || defined('UPLOAD_PHP')) && USER_CAN_UPLOAD_PICTURES  ? 'OR uploads = "YES"' : '';
+    $uploads_yes = (defined('EDITPICS_PHP') || defined('UPLOAD_PHP')) && USER_CAN_UPLOAD_PICTURES ? 'OR uploads = "YES"' : '';
 
     if ($superCage->get->keyExists('only_empty_albums')) { // don't check for permissions, as it's not security related
         $only_empty_albums = "AND aid NOT IN (SELECT aid FROM {$CONFIG['TABLE_PICTURES']})";
@@ -5946,9 +5946,9 @@ function album_selection_options($selected = 0)
     if (GALLERY_ADMIN_MODE) {
         $result = cpg_db_query("SELECT cid, rgt, name FROM {$CONFIG['TABLE_CATEGORIES']} ORDER BY lft");
     } elseif (USER_ID) {
-        $result = cpg_db_query("SELECT DISTINCT c.cid, c.rgt, c.name FROM {$CONFIG['TABLE_ALBUMS']} AS a RIGHT JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON a.category = c.cid WHERE c.cid = " . USER_GAL_CAT . " OR a.owner = ". USER_ID . $uploads_yes . " ORDER BY lft");
+        $result = cpg_db_query("SELECT DISTINCT c.cid, c.rgt, c.name FROM {$CONFIG['TABLE_ALBUMS']} AS a RIGHT JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON a.category = c.cid WHERE c.cid = " . USER_GAL_CAT . " OR a.owner = " . USER_ID . " $uploads_yes ORDER BY lft");
     } else {
-        $result = cpg_db_query("SELECT DISTINCT c.cid, c.rgt, c.name FROM {$CONFIG['TABLE_ALBUMS']} AS a RIGHT JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON a.category = c.cid WHERE 0 " . $uploads_yes . " ORDER BY lft");
+        $result = cpg_db_query("SELECT DISTINCT c.cid, c.rgt, c.name FROM {$CONFIG['TABLE_ALBUMS']} AS a RIGHT JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON a.category = c.cid WHERE 0 $uploads_yes ORDER BY lft");
     }
 
     $cats = array();
