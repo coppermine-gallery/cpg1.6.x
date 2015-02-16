@@ -132,9 +132,9 @@ EOT;
     // Reset Password
     $new_password = $cpg_udb->make_password();
 
-    $password = md5($new_password);
+    require 'include/passwordhash.inc.php';
 
-    $sql =  "UPDATE {$cpg_udb->usertable} SET {$cpg_udb->field['password']} = '$password' WHERE {$cpg_udb->field['email']} = '{$row['user_email']}'";
+    $sql =  "UPDATE {$cpg_udb->usertable} SET ".cpg_password_create_update_string($new_password)." WHERE {$cpg_udb->field['email']} = '{$row['user_email']}'";
     cpg_db_query($sql);
 
     $template_vars = array(
