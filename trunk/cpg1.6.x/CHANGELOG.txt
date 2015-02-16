@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2015-02-16 [B] Made phpBB 3 bridge compatible with phpBB version 3.1.x (thread ID 78055) {eenemeenemuu}
 2015-02-09 [B] Fixed icon when deleting picture from an album (thread ID 78036) {eenemeenemuu}
 2015-01-08 [C] Strip whitespace from imported IPTC title and caption (thread ID 77981) {eenemeenemuu}
 2014-10-22 [C] Better contrast for help boxes when using the theme "curve" (thread ID 77851) {eenemeenemuu}

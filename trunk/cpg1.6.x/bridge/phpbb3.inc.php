@@ -92,8 +92,8 @@ if (isset($bridge_lookup)) {
                 'regdate' => 'user_regdate', // name of 'registered' field in users table
                 'active' => 'user_active', // is user account active?
                 'lastvisit' => 'user_lastvisit', // name of 'location' field in users table
-                'location' => 'user_from', // name of 'location' field in users table
-                'website' => 'user_website', // name of 'website' field in users table
+                'location' => "''", // name of 'location' field in users table
+                'website' => "''", // name of 'website' field in users table
                 'usertbl_group_id' => 'group_id', // name of 'group id' field in users table
                 'grouptbl_group_id' => 'group_id', // name of 'group id' field in groups table
                 'grouptbl_group_name' => 'group_name' // name of 'group name' field in groups table
