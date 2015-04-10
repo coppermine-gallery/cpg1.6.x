@@ -2066,6 +2066,11 @@ function get_pic_pos($album, $pid)
 
         $result = cpg_db_query("SELECT filename, title, pid, position, ctime FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid");
 
+        if (mysql_num_rows($result) == 0) {
+            global $lang_errors;
+            cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
+        }
+
         $pic = mysql_fetch_assoc($result);
         $pic['title'] = mysql_real_escape_string($pic['title']);
 
