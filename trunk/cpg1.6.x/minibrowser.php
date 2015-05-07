@@ -32,7 +32,7 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
     $folder_regex = '/^([A-Za-z]:){0,1}[0-9A-Za-z\\.\\\\_\\-,&\' ]+$/';
 } else {
     // *nix server
-    $folder_prefix = '/';
+    $folder_prefix = '';
     $folder_sep = '/';
     $folder_regex = '/^[0-9A-Za-z\\.\\/_\\-,&\' ]+$/';
 }
@@ -47,16 +47,8 @@ if ($superCage->get->keyExists('folder') && ($matches = $superCage->get->getMatc
     $folder = '';
 }
 
-if ($superCage->get->keyExists('startfolder') && ($matches = $superCage->get->getMatched('startfolder', $folder_regex))) {
-    $startfolder = rawurldecode($mq ? stripslashes($matches[0]) : $matches[0]);
-} elseif ($superCage->post->keyExists('folder') && ($matches = $superCage->post->getMatched('startfolder', $folder_regex))) {
-    $startfolder = rawurldecode($mq ? stripslashes($matches[0]) : $matches[0]);
-} else {
-    $startfolder = '';
-}
-
-if (($folder == '') && ($startfolder != '')) {
-    $folder = $startfolder;
+if (strpos(cpg_normalize_path($folder), rtrim($CONFIG['fullpath'], '/')) !== 0) {
+    $folder = rtrim($CONFIG['fullpath'], '/').$folder_sep;
 }
 
 if ($superCage->get->keyExists('hidefolders') && ($matches = $superCage->get->getMatched('hidefolders', $folder_regex))) {
@@ -76,6 +68,10 @@ if ($superCage->get->keyExists('limitfolder') && $matches = $superCage->get->get
     $limitfolder = rawurldecode($mq ? stripslashes($matches[0]) : $matches[0]);
 } else {
     $limitfolder = '';
+}
+
+if (strpos(cpg_normalize_path($limitfolder), rtrim($CONFIG['fullpath'], '/')) !== 0) {
+    $limitfolder = rtrim($CONFIG['fullpath'], '/').$folder_sep;
 }
 
 if ($superCage->get->keyExists('linktarget') && ($matches = $superCage->get->getMatched('linktarget', $folder_regex))) {

@@ -214,15 +214,6 @@ if ($superCage->post->keyExists('submit')) {
                 log_write("Sending email from contact form successful (name: $sender_name, email: $sender_email, subject: $original_subject, IP: $ip", CPG_MAIL_LOG);
             }
 
-            if ( ($matches = $superCage->post->getMatched('referer', '/((\%3C)|<)[^\n]+((\%3E)|>)|(.*http.*)|(.*script.*)/i')) ) {
-                $CPG_REFERER = 'index.php';
-            } else {
-                /**
-                 * Using getRaw() since we are checking the referer in the above if condition.
-                 */
-                $CPG_REFERER = $superCage->post->getRaw('referer');
-            }
-
             cpgRedirectPage($CONFIG['ecards_more_pic_target'].$CPG_REFERER, $lang_common['information'], $lang_contact_php['email_sent']);
         }
     } // beyond this point an error must have happened - let the visitor review his input
@@ -242,7 +233,7 @@ if ($superCage->post->keyExists('submit')) {
 }
 
 pageheader($lang_contact_php['title']);
-print '<form method="post" action="'.$CPG_PHP_SELF.'" name="contactForm" id="contactForm" onsubmit="return validateContactFormFields();">'.$LINEBREAK;
+print '<form method="post" action="'.$CPG_PHP_SELF.'?referer=' . urlencode($CPG_REFERER) . '" name="contactForm" id="contactForm" onsubmit="return validateContactFormFields();">'.$LINEBREAK;
 
 starttable('100%', cpg_fetch_icon('contact', 2) . $lang_contact_php['title'], 3);
 
@@ -385,7 +376,6 @@ list($timestamp, $form_token) = getFormToken();
 print <<< EOT
     <tr>
         <td class="tableb" valign="top" align="right">
-            <input type="hidden" name="referer" value="$CPG_REFERER" />
             <input type="hidden" name="form_token" value="{$form_token}" />
             <input type="hidden" name="timestamp" value="{$timestamp}" />
         </td>
