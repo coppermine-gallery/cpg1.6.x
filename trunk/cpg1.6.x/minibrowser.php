@@ -220,7 +220,7 @@ if ($linktarget != '') {
         } // end foreach
     } // end is_array
     if ($allowed_file_counter!=0) {
-        echo '<a href="'.$linktarget.'?startdir='.rtrim(str_replace($limitfolder, '',$folder), $folder_sep).'" class="admin_menu" target="_parent">'.cpg_fetch_icon('ok', 2) . $lang_common['ok'].'</a>' . $newline;
+        echo '<a href="'.$linktarget.'?startdir='.rtrim(substr($folder, strlen($limitfolder)), $folder_sep).'" class="admin_menu" target="_parent">'.cpg_fetch_icon('ok', 2) . $lang_common['ok'].'</a>' . $newline;
     } // determine if we should display a submit button - END BLOCK
 } else {
     echo '<input type="submit" name="submit" value="'.$lang_common['ok'].'" class="button" />' . $newline;
