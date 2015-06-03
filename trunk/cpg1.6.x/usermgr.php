@@ -330,8 +330,25 @@ EOT;
     // Accept header addons
     echo CPGPluginAPI::filter('usermgr_header','');
 
+    if ($CONFIG['user_manager_hide_file_stats']) {
+        $pictures_quota_header = '';
+    } else {
+        $pictures_quota_header = <<< EOT
+                <td class="tableh1" align="center">
+                    <span class="statlink">{$lang_usermgr_php['pictures']}</span>
+                    <a href="{$CPG_PHP_SELF}?page=$page&amp;sort=pic_a$username"><img src="images/ascending.png" width="9" height="9" border="0" alt="" title="{$lang_usermgr_php['pic_a']}" /></a>
+                    <a href="{$CPG_PHP_SELF}?page=$page&amp;sort=pic_d$username"><img src="images/descending.png" width="9" height="9" border="0" alt="" title="{$lang_usermgr_php['pic_d']}" /></a>
+                </td>
+                <td class="tableh1" align="center">
+                    <span class="statlink">{$lang_usermgr_php['disk_space_used']}/{$lang_usermgr_php['disk_space_quota']}</span>
+                    <a href="{$CPG_PHP_SELF}?page=$page&amp;sort=disku_a$username"><img src="images/ascending.png" width="9" height="9" border="0" alt="" title="{$lang_usermgr_php['disku_a']}" /></a>
+                    <a href="{$CPG_PHP_SELF}?page=$page&amp;sort=disku_d$username"><img src="images/descending.png" width="9" height="9" border="0" alt="" title="{$lang_usermgr_php['disku_d']}" /></a>
+                </td>
+EOT;
+    }
+
     if (!$lim_user) {
-     echo <<< EOT
+        echo <<< EOT
 
         <tr>
                 <td class="tableh1" align="center">
@@ -363,21 +380,11 @@ EOT;
                 <td class="tableh1" align="center">
                     <span class="statlink">{$lang_usermgr_php['comments']}</span>
                 </td>
-                <td class="tableh1" align="center">
-                    <span class="statlink">{$lang_usermgr_php['pictures']}</span>
-                    <a href="{$CPG_PHP_SELF}?page=$page&amp;sort=pic_a$username"><img src="images/ascending.png" width="9" height="9" border="0" alt="" title="{$lang_usermgr_php['pic_a']}" /></a>
-                    <a href="{$CPG_PHP_SELF}?page=$page&amp;sort=pic_d$username"><img src="images/descending.png" width="9" height="9" border="0" alt="" title="{$lang_usermgr_php['pic_d']}" /></a>
-                </td>
-                <td class="tableh1" align="center">
-                    <span class="statlink">{$lang_usermgr_php['disk_space_used']}/{$lang_usermgr_php['disk_space_quota']}</span>
-                    <a href="{$CPG_PHP_SELF}?page=$page&amp;sort=disku_a$username"><img src="images/ascending.png" width="9" height="9" border="0" alt="" title="{$lang_usermgr_php['disku_a']}" /></a>
-                    <a href="{$CPG_PHP_SELF}?page=$page&amp;sort=disku_d$username"><img src="images/descending.png" width="9" height="9" border="0" alt="" title="{$lang_usermgr_php['disku_d']}" /></a>
-                </td>
+                $pictures_quota_header
         </tr>
 EOT;
-    }
-    else {
-     echo <<< EOT
+    } else {
+        echo <<< EOT
 
         <tr>
                 <td class="tableh1" colspan="2">
@@ -405,16 +412,7 @@ EOT;
                 <td class="tableh1" align="center">
                     <span class="statlink">{$lang_usermgr_php['comments']}</span>
                 </td>
-                <td class="tableh1" align="center">
-                    <span class="statlink">{$lang_usermgr_php['pictures']}</span>
-                    <a href="{$CPG_PHP_SELF}?page=$page&amp;sort=pic_a$username"><img src="images/ascending.png" width="9" height="9" border="0" alt="" title="{$lang_usermgr_php['pic_a']}" /></a>
-                    <a href="{$CPG_PHP_SELF}?page=$page&amp;sort=pic_d$username"><img src="images/descending.png" width="9" height="9" border="0" alt="" title="{$lang_usermgr_php['pic_d']}" /></a>
-                </td>
-                <td class="tableh1" align="center">
-                    <span class="statlink">{$lang_usermgr_php['disk_space_used']}/{$lang_usermgr_php['disk_space_quota']}</span>
-                    <a href="{$CPG_PHP_SELF}?page=$page&amp;sort=disku_a$username"><img src="images/ascending.png" width="9" height="9" border="0" alt="" title="{$lang_usermgr_php['disku_a']}" /></a>
-                    <a href="{$CPG_PHP_SELF}?page=$page&amp;sort=disku_d$username"><img src="images/descending.png" width="9" height="9" border="0" alt="" title="{$lang_usermgr_php['disku_d']}" /></a>
-                </td>
+                $pictures_quota_header
         </tr>
 EOT;
     }
@@ -536,6 +534,14 @@ EOT;
                     $checkbox_html = '<input name="u'.$user['user_id'].'" '.$makereadonly.'type="checkbox" value="" class="checkbox" />';
                 }
                 $profile_link = '<a href="' . $profile_link . '">' . cpg_fetch_icon('edit', 0, $lang_usermgr_php['edit_profile']) . '</a>';
+                if ($CONFIG['user_manager_hide_file_stats']) {
+                    $pictures_quota_data = '';
+                } else {
+                    $pictures_quota_data = <<< EOT
+                <td class="{$row_style_class}" align="right">{$file_quota_output}</td>
+                <td class="{$row_style_class}" align="center">{$disk_usage_output}</td>
+EOT;
+                }
                 echo <<< EOT
         <tr>
                 <td class="{$row_style_class}" align="center">{$checkbox_html}</td>
@@ -552,12 +558,20 @@ EOT;
                 <td class="{$row_style_class}">{$user['user_regdate']}</td>
                 <td class="{$row_style_class}">{$user['user_lastvisit']}</td>
                 <td class="{$row_style_class}" align="right">{$comment_quota_output}</td>
-                <td class="{$row_style_class}" align="right">{$file_quota_output}</td>
-                <td class="{$row_style_class}" align="center">{$disk_usage_output}</td>
+                $pictures_quota_data
         </tr>
 
 EOT;
         } else {
+                if ($CONFIG['user_manager_hide_file_stats']) {
+                    $pictures_quota_data = '';
+                } else {
+                    $pictures_quota_data = <<< EOT
+                <td class="{$row_style_class}" align="right">{$user['pic_count']}</td>
+                <td class="{$row_style_class}" align="center">{$disk_usage_output}</td>
+EOT;
+                }
+
                   echo <<< EOT
         <tr>
                 <td class="{$row_style_class}">{$user['user_name']}</td>
@@ -567,8 +581,7 @@ EOT;
                 <td class="{$row_style_class}">{$user['user_regdate']}</td>
                 <td class="{$row_style_class}">{$user['user_lastvisit']}</td>
                 <td class="{$row_style_class}" align="right">{$user['comment_num']}</td>
-                <td class="{$row_style_class}" align="right">{$user['pic_count']}</td>
-                <td class="{$row_style_class}" align="center">{$disk_usage_output}</td>
+                $pictures_quota_data
         </tr>
 
 EOT;
@@ -628,6 +641,14 @@ EOT;
         $create_new_user_icon = cpg_fetch_icon('add_user', 2);
         list($timestamp, $form_token) = getFormToken();	
 
+        if ($CONFIG['user_manager_hide_file_stats']) {
+            $pictures_quota_footer = '';
+        } else {
+            $pictures_quota_footer = <<< EOT
+                <td align="right" class="tablef">$totalPictureCount_fmt</td>
+                <td align="right" class="tablef">$totalSpaceCount_fmt</td>
+EOT;
+        }
         echo <<<EOT
                               </select>
                             <select name="delete_files" size="1" class="listbox" style="display:none">
@@ -646,8 +667,7 @@ EOT;
                 <input type="hidden" name="timestamp" value="{$timestamp}" />
                 </td>
                 <td align="right" class="tablef">$totalCommentCount_fmt</td>
-                <td align="right" class="tablef">$totalPictureCount_fmt</td>
-                <td align="right" class="tablef">$totalSpaceCount_fmt</td>
+                $pictures_quota_footer
         </tr>
 EOT;
 
