@@ -447,14 +447,18 @@ function update_thumbs()
             if ($updatetype == 3 || $updatetype == 4 || $updatetype == 5) {
                 // resize full-sized picture without watermark (will be applied later) if it's bigger than the max width or height for uploaded pictures
                 if (max($imagesize[0], $imagesize[1]) > $CONFIG['max_upl_width_height']) {
-                    if ((USER_IS_ADMIN && $CONFIG['auto_resize'] == 1) || (!USER_IS_ADMIN)) {
-                        // skip resizing for admin if not set to "everyone"
-                        $resize_method = $CONFIG['picture_use'] == "thumb" ? ($CONFIG['thumb_use'] == "ex" ? "any" : $CONFIG['thumb_use']) : $CONFIG['picture_use'];
-                        if (resize_image($work_image, $image, $CONFIG['max_upl_width_height'], $CONFIG['thumb_method'], $resize_method, 'false')) {
-                            $imagesize = cpg_getimagesize($image);
-                            echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $image . "</tt> " . $lang_util_php['updated_successfully'] . '!</td></tr>';
+                    $resize_method = $CONFIG['picture_use'] == "thumb" ? ($CONFIG['thumb_use'] == "ex" ? "any" : $CONFIG['thumb_use']) : $CONFIG['picture_use'];
+                    if (resize_image($work_image, $image, $CONFIG['max_upl_width_height'], $CONFIG['thumb_method'], $resize_method, 'false')) {
+                        $imagesize = cpg_getimagesize($image);
+                        echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $image . "</tt> " . $lang_util_php['updated_successfully'] . '!</td></tr>';
+                    } else {
+                        echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $image . '</tt>!</td></tr>';
+                    }
+                    if (file_exists($orig)) {
+                        if (copy($image, $orig)) {
+                            echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $orig . "</tt> " . $lang_util_php['updated_successfully'] . '!</td></tr>';
                         } else {
-                            echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $image . '</tt>!</td></tr>';
+                            echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $orig . '</tt>!</td></tr>';
                         }
                     }
                 }
@@ -491,25 +495,38 @@ function update_thumbs()
 
             if ($updatetype == 3 || $updatetype == 4 || $updatetype == 5) {
                 if ($CONFIG['enable_watermark'] == '1' && ($CONFIG['which_files_to_watermark'] == 'both' || $CONFIG['which_files_to_watermark'] == 'original')) {
-                    // update/create backup of full sized picture if watermark is enabled for full sized pictures
-                    if (copy($image, $orig)) {
-                        echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $orig . "</tt> " . $lang_util_php['updated_successfully'] . '!</td></tr>';
+                    if (!file_exists($orig)) {
+                        // create backup of full-sized picture if doesn't exist
+                        if (copy($image, $orig)) {
+                            echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $orig . "</tt> " . $lang_util_php['updated_successfully'] . '!</td></tr>';
+                            $backup_file_exists = true;
+                        } else {
+                            echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $orig . '</tt>!</td></tr>';
+                            $backup_file_exists = false;
+                        }
                     } else {
-                        echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $orig . '</tt>!</td></tr>';
+                        $backup_file_exists = true;
                     }
-                    // watermark full sized picture
-                    $wm_max_upl_width_height = (max($imagesize[0], $imagesize[1]) > $CONFIG['max_upl_width_height']) ? max($imagesize[0], $imagesize[1]) : $CONFIG['max_upl_width_height']; // use max aspect of original image if it hasn't been resized earlier
-                    if (resize_image($work_image, $image, $wm_max_upl_width_height, $CONFIG['thumb_method'], 'any', 'true')) {
-                        echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $image . "</tt> " . $lang_util_php['updated_successfully'] . '!' . '</td></tr>';
-                    } else {
-                        echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $image . '</tt>!</td></tr>';
+                    if ($backup_file_exists) {
+                        // watermark full-sized picture
+                        $wm_max_upl_width_height = (max($imagesize[0], $imagesize[1]) > $CONFIG['max_upl_width_height']) ? max($imagesize[0], $imagesize[1]) : $CONFIG['max_upl_width_height']; // use max aspect of original image if it hasn't been resized earlier
+                        if (resize_image($work_image, $image, $wm_max_upl_width_height, $CONFIG['thumb_method'], 'any', 'true')) {
+                            echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $image . "</tt> " . $lang_util_php['updated_successfully'] . '!' . '</td></tr>';
+                        } else {
+                            echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $image . '</tt>!</td></tr>';
+                        }
                     }
                 } elseif (file_exists($orig)) {
-                    // backup picture isn't needed but exists - delete it
-                    if (unlink($orig)) {
-                        echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . sprintf(str_replace('%s', '<tt>%s</tt>', $lang_util_php['del_orig']), $orig) . '!</td></tr>';
+                    // remove watermark from full-sized picture and delete backup file
+                    if (copy($orig, $image)) {
+                        echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $image . "</tt> " . $lang_util_php['updated_successfully'] . '!</td></tr>';
+                        if (unlink($orig)) {
+                            echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . sprintf(str_replace('%s', '<tt>%s</tt>', $lang_util_php['del_orig']), $orig) . '!</td></tr>';
+                        } else {
+                            echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . sprintf(str_replace('%s', '<tt>%s</tt>', $lang_util_php['del_error']), $orig) . '</td></tr>';
+                        }
                     } else {
-                        echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . sprintf(str_replace('%s', '<tt>%s</tt>', $lang_util_php['del_error']), $orig) . '</td></tr>';
+                        echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $image . '</tt>!</td></tr>';
                     }
                 }
             }
