@@ -121,22 +121,7 @@ function online_page_start() {
 
     cpg_db_query("DELETE FROM {$CONFIG['TABLE_ONLINE']} WHERE last_action < NOW() - INTERVAL {$CONFIG['mod_updates_duration']} MINUTE");
 
-    if ($user_id) {
-        cpg_db_query("REPLACE INTO {$CONFIG['TABLE_ONLINE']} (user_id, user_name, user_ip, last_action) VALUES ('$user_id', '$user_name', '$raw_ip', NOW())");
-
-    } else{
-        $testarray = explode('.',$raw_ip);
-        $teststr = $testarray[0] . '.' . $testarray[1];
-        $sel = cpg_db_query("SELECT user_ip FROM {$CONFIG['TABLE_ONLINE']} WHERE user_ip LIKE '$teststr%'");
-        $res = mysql_fetch_row($sel);
-        $result = $res[0];
-
-        if (mysql_num_rows($sel)){
-            cpg_db_query("UPDATE {$CONFIG['TABLE_ONLINE']} SET last_action = NOW() WHERE user_ip = '$result' LIMIT 1");
-        } else {
-            cpg_db_query("INSERT INTO {$CONFIG['TABLE_ONLINE']} (user_id, user_name, user_ip, last_action) VALUES ('$user_id', '$user_name', '$raw_ip', NOW())");
-        }
-    }
+    cpg_db_query("REPLACE INTO {$CONFIG['TABLE_ONLINE']} (user_id, user_name, user_ip, last_action) VALUES ('$user_id', '$user_name', '$raw_ip', NOW())");
 }
 
 function online_mainpage() {
