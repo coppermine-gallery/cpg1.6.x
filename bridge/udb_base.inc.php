@@ -218,7 +218,16 @@ class core_udb {
         }
 
         // Build SQL table, should work with all bridges
-        $sql = "SELECT {$f['user_id']} AS user_id, {$f['username']} AS user_name, {$f['email']} AS user_email, {$f['regdate']} AS user_regdate, {$f['lastvisit']} AS user_lastvisit, {$f['active']} AS user_active, "
+        if ($CONFIG['user_manager_hide_file_stats']) {
+            $sql = "SELECT {$f['user_id']} AS user_id, {$f['username']} AS user_name, {$f['email']} AS user_email, {$f['regdate']} AS user_regdate, {$f['lastvisit']} AS user_lastvisit, {$f['active']} AS user_active, "
+               . "'0' AS pic_count, '0' AS disk_usage, group_name, group_quota "
+               . "FROM {$this->usertable} AS u "
+               . "INNER JOIN `{$C['dbname']}`.{$C['TABLE_USERGROUPS']} AS g ON u.{$f['usertbl_group_id']} = g.group_id "
+               . $options['search']
+               . "GROUP BY user_id " . "ORDER BY " . $sort_codes[$options['sort']] . " "
+               . "LIMIT {$options['lower_limit']}, {$options['users_per_page']};";
+        } else {
+            $sql = "SELECT {$f['user_id']} AS user_id, {$f['username']} AS user_name, {$f['email']} AS user_email, {$f['regdate']} AS user_regdate, {$f['lastvisit']} AS user_lastvisit, {$f['active']} AS user_active, "
                . "COUNT(pid) AS pic_count, ROUND(SUM(total_filesize)/1024) AS disk_usage, group_name, group_quota "
                . "FROM {$this->usertable} AS u "
                . "INNER JOIN `{$C['dbname']}`.{$C['TABLE_USERGROUPS']} AS g ON u.{$f['usertbl_group_id']} = g.group_id "
@@ -226,6 +235,7 @@ class core_udb {
                . $options['search']
                . "GROUP BY user_id " . "ORDER BY " . $sort_codes[$options['sort']] . " "
                . "LIMIT {$options['lower_limit']}, {$options['users_per_page']};";
+        }
 
         $result = cpg_db_query($sql, $this->link_id);
 

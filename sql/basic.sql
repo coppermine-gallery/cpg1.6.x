@@ -220,6 +220,7 @@ INSERT INTO CPG_config VALUES ('user_field1_name', '');
 INSERT INTO CPG_config VALUES ('user_field2_name', '');
 INSERT INTO CPG_config VALUES ('user_field3_name', '');
 INSERT INTO CPG_config VALUES ('user_field4_name', '');
+INSERT INTO CPG_config VALUES ('user_manager_hide_file_stats', '0');
 INSERT INTO CPG_config VALUES ('userpics', 'userpics/');
 INSERT INTO CPG_config VALUES ('user_profile1_name', 'Location');
 INSERT INTO CPG_config VALUES ('user_profile2_name', 'Interests');
