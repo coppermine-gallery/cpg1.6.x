@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2015-06-10 [B] Fixed typo in user manager that created invalid user passwords (thread ID 76021) {eenemeenemuu}
 2015-06-03 [A] Added config option to hide file count and disk space usage in user manager to increase performance (thread ID 78129) {eenemeenemuu}
 2015-06-03 [B] Updated onlinestats plugin: fixed MySQL error (thread ID 77521) {eenemeenemuu}
 2015-06-03 [B] Fixed watermarking issue in admin tools (thread ID 78212) {eenemeenemuu}
