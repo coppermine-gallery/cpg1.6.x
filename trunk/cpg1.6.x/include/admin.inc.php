@@ -1337,6 +1337,11 @@ $config_data = array(
       'default_value' => '0',
       'help_link'     => 'f=configuration.htm&amp;as=admin_approval_notify&amp;ae=admin_approval_notify_end',
     ),
+    'user_manager_hide_file_stats' => array(
+      'type'          => 'checkbox',
+      'default_value' => '0',
+      'help_link'     => 'f=configuration.htm&amp;as=admin_user_manager_hide_file_stats&amp;ae=admin_user_manager_hide_file_stats_end',
+    ),
     'allow_memberlist' => array(
       'type'          => 'checkbox',
       'default_value' => '0',

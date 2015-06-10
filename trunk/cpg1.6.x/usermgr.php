@@ -590,6 +590,15 @@ EOT;
     } // while
     //mysql_free_result($result);
 
+    if ($CONFIG['user_manager_hide_file_stats']) {
+        $pictures_quota_footer = '';
+    } else {
+        $pictures_quota_footer = <<< EOT
+            <td align="right" class="tablef">$totalPictureCount_fmt</td>
+            <td align="right" class="tablef">$totalSpaceCount_fmt</td>
+EOT;
+    }
+
     if (!$lim_user) {
         if ($search) {
             $search_string_default = 'value="'.$search.'"';
@@ -641,14 +650,6 @@ EOT;
         $create_new_user_icon = cpg_fetch_icon('add_user', 2);
         list($timestamp, $form_token) = getFormToken();	
 
-        if ($CONFIG['user_manager_hide_file_stats']) {
-            $pictures_quota_footer = '';
-        } else {
-            $pictures_quota_footer = <<< EOT
-                <td align="right" class="tablef">$totalPictureCount_fmt</td>
-                <td align="right" class="tablef">$totalSpaceCount_fmt</td>
-EOT;
-        }
         echo <<<EOT
                               </select>
                             <select name="delete_files" size="1" class="listbox" style="display:none">
@@ -708,12 +709,7 @@ EOT;
             <td class="tablef" align="right" valign="middle">
                 $totalCommentCount_fmt
             </td>
-            <td class="tablef" align="right" valign="middle">
-                $totalPictureCount_fmt
-            </td>
-            <td class="tablef" align="right" valign="middle">
-                {$totalSpaceCount_fmt}
-            </td>
+            $pictures_quota_footer
         </tr>
 EOT;
     }

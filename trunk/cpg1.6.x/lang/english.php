@@ -855,6 +855,7 @@ $lang_admin_php['allow_user_upload_choice'] = 'Allow users to choose the upload 
 $lang_admin_php['editpics_ignore_newer_than'] = 'Show previously uploaded files at edit files form after flash upload';
 $lang_admin_php['allow_duplicate_emails_addr'] = 'Allow two users to have the same email address';
 $lang_admin_php['upl_notify_admin_email'] = 'Notify admin of user upload awaiting approval';
+$lang_admin_php['user_manager_hide_file_stats'] = 'Hide file count and disk space usage in user manager'; // cpg1.6
 $lang_admin_php['allow_memberlist'] = 'Allow logged in users to view the memberlist';
 $lang_admin_php['allow_email_change'] = 'Allow users to change email address in their profile';
 $lang_admin_php['allow_user_account_delete'] = 'Allow users to delete their own user account';
