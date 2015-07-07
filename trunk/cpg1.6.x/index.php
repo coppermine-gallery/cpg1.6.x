@@ -326,6 +326,8 @@ function get_subcat_data(&$cat_data)
 
     mysql_free_result($result);
 
+    $sort_order = cpg_album_sort_order('r.');
+
     // collect album info and album counts
     $sql = "SELECT aid, title, r.description, keyword, alb_hits, category, visibility, r.thumb, r.owner, depth AS level, lft, '0' AS pic_count
         FROM {$CONFIG['TABLE_CATEGORIES']} AS c
@@ -333,7 +335,7 @@ function get_subcat_data(&$cat_data)
         WHERE c.depth >= $CURRENT_CAT_DEPTH + 1
         $forbidden_set
         $lft_rgt
-        ORDER BY r.pos, r.aid";
+        ORDER BY $sort_order";
 
     $result = cpg_db_query($sql);
 
@@ -718,18 +720,7 @@ function list_albums()
         $alb_stats = cpg_db_fetch_rowset($alb_stats_q);
         mysql_free_result($alb_stats_q);
     } else {
-        $sort_array = array(
-            'ta' => "a.title ASC, a.aid ASC",
-            'td' => "a.title DESC, a.aid DESC",
-            'da' => "a.aid ASC",
-            'dd' => "a.aid DESC",
-            'pa' => "a.pos ASC, a.aid ASC",
-            'pd' => "a.pos DESC, a.aid DESC",
-        );
-        // TODO: add user defined sort order for albums
-        //$sort_code  = isset($USER['sort'])? $USER['sort'] : $CONFIG['album_sort_order'];
-        //$sort_order = isset($sort_array[$sort_code]) ? $sort_array[$sort_code] : $sort_array[$CONFIG['album_sort_order']];
-        $sort_order = $sort_array[$CONFIG['album_sort_order']];
+        $sort_order = cpg_album_sort_order('a.');
 
         $sql = "SELECT a.aid, a.title, a.description, a.thumb, a.keyword, category, visibility, filepath, filename, url_prefix, pwidth, pheight, a.owner "
             . " FROM {$CONFIG['TABLE_ALBUMS']} AS a "
