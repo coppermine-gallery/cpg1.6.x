@@ -6667,4 +6667,31 @@ function cpg_normalize_path($path) {
     return implode(DIRECTORY_SEPARATOR, $parts);
 }
 
+
+/**
+ * cpg_album_sort_order
+ *
+ * @param string $table_prefix
+ * @return string
+ */
+function cpg_album_sort_order($table_alias = '') {
+    global $CONFIG, $USER;
+
+    $sort_array = array(
+        'ta' => "{$table_alias}title ASC, {$table_alias}aid ASC",
+        'td' => "{$table_alias}title DESC, {$table_alias}aid DESC",
+        'da' => "{$table_alias}aid ASC",
+        'dd' => "{$table_alias}aid DESC",
+        'pa' => "{$table_alias}pos ASC, {$table_alias}aid ASC",
+        'pd' => "{$table_alias}pos DESC, {$table_alias}aid DESC",
+    );
+
+    // TODO: add user defined sort order for albums
+    //$sort_code  = isset($USER['sort'])? $USER['sort'] : $CONFIG['album_sort_order'];
+    //$sort_order = isset($sort_array[$sort_code]) ? $sort_array[$sort_code] : $sort_array[$CONFIG['album_sort_order']];
+    $sort_order = $sort_array[$CONFIG['album_sort_order']];
+
+    return $sort_order;
+}
+
 ?>
