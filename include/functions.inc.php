@@ -2042,6 +2042,7 @@ function get_pic_pos($album, $pid)
 {
     global $USER, $CONFIG, $CURRENT_ALBUM_KEYWORD, $FORBIDDEN_SET_DATA, $USER_DATA;
     global $RESTRICTEDWHERE, $FORBIDDEN_SET;
+    global $lang_errors;
 
     // Regular albums
     if (is_numeric($album)) {
@@ -2065,12 +2066,7 @@ function get_pic_pos($album, $pid)
         $approved = GALLERY_ADMIN_MODE ? '' : 'AND approved=\'YES\'';
 
         $result = cpg_db_query("SELECT filename, title, pid, position, ctime FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid");
-
-        if (mysql_num_rows($result) == 0) {
-            global $lang_errors;
-            cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
-        }
-
+        if (!mysql_num_rows($result)) cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
         $pic = mysql_fetch_assoc($result);
         $pic['title'] = mysql_real_escape_string($pic['title']);
 
@@ -2106,6 +2102,10 @@ function get_pic_pos($album, $pid)
 
         $superCage = Inspekt::makeSuperCage();
 
+        if (!$superCage->get->getInt('msg_id')) {
+            cpg_die(ERROR, $lang_errors['param_missing'], __FILE__, __LINE__);
+        }
+
         $query = "SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} AS p
             INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS r ON r.aid = p.aid
             INNER JOIN {$CONFIG['TABLE_COMMENTS']} AS c ON c.pid = p.pid
@@ -2132,6 +2132,10 @@ function get_pic_pos($album, $pid)
 
         $superCage = Inspekt::makeSuperCage();
 
+        if (!$superCage->get->getInt('msg_id')) {
+            cpg_die(ERROR, $lang_errors['param_missing'], __FILE__, __LINE__);
+        }
+
         $query = "SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} AS p
             INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS r ON r.aid = p.aid
             INNER JOIN {$CONFIG['TABLE_COMMENTS']} AS c ON c.pid = p.pid
@@ -2153,6 +2157,7 @@ function get_pic_pos($album, $pid)
 
         $query = "SELECT ctime FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid";
         $result = cpg_db_query($query);
+        if (!mysql_num_rows($result)) cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
         $ctime = mysql_result($result, 0);
         mysql_free_result($result);
 
@@ -2181,6 +2186,7 @@ function get_pic_pos($album, $pid)
 
         $query = "SELECT ctime FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid";
         $result = cpg_db_query($query);
+        if (!mysql_num_rows($result)) cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
         $ctime = mysql_result($result, 0);
         mysql_free_result($result);
 
@@ -2204,6 +2210,7 @@ function get_pic_pos($album, $pid)
 
         $query = "SELECT hits FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid";
         $result = cpg_db_query($query);
+        if (!mysql_num_rows($result)) cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
         $hits = mysql_result($result, 0);
         mysql_free_result($result);
 
@@ -2226,6 +2233,7 @@ function get_pic_pos($album, $pid)
 
         $query = "SELECT pic_rating, votes FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid";
         $result = cpg_db_query($query);
+        if (!mysql_num_rows($result)) cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
         list($pic_rating, $votes) = mysql_fetch_row($result);
         mysql_free_result($result);
 
@@ -2250,6 +2258,7 @@ function get_pic_pos($album, $pid)
 
         $query = "SELECT mtime FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid";
         $result = cpg_db_query($query);
+        if (!mysql_num_rows($result)) cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
         $mtime = mysql_result($result, 0);
         mysql_free_result($result);
 
