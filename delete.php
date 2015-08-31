@@ -536,7 +536,7 @@ case 'albmgr':
 
         if (!empty($get_album_name)) {
             //add the album to database
-            $query = "INSERT INTO {$CONFIG['TABLE_ALBUMS']} (category, title, uploads, pos, description, owner) VALUES ('$category', '$get_album_name', 'NO', '{$position}', '', '$user_id')";
+            $query = "INSERT INTO {$CONFIG['TABLE_ALBUMS']} (category, title, uploads, pos, description, owner) VALUES ('$category', '$get_album_name', '{$CONFIG['album_uploads_default']}', '{$position}', '', '$user_id')";
             cpg_db_query($query);
 
             //get the aid of added the albums
