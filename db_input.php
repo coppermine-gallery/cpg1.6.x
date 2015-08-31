@@ -193,7 +193,7 @@ case 'comment':
             $last_com_data = mysql_fetch_assoc($result);
             if ((USER_ID && $last_com_data['author_id'] == USER_ID) || (!USER_ID && $last_com_data['author_md5_id'] == $USER['ID'])) {
         if ($CONFIG['log_mode'] != 0) {
-                log_write('Attempt to comment-flood (PID: $pid) denied for user '.$USER_DATA['user_name'].' at ' . $hdr_ip, CPG_GLOBAL_LOG);
+                log_write('Attempt to comment-flood (PID: '.$pid.') denied for user '.$USER_DATA['user_name'].' at ' . $hdr_ip, CPG_GLOBAL_LOG);
                 }
                 cpg_die(ERROR, $lang_db_input_php['no_flood'], __FILE__, __LINE__);
             }
