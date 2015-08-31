@@ -25,6 +25,7 @@ INSERT INTO CPG_config VALUES ('alb_desc_thumb', '1');
 INSERT INTO CPG_config VALUES ('alb_list_thumb_size', '50');
 INSERT INTO CPG_config VALUES ('album_list_cols', '2');
 INSERT INTO CPG_config VALUES ('album_sort_order', 'pa');
+INSERT INTO CPG_config VALUES ('album_uploads_default', 'NO');
 INSERT INTO CPG_config VALUES ('albums_per_page', '12');
 INSERT INTO CPG_config VALUES ('allow_duplicate_emails_addr', '0');
 INSERT INTO CPG_config VALUES ('allow_guests_enter_file_details', '0');
