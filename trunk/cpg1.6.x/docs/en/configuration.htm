@@ -2524,6 +2524,7 @@
 
     <a name="admin_allow_user_edit_after_cat_close_end"></a>
     <br clear="all" style="clear:both;" />
+
     <a name="admin_allow_user_album_keyword"></a><h3>Allow users to assign album keywords<a href="#admin_allow_user_album_keyword" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
@@ -2536,6 +2537,22 @@
     <a name="admin_allow_user_album_keyword_end"></a>
     <br clear="all" style="clear:both;" />
 
+    <a name="admin_user_album_uploads_default_start"></a>
+    <a name="admin_user_album_uploads_default_start"></a><h3>Default value for album property "Visitors can upload files"<a href="#admin_user_album_uploads_default_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+    <div class="cpg_summary">
+        Default value: <input type="text" size="15" maxlength="15" class="textinput" value="No" /><br />
+        Recommended value: <input type="text" size="15" maxlength="15" class="textinput" value="No" /><br />
+        Available options:
+        <input type="text" size="15" maxlength="15" class="textinput" value="Yes" /><br />
+        <input type="text" size="15" maxlength="15" class="textinput" value="No" /><br />
+        Database record name: <tt class="code">album_uploads_default</tt><br />
+        <img src="../images/icons/config.png" border="0" width="12" height="12"  alt="" class="icon" title="Configuration" />: User settings &rarr; Default value for album property "Visitors can upload files"
+    </div>
+    <p>When creating one or more albums, Coppermine uses this option to set the default value for the album's property "Visitors can upload files". You can always change that propertry later in each album's "Album properties" page.</p>
+    <p>Whatever option you choose, it won't update the setting of existing albums.</p>
+
+    <a name="admin_user_album_uploads_default_end"></a>
+    <br clear="all" style="clear:both;" />
 
     <a name="admin_user_login_start"></a>
     <a name="admin_user_login_method_start"></a><h3>How do you want your users to be able to login<a href="#admin_user_login_method_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -2554,6 +2571,7 @@
 
     <a name="admin_user_login_method_end"></a>
     <br clear="all" style="clear:both;" />
+
     <a name="admin_user_login_threshold_start"></a><h3>Number of failed login attempts until temporary ban (to avoid brute force attacks)<a href="#admin_user_login_threshold_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="text" size="3" maxlength="3" class="numberinput" value="5" /><br />

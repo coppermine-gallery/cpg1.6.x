@@ -1379,7 +1379,16 @@ $config_data = array(
       'default_value' => '0',
       'help_link'     => 'f=configuration.htm&amp;as=admin_allow_user_album_keyword&amp;ae=admin_allow_user_album_keyword_end',
     ),
-    // login_method gives you the choice of logging in with username, email or both
+    'album_uploads_default' => array(
+      'type'          => 'select',
+      'default_value' => 'NO',
+      'help_link'     => 'f=configuration.htm&amp;as=admin_user_album_uploads_default_start&amp;ae=admin_user_album_uploads_default_end',
+      'warning'       => 'lang_admin_php[warning_just_new_albums]',
+      'options'       => array(
+                           'YES' => $lang_common['yes'],
+                           'NO' => $lang_common['no'],
+                         ),
+    ),
     'login_method' => array(
       'type'          => 'select',
       'default_value' => 'username',
