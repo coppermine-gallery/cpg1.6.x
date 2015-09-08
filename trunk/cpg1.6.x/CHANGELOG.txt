@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2015-09-08 [B] Fixed broken referrer feature (thread ID 78385) {eenemeenemuu}
 2015-08-31 [A] Added config option to set default value for album property "Visitors can upload files" (thread ID 78355) {eenemeenemuu}
 2015-08-31 [B] Fixed not processed variable in db_input.php (thread ID 78348) {eenemeenemuu}
 2015-07-27 [B] Fixed database error if meta albums are viewed with invalid or missing parameters (thread ID 78067) {eenemeenemuu}
