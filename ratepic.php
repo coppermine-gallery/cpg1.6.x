@@ -110,6 +110,20 @@ if (mysql_num_rows($result)) {
 
 mysql_free_result($result);
 
+// Check if user already rated this picture - vote stats table
+$sql = "SELECT null FROM {$CONFIG['TABLE_VOTE_STATS']} WHERE pid = $pic AND ip = '$raw_ip'";
+$result = cpg_db_query($sql);
+if (mysql_num_rows($result)) {
+    $send_back = array(
+        'status' => 'error',
+        'msg'    => $lang_rate_pic_php['already_rated'],
+        'a'      => $USER,
+    );
+    echo json_encode($send_back);
+    exit;
+}
+mysql_free_result($result);
+
 //Test for Self-Rating
 if (!empty($user_id) && $user_id == $row['owner_id'] && ($CONFIG['rate_own_files'] == 0 || $CONFIG['rate_own_files'] == 2 && !USER_IS_ADMIN)) {
 

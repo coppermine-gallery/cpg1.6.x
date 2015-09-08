@@ -3608,20 +3608,21 @@ function theme_html_img_nav_menu() {
 function theme_html_rating_box()
 {
     global $CONFIG, $CURRENT_PIC_DATA, $CURRENT_ALBUM_DATA, $THEME_DIR, $USER_DATA, $USER, $LINEBREAK;
-    global $template_image_rating, $template_image_rating_oldstyle, $lang_rate_pic;
+    global $template_image_rating, $template_image_rating_oldstyle, $lang_rate_pic, $raw_ip;
 
     if (!(USER_CAN_RATE_PICTURES && $CURRENT_ALBUM_DATA['votes'] == 'YES')) {
         return '';
     } else {
         //check if the users already voted or if this user is the owner
         $user_md5_id = USER_ID ? md5(USER_ID) : $USER['ID'];
-        $result = cpg_db_query("SELECT pic_id FROM {$CONFIG['TABLE_VOTES']} WHERE pic_id={$CURRENT_PIC_DATA['pid']} AND user_md5_id='$user_md5_id'");
+        $result_votes = cpg_db_query("SELECT null FROM {$CONFIG['TABLE_VOTES']} WHERE pic_id= {$CURRENT_PIC_DATA['pid']} AND user_md5_id='$user_md5_id'");
+        $result_vote_stats = cpg_db_query("SELECT null FROM {$CONFIG['TABLE_VOTE_STATS']} WHERE pid = {$CURRENT_PIC_DATA['pid']} AND ip = '$raw_ip'");
 
         $user_can_vote = 'false';
         if ($CURRENT_PIC_DATA['owner_id'] == $USER_DATA['user_id'] && $USER_DATA['user_id'] != 0 && ($CONFIG['rate_own_files'] == 0 || $CONFIG['rate_own_files'] == 2 && !USER_IS_ADMIN)) {
             // user is owner
             $rate_title = $lang_rate_pic['forbidden'];
-        } elseif (!mysql_num_rows($result)) {
+        } elseif (!mysql_num_rows($result_votes) && !mysql_num_rows($result_vote_stats)) {
             // user hasn't voted yet, show voting things
             $rate_title = $lang_rate_pic['rate_this_pic'];
             $user_can_vote = 'true';
@@ -3629,6 +3630,9 @@ function theme_html_rating_box()
             //user has voted
             $rate_title = $lang_rate_pic['already_voted'];
         }
+        mysql_free_result($result_votes);
+        mysql_free_result($result_vote_stats);
+
         $rating_stars_amount = ($CONFIG['old_style_rating']) ? 5 : $CONFIG['rating_stars_amount'];
         $votes = $CURRENT_PIC_DATA['votes'] ? sprintf($lang_rate_pic['rating'], round(($CURRENT_PIC_DATA['pic_rating'] / 2000) / (5/$rating_stars_amount), 1), $rating_stars_amount, $CURRENT_PIC_DATA['votes']) : $lang_rate_pic['no_votes'];
         $pid = $CURRENT_PIC_DATA['pid'];
