@@ -414,7 +414,7 @@ js_include('js/jquery.elastic.js');
 /**
  * Use $CPG_REFERER wherever $_GET['referer'] is used
  */
-if ( ($matches = $superCage->get->getMatched('referer', '/((\%3C)|<)[^\n]+((\%3E)|>)|(.*http.*)|(.*script.*)|([^\a].*)/i')) ) {
+if ( ($matches = $superCage->get->getMatched('referer', '/((\%3C)|<)[^\n]+((\%3E)|>)|(.*http.*)|(.*script.*)|(^[\W].*)/i')) ) {
     $CPG_REFERER = 'index.php';
 } else {
     /**
