@@ -99,6 +99,17 @@ if (USER_ID > 0) {
     }
 }
 
+// Prepare message
+if (in_array($pid, $FAVPICS)) {
+    $message_id = cpgStoreTempMessage($lang_rate_pic_php['fav_added']);
+    $message_icon = 'success';
+} else {
+    $message_id = cpgStoreTempMessage($lang_rate_pic_php['fav_removed']);
+    $message_icon = 'info';
+}
+$ref .= strpos($ref, '?') !== FALSE ? '&' : '?';
+$ref .= 'message_id='.$message_id.'&message_icon='.$message_icon.'#cpgMessageBlock';
+
 $header_location = (@preg_match('/Microsoft|WebSTAR|Xitami/', getenv('SERVER_SOFTWARE'))) ? 'Refresh: 0; URL=' : 'Location: ';
 header($header_location . $ref);
 pageheader($lang_common['information'], "<meta http-equiv=\"refresh\" content=\"1;url=$ref\">");
