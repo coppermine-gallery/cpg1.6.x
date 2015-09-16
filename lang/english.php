@@ -1769,6 +1769,8 @@ if (defined('RATEPIC_PHP')) {
 $lang_rate_pic_php['already_rated'] = 'Sorry but you have already rated this file';
 $lang_rate_pic_php['rate_ok'] = 'Your vote was accepted';
 $lang_rate_pic_php['forbidden'] = 'You cannot rate your own files.';
+$lang_rate_pic_php['fav_added'] = 'Picture has been added to favorites'; // cpg1.6
+$lang_rate_pic_php['fav_removed'] = 'Picture has been removed from favorites'; // cpg1.6
 }
 
 // ------------------------------------------------------------------------- //
