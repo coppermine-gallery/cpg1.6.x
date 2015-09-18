@@ -82,6 +82,15 @@ class CPGPluginAPI {
 
             include ('./plugins/'.$thisplugin->path.'/codebase.php');
 
+            // Load language files
+            if (file_exists('./plugins/'.$thisplugin->path.'/lang/english.php')) {
+                global $lang_plugins;
+                include ('./plugins/'.$thisplugin->path.'/lang/english.php');
+                if ($CONFIG['lang'] != 'english' && file_exists('./plugins/'.$thisplugin->path.'/lang/'.$CONFIG['lang'].'.php')) {
+                    include ('./plugins/'.$thisplugin->path.'/lang/'.$CONFIG['lang'].'.php');
+                }
+            }
+
             // Check if plugin has a wakeup action
             if (!($thisplugin->awake = CPGPluginAPI::action('plugin_wakeup',true,$thisplugin->plugin_id))) {
 
