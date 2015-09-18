@@ -48,7 +48,7 @@ if ($superCage->post->keyExists('update_config')) {
 }
 
 function display_plugin_list() {
-    global $CPG_PLUGINS, $lang_pluginmgr_php, $lang_plugin_php, $lang_common, $CONFIG, $CPG_PHP_SELF;
+    global $CPG_PLUGINS, $lang_pluginmgr_php, $lang_plugin_php, $lang_common, $CONFIG, $CPG_PHP_SELF, $lang_plugins;
 
     list($timestamp, $form_token) = getFormToken();
 
