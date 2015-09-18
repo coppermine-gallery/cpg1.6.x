@@ -510,29 +510,14 @@ To refer to that file, refer to <tt class="code">index.php?file=coffee_maker/foo
 
 <a name="plugin_api_tutorial_lang"></a>
 <h3>Multi-language Support<a href="#plugin_api_tutorial_lang" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-<p>You can make your plugins capable to be used in multiple languages. Therefore, your mustn't hard-code language strings into your plugin, but use variables instead. As you wouldn't want to introduce a load of individual language variables, you better use an array, preferably following the naming scheme <tt class="code">$lang_plugin_foldername</tt>. All that is left to do is adding a little switch into your plugin that determines the end user's language and make it use the language file if present.</p>
+<p>You can make your plugins capable to be used in multiple languages. Therefore, you mustn't hard-code language strings into your plugin, but use variables instead. If Coppermine should be able to load your language files, you need to create the folder "<tt class="code">lang</tt>" inside your plugin's directory of your plugin. Now, create a separate PHP file for each language in that new directory, while <tt class="code">english.php</tt> is mandatory. The language files needs to contain an array, following the naming scheme <tt class="code">$lang_plugins['plugin_name']</tt>.</p>
 <p class="cpg_example">Let's assume that the folder your plugin resides in is named <tt class="code">coffee_maker</tt> and the name is "Coffee Maker".</p>
-<p>It's advisable to move the definition of languages and other resources that you want to use globaly into a separate file. This way, you can call the function directly if needed (outside the scope of the plugin).</p>
-<div class="cpg_example">Therefore, at the very start of codebase.php, right after the starting PHP tag, insert
-<pre class="cpg_code">require_once "./plugins/coffee_maker/initialize.inc.php";</pre></div>
-<p>Of course you need to create the file you just refered to.</p>
-<div class="cpg_example">This is how the content of <tt class="code">initialize.inc.php</tt> should look like:
-<pre class="cpg_code">&lt;?php
-function coffee_maker_language() {
-	global $CONFIG, $lang_plugin_coffee_maker;
-	require "./plugins/coffee_maker/lang/english.php";
-	if ($CONFIG['lang'] != 'english' && file_exists("./plugins/coffee_maker/lang/{$CONFIG['lang']}.php")) {
-	    require "./plugins/coffee_maker/lang/{$CONFIG['lang']}.php";
-	}
-}
-?&gt;</pre></div>
-<p>As you can see from the code above, inside your plugin's folder, there should be another folder named <tt class="code">lang</tt> that contains the language files. It needs to contains <tt class="code">english.php</tt> at least.</p>
 <div class="cpg_example">Here's how the content of english.php could look like:
 <pre class="cpg_code">&lt;?php
-$lang_plugin_coffee_maker['plugin_name'] = 'Coffee Maker';
-$lang_plugin_coffee_maker['plugin_description'] = 'This plugin will turn your gallery into a full-featured coffee machine.';
-$lang_plugin_coffee_maker['coffee_bean'] = 'coffee bean';
-$lang_plugin_coffee_maker['brew'] = 'brew';
+$lang_plugins['coffee_maker']['plugin_name'] = 'Coffee Maker';
+$lang_plugins['coffee_maker']['plugin_description'] = 'This plugin will turn your gallery into a full-featured coffee machine.';
+$lang_plugins['coffee_maker']['coffee_bean'] = 'coffee bean';
+$lang_plugins['coffee_maker']['brew'] = 'brew';
 ?&gt;</pre></div>
 <p>Within <tt class="code">codebase.php</tt> or any other plugin file, you can then use the language strings instead of hard-coding them in. Don't forget to make them global inside functions (see <a href="http://www.php.net/manual/en/language.variables.scope.php" rel="external" class="phpnet">PHP: variable scope</a>).</p>
 <p><a class="back" href="#top">Back to top</a></p><hr />
