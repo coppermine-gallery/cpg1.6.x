@@ -2561,17 +2561,4 @@ $lang_xp_publish_php['continue'] = 'Drücke &quot;weiter&quot;, um mit dem Hochl
 $lang_xp_publish_php['link'] = '';
 }
 
-// ------------------------------------------------------------------------- //
-// Core plugins
-// ------------------------------------------------------------------------- //
-if (defined('CORE_PLUGIN')) {
-$lang_plugin_php['sample_config_name'] = 'Sample Plugin';
-$lang_plugin_php['sample_config_description'] = 'Dies ist ein Beispiel-Plugin. Es macht nichts wirklich nützliches - es soll nur demonstrieren, wozu Plugins genutzt werden können und wie sie programmiert werden. Wenn das Plugin aktiviert ist wird ein Besipieltext in rot angezeigt.';
-$lang_plugin_php['sample_plugin_documentation'] = 'Plugin Dokumentation';
-$lang_plugin_php['sample_plugin_support'] = 'Plugin Support';
-$lang_plugin_php['sample_install_explain'] = 'Gib den Benutzernamen (\'foo\') und das Passwort (\'bar\') ein, um das Plugin zu installieren';
-$lang_plugin_php['sample_install_username'] = 'Benutzernamen';
-$lang_plugin_php['sample_install_password'] = 'Passwort';
-$lang_plugin_php['sample_output'] = 'Dies ist nur beispielhafter Seiteninhalt, der vom &quot;Sample Plugin&quot; zurückgeliefert wird';
-}
 ?>

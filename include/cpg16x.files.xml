@@ -9291,6 +9291,19 @@
     <hash>583d802c7fb08f42f34fc2e19d6263dc</hash>
   </element>
   <element>
+    <fullpath>plugins/sample/lang/</fullpath>
+    <status>optional</status>
+    <permission>read</permission>
+  </element>
+  <element>
+    <fullpath>plugins/sample/lang/english.php</fullpath>
+    <version>1.5.9</version>
+    <revision>7805</revision>
+    <status>optional</status>
+    <permission>read</permission>
+    <hash>583d802c7fb08f42f34fc2e19d6263dc</hash>
+  </element>
+  <element>
     <fullpath>plugins/usergal_alphatabs/</fullpath>
     <status>optional</status>
     <permission>read</permission>
@@ -9354,7 +9367,7 @@
     <hash>141b073ab206a723533fefcf41ff6540</hash>
   </element>
   <element>
-    <fullpath>plugins/visiblehookpoints/js</fullpath>
+    <fullpath>plugins/visiblehookpoints/js/</fullpath>
     <status>optional</status>
     <permission>read</permission>
   </element>
@@ -9365,6 +9378,19 @@
     <status>optional</status>
     <permission>read</permission>
     <hash>3e5eb34dd1d21d96b747f537b7614e8f</hash>
+  </element>
+  <element>
+    <fullpath>plugins/visiblehookpoints/lang/</fullpath>
+    <status>optional</status>
+    <permission>read</permission>
+  </element>
+  <element>
+    <fullpath>plugins/visiblehookpoints/lang/english.php</fullpath>
+    <version>1.5.9</version>
+    <revision>7805</revision>
+    <status>optional</status>
+    <permission>read</permission>
+    <hash>583d802c7fb08f42f34fc2e19d6263dc</hash>
   </element>
   <element>
     <fullpath>sql/</fullpath>

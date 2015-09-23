@@ -2536,18 +2536,4 @@ if (defined('XP_PUBLISH_PHP')) {
  $lang_xp_publish_php['link'] = '';
 }
 
-// ------------------------------------------------------------------------- //
-// Core plugins
-// ------------------------------------------------------------------------- //
-if (defined('CORE_PLUGIN')) {
- $lang_plugin_php['sample_config_name'] = 'Sample Plugin';
- $lang_plugin_php['sample_config_description'] = 'Ceci est un exemple de plugin. Il ne fait rien de particulièrement utile - il n\'est là que pour montrer ce que les plugins peuvent faire et comment les coder. Lorsqu\'il est activé, il affichera un exemple de texte en rouge.';
- $lang_plugin_php['sample_plugin_documentation'] = 'Documentation du Plugin';
- $lang_plugin_php['sample_plugin_support'] = 'Aide du plugin';
- $lang_plugin_php['sample_install_explain'] = 'Entrer l\'identifiant (\'foo\') et le mot de passe (\'bar\') pour l\'installer';
- $lang_plugin_php['sample_install_username'] = 'Identifiant';
- $lang_plugin_php['sample_install_password'] = 'Mot de passe';
- $lang_plugin_php['sample_output'] = 'Ceci est un exemple de donnée renvoyée depuis le plugin &quot;sample plugin&quot;';
-}
-
 ?>
