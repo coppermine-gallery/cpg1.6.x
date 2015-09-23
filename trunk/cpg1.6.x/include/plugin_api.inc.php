@@ -411,10 +411,17 @@ class CPGPluginAPI {
             return true;
         }
 
-        // If the codebase and configuration.php file is missing return false
-        if (!file_exists('./plugins/'.$path.'/codebase.php') &&
-            !file_exists('./plugins/'.$path.'/configuration.php')) {
+        // If codebase.php or configuration.php don't exist, skip this plugin
+        if (!(file_exists('./plugins/'.$path.'/codebase.php') && file_exists('./plugins/'.$path.'/configuration.php'))) {
             return false;
+        }
+
+        // Load language files
+        if (file_exists('./plugins/'.$path.'/lang/english.php')) {
+            include ('./plugins/'.$path.'/lang/english.php');
+            if ($CONFIG['lang'] != 'english' && file_exists('./plugins/'.$path.'/lang/'.$CONFIG['lang'].'.php')) {
+                include ('./plugins/'.$path.'/lang/'.$CONFIG['lang'].'.php');
+            }
         }
 
         // Get the lowest priority level (highest number) from the database
