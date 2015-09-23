@@ -52,12 +52,24 @@ if ($superCage->get->keyExists('close')) {
 } else {
     $close = '0';
 }
-if ($superCage->get->keyExists('h') && preg_match('/^(lang_[a-z0-9_]+)(\[([a-z0-9_]+)\])?$/', $superCage->get->getEscaped('h'), $matches)) {
-    $header = !isset($matches[2]) ? ${$matches[1]} : ${$matches[1]}[$matches[3]];
+if ($superCage->get->keyExists('h') && preg_match('/^(lang_[a-z0-9_]+)(?:\[([a-z0-9_]+)\])?(?:\[([a-z0-9_]+)\])?$/', $superCage->get->getEscaped('h'), $matches)) {
+    if ($matches[1] == 'lang_plugins' && isset($matches[2])) {
+        cpg_load_plugin_language_file($matches[2]);
+    }
+    if (isset($matches[3])) {
+        $header = ${$matches[1]}[$matches[2]][$matches[3]];
+    } elseif (isset($matches[2])) {
+        $header = ${$matches[1]}[$matches[2]];
+    } else {
+        $header = ${$matches[1]};
+    }
 } else {
     $header = '';
 }
-if ($superCage->get->keyExists('t') && preg_match('/^(lang_[a-z0-9_]+)(\[([a-z0-9_]+)\])?$/', $superCage->get->getEscaped('t'), $matches)) {
+if ($superCage->get->keyExists('t') && preg_match('/^(lang_[a-z0-9_]+)(?:\[([a-z0-9_]+)\])?(?:\[([a-z0-9_]+)\])?$/', $superCage->get->getEscaped('t'), $matches)) {
+    if ($matches[1] == 'lang_plugins' && isset($matches[2])) {
+        cpg_load_plugin_language_file($matches[2]);
+    }
     if ($matches[1] == 'lang_tmp_picture_manager') {
         $text = <<< EOT
             <ul>
@@ -110,13 +122,15 @@ EOT;
     </li>
 </ul>
 EOT;
-    } elseif (!isset($matches[2])) {
-        $text = ${$matches[1]};
-    } elseif($matches[1] == 'lang_groupmgr_php' && $matches[3] == 'explain_guests_greyed_out_text') {
+    } elseif ($matches[1] == 'lang_groupmgr_php' && isset($matches[2]) && $matches[2] == 'explain_guests_greyed_out_text') {
         $group_name = mysql_result(cpg_db_query("SELECT group_name FROM {$CONFIG['TABLE_USERGROUPS']} WHERE group_id = 3"), 0);
         $text = sprintf($text, '<em>'.$group_name.'</em>');
+    } elseif (isset($matches[3])) {
+        $text = ${$matches[1]}[$matches[2]][$matches[3]];
+    } elseif (isset($matches[2])) {
+        $text = ${$matches[1]}[$matches[2]];
     } else {
-        $text = ${$matches[1]}[$matches[3]];
+        $text = ${$matches[1]};
     }
 } else {
     $text = '';

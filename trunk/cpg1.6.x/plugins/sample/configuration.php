@@ -16,11 +16,12 @@
 **********************************************/
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
-$name = $lang_plugin_php['sample_config_name'];
-$description = $lang_plugin_php['sample_config_description'] . '&nbsp;' . cpg_display_help('f=plugins.htm&amp;as=plugin_bundled_sample&amp;ae=plugin_bundled_sample_end', '400', '200');
+
+$name = $lang_plugins['sample']['config_name'];
+$description = $lang_plugins['sample']['config_description'];
 $author = 'Coppermine Development Team';
-$version = '1.6';
-$plugin_cpg_version = array('min' => '1.5');
+$version = '1.7';
+$plugin_cpg_version = array('min' => '1.6');
 /*
  * $extra_info is displayed with the title of a plugin that IS installed and
  * can be used to present extra information.  In this case we show a complex
@@ -29,7 +30,7 @@ $plugin_cpg_version = array('min' => '1.5');
 $extra_info = <<<EOT
     <table border="0" cellspacing="0" cellpadding="0">
     <tr>
-        <td class="admin_menu"><a href="docs/en/plugins.htm" title="{$lang_plugin_php['sample_plugin_documentation']}">{$lang_plugin_php['sample_plugin_documentation']}</a></td>
+        <td><a href="docs/en/plugins.htm" title="{$lang_plugins['sample']['plugin_documentation']}" class="admin_menu">{$lang_plugins['sample']['plugin_documentation']}</a></td>
     </tr>
     </table>
 EOT;
@@ -41,8 +42,9 @@ EOT;
 $install_info=<<<EOT
     <table border="0" cellspacing="0" cellpadding="0">
     <tr>
-        <td class="admin_menu"><a href="http://coppermine-gallery.net/forum/index.php?board=97.0" title="{$lang_plugin_php['sample_plugin_support']}">{$lang_plugin_php['sample_plugin_support']}</a></td>
+        <td><a href="http://coppermine-gallery.net/forum/index.php?board=97.0" title="{$lang_plugins['sample']['plugin_support']}" class="admin_menu">{$lang_plugins['sample']['plugin_support']}</a></td>
     </tr>
     </table>
 EOT;
+
 ?>

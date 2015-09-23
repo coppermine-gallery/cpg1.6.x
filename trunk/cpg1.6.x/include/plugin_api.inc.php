@@ -82,13 +82,7 @@ class CPGPluginAPI {
             include ('./plugins/'.$thisplugin->path.'/codebase.php');
 
             // Load language files
-            if (file_exists('./plugins/'.$thisplugin->path.'/lang/english.php')) {
-                global $lang_plugins;
-                include ('./plugins/'.$thisplugin->path.'/lang/english.php');
-                if ($CONFIG['lang'] != 'english' && file_exists('./plugins/'.$thisplugin->path.'/lang/'.$CONFIG['lang'].'.php')) {
-                    include ('./plugins/'.$thisplugin->path.'/lang/'.$CONFIG['lang'].'.php');
-                }
-            }
+            cpg_load_plugin_language_file($thisplugin->path);
 
             // Check if plugin has a wakeup action
             if (!($thisplugin->awake = CPGPluginAPI::action('plugin_wakeup',true,$thisplugin->plugin_id))) {
@@ -404,7 +398,7 @@ class CPGPluginAPI {
      **/
 
     function install($path) {
-        global $CONFIG,$thisplugin,$CPG_PLUGINS,$lang_plugin_api,$lang_plugin_php;
+        global $CONFIG,$thisplugin,$CPG_PLUGINS,$lang_plugin_api;
 
         // If this plugin is already installed return true
         if (CPGPluginAPI::installed($path)) {
@@ -417,12 +411,7 @@ class CPGPluginAPI {
         }
 
         // Load language files
-        if (file_exists('./plugins/'.$path.'/lang/english.php')) {
-            include ('./plugins/'.$path.'/lang/english.php');
-            if ($CONFIG['lang'] != 'english' && file_exists('./plugins/'.$path.'/lang/'.$CONFIG['lang'].'.php')) {
-                include ('./plugins/'.$path.'/lang/'.$CONFIG['lang'].'.php');
-            }
-        }
+        cpg_load_plugin_language_file($path);
 
         // Get the lowest priority level (highest number) from the database
         $sql = "SELECT priority FROM {$CONFIG['TABLE_PLUGINS']} ORDER BY priority DESC LIMIT 1";

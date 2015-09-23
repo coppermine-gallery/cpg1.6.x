@@ -16,9 +16,6 @@
 **********************************************/
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
-if (!defined('CORE_PLUGIN')) {
-    define('CORE_PLUGIN', true);
-}
 
 $thisplugin->add_action('plugin_install','opensearch_install');
 $thisplugin->add_action('plugin_configure','opensearch_configure');

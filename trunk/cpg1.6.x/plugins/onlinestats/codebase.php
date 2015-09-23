@@ -22,9 +22,6 @@ if (!defined('PLUGINMGR_PHP')) {
 if (!defined('ADMIN_PHP')) {
     define('ADMIN_PHP', true);
 }
-if (!defined('CORE_PLUGIN')) {
-    define('CORE_PLUGIN', true);
-}
 
 $icon_array['ok']  = cpg_fetch_icon('ok', 2);
 $icon_array['config']  = cpg_fetch_icon('config', 2);

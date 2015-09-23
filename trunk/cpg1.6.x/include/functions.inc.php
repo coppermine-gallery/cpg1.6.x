@@ -6703,4 +6703,21 @@ function cpg_album_sort_order($table_alias = '') {
     return $sort_order;
 }
 
+
+/**
+ * cpg_album_sort_order
+ *
+ * @param string $path
+ */
+function cpg_load_plugin_language_file($path) {
+    global $CONFIG;
+    if (file_exists('./plugins/'.$path.'/lang/english.php')) {
+        global $lang_plugins;
+        include ('./plugins/'.$path.'/lang/english.php');
+        if ($CONFIG['lang'] != 'english' && file_exists('./plugins/'.$path.'/lang/'.$CONFIG['lang'].'.php')) {
+            include ('./plugins/'.$path.'/lang/'.$CONFIG['lang'].'.php');
+        }
+    }
+}
+
 ?>

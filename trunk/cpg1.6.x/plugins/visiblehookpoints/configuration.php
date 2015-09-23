@@ -17,20 +17,21 @@
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
-$name = $lang_plugin_php['visiblehookpoints_config_name'];
-$description =  $lang_plugin_php['visiblehookpoints_config_description'] . '&nbsp;' . cpg_display_help('f=plugins.htm&amp;as=plugin_bundled_visiblehookpoints&amp;ae=plugin_bundled_visiblehookpoints_end', '400', '200');
+$name = $lang_plugins['visiblehookpoints']['config_name'];
+$description =  $lang_plugins['visiblehookpoints']['config_description'] . '&nbsp;' . cpg_display_help('f=plugins.htm&amp;as=plugin_bundled_visiblehookpoints&amp;ae=plugin_bundled_visiblehookpoints_end', '400', '200');
 $config_icon = cpg_fetch_icon('config', 1);
 $extra_info = <<<EOT
-    <a href="index.php?file=visiblehookpoints/index&action=config" class="admin_menu">{$config_icon}{$lang_plugin_php['visiblehookpoints_plugin_config']}</a>
-    <a href="http://forum.coppermine-gallery.net/index.php?board=97.0" class="admin_menu">{$lang_plugin_php['visiblehookpoints_plugin_support']}</a>
+    <a href="index.php?file=visiblehookpoints/index&action=config" class="admin_menu">{$config_icon}{$lang_plugins['visiblehookpoints']['plugin_config']}</a>
+    <a href="http://forum.coppermine-gallery.net/index.php?board=97.0" class="admin_menu">{$lang_plugins['visiblehookpoints']['plugin_support']}</a>
     
 EOT;
-$install_info = $lang_plugin_php['visiblehookpoints_config_install'];
+$install_info = $lang_plugins['visiblehookpoints']['config_install'];
 $author = <<< EOT
 Donnoman from <a href="http://cpg-contrib.org">cpg-contrib.org</a> (v1.x and 2.x)<br />
 Plugin config section added, ported to cpg1.5.x, added hovering boxes: by <a href="http://coppermine-gallery.net/forum/index.php?action=profile;u=2" rel="external" class="external">Joachim M&uuml;ller</a> (v3.0)<br />
 Added i18n support: by <a href="http://forum.coppermine-gallery.net/index.php?action=profile;u=24278" rel="external" class="external">eenemeenemuu</a> (v4.0)
 EOT;
-$version='4.0';
-$plugin_cpg_version = array('min' => '1.5.34');
+$version='4.1';
+$plugin_cpg_version = array('min' => '1.6');
+
 ?>

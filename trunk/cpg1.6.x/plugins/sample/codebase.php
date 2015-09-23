@@ -16,9 +16,6 @@
 **********************************************/
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
-if (!defined('CORE_PLUGIN')) {
-    define('CORE_PLUGIN', true);
-}
 
 // Add an install action
 $thisplugin->add_action('plugin_install','sample_install');
@@ -34,8 +31,8 @@ $thisplugin->add_filter('plugin_block','sample_block_mgr');
 
 // Sample function to modify gallery header html
 function sample_header($html) {
-    global $thisplugin, $lang_plugin_php;
-    $return = $html.'<strong style="color:red;">'.$lang_plugin_php['sample_output'].'</strong>';
+    global $thisplugin, $lang_plugins;
+    $return = $html.'<strong style="color:red;">'.$lang_plugins['sample']['output'].'</strong>';
     return $return;
 }
 
@@ -65,7 +62,7 @@ function sample_install() {
 // Configure function
 // Displays the form
 function sample_configure() {
-    global $lang_plugin_php, $lang_common;
+    global $lang_plugins, $lang_common;
     // Create the super cage
     $superCage = Inspekt::makeSuperCage();
 
@@ -74,12 +71,12 @@ function sample_configure() {
         <table border="0" cellspacing="0" cellpadding="0" width="100%">
           <tr>
             <td class="tableh2" colspan="2">
-              <h3>{$lang_plugin_php['sample_install_explain']}</h3>
+              <h3>{$lang_plugins['sample']['install_explain']}</h3>
             </td>
           </tr>
           <tr>
             <td class="tableb" align="right">
-              {$lang_plugin_php['sample_install_username']}:
+              {$lang_plugins['sample']['install_username']}:
             </td>
             <td class="tableb">
               <input type="text" name="uid" class="textinput" style="width:100%" />
@@ -87,7 +84,7 @@ function sample_configure() {
           </tr>
           <tr>
             <td class="tableb tableb_alternate" align="right">
-              {$lang_plugin_php['sample_install_password']}:
+              {$lang_plugins['sample']['install_password']}:
             </td>
             <td class="tableb tableb_alternate">
               <input type="password" name="pwd" class="textinput" style="width:100%" />
@@ -102,4 +99,5 @@ function sample_configure() {
     </form>
 EOT;
 }
+
 ?>

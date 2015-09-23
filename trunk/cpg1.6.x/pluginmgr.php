@@ -24,7 +24,6 @@
 
 define('IN_COPPERMINE', true);
 define('PLUGINMGR_PHP', true);
-define('CORE_PLUGIN', true);
 
 require('include/init.inc.php');
 
@@ -48,7 +47,7 @@ if ($superCage->post->keyExists('update_config')) {
 }
 
 function display_plugin_list() {
-    global $CPG_PLUGINS, $lang_pluginmgr_php, $lang_plugin_php, $lang_common, $CONFIG, $CPG_PHP_SELF, $lang_plugins;
+    global $CPG_PLUGINS, $lang_pluginmgr_php, $lang_plugins, $lang_common, $CONFIG, $CPG_PHP_SELF;
 
     list($timestamp, $form_token) = getFormToken();
 
@@ -281,12 +280,7 @@ EOT;
             }
 
             // Load language files
-            if (file_exists('./plugins/'.$path.'/lang/english.php')) {
-                include ('./plugins/'.$path.'/lang/english.php');
-                if ($CONFIG['lang'] != 'english' && file_exists('./plugins/'.$path.'/lang/'.$CONFIG['lang'].'.php')) {
-                    include ('./plugins/'.$path.'/lang/'.$CONFIG['lang'].'.php');
-                }
-            }
+            cpg_load_plugin_language_file($path);
 
             unset($extra_info);
             unset($install_info);
@@ -623,12 +617,7 @@ if (($CONFIG['enable_plugins'] != 1) || (($op != 'install') && ($op != 'uninstal
 } elseif ($op == 'install') {
 
     // Load language files
-    if (file_exists('./plugins/'.$CPG_PLUGINS['new']->path.'/lang/english.php')) {
-        include ('./plugins/'.$CPG_PLUGINS['new']->path.'/lang/english.php');
-        if ($CONFIG['lang'] != 'english' && file_exists('./plugins/'.$CPG_PLUGINS['new']->path.'/lang/'.$CONFIG['lang'].'.php')) {
-            include ('./plugins/'.$CPG_PLUGINS['new']->path.'/lang/'.$CONFIG['lang'].'.php');
-        }
-    }
+    cpg_load_plugin_language_file($CPG_PLUGINS['new']->path);
 
     // Display configure page table header
     starttable('100%',$lang_pluginmgr_php['configure_plugin'] . ': ' . $CPG_PLUGINS['new']->name);
