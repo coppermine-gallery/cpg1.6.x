@@ -275,9 +275,17 @@ EOT;
     foreach ($available_plugins as $path) {
         if (($plugin_id = CPGPluginAPI::installed($path))===false) {
 
-            // If codebase.php and configuration.php don't exist, skip this folder
+            // If codebase.php or configuration.php don't exist, skip this plugin
             if (!(file_exists('./plugins/'.$path.'/codebase.php') && file_exists('./plugins/'.$path.'/configuration.php'))) {
                 continue;
+            }
+
+            // Load language files
+            if (file_exists('./plugins/'.$path.'/lang/english.php')) {
+                include ('./plugins/'.$path.'/lang/english.php');
+                if ($CONFIG['lang'] != 'english' && file_exists('./plugins/'.$path.'/lang/'.$CONFIG['lang'].'.php')) {
+                    include ('./plugins/'.$path.'/lang/'.$CONFIG['lang'].'.php');
+                }
             }
 
             unset($extra_info);
