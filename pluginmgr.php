@@ -622,6 +622,14 @@ if (($CONFIG['enable_plugins'] != 1) || (($op != 'install') && ($op != 'uninstal
 // Plugin is being configured; Execute 'plugin_configure' action
 } elseif ($op == 'install') {
 
+    // Load language files
+    if (file_exists('./plugins/'.$CPG_PLUGINS['new']->path.'/lang/english.php')) {
+        include ('./plugins/'.$CPG_PLUGINS['new']->path.'/lang/english.php');
+        if ($CONFIG['lang'] != 'english' && file_exists('./plugins/'.$CPG_PLUGINS['new']->path.'/lang/'.$CONFIG['lang'].'.php')) {
+            include ('./plugins/'.$CPG_PLUGINS['new']->path.'/lang/'.$CONFIG['lang'].'.php');
+        }
+    }
+
     // Display configure page table header
     starttable('100%',$lang_pluginmgr_php['configure_plugin'] . ': ' . $CPG_PLUGINS['new']->name);
 
