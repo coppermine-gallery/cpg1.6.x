@@ -2230,13 +2230,19 @@
     <permission>read</permission>
   </element>
   <element>
-    <fullpath>docs/tutorial/cpg1.5.x_plugin_template_v1.0.zip</fullpath>
+    <fullpath>docs/tutorial/cpg1.5.x_plugin_template_v1.1.zip</fullpath>
     <status>mandatory</status>
     <permission>read</permission>
     <hash>b090e37226f9e3ca79ae1a0dbd2bb3ec</hash>
   </element>
   <element>
     <fullpath>docs/tutorial/cpg1.5_plugin_hello-world_v2.1.zip</fullpath>
+    <status>optional</status>
+    <permission>read</permission>
+    <hash>8b28c9585ec0c09af08209f1007ae27c</hash>
+  </element>
+  <element>
+    <fullpath>docs/tutorial/cpg1.5_plugin_hello-world_v2.2.1</fullpath>
     <status>optional</status>
     <permission>read</permission>
     <hash>8b28c9585ec0c09af08209f1007ae27c</hash>
