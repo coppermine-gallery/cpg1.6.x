@@ -8997,14 +8997,6 @@
     <hash>4c2136cacc0181f63e2f27663e7f2cdc</hash>
   </element>
   <element>
-    <fullpath>js/link_target.js</fullpath>
-    <version>1.5.9</version>
-    <revision>7805</revision>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>dca75a0382f539bafa8ad6ed07fa3ba8</hash>
-  </element>
-  <element>
     <fullpath>js/minibrowser.js</fullpath>
     <version>1.5.9</version>
     <revision>7805</revision>
@@ -9178,98 +9170,6 @@
     <permission>write</permission>
   </element>
   <element>
-    <fullpath>plugins/link_target/</fullpath>
-    <status>optional</status>
-    <permission>read</permission>
-  </element>
-  <element>
-    <fullpath>plugins/link_target/codebase.php</fullpath>
-    <version>1.5.9</version>
-    <revision>7805</revision>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>a845a38076a4253adb1b1b1ec7f63d5d</hash>
-  </element>
-  <element>
-    <fullpath>plugins/link_target/configuration.php</fullpath>
-    <version>1.5.9</version>
-    <revision>7805</revision>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>470ccefafe9db90f5d76baa4e08a1e0e</hash>
-  </element>
-  <element>
-    <fullpath>plugins/onlinestats/</fullpath>
-    <status>optional</status>
-    <permission>read</permission>
-  </element>
-  <element>
-    <fullpath>plugins/onlinestats/codebase.php</fullpath>
-    <version>1.5.9</version>
-    <revision>7805</revision>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>db74eb902076494250502699672197f1</hash>
-  </element>
-  <element>
-    <fullpath>plugins/onlinestats/configuration.php</fullpath>
-    <version>1.5.9</version>
-    <revision>7805</revision>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>00e1707c7561a3f6a9981d709a6a549d</hash>
-  </element>
-  <element>
-    <fullpath>plugins/onlinestats/index.php</fullpath>
-    <version>1.5.9</version>
-    <revision>7805</revision>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>26dd99a1f27ec63c413d21cc111c0234</hash>
-  </element>
-  <element>
-    <fullpath>plugins/onlinestats/readme.txt</fullpath>
-    <version>1.5.9</version>
-    <revision>7805</revision>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>43493dadcea20558932134a54672e785</hash>
-  </element>
-  <element>
-    <fullpath>plugins/onlinestats/schema.sql</fullpath>
-    <version>1.5.9</version>
-    <revision>7805</revision>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>88bf6d089b43a7c47d762aeca0385859</hash>
-  </element>
-  <element>
-    <fullpath>plugins/opensearch/</fullpath>
-    <status>optional</status>
-    <permission>read</permission>
-  </element>
-  <element>
-    <fullpath>plugins/opensearch/codebase.php</fullpath>
-    <version>1.5.9</version>
-    <revision>7805</revision>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>07ea99b3e5f324ac103a629b79411a91</hash>
-  </element>
-  <element>
-    <fullpath>plugins/opensearch/configuration.php</fullpath>
-    <version>1.5.9</version>
-    <revision>7805</revision>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>cf0a888b1ec24015e64b9399ed0ca57f</hash>
-  </element>
-  <element>
-    <fullpath>plugins/opensearch/osd.xml</fullpath>
-    <status>optional</status>
-    <permission>read</permission>
-  </element>
-  <element>
     <fullpath>plugins/sample/</fullpath>
     <status>optional</status>
     <permission>read</permission>
@@ -9302,27 +9202,6 @@
     <status>optional</status>
     <permission>read</permission>
     <hash>583d802c7fb08f42f34fc2e19d6263dc</hash>
-  </element>
-  <element>
-    <fullpath>plugins/usergal_alphatabs/</fullpath>
-    <status>optional</status>
-    <permission>read</permission>
-  </element>
-  <element>
-    <fullpath>plugins/usergal_alphatabs/codebase.php</fullpath>
-    <version>1.5.9</version>
-    <revision>7805</revision>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>c2978d8cb1fd036801d48033a8e72cc1</hash>
-  </element>
-  <element>
-    <fullpath>plugins/usergal_alphatabs/configuration.php</fullpath>
-    <version>1.5.9</version>
-    <revision>7805</revision>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>43f4d6cc727a5486a0dfa9d6a4142003</hash>
   </element>
   <element>
     <fullpath>plugins/visiblehookpoints/</fullpath>

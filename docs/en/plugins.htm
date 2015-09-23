@@ -51,45 +51,9 @@
 <p>You can find more plugins on the board &quot;<a href="http://forum.coppermine-gallery.net/index.php/board,91.0.html">cpg1.5 plugin contributions</a>&quot; on the Coppermine Support Forum, both from Coppermine developers and from user contributions.</p>
 <ul>
 	<li>
-		<a name="plugin_bundled_link_target"></a><h3>Link Target (link_target)<a href="#plugin_bundled_link_target" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-		Changes the way external links are being opened: when this plugin is enabled, all links that contain the attribute rel="external" will open in a new window (instead of the same window). This has the same effect as the use of the target="_blank" attribute, but it will not render your HTML output invalid.<br />
-		This plugin has an impact mostly on the "Powered by Coppermine" link at the bottom of the gallery output. It is strongly recommended <strong>not</strong> to use the deprecated target attribute for links any longer, as suggested in the article <a href="http://www.sitepoint.com/article/standards-compliant-world/" rel="external" class="external">New-Window Links in a Standards-Compliant World</a> by Kevin Yank.<br />
-		The dev team recommends <strong>not</strong> to use this plugin: opening links in a new window means bossing around your site visitors. All of them are aware how to open a link in a new window or browser tab if they want to: you should respect their decision and leave the decision to them if they want to leave your page for good.<br />
-		We suggest to think twice before enabling this little plugin: you will lose visitors who don't like to be forced to open links in new windows, and you will confuse complete newbies.<br />
-		This plugin has been bundled with cpg1.5.x to stop the requests from users who are still trying to open external links in a new browser window. Although the dev team is not fond of opening links in a new window we're aware that some will want this feature badly. So use it wisely if you must use it at all.
-		<a name="plugin_bundled_link_target_end"></a>
-	</li>
-	<li>
-		<a name="plugin_bundled_onlinestats"></a><h3>Who is online? (onlinestats)<a href="#plugin_bundled_onlinestats" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-		Displays a block on each gallery page that shows users and guests actually online. The output looks roughly like this:
-		<div class="cpg_example">
-			<table border="0 cellspacing="0" cellpadding="0" width="100%" class="maintable">
-				<tr>
-					<td class="tableh1">Who is online?</td>
-				</tr>
-				<tr>
-					<td class="tableb">There are <strong>42</strong> registered users. The newest registered user is <a href="#">foobar</a>. In total there are <strong>12</strong> visitors online: <strong>3</strong> registered user and <strong>9</strong> guests. Most users ever online: <strong>2</strong> on 08/27/08 at 19:44. Registered users who have been online in the past 10 minutes: <a href="#">Bill</a>, <a href="#">Linus</a>, <a href="#">Steve</a>.</td>
-				</tr>
-			</table>
-		</div>
-		The output is a page element similar to the category list or album list, so you can move the block around using the config option <a href="configuration.htm#admin_album_list_content">The content of the main page</a>. Once the plugin has been installed, the "who is online" block will not be actually visible: you need to actually enable it by adding the string <tt class="code">onlinestats</tt> (separated with a slash) to the above mentioned setting "The content of the main page", so if that config option contained before <tt class="code">catlist/alblist/random,2/lastup,2</tt> you could change that to <tt class="code">catlist/alblist/random,2/lastup,2/onlinestats</tt> to display the output of this plugin on the index page.
-		<a name="plugin_bundled_onlinestats_end"></a>
-	</li>
-	<li>
-		<a name="plugin_bundled_opensearch"></a><h3>OpenSearch (opensearch)<a href="#plugin_bundled_opensearch" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-		An implementation of OpenSearch for Coppermine. When enabled, visitors can add the gallery to their browser's search bar.<br />
-		What the plugin actually does is adding the corresponding meta tag to the header of your Coppermine-driven pages and creating the needed XML file that describes your gallery, based on what you have specified for &quot;<a href="configuration.htm#admin_general_name">Gallery name</a>&quot; and &quot;<a href="configuration.htm#admin_general_description">Gallery description</a>&quot; in Coppermine's config.
-		<a name="plugin_bundled_opensearch_end"></a>
-	</li>
-	<li>
 		<a name="plugin_bundled_sample"></a><h3>Sample Plugin (sample)<a href="#plugin_bundled_sample" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
 		This is a sample plugin. It will not do anything particular useful - it is just meant to demonstrate what plugins can do and how to code them. When enabled, it will display some sample text in red. Remember that this output will be displayed to anyone visiting your gallery, no matter what privilege level the visitor has, so if you have enabled this plugin out of curiosity, remember to turn it off once you have seen what it does.
 		<a name="plugin_bundled_sample_end"></a>
-	</li>
-	<li>
-		<a name="plugin_bundled_usergal_alphatabs"></a><h3>User Gallery Alphabetic Tabbing (usergal_alphatabs)<a href="#plugin_bundled_usergal_alphatabs" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-		What it does: displays tabs from A to Z at the top of user galleries that visitors can click on to directly jump to a page that displays all user galleries of the users who's username starts with that letter. Plugin only recommended to be used if you have a really large number of user galleries.
-		<a name="plugin_bundled_usergal_alphatabs_end"></a>
 	</li>
 	<li>
 		<a name="plugin_bundled_visiblehookpoints"></a><h3>Visible HookPoints (visiblehookpoints)<a href="#plugin_bundled_visiblehookpoints" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -104,12 +68,6 @@
 		There is now a statistics output showing how many times each hookpoint was called. There is also a timeline of when each hookpoint was executed relative to the scripts start time.
 		<a name="plugin_bundled_visiblehookpoints_end"></a>
 	</li>
-    <li>
-    	<a name="plugin_bundled_sef_url"></a><h3>SEF_URLS plugin<a href="#plugin_bundled_sef_url" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-    The plugin enables "Search-engine-friendly URLs" - this is an experimental plugin and should be used with caution.
-    <div class="cpg_message_error">The SEF_URLs plugin has been removed from the package for cpg1.5.x due to the known issues that made it not ready for production use. It can be obtained from the official Coppermine homepage - check the corresponding announcement thread &quot;<a href="http://coppermine-gallery.net/forum/index.php?topic=42568.0">SEF_URLs plugin for cpg1.5.x</a>&quot;. Please note that the plugin goes unsupported, so please don't ask questions about it.</div>
-    <a name="plugin_bundled_sef_url"></a>
-    </li>
 </ul>
 <a name="plugin_bundled_end">
 

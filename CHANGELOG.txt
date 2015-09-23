@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2015-09-23 [M] Converted plugins "link_target", "onlinestats", "opensearch" and "usergal_alphatabs" to standalone plugins and removed from Coppermine package {eenemeenemuu}
 2015-09-23 [D] Updated docs and template plugin regarding i18n of plugins {eenemeenemuu}
 2015-09-18 [A] Load plugin language files, if available {eenemeenemuu}
 2015-09-16 [A] Display confirmation message when adding/removing pictures to/from favorites (thread ID 78394) {eenemeenemuu}
