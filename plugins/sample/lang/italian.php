@@ -1,0 +1,29 @@
+<?php
+/*************************
+  Coppermine Photo Gallery
+  ************************
+  Copyright (c) 2003-2014 Coppermine Dev Team
+  v1.0 originally written by Gregory Demar
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License version 3
+  as published by the Free Software Foundation.
+
+  ********************************************
+  Coppermine version: 1.6.01
+  $HeadURL$
+  $Revision$
+**********************************************/
+
+if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
+
+$lang_plugins['sample']['config_name'] = 'Plugin di esempio';
+$lang_plugins['sample']['config_description'] = 'Questo &egrave; un plugin di esempio. Non fa niente di particolarmente utile - &egrave; pensato solo per dimostrare cosa possono fare i plugin e come scriverli. Se abilitato, mostrer&agrave; un testo di esempio in rosso.';
+$lang_plugins['sample']['plugin_documentation'] = 'Documentazione Plugin';
+$lang_plugins['sample']['plugin_support'] = 'Assistenza Plugin';
+$lang_plugins['sample']['install_explain'] = 'Inserisci il nome utente (\'foo\') e la password (\'bar\') per installare';
+$lang_plugins['sample']['install_username'] = 'Nome utente';
+$lang_plugins['sample']['install_password'] = 'Password';
+$lang_plugins['sample']['output'] = 'Questi sono dati esemplificativi restituiti dal plugin di esempio';
+
+?>
