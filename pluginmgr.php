@@ -47,7 +47,7 @@ if ($superCage->post->keyExists('update_config')) {
 }
 
 function display_plugin_list() {
-    global $CPG_PLUGINS, $lang_pluginmgr_php, $lang_plugins, $lang_common, $CONFIG, $CPG_PHP_SELF;
+    global $CPG_PLUGINS, $lang_pluginmgr_php, $lang_common, $CONFIG, $CPG_PHP_SELF;
 
     list($timestamp, $form_token) = getFormToken();
 
@@ -135,6 +135,12 @@ EOT;
         $plugins_count = count($installed_plugins);
         foreach ($installed_plugins as $thisplugin) {
             $installed_count++;
+
+            // Load language files
+            $lg = 'lang_plugin_'.$thisplugin['path'];
+            global $$lg;
+            cpg_load_plugin_language_file($thisplugin['path']);
+
             unset($extra_info);
             unset($install_info);
             include('./plugins/'.$thisplugin['path'].'/configuration.php');
@@ -280,6 +286,8 @@ EOT;
             }
 
             // Load language files
+            $lg = 'lang_plugin_'.$path;
+            global $$lg;
             cpg_load_plugin_language_file($path);
 
             unset($extra_info);

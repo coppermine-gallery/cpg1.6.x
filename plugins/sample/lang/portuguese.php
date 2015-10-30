@@ -17,13 +17,13 @@
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
-$lang_plugins['sample']['config_name'] = 'Plugin de exemplo';
-$lang_plugins['sample']['config_description'] = 'Este é um plugin de exemplo. Ele não fará nada particularmente útil - tem apenas por objectivo demonstrar o que os plugins podem fazer e como os programar. Quando activado, mostrará algum texto em vermelho.';
-$lang_plugins['sample']['plugin_documentation'] = 'Documentação do Plugin';
-$lang_plugins['sample']['plugin_support'] = 'Suporte do Plugin';
-$lang_plugins['sample']['install_explain'] = 'Introduza o nome de utilizador (\'foo\') e a senha (\'bar\') para instalar';
-$lang_plugins['sample']['install_username'] = 'Nome de utilizador';
-$lang_plugins['sample']['install_password'] = 'Senha';
-$lang_plugins['sample']['output'] = 'Isto são dados retornados pelo plugin de exemplo';
+$lang_plugin_sample['config_name'] = 'Plugin de exemplo';
+$lang_plugin_sample['config_description'] = 'Este é um plugin de exemplo. Ele não fará nada particularmente útil - tem apenas por objectivo demonstrar o que os plugins podem fazer e como os programar. Quando activado, mostrará algum texto em vermelho.';
+$lang_plugin_sample['plugin_documentation'] = 'Documentação do Plugin';
+$lang_plugin_sample['plugin_support'] = 'Suporte do Plugin';
+$lang_plugin_sample['install_explain'] = 'Introduza o nome de utilizador (\'foo\') e a senha (\'bar\') para instalar';
+$lang_plugin_sample['install_username'] = 'Nome de utilizador';
+$lang_plugin_sample['install_password'] = 'Senha';
+$lang_plugin_sample['output'] = 'Isto são dados retornados pelo plugin de exemplo';
 
 ?>

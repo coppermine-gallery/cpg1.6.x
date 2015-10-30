@@ -17,13 +17,13 @@
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
-$lang_plugins['sample']['config_name'] = 'Приклад модуля';
-$lang_plugins['sample']['config_description'] = 'Це приклад плагіна. Він не буде робити нічого дійсно корисного - він лише демонструє, що можуть робити плагіни і як їх написати. Коли включений, плагін буде відображати деякий текст червоним кольором. ';
-$lang_plugins['sample']['plugin_documentation'] = 'Документація модулів';
-$lang_plugins['sample']['plugin_support'] = 'Підтримка плагінів';
-$lang_plugins['sample']['install_explain'] = 'Введіть ім`я користувача (\'foo\') та пароль (\'bar\') щоб встановити';
-$lang_plugins['sample']['install_username'] = 'ім`я користувача';
-$lang_plugins['sample']['install_password'] = 'Пароль';
-$lang_plugins['sample']['output'] = 'Ці дані повернулися з тестового модуля';
+$lang_plugin_sample['config_name'] = 'Приклад модуля';
+$lang_plugin_sample['config_description'] = 'Це приклад плагіна. Він не буде робити нічого дійсно корисного - він лише демонструє, що можуть робити плагіни і як їх написати. Коли включений, плагін буде відображати деякий текст червоним кольором. ';
+$lang_plugin_sample['plugin_documentation'] = 'Документація модулів';
+$lang_plugin_sample['plugin_support'] = 'Підтримка плагінів';
+$lang_plugin_sample['install_explain'] = 'Введіть ім`я користувача (\'foo\') та пароль (\'bar\') щоб встановити';
+$lang_plugin_sample['install_username'] = 'ім`я користувача';
+$lang_plugin_sample['install_password'] = 'Пароль';
+$lang_plugin_sample['output'] = 'Ці дані повернулися з тестового модуля';
 
 ?>

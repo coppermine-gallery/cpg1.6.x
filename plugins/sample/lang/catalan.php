@@ -17,13 +17,13 @@
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
-$lang_plugins['sample']['config_name'] = 'Per exemple WordPress';
-$lang_plugins['sample']['config_description'] = 'Per exemple WordPress. No fa res particularment útil-pensat per mostrar què poden fer els plugins i com programar-los. En activar-lo mostrarà un text d\'exemple en vermell.';
-$lang_plugins['sample']['plugin_documentation'] = 'Documentació del Plugin';
-$lang_plugins['sample']['plugin_support'] = 'Suport del Plugin';
-$lang_plugins['sample']['install_explain'] = 'Introdueix el nom d\'usuari (\'foo\') i contrasenya (\'bar\') per instal·lar';
-$lang_plugins['sample']['install_username'] = 'Usuari';
-$lang_plugins['sample']['install_password'] = 'Contrasenya';
-$lang_plugins['sample']['output'] = 'Aquest és el text retornat pel connector d\'exemple';
+$lang_plugin_sample['config_name'] = 'Per exemple WordPress';
+$lang_plugin_sample['config_description'] = 'Per exemple WordPress. No fa res particularment útil-pensat per mostrar què poden fer els plugins i com programar-los. En activar-lo mostrarà un text d\'exemple en vermell.';
+$lang_plugin_sample['plugin_documentation'] = 'Documentació del Plugin';
+$lang_plugin_sample['plugin_support'] = 'Suport del Plugin';
+$lang_plugin_sample['install_explain'] = 'Introdueix el nom d\'usuari (\'foo\') i contrasenya (\'bar\') per instal·lar';
+$lang_plugin_sample['install_username'] = 'Usuari';
+$lang_plugin_sample['install_password'] = 'Contrasenya';
+$lang_plugin_sample['output'] = 'Aquest és el text retornat pel connector d\'exemple';
 
 ?>

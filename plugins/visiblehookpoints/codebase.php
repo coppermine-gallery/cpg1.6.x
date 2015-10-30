@@ -233,7 +233,7 @@ EOT;
 }
 
 function vhp_stats() {
-    global $VHP, $lang_plugins;
+    global $VHP, $lang_plugin_visiblehookpoints;
     $html ='';
     $marks=$times=$counts=array();
     foreach ($VHP as $value) {
@@ -247,10 +247,10 @@ function vhp_stats() {
           $counts[]=array('Variable_name'=>$marker,'Value'=>$count);
     }
     $html .= '<div class="vhp_wrap">';
-    $html .= vhp_stat_table($lang_plugins['visiblehookpoints']['usage_stats'],$counts);
+    $html .= vhp_stat_table($lang_plugin_visiblehookpoints['usage_stats'],$counts);
     $html .= '</div>';
     $html .= '<div class="vhp_wrap">';
-    $html .= vhp_stat_table($lang_plugins['visiblehookpoints']['time_chart'],$times);
+    $html .= vhp_stat_table($lang_plugin_visiblehookpoints['time_chart'],$times);
     $html .= '</div>';
     return $html;
 }
@@ -665,7 +665,7 @@ function visiblehookpoints_uninstall() {
 // Configure function
 // Displays the form
 function visiblehookpoints_configure() {
-    global $CONFIG, $lang_plugins;
+    global $CONFIG, $lang_plugin_visiblehookpoints;
     $superCage = Inspekt::makeSuperCage();
     $req_uri = $superCage->server->getMatched('REQUEST_URI', '/([^\/]+\.php)$/');
     $req_uri = $req_uri[1];
@@ -682,36 +682,36 @@ function visiblehookpoints_configure() {
       $visible = '';
       $admin_only = 'checked="checked"';
     }
-    $help_invisible = '&nbsp;'.cpg_display_help('f=empty.htm&amp;h=lang_plugins[visiblehookpoints][help_invisible_header]&amp;t=lang_plugins[visiblehookpoints][help_invisible_text]',470,245);
-    $help_visible = '&nbsp;'.cpg_display_help('f=empty.htm&amp;h=lang_plugins[visiblehookpoints][help_visible_header]&amp;t=lang_plugins[visiblehookpoints][help_visible_text]',470,245);
+    $help_invisible = '&nbsp;'.cpg_display_help('f=empty.htm&amp;h=lang_plugin_visiblehookpoints[help_invisible_header]&amp;t=lang_plugin_visiblehookpoints[help_invisible_text]',470,245);
+    $help_visible = '&nbsp;'.cpg_display_help('f=empty.htm&amp;h=lang_plugin_visiblehookpoints[help_visible_header]&amp;t=lang_plugin_visiblehookpoints[help_visible_text]',470,245);
     echo <<< EOT
     <form name="cpgform" id="cpgform" action="{$req_uri}" method="post">
 EOT;
-    starttable('100%', $lang_plugins['visiblehookpoints']['config_name'] . ' - ' . $lang_plugins['visiblehookpoints']['plugin_config'], 1);
+    starttable('100%', $lang_plugin_visiblehookpoints['config_name'] . ' - ' . $lang_plugin_visiblehookpoints['plugin_config'], 1);
     echo <<< EOT
               <tr>
                 <td class="tableh2">
-                  <h3>{$lang_plugins['visiblehookpoints']['visibility_choose']}</h3>
+                  <h3>{$lang_plugin_visiblehookpoints['visibility_choose']}</h3>
                 </td>
               </tr>
               <tr>
                 <td class="tableb">
                   <input type="radio" name="visiblehookpoints_display" id="invisible" value="0" class="radio" {$invisible} />
-                  <label for="invisible" class="clickable_option">{$lang_plugins['visiblehookpoints']['visibility_parameter']}</label>{$help_invisible}
+                  <label for="invisible" class="clickable_option">{$lang_plugin_visiblehookpoints['visibility_parameter']}</label>{$help_invisible}
               </tr>
               <tr>
                 <td class="tableb tableb_alternate">
                   <input type="radio" name="visiblehookpoints_display" id="visible" value="1" class="radio" {$visible} />
-                  <label for="visible" class="clickable_option">{$lang_plugins['visiblehookpoints']['visibility_permanent']}</label>{$help_visible}
+                  <label for="visible" class="clickable_option">{$lang_plugin_visiblehookpoints['visibility_permanent']}</label>{$help_visible}
               </tr>
               <!--<tr>
                 <td class="tableb">
                   <input type="radio" name="visiblehookpoints_display" id="admin_only" value="2" class="radio" {$admin_only} />
-                  <label for="admin_only" class="clickable_option">{$lang_plugins['visiblehookpoints']['visibility_admin']}</label>
+                  <label for="admin_only" class="clickable_option">{$lang_plugin_visiblehookpoints['visibility_admin']}</label>
               </tr>-->
               <tr>
                 <td class="tablef">
-                  <input type="submit" value="{$lang_plugins['visiblehookpoints']['save']}" class="button" />
+                  <input type="submit" value="{$lang_plugin_visiblehookpoints['save']}" class="button" />
                 </td>
               </tr>
 EOT;

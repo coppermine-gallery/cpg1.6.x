@@ -17,8 +17,8 @@
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
-$name = $lang_plugins['sample']['config_name'];
-$description = $lang_plugins['sample']['config_description'];
+$name = $lang_plugin_sample['config_name'];
+$description = $lang_plugin_sample['config_description'];
 $author = 'Coppermine Development Team';
 $version = '1.7';
 $plugin_cpg_version = array('min' => '1.6');
@@ -30,7 +30,7 @@ $plugin_cpg_version = array('min' => '1.6');
 $extra_info = <<<EOT
     <table border="0" cellspacing="0" cellpadding="0">
     <tr>
-        <td><a href="docs/en/plugins.htm" title="{$lang_plugins['sample']['plugin_documentation']}" class="admin_menu">{$lang_plugins['sample']['plugin_documentation']}</a></td>
+        <td><a href="docs/en/plugins.htm" title="{$lang_plugin_sample['plugin_documentation']}" class="admin_menu">{$lang_plugin_sample['plugin_documentation']}</a></td>
     </tr>
     </table>
 EOT;
@@ -42,7 +42,7 @@ EOT;
 $install_info=<<<EOT
     <table border="0" cellspacing="0" cellpadding="0">
     <tr>
-        <td><a href="http://coppermine-gallery.net/forum/index.php?board=97.0" title="{$lang_plugins['sample']['plugin_support']}" class="admin_menu">{$lang_plugins['sample']['plugin_support']}</a></td>
+        <td><a href="http://coppermine-gallery.net/forum/index.php?board=97.0" title="{$lang_plugin_sample['plugin_support']}" class="admin_menu">{$lang_plugin_sample['plugin_support']}</a></td>
     </tr>
     </table>
 EOT;

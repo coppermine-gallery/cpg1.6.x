@@ -53,8 +53,8 @@ if ($superCage->get->keyExists('close')) {
     $close = '0';
 }
 if ($superCage->get->keyExists('h') && preg_match('/^(lang_[a-z0-9_]+)(?:\[([a-z0-9_]+)\])?(?:\[([a-z0-9_]+)\])?$/', $superCage->get->getEscaped('h'), $matches)) {
-    if ($matches[1] == 'lang_plugins' && isset($matches[2])) {
-        cpg_load_plugin_language_file($matches[2]);
+    if (preg_match('/^lang_plugin_(.*)$/i', $matches[1], $match_plugin)) {
+        cpg_load_plugin_language_file($match_plugin[1]);
     }
     if (isset($matches[3])) {
         $header = ${$matches[1]}[$matches[2]][$matches[3]];
@@ -67,8 +67,8 @@ if ($superCage->get->keyExists('h') && preg_match('/^(lang_[a-z0-9_]+)(?:\[([a-z
     $header = '';
 }
 if ($superCage->get->keyExists('t') && preg_match('/^(lang_[a-z0-9_]+)(?:\[([a-z0-9_]+)\])?(?:\[([a-z0-9_]+)\])?$/', $superCage->get->getEscaped('t'), $matches)) {
-    if ($matches[1] == 'lang_plugins' && isset($matches[2])) {
-        cpg_load_plugin_language_file($matches[2]);
+    if (preg_match('/^lang_plugin_(.*)$/i', $matches[1], $match_plugin)) {
+        cpg_load_plugin_language_file($match_plugin[1]);
     }
     if ($matches[1] == 'lang_tmp_picture_manager') {
         $text = <<< EOT

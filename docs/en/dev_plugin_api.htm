@@ -510,14 +510,14 @@ To refer to that file, refer to <tt class="code">index.php?file=coffee_maker/foo
 
 <a name="plugin_api_tutorial_lang"></a>
 <h3>Multi-language Support<a href="#plugin_api_tutorial_lang" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-<p>You can make your plugins capable to be used in multiple languages. Therefore, you mustn't hard-code language strings into your plugin, but use variables instead. If Coppermine should be able to load your language files, you need to create the folder "<tt class="code">lang</tt>" inside your plugin's directory of your plugin. Now, create a separate PHP file for each language in that new directory, while <tt class="code">english.php</tt> is mandatory. The language files needs to contain an array, following the naming scheme <tt class="code">$lang_plugins['plugin_name']</tt>.</p>
+<p>You can make your plugins capable to be used in multiple languages. Therefore, you mustn't hard-code language strings into your plugin, but use variables instead. If Coppermine should be able to load your language files, you need to create the folder "<tt class="code">lang</tt>" inside your plugin's directory of your plugin. Now, create a separate PHP file for each language in that new directory, while <tt class="code">english.php</tt> is mandatory. The language files needs to contain an array, following the naming scheme <tt class="code">$lang_plugin_foldername</tt>.</p>
 <p class="cpg_example">Let's assume that the folder your plugin resides in is named <tt class="code">coffee_maker</tt> and the name is "Coffee Maker".</p>
 <div class="cpg_example">Here's how the content of english.php could look like:
 <pre class="cpg_code">&lt;?php
-$lang_plugins['coffee_maker']['plugin_name'] = 'Coffee Maker';
-$lang_plugins['coffee_maker']['plugin_description'] = 'This plugin will turn your gallery into a full-featured coffee machine.';
-$lang_plugins['coffee_maker']['coffee_bean'] = 'coffee bean';
-$lang_plugins['coffee_maker']['brew'] = 'brew';
+$lang_plugin_coffee_maker['plugin_name'] = 'Coffee Maker';
+$lang_plugin_coffee_maker['plugin_description'] = 'This plugin will turn your gallery into a full-featured coffee machine.';
+$lang_plugin_coffee_maker['coffee_bean'] = 'coffee bean';
+$lang_plugin_coffee_maker['brew'] = 'brew';
 ?&gt;</pre></div>
 <p>Within <tt class="code">codebase.php</tt> or any other plugin file, you can then use the language strings instead of hard-coding them in. Don't forget to make them global inside functions (see <a href="http://www.php.net/manual/en/language.variables.scope.php" rel="external" class="phpnet">PHP: variable scope</a>).</p>
 <p><a class="back" href="#top">Back to top</a></p><hr />
