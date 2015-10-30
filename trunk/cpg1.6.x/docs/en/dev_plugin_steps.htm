@@ -237,7 +237,7 @@ array('type' => 'array', 'regex' => '/^[A-Za-z ]+$/', 'delimiter' => '|'),</pre>
             <a name="steps_config_rows_checkbox"></a><h4>a. Checkbox<a href="#steps_config_rows_checkbox" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
             <pre class="code">	&lt;tr&gt;
         &lt;td&gt;
-            &lt;label for="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_donut</span>" class="clickable_option"&gt;{$lang_plugins['<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>']['<span style="color:red;font-weight:bolder;">donut</span>']}&lt;/label&gt;
+            &lt;label for="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_donut</span>" class="clickable_option"&gt;{$lang_plugin_<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>['<span style="color:red;font-weight:bolder;">donut</span>']}&lt;/label&gt;
         &lt;/td&gt;
         &lt;td&gt;
             &lt;input type="checkbox" name="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_donut</span>" id="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_donut</span>" class="checkbox" value="1" {$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_donut</span>']} /&gt;
@@ -248,15 +248,15 @@ array('type' => 'array', 'regex' => '/^[A-Za-z ]+$/', 'delimiter' => '|'),</pre>
             <a name="steps_config_rows_radio"></a><h4>b. Radio button<a href="#steps_config_rows_radio" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
             <pre class="code">	&lt;tr&gt;
         &lt;td style="vertical-align:top;"&gt;
-            {$lang_plugins['<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>']['<span style="color:red;font-weight:bolder;">strength</span>']}
+            {$lang_plugin_<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>['<span style="color:red;font-weight:bolder;">strength</span>']}
         &lt;/td&gt;
         &lt;td&gt;
             &lt;input type="radio" name="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span>" id="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span><span style="color:navy;font-weight:bolder;">_0</span>" class="radio" value="0" {$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span>'][<span style="color:navy;font-weight:bolder;">0</span>]} /&gt;
-            &lt;label for="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span><span style="color:navy;font-weight:bolder;">_0</span>" class="clickable_option"&gt;{$lang_plugins['<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>']['<span style="color:red;font-weight:bolder;">weak</span>']}&lt;/label&gt;&lt;br /&gt;
+            &lt;label for="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span><span style="color:navy;font-weight:bolder;">_0</span>" class="clickable_option"&gt;{$lang_plugin_<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>['<span style="color:red;font-weight:bolder;">weak</span>']}&lt;/label&gt;&lt;br /&gt;
             &lt;input type="radio" name="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span>" id="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span><span style="color:navy;font-weight:bolder;">_1</span>" class="radio" value="1" {$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span>'][<span style="color:navy;font-weight:bolder;">1</span>]} /&gt;
-            &lt;label for="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span><span style="color:navy;font-weight:bolder;">_1</span>" class="clickable_option"&gt;{$lang_plugins['<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>']['<span style="color:red;font-weight:bolder;">normal</span>']}&lt;/label&gt;&lt;br /&gt;
+            &lt;label for="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span><span style="color:navy;font-weight:bolder;">_1</span>" class="clickable_option"&gt;{$lang_plugin_<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>['<span style="color:red;font-weight:bolder;">normal</span>']}&lt;/label&gt;&lt;br /&gt;
             &lt;input type="radio" name="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span>" id="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span><span style="color:navy;font-weight:bolder;">_2</span>" class="radio" value="2" {$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span>'][<span style="color:navy;font-weight:bolder;">2</span>]} /&gt;
-            &lt;label for="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span><span style="color:navy;font-weight:bolder;">_2</span>" class="clickable_option"&gt;{$lang_plugins['<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>']['<span style="color:red;font-weight:bolder;">strong</span>']}&lt;/label&gt;
+            &lt;label for="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_strength</span><span style="color:navy;font-weight:bolder;">_2</span>" class="clickable_option"&gt;{$lang_plugin_<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>['<span style="color:red;font-weight:bolder;">strong</span>']}&lt;/label&gt;
         &lt;/td&gt;
     &lt;/tr&gt;</pre>
     The example above of course will only work if you have three radio buttons; if your number of radio buttons differs, you have to add/remove lines, keeping an eye on the index numbers at the end of the strings (highlighted in <span style="color:navy;font-weight:bolder;">dark blue</span> in the example above).
@@ -264,13 +264,13 @@ array('type' => 'array', 'regex' => '/^[A-Za-z ]+$/', 'delimiter' => '|'),</pre>
             <a name="steps_config_rows_dropdown"></a><h4>c. Dropdown (select/option list)<a href="#steps_config_rows_dropdown" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
             <pre class="code">	&lt;tr&gt;
         &lt;td valign="top"&gt;
-            {$lang_plugins['<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>']['<span style="color:red;font-weight:bolder;">taste</span>']}
+            {$lang_plugin_<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>['<span style="color:red;font-weight:bolder;">taste</span>']}
         &lt;/td&gt;
         &lt;td&gt;
             &lt;select name="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_taste</span>" id="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_taste</span>" class="listbox"&gt;
-                &lt;option value="0" {$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_taste</span>'][<span style="color:navy;font-weight:bolder;">0</span>]}&gt;{$lang_plugins['<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>']['<span style="color:red;font-weight:bolder;">espresso</span>']}&lt;/option&gt;
-                &lt;option value="1" {$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_taste</span>'][<span style="color:navy;font-weight:bolder;">1</span>]}&gt;{$lang_plugins['<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>']['<span style="color:red;font-weight:bolder;">italian</span>']}&lt;/option&gt;
-                &lt;option value="2" {$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_taste</span>'][<span style="color:navy;font-weight:bolder;">2</span>]}&gt;{$lang_plugins['<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>']['<span style="color:red;font-weight:bolder;">latte</span>']}&lt;/option&gt;
+                &lt;option value="0" {$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_taste</span>'][<span style="color:navy;font-weight:bolder;">0</span>]}&gt;{$lang_plugin_<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>['<span style="color:red;font-weight:bolder;">espresso</span>']}&lt;/option&gt;
+                &lt;option value="1" {$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_taste</span>'][<span style="color:navy;font-weight:bolder;">1</span>]}&gt;{$lang_plugin_<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>['<span style="color:red;font-weight:bolder;">italian</span>']}&lt;/option&gt;
+                &lt;option value="2" {$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_taste</span>'][<span style="color:navy;font-weight:bolder;">2</span>]}&gt;{$lang_plugin_<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>['<span style="color:red;font-weight:bolder;">latte</span>']}&lt;/option&gt;
             &lt;/select&gt;
         &lt;/td&gt;
     &lt;/tr&gt;</pre>
@@ -278,18 +278,18 @@ array('type' => 'array', 'regex' => '/^[A-Za-z ]+$/', 'delimiter' => '|'),</pre>
         <a name="steps_config_rows_textinput"></a><h4>d. Text input field (one line), both for numerical input (integers) as well as any other textual input<a href="#steps_config_rows_textinput" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
             <pre class="code">	&lt;tr&gt;
         &lt;td valign="top"&gt;
-            {$lang_plugins['<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>']['<span style="color:red;font-weight:bolder;">sugar_lumps</span>']}
+            {$lang_plugin_<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>['<span style="color:red;font-weight:bolder;">sugar_lumps</span>']}
         &lt;/td&gt;
         &lt;td&gt;
             &lt;input type="text" name="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_sugar</span>" id="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_sugar</span>" class="textinput" size="2" maxlength="2" value="{$CONFIG['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_sugar</span>']}" {$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_sugar</span>']} /&gt;
-            {$lang_plugins['<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>']['<span style="color:red;font-weight:bolder;">pieces</span>']}
+            {$lang_plugin_<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>['<span style="color:red;font-weight:bolder;">pieces</span>']}
         &lt;/td&gt;
     &lt;/tr&gt;</pre>
 
             <a name="steps_config_rows_textarea"></a><h4>e. Text input field (multiple lines, <abbr title="also known as">aka</abbr> textarea)<a href="#steps_config_rows_textarea" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
             <pre class="code">	&lt;tr&gt;
         &lt;td valign="top"&gt;
-            {$lang_plugins['<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>']['<span style="color:red;font-weight:bolder;">remarks</span>']}
+            {$lang_plugin_<span style="color:orange;font-weight:bolder;" title="Replace this with the plugin name you have chosen">coffee_maker</span>['<span style="color:red;font-weight:bolder;">remarks</span>']}
         &lt;/td&gt;
         &lt;td&gt;
             &lt;textarea name="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_remarks</span>" id="<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_remarks</span>" class="textinput" rows="7" cols="40" style="width:100%" {$option_output['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_remarks</span>']} /&gt;{$CONFIG['<span style="color:orange;font-weight:bolder;" title="Replace this with the record name you have come up with previously">plugin_coffee_maker_remarks</span>']}&lt;/textarea&gt;
@@ -300,18 +300,18 @@ array('type' => 'array', 'regex' => '/^[A-Za-z ]+$/', 'delimiter' => '|'),</pre>
         <a name="steps_config_language"></a><h3>8. Create the needed translation strings<a href="#steps_config_language" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
         Basically, we're done already, except for the language strings that we had to come up with in the form elements: our config option needed a name and maybe some explanatory text, and the option labels (if applicable) required additional strings. Those strings need to be defined in the language file: our plugin template already contains an English language file that we need to populate no matter what, that's why you need to edit that file (<tt class="filename">c:\mysite\plugins\coffee_maker\lang\english.php</tt>) with your plain text editor as well. The structure of the language files is pretty straightforward: you just define array records as suggested in the <a href="translation.htm#translation_step_by_step">translation guide</a> for "regular" Coppermine language files that applies for plugin language files just as well. Just keep in mind that apostrophes (single quotes) in your language strings need to be escaped with a leading backslash.<br />
         For the examples given above, the following translation strings would have to be added to the language file:
-        <pre class="code">$lang_plugins['coffee_maker']['donut'] = 'Donut';
-$lang_plugins['coffee_maker']['strength'] = 'Strength';
-$lang_plugins['coffee_maker']['weak'] = 'weak';
-$lang_plugins['coffee_maker']['normal'] = 'normal';
-$lang_plugins['coffee_maker']['strong'] = 'strong';
-$lang_plugins['coffee_maker']['taste'] = 'Taste';
-$lang_plugins['coffee_maker']['espresso'] = 'Espresso';
-$lang_plugins['coffee_maker']['italian'] = 'Italian';
-$lang_plugins['coffee_maker']['latte'] = 'Latte';
-$lang_plugins['coffee_maker']['sugar_lumps'] = 'Sugar lumps';
-$lang_plugins['coffee_maker']['pieces'] = 'pieces';
-$lang_plugins['coffee_maker']['remarks'] = 'Remarks';</pre>
+        <pre class="code">$lang_plugin_coffee_maker['donut'] = 'Donut';
+$lang_plugin_coffee_maker['strength'] = 'Strength';
+$lang_plugin_coffee_maker['weak'] = 'weak';
+$lang_plugin_coffee_maker['normal'] = 'normal';
+$lang_plugin_coffee_maker['strong'] = 'strong';
+$lang_plugin_coffee_maker['taste'] = 'Taste';
+$lang_plugin_coffee_maker['espresso'] = 'Espresso';
+$lang_plugin_coffee_maker['italian'] = 'Italian';
+$lang_plugin_coffee_maker['latte'] = 'Latte';
+$lang_plugin_coffee_maker['sugar_lumps'] = 'Sugar lumps';
+$lang_plugin_coffee_maker['pieces'] = 'pieces';
+$lang_plugin_coffee_maker['remarks'] = 'Remarks';</pre>
 
     </div>
 This is all that needs to be done to add config options to your custom plugin. Remember though that adding the option records alone will of course not do anything yet in terms of functionality of your plugin - you need to come up with code as well that is making use of your plugin's config options. When using your config options from within functions, don't forget to set the scope of the variable <tt class="code">$CONFIG</tt> using the keyword <a href="http://www.php.net/manual/en/language.variables.scope.php" rel="external" class="phpnet">global</a>.<br />

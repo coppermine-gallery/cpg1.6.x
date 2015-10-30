@@ -17,13 +17,13 @@
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
-$lang_plugins['sample']['config_name'] = 'Sample Plugin (サンプルプラグイン)';
-$lang_plugins['sample']['config_description'] = 'これは、サンプルプラグインです。何も有用なことはしません - このプラグインは、プラグインのコーディングの実例を示すためだけにあります。有効にした場合、赤色のサンプルテキストを表示します。';
-$lang_plugins['sample']['plugin_documentation'] = 'プラグインドキュメンテーション';
-$lang_plugins['sample']['plugin_support'] = 'プラグインサポート';
-$lang_plugins['sample']['install_explain'] = 'インストールするには、ユーザ名 (\'foo\') およびパスワード (\'bar\') を入力してください。';
-$lang_plugins['sample']['install_username'] = 'ユーザ名';
-$lang_plugins['sample']['install_password'] = 'パスワード';
-$lang_plugins['sample']['output'] = 'これは、サンプルプラグインから返された、サンプルデータです。';
+$lang_plugin_sample['config_name'] = 'Sample Plugin (サンプルプラグイン)';
+$lang_plugin_sample['config_description'] = 'これは、サンプルプラグインです。何も有用なことはしません - このプラグインは、プラグインのコーディングの実例を示すためだけにあります。有効にした場合、赤色のサンプルテキストを表示します。';
+$lang_plugin_sample['plugin_documentation'] = 'プラグインドキュメンテーション';
+$lang_plugin_sample['plugin_support'] = 'プラグインサポート';
+$lang_plugin_sample['install_explain'] = 'インストールするには、ユーザ名 (\'foo\') およびパスワード (\'bar\') を入力してください。';
+$lang_plugin_sample['install_username'] = 'ユーザ名';
+$lang_plugin_sample['install_password'] = 'パスワード';
+$lang_plugin_sample['output'] = 'これは、サンプルプラグインから返された、サンプルデータです。';
 
 ?>

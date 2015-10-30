@@ -17,13 +17,13 @@
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
-$lang_plugins['sample']['config_name'] = 'Malli -lisäosa';
-$lang_plugins['sample']['config_description'] = 'Tämä on malli lisäosa. Se ei tee mitään erityisen hyödyllistä - se on tarkoitettu vain lisäosien ominaisuuksien ja ohjelmoinnin esittelyyn. Kun lisäosa on käytössä,  se näyttää punaista tekstiä galleriasa.';
-$lang_plugins['sample']['plugin_documentation'] = 'Lisäosan dokumentaatio';
-$lang_plugins['sample']['plugin_support'] = 'Lisäosan tuki';
-$lang_plugins['sample']['install_explain'] = 'Syötä käyttäjätunnus (\'foo\') ja salasana (\'bar\') asentaaksesi tämän lisäosan';
-$lang_plugins['sample']['install_username'] = 'Käyttäjätunnus';
-$lang_plugins['sample']['install_password'] = 'Salasana';
-$lang_plugins['sample']['output'] = 'Tämä on esimerkkitekstiä, minkä tuotti malli lisäosa.';
+$lang_plugin_sample['config_name'] = 'Malli -lisäosa';
+$lang_plugin_sample['config_description'] = 'Tämä on malli lisäosa. Se ei tee mitään erityisen hyödyllistä - se on tarkoitettu vain lisäosien ominaisuuksien ja ohjelmoinnin esittelyyn. Kun lisäosa on käytössä,  se näyttää punaista tekstiä galleriasa.';
+$lang_plugin_sample['plugin_documentation'] = 'Lisäosan dokumentaatio';
+$lang_plugin_sample['plugin_support'] = 'Lisäosan tuki';
+$lang_plugin_sample['install_explain'] = 'Syötä käyttäjätunnus (\'foo\') ja salasana (\'bar\') asentaaksesi tämän lisäosan';
+$lang_plugin_sample['install_username'] = 'Käyttäjätunnus';
+$lang_plugin_sample['install_password'] = 'Salasana';
+$lang_plugin_sample['output'] = 'Tämä on esimerkkitekstiä, minkä tuotti malli lisäosa.';
 
 ?>

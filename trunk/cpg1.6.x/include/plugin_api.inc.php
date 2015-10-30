@@ -411,6 +411,8 @@ class CPGPluginAPI {
         }
 
         // Load language files
+        $lg = 'lang_plugin_'.$path;
+        global $$lg;
         cpg_load_plugin_language_file($path);
 
         // Get the lowest priority level (highest number) from the database

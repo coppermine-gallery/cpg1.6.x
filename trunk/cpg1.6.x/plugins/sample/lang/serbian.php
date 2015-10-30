@@ -17,13 +17,13 @@
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
-$lang_plugins['sample']['config_name'] = 'Probni dodatak';
-$lang_plugins['sample']['config_description'] = 'Ovo je probni dodatak. Ne radi ništa posebno korisno, napravljen je samo da pokaže šta se sve može dodacima i kako ih programirati. Kad je uključen, prikazaće neki probni tekst kao crven.';
-$lang_plugins['sample']['plugin_documentation'] = 'Dokumentacija dodatka';
-$lang_plugins['sample']['plugin_support'] = 'Podrška dodatka';
-$lang_plugins['sample']['install_explain'] = 'Unesite korisničko ime (\'foo\') i lozinku (\'bar\') kako biste instalirali';
-$lang_plugins['sample']['install_username'] = 'Korisničko ime';
-$lang_plugins['sample']['install_password'] = 'Lozinka';
-$lang_plugins['sample']['output'] = 'Ovo je uzorak teksta koji je proizveo ovaj dodatak';
+$lang_plugin_sample['config_name'] = 'Probni dodatak';
+$lang_plugin_sample['config_description'] = 'Ovo je probni dodatak. Ne radi ništa posebno korisno, napravljen je samo da pokaže šta se sve može dodacima i kako ih programirati. Kad je uključen, prikazaće neki probni tekst kao crven.';
+$lang_plugin_sample['plugin_documentation'] = 'Dokumentacija dodatka';
+$lang_plugin_sample['plugin_support'] = 'Podrška dodatka';
+$lang_plugin_sample['install_explain'] = 'Unesite korisničko ime (\'foo\') i lozinku (\'bar\') kako biste instalirali';
+$lang_plugin_sample['install_username'] = 'Korisničko ime';
+$lang_plugin_sample['install_password'] = 'Lozinka';
+$lang_plugin_sample['output'] = 'Ovo je uzorak teksta koji je proizveo ovaj dodatak';
 
 ?>
