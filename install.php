@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2015 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -42,7 +42,7 @@ define('STEP_FINALISE', 10);
 $LINEBREAK = "\r\n"; // For compatibility both on Windows as well as *nix
 
 // Set required versions
-$required_php_version = '4.3.0';
+$required_php_version = '5.0.0';
 $required_mysql_version = '3.23.23';
 
 // Set the parameters that normally get populated by the option form
@@ -1750,7 +1750,7 @@ function populateMysqlDb()
 */
 function createAdmin()
 {
-    global $config, $language;
+    global $CONFIG, $config, $language;
 
     if (!isset($config['admin_username']) || $config['admin_username'] == '') { $GLOBALS['error'] = $language['no_admin_username'];     return false;}
     if (!isset($config['admin_password']) || $config['admin_password'] == '') { $GLOBALS['error'] = $language['no_admin_password'];     return false;}

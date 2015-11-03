@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2015 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -103,7 +103,7 @@ define ('ISPK_EMAIL_VALID', '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$
 /**
  * @package    Inspekt
  */
-class Inspekt
+abstract class Inspekt
 {
 
     /**
@@ -312,9 +312,9 @@ class Inspekt
 
         foreach($input as $key=>$val) {
             if (is_array($val)) {
-                $input[$key]=Inspekt::_walkArray($val, $method);
+                $input[$key]=self::_walkArray($val, $method);
             } else {
-                $val = Inspekt::$method($val);
+                $val = self::$method($val);
                 $input[$key]=$val;
             }
         }
@@ -336,10 +336,10 @@ class Inspekt
      * @tag filter
      * @static
      */
-    function getAlpha($value)
+    public static function getAlpha($value)
     {
         if (is_array($value)) {
-            return Inspekt::_walkArray($value, 'getAlpha');
+            return self::_walkArray($value, 'getAlpha');
         } else {
             return preg_replace('/[^[:alpha:]]/', '', $value);
         }
@@ -354,10 +354,10 @@ class Inspekt
      * @tag filter
      * @static
      */
-    function getAlnum($value)
+    public static function getAlnum($value)
     {
         if (is_array($value)) {
-            return Inspekt::_walkArray($value, 'getAlnum');
+            return self::_walkArray($value, 'getAlnum');
         } else {
             return preg_replace('/[^[:alnum:]]/', '', $value);
         }
@@ -372,10 +372,10 @@ class Inspekt
      * @tag filter
      * @static
      */
-    function getDigits($value)
+    public static function getDigits($value)
     {
         if (is_array($value)) {
-            return Inspekt::_walkArray($value, 'getDigits');
+            return self::_walkArray($value, 'getDigits');
         } else {
             return preg_replace('/[^\d]/', '', $value);
         }
@@ -390,10 +390,10 @@ class Inspekt
      * @tag filter
      * @static
      */
-    function getDir($value)
+    public static function getDir($value)
     {
         if (is_array($value)) {
-            return Inspekt::_walkArray($value, 'getDir');
+            return self::_walkArray($value, 'getDir');
         } else {
             return dirname($value);
         }
@@ -407,10 +407,10 @@ class Inspekt
      *
      * @tag filter
      */
-    function getInt($value)
+    public static function getInt($value)
     {
         if (is_array($value)) {
-            return Inspekt::_walkArray($value, 'getInt');
+            return self::_walkArray($value, 'getInt');
         } else {
             return (int) $value;
         }
@@ -424,10 +424,10 @@ class Inspekt
      *
      * @tag filter
      */
-    function getPath($value)
+    public static function getPath($value)
     {
         if (is_array($value)) {
-            return Inspekt::_walkArray($value, 'getPath');
+            return self::_walkArray($value, 'getPath');
         } else {
             return realpath($value);
         }
@@ -444,7 +444,7 @@ class Inspekt
      * @tag validator
      * @static
      */
-    function getMatched($value, $pattern = NULL)
+    public static function getMatched($value, $pattern = NULL)
     {
         preg_match($pattern, $value, $matched);
 
@@ -464,7 +464,7 @@ class Inspekt
      *
      * @tag validator
      */
-    function isAlnum($value)
+    public static function isAlnum($value)
     {
         return ctype_alnum($value);
     }
@@ -478,7 +478,7 @@ class Inspekt
      *
      * @tag validator
      */
-    function isAlpha($value)
+    public static function isAlpha($value)
     {
         return ctype_alpha($value);
     }
@@ -497,7 +497,7 @@ class Inspekt
      *
      * @tag validator
      */
-    function isBetween($value, $min, $max, $inc = TRUE)
+    public static function isBetween($value, $min, $max, $inc = TRUE)
     {
         if ($value > $min &&
         $value < $max) {
@@ -524,7 +524,7 @@ class Inspekt
      *
      * @tag validator
      */
-    function isCcnum($value, $type = NULL)
+    public static function isCcnum($value, $type = NULL)
     {
         /**
          * @todo Type-specific checks
@@ -560,7 +560,7 @@ class Inspekt
      *
      * @tag validator
      */
-    function isDate($value)
+    public static function isDate($value)
     {
         list($year, $month, $day) = sscanf($value, '%d-%d-%d');
 
@@ -576,7 +576,7 @@ class Inspekt
      *
      * @tag validator
      */
-    function isDigits($value)
+    public static function isDigits($value)
     {
         return ctype_digit((string) $value);
     }
@@ -591,7 +591,7 @@ class Inspekt
      *
      * @tag validator
      */
-    function isEmail($value)
+    public static function isEmail($value)
     {
         return (bool) preg_match(ISPK_EMAIL_VALID, $value);
     }
@@ -604,7 +604,7 @@ class Inspekt
      *
      * @tag validator
      */
-    function isFloat($value)
+    public static function isFloat($value)
     {
         $locale = localeconv();
 
@@ -624,7 +624,7 @@ class Inspekt
      * @tag validator
      * @static
      */
-    function isGreaterThan($value, $min)
+    public static function isGreaterThan($value, $min)
     {
         return ($value > $min);
     }
@@ -639,7 +639,7 @@ class Inspekt
      * @tag validator
      * @static
      */
-    function isHex($value)
+    public static function isHex($value)
     {
         return ctype_xdigit($value);
     }
@@ -658,7 +658,7 @@ class Inspekt
      * @tag validator
      * @static
      */
-    function isHostname($value, $allow = ISPK_HOST_ALLOW_ALL)
+    public static function isHostname($value, $allow = ISPK_HOST_ALLOW_ALL)
     {
         if (!is_numeric($allow) || !is_int($allow)) {
             Inspekt_Error::raiseError('Illegal value for $allow; expected an integer', E_USER_WARNING);
@@ -722,7 +722,7 @@ class Inspekt
      * @tag validator
      * @static
      */
-    function isInt($value)
+    public static function isInt($value)
     {
         $locale = localeconv();
 
@@ -741,7 +741,7 @@ class Inspekt
      * @tag validator
      * @static
      */
-    function isIp($value)
+    public static function isIp($value)
     {
         return (bool) ip2long($value);
     }
@@ -756,7 +756,7 @@ class Inspekt
      * @tag validator
      * @static
      */
-    function isLessThan($value, $max)
+    public static function isLessThan($value, $max)
     {
         return ($value < $max);
     }
@@ -770,7 +770,7 @@ class Inspekt
      * @tag validator
      * @static
      */
-    function isOneOf($value, $allowed = NULL)
+    public static function isOneOf($value, $allowed = NULL)
     {
         /**
          * @todo: Consider allowing a string for $allowed, where each
@@ -792,7 +792,7 @@ class Inspekt
      * @tag validator
      * @static
      */
-    function isPhone($value, $country = 'US')
+    public static function isPhone($value, $country = 'US')
     {
         if (!ctype_digit($value)) {
             return FALSE;
@@ -871,7 +871,7 @@ class Inspekt
      * @tag validator
      * @static
      */
-    function isRegex($value, $pattern = NULL)
+    public static function isRegex($value, $pattern = NULL)
     {
         return (bool) preg_match($pattern, $value);
     }
@@ -889,7 +889,7 @@ class Inspekt
      * @tag validator
      * @static
      */
-    function isUri($value, $mode=ISPK_URI_ALLOW_COMMON)
+    public static function isUri($value, $mode=ISPK_URI_ALLOW_COMMON)
     {
         /**
          * @todo
@@ -953,7 +953,7 @@ class Inspekt
      * @tag validator
      * @static
      */
-    function isZip($value)
+    public static function isZip($value)
     {
         return (bool) preg_match('/(^\d{5}$)|(^\d{5}-\d{4}$)/', $value);
     }
@@ -967,10 +967,10 @@ class Inspekt
      * @tag filter
      * @static
      */
-    function noTags($value)
+    public static function noTags($value)
     {
         if (is_array($value)) {
-            return Inspekt::_walkArray($value, 'noTags');
+            return self::_walkArray($value, 'noTags');
         } else {
             return strip_tags($value);
         }
@@ -985,10 +985,10 @@ class Inspekt
      * @tag filter
      * @static
      */
-    function noPath($value)
+    public static function noPath($value)
     {
         if (is_array($value)) {
-            return Inspekt::_walkArray($value, 'noPath');
+            return self::_walkArray($value, 'noPath');
         } else {
             return basename($value);
         }
@@ -1002,10 +1002,10 @@ class Inspekt
      *
      * @tag filter
      */
-    function getEscaped($value)
+    public static function getEscaped($value)
     {
         if (is_array($value)) {
-            return Inspekt::_walkArray($value, 'getEscaped');
+            return self::_walkArray($value, 'getEscaped');
         } elseif (!empty($value)) {
             global $CONFIG;
             if (isset($CONFIG['LINK_ID']) && $CONFIG['LINK_ID']) {
