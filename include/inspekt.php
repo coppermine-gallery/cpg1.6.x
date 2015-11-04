@@ -298,7 +298,7 @@ abstract class Inspekt
      * @return array
      *
      */
-    function _walkArray($input, $method) {
+    protected static function _walkArray($input, $method) {
 
         if (!is_array($input)) {
             Inspekt_Error::raiseError('$input must be an array', E_USER_ERROR);
@@ -320,10 +320,6 @@ abstract class Inspekt
         }
         return $input;
     }
-
-
-
-
 
 
 

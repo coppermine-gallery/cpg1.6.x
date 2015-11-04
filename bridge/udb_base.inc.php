@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2015 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -360,7 +360,7 @@ class core_udb {
         $USER_DATA["group_id"] = $pri_group;
         $USER_DATA['groups'] = $groups;
         if (get_magic_quotes_gpc() == 0) {
-            $USER_DATA['group_name'] = mysql_escape_string($USER_DATA['group_name']);
+            $USER_DATA['group_name'] = mysql_real_escape_string($USER_DATA['group_name']);
         }
         return($USER_DATA);
     }

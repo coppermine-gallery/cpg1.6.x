@@ -1,3 +1,10 @@
 albums/userpics/1*/
 include/config.inc.php
-#need to add more, like logs/..
+php_mail.log
+
+logs/*
+!logs/index.html
+
+albums/edit/*
+!albums/edit/index.php
+!albums/edit/no_FTP-uploads_into_this_folder!.txt

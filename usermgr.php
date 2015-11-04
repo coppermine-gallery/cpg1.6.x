@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2015 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -180,6 +180,7 @@ function list_users($search = '')
     $page = $superCage->get->testInt('page') ? $superCage->get->getInt('page') : 1;    $lower_limit = ($page-1) * $user_per_page;
     $lower_limit = ($page-1) * $user_per_page;
 
+	$username = '';
     if ($search) {
         $username = '&amp;username='.$search;
 
@@ -738,7 +739,7 @@ EOT;
 
 function edit_user($user_id)
 {
-    global $CONFIG, $CPG_PHP_SELF; //, $PHP_SELF;
+    global $CONFIG, $CPG_PHP_SELF, $LINEBREAK; //, $PHP_SELF;
     global $lang_usermgr_php, $lang_common, $icon_array, $op;
 
     $form_data = array(
@@ -788,6 +789,9 @@ function edit_user($user_id)
     } else {
         // If this is a new user then add a checkbox for 'send login data to user' option
         $form_data[] = array('checkbox', 'send_login_data', $lang_usermgr_php['send_login_data']);
+        $user_data = array('user_name'=>'','user_active'=>'','user_group'=>'','user_group_list'=>'','user_email'=>'',
+			'user_profile1'=>'','user_profile2'=>'','user_profile3'=>'','user_profile4'=>'','user_profile6'=>''
+		);
     }
 
     $status_icon = cpg_fetch_icon('online', 2);
@@ -822,14 +826,14 @@ EOT;
         $loopCounter++;
         switch ($element[0]) {
             case 'input' :
-                $user_data[$element[1]] = $user_data[$element[1]];
+                $value = $user_data[$element[1]];
                 if ($element[2]) echo <<<EOT
             <tr>
                 <td width="40%" class="{$row_style_class}" valign="top">
                             {$element[2]}
             </td>
             <td width="60%" class="{$row_style_class}" valign="top">
-                    <input type="text" style="width: 100%" name="{$element[1]}" maxlength="{$element[3]}" value="{$user_data[$element[1]]}" class="textinput" />
+                    <input type="text" style="width: 100%" name="{$element[1]}" maxlength="{$element[3]}" value="{$value}" class="textinput" />
                     </td>
             </tr>
 

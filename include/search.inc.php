@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2015 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -31,7 +31,7 @@ $allowed = array('title', 'caption', 'keywords', 'filename', 'pic_raw_ip', 'pic_
 
 global $cpg_udb;
 // Use actual column name for search by owner name
-if ($cpg_udb->can_join_tables && $USER['search']['params']['owner_name']) {
+if ($cpg_udb->can_join_tables && isset($USER['search']['params']['owner_name'])) {
     $USER['search']['params'][$cpg_udb->field['username']] = true;
     $allowed[] = $cpg_udb->field['username'];
 }

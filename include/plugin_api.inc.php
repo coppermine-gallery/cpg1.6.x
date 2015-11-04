@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2015 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -33,7 +33,7 @@ $CONFIG['TABLE_PLUGINS']                = $CONFIG['TABLE_PREFIX'].'plugins';
  * Local plugin class
  * Processes all the plugins (filters,actions,install,uninstall)
  */
-class CPGPluginAPI {
+abstract class CPGPluginAPI {
 
     /**
      * CPGPluginAPI::load()
@@ -44,7 +44,7 @@ class CPGPluginAPI {
      * @return N/A
      **/
 
-    function load() {
+    public static function load() {
         global $CONFIG,$thisplugin,$USER_DATA,$CPG_PLUGINS,$lang_plugin_api;
 
         // Get the installed plugins from the database and sort them by execution priority
@@ -114,7 +114,7 @@ class CPGPluginAPI {
      * @return boolean TRUE/FALSE
      **/
 
-    function installed( $plugin_folder ) {
+    public static function installed( $plugin_folder ) {
         global $CONFIG;
 
         // Stores if a given plugin is installed or not
@@ -156,7 +156,7 @@ class CPGPluginAPI {
      * @return $value
      **/
 
-    function& filter( $key, $value, $execute_scope = CPG_EXEC_ALL ) {
+    public static function& filter( $key, $value, $execute_scope = CPG_EXEC_ALL ) {
         global $CPG_PLUGINS,$CONFIG,$USER_DATA,$thisplugin;
 
         global $hook_name;
@@ -244,7 +244,7 @@ class CPGPluginAPI {
      * @return $value
      **/
 
-    function& action( $key, $value, $execute_scope = CPG_EXEC_ALL ) {
+    public static function& action( $key, $value, $execute_scope = CPG_EXEC_ALL ) {
         global $CPG_PLUGINS,$CONFIG,$USER_DATA,$thisplugin;
 
         global $hook_name;
@@ -343,7 +343,7 @@ class CPGPluginAPI {
      * @return CPGPlugin $object
      **/
 
-    function wakeup($properties) {
+    public static function wakeup($properties) {
         global $CONFIG,$USER_DATA,$CPG_PLUGINS,$thisplugin,$lang_plugin_api;
 
         // Get a new instance of the plugin object
@@ -368,7 +368,7 @@ class CPGPluginAPI {
      * @return N/A
      **/
 
-    function sleep() {
+    public static function sleep() {
         global $CPG_PLUGINS,$thisplugin,$lang_plugin_api;
 
         // Loop through all the plugins
@@ -397,7 +397,7 @@ class CPGPluginAPI {
      * @return N/A
      **/
 
-    function install($path) {
+    public static function install($path) {
         global $CONFIG,$thisplugin,$CPG_PLUGINS,$lang_plugin_api;
 
         // If this plugin is already installed return true
@@ -481,7 +481,7 @@ class CPGPluginAPI {
      * @return N/A
      **/
 
-    function uninstall($plugin_id) {
+    public static function uninstall($plugin_id) {
         global $CONFIG,$USER_DATA,$CPG_PLUGINS,$thisplugin,$lang_plugin_api,$name;
 
         if (!isset($CPG_PLUGINS[$plugin_id])) {

@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2015 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -56,6 +56,7 @@ function alb_get_subcat_data($parent, $ident = '')
     global $CONFIG, $CAT_LIST, $USER_DATA;
 
     // select cats where the users can change the albums
+    $groups = '';
     foreach ($USER_DATA['groups'] as $group) {
         $groups .= "group_id = '$group' OR ";
     }

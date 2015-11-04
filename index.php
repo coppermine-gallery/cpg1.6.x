@@ -294,7 +294,7 @@ function get_subcat_data(&$cat_data)
 
     // collect info about all normal categories
     // restrict to 'subcat_level' categories deeper than current depth
-    $sql = "SELECT cid, lft, rgt, name, description, thumb, depth AS level, '0' AS alb_count
+    $sql = "SELECT cid, lft, rgt, name, description, thumb, depth AS level, '0' AS alb_count, '0' AS subalb_count
         FROM {$CONFIG['TABLE_CATEGORIES']}
         WHERE depth BETWEEN $CURRENT_CAT_DEPTH + 1 AND $CURRENT_CAT_DEPTH + {$CONFIG['subcat_level']}
         $lft_rgt

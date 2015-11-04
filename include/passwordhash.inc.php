@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2015 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -44,10 +44,10 @@
  */
 
 // These constants may be changed without breaking existing hashes.
-define("PBKDF2_HASH_ALGORITHM", $CONFIG['pbkdf2_hash_algorithm'] ? $CONFIG['pbkdf2_hash_algorithm'] : "sha256");
-define("PBKDF2_ITERATIONS", $CONFIG['pbkdf2_iterations'] ? $CONFIG['pbkdf2_iterations'] : 1000);
-define("PBKDF2_SALT_BYTE_SIZE", $CONFIG['pbkdf2_salt_byte_size'] ? $CONFIG['pbkdf2_salt_byte_size'] : 24);
-define("PBKDF2_HASH_BYTE_SIZE", $CONFIG['pbkdf2_hash_byte_size'] ? $CONFIG['pbkdf2_hash_byte_size'] : 24);
+define("PBKDF2_HASH_ALGORITHM", isset($CONFIG['pbkdf2_hash_algorithm']) ? $CONFIG['pbkdf2_hash_algorithm'] : "sha256");
+define("PBKDF2_ITERATIONS", isset($CONFIG['pbkdf2_iterations']) ? $CONFIG['pbkdf2_iterations'] : 1000);
+define("PBKDF2_SALT_BYTE_SIZE", isset($CONFIG['pbkdf2_salt_byte_size']) ? $CONFIG['pbkdf2_salt_byte_size'] : 24);
+define("PBKDF2_HASH_BYTE_SIZE", isset($CONFIG['pbkdf2_hash_byte_size']) ? $CONFIG['pbkdf2_hash_byte_size'] : 24);
 
 define("HASH_SECTIONS", 4);
 define("HASH_ALGORITHM_INDEX", 0);
