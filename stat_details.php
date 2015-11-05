@@ -270,7 +270,7 @@ if ($type == 'vote' && $pid != '') { // type == vote start
 
     $totalVotesSum = 0;
 
-    while ($row = mysql_fetch_array($result)) {
+    while ($row = $result->fetchArray()) {
           $voteArr[$row['rating']] = $row['totalVotes'];
           $totalVotesSum = $totalVotesSum + $row['totalVotes'];
           $loopCounter = 0;
@@ -386,9 +386,9 @@ EOT;
       }
       $query = "SELECT COUNT(pid) FROM $queryTable $countWhere";
       $result = cpg_db_query($query);
-      $nbEnr = mysql_fetch_array($result);
+      $nbEnr = $result->fetchArray();
       $count = $nbEnr[0];
-      mysql_free_result($result);
+//      mysql_free_result($result);
 
       // Calculation for pagination tabs and query limit
       $numPages = max(1, ceil($count/$amount));
@@ -451,9 +451,9 @@ EOT;
       }
       print '  </tr>' . $LINEBREAK;
       // display the table header - end
-      if (mysql_num_rows($result) > 0) {
+      if ($result->numRows() > 0) {
           $loop_counter = 0;
-          while ($row = mysql_fetch_array($result)) {
+          while ($row = $result->fetchArray()) {
               if ($loop_counter == 0) {
                   $row_style_class = 'tableb';
               } else {

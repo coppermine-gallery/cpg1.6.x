@@ -60,8 +60,8 @@ case 'display':
 
     $result = cpg_db_query("SELECT keywords FROM {$CONFIG['TABLE_PICTURES']}");
 
-    if (!mysql_num_rows($result)) {
-        cpg_die(ERROR, $lang_errors['non_exist_ap']);
+    if (!$result->numRows()) {
+        cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
     }
 
     $edit_icon   = cpg_fetch_icon('edit', 2);
@@ -74,7 +74,7 @@ case 'display':
 
     $i = 0;
 
-    while (list($keywords) = mysql_fetch_row($result)) {
+    while (list($keywords) = $result->fetchRow()) {
 
         $array = explode($keysep, html_entity_decode($keywords));
 
@@ -166,7 +166,7 @@ case 'changeword':
 
         $result = cpg_db_query($query);
 
-        while (list($id, $keywords) = mysql_fetch_row($result)) {
+        while (list($id, $keywords) = $result->fetchRow()) {
 
             $array_new = array();
 
@@ -217,7 +217,7 @@ case 'delete':
 
     $result = cpg_db_query($query);
 
-    while (list($id, $keywords) = mysql_fetch_row($result)) {
+    while (list($id, $keywords) = $result->fetchRow()) {
 
         $array_new = array();
         $array_old = explode($keysep, trim(html_entity_decode($keywords)));

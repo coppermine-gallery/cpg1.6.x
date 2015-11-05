@@ -26,8 +26,8 @@ $txt['closewindow'] = "Close window";
 
 
 $result = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = '$pid'");
-$CURRENT_PIC = mysql_fetch_array($result);
-mysql_free_result($result);
+$CURRENT_PIC = $result->fetchArray();
+//mysql_free_result($result);
 $pic_url = get_pic_url($CURRENT_PIC,'fullsize');
 
 

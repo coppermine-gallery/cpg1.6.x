@@ -66,10 +66,10 @@ function process_post_data()
 
     $user_album_set = array();
     $result = cpg_db_query("SELECT aid FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = " . (FIRST_USER_CAT + USER_ID) . " OR owner = " . USER_ID . " OR uploads = 'YES'");
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $result->fetchAssoc()) {
         $user_album_set[$row['aid']] = 1;
     }
-    mysql_free_result($result);
+//    mysql_free_result($result);
 
     $pid = $superCage->post->getInt('id');
     $aid = $superCage->post->getInt('aid');
@@ -92,11 +92,11 @@ function process_post_data()
     $del_comments = $superCage->post->keyExists('del_comments') ? $superCage->post->getInt('del_comments') : 0;
 
     $result = cpg_db_query("SELECT category, owner_id, url_prefix, filepath, filename, pwidth, pheight, p.aid AS aid FROM {$CONFIG['TABLE_PICTURES']} AS p INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS a ON a.aid = p.aid WHERE pid = '$pid'");
-    if (!mysql_num_rows($result)) {
+    if (!$result->numRows()) {
         cpg_die(CRITICAL_ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
     }
-    $pic = mysql_fetch_assoc($result);
-    mysql_free_result($result);
+    $pic = $result->fetchAssoc();
+//    mysql_free_result($result);
 
     if (!GALLERY_ADMIN_MODE && !MODERATOR_MODE && !USER_ADMIN_MODE && !user_is_allowed() && !$CONFIG['users_can_edit_pics'] ) {
 
@@ -119,11 +119,11 @@ function process_post_data()
     }
 
     $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid = '$aid'");
-    if (!mysql_num_rows($result)) {
+    if (!$result->numRows()) {
         cpg_die(CRITICAL_ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
     }
-    $new_alb = mysql_fetch_assoc($result);
-    mysql_free_result($result);
+    $new_alb = $result->fetchAssoc();
+//    mysql_free_result($result);
 
     cpg_trim_keywords($keywords);
 
@@ -215,9 +215,9 @@ function process_post_data()
             $file_base_name_old = str_replace('.' . $mime_content_old['extension'], '', basename($pic['filename']));
 
             foreach (array('.gif','.png','.jpg') as $thumb_extension) {
-                if (file_exists($CONFIG['fullpath'] . $pic['filepath'] . $CONFIG['thumb_pfx'] . $file_base_name_old . $thumb_extension)) {
+                if (file_exists($CONFIG['fullpath'] . $pic['filepath'] . $CONFIG['thumb_pfx'] . $file_base_name_old . $thumb_extension)) {->
                     // Thumbnail found, check if it's the only file using that thumbnail
-                    $count = mysql_result(cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} WHERE filepath = '{$pic['filepath']}' AND filename LIKE '{$file_base_name_old}.%'"), 0);
+                    $count = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} WHERE filepath = '{$pic['filepath']}' AND filename LIKE '{$file_base_name_old}.%'")->result(0);
                     if ($count == 1) {
                         $prefixes[] = 'thumb';
                         $custom_thumb = TRUE;
@@ -331,8 +331,8 @@ if ($superCage->post->keyExists('apply_changes')) {
 
 $result = cpg_db_query("SELECT *, p.title AS title, p.votes AS votes FROM {$CONFIG['TABLE_PICTURES']} AS p INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS a ON a.aid = p.aid WHERE pid = '$pid'");
 
-$CURRENT_PIC = mysql_fetch_assoc($result);
-mysql_free_result($result);
+$CURRENT_PIC = $result->fetchAssoc();
+//mysql_free_result($result);
 
 if (!(GALLERY_ADMIN_MODE || $CURRENT_PIC['category'] == FIRST_USER_CAT + USER_ID || ($CONFIG['users_can_edit_pics'] && $CURRENT_PIC['owner_id'] == USER_ID)) || !USER_ID) {
     cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);

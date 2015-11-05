@@ -117,7 +117,7 @@ EOT;
       $query = 'SELECT * FROM '.$CONFIG['TABLE_PLUGINS'].' ORDER BY priority ASC;';
       $result = cpg_db_query($query);
       $loop_counter = 0;
-      while ($installed_plugin = mysql_fetch_assoc($result)) {
+      while ($installed_plugin = $result->fetchAssoc()) {
         $installed_plugins[$loop_counter] = array(
           'index' => $loop_counter,
           'plugin_id' => $installed_plugin['plugin_id'],
@@ -428,7 +428,7 @@ switch ($op) {
         } else {
           $query = 'SELECT * FROM '.$CONFIG['TABLE_PLUGINS'].' WHERE plugin_id='.$plugin_id.' LIMIT 1;';
           $result = cpg_db_query($query);
-          $installed_plugin = mysql_fetch_assoc($result);
+          $installed_plugin = $result->fetchAssoc();
           if ($installed_plugin) {
             $priority = $installed_plugin['priority'];
             $name = $installed_plugin['name'];
@@ -481,7 +481,7 @@ switch ($op) {
         } else {
           $query = 'SELECT * FROM '.$CONFIG['TABLE_PLUGINS'].' WHERE plugin_id='.$plugin_id.' LIMIT 1;';
           $result = cpg_db_query($query);
-          $installed_plugin = mysql_fetch_assoc($result);
+          $installed_plugin = $result->fetchAssoc();
           if ($installed_plugin) {
             $priority = $installed_plugin['priority'];
           }
@@ -497,7 +497,7 @@ switch ($op) {
           if ($CONFIG['log_mode']) {
               $query = 'SELECT * FROM '.$CONFIG['TABLE_PLUGINS'].' WHERE plugin_id='.$plugin_id.' LIMIT 1;';
               $result = cpg_db_query($query);
-              $installed_plugin = mysql_fetch_assoc($result);
+              $installed_plugin = $result->fetchAssoc();
               log_write("Plugin '".$installed_plugin['name']."' moved up in plugin list", CPG_GLOBAL_LOG);
           }
         }
@@ -518,13 +518,13 @@ switch ($op) {
         } else {
           $query = 'SELECT * FROM '.$CONFIG['TABLE_PLUGINS'].' WHERE plugin_id='.$plugin_id.' LIMIT 1;';
           $result = cpg_db_query($query);
-          $installed_plugin = mysql_fetch_assoc($result);
+          $installed_plugin = $result->fetchAssoc();
           if ($installed_plugin) {
             $priority = $installed_plugin['priority'];
           }
           $query = 'SELECT * FROM '.$CONFIG['TABLE_PLUGINS'].' ORDER BY priority ASC;';
           $result = cpg_db_query($query);
-          $installed_plugins = mysql_fetch_assoc($result);
+          $installed_plugins = $result->fetchAssoc();
           $installed_count = count($installed_plugins);
         }
         if ($installed_plugin && ($priority < ($installed_count-1))) {
@@ -538,7 +538,7 @@ switch ($op) {
             if ($CONFIG['log_mode']) {
               $query = 'SELECT * FROM '.$CONFIG['TABLE_PLUGINS'].' WHERE plugin_id='.$plugin_id.' LIMIT 1;';
               $result = cpg_db_query($query);
-              $installed_plugin = mysql_fetch_assoc($result);
+              $installed_plugin = $result->fetchAssoc();
               log_write("Plugin '".$installed_plugin['name']."' moved down in plugin list", CPG_GLOBAL_LOG);
             }
         }

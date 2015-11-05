@@ -150,14 +150,15 @@ EOT;
 // Form has been submit --- end
 
 
-// Populate an array of available flags$flag_array = form_get_foldercontent('images/flags/', 'file', 'png');
+// Populate an array of available flags
+$flag_array = form_get_foldercontent('images/flags/', 'file', 'png');
 // Populate an array of files existing inside the lang folder
 $lang_file_array = form_get_foldercontent('lang/', 'file', 'php');
 $lang_file_orphan_array = $lang_file_array;
 
 // Let's populate the language list from the database
 $results = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_LANGUAGE']}");
-while ($row = mysql_fetch_array($results)) {
+while ($row = $results->fetchArray()) {
         $lang_language_data[$row['lang_id']]['lang_id'] = $row['lang_id'];
         $lang_language_data[$row['lang_id']]['english_name'] = $row['english_name'];
         $lang_language_data[$row['lang_id']]['native_name'] = $row['native_name'];
@@ -171,7 +172,7 @@ while ($row = mysql_fetch_array($results)) {
         }
         $lang_language_data[$row['lang_id']]['new'] = 'NO';
 } // while
-mysql_free_result($results);
+//mysql_free_result($results);
 unset($row);
 
 // Now let's merge the orphaned files (i.e. the files that exist on file system level, but not in the database) into the array that will compose the form output
@@ -340,21 +341,25 @@ foreach ($lang_language_data as $language) {
         // Completeness --- end
         if ($language['available'] == 'YES') { // availability --- start
             if (in_array($language['lang_id'], $lang_file_array) == TRUE) {
-                // Language file is in database and in lang folder                $availability_output = cpg_fetch_icon('ok', 0, 'lang/'.$language['lang_id'].'.php ' . $lang_langmgr_php['exists_in_db_and_file']);
+                // Language file is in database and in lang folder
+                $availability_output = cpg_fetch_icon('ok', 0, 'lang/'.$language['lang_id'].'.php ' . $lang_langmgr_php['exists_in_db_and_file']);
                 $availability_output .= '<input type="hidden" name="available_'.$language['lang_id'].'" id="available_' . $language['lang_id'] .'" value="YES" />';
                 $enable_greyed_out = '';
             } else {
-                //  Language file is in database, but not in lang folder                $availability_output = cpg_fetch_icon('stop', 0, 'lang/'.$language['lang_id'].'.php '.$lang_langmgr_php['missing']);
+                //  Language file is in database, but not in lang folder
+                $availability_output = cpg_fetch_icon('stop', 0, 'lang/'.$language['lang_id'].'.php '.$lang_langmgr_php['missing']);
                 $availability_output .= '<input type="hidden" name="available_'.$language['lang_id'].'" id="available_' . $language['lang_id'] .'" value="NO" />';
                 $enable_greyed_out = 'disabled="disabled"';
             }
         } else {
             if (in_array($language['lang_id'], $lang_file_array) == TRUE) {
-                // Language file is not database but in lang folder                $availability_output = cpg_fetch_icon('add', 0, 'lang/'.$language['lang_id'].'.php ' . $lang_langmgr_php['exists_as_file_only']);
+                // Language file is not database but in lang folder
+                $availability_output = cpg_fetch_icon('add', 0, 'lang/'.$language['lang_id'].'.php ' . $lang_langmgr_php['exists_as_file_only']);
                 $availability_output .= '<input type="hidden" name="available_'.$language['lang_id'].'" id="available_' . $language['lang_id'] .'" value="YES" />';
                 $enable_greyed_out = '';
             } else {
-                //  Language file is not database nor in lang folder - this case should never be true                $availability_output = cpg_fetch_icon('stop', 0, 'lang/'.$language['lang_id'].'.php ' . $lang_langmgr_php['missing']);
+                //  Language file is not database nor in lang folder - this case should never be true
+                $availability_output = cpg_fetch_icon('stop', 0, 'lang/'.$language['lang_id'].'.php ' . $lang_langmgr_php['missing']);
                 $availability_output .= '<input type="hidden" name="available_'.$language['lang_id'].'" id="available_' . $language['lang_id'] .'" value="NO" />';
                 $enable_greyed_out = 'disabled="disabled"';
             }

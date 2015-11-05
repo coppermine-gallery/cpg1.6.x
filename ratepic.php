@@ -47,7 +47,7 @@ $rate = max($rate, 0);
 $sql = "SELECT a.votes as votes_allowed, p.votes as votes, pic_rating, owner_id FROM {$CONFIG['TABLE_PICTURES']} AS p INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS a ON p.aid = a.aid WHERE pid = $pic";
 $result = cpg_db_query($sql);
 
-if (!mysql_num_rows($result)) {
+if (!$result->numRows()) {
 
     //send back voting failure to ajax request
     $send_back = array(
@@ -70,8 +70,8 @@ if(!checkFormToken()){
     exit;
 }
 
-$row = mysql_fetch_assoc($result);
-mysql_free_result($result);
+$row = $result->fetchAssoc();
+//mysql_free_result($result);
 
 if (!USER_CAN_RATE_PICTURES || $row['votes_allowed'] == 'NO') {
 
@@ -95,7 +95,7 @@ $user_md5_id = USER_ID ? md5(USER_ID) : $USER['ID'];
 $sql = "SELECT null FROM {$CONFIG['TABLE_VOTES']} WHERE pic_id = $pic AND user_md5_id = '$user_md5_id'";
 $result = cpg_db_query($sql);
 
-if (mysql_num_rows($result)) {
+if ($result->numRows()) {
 
     // user has already rated this file
     $send_back = array(
@@ -108,12 +108,12 @@ if (mysql_num_rows($result)) {
     exit;
 }
 
-mysql_free_result($result);
+//mysql_free_result($result);
 
 // Check if user already rated this picture - vote stats table
 $sql = "SELECT null FROM {$CONFIG['TABLE_VOTE_STATS']} WHERE pid = $pic AND ip = '$raw_ip'";
 $result = cpg_db_query($sql);
-if (mysql_num_rows($result)) {
+if ($result->numRows()) {
     $send_back = array(
         'status' => 'error',
         'msg'    => $lang_rate_pic_php['already_rated'],
@@ -122,7 +122,7 @@ if (mysql_num_rows($result)) {
     echo json_encode($send_back);
     exit;
 }
-mysql_free_result($result);
+//mysql_free_result($result);
 
 //Test for Self-Rating
 if (!empty($user_id) && $user_id == $row['owner_id'] && ($CONFIG['rate_own_files'] == 0 || $CONFIG['rate_own_files'] == 2 && !USER_IS_ADMIN)) {

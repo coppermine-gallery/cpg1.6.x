@@ -75,7 +75,7 @@ function list_group_alb_access($group_id) {  //shows a list of albums a specific
         category, album";
     $result = cpg_db_query($query);
     $albs = cpg_db_fetch_rowset($result);
-    mysql_free_result($result);
+//    mysql_free_result($result);
 
     foreach($albs as $album) {
       $aid = $album['aid'];
@@ -115,7 +115,7 @@ function list_groups_alb_access() //shows a list of albums each group can see. C
 
     $result = cpg_db_query($sql);
     $groups = cpg_db_fetch_rowset($result);
-    mysql_free_result($result);
+//    mysql_free_result($result);
 
     echo "
     <td>{$lang_usermgr_php['category']}</td>
@@ -422,26 +422,26 @@ EOT;
 
     // query total number of files uploaded
     $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} LIMIT 1");
-    $tempPicCount = mysql_fetch_array($result);
+    $tempPicCount = $result->fetchArray();
     $totalPictureCount = $tempPicCount[0];
     $totalPictureCount_fmt = cpg_float2decimal($totalPictureCount);
-    mysql_free_result($result);
+//    mysql_free_result($result);
     unset($tempPicCount);
 
     // query total space used
     $result = cpg_db_query("SELECT SUM(total_filesize) FROM {$CONFIG['TABLE_PICTURES']} LIMIT 1");
-    $tempSpaceCount = mysql_fetch_array($result);
+    $tempSpaceCount = $result->fetchArray();
     $totalSpaceCount = $tempSpaceCount[0];
     $totalSpaceCount_fmt = cpg_format_bytes($totalSpaceCount);
-    mysql_free_result($result);
+//    mysql_free_result($result);
     unset($tempSpaceCount);
 
     // query total number of comments posted
     $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_COMMENTS']} LIMIT 1");
-    $tempCommentCount = mysql_fetch_array($result);
+    $tempCommentCount = $result->fetchArray();
     $totalCommentCount = $tempCommentCount[0];
     $totalCommentCount_fmt = cpg_float2decimal($totalCommentCount);
-    mysql_free_result($result);
+//    mysql_free_result($result);
     unset($tempCommentCount);
 
     foreach ($users as $user) {
@@ -460,7 +460,7 @@ EOT;
         $group_quota_separator = '/';
         // Determine actual quota if user belongs to more than one user group
         if ($user_groups = cpg_get_groups($user['user_id'])) {
-            $quota = mysql_fetch_assoc(cpg_db_query("SELECT MAX(group_quota) AS disk_max, MIN(group_quota) AS disk_min FROM {$CONFIG['TABLE_USERGROUPS']} WHERE group_quota >= 0 AND group_id IN (".implode(", ", $user_groups).")"));
+            $quota = cpg_db_query("SELECT MAX(group_quota) AS disk_max, MIN(group_quota) AS disk_min FROM {$CONFIG['TABLE_USERGROUPS']} WHERE group_quota >= 0 AND group_id IN (".implode(", ", $user_groups).")")->fetchAssoc();
             $user['group_quota'] = $quota["disk_min"] ? $quota["disk_max"] : 0;
         }
         if ($user['group_quota']) {
@@ -504,9 +504,9 @@ EOT;
         } else {
             $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_COMMENTS']} WHERE author_id = {$user['user_id']} AND approval = 'YES' "); // only display approved comments for non-admin
         }
-        $commentCount = mysql_fetch_array($result);
+        $commentCount = $result->fetchArray();
         $user['comment_num'] = $commentCount[0];
-        mysql_free_result($result);
+//        mysql_free_result($result);
         if ($user['comment_num'] > 0) {
             $user_comment_link = '<a href="thumbnails.php?album=lastcomby&amp;uid=' . $user['user_id'] . '">' . cpg_fetch_icon('comment', 0, $lang_usermgr_php['last_comments'] . '('.$user['comment_num'].')') . '</a>';
         } else {
@@ -517,7 +517,7 @@ EOT;
         // create files bar
         $file_quota_output = theme_display_bar($user['pic_count'],$totalPictureCount,60,'', '', '','red','');
         // Look up banned table
-        if (mysql_num_rows(cpg_db_query("SELECT user_name FROM {$CONFIG['TABLE_BANNED']} WHERE user_name = '" . addslashes($user['user_name']) . "' AND brute_force=0 LIMIT 1"))) {
+        if (cpg_db_query("SELECT user_name FROM {$CONFIG['TABLE_BANNED']} WHERE user_name = '" . addslashes($user['user_name']) . "' AND brute_force=0 LIMIT 1")->numRows()) {
             $ban_user_link = '<a href="banning.php">' . cpg_fetch_icon('ban_user_disabled', 0, $lang_usermgr_php['user_is_banned']) . '</a>';
             $ban_memberlist = cpg_fetch_icon('ban_user_disabled', 0, $lang_usermgr_php['user_is_banned']);
         } else {
@@ -632,7 +632,7 @@ EOT;
         $sql = "SELECT group_id, group_name FROM {$CONFIG['TABLE_USERGROUPS']} ORDER BY group_name";
         $result = cpg_db_query($sql);
         $group_list = cpg_db_fetch_rowset($result);
-        mysql_free_result($result);
+//        mysql_free_result($result);
 
         if (isset($element[1])) {
             $sel_group = $user_data[$element[1]];
@@ -773,13 +773,13 @@ function edit_user($user_id)
     if ($user_id != 'new_user') {
         $sql = "SELECT * FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '$user_id'";
         $result = cpg_db_query($sql);
-        if (!mysql_num_rows($result)) {
+        if (!$result->numRows()) {
             cpg_die(CRITICAL_ERROR, $lang_usermgr_php['err_unknown_user'], __FILE__, __LINE__);
         }
-        $user_data = mysql_fetch_array($result);
-        mysql_free_result($result);
+        $user_data = $result->fetchArray();
+//        mysql_free_result($result);
 
-        if (mysql_num_rows(cpg_db_query("SELECT user_name FROM {$CONFIG['TABLE_BANNED']} WHERE user_name = '" . addslashes($user_data['user_name']) . "' AND brute_force=0 LIMIT 1"))){
+        if (cpg_db_query("SELECT user_name FROM {$CONFIG['TABLE_BANNED']} WHERE user_name = '" . addslashes($user_data['user_name']) . "' AND brute_force=0 LIMIT 1")->numRows()){
             $user_status = $lang_usermgr_php['user_is_banned'];
         } elseif ($user_data['user_active'] == 'YES') {
             $user_status = $lang_usermgr_php['status_active'];
@@ -897,7 +897,7 @@ EOT;
                 $sql = "SELECT group_id, group_name FROM {$CONFIG['TABLE_USERGROUPS']} ORDER BY group_name";
                 $result = cpg_db_query($sql);
                 $group_list = cpg_db_fetch_rowset($result);
-                mysql_free_result($result);
+//                mysql_free_result($result);
 
                 $sel_group = $user_data[$element[1]];
                 $user_group_list = ($user_data['user_group_list'] == '') ? ',' . $sel_group . ',' : ',' . $user_data['user_group_list'] . ',' . $sel_group . ',';
@@ -1014,7 +1014,7 @@ function update_user($user_id)
 
     if ($user_id == 'new_user') {
         cpg_db_query("INSERT INTO {$CONFIG['TABLE_USERS']} (user_regdate, user_profile6) VALUES (NOW(), '')");
-        $user_id = mysql_insert_id();
+        $user_id = cpg_db_last_insert_id();
         log_write('New user "'.$user_name.'" created', CPG_ACCESS_LOG);
 
         // Create a personal album if corresponding option is enabled
@@ -1027,17 +1027,17 @@ function update_user($user_id)
     $sql = "SELECT user_id FROM {$CONFIG['TABLE_USERS']} WHERE user_name = '$user_name' AND user_id != $user_id";
     $result = cpg_db_query($sql);
 
-    if (mysql_num_rows($result)) {
+    if ($result->numRows()) {
         cpg_die(ERROR, $lang_register_php['err_user_exists'], __FILE__, __LINE__);
         return false;
     }
-    mysql_free_result($result);
+//    mysql_free_result($result);
 
     if (utf_strlen($user_name) < 2) cpg_die(ERROR, $lang_register_php['username_warning2'], __FILE__, __LINE__);
         if ($user_password && utf_strlen($user_password) < 2) cpg_die(ERROR, $lang_register_php['password_warning1'], __FILE__, __LINE__);
 
     // Save old user data (we need it later to determine if we need to send the activation confirmation email)
-    $user_data = mysql_fetch_assoc(cpg_db_query("SELECT user_name, user_active, user_email, user_actkey FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '$user_id'"));
+    $user_data = cpg_db_query("SELECT user_name, user_active, user_email, user_actkey FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '$user_id'")->fetchAssoc();
 
     if (is_array($group_list)) {
         $user_group_list = '';
@@ -1151,13 +1151,13 @@ switch ($op) {
           WHERE group_id = $group_id AND albums.visibility = groups.group_id
         ";
         $result = cpg_db_query($sql);
-        $group = mysql_fetch_array($result);
+        $group = $result->fetchArray();
 
-        if (!mysql_num_rows($result)) {
+        if (!$result->numRows()) {
           pageheader($lang_usermgr_php['group_no_access']);
           msg_box($lang_usermgr_php['notice'].'&nbsp;'.cpg_display_help('f=groups.htm&amp;as=group_cp_assigned&amp;ae=group_cp_assigned_end', '450', '300'), $lang_usermgr_php['group_no_access']);
         } else {
-            mysql_free_result($result);
+//            mysql_free_result($result);
             $group_name = $group['group_name'];
             pageheader(sprintf($lang_usermgr_php['group_can_access'], $group_name));
             starttable(500, sprintf($lang_usermgr_php['group_can_access'], $group_name).'&nbsp;'.cpg_display_help('f=groups.htm&amp;as=group_cp_assigned&amp;ae=group_cp_assigned_end', '450', '300'), 3);

@@ -76,8 +76,8 @@ EOT;
 
         // get IP address of the person who tried to log in, look it up on the banning table and increase the brute force counter. If the brute force counter has reached a critical limit, set a regular banning record
         $result = cpg_db_query("SELECT ban_id, brute_force FROM {$CONFIG['TABLE_BANNED']} WHERE ip_addr = '$raw_ip' OR ip_addr = '$hdr_ip' LIMIT 1");
-        $failed_logon_counter = mysql_fetch_assoc($result);
-        mysql_free_result($result);
+        $failed_logon_counter = $result->fetchAssoc();
+//        mysql_free_result($result);
 
         $expiry_date = date("Y-m-d H:i:s", mktime(date('H'), date('i') + $CONFIG['login_expiry'], date('s'), date('m'), date('d'), date('Y')));
 

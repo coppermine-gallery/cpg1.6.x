@@ -51,9 +51,9 @@ if (isset($CLEAN['email'])) {
 
     $results = cpg_db_query($sql);
 
-    if (mysql_num_rows($results)) { // something has been found start
+    if ($results->numRows()) { // something has been found start
 
-        $USER_DATA = mysql_fetch_assoc($results);
+        $USER_DATA = $results->fetchAssoc();
 
         // check if we have an admin account (with empty email address)
         if ($USER_DATA['user_email'] == '') {
@@ -112,22 +112,22 @@ EOT;
 
     $result = cpg_db_query($sql);
 
-    if (!mysql_num_rows($result)) {
+    if (!$result->numRows()) {
         cpg_die($lang_forgot_passwd_php['forgot_passwd'], $lang_forgot_passwd_php['illegal_session']);
     }
 
-    mysql_free_result($result);
+//    mysql_free_result($result);
 
     $sql = "SELECT {$cpg_udb->field['username']}, {$cpg_udb->field['email']} FROM {$cpg_udb->usertable} WHERE {$cpg_udb->field['user_id']} = {$CLEAN['id']}";
 
     $result = cpg_db_query($sql);
 
-    if (!mysql_num_rows($result)) {
+    if (!$result->numRows()) {
         cpg_die($lang_forgot_passwd_php['forgot_passwd'], $lang_forgot_passwd_php['err_unk_user']);
     }
 
-    $row = mysql_fetch_assoc($result);
-    mysql_free_result($sql);
+    $row = $result->fetchAssoc();
+//    mysql_free_result($sql);
 
     // Reset Password
     $new_password = $cpg_udb->make_password();

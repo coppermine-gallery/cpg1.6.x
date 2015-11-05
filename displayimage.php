@@ -295,11 +295,11 @@ $ajax_call = $superCage->get->getInt('ajax_call');
 // attempt to fix topn images for keyworded albums
 if ($cat < 0) {
     $result = cpg_db_query("SELECT category, title, aid, keyword, description, alb_password_hint FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid='" . (- $cat) . "'");
-    if (mysql_num_rows($result) > 0) {
-        $CURRENT_ALBUM_DATA = mysql_fetch_assoc($result);
+    if ($result->numRows() > 0) {
+        $CURRENT_ALBUM_DATA = $result->fetchAssoc();
         $CURRENT_ALBUM_KEYWORD = $CURRENT_ALBUM_DATA['keyword'];
     }
-    mysql_free_result($result);
+//    mysql_free_result($result);
 }
 
 set_js_var('cookies_allowed', CPG_COOKIES_ALLOWED);
@@ -314,9 +314,9 @@ if (!$superCage->get->keyExists('fullsize') && ($pos < 0 || $pid > 0)) {
 
         $result = cpg_db_query("SELECT aid FROM {$CONFIG['TABLE_PICTURES']} AS p WHERE pid='$pid' $FORBIDDEN_SET LIMIT 1");
 
-        if (mysql_num_rows($result) == 0) {
+        if ($result->numRows() == 0) {
             // show password prompt if the file is in a password protected album and the user has access rights to that album
-            $aid = mysql_result(cpg_db_query("SELECT aid FROM {$CONFIG['TABLE_PICTURES']} WHERE pid='$pid' LIMIT 1"), 0);
+            $aid = cpg_db_query("SELECT aid FROM {$CONFIG['TABLE_PICTURES']} WHERE pid='$pid' LIMIT 1")->result(0);
             if (cpg_pw_protected_album_access($aid) === 1) {
                 $redirect = "thumbnails.php?album=".$aid;
                 header("Location: $redirect");
@@ -325,8 +325,8 @@ if (!$superCage->get->keyExists('fullsize') && ($pos < 0 || $pid > 0)) {
             }
         }
 
-        $row = mysql_fetch_assoc($result);
-        mysql_free_result($result);
+        $row = $result->fetchAssoc();
+//        mysql_free_result($result);
     }
 
     $album = (!$album) ? $row['aid'] : $album;
@@ -422,12 +422,12 @@ if (isset($CURRENT_PIC_DATA)) {
 
     $result = cpg_db_query("SELECT title, comments, votes, category, aid FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid='{$ref_album}' LIMIT 1");
 
-    if (!mysql_num_rows($result)) {
+    if (!$result->numRows()) {
         cpg_die(CRITICAL_ERROR, sprintf($lang_errors['pic_in_invalid_album'], $CURRENT_PIC_DATA['aid']), __FILE__, __LINE__);
     }
 
-    $CURRENT_ALBUM_DATA = mysql_fetch_assoc($result);
-    mysql_free_result($result);
+    $CURRENT_ALBUM_DATA = $result->fetchAssoc();
+//    mysql_free_result($result);
 
     if (is_numeric($album)) {
         $cat = - $album;
@@ -442,7 +442,7 @@ if (isset($CURRENT_PIC_DATA)) {
 
 if ($superCage->get->keyExists('fullsize')) {
 
-    $CURRENT_PIC_DATA = mysql_fetch_assoc(cpg_db_query("SELECT * FROM {$CONFIG['TABLE_PICTURES']} AS p " . "WHERE pid='$pid' $FORBIDDEN_SET"));
+    $CURRENT_PIC_DATA = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_PICTURES']} AS p " . "WHERE pid='$pid' $FORBIDDEN_SET")->fetchAssoc();
     theme_display_fullsize_pic();
 
 } elseif ($superCage->get->keyExists('slideshow')) {

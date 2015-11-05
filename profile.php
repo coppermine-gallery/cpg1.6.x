@@ -39,8 +39,8 @@ function cpgUserPicCount($uid)
     global $CONFIG;
 
     $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} WHERE owner_id = $uid");
-    list($pic_count) = mysql_fetch_row($result);
-    mysql_free_result($result);
+    list($pic_count) = $result->fetchRow();
+//    mysql_free_result($result);
 
     return $pic_count;
 }
@@ -51,12 +51,12 @@ function cpgUserThumb($uid)
 
     $query = "SELECT COUNT(*), MAX(pid) FROM {$CONFIG['TABLE_PICTURES']} AS p WHERE owner_id = '$uid' AND approved = 'YES' $FORBIDDEN_SET";
     $result = cpg_db_query($query);
-    list($picture_count, $thumb_pid) = mysql_fetch_row($result);
-    mysql_free_result($result);
+    list($picture_count, $thumb_pid) = $result->fetchRow();
+//    mysql_free_result($result);
 
     $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_ALBUMS']} AS p WHERE category = '" . (FIRST_USER_CAT + $uid) . "' $FORBIDDEN_SET");
-    list($album_count) = mysql_fetch_row($result);
-    mysql_free_result($result);
+    list($album_count) = $result->fetchRow();
+//    mysql_free_result($result);
 
     $user_thumb = '';
 
@@ -65,9 +65,9 @@ function cpgUserThumb($uid)
         $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $thumb_pid";
         $result = cpg_db_query($sql);
 
-        if (mysql_num_rows($result)) {
+        if ($result->numRows()) {
 
-            $picture = mysql_fetch_assoc($result);
+            $picture = $result->fetchAssoc();
 
             $pic_url = get_pic_url($picture, 'thumb');
 
@@ -82,7 +82,7 @@ function cpgUserThumb($uid)
             $user_thumb = '<img src="' . $pic_url . '" class="image"' . $image_size['geom'] . ' border="0" alt="" />';
         }
 
-        mysql_free_result($result);
+//        mysql_free_result($result);
     }
 
     return $user_thumb;
@@ -93,8 +93,8 @@ function cpgUserLastComment($uid)
     global $CONFIG, $FORBIDDEN_SET;
 
     $result = cpg_db_query("SELECT COUNT(*), MAX(msg_id) FROM {$CONFIG['TABLE_COMMENTS']} AS c INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.pid = c.pid WHERE approval = 'YES' AND author_id = '$uid' $FORBIDDEN_SET");
-    list($comment_count, $lastcom_id) = mysql_fetch_row($result);
-    mysql_free_result($result);
+    list($comment_count, $lastcom_id) = $result->fetchRow();
+//    mysql_free_result($result);
 
     $lastComArray = array(
         'count' => 0
@@ -105,9 +105,9 @@ function cpgUserLastComment($uid)
         $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight, msg_author, UNIX_TIMESTAMP(msg_date) as msg_date, msg_body FROM {$CONFIG['TABLE_COMMENTS']} AS c INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.pid = c.pid WHERE msg_id = $lastcom_id";
         $result = cpg_db_query($sql);
 
-        if (mysql_num_rows($result)) {
+        if ($result->numRows()) {
 
-            $row = mysql_fetch_assoc($result);
+            $row = $result->fetchAssoc();
 
             $pic_url = get_pic_url($row, 'thumb');
 
@@ -129,7 +129,7 @@ function cpgUserLastComment($uid)
             );
         }
 
-        mysql_free_result($result);
+//        mysql_free_result($result);
     }
 
     return $lastComArray;
@@ -388,7 +388,7 @@ if ($superCage->post->keyExists('change_profile') && USER_ID && UDB_INTEGRATION 
         } elseif (!$CONFIG['allow_duplicate_emails_addr']) {
             $sql = "SELECT null FROM {$CONFIG['TABLE_USERS']} WHERE user_email = '$email' AND user_id <> " . USER_ID;
             $result = cpg_db_query($sql);
-            if (mysql_num_rows($result)) {
+            if ($result->numRows()) {
                 $error = $lang_register_php['err_duplicate_email'];
             }
         }
@@ -435,8 +435,8 @@ if ($superCage->post->keyExists('change_password') && USER_ID && UDB_INTEGRATION
     require 'include/passwordhash.inc.php';
     $sql = "SELECT user_password, user_password_salt, user_password_hash_algorithm, user_password_iterations FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '" . USER_ID . "' LIMIT 1";
     $result = cpg_db_query($sql);
-    $password_params = mysql_fetch_assoc($result);
-    mysql_free_result($result);
+    $password_params = $result->fetchAssoc();
+//    mysql_free_result($result);
 
     $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET ".cpg_password_create_update_string($new_pass)." WHERE user_id = '" . USER_ID . "' ";
     if (!$password_params['user_password_salt']) {
@@ -446,7 +446,7 @@ if ($superCage->post->keyExists('change_password') && USER_ID && UDB_INTEGRATION
     }
     $result = cpg_db_query($sql);
 
-    if (!mysql_affected_rows($CONFIG['LINK_ID'])) {
+    if (!cpg_db_affected_rows()) {
         cpg_die(ERROR, $lang_register_php['pass_chg_error'], __FILE__, __LINE__);
     }
 
@@ -469,12 +469,12 @@ case 'edit_profile' :
     $sql = "SELECT user_name, user_email, user_group, user_active, UNIX_TIMESTAMP(user_regdate) AS user_regdate, group_name, " . "user_profile1, user_profile2, user_profile3, user_profile4, user_profile5, user_profile6, user_group_list, " . "COUNT(pid) AS pic_count, SUM(total_filesize) AS disk_usage, group_quota " . "FROM {$CONFIG['TABLE_USERS']} AS u " . "INNER JOIN {$CONFIG['TABLE_USERGROUPS']} AS g ON user_group = group_id " . "LEFT JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.owner_id = u.user_id " . "WHERE user_id ='" . USER_ID . "' " . "GROUP BY user_id ";
     $result = cpg_db_query($sql);
 
-    if (!mysql_num_rows($result)) {
+    if (!$result->numRows()) {
         cpg_die(ERROR, $lang_register_php['err_unk_user'], __FILE__, __LINE__);
     }
 
-    $user_data = mysql_fetch_assoc($result);
-    mysql_free_result($result);
+    $user_data = $result->fetchAssoc();
+//    mysql_free_result($result);
 
     $group_list = '';
 
@@ -483,11 +483,11 @@ case 'edit_profile' :
         $sql = "SELECT group_name " . "FROM {$CONFIG['TABLE_USERGROUPS']} " . "WHERE group_id IN ({$user_data['user_group_list']}) AND group_id != {$user_data['user_group']} " . "ORDER BY group_name";
         $result = cpg_db_query($sql);
 
-        while ($row = mysql_fetch_array($result)) {
+        while ($row = $result->fetchArray()) {
             $group_list .= $row['group_name'] . ', ';
         }
 
-        mysql_free_result($result);
+//        mysql_free_result($result);
 
         if ($group_list) {
             $group_list = '<br /><em>(' . substr($group_list, 0, -2) . ')</em>';
@@ -741,7 +741,7 @@ default:
 
     $result = cpg_db_query("SELECT null FROM {$CONFIG['TABLE_BANNED']} WHERE user_id = '$uid' AND brute_force = 0 LIMIT 1");
 
-    if (mysql_num_rows($result)) {
+    if ($result->numRows()) {
         $user_status = $lang_register_php['banned'];
     } elseif (isset($user_data['user_active']) && $user_data['user_active'] == 'YES') {
         $user_status = $lang_usermgr_php['status_active'];

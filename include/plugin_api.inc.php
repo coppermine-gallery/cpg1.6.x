@@ -52,7 +52,7 @@ abstract class CPGPluginAPI {
         $result = cpg_db_query($sql);
 
         // Exit if no plugins are installed
-        if (mysql_num_rows($result) == 0) {
+        if ($result->numRows() == 0) {
             return;
         }
 
@@ -66,7 +66,7 @@ abstract class CPGPluginAPI {
         $index = 0;
 
         // Get the plugin properties from the database
-        while ($plugin = mysql_fetch_assoc($result)) {
+        while ($plugin = $result->fetchAssoc()) {
 
             // If codebase.php or configuration.php don't exist, skip this plugin
             if (!(file_exists('./plugins/'.$plugin['path'].'/codebase.php') && file_exists('./plugins/'.$plugin['path'].'/configuration.php'))) {
@@ -101,7 +101,7 @@ abstract class CPGPluginAPI {
 
             $index++;
         }
-        mysql_free_result($result);
+//        mysql_free_result($result);
     }
 
 
@@ -127,14 +127,14 @@ abstract class CPGPluginAPI {
             $result = cpg_db_query($sql);
 
             // If the plugin isn't in the database store a false value in the array
-            if (mysql_num_rows($result) == 0) {
+            if ($result->numRows() == 0) {
                 $installed_array[$plugin_folder] = false;
                 return false;
             }
 
             // It's installed! Get the plugin_id
-            $plugin = mysql_fetch_assoc($result);
-            mysql_free_result($result);
+            $plugin = $result->fetchAssoc();
+//            mysql_free_result($result);
 
             // Store the plugin_id in the database
             $installed_array[$plugin_folder] = $plugin['plugin_id'];
@@ -419,8 +419,8 @@ abstract class CPGPluginAPI {
         $sql = "SELECT priority FROM {$CONFIG['TABLE_PLUGINS']} ORDER BY priority DESC LIMIT 1";
         $result = cpg_db_query($sql);
 
-        $data = mysql_fetch_assoc($result);
-        mysql_free_result($result);
+        $data = $result->fetchAssoc();
+//        mysql_free_result($result);
 
         // Set the execution priority to last
         $priority = (is_null($data['priority'])) ? (0) : ($data['priority']+1);

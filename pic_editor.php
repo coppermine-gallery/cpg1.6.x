@@ -76,12 +76,12 @@ if ($superCage->get->keyExists('id')) {
 if ($pid > 0) {
 
     $result = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = '$pid'");
-    $CURRENT_PIC = mysql_fetch_assoc($result);
-    mysql_free_result($result);
+    $CURRENT_PIC = $result->fetchAssoc();
+//    mysql_free_result($result);
 
     $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid = '{$CURRENT_PIC['aid']}'");
-    $CURRENT_ALBUM = mysql_fetch_assoc($result);
-    mysql_free_result($result);
+    $CURRENT_ALBUM = $result->fetchAssoc();
+//    mysql_free_result($result);
 
 } else {
     cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);

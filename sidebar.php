@@ -265,7 +265,7 @@ if (!empty($FORBIDDEN_SET) && !$cpg_show_private_album) {
 }
 $sql = "SELECT aid FROM {$CONFIG['TABLE_ALBUMS']} as a WHERE category>=" . FIRST_USER_CAT . $album_filter;
 $result = cpg_db_query($sql);
-$album_count = mysql_num_rows($result);
+$album_count = $result->numRows();
 if (!$album_count) {
         $HIDE_USER_CAT = 1;
 }
@@ -281,7 +281,7 @@ function get_tree_subcat_data($parent, $dtree_parent = 0) {
         }
         $sql = "SELECT cid, name " . "FROM {$CONFIG['TABLE_CATEGORIES']} " . "WHERE parent = '$parent' " . "ORDER BY ". $cat_sort_order;
         $result = cpg_db_query($sql);
-        if (($cat_count = mysql_num_rows($result)) > 0) {
+        if (($cat_count = $result->numRows()) > 0) {
                 $rowset = cpg_db_fetch_rowset($result);
                 $pos = 0;
                 $catStr .= '<ul>'.$LINEBREAK;
@@ -318,7 +318,7 @@ function get_tree_album_data($category,$dtree_parent) {
         if ($category == USER_GAL_CAT) {
                 $sql = "SELECT DISTINCT user_id, user_name FROM {$CONFIG['TABLE_USERS']}, {$CONFIG['TABLE_ALBUMS']} WHERE  10000 + {$CONFIG['TABLE_USERS']}.user_id = {$CONFIG['TABLE_ALBUMS']}.category ORDER BY user_name ASC";
                 $result = cpg_db_query($sql);
-                if (($cat_count = mysql_num_rows($result)) > 0) {
+                if (($cat_count = $result->numRows()) > 0) {
                         $rowset = cpg_db_fetch_rowset($result);
                         $catStr .= '<ul>'.$LINEBREAK;
                         foreach ($rowset as $subcat) {
@@ -338,7 +338,7 @@ function get_tree_album_data($category,$dtree_parent) {
                         $sql = "SELECT aid,title FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = $category ".$ALBUM_SET .$unaliased_album_filter . " ORDER BY pos";
                 }
                 $result = cpg_db_query($sql);
-                if (($cat_count = mysql_num_rows($result)) > 0) {
+                if (($cat_count = $result->numRows()) > 0) {
                         $rowset = cpg_db_fetch_rowset($result);
                         $catStr .= '<ul>'.$LINEBREAK;
                         foreach ($rowset as $subcat) {

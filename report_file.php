@@ -73,20 +73,20 @@ $form_action="$CPG_PHP_SELF?pid=$pid";
 
 // Get picture thumbnail url
 $result = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_PICTURES']} p WHERE pid='$pid' $FORBIDDEN_SET");
-if (!mysql_num_rows($result)) {
+if (!$result->numRows()) {
     cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
 }
 
-$row = mysql_fetch_array($result);
+$row = $result->fetchArray();
 $thumb_pic_url = get_pic_url($row, 'thumb');
 
 if ($what == 'comment') {
     $result = cpg_db_query("SELECT msg_id, msg_author, msg_body, UNIX_TIMESTAMP(msg_date) AS msg_date, author_id, author_md5_id, msg_raw_ip, msg_hdr_ip, approval FROM {$CONFIG['TABLE_COMMENTS']} WHERE msg_id='$cid' AND approval = 'YES' AND pid='$pid'");
-    if (!mysql_num_rows($result)) {
+    if (!$result->numRows()) {
         cpg_die(ERROR, $lang_errors['non_exist_comment'], __FILE__, __LINE__);
     }
 
-    $row = mysql_fetch_array($result);
+    $row = $result->fetchArray();
     $comment = bb_decode($row['msg_body']);
     if ($CONFIG['enable_smilies']) {
         $comment = process_smilies($comment);
