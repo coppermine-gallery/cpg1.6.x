@@ -1511,6 +1511,7 @@ $lang_install['title_file_check'] = 'Checking installation files';
 $lang_install['title_finished'] = 'Installation completed';
 $lang_install['title_imp'] = 'Image package selection';
 $lang_install['title_imp_test'] = 'Testing image library';
+$lang_install['title_dbase_type'] = 'Select Database Engine to use';
 $lang_install['title_mysql_db_sel'] = 'MySQL database selection';
 $lang_install['title_mysql_pop'] = 'Creating database structure';
 $lang_install['title_mysql_user'] = 'MySQL user authentication';

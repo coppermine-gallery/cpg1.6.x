@@ -32,11 +32,12 @@ define('STEP_VERSIONCHECK', 2);
 define('STEP_FOLDER_PERMISSIONS', 3);
 define('STEP_SELECT_IMG_PROC', 4);
 define('STEP_TEST_IMG_PROC', 5);
-define('STEP_DB_INFO', 6);
-define('STEP_DB_SELECT', 7);
-define('STEP_DB_INIT', 8);
-define('STEP_SET_ADMIN', 9);
-define('STEP_FINALISE', 10);
+define('STEP_DB_TYPE', 6);
+define('STEP_DB_INFO', 7);
+define('STEP_DB_SELECT', 8);
+define('STEP_DB_INIT', 9);
+define('STEP_SET_ADMIN', 10);
+define('STEP_FINALISE', 11);
 
 // Set global vars
 $LINEBREAK = "\r\n"; // For compatibility both on Windows as well as *nix
@@ -354,14 +355,28 @@ switch($step) {
         if ($error != '') {
             html_error();
         } else {
-            setTmpConfig('step', STEP_DB_INFO);
+            setTmpConfig('step', STEP_DB_TYPE);
         }
         html_content($content);
         html_footer();
         break;
 
+	case STEP_DB_TYPE:		// Ask user to select database type to be used
+        $page_title = $language['title_dbase_type'];
+        setTmpConfig('step', STEP_DB_INFO);
+        html_header();
+        html_dbase_type();
+        html_footer();
+
     case STEP_DB_INFO:     // Ask user for mysql host, username and password, try to establish a connection using that info
-        $page_title = $language['title_mysql_user'];
+    	$db_type = $superCage->post->getAlnum('db_type');
+    	if (!$db_type) {
+    		$db_type = $config['db_type'];
+    	} else {
+    		setTmpConfig('db_type', $db_type);
+    	}
+    	require_once 'include/database/'.$db_type.'/install.php';
+        $page_title = $language['title_'.$db_type.'_user'];
         // check if we are trying to test the connection
         if ($superCage->post->keyExists('update_check_connection')
                 || (isset($config['db_host']) && $superCage->post->keyExists('db_host')))
@@ -373,7 +388,8 @@ switch($step) {
             setTmpConfig('db_password', $superCage->post->getRaw('db_password'));
 
             // test the connection
-            checkSqlConnection();
+            $con_check = 'check'.ucfirst($db_type).'Connection';
+            $con_check();
         }
         html_header();
         if ($error != '') {
@@ -383,12 +399,15 @@ switch($step) {
                 setTmpConfig('step', STEP_DB_SELECT);
             }
         }
-        html_mysql_start();
+        $html_start = 'html_'.$db_type.'_start';
+        $html_start();
         html_footer();
         break;
 
     case STEP_DB_SELECT:     // Ask the user if he wants to use an existing db or if he wants the installer to create a new database. Try to perform the selected choice. Ask for the table prefix
-        $page_title = $language['title_mysql_db_sel'];
+    	$db_type = $config['db_type'];
+    	require_once 'include/database/'.$db_type.'/install.php';
+        $page_title = $language['title_'.$db_type.'_db_sel'];
         // save the db data from previous step
         if ($superCage->post->keyExists('db_host')  && !isset($config['db_populated'])) {
             // here we do not use the setTmpConfig function, as this function always writes the new file
@@ -403,23 +422,28 @@ switch($step) {
                 && trim($superCage->post->getRaw('new_db_name')) != '')
         {
             // try to create a new database.
-            createMysqlDb(trim($superCage->post->getRaw('new_db_name'))); // no /\:*?"<>|.
+            $createDb = 'create'.ucfirst($db_type).'Db';
+            $createDb(trim($superCage->post->getRaw('new_db_name'))); // no /\:*?"<>|.
             // save table prefix
             setTmpConfig('db_prefix', $superCage->post->getRaw('db_prefix')); // no /\:*?"<>|.
         }
-        checkSqlConnection();
+        $con_check = 'check'.ucfirst($db_type).'Connection';
+        $con_check();
         html_header();
         if ($error != '') {
             html_error();
         } else {
-            html_mysql_select_db();
+        	$html_select_db = 'html_'.$db_type.'_select_db';
+            $html_select_db();
             setTmpConfig('step', STEP_DB_INIT);
         }
         html_footer();
         break;
 
     case STEP_DB_INIT:     // save db_prefix/_name and finally create the tables
-        $page_title = $language['title_mysql_pop'];
+    	$db_type = $config['db_type'];
+    	require_once 'include/database/'.$db_type.'/install.php';
+        $page_title = $language['title_'.$db_type.'_pop'];
         // save the db data from previous step
         if ($superCage->post->keyExists('db_name') && !isset($config['db_populated'])) {
             setTmpConfig('db_name', $superCage->post->getRaw('db_name'));
@@ -429,7 +453,7 @@ switch($step) {
         $set_populated = false;
         if (!isset($config['db_populated']) && isset($config['db_name'])) {
             $msg = $language['db_populating'];
-            if (populateMysqlDb()) {
+            if (populateDatabase()) {
                 $set_populated = true;
             }
         } elseif (!isset($config['db_populated']) && !isset($config['db_name'])) {
@@ -463,6 +487,8 @@ switch($step) {
         break;
 
     case STEP_SET_ADMIN:     // Ask for coppermine admin username, password and email address
+    	$db_type = $config['db_type'];
+    	require_once 'include/database/'.$db_type.'/install.php';
         $page_title = $language['title_admin'];
         if ($superCage->post->keyExists('admin_username')) {
             // check validity of admin details
@@ -475,7 +501,8 @@ switch($step) {
             }
 
             // we need a db connection to use getEscaped()
-            checkSqlConnection();
+            $con_check = 'check'.ucfirst($db_type).'Connection';
+            $con_check();
 
             $admin_password = $superCage->post->getEscaped('admin_password');
             $admin_password_verif = $superCage->post->getEscaped('admin_password_verif');
@@ -618,7 +645,7 @@ function html_stepper()
     $tpl_step_done = '<td class="stepper_d" onMouseOver="this.className=\'stepper_do\'" onMouseOut="this.className=\'stepper_d\'" onclick="document.location=\'install.php?step=%s\'"><a href="install.php?step=%s" title="Step: %s">%s</a></td>';
     $tpl_step_current = '<td class="stepper_c"><span title="Step: %s">%s</span></td>';
     $tpl_step_notyet = '<td class="stepper_n"><span title="Step: %s">%s</span></td>';
-    for($i = 1; $i < 11; $i++) {
+    for($i = 1; $i < 12; $i++) {
         if ($i == $step) {
             $stepper .= sprintf($tpl_step_current, $i, $i);
         } elseif (isset($config['steps_done']) && is_array($config['steps_done']) && in_array($i, $config['steps_done'])) {
@@ -829,10 +856,60 @@ EOT;
 EOT;
 }
 
+/* html_dbase_type()
+ *
+ * prints page for selection of database type
+ */
+function html_dbase_type()
+{
+    global $language, $step, $config, $icon;
+
+    $step_next = $step + 1;
+
+	$dbpath = 'include/database/';
+	$dh  = opendir($dbpath);
+	while (false !== ($dname = readdir($dh))) {
+		if ($dname !== '.' && $dname !== '..' && is_dir($dbpath.$dname))
+			$dtypes[] = $dname;
+	}
+	sort($dtypes);
+	$opts = '';
+	foreach ($dtypes as $dtype) {
+		$opts .= '<option value="'.$dtype.'"';
+		require_once $dbpath.$dtype.'/install.php';
+		$ifunc = 'dbcheck_'.$dtype;
+		if (function_exists($ifunc) && $ifunc()===true) {
+			if ($dtype == 'mysqli') $opts .= ' selected';
+			$opts .= '>'.strtoupper($dtype);
+		} else {
+			$opts .= ' disabled>'.strtoupper($dtype).' ('.$ifunc().')';
+		}
+		$opts .= '</option>';
+	}
+
+	echo <<<EOT
+	<form action="install.php?step={$step_next}" name="cpgform" id="cpgform" method="post" style="margin:0px;padding:0px">
+		<table width="100%" border="0" cellpadding="0" cellspacing="1" class="maintable">
+			<tr>
+				<td class="tableb" colspan="2">
+					<select name="db_type">{$opts}</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center" class="tableh2">
+					<button type="submit" class="button" name="submit" value="{$language['continue']}">{$language['continue']}{$icon['submit']}</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+EOT;
+}
+
 /* html_mysql_start()
  *
  * prints page with basic MySql config
  */
+/*
 function html_mysql_start()
 {
     global $language, $step, $mysql_connected, $config, $icon;
@@ -908,12 +985,13 @@ EOT;
 EOT;
 }
 // end function html_mysql_start
-
+*/
 
 /* html_mysql_select_db()
  *
  * prints page for db selection
  */
+/*
 function html_mysql_select_db()
 {
     global $language, $step, $config, $icon;
@@ -967,7 +1045,7 @@ function html_mysql_select_db()
 EOT;
 }
 // end function html_mysql_select_db
-
+*/
 
 /* html_admin()
  *
@@ -1517,6 +1595,8 @@ function getIM()
 *
 * @return bool
 */
+
+/*
 $mysql_connection;          // (mysql_connection) connection to the db
 $mysql_connected = false;   // (bool) connected to the db?
 function checkSqlConnection()
@@ -1558,6 +1638,7 @@ function checkSqlConnection()
         return true;
     }
 }
+*/
 
 /*
 * getMysqlDbs()
@@ -1567,6 +1648,7 @@ function checkSqlConnection()
 *
 * @return string $db_select
 */
+/*
 function getMysqlDbs()
 {
     // Get a connection with the db
@@ -1598,7 +1680,7 @@ function getMysqlDbs()
         return false;
     }
 }
-
+*/
 /*
 * createMysqlDb()
 *
@@ -1607,6 +1689,7 @@ function getMysqlDbs()
 *
 * @return bool
 */
+/*
 function createMysqlDb($db_name)
 {
     global $language;
@@ -1625,15 +1708,16 @@ function createMysqlDb($db_name)
     }
     return true;
 }
-
+*/
 /*
-* populateMysqlDb()
+* populateDatabase()
 *
 * Executes sql file commands in db
 *
 * @return bool
 */
-function populateMysqlDb()
+
+function populateDatabase()
 {
     global $config, $language;
 
@@ -1650,7 +1734,8 @@ function populateMysqlDb()
         set_magic_quotes_runtime(0);
     }
     // Get a connection with the db.
-    if (!checkSqlConnection()) {
+    $con_check = 'check'.ucfirst($config['db_type']).'Connection';
+    if (!$con_check()) {
         return false;
     }
     // Check if we can read the db_schema file
@@ -1722,9 +1807,8 @@ function populateMysqlDb()
             $table = $table_match[2];
             $is_table = true;
         }
-        if (! mysql_query($q, $GLOBALS['mysql_connection'])) {
-            $GLOBALS['error'] = $language['mysql_error'] . mysql_error($GLOBALS['mysql_connection'])
-                . ' ' . $language['on_q'] . " '$q'";
+        if (! cpg_db_query($q)) {
+            $GLOBALS['error'] = $language['mysql_error'] . cpg_db_getError() . ' ' . $language['on_q'] . " '$q'";
             if ($is_table) {
                 $GLOBALS['temp_data'] .= "<br />" . sprintf($language['create_table'], $table)
                     . '&nbsp;&nbsp;&nbsp;&nbsp;' . $language['status'] . ':... ' . $language['nok'];
@@ -1780,12 +1864,12 @@ function createAdmin()
     $sql_query = remove_remarks($sql_query);
     $sql_query = split_sql_file($sql_query, ';');
     // Get a connection with the db.
-    if (!checkSqlConnection()) {
-        return false;
-    }
+//    if (!checkSqlConnection()) {
+//        return false;
+//    }
     foreach($sql_query as $q) {
-        if (!mysql_query($q, $GLOBALS['mysql_connection'])) {
-            $GLOBALS['error'] = $language['mysql_error'] . mysql_error($GLOBALS['mysql_connection']) . ' ' . $language['on_q'] . " '$q'";
+        if (!cpg_db_query($q)) {
+            $GLOBALS['error'] = $language['mysql_error'] . cpg_db_getError() . ' ' . $language['on_q'] . " '$q'";
             return false;
         }
     }
@@ -1831,15 +1915,16 @@ function writeConfig()
     $config = <<<EOT
 <?php
 // Coppermine configuration file
-// MySQL configuration
-\$CONFIG['dbserver'] =                         '{$config['db_host']}';        // Your database server
-\$CONFIG['dbuser'] =                         '{$config['db_user']}';        // Your mysql username
-\$CONFIG['dbpass'] =                         '{$config['db_password']}';                // Your mysql password
-\$CONFIG['dbname'] =                         '{$config['db_name']}';        // Your mysql database name
+// Database configuration
+\$CONFIG['dbtype'] =      '{$config['db_type']}';			// Your database type
+\$CONFIG['dbserver'] =    '{$config['db_host']}';			// Your database server
+\$CONFIG['dbuser'] =      '{$config['db_user']}';			// Your database username
+\$CONFIG['dbpass'] =      '{$config['db_password']}';			// Your database password
+\$CONFIG['dbname'] =      '{$config['db_name']}';			// Your database name
 
 
 // MySQL TABLE NAMES PREFIX
-\$CONFIG['TABLE_PREFIX'] =                '{$config['db_prefix']}';
+\$CONFIG['TABLE_PREFIX'] =         '{$config['db_prefix']}';
 $end_php_tag
 EOT;
     //write config file to disk
