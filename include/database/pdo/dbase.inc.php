@@ -15,40 +15,33 @@
   $Revision$
 **********************************************/
 
-/** MySQL database implementation **/
+/** PDO database implementation **/
 
 class CPG_Dbase
 {
-	protected $linkid = null;
+	protected $_instance;
 	protected $connected = false;
 	protected $errnum = 0;
 	protected $error = '';
+	protected $stmt = null;
 
 	public function __construct ($cfg)
 	{
-		$link = @mysql_connect($cfg['dbserver'], $cfg['dbuser'], $cfg['dbpass']);
-
-		if ($link) {
-			$this->linkid = $link;
-			if (mysql_select_db($cfg['dbname'], $link)) {
-				$this->connected = true;
-			} else {
-				$this->errnum = mysql_errno();
-				$this->error = mysql_error();
-			}
-			if (!empty($cfg['dbcharset'])) {
-				mysql_query("SET NAMES '{$cfg['dbcharset']}'", $link);
-			}
-		} else {
-			$this->errnum = mysql_errno();
-			$this->error = mysql_error();
+		list($db_ext, $db_sub) = explode(':', $cfg['dbtype']);
+		try {
+			$dsn = "{$db_sub}:host=" . $cfg['dbserver'] . ';dbname='.$cfg['dbname'];
+			$db = new PDO($dsn, $cfg['dbuser'], $cfg['dbpass']);
+			$this->_instance = $db;
+			$this->connected = true;
+		} catch (PDOException $e) {
+			$this->error = $e->getMessage();
 		}
 	}
 
 	public function query ($sql)
 	{
-		$rslt = mysql_query($sql, $this->linkid);
-		return new CPG_DbaseResult($rslt);
+		$this->stmt = $this->_instance->query($sql);
+		return new CPG_DbaseResult($this->stmt);
 	}
 
 	public function execute ()
@@ -68,17 +61,18 @@ class CPG_Dbase
 
 	public function escapeStr ($str)
 	{
-		return mysql_real_escape_string($str, $this->linkid);
+		//need to remove single quote chars that PDO places around string
+		return trim($this->_instance->quote($str), '\'');
 	}
 
 	public function insertId ()
 	{
-		return mysql_insert_id($this->linkid);
+		return $this->_instance->lastInsertId();
 	}
 
 	public function affectedRows ()
 	{
-		return mysql_affected_rows($this->linkid);
+		return $this->stmt->rowCount();
 	}
 
 }
@@ -94,12 +88,12 @@ class CPG_DbaseResult
 
 	public function fetchRow ()
 	{
-		return mysql_fetch_row($this->qresult);
+		return $this->qresult->fetch(PDO::FETCH_NUM);
 	}
 
 	public function fetchAssoc ()
 	{
-		return mysql_fetch_assoc($this->qresult);
+		return $this->qresult->fetch(PDO::FETCH_ASSOC);
 	}
 
 	public function fetchAssocAll ()
@@ -109,18 +103,20 @@ class CPG_DbaseResult
 
 	public function fetchArray ()
 	{
-		return mysql_fetch_array($this->qresult);
+		return $this->qresult->fetch(PDO::FETCH_BOTH);
 	}
 
 	public function result ($row=0, $fld=0)
 	{
-		return mysql_result($this->qresult, $row, $fld);
+		$row = $this->qresult->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_ABS, $row);
+		return $r ? $r[$fld] : false;
 	}
 
 	public function numRows ()
 	{
-		$num = mysql_num_rows($this->qresult);
-		return $num;
+		$i = 0;
+		if ($this->qresult) while ($this->qresult->fetch(PDO::FETCH_NUM)) { $i++; }
+		return $i;
 	}
 
 }

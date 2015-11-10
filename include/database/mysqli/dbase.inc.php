@@ -48,6 +48,7 @@ class CPG_Dbase
 
 	public function execute ()
 	{
+		// not currently used
 	}
 
 	public function isConnected ()
@@ -98,6 +99,7 @@ class CPG_DbaseResult
 
 	public function fetchAssocAll ()
 	{
+		// not currently used
 	}
 
 	public function fetchArray ()

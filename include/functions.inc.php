@@ -321,7 +321,7 @@ function cpg_db_last_insert_id()
 /**
  * cpg_db_affected_rows()
  *
- * Get the count of rows in last query
+ * Get the count of rows affected by last query
  *
  * @return integer $id
  **/
@@ -336,7 +336,7 @@ function cpg_db_affected_rows()
 /**
  * cpg_db_escape_string()
  *
- * Get the last inserted id of a query
+ * Escape a string for database purposes
  *
  * @param $str
  * @return

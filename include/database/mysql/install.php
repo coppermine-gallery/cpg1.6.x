@@ -17,11 +17,13 @@
 
 function dbcheck_mysql ()
 {
+	global $language;
 	return true;
 }
 
 global $mysql_connection;          // (mysql_connection) connection to the db
 global $mysql_connected;
+global $dbase_connected;
 $mysql_connected = false;   // (bool) connected to the db?
 function checkMysqlConnection()
 {
@@ -38,27 +40,28 @@ function checkMysqlConnection()
 
        // check for MySql support of PHP
         if (!function_exists('mysql_connect')) {
-            $GLOBALS['error'] = $language['no_mysql_support'];
+            $GLOBALS['error'] = sprintf($language['no_dbase_support'], 'MySQL');
             return false;
 
         // try to connect with given auth parameters
         } elseif (! $connect_id = @mysql_connect($config['db_host'],
                 $config['db_user'], $config['db_password']))
         {
-            $GLOBALS['error'] = $language['no_mysql_conn'] . '<br />'
-                . $language['mysql_error'] . mysql_error();
+            $GLOBALS['error'] = sprintf($language['no_dbase_conn'], 'MySQL', 'MySQL') . '<br />'
+                . $language['dbase_error'] . mysql_error();
             return false;
 
         // if a database is specified, try to select it.
         } elseif ($db_name != '') {
             if ( !mysql_select_db($db_name, $connect_id)) {
-                $GLOBALS['error'] = sprintf($language['mysql_wrong_db'], $db_name);
+                $GLOBALS['error'] = sprintf($language['dbase_wrong_db'], $db_name);
                 return false;
             }
         }
         // set our connection id
         $GLOBALS['mysql_connection'] = $connect_id;
         $GLOBALS['mysql_connected'] = true;
+        $GLOBALS['dbase_connected'] = true;
         return true;
     }
 }
@@ -77,7 +80,7 @@ function html_mysql_start()
         <table width="100%" border="0" cellpadding="0" cellspacing="1" class="maintable">
          <tr>
           <td class="tableb" colspan="2">
-          {$language['sect_mysql_info']}<br />
+          {$language['sect_dbase_info']}<br />
           </td>
          </tr>
          <tr>
@@ -89,7 +92,7 @@ EOT;
         echo <<<EOT
         <tr>
             <td></td>
-            <td align="left"><div class="cpg_message_success">{$language['mysql_succ']}</div></td>
+            <td align="left"><div class="cpg_message_success">{$language['dbase_succ']}</div></td>
         </tr>
 
 EOT;
@@ -99,20 +102,20 @@ EOT;
     $db_password = isset($config['db_password']) && $mysql_connected ? $config['db_password'] : '';
     echo <<<EOT
          <tr>
-          <td align="right">{$language['mysql_host']}</td>
+          <td align="right">{$language['dbase_host']}</td>
           <td><input type="text" class="textinput" name="db_host" value="$db_host" /></td>
          </tr>
          <tr>
-          <td align="right">{$language['mysql_username']}</td>
+          <td align="right">{$language['dbase_username']}</td>
           <td><input type="text" class="textinput" name="db_user" value="$db_user" /></td>
          </tr>
          <tr>
-          <td align="right">{$language['mysql_password']}</td>
+          <td align="right">{$language['dbase_password']}</td>
           <td><input type="password" name="db_password" value="$db_password" /></td>
          </tr>
          <tr>
          <td colspan="2" align="center">
-            <button type="submit" class="button" name="update_check_connection" value="{$language['mysql_test_connection']}">{$icon['test']}{$language['mysql_test_connection']}</button>
+            <button type="submit" class="button" name="update_check_connection" value="{$language['dbase_test_connection']}">{$icon['test']}{$language['dbase_test_connection']}</button>
           </td>
          </tr>
 
@@ -157,11 +160,11 @@ function html_mysql_select_db()
         <table width="100%" border="0" cellpadding="0" cellspacing="1" class="maintable">
          <tr>
           <td class="tableb" colspan="2">
-              {$language['sect_mysql_sel_db']}<br />
+              {$language['sect_dbase_sel_db']}<br />
           </td>
          </tr>
          <tr>
-          <td align="right">{$language['mysql_db_name']}</td>
+          <td align="right">{$language['dbase_db_name']}</td>
           <td>$dbs</td>
          </tr>
          <tr>
@@ -169,17 +172,17 @@ function html_mysql_select_db()
           <td>{$language['or']}</td>
          </tr>
          <tr>
-          <td align="right">{$language['mysql_create_db']}</td>
+          <td align="right">{$language['dbase_create_db']}</td>
           <td>
               <input type="text" class="textinput" name="new_db_name" />
-              <button type="submit" class="button" name="update_create_db" value="{$language['mysql_create_btn']}">{$icon['add']}{$language['mysql_create_btn']}</button>
+              <button type="submit" class="button" name="update_create_db" value="{$language['dbase_create_btn']}">{$icon['add']}{$language['dbase_create_btn']}</button>
           </td>
          </tr>
          <tr>
          <td colspan="2">&nbsp;</td>
          </tr>
          <tr>
-          <td align="right">{$language['mysql_tbl_pref']}</td>
+          <td align="right">{$language['dbase_tbl_pref']}</td>
           <td>
               <input type="text" class="textinput" name="db_prefix" value="$db_prefix" />
           </td>
@@ -245,8 +248,8 @@ function createMysqlDb($db_name)
     $query = 'CREATE DATABASE ' . $db_name;
     // try to create new db
     if (!mysql_query($query, $GLOBALS['mysql_connection'])) {
-        $GLOBALS['error'] = $language['mysql_no_create_db'] . '<br />'
-            . $language['mysql_error'] . '<br />' . mysql_error($GLOBALS['mysql_connection']);
+        $GLOBALS['error'] = $language['dbase_no_create_db'] . '<br />'
+            . $language['dbase_error'] . '<br />' . mysql_error($GLOBALS['mysql_connection']);
         return false;
     } else {
         setTmpConfig('db_name', $db_name);
@@ -255,7 +258,7 @@ function createMysqlDb($db_name)
 }
 
 
-if (!function_exists('cpg_db_escape_string')) {
+if (!function_exists('cpg_db_escape_string')) {	// Avoid errors when all install files are included together
 
 	function cpg_db_escape_string ($str)
 	{
