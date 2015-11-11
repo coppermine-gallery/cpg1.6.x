@@ -71,11 +71,11 @@ $recipient_email_warning = '';
 // Get picture thumbnail url
 $result = cpg_db_query("SELECT url_prefix, filepath, filename, title, caption, pwidth, pheight FROM {$CONFIG['TABLE_PICTURES']} AS p WHERE pid='$pid' $FORBIDDEN_SET");
 
-if (!mysql_num_rows($result)) {
+if (!$result->numRows()) {
     cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
 }
 
-$row = mysql_fetch_assoc($result);
+$row = $result->fetchAssoc();
 
 $thumb_pic_url = get_pic_url($row, 'thumb');
 $normal_pic_url = get_pic_url($row, 'normal');

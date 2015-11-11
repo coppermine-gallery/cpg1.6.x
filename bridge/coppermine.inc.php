@@ -129,13 +129,13 @@ if (isset($bridge_lookup)) {
                     $sql = "SELECT user_password, user_password_salt, user_password_hash_algorithm, user_password_iterations FROM {$this->usertable} WHERE $sql_user_email AND user_active = 'YES' LIMIT 1";
                     $result = cpg_db_query($sql, $this->link_id);
 
-                    if (!mysql_num_rows($result)) {
+                    if (!$result->numRows()) {
                         return false;
                     }
 
                     require 'include/passwordhash.inc.php';
-                    $password_params = mysql_fetch_assoc($result);
-                    mysql_free_result($result);
+                    $password_params = $result->fetchAssoc();
+//                    mysql_free_result($result);
 
                     // Check for user in users table
                     $sql = "SELECT user_id, user_name, user_password FROM {$this->usertable} WHERE $sql_user_email ";
@@ -148,12 +148,12 @@ if (isset($bridge_lookup)) {
 
                     $result = cpg_db_query($sql, $this->link_id);
 
-                    if (!mysql_num_rows($result)) {
+                    if (!$result->numRows()) {
                         return false;
                     }
 
-                    $USER_DATA = mysql_fetch_assoc($result);
-                    mysql_free_result($result);
+                    $USER_DATA = $result->fetchAssoc();
+//                    mysql_free_result($result);
 
                     // Update lastvisit value and salt password if needed
                     $salt_password = !$password_params['user_password_salt'] ? ', '.cpg_password_create_update_string($password) : '';
@@ -204,11 +204,11 @@ if (isset($bridge_lookup)) {
 
                 $result = cpg_db_query($sql, $this->link_id);
 
-                if ($row = mysql_fetch_array($result)){
+                if ($row = $result->fetchArray()){
                     $groups = array_merge($groups, explode(',', $row['user_group_list']));
                 }
 
-                mysql_free_result($result);
+//                mysql_free_result($result);
 
                 return $groups;
             }
@@ -267,9 +267,9 @@ if (isset($bridge_lookup)) {
                     $result = cpg_db_query($sql);
 
                     // If session exists...
-                    if (mysql_num_rows($result)) {
-                        $row = mysql_fetch_assoc($result);
-                        mysql_free_result($result);
+                    if ($result->numRows()) {
+                        $row = $result->fetchAssoc();
+//                        mysql_free_result($result);
 
                         $row['user_id'] = (int) $row['user_id'];
                         $this->sessiontime = $row['time'];
@@ -280,8 +280,8 @@ if (isset($bridge_lookup)) {
 
                         // If user exists, use the current session
                         if ($result) {
-                            $row = mysql_fetch_assoc($result);
-                            mysql_free_result($result);
+                            $row = $result->fetchAssoc();
+//                            mysql_free_result($result);
 
                             $pass = $row['user_password'];
                             $id = (int) $row['user_id'];
@@ -367,10 +367,10 @@ if (isset($bridge_lookup)) {
                             if ($randnum != "") {
                                     $sql = "SELECT session_id FROM {$this->sessionstable} WHERE session_id = '" . md5($session_id) . "'";
                                     $result = cpg_db_query($sql, $this->link_id);
-                                    if (!mysql_num_rows($result)) {
+                                    if (!$result->numRows()) {
                                             break;
                                     }
-                                    mysql_free_result($result);
+//                                    mysql_free_result($result);
                             }
                     }
                     return $randnum;
@@ -429,7 +429,7 @@ if (isset($bridge_lookup)) {
 
                         $udb_groups = array();
 
-                        while ($row = mysql_fetch_assoc($result))
+                        while ($row = $result->fetchAssoc())
                         {
                             $udb_groups[$row[$this->field['grouptbl_group_id']]+100] = utf_ucfirst(utf_strtolower($row[$this->field['grouptbl_group_name']]));
                         }
@@ -440,11 +440,11 @@ if (isset($bridge_lookup)) {
 
                 $result = cpg_db_query("SELECT group_id, group_name FROM {$CONFIG['TABLE_USERGROUPS']} WHERE 1");
 
-                while ($row = mysql_fetch_array($result)) {
+                while ($row = $result->fetchArray()) {
                     $cpg_groups[$row['group_id']] = $row['group_name'];
                 }
 
-                mysql_free_result($result);
+//                mysql_free_result($result);
                 /* Must be removed to allow new groups to be created in an unbridged install.
                 // Scan Coppermine groups that need to be deleted
                 foreach($cpg_groups as $c_group_id => $c_group_name) {

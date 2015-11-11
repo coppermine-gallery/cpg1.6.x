@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2015 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -168,19 +168,21 @@ $CONFIG['TABLE_LANGUAGE']      = $CONFIG['TABLE_PREFIX'].'languages';
 $CONFIG['TABLE_DICT']          = $CONFIG['TABLE_PREFIX'].'dict';
 
 // Connect to database
-$CONFIG['LINK_ID'] = cpg_db_connect();
+list($db_ext, $db_sub) = explode(':', $CONFIG['dbtype'].':');
+require 'include/database/'.$db_ext.'/dbase.inc.php';
+$CPGDB = new CPG_Dbase($CONFIG);
 
-if (!$CONFIG['LINK_ID']) {
-    log_write("Unable to connect to database: " . mysql_error(), CPG_DATABASE_LOG);
-    die('<strong>Coppermine critical error</strong>:<br />Unable to connect to database !<br /><br />MySQL said: <strong>' . mysql_error() . '</strong>');
+if (!$CPGDB->isConnected()) {
+    log_write("Unable to connect to database: " . $CPGDB->getError(), CPG_DATABASE_LOG);
+    die('<strong>Coppermine critical error</strong>:<br />Unable to connect to database !<br /><br />MySQL said: <strong>' . $CPGDB->getError() . '</strong>');
 }
 
 // Retrieve DB stored configuration
 $result = cpg_db_query("SELECT name, value FROM {$CONFIG['TABLE_CONFIG']}");
-while ( ($row = mysql_fetch_assoc($result)) ) {
+while ( ($row = $result->fetchAssoc()) ) {
     $CONFIG[$row['name']] = $row['value'];
 } // while
-mysql_free_result($result);
+//mysql_free_result($result);
 
 // Check if Coppermine is allowed to store cookies (cookie consent is required and user has agreed to store cookies)
 define('CPG_COOKIES_ALLOWED', ($CONFIG['cookies_need_consent'] && !$superCage->cookie->keyExists($CONFIG['cookie_name'].'_cookies_allowed') ? false : true));
@@ -270,8 +272,8 @@ $USER_DATA['allowed_albums'] = array();
 
 if (!GALLERY_ADMIN_MODE) {
     $result = cpg_db_query("SELECT aid FROM {$CONFIG['TABLE_ALBUMS']} WHERE moderator_group IN ".USER_GROUP_SET);
-    if (mysql_num_rows($result)) {
-        while ( ($row = mysql_fetch_assoc($result)) ) {
+    if ($result->numRows()) {
+        while ( ($row = $result->fetchAssoc()) ) {
             $USER_DATA['allowed_albums'][] = $row['aid'];
         }
     }
@@ -328,10 +330,10 @@ $CONFIG['default_lang'] = $CONFIG['lang'];      // Save default language
 $enabled_languages_array = array();
 
 $result = cpg_db_query("SELECT lang_id FROM {$CONFIG['TABLE_LANGUAGE']} WHERE enabled='YES'");
-while ($row = mysql_fetch_assoc($result)) {
+while ($row = $result->fetchAssoc()) {
     $enabled_languages_array[] = $row['lang_id'];
 }
-mysql_free_result($result);
+//mysql_free_result($result);
 
 // Process language selection if present in URI or in user profile or try
 // autodetection if default charset is utf-8
@@ -387,8 +389,8 @@ if ($superCage->cookie->keyExists($CONFIG['cookie_name'] . '_fav')) {
 if (USER_ID > 0) {
     $result = cpg_db_query("SELECT user_favpics FROM {$CONFIG['TABLE_FAVPICS']} WHERE user_id = ".USER_ID);
 
-    $row = mysql_fetch_assoc($result);
-    mysql_free_result($result);
+    $row = $result->fetchAssoc();
+//    mysql_free_result($result);
     if (!empty($row['user_favpics'])) {
         $FAVPICS = @unserialize(@base64_decode($row['user_favpics']));
     } else {
@@ -459,13 +461,13 @@ $query_string .= ") AND brute_force=0 LIMIT 1";
 
 $result = cpg_db_query($query_string);
 unset($query_string);
-if (mysql_num_rows($result)) {
+if ($result->numRows()) {
     pageheader($lang_common['error']);
     msg_box($lang_common['information'], $lang_errors['banned']);
     pagefooter();
     exit;
 }
-mysql_free_result($result);
+//mysql_free_result($result);
 
 // Retrieve the "private" album set
 if (!GALLERY_ADMIN_MODE && $CONFIG['allow_private_albums']) {

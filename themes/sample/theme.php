@@ -2047,7 +2047,7 @@ function theme_main_menu($which)
             if (USER_ID) {
                 $query = "SELECT null FROM {$CONFIG['TABLE_ALBUMS']} WHERE category='" . (FIRST_USER_CAT + USER_ID) . "' AND aid = '$album'";
                 $user_albums = cpg_db_query($query);
-                if (mysql_num_rows($user_albums)) {
+                if ($user_albums->numRows()) {
                     $upload_allowed = true;
                 } else {
                     $upload_allowed = false;
@@ -2058,7 +2058,7 @@ function theme_main_menu($which)
                 $query = "SELECT null FROM {$CONFIG['TABLE_ALBUMS']} WHERE category < " . FIRST_USER_CAT . " AND uploads='YES' AND (visibility = '0' OR visibility IN ".USER_GROUP_SET.") AND aid = '$album'";
                 $public_albums = cpg_db_query($query);
 
-                if (mysql_num_rows($public_albums)) {
+                if ($public_albums->numRows()) {
                     $upload_allowed = true;
                 } else {
                     $upload_allowed = false;
@@ -2287,12 +2287,12 @@ function theme_admin_mode_menu()
             // Query the languages table
             $help_lang = '';
             $results = cpg_db_query("SELECT lang_id, abbr FROM {$CONFIG['TABLE_LANGUAGE']} WHERE available='YES' AND enabled='YES'");
-            while ($row = mysql_fetch_array($results)) {
+            while ($row = $results->fetchArray()) {
                 if ($CONFIG['lang'] == $row['lang_id']) {
                     $help_lang = $row['abbr'];
                 }
             } // while
-            mysql_free_result($results);
+//            mysql_free_result($results);
             unset($row);
             if ($help_lang == '') {
                 $help_lang = 'en';
@@ -3622,7 +3622,7 @@ function theme_html_rating_box()
         if ($CURRENT_PIC_DATA['owner_id'] == $USER_DATA['user_id'] && $USER_DATA['user_id'] != 0 && ($CONFIG['rate_own_files'] == 0 || $CONFIG['rate_own_files'] == 2 && !USER_IS_ADMIN)) {
             // user is owner
             $rate_title = $lang_rate_pic['forbidden'];
-        } elseif (!mysql_num_rows($result_votes) && !mysql_num_rows($result_vote_stats)) {
+        } elseif (!$result_votes->numRows() && !$result_vote_stats->numRows()) {
             // user hasn't voted yet, show voting things
             $rate_title = $lang_rate_pic['rate_this_pic'];
             $user_can_vote = 'true';
@@ -3630,8 +3630,8 @@ function theme_html_rating_box()
             //user has voted
             $rate_title = $lang_rate_pic['already_voted'];
         }
-        mysql_free_result($result_votes);
-        mysql_free_result($result_vote_stats);
+//        mysql_free_result($result_votes);
+//        mysql_free_result($result_vote_stats);
 
         $rating_stars_amount = ($CONFIG['old_style_rating']) ? 5 : $CONFIG['rating_stars_amount'];
         $votes = $CURRENT_PIC_DATA['votes'] ? sprintf($lang_rate_pic['rating'], round(($CURRENT_PIC_DATA['pic_rating'] / 2000) / (5/$rating_stars_amount), 1), $rating_stars_amount, $CURRENT_PIC_DATA['votes']) : $lang_rate_pic['no_votes'];
@@ -3749,7 +3749,7 @@ function theme_html_comments($pid)
     }
 
     $result = cpg_db_query("SELECT COUNT(msg_id) FROM {$CONFIG['TABLE_COMMENTS']} WHERE pid='$pid'");
-    list($num) = mysql_fetch_row($result);
+    list($num) = $result->fetchRow();
 
     if ($num) {
 
@@ -3794,7 +3794,7 @@ function theme_html_comments($pid)
 
         $result = cpg_db_query("SELECT msg_id, msg_author, msg_body, UNIX_TIMESTAMP(msg_date) AS msg_date, author_id, author_md5_id, msg_raw_ip, msg_hdr_ip, pid, approval FROM {$CONFIG['TABLE_COMMENTS']} WHERE pid='$pid' ORDER BY msg_id $comment_sort_order LIMIT $start, $limit");
 
-        while ($row = mysql_fetch_assoc($result)) { // while-loop start
+        while ($row = $result->fetchAssoc()) { // while-loop start
             $user_can_edit = (GALLERY_ADMIN_MODE) || (USER_ID && USER_ID == $row['author_id'] && USER_CAN_POST_COMMENTS) || (!USER_ID && USER_CAN_POST_COMMENTS && ($USER['ID'] == $row['author_md5_id']));
             if (($user_can_edit != '' && $CONFIG['comment_user_edit'] != 0) || (GALLERY_ADMIN_MODE)) {
                 $comment_buttons = $tmpl_comments_buttons;
@@ -4085,10 +4085,10 @@ function theme_display_fullsize_pic()
     } elseif ($pid) {
         $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight FROM {$CONFIG['TABLE_PICTURES']} AS p " . "WHERE pid='$pid' $FORBIDDEN_SET";
         $result = cpg_db_query($sql);
-        if (!mysql_num_rows($result)) {
+        if (!$result->numRows()) {
             cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
         }
-        $row = mysql_fetch_assoc($result);
+        $row = $result->fetchAssoc();
         if (is_image($row['filename'])) {
             $pic_url = get_pic_url($row, 'fullsize');
             $geom = 'width="' . $row['pwidth'] . '" height="' . $row['pheight'] . '"';

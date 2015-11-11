@@ -67,7 +67,7 @@ function get_subcat_data($parent, $ident = '')
     $sql = "SELECT rgt, cid, parent, name, pos FROM {$CONFIG['TABLE_CATEGORIES']} ORDER BY lft ASC";
     $result = cpg_db_query($sql);
 
-    if (mysql_num_rows($result) > 0) {
+    if ($result->numRows() > 0) {
         $rowset = cpg_db_fetch_rowset($result);
 
         $right = array();
@@ -205,12 +205,12 @@ function form_alb_thumb()
     function cpg_get_alb_keyword($sql) {
         $keyword = '';
         $result = cpg_db_query($sql);
-        if (mysql_num_rows($result)) {
-            while ($row = mysql_fetch_assoc($result)) {
+        if ($result->numRows()) {
+            while ($row = $result->fetchAssoc()) {
                 $keyword .= "OR (keywords LIKE '%{$row['keyword']}%') ";
             }
         }
-        mysql_free_result($result);
+//        mysql_free_result($result);
         return $keyword;
     }
 
@@ -222,7 +222,7 @@ function form_alb_thumb()
         $results = cpg_db_query("SELECT pid, filepath, filename, url_prefix FROM {$CONFIG['TABLE_PICTURES']} AS p INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS a ON a.aid = p.aid WHERE (a.category = $cid $keyword) AND approved = 'YES' ORDER BY filename");
     }
 
-    if (mysql_num_rows($results) == 0) {
+    if ($results->numRows() == 0) {
 
         echo <<<EOT
 
@@ -254,7 +254,7 @@ EOT;
 
     $img_list = array(0 => $lang_modifyalb_php['last_uploaded']);
 
-    while ($picture = mysql_fetch_assoc($results)) {
+    while ($picture = $results->fetchAssoc()) {
 
         $thumb_url = get_pic_url($picture, 'thumb');
 
@@ -370,8 +370,8 @@ function verify_children($parent, $cid)
     $sql = "SELECT cid FROM {$CONFIG['TABLE_CATEGORIES']} WHERE parent = $parent";
     $result = cpg_db_query($sql);
 
-    if (($cat_count = mysql_num_rows($result)) > 0) {
-        while ($row = mysql_fetch_assoc($result)) {
+    if (($cat_count = $result->numRows()) > 0) {
+        while ($row = $result->fetchAssoc()) {
             $children[] = $row['cid'];
             verify_children($row['cid'], $cid);
         }
@@ -536,11 +536,11 @@ case 'editcat':
 
     $result = cpg_db_query("SELECT cid, name, parent, description, thumb FROM {$CONFIG['TABLE_CATEGORIES']} WHERE cid = $cid");
 
-    if (!mysql_num_rows($result)) {
+    if (!$result->numRows()) {
         cpg_die(ERROR, $lang_catmgr_php['unknown_cat'], __FILE__, __LINE__);
     }
 
-    $current_category = mysql_fetch_assoc($result);
+    $current_category = $result->fetchAssoc();
 
     break;
 
@@ -635,11 +635,11 @@ case 'deletecat':
 
     $result = cpg_db_query("SELECT parent FROM {$CONFIG['TABLE_CATEGORIES']} WHERE cid = $cid");
 
-    if (!mysql_num_rows($result)) {
+    if (!$result->numRows()) {
         cpg_die(ERROR, $lang_catmgr_php['unknown_cat'], __FILE__, __LINE__);
     }
 
-    $del_category = mysql_fetch_assoc($result);
+    $del_category = $result->fetchAssoc();
     $parent = $del_category['parent'];
 
     cpg_db_query("UPDATE {$CONFIG['TABLE_CATEGORIES']} SET parent = $parent, lft = 0 WHERE parent = $cid");

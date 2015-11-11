@@ -175,7 +175,7 @@ function html_album_list(&$alb_count)
 
     if (USER_IS_ADMIN) {
         $public_albums = cpg_db_query("SELECT aid, title FROM {$CONFIG['TABLE_ALBUMS']} WHERE category < " . FIRST_USER_CAT . " ORDER BY title");
-        if (mysql_num_rows($public_albums)) {
+        if ($public_albums->numRows()) {
             $public_albums_list = cpg_db_fetch_rowset($public_albums);
         } else {
             $public_albums_list = array();
@@ -186,7 +186,7 @@ function html_album_list(&$alb_count)
 
     if (USER_ID) {
         $user_albums = cpg_db_query("SELECT aid, title FROM {$CONFIG['TABLE_ALBUMS']} WHERE category='" . (FIRST_USER_CAT + USER_ID) . "' ORDER BY title");
-        if (mysql_num_rows($user_albums)) {
+        if ($user_albums->numRows()) {
             $user_albums_list = cpg_db_fetch_rowset($user_albums);
         } else {
             $user_albums_list = array();
@@ -753,7 +753,7 @@ function create_album()
 //  $params = array('{NEW_ALB_CREATED}' => sprintf($lang_xp_publish_php['new_alb_created'], $_POST['new_alb_name']),
     $params = array('{NEW_ALB_CREATED}' => sprintf($lang_xp_publish_php['new_alb_created'], $new_alb_name),
         '{CONTINUE}' => $lang_xp_publish_php['continue'],
-        '{ALBUM_ID}' => mysql_insert_id($CONFIG['LINK_ID']),
+        '{ALBUM_ID}' => cpg_db_last_insert_id(),
         );
 
     echo template_eval($template_create_album, $params);
@@ -787,25 +787,25 @@ function process_picture()
     // Check if the album id provided is valid
     if (!USER_IS_ADMIN) {
         $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid='$album' and category = '" . (USER_ID + FIRST_USER_CAT) . "'");
-        if (mysql_num_rows($result) == 0) simple_die(ERROR, $lang_db_input_php['unknown_album'], __FILE__, __LINE__);
-        $row = mysql_fetch_array($result);
-        mysql_free_result($result);
+        if ($result->numRows() == 0) simple_die(ERROR, $lang_db_input_php['unknown_album'], __FILE__, __LINE__);
+        $row = $result->fetchArray();
+//        mysql_free_result($result);
         $category = $row['category'];
     } else {
         $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid='$album'");
-        if (mysql_num_rows($result) == 0) simple_die(ERROR, $lang_db_input_php['unknown_album'], __FILE__, __LINE__);
-        $row = mysql_fetch_array($result);
-        mysql_free_result($result);
+        if ($result->numRows() == 0) simple_die(ERROR, $lang_db_input_php['unknown_album'], __FILE__, __LINE__);
+        $row = $result->fetchArray();
+//        mysql_free_result($result);
         $category = $row['category'];
     }
 
     // Get position
     $result = cpg_db_query("SELECT position FROM {$CONFIG['TABLE_PICTURES']} WHERE aid='$album' order by position desc");
-    if (mysql_num_rows($result) == 0) {
+    if ($result->numRows() == 0) {
              $position = 100;
     } else {
-             $row = mysql_fetch_array($result);
-             mysql_free_result($result);
+             $row = $result->fetchArray();
+//             mysql_free_result($result);
                      if ($row['position']) {
                      $position = $row['position'];
                              $position++;

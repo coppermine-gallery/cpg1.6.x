@@ -991,7 +991,7 @@ abstract class Inspekt
     }
 
     /**
-     * Returns the value escaped with mysql_real_escape_string.
+     * Returns the value escaped using database method.
      *
      * @param mixed $value
      * @return string
@@ -1005,9 +1005,9 @@ abstract class Inspekt
         } elseif (!empty($value)) {
             global $CONFIG;
             if (isset($CONFIG['LINK_ID']) && $CONFIG['LINK_ID']) {
-                return mysql_real_escape_string(htmlspecialchars($value, ENT_QUOTES), $CONFIG['LINK_ID']);
+                return cpg_db_escape_string(htmlspecialchars($value, ENT_QUOTES), $CONFIG['LINK_ID']);
             } else {
-                return mysql_real_escape_string(htmlspecialchars($value, ENT_QUOTES));
+                return cpg_db_escape_string(htmlspecialchars($value, ENT_QUOTES));
             }
         } else {
             return $value;

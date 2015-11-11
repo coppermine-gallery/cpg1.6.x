@@ -99,15 +99,15 @@ if (isset($album) && is_numeric($album)) {
 
     $result = cpg_db_query("SELECT category, title, aid, keyword, description, alb_password_hint FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid = $album");
 
-    if (mysql_num_rows($result) > 0) {
-        $CURRENT_ALBUM_DATA = mysql_fetch_assoc($result);
+    if ($result->numRows() > 0) {
+        $CURRENT_ALBUM_DATA = $result->fetchAssoc();
         $actual_cat = $CURRENT_ALBUM_DATA['category'];
         $CURRENT_ALBUM_KEYWORD = $CURRENT_ALBUM_DATA['keyword'];
         breadcrumb($actual_cat, $breadcrumb, $breadcrumb_text);
         $cat = - $album;
     }
 
-    mysql_free_result($result);
+//    mysql_free_result($result);
 
     if ($CONFIG['custom_sortorder_thumbs']) {
         //show sort options only when not a meta album
@@ -138,12 +138,12 @@ if (isset($album) && is_numeric($album)) {
 
     if ($cat < 0) {
         $result = cpg_db_query("SELECT category, title, aid, keyword, description, alb_password_hint FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid = " . (- $cat));
-        if (mysql_num_rows($result) > 0) {
-            $CURRENT_ALBUM_DATA = mysql_fetch_assoc($result);
+        if ($result->numRows() > 0) {
+            $CURRENT_ALBUM_DATA = $result->fetchAssoc();
             $actual_cat = $CURRENT_ALBUM_DATA['category'];
             $CURRENT_ALBUM_KEYWORD = $CURRENT_ALBUM_DATA['keyword'];
         }
-        mysql_free_result($result);
+//        mysql_free_result($result);
         get_meta_album_set($cat);
 
         breadcrumb($actual_cat, $breadcrumb, $breadcrumb_text);
@@ -159,11 +159,11 @@ if (isset($album) && is_numeric($album)) {
             $CURRENT_CAT_NAME = sprintf($lang_list_categories['xx_s_gallery'], $user_name);
         } else {
             $result = cpg_db_query("SELECT name FROM {$CONFIG['TABLE_CATEGORIES']} WHERE cid = $cat");
-            if (mysql_num_rows($result) == 0) {
+            if ($result->numRows() == 0) {
                 cpg_die(CRITICAL_ERROR, $lang_errors['non_exist_cat'], __FILE__, __LINE__);
             }
-            $row = mysql_fetch_assoc($result);
-            mysql_free_result($result);
+            $row = $result->fetchAssoc();
+//            mysql_free_result($result);
             $CURRENT_CAT_NAME = $row['name'];
         }
 
@@ -258,7 +258,7 @@ if ($CONFIG['allow_private_albums'] == 0 || !in_array($album, $FORBIDDEN_SET_DAT
     $password = md5($superCage->post->getEscaped('password'));
     $sql = "SELECT aid FROM {$CONFIG['TABLE_ALBUMS']} WHERE alb_password = '$password' AND aid = $album";
     $result = cpg_db_query($sql);
-    if (mysql_num_rows($result)) {
+    if ($result->numRows()) {
         $albpw = $superCage->cookie->getEscaped($CONFIG['cookie_name'] . '_albpw');
         if (!empty($albpw)) {
             $albpw = unserialize($albpw);
@@ -276,7 +276,7 @@ if ($CONFIG['allow_private_albums'] == 0 || !in_array($album, $FORBIDDEN_SET_DAT
 } else {
     $sql = "SELECT aid FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid = $album AND alb_password != ''";
     $result = cpg_db_query($sql);
-    if (mysql_num_rows($result)) {
+    if ($result->numRows()) {
         // This album has a password.
         // Check whether the cookie is set for the current albums password
         $albpw = $superCage->cookie->getEscaped($CONFIG['cookie_name'] . '_albpw');
@@ -286,7 +286,7 @@ if ($CONFIG['allow_private_albums'] == 0 || !in_array($album, $FORBIDDEN_SET_DAT
             if (isset($alb_pw[$album])) {
                 $sql = "SELECT aid FROM {$CONFIG['TABLE_ALBUMS']} WHERE alb_password = '{$alb_pw[$album]}' AND aid = $album";
                 $result = cpg_db_query($sql);
-                if (mysql_num_rows($result)) {
+                if ($result->numRows()) {
                     $valid = true; //The album password is correct. Show the album details.
                     get_private_album_set();
                 }

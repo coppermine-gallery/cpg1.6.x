@@ -221,7 +221,7 @@ class Inspekt_Cage
     }
 
     /**
-     * Returns the value escaped with mysql_real_escape_string.
+     * Returns the value escaped with database driver.
      *
      * @param mixed $value
      * @return string

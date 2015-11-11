@@ -69,9 +69,9 @@ class core_udb {
 
             $result = cpg_db_query($sql, $this->link_id);
 
-            if (mysql_num_rows($result)){
-                $row = mysql_fetch_assoc($result);
-                mysql_free_result($result);
+            if ($result->numRows()){
+                $row = $result->fetchAssoc();
+//                mysql_free_result($result);
 
                 $db_pass = $this->udb_hash_db($row['password']);
                 if ($db_pass === $cookie_pass) {
@@ -175,9 +175,9 @@ class core_udb {
 
         if (!$user_count) {
             $result = cpg_db_query("SELECT count(*) FROM {$this->usertable} WHERE 1", $this->link_id);
-            $nbEnr = mysql_fetch_array($result);
+            $nbEnr = $result->fetchArray();
             $user_count = $nbEnr[0];
-            mysql_free_result($result);
+//            mysql_free_result($result);
         }
 
         return $user_count;
@@ -245,7 +245,7 @@ class core_udb {
         }
 
         // Extract user list to an array
-        while ($user = mysql_fetch_assoc($result)) {
+        while ($user = $result->fetchAssoc()) {
             $userlist[] = $user;
         }
 
@@ -265,9 +265,9 @@ class core_udb {
             $sql = "SELECT {$this->field['username']} as user_name FROM {$this->usertable} WHERE {$this->field['user_id']} = '$uid'";
             $result = cpg_db_query($sql, $this->link_id);
 
-            if (mysql_num_rows($result)) {
-                $row = mysql_fetch_assoc($result);
-                mysql_free_result($result);
+            if ($result->numRows()) {
+                $row = $result->fetchAssoc();
+//                mysql_free_result($result);
                 $cache[$uid] = $row['user_name'];
             } else {
                 $cache[$uid] = '';
@@ -285,9 +285,9 @@ class core_udb {
         $sql = "SELECT {$this->field['user_id']} AS user_id FROM {$this->usertable} WHERE {$this->field['username']}  = '$username'";
         $result = cpg_db_query($sql, $this->link_id);
 
-        if (mysql_num_rows($result)) {
-            $row = mysql_fetch_array($result);
-            mysql_free_result($result);
+        if ($result->numRows()) {
+            $row = $result->fetchArray();
+//            mysql_free_result($result);
             return $row['user_id'];
         } else {
             return '';
@@ -332,35 +332,35 @@ class core_udb {
                         . "MIN(pub_upl_need_approval) AS pub_upl_need_approval, MIN( priv_upl_need_approval) AS  priv_upl_need_approval "
                         . "FROM {$CONFIG['TABLE_USERGROUPS']} WHERE group_id in (" .  implode(",", $groups). ")");
 
-        if (mysql_num_rows($result)) {
-            $USER_DATA = mysql_fetch_assoc($result);
+        if ($result->numRows()) {
+            $USER_DATA = $result->fetchAssoc();
             $result = cpg_db_query("SELECT group_name FROM {$CONFIG['TABLE_USERGROUPS']} WHERE group_id= " . $pri_group);
-            $temp_arr = mysql_fetch_assoc($result);
+            $temp_arr = $result->fetchAssoc();
             $USER_DATA["group_name"] = $temp_arr["group_name"];
         } else {
             $result = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_USERGROUPS']} WHERE group_id = $default_group_id");
-            if (!mysql_num_rows($result)) {
+            if (!$result->numRows()) {
                 $this->synchronize_groups();
                 die('<strong>Coppermine critical error</strong>:<br />The group table does not contain the Anonymous group !');
             }
-            $USER_DATA = mysql_fetch_assoc($result);
+            $USER_DATA = $result->fetchAssoc();
         }
-        mysql_free_result($result);
+//        mysql_free_result($result);
 
         $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_CATMAP']} WHERE group_id in (" .  implode(",", $groups). ")");
-        if (mysql_result($result, 0) > 0) {
+        if ($result->result(0) > 0) {
             $USER_DATA['can_create_public_albums'] = 1;
         } else {
             $USER_DATA['can_create_public_albums'] = 0;
         }
-        mysql_free_result($result);
+//        mysql_free_result($result);
 
         $USER_DATA["group_quota"] = ($USER_DATA["disk_min"])?$USER_DATA["disk_max"]:0;
         $USER_DATA['can_see_all_albums'] = $USER_DATA['has_admin_access'];
         $USER_DATA["group_id"] = $pri_group;
         $USER_DATA['groups'] = $groups;
         if (get_magic_quotes_gpc() == 0) {
-            $USER_DATA['group_name'] = mysql_real_escape_string($USER_DATA['group_name']);
+            $USER_DATA['group_name'] = cpg_db_escape_string($USER_DATA['group_name']);
         }
         return($USER_DATA);
     }
@@ -421,10 +421,10 @@ class core_udb {
                 . "{$this->field['website']} AS user_website "
             . "FROM  {$this->usertable} WHERE {$this->field['user_id']} = '$uid'";
         $result = cpg_db_query($sql, $this->link_id);
-        if (!mysql_num_rows($result)) {
+        if (!$result->numRows()) {
             cpg_die(ERROR, $lang_register_php['err_unk_user'], __FILE__, __LINE__);
         }
-        $user_data = mysql_fetch_array($result);
+        $user_data = $result->fetchArray();
         if (!isset($user_data['group_name'])) {
             $user_data['group_name'] = '';
         }
@@ -446,7 +446,7 @@ class core_udb {
         if (!isset($user_data['user_profile6'])) {
             $user_data['user_profile6'] = '';
         }
-        mysql_free_result($result);
+//        mysql_free_result($result);
 
         return $user_data;
     }
@@ -464,8 +464,8 @@ class core_udb {
                 . "WHERE ( category > " . FIRST_USER_CAT . " $FORBIDDEN_SET) "
                 . "GROUP BY category;";
         $result = cpg_db_query($sql);
-        $user_count = mysql_num_rows($result);
-        mysql_free_result($result);
+        $user_count = $result->numRows();
+//        mysql_free_result($result);
 
         if ($user_count == 0) {
             return false;
@@ -491,10 +491,10 @@ class core_udb {
                     . "ORDER BY category "
                     . "LIMIT $lower_limit, $users_per_page ";
             $result = cpg_db_query($sql);
-            while ($row = mysql_fetch_array($result)) {
+            while ($row = $result->fetchArray()) {
                 $users[] = $row;
             }
-            mysql_free_result($result);
+//            mysql_free_result($result);
 
         } else {
             // This is the way we collect the data without a direct join to the forum's user table
@@ -509,10 +509,10 @@ class core_udb {
                     . "LIMIT $lower_limit, $users_per_page ";
             $result = cpg_db_query($sql);
             $user_ids = array();
-            while ($row = mysql_fetch_array($result)) {
+            while ($row = $result->fetchArray()) {
                 $user_ids[] = $row['user_id'];
             }
-            mysql_free_result($result);
+//            mysql_free_result($result);
 
             $userlist = implode(',', $user_ids);
 
@@ -521,10 +521,10 @@ class core_udb {
                         . "FROM {$this->usertable} WHERE {$this->field['user_id']} IN ($userlist)", $this->link_id);
 
             $userdata = array();
-            while ($row = mysql_fetch_array($result)) {
+            while ($row = $result->fetchArray()) {
                 $userdata[$row['user_id']] = $row['user_name'];
             }
-            mysql_free_result($result);
+//            mysql_free_result($result);
 
             // This is the main query, similar to the one in the join implementation above but without the join to the user table
             // We use the pic's owner_id field as the user_id instead of using category - 10000 as the user_id
@@ -542,10 +542,10 @@ class core_udb {
             $result = cpg_db_query($sql);
 
             // Here we associate the username with the album details.
-            while ($row = mysql_fetch_array($result)) {
+            while ($row = $result->fetchArray()) {
                 $users[] = array_merge($row, array('user_name' => $userdata[$row['user_id']]));
             }
-            mysql_free_result($result);
+//            mysql_free_result($result);
         }
         return $users;
     }
@@ -565,7 +565,7 @@ class core_udb {
                 $result = cpg_db_query($sql, $this->link_id);
 
                 $udb_groups = array();
-                while ($row = mysql_fetch_assoc($result)) {
+                while ($row = $result->fetchAssoc()) {
                     $udb_groups[$row[$this->field['grouptbl_group_id']]+100] = $row[$this->field['grouptbl_group_name']];
                 }
             }
@@ -574,10 +574,10 @@ class core_udb {
         }
 
         $result = cpg_db_query("SELECT group_id, group_name FROM {$CONFIG['TABLE_USERGROUPS']} WHERE 1");
-        while ($row = mysql_fetch_array($result)) {
+        while ($row = $result->fetchArray()) {
             $cpg_groups[$row['group_id']] = $row['group_name'];
         }
-        mysql_free_result($result);
+//        mysql_free_result($result);
 
         // Scan Coppermine groups that need to be deleted
         foreach($cpg_groups as $c_group_id => $c_group_name) {
@@ -711,9 +711,9 @@ class core_udb {
             . "FROM {$this->usertable} "
             . "WHERE {$this->field['username']} = '$username' AND BINARY {$this->field['password']} = '$encpassword'";
         $results = cpg_db_query($sql);
-        if (mysql_num_rows($results)) {
-            $USER_DATA = mysql_fetch_assoc($results);
-            mysql_free_result($results);
+        if ($results->numRows()) {
+            $USER_DATA = $results->fetchAssoc();
+//            mysql_free_result($results);
             return $USER_DATA;
         } else {
             return false;
@@ -737,7 +737,7 @@ class core_udb {
             . "FROM {$this->usertable} "
             . "WHERE {$this->field['user_id']} = '$user_id'";
         $result = cpg_db_query($sql, $this->link_id);
-        if (mysql_num_rows($result)) {
+        if ($result->numRows()) {
             $row = cpg_db_fetch_row($result);
             return array('user_id' => $row['user_id'], 'pass_hash' => $row['pass_hash']);
         } else {

@@ -30,12 +30,12 @@ if ($output) { pageheader_mini($lang_gallery_admin_menu['key_lnk']); }
 $query = "SELECT keywords FROM {$CONFIG['TABLE_PICTURES']} WHERE keywords <> ''";
 $result = cpg_db_query($query);
 $i = 0;
-if (mysql_num_rows($result)) {
+if ($result->numRows()) {
 
     if ($output) { starttable('100%', $lang_gallery_admin_menu['key_lnk']); }
 
     cpg_db_query("TRUNCATE TABLE {$CONFIG['TABLE_DICT']}");
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $result->fetchAssoc()) {
         $keyArr = explode($CONFIG['keyword_separator'], $row['keywords']);
         foreach ($keyArr as $keyword) {
             $keyword = trim($keyword);
@@ -44,17 +44,17 @@ if (mysql_num_rows($result)) {
             }
             $query = "SELECT null FROM {$CONFIG['TABLE_DICT']} WHERE keyword = '$keyword'";
             $result2 = cpg_db_query($query);
-            if (!mysql_num_rows($result2)) {
+            if (!$result2->numRows()) {
                 $query = "INSERT INTO {$CONFIG['TABLE_DICT']} (keyword) VALUES ('$keyword')";
                 cpg_db_query($query);
                 if ($output) { echo '<tr><td class="tableh2">' . $keyword . '</td></tr>'; }
                 $i++ ;
             }
         }
-        mysql_free_result($result2);
+//        mysql_free_result($result2);
     }
     if ($output) { endtable(); }
-    mysql_free_result($result);
+//    mysql_free_result($result);
 }
 
 if ($output) {

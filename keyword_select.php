@@ -31,13 +31,13 @@ $result = cpg_db_query($query);
 
 $keywords = array();
 
-while ($row = mysql_fetch_assoc($result)) {
+while ($row = $result->fetchAssoc()) {
     $keywords[] = $row['keyword'];
 }
 
-$total = mysql_num_rows($result);
+$total = $result->numRows();
 
-mysql_free_result($result);
+//mysql_free_result($result);
 
 if ($superCage->get->keyExists('id')) {
     $formFieldId = $superCage->get->getInt('id');

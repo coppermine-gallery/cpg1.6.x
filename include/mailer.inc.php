@@ -33,7 +33,7 @@ function cpg_mail($to, $subject, $msg_body = '', $type = 'text/plain', $sender_n
         if (UDB_INTEGRATION == 'coppermine') {
             $to = array($CONFIG['gallery_admin_email']);
             $result = cpg_db_query("SELECT user_email FROM {$CONFIG['TABLE_USERS']} WHERE user_group = 1");
-            while ($row = mysql_fetch_assoc($result)) {
+            while ($row = $result->fetchAssoc()) {
                 if (!empty($row['user_email'])) {
                     $to[] = $row['user_email'];
                 }
