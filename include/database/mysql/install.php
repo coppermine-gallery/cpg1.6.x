@@ -18,6 +18,9 @@
 function dbcheck_mysql ()
 {
 	global $language;
+
+	if (!function_exists('mysql_connect')) return $language['not_available'];
+	if (mysql_get_client_info()[0] < 4) return $language['version_too_old'];
 	return true;
 }
 

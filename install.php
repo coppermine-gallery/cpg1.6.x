@@ -43,7 +43,6 @@ $LINEBREAK = "\r\n"; // For compatibility both on Windows as well as *nix
 
 // Set required versions
 $required_php_version = '5.0.0';
-$required_mysql_version = '3.23.23';
 
 // Set the parameters that normally get populated by the option form
 $displayOption_array = array(
@@ -184,7 +183,7 @@ switch($step) {
         break;
 
     case STEP_VERSIONCHECK:     // Are all mandatory files there
-        // Here we also do an extensive version check of php/mysql + check of javascript/cookies/register_globals
+        // Here we also do an extensive version check of php + check of javascript/cookies/register_globals
         // the cookie for this check is inserted in the previous step!
         // javascript is tested by altering a hidden form element in the previous step.
 
@@ -198,24 +197,6 @@ switch($step) {
             } else {
                 //user is using incompatible php version
                 $error .= sprintf($language['version_incompatible'], $php_version, 'PHP', $required_php_version) . '<br />';
-            }
-        }
-        //MySQL VERSION CHECK
-        ob_start();
-        phpinfo();
-        $php_info = ob_get_clean();
-        $php_info = stristr($php_info, 'Client API version');
-        preg_match('%([1-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})%', $php_info, $matches);
-        // preg_match('%<tr><td class="e">Client API version </td><td class="v">([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})%', $php_info, $matches);
-        $mysql_version = $matches[1];
-        if (version_compare($required_mysql_version, $mysql_version, '>=')) {
-            //check if php_version is actualy a version number
-            if ($mysql_version == '') {
-                //version could not be detected, show corresponding error
-                $error .= sprintf($language['version_undetected'], 'MySQL', $required_mysql_version) . '<br />';
-            } else {
-                //user is using incompatible php version
-                $error .= sprintf($language['version_incompatible'], $mysql_version, 'MySQL', $required_mysql_version) . '<br />';
             }
         }
         //COOKIE CHECK

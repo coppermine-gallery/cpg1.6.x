@@ -28,16 +28,20 @@ global $dbase_connected;
 $pdo_connected = false;   // (bool) connected to the db?
 function checkPdoConnection ($sub)
 {
-    global $config, $language;
+    global $config, $language, $error;
     $sub = $sub ?: 'mysql';
     if (isset($GLOBALS['pdo_connected']) && $GLOBALS['pdo_connected']) {
         return true;
     } else {
-        $connect_id = new PDO("{$sub}:host=" . $config['db_host'] . (isset($config['db_name']) ? (';dbname='.$config['db_name']) :''), $config['db_user'], $config['db_password']);
+    	try {
+        	$connect_id = new PDO("{$sub}:host=" . $config['db_host'] . (isset($config['db_name']) ? (';dbname='.$config['db_name']) :''), $config['db_user'], $config['db_password']);
+    		$GLOBALS['pdo_connection'] = $connect_id;
+    		$GLOBALS['pdo_connected'] = true;
+    		$GLOBALS['dbase_connected'] = true;
+		} catch (PDOException $e) {
+			$error = $e->getMessage();
+		}
     }
-    $GLOBALS['pdo_connection'] = $connect_id;
-    $GLOBALS['pdo_connected'] = true;
-    $GLOBALS['dbase_connected'] = true;
     return true;
 }
 

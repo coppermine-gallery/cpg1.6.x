@@ -18,6 +18,9 @@
 function dbcheck_mysqli ()
 {
 	global $language;
+
+	if (!function_exists('mysqli_connect')) return $language['not_available'];
+	if (mysqli_get_client_version() < 40000) return $language['version_too_old'];
 	return true;
 }
 

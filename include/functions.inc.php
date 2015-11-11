@@ -168,35 +168,6 @@ function user_save_profile()
    Database functions
  **************************************************************************/
 
-// Connect to the database
-
-/**
- * cpg_db_connect()
- *
- * Connect to the database
- **/
-
-/*function cpg_db_connect()
-{
-    global $CONFIG;
-
-    $result = @mysql_connect($CONFIG['dbserver'], $CONFIG['dbuser'], $CONFIG['dbpass']);
-
-    if (!$result) {
-        return false;
-    }
-
-    if (!mysql_select_db($CONFIG['dbname'])) {
-        return false;
-    }
-
-    if (!empty($CONFIG['dbcharset'])) {
-        cpg_db_query("SET NAMES '{$CONFIG['dbcharset']}'", $result);
-    }
-
-    return $result;
-}*/
-
 // Perform a database query
 
 /**
