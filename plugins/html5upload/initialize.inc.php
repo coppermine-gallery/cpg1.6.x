@@ -21,12 +21,8 @@ class Html5upload {
 
 	public function __construct ()
 	{
-		global $CONFIG, $lang_plugin_html5upload;
+		global $CONFIG;
 
-		require "./plugins/html5upload/lang/english.php";
-		if ($CONFIG['lang'] != 'english' && file_exists("./plugins/html5upload/lang/{$CONFIG['lang']}.php")) {
-			require "./plugins/html5upload/lang/{$CONFIG['lang']}.php";
-		}
 		$this->sys_max_chnk_size = min($this->to_bytes(ini_get('upload_max_filesize')), $this->to_bytes(ini_get('post_max_size')), $this->to_bytes(ini_get('memory_limit')));
 		$this->sys_max_upl_size = min($CONFIG['max_upl_size'] * 1024, $this->sys_max_chnk_size);
 	}

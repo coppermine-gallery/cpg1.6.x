@@ -168,7 +168,7 @@ $CONFIG['TABLE_LANGUAGE']      = $CONFIG['TABLE_PREFIX'].'languages';
 $CONFIG['TABLE_DICT']          = $CONFIG['TABLE_PREFIX'].'dict';
 
 // Connect to database
-list($db_ext, $db_sub) = explode(':', $CONFIG['dbtype']);
+list($db_ext, $db_sub) = explode(':', $CONFIG['dbtype'].':');
 require 'include/database/'.$db_ext.'/dbase.inc.php';
 $CPGDB = new CPG_Dbase($CONFIG);
 
