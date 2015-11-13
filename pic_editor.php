@@ -77,11 +77,11 @@ if ($pid > 0) {
 
     $result = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = '$pid'");
     $CURRENT_PIC = $result->fetchAssoc();
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid = '{$CURRENT_PIC['aid']}'");
     $CURRENT_ALBUM = $result->fetchAssoc();
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
 } else {
     cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);

@@ -206,11 +206,11 @@ function form_alb_thumb()
         $keyword = '';
         $result = cpg_db_query($sql);
         if ($result->numRows()) {
-            while ($row = $result->fetchAssoc()) {
+            while ($row = $result->fetchAssoc(true)) {
                 $keyword .= "OR (keywords LIKE '%{$row['keyword']}%') ";
             }
         }
-//        mysql_free_result($result);
+        $result->free();
         return $keyword;
     }
 

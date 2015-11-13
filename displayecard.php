@@ -56,7 +56,7 @@ if ((!is_array($CLEAN['data'])) && $CONFIG['log_ecards'] && (strlen($CLEAN['data
         $CLEAN['data']= @unserialize(@base64_decode($row['link']));
     }
 
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 }
 
 if (is_array($CLEAN['data'])) {
@@ -72,7 +72,7 @@ if (is_array($CLEAN['data'])) {
     }
 
     $row = $result->fetchAssoc();
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     if ($row['pwidth'] != 0 && $row['pheight'] != 0) {
         $image_size = compute_img_size($row['pwidth'], $row['pheight'], $CONFIG['picture_width'], 'normal');

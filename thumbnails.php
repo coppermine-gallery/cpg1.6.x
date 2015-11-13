@@ -107,7 +107,7 @@ if (isset($album) && is_numeric($album)) {
         $cat = - $album;
     }
 
-//    mysql_free_result($result);
+    $result->free();
 
     if ($CONFIG['custom_sortorder_thumbs']) {
         //show sort options only when not a meta album
@@ -143,7 +143,7 @@ if (isset($album) && is_numeric($album)) {
             $actual_cat = $CURRENT_ALBUM_DATA['category'];
             $CURRENT_ALBUM_KEYWORD = $CURRENT_ALBUM_DATA['keyword'];
         }
-//        mysql_free_result($result);
+        $result->free();
         get_meta_album_set($cat);
 
         breadcrumb($actual_cat, $breadcrumb, $breadcrumb_text);
@@ -163,7 +163,7 @@ if (isset($album) && is_numeric($album)) {
                 cpg_die(CRITICAL_ERROR, $lang_errors['non_exist_cat'], __FILE__, __LINE__);
             }
             $row = $result->fetchAssoc();
-//            mysql_free_result($result);
+//            mysqll_free_result($result);
             $CURRENT_CAT_NAME = $row['name'];
         }
 

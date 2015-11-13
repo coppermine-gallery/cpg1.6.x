@@ -200,7 +200,7 @@ function form_category($text, $name)
         if ($ALBUM_DATA['category'] != (FIRST_USER_CAT + USER_ID)) {
             $result = cpg_db_query("SELECT name FROM {$CONFIG['TABLE_CATEGORIES']} WHERE cid = '" . $ALBUM_DATA['category'] . "' LIMIT 1");
             $cat_name = cpg_db_fetch_row($result);
-//            mysql_free_result($result);
+//            mysqll_free_result($result);
             $cat_name = $cat_name['name'];
         }
 
@@ -313,7 +313,7 @@ EOT;
         -1 => $lang_modifyalb_php['random_image'],
     );
 
-    while ($picture = $results->fetchAssoc()) {
+    while ($picture = $results->fetchAssoc(true)) {
 
         $thumb_url = get_pic_url($picture, 'thumb');
 
@@ -326,7 +326,7 @@ EOT;
         $img_list[$picture['pid']] = htmlspecialchars($picture['filename']);
     }
 
-//    mysql_free_result($results);
+    $results->free();
 
     $thumbs_json = json_encode($thumbs);
 
@@ -452,11 +452,11 @@ function form_visibility($text, $name)
 
         $result = cpg_db_query("SELECT group_id, group_name FROM {$CONFIG['TABLE_USERGROUPS']}");
 
-        while ($group = $result->fetchAssoc()) {
+        while ($group = $result->fetchAssoc(true)) {
             $options[$group['group_id']] = sprintf($lang_modifyalb_php['group_only'], $group['group_name']);
         }
 
-//        mysql_free_result($result);
+        $result->free();
 
     } else {
 
@@ -467,11 +467,11 @@ function form_visibility($text, $name)
 
         $result = cpg_db_query("SELECT group_id, group_name FROM {$CONFIG['TABLE_USERGROUPS']} WHERE group_id IN " . USER_GROUP_SET);
 
-        while ($group = $result->fetchAssoc()) {
+        while ($group = $result->fetchAssoc(true)) {
             $options[$group['group_id']] = sprintf($lang_modifyalb_php['group_only'], $group['group_name']);
         }
 
-//        mysql_free_result($result);
+        $result->free();
     }
 
     echo <<< EOT
@@ -506,11 +506,11 @@ function form_moderator($text, $name)
 
     $result = cpg_db_query("SELECT group_id, group_name FROM {$CONFIG['TABLE_USERGROUPS']} WHERE group_id > 1");
 
-    while ($group = $result->fetchAssoc()) {
+    while ($group = $result->fetchAssoc(true)) {
         $options[$group['group_id']] = sprintf($lang_modifyalb_php['group_only'], $group['group_name']);
     }
 
-//    mysql_free_result($result);
+    $result->free();
 
     echo <<< EOT
     <tr>
@@ -588,7 +588,7 @@ function alb_list_box()
 
         $result = cpg_db_query("SELECT a.aid, a.title, c.name FROM {$CONFIG['TABLE_ALBUMS']} AS a INNER JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON a.category = c.cid WHERE a.category < '" . FIRST_USER_CAT . "'");
 
-        while ($row = $result->fetchAssoc()) {
+        while ($row = $result->fetchAssoc(true)) {
             // Add to multi-dim array for later sorting
             $rowset[] = array(
                 'cat'   => $row['name'],
@@ -597,12 +597,12 @@ function alb_list_box()
             );
         }
 
-//        mysql_free_result($result);
+        $result->free();
 
         //now we need to select the albums without a category
         $result = cpg_db_query("SELECT aid, title FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = 0");
 
-        while ($row = $result->fetchAssoc()) {
+        while ($row = $result->fetchAssoc(true)) {
             // Add to multi-dim array for later sorting
             $rowset[] = array(
                 'cat'   => $lang_modifyalb_php['no_cat'],
@@ -611,13 +611,13 @@ function alb_list_box()
             );
         }
 
-//        mysql_free_result($result);
+        $result->free();
 
         $sql = $cpg_udb->get_admin_album_list();
 
         $result = cpg_db_query($sql);
 
-        while ($row = $result->fetchAssoc()) {
+        while ($row = $result->fetchAssoc(true)) {
             // Add to multi-dim array for later sorting
             $rowset[] = array(
                 'cat'   => $lang_modifyalb_php['user_gal'],
@@ -626,7 +626,7 @@ function alb_list_box()
             );
         }
 
-//        mysql_free_result($result);
+        $result->free();
 
     } else {
         //Only list the albums owned by the user
@@ -634,7 +634,7 @@ function alb_list_box()
         //get albums in "my albums"
         $result = cpg_db_query("SELECT aid, title FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = ".(USER_ID + FIRST_USER_CAT)." AND owner = ".USER_ID);
 
-        while ($row = $result->fetchAssoc()) {
+        while ($row = $result->fetchAssoc(true)) {
             // Add to multi-dim array for later sorting
             $rowset[] = array(
                 'cat'   => $lang_modifyalb_php['my_gal'],
@@ -643,12 +643,12 @@ function alb_list_box()
             );
         }
 
-//        mysql_free_result($result);
+        $result->free();
 
         //get public albums
         $result = cpg_db_query("SELECT a.aid, a.title, c.name FROM {$CONFIG['TABLE_ALBUMS']} AS a INNER JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON a.category = c.cid WHERE a.owner = ".USER_ID);
 
-        while ($row = $result->fetchAssoc()) {
+        while ($row = $result->fetchAssoc(true)) {
             // Add to multi-dim array for later sorting
             $rowset[] = array(
                 'cat'   => $row['name'],
@@ -657,12 +657,12 @@ function alb_list_box()
             );
         }
 
-//        mysql_free_result($result);
+        $result->free();
 
         //now we need to select the albums without a category
         $result = cpg_db_query("SELECT aid, title FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = 0 AND owner = ".USER_ID);
 
-        while ($row = $result->fetchAssoc()) {
+        while ($row = $result->fetchAssoc(true)) {
             // Add to multi-dim array for later sorting
             $rowset[] = array(
                 'cat'   => $lang_modifyalb_php['no_cat'],
@@ -671,7 +671,7 @@ function alb_list_box()
             );
         }
 
-//        mysql_free_result($result);
+        $result->free();
     }
 
     // Sort by category and album title
@@ -820,7 +820,7 @@ if (GALLERY_ADMIN_MODE) {
         $hits = 0;
     }
 
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     $result = cpg_db_query("SELECT SUM(votes) FROM {$CONFIG['TABLE_PICTURES']} WHERE aid='{$CLEAN['album']}' AND votes > 0");
     $nbEnr = $result->fetchArray();
@@ -830,7 +830,7 @@ if (GALLERY_ADMIN_MODE) {
         $votes = 0;
     }
 
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} WHERE aid='{$CLEAN['album']}'");
     $nbEnr = $result->fetchArray();
@@ -840,7 +840,7 @@ if (GALLERY_ADMIN_MODE) {
         $files = 0;
     }
 
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_COMMENTS']} AS c INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.pid = c.pid WHERE aid='{$CLEAN['album']}'");
     $nbEnr = $result->fetchArray();
@@ -850,7 +850,7 @@ if (GALLERY_ADMIN_MODE) {
         $comments = 0;
     }
 
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     echo <<< EOT
     <br />

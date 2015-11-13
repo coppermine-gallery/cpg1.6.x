@@ -70,7 +70,7 @@ function display_group_list()
         3 => $lang_groupmgr_php['thumbnail_intermediate_full']
     );
 
-    while ($group = $result->fetchAssoc()) {
+    while ($group = $result->fetchAssoc(true)) {
         $group['group_name'] = $group['group_name'];
         $row_counter++;
         if ($row_counter == 1) {
@@ -202,7 +202,7 @@ EOT;
 
 EOT;
     } // while
-//    mysql_free_result($result);
+    $result->free();
 }
 
 function get_post_var($var)

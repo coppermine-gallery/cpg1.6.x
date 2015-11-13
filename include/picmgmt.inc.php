@@ -115,7 +115,7 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
         $result = cpg_db_query("SELECT sum(total_filesize) FROM {$CONFIG['TABLE_PICTURES']}, {$CONFIG['TABLE_ALBUMS']} WHERE  {$CONFIG['TABLE_PICTURES']}.aid = {$CONFIG['TABLE_ALBUMS']}.aid AND category = '" . (FIRST_USER_CAT + USER_ID) . "'");
         $record = $result->fetchArray();
         $total_space_used = $record[0];
-//        mysql_free_result($result);
+//        mysqll_free_result($result);
 
         if ((($total_space_used + $total_filesize)>>10) > $USER_DATA['group_quota'] ) {
             @unlink($image);

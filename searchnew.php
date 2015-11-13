@@ -340,11 +340,11 @@ function getallpicindb(&$pic_array, $startdir)
 
     $sql = "SELECT filepath, filename " . "FROM {$CONFIG['TABLE_PICTURES']} " . "WHERE filepath LIKE '$startdir%'";
     $result = cpg_db_query($sql);
-    while ($row = $result->fetchArray()) {
+    while ($row = $result->fetchArray(true)) {
         $pic_file = $row['filepath'] . replace_forbidden($row['filename']);
         $pic_array[$pic_file] = 1;
     }
-//    mysql_free_result($result);
+    $result->free();
 }
 
 /**
@@ -363,10 +363,10 @@ function getallalbumsindb(&$album_array)
     $sql = "SELECT aid, title " . "FROM {$CONFIG['TABLE_ALBUMS']} " . "WHERE 1";
     $result = cpg_db_query($sql);
 
-    while ($row = $result->fetchArray()) {
+    while ($row = $result->fetchArray(true)) {
         $album_array[$row['aid']] = $row['title'];
     }
-//    mysql_free_result($result);
+    $result->free();
 }
 
 /**

@@ -171,7 +171,7 @@ if ($sortDirection == 'ASC') {
 // determine the total number of entries
 $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_ECARDS']}");
 list($totalEcards) = $result->fetchRow();
-//mysql_free_result($result);
+//mysqll_free_result($result);
 
 if ($totalEcards == 0) {
     cpg_die(INFORMATION, $lang_errors['ecards_empty'], __FILE__, __LINE__, false);
@@ -333,7 +333,7 @@ $ecard_review_icon = cpg_fetch_icon('ecard_review', 0, $lang_db_ecard_php['ecard
 
 $result = cpg_db_query("SELECT eid, sender_name, sender_email, recipient_name, recipient_email, link, date, sender_ip FROM {$CONFIG['TABLE_ECARDS']} ORDER BY $sortBy $sortDirection LIMIT $startFrom, $countTo");
 
-while ($line = $result->fetchAssoc()) {
+while ($line = $result->fetchAssoc(true)) {
 
     $date = strftime($lang_date['lastcom'], $line['date']);
     list($line['ip_detail']) = CPGPluginAPI::filter('ip_information', array('', $line['sender_ip']));
@@ -382,7 +382,7 @@ EOT;
     }
 }
 
-//mysql_free_result($result);
+$result->free();
 
 echo <<< EOT
 

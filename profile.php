@@ -40,7 +40,7 @@ function cpgUserPicCount($uid)
 
     $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} WHERE owner_id = $uid");
     list($pic_count) = $result->fetchRow();
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     return $pic_count;
 }
@@ -52,11 +52,11 @@ function cpgUserThumb($uid)
     $query = "SELECT COUNT(*), MAX(pid) FROM {$CONFIG['TABLE_PICTURES']} AS p WHERE owner_id = '$uid' AND approved = 'YES' $FORBIDDEN_SET";
     $result = cpg_db_query($query);
     list($picture_count, $thumb_pid) = $result->fetchRow();
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_ALBUMS']} AS p WHERE category = '" . (FIRST_USER_CAT + $uid) . "' $FORBIDDEN_SET");
     list($album_count) = $result->fetchRow();
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     $user_thumb = '';
 
@@ -82,7 +82,7 @@ function cpgUserThumb($uid)
             $user_thumb = '<img src="' . $pic_url . '" class="image"' . $image_size['geom'] . ' border="0" alt="" />';
         }
 
-//        mysql_free_result($result);
+//        mysqll_free_result($result);
     }
 
     return $user_thumb;
@@ -94,10 +94,11 @@ function cpgUserLastComment($uid)
 
     $result = cpg_db_query("SELECT COUNT(*), MAX(msg_id) FROM {$CONFIG['TABLE_COMMENTS']} AS c INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.pid = c.pid WHERE approval = 'YES' AND author_id = '$uid' $FORBIDDEN_SET");
     list($comment_count, $lastcom_id) = $result->fetchRow();
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     $lastComArray = array(
-        'count' => 0
+        'count' => 0,
+        'thumb' => ''
     );
 
     if ($comment_count) {
@@ -129,7 +130,7 @@ function cpgUserLastComment($uid)
             );
         }
 
-//        mysql_free_result($result);
+//        mysqll_free_result($result);
     }
 
     return $lastComArray;
@@ -436,7 +437,7 @@ if ($superCage->post->keyExists('change_password') && USER_ID && UDB_INTEGRATION
     $sql = "SELECT user_password, user_password_salt, user_password_hash_algorithm, user_password_iterations FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '" . USER_ID . "' LIMIT 1";
     $result = cpg_db_query($sql);
     $password_params = $result->fetchAssoc();
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET ".cpg_password_create_update_string($new_pass)." WHERE user_id = '" . USER_ID . "' ";
     if (!$password_params['user_password_salt']) {
@@ -474,7 +475,7 @@ case 'edit_profile' :
     }
 
     $user_data = $result->fetchAssoc();
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     $group_list = '';
 
@@ -483,11 +484,11 @@ case 'edit_profile' :
         $sql = "SELECT group_name " . "FROM {$CONFIG['TABLE_USERGROUPS']} " . "WHERE group_id IN ({$user_data['user_group_list']}) AND group_id != {$user_data['user_group']} " . "ORDER BY group_name";
         $result = cpg_db_query($sql);
 
-        while ($row = $result->fetchArray()) {
+        while ($row = $result->fetchArray(true)) {
             $group_list .= $row['group_name'] . ', ';
         }
 
-//        mysql_free_result($result);
+        $result->free();
 
         if ($group_list) {
             $group_list = '<br /><em>(' . substr($group_list, 0, -2) . ')</em>';
@@ -567,6 +568,8 @@ EOT;
                      bb_decode(process_smilies($lastComArray['comment'])).
                      '</span>';
     } else {
+    	$lastComByText = '';
+    	$lastComDate = '';
         $lastComText = $lang_register_php['none'];
     }
 

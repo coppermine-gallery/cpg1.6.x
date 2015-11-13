@@ -43,7 +43,12 @@ class CPG_Dbase
 	public function query ($sql)
 	{
 		$rslt = mysqli_query($this->linkid, $sql);
-		return new CPG_DbaseResult($rslt);
+		if ($rslt === true) return true;
+		if ($rslt) {
+			return new CPG_DbaseResult($rslt);
+		} else {
+			return false;
+		}
 	}
 
 	public function execute ()
@@ -87,33 +92,40 @@ class CPG_DbaseResult
 		$this->qresult = $rslt;
 	}
 
-	public function fetchRow ()
+	public function fetchRow ($hold=false)
 	{
-		return mysqli_fetch_row($this->qresult);
+		$dat = mysqli_fetch_row($this->qresult);
+		if (!$hold) $this->free();
+		return $dat;
 	}
 
-	public function fetchAssoc ()
+	public function fetchAssoc ($hold=false)
 	{
-		return mysqli_fetch_assoc($this->qresult);
+		$dat = mysqli_fetch_assoc($this->qresult);
+		if (!$hold) $this->free();
+		return $dat;
 	}
 
-	public function fetchAssocAll ()
+	public function fetchAssocAll ($hold=false)
 	{
 		// not currently used
 	}
 
-	public function fetchArray ()
+	public function fetchArray ($hold=false)
 	{
-		return mysqli_fetch_array($this->qresult);
+		$dat = mysqli_fetch_array($this->qresult);
+		if (!$hold) $this->free();
+		return $dat;
 	}
 
-	public function result ($row=0, $fld=0)
+	public function result ($row=0, $fld=0, $hold=false)
 	{
 		$return = null;
 		if (mysqli_data_seek($this->qresult, $row)) {
 			$row = $this->qresult->fetch_row();
 			$return = $row[$fld];
 		}
+		if (!$hold) $this->free();
 		return $return;
 	}
 
@@ -121,6 +133,12 @@ class CPG_DbaseResult
 	{
 		$num = mysqli_num_rows($this->qresult);
 		return $num;
+	}
+
+	public function free ()
+	{
+		if ($this->qresult) mysqli_free_result($this->qresult);
+		$this->qresult = null;
 	}
 
 }

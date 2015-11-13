@@ -2287,12 +2287,12 @@ function theme_admin_mode_menu()
             // Query the languages table
             $help_lang = '';
             $results = cpg_db_query("SELECT lang_id, abbr FROM {$CONFIG['TABLE_LANGUAGE']} WHERE available='YES' AND enabled='YES'");
-            while ($row = $results->fetchArray()) {
+            while ($row = $results->fetchArray(true)) {
                 if ($CONFIG['lang'] == $row['lang_id']) {
                     $help_lang = $row['abbr'];
                 }
             } // while
-//            mysql_free_result($results);
+            $results->free();
             unset($row);
             if ($help_lang == '') {
                 $help_lang = 'en';
@@ -3630,8 +3630,8 @@ function theme_html_rating_box()
             //user has voted
             $rate_title = $lang_rate_pic['already_voted'];
         }
-//        mysql_free_result($result_votes);
-//        mysql_free_result($result_vote_stats);
+//        mysqll_free_result($result_votes);
+//        mysqll_free_result($result_vote_stats);
 
         $rating_stars_amount = ($CONFIG['old_style_rating']) ? 5 : $CONFIG['rating_stars_amount'];
         $votes = $CURRENT_PIC_DATA['votes'] ? sprintf($lang_rate_pic['rating'], round(($CURRENT_PIC_DATA['pic_rating'] / 2000) / (5/$rating_stars_amount), 1), $rating_stars_amount, $CURRENT_PIC_DATA['votes']) : $lang_rate_pic['no_votes'];

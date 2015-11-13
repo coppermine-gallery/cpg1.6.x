@@ -299,7 +299,7 @@ if ($cat < 0) {
         $CURRENT_ALBUM_DATA = $result->fetchAssoc();
         $CURRENT_ALBUM_KEYWORD = $CURRENT_ALBUM_DATA['keyword'];
     }
-//    mysql_free_result($result);
+    $result->free();
 }
 
 set_js_var('cookies_allowed', CPG_COOKIES_ALLOWED);
@@ -326,7 +326,7 @@ if (!$superCage->get->keyExists('fullsize') && ($pos < 0 || $pid > 0)) {
         }
 
         $row = $result->fetchAssoc();
-//        mysql_free_result($result);
+//        mysqll_free_result($result);
     }
 
     $album = (!$album) ? $row['aid'] : $album;
@@ -427,7 +427,7 @@ if (isset($CURRENT_PIC_DATA)) {
     }
 
     $CURRENT_ALBUM_DATA = $result->fetchAssoc();
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     if (is_numeric($album)) {
         $cat = - $album;

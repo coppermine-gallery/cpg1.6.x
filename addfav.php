@@ -66,7 +66,7 @@ if (!empty($CPG_REFERER) && strpos($CPG_REFERER, 'album=favpics')) {
             // No favorites (as we added the already removed $pid to the query), redirect to empty thumbnail page
             $ref = $CONFIG['site_url'] . "thumbnails.php?album=favpics";
         } else {
-            while ($row = $result->fetchAssoc()) {
+            while ($row = $result->fetchAssoc(true)) {
                 if ($row['pid'] == $pid && $new_pid) {
                     break;
                 }
@@ -77,7 +77,7 @@ if (!empty($CPG_REFERER) && strpos($CPG_REFERER, 'album=favpics')) {
             }
             $ref = str_replace("pid={$pid}", "pid={$new_pid}", $ref);
         }
-//        mysql_free_result($result);
+        $result->free();
     }
 }
 

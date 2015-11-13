@@ -35,7 +35,7 @@ if ($result->numRows()) {
     if ($output) { starttable('100%', $lang_gallery_admin_menu['key_lnk']); }
 
     cpg_db_query("TRUNCATE TABLE {$CONFIG['TABLE_DICT']}");
-    while ($row = $result->fetchAssoc()) {
+    while ($row = $result->fetchAssoc(true)) {
         $keyArr = explode($CONFIG['keyword_separator'], $row['keywords']);
         foreach ($keyArr as $keyword) {
             $keyword = trim($keyword);
@@ -51,10 +51,10 @@ if ($result->numRows()) {
                 $i++ ;
             }
         }
-//        mysql_free_result($result2);
+//        mysqll_free_result($result2);
     }
     if ($output) { endtable(); }
-//    mysql_free_result($result);
+    $result->free();
 }
 
 if ($output) {

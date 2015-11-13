@@ -118,7 +118,7 @@ if (!GALLERY_ADMIN_MODE && USER_ADMIN_MODE) {
             // user is only allowed to create public albums - get first category the user is allowed to create albums in
             $result = cpg_db_query("SELECT cm.cid FROM {$CONFIG['TABLE_CATMAP']} AS cm INNER JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON cm.cid = c.cid WHERE cm.group_id in (" .  implode(",", $USER_DATA['groups']). ") ORDER BY pos LIMIT 1");
             $cat = $result->result(0);
-//            mysql_free_result($result);
+//            mysqll_free_result($result);
         }
     }
     // only list the albums owned by the user

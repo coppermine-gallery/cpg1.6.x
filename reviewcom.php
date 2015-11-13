@@ -521,7 +521,7 @@ $rowcounter = 0;
 $totalMessageIdCollector = '';
 $loopCounter = 0;
 
-while ($row = $result->fetchArray()) {
+while ($row = $result->fetchArray(true)) {
     $loopCounter++;
     $thumb_url =  get_pic_url($row, 'thumb');
     if (!is_image($row['filename'])) {
@@ -622,7 +622,7 @@ while ($row = $result->fetchArray()) {
 EOT;
 }
 
-//mysql_free_result($result);
+$result->free();
 
 
 

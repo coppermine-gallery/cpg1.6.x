@@ -116,7 +116,7 @@ EOT;
         cpg_die($lang_forgot_passwd_php['forgot_passwd'], $lang_forgot_passwd_php['illegal_session']);
     }
 
-//    mysql_free_result($result);
+    $result->free();
 
     $sql = "SELECT {$cpg_udb->field['username']}, {$cpg_udb->field['email']} FROM {$cpg_udb->usertable} WHERE {$cpg_udb->field['user_id']} = {$CLEAN['id']}";
 
@@ -127,7 +127,7 @@ EOT;
     }
 
     $row = $result->fetchAssoc();
-//    mysql_free_result($sql);
+//    mysqll_free_result($sql);
 
     // Reset Password
     $new_password = $cpg_udb->make_password();

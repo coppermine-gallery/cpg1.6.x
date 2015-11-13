@@ -101,7 +101,7 @@ if ($superCage->get->keyExists('sort')) {
 $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_BANNED']} WHERE brute_force = 0");
 
 list($totalBanCount) = $result->fetchRow();
-//mysql_free_result($result);
+//mysqll_free_result($result);
 
 $total_pages = ceil($totalBanCount / $items_per_page);
 
@@ -205,7 +205,7 @@ EOT;
 
         $row_counter  = 0;
 
-        while ( ($row = $result->fetchAssoc()) ) {
+        while ( ($row = $result->fetchAssoc(true)) ) {
             if ($row['user_id']) {
                 $username     = get_username($row['user_id']);
                 $view_profile = '<a href="profile.php?uid=' . $row['user_id'] . '">' . cpg_fetch_icon('my_profile', 0, $lang_usermgr_php['view_profile']) . '</a>';
@@ -259,7 +259,7 @@ EOT;
             $row_counter++;
         }
     }
-//    mysql_free_result($result);
+    $result->free();
 }
 
 // Processing of form data --- start
@@ -274,14 +274,14 @@ if ($superCage->post->keyExists('submit')) {
 
     $action_output = '';
 
-    while ($row = $result->fetchAssoc()) {
+    while ($row = $result->fetchAssoc(true)) {
         $ban_database[$row['ban_id']]['user_id']   = $row['user_id'];
         $ban_database[$row['ban_id']]['user_name'] = addslashes($row['user_name']);
         $ban_database[$row['ban_id']]['email']     = $row['email'];
         $ban_database[$row['ban_id']]['ip_addr']   = $row['ip_addr'];
         $ban_database[$row['ban_id']]['expiry']    = $row['expiry'];
     }
-//    mysql_free_result($result);
+    $result->free();
 
     $posted_ban_id_array = $superCage->post->getAlnum('ban_id');
 
@@ -337,7 +337,7 @@ if ($superCage->post->keyExists('submit')) {
                 cpg_db_query("DELETE FROM {$CONFIG['TABLE_BANNED']} WHERE ban_id = $posted_ban_id");
                 $action_output .= '<li style="list-style-image:url(images/icons/ok.png)">' . sprintf($lang_banning_php['ban_record_x_deleted'], $posted_ban_id) . '</li>';
             }
-//            mysql_free_result($result);
+            $result->free();
         } // Delete the record --- end
         // Write the changes into the database --- start
         // Determine wether there has actually been a change --- start
@@ -514,7 +514,7 @@ if ($superCage->get->keyExists('ban_user') && $superCage->get->getInt('ban_user'
 
         unset($user_data);
     }
-//    mysql_free_result($result);
+    $result->free();
 } else {
     $comm_info = array(
         'msg_id' => 0,

@@ -66,10 +66,10 @@ function process_post_data()
 
     $user_album_set = array();
     $result = cpg_db_query("SELECT aid FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = " . (FIRST_USER_CAT + USER_ID) . " OR owner = " . USER_ID . " OR uploads = 'YES'");
-    while ($row = $result->fetchAssoc()) {
+    while ($row = $result->fetchAssoc(true)) {
         $user_album_set[$row['aid']] = 1;
     }
-//    mysql_free_result($result);
+    $result->free();
 
     $pid = $superCage->post->getInt('id');
     $aid = $superCage->post->getInt('aid');
@@ -96,7 +96,7 @@ function process_post_data()
         cpg_die(CRITICAL_ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
     }
     $pic = $result->fetchAssoc();
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     if (!GALLERY_ADMIN_MODE && !MODERATOR_MODE && !USER_ADMIN_MODE && !user_is_allowed() && !$CONFIG['users_can_edit_pics'] ) {
 
@@ -123,7 +123,7 @@ function process_post_data()
         cpg_die(CRITICAL_ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
     }
     $new_alb = $result->fetchAssoc();
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     cpg_trim_keywords($keywords);
 
@@ -332,7 +332,7 @@ if ($superCage->post->keyExists('apply_changes')) {
 $result = cpg_db_query("SELECT *, p.title AS title, p.votes AS votes FROM {$CONFIG['TABLE_PICTURES']} AS p INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS a ON a.aid = p.aid WHERE pid = '$pid'");
 
 $CURRENT_PIC = $result->fetchAssoc();
-//mysql_free_result($result);
+//mysqll_free_result($result);
 
 if (!(GALLERY_ADMIN_MODE || $CURRENT_PIC['category'] == FIRST_USER_CAT + USER_ID || ($CONFIG['users_can_edit_pics'] && $CURRENT_PIC['owner_id'] == USER_ID)) || !USER_ID) {
     cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);

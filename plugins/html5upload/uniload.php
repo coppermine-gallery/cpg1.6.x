@@ -333,7 +333,7 @@ if (!GALLERY_ADMIN_MODE) {
 		errorOut($lang_db_input_php['unknown_album'], 1, __FILE__, __LINE__);
 	}
 	$row = $result->fetchArray();
-//	mysql_free_result($result);
+//	mysqll_free_result($result);
 	$category = $row['category'];
 } else {
 	$result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid='$album'");
@@ -341,7 +341,7 @@ if (!GALLERY_ADMIN_MODE) {
 		errorOut($lang_db_input_php['unknown_album'], 1, __FILE__, __LINE__);
 	}
 	$row = $result->fetchArray();
-//	mysql_free_result($result);
+//	mysqll_free_result($result);
 	$category = $row['category'];
 }
 

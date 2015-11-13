@@ -158,7 +158,7 @@ $lang_file_orphan_array = $lang_file_array;
 
 // Let's populate the language list from the database
 $results = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_LANGUAGE']}");
-while ($row = $results->fetchArray()) {
+while ($row = $results->fetchArray(true)) {
         $lang_language_data[$row['lang_id']]['lang_id'] = $row['lang_id'];
         $lang_language_data[$row['lang_id']]['english_name'] = $row['english_name'];
         $lang_language_data[$row['lang_id']]['native_name'] = $row['native_name'];
@@ -172,7 +172,7 @@ while ($row = $results->fetchArray()) {
         }
         $lang_language_data[$row['lang_id']]['new'] = 'NO';
 } // while
-//mysql_free_result($results);
+$results->free();
 unset($row);
 
 // Now let's merge the orphaned files (i.e. the files that exist on file system level, but not in the database) into the array that will compose the form output

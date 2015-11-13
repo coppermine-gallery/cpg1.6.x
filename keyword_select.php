@@ -37,7 +37,7 @@ while ($row = $result->fetchAssoc()) {
 
 $total = $result->numRows();
 
-//mysql_free_result($result);
+//mysqll_free_result($result);
 
 if ($superCage->get->keyExists('id')) {
     $formFieldId = $superCage->get->getInt('id');

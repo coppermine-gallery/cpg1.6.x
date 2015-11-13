@@ -235,7 +235,7 @@ if ($search_string && isset($search_params['params'])) {
             $query = "SELECT $criteria FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid";
             $result = cpg_db_query($query);
             $criteria_pid = $result->result(0);
-//            mysql_free_result($result);
+//            mysqll_free_result($result);
 
             if ($direction == "ASC") {
                 $direction = "<";
@@ -255,7 +255,7 @@ if ($search_string && isset($search_params['params'])) {
                 $result = cpg_db_query($query);
 
                 list($pos) = $result->fetchRow();
-//                mysql_free_result($result);
+//                mysqll_free_result($result);
 
         } else {
 
@@ -271,7 +271,7 @@ if ($search_string && isset($search_params['params'])) {
             $query .= " ORDER BY $sort_order $limit";
             $result = cpg_db_query($query);
             $rowset = cpg_db_fetch_rowset($result);
-//            mysql_free_result($result);
+//            mysqll_free_result($result);
 
             if ($set_caption) {
                 build_caption($rowset);

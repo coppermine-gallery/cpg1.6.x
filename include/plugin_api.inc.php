@@ -66,7 +66,7 @@ abstract class CPGPluginAPI {
         $index = 0;
 
         // Get the plugin properties from the database
-        while ($plugin = $result->fetchAssoc()) {
+        while ($plugin = $result->fetchAssoc(true)) {
 
             // If codebase.php or configuration.php don't exist, skip this plugin
             if (!(file_exists('./plugins/'.$plugin['path'].'/codebase.php') && file_exists('./plugins/'.$plugin['path'].'/configuration.php'))) {
@@ -101,7 +101,7 @@ abstract class CPGPluginAPI {
 
             $index++;
         }
-//        mysql_free_result($result);
+        $result->free();
     }
 
 
@@ -134,7 +134,7 @@ abstract class CPGPluginAPI {
 
             // It's installed! Get the plugin_id
             $plugin = $result->fetchAssoc();
-//            mysql_free_result($result);
+//            mysqll_free_result($result);
 
             // Store the plugin_id in the database
             $installed_array[$plugin_folder] = $plugin['plugin_id'];
@@ -420,7 +420,7 @@ abstract class CPGPluginAPI {
         $result = cpg_db_query($sql);
 
         $data = $result->fetchAssoc();
-//        mysql_free_result($result);
+//        mysqll_free_result($result);
 
         // Set the execution priority to last
         $priority = (is_null($data['priority'])) ? (0) : ($data['priority']+1);

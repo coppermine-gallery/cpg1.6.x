@@ -789,13 +789,13 @@ function process_picture()
         $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid='$album' and category = '" . (USER_ID + FIRST_USER_CAT) . "'");
         if ($result->numRows() == 0) simple_die(ERROR, $lang_db_input_php['unknown_album'], __FILE__, __LINE__);
         $row = $result->fetchArray();
-//        mysql_free_result($result);
+//        mysqll_free_result($result);
         $category = $row['category'];
     } else {
         $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid='$album'");
         if ($result->numRows() == 0) simple_die(ERROR, $lang_db_input_php['unknown_album'], __FILE__, __LINE__);
         $row = $result->fetchArray();
-//        mysql_free_result($result);
+//        mysqll_free_result($result);
         $category = $row['category'];
     }
 
@@ -805,7 +805,7 @@ function process_picture()
              $position = 100;
     } else {
              $row = $result->fetchArray();
-//             mysql_free_result($result);
+//             mysqll_free_result($result);
                      if ($row['position']) {
                      $position = $row['position'];
                              $position++;

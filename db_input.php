@@ -125,11 +125,11 @@ case 'comment_update':
     $result = cpg_db_query("SELECT pid FROM {$CONFIG['TABLE_COMMENTS']} WHERE msg_id = '$msg_id'");
 
     if (!$result->numRows()) {
-//        mysql_free_result($result);
+//        mysqll_free_result($result);
         cpgRedirectPage('index.php', $lang_common['information'], $lang_db_input_php['com_updated'], 1);
     } else {
         $comment_data = $result->fetchAssoc();
-//        mysql_free_result($result);
+//        mysqll_free_result($result);
         $redirect = "displayimage.php?pid=" . $comment_data['pid'];
         cpgRedirectPage($redirect, $lang_common['information'], $lang_db_input_php['com_updated'], 1);
     }
@@ -181,7 +181,7 @@ case 'comment':
     }
 
     $album_data = $result->fetchAssoc();
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     if ($album_data['comments'] != 'YES') {
         cpg_die(ERROR, $lang_errors['perm_denied'], __FILE__, __LINE__);
@@ -198,7 +198,7 @@ case 'comment':
                 cpg_die(ERROR, $lang_db_input_php['no_flood'], __FILE__, __LINE__);
             }
         }
-//        mysql_free_result($result);
+//        mysqll_free_result($result);
     }
 
     $akismet_approval_needed = 0;
@@ -387,7 +387,7 @@ case 'album_update':
     // Get the old alb_password before update
     $result = cpg_db_query("SELECT alb_password FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid = $aid");
     $row = $result->fetchAssoc();
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     // If there is some value in alb_password then it means album was previously password protected
     if ($row['alb_password']) {
@@ -545,7 +545,7 @@ case 'picture':
         }
 
         $row = $result->fetchAssoc();
-//        mysql_free_result($result);
+//        mysqll_free_result($result);
 
         $category = $row['category'];
 
@@ -558,7 +558,7 @@ case 'picture':
         }
 
         $row = $result->fetchAssoc();
-//        mysql_free_result($result);
+//        mysqll_free_result($result);
 
         $category = $row['category'];
     }

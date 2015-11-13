@@ -179,10 +179,10 @@ if (!$CPGDB->isConnected()) {
 
 // Retrieve DB stored configuration
 $result = cpg_db_query("SELECT name, value FROM {$CONFIG['TABLE_CONFIG']}");
-while ( ($row = $result->fetchAssoc()) ) {
+while ( ($row = $result->fetchAssoc(true)) ) {
     $CONFIG[$row['name']] = $row['value'];
 } // while
-//mysql_free_result($result);
+$result->free();
 
 // Check if Coppermine is allowed to store cookies (cookie consent is required and user has agreed to store cookies)
 define('CPG_COOKIES_ALLOWED', ($CONFIG['cookies_need_consent'] && !$superCage->cookie->keyExists($CONFIG['cookie_name'].'_cookies_allowed') ? false : true));
@@ -330,10 +330,10 @@ $CONFIG['default_lang'] = $CONFIG['lang'];      // Save default language
 $enabled_languages_array = array();
 
 $result = cpg_db_query("SELECT lang_id FROM {$CONFIG['TABLE_LANGUAGE']} WHERE enabled='YES'");
-while ($row = $result->fetchAssoc()) {
+while ($row = $result->fetchAssoc(true)) {
     $enabled_languages_array[] = $row['lang_id'];
 }
-//mysql_free_result($result);
+$result->free();
 
 // Process language selection if present in URI or in user profile or try
 // autodetection if default charset is utf-8
@@ -390,7 +390,7 @@ if (USER_ID > 0) {
     $result = cpg_db_query("SELECT user_favpics FROM {$CONFIG['TABLE_FAVPICS']} WHERE user_id = ".USER_ID);
 
     $row = $result->fetchAssoc();
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
     if (!empty($row['user_favpics'])) {
         $FAVPICS = @unserialize(@base64_decode($row['user_favpics']));
     } else {
@@ -467,7 +467,7 @@ if ($result->numRows()) {
     pagefooter();
     exit;
 }
-//mysql_free_result($result);
+$result->free();
 
 // Retrieve the "private" album set
 if (!GALLERY_ADMIN_MODE && $CONFIG['allow_private_albums']) {

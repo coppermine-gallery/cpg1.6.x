@@ -843,7 +843,7 @@ EOT;
             exit;
         }
         $row = $result->fetchArray();
-//        mysql_free_result($result);
+//        mysqll_free_result($result);
         $category = $row['category'];
     } else {
         $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid='$album'");
@@ -852,7 +852,7 @@ EOT;
             exit;
         }
         $row = $result->fetchArray();
-//        mysql_free_result($result);
+//        mysqll_free_result($result);
         $category = $row['category'];
     }
 

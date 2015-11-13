@@ -176,7 +176,7 @@ $available_doc_folders_array = form_get_foldercontent('docs/', 'folder', '', arr
 
 // Query the languages table
 $results = cpg_db_query("SELECT lang_id, abbr FROM {$CONFIG['TABLE_LANGUAGE']} WHERE available = 'YES' AND enabled = 'YES'");
-while ($row = $results->fetchAssoc()) {
+while ($row = $results->fetchAssoc(true)) {
     if ($CONFIG['lang'] == $row['lang_id']) {
         $help_lang = $row['abbr'];
         break;
@@ -184,7 +184,7 @@ while ($row = $results->fetchAssoc()) {
         $help_lang = 'en';
     }
 } // while
-//mysql_free_result($results);
+$results->free();
 unset($row);
 
 // Make sure that the chosen help file actually exists

@@ -105,7 +105,7 @@ if (EDIT_PICTURES_MODE) {
         cpg_die(CRITICAL_ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
     }
     $ALBUM_DATA = $result->fetchAssoc();
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
     $cat = $ALBUM_DATA['category'];
     $actual_cat = $cat;
 
@@ -199,10 +199,10 @@ function process_post_data()
 
     $user_album_set = array();
     $result = cpg_db_query("SELECT aid FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = " . (FIRST_USER_CAT + USER_ID) . " OR owner = " . USER_ID . " OR uploads = 'YES'");
-    while ($row = $result->fetchAssoc()) {
+    while ($row = $result->fetchAssoc(true)) {
         $user_album_set[$row['aid']] = 1;
     }
-//    mysql_free_result($result);
+    $result->free();
 
     $pid_array = $superCage->post->getInt('pid');
 
@@ -260,7 +260,7 @@ function process_post_data()
         }
 
         $pic = $result->fetchAssoc();
-//        mysql_free_result($result);
+//        mysqll_free_result($result);
 
         if (!GALLERY_ADMIN_MODE && !MODERATOR_MODE && !USER_ADMIN_MODE && !user_is_allowed() && !$CONFIG['users_can_edit_pics'] ) {
 
@@ -697,7 +697,7 @@ if (UPLOAD_APPROVAL_MODE) {
     }
 
     list($pic_count) = $result->fetchRow();
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     if (MODERATOR_MODE) {
 
@@ -749,7 +749,7 @@ if (UPLOAD_APPROVAL_MODE) {
     $result = cpg_db_query($sql . $owner_str);
 
     list($pic_count) = $result->fetchRow();
-//    mysql_free_result($result);;
+//    mysqll_free_result($result);;
 
     $sql = "SELECT p.*,a.category FROM {$CONFIG['TABLE_PICTURES']} as p " .
             " INNER JOIN {$CONFIG['TABLE_ALBUMS']} as a " .
@@ -913,7 +913,7 @@ EOT;
 
 echo $submit_button;
 
-while ($CURRENT_PIC = $result->fetchAssoc()) {
+while ($CURRENT_PIC = $result->fetchAssoc(true)) {
 
     // wrap the actual block into another table
     print <<< EOT
@@ -929,7 +929,7 @@ EOT;
 EOT;
 } // while
 
-//mysql_free_result($result);
+$result->free();
 
 echo $submit_button;
 

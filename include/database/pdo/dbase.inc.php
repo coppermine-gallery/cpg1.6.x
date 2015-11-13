@@ -41,7 +41,12 @@ class CPG_Dbase
 	public function query ($sql)
 	{
 		$this->stmt = $this->_instance->query($sql);
-		return new CPG_DbaseResult($this->stmt);
+		if ($this->stmt === true) return true;
+		if ($this->stmt) {
+			return new CPG_DbaseResult($this->stmt);
+		} else {
+			return false;
+		}
 	}
 
 	public function execute ()
@@ -72,6 +77,7 @@ class CPG_Dbase
 
 	public function affectedRows ()
 	{
+		if (!$this->stmt) return false;
 		return $this->stmt->rowCount();
 	}
 
@@ -86,29 +92,36 @@ class CPG_DbaseResult
 		$this->qresult = $rslt;
 	}
 
-	public function fetchRow ()
+	public function fetchRow ($hold=false)
 	{
-		return $this->qresult->fetch(PDO::FETCH_NUM);
+		$dat = $this->qresult->fetch(PDO::FETCH_NUM);
+		if (!$hold) $this->free();
+		return $dat;
 	}
 
-	public function fetchAssoc ()
+	public function fetchAssoc ($hold=false)
 	{
-		return $this->qresult->fetch(PDO::FETCH_ASSOC);
+		$dat = $this->qresult->fetch(PDO::FETCH_ASSOC);
+		if (!$hold) $this->free();
+		return $dat;
 	}
 
-	public function fetchAssocAll ()
+	public function fetchAssocAll ($hold=false)
 	{
 		// not currently used
 	}
 
-	public function fetchArray ()
+	public function fetchArray ($hold=false)
 	{
-		return $this->qresult->fetch(PDO::FETCH_BOTH);
+		$dat = $this->qresult->fetch(PDO::FETCH_BOTH);
+		if (!$hold) $this->free();
+		return $dat;
 	}
 
-	public function result ($row=0, $fld=0)
+	public function result ($row=0, $fld=0, $hold=false)
 	{
 		$row = $this->qresult->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_ABS, $row);
+		if (!$hold) $this->free();
 		return $r ? $r[$fld] : false;
 	}
 
@@ -117,6 +130,12 @@ class CPG_DbaseResult
 		$i = 0;
 		if ($this->qresult) while ($this->qresult->fetch(PDO::FETCH_NUM)) { $i++; }
 		return $i;
+	}
+
+	public function free ()
+	{
+		if ($this->qresult) $this->qresult->closeCursor();
+		$this->qresult = null;
 	}
 
 }

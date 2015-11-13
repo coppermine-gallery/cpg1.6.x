@@ -205,10 +205,10 @@ if ($linktarget != '') {
     // get the allowed extensions
     $filetypes = array();
     $result = cpg_db_query("SELECT extension FROM {$CONFIG['TABLE_FILETYPES']}");
-    while($row = $result->fetchRow()) {
+    while($row = $result->fetchRow(true)) {
         $filetypes[] = $row[0];
     }
-//    mysql_free_result($result);
+    $result->free();
     $filetypes = array_unique($filetypes);
     // loop through the $filename array, get the extensions and check if at least one allowed ending is there
     $allowed_file_counter = 0;

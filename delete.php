@@ -89,7 +89,7 @@ function delete_picture($pid, $tablecellstyle = 'tableb')
         }
     }
 
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     $aid = $pic['aid'];
     $dir = $CONFIG['fullpath'] . $pic['filepath'];
@@ -196,7 +196,7 @@ function delete_album($aid)
 
     $album_data = $result->fetchAssoc();
 
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     if (!GALLERY_ADMIN_MODE) {
         if ($album_data['category'] != FIRST_USER_CAT + USER_ID && $album_data['owner'] != USER_ID) {
@@ -210,7 +210,7 @@ function delete_album($aid)
     // Delete all files
     $loopCounter = 0;
 
-    while ($pic = $result->fetchAssoc()) {
+    while ($pic = $result->fetchAssoc(true)) {
 
         if ($loopCounter / 2 == floor($loopCounter / 2)) {
             $tablecellstyle = 'tableb';
@@ -225,7 +225,7 @@ function delete_album($aid)
         ob_end_clean();
     }
 
-//    mysql_free_result($result);
+    $result->free();
 
     // Delete album
     $query = "DELETE FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid='$aid'";
@@ -259,14 +259,14 @@ function delete_user($key) {
         $result2 = cpg_db_query("SELECT aid FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = '" . (FIRST_USER_CAT + $key) . "'");
         $user_alb_counter = 0;
 
-        while ($album = $result2->fetchAssoc()) {
+        while ($album = $result2->fetchAssoc(true)) {
             starttable('100%');
             print delete_album($album['aid']);
             endtable();
             $user_alb_counter++;
         } // while
 
-//        mysql_free_result($result2);
+        $result2->free();
 
         starttable('100%');
 
@@ -275,7 +275,7 @@ function delete_user($key) {
         // Then anonymize comments posted by the user
         $comment_result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_COMMENTS']} WHERE author_id = '$key'");
         $comment_counter = $comment_result->fetchRow();
-//        mysql_free_result($comment_result);
+//        mysqll_free_result($comment_result);
 
         print '<td class="tableb" width="25%">';
 
@@ -311,7 +311,7 @@ function delete_user($key) {
         // Do the same for pictures uploaded in public albums
         $publ_upload_result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} WHERE owner_id = '$key'");
         $publ_upload_counter = $publ_upload_result->fetchRow();
-//        mysql_free_result($publ_upload_result);
+//        mysqll_free_result($publ_upload_result);
 
         print '<td class="tableb" width="25%">';
 
@@ -363,7 +363,7 @@ function delete_user($key) {
         endtable();
         print '</td>';
     }
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
     print '</tr>';
 }
 
@@ -478,7 +478,7 @@ case 'albmgr':
         $group_id = $USER_DATA['group_id'];
         $result = cpg_db_query("SELECT DISTINCT cid FROM {$CONFIG['TABLE_CATMAP']} WHERE group_id = $group_id");
         $rowset = cpg_db_fetch_rowset($result);
-//        mysql_free_result($result);
+//        mysqll_free_result($result);
 
         //add allowed categories to the restriction
         if (USER_CAN_CREATE_PRIVATE_ALBUMS) {
@@ -690,7 +690,7 @@ case 'picmgr':
     $album_id = $superCage->post->getInt('album_id');
     $result = cpg_db_query("SELECT aid, pid, filename, title, position FROM {$CONFIG['TABLE_PICTURES']} WHERE aid = '$album_id' ORDER BY position ASC, pid");
     $rowset = cpg_db_fetch_rowset($result);
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     if ($superCage->post->keyExists('picture_order')) {
         //Check if the form token is valid
@@ -748,7 +748,7 @@ case 'comment':
         $comment_data = $result->fetchAssoc();
     }
 
-//    mysql_free_result($result);
+    $result->free();
 
     if (GALLERY_ADMIN_MODE) {
         $query = "DELETE FROM {$CONFIG['TABLE_COMMENTS']} WHERE msg_id = '$msg_id'";
@@ -918,7 +918,7 @@ case 'user':
 
                     print '</strong></td>';
                 }
-//                mysql_free_result($result);
+//                mysqll_free_result($result);
 
             } // foreach --- end
 
@@ -970,7 +970,7 @@ case 'user':
                     print '</strong></td>';
                 }
 
-//                mysql_free_result($result);
+//                mysqll_free_result($result);
             } // foreach --- end
 
             echo '<tr><td colspan="2" class="tablef" align="center">' . $LINEBREAK;
@@ -1017,7 +1017,7 @@ case 'user':
                     print '</strong></td>';
                 }
 
-//                mysql_free_result($result);
+//                mysqll_free_result($result);
             } // foreach --- end
 
             echo '<tr><td colspan="2" class="tablef" align="center">' . $LINEBREAK;
@@ -1075,7 +1075,7 @@ case 'user':
                     print '</strong></td>';
                 }
 
-//                mysql_free_result($result);
+//                mysqll_free_result($result);
             } // foreach --- end
 
             echo '<tr><td colspan="2" class="tablef" align="center">' . $LINEBREAK;
@@ -1134,7 +1134,7 @@ case 'user':
                     }
 
                     $user_group_data = $result_user->fetchAssoc();
-//                    mysql_free_result($result_user);
+//                    mysqll_free_result($result_user);
 
                     $user_group = explode(',', $user_group_data['user_group_list']);
 
@@ -1164,7 +1164,7 @@ case 'user':
                     print '</strong></td>';
                 }
 
-//                mysql_free_result($result);
+//                mysqll_free_result($result);
             } // foreach --- end
 
             echo '<tr><td colspan="2" class="tablef" align="center">' . $LINEBREAK;

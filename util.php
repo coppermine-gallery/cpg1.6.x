@@ -593,7 +593,7 @@ function deletebackup_img()
 
     $i = 0;
 
-    while ($row = $result->fetchAssoc()) {
+    while ($row = $result->fetchAssoc(true)) {
 
         $back = $CONFIG['fullpath'] . $row['filepath'] . $CONFIG['orig_pfx'] . $row['filename'];
 
@@ -617,7 +617,7 @@ function deletebackup_img()
         echo $lang_util_php['nothing_deleted'].'<br />';
     }
 
-//    mysql_free_result($result);
+    $result->free();
 }
 
 function del_orig()
@@ -638,7 +638,7 @@ function del_orig()
 
     $result = cpg_db_query("SELECT pid, filepath, filename FROM {$CONFIG['TABLE_PICTURES']} $albstr");
 
-    while ($row = $result->fetchAssoc()) {
+    while ($row = $result->fetchAssoc(true)) {
 
         $pid = $row['pid'];
         $image = $CONFIG['fullpath'] . $row['filepath'] . $row['filename'];
@@ -673,7 +673,7 @@ function del_orig()
         echo '<br />';
     }
 
-//    mysql_free_result($result);
+    $result->free();
 }
 
 function del_norm()
@@ -694,7 +694,7 @@ function del_norm()
 
     $result = cpg_db_query("SELECT pid, filepath, filename FROM {$CONFIG['TABLE_PICTURES']} $albstr");
 
-    while ($row = $result->fetchAssoc()) {
+    while ($row = $result->fetchAssoc(true)) {
 
         $pid = $row['pid'];
         $image = $CONFIG['fullpath'] . $row['filepath'] . $row['filename'];
@@ -720,7 +720,7 @@ function del_norm()
         echo '<br />';
     }
 
-//    mysql_free_result($result);
+    $result->free();
 }
 
 function del_orphans()
@@ -740,7 +740,7 @@ function del_orphans()
 
     $result = cpg_db_query("SELECT c.pid, msg_id, msg_body FROM {$CONFIG['TABLE_COMMENTS']} AS c LEFT JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.pid = c.pid WHERE p.pid IS NULL");
 
-    while ($row = $result->fetchAssoc()) {
+    while ($row = $result->fetchAssoc(true)) {
 
         $pid = $row['pid'];
         $msg_id = $row['msg_id'];
@@ -774,7 +774,7 @@ EOT;
         }
     }
 
-//    mysql_free_result($result);
+    $result->free();
 }
 
 function del_old()
@@ -801,7 +801,7 @@ function del_old()
 
     $result = cpg_db_query("SELECT pid, filepath, filename FROM {$CONFIG['TABLE_PICTURES']} WHERE ctime <= $start $albstr");
 
-    while ($row = $result->fetchAssoc()) {
+    while ($row = $result->fetchAssoc(true)) {
 
         $pid = $row['pid'];
         $image = $CONFIG['fullpath'] . $row['filepath'] . $row['filename'];
@@ -857,7 +857,7 @@ function del_old()
         $delete_counter++;
     }
 
-//    mysql_free_result($result);
+    $result->free();
 
     printf($lang_util_php['affected_records'], $delete_counter);
 }
@@ -914,7 +914,7 @@ function refresh_db()
     $count = $result->numRows();
     $found = 0;
 
-    while ($row = $result->fetchAssoc()) {
+    while ($row = $result->fetchAssoc(all)) {
 
         extract($row, EXTR_PREFIX_ALL, "db");
         unset($prob);
@@ -1004,7 +1004,7 @@ function refresh_db()
 EOT;
     }
 
-//    mysql_free_result($result);
+    $result->free();
 }
 
 

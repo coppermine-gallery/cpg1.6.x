@@ -74,7 +74,7 @@ case 'display':
 
     $i = 0;
 
-    while (list($keywords) = $result->fetchRow()) {
+    while (list($keywords) = $result->fetchRow(true)) {
 
         $array = explode($keysep, html_entity_decode($keywords));
 
@@ -121,6 +121,7 @@ EOT;
             $i++;
         }
     }
+    $result->free();
 
     sort($total_array);
 

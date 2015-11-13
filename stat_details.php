@@ -388,7 +388,7 @@ EOT;
       $result = cpg_db_query($query);
       $nbEnr = $result->fetchArray();
       $count = $nbEnr[0];
-//      mysql_free_result($result);
+//      mysqll_free_result($result);
 
       // Calculation for pagination tabs and query limit
       $numPages = max(1, ceil($count/$amount));

@@ -493,7 +493,7 @@ function check_user_info(&$error)
         return false;
     }
 
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     if (utf_strlen($user_name) < 2) {
         $error .= '<li style="list-style-image:url(images/icons/stop.png)">' . $lang_register_php['username_warning2'] . '</li>';
@@ -537,7 +537,7 @@ function check_user_info(&$error)
         $error .= '<li style="list-style-image:url(images/icons/stop.png)">' . $lang_register_php['user_name_banned'] . '</li>';
     }
 
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     $result = cpg_db_query("SELECT null FROM {$CONFIG['TABLE_BANNED']} WHERE email = '$email' AND brute_force = 0 LIMIT 1");
 
@@ -545,7 +545,7 @@ function check_user_info(&$error)
         $error .= '<li style="list-style-image:url(images/icons/stop.png)">' . $lang_register_php['email_address_banned'] . '</li>';
     }
 
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     // check captcha
     if ($CONFIG['registration_captcha'] != 0) {
@@ -569,7 +569,7 @@ function check_user_info(&$error)
             $error = '<li style="list-style-image:url(images/icons/stop.png)">' . $lang_register_php['err_duplicate_email'] . '</li>';
         }
 
-//        mysql_free_result($result);
+//        mysqll_free_result($result);
     }
 
     $error = CPGPluginAPI::filter('register_form_validate', $error);
@@ -714,7 +714,7 @@ if ($superCage->get->keyExists('activate')) {
     }
 
     $row = $result->fetchAssoc();
-//    mysql_free_result($result);
+//    mysqll_free_result($result);
 
     if ($row['user_active'] == 'YES') {
         cpg_die(ERROR, $lang_register_php['acct_already_act'], __FILE__, __LINE__);
@@ -771,12 +771,12 @@ if ($superCage->get->keyExists('activate')) {
         if (UDB_INTEGRATION == 'coppermine') {
             // get default language in which to inform the admins
             $result = cpg_db_query("SELECT user_id, user_email, user_language FROM {$CONFIG['TABLE_USERS']} WHERE user_group = 1");
-            while ($row2 = $result->fetchAssoc()) {
+            while ($row2 = $result->fetchAssoc(true)) {
                 if (!empty($row2['user_email'])) {
                     $admins[$row2['user_id']] = array('email' => $row2['user_email'], 'lang' => $row2['user_language']);
                 }
             }
-//            mysql_free_result($result);
+            $result->free();
         } else {
             //@todo: is it possible to get the language from bridged installs?
             $admins[] = array('email' => $CONFIG['gallery_admin_email'], 'lang' => 'english');

@@ -259,10 +259,10 @@ function cpg_refresh_config_db_values() {
     global $CONFIG;
     // Retrieve DB stored configuration
     $results = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_CONFIG']}");
-    while ($row = $results->fetchArray()) {
+    while ($row = $results->fetchArray(true)) {
         $CONFIG[$row['name']] = $row['value'];
     } // while
-//    mysql_free_result($results);
+    $results->free();
     return $CONFIG;
 }
 
