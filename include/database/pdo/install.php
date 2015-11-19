@@ -17,7 +17,9 @@
 
 function dbcheck_pdo ($sub=null)
 {
-	global $language;
+	global $language, $lang_update_php;
+
+	if (!isset($language)) $language = $lang_update_php;
 	if (phpversion('PDO')) { return true; }
 	else { return $language['not_available']; }
 }

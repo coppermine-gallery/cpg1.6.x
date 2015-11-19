@@ -341,7 +341,7 @@ switch($step) {
         html_footer();
         break;
 
-    case STEP_DB_INFO:     // Ask user for database host, username and password, try to establish a connection using that info
+    case STEP_DB_INFO:     // Ask user for database type, host, username and password, try to establish a connection using that info
     	$db_type = $superCage->post->getRaw('db_type');
     	if (!$db_type) {
     		$db_type = $config['db_type'];
@@ -842,22 +842,9 @@ function html_dbase_start($type=null)
     global $language, $step, $dbase_connected, $config, $icon;
 
     $step_next = $step + 1;
-    $dbChoices = array('mysqli'=>'MYSQLI','mysql'=>'MYSQL','pdo:mysql'=>'PDO:MYSQL');
 
-	$opts = ''; $slct = $type ?: 'mysqli';
-	foreach ($dbChoices as $dtype => $dsp) {
-		$opts .= '<option value="'.$dtype.'"';
-		list($tnam,$tsub) = explode(':', $dtype);
-		require_once 'include/database/'.$tnam.'/install.php';
-		$ifunc = 'dbcheck_'.$tnam;
-		if (function_exists($ifunc) && $ifunc($tsub)===true) {
-			if ($dtype == $slct) $opts .= ' selected';
-			$opts .= '>'.$dsp;
-		} else {
-			$opts .= ' disabled>'.$dsp.' ('.$ifunc($tsub).')';
-		}
-		$opts .= '</option>';
-	}
+	require_once 'include/dbselect.inc.php';
+	$dbselect = new DbaseSelect();
 
     echo <<<EOT
       <form action="install.php?step={$step_next}" name="cpgform" id="cpgform" method="post" style="margin:0px;padding:0px">
@@ -872,7 +859,7 @@ function html_dbase_start($type=null)
          </tr>
 		<tr>
 			<td align="right">Database Type</td>
-			<td><select name="db_type">{$opts}</select></td>
+			<td><select name="db_type">{$dbselect->options()}</select></td>
 		</tr>
 
 EOT;
@@ -1678,8 +1665,6 @@ function writeConfig()
 {
     global $config, $language;
 
-    // this is used to prevent screwing up the color coding in my editor.
-    $end_php_tag = '?>';
     $config = <<<EOT
 <?php
 // Coppermine configuration file
@@ -1690,10 +1675,8 @@ function writeConfig()
 \$CONFIG['dbpass'] =      '{$config['db_password']}';			// Your database password
 \$CONFIG['dbname'] =      '{$config['db_name']}';			// Your database name
 
-
 // DATABASE TABLE NAMES PREFIX
 \$CONFIG['TABLE_PREFIX'] =         '{$config['db_prefix']}';
-$end_php_tag
 EOT;
     //write config file to disk
     if ($fd = @fopen('include/config.inc.php', 'wb')) {

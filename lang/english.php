@@ -1475,8 +1475,6 @@ $lang_install['dbase_succ'] = 'Successful connection with database';
 $lang_install['dbase_tbl_pref'] = 'Table prefix';
 $lang_install['dbase_test_connection'] = 'Test connection';
 $lang_install['dbase_wrong_db'] = 'Could not locate a database called \'%s\' please check the value entered for this';
-$lang_install['not_available'] = 'not available';
-$lang_install['version_too_old'] = 'version too old';
 $lang_install['n_a'] = 'N/A';
 $lang_install['no_admin_email'] = 'You have to enter an admin email address';
 $lang_install['no_admin_password'] = 'You have to enter an admin password';
@@ -1550,7 +1548,9 @@ $lang_install['writable'] = 'Writable';
 $lang_install['not_writable'] = 'Not writable';
 $lang_install['not_exist'] = 'Does not exist';
 $lang_install['old_install'] = 'This is the new install wizard. Click %shere%s for the classic install screen.';
-
+// 1.6 dbabstract
+$lang_install['not_available'] = 'not available';
+$lang_install['version_too_old'] = 'version too old';
 }
 
 // ------------------------------------------------------------------------- //
@@ -2340,6 +2340,13 @@ $lang_update_php['delete_file'] = 'Delete %s';
 $lang_update_php['could_not_delete'] = 'Could not delete due to missing permissions. Delete the file manually!';
 $lang_update_php['rename_file'] = 'Rename %s to %s';
 $lang_update_php['could_not_rename'] = 'Could not rename due to missing permissions. Rename the file manually!';
+// 1.6 dbabstract
+$lang_update_php['newDbMethod'] = 'Your Coppermine Gallery installation is using a database connection method (mysql) that is deprecated and should be changed. Please choose an alternate connection method below.';
+$lang_update_php['not_available'] = 'not available';
+$lang_update_php['version_too_old'] = 'version too old';
+$lang_update_php['recommended'] = ' (recommended)';
+$lang_update_php['current_nr'] = ' (current, not recommended)';
+$lang_update_php['unable_write_config'] = 'Unable to write config file';
 }
 
 // ------------------------------------------------------------------------- //
