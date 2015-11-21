@@ -839,36 +839,36 @@ EOT;
 
 function html_dbase_start($type=null)
 {
-    global $language, $step, $dbase_connected, $config, $icon;
+	global $language, $step, $dbase_connected, $config, $icon;
 
-    $step_next = $step + 1;
+	$step_next = $step + 1;
+	$slct = $type ?: 'mysqli';
 
 	require_once 'include/dbselect.inc.php';
 	$dbselect = new DbaseSelect();
 
-    echo <<<EOT
-      <form action="install.php?step={$step_next}" name="cpgform" id="cpgform" method="post" style="margin:0px;padding:0px">
-        <table width="100%" border="0" cellpadding="0" cellspacing="1" class="maintable">
-         <tr>
-          <td class="tableb" colspan="2">
-          {$language['sect_dbase_info']}<br />
-          </td>
-         </tr>
-         <tr>
-          <td colspan="2">&nbsp;</td>
-         </tr>
-		<tr>
-			<td align="right">Database Type</td>
-			<td><select name="db_type">{$dbselect->options()}</select></td>
-		</tr>
-
+	echo <<<EOT
+	<form action="install.php?step={$step_next}" name="cpgform" id="cpgform" method="post" style="margin:0px;padding:0px">
+		<table width="100%" border="0" cellpadding="0" cellspacing="1" class="maintable">
+			<tr>
+				<td class="tableb" colspan="2">
+					{$language['sect_dbase_info']}<br />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="right">Database Type</td>
+				<td><select name="db_type">{$dbselect->options($slct)}</select></td>
+			</tr>
 EOT;
-    if ($dbase_connected) {
-        echo <<<EOT
-        <tr>
-            <td></td>
-            <td align="left"><div class="cpg_message_success">{$language['dbase_succ']}</div></td>
-        </tr>
+	if ($dbase_connected) {
+		echo <<<EOT
+			<tr>
+				<td></td>
+				<td align="left"><div class="cpg_message_success">{$language['dbase_succ']}</div></td>
+			</tr>
 
 EOT;
     }
