@@ -168,7 +168,21 @@ function user_save_profile()
    Database functions
  **************************************************************************/
 
-// Perform a database query
+/**
+ * cpg_db_get_connection()
+ *
+ * Get the global database object
+ *
+ * @return
+ **/
+
+function cpg_db_get_connection()
+{
+    global $CPGDB;
+
+    return $CPGDB;
+}
+
 
 /**
  * cpg_db_query()
@@ -210,8 +224,6 @@ function cpg_db_query($query)
     return $result;
 }
 
-// Error message if a query failed
-
 
 /**
  * cpg_db_error()
@@ -238,7 +250,21 @@ function cpg_db_error($the_error, $link_id)
     }
 }
 
-// Fetch all rows in an array
+
+/**
+ * cpg_db_num_rows()
+ *
+ * Get then numbers of rows in a result
+ *
+ * @param $result
+ * @return
+ **/
+
+function cpg_db_num_rows($result)
+{
+    return $result->numRows($result);
+}
+
 
 /**
  * cpg_db_fetch_rowset()
@@ -261,10 +287,11 @@ function cpg_db_fetch_rowset($result, $hold=false)
     return $rowset;
 }
 
+
 /**
  * cpg_db_fetch_row()
  *
- * Fetch row in an array
+ * Fetch row as a simple numeric array
  *
  * @param $result
  * @return
@@ -272,8 +299,52 @@ function cpg_db_fetch_rowset($result, $hold=false)
 
 function cpg_db_fetch_row($result, $hold=false)
 {
+    return $result->fetchRow($hold);
+}
+
+
+/**
+ * cpg_db_fetch_assoc()
+ *
+ * Fetch row as an associative array
+ *
+ * @param $result
+ * @return
+ **/
+
+function cpg_db_fetch_assoc($result, $hold=false)
+{
     return $result->fetchAssoc($hold);
 }
+
+
+/**
+ * cpg_db_fetch_array()
+ *
+ * Fetch row as both a simple and associative array
+ *
+ * @param $result
+ * @return
+ **/
+
+function cpg_db_fetch_array($result, $hold=false)
+{
+    return $result->fetchArray($hold);
+}
+
+
+ * cpg_db_free_result()
+ *
+ * Free query result storage
+ *
+ * @param $result
+ **/
+
+function cpg_db_free_result($result)
+{
+    $result->free();
+}
+
 
 /**
  * cpg_db_last_insert_id()
@@ -290,6 +361,7 @@ function cpg_db_last_insert_id()
     return $CPGDB->insertId();
 }
 
+
 /**
  * cpg_db_affected_rows()
  *
@@ -304,6 +376,7 @@ function cpg_db_affected_rows()
 
     return $CPGDB->affectedRows();
 }
+
 
 /**
  * cpg_db_escape_string()
@@ -320,6 +393,7 @@ function cpg_db_escape_string($str)
 
     return $CPGDB->escapeStr($str);
 }
+
 
 /**************************************************************************
    Sanitization functions
@@ -5224,7 +5298,7 @@ function user_is_allowed($include_upload_permissions = true)
         if (defined('MODIFYALB_PHP')) {
             //check if the user has any album available
             $result        = cpg_db_query("SELECT aid FROM {$CONFIG['TABLE_ALBUMS']} WHERE owner = " . $USER_DATA['user_id'] . " LIMIT 1");
-            $temp_album_id = cpg_db_fetch_row($result);
+            $temp_album_id = cpg_db_fetch_assoc($result);
             $album_id      = $temp_album_id['aid'];
         } else {
             $album_id = 0;

@@ -1,19 +1,19 @@
 <?php
 /*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2015 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
+ Coppermine Photo Gallery
+ *************************
+ Copyright (c) 2003-2015 Coppermine Dev Team
+ v1.0 originally written by Gregory Demar
 
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License version 3
+ as published by the Free Software Foundation.
 
-  ********************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
-  $Revision$
-**********************************************/
+ ********************************************
+ Coppermine version: 1.6.01
+ $HeadURL$
+ $Revision$
+ ********************************************/
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -739,7 +739,7 @@ class core_udb {
             . "WHERE {$this->field['user_id']} = '$user_id'";
         $result = cpg_db_query($sql, $this->link_id);
         if ($result->numRows()) {
-            $row = cpg_db_fetch_row($result);
+            $row = $result->fetchAssoc();
             return array('user_id' => $row['user_id'], 'pass_hash' => $row['pass_hash']);
         } else {
             return array();

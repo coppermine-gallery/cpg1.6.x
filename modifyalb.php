@@ -199,7 +199,7 @@ function form_category($text, $name)
 
         if ($ALBUM_DATA['category'] != (FIRST_USER_CAT + USER_ID)) {
             $result = cpg_db_query("SELECT name FROM {$CONFIG['TABLE_CATEGORIES']} WHERE cid = '" . $ALBUM_DATA['category'] . "' LIMIT 1");
-            $cat_name = cpg_db_fetch_row($result);
+            $cat_name = $result->fetchAssoc();
 //            mysqll_free_result($result);
             $cat_name = $cat_name['name'];
         }
