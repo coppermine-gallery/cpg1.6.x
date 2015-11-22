@@ -5303,7 +5303,7 @@ function user_is_allowed($include_upload_permissions = true)
         if (defined('MODIFYALB_PHP')) {
             //check if the user has any album available
             $result        = cpg_db_query("SELECT aid FROM {$CONFIG['TABLE_ALBUMS']} WHERE owner = " . $USER_DATA['user_id'] . " LIMIT 1");
-            $temp_album_id = cpg_db_fetch_assoc($result);
+            $temp_album_id = $result->fetchAssoc();
             $album_id      = $temp_album_id['aid'];
         } else {
             $album_id = 0;
