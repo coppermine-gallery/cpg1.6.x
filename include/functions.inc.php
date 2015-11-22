@@ -172,15 +172,20 @@ function user_save_profile()
  * cpg_db_get_connection()
  *
  * Get the global database object
+ *  or return a new database object
  *
  * @return
  **/
 
-function cpg_db_get_connection()
+function cpg_db_get_connection($cfg=null)
 {
     global $CPGDB;
 
-    return $CPGDB;
+	if ($cfg && isset($cfg['dbserver']) && isset($cfg['dbuser']) && isset($cfg['dbpass']) && isset($cfg['dbname'])) {
+		return new CPG_Dbase($cfg);
+	} else {
+    	return $CPGDB;
+    }
 }
 
 
@@ -190,7 +195,6 @@ function cpg_db_get_connection()
  * Perform a database query
  *
  * @param $query
- * @param integer $link_id
  * @return
  **/
 
@@ -218,7 +222,7 @@ function cpg_db_query($query)
         $trace = debug_backtrace();
         $last = $trace[0];
         $localfile = str_replace(realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR , '', $last['file']);
-        cpg_db_error("While executing query '$query' in $localfile on line {$last['line']}", $link_id);
+        cpg_db_error("While executing query '$query' in $localfile on line {$last['line']}");
     }
 
     return $result;
@@ -234,7 +238,7 @@ function cpg_db_query($query)
  * @return
  **/
 
-function cpg_db_error($the_error, $link_id)
+function cpg_db_error($the_error)
 {
     global $CONFIG, $CPGDB, $lang_errors, $LINEBREAK;
 
@@ -243,9 +247,9 @@ function cpg_db_error($the_error, $link_id)
     if ($CONFIG['debug_mode'] === '0' || ($CONFIG['debug_mode'] === '2' && !GALLERY_ADMIN_MODE)) {
         cpg_die(CRITICAL_ERROR, $lang_errors['database_query'], __FILE__, __LINE__);
     } else {
-        $the_error .= $LINEBREAK . $LINEBREAK . 'mySQL error: ' . $CPGDB->getError() . $LINEBREAK;
+        $the_error .= $LINEBREAK . $LINEBREAK . 'database error: ' . $CPGDB->getError() . $LINEBREAK;
         $out        = "<br />" . $lang_errors['database_query'] . ".<br /><br/>
-                <form name=\"mysql\" id=\"mysql\"><textarea rows=\"8\" cols=\"60\">" . htmlspecialchars($the_error) . "</textarea></form>";
+                <form name=\"dbsql\" id=\"dbsql\"><textarea rows=\"8\" cols=\"60\">" . htmlspecialchars($the_error) . "</textarea></form>";
         cpg_die(CRITICAL_ERROR, $out, __FILE__, __LINE__);
     }
 }
@@ -333,6 +337,7 @@ function cpg_db_fetch_array($result, $hold=false)
 }
 
 
+/**
  * cpg_db_free_result()
  *
  * Free query result storage
