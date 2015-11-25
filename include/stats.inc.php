@@ -235,7 +235,7 @@ function individualStatsByOS($pid='',$type='hits', $tableWidth='100%') {
                 }
                 // Now this is a very crude way to query the database which is bound to overload larger galleries. Should be reviewed!
                 $result = cpg_db_query($query);
-                $row = $result->fetchArray();
+                $row = $result->fetchArray(true);
                 if ($row[0] != 0) {
                     $osResultArray[$key] = $row[0];
                 }
@@ -305,7 +305,7 @@ function individualStatsByBrowser($pid='',$type='hits', $tableWidth='100%') {
                 }
                 // Now this is a very crude way to query the database which is bound to overload larger galleries. Should be reviewed!
                 $result = cpg_db_query($query);
-                $row = $result->fetchArray();
+                $row = $result->fetchArray(true);
                 if ($row[0] != 0) {
                     $browserResultArray[$key] = $row[0];
                 }

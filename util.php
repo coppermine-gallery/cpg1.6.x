@@ -365,6 +365,7 @@ function filename_to_title()
         echo "{$lang_util_php['file']} : <strong>$filename</strong> {$lang_util_php['title_set_to']} : <strong>$newtitle</strong><br />" . $LINEBREAK;
 
     } // end while
+    $result->free();
 
     echo '<br />' . $LINEBREAK . sprintf($lang_util_php['titles_updated'], $file_count) . '<br />' . $LINEBREAK;
 }
@@ -538,6 +539,7 @@ function update_thumbs()
             echo '<tr><td class="'.$tablestyle.'">' . $icon_array['cancel'] . sprintf($lang_util_php['no_image'], '<tt>' . $row['filepath'] . $row['filename'] . '</tt>') . '</td></tr>';
         }
     }
+    $result->free();
 
     if ($count == $numpics) {
 
@@ -610,14 +612,13 @@ function deletebackup_img()
             // printf($lang_util_php['error_not_found'], $back);
         }
     }
+    $result->free();
 
     echo '<br />';
 
     if ($i == 0) {
         echo $lang_util_php['nothing_deleted'].'<br />';
     }
-
-    $result->free();
 }
 
 function del_orig()
@@ -638,7 +639,7 @@ function del_orig()
 
     $result = cpg_db_query("SELECT pid, filepath, filename FROM {$CONFIG['TABLE_PICTURES']} $albstr");
 
-    while ($row = $result->fetchAssoc(true)) {
+    while ($row = $result->fetchAssoc()) {
 
         $pid = $row['pid'];
         $image = $CONFIG['fullpath'] . $row['filepath'] . $row['filename'];
@@ -694,7 +695,7 @@ function del_norm()
 
     $result = cpg_db_query("SELECT pid, filepath, filename FROM {$CONFIG['TABLE_PICTURES']} $albstr");
 
-    while ($row = $result->fetchAssoc(true)) {
+    while ($row = $result->fetchAssoc()) {
 
         $pid = $row['pid'];
         $image = $CONFIG['fullpath'] . $row['filepath'] . $row['filename'];
@@ -740,7 +741,7 @@ function del_orphans()
 
     $result = cpg_db_query("SELECT c.pid, msg_id, msg_body FROM {$CONFIG['TABLE_COMMENTS']} AS c LEFT JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.pid = c.pid WHERE p.pid IS NULL");
 
-    while ($row = $result->fetchAssoc(true)) {
+    while ($row = $result->fetchAssoc()) {
 
         $pid = $row['pid'];
         $msg_id = $row['msg_id'];
@@ -801,7 +802,7 @@ function del_old()
 
     $result = cpg_db_query("SELECT pid, filepath, filename FROM {$CONFIG['TABLE_PICTURES']} WHERE ctime <= $start $albstr");
 
-    while ($row = $result->fetchAssoc(true)) {
+    while ($row = $result->fetchAssoc()) {
 
         $pid = $row['pid'];
         $image = $CONFIG['fullpath'] . $row['filepath'] . $row['filename'];
@@ -914,7 +915,7 @@ function refresh_db()
     $count = $result->numRows();
     $found = 0;
 
-    while ($row = $result->fetchAssoc(all)) {
+    while ($row = $result->fetchAssoc()) {
 
         extract($row, EXTR_PREFIX_ALL, "db");
         unset($prob);
@@ -979,6 +980,7 @@ function refresh_db()
             echo "<tr><td class=\"tableb\">$url</td><td class=\"tableb\">{$lang_util_php['no_prob_detect']}</td><td class=\"tableb\">{$lang_common['ok']}</td></tr>";
         }
     }
+    $result->free();
 
     endtable();
 

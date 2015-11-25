@@ -70,7 +70,7 @@ function display_group_list()
         3 => $lang_groupmgr_php['thumbnail_intermediate_full']
     );
 
-    while ($group = $result->fetchAssoc(true)) {
+    while ($group = $result->fetchAssoc()) {
         $group['group_name'] = $group['group_name'];
         $row_counter++;
         if ($row_counter == 1) {

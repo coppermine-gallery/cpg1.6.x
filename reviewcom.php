@@ -144,6 +144,7 @@ if ($get_data_rejected==0) { // individual approval start
         }
         $msg_author = $row['msg_author'];
     }
+    $result->free();
 
     // if all verifications have passed, execute the change and output the result; else, display an error message
     if ($get_data_rejected == 0) {
@@ -269,13 +270,13 @@ if ($superCage->post->keyExists('cid_array')) {
 if ($CONFIG['comment_akismet_api_key'] != '' && $CONFIG['comment_akismet_enable'] == 0) {
     foreach ($akismet_ham_array as $key) {
         $result = cpg_db_query("SELECT pid, msg_author, msg_body, msg_hdr_ip FROM {$CONFIG['TABLE_COMMENTS']} WHERE msg_id='$key' LIMIT 1");
-        $comment_data = $result->fetchArray();
+        $comment_data = $result->fetchArray(true);
         $akismet_result = cpg_akismet_submit_data($comment_evaluation_array, 'ham');
     }
 }
 
 $result = cpg_db_query("SELECT count(*) FROM {$CONFIG['TABLE_COMMENTS']} WHERE 1");
-$nbEnr = $result->fetchArray();
+$nbEnr = $result->fetchArray(true);
 $comment_count = $nbEnr[0];
 
 if (!$comment_count) {
@@ -521,7 +522,7 @@ $rowcounter = 0;
 $totalMessageIdCollector = '';
 $loopCounter = 0;
 
-while ($row = $result->fetchArray(true)) {
+while ($row = $result->fetchArray()) {
     $loopCounter++;
     $thumb_url =  get_pic_url($row, 'thumb');
     if (!is_image($row['filename'])) {

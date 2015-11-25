@@ -46,6 +46,7 @@ if ($result->numRows()) {
             }
         }
     }
+    $result->free();
 
     // Sort selected keywords
     sort($keywords_array);

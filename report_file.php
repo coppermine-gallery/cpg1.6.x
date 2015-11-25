@@ -77,7 +77,7 @@ if (!$result->numRows()) {
     cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
 }
 
-$row = $result->fetchArray();
+$row = $result->fetchArray(true);
 $thumb_pic_url = get_pic_url($row, 'thumb');
 
 if ($what == 'comment') {
@@ -86,7 +86,7 @@ if ($what == 'comment') {
         cpg_die(ERROR, $lang_errors['non_exist_comment'], __FILE__, __LINE__);
     }
 
-    $row = $result->fetchArray();
+    $row = $result->fetchArray(true);
     $comment = bb_decode($row['msg_body']);
     if ($CONFIG['enable_smilies']) {
         $comment = process_smilies($comment);

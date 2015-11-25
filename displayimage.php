@@ -325,8 +325,7 @@ if (!$superCage->get->keyExists('fullsize') && ($pos < 0 || $pid > 0)) {
             }
         }
 
-        $row = $result->fetchAssoc();
-//        mysqll_free_result($result);
+        $row = $result->fetchAssoc(true);
     }
 
     $album = (!$album) ? $row['aid'] : $album;
@@ -426,8 +425,7 @@ if (isset($CURRENT_PIC_DATA)) {
         cpg_die(CRITICAL_ERROR, sprintf($lang_errors['pic_in_invalid_album'], $CURRENT_PIC_DATA['aid']), __FILE__, __LINE__);
     }
 
-    $CURRENT_ALBUM_DATA = $result->fetchAssoc();
-//    mysqll_free_result($result);
+    $CURRENT_ALBUM_DATA = $result->fetchAssoc(true);
 
     if (is_numeric($album)) {
         $cat = - $album;
@@ -442,7 +440,7 @@ if (isset($CURRENT_PIC_DATA)) {
 
 if ($superCage->get->keyExists('fullsize')) {
 
-    $CURRENT_PIC_DATA = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_PICTURES']} AS p " . "WHERE pid='$pid' $FORBIDDEN_SET")->fetchAssoc();
+    $CURRENT_PIC_DATA = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_PICTURES']} AS p " . "WHERE pid='$pid' $FORBIDDEN_SET")->fetchAssoc(true);
     theme_display_fullsize_pic();
 
 } elseif ($superCage->get->keyExists('slideshow')) {

@@ -104,8 +104,7 @@ if (EDIT_PICTURES_MODE) {
     if (!$result->numRows()) {
         cpg_die(CRITICAL_ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
     }
-    $ALBUM_DATA = $result->fetchAssoc();
-//    mysqll_free_result($result);
+    $ALBUM_DATA = $result->fetchAssoc(true);
     $cat = $ALBUM_DATA['category'];
     $actual_cat = $cat;
 
@@ -199,7 +198,7 @@ function process_post_data()
 
     $user_album_set = array();
     $result = cpg_db_query("SELECT aid FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = " . (FIRST_USER_CAT + USER_ID) . " OR owner = " . USER_ID . " OR uploads = 'YES'");
-    while ($row = $result->fetchAssoc(true)) {
+    while ($row = $result->fetchAssoc()) {
         $user_album_set[$row['aid']] = 1;
     }
     $result->free();
@@ -259,8 +258,7 @@ function process_post_data()
             cpg_die(CRITICAL_ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
         }
 
-        $pic = $result->fetchAssoc();
-//        mysqll_free_result($result);
+        $pic = $result->fetchAssoc(true);
 
         if (!GALLERY_ADMIN_MODE && !MODERATOR_MODE && !USER_ADMIN_MODE && !user_is_allowed() && !$CONFIG['users_can_edit_pics'] ) {
 
@@ -696,8 +694,7 @@ if (UPLOAD_APPROVAL_MODE) {
         $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} WHERE approved = 'NO'");
     }
 
-    list($pic_count) = $result->fetchRow();
-//    mysqll_free_result($result);
+    list($pic_count) = $result->fetchRow(true);
 
     if (MODERATOR_MODE) {
 
@@ -748,8 +745,7 @@ if (UPLOAD_APPROVAL_MODE) {
 
     $result = cpg_db_query($sql . $owner_str);
 
-    list($pic_count) = $result->fetchRow();
-//    mysqll_free_result($result);;
+    list($pic_count) = $result->fetchRow(true);
 
     $sql = "SELECT p.*,a.category FROM {$CONFIG['TABLE_PICTURES']} as p " .
             " INNER JOIN {$CONFIG['TABLE_ALBUMS']} as a " .
@@ -913,7 +909,7 @@ EOT;
 
 echo $submit_button;
 
-while ($CURRENT_PIC = $result->fetchAssoc(true)) {
+while ($CURRENT_PIC = $result->fetchAssoc()) {
 
     // wrap the actual block into another table
     print <<< EOT

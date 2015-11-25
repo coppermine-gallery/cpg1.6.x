@@ -37,7 +37,7 @@ class MyCalendar extends Calendar {
 
         $sql = "SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} AS p WHERE approved = 'YES' AND DATE(FROM_UNIXTIME(ctime)) = '$date' $FORBIDDEN_SET";
         $result = cpg_db_query($sql);
-        list($nb_pics) = $result->fetchRow();
+        list($nb_pics) = $result->fetchRow(true);
 
         if ($nb_pics) {
             $link = '<a href="#" onclick="sendDate(\'' . $month . '\', \'' . $day . '\', \'' . $year . '\');" class="user_thumb_infobox" title="' . $nb_pics . ' ' . $lang_calendar_php['files'] . '">';

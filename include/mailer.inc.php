@@ -38,6 +38,7 @@ function cpg_mail($to, $subject, $msg_body = '', $type = 'text/plain', $sender_n
                     $to[] = $row['user_email'];
                 }
             }
+            $result->free();
             $to = array_unique($to);
         } else {
             $to = array($CONFIG['gallery_admin_email']);

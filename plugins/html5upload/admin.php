@@ -85,7 +85,7 @@ function h5u_config_groupSel ($grpn=0) {
 
 	$sql = "SELECT group_id, group_name FROM {$CONFIG['TABLE_USERGROUPS']} ORDER BY group_name";
 	$rslt = cpg_db_query($sql);
-	$group_list = cpg_db_fetch_rowset($rslt);
+	$group_list = cpg_db_fetch_rowset($rslt, true);
 
 	$htm = '<select name="h5u_gSel" onchange="selectConfigGroup(event,this)" style="margin-left:3em">';
 	$htm .= '<option value="0"'.($grpn==0?' selected':'').'>&lt; default &gt;</option>';
@@ -112,7 +112,7 @@ EOT;
 	// since we may have just written the cfg to the db, get a fresh copy from there
 	$grpc = $grpn ? $grpn : '';
 	$rslt = cpg_db_query("SELECT value FROM {$CONFIG['TABLE_CONFIG']} WHERE name = 'html5upload_config{$grpc}'");
-	$scfg = $rslt->fetchAssoc();
+	$scfg = $rslt->fetchAssoc(true);
 	$tcfg = $scfg ? unserialize($scfg['value']) : unserialize($CONFIG['html5upload_config']);
 
 	$plugin_help = $h5a_upload->help_button('adm');

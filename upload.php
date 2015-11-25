@@ -842,8 +842,7 @@ EOT;
             echo "error|{$lang_db_input_php['unknown_album']}|1";
             exit;
         }
-        $row = $result->fetchArray();
-//        mysqll_free_result($result);
+        $row = $result->fetchArray(true);
         $category = $row['category'];
     } else {
         $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid='$album'");
@@ -851,8 +850,7 @@ EOT;
             echo "error|{$lang_db_input_php['unknown_album']}|1";
             exit;
         }
-        $row = $result->fetchArray();
-//        mysqll_free_result($result);
+        $row = $result->fetchArray(true);
         $category = $row['category'];
     }
 

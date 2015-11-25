@@ -68,7 +68,7 @@ function get_subcat_data($parent, $ident = '')
     $result = cpg_db_query($sql);
 
     if ($result->numRows() > 0) {
-        $rowset = cpg_db_fetch_rowset($result);
+        $rowset = cpg_db_fetch_rowset($result, true);
 
         $right = array();
 
@@ -172,7 +172,7 @@ function usergroup_list_box($cid)
     $sql = "SELECT ug.group_name AS name, ug.group_id AS id, catm.group_id AS catm_gid FROM {$CONFIG['TABLE_USERGROUPS']} AS ug LEFT JOIN {$CONFIG['TABLE_CATMAP']} AS catm ON catm.group_id = ug.group_id AND catm.cid = $cid";
     $sql .= " HAVING id NOT IN (".implode(', ', $exclude_groups).")"; // don't list administrator and guest groups
     $result = cpg_db_query($sql);
-    $rowset = cpg_db_fetch_rowset($result);
+    $rowset = cpg_db_fetch_rowset($result, true);
 
     //put the values in an array for ease of use and clean code for now
     foreach ($rowset as $row) {
@@ -200,13 +200,13 @@ function usergroup_list_box($cid)
 
 function form_alb_thumb()
 {
-    global $CONFIG, $lang_catmgr_php, $lang_modifyalb_php, $current_category, $cid, $USER_DATA;
+    global $CONFIG, $lang_catmgr_php, $lang_modifyalb_php, $current_category, $cid, $USER_DATA, $LINEBREAK;
 
     function cpg_get_alb_keyword($sql) {
         $keyword = '';
         $result = cpg_db_query($sql);
         if ($result->numRows()) {
-            while ($row = $result->fetchAssoc(true)) {
+            while ($row = $result->fetchAssoc()) {
                 $keyword .= "OR (keywords LIKE '%{$row['keyword']}%') ";
             }
         }
@@ -266,6 +266,7 @@ EOT;
 
         $img_list[$picture['pid']] = htmlspecialchars($picture['filename']);
     } // while
+    $results->free();
 
     echo <<< EOT
 
@@ -376,6 +377,7 @@ function verify_children($parent, $cid)
             verify_children($row['cid'], $cid);
         }
     }
+    $result->free();
 
     return false;
 }
@@ -540,7 +542,7 @@ case 'editcat':
         cpg_die(ERROR, $lang_catmgr_php['unknown_cat'], __FILE__, __LINE__);
     }
 
-    $current_category = $result->fetchAssoc();
+    $current_category = $result->fetchAssoc(true);
 
     break;
 
@@ -639,7 +641,7 @@ case 'deletecat':
         cpg_die(ERROR, $lang_catmgr_php['unknown_cat'], __FILE__, __LINE__);
     }
 
-    $del_category = $result->fetchAssoc();
+    $del_category = $result->fetchAssoc(true);
     $parent = $del_category['parent'];
 
     cpg_db_query("UPDATE {$CONFIG['TABLE_CATEGORIES']} SET parent = $parent, lft = 0 WHERE parent = $cid");

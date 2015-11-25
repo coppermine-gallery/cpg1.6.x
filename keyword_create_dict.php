@@ -35,7 +35,7 @@ if ($result->numRows()) {
     if ($output) { starttable('100%', $lang_gallery_admin_menu['key_lnk']); }
 
     cpg_db_query("TRUNCATE TABLE {$CONFIG['TABLE_DICT']}");
-    while ($row = $result->fetchAssoc(true)) {
+    while ($row = $result->fetchAssoc()) {
         $keyArr = explode($CONFIG['keyword_separator'], $row['keywords']);
         foreach ($keyArr as $keyword) {
             $keyword = trim($keyword);
@@ -44,18 +44,17 @@ if ($result->numRows()) {
             }
             $query = "SELECT null FROM {$CONFIG['TABLE_DICT']} WHERE keyword = '$keyword'";
             $result2 = cpg_db_query($query);
-            if (!$result2->numRows()) {
+            if (!$result2->numRows(true)) {
                 $query = "INSERT INTO {$CONFIG['TABLE_DICT']} (keyword) VALUES ('$keyword')";
                 cpg_db_query($query);
                 if ($output) { echo '<tr><td class="tableh2">' . $keyword . '</td></tr>'; }
                 $i++ ;
             }
         }
-//        mysqll_free_result($result2);
     }
     if ($output) { endtable(); }
-    $result->free();
 }
+$result->free();
 
 if ($output) {
     echo "<p>{$lang_editpics_php['new_keywords']}: $i</p>";

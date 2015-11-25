@@ -143,10 +143,11 @@ if (isset($bridge_lookup)) {
 
             $sql = "SELECT u.{$this->field['user_id']}, u.{$this->field['password']}, u.{$this->field['grouptbl_group_id']}+100 AS usergroupid FROM {$this->usertable} AS u, {$this->sessionstable} AS s WHERE s.{$this->field['user_id']}=u.{$this->field['user_id']} AND s.sessionhash='$session_id'";
 
-            $result = cpg_db_query($sql, $this->link_id);
+            $result = $this->query($sql);
 
-            if (mysql_num_rows($result)){
-                $row = mysql_fetch_array($result);
+            if (cpg_db_num_rows($result)){
+                $row = cpg_db_fetch_array($result);
+                $result->free();
                 return $row;
             } else {
                 return false;
@@ -161,9 +162,10 @@ if (isset($bridge_lookup)) {
             if ($this->use_post_based_groups){
                 $sql = "SELECT g.{$this->field['usertbl_group_id']}+100 AS group_id, u.* FROM {$this->usertable} AS u, {$this->groupstable} as g WHERE g.{$this->field['grouptbl_group_id']} = u.{$this->field['usertbl_group_id']} AND u.{$this->field['user_id']} = '{$row['id']}'";
 
-                $result = cpg_db_query($sql, $this->link_id);
+                $result = $this->query($sql);
 
-                $row = mysql_fetch_array($result);
+                $row = cpg_db_fetch_array($result);
+                $result->free();
 
                 $data[0] = $row['group_id'];
 

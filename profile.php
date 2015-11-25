@@ -39,8 +39,7 @@ function cpgUserPicCount($uid)
     global $CONFIG;
 
     $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} WHERE owner_id = $uid");
-    list($pic_count) = $result->fetchRow();
-//    mysqll_free_result($result);
+    list($pic_count) = $result->fetchRow(true);
 
     return $pic_count;
 }
@@ -51,12 +50,10 @@ function cpgUserThumb($uid)
 
     $query = "SELECT COUNT(*), MAX(pid) FROM {$CONFIG['TABLE_PICTURES']} AS p WHERE owner_id = '$uid' AND approved = 'YES' $FORBIDDEN_SET";
     $result = cpg_db_query($query);
-    list($picture_count, $thumb_pid) = $result->fetchRow();
-//    mysqll_free_result($result);
+    list($picture_count, $thumb_pid) = $result->fetchRow(true);
 
     $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_ALBUMS']} AS p WHERE category = '" . (FIRST_USER_CAT + $uid) . "' $FORBIDDEN_SET");
-    list($album_count) = $result->fetchRow();
-//    mysqll_free_result($result);
+    list($album_count) = $result->fetchRow(true);
 
     $user_thumb = '';
 
@@ -82,7 +79,7 @@ function cpgUserThumb($uid)
             $user_thumb = '<img src="' . $pic_url . '" class="image"' . $image_size['geom'] . ' border="0" alt="" />';
         }
 
-//        mysqll_free_result($result);
+        $result->free();
     }
 
     return $user_thumb;
@@ -93,8 +90,7 @@ function cpgUserLastComment($uid)
     global $CONFIG, $FORBIDDEN_SET;
 
     $result = cpg_db_query("SELECT COUNT(*), MAX(msg_id) FROM {$CONFIG['TABLE_COMMENTS']} AS c INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.pid = c.pid WHERE approval = 'YES' AND author_id = '$uid' $FORBIDDEN_SET");
-    list($comment_count, $lastcom_id) = $result->fetchRow();
-//    mysqll_free_result($result);
+    list($comment_count, $lastcom_id) = $result->fetchRow(true);
 
     $lastComArray = array(
         'count' => 0,
@@ -130,7 +126,7 @@ function cpgUserLastComment($uid)
             );
         }
 
-//        mysqll_free_result($result);
+        $result->free();
     }
 
     return $lastComArray;
@@ -436,8 +432,7 @@ if ($superCage->post->keyExists('change_password') && USER_ID && UDB_INTEGRATION
     require 'include/passwordhash.inc.php';
     $sql = "SELECT user_password, user_password_salt, user_password_hash_algorithm, user_password_iterations FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '" . USER_ID . "' LIMIT 1";
     $result = cpg_db_query($sql);
-    $password_params = $result->fetchAssoc();
-//    mysqll_free_result($result);
+    $password_params = $result->fetchAssoc(true);
 
     $sql = "UPDATE {$CONFIG['TABLE_USERS']} SET ".cpg_password_create_update_string($new_pass)." WHERE user_id = '" . USER_ID . "' ";
     if (!$password_params['user_password_salt']) {
@@ -474,8 +469,7 @@ case 'edit_profile' :
         cpg_die(ERROR, $lang_register_php['err_unk_user'], __FILE__, __LINE__);
     }
 
-    $user_data = $result->fetchAssoc();
-//    mysqll_free_result($result);
+    $user_data = $result->fetchAssoc(true);
 
     $group_list = '';
 
@@ -484,7 +478,7 @@ case 'edit_profile' :
         $sql = "SELECT group_name " . "FROM {$CONFIG['TABLE_USERGROUPS']} " . "WHERE group_id IN ({$user_data['user_group_list']}) AND group_id != {$user_data['user_group']} " . "ORDER BY group_name";
         $result = cpg_db_query($sql);
 
-        while ($row = $result->fetchArray(true)) {
+        while ($row = $result->fetchArray()) {
             $group_list .= $row['group_name'] . ', ';
         }
 

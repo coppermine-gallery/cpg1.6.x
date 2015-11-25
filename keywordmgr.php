@@ -74,7 +74,7 @@ case 'display':
 
     $i = 0;
 
-    while (list($keywords) = $result->fetchRow(true)) {
+    while (list($keywords) = $result->fetchRow()) {
 
         $array = explode($keysep, html_entity_decode($keywords));
 
@@ -190,6 +190,7 @@ case 'changeword':
 
             $newquerys[] = "UPDATE {$CONFIG['TABLE_PICTURES']} SET keywords = '$keywords' WHERE pid = $id";
         }
+        $result->free();
     }
 
     $newquerys[] = "UPDATE {$CONFIG['TABLE_PICTURES']} SET keywords = TRIM(REPLACE(keywords, '{$keysep}{$keysep}', '{$keysep}'))";
@@ -238,6 +239,7 @@ case 'delete':
 
         $newquerys[] = "UPDATE {$CONFIG['TABLE_PICTURES']} SET keywords = '$keywords' WHERE pid = $id";
     }
+    $result->free();
 
     $newquerys[] = "UPDATE {$CONFIG['TABLE_PICTURES']} SET keywords = TRIM(REPLACE(keywords, '{$keysep}{$keysep}', '{$keysep}'))";
     $newquerys[] = "UPDATE {$CONFIG['TABLE_PICTURES']} SET keywords = '' WHERE keywords = '{$keysep}'";

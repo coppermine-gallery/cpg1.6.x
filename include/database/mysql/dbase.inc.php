@@ -97,42 +97,43 @@ class CPG_DbaseResult
 		$this->qresult = $rslt;
 	}
 
-	public function fetchRow ($hold=false)
+	public function fetchRow ($free=false)
 	{
 		$dat = mysql_fetch_row($this->qresult);
-		if (!$hold) $this->free();
+		if ($free) $this->free();
 		return $dat;
 	}
 
-	public function fetchAssoc ($hold=false)
+	public function fetchAssoc ($free=false)
 	{
 		$dat = mysql_fetch_assoc($this->qresult);
-		if (!$hold) $this->free();
+		if ($free) $this->free();
 		return $dat;
 	}
 
-	public function fetchAssocAll ($hold=false)
+	public function fetchAssocAll ($free=false)
 	{
 		// not currently used
 	}
 
-	public function fetchArray ($hold=false)
+	public function fetchArray ($free=false)
 	{
 		$dat = mysql_fetch_array($this->qresult);
-		if (!$hold) $this->free();
+		if ($free) $this->free();
 		return $dat;
 	}
 
-	public function result ($row=0, $fld=0, $hold=false)
+	public function result ($row=0, $fld=0, $free=false)
 	{
 		$dat = mysql_result($this->qresult, $row, $fld);
-		if (!$hold) $this->free();
+		if ($free) $this->free();
 		return $dat;
 	}
 
-	public function numRows ()
+	public function numRows ($free=false)
 	{
 		$num = mysql_num_rows($this->qresult);
+		if ($free) $this->free();
 		return $num;
 	}
 

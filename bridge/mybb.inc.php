@@ -126,16 +126,17 @@ if (isset($bridge_lookup)) {
                 return false;
             }
 
-            $result = cpg_db_query("SELECT u.{$this->field['user_id']}, u.{$this->field['password']}, additionalgroups
+            $result = $this->query("SELECT u.{$this->field['user_id']}, u.{$this->field['password']}, additionalgroups
                 FROM {$this->sessionstable} AS s
                 INNER JOIN {$this->usertable} AS u ON u.uid = s.uid
-                WHERE sid = '" . $this->sid . "'", $this->link_id);
+                WHERE sid = '" . $this->sid . "'");
 
-            if (!mysql_num_rows($result)) {
+            if (!cpg_db_num_rows($result)) {
                 return false;
             }
 
-            $row = mysql_fetch_row($result);
+            $row = cpg_db_fetch_row($result);
+            $result->free();
 
             $this->additionalgroups = array_pop($row);
             $this->logoutkey = md5($row[1]);

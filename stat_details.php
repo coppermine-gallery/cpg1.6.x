@@ -275,6 +275,7 @@ if ($type == 'vote' && $pid != '') { // type == vote start
           $totalVotesSum = $totalVotesSum + $row['totalVotes'];
           $loopCounter = 0;
     }
+    $result->free();
 
     if (defined('THEME_HAS_RATING_GRAPHICS')) {
         $prefix = $THEME_DIR;
@@ -386,9 +387,8 @@ EOT;
       }
       $query = "SELECT COUNT(pid) FROM $queryTable $countWhere";
       $result = cpg_db_query($query);
-      $nbEnr = $result->fetchArray();
+      $nbEnr = $result->fetchArray(true);
       $count = $nbEnr[0];
-//      mysqll_free_result($result);
 
       // Calculation for pagination tabs and query limit
       $numPages = max(1, ceil($count/$amount));
@@ -525,6 +525,8 @@ EOT;
               } // check internals end
           }
       }
+      $result->free();
+
   // Display pagination
   $record_selector = '&nbsp;&nbsp;-&nbsp;&nbsp;<select name="amount" size="1" onchange="sendForm();" class="listbox">';
   foreach ($amount_allowed as $key) {

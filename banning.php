@@ -100,8 +100,7 @@ if ($superCage->get->keyExists('sort')) {
 
 $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_BANNED']} WHERE brute_force = 0");
 
-list($totalBanCount) = $result->fetchRow();
-//mysqll_free_result($result);
+list($totalBanCount) = $result->fetchRow(true);
 
 $total_pages = ceil($totalBanCount / $items_per_page);
 
@@ -205,7 +204,7 @@ EOT;
 
         $row_counter  = 0;
 
-        while ( ($row = $result->fetchAssoc(true)) ) {
+        while ( ($row = $result->fetchAssoc()) ) {
             if ($row['user_id']) {
                 $username     = get_username($row['user_id']);
                 $view_profile = '<a href="profile.php?uid=' . $row['user_id'] . '">' . cpg_fetch_icon('my_profile', 0, $lang_usermgr_php['view_profile']) . '</a>';
@@ -274,7 +273,7 @@ if ($superCage->post->keyExists('submit')) {
 
     $action_output = '';
 
-    while ($row = $result->fetchAssoc(true)) {
+    while ($row = $result->fetchAssoc()) {
         $ban_database[$row['ban_id']]['user_id']   = $row['user_id'];
         $ban_database[$row['ban_id']]['user_name'] = addslashes($row['user_name']);
         $ban_database[$row['ban_id']]['email']     = $row['email'];
@@ -528,7 +527,7 @@ if ($superCage->get->keyExists('delete_comment_id') && $superCage->get->getInt('
     //get info on user
     $comm_id = $superCage->get->getInt('delete_comment_id');
     //check if there is a comment who's creator we have to ban
-    $comm_info = cpg_db_query("SELECT msg_author, msg_hdr_ip, msg_raw_ip FROM {$CONFIG['TABLE_COMMENTS']} WHERE msg_id = $comm_id")->fetchAssoc();
+    $comm_info = cpg_db_query("SELECT msg_author, msg_hdr_ip, msg_raw_ip FROM {$CONFIG['TABLE_COMMENTS']} WHERE msg_id = $comm_id")->fetchAssoc(true);
 
     $comm_info['msg_ip'] = ($comm_info['msg_hdr_ip'] == '') ? $comm_info['msg_hdr_ip'] : $comm_info['msg_raw_ip'];
 

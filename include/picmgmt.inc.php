@@ -113,9 +113,8 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
     // Test if disk quota exceeded
     if (!GALLERY_ADMIN_MODE && $USER_DATA['group_quota'] && $category == FIRST_USER_CAT + USER_ID) {
         $result = cpg_db_query("SELECT sum(total_filesize) FROM {$CONFIG['TABLE_PICTURES']}, {$CONFIG['TABLE_ALBUMS']} WHERE  {$CONFIG['TABLE_PICTURES']}.aid = {$CONFIG['TABLE_ALBUMS']}.aid AND category = '" . (FIRST_USER_CAT + USER_ID) . "'");
-        $record = $result->fetchArray();
+        $record = $result->fetchArray(true);
         $total_space_used = $record[0];
-//        mysqll_free_result($result);
 
         if ((($total_space_used + $total_filesize)>>10) > $USER_DATA['group_quota'] ) {
             @unlink($image);

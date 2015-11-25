@@ -92,43 +92,44 @@ class CPG_DbaseResult
 		$this->qresult = $rslt;
 	}
 
-	public function fetchRow ($hold=false)
+	public function fetchRow ($free=false)
 	{
 		$dat = $this->qresult->fetch(PDO::FETCH_NUM);
-		if (!$hold) $this->free();
+		if ($free) $this->free();
 		return $dat;
 	}
 
-	public function fetchAssoc ($hold=false)
+	public function fetchAssoc ($free=false)
 	{
 		$dat = $this->qresult->fetch(PDO::FETCH_ASSOC);
-		if (!$hold) $this->free();
+		if ($free) $this->free();
 		return $dat;
 	}
 
-	public function fetchAssocAll ($hold=false)
+	public function fetchAssocAll ($free=false)
 	{
 		// not currently used
 	}
 
-	public function fetchArray ($hold=false)
+	public function fetchArray ($free=false)
 	{
 		$dat = $this->qresult->fetch(PDO::FETCH_BOTH);
-		if (!$hold) $this->free();
+		if ($free) $this->free();
 		return $dat;
 	}
 
-	public function result ($row=0, $fld=0, $hold=false)
+	public function result ($row=0, $fld=0, $free=false)
 	{
 		$row = $this->qresult->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_ABS, $row);
-		if (!$hold) $this->free();
+		if ($free) $this->free();
 		return $r ? $r[$fld] : false;
 	}
 
-	public function numRows ()
+	public function numRows ($free=false)
 	{
 		$i = 0;
 		if ($this->qresult) while ($this->qresult->fetch(PDO::FETCH_NUM)) { $i++; }
+		if ($free) $this->free();
 		return $i;
 	}
 

@@ -35,9 +35,7 @@ while ($row = $result->fetchAssoc()) {
     $keywords[] = $row['keyword'];
 }
 
-$total = $result->numRows();
-
-//mysqll_free_result($result);
+$total = $result->numRows(true);
 
 if ($superCage->get->keyExists('id')) {
     $formFieldId = $superCage->get->getInt('id');

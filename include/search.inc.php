@@ -128,7 +128,7 @@ if ($search_string && isset($search_params['params'])) {
                                         ." AND approved = 'YES' "
                                         ." ORDER BY `pid` DESC";
                                 $thumb_result = cpg_db_query($thumb_query);
-                                $thumb = $thumb_result->fetchAssoc();
+                                $thumb = $thumb_result->fetchAssoc(true);
                                 // TODO: query above only pulls in last_pid in each album, not correct album thumb as set by user
 
                                 $thumb_url = get_pic_url($thumb, 'thumb');
@@ -159,6 +159,7 @@ if ($search_string && isset($search_params['params'])) {
                         endtable();
                         echo '<br/>';
                 }
+                $result->free();
         }
 
         if ($superCage->get->keyExists('category_title')) {
@@ -169,7 +170,7 @@ if ($search_string && isset($search_params['params'])) {
                         while ($cat = $result->fetchAssoc()) {
                                 $album_q = "SELECT aid, title FROM `{$CONFIG['TABLE_ALBUMS']}` AS p WHERE (`category` = '{$cat['cid']}') $FORBIDDEN_SET ORDER BY `aid` DESC LIMIT 1";
                                 $album_r = cpg_db_query($album_q);
-                                $album = $album_r->fetchArray();
+                                $album = $album_r->fetchArray(true);
 
                                 // TODO: This is weird.  It seems to pull in the largest aid's thumb for the category image?
                                 $thumb_query = "SELECT filepath, filename, url_prefix, pwidth, pheight "
@@ -178,7 +179,7 @@ if ($search_string && isset($search_params['params'])) {
                                         ." AND approved = 'YES' "
                                         ." ORDER BY `pid` DESC";
                                 $thumb_result = cpg_db_query($thumb_query);
-                                $thumb = $thumb_result->fetchAssoc();
+                                $thumb = $thumb_result->fetchAssoc(true);
                                 $thumb_url = get_pic_url($thumb, 'thumb');
                                 $thumb_size = compute_img_size($thumb['pwidth'], $thumb['pheight'], $CONFIG['alb_list_thumb_size'], true, 'cat_thumb');
 
@@ -207,6 +208,7 @@ if ($search_string && isset($search_params['params'])) {
                         endtable();
                         echo '<br/>';
                 }
+                $result->free();
         }
 
         // Make sure they selected some parameter other than album/category
@@ -234,8 +236,7 @@ if ($search_string && isset($search_params['params'])) {
 
             $query = "SELECT $criteria FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid";
             $result = cpg_db_query($query);
-            $criteria_pid = $result->result(0);
-//            mysqll_free_result($result);
+            $criteria_pid = $result->result(0, 0, true);
 
             if ($direction == "ASC") {
                 $direction = "<";
@@ -254,8 +255,7 @@ if ($search_string && isset($search_params['params'])) {
 
                 $result = cpg_db_query($query);
 
-                list($pos) = $result->fetchRow();
-//                mysqll_free_result($result);
+                list($pos) = $result->fetchRow(true);
 
         } else {
 
@@ -265,13 +265,12 @@ if ($search_string && isset($search_params['params'])) {
 
             $temp = str_replace("SELECT p.*{$user_column}", 'SELECT COUNT(*)', $query);
             $result = cpg_db_query($temp);
-            $row = $result->fetchRow();
+            $row = $result->fetchRow(true);
             $count = $row[0];
 
             $query .= " ORDER BY $sort_order $limit";
             $result = cpg_db_query($query);
-            $rowset = cpg_db_fetch_rowset($result);
-//            mysqll_free_result($result);
+            $rowset = cpg_db_fetch_rowset($result, true);
 
             if ($set_caption) {
                 build_caption($rowset);

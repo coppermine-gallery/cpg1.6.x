@@ -73,6 +73,7 @@ if ($superCage->post->KeyExists('email') && $superCage->post->testEmail('email')
 
 EOT;
     }
+    $results->free();
 }
 
 pageheader($lang_send_activation_php['resend_act_link']);

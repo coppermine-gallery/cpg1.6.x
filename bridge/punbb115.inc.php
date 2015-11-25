@@ -117,8 +117,9 @@ if (isset($bridge_lookup)) {
                 list($username, $pass_hash) = unserialize($superCage->cookie->getRaw($this->cookie_name));
                 if (strcasecmp($username, 'Guest'))
                 {
-                    $result = cpg_db_query("SELECT id, username, status+100 AS status FROM {$this->usertable} WHERE username = '$username' AND password = '$pass_hash'", $this->link_id);
-                    $row = mysql_fetch_assoc($result);
+                    $result = $this->query("SELECT id, username, status+100 AS status FROM {$this->usertable} WHERE username = '$username' AND password = '$pass_hash'");
+                    $row = cpg_db_fetch_assoc($result);
+                    $result->free();
                 }
             }
 

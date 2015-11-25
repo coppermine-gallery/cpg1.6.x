@@ -55,8 +55,8 @@ if ((!is_array($CLEAN['data'])) && $CONFIG['log_ecards'] && (strlen($CLEAN['data
         $row = $result->fetchAssoc();
         $CLEAN['data']= @unserialize(@base64_decode($row['link']));
     }
+    $result->free();
 
-//    mysqll_free_result($result);
 }
 
 if (is_array($CLEAN['data'])) {
@@ -71,8 +71,7 @@ if (is_array($CLEAN['data'])) {
         cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
     }
 
-    $row = $result->fetchAssoc();
-//    mysqll_free_result($result);
+    $row = $result->fetchAssoc(true);
 
     if ($row['pwidth'] != 0 && $row['pheight'] != 0) {
         $image_size = compute_img_size($row['pwidth'], $row['pheight'], $CONFIG['picture_width'], 'normal');

@@ -1537,7 +1537,6 @@ if (defined('INSTALL_PHP')) {
  $lang_install['writable'] = 'Inscriptible';
  $lang_install['not_writable'] = 'Non inscriptible';
  $lang_install['not_exist'] = 'N\'existe pas';
- $lang_install['old_install'] = 'Vous êtes dans le nouvel assistant d\'installation. Cliquez %sici%s pour accéder à l\'ancien écran d\'installation.';
 
 }
 

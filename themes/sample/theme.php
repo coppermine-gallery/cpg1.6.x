@@ -2287,7 +2287,7 @@ function theme_admin_mode_menu()
             // Query the languages table
             $help_lang = '';
             $results = cpg_db_query("SELECT lang_id, abbr FROM {$CONFIG['TABLE_LANGUAGE']} WHERE available='YES' AND enabled='YES'");
-            while ($row = $results->fetchArray(true)) {
+            while ($row = $results->fetchArray()) {
                 if ($CONFIG['lang'] == $row['lang_id']) {
                     $help_lang = $row['abbr'];
                 }
@@ -3630,8 +3630,8 @@ function theme_html_rating_box()
             //user has voted
             $rate_title = $lang_rate_pic['already_voted'];
         }
-//        mysqll_free_result($result_votes);
-//        mysqll_free_result($result_vote_stats);
+        $result_votes->free();
+        $result_vote_stats->free();
 
         $rating_stars_amount = ($CONFIG['old_style_rating']) ? 5 : $CONFIG['rating_stars_amount'];
         $votes = $CURRENT_PIC_DATA['votes'] ? sprintf($lang_rate_pic['rating'], round(($CURRENT_PIC_DATA['pic_rating'] / 2000) / (5/$rating_stars_amount), 1), $rating_stars_amount, $CURRENT_PIC_DATA['votes']) : $lang_rate_pic['no_votes'];
@@ -3749,7 +3749,7 @@ function theme_html_comments($pid)
     }
 
     $result = cpg_db_query("SELECT COUNT(msg_id) FROM {$CONFIG['TABLE_COMMENTS']} WHERE pid='$pid'");
-    list($num) = $result->fetchRow();
+    list($num) = $result->fetchRow(true);
 
     if ($num) {
 
@@ -3895,6 +3895,7 @@ function theme_html_comments($pid)
                 $html .= template_eval($template, $params);
             }
         } // while-loop end
+        $result->free();
 
         $html .= $tabs;
     }
@@ -4088,7 +4089,7 @@ function theme_display_fullsize_pic()
         if (!$result->numRows()) {
             cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
         }
-        $row = $result->fetchAssoc();
+        $row = $result->fetchAssoc(true);
         if (is_image($row['filename'])) {
             $pic_url = get_pic_url($row, 'fullsize');
             $geom = 'width="' . $row['pwidth'] . '" height="' . $row['pheight'] . '"';

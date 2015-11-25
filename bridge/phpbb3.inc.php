@@ -128,15 +128,16 @@ if (isset($bridge_lookup)) {
 
                 $sql = "SELECT user_id, user_password, group_id FROM {$this->sessionstable} INNER JOIN {$this->usertable} ON session_user_id = user_id WHERE session_id = '{$this->session_id}'";
 
-                $result = cpg_db_query($sql, $this->link_id);
+                $result = $this->query($sql);
 
-                if (mysql_num_rows($result)){
-                    $row = mysql_fetch_array($result);
+                if (cpg_db_num_rows($result)){
+                    $row = cpg_db_fetch_array($result);
                     $this->primary_group = array_pop($row);
                     return $row['user_id'] == 1 ? false : $row;
                 } else {
                     return false;
                 }
+                $result->free();
             }
         }
 
@@ -162,11 +163,12 @@ if (isset($bridge_lookup)) {
     		    $data[] = $this->primary_group + 100;
     		
     		    $sql = "SELECT group_id FROM {$this->usergroupstable} WHERE user_id = {$row['id']}";
-    		    $result = cpg_db_query($sql, $this->link_id);
+    		    $result = $this->query($sql);
     		
-    		    while ($group = mysql_fetch_assoc($result)) {
+    		    while ($group = cpg_db__fetch_assoc($result)) {
         		    $data[] = $group['group_id'] + 100;
     		    }
+    		    $result->free();
 
                 $data = array_unique($data);
 

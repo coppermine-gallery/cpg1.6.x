@@ -115,16 +115,14 @@ if (!defined('SKIP_AUTHENTICATION') && !$_SESSION['auth']) {
 
         // Check if column 'user_password_salt' exists in user table
         $result = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_PREFIX']}users LIMIT 1");
-        $row = $result->fetchAssoc(); 
+        $row = $result->fetchAssoc(true); 
         $col_user_password_salt_exists = isset($row['user_password_salt']) ? true : false;
-//        mysqll_free_result($result);
 
         if ($col_user_password_salt_exists) {
             require 'include/passwordhash.inc.php';
             $sql = "SELECT user_password, user_password_salt, user_password_hash_algorithm, user_password_iterations FROM {$CONFIG['TABLE_PREFIX']}users WHERE user_group = 1 AND user_name = '$user'";
             $result = cpg_db_query($sql);
-            $password_params = $result->fetchAssoc();
-//          mysqll_free_result($result);
+            $password_params = $result->fetchAssoc(true);
         }
 
         if (!$col_user_password_salt_exists || !$password_params['user_password_salt']) {
@@ -434,7 +432,7 @@ function cpg_get_config_value($config_name)
     global $CONFIG;
 
     $result = cpg_db_query("SELECT value FROM ".$CONFIG['TABLE_PREFIX']."config WHERE name='".$config_name."' LIMIT 1");
-    $row = $result->fetchRow();
+    $row = $result->fetchRow(true);
 
     return $row[0];
 }
@@ -519,7 +517,7 @@ EOT;
 
             $description = array();
 
-            while ($row = $result->fetchRow(true)) {
+            while ($row = $result->fetchRow()) {
                 $description[] = $row;
             }
             $result->free();
@@ -532,7 +530,7 @@ EOT;
 
             $description2 = array();
 
-            while ($row = $result->fetchRow(true)) {
+            while ($row = $result->fetchRow()) {
                 $description2[] = $row;
             }
             $result->free();
@@ -553,7 +551,7 @@ EOT;
                 echo "Rows Affected: ".$affected.". ";
             }
             if ($warnings) {
-                while ($warning = $warnings->fetchRow(true)) {
+                while ($warning = $warnings->fetchRow()) {
                     if ($warning[0] != '') {
                         $warning_text = 'MySQL said: ';
                     } else {
@@ -740,7 +738,7 @@ function update_system_thumbs()
     global $CONFIG, $lang_update_php, $lang_common, $ok_icon, $already_done_icon, $error_icon;
 
     $results = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_PREFIX']}config;");
-    while ($row = $results->fetchAssoc(true)) {
+    while ($row = $results->fetchAssoc()) {
         $CONFIG[$row['name']] = $row['value'];
     } // while
     $results->free();

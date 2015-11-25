@@ -53,7 +53,7 @@ if (isset($CLEAN['email'])) {
 
     if ($results->numRows()) { // something has been found start
 
-        $USER_DATA = $results->fetchAssoc();
+        $USER_DATA = $results->fetchAssoc(true);
 
         // check if we have an admin account (with empty email address)
         if ($USER_DATA['user_email'] == '') {
@@ -126,8 +126,7 @@ EOT;
         cpg_die($lang_forgot_passwd_php['forgot_passwd'], $lang_forgot_passwd_php['err_unk_user']);
     }
 
-    $row = $result->fetchAssoc();
-//    mysqll_free_result($sql);
+    $row = $result->fetchAssoc(true);
 
     // Reset Password
     $new_password = $cpg_udb->make_password();

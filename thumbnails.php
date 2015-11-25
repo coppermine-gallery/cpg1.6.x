@@ -162,8 +162,7 @@ if (isset($album) && is_numeric($album)) {
             if ($result->numRows() == 0) {
                 cpg_die(CRITICAL_ERROR, $lang_errors['non_exist_cat'], __FILE__, __LINE__);
             }
-            $row = $result->fetchAssoc();
-//            mysqll_free_result($result);
+            $row = $result->fetchAssoc(true);
             $CURRENT_CAT_NAME = $row['name'];
         }
 

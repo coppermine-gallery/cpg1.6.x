@@ -176,7 +176,7 @@ $available_doc_folders_array = form_get_foldercontent('docs/', 'folder', '', arr
 
 // Query the languages table
 $results = cpg_db_query("SELECT lang_id, abbr FROM {$CONFIG['TABLE_LANGUAGE']} WHERE available = 'YES' AND enabled = 'YES'");
-while ($row = $results->fetchAssoc(true)) {
+while ($row = $results->fetchAssoc()) {
     if ($CONFIG['lang'] == $row['lang_id']) {
         $help_lang = $row['abbr'];
         break;

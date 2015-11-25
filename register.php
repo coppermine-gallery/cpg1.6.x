@@ -488,12 +488,10 @@ function check_user_info(&$error)
     $sql = "SELECT null FROM {$CONFIG['TABLE_USERS']} WHERE user_name = '$user_name'";
     $result = cpg_db_query($sql);
 
-    if ($result->numRows()) {
+    if ($result->numRows(free)) {
         $error = '<li style="list-style-image:url(images/icons/stop.png)">' . $lang_register_php['err_user_exists'] . '</li>';
         return false;
     }
-
-//    mysqll_free_result($result);
 
     if (utf_strlen($user_name) < 2) {
         $error .= '<li style="list-style-image:url(images/icons/stop.png)">' . $lang_register_php['username_warning2'] . '</li>';
@@ -533,19 +531,15 @@ function check_user_info(&$error)
     // Perform the ban check against email address and username
     $result = cpg_db_query("SELECT null FROM {$CONFIG['TABLE_BANNED']} WHERE user_name = '$user_name' AND brute_force = 0 LIMIT 1");
 
-    if ($result->numRows()) {
+    if ($result->numRows(true)) {
         $error .= '<li style="list-style-image:url(images/icons/stop.png)">' . $lang_register_php['user_name_banned'] . '</li>';
     }
 
-//    mysqll_free_result($result);
-
     $result = cpg_db_query("SELECT null FROM {$CONFIG['TABLE_BANNED']} WHERE email = '$email' AND brute_force = 0 LIMIT 1");
 
-    if ($result->numRows()) {
+    if ($result->numRows(true)) {
         $error .= '<li style="list-style-image:url(images/icons/stop.png)">' . $lang_register_php['email_address_banned'] . '</li>';
     }
-
-//    mysqll_free_result($result);
 
     // check captcha
     if ($CONFIG['registration_captcha'] != 0) {
@@ -565,11 +559,9 @@ function check_user_info(&$error)
         $sql = "SELECT null FROM {$CONFIG['TABLE_USERS']} WHERE user_email = '$email'";
         $result = cpg_db_query($sql);
 
-        if ($result->numRows()) {
+        if ($result->numRows(true)) {
             $error = '<li style="list-style-image:url(images/icons/stop.png)">' . $lang_register_php['err_duplicate_email'] . '</li>';
         }
-
-//        mysqll_free_result($result);
     }
 
     $error = CPGPluginAPI::filter('register_form_validate', $error);
@@ -647,6 +639,7 @@ function check_user_info(&$error)
                     $admins[$row['user_id']] = array('email' => $row['user_email'], 'lang' => $row['user_language']);
                 }
             }
+            $result->free();
         } else {
             //@todo: is it possible to get the language from bridged installs?
             $admins[] = array('email' => $CONFIG['gallery_admin_email'], 'lang' => 'english');
@@ -713,8 +706,7 @@ if ($superCage->get->keyExists('activate')) {
         cpg_die(ERROR, $lang_register_php['acct_act_failed'], __FILE__, __LINE__);
     }
 
-    $row = $result->fetchAssoc();
-//    mysqll_free_result($result);
+    $row = $result->fetchAssoc(true);
 
     if ($row['user_active'] == 'YES') {
         cpg_die(ERROR, $lang_register_php['acct_already_act'], __FILE__, __LINE__);
@@ -771,7 +763,7 @@ if ($superCage->get->keyExists('activate')) {
         if (UDB_INTEGRATION == 'coppermine') {
             // get default language in which to inform the admins
             $result = cpg_db_query("SELECT user_id, user_email, user_language FROM {$CONFIG['TABLE_USERS']} WHERE user_group = 1");
-            while ($row2 = $result->fetchAssoc(true)) {
+            while ($row2 = $result->fetchAssoc()) {
                 if (!empty($row2['user_email'])) {
                     $admins[$row2['user_id']] = array('email' => $row2['user_email'], 'lang' => $row2['user_language']);
                 }

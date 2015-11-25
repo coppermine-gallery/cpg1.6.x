@@ -1559,7 +1559,6 @@ $lang_install['imp_test_error'] = 'There was an error in one or more of the test
 $lang_install['writable'] = 'Writable';
 $lang_install['not_writable'] = 'Not writable';
 $lang_install['not_exist'] = 'Does not exist';
-$lang_install['old_install'] = 'This is the new install wizard. Click %shere%s for the classic install screen.';
 }
 
 // ------------------------------------------------------------------------- //

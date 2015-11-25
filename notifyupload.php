@@ -33,15 +33,13 @@ if ($CONFIG['upl_notify_admin_email'] && $superCage->post->keyExists('album') &&
     if (!GALLERY_ADMIN_MODE) {
         $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid='$album' and (uploads = 'YES' OR category = '" . (USER_ID + FIRST_USER_CAT) . "' OR owner = '" . USER_ID . "')");
         if ($result->numRows()) {
-            $row = $result->fetchArray();
-//            mysqll_free_result($result);
+            $row = $result->fetchArray(true);
             $category = $row['category'];
         }
     } else {
         $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid='$album'");
         if ($result->numRows()) {
-            $row = $result->fetchArray();
-//            mysqll_free_result($result);
+            $row = $result->fetchArray(true);
             $category = $row['category'];
         }
     }

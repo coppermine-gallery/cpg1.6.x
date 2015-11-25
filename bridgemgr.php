@@ -259,7 +259,7 @@ function cpg_refresh_config_db_values() {
     global $CONFIG;
     // Retrieve DB stored configuration
     $results = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_CONFIG']}");
-    while ($row = $results->fetchArray(true)) {
+    while ($row = $results->fetchArray()) {
         $CONFIG[$row['name']] = $row['value'];
     } // while
     $results->free();
@@ -766,13 +766,13 @@ else { // not in gallery admin mode --- start
     // check if the wait time is over; if it isn't, send them back
     $results = cpg_db_query("SELECT value FROM {$CONFIG['TABLE_BRIDGE']} WHERE name = 'recovery_logon_timestamp'");
     if ($results->numRows()) {
-        $row = $results->fetchArray();
+        $row = $results->fetchArray(true);
     }
     $recovery_logon_timestamp = $row['value'];
     //print $recovery_logon_timestamp;
     $results = cpg_db_query("SELECT value FROM {$CONFIG['TABLE_BRIDGE']} WHERE name = 'recovery_logon_failures'");
     if ($results->numRows()) {
-        $row = $results->fetchArray();
+        $row = $results->fetchArray(true);
     }
     $recovery_logon_failures = $row['value'];
     $logon_allowed = cpg_check_allowed_emergency_logon($recovery_logon_timestamp,$recovery_logon_failures);
@@ -795,7 +795,7 @@ else { // not in gallery admin mode --- start
 
         $results = cpg_db_query("SELECT user_id, user_name, user_password FROM $temp_user_table WHERE user_name = '" . addslashes($posted_var['username']) . "' AND BINARY user_password = '" . $encpassword . "' AND user_active = 'YES' AND user_group = '1'");
         if ($results->numRows()) {
-            $retrieved_data = $results->fetchArray();
+            $retrieved_data = $results->fetchArray(true);
         }
         if ($retrieved_data['user_name'] == $posted_var['username'] && $retrieved_data['user_password'] == $encpassword && $retrieved_data['user_name'] != '' ) {
             // authentication successful
@@ -824,7 +824,7 @@ else { // not in gallery admin mode --- start
             cpg_db_query("UPDATE {$CONFIG['TABLE_BRIDGE']} SET value = NOW() WHERE name = 'recovery_logon_timestamp'");
             $results = cpg_db_query("SELECT value FROM {$CONFIG['TABLE_BRIDGE']} WHERE name = 'recovery_logon_failures'");
             if ($results->numRows()) {
-                $row = $results->fetchArray();
+                $row = $results->fetchArray(true);
             }
             $number_of_failed_attempts = $row['value'] + 1;
             cpg_db_query("UPDATE {$CONFIG['TABLE_BRIDGE']} SET value = '$number_of_failed_attempts' WHERE name = 'recovery_logon_failures'");
@@ -836,13 +836,13 @@ else { // not in gallery admin mode --- start
     // check if the wait time is over; if it isn't, disable the submit button
     $results = cpg_db_query("SELECT value FROM {$CONFIG['TABLE_BRIDGE']} WHERE name = 'recovery_logon_timestamp'");
     if ($results->numRows()) {
-        $row = $results->fetchArray();
+        $row = $results->fetchArray(true);
     }
     $recovery_logon_timestamp = $row['value'];
     //print $recovery_logon_timestamp;
     $results = cpg_db_query("SELECT value FROM {$CONFIG['TABLE_BRIDGE']} WHERE name = 'recovery_logon_failures'");
     if ($results->numRows()) {
-        $row = $results->fetchArray();
+        $row = $results->fetchArray(true);
     }
     $recovery_logon_failures = $row['value'];
     $logon_allowed = cpg_check_allowed_emergency_logon($recovery_logon_timestamp,$recovery_logon_failures);

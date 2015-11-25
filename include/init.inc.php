@@ -180,7 +180,7 @@ if (!$CPGDB->isConnected()) {
 
 // Retrieve DB stored configuration
 $result = cpg_db_query("SELECT name, value FROM {$CONFIG['TABLE_CONFIG']}");
-while ( ($row = $result->fetchAssoc(true)) ) {
+while ( ($row = $result->fetchAssoc()) ) {
     $CONFIG[$row['name']] = $row['value'];
 } // while
 $result->free();
@@ -278,6 +278,7 @@ if (!GALLERY_ADMIN_MODE) {
             $USER_DATA['allowed_albums'][] = $row['aid'];
         }
     }
+    $result->free();
 }
 
 // Set the debug flag to be used in js var
@@ -331,7 +332,7 @@ $CONFIG['default_lang'] = $CONFIG['lang'];      // Save default language
 $enabled_languages_array = array();
 
 $result = cpg_db_query("SELECT lang_id FROM {$CONFIG['TABLE_LANGUAGE']} WHERE enabled='YES'");
-while ($row = $result->fetchAssoc(true)) {
+while ($row = $result->fetchAssoc()) {
     $enabled_languages_array[] = $row['lang_id'];
 }
 $result->free();
@@ -390,8 +391,7 @@ if ($superCage->cookie->keyExists($CONFIG['cookie_name'] . '_fav')) {
 if (USER_ID > 0) {
     $result = cpg_db_query("SELECT user_favpics FROM {$CONFIG['TABLE_FAVPICS']} WHERE user_id = ".USER_ID);
 
-    $row = $result->fetchAssoc();
-//    mysqll_free_result($result);
+    $row = $result->fetchAssoc(true);
     if (!empty($row['user_favpics'])) {
         $FAVPICS = @unserialize(@base64_decode($row['user_favpics']));
     } else {

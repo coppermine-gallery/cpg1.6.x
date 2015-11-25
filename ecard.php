@@ -75,7 +75,7 @@ if (!$result->numRows()) {
     cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
 }
 
-$row = $result->fetchAssoc();
+$row = $result->fetchAssoc(true);
 
 $thumb_pic_url = get_pic_url($row, 'thumb');
 $normal_pic_url = get_pic_url($row, 'normal');

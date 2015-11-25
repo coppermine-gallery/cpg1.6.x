@@ -158,7 +158,7 @@ $lang_file_orphan_array = $lang_file_array;
 
 // Let's populate the language list from the database
 $results = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_LANGUAGE']}");
-while ($row = $results->fetchArray(true)) {
+while ($row = $results->fetchArray()) {
         $lang_language_data[$row['lang_id']]['lang_id'] = $row['lang_id'];
         $lang_language_data[$row['lang_id']]['english_name'] = $row['english_name'];
         $lang_language_data[$row['lang_id']]['native_name'] = $row['native_name'];

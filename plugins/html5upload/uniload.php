@@ -118,14 +118,14 @@ if (GALLERY_ADMIN_MODE) {
 }
 
 if ($public_albums->numRows()) {
-	$public_albums_list = cpg_db_fetch_rowset($public_albums);
+	$public_albums_list = cpg_db_fetch_rowset($public_albums, true);
 } else {
 	$public_albums_list = array();
 }
 
 //do the same for non-categorized albums
 if ($public_albums_no_cat->numRows()) {
-	$public_albums_list_no_cat = cpg_db_fetch_rowset($public_albums_no_cat);
+	$public_albums_list_no_cat = cpg_db_fetch_rowset($public_albums_no_cat, true);
 } else {
 	$public_albums_list_no_cat = array();
 }
@@ -136,7 +136,7 @@ $public_albums_list = array_merge($public_albums_list, $public_albums_list_no_ca
 if (USER_ID) {
 	$user_albums = cpg_db_query("SELECT aid, title FROM {$CONFIG['TABLE_ALBUMS']} WHERE category='" . (FIRST_USER_CAT + USER_ID) . '\' ORDER BY title');
 	if ($user_albums->numRows()) {
-		$user_albums_list = cpg_db_fetch_rowset($user_albums);
+		$user_albums_list = cpg_db_fetch_rowset($user_albums, true);
 	} else {
 		$user_albums_list = array();
 	}
@@ -332,16 +332,14 @@ if (!GALLERY_ADMIN_MODE) {
 	if ($result->numRows() == 0) {
 		errorOut($lang_db_input_php['unknown_album'], 1, __FILE__, __LINE__);
 	}
-	$row = $result->fetchArray();
-//	mysqll_free_result($result);
+	$row = $result->fetchArray(true);
 	$category = $row['category'];
 } else {
 	$result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid='$album'");
 	if ($result->numRows() == 0) {
 		errorOut($lang_db_input_php['unknown_album'], 1, __FILE__, __LINE__);
 	}
-	$row = $result->fetchArray();
-//	mysqll_free_result($result);
+	$row = $result->fetchArray(true);
 	$category = $row['category'];
 }
 

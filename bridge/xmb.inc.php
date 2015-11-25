@@ -114,15 +114,16 @@ if (isset($bridge_lookup)) {
         {
             $sql = "SELECT * FROM {$this->groupstable}";
 
-            $result = cpg_db_query($sql, $this->link_id);
+            $result = $this->query($sql);
 
             // XMB has no guest group in groups table, so adding one here
             $udb_groups = array(3=>'Guests');
 
-            while ($row = mysql_fetch_assoc($result))
+            while ($row = cpg_db_fetch_assoc($result))
             {
                 $udb_groups[$row['id']+100] = utf_ucfirst(utf_strtolower($row[$this->field['grouptbl_group_name']]));
             }
+            $result->free();
             return $udb_groups;
         }
 
@@ -132,10 +133,10 @@ if (isset($bridge_lookup)) {
 
             $sql = "SELECT id FROM {$this->groupstable}, {$this->usertable} WHERE {$this->field['usertbl_group_id']} = {$this->field['grouptbl_group_id']} AND {$this->field['user_id']}='$id'";
 
-            $result = cpg_db_query($sql, $this->link_id);
+            $result = $this->query($sql);
 
-            if (mysql_num_rows($result)){
-                $row = mysql_fetch_row($result);
+            if (cpg_db_num_rows($result)){
+                $row = cpg_db_fetch_row($result);
                 if ($this->use_post_based_groups){
                     $row = array($row[0] + 100);
                 } else {
@@ -145,13 +146,14 @@ if (isset($bridge_lookup)) {
                         $row = array(2);
                     }
                 }
+                $result->free();
                 return $row;
             } else {
                 return false;
             }
         }
 
-            function get_users($options = array())
+        function get_users($options = array())
         {
             global $CONFIG;
 
@@ -205,9 +207,10 @@ if (isset($bridge_lookup)) {
             }
 
             // Extract user list to an array
-            while ($user = mysql_fetch_assoc($result)) {
+            while ($user = cpg_db_fetch_assoc($result)) {
                 $userlist[] = $user;
             }
+            $result->free();
 
             return $userlist;
         }

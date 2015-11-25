@@ -148,9 +148,9 @@ if (isset($bridge_lookup)) {
             $data = array();
 
             $sql = "SELECT id_group, {$this->field['additionals']} AS additionals FROM {$this->usertable} WHERE {$this->field['user_id']} = {$row['id']}";
-            $result = cpg_db_query($sql, $this->link_id);
+            $result = $this->query($sql);
 
-            $groupdata = mysql_fetch_assoc($result);
+            $groupdata = cpg_db_fetch_assoc($result, true);
 
             if ($this->use_post_based_groups) {
 
@@ -189,13 +189,14 @@ if (isset($bridge_lookup)) {
             // Use this version to include all SMF groups
             $sql ="SELECT * FROM {$this->groupstable}";
 
-            $result = cpg_db_query($sql, $this->link_id);
+            $result = $this->query($sql);
 
             $udb_groups = array(100 => 'Guests');
 
-            while ($row = mysql_fetch_assoc($result)) {
+            while ($row = cpg_db_fetch_assoc($result)) {
                 $udb_groups[$row[$this->field['grouptbl_group_id']]+100] = utf_ucfirst(utf_strtolower($row[$this->field['grouptbl_group_name']]));
             }
+            $result->free();
 
             return $udb_groups;
         }
@@ -222,11 +223,11 @@ if (isset($bridge_lookup)) {
 
                 $sql = "SELECT data FROM {$this->sessionstable} WHERE session_id = '$session_id'";
 
-                $result = cpg_db_query($sql, $this->link_id);
+                $result = $this->query($sql);
 
-                if (mysql_num_rows($result)) {
+                if (cpg_db_num_rows($result)) {
 
-                    list($data) = mysql_fetch_row($result);
+                    list($data) = cpg_db_fetch_row($result);
 
                     session_name('CPG');
                     session_start();
@@ -237,6 +238,7 @@ if (isset($bridge_lookup)) {
 
                     return $session;
                 }
+                $result->free();
             }
 
             return false;
@@ -256,7 +258,7 @@ if (isset($bridge_lookup)) {
 
                 $sql = "UPDATE {$this->sessionstable} SET data = '$data' WHERE session_id = '$session_id'";
 
-                cpg_db_query($sql, $this->link_id);
+                $this->query($sql);
             }
         }
 

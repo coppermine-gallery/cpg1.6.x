@@ -205,7 +205,7 @@ if ($linktarget != '') {
     // get the allowed extensions
     $filetypes = array();
     $result = cpg_db_query("SELECT extension FROM {$CONFIG['TABLE_FILETYPES']}");
-    while($row = $result->fetchRow(true)) {
+    while($row = $result->fetchRow()) {
         $filetypes[] = $row[0];
     }
     $result->free();

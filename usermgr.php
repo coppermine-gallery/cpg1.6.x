@@ -74,8 +74,7 @@ function list_group_alb_access($group_id) {  //shows a list of albums a specific
       ORDER BY
         category, album";
     $result = cpg_db_query($query);
-    $albs = cpg_db_fetch_rowset($result);
-//    mysqll_free_result($result);
+    $albs = cpg_db_fetch_rowset($result, true);
 
     foreach($albs as $album) {
       $aid = $album['aid'];
@@ -114,8 +113,7 @@ function list_groups_alb_access() //shows a list of albums each group can see. C
     ";
 
     $result = cpg_db_query($sql);
-    $groups = cpg_db_fetch_rowset($result);
-//    mysqll_free_result($result);
+    $groups = cpg_db_fetch_rowset($result, true);
 
     echo "
     <td>{$lang_usermgr_php['category']}</td>
@@ -422,18 +420,16 @@ EOT;
 
     // query total number of files uploaded
     $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} LIMIT 1");
-    $tempPicCount = $result->fetchArray();
+    $tempPicCount = $result->fetchArray(true);
     $totalPictureCount = $tempPicCount[0];
     $totalPictureCount_fmt = cpg_float2decimal($totalPictureCount);
-//    mysqll_free_result($result);
     unset($tempPicCount);
 
     // query total space used
     $result = cpg_db_query("SELECT SUM(total_filesize) FROM {$CONFIG['TABLE_PICTURES']} LIMIT 1");
-    $tempSpaceCount = $result->fetchArray();
+    $tempSpaceCount = $result->fetchArray(true);
     $totalSpaceCount = $tempSpaceCount[0];
     $totalSpaceCount_fmt = cpg_format_bytes($totalSpaceCount);
-//    mysqll_free_result($result);
     unset($tempSpaceCount);
 
     // query total number of comments posted
@@ -441,7 +437,6 @@ EOT;
     $tempCommentCount = $result->fetchArray(true);
     $totalCommentCount = $tempCommentCount[0];
     $totalCommentCount_fmt = cpg_float2decimal($totalCommentCount);
-//    mysqll_free_result($result);
     unset($tempCommentCount);
 
     foreach ($users as $user) {
@@ -460,7 +455,7 @@ EOT;
         $group_quota_separator = '/';
         // Determine actual quota if user belongs to more than one user group
         if ($user_groups = cpg_get_groups($user['user_id'])) {
-            $quota = cpg_db_query("SELECT MAX(group_quota) AS disk_max, MIN(group_quota) AS disk_min FROM {$CONFIG['TABLE_USERGROUPS']} WHERE group_quota >= 0 AND group_id IN (".implode(", ", $user_groups).")")->fetchAssoc();
+            $quota = cpg_db_query("SELECT MAX(group_quota) AS disk_max, MIN(group_quota) AS disk_min FROM {$CONFIG['TABLE_USERGROUPS']} WHERE group_quota >= 0 AND group_id IN (".implode(", ", $user_groups).")")->fetchAssoc(true);
             $user['group_quota'] = $quota["disk_min"] ? $quota["disk_max"] : 0;
         }
         if ($user['group_quota']) {
@@ -506,7 +501,6 @@ EOT;
         }
         $commentCount = $result->fetchArray(true);
         $user['comment_num'] = $commentCount[0];
-//        mysqll_free_result($result);
         if ($user['comment_num'] > 0) {
             $user_comment_link = '<a href="thumbnails.php?album=lastcomby&amp;uid=' . $user['user_id'] . '">' . cpg_fetch_icon('comment', 0, $lang_usermgr_php['last_comments'] . '('.$user['comment_num'].')') . '</a>';
         } else {
@@ -631,8 +625,7 @@ EOT;
 EOT;
         $sql = "SELECT group_id, group_name FROM {$CONFIG['TABLE_USERGROUPS']} ORDER BY group_name";
         $result = cpg_db_query($sql);
-        $group_list = cpg_db_fetch_rowset($result);
-//        mysqll_free_result($result);
+        $group_list = cpg_db_fetch_rowset($result, true);
 
         if (isset($element[1])) {
             $sel_group = $user_data[$element[1]];
@@ -776,8 +769,7 @@ function edit_user($user_id)
         if (!$result->numRows()) {
             cpg_die(CRITICAL_ERROR, $lang_usermgr_php['err_unknown_user'], __FILE__, __LINE__);
         }
-        $user_data = $result->fetchArray();
-//        mysqll_free_result($result);
+        $user_data = $result->fetchArray(true);
 
         if (cpg_db_query("SELECT user_name FROM {$CONFIG['TABLE_BANNED']} WHERE user_name = '" . addslashes($user_data['user_name']) . "' AND brute_force=0 LIMIT 1")->numRows()){
             $user_status = $lang_usermgr_php['user_is_banned'];
@@ -896,8 +888,7 @@ EOT;
             case 'group_list' :
                 $sql = "SELECT group_id, group_name FROM {$CONFIG['TABLE_USERGROUPS']} ORDER BY group_name";
                 $result = cpg_db_query($sql);
-                $group_list = cpg_db_fetch_rowset($result);
-//                mysqll_free_result($result);
+                $group_list = cpg_db_fetch_rowset($result, true);
 
                 $sel_group = $user_data[$element[1]];
                 $user_group_list = ($user_data['user_group_list'] == '') ? ',' . $sel_group . ',' : ',' . $user_data['user_group_list'] . ',' . $sel_group . ',';
@@ -1037,7 +1028,7 @@ function update_user($user_id)
         if ($user_password && utf_strlen($user_password) < 2) cpg_die(ERROR, $lang_register_php['password_warning1'], __FILE__, __LINE__);
 
     // Save old user data (we need it later to determine if we need to send the activation confirmation email)
-    $user_data = cpg_db_query("SELECT user_name, user_active, user_email, user_actkey FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '$user_id'")->fetchAssoc();
+    $user_data = cpg_db_query("SELECT user_name, user_active, user_email, user_actkey FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '$user_id'")->fetchAssoc(true);
 
     if (is_array($group_list)) {
         $user_group_list = '';
@@ -1153,11 +1144,10 @@ switch ($op) {
         $result = cpg_db_query($sql);
         $group = $result->fetchArray();
 
-        if (!$result->numRows()) {
+        if (!$result->numRows(true)) {
           pageheader($lang_usermgr_php['group_no_access']);
           msg_box($lang_usermgr_php['notice'].'&nbsp;'.cpg_display_help('f=groups.htm&amp;as=group_cp_assigned&amp;ae=group_cp_assigned_end', '450', '300'), $lang_usermgr_php['group_no_access']);
         } else {
-            $result->free();
             $group_name = $group['group_name'];
             pageheader(sprintf($lang_usermgr_php['group_can_access'], $group_name));
             starttable(500, sprintf($lang_usermgr_php['group_can_access'], $group_name).'&nbsp;'.cpg_display_help('f=groups.htm&amp;as=group_cp_assigned&amp;ae=group_cp_assigned_end', '450', '300'), 3);

@@ -40,8 +40,7 @@ function exif_parse_file($filename, $pid)
     //Check if we have the data of the said file in the table
     $result = cpg_db_query("SELECT exifData FROM {$CONFIG['TABLE_EXIF']} WHERE pid = $pid");
     if ($result->numRows() > 0) {
-        $row = $result->fetchAssoc();
-//        mysqll_free_result($result);
+        $row = $result->fetchAssoc(true);
         $exif = unserialize($row['exifData']);
 
         // Convert old EXIF data style to new one

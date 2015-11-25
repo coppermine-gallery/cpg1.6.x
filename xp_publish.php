@@ -176,7 +176,7 @@ function html_album_list(&$alb_count)
     if (USER_IS_ADMIN) {
         $public_albums = cpg_db_query("SELECT aid, title FROM {$CONFIG['TABLE_ALBUMS']} WHERE category < " . FIRST_USER_CAT . " ORDER BY title");
         if ($public_albums->numRows()) {
-            $public_albums_list = cpg_db_fetch_rowset($public_albums);
+            $public_albums_list = cpg_db_fetch_rowset($public_albums, true);
         } else {
             $public_albums_list = array();
         }
@@ -187,7 +187,7 @@ function html_album_list(&$alb_count)
     if (USER_ID) {
         $user_albums = cpg_db_query("SELECT aid, title FROM {$CONFIG['TABLE_ALBUMS']} WHERE category='" . (FIRST_USER_CAT + USER_ID) . "' ORDER BY title");
         if ($user_albums->numRows()) {
-            $user_albums_list = cpg_db_fetch_rowset($user_albums);
+            $user_albums_list = cpg_db_fetch_rowset($user_albums, true);
         } else {
             $user_albums_list = array();
         }
@@ -788,28 +788,25 @@ function process_picture()
     if (!USER_IS_ADMIN) {
         $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid='$album' and category = '" . (USER_ID + FIRST_USER_CAT) . "'");
         if ($result->numRows() == 0) simple_die(ERROR, $lang_db_input_php['unknown_album'], __FILE__, __LINE__);
-        $row = $result->fetchArray();
-//        mysqll_free_result($result);
+        $row = $result->fetchArray(true);
         $category = $row['category'];
     } else {
         $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid='$album'");
         if ($result->numRows() == 0) simple_die(ERROR, $lang_db_input_php['unknown_album'], __FILE__, __LINE__);
-        $row = $result->fetchArray();
-//        mysqll_free_result($result);
+        $row = $result->fetchArray(true);
         $category = $row['category'];
     }
 
     // Get position
     $result = cpg_db_query("SELECT position FROM {$CONFIG['TABLE_PICTURES']} WHERE aid='$album' order by position desc");
     if ($result->numRows() == 0) {
-             $position = 100;
+		$position = 100;
     } else {
-             $row = $result->fetchArray();
-//             mysqll_free_result($result);
-                     if ($row['position']) {
-                     $position = $row['position'];
-                             $position++;
-                                         }
+		$row = $result->fetchArray(true);
+		if ($row['position']) {
+			$position = $row['position'];
+			$position++;
+		}
     }
 
 
