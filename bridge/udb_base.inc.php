@@ -31,7 +31,7 @@ class core_udb
 		global $CONFIG;
 
 		// Define whether we can join tables or not in SQL queries (same host & same db or user or positive check)
-		$this->can_join_tables = ($this->db['host'] == $CONFIG['dbserver'] && ($this->db['name'] == $CONFIG['dbname'] || $this->db['user'] == $CONFIG['dbuser'] || mysql_query("SELECT NULL FROM ".$this->usertable." LIMIT 1")));
+		$this->can_join_tables = ($this->db['host'] == $CONFIG['dbserver'] && ($this->db['name'] == $CONFIG['dbname'] || $this->db['user'] == $CONFIG['dbuser'] || $this->query("SELECT NULL FROM ".$this->usertable." LIMIT 1")));
 
 		if ($obj){
 			$this->dbObj = $obj;
@@ -93,6 +93,7 @@ class core_udb
 			} else {
 				$this->load_guest_data();
 			}
+			$result->free();
 		}
 
 		$user_group_set = '(' . implode(',', $USER_DATA['groups']) . ')';
@@ -192,6 +193,7 @@ class core_udb
 			$result = $this->query("SELECT count(*) FROM {$this->usertable} WHERE 1");
 			$nbEnr = $result->fetchArray(true);
 			$user_count = $nbEnr[0];
+			$result->free();
 		}
 
 		return $user_count;
@@ -290,6 +292,7 @@ class core_udb
 			} else {
 				$cache[$uid] = '';
 			}
+			$result->free();
 		}
 
 		return $cache[$uid];
@@ -365,6 +368,7 @@ class core_udb
 			}
 			$USER_DATA = $result->fetchAssoc(true);
 		}
+		$result->free();
 
 		$result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_CATMAP']} WHERE group_id in (" .  implode(",", $groups). ")");
 		if ($result->result(0, 0, true) > 0) {
@@ -372,6 +376,7 @@ class core_udb
 		} else {
 			$USER_DATA['can_create_public_albums'] = 0;
 		}
+		$result->free();
 
 		$USER_DATA["group_quota"] = ($USER_DATA["disk_min"])?$USER_DATA["disk_max"]:0;
 		$USER_DATA['can_see_all_albums'] = $USER_DATA['has_admin_access'];
@@ -472,6 +477,7 @@ class core_udb
 			$user_data['user_profile6'] = '';
 		}
 
+		$result->free();
 		return $user_data;
 	}
 	// end function get_user_infos
