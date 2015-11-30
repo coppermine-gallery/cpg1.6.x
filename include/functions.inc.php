@@ -5934,7 +5934,8 @@ function get_cat_data()
             // add user categories
             if ($subcat['cid'] == 1 && GALLERY_ADMIN_MODE) {
                 global $cpg_udb;
-                $result2 = cpg_db_query("SELECT {$cpg_udb->field['user_id']} AS user_id, {$cpg_udb->field['username']} AS user_name FROM {$cpg_udb->usertable} ORDER BY user_name", $cpg_udb->link_id);
+                // query via bridge
+                $result2 = $cpg_udb->query("SELECT {$cpg_udb->field['user_id']} AS user_id, {$cpg_udb->field['username']} AS user_name FROM {$cpg_udb->usertable} ORDER BY user_name");
                 $rowset2 = cpg_db_fetch_rowset($result2, true);
                 foreach ($rowset2 as $user) {
                     $CAT_LIST[] = array(FIRST_USER_CAT + $user['user_id'], '&nbsp;&nbsp;&nbsp;' . $user['user_name']);
@@ -6009,8 +6010,9 @@ function album_selection_options($selected = 0)
             $options .= '<optgroup label="' . $lang_common['personal_albums'] . '">' . $LINEBREAK;
 
             if (GALLERY_ADMIN_MODE) {
-                $result2 = cpg_db_query("SELECT {$cpg_udb->field['user_id']} AS user_id, {$cpg_udb->field['username']} AS user_name "
-                    . "FROM {$cpg_udb->usertable} ORDER BY {$cpg_udb->field['username']}", $cpg_udb->link_id);
+            	// query via bridge
+                $result2 = $cpg_udb->query("SELECT {$cpg_udb->field['user_id']} AS user_id, {$cpg_udb->field['username']} AS user_name "
+                    . "FROM {$cpg_udb->usertable} ORDER BY {$cpg_udb->field['username']}");
                 $users = cpg_db_fetch_rowset($result2, true);
             } else {
                 $users = array(array('user_id' => USER_ID, 'user_name' => USER_NAME));

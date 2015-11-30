@@ -55,7 +55,7 @@ class core_udb
 	// end function connect
 
 
-	protected function query ($sql)
+	public function query ($sql)
 	{
 		return $this->dbObj->query($sql);
 	}
