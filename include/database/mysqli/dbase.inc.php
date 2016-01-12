@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2015 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -92,61 +92,47 @@ class CPG_DbaseResult
 		$this->qresult = $rslt;
 	}
 
-	public function fetchRow ($hold=false)
+	public function fetchRow ($free=false)
 	{
-		if (!$this->qresult) {
-			echo'<pre>';var_dump(debug_backtrace());echo'</pre>';
-		}
 		$dat = mysqli_fetch_row($this->qresult);
-		if (!$hold) $this->free();
+		if ($free) $this->free();
 		return $dat;
 	}
 
-	public function fetchAssoc ($hold=false)
+	public function fetchAssoc ($free=false)
 	{
-		if (!$this->qresult) {
-			echo'<pre>';var_dump(debug_backtrace());echo'</pre>';
-		}
 		$dat = mysqli_fetch_assoc($this->qresult);
-		if (!$hold) $this->free();
+		if ($free) $this->free();
 		return $dat;
 	}
 
-	public function fetchAssocAll ($hold=false)
+	public function fetchAssocAll ($free=false)
 	{
 		// not currently used
 	}
 
-	public function fetchArray ($hold=false)
+	public function fetchArray ($free=false)
 	{
-		if (!$this->qresult) {
-			echo'<pre>';var_dump(debug_backtrace());echo'</pre>';
-		}
 		$dat = mysqli_fetch_array($this->qresult);
-		if (!$hold) $this->free();
+		if ($free) $this->free();
 		return $dat;
 	}
 
-	public function result ($row=0, $fld=0, $hold=false)
+	public function result ($row=0, $fld=0, $free=false)
 	{
-		if (!$this->qresult) {
-			echo'<pre>';var_dump(debug_backtrace());echo'</pre>';
-		}
 		$return = null;
 		if (mysqli_data_seek($this->qresult, $row)) {
 			$row = $this->qresult->fetch_row();
 			$return = $row[$fld];
 		}
-		if (!$hold) $this->free();
+		if ($free) $this->free();
 		return $return;
 	}
 
-	public function numRows ()
+	public function numRows ($free=false)
 	{
-		if (!$this->qresult) {
-			echo'<pre>';var_dump(debug_backtrace());echo'</pre>';
-		}
 		$num = mysqli_num_rows($this->qresult);
+		if ($free) $this->free();
 		return $num;
 	}
 

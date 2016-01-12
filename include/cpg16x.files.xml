@@ -253,14 +253,6 @@
     <hash>25e0534142ad6090108052f651accc2c</hash>
   </element>
   <element>
-    <fullpath>install_classic.php</fullpath>
-    <version>1.6.01</version>
-    <revision>8713</revision>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>358b96bd0eb155c4c4279d099b59590f</hash>
-  </element>
-  <element>
     <fullpath>keyword_create_dict.php</fullpath>
     <version>1.6.01</version>
     <revision>8634</revision>

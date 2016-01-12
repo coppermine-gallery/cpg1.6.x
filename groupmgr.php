@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2015 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -51,7 +51,7 @@ function display_group_list()
     );
 
     $result = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_USERGROUPS']} WHERE 1 ORDER BY group_id");
-    if (!mysql_num_rows($result)) {
+    if (!$result->numRows()) {
         cpg_db_query("INSERT INTO {$CONFIG['TABLE_USERGROUPS']}
         VALUES (1, 'Administrators', 0, 1, 1, 1, 1, 1, 1, 0, 0, 3)");
         cpg_db_query("INSERT INTO {$CONFIG['TABLE_USERGROUPS']}
@@ -70,7 +70,7 @@ function display_group_list()
         3 => $lang_groupmgr_php['thumbnail_intermediate_full']
     );
 
-    while ($group = mysql_fetch_assoc($result)) {
+    while ($group = $result->fetchAssoc()) {
         $group['group_name'] = $group['group_name'];
         $row_counter++;
         if ($row_counter == 1) {
@@ -202,7 +202,7 @@ EOT;
 
 EOT;
     } // while
-    mysql_free_result($result);
+    $result->free();
 }
 
 function get_post_var($var)

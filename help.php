@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2015 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -123,7 +123,7 @@ EOT;
 </ul>
 EOT;
     } elseif ($matches[1] == 'lang_groupmgr_php' && isset($matches[2]) && $matches[2] == 'explain_guests_greyed_out_text') {
-        $group_name = mysql_result(cpg_db_query("SELECT group_name FROM {$CONFIG['TABLE_USERGROUPS']} WHERE group_id = 3"), 0);
+        $group_name = cpg_db_query("SELECT group_name FROM {$CONFIG['TABLE_USERGROUPS']} WHERE group_id = 3")->result(0);
         $text = sprintf($text, '<em>'.$group_name.'</em>');
     } elseif (isset($matches[3])) {
         $text = ${$matches[1]}[$matches[2]][$matches[3]];
@@ -176,14 +176,15 @@ $available_doc_folders_array = form_get_foldercontent('docs/', 'folder', '', arr
 
 // Query the languages table
 $results = cpg_db_query("SELECT lang_id, abbr FROM {$CONFIG['TABLE_LANGUAGE']} WHERE available = 'YES' AND enabled = 'YES'");
-while ($row = mysql_fetch_assoc($results)) {
+while ($row = $results->fetchAssoc()) {
     if ($CONFIG['lang'] == $row['lang_id']) {
         $help_lang = $row['abbr'];
         break;
     } else {
         $help_lang = 'en';
     }
-} // whilemysql_free_result($results);
+} // while
+$results->free();
 unset($row);
 
 // Make sure that the chosen help file actually exists

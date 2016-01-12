@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2015 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -1379,7 +1379,7 @@ $lang_groupmgr_php['del_groups'] = 'Delete selected group(s)';
 $lang_groupmgr_php['confirm_del'] = 'Warning, when you delete a group, users that belong to this group will be transferred to the \'Registered\' group!\n\nDo you want to proceed?'; // js-alert
 $lang_groupmgr_php['title'] = 'Manage user groups';
 $lang_groupmgr_php['reset_to_default'] = 'Reset to default name (%s) - recommended!';
-$lang_groupmgr_php['error_group_empty'] = 'Group table was empty!<br />Default groups created, please reload this page';
+$lang_groupmgr_php['error_group_empty'] = 'Database group table was empty!<br />Default groups created, please reload this page';
 $lang_groupmgr_php['explain_greyed_out_title'] = 'Why is this row grayed out?';
 $lang_groupmgr_php['explain_guests_greyed_out_text'] = 'You cannot change the properties of this group because the access level of this group is NONE. All unlogged users (members of the group %s) can\'t do anything but login; therefore group settings don\'t apply for them. Change the access level here or on the Gallery Configuration page under "User Settings", "Allow unlogged users access".';
 $lang_groupmgr_php['group_assigned_album'] = 'assigned album(s)';
@@ -1462,27 +1462,27 @@ $lang_install['installer_locked'] = 'The installer is locked';
 $lang_install['installer_selected'] = 'The installer selected';
 $lang_install['inv_im_path'] = 'The installer cannot find the \'%s\' directory you have specified for ImageMagick or it does not have permission to access it. Check that your typing is correct and that you have access to the specified directory.';
 $lang_install['lets_go'] = 'Let\'s Go!';
-$lang_install['mysql_create_btn'] = 'Create';
-$lang_install['mysql_create_db'] = 'Create new MySQL database';
-$lang_install['mysql_db_name'] = 'MySQL database name';
-$lang_install['mysql_error'] = 'MySQL error: ';
-$lang_install['mysql_host'] = 'MySQL host<br />(localhost is usually OK)';
-$lang_install['mysql_username'] = 'MySQL username';
-$lang_install['mysql_password'] = 'MySQL password';
-$lang_install['mysql_no_create_db'] = 'Could not create MySQL database.';
-$lang_install['mysql_no_sel_dbs'] = 'Could not retrieve available MySQL databases';
-$lang_install['mysql_succ'] = 'Successful connection with database';
-$lang_install['mysql_tbl_pref'] = 'MySQL table prefix';
-$lang_install['mysql_test_connection'] = 'Test connection';
-$lang_install['mysql_wrong_db'] = 'MySQL could not locate a database called \'%s\' please check the value entered for this';
+$lang_install['dbase_create_btn'] = 'Create';
+$lang_install['dbase_create_db'] = 'Create new database';
+$lang_install['dbase_db_name'] = 'Database name';
+$lang_install['dbase_error'] = 'Database error: ';
+$lang_install['dbase_host'] = 'Database host<br />(localhost is usually OK)';
+$lang_install['dbase_username'] = 'Database username';
+$lang_install['dbase_password'] = 'Database password';
+$lang_install['dbase_no_create_db'] = 'Could not create database.';
+$lang_install['dbase_no_sel_dbs'] = 'Could not retrieve available databases';
+$lang_install['dbase_succ'] = 'Successful connection with database';
+$lang_install['dbase_tbl_pref'] = 'Table prefix';
+$lang_install['dbase_test_connection'] = 'Test connection';
+$lang_install['dbase_wrong_db'] = 'Could not locate a database called \'%s\' please check the value entered for this';
 $lang_install['n_a'] = 'N/A';
 $lang_install['no_admin_email'] = 'You have to enter an admin email address';
 $lang_install['no_admin_password'] = 'You have to enter an admin password';
 $lang_install['no_admin_username'] = 'You have to enter an admin username';
 $lang_install['no_dir'] = 'Directory not available';
 $lang_install['no_gd'] = 'Your installation of PHP does not seem to include the \'GD\' graphic library extension and you have not indicated that you want to use ImageMagick. Coppermine has been configured to use GD2 because the automatic GD detection sometimes fails. If GD is installed on your system, the script should work else you will need to install ImageMagick.';
-$lang_install['no_mysql_conn'] = 'Could not create a MySQL connection, please check the MySQL details entered';
-$lang_install['no_mysql_support'] = 'PHP does not have MySQL support enabled.';
+$lang_install['no_dbase_conn'] = 'Could not create a %s connection, please check the %s details entered';
+$lang_install['no_dbase_support'] = 'PHP does not have %s support enabled.';
 $lang_install['no_thumb_method'] = 'You have to choose an image manipulation application (GD/IM)';
 $lang_install['nok'] = 'Not OK';
 $lang_install['not_here_yet'] = 'Nothing here yet, please click %shere%s to go back.';
@@ -1499,8 +1499,8 @@ $lang_install['please_go_back'] = 'Please %sclick here%s to go back and fix this
 $lang_install['populate_db'] = 'Populate database';
 $lang_install['ready_to_roll'] = '<a href="index.php">Coppermine</a> is now properly configured and ready to use.<br /><a href="login.php">Login</a> using the information you provided for your admin account.';
 $lang_install['sect_create_adm'] = 'This section requires information to create your Coppermine administration account. Use only alphanumeric characters. Enter the data carefully!';
-$lang_install['sect_mysql_info'] = 'This section requires information on how to access your MySQL database.<br />If you don\'t know how to fill them, check with your webhost support.';
-$lang_install['sect_mysql_sel_db'] = 'Here you have to choose which database you want to use for Coppermine.<br />If your MySQL account has the needed privileges, you can create a new database from within the installer or you can use an existing database. If you don\'t like both options, you will have to create a database first outside the Coppermine installer, then return here then select the new database from the dropdown box below. You can also change the table prefix (don\'t use dots though), but keeping the default prefix is recommended.';
+$lang_install['sect_dbase_info'] = 'This section requires information on how to access your database.<br />If you don\'t know how to fill them, check with your webhost support.';
+$lang_install['sect_dbase_sel_db'] = 'Here you have to choose which database you want to use for Coppermine.<br />If your database account has the needed privileges, you can create a new database from within the installer or you can use an existing database. If you don\'t like both options, you will have to create a database first outside the Coppermine installer, then return here then select the new database from the dropdown box below. You can also change the table prefix (don\'t use dots though), but keeping the default prefix is recommended.';
 $lang_install['select_lang'] = 'Select default language: ';
 $lang_install['sql_file_not_found'] = 'The file \'%s\' could not be found. Check that you have uploaded all Coppermine files to your server.';
 $lang_install['status'] = 'Status';
@@ -1511,9 +1511,10 @@ $lang_install['title_file_check'] = 'Checking installation files';
 $lang_install['title_finished'] = 'Installation completed';
 $lang_install['title_imp'] = 'Image package selection';
 $lang_install['title_imp_test'] = 'Testing image library';
-$lang_install['title_mysql_db_sel'] = 'MySQL database selection';
-$lang_install['title_mysql_pop'] = 'Creating database structure';
-$lang_install['title_mysql_user'] = 'MySQL user authentication';
+$lang_install['title_dbase_type'] = 'Select Database Engine to use';
+$lang_install['title_dbase_db_sel'] = '%s database selection';
+$lang_install['title_dbase_pop'] = 'Creating database structure';
+$lang_install['title_dbase_user'] = 'Database user authentication';
 $lang_install['title_welcome'] = 'Welcome to Coppermine installation';
 $lang_install['tmp_conf_error'] = 'Unable to write the temporary config file - make sure the \'include\' folder is writable for the script.';
 $lang_install['tmp_conf_ser_err'] = 'A serious error occurred in the installer, try reloading your page or start over by removing the \'include/config.tmp\' file.';
@@ -1546,8 +1547,9 @@ $lang_install['imp_test_error'] = 'There was an error in one or more of the test
 $lang_install['writable'] = 'Writable';
 $lang_install['not_writable'] = 'Not writable';
 $lang_install['not_exist'] = 'Does not exist';
-$lang_install['old_install'] = 'This is the new install wizard. Click %shere%s for the classic install screen.';
-
+// 1.6 dbabstract
+$lang_install['not_available'] = 'not available';
+$lang_install['version_too_old'] = 'version too old';
 }
 
 // ------------------------------------------------------------------------- //
@@ -2314,12 +2316,12 @@ $lang_update_php['title'] = 'Updater';
 $lang_update_php['welcome_updater'] = 'Welcome to Coppermine update';
 $lang_update_php['could_not_authenticate'] = 'Could not authenticate you';
 $lang_update_php['provide_admin_account_cpg'] = 'Please provide your Coppermine admin account data'; // cpg1.6
-$lang_update_php['provide_admin_account_mysql'] = 'Please provide your MySQL account data'; // cpg1.6
+$lang_update_php['provide_admin_account_dbase'] = 'Please provide your %s account data'; // cpg1.6
 $lang_update_php['try_again'] = 'Try again';
-$lang_update_php['mysql_connect_error'] = 'Could not create a MySQL connection';
-$lang_update_php['mysql_database_error'] = 'MySQL could not locate a database called %s';
-$lang_update_php['mysql_said'] = 'MySQL said';
-$lang_update_php['check_config_file'] = 'Please check the MySQL details in %s';
+$lang_update_php['dbase_connect_error'] = 'Could not create a %s connection';
+$lang_update_php['dbase_database_error'] = '%s could not locate a database called %s';
+$lang_update_php['dbase_said'] = '%s said';
+$lang_update_php['check_config_file'] = 'Please check the %s details in %s';
 $lang_update_php['performing_database_updates'] = 'Performing Database Updates';
 $lang_update_php['performing_file_updates'] = 'Performing File Updates';
 $lang_update_php['already_done'] = 'Already Done';
@@ -2337,6 +2339,13 @@ $lang_update_php['delete_file'] = 'Delete %s';
 $lang_update_php['could_not_delete'] = 'Could not delete due to missing permissions. Delete the file manually!';
 $lang_update_php['rename_file'] = 'Rename %s to %s';
 $lang_update_php['could_not_rename'] = 'Could not rename due to missing permissions. Rename the file manually!';
+// 1.6 dbabstract
+$lang_update_php['newDbMethod'] = 'Your Coppermine Gallery installation is using a database connection method (mysql) that is deprecated and should be changed. Please choose an alternate connection method below.';
+$lang_update_php['not_available'] = 'not available';
+$lang_update_php['version_too_old'] = 'version too old';
+$lang_update_php['recommended'] = ' (recommended)';
+$lang_update_php['current_nr'] = ' (current, not recommended)';
+$lang_update_php['unable_write_config'] = 'Unable to write config file';
 }
 
 // ------------------------------------------------------------------------- //

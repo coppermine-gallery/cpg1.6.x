@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2015 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -53,7 +53,7 @@ $sql = "SELECT pid FROM {$CONFIG['TABLE_PICTURES']} WHERE filepath='" . addslash
 
 $result = cpg_db_query($sql);
 
-if (mysql_num_rows($result)) {
+if ($result->numRows()) {
     $status = 'DUPE';
 } elseif (($result = add_picture($aid, $dir_name, $sane_name)) === true) {
     $status = 'OK';

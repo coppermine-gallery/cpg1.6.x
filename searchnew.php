@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2015 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -340,11 +340,11 @@ function getallpicindb(&$pic_array, $startdir)
 
     $sql = "SELECT filepath, filename " . "FROM {$CONFIG['TABLE_PICTURES']} " . "WHERE filepath LIKE '$startdir%'";
     $result = cpg_db_query($sql);
-    while ($row = mysql_fetch_array($result)) {
+    while ($row = $result->fetchArray()) {
         $pic_file = $row['filepath'] . replace_forbidden($row['filename']);
         $pic_array[$pic_file] = 1;
     }
-    mysql_free_result($result);
+    $result->free();
 }
 
 /**
@@ -363,10 +363,10 @@ function getallalbumsindb(&$album_array)
     $sql = "SELECT aid, title " . "FROM {$CONFIG['TABLE_ALBUMS']} " . "WHERE 1";
     $result = cpg_db_query($sql);
 
-    while ($row = mysql_fetch_array($result)) {
+    while ($row = $result->fetchArray()) {
         $album_array[$row['aid']] = $row['title'];
     }
-    mysql_free_result($result);
+    $result->free();
 }
 
 /**

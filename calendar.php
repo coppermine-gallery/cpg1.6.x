@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2015 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -37,7 +37,7 @@ class MyCalendar extends Calendar {
 
         $sql = "SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} AS p WHERE approved = 'YES' AND DATE(FROM_UNIXTIME(ctime)) = '$date' $FORBIDDEN_SET";
         $result = cpg_db_query($sql);
-        list($nb_pics) = mysql_fetch_row($result);
+        list($nb_pics) = $result->fetchRow(true);
 
         if ($nb_pics) {
             $link = '<a href="#" onclick="sendDate(\'' . $month . '\', \'' . $day . '\', \'' . $year . '\');" class="user_thumb_infobox" title="' . $nb_pics . ' ' . $lang_calendar_php['files'] . '">';

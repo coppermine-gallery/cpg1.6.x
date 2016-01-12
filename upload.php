@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2015 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -504,14 +504,14 @@ if (GALLERY_ADMIN_MODE) {
 }
 
 
-if (mysql_num_rows($public_albums)) {
+if ($public_albums->numRows()) {
     $public_albums_list = cpg_db_fetch_rowset($public_albums);
 } else {
     $public_albums_list = array();
 }
 
 //do the same for non-categorized albums
-if (mysql_num_rows($public_albums_no_cat)) {
+if ($public_albums_no_cat->numRows()) {
     $public_albums_list_no_cat = cpg_db_fetch_rowset($public_albums_no_cat);
 } else {
     $public_albums_list_no_cat = array();
@@ -523,7 +523,7 @@ $public_albums_list = array_merge($public_albums_list, $public_albums_list_no_ca
 
 if (USER_ID) {
     $user_albums = cpg_db_query("SELECT aid, title FROM {$CONFIG['TABLE_ALBUMS']} WHERE category='" . (FIRST_USER_CAT + USER_ID) . "' ORDER BY title");
-    if (mysql_num_rows($user_albums)) {
+    if ($user_albums->numRows()) {
         $user_albums_list = cpg_db_fetch_rowset($user_albums);
     } else {
         $user_albums_list = array();
@@ -838,21 +838,19 @@ EOT;
     // Check if the album id provided is valid
     if (!GALLERY_ADMIN_MODE) {
         $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid = $album AND (owner = " . USER_ID . " OR category = " . (USER_ID + FIRST_USER_CAT) . (USER_CAN_UPLOAD_PICTURES  ? ' OR uploads = "YES"' : '') . ")");
-        if (mysql_num_rows($result) == 0) {
+        if ($result->numRows() == 0) {
             echo "error|{$lang_db_input_php['unknown_album']}|1";
             exit;
         }
-        $row = mysql_fetch_array($result);
-        mysql_free_result($result);
+        $row = $result->fetchArray(true);
         $category = $row['category'];
     } else {
         $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid='$album'");
-        if (mysql_num_rows($result) == 0) {
+        if ($result->numRows() == 0) {
             echo "error|{$lang_db_input_php['unknown_album']}|1";
             exit;
         }
-        $row = mysql_fetch_array($result);
-        mysql_free_result($result);
+        $row = $result->fetchArray(true);
         $category = $row['category'];
     }
 

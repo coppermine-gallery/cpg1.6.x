@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2015 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -117,7 +117,7 @@ EOT;
       $query = 'SELECT * FROM '.$CONFIG['TABLE_PLUGINS'].' ORDER BY priority ASC;';
       $result = cpg_db_query($query);
       $loop_counter = 0;
-      while ($installed_plugin = mysql_fetch_assoc($result)) {
+      while ($installed_plugin = $result->fetchAssoc()) {
         $installed_plugins[$loop_counter] = array(
           'index' => $loop_counter,
           'plugin_id' => $installed_plugin['plugin_id'],
@@ -127,6 +127,7 @@ EOT;
         );
         $loop_counter++;
       }
+      $result->free();
     }
 
     $installed_count = 0;
@@ -428,7 +429,7 @@ switch ($op) {
         } else {
           $query = 'SELECT * FROM '.$CONFIG['TABLE_PLUGINS'].' WHERE plugin_id='.$plugin_id.' LIMIT 1;';
           $result = cpg_db_query($query);
-          $installed_plugin = mysql_fetch_assoc($result);
+          $installed_plugin = $result->fetchAssoc(true);
           if ($installed_plugin) {
             $priority = $installed_plugin['priority'];
             $name = $installed_plugin['name'];
@@ -481,7 +482,7 @@ switch ($op) {
         } else {
           $query = 'SELECT * FROM '.$CONFIG['TABLE_PLUGINS'].' WHERE plugin_id='.$plugin_id.' LIMIT 1;';
           $result = cpg_db_query($query);
-          $installed_plugin = mysql_fetch_assoc($result);
+          $installed_plugin = $result->fetchAssoc(true);
           if ($installed_plugin) {
             $priority = $installed_plugin['priority'];
           }
@@ -497,7 +498,7 @@ switch ($op) {
           if ($CONFIG['log_mode']) {
               $query = 'SELECT * FROM '.$CONFIG['TABLE_PLUGINS'].' WHERE plugin_id='.$plugin_id.' LIMIT 1;';
               $result = cpg_db_query($query);
-              $installed_plugin = mysql_fetch_assoc($result);
+              $installed_plugin = $result->fetchAssoc(true);
               log_write("Plugin '".$installed_plugin['name']."' moved up in plugin list", CPG_GLOBAL_LOG);
           }
         }
@@ -518,13 +519,13 @@ switch ($op) {
         } else {
           $query = 'SELECT * FROM '.$CONFIG['TABLE_PLUGINS'].' WHERE plugin_id='.$plugin_id.' LIMIT 1;';
           $result = cpg_db_query($query);
-          $installed_plugin = mysql_fetch_assoc($result);
+          $installed_plugin = $result->fetchAssoc(true);
           if ($installed_plugin) {
             $priority = $installed_plugin['priority'];
           }
           $query = 'SELECT * FROM '.$CONFIG['TABLE_PLUGINS'].' ORDER BY priority ASC;';
           $result = cpg_db_query($query);
-          $installed_plugins = mysql_fetch_assoc($result);
+          $installed_plugins = $result->fetchAssoc(true);
           $installed_count = count($installed_plugins);
         }
         if ($installed_plugin && ($priority < ($installed_count-1))) {
@@ -538,7 +539,7 @@ switch ($op) {
             if ($CONFIG['log_mode']) {
               $query = 'SELECT * FROM '.$CONFIG['TABLE_PLUGINS'].' WHERE plugin_id='.$plugin_id.' LIMIT 1;';
               $result = cpg_db_query($query);
-              $installed_plugin = mysql_fetch_assoc($result);
+              $installed_plugin = $result->fetchAssoc(true);
               log_write("Plugin '".$installed_plugin['name']."' moved down in plugin list", CPG_GLOBAL_LOG);
             }
         }

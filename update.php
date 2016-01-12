@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2015 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -77,6 +77,22 @@ if (!function_exists('cpg_display_help')) {
     $help = '&nbsp;<a href="docs/en/upgrading.htm?hide_nav=1#updater" class="greybox"><img src="images/help.gif" border="0" width="13" height="11" alt="" /></a>';
 }
 
+// --------------------- SELECT NEW DATABASE ACCESS METHOD --------------------- //
+// if a different dbase method is selected, we have to change the config and reload
+// the page to get to the correct dbase class
+if ($superCage->post->keyExists('action') && $superCage->post->getAlpha('action') == 'dbselect') {
+	set_config_dbtype($superCage->post->getAlpha('db_type'));
+	if ($errors) {
+		html_error($errors);
+	} else {
+		header('Location: update.php?dbswitch=1');
+	}
+	exit;
+}
+if ($superCage->get->keyExists('dbswitch') && $superCage->get->getInt('dbswitch')) {
+	define('SKIP_AUTHENTICATION', true);
+}
+
 // ---------------------------- AUTHENTICATION --------------------------- //
 // SKIP_AUTHENTICATION is a constant that can be defined for users who can't retrieve any kind of password
 if (!defined('SKIP_AUTHENTICATION') && !$_SESSION['auth']) {
@@ -98,23 +114,21 @@ if (!defined('SKIP_AUTHENTICATION') && !$_SESSION['auth']) {
         $pass = $superCage->post->getEscaped('pass');
 
         // Check if column 'user_password_salt' exists in user table
-        $result = mysql_query("SELECT * FROM {$CONFIG['TABLE_PREFIX']}users LIMIT 1");
-        $row = mysql_fetch_array($result); 
+        $result = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_PREFIX']}users LIMIT 1");
+        $row = $result->fetchAssoc(true); 
         $col_user_password_salt_exists = isset($row['user_password_salt']) ? true : false;
-        mysql_free_result($result);
 
         if ($col_user_password_salt_exists) {
             require 'include/passwordhash.inc.php';
             $sql = "SELECT user_password, user_password_salt, user_password_hash_algorithm, user_password_iterations FROM {$CONFIG['TABLE_PREFIX']}users WHERE user_group = 1 AND user_name = '$user'";
-            $result = mysql_query($sql);
-            $password_params = mysql_fetch_assoc($result);
-            mysql_free_result($result);
+            $result = cpg_db_query($sql);
+            $password_params = $result->fetchAssoc(true);
         }
 
         if (!$col_user_password_salt_exists || !$password_params['user_password_salt']) {
             $sql = "SELECT user_active FROM {$CONFIG['TABLE_PREFIX']}users WHERE user_group = 1 AND user_name = '$user' AND (user_password = '$pass' OR user_password = '".md5($pass)."')";
-            $result = @mysql_query($sql);
-            if (!@mysql_num_rows($result)) {
+            $result = cpg_db_query($sql);
+            if (!$result->numRows()) {
                 //not authenticated, try mysql account details
                 html_auth_box('MySQL');
                 die();
@@ -323,11 +337,58 @@ EOT;
 EOT;
 }
 
+function html_dbase_select ()
+{
+	global $lang_update_php, $lang_common, $help;
+
+	$superCage = Inspekt::makeSuperCage();
+
+	require_once 'include/dbselect.inc.php';
+	$dbselect = new DbaseSelect(array('mysqli'=>'MYSQLI'.$lang_update_php['recommended'],'pdo:mysql'=>'PDO:MYSQL','mysql'=>'MYSQL'.$lang_update_php['current_nr']));
+
+	if (function_exists('cpg_fetch_icon')) {
+		$ok_icon       = cpg_fetch_icon('ok', 2);
+	} else {        $update_icon   = '';
+		$ok_icon       = '';
+}
+
+	echo <<<EOT
+	<form action="update.php" name="cpgform" id="cpgform" method="post" style="margin:0px;padding:0px">
+		<table width="100%" border="0" cellpadding="0" cellspacing="1" class="maintable">
+			<tr>
+				<td class="tableb" colspan="2">
+					{$lang_update_php['newDbMethod']}<br />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">&nbsp;</td>
+			</tr>
+			<tr>
+				<td style="text-align:right;width:50%">Database Type</td>
+				<td><select name="db_type">{$dbselect->options()}</select></td>
+			</tr>
+			<tr>
+				<td colspan="2">&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center" class="tableh2">
+					<button type="submit" class="button" name="submit" value="{$lang_common['continue']}">{$lang_common['continue']}{$ok_icon}</button>
+				</td>
+			</tr>
+		</table>
+		<input type="hidden" name="action" value="dbselect" />
+	</form>
+EOT;
+}
+
+
 // --------------------------------- MAIN CODE ----------------------------- //
 function start_update()
 {
     global $errors, $notes, $lang_update_php, $LINEBREAK;
     global $update_icon, $ok_icon, $already_done_icon, $error_icon, $file_system_icon;
+
+	if (!check_db_type()) return;
 
     // The updater
     //html_header($lang_update_php['title']);
@@ -370,13 +431,25 @@ function cpg_get_config_value($config_name)
 {
     global $CONFIG;
 
-    $result = mysql_query("SELECT value FROM ".$CONFIG['TABLE_PREFIX']."config WHERE name='".$config_name."' LIMIT 1");
-    $row = mysql_fetch_row($result);
+    $result = cpg_db_query("SELECT value FROM ".$CONFIG['TABLE_PREFIX']."config WHERE name='".$config_name."' LIMIT 1");
+    $row = $result->fetchRow(true);
 
     return $row[0];
 }
 
 // ----------------------------- TEST FUNCTIONS ---------------------------- //
+function check_db_type ()
+{
+	global $CONFIG;
+
+	if (!isset($CONFIG['dbtype']) || $CONFIG['dbtype'] == 'mysql') {
+		html_dbase_select();
+		return false;
+	}
+
+	return true;
+}
+
 function test_sql_connection()
 {
     global $errors, $CONFIG, $lang_update_php;
@@ -401,7 +474,7 @@ function test_sql_connection()
 // ------------------------- SQL QUERIES TO CREATE TABLES ------------------ //
 function update_tables()
 {
-    global $errors, $CONFIG, $lang_update_php, $lang_common, $LINEBREAK, $help;
+    global $errors, $CONFIG, $CPGDB, $lang_update_php, $lang_common, $LINEBREAK, $help;
     global $update_icon, $ok_icon, $already_done_icon, $error_icon, $file_system_icon;
 
     $loopCounter = 0;
@@ -440,34 +513,36 @@ EOT;
 
             $query = explode(' ', $q);
 
-            $result = mysql_query("DESCRIBE " . $query[2]);
+            $result = cpg_db_query("DESCRIBE " . $query[2]);
 
             $description = array();
 
-            while ($row = mysql_fetch_row($result)) {
+            while ($row = $result->fetchRow()) {
                 $description[] = $row;
             }
+            $result->free();
 
-            $result = @mysql_query($q);
-            $affected = mysql_affected_rows();
-            $warnings = mysql_query('SHOW WARNINGS');
+            $result = @cpg_db_query($q);
+            $affected = $CPGDB->affectedRows();
+            $warnings = cpg_db_query('SHOW WARNINGS');
 
-            $result = mysql_query("DESCRIBE " . $query[2]);
+            $result = cpg_db_query("DESCRIBE " . $query[2]);
 
             $description2 = array();
 
-            while ($row = mysql_fetch_row($result)) {
+            while ($row = $result->fetchRow()) {
                 $description2[] = $row;
             }
+            $result->free();
 
             if ($description == $description2) {
                 $affected = 0;
             }
 
         } else {
-            $result = @mysql_query($q);
-            $affected = mysql_affected_rows();
-            $warnings = mysql_query('SHOW WARNINGS;');
+            $result = @cpg_db_query($q);
+            $affected = $CPGDB->affectedRows();
+            $warnings = cpg_db_query('SHOW WARNINGS;');
         }
 
         if ($superCage->get->keyExists('debug')) {
@@ -476,7 +551,7 @@ EOT;
                 echo "Rows Affected: ".$affected.". ";
             }
             if ($warnings) {
-                while ($warning = mysql_fetch_row($warnings)) {
+                while ($warning = $warnings->fetchRow()) {
                     if ($warning[0] != '') {
                         $warning_text = 'MySQL said: ';
                     } else {
@@ -484,6 +559,7 @@ EOT;
                     }
                     echo $warning_text.'<tt class="code">'.$warning[0]. ' ('.$warning[1].') '.$warning[2].'</tt><br />';
                 }
+                $warnings->free();
             }
         }
         echo '</td>'.$LINEBREAK; // end the table cell that contains the output
@@ -514,11 +590,11 @@ EOT;
             </tr>
 
 EOT;
-        $result = mysql_query("update {$CONFIG['TABLE_PREFIX']}users set user_password=md5(user_password);");
+        $result = cpg_db_query("update {$CONFIG['TABLE_PREFIX']}users set user_password=md5(user_password);");
         if ($CONFIG['enable_encrypted_passwords'] === '0') {
-            $result = mysql_query("update {$CONFIG['TABLE_PREFIX']}config set value = '1' WHERE name = 'enable_encrypted_passwords'");
+            $result = cpg_db_query("update {$CONFIG['TABLE_PREFIX']}config set value = '1' WHERE name = 'enable_encrypted_passwords'");
         } else {
-            $result = mysql_query("INSERT INTO {$CONFIG['TABLE_PREFIX']}config ( `name` , `value` ) VALUES ('enable_encrypted_passwords', '1')");
+            $result = cpg_db_query("INSERT INTO {$CONFIG['TABLE_PREFIX']}config ( `name` , `value` ) VALUES ('enable_encrypted_passwords', '1')");
         }
     } else {
         echo <<< EOT
@@ -550,12 +626,12 @@ EOT;
 
 EOT;
         // Encrypt the album password but only for those albums which have a password assigned.
-        $result = mysql_query("update {$CONFIG['TABLE_PREFIX']}albums set alb_password=md5(alb_password) WHERE alb_password IS NOT NULL AND alb_password != '';");
+        $result = cpg_db_query("update {$CONFIG['TABLE_PREFIX']}albums set alb_password=md5(alb_password) WHERE alb_password IS NOT NULL AND alb_password != '';");
 
         if ($CONFIG['enable_encrypted_alb_passwords'] != NULL) {
-            $result = mysql_query("update {$CONFIG['TABLE_PREFIX']}config set value = 1 WHERE name = 'enable_encrypted_alb_passwords'");
+            $result = cpg_db_query("update {$CONFIG['TABLE_PREFIX']}config set value = 1 WHERE name = 'enable_encrypted_alb_passwords'");
         } else {
-            $result = mysql_query("INSERT INTO {$CONFIG['TABLE_PREFIX']}config ( `name` , `value` ) VALUES ('enable_encrypted_alb_passwords', '1')");
+            $result = cpg_db_query("INSERT INTO {$CONFIG['TABLE_PREFIX']}config ( `name` , `value` ) VALUES ('enable_encrypted_alb_passwords', '1')");
         }
     } else {
         echo <<< EOT
@@ -661,11 +737,11 @@ function update_system_thumbs()
 {
     global $CONFIG, $lang_update_php, $lang_common, $ok_icon, $already_done_icon, $error_icon;
 
-    $results = mysql_query("SELECT * FROM {$CONFIG['TABLE_PREFIX']}config;");
-    while ($row = mysql_fetch_array($results)) {
+    $results = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_PREFIX']}config;");
+    while ($row = $results->fetchAssoc()) {
         $CONFIG[$row['name']] = $row['value'];
     } // while
-    mysql_free_result($results);
+    $results->free();
 
     // Code to rename system thumbs in images folder
     $default_thumb_pfx = 'thumb_';
@@ -749,6 +825,33 @@ EOT;
             } // foreach $thumbs
         } // foreach $folders
     } // if different thumb_pfx
+}
+
+function set_config_dbtype ($db_type)
+{
+	global $lang_update_php, $errors;
+	include 'include/config.inc.php';
+	$CONFIG['dbtype'] = $db_type;
+	$config = <<<EOT
+<?php
+// Coppermine configuration file
+// Database configuration
+\$CONFIG['dbtype'] =      '{$CONFIG['dbtype']}';			// Your database type
+\$CONFIG['dbserver'] =    '{$CONFIG['dbserver']}';			// Your database server
+\$CONFIG['dbuser'] =      '{$CONFIG['dbuser']}';			// Your database username
+\$CONFIG['dbpass'] =      '{$CONFIG['dbpass']}';			// Your database password
+\$CONFIG['dbname'] =      '{$CONFIG['dbname']}';			// Your database name
+
+// DATABASE TABLE NAMES PREFIX
+\$CONFIG['TABLE_PREFIX'] =         '{$CONFIG['TABLE_PREFIX']}';
+EOT;
+    //write config file to disk
+    if ($fd = @fopen('include/config.inc.php', 'wb')) {
+        fwrite($fd, $config);
+        fclose($fd);
+    } else {
+        $errors .= '<hr /><br />' . $lang_update_php['unable_write_config'] . '<br />';
+    }
 }
 
 // function definitions --- end

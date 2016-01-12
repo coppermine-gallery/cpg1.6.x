@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2015 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -60,8 +60,8 @@ case 'display':
 
     $result = cpg_db_query("SELECT keywords FROM {$CONFIG['TABLE_PICTURES']}");
 
-    if (!mysql_num_rows($result)) {
-        cpg_die(ERROR, $lang_errors['non_exist_ap']);
+    if (!$result->numRows()) {
+        cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
     }
 
     $edit_icon   = cpg_fetch_icon('edit', 2);
@@ -74,7 +74,7 @@ case 'display':
 
     $i = 0;
 
-    while (list($keywords) = mysql_fetch_row($result)) {
+    while (list($keywords) = $result->fetchRow()) {
 
         $array = explode($keysep, html_entity_decode($keywords));
 
@@ -121,6 +121,7 @@ EOT;
             $i++;
         }
     }
+    $result->free();
 
     sort($total_array);
 
@@ -166,7 +167,7 @@ case 'changeword':
 
         $result = cpg_db_query($query);
 
-        while (list($id, $keywords) = mysql_fetch_row($result)) {
+        while (list($id, $keywords) = $result->fetchRow()) {
 
             $array_new = array();
 
@@ -189,6 +190,7 @@ case 'changeword':
 
             $newquerys[] = "UPDATE {$CONFIG['TABLE_PICTURES']} SET keywords = '$keywords' WHERE pid = $id";
         }
+        $result->free();
     }
 
     $newquerys[] = "UPDATE {$CONFIG['TABLE_PICTURES']} SET keywords = TRIM(REPLACE(keywords, '{$keysep}{$keysep}', '{$keysep}'))";
@@ -217,7 +219,7 @@ case 'delete':
 
     $result = cpg_db_query($query);
 
-    while (list($id, $keywords) = mysql_fetch_row($result)) {
+    while (list($id, $keywords) = $result->fetchRow()) {
 
         $array_new = array();
         $array_old = explode($keysep, trim(html_entity_decode($keywords)));
@@ -237,6 +239,7 @@ case 'delete':
 
         $newquerys[] = "UPDATE {$CONFIG['TABLE_PICTURES']} SET keywords = '$keywords' WHERE pid = $id";
     }
+    $result->free();
 
     $newquerys[] = "UPDATE {$CONFIG['TABLE_PICTURES']} SET keywords = TRIM(REPLACE(keywords, '{$keysep}{$keysep}', '{$keysep}'))";
     $newquerys[] = "UPDATE {$CONFIG['TABLE_PICTURES']} SET keywords = '' WHERE keywords = '{$keysep}'";

@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2015 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -101,11 +101,10 @@ if (EDIT_PICTURES_MODE) {
     $query = "SELECT title, category, keyword FROM {$CONFIG['TABLE_ALBUMS']} "
             ." WHERE aid = '$album_id'";
     $result = cpg_db_query($query);
-    if (!mysql_num_rows($result)) {
+    if (!$result->numRows()) {
         cpg_die(CRITICAL_ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
     }
-    $ALBUM_DATA = mysql_fetch_assoc($result);
-    mysql_free_result($result);
+    $ALBUM_DATA = $result->fetchAssoc(true);
     $cat = $ALBUM_DATA['category'];
     $actual_cat = $cat;
 
@@ -199,10 +198,10 @@ function process_post_data()
 
     $user_album_set = array();
     $result = cpg_db_query("SELECT aid FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = " . (FIRST_USER_CAT + USER_ID) . " OR owner = " . USER_ID . " OR uploads = 'YES'");
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $result->fetchAssoc()) {
         $user_album_set[$row['aid']] = 1;
     }
-    mysql_free_result($result);
+    $result->free();
 
     $pid_array = $superCage->post->getInt('pid');
 
@@ -255,12 +254,11 @@ function process_post_data()
         $query = "SELECT pid, category, filepath, filename, owner_id FROM {$CONFIG['TABLE_PICTURES']} AS p INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS a ON a.aid = p.aid WHERE pid = $pid";
         $result = cpg_db_query($query);
 
-        if (!mysql_num_rows($result)) {
+        if (!$result->numRows()) {
             cpg_die(CRITICAL_ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
         }
 
-        $pic = mysql_fetch_assoc($result);
-        mysql_free_result($result);
+        $pic = $result->fetchAssoc(true);
 
         if (!GALLERY_ADMIN_MODE && !MODERATOR_MODE && !USER_ADMIN_MODE && !user_is_allowed() && !$CONFIG['users_can_edit_pics'] ) {
 
@@ -343,7 +341,7 @@ function process_post_data()
                 foreach (array('.gif','.png','.jpg') as $thumb_extension) {
                     if (file_exists($dir . $CONFIG['thumb_pfx'] . $file_base_name . $thumb_extension)) {
                         // Thumbnail found, check if it's the only file using that thumbnail
-                        $count = mysql_result(cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} WHERE filepath = '{$pic['filepath']}' AND filename LIKE '{$file_base_name}.%'"), 0);
+                        $count = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} WHERE filepath = '{$pic['filepath']}' AND filename LIKE '{$file_base_name}.%'")->result(0);
                         if ($count == 1) {
                             unset($files[count($files)-1]);
                             $files[] = $dir . $CONFIG['thumb_pfx'] . $file_base_name . $thumb_extension;
@@ -696,8 +694,7 @@ if (UPLOAD_APPROVAL_MODE) {
         $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} WHERE approved = 'NO'");
     }
 
-    list($pic_count) = mysql_fetch_row($result);
-    mysql_free_result($result);
+    list($pic_count) = $result->fetchRow(true);
 
     if (MODERATOR_MODE) {
 
@@ -748,8 +745,7 @@ if (UPLOAD_APPROVAL_MODE) {
 
     $result = cpg_db_query($sql . $owner_str);
 
-    list($pic_count) = mysql_fetch_row($result);
-    mysql_free_result($result);;
+    list($pic_count) = $result->fetchRow(true);
 
     $sql = "SELECT p.*,a.category FROM {$CONFIG['TABLE_PICTURES']} as p " .
             " INNER JOIN {$CONFIG['TABLE_ALBUMS']} as a " .
@@ -764,7 +760,7 @@ if (UPLOAD_APPROVAL_MODE) {
     $help = '&nbsp;' . cpg_display_help('f=files.htm&amp;as=edit_pics&amp;ae=edit_pics_end&amp;top=1', '800', '500');
 }
 
-if (!mysql_num_rows($result)) {
+if (!$result->numRows()) {
     if ($link_count > 0) {
         cpg_die(INFORMATION, $lang_editpics_php['error_linked_only']);
     } else {
@@ -913,7 +909,7 @@ EOT;
 
 echo $submit_button;
 
-while ($CURRENT_PIC = mysql_fetch_assoc($result)) {
+while ($CURRENT_PIC = $result->fetchAssoc()) {
 
     // wrap the actual block into another table
     print <<< EOT
@@ -929,7 +925,7 @@ EOT;
 EOT;
 } // while
 
-mysql_free_result($result);
+$result->free();
 
 echo $submit_button;
 

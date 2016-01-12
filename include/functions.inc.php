@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2015 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -46,29 +46,28 @@ function get_meta_album_set($cat)
 
     } elseif ($cat > 0) {
         $result = cpg_db_query("SELECT rgt, lft, depth FROM {$CONFIG['TABLE_CATEGORIES']} WHERE cid = $cat LIMIT 1");
-        list($rgt, $lft, $CURRENT_CAT_DEPTH) = mysql_fetch_row($result);
-        mysql_free_result($result);
+        list($rgt, $lft, $CURRENT_CAT_DEPTH) = $result->fetchRow(true);
         $RESTRICTEDWHERE = "INNER JOIN {$CONFIG['TABLE_CATEGORIES']} AS c2 ON c2.cid = category WHERE (c2.lft BETWEEN $lft AND $rgt";
 
         if (empty($CURRENT_ALBUM_KEYWORD)) {
             $result = cpg_db_query("SELECT cid FROM {$CONFIG['TABLE_CATEGORIES']} WHERE lft BETWEEN $lft AND $rgt");
             $categories = array();
-            while($row = mysql_fetch_assoc($result)) {
+            while($row = $result->fetchAssoc()) {
                 $categories[] = $row['cid'];
             }
-            mysql_free_result($result);
+            $result->free();
             $categories = implode(', ', $categories);
 
             $result = cpg_db_query("SELECT keyword FROM {$CONFIG['TABLE_ALBUMS']} WHERE category IN ($categories)");
-            if (mysql_num_rows($result) > 0) {
+            if ($result->numRows() > 0) {
                 $CURRENT_ALBUM_KEYWORD = array();
-                while($row = mysql_fetch_assoc($result)) {
+                while($row = $result->fetchAssoc()) {
                     if(!empty($row['keyword'])) {
                         $CURRENT_ALBUM_KEYWORD[] = $row['keyword'];
                     }
                 }
             }
-            mysql_free_result($result);
+            $result->free();
         }
 
     } elseif ($cat < 0) {
@@ -168,36 +167,26 @@ function user_save_profile()
    Database functions
  **************************************************************************/
 
-// Connect to the database
-
 /**
- * cpg_db_connect()
+ * cpg_db_get_connection()
  *
- * Connect to the database
+ * Get the global database object
+ *  or return a new database object
+ *
+ * @return
  **/
 
-function cpg_db_connect()
+function cpg_db_get_connection($cfg=null)
 {
-    global $CONFIG;
+    global $CPGDB;
 
-    $result = @mysql_connect($CONFIG['dbserver'], $CONFIG['dbuser'], $CONFIG['dbpass']);
-
-    if (!$result) {
-        return false;
+	if ($cfg && isset($cfg['dbserver']) && isset($cfg['dbuser']) && isset($cfg['dbpass']) && isset($cfg['dbname'])) {
+		return new CPG_Dbase($cfg);
+	} else {
+    	return $CPGDB;
     }
-
-    if (!mysql_select_db($CONFIG['dbname'])) {
-        return false;
-    }
-
-    if (!empty($CONFIG['dbcharset'])) {
-        cpg_db_query("SET NAMES '{$CONFIG['dbcharset']}'", $result);
-    }
-
-    return $result;
 }
 
-// Perform a database query
 
 /**
  * cpg_db_query()
@@ -205,23 +194,16 @@ function cpg_db_connect()
  * Perform a database query
  *
  * @param $query
- * @param integer $link_id
  * @return
  **/
 
-function cpg_db_query($query, $use_link_id = 0)
+function cpg_db_query($query)
 {
-    global $CONFIG, $query_stats, $queries;
-
-    if ($use_link_id) {
-        $link_id = $use_link_id;
-    } else {
-        $link_id = $CONFIG['LINK_ID'];
-    }
+    global $CONFIG, $CPGDB, $query_stats, $queries;
 
     $query_start = cpgGetMicroTime();
 
-    $result = mysql_query($query, $link_id);
+    $result = $CPGDB->query($query);
 
     $query_end = cpgGetMicroTime();
 
@@ -239,13 +221,11 @@ function cpg_db_query($query, $use_link_id = 0)
         $trace = debug_backtrace();
         $last = $trace[0];
         $localfile = str_replace(realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR , '', $last['file']);
-        cpg_db_error("While executing query '$query' in $localfile on line {$last['line']}", $link_id);
+        cpg_db_error("While executing query '$query' in $localfile on line {$last['line']}");
     }
 
     return $result;
 }
-
-// Error message if a query failed
 
 
 /**
@@ -257,23 +237,37 @@ function cpg_db_query($query, $use_link_id = 0)
  * @return
  **/
 
-function cpg_db_error($the_error, $link_id)
+function cpg_db_error($the_error)
 {
-    global $CONFIG, $lang_errors, $LINEBREAK;
+    global $CONFIG, $CPGDB, $lang_errors, $LINEBREAK;
 
-    log_write("$the_error the following error was encountered: $LINEBREAK" . mysql_error($link_id), CPG_DATABASE_LOG);
+    log_write("$the_error the following error was encountered: $LINEBREAK" . $CPGDB->getError(), CPG_DATABASE_LOG);
 
     if ($CONFIG['debug_mode'] === '0' || ($CONFIG['debug_mode'] === '2' && !GALLERY_ADMIN_MODE)) {
         cpg_die(CRITICAL_ERROR, $lang_errors['database_query'], __FILE__, __LINE__);
     } else {
-        $the_error .= $LINEBREAK . $LINEBREAK . 'mySQL error: ' . mysql_error($link_id) . $LINEBREAK;
+        $the_error .= $LINEBREAK . $LINEBREAK . 'database error: ' . $CPGDB->getError() . $LINEBREAK;
         $out        = "<br />" . $lang_errors['database_query'] . ".<br /><br/>
-                <form name=\"mysql\" id=\"mysql\"><textarea rows=\"8\" cols=\"60\">" . htmlspecialchars($the_error) . "</textarea></form>";
+                <form name=\"dbsql\" id=\"dbsql\"><textarea rows=\"8\" cols=\"60\">" . htmlspecialchars($the_error) . "</textarea></form>";
         cpg_die(CRITICAL_ERROR, $out, __FILE__, __LINE__);
     }
 }
 
-// Fetch all rows in an array
+
+/**
+ * cpg_db_num_rows()
+ *
+ * Get then numbers of rows in a result
+ *
+ * @param $result
+ * @return
+ **/
+
+function cpg_db_num_rows($result, $free=false)
+{
+    return $result->numRows($free);
+}
+
 
 /**
  * cpg_db_fetch_rowset()
@@ -284,30 +278,77 @@ function cpg_db_error($the_error, $link_id)
  * @return
  **/
 
-function cpg_db_fetch_rowset($result)
+function cpg_db_fetch_rowset($result, $free=false)
 {
     $rowset = array();
 
-    while ( ($row = mysql_fetch_assoc($result)) ) {
+    while ( ($row = $result->fetchAssoc()) ) {
         $rowset[] = $row;
     }
+	if ($free) $result->free();
 
     return $rowset;
 }
 
+
 /**
  * cpg_db_fetch_row()
  *
- * Fetch row in an array
+ * Fetch row as a simple numeric array
  *
  * @param $result
  * @return
  **/
 
-function cpg_db_fetch_row($result)
+function cpg_db_fetch_row($result, $free=false)
 {
-    return mysql_fetch_assoc($result);
+    return $result->fetchRow($free);
 }
+
+
+/**
+ * cpg_db_fetch_assoc()
+ *
+ * Fetch row as an associative array
+ *
+ * @param $result
+ * @return
+ **/
+
+function cpg_db_fetch_assoc($result, $free=false)
+{
+    return $result->fetchAssoc($free);
+}
+
+
+/**
+ * cpg_db_fetch_array()
+ *
+ * Fetch row as both a simple and associative array
+ *
+ * @param $result
+ * @return
+ **/
+
+function cpg_db_fetch_array($result, $free=false)
+{
+    return $result->fetchArray($free);
+}
+
+
+/**
+ * cpg_db_free_result()
+ *
+ * Free query result storage
+ *
+ * @param $result
+ **/
+
+function cpg_db_free_result($result)
+{
+    $result->free();
+}
+
 
 /**
  * cpg_db_last_insert_id()
@@ -319,10 +360,44 @@ function cpg_db_fetch_row($result)
 
 function cpg_db_last_insert_id()
 {
-    global $CONFIG;
+    global $CPGDB;
 
-    return mysql_insert_id($CONFIG['LINK_ID']);
+    return $CPGDB->insertId();
 }
+
+
+/**
+ * cpg_db_affected_rows()
+ *
+ * Get the count of rows affected by last query
+ *
+ * @return integer $id
+ **/
+
+function cpg_db_affected_rows()
+{
+    global $CPGDB;
+
+    return $CPGDB->affectedRows();
+}
+
+
+/**
+ * cpg_db_escape_string()
+ *
+ * Escape a string for database purposes
+ *
+ * @param $str
+ * @return
+ **/
+
+function cpg_db_escape_string($str)
+{
+    global $CPGDB;
+
+    return $CPGDB->escapeStr($str);
+}
+
 
 /**************************************************************************
    Sanitization functions
@@ -915,11 +990,12 @@ function get_private_album_set($aid_str="")
 
         $result = cpg_db_query($sql);
 
-        if (mysql_num_rows($result)) {
-            while ( ($data = mysql_fetch_assoc($result)) ) {
+        if ($result->numRows()) {
+            while ( ($data = $result->fetchAssoc()) ) {
                 $albpw_db[$data['aid']] = $data['alb_password'];
             }
         }
+        $result->free();
 
         $valid = array_intersect($albpw_db, $alb_pw);
 
@@ -956,11 +1032,10 @@ function get_private_album_set($aid_str="")
             //list($rgt, $lft, $CURRENT_CAT_DEPTH) = mysql_fetch_row($result);
 
             $result = cpg_db_query("SELECT rgt, lft FROM {$CONFIG['TABLE_CATEGORIES']} WHERE cid = $cat LIMIT 1");
-            if (mysql_num_rows($result) == 0) {
+            if ($result->numRows() == 0) {
                 cpg_die(CRITICAL_ERROR, $lang_errors['non_exist_cat'], __FILE__, __LINE__);
             }
-            list($rgt, $lft) = mysql_fetch_row($result);
-            mysql_free_result($result);
+            list($rgt, $lft) = $result->fetchRow(true);
 
             $RESTRICTEDWHERE = "INNER JOIN {$CONFIG['TABLE_CATEGORIES']} AS c2 ON c2.cid = category
                                     WHERE (c2.lft BETWEEN $lft AND $rgt";
@@ -977,9 +1052,9 @@ function get_private_album_set($aid_str="")
 
     $result = cpg_db_query($sql);
 
-    if (mysql_num_rows($result)) {
+    if ($result->numRows()) {
 
-        while ( ($album = mysql_fetch_assoc($result)) ) {
+        while ( ($album = $result->fetchAssoc(true)) ) {
             $FORBIDDEN_SET_DATA[] = $album['aid'];
         } // while
 
@@ -990,7 +1065,7 @@ function get_private_album_set($aid_str="")
         $FORBIDDEN_SET      = "";
     }
 
-    mysql_free_result($result);
+    $result->free();
 }
 
 // Generate the thumbnail caption based on admin preference and thumbnail page requirements
@@ -1274,8 +1349,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         // and having it defined as static in the function may be problematic
         if (is_null($pic_count)) {
             $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} WHERE ((aid='$album' $forbidden_set_string ) $keyword) $approved");
-            list($count) = mysql_fetch_row($result);
-            mysql_free_result($result);
+            list($count) = $result->fetchRow(true);
             $pic_count = $count;
         } else {
             $count = $pic_count;
@@ -1305,8 +1379,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
                     $limit";
 
         $result = cpg_db_query($query);
-        $rowset = cpg_db_fetch_rowset($result);
-        mysql_free_result($result);
+        $rowset = cpg_db_fetch_rowset($result, true);
 
         if ($flipped) {
             $rowset = array_reverse($rowset);
@@ -1362,8 +1435,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
 
         $result = cpg_db_query($query);
 
-        list($count) = mysql_fetch_row($result);
-        mysql_free_result($result);
+        list($count) = $result->fetchRow(true);
 
         list($ASC, $DESC, $limit, $flipped) = get_pic_data_ordering($count, $limit1, $limit2);
 
@@ -1386,8 +1458,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
                 $limit";
 
         $result = cpg_db_query($query);
-        $rowset = cpg_db_fetch_rowset($result);
-        mysql_free_result($result);
+        $rowset = cpg_db_fetch_rowset($result, true);
 
         if ($flipped) {
             $rowset = array_reverse($rowset);
@@ -1429,8 +1500,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
 
         $result = cpg_db_query($query);
 
-        list($count) = mysql_fetch_row($result);
-        mysql_free_result($result);
+        list($count) = $result->fetchRow(true);
 
         list($ASC, $DESC, $limit, $flipped) = get_pic_data_ordering($count, $limit1, $limit2);
 
@@ -1454,8 +1524,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
                 $limit";
 
         $result = cpg_db_query($query);
-        $rowset = cpg_db_fetch_rowset($result);
-        mysql_free_result($result);
+        $rowset = cpg_db_fetch_rowset($result, true);
 
         if ($set_caption) {
             build_caption($rowset, array('msg_body', 'msg_date'));
@@ -1486,8 +1555,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
 
         $result = cpg_db_query($query);
 
-        list($count) = mysql_fetch_row($result);
-        mysql_free_result($result);
+        list($count) = $result->fetchRow(true);
 
         list($ASC, $DESC, $limit, $flipped) = get_pic_data_ordering($count, $limit1, $limit2);
 
@@ -1502,8 +1570,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
                 $limit";
 
         $result = cpg_db_query($query);
-        $rowset = cpg_db_fetch_rowset($result);
-        mysql_free_result($result);
+        $rowset = cpg_db_fetch_rowset($result, true);
 
         if ($flipped) {
             $rowset = array_reverse($rowset);
@@ -1543,8 +1610,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
 
         $result = cpg_db_query($query);
 
-        list($count) = mysql_fetch_row($result);
-        mysql_free_result($result);
+        list($count) = $result->fetchRow(true);
 
         list($ASC, $DESC, $limit, $flipped) = get_pic_data_ordering($count, $limit1, $limit2);
 
@@ -1560,8 +1626,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
                 $limit";
 
         $result = cpg_db_query($query);
-        $rowset = cpg_db_fetch_rowset($result);
-        mysql_free_result($result);
+        $rowset = cpg_db_fetch_rowset($result, true);
 
         if ($flipped) {
             $rowset = array_reverse($rowset);
@@ -1593,8 +1658,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
 
         $result = cpg_db_query($query);
 
-        list($count) = mysql_fetch_row($result);
-        mysql_free_result($result);
+        list($count) = $result->fetchRow(true);
 
         list($ASC, $DESC, $limit, $flipped) = get_pic_data_ordering($count, $limit1, $limit2);
 
@@ -1610,8 +1674,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
                 $limit";
 
         $result = cpg_db_query($query);
-        $rowset = cpg_db_fetch_rowset($result);
-        mysql_free_result($result);
+        $rowset = cpg_db_fetch_rowset($result, true);
 
         if ($flipped) {
             $rowset = array_reverse($rowset);
@@ -1643,8 +1706,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
 
         $result = cpg_db_query($query);
 
-        list($count) = mysql_fetch_row($result);
-        mysql_free_result($result);
+        list($count) = $result->fetchRow(true);
 
         list($ASC, $DESC, $limit, $flipped) = get_pic_data_ordering($count, $limit1, $limit2);
 
@@ -1660,8 +1722,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
                 $limit";
 
         $result = cpg_db_query($query);
-        $rowset = cpg_db_fetch_rowset($result);
-        mysql_free_result($result);
+        $rowset = cpg_db_fetch_rowset($result, true);
 
         if ($flipped) {
             $rowset = array_reverse($rowset);
@@ -1693,8 +1754,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
 
         $result = cpg_db_query($query);
 
-        list($count) = mysql_fetch_row($result);
-        mysql_free_result($result);
+        list($count) = $result->fetchRow(true);
 
         list($ASC, $DESC, $limit, $flipped) = get_pic_data_ordering($count, $limit1, $limit2);
 
@@ -1716,8 +1776,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
                 $limit";
 
         $result = cpg_db_query($query);
-        $rowset = cpg_db_fetch_rowset($result);
-        mysql_free_result($result);
+        $rowset = cpg_db_fetch_rowset($result, true);
 
         if ($flipped) {
             $rowset = array_reverse($rowset);
@@ -1748,8 +1807,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
 
         $result = cpg_db_query($query);
 
-        list($count) = mysql_fetch_row($result);
-        mysql_free_result($result);
+        list($count) = $result->fetchRow(true);
 
         $query = "SELECT pid
                 FROM {$CONFIG['TABLE_PICTURES']} AS r
@@ -1762,10 +1820,10 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         $result = cpg_db_query($query);
 
         $pidlist = array();
-        while ($row = mysql_fetch_assoc($result)) {
+        while ($row = $result->fetchAssoc()) {
             $pidlist[] = $row['pid'];
         }
-        mysql_free_result($result);
+        $result->free();
 
         if (count($pidlist)) {
             $select_columns = implode(', ', $select_column_list);
@@ -1776,8 +1834,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
                     WHERE pid IN (" . implode(', ', $pidlist) . ")";
 
             $result = cpg_db_query($query);
-            $rowset = cpg_db_fetch_rowset($result);
-            mysql_free_result($result);
+            $rowset = cpg_db_fetch_rowset($result, true);
 
             shuffle($rowset);
         } else {
@@ -1842,8 +1899,8 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
                 AND approved = 'YES'
                 GROUP BY r.aid";
         $result = cpg_db_query($query);
-        $count = mysql_num_rows($result);
-        mysql_free_result($result);
+        $count = $result->numRows();
+        $result->free();
 
         $query = "SELECT $select_columns_albums
                 FROM {$CONFIG['TABLE_PICTURES']} AS r
@@ -1854,8 +1911,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
                 ORDER BY ctime DESC
                 $limit";
         $result = cpg_db_query($query);
-        $rowset_aid = cpg_db_fetch_rowset($result);
-        mysql_free_result($result);
+        $rowset_aid = cpg_db_fetch_rowset($result, true);
 
         // For 'lastalb' album, only use approved photos for album thumbnails
         $approved = 'AND approved=\'YES\'';
@@ -1870,10 +1926,10 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         if (count($album_thumbs)) {
             $query = "SELECT pid FROM {$CONFIG['TABLE_PICTURES']} WHERE pid IN (".implode(',', $album_thumbs).")";
             $result = cpg_db_query($query);
-            while ($row = mysql_fetch_assoc($result)) {
+            while ($row = $result->fetchAssoc()) {
                 $rowset_available_pids[] = $row['pid'];
             }
-            mysql_free_result($result);
+            $result->free();
         }
 
         $album_thumbs = array();
@@ -1891,8 +1947,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
                 $keyword = ($row['keyword'] ? "OR (keywords like '%".addslashes($row['keyword'])."%' $forbidden_set_string )" : '');
                 $query = "SELECT pid FROM {$CONFIG['TABLE_PICTURES']} WHERE ((aid = '{$row['aid']}' $forbidden_set_string) $keyword) $approved ORDER BY RAND() LIMIT 0,1";
                 $result = cpg_db_query($query);
-                list($pid_random) = mysql_fetch_row($result);
-                mysql_free_result($result);
+                list($pid_random) = $result->fetchRow(true);
                 $album_thumbs[] = $pid_random;
                 $rowset_aid[$index]['thumb'] = $pid_random;
             } else {  // thumb = 0
@@ -1900,8 +1955,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
                 $keyword = ($row['keyword'] ? "OR (keywords like '%".addslashes($row['keyword'])."%' $forbidden_set_string )" : '');
                 $query = "SELECT pid FROM {$CONFIG['TABLE_PICTURES']} WHERE ((aid = '{$row['aid']}' $forbidden_set_string) $keyword) $approved ORDER BY ctime DESC LIMIT 0,1";
                 $result = cpg_db_query($query);
-                list($pid_lastup) = mysql_fetch_row($result);
-                mysql_free_result($result);
+                list($pid_lastup) = $result->fetchRow(true);
                 $album_thumbs[] = $pid_lastup;
                 $rowset_aid[$index]['thumb'] = $pid_lastup;
             }
@@ -1916,8 +1970,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
                     WHERE approved = 'YES'
                     AND r.pid IN ($album_thumbs_set)";
             $result = cpg_db_query($query);
-            $rowset_pid = cpg_db_fetch_rowset($result);
-            mysql_free_result($result);
+            $rowset_pid = cpg_db_fetch_rowset($result, true);
 
             $rowset_pid_indexed = array();
             foreach ($rowset_pid as $row) {
@@ -1957,8 +2010,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
 
             $result = cpg_db_query($query);
 
-            list($count) = mysql_fetch_row($result);
-            mysql_free_result($result);
+            list($count) = $result->fetchRow(true);
 
             $select_columns = implode(', ', $select_column_list);
 
@@ -1972,9 +2024,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
                             $limit";
 
             $result = cpg_db_query($query);
-            $rowset = cpg_db_fetch_rowset($result);
-
-            mysql_free_result($result);
+            $rowset = cpg_db_fetch_rowset($result, true);
 
             if ($set_caption) {
                 build_caption($rowset, array('ctime'));
@@ -2004,8 +2054,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
 
         $result = cpg_db_query($query);
 
-        list($count) = mysql_fetch_row($result);
-        mysql_free_result($result);
+        list($count) = $result->fetchRow(true);
 
         list($ASC, $DESC, $limit, $flipped) = get_pic_data_ordering($count, $limit1, $limit2);
 
@@ -2021,8 +2070,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
                 $limit";
 
         $result = cpg_db_query($query);
-        $rowset = cpg_db_fetch_rowset($result);
-        mysql_free_result($result);
+        $rowset = cpg_db_fetch_rowset($result, true);
 
         if ($flipped) {
             $rowset = array_reverse($rowset);
@@ -2066,9 +2114,9 @@ function get_pic_pos($album, $pid)
         $approved = GALLERY_ADMIN_MODE ? '' : 'AND approved=\'YES\'';
 
         $result = cpg_db_query("SELECT filename, title, pid, position, ctime FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid");
-        if (!mysql_num_rows($result)) cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
-        $pic = mysql_fetch_assoc($result);
-        $pic['title'] = mysql_real_escape_string($pic['title']);
+        if (!$result->numRows()) cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
+        $pic = $result->fetchAssoc(true);
+        $pic['title'] = cpg_db_escape_string($pic['title']);
 
         $sort_array = array(
             'na' => "(filename < '{$pic['filename']}' OR filename = '{$pic['filename']}' AND pid < {$pic['pid']})",
@@ -2089,8 +2137,7 @@ function get_pic_pos($album, $pid)
 
         $result = cpg_db_query($query);
 
-        list($pos) = mysql_fetch_row($result);
-        mysql_free_result($result);
+        list($pos) = $result->fetchRow(true);
 
         return $pos;
     }
@@ -2116,8 +2163,7 @@ function get_pic_pos($album, $pid)
 
             $result = cpg_db_query($query);
 
-            list($pos) = mysql_fetch_row($result);
-            mysql_free_result($result);
+            list($pos) = $result->fetchRow(true);
 
         return $pos;
         break;
@@ -2147,8 +2193,7 @@ function get_pic_pos($album, $pid)
 
             $result = cpg_db_query($query);
 
-            list($pos) = mysql_fetch_row($result);
-            mysql_free_result($result);
+            list($pos) = $result->fetchRow(true);
 
         return $pos;
         break;
@@ -2157,9 +2202,8 @@ function get_pic_pos($album, $pid)
 
         $query = "SELECT ctime FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid";
         $result = cpg_db_query($query);
-        if (!mysql_num_rows($result)) cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
-        $ctime = mysql_result($result, 0);
-        mysql_free_result($result);
+        if (!$result->numRows()) cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
+        $ctime = $result->result(0, 0, true);
 
         $query = "SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} AS p
             INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS r ON r.aid = p.aid
@@ -2170,8 +2214,7 @@ function get_pic_pos($album, $pid)
 
             $result = cpg_db_query($query);
 
-            list($pos) = mysql_fetch_row($result);
-            mysql_free_result($result);
+            list($pos) = $result->fetchRow(true);
 
         return $pos;
         break;
@@ -2186,9 +2229,8 @@ function get_pic_pos($album, $pid)
 
         $query = "SELECT ctime FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid";
         $result = cpg_db_query($query);
-        if (!mysql_num_rows($result)) cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
-        $ctime = mysql_result($result, 0);
-        mysql_free_result($result);
+        if (!$result->numRows()) cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
+        $ctime = $result->result(0, 0, true);
 
         $query = "SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} AS p
             INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS r ON r.aid = p.aid
@@ -2200,8 +2242,7 @@ function get_pic_pos($album, $pid)
 
             $result = cpg_db_query($query);
 
-            list($pos) = mysql_fetch_row($result);
-            mysql_free_result($result);
+            list($pos) = $result->fetchRow(true);
 
         return $pos;
         break;
@@ -2210,9 +2251,8 @@ function get_pic_pos($album, $pid)
 
         $query = "SELECT hits FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid";
         $result = cpg_db_query($query);
-        if (!mysql_num_rows($result)) cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
-        $hits = mysql_result($result, 0);
-        mysql_free_result($result);
+        if (!$result->numRows()) cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
+        $hits = $result->result(0, 0, true);
 
         $query = "SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} AS p
             INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS r ON r.aid = p.aid
@@ -2223,8 +2263,7 @@ function get_pic_pos($album, $pid)
 
             $result = cpg_db_query($query);
 
-            list($pos) = mysql_fetch_row($result);
-            mysql_free_result($result);
+            list($pos) = $result->fetchRow(true);
 
         return $pos;
         break;
@@ -2233,9 +2272,8 @@ function get_pic_pos($album, $pid)
 
         $query = "SELECT pic_rating, votes FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid";
         $result = cpg_db_query($query);
-        if (!mysql_num_rows($result)) cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
-        list($pic_rating, $votes) = mysql_fetch_row($result);
-        mysql_free_result($result);
+        if (!$result->numRows()) cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
+        list($pic_rating, $votes) = $result->fetchRow(true);
 
         $query = "SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} AS p
             INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS r ON r.aid = p.aid
@@ -2248,8 +2286,7 @@ function get_pic_pos($album, $pid)
 
             $result = cpg_db_query($query);
 
-            list($pos) = mysql_fetch_row($result);
-            mysql_free_result($result);
+            list($pos) = $result->fetchRow(true);
 
         return $pos;
         break;
@@ -2258,9 +2295,8 @@ function get_pic_pos($album, $pid)
 
         $query = "SELECT mtime FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid";
         $result = cpg_db_query($query);
-        if (!mysql_num_rows($result)) cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
-        $mtime = mysql_result($result, 0);
-        mysql_free_result($result);
+        if (!$result->numRows()) cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
+        $mtime = $result->result(0, 0, true);
 
         $query = "SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} AS p
             INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS r ON r.aid = p.aid
@@ -2272,8 +2308,7 @@ function get_pic_pos($album, $pid)
 
             $result = cpg_db_query($query);
 
-            list($pos) = mysql_fetch_row($result);
-            mysql_free_result($result);
+            list($pos) = $result->fetchRow(true);
 
         return $pos;
         break;
@@ -2312,8 +2347,7 @@ function get_pic_pos($album, $pid)
 
             $result = cpg_db_query($query);
 
-            list($pos) = mysql_fetch_row($result);
-            mysql_free_result($result);
+            list($pos) = $result->fetchRow(true);
 
         return $pos;
         break;
@@ -2333,8 +2367,7 @@ function get_pic_pos($album, $pid)
 
             $result = cpg_db_query($query);
 
-            list($pos) = mysql_fetch_row($result);
-            mysql_free_result($result);
+            list($pos) = $result->fetchRow(true);
 
         return $pos;
         break;
@@ -2367,11 +2400,10 @@ function get_album_name($aid)
 
     $result = cpg_db_query("SELECT title, keyword FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid = $aid");
 
-    $count = mysql_num_rows($result);
+    $count = $result->numRows();
 
     if ($count > 0) {
-        $row = mysql_fetch_assoc($result);
-        mysql_free_result($result);
+        $row = $result->fetchAssoc(true);
         return $row;
     } else {
         cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
@@ -2435,8 +2467,7 @@ function cpg_get_pending_approvals()
 
     $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} WHERE approved = 'NO'");
 
-    list($count) = mysql_fetch_row($result);
-    mysql_free_result($result);
+    list($count) = $result->fetchRow(true);
 
     return $count;
 }
@@ -2462,8 +2493,7 @@ function count_pic_comments($pid, $skip = 0)
 
     $result = cpg_db_query($sql);
 
-    list($count) = mysql_fetch_row($result);
-    mysql_free_result($result);
+    list($count) = $result->fetchRow(true);
 
     return $count;
 }
@@ -2830,7 +2860,7 @@ function breadcrumb($cat, &$breadcrumb, &$BREADCRUMB_TEXT)
 
             $result = cpg_db_query("SELECT name FROM {$CONFIG['TABLE_CATEGORIES']} WHERE cid = " . USER_GAL_CAT);
 
-            $row = mysql_fetch_assoc($result);
+            $row = $result->fetchAssoc(true);
 
             $category_array[] = array(USER_GAL_CAT, $row['name']);
 
@@ -2853,12 +2883,12 @@ function breadcrumb($cat, &$breadcrumb, &$BREADCRUMB_TEXT)
                 AND c.cid = $cat
                 ORDER BY p.lft");
 
-            while ( ($row = mysql_fetch_assoc($result)) ) {
+            while ( ($row = $result->fetchAssoc()) ) {
                 $category_array[] = array($row['cid'], $row['name']);
                 $CURRENT_CAT_NAME = $row['name'];
             }
 
-            mysql_free_result($result);
+            $result->free();
         }
     }
 
@@ -4107,7 +4137,7 @@ function cpg_phpinfo_mysql_version()
 {
     $result = cpg_db_query("SELECT VERSION()");
 
-    list($version) = mysql_fetch_row($result);
+    list($version) = $result->fetchRow(true);
 
     return $version;
 } // function cpg_phpinfo_mysql_version
@@ -4146,19 +4176,19 @@ function languageSelect($parameter)
     // return without return value if the table doesn't exist because
     // the upgrade script hasn't been run
     $results = cpg_db_query("SHOW TABLES LIKE '{$CONFIG['TABLE_LANGUAGE']}'");
-    if (!mysql_num_rows($results)) {
+    if (!$results->numRows()) {
         return;
     }
-    mysql_free_result($results);
+    $results->free();
 
     // get list of available languages
     $results = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_LANGUAGE']}");
-    while ( ($row = mysql_fetch_array($results)) ) {
+    while ( ($row = $results->fetchArray()) ) {
         if ($row['available'] == 'YES' && $row['enabled'] == 'YES' && file_exists('lang/'.$row['lang_id'].'.php')) {
             $lang_language_data[$row['lang_id']] = $row;
         }
     } // while
-    mysql_free_result($results);
+    $results->free();
 
     // sort the array by English name
     ksort($lang_language_data);
@@ -4432,11 +4462,11 @@ function cpg_get_bridge_db_values()
     // Retrieve DB stored configuration
     $results = cpg_db_query("SELECT name, value FROM {$CONFIG['TABLE_BRIDGE']}");
 
-    while ( ($row = mysql_fetch_assoc($results)) ) {
+    while ( ($row = $results->fetchAssoc()) ) {
         $BRIDGE[$row['name']] = $row['value'];
     } // while
 
-    mysql_free_result($results);
+    $results->free();
 
     return $BRIDGE;
 } // function cpg_get_bridge_db_values
@@ -4906,12 +4936,11 @@ function cpgFetchTempMessage($message_id)
 
     $result = cpg_db_query($query);
 
-    if (mysql_num_rows($result) > 0) {
-        $row     = mysql_fetch_row($result);
+    if ($result->numRows() > 0) {
+        $row     = $result->fetchRow();
         $message = urldecode($row[0]);
     }
-
-    mysql_free_result($result);
+    $result->free();
 
     // delete the message once fetched
     $query = "DELETE FROM {$CONFIG['TABLE_TEMP_MESSAGES']} WHERE message_id = '$message_id'";
@@ -5228,7 +5257,7 @@ function user_is_allowed($include_upload_permissions = true)
         if (defined('MODIFYALB_PHP')) {
             //check if the user has any album available
             $result        = cpg_db_query("SELECT aid FROM {$CONFIG['TABLE_ALBUMS']} WHERE owner = " . $USER_DATA['user_id'] . " LIMIT 1");
-            $temp_album_id = cpg_db_fetch_row($result);
+            $temp_album_id = $result->fetchAssoc(true);
             $album_id      = $temp_album_id['aid'];
         } else {
             $album_id = 0;
@@ -5238,7 +5267,7 @@ function user_is_allowed($include_upload_permissions = true)
 
     $result = cpg_db_query("SELECT DISTINCT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE owner = '" . $USER_DATA['user_id'] . "' AND aid='$album_id'");
 
-    $allowed_albums = cpg_db_fetch_rowset($result);
+    $allowed_albums = cpg_db_fetch_rowset($result, true);
 
     $cat = $allowed_albums ? $allowed_albums[0]['category'] : '';
 
@@ -5250,11 +5279,10 @@ function user_is_allowed($include_upload_permissions = true)
     if ($album_id && $include_upload_permissions) {
         $public_albums = cpg_db_query("SELECT aid FROM {$CONFIG['TABLE_ALBUMS']} WHERE category < " . FIRST_USER_CAT . " AND ((uploads='YES' AND (visibility = '0' OR visibility IN ".USER_GROUP_SET." OR alb_password != '')) OR (owner=".USER_ID.")) AND aid=$album_id");
 
-        if (count(cpg_db_fetch_rowset($public_albums))) {
+        if (count(cpg_db_fetch_rowset($public_albums, true))) {
             $check_approve = true;
             define('USER_UPLOAD_ALLOWED', 1);
         }
-        mysql_free_result($public_albums);
     }
 
     //check if admin allows editing after closing category
@@ -5262,7 +5290,7 @@ function user_is_allowed($include_upload_permissions = true)
         //Disallowed -> Check if album is in such a category
         $result = cpg_db_query("SELECT DISTINCT aid FROM {$CONFIG['TABLE_ALBUMS']} AS alb INNER JOIN {$CONFIG['TABLE_CATMAP']} AS catm ON alb.category=catm.cid WHERE alb.owner = '" . $USER_DATA['user_id'] . "' AND alb.aid='$album_id' AND catm.group_id='" . $USER_DATA['group_id'] . "'");
 
-        $allowed_albums = cpg_db_fetch_rowset($result);
+        $allowed_albums = cpg_db_fetch_rowset($result, true);
 
         if ($allowed_albums && $allowed_albums[0]['aid'] == '' && $cat != (FIRST_USER_CAT + USER_ID)) {
             $check_approve = false;
@@ -5492,9 +5520,7 @@ function check_rebuild_tree()
 
     $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_PREFIX']}categories WHERE lft = 0");
 
-    list($count) = mysql_fetch_row($result);
-
-    mysql_free_result($result);
+    list($count) = $result->fetchRow(true);
 
     if ($count) {
         return rebuild_tree();
@@ -5522,7 +5548,7 @@ function rebuild_tree($parent = 0, $left = 0, $depth = 0, $pos = 0)
     // get all children of this node
     $result = cpg_db_query("SELECT cid FROM {$CONFIG['TABLE_PREFIX']}categories WHERE parent = $parent ORDER BY $sort_query, cid");
 
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $result->fetchAssoc()) {
         // recursive execution of this function for each
         // child of this node
         // $right is the current right value, which is
@@ -5531,6 +5557,7 @@ function rebuild_tree($parent = 0, $left = 0, $depth = 0, $pos = 0)
             $right = rebuild_tree($row['cid'], $right, $depth + 1, $childpos++);
         }
     }
+    $result->free();
 
     // we've got the left value, and now that we've processed
     // the children of this node we also know the right value
@@ -5692,18 +5719,18 @@ if (!function_exists('cpg_get_available_languages')) {
         // return without return value if the table doesn't exist because
         // the upgrade script hasn't been run
         $results = cpg_db_query("SHOW TABLES LIKE '{$CONFIG['TABLE_LANGUAGE']}'");
-        if (!mysql_num_rows($results)) {
+        if (!$results->numRows()) {
             // The update script has not been run - use the "old school" language file lookup and return the contents
             $language_array = form_get_foldercontent('lang/', 'file', 'php');
             ksort($language_array);
             return $language_array;
         }
-        mysql_free_result($results);
+        $results->free();
         unset($results);
 
         // get list of available languages
         $results = cpg_db_query("SELECT lang_id, english_name, native_name, custom_name FROM {$CONFIG['TABLE_LANGUAGE']} WHERE available='YES' AND enabled='YES' ");
-        while ( ($row = mysql_fetch_array($results)) ) {
+        while ( ($row = $results->fetchArray()) ) {
             if (file_exists('lang/' . $row['lang_id'] . '.php')) {
                 if ($row['custom_name'] != '') {
                     $language_array[$row['lang_id']] = $row['custom_name'];
@@ -5717,7 +5744,7 @@ if (!function_exists('cpg_get_available_languages')) {
                 }
             }
         } // while
-        mysql_free_result($results);
+        $results->free();
 
         unset($row);
         if (count($language_array) == 0) {
@@ -5795,7 +5822,7 @@ function cpg_get_type($filename,$filter=null)
 
         $CONFIG['allowed_file_extensions'] = '';
 
-        while ( ($row = mysql_fetch_assoc($result)) ) {
+        while ( ($row = $result->fetchAssoc()) ) {
             // Only add types that are in both the database and user defined parameter
             if ($CONFIG[$content_types_to_vars[$row['content']]] == 'ALL' || is_int(strpos('/' . $CONFIG[$content_types_to_vars[$row['content']]] . '/', '/' . $row['extension'] . '/'))) {
                 $FILE_TYPES[$row['extension']]      = $row;
@@ -5807,7 +5834,7 @@ function cpg_get_type($filename,$filter=null)
 
         $CONFIG['allowed_file_extensions'] = substr($CONFIG['allowed_file_extensions'], 1);
 
-        mysql_free_result($result);
+        $result->free();
     }
 
     if (!is_array($filename)) {
@@ -5891,8 +5918,8 @@ function get_cat_data()
         $sql = "SELECT rgt, c.cid, name FROM {$CONFIG['TABLE_CATEGORIES']} AS c NATURAL JOIN {$CONFIG['TABLE_CATMAP']} WHERE group_id IN (" . implode(', ', $USER_DATA['groups']) . ") ORDER BY lft ASC";
     }
     $result = cpg_db_query($sql);
-    if (mysql_num_rows($result) > 0) {
-        $rowset = cpg_db_fetch_rowset($result);
+    if ($result->numRows() > 0) {
+        $rowset = cpg_db_fetch_rowset($result, true);
         $right = array();
         foreach ($rowset as $subcat) {
             if (count($right) > 0) {
@@ -5907,8 +5934,9 @@ function get_cat_data()
             // add user categories
             if ($subcat['cid'] == 1 && GALLERY_ADMIN_MODE) {
                 global $cpg_udb;
-                $result2 = cpg_db_query("SELECT {$cpg_udb->field['user_id']} AS user_id, {$cpg_udb->field['username']} AS user_name FROM {$cpg_udb->usertable} ORDER BY user_name", $cpg_udb->link_id);
-                $rowset2 = cpg_db_fetch_rowset($result2);
+                // query via bridge
+                $result2 = $cpg_udb->query("SELECT {$cpg_udb->field['user_id']} AS user_id, {$cpg_udb->field['username']} AS user_name FROM {$cpg_udb->usertable} ORDER BY user_name");
+                $rowset2 = cpg_db_fetch_rowset($result2, true);
                 foreach ($rowset2 as $user) {
                     $CAT_LIST[] = array(FIRST_USER_CAT + $user['user_id'], '&nbsp;&nbsp;&nbsp;' . $user['user_name']);
                 }
@@ -5945,9 +5973,10 @@ function album_selection_options($selected = 0)
         $result = cpg_db_query("SELECT aid, title, category FROM {$CONFIG['TABLE_ALBUMS']} WHERE (0 $uploads_yes) $only_empty_albums ORDER BY pos");
     }
 
-    while ( ($row = mysql_fetch_assoc($result)) ) {
+    while ( ($row = $result->fetchAssoc()) ) {
         $albums[$row['category']][$row['aid']] = $row['title'];
     }
+    $result->free();
     if (!empty($albums[0])) {
         // Albums in no category
         $options .= '<optgroup label="' . $lang_common['albums_no_category'] . '">';
@@ -5967,7 +5996,7 @@ function album_selection_options($selected = 0)
 
     $cats = array();
     // Loop through all categories
-    while ( ($row = mysql_fetch_assoc($result))) {
+    while ( ($row = $result->fetchAssoc())) {
         // Determine category hierarchy
         if (count($cats)) {
             while ($cats && $cats[count($cats)-1]['rgt'] < $row['rgt']) {
@@ -5981,10 +6010,10 @@ function album_selection_options($selected = 0)
             $options .= '<optgroup label="' . $lang_common['personal_albums'] . '">' . $LINEBREAK;
 
             if (GALLERY_ADMIN_MODE) {
-                $result2 = cpg_db_query("SELECT {$cpg_udb->field['user_id']} AS user_id, {$cpg_udb->field['username']} AS user_name "
-                    . "FROM {$cpg_udb->usertable} ORDER BY {$cpg_udb->field['username']}", $cpg_udb->link_id);
-                $users = cpg_db_fetch_rowset($result2);
-                mysql_free_result($result2);
+            	// query via bridge
+                $result2 = $cpg_udb->query("SELECT {$cpg_udb->field['user_id']} AS user_id, {$cpg_udb->field['username']} AS user_name "
+                    . "FROM {$cpg_udb->usertable} ORDER BY {$cpg_udb->field['username']}");
+                $users = cpg_db_fetch_rowset($result2, true);
             } else {
                 $users = array(array('user_id' => USER_ID, 'user_name' => USER_NAME));
             }
@@ -6016,7 +6045,7 @@ function album_selection_options($selected = 0)
             $options .= '</optgroup>';
         }
     }
-    mysql_free_result($result);
+    $result->free();
 
     return $options;
 }
@@ -6397,21 +6426,21 @@ function cpg_get_comment_page_number($msg_id) {
     global $CONFIG;
 
     $result = cpg_db_query("SELECT pid FROM {$CONFIG['TABLE_COMMENTS']} WHERE msg_id = '$msg_id'");
-    list($pid) = mysql_fetch_row($result);
+    list($pid) = $result->fetchRow(true);
 
     if (!$pid) {
         return false;
     }
 
     $result = cpg_db_query("SELECT COUNT(msg_id) FROM {$CONFIG['TABLE_COMMENTS']} WHERE pid='$pid'");
-    list($num) = mysql_fetch_row($result);
+    list($num) = $result->fetchRow(true);
     $page_count = ceil($num / $CONFIG['comments_per_page']);
 
     $comment_sort_order = ($CONFIG['comments_sort_descending'] == 1) ? 'ASC' : 'DESC'; // we need to count reversed
     $result = cpg_db_query("SELECT msg_id FROM {$CONFIG['TABLE_COMMENTS']} WHERE pid='$pid' ORDER BY msg_id $comment_sort_order");
     $i = 0;
     $page = $page_count + 1;
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $result->fetchAssoc()) {
         if (($i++ % $CONFIG['comments_per_page']) == 0) {
             $page--;
         }
@@ -6419,7 +6448,7 @@ function cpg_get_comment_page_number($msg_id) {
             break;
         }
     }
-    mysql_free_result($result);
+    $result->free();
 
     return $page;
 }
@@ -6434,8 +6463,7 @@ function cpg_lang_name2code($lang_name) {
     global $CONFIG;
     if ($lang_name != '') {
         $result = cpg_db_query("SELECT flag, abbr FROM {$CONFIG['TABLE_LANGUAGE']} WHERE lang_id='{$lang_name}' LIMIT 1");
-        list($flag, $abbr) = mysql_fetch_row($result);
-        mysql_free_result($result);
+        list($flag, $abbr) = $result->fetchRow(true);
         if ($abbr != '') {
             return $abbr;
         } elseif ($flag != '') {
@@ -6483,9 +6511,10 @@ function cpg_pw_protected_album_access($aid) {
 
     // Fetch all password protected albums
     $result = cpg_db_query("SELECT aid FROM {$CONFIG['TABLE_ALBUMS']} WHERE alb_password != ''");
-    while($row = mysql_fetch_assoc($result)) {
+    while($row = $result->fetchAssoc()) {
         $aid_w_pw[] = $row['aid'];
     }
+    $result->free();
 
     // Check if the user has access to the password protected album if he knows the correct password
     if (!in_array($aid, array_diff($FORBIDDEN_SET_DATA, $aid_w_pw))) {
@@ -6519,7 +6548,7 @@ function cpg_get_groups($user_id) {
                 . "FROM {$cpg_udb->usertable} AS u "
                 . "WHERE u.{$f['user_id']}='{$user_id}'";
     }
-    return $cpg_udb->get_groups(mysql_fetch_assoc(cpg_db_query($sql)));
+    return $cpg_udb->get_groups(cpg_db_query($sql)->fetchAssoc(true));
 }
 
 

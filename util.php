@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2015 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -321,7 +321,7 @@ function filename_to_title()
 
     $file_count = 0;
 
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $result->fetchAssoc()) {
 
         $filename = $row['filename'];
         $pid = $row['pid'];
@@ -365,6 +365,7 @@ function filename_to_title()
         echo "{$lang_util_php['file']} : <strong>$filename</strong> {$lang_util_php['title_set_to']} : <strong>$newtitle</strong><br />" . $LINEBREAK;
 
     } // end while
+    $result->free();
 
     echo '<br />' . $LINEBREAK . sprintf($lang_util_php['titles_updated'], $file_count) . '<br />' . $LINEBREAK;
 }
@@ -416,10 +417,10 @@ function update_thumbs()
     starttable('100%', $icon_array['util'] . $lang_util_php['thumbs_wait']);
 
     $result = cpg_db_query("SELECT pid, filepath, filename FROM {$CONFIG['TABLE_PICTURES']} $albstr LIMIT $startpic, $numpics");
-    $count = mysql_num_rows($result);
+    $count = $result->numRows();
     $loopCounter = 0;
 
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $result->fetchAssoc()) {
 
         if (is_image($row['filename'])) { // the file is an image --- start
 
@@ -538,6 +539,7 @@ function update_thumbs()
             echo '<tr><td class="'.$tablestyle.'">' . $icon_array['cancel'] . sprintf($lang_util_php['no_image'], '<tt>' . $row['filepath'] . $row['filename'] . '</tt>') . '</td></tr>';
         }
     }
+    $result->free();
 
     if ($count == $numpics) {
 
@@ -593,7 +595,7 @@ function deletebackup_img()
 
     $i = 0;
 
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $result->fetchAssoc(true)) {
 
         $back = $CONFIG['fullpath'] . $row['filepath'] . $CONFIG['orig_pfx'] . $row['filename'];
 
@@ -610,14 +612,13 @@ function deletebackup_img()
             // printf($lang_util_php['error_not_found'], $back);
         }
     }
+    $result->free();
 
     echo '<br />';
 
     if ($i == 0) {
         echo $lang_util_php['nothing_deleted'].'<br />';
     }
-
-    mysql_free_result($result);
 }
 
 function del_orig()
@@ -638,7 +639,7 @@ function del_orig()
 
     $result = cpg_db_query("SELECT pid, filepath, filename FROM {$CONFIG['TABLE_PICTURES']} $albstr");
 
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $result->fetchAssoc()) {
 
         $pid = $row['pid'];
         $image = $CONFIG['fullpath'] . $row['filepath'] . $row['filename'];
@@ -673,7 +674,7 @@ function del_orig()
         echo '<br />';
     }
 
-    mysql_free_result($result);
+    $result->free();
 }
 
 function del_norm()
@@ -694,7 +695,7 @@ function del_norm()
 
     $result = cpg_db_query("SELECT pid, filepath, filename FROM {$CONFIG['TABLE_PICTURES']} $albstr");
 
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $result->fetchAssoc()) {
 
         $pid = $row['pid'];
         $image = $CONFIG['fullpath'] . $row['filepath'] . $row['filename'];
@@ -720,7 +721,7 @@ function del_norm()
         echo '<br />';
     }
 
-    mysql_free_result($result);
+    $result->free();
 }
 
 function del_orphans()
@@ -740,7 +741,7 @@ function del_orphans()
 
     $result = cpg_db_query("SELECT c.pid, msg_id, msg_body FROM {$CONFIG['TABLE_COMMENTS']} AS c LEFT JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.pid = c.pid WHERE p.pid IS NULL");
 
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $result->fetchAssoc()) {
 
         $pid = $row['pid'];
         $msg_id = $row['msg_id'];
@@ -755,7 +756,7 @@ function del_orphans()
 
     if (!$superCage->post->keyExists('del')) {
 
-        $count = mysql_num_rows($result);
+        $count = $result->numRows();
 
         echo "<br /><br />$count {$lang_util_php['orphan_comment']}<br /><br />";
 
@@ -774,7 +775,7 @@ EOT;
         }
     }
 
-    mysql_free_result($result);
+    $result->free();
 }
 
 function del_old()
@@ -801,7 +802,7 @@ function del_old()
 
     $result = cpg_db_query("SELECT pid, filepath, filename FROM {$CONFIG['TABLE_PICTURES']} WHERE ctime <= $start $albstr");
 
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $result->fetchAssoc()) {
 
         $pid = $row['pid'];
         $image = $CONFIG['fullpath'] . $row['filepath'] . $row['filename'];
@@ -857,7 +858,7 @@ function del_old()
         $delete_counter++;
     }
 
-    mysql_free_result($result);
+    $result->free();
 
     printf($lang_util_php['affected_records'], $delete_counter);
 }
@@ -911,10 +912,10 @@ function refresh_db()
     $outcome = 'none';
 
     $result = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_PICTURES']} $albstr ORDER BY pid ASC LIMIT $startpic, $numpics");
-    $count = mysql_num_rows($result);
+    $count = $result->numRows();
     $found = 0;
 
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $result->fetchAssoc()) {
 
         extract($row, EXTR_PREFIX_ALL, "db");
         unset($prob);
@@ -979,6 +980,7 @@ function refresh_db()
             echo "<tr><td class=\"tableb\">$url</td><td class=\"tableb\">{$lang_util_php['no_prob_detect']}</td><td class=\"tableb\">{$lang_common['ok']}</td></tr>";
         }
     }
+    $result->free();
 
     endtable();
 
@@ -1004,7 +1006,7 @@ function refresh_db()
 EOT;
     }
 
-    mysql_free_result($result);
+    $result->free();
 }
 
 
