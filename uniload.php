@@ -7,7 +7,7 @@ define('ADMIN_PHP', true);
 
 define('H5U_LOG','h5upload');
 
-file_put_contents('chunklog.txt', print_r($_POST, true).print_r($_FILES, true), FILE_APPEND);
+//file_put_contents('chunklog.txt', print_r($_POST, true).print_r($_FILES, true), FILE_APPEND);
 
 $upload_log ='';
 function upldLog ($msg)
