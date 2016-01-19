@@ -35,11 +35,16 @@ global $CONFIG, $USER, $lang_upload_php, $upload_form, $max_file_size;
 
 // Set up an array of choices for the upload method
 $upload_choices = array(
-    'swfupload'   => $lang_upload_php['upload_swf'],
-    'html_single' => $lang_upload_php['upload_single'],
+//    'swfupload'   => $lang_upload_php['upload_swf'],
+//    'html_single' => $lang_upload_php['upload_single'],
 );
 // Filter upload choices to allow plugins to add upload methods
-$upload_choices = CPGPluginAPI::filter('upload_options',$upload_choices);
+$upload_choices = CPGPluginAPI::filter('upload_options', $upload_choices);
+
+// Complain if there is no upload method
+if (!$upload_choices) {
+    cpg_die(ERROR, $lang_upload_php['err_no_method'], __FILE__, __LINE__);
+}
 
 // Default upload method set by the gallery administrator
 $upload_form = $CONFIG['upload_mechanism'];
@@ -55,7 +60,7 @@ $icon_array['info'] = cpg_fetch_icon('info', 2);
 // If we have "single" key in GET then we will force the upload form mechanism to single file upload
 // This acts as a fallback if js or flash is disabled
 if ($superCage->get->keyExists('single')) {
-    $upload_form = 'html_single';
+    $upload_form = 'upload_sgl';
 } elseif ($CONFIG['allow_user_upload_choice'] && $superCage->get->keyExists('method')) {
     // pull in upload method from GET parameter 'method'
     $matches = $superCage->get->getMatched('method','/^[0-9A-Za-z_]+$/');
@@ -692,7 +697,7 @@ EOT;
     CPGPluginAPI::action('upload_process',$upload_form);
 
 // Process the SWF upload form submission
-} elseif ($superCage->post->keyExists('process')) {
+} /* elseif ($superCage->post->keyExists('process')) {
 
     // Make sure there is no output yet
     ob_clean();
@@ -962,5 +967,5 @@ EOT;
     }
 
     exit;
-}
+}*/
 ?>

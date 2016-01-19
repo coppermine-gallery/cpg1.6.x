@@ -1308,11 +1308,11 @@ $config_data = array(
     ),
     'upload_mechanism' => array(
       'type'          => 'select',
-      'default_value' => 'swfupload',
+      'default_value' => 'upload_h5a',
       'help_link'     => 'f=configuration.htm&amp;as=admin_upload_mechanism&amp;ae=admin_upload_mechanism_end',
       'options'       => array(
-                           'swfupload' => $lang_admin_php['upload_swf'],
-                           'html_single' => $lang_admin_php['upload_single'],
+                           //'swfupload' => $lang_admin_php['upload_swf'],
+                           //'html_single' => $lang_admin_php['upload_single'],
                          ),
     ),
     'allow_user_upload_choice' => array(

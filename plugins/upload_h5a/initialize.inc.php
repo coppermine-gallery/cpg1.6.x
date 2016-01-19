@@ -1,7 +1,7 @@
 <?php
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
-class Html5uploado {
+class Html5upload {
 
 	public $h5u_config_default = array(
 		'concurrent'=>3,
@@ -30,7 +30,7 @@ class Html5uploado {
 	public function help_button ($guid)
 	{
 		global $CONFIG;
-		return '&nbsp;<a class="greybox" href="plugins/html5upload/help.php?t=' . $CONFIG['theme'] . '&l='.$CONFIG['lang']
+		return '&nbsp;<a class="greybox" href="plugins/upload_h5a/help.php?t=' . $CONFIG['theme'] . '&l='.$CONFIG['lang']
 			. '&g='.$guid.'" title="Help"><img src="images/help.gif" width="13" height="11" border="0" alt=""></a>';
 	}
 
@@ -68,4 +68,4 @@ class Html5uploado {
 }
 
 global $h5a_upload;
-$h5a_upload = new Html5uploado();
+$h5a_upload = new Html5upload();

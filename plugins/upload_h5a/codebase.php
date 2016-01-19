@@ -1,7 +1,7 @@
 <?php
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
-//require_once './plugins/html5upload/initialize.inc.php';
+require_once './plugins/upload_h5a/initialize.inc.php';
 
 // Add a filter for the upload options
 $thisplugin->add_filter('upload_options','html5_add_upload_option');
@@ -10,25 +10,25 @@ $thisplugin->add_action('upload_form','html5_display_upload_form');
 
 function html5_add_upload_option($upload_choices)
 {
-	global $lang_plugin_html5upload;
+	global $lang_plugin_upload_h5a;
 
-	$more_upload_choices = array('html5_upload' => $lang_plugin_html5upload['html5_method']);
+	$more_upload_choices = array('upload_h5a' => $lang_plugin_upload_h5a['html5_method']);
 	return array_merge($upload_choices, $more_upload_choices);
 }
 
 function html5_display_upload_form($upload_settings)
 {
-	global $CONFIG, $USER_DATA, $lang_common, $lang_upload_php, $lang_plugin_html5upload, $icon_array, $h5a_upload, $lang_bbcode_help_title, $lang_bbcode_help;
+	global $CONFIG, $USER_DATA, $lang_common, $lang_upload_php, $lang_plugin_upload, $lang_plugin_upload_h5a, $icon_array, $h5a_upload, $lang_bbcode_help_title, $lang_bbcode_help;
 
 	list($upload_form, $upload_select) = $upload_settings;
-	if ($upload_form != 'html5_upload') {
+	if ($upload_form != 'upload_h5a') {
 		return $upload_settings;
 	}
-	$plugpath = 'plugins/html5upload';
+	$plugpath = 'plugins/upload_h5a';
 
 	$grpn = USER_ID > 0 ? (int) $USER_DATA['group_id'] : 0;
 	$grpc = $grpn ? $grpn : '';
-	$cfg = isset($CONFIG['html5upload_config'.$grpc]) ? unserialize($CONFIG['html5upload_config'.$grpc]) : unserialize($CONFIG['html5upload_config']);
+	$cfg = isset($CONFIG['upload_h5a'.$grpc]) ? unserialize($CONFIG['upload_h5a'.$grpc]) : unserialize($CONFIG['upload_h5a']);
 
 	$maxfilesizebytes = $cfg['upldsize'] ? max($cfg['upldsize'], $h5a_upload->sys_max_upl_size) : $h5a_upload->sys_max_upl_size;
 	$maxfilesize = sprintf($lang_upload_php['max_fsize'], $h5a_upload->to_KMG($maxfilesizebytes));
@@ -43,16 +43,16 @@ function html5_display_upload_form($upload_settings)
 	set_js_var('H5uPath', "{$plugpath}/");
 	set_js_var('maxfilesize', $maxfilesizebytes);
 	set_js_var('maxchunksize', $h5a_upload->sys_max_chnk_size);
-	set_js_var('fup_payload', array('event'=>'picture','process'=>1,'form_token'=>$form_token,'timestamp'=>$timestamp,'MFU'=>1));
+	set_js_var('fup_payload', array('method'=>'upload_h5a','form_token'=>$form_token,'timestamp'=>$timestamp));
 	set_js_var('h5uM', array(
-			'selAlb'=>$lang_plugin_html5upload['albmSelMsg'],
-			'aborted'=>$lang_plugin_html5upload['aborted'],
-			'type_err'=>$lang_plugin_html5upload['type_err'],
-			'size_err'=>$lang_plugin_html5upload['size_err'],
-			'extallow'=>$lang_plugin_html5upload['extallow'],
-			'q_stop'=>$lang_plugin_html5upload['q_stop'],
-			'q_go'=>$lang_plugin_html5upload['q_resume'],
-			'q_can'=>$lang_plugin_html5upload['q_cancel']
+			'selAlb'=>$lang_plugin_upload['albmSelMsg'],
+			'aborted'=>$lang_plugin_upload_h5a['aborted'],
+			'type_err'=>$lang_plugin_upload_h5a['type_err'],
+			'size_err'=>$lang_plugin_upload['size_err'],
+			'extallow'=>$lang_plugin_upload_h5a['extallow'],
+			'q_stop'=>$lang_plugin_upload_h5a['q_stop'],
+			'q_go'=>$lang_plugin_upload_h5a['q_resume'],
+			'q_can'=>$lang_plugin_upload_h5a['q_cancel']
 			));
 
 	$allowed_types = array_merge(
@@ -65,19 +65,19 @@ function html5_display_upload_form($upload_settings)
 
 	// include the javascript upload engine (minified unless in debug mode)
 	$jsv = ($CONFIG['debug_mode']==1 || ($CONFIG['debug_mode']==2 && GALLERY_ADMIN_MODE)) ? '' : '.min';
-	js_include('plugins/html5upload/js/upload'.$jsv.'.js');
+	js_include('plugins/upload_h5a/js/upload'.$jsv.'.js');
 
 	// add our style sheet
-	$h5up_meta = '<link rel="stylesheet" href="plugins/html5upload/css/upload.css" type="text/css" />';
+	$h5up_meta = '<link rel="stylesheet" href="plugins/upload_h5a/css/upload.css" type="text/css" />';
 
-	pageheader($lang_plugin_html5upload['title'], $h5up_meta);
+	pageheader($lang_plugin_upload_h5a['title'], $h5up_meta);
 
 	$upload_help = $h5a_upload->help_button('use');
 	$upload_table_header = <<<EOT
 	<table border="0" cellspacing="0" cellpadding="0" width="100%">
 		<tr>
 			<td>
-				{$icon_array['upload']}{$lang_plugin_html5upload['upldfiles']}{$upload_help}
+				{$icon_array['upload']}{$lang_plugin_upload_h5a['upldfiles']}{$upload_help}
 			</td>
 			<td style="text-align:right">
 				<span id="upload_method_selector">{$upload_select}</span>
@@ -91,10 +91,10 @@ EOT;
 	form_alb_list_box($lang_common['album'], 'h5u_album');
 	echo <<<EOT
 	<tr id="navailrow" style="text-align:center;background-color:yellow;display:none">
-		<td colspan="2">{$lang_plugin_html5upload['notavail']}</td>
+		<td colspan="2">{$lang_plugin_upload_h5a['notavail']}</td>
 	</tr>
 	<tr class="H5upV">
-		<td class="tableb" width="30%">{$lang_plugin_html5upload['flistitl']}</td>
+		<td class="tableb" width="30%">{$lang_plugin_upload_h5a['flistitl']}</td>
 		<td class="tableb"><input type="checkbox" id="flistitl" onchange="shide_titlrow(this);" /></td>
 	</tr>
 EOT;
@@ -133,12 +133,12 @@ EOT;
 
 	echo <<<EOT
 	<tr id="h5upldrow">
-		<td class="tableb">{$lang_plugin_html5upload['files']}</td>
+		<td class="tableb">{$lang_plugin_upload_h5a['files']}</td>
 		<td class="tableb" style="padding:1em">
 			<div style="width:480px">
 				<input type="file" name="userpictures" id="upload_field" multiple="multiple" {$acptmime}/>
 				&nbsp;<br />
-				<div id="dropArea">{$lang_plugin_html5upload['drop_files']}</div>
+				<div id="dropArea">{$lang_plugin_upload_h5a['drop_files']}</div>
 				&nbsp;<br />
 				<div id="progress_report" style="position:relative">
 					<div id="progress_report_name"></div>
@@ -147,7 +147,7 @@ EOT;
 						<div id="progress_report_bar" style="background-color: blue; width: 0; height: 100%;"></div>
 					</div>
 					<div>
-						{$lang_plugin_html5upload['files_left']}<span id="qcount">0</span><div class="acti" id="qstop"><img src="plugins/html5upload/css/stop.png" title="{$lang_plugin_html5upload['q_stop']}" onclick="H5uQctrl.stop()" /></div><div class="acti" id="qgocan"><img src="plugins/html5upload/css/play-green.png" title="{$lang_plugin_html5upload['q_resume']}" onclick="H5uQctrl.go()" /><img src="plugins/html5upload/css/cross.png" title="{$lang_plugin_html5upload['q_cancel']}" onclick="H5uQctrl.cancel()" /></div>
+						{$lang_plugin_upload_h5a['files_left']}<span id="qcount">0</span><div class="acti" id="qstop"><img src="plugins/upload_h5a/css/stop.png" title="{$lang_plugin_upload_h5a['q_stop']}" onclick="H5uQctrl.stop()" /></div><div class="acti" id="qgocan"><img src="plugins/upload_h5a/css/play-green.png" title="{$lang_plugin_upload_h5a['q_resume']}" onclick="H5uQctrl.go()" /><img src="plugins/upload_h5a/css/cross.png" title="{$lang_plugin_upload_h5a['q_cancel']}" onclick="H5uQctrl.cancel()" /></div>
 					</div>
 					<div id="fprogress"></div>
 					<div id="server_response"></div>
@@ -156,9 +156,9 @@ EOT;
 		</td>
 	</tr>
 	<tr id="gotoedit" style="display:none">
-		<td class="tableb tableb_alternate">{$lang_plugin_html5upload['continue']}</td>
+		<td class="tableb tableb_alternate">{$lang_plugin_upload_h5a['continue']}</td>
 		<td class="tableb tableb_alternate">
-			<button type="button" onclick="window.location=redirURL">{$lang_plugin_html5upload['gotoedit']}</button>
+			<button type="button" onclick="window.location=redirURL">{$lang_plugin_upload_h5a['gotoedit']}</button>
 		</td>
 	</tr>
 EOT;
@@ -169,19 +169,19 @@ EOT;
 
 
 /** INSTALL/UNINSTALL **/
-$thisplugin->add_action('plugin_install', 'html5upload_install');
+$thisplugin->add_action('plugin_install', 'upload_h5a_install');
 
-function html5upload_install () {
+function upload_h5a_install () {
 	global $CONFIG, $h5a_upload;
 	$scfg = cpg_db_escape_string(serialize($h5a_upload->h5u_config_default));
-	cpg_db_query("INSERT INTO {$CONFIG['TABLE_CONFIG']} (name, value) VALUES ('html5upload_config', '{$scfg}')");
+	cpg_db_query("INSERT INTO {$CONFIG['TABLE_CONFIG']} (name, value) VALUES ('upload_h5a', '{$scfg}')");
 	return true;
 }
 
-$thisplugin->add_action('plugin_uninstall', 'html5upload_uninstall');
+$thisplugin->add_action('plugin_uninstall', 'upload_h5a_uninstall');
 
-function html5upload_uninstall () {
+function upload_h5a_uninstall () {
 	global $CONFIG;
-	cpg_db_query("DELETE FROM {$CONFIG['TABLE_CONFIG']} WHERE name LIKE 'html5upload_config%'");
+	cpg_db_query("DELETE FROM {$CONFIG['TABLE_CONFIG']} WHERE name LIKE 'upload_h5a%'");
 	return true;
 }

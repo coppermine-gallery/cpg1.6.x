@@ -213,7 +213,7 @@ function process_post_data()
             $file_base_name_old = str_replace('.' . $mime_content_old['extension'], '', basename($pic['filename']));
 
             foreach (array('.gif','.png','.jpg') as $thumb_extension) {
-                if (file_exists($CONFIG['fullpath'] . $pic['filepath'] . $CONFIG['thumb_pfx'] . $file_base_name_old . $thumb_extension)) {->
+                if (file_exists($CONFIG['fullpath'] . $pic['filepath'] . $CONFIG['thumb_pfx'] . $file_base_name_old . $thumb_extension)) {
                     // Thumbnail found, check if it's the only file using that thumbnail
                     $count = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} WHERE filepath = '{$pic['filepath']}' AND filename LIKE '{$file_base_name_old}.%'")->result(0);
                     if ($count == 1) {

@@ -1,7 +1,7 @@
 <?php
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
-require_once './plugins/html5upload/initialize.inc.php';
+//require_once './plugins/html5upload/initialize.inc.php';
 global $lang_plugin_html5upload, $lang_gallery_admin_menu;
 
 $name = $lang_plugin_html5upload['html5upload'];

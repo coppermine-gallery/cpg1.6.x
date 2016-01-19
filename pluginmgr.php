@@ -144,6 +144,7 @@ EOT;
 
             unset($extra_info);
             unset($install_info);
+			unset($config_action);	//@RJC
             include('./plugins/'.$thisplugin['path'].'/configuration.php');
             $pluginPath = $thisplugin['path'];
 
@@ -180,22 +181,33 @@ EOT;
                         <td colspan="2" class="tableh1">{$name} ({$pluginPath}): {$lang_pluginmgr_php['vers']}$version</td>
                     </tr>
                     <tr>
-                        <td class="tableb" valign="top">{$lang_pluginmgr_php['author']}:</td>
+                        <td class="tableb" width="20%" valign="top">{$lang_pluginmgr_php['author']}:</td>
                         <td class="tableb" valign="top">$author</td>
                     </tr>
                     <tr>
-                        <td class="tableb tableb_alternate" valign="top">{$lang_pluginmgr_php['desc']}</td>
+                        <td class="tableb tableb_alternate" valign="top">{$lang_pluginmgr_php['desc']}:</td>
                         <td class="tableb tableb_alternate" valign="top">$description</td>
                     </tr>
 EOT;
             if ($extra != '') {
               echo <<<EOT
                     <tr>
-                        <td class="tableb" width="20%" valign="top">{$lang_pluginmgr_php['extra']}:</td>
+                        <td class="tableb" valign="top">{$lang_pluginmgr_php['extra']}:</td>
                         <td class="tableb" valign="top">{$extra}</td>
                     </tr>
 EOT;
             }
+//@RJC\
+			if (isset($config_action) and $config_action) {
+				$btn_icon = cpg_fetch_icon('config', 1);
+				echo <<<EOT
+					<tr>
+						<td class="tableb tableb_alternate" valign="top">{$lang_pluginmgr_php['plugin_action']}:</td>
+						<td class="tableb tableb_alternate" valign="top"><a href="pluginmgr.php?op=admin&amp;p={$thisplugin['plugin_id']}&amp;c={$config_action}" class="admin_menu">{$btn_icon}{$lang_pluginmgr_php['configure_plugin']}</a></td>
+					</tr>
+EOT;
+			}
+//@RJC/
             echo <<<EOT
                 </table>
             </td>
@@ -332,7 +344,7 @@ EOT;
             if ($extra != '') {
               echo <<<EOT
                     <tr>
-                        <td class="tableb tableb_alternate" width="20%" valign="top">{$lang_pluginmgr_php['install_info']}:</td>
+                        <td class="tableb tableb_alternate" valign="top">{$lang_pluginmgr_php['install_info']}:</td>
                         <td class="tableb tableb_alternate" valign="top">{$extra}</td>
                     </tr>
 EOT;
@@ -455,6 +467,12 @@ switch ($op) {
           cpgRedirectPage('pluginmgr.php',$lang_pluginmgr_php['pmgr'],$lang_pluginmgr_php['plugin_disabled_note']);
         }
         break;
+//@RJC\
+	case 'admin':
+		$plugin_id = $p;
+		$actonplugin = @$CPG_PLUGINS[$plugin_id];
+		break;
+//@RJC/
     case 'delete':
         if (!checkFormToken()) {
             cpg_die(ERROR, $lang_errors['invalid_form_token'], __FILE__, __LINE__);
@@ -614,7 +632,7 @@ EOT;
  */
 
 // Plugin isn't being configured; Display the plugin list
-if (($CONFIG['enable_plugins'] != 1) || (($op != 'install') && ($op != 'uninstall')) || (is_bool($installed) && $installed) || (is_bool($uninstalled) && $uninstalled)) {
+if (($CONFIG['enable_plugins'] != 1) || (($op != 'install') && ($op != 'uninstall') && ($op != 'admin')) || (is_bool($installed) && $installed) || (is_bool($uninstalled) && $uninstalled)) {	//@RJC
 
     // Refresh the page; An operation was just performed
     if  ($superCage->get->keyExists('op')) {
@@ -645,6 +663,22 @@ EOT;
 
     // End the table
     endtable();
+//@RJC\
+} elseif ($op == 'admin') {
+	// Display admin plugin configuration
+	echo <<< EOT
+	<tr>
+		<td class="tableb" valign="top" width="100%">
+EOT;
+
+	$cfg_file = @$superCage->get->getEscaped('c');
+	include('./plugins/'.$actonplugin->path.'/'.$cfg_file.'.php');
+
+	echo <<< EOT
+		</td>
+	</tr>
+EOT;
+//@RJC/
 } else {
 
     // Display cleanup page table header
