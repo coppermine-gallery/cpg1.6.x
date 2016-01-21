@@ -1,7 +1,7 @@
 <?php
-/*************************
+/**************************
   Coppermine Photo Gallery
-  ************************
+ **************************
   Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
@@ -9,11 +9,11 @@
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
 
-  ********************************************
+ ************************************
   Coppermine version: 1.6.01
   $HeadURL$
   $Revision$
-**********************************************/
+ ************************************/
 
 // Confirm we are in Coppermine and set the language blocks.
 define('IN_COPPERMINE', true);
@@ -571,25 +571,25 @@ if (!$superCage->post->keyExists('process') && !$superCage->post->keyExists('plu
     // Call active plugins for alternate upload forms
     CPGPluginAPI::action('upload_form',array($upload_form,$upload_select));
 
-    if ($upload_form == 'swfupload') {
+//    if ($upload_form == 'swfupload') {
         // Get the user password hash
-        $user_pass = $cpg_udb->get_user_pass(USER_ID);
+//        $user_pass = $cpg_udb->get_user_pass(USER_ID);
         // Serialize and base64 encode the password
-        set_js_var('user', base64_encode(serialize($user_pass)));
-        set_js_var('user_id', USER_ID);
-        set_js_var('allow_guests_enter_file_details', $CONFIG['allow_guests_enter_file_details']);
-    }
+//        set_js_var('user', base64_encode(serialize($user_pass)));
+//        set_js_var('user_id', USER_ID);
+//        set_js_var('allow_guests_enter_file_details', $CONFIG['allow_guests_enter_file_details']);
+//    }
     // Do some cleanup in the edit directory.
     spring_cleaning('./'.$CONFIG['fullpath'].'edit',CPG_HOUR);
 
     // Create upload form headers.
-    pageheader($lang_upload_php['title']);
+//    pageheader($lang_upload_php['title']);
 
-    if ($upload_form == 'html_single') {
+//    if ($upload_form == 'html_single') {
         // For single upload form, send the request to db_input.php
-        open_form('db_input.php');
-        $upload_help = cpg_display_help('f=uploading_http.htm&amp;as=upload_http_interface_html&amp;ae=upload_http_interface_html_end', '450', '300');
-    } else {
+//        open_form('db_input.php');
+//        $upload_help = cpg_display_help('f=uploading_http.htm&amp;as=upload_http_interface_html&amp;ae=upload_http_interface_html_end', '450', '300');
+//    } else {
         if ($USER_DATA['pub_upl_need_approval'] == 1 || $USER_DATA['priv_upl_need_approval'] == 1) {
             echo '<div id="admin_approval" style="display: none;">';
             msg_box($lang_common['information'], $lang_db_input_php['upload_success']);
@@ -597,7 +597,7 @@ if (!$superCage->post->keyExists('process') && !$superCage->post->keyExists('plu
         }
 
         $upload_help = cpg_display_help('f=empty.htm&amp;h=lang_upload_php[title]&amp;t=lang_tmp_upload',470,245);
-    }
+//    }
 
     $upload_table_header = <<< EOT
     <table border="0" cellspacing="0" cellpadding="0" width="100%">
@@ -613,7 +613,7 @@ if (!$superCage->post->keyExists('process') && !$superCage->post->keyExists('plu
         </tr>
     </table>
 EOT;
-
+/*
     // Open the form table.
     starttable('100%', $upload_table_header, 2);
 
@@ -670,7 +670,7 @@ EOT;
         // Close the table.
         endtable();
     }
-
+*/
     if ($CONFIG['display_xp_publish_link'] == 1) {
         print '<br />';
         starttable('100%', $icon_array['info'] . $lang_upload_php['alternative_upload'],1);
@@ -688,7 +688,7 @@ EOT;
     pagefooter();
 
     // The form has been displayed, so exit the script.
-    exit;
+//    exit;
 
 // Process a plugin's form submission
 } elseif ($superCage->post->keyExists('plugin_process')) {

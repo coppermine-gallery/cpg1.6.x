@@ -1,7 +1,7 @@
 <?php
-/*************************
+/**************************
   Coppermine Photo Gallery
-  ************************
+ **************************
   Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
@@ -9,11 +9,11 @@
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
 
-  ********************************************
+ ************************************
   Coppermine version: 1.6.01
   $HeadURL$
   $Revision$
-**********************************************/
+ ************************************/
 
 if (!function_exists('stripos')) {
     function stripos($str, $needle, $offset = 0)
@@ -5771,21 +5771,28 @@ function array_is_associative($array)
     return false;
 }
 
-function cpg_config_set($name, $value)
+function cpg_config_set($name, $value, $insert=false)
 {
     global $CONFIG;
 
-    //$value = addslashes($value);
+    if (!isset($CONFIG[$name])) {
+    	if ($insert) {
+    		$sql = "INSERT INTO {$CONFIG['TABLE_CONFIG']} (name, value) VALUES ('{$name}', '{$value}')";
+    		cpg_db_query($sql);
+			if ($CONFIG['log_mode'] != 0) {
+				log_write("Setting for '$name' set to '$value' by user " . USER_NAME, CPG_CONFIG_LOG);
+			}
+    	}
+    } else {
+		if ($CONFIG[$name] === $value) {
+        	return;
+    	}
+		$sql = "UPDATE {$CONFIG['TABLE_CONFIG']} SET value = '$value' WHERE name = '$name'";
+		cpg_db_query($sql);
 
-    if ($CONFIG[$name] === $value) {
-        return;
-    }
-
-    $sql = "UPDATE {$CONFIG['TABLE_CONFIG']} SET value = '$value' WHERE name = '$name'";
-    cpg_db_query($sql);
-
-    if ($CONFIG['log_mode'] != 0) {
-        log_write("Setting for '$name' changed from '{$CONFIG[$name]}' to '$value' by user " . USER_NAME, CPG_CONFIG_LOG);
+		if ($CONFIG['log_mode'] != 0) {
+			log_write("Setting for '$name' changed from '{$CONFIG[$name]}' to '$value' by user " . USER_NAME, CPG_CONFIG_LOG);
+		}
     }
 
     $CONFIG[$name] = $value;

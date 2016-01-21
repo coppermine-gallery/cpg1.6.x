@@ -1763,7 +1763,8 @@ $lang_pluginmgr_php['minimum_requirements_not_met'] = 'Minimum requirements not 
 $lang_pluginmgr_php['confirm_version'] = 'Could not determine the version requirements for this plugin. This is usually an indicator that the plugin was not designed for your version of Coppermine and might therefore crash your gallery. Continue anyway (not recommended)?'; // js-alert
 $lang_pluginmgr_php['announcement_thread'] = 'Announcement thread'; // cpg1.6
 
-$lang_pluginmgr_php['plugin_action'] = 'Action';	//@RJC
+$lang_pluginmgr_php['plugin_action'] = 'Action';	// cpg1.6
+$lang_pluginmgr_php['saved_config'] = 'The configuration for &laquo;%s&raquo; has been saved.';	// cpg1.6
 }
 
 // ------------------------------------------------------------------------- //

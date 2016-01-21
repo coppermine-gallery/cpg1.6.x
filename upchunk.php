@@ -1,7 +1,7 @@
 <?php
-/*************************
+/**************************
   Coppermine Photo Gallery
-  ************************
+ **************************
   Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
@@ -9,11 +9,11 @@
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
 
-  ********************************************
+ ************************************
   Coppermine version: 1.6.01
   $HeadURL$
   $Revision$
-**********************************************/
+ ************************************/
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -46,7 +46,7 @@ class UpChunkObj
 	{
 		$dest = $this->ckpath.'/'.$this->filename.'.part'.$cnkn;
 		if (!move_uploaded_file($file, $dest)) {
-			upldLog('failed to placed chunk: '.$dest);
+			upldLog('failed to place chunk: '.$dest);
 			errorOut(sprintf($GLOBALS['lang_plugin_upload_h5a']['muf_err'], $cnkn, $this->filename, $file, $dest));
 		}
 		upldLog('placed chunk: '.$dest);
@@ -90,7 +90,7 @@ class UpChunkObj
 		upldLog('chunks cleared: '.$this->ckpath);
 	}
 
-	private function rrmdir($dir) {
+	private function rrmdir ($dir) {
 		if (is_dir($dir)) {
 			$objects = scandir($dir);
 			foreach ($objects as $object) {

@@ -1,4 +1,20 @@
 <?php
+/**************************
+  Coppermine Photo Gallery
+ **************************
+  Copyright (c) 2003-2016 Coppermine Dev Team
+  v1.0 originally written by Gregory Demar
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License version 3
+  as published by the Free Software Foundation.
+
+ ************************************
+  Coppermine version: 1.6.01
+  $HeadURL$
+  $Revision$
+ ************************************/
+
 /* FOR USE WITH NEW ADMIN PLUGIN CONFIGURATION SCHEME */
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -7,16 +23,11 @@ if (!GALLERY_ADMIN_MODE) {
 }
 
 function h5u_config_save ($sC, $revert=false) {
-	global $CONFIG, $superCage, $lang_plugin_upload_h5a, $lang_common, $lang_errors;
-
-	if (!checkFormToken()) {
-		global $lang_errors;
-		cpg_die(ERROR, $lang_errors['invalid_form_token'], __FILE__, __LINE__);
-	}
+	global $CONFIG, $superCage, $lang_plugin_upload_h5a, $lang_common;
 
 	$grpn = 0;
-	if ($superCage->post->keyExists('h5u_gSel')) {
-		$grpn = (int) $superCage->post->getEscaped('h5u_gSel');
+	if ($sC->post->keyExists('h5u_gSel')) {
+		$grpn = (int) $sC->post->getEscaped('h5u_gSel');
 	}
 	$grpc = $grpn ? $grpn : '';
 
@@ -27,21 +38,21 @@ function h5u_config_save ($sC, $revert=false) {
 
 	$cfg = isset($CONFIG['upload_h5a'.$grpc]) ? unserialize($CONFIG['upload_h5a'.$grpc]) : unserialize($CONFIG['upload_h5a']);
 
-	if ($superCage->post->keyExists('upsize')) {
-		$uplsiz = (int) $superCage->post->getEscaped('upsize');
-		$uplsizm = (int) $superCage->post->getEscaped('upsizem');
+	if ($sC->post->keyExists('upsize')) {
+		$uplsiz = (int) $sC->post->getEscaped('upsize');
+		$uplsizm = (int) $sC->post->getEscaped('upsizem');
 		for ($i=0;$i<$uplsizm+1;$i++) {
 			$uplsiz = $uplsiz << 10;
 		}
 		$cfg['upldsize'] = $uplsiz;
 	}
 
-	if ($superCage->post->keyExists('concurrent')) {
-		$cfg['concurrent'] = (int) $superCage->post->getEscaped('concurrent');
+	if ($sC->post->keyExists('concurrent')) {
+		$cfg['concurrent'] = (int) $sC->post->getEscaped('concurrent');
 	}
 
-	if ($superCage->post->keyExists('acptmime')) {
-		$mtypes = trim($superCage->post->getEscaped('acptmime'));
+	if ($sC->post->keyExists('acptmime')) {
+		$mtypes = trim($sC->post->getEscaped('acptmime'));
 		$mtypes = str_replace('&quot;', '', $mtypes);
 		$mtypes = trim($mtypes);
 		$mtypes = preg_replace('/([^,\s])[,\s]+([^,\s])/', '$1,$2', $mtypes);
@@ -49,14 +60,14 @@ function h5u_config_save ($sC, $revert=false) {
 		$cfg['acptmime'] = $mtypes;
 	}
 
-	$cfg['autoedit'] = $superCage->post->keyExists('autoedit') ? 1 : 0;
-	$cfg['enabtitl'] = $superCage->post->keyExists('titlfld') ? 1 : 0;
-	$cfg['enabdesc'] = $superCage->post->keyExists('descfld') ? 1 : 0;
-	$cfg['enabkeys'] = $superCage->post->keyExists('keysfld') ? 1 : 0;
-	$cfg['enabusr1'] = $superCage->post->keyExists('usr1fld') ? 1 : 0;
-	$cfg['enabusr2'] = $superCage->post->keyExists('usr2fld') ? 1 : 0;
-	$cfg['enabusr3'] = $superCage->post->keyExists('usr3fld') ? 1 : 0;
-	$cfg['enabusr4'] = $superCage->post->keyExists('usr4fld') ? 1 : 0;
+	$cfg['autoedit'] = $sC->post->keyExists('autoedit') ? 1 : 0;
+	$cfg['enabtitl'] = $sC->post->keyExists('titlfld') ? 1 : 0;
+	$cfg['enabdesc'] = $sC->post->keyExists('descfld') ? 1 : 0;
+	$cfg['enabkeys'] = $sC->post->keyExists('keysfld') ? 1 : 0;
+	$cfg['enabusr1'] = $sC->post->keyExists('usr1fld') ? 1 : 0;
+	$cfg['enabusr2'] = $sC->post->keyExists('usr2fld') ? 1 : 0;
+	$cfg['enabusr3'] = $sC->post->keyExists('usr3fld') ? 1 : 0;
+	$cfg['enabusr4'] = $sC->post->keyExists('usr4fld') ? 1 : 0;
 
 	$scfg = cpg_db_escape_string(serialize($cfg));
 	if (isset($CONFIG['upload_h5a'.$grpc])) {
@@ -78,7 +89,7 @@ EOT;
 }
 
 function h5u_config_groupSel ($grpn=0) {
-	global $CONFIG, $superCage;
+	global $CONFIG;
 
 	$sql = "SELECT group_id, group_name FROM {$CONFIG['TABLE_USERGROUPS']} ORDER BY group_name";
 	$rslt = cpg_db_query($sql);
@@ -93,7 +104,7 @@ function h5u_config_groupSel ($grpn=0) {
 }
 
 function h5u_config_form ($sC) {
-	global $CONFIG, $superCage, $lang_common, $lang_plugin_upload_h5a, $lang_gallery_admin_menu, $h5a_upload;
+	global $CONFIG, $lang_common, $lang_plugin_upload_h5a, $lang_gallery_admin_menu, $h5a_upload;
 
 	$plugpath = 'plugins/upload_h5a';
 	echo <<<EOT
@@ -102,8 +113,8 @@ function h5u_config_form ($sC) {
 	</style>
 EOT;
 	$grpn = 0;
-	if ($superCage->post->keyExists('h5u_gSel')) {
-		$grpn = (int) $superCage->post->getEscaped('h5u_gSel');
+	if ($sC->post->keyExists('h5u_gSel')) {
+		$grpn = (int) $sC->post->getEscaped('h5u_gSel');
 	}
 
 	// since we may have just written the cfg to the db, get a fresh copy from there
@@ -113,7 +124,6 @@ EOT;
 	$tcfg = $scfg ? unserialize($scfg['value']) : unserialize($CONFIG['upload_h5a']);
 
 	$plugin_help = $h5a_upload->help_button('adm');
-	echo '<form id="cfgForm" action="'.$superCage->server->getEscaped('REQUEST_URI').'" method="post">';
 	starttable('100%', $lang_plugin_upload_h5a['html5upload']." - ".$lang_gallery_admin_menu['admin_lnk'].$plugin_help.h5u_config_groupSel($grpn), 2);
 
 	$concopts = '';
@@ -229,12 +239,6 @@ EOT;
 	</tr>
 EOT;
 	endtable();
-
-	list($timestamp, $form_token) = getFormToken();
-	echo "<input type=\"hidden\" name=\"form_token\" value=\"{$form_token}\" />";
-	echo "<input type=\"hidden\" name=\"timestamp\" value=\"{$timestamp}\" />";
-	pagefooter();
-
 }
 
 if ($superCage->post->keyExists('save'))

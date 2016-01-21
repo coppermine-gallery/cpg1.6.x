@@ -1,7 +1,7 @@
 <?php
-/*************************
+/**************************
   Coppermine Photo Gallery
-  ************************
+ **************************
   Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
@@ -9,11 +9,11 @@
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
 
-  ********************************************
+ ************************************
   Coppermine version: 1.6.01
   $HeadURL$
   $Revision$
-**********************************************/
+ ************************************/
 
 // ------------------------------------------------------------------------- //
 //  Open Plugin API (OpenPAPI) for Coppermine Photo Gallery                  //
@@ -666,15 +666,28 @@ EOT;
 //@RJC\
 } elseif ($op == 'admin') {
 	// Display admin plugin configuration
-	echo <<< EOT
-	<tr>
-		<td class="tableb" valign="top" width="100%">
-EOT;
+
+	// Fail if there is a post no valid form token
+	if ($superCage->post->_source && !checkFormToken()) {
+		cpg_die(ERROR, $lang_errors['invalid_form_token'], __FILE__, __LINE__);
+	}
 
 	$cfg_file = @$superCage->get->getEscaped('c');
+	echo <<< EOT
+	<tr>
+		<td valign="top" width="100%">
+			<form id="cfgForm" action="pluginmgr.php?op=admin&amp;p={$p}&amp;c={$cfg_file}" method="post">
+
+EOT;
+
+	// Invoke the plugin's config action
 	include('./plugins/'.$actonplugin->path.'/'.$cfg_file.'.php');
 
+	list($timestamp, $form_token) = getFormToken();
 	echo <<< EOT
+			<input type="hidden" name="form_token" value="{$form_token}" />
+			<input type="hidden" name="timestamp" value="{$timestamp}" />
+			</form>
 		</td>
 	</tr>
 EOT;

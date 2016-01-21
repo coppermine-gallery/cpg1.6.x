@@ -1,3 +1,19 @@
+/**************************
+  Coppermine Photo Gallery
+ **************************
+  Copyright (c) 2003-2016 Coppermine Dev Team
+  v1.0 originally written by Gregory Demar
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License version 3
+  as published by the Free Software Foundation.
+
+ ************************************
+  Coppermine version: 1.6.01
+  $HeadURL$
+  $Revision$
+ ************************************/
+
 #dropArea { border: 1px dashed #777; width: 100%; padding: 1em 0; text-align: center; border-radius: 5px }
 #dropArea.hover { background-color: #DFD; border: 1px solid #999; box-shadow: inset 2px 2px 3px #999 }
 #totprogress { width: 100%; height: 8px; margin-bottom: 3px; border: 1px solid #BBB; border-radius: 3px; background: #1EAEFB url("progbar.png") -1px 0 no-repeat }
