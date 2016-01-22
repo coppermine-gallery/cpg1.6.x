@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2016-01-22 [B] Resolved update conflict with older html5upload plugin {ron4mac}
 2016-01-21 [A] Added example of using 'config_action' to sample plugin {ron4mac}
 2016-01-20 [O] Provided option to cpg_config_set() for Db insertion if item not set in $CONFIG {ron4mac}
 2016-01-18 [A] Added plugin 'config_action' setting used by plugin manager to present plugin configuration {ron4mac}
