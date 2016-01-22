@@ -700,8 +700,22 @@ EOT;
 
 EOT;
 	} else {
-		$result = cpg_db_query("INSERT INTO {$CONFIG['TABLE_PREFIX']}plugins (name, path, priority) VALUES ('HTML5 Upload', 'upload_h5a', 0), ('Flash Upload', 'upload_swf', 1), ('Single File Upload', 'upload_sgl', 2)");
-		$result = cpg_db_query("INSERT INTO {$CONFIG['TABLE_PREFIX']}config VALUES ('upload_h5a', 'a:11:{s:10:\"concurrent\";i:3;s:8:\"upldsize\";i:0;s:8:\"autoedit\";i:1;s:8:\"acptmime\";s:7:\"image/*\";s:8:\"enabtitl\";i:0;s:8:\"enabdesc\";i:0;s:8:\"enabkeys\";i:1;s:8:\"enabusr1\";i:0;s:8:\"enabusr2\";i:0;s:8:\"enabusr3\";i:0;s:8:\"enabusr4\";i:0;}')");
+		cpg_db_query("INSERT INTO {$CONFIG['TABLE_PREFIX']}plugins (name, path, priority) VALUES ('CoreH5A Upload', 'upload_h5a', 0), ('CoreSWF Upload', 'upload_swf', 1), ('CoreSGL Upload', 'upload_sgl', 2)");
+
+		// employ any existing html5upload configurations
+    	$result = cpg_db_query("SELECT name,value FROM {$CONFIG['TABLE_PREFIX']}config WHERE name LIKE 'html5upload_config%'");
+		$cfgs = cpg_db_fetch_rowset($result, true);
+		foreach ($cfgs as $cfg) {
+			$cfgn = 'upload_h5a' . substr($cfg['name'], 18);
+			$cfgv = cpg_db_escape_string($cfg['value']);
+			cpg_db_query("INSERT INTO {$CONFIG['TABLE_PREFIX']}config VALUES ('{$cfgn}', '{$cfgv}')");
+			}
+		}
+		// if there were no html5upload configs, set a default one
+		if (!$cfgs) {
+			cpg_db_query("INSERT INTO {$CONFIG['TABLE_PREFIX']}config VALUES ('upload_h5a', 'a:11:{s:10:\"concurrent\";i:3;s:8:\"upldsize\";i:0;s:8:\"autoedit\";i:1;s:8:\"acptmime\";s:7:\"image/*\";s:8:\"enabtitl\";i:0;s:8:\"enabdesc\";i:0;s:8:\"enabkeys\";i:1;s:8:\"enabusr1\";i:0;s:8:\"enabusr2\";i:0;s:8:\"enabusr3\";i:0;s:8:\"enabusr4\";i:0;}')");
+		}
+
         echo <<< EOT
                 <td class="{$cellStyle} updatesOK">
                     {$ok_icon}{$lang_common['ok']}
@@ -709,7 +723,6 @@ EOT;
             </tr>
 
 EOT;
-	}	
 }
 
 function update_files()

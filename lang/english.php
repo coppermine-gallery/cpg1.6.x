@@ -2219,7 +2219,7 @@ $lang_plugin_upload['size_err'] = 'File is larger than max size allowed.';
 $lang_plugin_upload_h5a['plug_desc'] = 'Adds HTML5 concurrent, multi-file upload capabilities, including drag-and-drop';
 $lang_plugin_upload_h5a['plug_info'] = 'This plugin provides a method for concurrent, multi-file uploads using HTML5 and javascript within capable browsers.';
 $lang_plugin_upload_h5a['html5_method'] = 'Multiple files - HTML5 (recommended)';
-$lang_plugin_upload_h5a['html5upload'] = 'HTML5 Upload';
+$lang_plugin_upload_h5a['html5upload'] = 'CoreH5A Upload';
 $lang_plugin_upload_h5a['title'] = 'HTML5 Upload';
 
 $lang_plugin_upload_h5a['upldfiles'] = 'Upload files';
@@ -2255,14 +2255,14 @@ $lang_plugin_upload_h5a['dest_fail'] = 'Cannot create the destination file: %s';
 $lang_plugin_upload_swf['plug_desc'] = 'Adds Flash multi-file upload capabilities';
 $lang_plugin_upload_swf['plug_info'] = 'This plugin provides a method for multi-file uploads using Flash and javascript.';
 $lang_plugin_upload_swf['swf_method'] = 'Multiple files - Flash';
-$lang_plugin_upload_swf['swfupload'] = 'Flash Upload';
+$lang_plugin_upload_swf['swfupload'] = 'CoreSWF Upload';
 $lang_plugin_upload_swf['title'] = 'Flash Upload';
 
 // single
 $lang_plugin_upload_sgl['plug_desc'] = 'Adds single file upload method';
 $lang_plugin_upload_sgl['plug_info'] = 'This plugin provides a method for single file uploads.';
 $lang_plugin_upload_sgl['sgl_method'] = 'Simple - one file at a time';
-$lang_plugin_upload_sgl['sglupload'] = 'Single File Upload';
+$lang_plugin_upload_sgl['sglupload'] = 'CoreSGL Upload';
 $lang_plugin_upload_sgl['title'] = 'Single File Upload';
 $lang_plugin_upload_sgl['choose_file'] = 'Please choose a file.';
 }

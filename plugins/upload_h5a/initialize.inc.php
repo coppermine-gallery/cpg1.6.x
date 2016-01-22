@@ -17,7 +17,7 @@
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
-class Html5upload {
+class H5aUpload {
 
 	public $h5u_config_default = array(
 		'concurrent'=>3,
@@ -84,4 +84,4 @@ class Html5upload {
 }
 
 global $h5a_upload;
-$h5a_upload = new Html5upload();
+$h5a_upload = new H5aUpload();

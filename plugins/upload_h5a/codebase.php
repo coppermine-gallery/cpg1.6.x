@@ -20,11 +20,11 @@ if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 require_once './plugins/upload_h5a/initialize.inc.php';
 
 // Add a filter for the upload options
-$thisplugin->add_filter('upload_options','html5_add_upload_option');
+$thisplugin->add_filter('upload_options','uploadh5a_add_upload_option');
 // Add actions for processing uploads
-$thisplugin->add_action('upload_form','html5_display_upload_form');
+$thisplugin->add_action('upload_form','uploadh5a_display_upload_form');
 
-function html5_add_upload_option($upload_choices)
+function uploadh5a_upload_option($upload_choices)
 {
 	global $lang_plugin_upload_h5a;
 
@@ -32,7 +32,7 @@ function html5_add_upload_option($upload_choices)
 	return array_merge($upload_choices, $more_upload_choices);
 }
 
-function html5_display_upload_form($upload_settings)
+function uploadh5a_display_upload_form($upload_settings)
 {
 	global $CONFIG, $USER_DATA, $lang_common, $lang_upload_php, $lang_plugin_upload, $lang_plugin_upload_h5a, $icon_array, $h5a_upload, $lang_bbcode_help_title, $lang_bbcode_help;
 
