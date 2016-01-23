@@ -24,7 +24,7 @@ $thisplugin->add_filter('upload_options','uploadh5a_add_upload_option');
 // Add actions for processing uploads
 $thisplugin->add_action('upload_form','uploadh5a_display_upload_form');
 
-function uploadh5a_upload_option($upload_choices)
+function uploadh5a_add_upload_option($upload_choices)
 {
 	global $lang_plugin_upload_h5a;
 

@@ -66,19 +66,21 @@ class H5aUpload {
 	// convert integer value to n(K|M|G) string
 	public function to_KMG ($val=0)
 	{
-		$sizm = 'K';
+		global $lang_byte_units;
+
+		$sizm = $lang_byte_units[1];	//'K';
 		if ($val) {
 			if ($val % 0x40000000 == 0) {
-				$sizm = 'G';
+				$sizm = $lang_byte_units[3];	//'G';
 				$val >>= 30;
 			} elseif ($val % 0x100000 == 0) {
-				$sizm = 'M';
+				$sizm = $lang_byte_units[2];	//'M';
 				$val >>= 20;
 			} else {
 				$val >>= 10;
 			}
 		}
-		return $val.$sizm;
+		return $val.' '.$sizm;
 	}
 
 }

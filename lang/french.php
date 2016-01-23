@@ -343,13 +343,13 @@ $lang_create_tabs['previous'] = 'précédent';
 $lang_create_tabs['next'] = 'suivant';
 $lang_create_tabs['jump_to_page'] = 'Sauter à la page ';
 
-$lang_get_remote_File_by_url['no_data_returned'] = 'Pas de données retournées avec %s';
-$lang_get_remote_File_by_url['curl'] = 'CURL';
-$lang_get_remote_File_by_url['fsockopen'] = 'Socket connection (FSOCKOPEN)';
-$lang_get_remote_File_by_url['fopen'] = 'fopen';
-$lang_get_remote_File_by_url['curl_not_available'] = 'CURL n\'est pas disponible sur votre serveur';
-$lang_get_remote_File_by_url['error_number'] = 'Erreur NÂ°: %s';
-$lang_get_remote_File_by_url['error_message'] = 'Message d\'erreur : %s';
+$lang_get_remote_file_by_url['no_data_returned'] = 'Pas de données retournées avec %s';
+$lang_get_remote_file_by_url['curl'] = 'CURL';
+$lang_get_remote_file_by_url['fsockopen'] = 'Socket connection (FSOCKOPEN)';
+$lang_get_remote_file_by_url['fopen'] = 'fopen';
+$lang_get_remote_file_by_url['curl_not_available'] = 'CURL n\'est pas disponible sur votre serveur';
+$lang_get_remote_file_by_url['error_number'] = 'Erreur NÂ°: %s';
+$lang_get_remote_file_by_url['error_message'] = 'Message d\'erreur : %s';
 
 // ------------------------------------------------------------------------- //
 // File include/mailer.inc.php
