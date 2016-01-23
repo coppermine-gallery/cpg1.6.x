@@ -104,7 +104,7 @@ function h5u_config_groupSel ($grpn=0) {
 }
 
 function h5u_config_form ($sC) {
-	global $CONFIG, $lang_common, $lang_plugin_upload_h5a, $lang_gallery_admin_menu, $h5a_upload;
+	global $CONFIG, $lang_byte_units, $lang_common, $lang_plugin_upload_h5a, $lang_gallery_admin_menu, $h5a_upload;
 
 	$plugpath = 'plugins/upload_h5a';
 	echo <<<EOT
@@ -149,7 +149,8 @@ EOT;
 	}
 
 	$sizmopts = '';
-	foreach(array('K','M','G') as $k=>$v) {
+//	foreach(array('K','M','G') as $k=>$v) {
+	foreach(array($lang_byte_units[1],$lang_byte_units[2],$lang_byte_units[3]) as $k=>$v) {
 		$selected = $uplsizm == $k ? 'selected="selected"' : '';
 		$sizmopts .= "<option value=\"$k\" $selected>$v</option>";
 	}
