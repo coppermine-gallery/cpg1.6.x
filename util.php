@@ -119,12 +119,6 @@ $tasks = array(
                 <input type="checkbox" name="notitle" checked="checked" value="1" class="nobg" />' . $lang_util_php['notitle']
     ),
 
-//    'del_titles' => array(
-//        'del_titles',
-//        $lang_util_php['delete_title'],
-//        $lang_util_php['delete_title_explanation']
-//    ),
-
 	'change_values' => array(
 		'change_values',
         $lang_util_php['change_values_title'],'
@@ -285,28 +279,6 @@ if (array_key_exists($action, $tasks)) {
 EOT;
 }
 
-/*
-function del_titles()
-{
-    global $CONFIG, $lang_util_php;
-
-    $superCage = Inspekt::makeSuperCage();
-
-    if ($superCage->post->keyExists('albumid')) {
-        $albumid = $superCage->post->getInt('albumid');
-    } else {
-        $albumid = 0;
-    }
-
-    $albstr = $albumid ? "WHERE aid = $albumid" : '';
-
-    echo "<h2>{$lang_util_php['delete_wait']}</h2>";
-
-    cpg_db_query("UPDATE {$CONFIG['TABLE_PICTURES']} SET title = '' $albstr");
-
-    echo $lang_util_php['titles_deleted'] . '<br />';
-}
-*/
 
 function change_values ()
 {
