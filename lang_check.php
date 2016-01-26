@@ -83,18 +83,50 @@ foreach(scandir('lang') as $f) {
 	$langs[] = $f;
 }
 
+echo <<<EOT
+<!DOCTYPE html>
+<head>
+<title>Language File Check for Coppermine Photo Gallery</title>
+<style>
+	div {
+		padding:6px;
+		border:1px solid #CCC;
+		background-color:#FFE;
+	}
+	h2 {
+		margin-top:4px;
+	}
+	h3 {
+		margin-bottom:0;
+	}
+	xmp {
+		white-space: pre-wrap;
+	}
+</style>
+</head>
+<body>
+EOT;
+
 $en = new Lang();
 
 foreach ($langs as $lang) {
 	$lobj = new Lang($lang);
+	echo '<div><h2>Language file: '.$lang.'</h2>';
 	$misses = array_diff_key_recursive($en->vars, $lobj->vars);
 	if ($misses) {
-		echo "<h3>Missing translations for languge file: {$lang}</h3>";
+		echo "<h3>Missing translations.</h3>";
 		echo'<xmp>';
 		splay($misses);
 		echo'</xmp>';
 	}
-	
+	$misses = array_diff_key_recursive($lobj->vars, $en->vars);
+	if ($misses) {
+		echo "<h3>Translations that could (possibly) be removed.</h3>";
+		echo'<xmp>';
+		splay($misses);
+		echo'</xmp>';
+	}
+	echo '</div><br /><br />';
 }
 
 function splay ($nodes, $ind=0)
@@ -127,3 +159,4 @@ function array_diff_key_recursive (array $arr1, array $arr2)
 }
 
 ?>
+</body>
