@@ -85,6 +85,7 @@ foreach(scandir('lang') as $f) {
 
 echo <<<EOT
 <!DOCTYPE html>
+<html>
 <head>
 <title>Language File Check for Coppermine Photo Gallery</title>
 <style>
@@ -160,3 +161,4 @@ function array_diff_key_recursive (array $arr1, array $arr2)
 
 ?>
 </body>
+</html>
