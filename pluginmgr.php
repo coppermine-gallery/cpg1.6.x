@@ -674,10 +674,7 @@ EOT;
 
 	$cfg_file = @$superCage->get->getEscaped('c');
 	echo <<< EOT
-	<tr>
-		<td valign="top" width="100%">
-			<form id="cfgForm" action="pluginmgr.php?op=admin&amp;p={$p}&amp;c={$cfg_file}" method="post">
-
+	<form id="cfgForm" action="pluginmgr.php?op=admin&amp;p={$p}&amp;c={$cfg_file}" method="post">
 EOT;
 
 	// Invoke the plugin's config action
@@ -685,11 +682,9 @@ EOT;
 
 	list($timestamp, $form_token) = getFormToken();
 	echo <<< EOT
-			<input type="hidden" name="form_token" value="{$form_token}" />
-			<input type="hidden" name="timestamp" value="{$timestamp}" />
-			</form>
-		</td>
-	</tr>
+	<input type="hidden" name="form_token" value="{$form_token}" />
+	<input type="hidden" name="timestamp" value="{$timestamp}" />
+	</form>
 EOT;
 //@RJC/
 } else {

@@ -40,7 +40,7 @@ if (isset($bridge_lookup)) {
 
     class phpbb2018_udb extends core_udb {
 
-        function phpbb2018_udb()
+        function __construct()
         {
             global $BRIDGE;
 
