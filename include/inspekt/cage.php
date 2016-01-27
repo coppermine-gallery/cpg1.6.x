@@ -55,7 +55,7 @@ class Inspekt_Cage
      *
      * @return Inspekt_Cage
      */
-    function Inspekt_Cage() {
+    function __construct() {
         // placeholder -- we're using a factory here
     }
 

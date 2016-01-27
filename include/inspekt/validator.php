@@ -26,7 +26,7 @@
  */
 class Inspekt_Validator {
 
-	function Inspekt_Validator($input) {
+	function __construct($input) {
 
 
 	}

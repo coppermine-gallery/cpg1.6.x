@@ -26,7 +26,7 @@
  */
 class Inspekt_Filter {
 
-	function Inspekt_Filter() {
+	function __construct() {
 
 
 	}

@@ -11,3 +11,4 @@ albums/edit/*
 
 sv_*
 .git*
+.htaccess

@@ -1850,7 +1850,7 @@ class GDtest
      * @param int $version
      * @param string $image_path
      */
-    function GDtest($image_path = '')
+    function __construct($image_path = '')
     {
         if ($image_path != '') {
             $this->image_path = $image_path;
@@ -2055,7 +2055,7 @@ class IMtest
      * @param string $IMpath
      * @param string $image_path
      */
-    function IMtest($IMpath, $image_path = '')
+    function __construct($IMpath, $image_path = '')
     {
         // add trailing slash if necessary
         if (!empty($IMpath) && !preg_match('|[/\\\\]\Z|', $IMpath)) {

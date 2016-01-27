@@ -36,7 +36,7 @@ class cpg_debugger {
     var $error_level;
     var $basepath_len;
 
-    function cpg_debugger($log = 'debug.log') {
+    function __construct($log = 'debug.log') {
         $this->logfile = $log;
         $this->basepath_len = strlen(dirname(dirname(__FILE__)));
     }
