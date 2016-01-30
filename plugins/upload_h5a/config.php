@@ -23,7 +23,7 @@ if (!GALLERY_ADMIN_MODE) {
 }
 
 function h5u_config_save ($sC, $revert=false) {
-	global $CONFIG, $superCage, $lang_plugin_upload_h5a, $lang_common;
+	global $CONFIG, $lang_plugin_upload_h5a, $lang_common;
 
 	$grpn = 0;
 	if ($sC->post->keyExists('h5u_gSel')) {
