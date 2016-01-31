@@ -762,7 +762,7 @@ if (UPLOAD_APPROVAL_MODE) {
 
 if (!$result->numRows()) {
     if ($link_count > 0) {
-        cpg_die(INFORMATION, $lang_editpics_php['error_linked_only']);
+        cpg_die(INFORMATION, $lang_editpics_php['error_linked_only'], __FILE__, __LINE__);
     } else {
         if (UPLOAD_APPROVAL_MODE) {
             pageheader($lang_editpics_php['error_approval_empty'], '<meta http-equiv="refresh" content="10;url=index.php" />');
@@ -784,7 +784,7 @@ EOT;
             pagefooter();
             exit;
         } else {
-            cpg_die(INFORMATION, $lang_editpics_php['error_empty']);
+            cpg_die(INFORMATION, $lang_editpics_php['error_empty'], __FILE__, __LINE__);
         }
     }
 }

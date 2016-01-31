@@ -197,7 +197,7 @@ if ($radio != 0) {
 }
 echo '</td>' . $newline;
 echo '<td class="tableh2">' . $newline;
-$folder_array = split(rtrim($CONFIG['fullpath'],'/'),ltrim($folder, $folder_sep));
+$folder_array = explode(rtrim($CONFIG['fullpath'],'/'),ltrim($folder, $folder_sep));
 $folder_display = rtrim($CONFIG['fullpath'],'/') . $folder_array[1];
 echo '<input type="text" name="cf2" size="50" value="' . $folder_display . '" disabled="disabled" class="tableh2" />&nbsp;' . $newline;
 if ($linktarget != '') {

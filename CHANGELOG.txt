@@ -23,6 +23,14 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2016-01-27 [B,M] Made compatible with PHP7 [ class constructor, split(), mis-placed break ] {ron4mac}
+2016-01-24 [A] Added 'change_values' function to admin tools, removing need for 'del_titles' {ron4mac}
+2016-01-22 [B] Corrected array name typo in section of french.php {ron4mac}
+2016-01-22 [B] Resolved update conflict with older html5upload plugin {ron4mac}
+2016-01-21 [A] Added example of using 'config_action' to sample plugin {ron4mac}
+2016-01-20 [O] Provided option to cpg_config_set() for Db insertion if item not set in $CONFIG {ron4mac}
+2016-01-18 [A] Added plugin 'config_action' setting used by plugin manager to present plugin configuration {ron4mac}
+2016-01-18 [A] Implemented uploading via core enabled plugins using HTML5, SWF and SINGLE {ron4mac}
 2016-01-13 [A] Implemented database abstraction allowing use of MYSQLI, MYSQL(PDO), or MYSQL {ron4mac}
 2016-01-13 [M] Updated header information to reflect current year 2016 {ron4mac}
 2015-11-11 [M] Updated header information to reflect current year {eenemeenemuu}

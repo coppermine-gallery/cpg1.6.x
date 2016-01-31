@@ -546,7 +546,7 @@ class CPGPlugin {
      * @return N/A
      **/
 
-    function CPGPlugin($properties) {
+    function __construct($properties) {
 
         // Store the properties in the object
         foreach($properties as $key => $value) {

@@ -19,6 +19,7 @@
 
 class CPG_Dbase
 {
+	public $db_type = 'MySQL';
 	protected $linkid = null;
 	protected $connected = false;
 	protected $errnum = 0;

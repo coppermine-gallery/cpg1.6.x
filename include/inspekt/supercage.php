@@ -90,7 +90,7 @@ Class Inspekt_Supercage {
 	 *
 	 * @return Inspekt_Supercage
 	 */
-	function Inspekt_Supercage() {
+	function __construct() {
 		// placeholder
 	}
 

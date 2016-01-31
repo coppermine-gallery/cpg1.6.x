@@ -1,7 +1,7 @@
 <?php
-/*************************
+/**************************
   Coppermine Photo Gallery
-  ************************
+ **************************
   Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
@@ -9,11 +9,11 @@
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
 
-  ********************************************
+ ************************************
   Coppermine version: 1.6.01
   $HeadURL$
   $Revision$
-**********************************************/
+ ************************************/
 
 if (!function_exists('stripos')) {
     function stripos($str, $needle, $offset = 0)
@@ -4348,7 +4348,7 @@ EOT;
 EOT;
         // Try to retrieve the news directly
         //$result = cpgGetRemoteFileByURL('http://coppermine-gallery.net/cpg15x_news.htm', 'GET', '', '200'); // disabled, see http://forum.coppermine-gallery.net/index.php/topic,65424.msg325573.html#msg325573
-
+		if (isset($result)) {
         if (strlen($result['body']) < 200) { // retrieving the file failed - let's display it in an iframe then
             print <<< EOT
                       <iframe src="http://coppermine-gallery.net/cpg15x_news.htm" align="left" frameborder="0" scrolling="auto" marginheight="0" marginwidth="0" width="100%" height="100" name="coppermine_news" id="coppermine_news" class="textinput">
@@ -4367,6 +4367,7 @@ EOT;
             $result['body'] = str_replace(strstr($result['body'], '</body>'), '', $result['body']);
             // The result should now contain everything between the body tags - let's print it
             print $result['body'];
+        }
         }
         print <<< EOT
                     </td>
@@ -5770,21 +5771,28 @@ function array_is_associative($array)
     return false;
 }
 
-function cpg_config_set($name, $value)
+function cpg_config_set($name, $value, $insert=false)
 {
     global $CONFIG;
 
-    //$value = addslashes($value);
+    if (!isset($CONFIG[$name])) {
+    	if ($insert) {
+    		$sql = "INSERT INTO {$CONFIG['TABLE_CONFIG']} (name, value) VALUES ('{$name}', '{$value}')";
+    		cpg_db_query($sql);
+			if ($CONFIG['log_mode'] != 0) {
+				log_write("Setting for '$name' set to '$value' by user " . USER_NAME, CPG_CONFIG_LOG);
+			}
+    	}
+    } else {
+		if ($CONFIG[$name] === $value) {
+        	return;
+    	}
+		$sql = "UPDATE {$CONFIG['TABLE_CONFIG']} SET value = '$value' WHERE name = '$name'";
+		cpg_db_query($sql);
 
-    if ($CONFIG[$name] === $value) {
-        return;
-    }
-
-    $sql = "UPDATE {$CONFIG['TABLE_CONFIG']} SET value = '$value' WHERE name = '$name'";
-    cpg_db_query($sql);
-
-    if ($CONFIG['log_mode'] != 0) {
-        log_write("Setting for '$name' changed from '{$CONFIG[$name]}' to '$value' by user " . USER_NAME, CPG_CONFIG_LOG);
+		if ($CONFIG['log_mode'] != 0) {
+			log_write("Setting for '$name' changed from '{$CONFIG[$name]}' to '$value' by user " . USER_NAME, CPG_CONFIG_LOG);
+		}
     }
 
     $CONFIG[$name] = $value;

@@ -1,7 +1,7 @@
 <?php
-/*************************
+/**************************
   Coppermine Photo Gallery
-  ************************
+ **************************
   Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
@@ -9,18 +9,18 @@
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
 
-  ********************************************
+ ************************************
   Coppermine version: 1.6.01
   $HeadURL$
   $Revision$
-**********************************************/
+ ************************************/
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
 $name = $lang_plugin_sample['config_name'];
 $description = $lang_plugin_sample['config_description'];
 $author = 'Coppermine Development Team';
-$version = '1.7';
+$version = '1.8';
 $plugin_cpg_version = array('min' => '1.6');
 /*
  * $extra_info is displayed with the title of a plugin that IS installed and
@@ -46,5 +46,10 @@ $install_info=<<<EOT
     </tr>
     </table>
 EOT;
-
+/*
+ * $config_action provides the name of a PHP file in the plugin that will be
+ * linked to in the Plugin Manager to allow configuration of the plugin.
+ * Use the file name without the .php extension.
+ */
+$config_action = 'config';
 ?>

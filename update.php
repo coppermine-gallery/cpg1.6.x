@@ -452,23 +452,23 @@ function check_db_type ()
 
 function test_sql_connection()
 {
-    global $errors, $CONFIG, $lang_update_php;
+    global $errors, $CONFIG, $CPGDB, $lang_update_php;
 
-    if (! $connect_id = @mysql_connect($CONFIG['dbserver'], $CONFIG['dbuser'], $CONFIG['dbpass'])) {
+	if (!isset($CPGDB)) {
+		list($db_ext, $db_sub) = explode(':', $CONFIG['dbtype'].':');
+		$db_ext = $db_ext ?: 'mysql';
+		require 'include/database/'.$db_ext.'/dbase.inc.php';
+		$CPGDB = new CPG_Dbase($CONFIG);
+	}
+
+	if (!$CPGDB->isConnected()) {
         $errors .= '<hr />';
-        $errors .= $lang_update_php['mysql_connect_error'] . '. ';
+        $errors .= sprintf($lang_update_php['dbase_database_error'], $CONFIG['dbname']) . '. ';
         $errors .= sprintf($lang_update_php['check_config_file'] . '. ', 'include/config.inc.php');
         $errors .= '<br />';
-        $errors .= $lang_update_php['mysql_said'] . ': ' . mysql_error();
-    } elseif (! mysql_select_db($CONFIG['dbname'], $connect_id)) {
-        $errors .= '<hr />';
-        $errors .= sprintf($lang_update_php['mysql_database_error'] . '. ', $CONFIG['dbname']);
-        $errors .= sprintf($lang_update_php['check_config_file'] . '. ', 'include/config.inc.php');
-    } else {
-        $CONFIG['LINK_ID'] = $connect_id;
-    }
+        $errors .= sprintf($lang_update_php['dbase_said'], $CPGDB->db_type) . ': ' . $CPGDB->getError();
+	}
 }
-
 
 
 // ------------------------- SQL QUERIES TO CREATE TABLES ------------------ //
@@ -672,6 +672,57 @@ EOT;
 EOT;
     }
 
+	// Check for enabled v1.6 core upload plugin(s)
+    $cellStyle = ($loopCounter / 2 == floor($loopCounter / 2)) ? 'tableb' : 'tableb tableb_alternate';
+    $loopCounter++;
+    $result = cpg_db_query("SELECT path FROM {$CONFIG['TABLE_PREFIX']}plugins WHERE path LIKE 'upload____'");
+    $plgs = cpg_db_fetch_rowset($result, true);
+    $upc = 0;
+    foreach ($plgs as $plg) {
+    	if (in_array(substr($plg['path'], 6), array('_h5a','_swf','_sgl'))) {
+    		echo $plg['path'];
+    		$upc++;
+    	}
+    }
+    echo <<<EOT
+            <tr>
+                <td class="{$cellStyle}">
+                    {$lang_update_php['core_upload_plugs']}:
+                </td>
+
+EOT;
+	if ($upc) {
+        echo <<< EOT
+                <td class="{$cellStyle} updatesFail">
+                    {$already_done_icon}{$lang_update_php['already_done']}
+                </td>
+            </tr>
+
+EOT;
+	} else {
+		cpg_db_query("INSERT INTO {$CONFIG['TABLE_PREFIX']}plugins (name, path, priority) VALUES ('CoreH5A Upload', 'upload_h5a', 0), ('CoreSWF Upload', 'upload_swf', 1), ('CoreSGL Upload', 'upload_sgl', 2)");
+
+		// employ any existing html5upload configurations
+    	$result = cpg_db_query("SELECT name,value FROM {$CONFIG['TABLE_PREFIX']}config WHERE name LIKE 'html5upload_config%'");
+		$cfgs = cpg_db_fetch_rowset($result, true);
+		foreach ($cfgs as $cfg) {
+			$cfgn = 'upload_h5a' . substr($cfg['name'], 18);
+			$cfgv = cpg_db_escape_string($cfg['value']);
+			cpg_db_query("INSERT INTO {$CONFIG['TABLE_PREFIX']}config VALUES ('{$cfgn}', '{$cfgv}')");
+			}
+		}
+		// if there were no html5upload configs, set a default one
+		if (!$cfgs) {
+			cpg_db_query("INSERT INTO {$CONFIG['TABLE_PREFIX']}config VALUES ('upload_h5a', 'a:11:{s:10:\"concurrent\";i:3;s:8:\"upldsize\";i:0;s:8:\"autoedit\";i:1;s:8:\"acptmime\";s:7:\"image/*\";s:8:\"enabtitl\";i:0;s:8:\"enabdesc\";i:0;s:8:\"enabkeys\";i:1;s:8:\"enabusr1\";i:0;s:8:\"enabusr2\";i:0;s:8:\"enabusr3\";i:0;s:8:\"enabusr4\";i:0;}')");
+		}
+
+        echo <<< EOT
+                <td class="{$cellStyle} updatesOK">
+                    {$ok_icon}{$lang_common['ok']}
+                </td>
+            </tr>
+
+EOT;
 }
 
 function update_files()

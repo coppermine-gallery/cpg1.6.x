@@ -119,11 +119,17 @@ $tasks = array(
                 <input type="checkbox" name="notitle" checked="checked" value="1" class="nobg" />' . $lang_util_php['notitle']
     ),
 
-    'del_titles' => array(
-        'del_titles',
-        $lang_util_php['delete_title'],
-        $lang_util_php['delete_title_explanation']
-    ),
+	'change_values' => array(
+		'change_values',
+        $lang_util_php['change_values_title'],'
+            <strong>' . $lang_util_php['change_values_how'] . ' (2):</strong><br />
+			<br />'.$lang_util_php['change_values_title_label'].' <input type="checkbox" name="clr_title" value="1" class="clr-val" /> Clear the titles
+			<br /><input type="text" name="newtitle" style="width:40em" />
+			<br />'.$lang_util_php['change_values_desc_label'].' <input type="checkbox" name="clr_desc" value="1" class="clr-val" /> Clear the descriptions
+			<br /><textarea name="newdesc" rows="3" cols="80"></textarea>
+			<br />'.$lang_util_php['change_values_tags_label'].' <input type="checkbox" name="clr_tags" value="1" class="clr-val" /> Clear the keywords
+			<br /><input type="text" name="newkeys" style="width:40em" />'
+	),
 
     'del_orig' => array(
         'del_orig',
@@ -237,7 +243,7 @@ if (array_key_exists($action, $tasks)) {
         starttable('100%', '', 2);
 
         print '          <tr>'.$LINEBREAK;
-        print '            <td class="tableb">'.$LINEBREAK;
+        print '            <td class="tableb" style="width:1em">'.$LINEBREAK;
         print '            </td>'.$LINEBREAK;
         print '            <td class="tableb">'.$LINEBREAK;
         print $options;
@@ -273,26 +279,42 @@ if (array_key_exists($action, $tasks)) {
 EOT;
 }
 
-function del_titles()
+
+function change_values ()
 {
     global $CONFIG, $lang_util_php;
 
     $superCage = Inspekt::makeSuperCage();
+
+	$msg = $lang_util_php['change_values_msg_nothing'];
 
     if ($superCage->post->keyExists('albumid')) {
         $albumid = $superCage->post->getInt('albumid');
     } else {
         $albumid = 0;
     }
+    $albstr = $albumid ? " WHERE aid = $albumid" : '';
 
-    $albstr = $albumid ? "WHERE aid = $albumid" : '';
+	$newt = cpg_db_escape_string(trim($superCage->post->getRaw('newtitle')));
+	$clrt = $superCage->post->keyExists('clr_title');
+	$newd = cpg_db_escape_string(trim($superCage->post->getRaw('newdesc')));
+	$clrd = $superCage->post->keyExists('clr_desc');
+	$newk = cpg_db_escape_string(trim($superCage->post->getRaw('newkeys')));
+	$clrk = $superCage->post->keyExists('clr_tags');
+	$sets = array();
+	if ($clrt || $newt) $sets[] = 'title=\''.($clrt ? '' : $newt).'\'';
+	if ($clrd || $newd) $sets[] = 'caption=\''.($clrd ? '' : $newd).'\'';
+	if ($clrk || $newk) $sets[] = 'keywords=\''.($clrk ? '' : $newk).'\'';
+	if ($sets) {
+		$set = implode(',', $sets);
+		if (cpg_db_query("UPDATE {$CONFIG['TABLE_PICTURES']} SET {$set}{$albstr}")) {
+			$msg = sprintf($lang_util_php['change_values_msg_changed'], cpg_db_affected_rows());
+		} else $msg = $lang_util_php['change_values_msg_error'];
+	}
 
-    echo "<h2>{$lang_util_php['delete_wait']}</h2>";
-
-    cpg_db_query("UPDATE {$CONFIG['TABLE_PICTURES']} SET title = '' $albstr");
-
-    echo $lang_util_php['titles_deleted'] . '<br />';
+	echo "{$msg}<br />";
 }
+
 
 function filename_to_title()
 {

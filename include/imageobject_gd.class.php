@@ -121,7 +121,7 @@ class imageObject {
 
     function cropImage($clipval) {
 
-        $cliparray = split(",",$clipval);
+        $cliparray = explode(",",$clipval);
 
         $clip_top = $cliparray[0];
         $clip_right = $cliparray[1];

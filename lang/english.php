@@ -1762,6 +1762,9 @@ $lang_pluginmgr_php['uninstall'] = 'uninstall';
 $lang_pluginmgr_php['minimum_requirements_not_met'] = 'Minimum requirements not met';
 $lang_pluginmgr_php['confirm_version'] = 'Could not determine the version requirements for this plugin. This is usually an indicator that the plugin was not designed for your version of Coppermine and might therefore crash your gallery. Continue anyway (not recommended)?'; // js-alert
 $lang_pluginmgr_php['announcement_thread'] = 'Announcement thread'; // cpg1.6
+
+$lang_pluginmgr_php['plugin_action'] = 'Action';	// cpg1.6
+$lang_pluginmgr_php['saved_config'] = 'The configuration for &laquo;%s&raquo; has been saved.';	// cpg1.6
 }
 
 // ------------------------------------------------------------------------- //
@@ -2178,6 +2181,7 @@ $lang_upload_php['err_flash_disabled'] = 'Upload interface is taking a long time
 $lang_upload_php['err_alternate_method'] = 'Alternately you can use the <a href="upload.php?single=1">single</a> file upload interface.';
 $lang_upload_php['err_flash_version'] = 'Upload interface could not load. You may need to install or upgrade Flash Player. Visit the <a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">Adobe website</a> to get the Flash Player.';
 $lang_upload_php['flash_loading'] = 'Upload interface is loading. Please wait a moment...';
+$lang_upload_php['err_no_method'] = 'There must be at least one upload plugin enabled';
 
 $lang_upload_swf_php['browse'] = 'Browse...';
 $lang_upload_swf_php['cancel_all'] = 'Cancel all uploads';
@@ -2202,6 +2206,65 @@ $lang_upload_swf_php['status_validation_failed'] = 'Failed Validation. Upload sk
 $lang_upload_swf_php['queue_limit'] = 'You have attempted to queue too many files.';
 $lang_upload_swf_php['upload_limit_1'] = 'You have reached the upload limit.';
 $lang_upload_swf_php['upload_limit_2'] = 'You may select up to %s file(s)';
+}
+// ------------------------------------------------------------------------- //
+// Upload plugin(s)
+// ------------------------------------------------------------------------- //
+if (defined('PLUGINMGR_PHP') || defined('UPLOAD_PHP') || defined('ADMIN_PHP') || defined('UPLOAD_H5A')) {
+$lang_plugin_upload['js_require'] = 'JAVASCRIPT IS REQUIRED FOR THIS METHOD TO FUNCTION.';
+$lang_plugin_upload['albmSelMsg'] = 'Please select an album first.';
+$lang_plugin_upload['size_err'] = 'File is larger than max size allowed.';
+
+// HTML5
+$lang_plugin_upload_h5a['plug_desc'] = 'Adds HTML5 concurrent, multi-file upload capabilities, including drag-and-drop';
+$lang_plugin_upload_h5a['plug_info'] = 'This plugin provides a method for concurrent, multi-file uploads using HTML5 and javascript within capable browsers.';
+$lang_plugin_upload_h5a['html5_method'] = 'Multiple files - HTML5 (recommended)';
+$lang_plugin_upload_h5a['html5upload'] = 'CoreH5A Upload';
+$lang_plugin_upload_h5a['title'] = 'HTML5 Upload';
+
+$lang_plugin_upload_h5a['upldfiles'] = 'Upload files';
+$lang_plugin_upload_h5a['files'] = 'Files';
+$lang_plugin_upload_h5a['flistitl'] = 'Use file name as title';
+$lang_plugin_upload_h5a['drop_files'] = 'Or drop files here';
+$lang_plugin_upload_h5a['files_left'] = 'Files queued: ';
+$lang_plugin_upload_h5a['continue'] = 'Continue:';
+$lang_plugin_upload_h5a['gotoedit'] = 'Edit uploaded files';
+
+$lang_plugin_upload_h5a['maxUplSiz'] = 'Maximum upload file size';	//v1.3
+$lang_plugin_upload_h5a['select'] = 'Number of concurrent uploads';
+$lang_plugin_upload_h5a['acptmime'] = 'Mime type filters for browser file select';
+$lang_plugin_upload_h5a['autoedit'] = 'Automatically go to edit after error-free upload completes';
+$lang_plugin_upload_h5a['incflds'] = 'Include fields:';
+$lang_plugin_upload_h5a['saved'] = 'Your settings have been saved.';
+$lang_plugin_upload_h5a['revert'] = 'Revert to default';	//v1.3
+
+$lang_plugin_upload_h5a['notavail'] = 'NOT AVAILABLE WITH THIS WEB BROWSER';
+$lang_plugin_upload_h5a['aborted'] = 'aborted';
+$lang_plugin_upload_h5a['type_err'] = 'Cannot upload a file of this type. (extension)';
+$lang_plugin_upload_h5a['extallow'] = 'Only files with the following extensions are allowed: ';
+
+$lang_plugin_upload_h5a['q_stop'] = 'stop queue';
+$lang_plugin_upload_h5a['q_resume'] = 'resume queue';
+$lang_plugin_upload_h5a['q_cancel'] = 'cancel queue';
+//v1.3.2 chunked
+$lang_plugin_upload_h5a['muf_err'] = 'Error saving chunk #%d for file %s ( %s %s )';
+$lang_plugin_upload_h5a['miss_chnk'] = 'Missing file chunks';
+$lang_plugin_upload_h5a['dest_fail'] = 'Cannot create the destination file: %s';
+
+// swf
+$lang_plugin_upload_swf['plug_desc'] = 'Adds Flash multi-file upload capabilities';
+$lang_plugin_upload_swf['plug_info'] = 'This plugin provides a method for multi-file uploads using Flash and javascript.';
+$lang_plugin_upload_swf['swf_method'] = 'Multiple files - Flash';
+$lang_plugin_upload_swf['swfupload'] = 'CoreSWF Upload';
+$lang_plugin_upload_swf['title'] = 'Flash Upload';
+
+// single
+$lang_plugin_upload_sgl['plug_desc'] = 'Adds single file upload method';
+$lang_plugin_upload_sgl['plug_info'] = 'This plugin provides a method for single file uploads.';
+$lang_plugin_upload_sgl['sgl_method'] = 'Simple - one file at a time';
+$lang_plugin_upload_sgl['sglupload'] = 'CoreSGL Upload';
+$lang_plugin_upload_sgl['title'] = 'Single File Upload';
+$lang_plugin_upload_sgl['choose_file'] = 'Please choose a file.';
 }
 // ------------------------------------------------------------------------- //
 // File usermgr.php
@@ -2319,7 +2382,7 @@ $lang_update_php['provide_admin_account_cpg'] = 'Please provide your Coppermine 
 $lang_update_php['provide_admin_account_dbase'] = 'Please provide your %s account data'; // cpg1.6
 $lang_update_php['try_again'] = 'Try again';
 $lang_update_php['dbase_connect_error'] = 'Could not create a %s connection';
-$lang_update_php['dbase_database_error'] = '%s could not locate a database called %s';
+$lang_update_php['dbase_database_error'] = 'Could not connect to database: %s';
 $lang_update_php['dbase_said'] = '%s said';
 $lang_update_php['check_config_file'] = 'Please check the %s details in %s';
 $lang_update_php['performing_database_updates'] = 'Performing Database Updates';
@@ -2346,6 +2409,8 @@ $lang_update_php['version_too_old'] = 'version too old';
 $lang_update_php['recommended'] = ' (recommended)';
 $lang_update_php['current_nr'] = ' (current, not recommended)';
 $lang_update_php['unable_write_config'] = 'Unable to write config file';
+// 1.6 core upload plugins
+$lang_update_php['core_upload_plugs'] = 'Enable core upload plugins';
 }
 
 // ------------------------------------------------------------------------- //
@@ -2386,8 +2451,16 @@ $lang_util_php['filename_euro'] = 'Change 2003_11_23_13_20_20.jpg to 23/11/2003 
 $lang_util_php['filename_us'] = 'Change 2003_11_23_13_20_20.jpg to 11/23/2003 13:20';
 $lang_util_php['filename_time'] = 'Change 2003_11_23_13_20_20.jpg to 13:20';
 $lang_util_php['notitle'] = 'Apply only for files with empty titles';
-$lang_util_php['delete_title'] = 'Delete file titles';
-$lang_util_php['delete_title_explanation'] = 'This will remove all titles on files in the album you specify.';
+//$lang_util_php['delete_title'] = 'Delete file titles';
+//$lang_util_php['delete_title_explanation'] = 'This will remove all titles on files in the album you specify.';
+$lang_util_php['change_values_title'] = 'Change values for (or clear) title, description and keywords.';
+$lang_util_php['change_values_how'] = 'Set new bulk values for items, or clear them.';
+$lang_util_php['change_values_title_label'] = 'Title:';
+$lang_util_php['change_values_desc_label'] = 'Description:';
+$lang_util_php['change_values_tags_label'] = 'Keywords (use semicolon):';
+$lang_util_php['change_values_msg_nothing'] = 'Nothing to do.';
+$lang_util_php['change_values_msg_changed'] = 'Changes were made to %d items.';
+$lang_util_php['change_values_msg_error'] = 'Failed to make changes.';
 $lang_util_php['delete_original'] = 'Delete original size photos';
 $lang_util_php['delete_original_explanation'] = 'This will remove the full sized pictures.';
 $lang_util_php['delete_intermediate'] = 'Delete intermediate pictures';

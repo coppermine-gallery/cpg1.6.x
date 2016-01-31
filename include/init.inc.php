@@ -175,7 +175,7 @@ $CPGDB = new CPG_Dbase($CONFIG);
 
 if (!$CPGDB->isConnected()) {
     log_write("Unable to connect to database: " . $CPGDB->getError(), CPG_DATABASE_LOG);
-    die('<strong>Coppermine critical error</strong>:<br />Unable to connect to database !<br /><br />MySQL said: <strong>' . $CPGDB->getError() . '</strong>');
+    die('<strong>Coppermine critical error</strong>:<br />Unable to connect to database !<br /><br />'.$CPGDB->db_type.' said: <strong>' . $CPGDB->getError() . '</strong>');
 }
 
 // Retrieve DB stored configuration

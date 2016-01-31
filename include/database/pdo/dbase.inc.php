@@ -19,6 +19,7 @@
 
 class CPG_Dbase
 {
+	public $db_type = 'MySQL(PDO)';
 	protected $_instance;
 	protected $connected = false;
 	protected $errnum = 0;

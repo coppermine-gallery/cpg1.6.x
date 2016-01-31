@@ -36,7 +36,7 @@ if (isset($bridge_lookup)) {
 
     class cpg_udb extends core_udb {
 
-        function cpg_udb()
+        function __construct()
         {
             global $BRIDGE;
 

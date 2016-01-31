@@ -35,7 +35,7 @@ class Inspekt_Error {
 	 *
 	 * @return Inspekt_Error
 	 */
-	function Inspekt_Error() {
+	function __construct() {
 
 	}
 

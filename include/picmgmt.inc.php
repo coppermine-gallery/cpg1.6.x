@@ -544,7 +544,8 @@ function UnsharpMask($img, $amount, $radius, $threshold)        {
 
         $radius = abs(round($radius));         // Only integers make sense.
         if ($radius == 0) {
-                return $img; imagedestroy($img); break;                }
+            return $img;
+        }
         $w = imagesx($img); $h = imagesy($img);
         $imgCanvas = imagecreatetruecolor($w, $h);
         $imgCanvas2 = imagecreatetruecolor($w, $h);
