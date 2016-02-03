@@ -1347,7 +1347,7 @@ function testImageProcessor()
 */
 function checkBasicGD()
 {
-	if (!function_exists(imagecreatetruecolor)) {
+	if (!function_exists('imagecreatetruecolor')) {
 		return false;
 	}
     $im = imagecreatetruecolor(1, 1);
