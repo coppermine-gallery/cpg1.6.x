@@ -9065,14 +9065,6 @@
     <hash>0292aab13588c5c242e153188ca0d357</hash>
   </element>
   <element>
-    <fullpath>js/setup_swf_upload.js</fullpath>
-    <version>1.6.01</version>
-    <revision>8634</revision>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>21cdd94c0e17996b986c6e1a18d323c3</hash>
-  </element>
-  <element>
     <fullpath>js/thumbnails.js</fullpath>
     <version>1.6.01</version>
     <revision>8634</revision>
@@ -9103,57 +9095,6 @@
     <status>mandatory</status>
     <permission>read</permission>
     <hash>da7ba798724fd36a7fa66007ff354b49</hash>
-  </element>
-  <element>
-    <fullpath>js/swfupload/</fullpath>
-    <status>mandatory</status>
-    <permission>write</permission>
-  </element>
-  <element>
-    <fullpath>js/swfupload/fileprogress.js</fullpath>
-    <version>1.6.01</version>
-    <revision>8634</revision>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>440a625bad12849b2bf14a8cee6c02dd</hash>
-  </element>
-  <element>
-    <fullpath>js/swfupload/handlers.js</fullpath>
-    <version>1.6.01</version>
-    <revision>8634</revision>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>30d82425722568a1204211885816404f</hash>
-  </element>
-  <element>
-    <fullpath>js/swfupload/swfupload.js</fullpath>
-    <version>1.6.01</version>
-    <revision>8634</revision>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>b82e8d8d4f4493effc1a97cdf04f23c3</hash>
-  </element>
-  <element>
-    <fullpath>js/swfupload/swfupload.swf</fullpath>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>29e92561ddad7b56432110a5e68e2d7e</hash>
-  </element>
-  <element>
-    <fullpath>js/swfupload/swfupload.queue.js</fullpath>
-    <version>1.6.01</version>
-    <revision>8634</revision>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>9bcf9c22c2029f6f11c320d09b72d67d</hash>
-  </element>
-  <element>
-    <fullpath>js/swfupload/swfupload.swfobject.js</fullpath>
-    <version>1.6.01</version>
-    <revision>8634</revision>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>93a727cca8318b56301d0b1c2c029015</hash>
   </element>
   <element>
     <fullpath>logs/</fullpath>

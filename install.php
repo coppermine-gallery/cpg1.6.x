@@ -1347,6 +1347,9 @@ function testImageProcessor()
 */
 function checkBasicGD()
 {
+	if (!function_exists(imagecreatetruecolor)) {
+		return false;
+	}
     $im = imagecreatetruecolor(1, 1);
     $tst_image = "albums/gd2.jpg";
     imagejpeg($im, $tst_image);
