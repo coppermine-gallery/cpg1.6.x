@@ -23,6 +23,9 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2016-03-01 [M,O] Moved all image manipulation code into 'ImageTool' object classes {ron4mac}
+2016-02-21 [B] Repaired 'spinButton' code and CSS (should be made into standard HTML5 elements) {ron4mac}
+2016-02-12 [M] Changed default cookie name to 'cpg16x' {ron4mac}
 2016-01-27 [B,M] Made compatible with PHP7 [ class constructor, split(), mis-placed break ] {ron4mac}
 2016-01-24 [A] Added 'change_values' function to admin tools, removing need for 'del_titles' {ron4mac}
 2016-01-22 [B] Corrected array name typo in section of french.php {ron4mac}

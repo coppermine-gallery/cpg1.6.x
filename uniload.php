@@ -70,7 +70,7 @@ function uni_exit ()
 require('include/init.inc.php');
 require('include/picmgmt.inc.php');
 
-error_reporting(-1);
+error_reporting(-1);	ini_set('log_errors', '1');
 //file_put_contents('plugins/upload_h5a/chunklog.txt', "\nSCF ".print_r($superCage->files->getInt('/Filedata/error'), true), FILE_APPEND);
 
 $h5u_debug = !!($CONFIG['debug_mode']==1 || ($CONFIG['debug_mode']==2 && GALLERY_ADMIN_MODE));

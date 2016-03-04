@@ -100,14 +100,8 @@ if (rand(1,100) < 25){
         }
 }
 
-//Include the proper class for image Object
-if ($CONFIG['thumb_method']=="gd2"){
-    require("include/imageobject_gd.class.php");
-}elseif ($CONFIG['thumb_method']=="im"){
-    require("include/imageobject_im.class.php");
-}else{
-    die ($lang_editpics_php['error_editor_class']);
-}
+//Include the proper class (imageObject) for image manipulation
+getImageTool();
 
 //////////////////////////////////Main script//////////////////////////////////////
 // PREVENTING CACHING
@@ -124,116 +118,115 @@ if (!$img_dir) $img_dir = IMG_DIR;
 
 //if ($_GET['id']){
 if ($superCage->get->getInt('id')) {
-   //Copy the Image file to the editing directory
-   if (copy($CONFIG['fullpath'].$CURRENT_PIC['filepath'].$CURRENT_PIC['filename'],$img_dir.$CURRENT_PIC['filename']))
-   $newimage = $CURRENT_PIC['filename'];
-}else if(!isset($newimage)){
-   //$newimage = $_POST['newimage'];
-   $matches = $superCage->post->getMatched('newimage','/^[0-9A-Za-z\/_.\-~]+$/');
-   $newimage = $matches[0];
+	//Copy the Image file to the editing directory
+	if (copy($CONFIG['fullpath'].$CURRENT_PIC['filepath'].$CURRENT_PIC['filename'],$img_dir.$CURRENT_PIC['filename']))
+	$newimage = $CURRENT_PIC['filename'];
+} else if (!isset($newimage)){
+	//$newimage = $_POST['newimage'];
+	$matches = $superCage->post->getMatched('newimage', '/^[0-9A-Za-z\/_.\-~]+$/');
+	$newimage = $matches[0];
 }
 
-   if ($newimage){
-      $imgObj = new imageObject($img_dir,$newimage);
-      /*if ($_POST['quality']){
-         $imgObj->quality = $_POST['quality'];
-      }*/
-      if ($superCage->post->keyExists('quality')) {
-         $imgObj->quality = $superCage->post->getInt('quality');
-      }
+if ($newimage) {
+	$imgObj = new imageObject($img_dir,$newimage);
+	/*if ($_POST['quality']){
+		$imgObj->quality = $_POST['quality'];
+	}*/
+	if ($superCage->post->keyExists('quality')) {
+		$imgObj->quality = $superCage->post->getInt('quality');
+	}
 
-      if ($imgObj->imgRes){
-          /*if ($_POST['clipval'] && $_POST['cropping']==true){
-             $imgObj = $imgObj->cropImage($_POST['clipval']);
-          }*/
-          if ($superCage->post->getEscaped('clipval') && $superCage->post->getEscaped('cropping') == true) {
-             $imgObj = $imgObj->cropImage($superCage->post->getEscaped('clipval'));
-          }
+	if ($imgObj->imgRes){
+		/*if ($_POST['clipval'] && $_POST['cropping']==true){
+			$imgObj = $imgObj->cropImage($_POST['clipval']);
+		}*/
+		if ($superCage->post->getEscaped('clipval') && $superCage->post->getEscaped('cropping') == true) {
+			$imgObj = $imgObj->cropImage($superCage->post->getEscaped('clipval'));
+		}
 
-          /*if ($_POST['angle']<>0){
-             $imgObj = $imgObj->rotateImage($_POST['angle']);
-          }*/
-          if ($superCage->post->getInt('angle') <> 0) {
-             $imgObj = $imgObj->rotateImage($superCage->post->getInt('angle'));
-          }
+		/*if ($_POST['angle']<>0){
+			$imgObj = $imgObj->rotateImage($_POST['angle']);
+		}*/
+		if ($superCage->post->getInt('angle') <> 0) {
+			$imgObj = $imgObj->rotateImage($superCage->post->getInt('angle'));
+		}
+	}
+	$newimage = $imgObj->filename;
+}//newimage
 
+//if(isset($_POST["save"])) {
+if ($superCage->post->keyExists('save')) {
 
-      }
-      $newimage = $imgObj->filename;
-   }//newimage
+	$width = $imgObj->width;
+	$height = $imgObj->height;
+	$normal = $CONFIG['fullpath'] . $CURRENT_PIC['filepath'] . $CONFIG['normal_pfx'] . $CURRENT_PIC['filename'];
+	$thumbnail = $CONFIG['fullpath'] . $CURRENT_PIC['filepath'] . $CONFIG['thumb_pfx'] . $CURRENT_PIC['filename'];
+	$filesize = @filesize($img_dir.$newimage);
 
-   //if(isset($_POST["save"])) {
-   if ($superCage->post->keyExists('save')) {
+	//Full image replace
+	copy($img_dir.$newimage,$CONFIG['fullpath'].$CURRENT_PIC['filepath'].$CURRENT_PIC['filename'])   ;
 
-        $width=$imgObj->width;
-        $height=$imgObj->height;
-        $normal = $CONFIG['fullpath'] . $CURRENT_PIC['filepath'] . $CONFIG['normal_pfx'] . $CURRENT_PIC['filename'];
-        $thumbnail = $CONFIG['fullpath'] . $CURRENT_PIC['filepath'] . $CONFIG['thumb_pfx'] . $CURRENT_PIC['filename'];
-        $filesize = @filesize($img_dir.$newimage);
+	// Normal image resized and replace, use the CPG resize method instead of the object resizeImage
+	// as using the object resizeImage will make the final display of image to be a thumbnail in the editor
 
-        //Full image replace
-        copy($img_dir.$newimage,$CONFIG['fullpath'].$CURRENT_PIC['filepath'].$CURRENT_PIC['filename'])   ;
+	if (max($width, $height) > $CONFIG['picture_width'] && $CONFIG['make_intermediate']) {
+		resize_image($img_dir.$newimage, $normal, $CONFIG['picture_width'], $CONFIG['thumb_use']);
+	} else {
+		@unlink($normal);
+	}
 
-        // Normal image resized and replace, use the CPG resize method instead of the object resizeImage
-        // as using the object resizeImage will make the final display of image to be a thumbnail in the editor
+	//thumbnail resized and replace
+	resize_image($img_dir.$newimage, $thumbnail, $CONFIG['thumb_width'], $CONFIG['thumb_use']);
+	$total_filesize = $filesize + (file_exists($normal) ? filesize($normal) : 0) + filesize($thumbnail);
 
-        if (max($width, $height) > $CONFIG['picture_width'] && $CONFIG['make_intermediate']) {
-            resize_image($img_dir.$newimage, $normal, $CONFIG['picture_width'], $CONFIG['thumb_method'], $CONFIG['thumb_use']);
-        } else {
-            @unlink($normal);
-        }
+	//Update the image size in the DB
+	cpg_db_query("UPDATE {$CONFIG['TABLE_PICTURES']}
+				  SET pheight = $height,
+					  pwidth = $width,
+					  filesize = $filesize,
+					  total_filesize = $total_filesize
+				  WHERE pid = '$pid'");
 
-        //thumbnail resized and replace
-        resize_image($img_dir.$newimage, $thumbnail, $CONFIG['thumb_width'], $CONFIG['thumb_method'], $CONFIG['thumb_use']);
-        $total_filesize = $filesize + (file_exists($normal) ? filesize($normal) : 0) + filesize($thumbnail);
+	$message = sprintf($lang_editpics_php['success_picture'], '<a href="#" onclick="self.close();">', '</a>');
 
-        //Update the image size in the DB
-        cpg_db_query("UPDATE {$CONFIG['TABLE_PICTURES']}
-                      SET pheight = $height,
-                          pwidth = $width,
-                          filesize = $filesize,
-                          total_filesize = $total_filesize
-                      WHERE pid = '$pid'");
+}
 
-        $message = sprintf($lang_editpics_php['success_picture'], '<a href="#" onclick="self.close();">', '</a>');
+//if(isset($_POST["save_thumb"])) {
+if ($superCage->post->keyExists('save_thumb')) {
+	$width=$imgObj->width;
+	$height=$imgObj->height;
+		$normal = $CONFIG['fullpath'] . $CURRENT_PIC['filepath'] . $CONFIG['normal_pfx'] . $CURRENT_PIC['filename'];
+		$thumbnail = $CONFIG['fullpath'] . $CURRENT_PIC['filepath'] . $CONFIG['thumb_pfx'] . $CURRENT_PIC['filename'];
+		$currentPic = $CONFIG['fullpath'] . $CURRENT_PIC['filepath'] . $CURRENT_PIC['filename'];
 
-   }
+	//Calculate the thumbnail dimensions
+	if ($CONFIG['thumb_use'] == 'ht') {
+		$ratio = $height / $CONFIG['thumb_width'] ;
+	} elseif ($CONFIG['thumb_use'] == 'wd') {
+		$ratio = $width / $CONFIG['thumb_width'] ;
+	} else {
+		$ratio = max($width, $height) / $CONFIG['thumb_width'] ;
+	}
+	$ratio = max($ratio, 1.0);
+	$dstWidth = (int)($width / $ratio);
+	$dstHeight = (int)($height / $ratio);
+	//$imgObj->quality = (int)($_POST['quality']);
+	$imgObj->quality = $superCage->post->getInt('quality');
+	$imgObj = $imgObj->resizeImage($dstWidth,$dstHeight);
+	$newimage = $imgObj->filename;
 
-   //if(isset($_POST["save_thumb"])) {
-     if ($superCage->post->keyExists('save_thumb')) {
-        $width=$imgObj->width;
-        $height=$imgObj->height;
-            $normal = $CONFIG['fullpath'] . $CURRENT_PIC['filepath'] . $CONFIG['normal_pfx'] . $CURRENT_PIC['filename'];
-            $thumbnail = $CONFIG['fullpath'] . $CURRENT_PIC['filepath'] . $CONFIG['thumb_pfx'] . $CURRENT_PIC['filename'];
-            $currentPic = $CONFIG['fullpath'] . $CURRENT_PIC['filepath'] . $CURRENT_PIC['filename'];
+	copy($img_dir.$newimage,$CONFIG['fullpath'].$CURRENT_PIC['filepath'].$CONFIG['thumb_pfx'].$CURRENT_PIC['filename'])   ;
 
-        //Calculate the thumbnail dimensions
-        if ($CONFIG['thumb_use'] == 'ht') {
-            $ratio = $height / $CONFIG['thumb_width'] ;
-        } elseif ($CONFIG['thumb_use'] == 'wd') {
-            $ratio = $width / $CONFIG['thumb_width'] ;
-        } else {
-            $ratio = max($width, $height) / $CONFIG['thumb_width'] ;
-        }
-        $ratio = max($ratio, 1.0);
-        $dstWidth = (int)($width / $ratio);
-        $dstHeight = (int)($height / $ratio);
-        //$imgObj->quality = (int)($_POST['quality']);
-        $imgObj->quality = $superCage->post->getInt('quality');
-        $imgObj = $imgObj->resizeImage($dstWidth,$dstHeight);
-        $newimage = $imgObj->filename;
+	$total_filesize = filesize($currentPic) + (file_exists($normal) ? filesize($normal) : 0) + filesize($thumbnail);
 
-        copy($img_dir.$newimage,$CONFIG['fullpath'].$CURRENT_PIC['filepath'].$CONFIG['thumb_pfx'].$CURRENT_PIC['filename'])   ;
-
-        $total_filesize = filesize($currentPic) + (file_exists($normal) ? filesize($normal) : 0) + filesize($thumbnail);
-
-        //Update the image size in the DB
-        cpg_db_query("UPDATE {$CONFIG['TABLE_PICTURES']} SET total_filesize = $total_filesize WHERE pid = '$pid'");
+	//Update the image size in the DB
+	cpg_db_query("UPDATE {$CONFIG['TABLE_PICTURES']} SET total_filesize = $total_filesize WHERE pid = '$pid'");
 
 
-        $message = sprintf($lang_editpics_php['success_thumb'], '<a href="#" onclick="self.close();">', '</a>');
+	$message = sprintf($lang_editpics_php['success_thumb'], '<a href="#" onclick="self.close();">', '</a>');
 
-   }
+}
+
 // Convert the array to json object string
 $js_vars['width'] = $imgObj->width;
 $js_vars['height'] = $imgObj->height;
@@ -320,7 +313,7 @@ if ($superCage->get->keyExists('id')) {
 <td>
 <table border="0" cellspacing="2" cellpadding="2" class="maintableb" width="100%" >
   <tr>
-<?php if ($CONFIG['thumb_method']=='im' ||($CONFIG['thumb_method']=='gd2' && function_exists('imagerotate'))){ ?>
+<?php if ($CONFIG['thumb_method']=='im' || ($CONFIG['thumb_method']=='gd2' && function_exists('imagerotate'))) { ?>
 
 
    <td>
@@ -406,7 +399,7 @@ print $LINEBREAK;
 <?php } ?>
 
 <div id="imgdiv">
-<?php if ($imgObj){ ?>
+<?php if ($imgObj) { ?>
 <img src="<?php echo $imgObj->directory.$imgObj->filename?>?<?php echo rand(); ?>" <?php echo $imgObj->string; ?> style="vertical-align: middle;" alt="" />
 <?php } ?>
 </div>

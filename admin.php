@@ -416,7 +416,7 @@ EOT;
 			}
 			if (isset($value['min']) && ($value['min'] != '' || $value['max'] != '')) { // apply class spinbutton if applicable
 				$spinbuttonOption = ' spin-button';
-				$javascriptOutput .= '  $("#'.$key.'").SpinButton({';
+				$javascriptOutput .= '  $("#'.$key.'").spinbox({';
 				if ($value['min'] != '') {
 					$javascriptOutput .= 'min: '.$value['min'];
 					if ($value['max'] != '') {

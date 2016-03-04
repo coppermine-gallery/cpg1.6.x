@@ -2924,6 +2924,23 @@ function breadcrumb($cat, &$breadcrumb, &$BREADCRUMB_TEXT)
 
  **************************************************************************/
 
+// Get the configured/available image tool class
+function getImageTool ()
+{
+	global $CONFIG;
+
+	if ($CONFIG['thumb_method'] == 'gd2') {
+		require_once 'include/imageobject_gd.class.php';
+	} else {
+		if (class_exists('Imagick')) {
+			require_once 'include/imageobject_imx.class.php';
+		} else {
+			require_once 'include/imageobject_im.class.php';
+		}
+	}
+}
+
+
 // Compute image geometry based on max width / height
 
 /**

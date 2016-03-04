@@ -12,3 +12,4 @@ albums/edit/*
 sv_*
 .git*
 .htaccess
+php.ini

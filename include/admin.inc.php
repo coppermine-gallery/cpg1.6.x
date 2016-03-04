@@ -1511,7 +1511,7 @@ $config_data = array(
   'cookie_settings' => array(
     'cookie_name' => array(
       'type'          => 'textfield',
-      'default_value' => 'cpg15x',
+      'default_value' => 'cpg16x',
       'help_link'     => 'f=configuration.htm&amp;as=admin_cookie_name&amp;ae=admin_cookie_name_end',
       'regex'         => '^([a-z0-9_-]){1,}$',
       'regex_not'     => '\.',

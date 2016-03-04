@@ -888,7 +888,6 @@ function process_picture()
         }
 
         // JPEG and PNG only are allowed with GD
-        //if ($imginfo[2] != GIS_JPG && $imginfo[2] != GIS_PNG && ($CONFIG['thumb_method'] == 'gd1' || $CONFIG['thumb_method'] == 'gd2')) {
         if ($imginfo[2] != GIS_JPG && $imginfo[2] != GIS_PNG && $CONFIG['GIF_support'] == 0) {
             @unlink($uploaded_pic);
             simple_die(ERROR, $lang_errors['gd_file_type_err'], __FILE__, __LINE__, true);
@@ -898,8 +897,8 @@ function process_picture()
         if (max($imginfo[0], $imginfo[1]) > $CONFIG['max_upl_width_height']) {
             if ((USER_IS_ADMIN && $CONFIG['auto_resize'] == 1) || (!USER_IS_ADMIN && $CONFIG['auto_resize'] > 0)) //($CONFIG['auto_resize']==1)
             {
-              //resize_image($uploaded_pic, $uploaded_pic, $CONFIG['max_upl_width_height'], $CONFIG['thumb_method'], $imginfo[0] > $CONFIG['max_upl_width_height'] ? 'wd' : 'ht');
-              resize_image($uploaded_pic, $uploaded_pic, $CONFIG['max_upl_width_height'], $CONFIG['thumb_method'], $CONFIG['thumb_use']);
+              //resize_image($uploaded_pic, $uploaded_pic, $CONFIG['max_upl_width_height'], $imginfo[0] > $CONFIG['max_upl_width_height'] ? 'wd' : 'ht');
+              resize_image($uploaded_pic, $uploaded_pic, $CONFIG['max_upl_width_height'], $CONFIG['thumb_use']);
             }
             else
             {

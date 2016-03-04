@@ -471,7 +471,7 @@ function update_thumbs()
                 // resize full-sized picture without watermark (will be applied later) if it's bigger than the max width or height for uploaded pictures
                 if (max($imagesize[0], $imagesize[1]) > $CONFIG['max_upl_width_height']) {
                     $resize_method = $CONFIG['picture_use'] == "thumb" ? ($CONFIG['thumb_use'] == "ex" ? "any" : $CONFIG['thumb_use']) : $CONFIG['picture_use'];
-                    if (resize_image($work_image, $image, $CONFIG['max_upl_width_height'], $CONFIG['thumb_method'], $resize_method, 'false')) {
+                    if (resize_image($work_image, $image, $CONFIG['max_upl_width_height'], $resize_method, 'false')) {
                         $imagesize = cpg_getimagesize($image);
                         echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $image . "</tt> " . $lang_util_php['updated_successfully'] . '!</td></tr>';
                     } else {
@@ -489,7 +489,7 @@ function update_thumbs()
 
             if ($updatetype == 0 || $updatetype == 2 || $updatetype == 5) {
                 // resize thumbnail
-                if (resize_image($work_image, $thumb, $CONFIG['thumb_width'], $CONFIG['thumb_method'], $CONFIG['thumb_use'], "false", 1)) {
+                if (resize_image($work_image, $thumb, $CONFIG['thumb_width'], $CONFIG['thumb_use'], "false", 1)) {
                     echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $thumb .'</tt> '. $lang_util_php['updated_successfully'] . '!</td></tr>';
                 } else {
                     echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $thumb.'</tt>!</td></tr>';
@@ -501,7 +501,7 @@ function update_thumbs()
                     // intermediate sized picture is needed - create/update it
                     $resize_method = $CONFIG['picture_use'] == "thumb" ? ($CONFIG['thumb_use'] == "ex" ? "any" : $CONFIG['thumb_use']) : $CONFIG['picture_use'];
                     $watermark = ($CONFIG['enable_watermark'] == '1' && ($CONFIG['which_files_to_watermark'] == 'both' || $CONFIG['which_files_to_watermark'] == 'resized')) ? 'true' : 'false';
-                    if (resize_image($work_image, $normal, $CONFIG['picture_width'], $CONFIG['thumb_method'], $resize_method, $watermark)) {
+                    if (resize_image($work_image, $normal, $CONFIG['picture_width'], $resize_method, $watermark)) {
                         echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $normal . '</tt> ' . $lang_util_php['updated_successfully'] . '!</td></tr>';
                     } else {
                         echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $normal . '</tt>!</td></tr>';
@@ -533,7 +533,7 @@ function update_thumbs()
                     if ($backup_file_exists) {
                         // watermark full-sized picture
                         $wm_max_upl_width_height = (max($imagesize[0], $imagesize[1]) > $CONFIG['max_upl_width_height']) ? max($imagesize[0], $imagesize[1]) : $CONFIG['max_upl_width_height']; // use max aspect of original image if it hasn't been resized earlier
-                        if (resize_image($work_image, $image, $wm_max_upl_width_height, $CONFIG['thumb_method'], 'any', 'true')) {
+                        if (resize_image($work_image, $image, $wm_max_upl_width_height, 'any', 'true')) {
                             echo '<tr><td class="'.$tablestyle.'">' . $icon_array['ok'] . '<tt>' . $image . "</tt> " . $lang_util_php['updated_successfully'] . '!' . '</td></tr>';
                         } else {
                             echo '<tr><td class="'.$tablestyle.'">' . $icon_array['stop'] . $lang_util_php['error_create'] . ': <tt>' . $image . '</tt>!</td></tr>';
