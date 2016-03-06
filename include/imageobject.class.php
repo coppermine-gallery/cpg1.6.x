@@ -20,6 +20,19 @@ class ImageTool {
 	// image information
 	protected $imginfo;
 
+	// needed actions to correctly orient an image based on its current orientation
+	// array(<rotate angle>, <mirror>)
+	protected $orientAction = array(
+		1 => array(0, false),
+		2 => array(0, true),
+		3 => array(180, false),
+		4 => array(180, true),
+		5 => array(-90, true),
+		6 => array(-90, false),
+		7 => array(90, true),
+		8 => array(90, false)
+	);
+
 	// Calculate watermark position
 	protected function get_wm_position ($destW, $destH, $wmW, $wmH)
 	{

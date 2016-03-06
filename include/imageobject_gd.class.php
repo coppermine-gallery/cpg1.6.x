@@ -196,9 +196,52 @@ class imageObject extends ImageTool {
     }
 
 
+	private function _mirrorImage ($img)
+	{
+		$width = imagesx ($img);
+		$height = imagesy ($img);
+
+		$src_x = $width -1;
+		$src_y = 0;
+		$src_width = -$width;
+		$src_height = $height;
+
+		$imgdest = imagecreatetruecolor($width, $height);
+
+		if (imagecopyresampled($imgdest, $img, 0, 0, $src_x, $src_y, $width, $height, $src_width, $src_height)) {
+			return $imgdest;
+		}
+
+		return $img;
+	}
+
+
+	public function orientImage ($from=1)
+	{
+		$dest = $this->directory . $this->filename;
+
+		$oAct = $this->orientAction[$from];
+		if ($oAct[0] !==  0) $this->imgRes = imagerotate($this->imgRes, $oAct[0], 0); 
+		if ($oAct[1]) $this->imgRes = $this->_mirrorImage($this->imgRes);
+
+		switch ($this->imginfo[2])
+		{
+			case 1:
+				imagegif($this->imgRes, $dest);
+				break;
+			case 2:
+				imagejpeg($this->imgRes, $dest, 95);
+				break;
+			case 3:
+				imagepng($this->imgRes, $dest, 0);
+				break;
+		}
+	}
+
+
 	public function send ($maxS=0, $type='jpeg')
 	{
-        global $CONFIG;
+		global $CONFIG;
 
 		$content_type = array(
 			GIS_GIF => 'gif',

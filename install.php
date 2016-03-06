@@ -504,23 +504,34 @@ switch($step) {
                 // add finished flag to config
                 setTmpConfig('install_finished', 'done');
                 // redirect to last page
-                header('Location: install.php?step=' . ($step + 1));
-                exit;
+//                header('Location: install.php?step=' . ($step + 1));
+//                exit;
             }
         }
         html_header();
         if ($error != '') {
             html_error();
         } else {
-            if (isset($config['admin_username'])) setTmpConfig('step', STEP_FINALISE);
+            if (isset($config['install_finished'])) {
+                setTmpConfig('step', STEP_FINALISE);
+                finaliseInstall();
+				if ($error != '') {
+					html_error();
+				} else {
+                	html_finish();
+                }
+            } else {
+                html_admin();
+            }
         }
-        html_admin();
+//        html_admin();
         html_footer();
         break;
 
     case STEP_FINALISE:    // Finally check if everything is set up properly and tell the user so
         // write real config file
-        writeConfig();
+//        writeConfig();
+		finaliseInstall();
 
         $page_title = $language['title_finished'];
         html_header();
@@ -531,25 +542,50 @@ switch($step) {
         html_footer();
 
         // delete temp config + created test images!!
-        $files_to_remove = array(
-            'albums/combined_generated.jpg',
-            'albums/giftest_generated.gif',
-            'albums/giftest_generated.jpg',
-            'albums/jpgtest_generated.jpg',
-            'albums/pngtest_generated.jpg',
-            'albums/pngtest_generated.png',
-            'albums/scaled_generated.jpg',
-            'albums/texttest_generated.jpg',
-            'include/config.tmp.php',
-        );
-        foreach($files_to_remove as $file) {
-            if (is_file($file)) {
-                unlink($file);
-            }
-        }
+//        $files_to_remove = array(
+//            'albums/combined_generated.jpg',
+//            'albums/giftest_generated.gif',
+//            'albums/giftest_generated.jpg',
+//            'albums/jpgtest_generated.jpg',
+//            'albums/pngtest_generated.jpg',
+//            'albums/pngtest_generated.png',
+//            'albums/scaled_generated.jpg',
+//            'albums/texttest_generated.jpg',
+//            'include/config.tmp.php',
+//        );
+//        foreach($files_to_remove as $file) {
+//            if (is_file($file)) {
+//                unlink($file);
+//            }
+//        }
 
         break;
 }
+
+
+function finaliseInstall ()
+{
+    writeConfig();
+
+    // delete temp config + created test images!!
+    $files_to_remove = array(
+        'albums/combined_generated.jpg',
+        'albums/giftest_generated.gif',
+        'albums/giftest_generated.jpg',
+        'albums/jpgtest_generated.jpg',
+        'albums/pngtest_generated.jpg',
+        'albums/pngtest_generated.png',
+        'albums/scaled_generated.jpg',
+        'albums/texttest_generated.jpg',
+        'include/config.tmp.php',
+        );
+    foreach ($files_to_remove as $file) {
+        if (is_file($file)) {
+            unlink($file);
+        }
+    }
+}
+
 
 ########################
 ####Install Templates###
@@ -933,7 +969,7 @@ function html_admin()
     // TODO: ditto above
     $admin_email_verify = isset($config['admin_email']) ? $config['admin_email'] : '';
     echo <<<EOT
-      <form action="install.php?step=$step" name="cpgform" id="cpgform" method="post" style="margin:0px;padding:0px">
+      <form action="install.php?step={$step}" name="cpgform" id="cpgform" method="post" style="margin:0px;padding:0px">
         <table width="100%" border="0" cellpadding="0" cellspacing="1" class="maintable">
          <tr>
           <td class="tableb" colspan="2">

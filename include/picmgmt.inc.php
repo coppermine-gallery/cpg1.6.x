@@ -39,8 +39,6 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
         return array('error' => $lang_db_input_php['err_invalid_fext'] . ' ' . $CONFIG['allowed_file_extensions'], 'halt_upload' => 0);
     } elseif (is_image($filename)) {
 
-        $imagesize = cpg_getimagesize($image);
-
         if ($CONFIG['read_iptc_data']) {
             // read IPTC data
             $iptc = get_IPTC($image);
@@ -50,6 +48,20 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
                 $keywords = (isset($iptc['Keywords'])) ? implode($CONFIG['keyword_separator'], $iptc['Keywords']) : $keywords;
             }
         }
+
+		if (true) {		// maybe configure as an option
+			$exif = @exif_read_data(realpath($image));
+			if ($exif) {
+				$ort = $exif['Orientation'];
+				if ($ort !== 1) {
+					getImageTool();
+					$imgObj = new imageObject($image);
+					$imgObj->orientImage($ort);
+				}
+			}
+		}
+
+        $imagesize = cpg_getimagesize($image);
 
         // resize picture if it's bigger than the max width or height for uploaded pictures
         if (max($imagesize[0], $imagesize[1]) > $CONFIG['max_upl_width_height']) {

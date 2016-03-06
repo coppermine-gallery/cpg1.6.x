@@ -110,8 +110,8 @@ class imageObject extends ImageTool {
 		// Clear current resources
 		$this->imgRes->clear();
 
-        // Call the constructor again to repopulate the dimensions etc
-        $this->__construct($this->directory, $this->filename);
+		// Call the constructor again to repopulate the dimensions etc
+		$this->__construct($this->directory, $this->filename);
 
 		return $this;
 	}
@@ -125,8 +125,8 @@ class imageObject extends ImageTool {
 		// Clear current resources
 		$this->imgRes->clear();
 
-        // Call the constructor again to repopulate the dimensions etc
-        $this->__construct($this->directory, $this->filename);
+		// Call the constructor again to repopulate the dimensions etc
+		$this->__construct($this->directory, $this->filename);
 
 		return $this;
 	}
@@ -141,10 +141,24 @@ class imageObject extends ImageTool {
 		// Clear current resources
 		$this->imgRes->clear();
 
-        // Call the constructor again to repopulate the dimensions etc
-        $this->__construct($this->directory, $this->filename);
+		// Call the constructor again to repopulate the dimensions etc
+		$this->__construct($this->directory, $this->filename);
 
 		return $this;
+	}
+
+
+	public function orientImage ($from)
+	{
+		$oAct = $this->orientAction[$from];
+		if ($oAct[0] !==  0) $this->imgRes->rotateimage("#000", -$oAct[0]); 
+		if ($oAct[1]) $this->imgRes->flopImage();
+
+		$this->imgRes->setImageOrientation(Imagick::ORIENTATION_TOPLEFT);
+		$this->imgRes->writeImage($this->srcPath);
+
+		// Clear current resources
+		$this->imgRes->clear();
 	}
 
 
@@ -257,6 +271,28 @@ class imageObject extends ImageTool {
 
 		}
 
+/*
+		if (true) {		// maybe configure as an option
+			$orientation = $this->imgRes->getImageOrientation();
+
+			switch ($orientation) {
+				case Imagick::ORIENTATION_BOTTOMRIGHT:
+					$this->imgRes->rotateimage("#000", 180); // rotate 180 degrees
+				break;
+
+				case Imagick::ORIENTATION_RIGHTTOP:
+					$this->imgRes->rotateimage("#000", 90); // rotate 90 degrees CW
+				break;
+
+				case Imagick::ORIENTATION_LEFTBOTTOM:
+					$this->imgRes->rotateimage("#000", -90); // rotate 90 degrees CCW
+				break;
+			}
+
+			$this->imgRes->setImageOrientation(Imagick::ORIENTATION_TOPLEFT);
+		}
+*/
+
 		// Save the image to the destination
 		$this->imgRes->writeImage($dest_file);
 
@@ -272,10 +308,6 @@ class imageObject extends ImageTool {
 		} else {
 			return true;
 		}
-	}
-
-	private function orientImage ()
-	{
 	}
 
 }

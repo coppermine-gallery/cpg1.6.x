@@ -189,6 +189,25 @@ class imageObject extends ImageTool {
     }
 
 
+	public function orientImage ($from)
+	{
+        global $CONFIG;
+
+		$src_file = $this->directory.$this->filename;
+        $output = array();
+
+		if (preg_match('#[A-Z]:|\\\\#Ai', __FILE__)) {
+			$cur_dir = dirname(__FILE__);
+			$src_file = '"' . $cur_dir . '\\' . strtr($src_file, '/', '\\') . '"';
+		} else {
+			$src_file = escapeshellarg($src_file);
+		}
+
+        $cmd = "{$CONFIG['impath']}convert $src_file -auto-orient $src_file";
+        exec($cmd, $output, $retval);
+	}
+
+
 	public function send ($maxS=0, $type='jpeg')
 	{
         global $CONFIG;

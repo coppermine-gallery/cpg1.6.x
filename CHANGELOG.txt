@@ -23,6 +23,8 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2016-03-06 [A] Added automatic image orientation during upload of images {ron4mac}
+2016-03-02 [B] Corrected a problem where some server/PHP environments would hang at step 9 of install {ron4mac}
 2016-03-01 [M,O] Moved all image manipulation code into 'ImageTool' object classes {ron4mac}
 2016-02-21 [B] Repaired 'spinButton' code and CSS (should be made into standard HTML5 elements) {ron4mac}
 2016-02-12 [M] Changed default cookie name to 'cpg16x' {ron4mac}
