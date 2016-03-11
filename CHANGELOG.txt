@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2016-03-11 [D] Updated README.txt {ron4mac}
 2016-03-09 [B] Corrected issues with SWF upload button UI {ron4mac}
 2016-03-06 [A] Added automatic image orientation during upload of images {ron4mac}
 2016-03-02 [B] Corrected a problem where some server/PHP environments would hang at step 9 of install {ron4mac}
