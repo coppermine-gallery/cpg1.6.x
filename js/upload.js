@@ -15,9 +15,6 @@
 **********************************************/
 
 $(document).ready(function() {
-    button_enabled_style = '.browse { font-family: Arial,Helvetica,sans-serif;}';
-    button_disabled_style = '.browse { font-family: Arial,Helvetica,sans-serif; color: #D0CFD0;}';
-
     $('#uploadMethod').change(function() {
         var param = 'method=' + $(this).val();
         if ($("select[name='album']").val()) {

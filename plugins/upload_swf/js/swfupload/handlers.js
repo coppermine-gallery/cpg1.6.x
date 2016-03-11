@@ -288,6 +288,7 @@ function swfUploadLoaded() {
         this.setButtonDisabled(false);
         // Set the button style to enabled
         this.setButtonTextStyle(button_enabled_style);
+        this.setButtonText(button_enabled_text);
     }
 
 }
