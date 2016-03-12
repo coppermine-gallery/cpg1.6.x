@@ -1081,18 +1081,19 @@ $config_data = array(
       'default_value' => 'gd2',
       'help_link'     => 'f=configuration.htm&amp;as=admin_picture_thumb_advanced_resize_method&amp;ae=admin_picture_thumb_advanced_resize_method_end',
       'options'       => array(
+							'imx' => 'Imagick Extension',
                            'im' => 'ImageMagick',
                            'gd2' => 'GD version 2.x',
                          ),
     ),
     'impath' => array(
-      'type'          => 'textfield',
+      'type'          => extension_loaded('imagick') ? 'hidden' : 'textfield',
       'default_value' => '',
       'help_link'     => 'f=configuration.htm&amp;as=admin_picture_thumb_advanced_im_path&amp;ae=admin_picture_thumb_advanced_im_path_end',
       'regex'         => '/$|^$',
     ),
     'im_options' => array(
-      'type'          => 'textfield',
+      'type'          => extension_loaded('imagick') ? 'hidden' : 'textfield',
       'default_value' => '-antialias',
       'help_link'     => 'f=configuration.htm&amp;as=admin_picture_thumb_advanced_im_commandline&amp;ae=admin_picture_thumb_advanced_im_commandline_end',
     ),

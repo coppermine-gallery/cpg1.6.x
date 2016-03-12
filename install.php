@@ -267,7 +267,7 @@ switch($step) {
 
 	case STEP_SELECT_IMG_PROC:		// Check available image processors & let user choose
 		$page_title = $language['title_imp'];
-		$supported_processors = array('gd2' => "GD2", 'im' => 'ImageMagick');
+		$supported_processors = array('gd2' => "GD2", 'im' => 'ImageMagick', 'imx' => 'Imagick Extension');
 		$image_processors = checkImageProcessor();
 		html_header();
 		if ($error != '') {
@@ -290,7 +290,7 @@ switch($step) {
 			$path = str_replace(array('.exe', '"'), '',$image_processors['im']['path']);
 			$path = substr($path, 0, (strlen($path) - 7));
 			$imp_list .= '<option value="im">ImageMagick</option>';
-			$content .= '<strong>ImageMagick</strong> Version ' . substr($image_processors['im']['version'], 20, 7) . '(at: ' . $path .')';
+			$content .= '<strong>ImageMagick</strong> Version ' . substr($image_processors['im']['version'], 20, 7) . '(at: ' . $path .')<br />';
 			if($error == ''){
 				$selected = 'im';
 			}
@@ -298,6 +298,12 @@ switch($step) {
 		} else {
 			$path = '';
 			$im_not_found = '<br /><fieldset style="width:90%" title="ImageMagick">' . $language['im_not_found'] .'</fieldset>';
+		}
+		if (isset($image_processors['imx'])) {
+			// Imagick extension is avilable, add it to the list and make it default
+			$imp_list .= '<option value="imx">Imagick Extension</option>';
+			$content .= '<strong>Imagick Extension</strong> '.$image_processors['imx'].'<br />';
+			$selected = 'imx';
 		}
 		// check configuration options
 		if (isset($config['thumb_method'])) $selected = $config['thumb_method'];
@@ -1313,6 +1319,12 @@ function checkImageProcessor()
 		$imagesProcessors['gd2'] = 'installed';
 	}
 
+	// check for Imagick
+	if (extension_loaded('imagick')) {
+		$vers = Imagick::getVersion();
+		$imagesProcessors['imx'] = $vers['versionString'];
+	}
+
 	return $imagesProcessors;
 }
 
@@ -1334,6 +1346,9 @@ function testImageProcessor()
 			break;
 		case 'im':
 			$image_processor = new IMtest($config['im_path']);
+			break;
+		case 'imx':
+			$image_processor = new IMXtest();
 			break;
 		default:
 			$image_processor = new GDtest();
@@ -1857,8 +1872,6 @@ class GDtest
 	var $image_path = 'albums/'; //path to store temp images
 
 	/*
-	 * function GDtest()
-	 *
 	 * Initializes the class.
 	 *
 	 * @param int $version
@@ -2062,8 +2075,6 @@ class IMtest
 	var $CPGpath = ''; //path to root cpg folder
 
 	/*
-	 * function IMtest()
-	 *
 	 * Initializes the class.
 	 *
 	 * @param string $IMpath
@@ -2184,7 +2195,7 @@ class IMtest
 		$source_b = 'images/install/combine_b.gif';
 
 		$combine_command = $this->IMpath . ' ' . $this->createImagePath($source_a)
-			. ' ' . $this->createImagePath($source_b) . ' -geometry +66+1	-composite	 '
+			. ' ' . $this->createImagePath($source_b) . ' -geometry +66+1 -composite '
 			. $this->createImagePath('combined_generated.jpg', true);
 
 		exec($combine_command, $output, $retval);
@@ -2256,6 +2267,254 @@ class IMtest
 			//put error in array
 			$results['scale'] = array(
 				'error'		=> 'scale_error',
+			);
+		} else {
+			//put results in array
+			$results['scale'] = array(
+				'original'	=> 'images/install/scaled.jpg',
+				'created'	=> $this->image_path . 'scaled_generated.jpg',
+			);
+		}
+
+		return $results;
+	}
+
+}
+
+########################
+##### IMXtest Class ####
+########################
+class IMXtest
+{
+	var $image_path = 'albums/'; //path to store temp images
+
+	/*
+	 * Initializes the class.
+	 *
+	 * @param string $image_path
+	 */
+	function __construct ($image_path = '')
+	{
+		if ($image_path != '') {
+			$this->image_path = $image_path;
+		}
+	}
+
+	/*
+	 * function createImagePath()
+	 *
+	 * Creates the path to the images, $dest is to tell
+	 * if we are using the destination path
+	 *
+	 * @param string $image_path
+	 * @param boolean $dest
+	 *
+	 * @return string $path
+	 */
+	function createImagePath($image_path, $dest = false)
+	{
+		if ($dest) {
+			$path = $this->image_path . $image_path;
+		} else {
+			$path = $image_path;
+		}
+		return $path;
+	}
+
+	/*
+	 * function testRead()
+	 *
+	 * Do basic tests on reading and writing file formats
+	 *
+	 * @return array $results
+	 */
+	function testReadWrite()
+	{
+		$imgObj = new Imagick();
+
+		//create gif test image
+		$retval = '';
+		try {
+			$imgObj->readImage($this->createImagePath('images/install/giftest.gif'));
+			$imgObj->writeImage($this->createImagePath('giftest_generated.jpg', true));
+			$imgObj->clear();
+		} catch (Exception $e) {
+			$retval = $e->getMessage();
+		}
+
+		if ($retval) {
+			//an error occured, add to array
+			$results['read_gif'] = array(
+					'error'		=> 'read_error: '.$retval,
+				);
+		} else {
+			//all went fine
+			$results['read_gif'] = array(
+					'original'	=> 'images/install/giftest.gif',
+					'created'	=> $this->image_path . 'giftest_generated.jpg',
+				);
+		}
+
+		//create png test image
+		$retval = '';
+		try {
+			$imgObj->readImage($this->createImagePath('images/install/pngtest.png'));
+			$imgObj->writeImage($this->createImagePath('pngtest_generated.jpg', true));
+			$imgObj->clear();
+		} catch (Exception $e) {
+			$retval = $e->getMessage();
+		}
+
+		if ($retval) {
+			//an error occured, add to array
+			$results['read_png'] = array(
+					'error'		=> 'read_error: '.$retval,
+				);
+		} else {
+			//all went fine
+			$results['read_png'] = array(
+					'original'	=> 'images/install/pngtest.png',
+					'created'	=> $this->image_path . 'pngtest_generated.jpg',
+				);
+		}
+
+		//create jpg test image
+		$retval = '';
+		try {
+			$imgObj->readImage($this->createImagePath('images/install/jpgtest.jpg'));
+			$imgObj->writeImage($this->createImagePath('jpgtest_generated.jpg', true));
+			$imgObj->clear();
+		} catch (Exception $e) {
+			$retval = $e->getMessage();
+		}
+
+		if ($retval) {
+			//an error occured, add to array
+			$results['read_jpg'] = array(
+					'error'		=> 'read_error: '.$retval,
+				);
+		} else {
+			//all went fine
+			$results['read_jpg'] = array(
+					'original'	=> 'images/install/jpgtest.jpg',
+					'created'	=> $this->image_path . 'jpgtest_generated.jpg',
+				);
+		}
+
+		return $results;
+	}
+
+	/*
+	 * function testCombineImage()
+	 *
+	 * test combining of images
+	 *
+	 * @return array $results
+	 */
+	function testCombineImage()
+	{
+		$source_a = 'images/install/jpgtest.jpg';
+		$source_b = 'images/install/combine_b.gif';
+		$retval = '';
+
+		try {
+			$imgObjA = new Imagick($this->createImagePath($source_a));
+			$imgObjB = new Imagick($this->createImagePath($source_b));
+			$imgObjA->compositeImage($imgObjB, imagick::COMPOSITE_DEFAULT, 66, 1);
+			$imgObjA->writeImage($this->createImagePath('combined_generated.jpg', true));
+			$imgObjA->clear();
+			$imgObjB->clear();
+		} catch (Exception $e) {
+			$retval = $e->getMessage();
+		}
+
+		if ($retval) {
+			//an error occured, add to array
+			$results['combine'] = array(
+					'error'		=> 'combine_error: '.$retval,
+				);
+		} else {
+			//all went fine
+			$results['combine'] = array(
+					'original'	=> 'images/install/combined.jpg',
+					'created'	=> $this->image_path . 'combined_generated.jpg',
+				);
+		}
+
+		return $results;
+	}
+
+	/*
+	 * function testTextOnImage()
+	 *
+	 * test adding text to images
+	 *
+	 * @return array $results
+	 */
+	function testTextOnImage()
+	{
+		$text = '2008 � Susanna Thornton';
+		$font = 'images/fonts/LiberationSans-Regular.ttf';
+		$source = 'images/install/jpgtest.jpg';
+		$retval = '';
+
+		try {
+			$imgObj = new Imagick($this->createImagePath($source));
+			$draw = new ImagickDraw();
+			$draw->setFont($font);
+			$draw->setFontSize(12);
+			$draw->setFillColor("#FFF");
+			$draw->setStrokeAntialias(true);
+			$draw->setTextAntialias(true);
+			$draw->annotation(50, 110, $text);
+			$imgObj->drawImage($draw);
+			$imgObj->writeImage($this->createImagePath('texttest_generated.jpg', true));
+			$draw->destroy();
+			$imgObj->clear();
+		} catch (Exception $e) {
+			$retval = $e->getMessage();
+		}
+
+		if ($retval) {
+			//an error occured, add to array
+			$results['text'] = array(
+					'error'		=> 'text_error: '.$retval,
+				);
+		} else {
+			//all went fine
+			$results['text'] = array(
+					'original'	=> 'images/install/texttest.jpg',
+					'created'	=> $this->image_path . 'texttest_generated.jpg',
+				);
+		}
+
+		return $results;
+	}
+
+	/*
+	 * function testScale()
+	 *
+	 * test scaling of images
+	 *
+	 * @return array $results
+	 */
+	function testScale()
+	{
+		$retval = '';
+
+		try {
+			$imgObj = new Imagick($this->createImagePath('images/install/jpgtest.jpg'));
+			$imgObj->scaleImage(100, 57);
+			$imgObj->writeImage($this->createImagePath('scaled_generated.jpg', true));
+			$imgObj->clear();
+		} catch (Exception $e) {
+			$retval = $e->getMessage();
+		}
+
+		if ($retval) {
+			//put error in array
+			$results['scale'] = array(
+				'error'		=> 'scale_error: '.$retval,
 			);
 		} else {
 			//put results in array

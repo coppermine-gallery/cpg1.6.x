@@ -2929,14 +2929,12 @@ function getImageTool ()
 {
 	global $CONFIG;
 
-	if ($CONFIG['thumb_method'] == 'gd2') {
-		require_once 'include/imageobject_gd.class.php';
+	if ($CONFIG['thumb_method'] == 'imx') {
+		require_once 'include/imageobject_imx.class.php';
+	} elseif ($CONFIG['thumb_method'] == 'im') {
+		require_once 'include/imageobject_im.class.php';
 	} else {
-		if (class_exists('Imagick')) {
-			require_once 'include/imageobject_imx.class.php';
-		} else {
-			require_once 'include/imageobject_im.class.php';
-		}
+		require_once 'include/imageobject_gd.class.php';
 	}
 }
 

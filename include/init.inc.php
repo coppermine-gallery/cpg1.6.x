@@ -221,7 +221,7 @@ define('DEFAULT_LANGUAGE', $CONFIG['lang']);
 define('DEFAULT_THEME', $CONFIG['theme']);
 
 // Check for GD GIF Create support
-if ($CONFIG['thumb_method'] == 'im' || function_exists('imagecreatefromgif')) {
+if ($CONFIG['thumb_method'] == 'im' || $CONFIG['thumb_method'] == 'imx' || function_exists('imagecreatefromgif')) {
     $CONFIG['GIF_support'] = 1;
 } else {
     $CONFIG['GIF_support'] = 0;

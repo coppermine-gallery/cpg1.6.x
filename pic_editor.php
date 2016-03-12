@@ -313,7 +313,7 @@ if ($superCage->get->keyExists('id')) {
 <td>
 <table border="0" cellspacing="2" cellpadding="2" class="maintableb" width="100%" >
   <tr>
-<?php if ($CONFIG['thumb_method']=='im' || ($CONFIG['thumb_method']=='gd2' && function_exists('imagerotate'))) { ?>
+<?php if ($CONFIG['thumb_method']=='im' || $CONFIG['thumb_method']=='imx' || ($CONFIG['thumb_method']=='gd2' && function_exists('imagerotate'))) { ?>
 
 
    <td>
