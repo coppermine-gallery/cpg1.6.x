@@ -175,9 +175,9 @@ class imageObject extends ImageTool {
 		}
 		if ($maxS) {
 			if ($this->width > $this->height) {
-				$this->resizeImage($maxS, 0);
+				$this->imgRes->resizeImage($maxS, 0, Imagick::FILTER_LANCZOS, 1);
 			} else {
-				$this->resizeImage(0, $maxS);
+				$this->imgRes->resizeImage(0, $maxS, Imagick::FILTER_LANCZOS, 1);
 			}
 		}
 		

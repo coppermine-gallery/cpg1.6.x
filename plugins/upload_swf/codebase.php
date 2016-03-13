@@ -163,6 +163,8 @@ EOT;
 			<div id="upload_form">
 				<div>
 					<span id="browse_button_place_holder"></span>
+					<input type="checkbox" id="autorient" value="1" checked />
+					<label for="autorient">{$lang_upload_php['auto_orient']}</label>
 					<button id="button_cancel" onclick="swfu.cancelQueue();" disabled="disabled" class="button">
 						{$icon_array['cancel']}
 						{$lang_upload_swf_php['cancel_all']}

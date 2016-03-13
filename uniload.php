@@ -422,6 +422,11 @@ if (is_dir($path_to_image)) {
 	errorOut($lang_upload_php['failure'] . " - '$path_to_image'", 0, __FILE__, __LINE__);
 }
 
+// Set config for auto-orientation if requested
+if ($superCage->post->getInt('autorient')) {
+	$CONFIG['autorient'] = 1;
+}
+
 // Move the picture into its final location
 if (rename($path_to_image, $uploaded_pic)) {
 

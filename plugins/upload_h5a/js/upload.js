@@ -469,7 +469,7 @@ function H5up_done(errcnt) {
 	w.H5uSetup = _setup;
 	w.H5uQctrl = _qCtrl;
 
-})(window,'uniload.php',['flistitl','title','caption','keywords','user1','user2','user3','user4']);
+})(window,'uniload.php',['autorient','flistitl','title','caption','keywords','user1','user2','user3','user4']);
 
 // explain allowed file types (extensions)
 function showAllowedExts() {

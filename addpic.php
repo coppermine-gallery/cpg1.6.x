@@ -37,6 +37,11 @@ $pic_file  = base64_decode($matches[0]);
 $dir_name  = dirname($pic_file) . '/';
 $file_name = basename($pic_file);
 
+// Setup for auto-orient if requested
+if ($superCage->get->getInt('ao')) {
+	$CONFIG['autorient'] = 1;
+}
+
 // Replace the windows directory separator with /
 $dir_name = str_replace('\\\\', '/', $dir_name);
 $dir_name = str_replace('\\', '/', $dir_name);

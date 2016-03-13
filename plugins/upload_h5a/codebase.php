@@ -153,6 +153,8 @@ EOT;
 		<td class="tableb" style="padding:1em">
 			<div style="width:480px">
 				<input type="file" name="userpictures" id="upload_field" multiple="multiple" {$acptmime}/>
+				<input type="checkbox" id="autorient" value="1" checked />
+				<label for="autorient">{$lang_upload_php['auto_orient']}</label>
 				&nbsp;<br />
 				<div id="dropArea">{$lang_plugin_upload_h5a['drop_files']}</div>
 				&nbsp;<br />

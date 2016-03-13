@@ -49,7 +49,7 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
             }
         }
 
-		if (true) {		// maybe configure as an option
+		if (isset($CONFIG['autorient']) && $CONFIG['autorient'] == 1) {
 			$exif = @exif_read_data(realpath($image));
 			if ($exif) {
 				$ort = $exif['Orientation'];

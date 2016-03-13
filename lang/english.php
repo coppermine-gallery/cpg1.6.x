@@ -2182,6 +2182,7 @@ $lang_upload_php['err_alternate_method'] = 'Alternately you can use the <a href=
 $lang_upload_php['err_flash_version'] = 'Upload interface could not load. You may need to install or upgrade Flash Player. Visit the <a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">Adobe website</a> to get the Flash Player.';
 $lang_upload_php['flash_loading'] = 'Upload interface is loading. Please wait a moment...';
 $lang_upload_php['err_no_method'] = 'There must be at least one upload plugin enabled';
+$lang_upload_php['auto_orient'] = 'Auto-orient image(s)';
 
 $lang_upload_swf_php['browse'] = 'Browse...';
 $lang_upload_swf_php['cancel_all'] = 'Cancel all uploads';

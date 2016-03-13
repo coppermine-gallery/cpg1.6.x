@@ -97,6 +97,8 @@ EOT;
 	</td>
 	<td width="70%" class="tableb" valign="top">
 		<input type="file" name="Filedata" size="60" class="listbox">
+		<input type="checkbox" name="autorient" value="1" checked />
+		<label for="autorient">{$lang_upload_php['auto_orient']}</label>
 	</td>
 </tr>
 EOT;

@@ -30,6 +30,10 @@ function fileQueued(file) {
     try {
         // We will put the album id in post params of swfu object
         swfu.addPostParam('album', $("select[name='swf_album']").val());
+        // And whether auto-orient is requested
+        if (document.getElementById('autorient').checked) {
+        	swfu.addPostParam('autorient', 1);
+        }
         var progress = new FileProgress(file, this.customSettings.progressTarget);
         progress.setStatus(js_vars.lang_upload_swf_php.status_pending);
         progress.toggleCancel(true, this);

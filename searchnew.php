@@ -18,6 +18,7 @@
 define('IN_COPPERMINE', true);
 define('SEARCHNEW_PHP', true);
 define('DB_INPUT_PHP', true);
+define('UPLOAD_PHP', true);
 
 require('include/init.inc.php');
 
@@ -50,7 +51,7 @@ $icon_array['batch_add'] = cpg_fetch_icon('searchnew', 2);
 
 function albumselect($id = "album")
 {
-    global $lang_common;
+    global $lang_common, $lang_upload_php;
 
     $options = album_selection_options();
     $only_empty_albums = only_empty_albums_button();
@@ -61,6 +62,8 @@ function albumselect($id = "album")
             $options
         </select>
         $only_empty_albums
+		<input type="checkbox" name="autorient" id="autorient" value="1" checked />
+		<label for="autorient">{$lang_upload_php['auto_orient']}</label>
 EOT;
 }
 
