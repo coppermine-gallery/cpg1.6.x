@@ -1087,13 +1087,13 @@ $config_data = array(
                          ),
     ),
     'impath' => array(
-      'type'          => extension_loaded('imagick') ? 'hidden' : 'textfield',
+      'type'          => 'textfield',
       'default_value' => '',
       'help_link'     => 'f=configuration.htm&amp;as=admin_picture_thumb_advanced_im_path&amp;ae=admin_picture_thumb_advanced_im_path_end',
       'regex'         => '/$|^$',
     ),
     'im_options' => array(
-      'type'          => extension_loaded('imagick') ? 'hidden' : 'textfield',
+      'type'          => 'textfield',
       'default_value' => '-antialias',
       'help_link'     => 'f=configuration.htm&amp;as=admin_picture_thumb_advanced_im_commandline&amp;ae=admin_picture_thumb_advanced_im_commandline_end',
     ),

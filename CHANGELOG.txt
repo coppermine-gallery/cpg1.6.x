@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2016-03-13 [A] In admin config, only show ImageMagick settings if ImageMagick method is selected {ron4mac}
 2016-03-12 [A] Added checkbox option for auto-orient to upload methods (and batch-add) {ron4mac}
 2016-03-11 [D] Updated README.txt {ron4mac}
 2016-03-11 [A] Formally added Imagick Extension as an image manipulation option {ron4mac}
