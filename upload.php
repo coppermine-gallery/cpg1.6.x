@@ -79,30 +79,11 @@ if (!in_array($upload_form, array_keys($upload_choices))) {
     // Try gallery default upload method
     $upload_form = $CONFIG['upload_mechanism'];
     if (!in_array($upload_form, array_keys($upload_choices))) {
-        $upload_form = 'html_single';
+        $upload_form = 'upload_h5a';
     }
     unset($USER['upload_method']);
 }
 
-// If upload method is swf then only include the JS files and other code for it
-if ('swfupload' == $upload_form) {
-    js_include('js/swfupload/swfupload.js');
-    js_include('js/swfupload/swfupload.swfobject.js');
-    js_include('js/swfupload/swfupload.queue.js');
-    js_include('js/swfupload/fileprogress.js');
-    js_include('js/swfupload/handlers.js');
-    js_include('js/setup_swf_upload.js');
-
-    // Set the lang_upload_swf_php language array for use in js
-    set_js_var('lang_upload_swf_php', $lang_upload_swf_php);
-
-    set_js_var('notify_admin', $CONFIG['upl_notify_admin_email']);
-    set_js_var('max_upl_size', $CONFIG['max_upl_size']);
-
-    list($timestamp, $form_token) = getFormToken();
-    set_js_var('timestamp', $timestamp);
-    set_js_var('form_token', $form_token);
-}
 js_include('js/upload.js');
 
 //___________________________________Function Block_______________________________________
@@ -252,149 +233,6 @@ function form_alb_list_box($text, $name)
         </td>
     </tr>
 
-EOT;
-}
-
-
-function form_instructions()
-{
-    global $lang_upload_php, $max_file_size;
-
-    $max_fsize = sprintf($lang_upload_php['max_fsize'], cpg_format_bytes($max_file_size));
-
-    echo <<<EOT
-    <tr>
-        <td colspan="2" class="tableh2">
-            <noscript>
-                    <div class="cpg_message_error">{$lang_upload_php['err_js_disabled']}<br />
-                    {$lang_upload_php['err_alternate_method']}</div>
-            </noscript>
-            <div id="divLoadingContent" class="cpg_message_info" style="display: none;">{$lang_upload_php['flash_loading']}</div>
-            <div id="divLongLoading" class="cpg_message_warning" style="display: none;">{$lang_upload_php['err_flash_disabled']}<br />{$lang_upload_php['err_alternate_method']}</div>
-            <div id="divAlternateContent" class="cpg_message_error" style="display: none;">{$lang_upload_php['err_flash_version']}<br />{$lang_upload_php['err_alternate_method']}</div>
-            <div id="divMaxFilesize" style="display: none;"><strong>{$max_fsize}</strong></div>
-           </td>
-       </tr>
-EOT;
-}
-
-
-// The create form function for simple uploading, one file at a time.
-// Takes the $data array as its object.
-// Type:
-// 0 => text box input
-// 1 => file input
-// 2 => album list
-// 3 => text area input
-// 4 => hidden input
-function create_form_simple(&$data)
-{
-
-    global $CONFIG, $lang_upload_php;
-
-    // Cycle through the elements in the data array.
-    foreach($data as $element) {
-
-        // If the element is another array, parse the definition contained within the array.
-        if ((is_array($element))) {
-            $element[2] = (isset($element[2])) ? $element[2] : '';
-            $element[3] = (isset($element[3])) ? $element[3] : '';
-            $element[4] = (isset($element[4])) ? $element[4] : '';
-
-            // Based on the type declared in the data array's third position, create a different form input.
-            switch ($element[2]) {
-
-                // If the type is a text box input
-                case 0 :
-
-                    //Call the form input function.
-                    text_box_input($element[0], $element[1], $element[3], $element[4], (isset($element[5])) ? $element[5] : '');
-                    break;
-
-                // If the type is a file input.
-                case 1 :
-
-                    // Call the file input function.
-                    file_input($element[0], $element[1], $element[3]);
-                    break;
-
-                // If the type is an album list dropdown.
-                case 2 :
-
-                    // Call the album list function.
-                    form_alb_list_box($element[0], $element[1]);
-                    break;
-
-                // If the type is a text area
-                case 3 :
-
-                    // Call the text area function.
-                    text_area_input($element[0], $element[1], $element[3], (isset($element[4])) ? $element[4] : '');
-                    break;
-
-                // If the type is a hidden form
-                case 4 :
-
-                    // Call the hidden input funtion.
-                    hidden_input($element[0], $element[1]);
-                    break;
-
-                // If the type is not present, kill the script.
-                default:
-                    cpg_die(ERROR, $lang_upload_php['reg_instr_1'], __FILE__, __LINE__);
-            } // switch
-        } else {
-
-            // If the element is not an array, it is a label, so call the label function.
-            form_label($element);
-        }
-    }
-}
-
-
-// Function to create the swfupload form
-function create_form_swfupload()
-{
-    global $lang_common, $lang_upload_swf_php, $icon_array;
-    form_alb_list_box($lang_common['album'], 'album');
-
-    echo <<<EOT
-    <tr>
-        <td colspan="2" class="tableb tableb_alternate">
-            <div id="upload_form">
-                <div>
-                    <span id="browse_button_place_holder"></span>
-                    <button id="button_cancel" onclick="swfu.cancelQueue();" disabled="disabled" class="button">
-                        {$icon_array['cancel']}
-                        {$lang_upload_swf_php['cancel_all']}
-                    </button>
-                </div>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2" class="tableb">
-                <div class="fieldset flash" id="upload_progress">
-                    <span class="legend">{$lang_upload_swf_php['upload_queue']}</span>
-                </div>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2" class="tableb tableb_alternate">
-            <button id="button_continue" class="button" onclick="return continue_upload();" style="display: none; margin-top: 5px;">
-                {$icon_array['continue']}
-                {$lang_common['continue']}
-            </button>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2" class="tableh2">
-            <div id="upload_status">
-                <span id="upload_count">0</span> {$lang_upload_swf_php['files_uploaded']}:
-            </div>
-            <div id="uploadedThumbnails"></div>
-        </td>
-    </tr>
 EOT;
 }
 

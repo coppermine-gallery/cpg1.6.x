@@ -700,7 +700,10 @@ EOT;
 
 EOT;
 	} else {
+		// Pre-install the core upload plugins
 		cpg_db_query("INSERT INTO {$CONFIG['TABLE_PREFIX']}plugins (name, path, priority) VALUES ('CoreH5A Upload', 'upload_h5a', 0), ('CoreSWF Upload', 'upload_swf', 1), ('CoreSGL Upload', 'upload_sgl', 2)");
+		// And set the default mechanism to 'upload_h5a'
+		cpg_db_query("UPDATE {$CONFIG['TABLE_PREFIX']}config SET value='upload_h5a' WHERE name='upload_mechanism'");
 
 		// employ any existing html5upload configurations
     	$result = cpg_db_query("SELECT name,value FROM {$CONFIG['TABLE_PREFIX']}config WHERE name LIKE 'html5upload_config%'");
@@ -712,7 +715,7 @@ EOT;
 			}
 		}
 		// if there were no html5upload configs, set a default one
-		if (!$cfgs) {
+		if (!isset($cfgs) || !$cfgs) {
 			cpg_db_query("INSERT INTO {$CONFIG['TABLE_PREFIX']}config VALUES ('upload_h5a', 'a:11:{s:10:\"concurrent\";i:3;s:8:\"upldsize\";i:0;s:8:\"autoedit\";i:1;s:8:\"acptmime\";s:7:\"image/*\";s:8:\"enabtitl\";i:0;s:8:\"enabdesc\";i:0;s:8:\"enabkeys\";i:1;s:8:\"enabusr1\";i:0;s:8:\"enabusr2\";i:0;s:8:\"enabusr3\";i:0;s:8:\"enabusr4\";i:0;}')");
 		}
 
@@ -749,6 +752,8 @@ function delete_files()
     $delete_file_array = array(
         'js/jquery-1.3.2.js',
         'logs/log_header.inc.php',
+        'js/setup_swf_upload.js',
+        'js/swfupload',
     );
 
     // Check if the file exists in the first place
