@@ -59,10 +59,12 @@ if ($superCage->post->keyExists('doupd')) {
 	<script type="text/javascript">
 	function hasUpdSelect(frm)
 	{
-		if (!frm.updid.value) {
+		if ((Array.isArray(frm.updid) && !frm.updid.value) || !frm.updid.checked) {
 			alert('{$lang_update_php['select_update']}');
 			return false;
 		}
+		$('#doupd').hide();
+		$('#upding').show();
 		return true;
 	}
 	</script>
@@ -85,7 +87,8 @@ EOT;
 		list($timestamp, $form_token) = getFormToken();
 		echo "<input type=\"hidden\" name=\"form_token\" value=\"{$form_token}\" />";
 		echo "<input type=\"hidden\" name=\"timestamp\" value=\"{$timestamp}\" />";
-		echo '<button type="submit" name="doupd" id="doupd" class="admin">'.$lang_update_php['perform_update'].'</button></form>';
+		echo '<button type="submit" name="doupd" id="doupd" class="admin">'.$lang_update_php['perform_update'].'</button>';
+		echo '<img id="upding" src="images/loader.gif" alt="" style="display:none" /></form>';
 	} else {
 		theme_msg_box($lang_update_php['no_updates_title'], $lang_update_php['no_updates_msg'], 'cpg_message_warning', '', '');
 	}
