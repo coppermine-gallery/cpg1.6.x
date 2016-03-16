@@ -59,7 +59,7 @@ if ($superCage->post->keyExists('doupd')) {
 	<script type="text/javascript">
 	function hasUpdSelect(frm)
 	{
-		if ((Array.isArray(frm.updid) && !frm.updid.value) || !frm.updid.checked) {
+		if ((frm.updid.length && !frm.updid.value) || (!frm.updid.length && !frm.updid.checked)) {
 			alert('{$lang_update_php['select_update']}');
 			return false;
 		}
