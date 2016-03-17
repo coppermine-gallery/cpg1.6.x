@@ -4310,6 +4310,28 @@ function themeSelect($parameter)
 
 
 /**
+ * cpg_has_updates()
+ *
+ * @return
+ **/
+
+function cpg_has_updates ()
+{
+	include 'include/updates.inc.php';
+
+	if (!isset($last_updates_check) || (time() - $last_updates_check) > 86400) {
+		$updf = '<?php $last_updates_check = '.time().'; $cpg_has_updates = ';
+		require_once 'include/upgrader.inc.php';
+		$upgc = new CPG_Updater();
+		$has = (bool) count($upgc->getUpdates());
+		file_put_contents('include/updates.inc.php', $updf . (string) $has . ';');
+		return $has;
+	}
+	return false;
+}
+
+
+/**
  * cpg_alert_dev_version()
  *
  * @return
@@ -4337,6 +4359,16 @@ EOT;
         {$lang_version_alert['gallery_offline']}
         </div>
 EOT;
+    }
+
+	// notification about any updates available
+    if (cpg_has_updates ()) {
+        $return = <<<EOT
+        <div class="cpg_message_info">
+        <h4>{$lang_version_alert['updates_available']}</h4>
+EOT;
+        $return .= '<a href="updater.php" class="button">'.$lang_version_alert['view_updates'].'</a>';
+        $return .= '</div>';
     }
 
     // display news from coppermine-gallery.net

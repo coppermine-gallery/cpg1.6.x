@@ -337,6 +337,9 @@ $lang_version_alert['gallery_offline'] = 'The gallery is currently offline and w
 $lang_version_alert['coppermine_news'] = 'News from coppermine-gallery.net';
 $lang_version_alert['no_iframe'] = 'Your browser cannot display inline frames';
 $lang_version_alert['hide'] = 'hide';
+// for version update checks
+$lang_version_alert['updates_available'] = 'There is a newer version of CPG available.';
+$lang_version_alert['view_updates'] = 'View Updates';
 
 $lang_create_tabs['previous'] = 'Previous';
 $lang_create_tabs['next'] = 'Next';
@@ -2412,6 +2415,18 @@ $lang_update_php['current_nr'] = ' (current, not recommended)';
 $lang_update_php['unable_write_config'] = 'Unable to write config file';
 // 1.6 core upload plugins
 $lang_update_php['core_upload_plugs'] = 'Enable core upload plugins';
+// for scripted upgrade/update mechanism
+$lang_update_php['no_zip_extn'] = 'The extension providing ZipArchive is not available';
+$lang_update_php['files_placed_title'] = 'Update files placed';
+$lang_update_php['files_placed_msg'] = 'All update files were successfully placed';
+$lang_update_php['complete_update'] = 'Complete Update';
+$lang_update_php['select_update'] = 'Please select the update to perform.';
+$lang_update_php['available_updates'] = 'Available Updates';
+$lang_update_php['perform_update'] = 'Perform Selected Update';
+$lang_update_php['no_updates_title'] = 'No update available';
+$lang_update_php['no_updates_msg'] = 'No updates are available for your version';
+$lang_update_php['not_found'] = 'Releases of CPG not found at Github';
+$lang_update_php['save_error'] = 'Could not save new update. Operation aborted.';
 }
 
 // ------------------------------------------------------------------------- //

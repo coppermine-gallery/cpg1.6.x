@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2016-03-17 [A] Integrated 'updates available' notification and scripted update capability {ron4mac}
 2016-03-16 [A] Added beginning of tool for scripted upgrades (upgrader.php) {ron4mac}
 2016-03-16 [M] Cleaned up some defunct swf stuff and improved upgrading over 1.5x {ron4mac}
 2016-03-13 [A] In admin config, only show ImageMagick settings if ImageMagick method is selected {ron4mac}

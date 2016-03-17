@@ -1,5 +1,6 @@
 albums/userpics/1*/
 include/config.inc.php
+include/updates.inc.php
 php_mail.log
 
 logs/*
