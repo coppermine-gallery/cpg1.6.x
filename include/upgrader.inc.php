@@ -21,12 +21,13 @@ class CPG_Updater
 {
 	protected $updates = array();
 
-	public function __construct ()
+	public function __construct ($quiet=false)
 	{
 		global $lang_update_php;
 
 		$releases = json_decode($this->getUrlData('https://api.github.com/repos/coppermine-gallery/cpg1.6.x/releases'));
 		if (!$releases) {
+			if ($quiet) return;
 			cpg_die(ERROR, $lang_update_php['not_found']?:'Releases of CPG not found at Github', __FILE__, __LINE__);
 		}
 		foreach ($releases as $r) {

@@ -4322,7 +4322,7 @@ function cpg_has_updates ()
 	if (!isset($last_updates_check) || (time() - $last_updates_check) > 86400) {
 		$updf = '<?php $last_updates_check = '.time().'; $cpg_has_updates = ';
 		require_once 'include/upgrader.inc.php';
-		$upgc = new CPG_Updater();
+		$upgc = new CPG_Updater(true);
 		$has = (bool) count($upgc->getUpdates());
 		file_put_contents('include/updates.inc.php', $updf . (string) $has . ';');
 		return $has;
