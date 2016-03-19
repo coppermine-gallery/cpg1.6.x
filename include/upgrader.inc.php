@@ -120,6 +120,7 @@ class CPG_Updater
 
 	private function curly ($url, $agent)
 	{
+		if (!extension_loaded('libcurl')) return '';
 		// create curl resource
 		$ch = curl_init();
 		// set url
