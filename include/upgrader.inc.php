@@ -31,6 +31,7 @@ class CPG_Updater
 			cpg_die(ERROR, $lang_update_php['not_found']?:'Releases of CPG not found at Github', __FILE__, __LINE__);
 		}
 		foreach ($releases as $r) {
+			//if ($r->prerelease) continue;	// don't offer any prereleases
 			$tag = $r->tag_name;
 			if (preg_match('/\d+\.\d+\.\d+/', $tag, $m)) {
 				if (version_compare($m[0], COPPERMINE_VERSION) == 1) {
