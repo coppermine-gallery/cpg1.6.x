@@ -117,7 +117,7 @@ class CPG_Updater
 						'tag' => $m[0],
 						'ball' => $r->zipball_url,
 						'name' => $r->name,
-						'body' => $r->body
+						'body' => nl2br($r->body)
 						);
 				}
 			}
