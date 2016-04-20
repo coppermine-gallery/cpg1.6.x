@@ -38,3 +38,6 @@ INSERT INTO CPG_config VALUES ('batch_add_hide_existing_files', '0');
 INSERT INTO CPG_config VALUES ('only_empty_albums', '0');
 INSERT INTO CPG_config VALUES ('user_manager_hide_file_stats', '0');
 INSERT INTO CPG_config VALUES ('album_uploads_default', 'NO');
+
+# Add field to plugin table to signify enabled/disabled
+ALTER TABLE CPG_plugins ADD `enabled` TINYINT(1) NOT NULL DEFAULT '1' AFTER `name`;

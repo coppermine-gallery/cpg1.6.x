@@ -79,25 +79,27 @@ abstract class CPGPluginAPI {
 
             $thisplugin =& $CPG_PLUGINS[$plugin['plugin_id']];
 
-            include ('./plugins/'.$thisplugin->path.'/codebase.php');
-
-            // Load language files
-            cpg_load_plugin_language_file($thisplugin->path);
-
-            // Check if plugin has a wakeup action
-            if (!($thisplugin->awake = CPGPluginAPI::action('plugin_wakeup',true,$thisplugin->plugin_id))) {
-
-
-                if ($CONFIG['log_mode']) {
-                    log_write("Couldn't wake plugin '" . $thisplugin->name, CPG_GLOBAL_LOG);
-                }
-
-                $thisplugin->filters = array();
-                $thisplugin->actions = array();
-                if (!isset($thisplugin->error['desc']) || is_null($thisplugin->error['desc'])) {
-                    $thisplugin->error['desc'] = "Couldn't wake plugin '{$thisplugin->name}'";
-                }
-            }
+			if ($thisplugin->enabled) {
+	            include ('./plugins/'.$thisplugin->path.'/codebase.php');
+	
+	            // Load language files
+	            cpg_load_plugin_language_file($thisplugin->path);
+	
+	            // Check if plugin has a wakeup action
+	            if (!($thisplugin->awake = CPGPluginAPI::action('plugin_wakeup',true,$thisplugin->plugin_id))) {
+	
+	
+	                if ($CONFIG['log_mode']) {
+	                    log_write("Couldn't wake plugin '" . $thisplugin->name, CPG_GLOBAL_LOG);
+	                }
+	
+	                $thisplugin->filters = array();
+	                $thisplugin->actions = array();
+	                if (!isset($thisplugin->error['desc']) || is_null($thisplugin->error['desc'])) {
+	                    $thisplugin->error['desc'] = "Couldn't wake plugin '{$thisplugin->name}'";
+	                }
+	            }
+			}
 
             $index++;
         }
@@ -168,8 +170,8 @@ abstract class CPGPluginAPI {
             // Reference current plugin to local scope
             $thisplugin =& $CPG_PLUGINS[$plugin_id];
 
-            // Skip this plugin; the key isn't set
-            if (!isset($thisplugin->filters[$key]) || (!$thisplugin->awake)) {
+            // Skip this plugin; the plugin is not enabled or the key isn't set
+            if (!$thisplugin->enabled || !isset($thisplugin->filters[$key]) || (!$thisplugin->awake)) {
                  return $value;
             }
 
@@ -196,6 +198,9 @@ abstract class CPGPluginAPI {
 
                 // Reference current plugin to local scope
                 $thisplugin =& $CPG_PLUGINS[$plugin_id];
+
+				// If not enabled ignore this one
+				if (!$thisplugin->enabled) continue;
 
                 // Get the filter's value from the plugin
                 if (!isset($thisplugin->filters[$key]) || ($key != 'plugin_wakeup' && !$thisplugin->awake)) {
@@ -256,8 +261,8 @@ abstract class CPGPluginAPI {
             // Reference current plugin to local scope
             $thisplugin =& $CPG_PLUGINS[$plugin_id];
 
-            // Skip this plugin; the key isn't set
-            if (!isset($thisplugin->actions[$key]) || (!$thisplugin->awake && $key!='plugin_wakeup')) {
+            // Skip this plugin; the plugin is not enabled or the key isn't set
+            if (!$thisplugin->enabled || !isset($thisplugin->actions[$key]) || (!$thisplugin->awake && $key!='plugin_wakeup')) {
 
                  return $value;
             }
@@ -285,6 +290,9 @@ abstract class CPGPluginAPI {
 
                 // Copy current plugin to local scope
                 $thisplugin =& $CPG_PLUGINS[$plugin_id]; //changed to reference for PHP4 see note below
+
+				// If not enabled ignore this one
+				if (!$thisplugin->enabled) continue;
 
                 // Get the action's value from the plugin
                 if (!isset($thisplugin->actions[$key]) || ($key != 'plugin_wakeup' && !$thisplugin->awake)) {

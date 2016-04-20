@@ -3925,6 +3925,7 @@ EOT;
         $table = array();
         foreach ($CPG_PLUGINS as $plugin) {
             $table[] = array('Name', $plugin->name);
+            $table[] = array('Enabled', $plugin->enabled);
             $table[] = array('Actions', implode(', ', array_keys($plugin->actions)));
             $table[] = array('Filters', implode(', ', array_keys($plugin->filters)));
             $table[] = array('--------------');
@@ -5947,7 +5948,7 @@ function captcha_plugin_enabled($section = 'contact')
 
     if (!empty($CPG_PLUGINS)) {
         foreach ($CPG_PLUGINS as $plugin) {
-            if (isset($plugin->filters['captcha_'.$section.'_print'])) {
+            if ($plugin->enabled && isset($plugin->filters['captcha_'.$section.'_print'])) {
                 return true;
             }
         }

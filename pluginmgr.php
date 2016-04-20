@@ -58,7 +58,7 @@ function display_plugin_list() {
     $no_selected = !$CONFIG['enable_plugins'] ? 'checked="checked"' : '';
     print '<form name="pluginenableconfig" id="cpgform2" action="'.$CPG_PHP_SELF.'" method="post" style="margin:0px;padding:0px">';
     starttable('-1', cpg_fetch_icon('plugin_mgr', 2) . $lang_pluginmgr_php['pmgr'].$help,3);
-echo <<< EOT
+echo <<<EOT
         <tr>
                 <td class="tableh2" colspan="3">
                     {$lang_pluginmgr_php['explanation']}
@@ -83,7 +83,7 @@ echo <<< EOT
 EOT;
     endtable();
     print '</form>';
-echo <<< EOT
+echo <<<EOT
         <br />
 EOT;
 
@@ -106,6 +106,7 @@ EOT;
         $installed_plugins[$loop_counter] = array(
           'index' => $thisplugin->index,
           'plugin_id' => $thisplugin->plugin_id,
+          'enabled' => $thisplugin->enabled,
           'path' => $thisplugin->path,
           'priority' => $thisplugin->priority,
           'error' => $thisplugin->error,
@@ -121,6 +122,7 @@ EOT;
         $installed_plugins[$loop_counter] = array(
           'index' => $loop_counter,
           'plugin_id' => $installed_plugin['plugin_id'],
+          'enabled' => $installed_plugin['enabled'],
           'path' => $installed_plugin['path'],
           'priority' => $installed_plugin['priority'],
           'error' => array(),
@@ -172,9 +174,11 @@ EOT;
                 $loop_counter = 0;
             }
 
+			$enabstyle = $thisplugin['enabled'] ? '' : 'style="opacity:0.5"';
+
             echo <<<EOT
         <tr>
-            <td width="90%" class="{$row_style_class}">
+            <td width="90%" class="{$row_style_class}"{$enabstyle}>
                 <a name="{$pluginPath}"></a>
                 <table border="0" width="100%" cellspacing="0" cellpadding="0" class="maintable">
                     <tr>
@@ -214,6 +218,15 @@ EOT;
             <td class="{$row_style_class}" valign="top">
             <table border="0" width="100%" cellspacing="0" cellpadding="0">
             <tr>
+EOT;
+            $plgable = cpg_fetch_icon($thisplugin['enabled'] ? 'plugin_enabled' : 'plugin_disabled', 0);
+            $act = $thisplugin['enabled'] ? 'disable' : 'enable';
+			echo <<<EOT
+            <td width="3%" align="center" valign="middle">
+                <a href="pluginmgr.php?op={$act}&amp;p={$thisplugin['plugin_id']}&amp;form_token={$form_token}&amp;timestamp={$timestamp}" title="{$lang_pluginmgr_php[$act]}">
+                    {$plgable}
+                </a>
+            </td>
 EOT;
             if (($thisplugin['index'] > 0) && ($plugins_count > 1)) {
                 $up = cpg_fetch_icon('up', 0);
@@ -384,6 +397,8 @@ EOT;
             }
             unset($plugin_cpg_version);
             $delete = cpg_fetch_icon('delete', 0);
+            $enable = cpg_fetch_icon('enable', 0);
+            $disable = cpg_fetch_icon('disable', 0);
             echo <<<EOT
                 </table>
             </td>
@@ -416,6 +431,13 @@ EOT;
  * Main code
  */
 
+function able_plugin ($plgid, $val)
+{
+	global $CONFIG;
+
+	$sql = 'UPDATE '.$CONFIG['TABLE_PLUGINS'].' SET enabled='.$val.' WHERE plugin_id='.$plgid.';';
+	$result = cpg_db_query($sql);
+}
 
 /**
  * Plugin manager events
@@ -466,6 +488,13 @@ switch ($op) {
         } else {
           cpgRedirectPage('pluginmgr.php',$lang_pluginmgr_php['pmgr'],$lang_pluginmgr_php['plugin_disabled_note']);
         }
+        break;
+    case 'enable':
+    case 'disable':
+        if (!checkFormToken()) {
+            cpg_die(ERROR, $lang_errors['invalid_form_token'], __FILE__, __LINE__);
+        }
+        able_plugin($p, $op=='enable'?1:0);
         break;
 //@RJC\
 	case 'admin':
@@ -649,14 +678,14 @@ if (($CONFIG['enable_plugins'] != 1) || (($op != 'install') && ($op != 'uninstal
     // Display configure page table header
     starttable('100%',$lang_pluginmgr_php['configure_plugin'] . ': ' . $CPG_PLUGINS['new']->name);
 
-    echo <<< EOT
+    echo <<<EOT
     <tr>
         <td class="tableb" valign="top" width="100%">
 EOT;
 
         // Execute 'plugin_configure' action on the new plugin
         CPGPluginAPI::action('plugin_configure',$installed,CPG_EXEC_NEW);
-    echo <<< EOT
+    echo <<<EOT
         </td>
     </tr>
 EOT;
@@ -673,7 +702,7 @@ EOT;
 	}
 
 	$cfg_file = @$superCage->get->getEscaped('c');
-	echo <<< EOT
+	echo <<<EOT
 	<form id="cfgForm" action="pluginmgr.php?op=admin&amp;p={$p}&amp;c={$cfg_file}" method="post">
 EOT;
 
@@ -681,7 +710,7 @@ EOT;
 	include('./plugins/'.$actonplugin->path.'/'.$cfg_file.'.php');
 
 	list($timestamp, $form_token) = getFormToken();
-	echo <<< EOT
+	echo <<<EOT
 	<input type="hidden" name="form_token" value="{$form_token}" />
 	<input type="hidden" name="timestamp" value="{$timestamp}" />
 	</form>
@@ -692,14 +721,14 @@ EOT;
     // Display cleanup page table header
     starttable('100%',$lang_pluginmgr_php['cleanup_plugin'] . ': ' . $CPG_PLUGINS[$plugin_id]->name);
 
-    echo <<< EOT
+    echo <<<EOT
     <tr>
         <td class="tableb" valign="top" width="100%">
 EOT;
 
         // Execute 'plugin_cleanup' action on the plugin
         CPGPluginAPI::action('plugin_cleanup',$uninstalled,$plugin_id);
-    echo <<< EOT
+    echo <<<EOT
         </td>
     </tr>
 EOT;

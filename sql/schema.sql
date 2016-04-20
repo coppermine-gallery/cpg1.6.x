@@ -273,6 +273,7 @@ CREATE TABLE CPG_pictures (
 CREATE TABLE CPG_plugins (
   plugin_id int(10) unsigned NOT NULL auto_increment,
   name varchar(64) NOT NULL default '',
+  enabled tinyint(1) NOT NULL DEFAULT '1',
   path varchar(128) NOT NULL default '',
   priority int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (plugin_id),

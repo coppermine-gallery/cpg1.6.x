@@ -1768,6 +1768,8 @@ $lang_pluginmgr_php['announcement_thread'] = 'Announcement thread'; // cpg1.6
 
 $lang_pluginmgr_php['plugin_action'] = 'Action';	// cpg1.6
 $lang_pluginmgr_php['saved_config'] = 'The configuration for &laquo;%s&raquo; has been saved.';	// cpg1.6
+$lang_pluginmgr_php['enable'] = 'Enable';	// cpg1.6
+$lang_pluginmgr_php['disable'] = 'Disable';	// cpg1.6
 }
 
 // ------------------------------------------------------------------------- //
