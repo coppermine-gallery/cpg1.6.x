@@ -23,7 +23,9 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
-2016-03-22 [C] use nl2br() in upgrader for release body text {ron4mac}
+2016-04-19 [A] Added plugin enable/disable feature {ron4mac}
+2016-03-22 [M] Put code in place to not offer pre-releases as a scripted upgrade choice {ron4mac}
+2016-03-22 [C] Use nl2br() in upgrader for release body text {ron4mac}
 2016-03-18 [B] Don't die during check for updates when there is no access to Github {ron4mac}
 2016-03-17 [A] Integrated 'updates available' notification and scripted update capability {ron4mac}
 2016-03-16 [A] Added beginning of tool for scripted upgrades (upgrader.php) {ron4mac}
