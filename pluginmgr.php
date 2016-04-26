@@ -174,7 +174,7 @@ EOT;
                 $loop_counter = 0;
             }
 
-			$enabstyle = $thisplugin['enabled'] ? '' : 'style="opacity:0.5"';
+			$enabstyle = $thisplugin['enabled'] ? '' : ' style="opacity:0.5"';
 
             echo <<<EOT
         <tr>

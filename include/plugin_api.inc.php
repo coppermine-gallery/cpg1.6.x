@@ -439,6 +439,7 @@ abstract class CPGPluginAPI {
                                     array(
                                           'plugin_id' => 'new',
                                           'name' => $name,
+                                          'enabled' => 1,
                                           'priority' => $priority,
                                           'path' => $path
                                          )
