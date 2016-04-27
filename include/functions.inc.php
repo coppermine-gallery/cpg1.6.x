@@ -237,7 +237,7 @@ function cpg_db_query($query, $compat=null)
  * @return
  **/
 
-function cpg_db_error($the_error)
+function cpg_db_error($the_error, $compat=null)
 {
     global $CONFIG, $CPGDB, $lang_errors, $LINEBREAK;
 
