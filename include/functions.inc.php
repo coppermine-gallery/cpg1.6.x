@@ -197,13 +197,13 @@ function cpg_db_get_connection($cfg=null)
  * @return
  **/
 
-function cpg_db_query($query, $compat=null)
+function cpg_db_query($query, $dbobj=null)
 {
     global $CONFIG, $CPGDB, $query_stats, $queries;
 
     $query_start = cpgGetMicroTime();
 
-    $result = $CPGDB->query($query);
+    $result = $dbobj ? $dbobj->query($query) : $CPGDB->query($query);
 
     $query_end = cpgGetMicroTime();
 
@@ -237,16 +237,18 @@ function cpg_db_query($query, $compat=null)
  * @return
  **/
 
-function cpg_db_error($the_error, $compat=null)
+function cpg_db_error($the_error, $dbobj=null)
 {
     global $CONFIG, $CPGDB, $lang_errors, $LINEBREAK;
 
-    log_write("$the_error the following error was encountered: $LINEBREAK" . $CPGDB->getError(), CPG_DATABASE_LOG);
+	$dbo = $dbobj ?: $CPGDB;
+
+    log_write("$the_error the following error was encountered: $LINEBREAK" . $dbo->getError(), CPG_DATABASE_LOG);
 
     if ($CONFIG['debug_mode'] === '0' || ($CONFIG['debug_mode'] === '2' && !GALLERY_ADMIN_MODE)) {
         cpg_die(CRITICAL_ERROR, $lang_errors['database_query'], __FILE__, __LINE__);
     } else {
-        $the_error .= $LINEBREAK . $LINEBREAK . 'database error: ' . $CPGDB->getError() . $LINEBREAK;
+        $the_error .= $LINEBREAK . $LINEBREAK . 'database error: ' . $dbo->getError() . $LINEBREAK;
         $out        = "<br />" . $lang_errors['database_query'] . ".<br /><br/>
                 <form name=\"dbsql\" id=\"dbsql\"><textarea rows=\"8\" cols=\"60\">" . htmlspecialchars($the_error) . "</textarea></form>";
         cpg_die(CRITICAL_ERROR, $out, __FILE__, __LINE__);
@@ -372,13 +374,17 @@ function cpg_db_free_result($result)
  * @return integer $id
  **/
 
-function cpg_db_last_insert_id()
+function cpg_db_last_insert_id($dbobj=null)
 {
     global $CPGDB;
 
-    return $CPGDB->insertId();
+    return $dbobj ? $dbobj->insertId() : $CPGDB->insertId();
 }
 
+function cpg_db_insert_id($dbobj=null)
+{
+	return cpg_db_last_insert_id($dbobj);
+}
 
 /**
  * cpg_db_affected_rows()
@@ -388,11 +394,11 @@ function cpg_db_last_insert_id()
  * @return integer $id
  **/
 
-function cpg_db_affected_rows()
+function cpg_db_affected_rows($dbobj=null)
 {
     global $CPGDB;
 
-    return $CPGDB->affectedRows();
+    return $dbobj ? $dbobj->affectedRows() : $CPGDB->affectedRows();
 }
 
 
