@@ -197,7 +197,7 @@ function cpg_db_get_connection($cfg=null)
  * @return
  **/
 
-function cpg_db_query($query)
+function cpg_db_query($query, $compat=null)
 {
     global $CONFIG, $CPGDB, $query_stats, $queries;
 
@@ -333,6 +333,20 @@ function cpg_db_fetch_assoc($result, $free=false)
 function cpg_db_fetch_array($result, $free=false)
 {
     return $result->fetchArray($free);
+}
+
+
+/**
+ * cpg_db_result()
+ *
+ * Fetch data from a certain row and field
+ *
+ * @param $result
+ **/
+
+function cpg_db_result($result, $row=0, $field=0, $free=false)
+{
+    $result->result($row, $field, $free);
 }
 
 

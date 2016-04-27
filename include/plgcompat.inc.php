@@ -1,6 +1,29 @@
 <?php
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+Plugins using these methods to access the CPG database can be made to be compatible
+both with v1.5.x and v1.6.x
+
+Require this file in your code:
+  require_once './include/plgcompat.inc.php';
+
+Change msql_<command> calls to Plg_Db::<command>
+  $r = mysql_fetch_assoc($result)
+  v   v   v   v   v   v   v   v
+  $r = Plg_Db::fetch_assoc($result);
+
+Please note the additional 'free' parameter in the methods below when getting result data.
+It can be used to automatically free the result after returning the data.
+
+WARNING!!!!
+If you currently use "cpg_db_fetch_row()" in your code, its behavior changes between CPG
+1.5.x and 1.6.x.  Version 1.5 returns an associated array while version 1.6 will return
+a numerically indexed array. The recommendation is that you change your version 1.5
+"cpg_db_fetch_row()" calls to "Plg_Db::fetch_assoc()" calls.
+
+ * * * * * * * * * * * * * * * * * * * * * * * * * * */
+ 
 abstract class Plg_Db
 {
 	static protected $is15;

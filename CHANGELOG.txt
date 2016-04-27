@@ -23,6 +23,8 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2016-04-27 [M] Improved cpg_db_ function compatabilities {ron4mac}
+2016-04-25 [A] Added plugin compatibility include file {ron4mac}
 2016-04-19 [A] Added plugin enable/disable feature {ron4mac}
 2016-03-22 [M] Put code in place to not offer pre-releases as a scripted upgrade choice {ron4mac}
 2016-03-22 [C] Use nl2br() in upgrader for release body text {ron4mac}
