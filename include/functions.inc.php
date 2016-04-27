@@ -346,7 +346,7 @@ function cpg_db_fetch_array($result, $free=false)
 
 function cpg_db_result($result, $row=0, $field=0, $free=false)
 {
-    $result->result($row, $field, $free);
+    return $result->result($row, $field, $free);
 }
 
 
