@@ -251,7 +251,7 @@ class zip
 
   while ($pos < $size)
   {
-    $byte = @fread($zip, 1); $bytes=($bytes << 8) | Ord($byte);
+    $byte = @fread($zip, 1); $bytes=(($bytes << 8) | Ord($byte)) & 0xffffffff;
     if ($bytes == 0x504b0506){ $pos++; break; } $pos++;
   }
 

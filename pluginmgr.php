@@ -278,7 +278,7 @@ EOT;
     $help_upload = '&nbsp;'.cpg_display_help('f=plugins.htm&amp;as=plugin_manager_upload&amp;ae=plugin_manager_upload_end&amp;top=1', '640', '480');
     $help_install = '&nbsp;'.cpg_display_help('f=plugins.htm&amp;as=plugin_manager_install&amp;ae=plugin_manager_install_end&amp;top=1', '640', '480');
     starttable('100%');
-echo <<<EOT
+	echo <<<EOT
         <tr>
                 <td class="tableh1" width="90%">
                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -286,6 +286,8 @@ echo <<<EOT
                             <td align="left">
                                 <strong><span class="statlink">{$lang_pluginmgr_php['n_plugins']}</span></strong>{$help_install}
                             </td>
+EOT;
+	if (extension_loaded('zlib')) echo <<<EOT
                             <td align="right">
                                     <input type="file" size="40" name="plugin" class="textinput" />
                                     <input type="hidden" name="form_token" value="{$form_token}" />
@@ -293,6 +295,8 @@ echo <<<EOT
                                     <input type="submit" class="button" value="{$lang_pluginmgr_php['upload']}" />
                                     {$help_upload}
                             </td>
+EOT;
+	echo <<<EOT
                         </tr>
                     </table>
                 </td>
