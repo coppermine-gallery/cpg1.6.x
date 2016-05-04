@@ -2420,7 +2420,7 @@ $lang_update_php['core_upload_plugs'] = 'Enable core upload plugins';
 // for scripted upgrade/update mechanism
 $lang_update_php['no_zip_extn'] = 'The extension providing ZipArchive is not available';
 $lang_update_php['files_placed_title'] = 'Update files placed';
-$lang_update_php['files_placed_msg'] = 'All update files were successfully placed';
+$lang_update_php['files_placed_msg'] = 'All update files were successfully placed. Click below to complete the update.';
 $lang_update_php['complete_update'] = 'Complete Update';
 $lang_update_php['select_update'] = 'Please select the update to perform.';
 $lang_update_php['available_updates'] = 'Available Updates';
@@ -2429,6 +2429,7 @@ $lang_update_php['no_updates_title'] = 'No update available';
 $lang_update_php['no_updates_msg'] = 'No updates are available for your version';
 $lang_update_php['not_found'] = 'Releases of CPG not found at Github';
 $lang_update_php['save_error'] = 'Could not save new update. Operation aborted.';
+$lang_update_php['pre_warning'] = '<span style="color:red">WARNING: This is a pre-release version!</span>';
 }
 
 // ------------------------------------------------------------------------- //

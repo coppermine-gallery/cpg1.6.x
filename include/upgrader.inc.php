@@ -38,6 +38,7 @@ class CPG_Updater
 					$this->updates[] = array(
 						'id' => $r->id,
 						'tag' => $m[0],
+						'pre' => $r->prerelease,
 						'ball' => $r->zipball_url,
 						'name' => $r->name,
 						'body' => nl2br($r->body)
@@ -83,13 +84,13 @@ class CPG_Updater
 				list($bd,$fp) = explode('/', $stat['name'], 2);
 				if (substr($fp, -1) == '/') {
 					if ($this->matchedPath($fp, $p2s)) continue;
-		//			@mkdir($fp);
+					if (!is_dir($fp)) @mkdir($fp);
 					$this->logIt("DIR: {$fp}");
 				} elseif ($fp) {
 					if (in_array($fp, $f2p) && file_exists($fp)) continue;
 					if ($this->matchedPath($fp, $p2s)) continue;
 					$fc = $zip->getFromIndex($i);
-		//			file_put_contents($fp, $fc);
+					file_put_contents($fp, $fc);
 					$this->logIt("PUT: {$fp}");
 				}
 			}

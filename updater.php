@@ -32,6 +32,13 @@ if (!extension_loaded('zip')) {
 }
 
 pageheader('Coppermine Upgrader');
+echo <<<EOT
+<style type="text/css">
+span.admin_menu { padding:1px; }
+span.admin_menu a:link { color:#FFF; }
+span.admin_menu a:visited { color:#FFF; }
+</style>
+EOT;
 $updater = new CPG_Updater();
 if ($superCage->post->keyExists('doupd')) {
 	if (!checkFormToken()) {
@@ -62,10 +69,12 @@ EOT;
 		starttable('100%', $lang_update_php['available_updates'], 2);
 		foreach ($updates as $k => $updt) {
 			$tclass = $k%2 ? 'tableb_alternate' : 'tabelb';
+			$xmsg = '';
+			if ($updt['pre']) { $xmsg .= '<br />'.$lang_update_php['pre_warning']; }
 			echo <<<EOT
 		<tr>
 			<td class="{$tclass}"><input type="radio" name="updid" value="{$updt['id']}" /></td>
-			<td class="{$tclass}"><b>{$updt['name']}</b><br />{$updt['body']}</td>
+			<td class="{$tclass}"><b>{$updt['name']}</b>{$xmsg}<br />{$updt['body']}</td>
 		</tr>
 EOT;
 		}
