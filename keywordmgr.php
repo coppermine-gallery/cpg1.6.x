@@ -264,4 +264,4 @@ if ($CONFIG['clickable_keyword_search'] != 0) {
 
 pagefooter();
 
-?>
+//EOF

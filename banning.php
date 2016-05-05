@@ -661,4 +661,4 @@ print '</form>' . $LINEBREAK;
 
 pagefooter();
 
-?>
+//EOF

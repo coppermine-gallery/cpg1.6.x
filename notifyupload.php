@@ -63,4 +63,4 @@ if ($CONFIG['upl_notify_admin_email'] && $superCage->post->keyExists('album') &&
         }
     }
 }
-?>
+//EOF

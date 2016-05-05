@@ -936,4 +936,4 @@ echo "<input type=\"hidden\" name=\"form_token\" value=\"{$form_token}\" />
 
 pagefooter();
 
-?>
+//EOF

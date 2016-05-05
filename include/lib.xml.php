@@ -342,4 +342,4 @@ class Xml {
     return true;
   }
 }
-?>
+//EOF

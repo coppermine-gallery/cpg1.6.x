@@ -26,4 +26,4 @@ $lang_plugin_sample['install_username'] = 'ім`я користувача';
 $lang_plugin_sample['install_password'] = 'Пароль';
 $lang_plugin_sample['output'] = 'Ці дані повернулися з тестового модуля';
 
-?>
+//EOF

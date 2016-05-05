@@ -386,4 +386,4 @@ $params = array(
 echo(template_eval($template_sidebar, $params));
 
 }
-?>
+//EOF

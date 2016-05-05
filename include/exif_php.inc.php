@@ -72,4 +72,4 @@ function exif_parse_file($filename, $pid)
     return $exifParsed;
 }
 
-?>
+//EOF

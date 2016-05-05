@@ -57,3 +57,4 @@ class ImageTool {
 	}
 
 }
+//EOF

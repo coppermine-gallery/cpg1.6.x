@@ -100,4 +100,4 @@ function sample_configure() {
 EOT;
 }
 
-?>
+//EOF

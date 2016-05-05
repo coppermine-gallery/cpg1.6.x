@@ -26,4 +26,4 @@ $lang_plugin_sample['install_username'] = 'Όνομα Χρήστη';
 $lang_plugin_sample['install_password'] = 'Κωδικός';
 $lang_plugin_sample['output'] = 'Αυτό το δείγμα δεδομένων έχει επιστραφεί από το δείγμα του βοηθήματος';
 
-?>
+//EOF

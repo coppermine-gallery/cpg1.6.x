@@ -82,7 +82,7 @@ echo '<form action="send_activation.php" method="post" name="activationlink" id=
 
 starttable(-1, $lang_send_activation_php['resend_act_link'], 2);
 
-echo <<< EOT
+echo <<<EOT
             $lookup_failed
                  <tr>
                      <td class="tableb" width="40%">{$lang_send_activation_php['enter_email']}</td>
@@ -105,4 +105,4 @@ echo '</form>';
 
 pagefooter();
 
-?>
+//EOF

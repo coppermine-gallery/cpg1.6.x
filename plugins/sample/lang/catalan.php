@@ -26,4 +26,4 @@ $lang_plugin_sample['install_username'] = 'Usuari';
 $lang_plugin_sample['install_password'] = 'Contrasenya';
 $lang_plugin_sample['output'] = 'Aquest és el text retornat pel connector d\'exemple';
 
-?>
+//EOF

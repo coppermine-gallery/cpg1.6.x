@@ -28,9 +28,6 @@ class Inspekt_Filter {
 
 	function __construct() {
 
-
 	}
 
-
 }
-

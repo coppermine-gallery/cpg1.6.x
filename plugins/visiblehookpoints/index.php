@@ -86,4 +86,4 @@ switch ($action) {
 pagefooter();
 ob_end_flush();
 
-?>
+//EOF

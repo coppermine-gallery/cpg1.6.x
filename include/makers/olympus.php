@@ -201,5 +201,4 @@ function parseOlympus($block, &$result, $seek, $globalOffset) {
 	}
 }
 
-
-?>
+//EOF

@@ -351,4 +351,4 @@ class zip
  }
 }
 
-?>
+//EOF

@@ -63,4 +63,4 @@ if ($output) {
     header("Location: $CPG_REFERER");
 }
 
-?>
+//EOF

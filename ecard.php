@@ -481,4 +481,4 @@ EOT;
 
 pagefooter();
 
-?>
+//EOF

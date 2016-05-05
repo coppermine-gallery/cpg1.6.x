@@ -423,5 +423,4 @@ function parseNikon($block,&$result) {
 	}
 }
 
-
-?>
+//EOF

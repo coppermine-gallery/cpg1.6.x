@@ -26,4 +26,4 @@ $lang_plugin_sample['install_username'] = 'Usuario';
 $lang_plugin_sample['install_password'] = 'Contraseña';
 $lang_plugin_sample['output'] = 'Este es el texto devuelto por el plugin de ejmplo';
 
-?>
+//EOF

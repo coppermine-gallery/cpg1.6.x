@@ -813,4 +813,4 @@ endtable();
 
 pagefooter();
 
-?>
+//EOF

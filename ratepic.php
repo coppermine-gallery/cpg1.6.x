@@ -171,4 +171,4 @@ $send_back = array(
 
 echo json_encode($send_back);
 
-?>
+//EOF

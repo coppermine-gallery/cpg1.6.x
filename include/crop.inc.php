@@ -176,4 +176,4 @@ echo <<<EOT
   </table>
 </div>
 EOT;
-?>
+//EOF

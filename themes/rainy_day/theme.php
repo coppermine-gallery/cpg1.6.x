@@ -45,4 +45,4 @@ $template_sys_menu_button = <<<EOT
 <!-- END {BLOCK_ID} -->
 EOT;
 
-?>
+//EOF

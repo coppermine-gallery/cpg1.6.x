@@ -259,5 +259,4 @@ function parseFujifilm($block,&$result) {
 	}
 }
 
-
-?>
+//EOF

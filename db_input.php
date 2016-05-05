@@ -725,4 +725,4 @@ default:
     cpg_die(CRITICAL_ERROR, $lang_errors['param_missing'], __FILE__, __LINE__);
 }
 
-?>
+//EOF

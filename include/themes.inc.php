@@ -4417,4 +4417,4 @@ function theme_album_info($pic_count, $link_pic_count, $last_upload_date)
 ** Section <<<theme_album_info>>> - END
 ******************************************************************************/
 } //{THEMES}
-?>
+//EOF

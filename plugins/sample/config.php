@@ -80,3 +80,5 @@ if ($superCage->post->keyExists('save'))
 	plg_sample_config_save($superCage);
 
 plg_sample_config_form($superCage);
+
+//EOF

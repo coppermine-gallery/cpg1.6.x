@@ -497,4 +497,4 @@ if ($superCage->get->keyExists('fullsize')) {
     pagefooter();
 }
 
-?>
+//EOF

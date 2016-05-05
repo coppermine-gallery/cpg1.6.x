@@ -26,4 +26,4 @@ $lang_plugin_sample['install_username'] = 'Korisničko ime';
 $lang_plugin_sample['install_password'] = 'Lozinka';
 $lang_plugin_sample['output'] = 'Ovo je uzorak teksta koji je proizveo ovaj dodatak';
 
-?>
+//EOF

@@ -345,4 +345,4 @@ echo <<< EOT
 EOT;
 pagefooter();
 
-?>
+//EOF

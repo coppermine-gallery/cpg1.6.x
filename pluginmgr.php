@@ -745,4 +745,4 @@ EOT;
 echo '<br />' . $LINEBREAK;
 
 pagefooter();
-?>
+//EOF

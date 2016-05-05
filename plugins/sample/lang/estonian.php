@@ -26,4 +26,4 @@ $lang_plugin_sample['install_username'] = 'Kasutajanimi';
 $lang_plugin_sample['install_password'] = 'Salasõna';
 $lang_plugin_sample['output'] = 'See on näidissisu, mille väljastas näidisplugin';
 
-?>
+//EOF

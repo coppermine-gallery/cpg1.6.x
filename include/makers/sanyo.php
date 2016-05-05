@@ -170,5 +170,4 @@ function parseSanyo($block,&$result,$seek, $globalOffset) {
 	}
 }
 
-
-?>
+//EOF

@@ -356,4 +356,4 @@ EOT;
 
 pagefooter();
 
-?>
+//EOF

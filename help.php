@@ -272,4 +272,4 @@ echo <<< EOT
 
 EOT;
 
-?>
+//EOF

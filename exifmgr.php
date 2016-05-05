@@ -133,4 +133,4 @@ EOT;
 
 pagefooter();
 
-?>
+//EOF

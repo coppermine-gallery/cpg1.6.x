@@ -420,7 +420,7 @@ if (!$superCage->post->keyExists('process') && !$superCage->post->keyExists('plu
 
 	$upload_help = cpg_display_help('f=empty.htm&amp;h=lang_upload_php[title]&amp;t=lang_tmp_upload',470,245);
 
-    $upload_table_header = <<< EOT
+    $upload_table_header = <<<EOT
     <table border="0" cellspacing="0" cellpadding="0" width="100%">
         <tr>
             <td>
@@ -438,7 +438,7 @@ EOT;
     if ($CONFIG['display_xp_publish_link'] == 1) {
         print '<br />';
         starttable('100%', $icon_array['info'] . $lang_upload_php['alternative_upload'],1);
-        print <<< EOT
+        print <<<EOT
         <tr>
             <td class="tableb">
                 {$lang_upload_php['xp_publish_promote']}<br />
@@ -458,4 +458,5 @@ EOT;
     // Call active plugins for alternate upload forms
     CPGPluginAPI::action('upload_process',$upload_form);
 }
-?>
+
+//EOF

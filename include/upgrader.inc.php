@@ -163,3 +163,4 @@ class CPG_Updater
 	}
 
 }
+//EOF

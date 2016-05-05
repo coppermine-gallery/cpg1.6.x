@@ -820,4 +820,4 @@ if ($superCage->get->keyExists('activate')) {
 
 pagefooter();
 
-?>
+//EOF

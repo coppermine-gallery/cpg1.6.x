@@ -27,4 +27,5 @@ $aFonts = array('images/fonts/acidic.ttf', 'images/fonts/hurryup.ttf');
 // create new image
 $oPhpCaptcha = new PhpCaptcha($aFonts, 150, 30, 5, 20, false);
 $oPhpCaptcha->Create();
-?>
+
+//EOF

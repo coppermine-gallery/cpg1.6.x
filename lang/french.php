@@ -2538,4 +2538,4 @@ if (defined('XP_PUBLISH_PHP')) {
  $lang_xp_publish_php['link'] = '';
 }
 
-?>
+//EOF

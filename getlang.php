@@ -59,4 +59,4 @@ EOT;
 endtable();
 pagefooter();
 
-?>
+//EOF

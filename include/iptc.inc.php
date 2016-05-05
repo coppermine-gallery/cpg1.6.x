@@ -60,4 +60,4 @@ function get_IPTC($filename) {
         }
 return $IPTC_data;
 }
-?>
+//EOF

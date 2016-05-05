@@ -553,4 +553,4 @@ function strings_from_language_file($string) {
 
     return $return;
 }
-?>
+//EOF

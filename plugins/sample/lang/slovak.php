@@ -26,4 +26,4 @@ $lang_plugin_sample['install_username'] = 'Užívateľské meno';
 $lang_plugin_sample['install_password'] = 'Heslo';
 $lang_plugin_sample['output'] = 'Toto sú vzorové dáta vrátené vzorovým zásuvným modulom';
 
-?>
+//EOF

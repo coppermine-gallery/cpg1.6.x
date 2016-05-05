@@ -230,5 +230,4 @@ function parseGPS($block,&$result,$offset,$seek, $globalOffset) {
 	}
 }
 
-
-?>
+//EOF

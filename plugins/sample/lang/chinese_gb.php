@@ -26,4 +26,4 @@ $lang_plugin_sample['install_username'] = '用户名';
 $lang_plugin_sample['install_password'] = '密码';
 $lang_plugin_sample['output'] = '这是样本数据从样品插件;';
 
-?>
+//EOF

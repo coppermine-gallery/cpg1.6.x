@@ -91,4 +91,4 @@ function cpg_akismet_submit_data($variable_array, $type = '') {
     }
 }
 
-?>
+//EOF

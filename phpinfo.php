@@ -58,5 +58,4 @@ print $string;
 print '</div>' . $LINEBREAK;
 
 pagefooter();
-
-?>
+//EOF

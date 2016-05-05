@@ -116,4 +116,4 @@ pageheader($lang_common['information'], "<meta http-equiv=\"refresh\" content=\"
 msg_box($lang_common['information'], $lang_rate_pic_php['rate_ok'], $lang_common['continue'], $ref);
 pagefooter();
 
-?>
+//EOF

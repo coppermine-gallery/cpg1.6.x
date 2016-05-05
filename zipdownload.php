@@ -97,5 +97,4 @@ EOT;
 
     header('Location: ' . $CONFIG['site_url'] . $CONFIG['fullpath'] . $filename);
 }
-
-?>
+//EOF

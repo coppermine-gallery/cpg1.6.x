@@ -391,4 +391,4 @@ print '</form>';
 
 pagefooter();
 
-?>
+//EOF

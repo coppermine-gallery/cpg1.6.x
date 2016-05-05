@@ -26,7 +26,7 @@ if (!defined('IN_COPPERMINE')) {
 
 starttable("100%", $lang_index_php['welcome']);
 
-echo <<< EOT
+echo <<<EOT
     <tr>
         <td class="tableb">
             Here is text in the "anycontent" block.<br />
@@ -39,4 +39,4 @@ EOT;
 
 endtable();
 
-?>
+//EOF

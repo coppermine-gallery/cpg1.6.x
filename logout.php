@@ -41,4 +41,4 @@ if (defined('UDB_INTEGRATION')) {
 
 cpgRedirectPage('index.php', $lang_logout_php['logout'], sprintf($lang_logout_php['bye'], stripslashes(USER_NAME)), 3); // Replace 'index.php' with $CPG_REFERER to redirect the user to the page he came from, with the drawback that the visitor will get an error message if he came from a page that is not accesible for guests
 
-?>
+//EOF

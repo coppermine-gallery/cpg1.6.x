@@ -93,4 +93,4 @@ if ($result->numRows()) {
 
     endtable();
 }
-?>
+//EOF

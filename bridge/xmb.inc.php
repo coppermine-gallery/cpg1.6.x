@@ -271,4 +271,4 @@ if (isset($bridge_lookup)) {
     // and go !
     $cpg_udb = new cpg_udb;
 }
-?>
+//EOF

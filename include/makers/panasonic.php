@@ -304,4 +304,4 @@ function parsePanasonic($block,&$result) {
 	}
 }
 
-?>
+//EOF

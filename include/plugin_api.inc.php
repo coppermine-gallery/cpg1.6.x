@@ -708,4 +708,4 @@ function pluginapi_sleep_wrapper() {
     CPGPluginAPI::sleep();
 }
 
-?>
+//EOF

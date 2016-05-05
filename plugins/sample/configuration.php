@@ -52,4 +52,5 @@ EOT;
  * Use the file name without the .php extension.
  */
 $config_action = 'config';
-?>
+
+//EOF

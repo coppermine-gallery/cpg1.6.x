@@ -690,4 +690,4 @@ EOT;
     pagefooter();
 }
 
-?>
+//EOF

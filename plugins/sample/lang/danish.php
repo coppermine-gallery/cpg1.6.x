@@ -26,4 +26,4 @@ $lang_plugin_sample['install_username'] = 'Brugernavn';
 $lang_plugin_sample['install_password'] = 'Kodeord';
 $lang_plugin_sample['output'] = 'Dette er prøve data vist fra prøve plugin';
 
-?>
+//EOF

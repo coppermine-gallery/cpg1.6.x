@@ -128,4 +128,4 @@ if (!isset($log) || dirname($log) != '.') {
 
 endtable();
 pagefooter();
-?>
+//EOF

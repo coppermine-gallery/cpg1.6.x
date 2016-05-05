@@ -156,5 +156,4 @@ EOT;
 
 endtable();
 pagefooter();
-
-?>
+//EOF

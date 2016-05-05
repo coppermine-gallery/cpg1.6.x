@@ -26,4 +26,4 @@ $lang_plugin_sample['install_username'] = 'Användarnamn';
 $lang_plugin_sample['install_password'] = 'Lösenord';
 $lang_plugin_sample['output'] = 'Det här är exempel på test som skickats av exempelinsticksmodulen';
 
-?>
+//EOF

@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2016-05-05 [M] Remove trailing php end tags (?>) {ron4mac}
 2016-05-05 [M] Perform cursory writeable directory check before allowing update/upgrade action {ron4mac}
 2016-05-04 [M] Only show plugin manager upload feature if ZLib is available {ron4mac}
 2016-05-04 [B] Repair include/zip.lib.php, allowing it to extract files (for plugin manager) {ron4mac}

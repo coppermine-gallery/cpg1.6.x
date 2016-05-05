@@ -6826,4 +6826,4 @@ function cpg_load_plugin_language_file($path) {
     }
 }
 
-?>
+//EOF

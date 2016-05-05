@@ -129,3 +129,4 @@ unset($available_languages);
 if ($lang) {
     $USER['lang'] = $lang;
 }
+//EOF

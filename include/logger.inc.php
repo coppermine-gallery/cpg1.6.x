@@ -168,4 +168,4 @@ function& spring_cleaning($directory_path, $cache_time = CPG_HOUR, $exclusion_li
     return $deleted_list;
 }
 
-?>
+//EOF

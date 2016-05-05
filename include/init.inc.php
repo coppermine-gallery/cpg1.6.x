@@ -481,3 +481,4 @@ if (!USER_IS_ADMIN && $CONFIG['offline'] && $CPG_PHP_SELF != 'login.php' && $CPG
     pagefooter();
     exit;
 }
+//EOF

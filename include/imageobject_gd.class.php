@@ -515,3 +515,4 @@ class imageObject extends ImageTool {
 	}
 
 }
+//EOF

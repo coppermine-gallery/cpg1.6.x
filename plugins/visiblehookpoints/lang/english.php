@@ -36,4 +36,4 @@ $lang_plugin_visiblehookpoints['usage_stats'] = 'Visible HookPoints marker usage
 $lang_plugin_visiblehookpoints['time_chart'] = 'Visible HookPoints time chart in seconds from CPG_TIME_START';
 $lang_plugin_visiblehookpoints['error'] = 'Plugin &quot;Visible HookPoints&quot;: Unknown action value';
 
-?>
+//EOF

@@ -976,5 +976,4 @@ switch ($cmd) {
     default:
         display_instructions();
 } // switch
-
-?>
+//EOF

@@ -787,3 +787,4 @@ class core_udb
 	// end function get_user_pass
 }
 // end class core_udb
+//EOF

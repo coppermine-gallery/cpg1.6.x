@@ -438,5 +438,4 @@ function parseCanon($block,&$result,$seek, $globalOffset) {
 	}
 }
 
-
-?>
+//EOF

@@ -134,7 +134,7 @@ starttable(-1, cpg_fetch_icon('login', 2) . $lang_login_php['enter_login_pswd'],
 //see how users are allowed to login, can be username, email address or both
 $login_method = $lang_login_php[$CONFIG['login_method']];
 
-echo <<< EOT
+echo <<<EOT
                   $login_failed
                   $cookie_warning
                   <tr>
@@ -163,7 +163,7 @@ EOT;
 
 endtable();
 
-echo <<< EOT
+echo <<<EOT
 
 </form>
 <script language="javascript" type="text/javascript">
@@ -175,4 +175,4 @@ EOT;
 
 pagefooter();
 
-?>
+//EOF

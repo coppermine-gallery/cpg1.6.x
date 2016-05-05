@@ -2564,4 +2564,4 @@ $lang_xp_publish_php['continue'] = 'Drücke &quot;weiter&quot;, um mit dem Hochl
 $lang_xp_publish_php['link'] = '';
 }
 
-?>
+//EOF

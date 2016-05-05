@@ -59,4 +59,4 @@ if ($superCage->get->getAlpha('what') == 'news') {
     cpgRedirectPage($CPG_REFERER, $lang_common['information'], $lang_mode_php[$admin_mode], 3);
 }
 
-?>
+//EOF

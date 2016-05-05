@@ -181,4 +181,4 @@ EOT;
     return $html;
 }
 
-?>
+//EOF

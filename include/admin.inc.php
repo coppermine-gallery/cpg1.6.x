@@ -1645,5 +1645,4 @@ $config_data = array(
   ),
 );
 
-
-?>
+//EOF

@@ -72,4 +72,4 @@ if (ob_get_length()) {
 
 echo $status;
 
-?>
+//EOF

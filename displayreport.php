@@ -103,4 +103,4 @@ if (is_array($data)) {
     cpg_die(CRITICAL_ERROR, $lang_report_php['invalid_data'], __FILE__, __LINE__);
 }
 
-?>
+//EOF

@@ -279,4 +279,4 @@ if ($search_string && isset($search_params['params'])) {
         }
 
 }
-?>
+//EOF

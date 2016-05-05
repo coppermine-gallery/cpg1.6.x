@@ -1177,5 +1177,4 @@ switch ($op) {
         pagefooter();
         break;
 }
-
-?>
+//EOF

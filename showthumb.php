@@ -68,4 +68,4 @@ $matches = $superCage->get->getMatched('picfile', '/^[0-9A-Za-z~\s\/\\.-_]+$/');
 
 makethumbnail($CONFIG['fullpath'] . $matches[0], $superCage->get->getInt('size'));
 
-?>
+//EOF

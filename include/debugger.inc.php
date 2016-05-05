@@ -131,3 +131,4 @@ define('CAN_MOD_INI', strpos(ini_get('disable_functions'), 'ini_set') === FALSE)
 error_reporting(E_ALL);
 $cpgdebugger = new cpg_debugger();
 $cpgdebugger->start();
+//EOF

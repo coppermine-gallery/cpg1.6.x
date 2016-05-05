@@ -26,4 +26,4 @@ $lang_plugin_sample['install_username'] = 'Käyttäjätunnus';
 $lang_plugin_sample['install_password'] = 'Salasana';
 $lang_plugin_sample['output'] = 'Tämä on esimerkkitekstiä, minkä tuotti malli lisäosa.';
 
-?>
+//EOF

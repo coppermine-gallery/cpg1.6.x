@@ -26,4 +26,4 @@ $lang_plugin_sample['install_username'] = 'Identifiant';
 $lang_plugin_sample['install_password'] = 'Mot de passe';
 $lang_plugin_sample['output'] = 'Ceci est un exemple de donnée renvoyée depuis le plugin &quot;sample plugin&quot;';
 
-?>
+//EOF

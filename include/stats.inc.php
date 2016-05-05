@@ -362,4 +362,4 @@ EOT;
  * function defintions end
  */
 
-?>
+//EOF

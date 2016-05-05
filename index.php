@@ -1175,4 +1175,4 @@ if (!$file) {
     pagefooter();
 }
 
-?>
+//EOF

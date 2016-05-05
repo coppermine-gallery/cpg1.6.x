@@ -3052,4 +3052,4 @@ class cpg_SMTP
 
 }
 
-?>
+//EOF

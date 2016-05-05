@@ -2658,4 +2658,4 @@ $lang_xp_publish_php['continue'] = 'Press &quot;Next&quot; to start to upload yo
 $lang_xp_publish_php['link'] = '';
 }
 
-?>
+//EOF

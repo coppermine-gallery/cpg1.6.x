@@ -26,4 +26,4 @@ $lang_plugin_sample['install_username'] = 'Brukernavn';
 $lang_plugin_sample['install_password'] = 'Passord';
 $lang_plugin_sample['output'] = 'Dette er et eksempel på test som sendes av eksempel-plugin-modulen';
 
-?>
+//EOF

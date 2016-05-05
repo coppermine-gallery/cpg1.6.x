@@ -26,4 +26,4 @@ $lang_plugin_sample['install_username'] = 'اسم المستخدم';
 $lang_plugin_sample['install_password'] = 'كلمة المرور';
 $lang_plugin_sample['output'] = 'هذه عينة بيانات مرجوعة من عينة الإضافة البرمجية plugin';
 
-?>
+//EOF

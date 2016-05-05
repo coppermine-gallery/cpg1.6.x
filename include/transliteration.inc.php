@@ -256,3 +256,4 @@ function _transliteration_replace($ord, $unknown = '?', $langcode = NULL) {
   return isset($map[$bank][$langcode][$ord]) ? $map[$bank][$langcode][$ord] : $unknown;
 }
 
+//EOF

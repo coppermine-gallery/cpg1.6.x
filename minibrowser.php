@@ -305,4 +305,4 @@ echo <<< EOT
 </html>
 
 EOT;
-?>
+//EOF

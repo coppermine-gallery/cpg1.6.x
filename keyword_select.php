@@ -113,4 +113,4 @@ echo '</form>';
 
 pagefooter_mini();
 
-?>
+//EOF

@@ -909,6 +909,5 @@ EOT;
         $errors .= '<hr /><br />' . $lang_update_php['unable_write_config'] . '<br />';
     }
 }
-
 // function definitions --- end
-?>
+//EOF

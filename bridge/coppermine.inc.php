@@ -476,3 +476,4 @@ if (isset($bridge_lookup)) {
 	// and go !
 	$cpg_udb = new coppermine_udb;
 }
+//EOF

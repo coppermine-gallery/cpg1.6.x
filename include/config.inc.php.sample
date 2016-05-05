@@ -11,4 +11,3 @@ $CONFIG['dbname'] =					'coppermine';		// Your database name
 
 // DATABASE TABLE NAMES PREFIX
 $CONFIG['TABLE_PREFIX'] =			'cpg16x_';
-?>

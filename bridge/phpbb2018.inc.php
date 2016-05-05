@@ -363,4 +363,4 @@ if (isset($bridge_lookup)) {
     // and go !
     $cpg_udb = new phpbb2018_udb;
 }
-?>
+//EOF

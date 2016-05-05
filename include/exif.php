@@ -1156,5 +1156,4 @@ function get35mmEquivFocalLength(&$result) {
 	}
 	return null;
 }
-
-?>
+//EOF

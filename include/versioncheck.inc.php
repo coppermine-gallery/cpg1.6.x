@@ -968,4 +968,4 @@ function cpgGetRemoteFileByURL($remoteURL, $method = "GET", $redirect = 10, $min
 }
 }
 
-?>
+//EOF

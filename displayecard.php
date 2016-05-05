@@ -121,4 +121,4 @@ EOT;
     cpg_die(CRITICAL_ERROR, $lang_db_ecard_php['invalid_data'], __FILE__, __LINE__);
 }
 
-?>
+//EOF

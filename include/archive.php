@@ -683,4 +683,4 @@ class zip_file extends archive
     return 1;
   }
 }
-?>
+//EOF

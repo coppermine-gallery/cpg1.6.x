@@ -913,4 +913,4 @@ EOT;
 }
 pagefooter();
 
-?>
+//EOF

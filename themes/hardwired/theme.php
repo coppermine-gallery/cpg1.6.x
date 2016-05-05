@@ -206,4 +206,4 @@ $template_sub_menu = <<< EOT
 
 EOT;
 
-?>
+//EOF

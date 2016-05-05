@@ -763,4 +763,4 @@ EOT;
 EOT;
     }
 // output the footer depending on the mode (fullscreen vs embedded) - end
-?>
+//EOF

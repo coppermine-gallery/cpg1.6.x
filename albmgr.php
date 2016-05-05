@@ -292,4 +292,4 @@ endtable();
 echo '</form>';
 pagefooter();
 
-?>
+//EOF

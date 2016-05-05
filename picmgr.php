@@ -192,4 +192,4 @@ EOT;
 </form>
 EOT;
    pagefooter();
-?>
+//EOF

@@ -195,4 +195,4 @@ echo '</form>';
 
 pagefooter();
 
-?>
+//EOF

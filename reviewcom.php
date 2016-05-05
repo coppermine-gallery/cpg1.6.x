@@ -725,4 +725,4 @@ EOT;
 
 pagefooter();
 } // mass approval end
-?>
+//EOF

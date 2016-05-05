@@ -1089,5 +1089,4 @@ function keyword_convert()
 }
 
 pagefooter();
-
-?>
+//EOF

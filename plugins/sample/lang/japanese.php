@@ -26,4 +26,4 @@ $lang_plugin_sample['install_username'] = 'ユーザ名';
 $lang_plugin_sample['install_password'] = 'パスワード';
 $lang_plugin_sample['output'] = 'これは、サンプルプラグインから返された、サンプルデータです。';
 
-?>
+//EOF

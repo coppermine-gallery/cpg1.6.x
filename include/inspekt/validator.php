@@ -28,9 +28,6 @@ class Inspekt_Validator {
 
 	function __construct($input) {
 
-
 	}
 
-
 }
-
