@@ -2423,6 +2423,7 @@ $lang_update_php['files_placed_title'] = 'Update files placed';
 $lang_update_php['files_placed_msg'] = 'All update files were successfully placed. Click below to complete the update.';
 $lang_update_php['complete_update'] = 'Complete Update';
 $lang_update_php['select_update'] = 'Please select the update to perform.';
+$lang_update_php['not_writeable'] = '<b>Updating can not be performed</b><br />The following directories are not writeable: ';
 $lang_update_php['available_updates'] = 'Available Updates';
 $lang_update_php['perform_update'] = 'Perform Selected Update';
 $lang_update_php['no_updates_title'] = 'No update available';

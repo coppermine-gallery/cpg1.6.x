@@ -29,6 +29,7 @@ require('include/init.inc.php');
 	$lang_update_php['complete_update'] = 'Complete Update';
 	$lang_update_php['select_update'] = 'Please select the update to perform.';
 	$lang_update_php['available_updates'] = 'Available Updates';
+	$lang_update_php['not_writeable'] = '<b>Updating can not be performed</b><br />The following directories are not writeable: ';
 	$lang_update_php['perform_update'] = 'Perform Selected Update';
 	$lang_update_php['no_updates_title'] = 'No update available';
 	$lang_update_php['no_updates_msg'] = 'No updates are available for your version';
@@ -80,6 +81,11 @@ EOT;
 
 	$updates = $updater->getUpdates();
 	if ($updates) {
+		$badDirs = $updater->checkCpgDirs();
+		if ($badDirs) {
+			$bdmsg = implode(',', $badDirs);
+			theme_msg_box('',$lang_update_php['not_writeable'].$bdmsg, 'cpg_message_error', '', '');
+		}
 		echo '<form id="updForm" action="'.$superCage->server->getEscaped('REQUEST_URI').'" method="post" onsubmit="return hasUpdSelect(this);">';
 		starttable('100%', $lang_update_php['available_updates'], 2);
 		foreach ($updates as $k => $updt) {
@@ -97,7 +103,7 @@ EOT;
 		list($timestamp, $form_token) = getFormToken();
 		echo "<input type=\"hidden\" name=\"form_token\" value=\"{$form_token}\" />";
 		echo "<input type=\"hidden\" name=\"timestamp\" value=\"{$timestamp}\" />";
-		echo '<button type="submit" name="doupd" id="doupd" class="admin">'.$lang_update_php['perform_update'].'</button>';
+		if (!$badDirs) echo '<button type="submit" name="doupd" id="doupd" class="admin">'.$lang_update_php['perform_update'].'</button>';
 		echo '<img id="upding" src="images/loader.gif" alt="" style="display:none" /></form>';
 	} else {
 		theme_msg_box($lang_update_php['no_updates_title'], $lang_update_php['no_updates_msg'], 'cpg_message_warning', '', '');
@@ -188,6 +194,16 @@ class CPG_Updater
 		}
 
 		unlink($tmpf);
+	}
+
+	public function checkCpgDirs ()
+	{
+		$cpgDirs = array('albums','bridge','css','docs','images','include','js','lang','logs','plugins','sql','themes');
+		$ng = array();
+		foreach ($cpgDirs as $dir) {
+			if (!(is_dir($dir) && is_writable($dir))) $ng[] = $dir;
+		}
+		return $ng;
 	}
 
 	private function getUrlData ($url)

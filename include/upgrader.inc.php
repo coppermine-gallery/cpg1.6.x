@@ -107,6 +107,16 @@ class CPG_Updater
 		return print_r($this->updates, true);
 	}
 
+	public function checkCpgDirs ()
+	{
+		$cpgDirs = array('albums','bridge','css','docs','images','include','js','lang','logs','plugins','sql','themes');
+		$ng = array();
+		foreach ($cpgDirs as $dir) {
+			if (!(is_dir($dir) && is_writable($dir))) $ng[] = $dir;
+		}
+		return $ng;
+	}
+
 	private function getUrlData ($url)
 	{
 		$ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/537.75.14';
