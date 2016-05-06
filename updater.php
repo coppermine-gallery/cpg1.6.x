@@ -39,7 +39,8 @@ span.admin_menu a:link { color:#FFF; }
 span.admin_menu a:visited { color:#FFF; }
 </style>
 EOT;
-$updater = new CPG_Updater();
+include 'include/updates.inc.php';
+$updater = new CPG_Updater(false, isset($pre_release) ? !$pre_release : true);
 if ($superCage->post->keyExists('doupd')) {
 	if (!checkFormToken()) {
 		cpg_die(ERROR, $lang_errors['invalid_form_token'], __FILE__, __LINE__);

@@ -4341,11 +4341,12 @@ function cpg_has_updates ()
 	include 'include/updates.inc.php';
 
 	if (!isset($last_updates_check) || (time() - $last_updates_check) > 86400) {
-		$updf = '<?php $last_updates_check = '.time().'; $cpg_has_updates = ';
+		$updf = '<?php $last_updates_check = '.time().';';
 		require_once 'include/upgrader.inc.php';
-		$upgc = new CPG_Updater(true);
+		$upgc = new CPG_Updater(true, isset($pre_release) ? !$pre_release : true);
 		$has = (bool) count($upgc->getUpdates());
-		file_put_contents('include/updates.inc.php', $updf . (string) $has . ';');
+		if (isset($pre_release)) $updf .= '$pre_release='.(bool)$pre_release.';';
+		file_put_contents('include/updates.inc.php', $updf);
 		return $has;
 	}
 	return false;
@@ -4383,7 +4384,7 @@ EOT;
     }
 
 	// notification about any updates available
-    if (cpg_has_updates ()) {
+    if (cpg_has_updates()) {
         $return = <<<EOT
         <div class="cpg_message_info">
         <h4>{$lang_version_alert['updates_available']}</h4>
