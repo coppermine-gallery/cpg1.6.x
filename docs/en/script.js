@@ -772,7 +772,7 @@ doc_toc += '          <li><a href="admin-tools.htm#admin_tools_options">Availabl
 doc_toc += '            <ul>\n';
 doc_toc += '              <li><a href="admin-tools.htm#admin_tools_options_rebuild">Update thumbs and/or resized photos</a></li>\n';
 doc_toc += '              <li><a href="admin-tools.htm#admin_tools_options_filename_filetitle">Filename &rarr; File title</a></li>\n';
-doc_toc += '              <li><a href="admin-tools.htm#admin_tools_options_delete_titles">Delete file titles</a></li>\n';
+doc_toc += '              <li><a href="admin-tools.htm#admin_tools_options_change_values">Change values for (or clear) title, description and keywords</a></li>\n';
 doc_toc += '              <li><a href="admin-tools.htm#admin_tools_options_delete_original">Delete original size photos</a></li>\n';
 doc_toc += '              <li><a href="admin-tools.htm#admin_tools_options_intermediate">Delete intermediate pictures</a></li>\n';
 doc_toc += '              <li><a href="admin-tools.htm#admin_tools_options_delete_older_files">Delete files that are older than a set number of days</a></li>\n';
