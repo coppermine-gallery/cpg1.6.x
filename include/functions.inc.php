@@ -418,6 +418,14 @@ function cpg_db_escape_string($str)
     return $CPGDB->escapeStr($str);
 }
 
+function cpg_db_real_escape_string($str, $dbobj=null)
+{
+    global $CPGDB;
+
+    return $dbobj ? $dbobj->escapeStr($str) : $CPGDB->escapeStr($str);
+}
+
+
 
 /**************************************************************************
    Sanitization functions

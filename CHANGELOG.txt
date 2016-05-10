@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2016-05-10 [M] Accomodate conversion of mysql_real_escape_string to cpg_db... {ron4mac}
 2016-05-06 [M] Don't show pre-release update versions (unless overridden) {ron4mac}
 2016-05-05 [M] Remove trailing php end tags (?>) {ron4mac}
 2016-05-05 [M] Perform cursory writeable directory check before allowing update/upgrade action {ron4mac}
