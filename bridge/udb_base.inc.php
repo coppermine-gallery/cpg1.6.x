@@ -739,7 +739,7 @@ class core_udb
 
 
 	// Simple login by specified username and pass.
-	// Used for xp publisher login
+	// Originally used for xp publisher login
 	// Needs override for any BBS that is more complex than straight md5(password)
 	function login ($username = null, $password = null, $remember = false)
 	{

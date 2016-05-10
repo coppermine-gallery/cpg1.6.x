@@ -720,7 +720,6 @@ $lang_admin_php['custom_header_path'] = 'Pfad zu benutzerdefiniertem header-incl
 $lang_admin_php['custom_footer_path'] = 'Pfad zu benutzerdefiniertem footer-include';
 $lang_admin_php['browse_by_date'] = 'Aktiviere Betrachtung nach Datum';
 $lang_admin_php['display_redirection_page'] = 'Umleitungs-Seiten anzeigen';
-$lang_admin_php['display_xp_publish_link'] = 'XP Publisher bewerben durch Anzeige von Link auf Upload-Seite';
 $lang_admin_php['main_table_width'] = 'Breite der Haupttabelle';
 $lang_admin_php['pixels_or_percent'] = 'in Pixel oder %';
 $lang_admin_php['subcat_level'] = 'Anzahl angezeigter Kategorie-Ebenen';
@@ -2179,7 +2178,6 @@ $lang_upload_php['allowed_doc_types'] = 'Dokumente: %s';
 $lang_upload_php['allowed_snd_types'] = 'Audio: %s';
 $lang_upload_php['please_wait'] = 'Bitte warten, während die Datei hochgeladen wird - das kann einen Moment dauern';
 $lang_upload_php['alternative_upload'] = 'Alternative Upload-Methode';
-$lang_upload_php['xp_publish_promote'] = 'Wenn Du Windows XP/Vista benutzt kannst Du auch den Windows XP Uploading Wizard benutzen um Dateien hochzuladen, der eine einfachere Benutzerschnittstelle bietet.';
 $lang_upload_php['err_js_disabled'] = 'Die Flash-basierte Benutzerschnittstelle zum Hochladen von Bildern konnte nicht geladen werden. JavaScript muss im Browser aktiviert sein, um die Flash-basierte Schnittstelle benutzen zu können.';
 $lang_upload_php['err_flash_disabled'] = 'Die Benutzerschnittstelle zum Hochladen braucht sehr lange, um zu laden, oder der Ladevorgang ist fehlgeschlagen. Bitte stelle sicher, dass das Flash-Plugin des Browsers aktiviert ist und dass eine funktionierende Version von Flash installiert ist.';
 $lang_upload_php['err_alternate_method'] = 'Alternativ kann die <a href="upload.php?single=1">einfache</a> Benutzer-Schnittstelle zum Hochladen verwendet werden.';
@@ -2516,52 +2514,6 @@ $lang_viewlog_php['delete_all'] = 'Alle Logs löschen';
 $lang_viewlog_php['delete_this'] = 'Dieses Log löschen';
 $lang_viewlog_php['view_logs'] = 'Logs anzeigen';
 $lang_viewlog_php['no_logs'] = 'Keine Logs vorhanden';
-}
-
-
-// ------------------------------------------------------------------------- //
-// File xp_publish.php
-// ------------------------------------------------------------------------- //
-
-if (defined('XP_PUBLISH_PHP')) {
-$lang_xp_publish_php['title'] = 'XP Web Publishing Assistent';
-$lang_xp_publish_php['client_header'] = 'XP Web Publishing Assistent Client';
-$lang_xp_publish_php['requirements'] = 'Anforderungen';
-$lang_xp_publish_php['windows_xp'] = 'Windows XP / Vista';
-$lang_xp_publish_php['no_windows_xp'] = 'Du scheinst ein anderes, nicht unterstütztes Betriebssystem zu benutzen';
-$lang_xp_publish_php['no_os_detect'] = 'Konnte Dein Betriebssystem nicht detektieren';
-$lang_xp_publish_php['requirement_http_upload'] = 'Eine funktionierende Coppermine-Installation mit funktionierenden http-Uploads';
-$lang_xp_publish_php['requirement_ie'] = 'Microsoft Internet Explorer';
-$lang_xp_publish_php['requirement_permissions'] = 'Der Galerie-Admin muss Dir die Berechtigung eingeräumt haben, Dateien hochzuladen';
-$lang_xp_publish_php['requirement_login'] = 'Du musst angemeldet sein, um Dateien hochladen zu können';
-$lang_xp_publish_php['no_ie'] = 'Du scheinst einen anderen, nicht unterstützten Browser zu benutzen';
-$lang_xp_publish_php['no_browser_detect'] = 'Konnte Deinen Browser nicht detektieren';
-$lang_xp_publish_php['no_gallery_name'] = 'Du musst einen Galerie-Namen in den Einstellungen angeben';
-$lang_xp_publish_php['no_gallery_description'] = 'Du musst eine Galerie-Beschreibung in den Einstellungen angeben';
-$lang_xp_publish_php['howto_install'] = 'Installation';
-$lang_xp_publish_php['install_right_click'] = 'Rechts-Klicke auf %sdiesen Link%s und wähle &quot;Ziel speichern unter...&quot;'; // translator note: don't replace the %s - that placeholder token needs to go untranslated
-$lang_xp_publish_php['install_save'] = 'Speichere die Datei auf Deinem Rechner. Stelle beim Speichern sicher, dass der vorgeschlagene Dateiname <tt>cpg_###.reg</tt> lautet (die Rauten repräsentieren einen numerischen Zeitstempel). Ändere die Erweiterung falls nötig auf .reg (lasse die Zahlen unverändert)';
-$lang_xp_publish_php['install_execute'] = 'Nach der Beendigung des Downloads führe die Datei aus durch Doppelklicken, um den Dienst in Deinem Web-Veröffentlichungs-Dienst zu registrieren';
-$lang_xp_publish_php['usage'] = 'Benutzung';
-$lang_xp_publish_php['select_files'] = 'Markiere im Windows Explorer die Dateien, die Du hochladen willst';
-$lang_xp_publish_php['display_tasks'] = 'Stelle sicher, dass die Verzeichnis-Struktur im linken Teil des Explorer-Fensters NICHT angezeigt wird';
-$lang_xp_publish_php['publish_on_the_web'] = 'Klicke auf &quot;Im Web veröffentlichen&quot; im linken Explorer-Fenster';
-$lang_xp_publish_php['confirm_selection'] = 'Bestätige die Datei-Auswahl';
-$lang_xp_publish_php['select_service'] = 'Wähle aus der Liste der zur Verfügung stehenden Dienste den Deiner Galerie aus (er trägt den Namen der Galerie).';
-$lang_xp_publish_php['enter_login'] = 'Gib Deine Anmelde-Daten ein, falls Du dazu aufgefordert wirst';
-$lang_xp_publish_php['select_album'] = 'Wähle des Ziel-Album oder erzeuge ein neues Album';
-$lang_xp_publish_php['next'] = 'Klicke auf &quot;weiter&quot;';
-$lang_xp_publish_php['upload_starts'] = 'Der Hochlade-Vorgang Deiner gewählten Bilder sollte starten';
-$lang_xp_publish_php['upload_completed'] = 'Überprüfe nach erfolgtem Upload, ob der Vorgang erfolgreich war';
-$lang_xp_publish_php['welcome'] = 'Hallo <strong>%s</strong>,';
-$lang_xp_publish_php['need_login'] = 'Du musst Dich per Internet Explorer erst anmelden, bevor Du diesen Assistenten benutzen kannst.<p/><p>Vergiss nicht, die Option "merken" zu aktivieren, wenn verfügbar.';
-$lang_xp_publish_php['no_alb'] = 'Leider gibt es kein Album, in das Du mit diesem Assistenten Bilder hochladen darfst.';
-$lang_xp_publish_php['upload'] = 'Bilder in ein bestehendes Album hochladen';
-$lang_xp_publish_php['create_new'] = 'Neues Album für die Bilder erzeugen';
-$lang_xp_publish_php['category'] = 'Kategorie';
-$lang_xp_publish_php['new_alb_created'] = 'Dein neues Album &quot;<strong>%s</strong>&quot; wurde erzeugt.';
-$lang_xp_publish_php['continue'] = 'Drücke &quot;weiter&quot;, um mit dem Hochladen zu beginnen';
-$lang_xp_publish_php['link'] = '';
 }
 
 //EOF

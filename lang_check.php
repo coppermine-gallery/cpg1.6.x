@@ -62,7 +62,7 @@ define('UPDATE_PHP', true);
 define('UTIL_PHP', true);
 define('VERSIONCHECK_PHP', true);
 define('VIEWLOG_PHP', true);
-define('XP_PUBLISH_PHP', true);
+//define('XP_PUBLISH_PHP', true);
 
 class Lang
 {

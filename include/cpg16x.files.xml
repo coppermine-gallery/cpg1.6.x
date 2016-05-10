@@ -529,14 +529,6 @@
     <hash>c012efc54dfe4c4064c90e3fa0b4fa28</hash>
   </element>
   <element>
-    <fullpath>xp_publish.php</fullpath>
-    <version>1.6.01</version>
-    <revision>8634</revision>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>dd73f9cc5d29590cd3ff73eb1eb37cf9</hash>
-  </element>
-  <element>
     <fullpath>zipdownload.php</fullpath>
     <version>1.6.01</version>
     <revision>8634</revision>
@@ -1400,14 +1392,6 @@
     <status>mandatory</status>
     <permission>read</permission>
     <hash>f806eaf5e0086a692149fb698ef21040</hash>
-  </element>
-  <element>
-    <fullpath>docs/en/uploading_xp-publisher.htm</fullpath>
-    <version>1.6.01</version>
-    <revision>7906</revision>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>7c90c58ef2124dd2e3978908c07c3d71</hash>
   </element>
   <element>
     <fullpath>docs/en/upload_troubleshooting.htm</fullpath>

@@ -289,11 +289,6 @@ $config_data = array(
       'options'         => array($lang_common['no'], $lang_common['yes']),
       'end_description' => '('.$lang_admin_php['recommended'].': '.$lang_common['no'].')',
     ),
-    'display_xp_publish_link' => array(
-      'type'          => 'checkbox',
-      'default_value' => '0',
-      'help_link'     => 'f=configuration.htm&amp;as=admin_theme_display_xp_publish_link&amp;ae=admin_theme_display_xp_publish_link_end',
-    ),
   ),
   'album_list_view' => array(
     'main_table_width' => array(

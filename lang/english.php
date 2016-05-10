@@ -707,7 +707,6 @@ $lang_admin_php['custom_header_path'] = 'Path to custom header include';
 $lang_admin_php['custom_footer_path'] = 'Path to custom footer include';
 $lang_admin_php['browse_by_date'] = 'Enable browsing by date';
 $lang_admin_php['display_redirection_page'] = 'Display redirection pages';
-$lang_admin_php['display_xp_publish_link'] = 'Promote usage of XP Publisher by displaying a corresponding link on upload page';
 $lang_admin_php['main_table_width'] = 'Width of the main table';
 $lang_admin_php['pixels_or_percent'] = 'pixels or %';
 $lang_admin_php['subcat_level'] = 'Number of levels of categories to display';
@@ -2180,7 +2179,6 @@ $lang_upload_php['allowed_doc_types'] = 'Document extensions: %s';
 $lang_upload_php['allowed_snd_types'] = 'Audio extensions: %s';
 $lang_upload_php['please_wait'] = 'Please wait while the script is uploading - this might take a while';
 $lang_upload_php['alternative_upload'] = 'Alternative upload method';
-$lang_upload_php['xp_publish_promote'] = 'If you are running Windows XP/Vista, you can use the Windows XP Uploading Wizard as well to upload files, providing an easier user interface directly on the client.';
 $lang_upload_php['err_js_disabled'] = 'Flash upload interface could not load. You must have JavaScript enabled to enjoy the flash upload interface.';
 $lang_upload_php['err_flash_disabled'] = 'Upload interface is taking a long time to load or the load has failed. Please make sure that the Flash Plugin is enabled and that a working version of the Flash Player is installed.';
 $lang_upload_php['err_alternate_method'] = 'Alternately you can use the <a href="upload.php?single=1">single</a> file upload interface.';
@@ -2612,50 +2610,6 @@ $lang_viewlog_php['delete_this'] = 'Delete This Log';
 $lang_viewlog_php['view_logs'] = 'View Logs';
 $lang_viewlog_php['no_logs'] = 'No logs created.';
 $lang_viewlog_php['last_updated'] = 'last update';
-}
-
-// ------------------------------------------------------------------------- //
-// File xp_publish.php
-// ------------------------------------------------------------------------- //
-if (defined('XP_PUBLISH_PHP')) {
-$lang_xp_publish_php['title'] = 'XP Web Publishing Wizard';
-$lang_xp_publish_php['client_header'] = 'XP Web Publishing Wizard Client';
-$lang_xp_publish_php['requirements'] = 'Requirements';
-$lang_xp_publish_php['windows_xp'] = 'Windows XP / Vista';
-$lang_xp_publish_php['no_windows_xp'] = 'You appear to be running another, unsupported operating system';
-$lang_xp_publish_php['no_os_detect'] = 'Could not detect your operating system';
-$lang_xp_publish_php['requirement_http_upload'] = 'A working installation of Coppermine on which the http upload function works properly';
-$lang_xp_publish_php['requirement_ie'] = 'Microsoft Internet Explorer';
-$lang_xp_publish_php['requirement_permissions'] = 'The administrator of the gallery must have granted you permission to upload';
-$lang_xp_publish_php['requirement_login'] = 'You need to be logged in to upload';
-$lang_xp_publish_php['no_ie'] = 'You appear to be using another, unsupported browser';
-$lang_xp_publish_php['no_browser_detect'] = 'Could not detect your browser';
-$lang_xp_publish_php['no_gallery_name'] = 'You need to specify a gallery name in config';
-$lang_xp_publish_php['no_gallery_description'] = 'You need to specify a gallery description in config';
-$lang_xp_publish_php['howto_install'] = 'How to install';
-$lang_xp_publish_php['install_right_click'] = 'Right click on %sthis link%s and select &quot;save target as...&quot;'; // translator note: don't replace the %s - that placeholder token needs to go untranslated
-$lang_xp_publish_php['install_save'] = 'Save the file on your client. When saving the file, make sure that the proposed file name is <tt>cpg_###.reg</tt> (the ### represents a numerical timestamp). Change it to that name if necessary (leave the numbers)';
-$lang_xp_publish_php['install_execute'] = 'After the download has finished, execute the file by double clicking on it in order to register your server with the web publishing wizard';
-$lang_xp_publish_php['usage'] = 'Usage';
-$lang_xp_publish_php['select_files'] = 'In Windows Explorer, select the files you want to upload';
-$lang_xp_publish_php['display_tasks'] = 'Make sure that the folders are not being displayed in left bar of the Explorer';
-$lang_xp_publish_php['publish_on_the_web'] = 'click on &quot;Publish xxx on the web&quot; in the left pane';
-$lang_xp_publish_php['confirm_selection'] = 'Confirm your file selection';
-$lang_xp_publish_php['select_service'] = 'In the list of services that appear, select the one for your photo gallery (it has the name of your gallery)';
-$lang_xp_publish_php['enter_login'] = 'Enter your login information if required';
-$lang_xp_publish_php['select_album'] = 'Select the target album for your pictures or create a new one';
-$lang_xp_publish_php['next'] = 'Click on &quot;next&quot;';
-$lang_xp_publish_php['upload_starts'] = 'The upload of your pictures should start';
-$lang_xp_publish_php['upload_completed'] = 'When it is completed, check your gallery to see if pictures have been properly added';
-$lang_xp_publish_php['welcome'] = 'Welcome <strong>%s</strong>,';
-$lang_xp_publish_php['need_login'] = 'You need to login to the gallery using Internet Explorer before you can use this wizard.<p/><p>When you login don\'t forget to select the &quot;remember me&quot; option if it is present.';
-$lang_xp_publish_php['no_alb'] = 'Sorry but there is no album where you are allowed to upload pictures with this wizard.';
-$lang_xp_publish_php['upload'] = 'Upload your pictures into an existing album';
-$lang_xp_publish_php['create_new'] = 'Create a new album for your pictures';
-$lang_xp_publish_php['category'] = 'Category';
-$lang_xp_publish_php['new_alb_created'] = 'Your new album &quot;<strong>%s</strong>&quot; was created.';
-$lang_xp_publish_php['continue'] = 'Press &quot;Next&quot; to start to upload your pictures';
-$lang_xp_publish_php['link'] = '';
 }
 
 //EOF

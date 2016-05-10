@@ -435,20 +435,6 @@ if (!$superCage->post->keyExists('process') && !$superCage->post->keyExists('plu
     </table>
 EOT;
 
-    if ($CONFIG['display_xp_publish_link'] == 1) {
-        print '<br />';
-        starttable('100%', $icon_array['info'] . $lang_upload_php['alternative_upload'],1);
-        print <<<EOT
-        <tr>
-            <td class="tableb">
-                {$lang_upload_php['xp_publish_promote']}<br />
-                [<a href="xp_publish.php">{$lang_common['more']}</a>]
-            </td>
-        </tr>
-EOT;
-        endtable();
-        echo '<br />';
-    }
     pagefooter();
 
 

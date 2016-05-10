@@ -699,7 +699,6 @@ $lang_admin_php['custom_header_path'] = 'Chemin pour inclure un en-tête de page
 $lang_admin_php['custom_footer_path'] = 'Chemin pour inclure un pied de page personnalisé';
 $lang_admin_php['browse_by_date'] = 'Activer la navigation par date';
 $lang_admin_php['display_redirection_page'] = 'Afficher les pages de redirection';
-$lang_admin_php['display_xp_publish_link'] = 'Proposer l\'utilisation de XP Publisher en affichant un lien sur la page de téléchargement';
 $lang_admin_php['main_table_width'] = 'Largeur du tableau principal';
 $lang_admin_php['pixels_or_percent'] = 'Pixels ou %';
 $lang_admin_php['subcat_level'] = 'Nombre de niveaux de catégories à afficher';
@@ -2153,7 +2152,6 @@ $lang_upload_php['allowed_doc_types'] = 'Extension de Document : %s';
 $lang_upload_php['allowed_snd_types'] = 'Extensions Audio : %s';
 $lang_upload_php['please_wait'] = 'Merci de patienter pendant que le script télécharge - cela peut prendre plusieurs minutes';
 $lang_upload_php['alternative_upload'] = 'Méthode de téléchargement alternative';
-$lang_upload_php['xp_publish_promote'] = 'Si vous utilisez Windows XP ou Vista, vous pouvez utilisez l\'assistant de publication Web de Windows XP pour télécharger des fichiers, apportant ainsi une interface utilisateur plus simple.';
 $lang_upload_php['err_js_disabled'] = 'L\'interface de téléchargement Flash n\'a pas pu être chargé. Vous devez avoir JavaScript activé pour pouvoir profiter de l\'interface de téléchargement Flash.';
 $lang_upload_php['err_flash_disabled'] = 'L\'interface de téléchargement prends beaucoup de temps pour charger ou le chargement a échoué. Vérifiez que le plugin Flash est activé et qu\'une version fonctionnelle d\'Adobe Flash Player est installée.';
 $lang_upload_php['err_alternate_method'] = 'A la place, vous pouvez utiliser l\'interface de téléchargement <a href="upload.php?single=1">fichier unique</a>.';
@@ -2492,50 +2490,6 @@ if (defined('VIEWLOG_PHP')) {
  $lang_viewlog_php['view_logs'] = 'Consulter les logs';
  $lang_viewlog_php['no_logs'] = 'Pas de log créé.';
  $lang_viewlog_php['last_updated'] = 'dernière mise à jour';
-}
-
-// ----------------------- //
-// File xp_publish.php
-// ----------------------- //
-if (defined('XP_PUBLISH_PHP')) {
- $lang_xp_publish_php['title'] = 'Coppermine - Assistant de Publication Web XP';
- $lang_xp_publish_php['client_header'] = 'Assistant de publication Web XP';
- $lang_xp_publish_php['requirements'] = 'Requis';
- $lang_xp_publish_php['windows_xp'] = 'Windows XP / Vista';
- $lang_xp_publish_php['no_windows_xp'] = 'Vous semblez utiliser un autre système d\'exploitation non supporté';
- $lang_xp_publish_php['no_os_detect'] = 'Impossible de définir votre système d\'exploitation';
- $lang_xp_publish_php['requirement_http_upload'] = 'Une installation de Coppermine qui fonctionne et dans laquelle la fonction de téléchargement par http fonctionne';
- $lang_xp_publish_php['requirement_ie'] = 'Microsoft Internet Explorer';
- $lang_xp_publish_php['requirement_permissions'] = 'L\'administrateur de la galerie doit voir avoir donné les permissions de téléchargement';
- $lang_xp_publish_php['requirement_login'] = 'Vous devez être identifié pour télécharger';
- $lang_xp_publish_php['no_ie'] = 'Vous semblez utiliser un autre navigateur non supporté';
- $lang_xp_publish_php['no_browser_detect'] = 'Impossible de détecter votre navigateur';
- $lang_xp_publish_php['no_gallery_name'] = 'Vous devez spécifier un nom de galerie dans la configuration';
- $lang_xp_publish_php['no_gallery_description'] = 'Vous devez spécifier une description pour la galerie dans la configutation';
- $lang_xp_publish_php['howto_install'] = 'Comment installer';
- $lang_xp_publish_php['install_right_click'] = 'Faites un click droit sur %sce lien%s et sélectionnez &quot;enregistre la cible sous...&quot;';
- $lang_xp_publish_php['install_save'] = 'Sauvegardez ce fichier sur votre client. Lors de la sauvegarde du fichier, assurez-vous que le nom proposé est <tt>cpg_###.reg</tt> ( ### représente un horodatage numérique). Modifiez de cette manière si nécessaire (laissez les chiffres)';
- $lang_xp_publish_php['install_execute'] = 'Une fois le téléchargement terminé, lancez le fichier en double-cliquant dessus afin d\'Enregistrez votre serveur avec l\'assistant de publication web';
- $lang_xp_publish_php['usage'] = 'Utilisation';
- $lang_xp_publish_php['select_files'] = 'Dans l\'explorateur Windows, sélectionnez les fichiers que vous voulez télécharger';
- $lang_xp_publish_php['display_tasks'] = 'Assurez-vous que les répertoires ne sont pas affichés dans le panneau latéral de l\'explorateur';
- $lang_xp_publish_php['publish_on_the_web'] = 'cliquez sur &quot;Publier xxx sur le web&quot; dans le panneau de gauche';
- $lang_xp_publish_php['confirm_selection'] = 'Confirmez votre sélection de fichiers';
- $lang_xp_publish_php['select_service'] = 'Dans la liste des options qui apparaissent, sélectionnez celle pour votre galerie photo (elle a le nom de votre galerie)';
- $lang_xp_publish_php['enter_login'] = 'Entrez vos informations d\'identification si demandées';
- $lang_xp_publish_php['select_album'] = 'Sélectionnez l\'album cible pour vos images ou créez un nouvel album';
- $lang_xp_publish_php['next'] = 'Cliquez sur &quot;suivant&quot;';
- $lang_xp_publish_php['upload_starts'] = 'Le téléchargement de vos fichiers devrait démarrer';
- $lang_xp_publish_php['upload_completed'] = 'Lorsqu\'il est terminé, vérifiez dans votre galerie si les fichiers ont bien été ajoutés correctement';
- $lang_xp_publish_php['welcome'] = 'Bienvenue <strong>%s</strong>,';
- $lang_xp_publish_php['need_login'] = 'Vous devez vous identifier en utilisant Internet Explorer avant de pouvoir utiliser cet assistant.<p/><p>Lors de votre identification, n\'oubliez pas de sélectionner l\'option &quot;se souvenir de moi&quot; si elle est présente.';
- $lang_xp_publish_php['no_alb'] = 'Désolé, mais il n\'y a pas d\'albums où vous êtes autorisé à télécharger des images avec cet assistant.';
- $lang_xp_publish_php['upload'] = 'Télécharger vos images dans un album existant';
- $lang_xp_publish_php['create_new'] = 'Créer un nouvel album pour vos images';
- $lang_xp_publish_php['category'] = 'Catégorie';
- $lang_xp_publish_php['new_alb_created'] = 'Votre nouvel album &quot;<strong>%s</strong>&quot; a été crée.';
- $lang_xp_publish_php['continue'] = 'Cliquer sur &quot;Suivant&quot; pour commencer le téléchargement de vos images';
- $lang_xp_publish_php['link'] = '';
 }
 
 //EOF

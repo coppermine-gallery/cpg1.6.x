@@ -105,7 +105,6 @@ INSERT INTO CPG_config VALUES ('display_stats_on_index', '1');
 INSERT INTO CPG_config VALUES ('display_thumbnail_rating', '0');
 INSERT INTO CPG_config VALUES ('display_thumbs_batch_add', '1');
 INSERT INTO CPG_config VALUES ('display_uploader', '0');
-INSERT INTO CPG_config VALUES ('display_xp_publish_link', '0');
 INSERT INTO CPG_config VALUES ('ecard_captcha', '1');
 INSERT INTO CPG_config VALUES ('ecard_flash', '0');
 INSERT INTO CPG_config VALUES ('ecards_more_pic_target', 'http://yoursite.tld/your_coppermine_folder/');
