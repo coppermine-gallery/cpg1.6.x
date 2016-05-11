@@ -331,6 +331,12 @@ if ($is_a_chunk) {
 // Change file permission
 @chmod($path_to_image, octdec($CONFIG['default_file_mode'])); //silence the output in case chmod is disabled
 
+// Check that an image is valid
+if (is_image($path_to_image) && !cpg_getimagesize($path_to_image)) {
+	@unlink($path_to_image);
+	errorOut($lang_db_input_php['err_invalid_img'], 0, __FILE__, __LINE__);
+}
+
 // Create a testing alias.
 $picture_alias = $matches[1].'.'.$matches[2];
 
