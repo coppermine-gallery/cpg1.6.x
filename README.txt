@@ -1,6 +1,6 @@
-/*************************
+/**************************
   Coppermine Photo Gallery
-  ************************
+ **************************
   Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory DEMAR
 
@@ -8,11 +8,11 @@
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
 
-  ********************************************
+ *************************************
   Coppermine version: 1.6.01
   $HeadURL$
   $Revision$
-**********************************************/
+ *************************************/
 
 CPG - Coppermine Photo Gallery Quick-Start Guide
 ================================================
@@ -46,7 +46,7 @@ Question: Ok, I uploaded everything to www.yoursite.com/cpg16x. Now what?
 Answer: You need to change permissions on a few directories before you can do anything else. Using your FTP program or website Control Panel, change permissions on the: "include", "albums", "albums/userpics", and "albums/edit" directories to 777. You should also create a new directory in albums that you will FTP your images/files into (name it "uploads" or any thing that catches your fancy -just no spaces or funny diacritical symbols, please.) and set it's permissions to '777' also. Some server set-ups will not work with chmod '777'. In which case, you should use '755'. (Confused? Don't know what CHMODE is? You've been warned, need we say more?)
 
 Question: I changed the permissions. What's next?
-Answer: You need to create a MySQL(i) database. Using your website Control Panel or a tool like phpMyAdmin, create a MySQL(i) database. Write down the database name, the username and password – you'll need it to successfully install Coppermine. If you already have a database you're using for a BBS or something else, that'll work just as well. You can use that database for Coppermine, too. If you have a BBS and plan to connect it to Coppermine install, you'll need to share the database anyway.
+Answer: You need to create a MySQL(i) database. Using your website Control Panel or a tool like phpMyAdmin, create a MySQL(i) database. Write down the database name, the username and password â€“ you'll need it to successfully install Coppermine. If you already have a database you're using for a BBS or something else, that'll work just as well. You can use that database for Coppermine, too. If you have a BBS and plan to connect it to Coppermine install, you'll need to share the database anyway.
 
 Question: My files are in place, permissions are set, and I have my database information. What's the next step?
 Answer: Read the... (Oops, sorry.)  Now you have to run the Coppermine install. Launch your web browser and enter http://www.yousite.com/coppermine/install.php and fill in the information that is requested. If you have never used ImageMagick before, leave that line blank during the install process. You can always add that information after you have Coppermine up and running.
@@ -59,7 +59,7 @@ Answer: 1) Wipe that smile off your face. 2) Read the docs, anyway -- twice. 3) 
 
 * General Settings: You should put in your site name and email address, and set your GMT time zone offset.
 * Language, Themes & Charset settings: Choose your default language.
-* Files and thumbnails settings: Set the max size for uploaded files to whatever size you prefer in kilobytes . The default setting is 1024kb. Make sure that this maximum file size is within the maximum allowed by your webhost. While you are at it, you should also set the "max width or height for uploaded pictures/videos (pixels)" – this will prevent your users from uploading images that are larger than what is desireable. If you would like Coppermine to automatically resize images that are larger than what you've designated in the Config settings, set "auto resize images that are larger than max width or height" to either: "Yes:Everyone" or "Yes:User only". "Everyone" means everybody, including when the administrator(you) batch-adds pictures, and User means just your gallery members when they upload pictures.
+* Files and thumbnails settings: Set the max size for uploaded files to whatever size you prefer in kilobytes . The default setting is 1024kb. Make sure that this maximum file size is within the maximum allowed by your webhost. While you are at it, you should also set the "max width or height for uploaded pictures/videos (pixels)" â€“ this will prevent your users from uploading images that are larger than what is desireable. If you would like Coppermine to automatically resize images that are larger than what you've designated in the Config settings, set "auto resize images that are larger than max width or height" to either: "Yes:Everyone" or "Yes:User only". "Everyone" means everybody, including when the administrator(you) batch-adds pictures, and User means just your gallery members when they upload pictures.
 * Files and thumbnails advanced settings: Make sure you have the correct image manipulation software selected. If you plan to use ImageMagick you may need put in the path to the binaries (make sure it ends with a trailing slash "/"). Do you want to allow your members to be able to create private albums? If you do, be sure to set "Users can have private albums" to 'Yes'.
 * User settings: If you plan to let people register and upload pictures, make certain that you set "Allow new user registrations" to 'Yes'.
 * You also want to take a peek at the groups settings. Coppermine comes with four groups by default: administrators, registered users, anonymous users, and banned users. This is where you control permissions to send e-cards, upload files, etc. This is also where you can set the maximum allowed disk space for each group (disk quota). It's set to 1024kb by default.
