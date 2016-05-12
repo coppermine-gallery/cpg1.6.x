@@ -31,12 +31,12 @@
 </div>
 
 <a name="upgrade"></a><h1>Upgrading<a href="#upgrade" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
-<p>Please note: as there have been changes both in the coppermine files and the database from previous versions to cpg1.6.x, users of older versions than cpg1.6.01 will have to apply <strong>all</strong> steps mentioned below: both the files have to be replaced and the update.php script has to be run once.</p>
+<p>Please note: as there have been changes both in the Coppermine files and the database from previous versions to cpg1.6.x, users of older versions than cpg1.6.01 will have to apply <strong>all</strong> steps mentioned below: both the files have to be replaced and the update.php script has to be run once.</p>
 <div class="indent">
 
     <a name="upgrade_why"></a><h2>Why upgrade?<a href="#upgrade_why" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
     <p>There are major and minor releases of Coppermine. Major releases have so far been cpg1.0, cpg1.1, cpg1.2.x, cpg1.3.x, cpg1.4.x and cpg1.5.x. The next major release will be cpg1.6.x (which currently is in the dev pipeline - no scheduled release date yet) -  you're just reading the preliminary docs for cpg1.6.x. Minor releases (the third number in the version numbering scheme) represent updates, also known as &quot;maintenance releases&quot;. Major releases contain new features (compared to the previous major release), minor releases do not contain new features, but only bug fixes and slight improvements (like additional language files).</p>
-    <p>To understand the release policy of the coppermine dev team you have to understand how bugs are being fixed: we maintain a repository where the core code of each major release is being constantly being improved. Major and minor bugs that are reported on the coppermine support board are being fixed in that repository. Once a new package is being bundled, all fixes that have been made in that repository go into the new maintenance release.</p>
+    <p>To understand the release policy of the Coppermine dev team you have to understand how bugs are being fixed: we maintain a repository where the core code of each major release is being constantly being improved. Major and minor bugs that are reported on the Coppermine support board are being fixed in that repository. Once a new package is being bundled, all fixes that have been made in that repository go into the new maintenance release.</p>
     <p>There is a good reason for every new maintenance release: they are usually being packaged when a new bug or vulnerability is being discovered that is relevant in terms of security. As suggested above, there are several minor bugfixes that go into each new release as well, not only the one major bug or vulnerability that lead to the maintenance release. Therefore, it will not be enough to just fix the single vulnerability that has been the initial reason for a new package to be released. Instead, always upgrade to the most recent stable release as soon as it has been announced.</p>
 
     <div class="indent">
@@ -61,11 +61,11 @@
               </tr>
             </table>
         </div>
-        <p>As you can see, the coppermine dev team is constantly fixing and improving coppermine. Every non-trivial piece of software contains bugs, so there is no guarantee that the version that currently is the most recent one will be the final, ultimately bug-free version to be released in the cpg1.5.x series. It is absolutely vital that you perform regular updates as soon as new packages are being released.</p>
+        <p>As you can see, the Coppermine dev team is constantly fixing and improving Coppermine. Every non-trivial piece of software contains bugs, so there is no guarantee that the version that currently is the most recent one will be the final, ultimately bug-free version to be released in the cpg1.5.x series. It is absolutely vital that you perform regular updates as soon as new packages are being released.</p>
         <a name="upgrade_why_reasons_end"></a>
 
         <a name="upgrade_why_changelog"></a><h3>Changelog<a href="#upgrade_why_changelog" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-        <p>Details on the changes that went into a release can be found in the changelog that comes with each package. The changelog file can be found in the root directory of the coppermine package. The changelog contains more information on additional languages and the time and date of the fix as well.</p>
+        <p>Details on the changes that went into a release can be found in the changelog that comes with each package. The changelog file can be found in the root directory of the Coppermine package. The changelog contains more information on additional languages and the time and date of the fix as well.</p>
         <p>The changelog is a plain-text file that can be read using a simple editor - on Windows-driven machines, notepad.exe is fine.</p>
         <a name="upgrade_why_changelog_end"></a>
     </div><a name="upgrade_why_end"></a>
@@ -81,17 +81,17 @@
         </li>
         <li>
             <a name="upgrade_any_backup_config"></a><h3 class="detail_head_collapsed smaller">Backup your include/config.inc.php file, your anycontent.php file and your &quot;albums&quot; directoy as a safety precaution if anything should go wrong.</h3>
-            <div class="detail_body border1">Usually, you just download your entire coppermine folder to your local hard drive or any other safe backup location using your <a href="dev_tools.htm#dev_tools_ftp_client"><abbr title="File Transfer Protocol">FTP</abbr> app</a>. A fresh Coppermine package doesn't contain a config file anyway (that file has being created during install on your server), so you can't actually replace an existing config file with an empty one from the package; again, the backup is only a safety precaution.
+            <div class="detail_body border1">Usually, you just download your entire Coppermine folder to your local hard drive or any other safe backup location using your <a href="dev_tools.htm#dev_tools_ftp_client"><abbr title="File Transfer Protocol">FTP</abbr> app</a>. A fresh Coppermine package doesn't contain a config file anyway (that file has being created during install on your server), so you can't actually replace an existing config file with an empty one from the package; again, the backup is only a safety precaution.
             <p class="small"><a href="#upgrade_any_backup_config" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></p></div>
         </li>
         <li>
             <a name="upgrade_any_download"></a><h3 class="detail_head_collapsed smaller">Download the most recent stable version existing in the download section of the official Coppermine homepage</h3>
-            <div class="detail_body border1">Don't assume that you have the most recent version, especially if you have installed Coppermine using a control panel app provided by your webhost. The coppermine dev team doesn't recommend using such <a href="auto-installers.htm#auto-installers">auto-installers</a> - please download the original from the <a href="http://coppermine-gallery.net/">official Coppermine homepage</a>.<br />
+            <div class="detail_body border1">Don't assume that you have the most recent version, especially if you have installed Coppermine using a control panel app provided by your webhost. The Coppermine dev team doesn't recommend using such <a href="auto-installers.htm#auto-installers">auto-installers</a> - please download the original from the <a href="http://coppermine-gallery.net/">official Coppermine homepage</a>.<br />
             If you're not sure what package to use (i.e. if there are several archive types), choose the zip archive, as Windows XP and better out of the box come with support for zip archives.
             <p class="small"><a href="#upgrade_any_download" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></p></div>
         </li>
         <li>
-            <a name="upgrade_any_unpack"></a><h3 class="detail_head_collapsed smaller">Unpack the coppermine package you downloaded</h3>
+            <a name="upgrade_any_unpack"></a><h3 class="detail_head_collapsed smaller">Unpack the Coppermine package you downloaded</h3>
             <div class="detail_body border1">Similar to fresh installs, you need to extract the packed archive into a temporary folder on your local hard drive (preserving the folder structure within the package). Most modern operating systems come with an unarchiver that is capable to extract zip archives. If you don't have one, the Coppermine devs recommend using <a href="http://7-zip.org/" rel="external" class="external">7-Zip</a>.
             <p class="small"><a href="#upgrade_any_unpack" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></p></div>
         </li>
@@ -102,12 +102,12 @@
         </li>
         <li>
             <a name="upgrade_any_update_script"></a><h3 class="detail_head_collapsed smaller">Run the update script</h3>
-            <div class="detail_body border1">To run the PHP-file &quot;<tt class="code">update.php</tt>&quot; (i.e. the <a href="#updater">update script</a>), just enter the <abbr title="Uniform Resource Locator">URL</abbr> into the address bar of your browser. The file &quot;<tt class="code">update.php</tt>&quot; resides in the coppermine directory, so to run it you will need to point your browser to <tt class="code">http://yourdomain.tld/your_coppermine_folder/update.php</tt> (if you have installed Coppermine into the root of your web site, you will have to run <tt class="code">http://yourdomain.tld/update.php</tt> accordingly). This will update your coppermine install by making all necessary changes in the database.
+            <div class="detail_body border1">To run the PHP-file &quot;<tt class="code">update.php</tt>&quot; (i.e. the <a href="#updater">update script</a>), just enter the <abbr title="Uniform Resource Locator">URL</abbr> into the address bar of your browser. The file &quot;<tt class="code">update.php</tt>&quot; resides in the Coppermine directory, so to run it you will need to point your browser to <tt class="code">http://yourdomain.tld/your_coppermine_folder/update.php</tt> (if you have installed Coppermine into the root of your web site, you will have to run <tt class="code">http://yourdomain.tld/update.php</tt> accordingly). This will update your Coppermine install by making all necessary changes in the database.
             <p class="small"><a href="#upgrade_any_update_script" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></p></div>
         </li>
     </ul>
     <p>To make this absolutely clear:</p>
-    <p class="cpg_message_error">there is no such thing as a separate upgrade package - coppermine always comes as a complete package that can be used both for a fresh install as well as an upgrade.</p>
+    <p class="cpg_message_error">there is no such thing as a separate upgrade package - Coppermine always comes as a complete package that can be used both for a fresh install as well as an upgrade.</p>
 
 
 
@@ -119,7 +119,7 @@
         <div class="indent">
         <a name="upgrade_10"></a><a name="upgrade_12"></a><h3>Upgrading from version cpg1.0, cpg1.1, cpg1.2.x, cpg1.3.x or cpg1.4.x to cpg1.6.x<a href="#upgrade_10" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
 
-        <p>Support for a direct upgrade from cpg1.0, cpg1.1, cpg1.2.x or cpg1.3.x to cpg1.5.x has been dropped - if you still have such an ancient version running, you will have to upgrade in a two-step-process (from your version to cpg1.4.x and then on to cpg1.5.x)</p>
+        <p>Support for a direct upgrade from cpg1.0, cpg1.1, cpg1.2.x, cpg1.3.x or cpg1.4.x to cpg1.6.x has been dropped - if you still have such an ancient version running, you will have to upgrade in a two-step-process (from your version to cpg1.5.x and then on to cpg1.6.x)</p>
 
 
 
@@ -147,7 +147,7 @@
           </li>
           <li>
               <a name="upgrade_14_outdated_files"></a><h4>Outdated files<a href="#upgrade_14_outdated_files" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
-              Delete the outdated files that came with older versions of coppermine that no longer exist in cpg1.5.x.<br />
+              Delete the outdated files that came with older versions of Coppermine that no longer exist in cpg1.5.x.<br />
               Again, this is just a precaution to make sure that your new gallery doesn't contain flaws from outdated versions that would allow malevolent attackers to exploit weaknesses in older versions. To find out what files need to be removed manually, take a look at the output at the bottom of the update screen (<tt class="code">http://yourdomain.tld/your_coppermine_folder/update.php</tt>) - the updater will attempt to delete the files for you, but in most server setups it won't have the permission to do so, so you will have to manually delete the files using your FTP app. Another way to find out about the files that need to be deleted is the <a href="#versioncheck">versioncheck</a> page - the files that are scheduled for removal will be displayed there as well - the versioncheck page won't attempt to delete those files though.
           </li>
           <li>
@@ -169,18 +169,18 @@
             <ul>
                 <li>Check the authorization of the visitor who accesses the script</li>
                 <li>Run the mysql database queries that reside in the file <tt class="code">sql/update.sql</tt> (replacing the generic table prefix with the one you actually chose during initial install)</li>
-                <li>Delete some files that used to reside inside coppermine's core in previous versions. The script only deletes unneeded files, but it doesn't touch your custom files, so there is absolutely no reason to be alarmed.</li>
-                <li>Convert your passwords from plain text to encrypted: in older versions of coppermine there used to be an option to allow the passwords of your users to be stored in plain text within the database. In cpg1.5.x, plain text passwords are no longer supported. Therefore (if you don't already use encrypted passwords), the passwords in your database will be encrypted by the update script.</li>
+                <li>Delete some files that used to reside inside Coppermine's core in previous versions. The script only deletes unneeded files, but it doesn't touch your custom files, so there is absolutely no reason to be alarmed.</li>
+                <li>Convert your passwords from plain text to encrypted: in older versions of Coppermine there used to be an option to allow the passwords of your users to be stored in plain text within the database. In cpg1.5.x, plain text passwords are no longer supported. Therefore (if you don't already use encrypted passwords), the passwords in your database will be encrypted by the update script.</li>
             </ul>
             <a name="updater_purpose"></a><h3>Purpose<a href="#updater_purpose" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-            <p>The updater will perform the database update for you after you manually have replaced the sql file it is using. The updater will <strong>not</strong> detect for you if there is a new version of coppermine available, nor will it download anything from the coppermine website. The level of automation is not that advanced in coppermine (yet).</p>
-            <p>To find out about new versions of coppermine or maintenance releases, check the <a href="configuration.htm#admin_general_coppermine_news">news from coppermine-gallery.net</a>.</p>
+            <p>The updater will perform the database update for you after you manually have replaced the sql file it is using. The updater will <strong>not</strong> detect for you if there is a new version of Coppermine available, nor will it download anything from the Coppermine website. The level of automation is not that advanced in Coppermine (yet).</p>
+            <p>To find out about new versions of Coppermine or maintenance releases, check the <a href="configuration.htm#admin_general_coppermine_news">news from coppermine-gallery.net</a>.</p>
             <a name="updater_authorization"></a><h3>Authorization check<a href="#updater_authorization" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
             <p>In Coppermine versions before cpg1.5.x, the update script used to be publicly accessible, e.g. everybody was able to run it. While this was good for support purposes (supporters were able to run the updater for users looking for help if it was obvious that they had not done so), there was a slight chance that this accessibility for everyone could at some stage be a security risk. That's why the dev team members decided to protect the updater from being run by any visitor who accesses it - starting with cpg1.5x you need to supply admin credentials. This can happen in four different ways:</p>
             <ul>
-                <li>If you're already logged in as admin and run the updater from the link in coppermine's admin menu, the updater should run without further prompts for authentification - it uses the "regular" cookie-driven authentification that the entire coppermine script is using</li>
-                <li>If you're not logged in as admin or if the coppermine core components no longer work without running the updater first (usually happens when upgrading major coppermine versions), you are prompted for credentials - enter the coppermine admin account details that you set up when installing coppermine in the first place</li>
-                <li>If you can not remember your standalone coppermine admin credentials, you can supply your mysql credentials - you needed them when you installed coppermine in the first place. If you have forgotten them, read them up in the file that is used to store the mysql database connection details: download <tt class="code">include/config.inc.php</tt> from your webserver to your client and then edit it with a plain text editor - you should see the mysql credentials in that file. If they have changed, your webhost should be able to help you retrieving them.</li>
+                <li>If you're already logged in as admin and run the updater from the link in Coppermine's admin menu, the updater should run without further prompts for authentification - it uses the "regular" cookie-driven authentification that the entire Coppermine script is using</li>
+                <li>If you're not logged in as admin or if the Coppermine core components no longer work without running the updater first (usually happens when upgrading major Coppermine versions), you are prompted for credentials - enter the Coppermine admin account details that you set up when installing Coppermine in the first place</li>
+                <li>If you can not remember your standalone Coppermine admin credentials, you can supply your mysql credentials - you needed them when you installed Coppermine in the first place. If you have forgotten them, read them up in the file that is used to store the mysql database connection details: download <tt class="code">include/config.inc.php</tt> from your webserver to your client and then edit it with a plain text editor - you should see the mysql credentials in that file. If they have changed, your webhost should be able to help you retrieving them.</li>
                 <li>If everything else fails, there is a toggle inside the code of the update script that you can use to skip authentification - to switch that toggle, download the update script (<tt class="code">update.php</tt>) from your webserver to your client, find <tt class="code">// define('SKIP_AUTHENTICATION', true);</tt> and replace with <tt class="code">define('SKIP_AUTHENTICATION', true);</tt>. Safe your changes and upload the edited file to your webserver, overwriting the version that already resides on your server. Remember to restore the file as it was after having successfully performed the update.</li>
             </ul>
             <a name="updater_when"></a><h3>When must the updater be run?<a href="#updater_when" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
@@ -189,8 +189,8 @@
         </div><a name="updater_end"></a>
 
     <a name="versioncheck"></a><h2>The version check tool<a href="#versioncheck" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
-    <p>Since the release of cpg1.3.2 Coppermine comes with an additional version checking tool to help you resolve issues with upgrades and updates easily. To launch the versioncheck, simply add <tt>versioncheck.php</tt> to your browser's address bar after being logged into coppermine as admin (example: <tt>http://yourdomain.tld/your_coppermine_folder/versioncheck.php</tt>). You can run the versioncheck utility from the <a href="admin_menu.htm#admin_menu">Admin menu</a>.</p>
-    <p class="cpg_message_info">The versioncheck tool does <strong>not</strong> perform an actual update: it does not download newer versions of coppermine for you, nor does it install any fixes - it just is meant to make you aware of newer versions and help you to determine wether you performed an upgrade correctly.</p>
+    <p>Since the release of cpg1.3.2 Coppermine comes with an additional version checking tool to help you resolve issues with upgrades and updates easily. To launch the versioncheck, simply add <tt>versioncheck.php</tt> to your browser's address bar after being logged into Coppermine as admin (example: <tt>http://yourdomain.tld/your_coppermine_folder/versioncheck.php</tt>). You can run the versioncheck utility from the <a href="admin_menu.htm#admin_menu">Admin menu</a>.</p>
+    <p class="cpg_message_info">The versioncheck tool does <strong>not</strong> perform an actual update: it does not download newer versions of Coppermine for you, nor does it install any fixes - it just is meant to make you aware of newer versions and help you to determine wether you performed an upgrade correctly.</p>
 
     <div class="indent">
 
@@ -198,13 +198,13 @@
         <p>The script &quot;versioncheck&quot; is meant for two purposes:</p>
         <ul>
             <li>If you have upgraded from a previous version, you should perform versioncheck to see if your upgrade worked as expected</li>
-            <li>Use versioncheck to make sure that your coppermine version is up-to-date</li>
+            <li>Use versioncheck to make sure that your Coppermine version is up-to-date</li>
         </ul>
         <p>This script goes through the files on your webserver and tries to determine if the local file versions on your webserver are the identical to the ones at the repository of http://coppermine-gallery.net. Files that do not match are displayed and are the files you should update as well.</p>
         <a name="versioncheck_description_end"></a>
 
         <a name="versioncheck_first_run"></a><h3>First run<a href="#versioncheck_first_run" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-        <p>When run for the first time, you will see the <a href"versioncheck_options_start">option</a> screen first. For a start, default options should be OK, so just submit the form. The script will then determine the coppermine version you're currently running, an try to look up the XML file on the coppermine repository that corresponds to your version. If successfull, it will compare all files that exist on your server against the most recent files that are recommended to use (trying to obtain that data from the repository). Subsequently, you should see a list of folders and files that are supposed to exist on your server and an explanation if the file versions you have are the most recent. For details how to interpret the output, read on.</p>
+        <p>When run for the first time, you will see the <a href"versioncheck_options_start">option</a> screen first. For a start, default options should be OK, so just submit the form. The script will then determine the Coppermine version you're currently running, an try to look up the XML file on the Coppermine repository that corresponds to your version. If successfull, it will compare all files that exist on your server against the most recent files that are recommended to use (trying to obtain that data from the repository). Subsequently, you should see a list of folders and files that are supposed to exist on your server and an explanation if the file versions you have are the most recent. For details how to interpret the output, read on.</p>
 
 
 
@@ -219,7 +219,7 @@
                 <li><em>Full-screen</em><br />
                 Use this by default. It will display as much detail as possible and has a nicer layout</li>
                 <li><em>Text-only</em><br />
-                If a supporter <em>asks</em> you to post your versioncheck-output, switch to this options, so you can easily copy the output and paste it into your posting on the coppermine support board. Only do so if a supporter explicitely asks for it! Another potential use for the text-only output is resources-consumption: if you suffer from time-outs, try using the plain-text option, as it consumes slightly less resources.</li>
+                If a supporter <em>asks</em> you to post your versioncheck-output, switch to this options, so you can easily copy the output and paste it into your posting on the Coppermine support board. Only do so if a supporter explicitely asks for it! Another potential use for the text-only output is resources-consumption: if you suffer from time-outs, try using the plain-text option, as it consumes slightly less resources.</li>
             </ul>
             <a name="versioncheck_options_display_output_end"></a>
             </li>
@@ -228,7 +228,7 @@
             <a name="versioncheck_options_only_show_potential_errors_end"></a>
             </li>
             <li><a name="versioncheck_options_hide_images"></a><h4>Hide images<a href="#versioncheck_options_hide_images" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
-            When enabling this option, the many graphical resources that come with coppermine (i.e. all the icons and other images) are not being taken into account for display on the versioncheck page - a filter is being applied. Use this option to make the output less cluttered: images usually are not security-sensitive, so if you're only concerned about files that have an impact on security, you can safely hide the images.
+            When enabling this option, the many graphical resources that come with Coppermine (i.e. all the icons and other images) are not being taken into account for display on the versioncheck page - a filter is being applied. Use this option to make the output less cluttered: images usually are not security-sensitive, so if you're only concerned about files that have an impact on security, you can safely hide the images.
             <a name="versioncheck_options_hide_images_end"></a>
             </li>
             <li><a name="versioncheck_options_no_modification_check"></a><h4>Don't check for modified files<a href="#versioncheck_options_no_modification_check" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
@@ -268,10 +268,10 @@
             The same thing that applies to version numbers applies to revisions as well: only textual files can have revision numbers - folders and binary files don't have a revision number.<br />
             Confused? You don't have to: usually, you can safely ignore revisions - if you want to find out about what revisions are being used for, read the <a href="dev_subversion.htm#dev_subversion_revision">details on the subversion</a> page.</li>
             <li><a name="versioncheck_comparison_modified"></a><h4>Modified<a href="#versioncheck_comparison_modified" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
-            If a file is accessible and the version and revision numbers match, the versioncheck script attempts to perform a check wether the file has been modified, compared to the original that comes with the coppermine package. This check is being performed by taking into account the MD5-hashes of the original file and your copy.<br />When performing a fresh install or upgrade, there should be no modified files. If they are being displayed as modified, there are several possible reasons:
+            If a file is accessible and the version and revision numbers match, the versioncheck script attempts to perform a check wether the file has been modified, compared to the original that comes with the Coppermine package. This check is being performed by taking into account the MD5-hashes of the original file and your copy.<br />When performing a fresh install or upgrade, there should be no modified files. If they are being displayed as modified, there are several possible reasons:
             <ul>
                 <li>You <strong>deliberately</strong> modified the file (e.g. by applying a custom modification to it). In this case, it's OK to ignore the warning in the &quot;Modified&quot;-column and continue</li>
-                <li>Your file has not been transfered fully to the webserver. If this is the case, try to re-upload the file from your client to the server. If this doesn't help, your package might have gotten corrupt. Re-download a fresh one from the coppermine download section, un-archive it and re-upload the file. Make sure that your FTP app is configured to actually overwrite existing files</li>
+                <li>Your file has not been transfered fully to the webserver. If this is the case, try to re-upload the file from your client to the server. If this doesn't help, your package might have gotten corrupt. Re-download a fresh one from the Coppermine download section, un-archive it and re-upload the file. Make sure that your FTP app is configured to actually overwrite existing files</li>
                 <li>You have used an improper FTP-mode to transfer the file to your webserver. Using FTP apps, you can transfer files in binary or ASCII-mode. Most up-to-date FTP clients have a feature that will automatically select the proper FTP-mode for each file. If this is not the case, try the manual appoach and explicitely specify the FTP-mode for your file uploads.</li>
                 <li>Your webhost is injecting code into each file. Many free webspace providers (so-called &quot;freehosts&quot;) do this to inject advertisments into your files. There's little you can do then except signing up with paid webhosting or ignoring the &quot;Modified&quot;-warning and hoping that things will work anyway.</li>
             </ul>
@@ -295,11 +295,11 @@
             Error messages like <tt class="code">Fatal error: Maximum execution time of 60 seconds exceeded in /path/to/webroot/coppermine_folder/include/versioncheck.inc.php on line 276</tt> are an indicator for the script consuming too many resources on your server. Try disabling some output options. If this doesn't help, you simply can not run the versioncheck script on your server.
             </li>
         </ul>
-        <p>Versioncheck is being provided as a courtesy to end users. As there are several factors that have an impact on it, it may or may not work on your server setup. If the versioncheck tool does nothing at all, this is probably the case for you - you don't have to be alarmed in this case: just make sure to keep your coppermine install up-to-date, preferably by enabling the config option "<a href="configuration.htm#admin_general_coppermine_news">Display news from coppermine-gallery.net</a>". Only if individual issues are being reported by the version check tool (i.e. only if <em>some</em> lines contain a remark in the comments column), you should be alarmed and take a closer look.</p>
+        <p>Versioncheck is being provided as a courtesy to end users. As there are several factors that have an impact on it, it may or may not work on your server setup. If the versioncheck tool does nothing at all, this is probably the case for you - you don't have to be alarmed in this case: just make sure to keep your coppermine install up-to-date, preferably by enabling the config option "<a href="configuration.htm#admin_general_coppermine_news">Display news from Coppermine-gallery.net</a>". Only if individual issues are being reported by the version check tool (i.e. only if <em>some</em> lines contain a remark in the comments column), you should be alarmed and take a closer look.</p>
         <a name="versioncheck_problems_end"></a>
 
         <a name="versioncheck_expect"></a><h3>Wrong expectations<a href="#versioncheck_expect" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-        <p>To some this may sound trivial, for others it might be an important piece of information: naturally, files that you have not replaced during the upgrading process (e.g. <tt class="code">anycontent.php</tt>) will show as outdated in versioncheck's output. This is of course to be expected. It doesn't hurt if you performed the upgrade exactly as suggested, as the files you're supposed to keep during that process don't actually contain code that needs updating. As an example, <tt class="code">anycontent.php</tt> doesn't actually contain code at all (at least the file that comes with coppermine out of the box). It <em>can</em> contain custom code if you decide to use it. For details on the usage of <tt class="code">anycontent.php</tt>, refer to the section &quot;<a href="php-content.htm#php-content_anycontent">Using anycontent.php</a>&quot;.</p>
+        <p>To some this may sound trivial, for others it might be an important piece of information: naturally, files that you have not replaced during the upgrading process (e.g. <tt class="code">anycontent.php</tt>) will show as outdated in versioncheck's output. This is of course to be expected. It doesn't hurt if you performed the upgrade exactly as suggested, as the files you're supposed to keep during that process don't actually contain code that needs updating. As an example, <tt class="code">anycontent.php</tt> doesn't actually contain code at all (at least the file that comes with Coppermine out of the box). It <em>can</em> contain custom code if you decide to use it. For details on the usage of <tt class="code">anycontent.php</tt>, refer to the section &quot;<a href="php-content.htm#php-content_anycontent">Using anycontent.php</a>&quot;.</p>
         <p>The versioncheck tool doesn't actually <em>download</em> newer file versions from the internet - it just <em>checks</em> the files you have on your server against a list of most recent files. The versioncheck tool doesn't check nor sanitize your site against hacking.</p>
 
     </div><a name="versioncheck_end"></a>
@@ -310,20 +310,20 @@
         <li><a name="upgrade_faq_new_releases_alert"></a><h3>How do I find out about new Coppermine releases?<a href="#upgrade_faq_new_releases_alert" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
         There are various tools that allow you to stay up to date and make sure that you don't miss a release:
         <ul>
-            <li>Leave the config setting &quot;<a href="configuration.htm#admin_general_coppermine_news">Display news from coppermine-gallery.net</a>&quot; enabled: this feature will alert you about news concerning releases and security issues on your coppermine-driven gallery. The news are only visible for you as admin, so your end users won't even notice.</li>
+            <li>Leave the config setting &quot;<a href="configuration.htm#admin_general_coppermine_news">Display news from coppermine-gallery.net</a>&quot; enabled: this feature will alert you about news concerning releases and security issues on your Coppermine-driven gallery. The news are only visible for you as admin, so your end users won't even notice.</li>
             <li>Subscribe to the package on the sf.net project pages</li>
             <li>Subscribe to the <a href="http://forum.coppermine-gallery.net/index.php/board,58.0.html" rel="external" class=" external">announcements board</a> (by clicking on "notify" when being logged in). You will then get an email whenever a new posting is made on the announcement board.</li>
         </ul>
         </li>
         <li><a name="upgrade_faq_difference_update_upgrade"></a><h3>What's the difference between <em>updating</em> and <em>upgrading</em>?<a href="#upgrade_faq_difference_update_upgrade" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-        The words "update" and "upgrade" are often being used as synonyms. There is a slight difference though in the definition of the coppermine developers: <strong>upgrading</strong> usually means increasing the <em>major</em> version number, e.g. from cpg1.<em>5</em>.x to cpg1.<em>6</em>.x; while <strong>updating</strong> usually refers to <em>minor</em> version increases, e.g. maintenance releases from cpg1.6.<em>x</em> to cpg1.6.<em>y</em>.<br />
-        However, the usage is not that strict, so you might find places both in this document as well as other media (like the official coppermine forum) where the terms are being used the other way 'round. In fact, the words are pretty much synonyms as far as we're concerned.</li>
+        The words "update" and "upgrade" are often being used as synonyms. There is a slight difference though in the definition of the Coppermine developers: <strong>upgrading</strong> usually means increasing the <em>major</em> version number, e.g. from cpg1.<em>5</em>.x to cpg1.<em>6</em>.x; while <strong>updating</strong> usually refers to <em>minor</em> version increases, e.g. maintenance releases from cpg1.6.<em>x</em> to cpg1.6.<em>y</em>.<br />
+        However, the usage is not that strict, so you might find places both in this document as well as other media (like the official Coppermine forum) where the terms are being used the other way 'round. In fact, the words are pretty much synonyms as far as we're concerned.</li>
         <li>
             <a name="upgrade_faq_what_version"></a><h3>How do I find out what version of Coppermine I have?<a href="#upgrade_faq_what_version" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
             There are several ways to determine what version of Coppermine you are running:
             <ul>
                 <li>If you can log in to your Coppermine gallery using your admin account, go to the config panel of Coppermine: the exact version will be displayed in the table header</li>
-                <li>Take a look at the output of any coppermine-driven page using your regular browser (usually by right-clicking on a blank section and choosing "Show source-code" or similar from the context menu). Scroll down to the bottom of the output (right before the closing body tag) - you should see a comment line there that will display the exact Coppermine version</li>
+                <li>Take a look at the output of any Coppermine-driven page using your regular browser (usually by right-clicking on a blank section and choosing "Show source-code" or similar from the context menu). Scroll down to the bottom of the output (right before the closing body tag) - you should see a comment line there that will display the exact Coppermine version</li>
                 <li>Use a plain text editor to open a local copy of any PHP core file of Coppermine - in the file header you should see both an exact Coppermine version as well as the subversion revision number. This is the case as well for several other files that come with Coppermine.</li>
             </ul>
         </li>
@@ -331,8 +331,8 @@
 </div><a name="upgrade_end"></a>
 
 <a name="downgrading"></a><h2>Downgrading from cpg1.6.x to an older version<a href="#downgrading" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
-<p>CPG1.6.x incorporates many new features (compared to older versions), so we encourage all users to upgrade. However, there may be some who want to test cpg1.6.x and decide later that they want to go back to an older version. You have to keep in mind that a full upgrade changes the overall layout of coppermine's database that includes converting the encoding to unicode. This process can't be reverted: once you have done the conversion, the only way back is to restore a complete mySQL database dump (of course you have to create this backup <strong>before</strong> you upgraded in the first place). Creating mySQL dumps (backups) is recommended anyway, so you should do so <strong>now</strong>.</p>
-<p class="cpg_message_warning">To make this absolutely clear: you can <strong>only</strong> downgrade if you used to have cpg1.5.x before and upgraded this version to cpg1.6.x. If you have made a <strong>fresh</strong> install of cpg1.65.x, you <strong>can not</strong> downgrade at all!</p>
+<p>CPG1.6.x incorporates many new features (compared to older versions), so we encourage all users to upgrade. However, there may be some who want to test cpg1.6.x and decide later that they want to go back to an older version. You have to keep in mind that a full upgrade changes the overall layout of Coppermine's database that includes converting the encoding to unicode. This process can't be reverted: once you have done the conversion, the only way back is to restore a complete mySQL database dump (of course you have to create this backup <strong>before</strong> you upgraded in the first place). Creating mySQL dumps (backups) is recommended anyway, so you should do so <strong>now</strong>.</p>
+<p class="cpg_message_warning">To make this absolutely clear: you can <strong>only</strong> downgrade if you used to have cpg1.5.x before and upgraded this version to cpg1.6.x. If you have made a <strong>fresh</strong> install of cpg1.6.x, you <strong>can not</strong> downgrade at all!</p>
 <p>To actually perform the downgrade, replace all cpg1.6.x files on your server with the files from the older version (as if you were doing an upgrade, see above). Then restore your database dump that you must have made before upgrading. If you don't have a database dump (backup), you can't go back!</p>
 <a name="downgrading_end"></a>
 
