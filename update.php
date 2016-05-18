@@ -754,6 +754,8 @@ function delete_files()
         'logs/log_header.inc.php',
         'js/setup_swf_upload.js',
         'js/swfupload',
+        'docs/en/uploading_xp-publisher.htm',
+        'xp_publish.php',
     );
 
     // Check if the file exists in the first place
