@@ -39,7 +39,7 @@ EOT;
  * can be used to present extra information. In this case we show a complex
  * example that forms a button the user can click.
  */
-$install_info=<<<EOT
+$install_info = <<<EOT
     <table border="0" cellspacing="0" cellpadding="0">
     <tr>
         <td><a href="http://coppermine-gallery.net/forum/index.php?board=97.0" title="{$lang_plugin_sample['plugin_support']}" class="admin_menu">{$lang_plugin_sample['plugin_support']}</a></td>
@@ -52,5 +52,14 @@ EOT;
  * Use the file name without the .php extension.
  */
 $config_action = 'config';
+/*
+ Alternatively, $config_action can be an array with .css and .js files included that the plugin
+ manager will load when running the configuration action. Paths are plugin relative.
+$config_action = array(
+		'action' => 'config',
+		'css' => 'css/mystyle.css',	//can be an array as the js below
+		'js' => array('js/myjs1.js','js/myjs2.js')
+	)
+*/
 
 //EOF
