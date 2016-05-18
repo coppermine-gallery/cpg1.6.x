@@ -203,11 +203,19 @@ EOT;
             }
 //@RJC\
 			if (isset($config_action) and $config_action) {
+				if (is_array($config_action)) {
+					$action = $config_action['action'];
+					$xa = '&amp;xa=' . urlencode(base64_encode(serialize($config_action)));
+				} else {
+					$action = $config_action;
+					$xa = '&amp;xa=' . urlencode(base64_encode(serialize(array('action'=>$config_action))));
+				}
 				$btn_icon = cpg_fetch_icon('config', 1);
 				echo <<<EOT
 					<tr>
 						<td class="tableb tableb_alternate" valign="top">{$lang_pluginmgr_php['plugin_action']}:</td>
-						<td class="tableb tableb_alternate" valign="top"><a href="pluginmgr.php?op=admin&amp;p={$thisplugin['plugin_id']}&amp;c={$config_action}" class="admin_menu">{$btn_icon}{$lang_pluginmgr_php['configure_plugin']}</a></td>
+						<!-- <td class="tableb tableb_alternate" valign="top"><a href="pluginmgr.php?op=admin&amp;p={$thisplugin['plugin_id']}&amp;c={$action}{$xa}" class="admin_menu">{$btn_icon}{$lang_pluginmgr_php['configure_plugin']}</a></td> -->
+						<td class="tableb tableb_alternate" valign="top"><a href="pluginmgr.php?op=admin&amp;p={$thisplugin['plugin_id']}{$xa}" class="admin_menu">{$btn_icon}{$lang_pluginmgr_php['configure_plugin']}</a></td>
 					</tr>
 EOT;
 			}
@@ -504,6 +512,51 @@ switch ($op) {
 	case 'admin':
 		$plugin_id = $p;
 		$actonplugin = @$CPG_PLUGINS[$plugin_id];
+		// Display admin plugin configuration
+
+		// Fail if there is a post and no valid form token
+		if ($superCage->post->_source && !checkFormToken()) {
+			cpg_die(ERROR, $lang_errors['invalid_form_token'], __FILE__, __LINE__);
+		}
+
+		$ap = @$superCage->get->getEscaped('xa');
+		$xa = unserialize(base64_decode(urldecode($ap)));
+
+		$cfg_file = $xa['action'];
+
+		$meta = array();
+		if (isset($xa['css'])) {
+			if (!is_array($xa['css'])) $xa['css'] = array($xa['css']);
+			foreach ($xa['css'] as $css) {
+				$meta[] = '<link rel="stylesheet" href="plugins/'.$actonplugin->path.'/'.$css.'" type="text/css" />';
+			}
+		}
+		if (isset($xa['js'])) {
+			if (!is_array($xa['js'])) $xa['js'] = array($xa['js']);
+			foreach ($xa['js'] as $js) {
+				js_include('plugins/'.$actonplugin->path.'/'.$js);
+			}
+		}
+
+		pageheader($lang_pluginmgr_php['pmgr'], implode("\n",$meta));
+
+		echo <<<EOT
+		<form id="cfgForm" action="pluginmgr.php?op=admin&amp;p={$p}&amp;xa={$ap}" method="post">
+EOT;
+
+		// Invoke the plugin's config action
+		include('./plugins/'.$actonplugin->path.'/'.$cfg_file.'.php');
+
+		list($timestamp, $form_token) = getFormToken();
+		echo <<<EOT
+		<input type="hidden" name="form_token" value="{$form_token}" />
+		<input type="hidden" name="timestamp" value="{$timestamp}" />
+		</form>
+EOT;
+		echo '<br />' . $LINEBREAK;
+
+		pagefooter();
+		exit();
 		break;
 //@RJC/
     case 'delete':
@@ -696,30 +749,6 @@ EOT;
 
     // End the table
     endtable();
-//@RJC\
-} elseif ($op == 'admin') {
-	// Display admin plugin configuration
-
-	// Fail if there is a post no valid form token
-	if ($superCage->post->_source && !checkFormToken()) {
-		cpg_die(ERROR, $lang_errors['invalid_form_token'], __FILE__, __LINE__);
-	}
-
-	$cfg_file = @$superCage->get->getEscaped('c');
-	echo <<<EOT
-	<form id="cfgForm" action="pluginmgr.php?op=admin&amp;p={$p}&amp;c={$cfg_file}" method="post">
-EOT;
-
-	// Invoke the plugin's config action
-	include('./plugins/'.$actonplugin->path.'/'.$cfg_file.'.php');
-
-	list($timestamp, $form_token) = getFormToken();
-	echo <<<EOT
-	<input type="hidden" name="form_token" value="{$form_token}" />
-	<input type="hidden" name="timestamp" value="{$timestamp}" />
-	</form>
-EOT;
-//@RJC/
 } else {
 
     // Display cleanup page table header
