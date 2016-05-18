@@ -349,12 +349,12 @@ switch($step) {
 
 	case STEP_DB_INFO:		// Ask user for database type, host, username and password, try to establish a connection using that info
 		$db_type = $superCage->post->getRaw('db_type');
-		if (!$db_type) {
+		if (!isset($db_type)) {
 			$db_type = $config['db_type'];
 		} else {
 			setTmpConfig('db_type', $db_type);
 		}
-		list($dext, $dsub) = explode(':', $db_type);
+		list($dext, $dsub) = explode(':', $db_type.':');
 		if ($db_type) require_once 'include/database/'.$dext.'/install.php';
 		$page_title = $language['title_dbase_user'];
 		// check if we are trying to test the connection
@@ -385,7 +385,7 @@ switch($step) {
 
 	case STEP_DB_SELECT:	 // Ask the user if he wants to use an existing db or if he wants the installer to create a new database. Try to perform the selected choice. Ask for the table prefix
 		$db_type = $config['db_type'];
-		list($dext, $dsub) = explode(':', $db_type);
+		list($dext, $dsub) = explode(':', $db_type.':');
 		require_once 'include/database/'.$dext.'/install.php';
 		$page_title = sprintf($language['title_dbase_db_sel'], strtoupper($db_type));
 		// save the db data from previous step
@@ -422,7 +422,7 @@ switch($step) {
 
 	case STEP_DB_INIT:		// save db_prefix/_name and finally create the tables
 		$db_type = $config['db_type'];
-		list($dext, $dsub) = explode(':', $db_type);
+		list($dext, $dsub) = explode(':', $db_type.':');
 		require_once 'include/database/'.$dext.'/install.php';
 		$page_title = $language['title_'.$db_type.'_pop'];
 		// save the db data from previous step
@@ -469,7 +469,7 @@ switch($step) {
 
 	case STEP_SET_ADMIN:	 // Ask for coppermine admin username, password and email address
 		$db_type = $config['db_type'];
-		list($dext, $dsub) = explode(':', $db_type);
+		list($dext, $dsub) = explode(':', $db_type.':');
 		require_once 'include/database/'.$dext.'/install.php';
 		$page_title = $language['title_admin'];
 		if ($superCage->post->keyExists('admin_username')) {
@@ -1512,7 +1512,7 @@ function populateDatabase()
 		set_magic_quotes_runtime(0);
 	}
 	// Get a connection with the db.
-	list($dext, $dsub) = explode(':', $config['db_type']);
+	list($dext, $dsub) = explode(':', $config['db_type'].':');
 	$con_check = 'check'.ucfirst($dext).'Connection';
 	if (!$con_check($dsub)) {
 		return false;

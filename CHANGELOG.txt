@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2016-05-18 [C] Removed some PHP notices during installation {eenemeenemuu}
 2016-05-18 [M] Improved plugin configuration action (pluginmgr) {ron4mac}
 2016-05-10 [M] Removed obsolete XP Publisher feature {ron4mac}
 2016-05-10 [M] Accomodate conversion of mysql_real_escape_string to cpg_db... {ron4mac}

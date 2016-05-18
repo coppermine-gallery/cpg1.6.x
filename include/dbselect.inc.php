@@ -31,7 +31,7 @@ class DbaseSelect
 		$opts = '';
 		foreach ($this->dbtypes as $dtype => $dsp) {
 			$opts .= '<option value="'.$dtype.'"';
-			list($tnam,$tsub) = explode(':', $dtype);
+			list($tnam,$tsub) = explode(':', $dtype.':');
 			require_once 'include/database/'.$tnam.'/install.php';
 			$ifunc = 'dbcheck_'.$tnam;
 			if (function_exists($ifunc) && $ifunc($tsub)===true) {
