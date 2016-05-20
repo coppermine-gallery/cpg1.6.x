@@ -11,7 +11,6 @@
  *************************************
  Coppermine version: 1.6.01
  $HeadURL$
- $Revision$
  *************************************/
 
 CPG - Coppermine Photo Gallery Quick-Start Guide

@@ -12,7 +12,6 @@
  ********************************************
  Coppermine version: 1.6.01
  $HeadURL$
- $Revision$
  ********************************************/
 
 require_once 'imageobject.class.php';

@@ -12,7 +12,6 @@
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
-  $Revision$
   ********************************************
   Code below has been taken from lib.xml.php and slightly modified for use with coppermine
   Orginal: http://www.phpclasses.org/browse/file/17412.html

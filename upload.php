@@ -12,7 +12,6 @@
  ************************************
   Coppermine version: 1.6.01
   $HeadURL$
-  $Revision$
  ************************************/
 
 // Confirm we are in Coppermine and set the language blocks.

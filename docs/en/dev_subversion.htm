@@ -14,7 +14,6 @@
 
   Coppermine version: 1.6.01
   $HeadURL$
-  $Revision$
 -->
 <link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
 <link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
@@ -299,13 +298,12 @@ For those who don't want to download and install a full SVN client software ther
 In all textual Coppermine files (i.e. files with the extensions <tt class="code">.php</tt>, <tt class="code">.htm</tt>, <tt class="code">.css</tt>, <tt class="code">.js</tt>, <tt class="code">sql</tt>, <tt class="code">.txt</tt>, <tt class="code">.xml</tt>) there is a subversion header present that is meant to help developers and power users to determine what version and revision number a particular file is. This can be helpful when troubleshooting as well as in support matters. However, from a technical point of view (as far as the core functionality of your gallery is concerned), the additional subversion file headers are just for information purposes and don't server any technical purpose.<br />
 Subsequently: if you're an end user, you can savely remove the subversion file headers from files where this bothers you, e.g. if you want a clean HTML output (code-wise) of your pages you can remove the subversion file header from the HTML template file of your custom theme (<tt class="code">themes/yourtheme/template.html</tt>).<br />
 Developers and contributors on the other hand are required to <strong>preserve</strong> the subversion file header or add it when coming up with new files that end up under version control (see &quot;<a href="dev_files.htm#dev_files_adding">Adding files</a>&quot;).<br />
-The idea behind the subversion file header is that it always gets updated automatically by the subversion software whenever a user with subversion write access commits a file. Think of the lines as placeholders: the subversion keywords <tt class="code">&#36;HeadURL&#36;</tt>, <tt class="code">&#36;Revision&#36;</tt>,  <tt class="code">&#36;Date&#36;</tt> get replaced by their actual values - in this document, the equivalents are <tt class="code">$HeadURL$</tt>, <tt class="code">$Revision$</tt>,  <tt class="code">$Date$</tt>. There is no point in manually editing the content of those values - remove the information if you're an end user and it bothers you, but it won't affect your gallery in any way, so it's easier to leave the subversion file headers as they are.
+The idea behind the subversion file header is that it always gets updated automatically by the subversion software whenever a user with subversion write access commits a file. Think of the lines as placeholders: the subversion keywords <tt class="code">&#36;HeadURL&#36;</tt>, <tt class="code">&#36;Date&#36;</tt> get replaced by their actual values - in this document, the equivalents are <tt class="code">$HeadURL$</tt>, <tt class="code">$Date$</tt>. There is no point in manually editing the content of those values - remove the information if you're an end user and it bothers you, but it won't affect your gallery in any way, so it's easier to leave the subversion file headers as they are.
 
 
 <div id="doc_footer">
 	<div class="doc_info_wrapper">
 		<span id="doc_last_changed">$LastChangedDate$</span>
-		<span id="doc_revision">$Revision$</span>
 	</div>
 </div>
 </body>

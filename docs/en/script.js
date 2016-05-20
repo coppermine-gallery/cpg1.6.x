@@ -11,7 +11,6 @@
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
-  $Revision$
 **********************************************/
 
 var linebreak = '\n';
@@ -1552,12 +1551,6 @@ function dateRevision() {
   var lastChangeDate = lastChangeDate.replace('LastChangedDate: ', '');
   var lastChangeDate = lastChangeDate.replace(/Date: /g, '');
   $('#doc_last_changed').text('About this document: ' + 'last changed on ' + lastChangeDate);
-
-  var revisionNumber = $('#doc_revision').text();
-  var revisionNumber = revisionNumber.replace('$', '');
-  var revisionNumber = revisionNumber.replace('$', '');
-  var revisionNumber = revisionNumber.replace(/Revision: /g, '');
-  $('#doc_revision').text(', SVN revision ' + revisionNumber);
 }
 
 function getUrlParameters(name)

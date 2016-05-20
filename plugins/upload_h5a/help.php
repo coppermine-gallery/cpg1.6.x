@@ -12,7 +12,6 @@
  ************************************
   Coppermine version: 1.6.01
   $HeadURL$
-  $Revision$
  ************************************/
 
 $styles = '../../themes/'.$_GET['t'].'/style.css';

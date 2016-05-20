@@ -11,8 +11,7 @@
 ##  ********************************************
 ##  Coppermine version: 1.6.01
 ##  $HeadURL$
-##  $Revision$
-##  ********************************************
+####  ********************************************
 
 # The following line has to be removed when the moderator group feature will be re-enabled!
 UPDATE CPG_albums SET moderator_group = 0;

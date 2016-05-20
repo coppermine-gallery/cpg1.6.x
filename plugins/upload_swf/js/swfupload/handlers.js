@@ -11,7 +11,6 @@
  ************************************
   Coppermine version: 1.6.01
   $HeadURL$
-  $Revision$
  ************************************/
 
 /* Demo Note:  This demo uses a FileProgress class that handles the UI for displaying the file name and percent complete.

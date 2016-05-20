@@ -12,7 +12,6 @@
  ************************************
   Coppermine version: 1.6.01
   $HeadURL$
-  $Revision$
  ************************************/
 
 /* FOR USE WITH NEW ADMIN PLUGIN CONFIGURATION SCHEME */

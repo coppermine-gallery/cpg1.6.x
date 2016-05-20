@@ -12,7 +12,6 @@
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
-  $Revision$
 **********************************************/
 
 define('THEME_HAS_PROGRESS_GRAPHICS', 1);
