@@ -23,6 +23,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2016-05-20 [B] Updated repository link {eenemeenemuu}
 2016-05-20 [M] Removed any reference to SVN revision from versioncheck {eenemeenemuu}
 2016-05-20 [D] Updated link in credits page (thread ID 78727) {eenemeenemuu}
 2016-05-18 [C] Removed some PHP notices during installation {eenemeenemuu}

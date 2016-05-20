@@ -39,7 +39,7 @@ $textFileExtensions_array = array(
 $imageFileExtensions_array = array(
   'jpg', 'png', 'gif'
 );
-$subversionRepository = 'http://coppermine.svn.sourceforge.net/viewvc/coppermine/trunk/';
+$gitrepository = 'https://github.com/coppermine-gallery/cpg1.6.x/blob/master/';
 $majorVersion = 'cpg'.str_replace('.' . ltrim(substr(COPPERMINE_VERSION,strrpos(COPPERMINE_VERSION,'.')),'.'), '', COPPERMINE_VERSION).'.x';
 
 $maxLength_array = array();
@@ -627,7 +627,7 @@ EOT;
 }
 
 function cpg_versioncheckCreateHTMLOutput($file_data_array) {
-  global $textFileExtensions_array, $lang_versioncheck_php, $lang_common, $majorVersion, $displayOption_array, $file_data_count, $maxLength_array, $subversionRepository, $imageFileExtensions_array, $LINEBREAK;
+  global $textFileExtensions_array, $lang_versioncheck_php, $lang_common, $majorVersion, $displayOption_array, $file_data_count, $maxLength_array, $gitrepository, $imageFileExtensions_array, $LINEBREAK;
   $loopCounter_array = array('total' => 0, 'error' => 0, 'display' => 0);
   if (strlen($file_data_count) > $maxLength_array['counter']) {
     $maxLength_array['counter'] = strlen($file_data_count);
@@ -732,7 +732,7 @@ EOT;
           }
           print <<< EOT
           <td class="{$cellstyle}{$important['comment']}" align="left" style="font-size:9px">{$file_data_values['comment']}</td>
-          <td class="{$cellstyle}{$important['svn']}" align="left" style="font-size:9px"><a href="{$subversionRepository}{$majorVersion}/{$file_data_values['fullpath']}"><img src="images/icons/subversion.png" width="16" height="16" border="0" alt="" title="{$lang_versioncheck_php['browse_corresponding_page_subversion']}" /></a></td>
+          <td class="{$cellstyle}{$important['svn']}" align="left" style="font-size:9px"><a href="{$gitrepository}{$file_data_values['fullpath']}"><img src="images/icons/subversion.png" width="16" height="16" border="0" alt="" title="{$lang_versioncheck_php['browse_corresponding_page_subversion']}" /></a></td>
         </tr>
 EOT;
       }
