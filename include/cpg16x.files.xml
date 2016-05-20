@@ -9168,11 +9168,6 @@
     <hash>19be42b26f4d587e72f0a52e7d36b36c</hash>
   </element>
   <element>
-    <fullpath>plugins/upload_swf/images/sv_browse_swf.png</fullpath>
-    <status>mandatory</status>
-    <permission>read</permission>
-  </element>
-  <element>
     <fullpath>plugins/upload_swf/js/</fullpath>
     <status>mandatory</status>
     <permission>read</permission>
