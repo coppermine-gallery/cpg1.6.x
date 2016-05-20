@@ -591,13 +591,10 @@ EOT;
     print "  </element>".$LINEBREAK;
     $loopCounter++;
   }
-  print '</file_data>'.$LINEBREAK;
+  print '</file_data>';
   // display formatted footer data
   if ($displayOption_array['output'] == 'textarea' || $displayOption_array['output'] == 'create') {
-    print <<< EOT
-    </textarea>
-    </form>
-EOT;
+    print '</textarea></form>';
   }
   $loopCounter++;
   return $loopCounter;

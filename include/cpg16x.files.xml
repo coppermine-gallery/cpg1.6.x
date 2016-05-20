@@ -5,7 +5,7 @@
     <version>1.6.01</version>
     <status>optional</status>
     <permission>read</permission>
-    <hash>ec4b3111071da3d490151043c695c15d</hash>
+    <hash>77c6c67433fb03e0467b66c508028188</hash>
   </element>
   <element>
     <fullpath>COPYING.txt</fullpath>
@@ -368,7 +368,7 @@
     <version>1.6.01</version>
     <status>mandatory</status>
     <permission>read</permission>
-    <hash>5cae70cf6deaf1648e4d31d167a9f299</hash>
+    <hash>c324e2dd2edfe3e6fe2bed307fb670a5</hash>
   </element>
   <element>
     <fullpath>docs/en/admin_menu.htm</fullpath>
@@ -452,7 +452,7 @@
     <version>1.6.01</version>
     <status>mandatory</status>
     <permission>read</permission>
-    <hash>4c2ff0b00998d17e11162415740f520f</hash>
+    <hash>2dc44c27bfdac06bce5cab22e23c35d3</hash>
   </element>
   <element>
     <fullpath>docs/en/dev.htm</fullpath>
@@ -8286,7 +8286,7 @@
     <fullpath>include/updates.inc.php</fullpath>
     <status>optional</status>
     <permission>write</permission>
-    <hash>279d72152e1e5bbd4632539772a60c48</hash>
+    <hash>e8dfb6b692d6dce9040ecbba9669e277</hash>
   </element>
   <element>
     <fullpath>include/upgrader.inc.php</fullpath>
@@ -8300,7 +8300,7 @@
     <version>1.6.01</version>
     <status>mandatory</status>
     <permission>read</permission>
-    <hash>7de26a1d4a232e4195f63413fcc04eab</hash>
+    <hash>e05d088a40dfe9b4df75a56f201b77cc</hash>
   </element>
   <element>
     <fullpath>include/zip.lib.php</fullpath>
@@ -9171,7 +9171,6 @@
     <fullpath>plugins/upload_swf/images/sv_browse_swf.png</fullpath>
     <status>mandatory</status>
     <permission>read</permission>
-    <hash>ed42c13d7568af526462bbede1890335</hash>
   </element>
   <element>
     <fullpath>plugins/upload_swf/js/</fullpath>
