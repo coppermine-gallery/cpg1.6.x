@@ -732,7 +732,7 @@ function cpgVersioncheckConnectRepository() {
     global $displayOption_array, $majorVersion;
     // Perform the repository lookup and xml creation --- start
     //$displayOption_array['do_not_connect_to_online_repository'] = 1;
-    $remoteURL = 'http://coppermine-gallery.net/' . str_replace('.', '', $majorVersion) . '.files.xml';
+	$remoteURL = 'https://github.com/coppermine-gallery/cpg1.6.x/raw/v'.COPPERMINE_VERSION.'/include/'.str_replace('.', '', $majorVersion).'.files.xml';
     $localFile = 'include/' . str_replace('.', '', $majorVersion) . '.files.xml';
     $remoteConnectionFailed = '';
     if ($displayOption_array['do_not_connect_to_online_repository'] == 0) { // connect to the online repository --- start
