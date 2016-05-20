@@ -15,20 +15,6 @@
   $Revision$
 **********************************************/
 
-/*
-Dev note: I had to re-design the versioncheck page to make the code less cluttered.
-As a result, the changes applied by Sander to make this page fit into the new installer
-are gone. Please do not re-introduce those changes: they were bad in the first place.
-Instead, the installer needs to be reviewed. I updated the installer a little bit to make
-sure it doesn't break entirely, however I suggest re-designing the installer without the
-OO-approach: only use OO where it makes sense and if you have no dependencies.
-This is not the case: coppermine has been built the old-school way (without OO), and there
-is little benefit in the OO-tech of the new installer. It doesn't have to be re-built from
-scratch though.
-Further discussion should be led on the dev board.
-Joachim 2008-08-08
-*/
-
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
 // define some vars
