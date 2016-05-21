@@ -583,7 +583,7 @@ EOT;
             $output .= cpg_fillArrayFieldWithSpaces($file_data_values['local_version'].$file_data_values['txt_version'], $maxLength_array['version']);
             $output .= $textSeparator;
             if ($displayOption_array['no_modification_check'] != 1) {
-                $output .= cpg_fillArrayFieldWithSpaces($file_data_values['local_modified'].$file_data_values['txt_modified'], $maxLength_array['modified']);
+                $output .= cpg_fillArrayFieldWithSpaces($file_data_values['txt_modified'], $maxLength_array['modified']);
                 $output .= $textSeparator;
             }
             if ($file_data_values['comment'] != '') {
@@ -712,7 +712,7 @@ EOT;
 EOT;
           if (isset($displayOption_array['no_modification_check']) && $displayOption_array['no_modification_check'] != 1) {
               print <<< EOT
-          <td class="{$cellstyle}{$important['modified']}" align="left" style="font-size:9px">{$file_data_values['local_modified']}{$file_data_values['txt_modified']}</td>
+          <td class="{$cellstyle}{$important['modified']}" align="left" style="font-size:9px">{$file_data_values['txt_modified']}</td>
 EOT;
           }
           print <<< EOT
