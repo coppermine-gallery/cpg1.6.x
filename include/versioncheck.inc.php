@@ -732,12 +732,17 @@ function cpgVersioncheckConnectRepository() {
     global $displayOption_array, $majorVersion;
     // Perform the repository lookup and xml creation --- start
     //$displayOption_array['do_not_connect_to_online_repository'] = 1;
-	$remoteURL = 'https://github.com/coppermine-gallery/cpg1.6.x/raw/v'.COPPERMINE_VERSION.'/include/'.str_replace('.', '', $majorVersion).'.files.xml';
-    $localFile = 'include/' . str_replace('.', '', $majorVersion) . '.files.xml';
+    $xmlFN = str_replace('.', '', $majorVersion) . '.files.xml';
+	$remoteURL = 'https://github.com:443/coppermine-gallery/cpg1.6.x/raw/v' . COPPERMINE_VERSION . '/include/' . $xmlFN;
+    $altRemoteURL = 'http://coppermine-gallery.net/' . $xmlFN;
+    $localFile = 'include/' . $xmlFN;
     $remoteConnectionFailed = '';
     if ($displayOption_array['do_not_connect_to_online_repository'] == 0) { // connect to the online repository --- start
-      $result = cpgGetRemoteFileByURL($remoteURL, 'GET','','200');
-      if (strlen($result['body']) < 2000) {
+      $result = cpgGetRemoteFileByURL($remoteURL, 'GET','','20000');
+      if (strlen($result['body']) < 20000) {
+        $result = cpgGetRemoteFileByURL($altRemoteURL, 'GET','','20000');
+      }
+      if (strlen($result['body']) < 20000) {
         $remoteConnectionFailed = 1;
         $error = $result['error'];
       }
