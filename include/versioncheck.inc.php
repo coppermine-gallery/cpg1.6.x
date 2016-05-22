@@ -24,7 +24,7 @@ $textFileExtensions_array = array(
 $imageFileExtensions_array = array(
   'jpg', 'png', 'gif'
 );
-$gitrepository = 'https://github.com/coppermine-gallery/cpg1.6.x/blob/master/';
+$gitrepository = 'https://github.com/coppermine-gallery/cpg1.6.x/blob/v' . COPPERMINE_VERSION . '/';
 $majorVersion = 'cpg'.str_replace('.' . ltrim(substr(COPPERMINE_VERSION,strrpos(COPPERMINE_VERSION,'.')),'.'), '', COPPERMINE_VERSION).'.x';
 
 $maxLength_array = array();
@@ -717,7 +717,7 @@ EOT;
           }
           print <<< EOT
           <td class="{$cellstyle}{$important['comment']}" align="left" style="font-size:9px">{$file_data_values['comment']}</td>
-          <td class="{$cellstyle}{$important['svn']}" align="left" style="font-size:9px"><a href="{$gitrepository}{$file_data_values['fullpath']}"><img src="images/icons/subversion.png" width="16" height="16" border="0" alt="" title="{$lang_versioncheck_php['browse_corresponding_page_subversion']}" /></a></td>
+          <td class="{$cellstyle}{$important['svn']}" align="center" style="font-size:9px"><a href="{$gitrepository}{$file_data_values['fullpath']}"><img src="images/icons/github.png" width="16" height="16" border="0" alt="" title="{$lang_versioncheck_php['browse_corresponding_page_subversion']}" /></a></td>
         </tr>
 EOT;
       }

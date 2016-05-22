@@ -4900,10 +4900,10 @@
     <hash>8b5dc903482ddd86a3db77ec1a7ecda2</hash>
   </element>
   <element>
-    <fullpath>images/icons/subversion.png</fullpath>
+    <fullpath>images/icons/github.png</fullpath>
     <status>mandatory</status>
     <permission>read</permission>
-    <hash>851fafa8935d1e0447d48e011d8f72e1</hash>
+    <hash>b04e448f819f139f060aff072acac696</hash>
   </element>
   <element>
     <fullpath>images/icons/tab_first.png</fullpath>
@@ -8300,7 +8300,7 @@
     <version>1.6.01</version>
     <status>mandatory</status>
     <permission>read</permission>
-    <hash>c3b91b24e597038212d3ab9368878903</hash>
+    <hash>0e45b712d98d4020806d91caa306c5c2</hash>
   </element>
   <element>
     <fullpath>include/zip.lib.php</fullpath>
@@ -8604,21 +8604,21 @@
     <version>1.6.01</version>
     <status>mandatory</status>
     <permission>read</permission>
-    <hash>e8cc87cd6d65e4753c57bb6dd831967c</hash>
+    <hash>7de069134b0564d93673bfb27144d98e</hash>
   </element>
   <element>
     <fullpath>lang/french.php</fullpath>
     <version>1.6.01</version>
     <status>mandatory</status>
     <permission>read</permission>
-    <hash>2222c3f9dd771ab2ee37c59a2058654e</hash>
+    <hash>543e63338c8a492f1b93557c480b5798</hash>
   </element>
   <element>
     <fullpath>lang/german.php</fullpath>
     <version>1.6.01</version>
     <status>optional</status>
     <permission>read</permission>
-    <hash>ebb866adaa167263e737a857fba00ae1</hash>
+    <hash>379dca24a8326f23981e1ae19be4b563</hash>
   </element>
   <element>
     <fullpath>lang_check.php</fullpath>

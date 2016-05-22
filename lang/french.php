@@ -2457,7 +2457,7 @@ if (defined('VERSIONCHECK_PHP')) {
  $lang_versioncheck_php['comment'] = 'Commentaire';
  $lang_versioncheck_php['help'] = 'Aide';
  $lang_versioncheck_php['repository_link'] = 'Lien vers le référentiel';
- $lang_versioncheck_php['browse_corresponding_page_subversion'] = 'Naviguer vers la page correspondant à ce fichier dans le référenciel SVN du projet';
+ $lang_versioncheck_php['browse_corresponding_page_subversion'] = 'Naviguer vers la page correspondant à ce fichier dans le projet référenciel';
  $lang_versioncheck_php['mandatory'] = 'obligatoire';
  $lang_versioncheck_php['mandatory_missing'] = 'Fichier obligatoire manquant';
  $lang_versioncheck_php['optional'] = 'optionnel';
