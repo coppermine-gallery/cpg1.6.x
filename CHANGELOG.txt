@@ -22,6 +22,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2016-05-23 [B] Change data check method and notify admin of failed repository retrieval for version check {ron4mac}
 2016-05-22 [M] Corrected URL for repository file and adjusted link to repository {ron4mac}
 2016-05-20 [M] If can't get versioncheck XML file from Github, try getting it from coppermine-gallery.net {ron4mac}
 2016-05-20 [M] Get correct XML file from Github for versioncheck {ron4mac}

@@ -24,7 +24,8 @@ $textFileExtensions_array = array(
 $imageFileExtensions_array = array(
   'jpg', 'png', 'gif'
 );
-$gitrepository = 'https://github.com/coppermine-gallery/cpg1.6.x/blob/v' . COPPERMINE_VERSION . '/';
+//$gitrepository = 'https://github.com/coppermine-gallery/cpg1.6.x/blob/v' . COPPERMINE_VERSION . '/';
+$gitrepository = 'https://github.com/coppermine-gallery/cpg1.6.x/blob/master/';
 $majorVersion = 'cpg'.str_replace('.' . ltrim(substr(COPPERMINE_VERSION,strrpos(COPPERMINE_VERSION,'.')),'.'), '', COPPERMINE_VERSION).'.x';
 
 $maxLength_array = array();
@@ -733,26 +734,31 @@ function cpgVersioncheckConnectRepository() {
     // Perform the repository lookup and xml creation --- start
     //$displayOption_array['do_not_connect_to_online_repository'] = 1;
     $xmlFN = str_replace('.', '', $majorVersion) . '.files.xml';
-	$remoteURL = 'https://github.com:443/coppermine-gallery/cpg1.6.x/raw/v' . COPPERMINE_VERSION . '/include/' . $xmlFN;
+	//$remoteURL = 'https://github.com:443/coppermine-gallery/cpg1.6.x/raw/v' . COPPERMINE_VERSION . '/include/' . $xmlFN;
+	$remoteURL = 'https://github.com:443/coppermine-gallery/cpg1.6.x/raw/master/include/' . $xmlFN;
     $altRemoteURL = 'http://coppermine-gallery.net/' . $xmlFN;
     $localFile = 'include/' . $xmlFN;
     $remoteConnectionFailed = '';
     if ($displayOption_array['do_not_connect_to_online_repository'] == 0) { // connect to the online repository --- start
       $result = cpgGetRemoteFileByURL($remoteURL, 'GET','','20000');
-      if (strlen($result['body']) < 20000) {
+      //if (strlen($result['body']) < 20000) {
+      if (substr($result['body'],0,19) != '<?xml version="1.0"') {
         $result = cpgGetRemoteFileByURL($altRemoteURL, 'GET','','20000');
       }
-      if (strlen($result['body']) < 20000) {
+      //if (strlen($result['body']) < 20000) {
+      if (substr($result['body'],0,19) != '<?xml version="1.0"') {
         $remoteConnectionFailed = 1;
         $error = $result['error'];
       }
     } // connect to the online repository --- end
-    if ($displayOption_array['do_not_connect_to_online_repository'] == 1 || $remoteConnectionFailed == 1) {
+    if ($displayOption_array['do_not_connect_to_online_repository'] == 1 /*|| $remoteConnectionFailed == 1*/) {
       $result = array('body' => file_get_contents($localFile));
     }
     unset($result['headers']); // we should take a look the header data and error messages before dropping them. Well, later maybe ;-)
     unset($result['error']);
     $result = array_shift($result);
+    // return an empty array if there is no xml to parse
+    if (!$result) return array();
     if (function_exists('simplexml_load_string')) {
         $xml = simplexml_load_string($result);
         unset($result);

@@ -94,6 +94,11 @@ if ($displayOption_array['output'] != 'options') {
 // main code starts here
 $title_help = ' ' . cpg_display_help('f=upgrading.htm&amp;as=versioncheck&amp;ae=versioncheck_end', '600', '400');
 pageheader($lang_versioncheck_php['title']);
+
+if ($displayOption_array['output'] != 'options' && !$file_data_array) {
+	msg_box($lang_versioncheck_php['no_repo_title'], $lang_versioncheck_php['no_repo_message'], '', '', 'warning');
+}
+
 starttable('100%', cpg_fetch_icon('check_versions', 2) . $lang_versioncheck_php['title']. $title_help, 1);
 //print '<h1>' . cpg_fetch_icon('check_versions', 2) . $lang_versioncheck_php['title']. $title_help . '</h1>';
 

@@ -2598,6 +2598,8 @@ $lang_versioncheck_php['read'] = 'Read';
 $lang_versioncheck_php['write'] = 'Write';
 $lang_versioncheck_php['warning'] = 'Warning';
 $lang_versioncheck_php['not_applicable'] = 'n/a';
+$lang_versioncheck_php['no_repo_title'] = 'No Repository Data';
+$lang_versioncheck_php['no_repo_message'] = 'Could not get version check information from the repository.';
 }
 
 // ------------------------------------------------------------------------- //

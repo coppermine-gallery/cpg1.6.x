@@ -8283,12 +8283,6 @@
     <hash>657e11b140b0da078a852fd0f9e3c3f9</hash>
   </element>
   <element>
-    <fullpath>include/updates.inc.php</fullpath>
-    <status>optional</status>
-    <permission>write</permission>
-    <hash>72d8e2a367ae7ff6d053c6e5db6abb65</hash>
-  </element>
-  <element>
     <fullpath>include/upgrader.inc.php</fullpath>
     <version>1.6.01</version>
     <status>mandatory</status>
