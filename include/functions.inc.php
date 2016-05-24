@@ -4423,11 +4423,10 @@ EOT;
                     <td class="tableb" colspan="2">
 EOT;
         // Try to retrieve the news directly
-        //$result = cpgGetRemoteFileByURL('http://coppermine-gallery.net/cpg15x_news.htm', 'GET', '', '200'); // disabled, see http://forum.coppermine-gallery.net/index.php/topic,65424.msg325573.html#msg325573
-		if (isset($result)) {
+        //$result = cpgGetRemoteFileByURL('http://coppermine-gallery.net/cpg16x_news.htm', 'GET', '', '200'); // disabled, see http://forum.coppermine-gallery.net/index.php/topic,65424.msg325573.html#msg325573
         if (strlen($result['body']) < 200) { // retrieving the file failed - let's display it in an iframe then
             print <<< EOT
-                      <iframe src="http://coppermine-gallery.net/cpg15x_news.htm" align="left" frameborder="0" scrolling="auto" marginheight="0" marginwidth="0" width="100%" height="100" name="coppermine_news" id="coppermine_news" class="textinput">
+                      <iframe src="http://coppermine-gallery.net/cpg16x_news.htm" align="left" frameborder="0" scrolling="auto" marginheight="0" marginwidth="0" width="100%" height="100" name="coppermine_news" id="coppermine_news" class="textinput">
                         {$lang_version_alert['no_iframe']}
                       </iframe>
 EOT;
@@ -4443,7 +4442,6 @@ EOT;
             $result['body'] = str_replace(strstr($result['body'], '</body>'), '', $result['body']);
             // The result should now contain everything between the body tags - let's print it
             print $result['body'];
-        }
         }
         print <<< EOT
                     </td>
