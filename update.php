@@ -679,7 +679,7 @@ EOT;
     $upc = 0;
     foreach ($plgs as $plg) {
     	if (in_array(substr($plg['path'], 6), array('_h5a','_swf','_sgl'))) {
-    		echo $plg['path'];
+    		//echo $plg['path'];
     		$upc++;
     	}
     }
