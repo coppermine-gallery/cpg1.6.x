@@ -138,6 +138,7 @@ INSERT INTO CPG_config VALUES ('keep_votes_time', '30');
 INSERT INTO CPG_config VALUES ('keyword_separator', ';');
 INSERT INTO CPG_config VALUES ('lang', 'english');
 INSERT INTO CPG_config VALUES ('language_autodetect', '1');
+INSERT INTO CPG_config VALUES ('last_updates_check', '1');
 INSERT INTO CPG_config VALUES ('link_pic_count', '1');
 INSERT INTO CPG_config VALUES ('link_last_upload', '0');
 INSERT INTO CPG_config VALUES ('log_ecards', '0');

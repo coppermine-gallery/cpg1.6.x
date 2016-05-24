@@ -40,3 +40,5 @@ INSERT INTO CPG_config VALUES ('album_uploads_default', 'NO');
 
 # Add field to plugin table to signify enabled/disabled
 ALTER TABLE CPG_plugins ADD `enabled` TINYINT(1) NOT NULL DEFAULT '1' AFTER `name`;
+
+INSERT INTO CPG_config VALUES ('last_updates_check', '1');

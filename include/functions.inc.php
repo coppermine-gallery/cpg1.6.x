@@ -4343,20 +4343,18 @@ function themeSelect($parameter)
  * @return
  **/
 
-function cpg_has_updates ()
+function cpg_has_updates()
 {
-	include 'include/updates.inc.php';
+    global $CONFIG;
 
-	if (!isset($last_updates_check) || (time() - $last_updates_check) > 86400) {
-		$updf = '<?php $last_updates_check = '.time().';';
-		require_once 'include/upgrader.inc.php';
-		$upgc = new CPG_Updater(true, isset($pre_release) ? !$pre_release : true);
-		$has = (bool) count($upgc->getUpdates());
-		if (isset($pre_release)) $updf .= '$pre_release='.(bool)$pre_release.';';
-		file_put_contents('include/updates.inc.php', $updf);
-		return $has;
-	}
-	return false;
+    if ((time() - $CONFIG['last_updates_check']) > 86400) {
+        require_once 'include/upgrader.inc.php';
+        $upgc = new CPG_Updater(true);
+        $has = (bool) count($upgc->getUpdates());
+        cpg_db_query("UPDATE {$CONFIG['TABLE_CONFIG']} SET value = '".time()."' WHERE name = 'last_updates_check'");
+        return $has;
+    }
+    return false;
 }
 
 
