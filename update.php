@@ -408,7 +408,7 @@ function start_update()
     }
 
     if ($errors == '') {
-        echo '        <table border="0" cellspacing="0" cellpadding="0" class="maintable">' . $LINEBREAK;
+        echo '        <table border="0" cellspacing="0" cellpadding="0" class="maintable" width="100%">' . $LINEBREAK;
         update_tables();
         update_files();
         echo '        </table>' . $LINEBREAK;
