@@ -149,7 +149,7 @@ if ($search_string && isset($search_params['params'])) {
                                         <img src="<?php echo $thumb_url?>"  class="image" <?php echo $thumb_size['geom'] ?> border="0" alt="<?php echo $thumb['filename'] ?>">
                                     </a>
                                   </td>
-                                  <td width=100% valign=top>
+                                  <td width="100%" valign=top>
                                     <?php if ($alb['description'] == "") { echo '&nbsp;'; } else { echo $alb['description']; } ?>
                                   </td>
                                 </tr>
