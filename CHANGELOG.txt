@@ -1,7 +1,7 @@
 ************************
 Coppermine Photo Gallery
 ************************
-Copyright (c) 2003-2015 Coppermine Dev Team
+Copyright (c) 2003-2016 Coppermine Dev Team
 v1.0 originally written by Gregory Demar
 
 This program is free software; you can redistribute it and/or modify
@@ -10,7 +10,6 @@ as published by the Free Software Foundation.
 ********************************************
 Coppermine version: 1.6.01
 $HeadURL$
-$Revision$
 *********************************************
 Changelog
 =========
@@ -23,6 +22,56 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2016-05-24 [B] Correct possible failure to get update when curl must be used {ron4mac}
+2016-05-24 [C] Set table width to 100% on update.php {eenemeenemuu}
+2016-05-23 [B] Change data check method and notify admin of failed repository retrieval for version check {ron4mac}
+2016-05-22 [M] Corrected URL for repository file and adjusted link to repository {ron4mac}
+2016-05-20 [M] If can't get versioncheck XML file from Github, try getting it from coppermine-gallery.net {ron4mac}
+2016-05-20 [M] Get correct XML file from Github for versioncheck {ron4mac}
+2016-05-20 [M] Removed SVN keyword "revision" from all files {eenemeenemuu}
+2016-05-20 [B] Updated repository link {eenemeenemuu}
+2016-05-20 [M] Removed any reference to SVN revision from versioncheck {eenemeenemuu}
+2016-05-20 [D] Updated link in credits page (thread ID 78727) {eenemeenemuu}
+2016-05-18 [C] Removed some PHP notices during installation {eenemeenemuu}
+2016-05-18 [M] Improved plugin configuration action (pluginmgr) {ron4mac}
+2016-05-10 [M] Removed obsolete XP Publisher feature {ron4mac}
+2016-05-10 [M] Accomodate conversion of mysql_real_escape_string to cpg_db... {ron4mac}
+2016-05-06 [M] Don't show pre-release update versions (unless overridden) {ron4mac}
+2016-05-05 [M] Remove trailing php end tags (?>) {ron4mac}
+2016-05-05 [M] Perform cursory writeable directory check before allowing update/upgrade action {ron4mac}
+2016-05-04 [M] Only show plugin manager upload feature if ZLib is available {ron4mac}
+2016-05-04 [B] Repair include/zip.lib.php, allowing it to extract files (for plugin manager) {ron4mac}
+2016-05-03 [M] Fully enabled updater/upgrader, allowing pre-releases with warning {ron4mac}
+2016-04-27 [M] Improved cpg_db_ function compatabilities {ron4mac}
+2016-04-25 [A] Added plugin compatibility include file {ron4mac}
+2016-04-19 [A] Added plugin enable/disable feature {ron4mac}
+2016-03-22 [M] Put code in place to not offer pre-releases as a scripted upgrade choice {ron4mac}
+2016-03-22 [C] Use nl2br() in upgrader for release body text {ron4mac}
+2016-03-18 [B] Don't die during check for updates when there is no access to Github {ron4mac}
+2016-03-17 [A] Integrated 'updates available' notification and scripted update capability {ron4mac}
+2016-03-16 [A] Added beginning of tool for scripted upgrades (upgrader.php) {ron4mac}
+2016-03-16 [M] Cleaned up some defunct swf stuff and improved upgrading over 1.5x {ron4mac}
+2016-03-13 [A] In admin config, only show ImageMagick settings if ImageMagick method is selected {ron4mac}
+2016-03-12 [A] Added checkbox option for auto-orient to upload methods (and batch-add) {ron4mac}
+2016-03-11 [D] Updated README.txt {ron4mac}
+2016-03-11 [A] Formally added Imagick Extension as an image manipulation option {ron4mac}
+2016-03-09 [B] Corrected issues with SWF upload button UI {ron4mac}
+2016-03-06 [A] Added automatic image orientation during upload of images {ron4mac}
+2016-03-02 [B] Corrected a problem where some server/PHP environments would hang at step 9 of install {ron4mac}
+2016-03-01 [M,O] Moved all image manipulation code into 'ImageTool' object classes {ron4mac}
+2016-02-21 [B] Repaired 'spinButton' code and CSS (should be made into standard HTML5 elements) {ron4mac}
+2016-02-12 [M] Changed default cookie name to 'cpg16x' {ron4mac}
+2016-01-27 [B,M] Made compatible with PHP7 [ class constructor, split(), mis-placed break ] {ron4mac}
+2016-01-24 [A] Added 'change_values' function to admin tools, removing need for 'del_titles' {ron4mac}
+2016-01-22 [B] Corrected array name typo in section of french.php {ron4mac}
+2016-01-22 [B] Resolved update conflict with older html5upload plugin {ron4mac}
+2016-01-21 [A] Added example of using 'config_action' to sample plugin {ron4mac}
+2016-01-20 [O] Provided option to cpg_config_set() for Db insertion if item not set in $CONFIG {ron4mac}
+2016-01-18 [A] Added plugin 'config_action' setting used by plugin manager to present plugin configuration {ron4mac}
+2016-01-18 [A] Implemented uploading via core enabled plugins using HTML5, SWF and SINGLE {ron4mac}
+2016-01-13 [A] Implemented database abstraction allowing use of MYSQLI, MYSQL(PDO), or MYSQL {ron4mac}
+2016-01-13 [M] Updated header information to reflect current year 2016 {ron4mac}
+2015-11-11 [M] Updated header information to reflect current year {eenemeenemuu}
 2015-11-04 [M] Abstracted Inspekt and CPGPluginAPI classes, changed PHP minimum to 5.0, cleaned up various PHP complaints {ron4mac}
 2015-11-04 [B] Corrected install not completing {ron4mac}
 2015-09-23 [M] Converted plugins "link_target", "onlinestats", "opensearch" and "usergal_alphatabs" to standalone plugins and removed from Coppermine package {eenemeenemuu}

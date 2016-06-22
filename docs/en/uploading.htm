@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="language" content="en" />
 <meta name="copyright" content="Coppermine dev team" />
-<meta name="description" content="There are several methods to upload files within Coppermine. You (as gallery admin) should use FTP-upload plus batch-add (only the admin can do this). Regular users are supposed to use the regular http upload or (if they have Windows XP) the XP Publisher." />
+<meta name="description" content="There are several methods to upload files within Coppermine. You (as gallery admin) should use FTP-upload plus batch-add (only the admin can do this). Regular users are supposed to use the regular http upload or [[ removed xppublish ]]." />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" />
@@ -14,8 +14,8 @@
 
   Coppermine version: 1.6.01
   $HeadURL$
-  $Revision$
-
+
+
 -->
 <link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
 <link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
@@ -33,7 +33,7 @@
 
 <a name="uploading"></a><h1>Uploading pics/files<a href="#uploading" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
 <p>Coppermine is a web gallery, so the key aspect of it's usage is the ability of the admin (or the users if the admin allows them to upload) to upload images (or rather files) to the gallery - without files being uploaded, a gallery doesn't make much sense. What actually happens during upload is that the image uploaded gets resized and a thumbnail is being created. Additionally to the file that is being stored on the webspace, a database record is being created for each file uploaded. All of this stuff happens "behind the scenes" - coppermine is taking care of this, so you don't have to know what exactly is happening. However, the ability to upload is being limited by several factors that coppermine doesn't have the power to change. This is where this part of the documentation comes into play: if things go wrong or don't work as expected, you should read up this documentation to be able to fix the things that don't work as expected. So, please read on - at least if you have issues with uploads.</p>
-<p>There are several methods to upload files within Coppermine. You (as gallery admin) should use <a href="uploading_batch-add.htm#batch_add_pics">FTP-upload plus batch-add</a> (only the admin can do this). Regular users are supposed to use the "regular" <a href="uploading_http.htm#upload_http">http upload</a> or (if they have Windows XP) the <a href="uploading_xp-publisher.htm#xp">XP Publisher</a>.</p>
+<p>There are several methods to upload files within Coppermine. You (as gallery admin) should use <a href="uploading_batch-add.htm#batch_add_pics">FTP-upload plus batch-add</a> (only the admin can do this). Regular users are supposed to use the "regular" <a href="uploading_http.htm#upload_http">http upload</a>.</p>
 <p>An uploading client for Linux using the KDE desktop is available as well: Coppermine-developer Aditya Mooley has created &quot;<a href="http://koppermine.sourceforge.net/" rel="external" class="external">Koppermine</a>&quot; that is recommended for all Linux users.</p>
 <p class="cpg_message_error">If you have issues uploading, read the <a href="upload_troubleshooting.htm">upload troubleshooting section</a> extra carefully.</p>
 <a name="uploading_end"></a>
@@ -43,7 +43,6 @@
 <ul>
 	<li><a href="uploading_batch-add.htm#batch_add_pics">Uploading pics by FTP / Batch-Add Pictures</a></li>
 	<li><a href="uploading_http.htm#upload_http">Uploading by HTTP</a></li>
-	<li><a href="uploading_xp-publisher.htm#xp">Windows XP Web Publishing Wizard</a></li>
 	<li><a href="upload_troubleshooting.htm">Upload troubleshooting</a></li>
 </ul>
 
@@ -64,14 +63,9 @@
 <p>FTP uploads are a totally different animal: as the initial FTP upload isn't being performed by coppermine, but the admin user himself (using his FTP client), it's <em>his</em> task to make sure the files he tried to upload are actually there where they are expected. What the batch-add process does is adding the files that already are physically where you want them to be to the database. To make sure that you understand this concept: the database itself doesn't contain the files - think of it as a logical structure only, that keeps track of the physical location of the files and some other parameters (like dimensions, the album the file resides in etc.). Think of the database as a phone book that doesn't actually contain the people it lists, nor does it contain wires nor phones: all a phone book consists of are records that point to something in real life (a person's name &amp; address &amp; phone number).</p>
 <p>This being said, your FTP-uploads should go into a folder structure within the albums-folder. They must not go into the userpics folder, but into a folder-structure of it's own. Those folders you create with your FTP app are not temporary folders, but they are permanent: coppermine doesn't move those files around, but leaves them where you FTP-uploaded them to in the first place.</p>
 
-<a name="uploading_structure_xppublish"></a><h3>XP Publisher uploads<a href="#uploading_structure_xppublish" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-<p>When you use <a href="uploading_xp-publisher.htm">XP Publisher</a> to upload, there is another storage pattern that is being applied: the files go into sub-folders of the albums folder that are named wpw-yyyymmdd, where "wpw" stands for "Windows Publishing Wizard" and yyyy for the year, mm for the month and dd for the day of the upload. Again, coppermine doesn't move those files around - they remain where they are.</p>
-
-
 <div id="doc_footer">
 	<div class="doc_info_wrapper">
 		<span id="doc_last_changed">$LastChangedDate$</span>
-		<span id="doc_revision">$Revision$</span>
 	</div>
 </div>
 </body>

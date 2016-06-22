@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -12,7 +12,6 @@
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
-  $Revision$
 **********************************************/
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -39,7 +38,7 @@ if (isset($bridge_lookup)) {
     class cpg_udb extends core_udb
     {
 
-        function cpg_udb()
+        function __construct()
         {
             global $BRIDGE;
 
@@ -114,10 +113,11 @@ if (isset($bridge_lookup)) {
 
                 $sql = "SELECT member_id, member_login_key FROM {$this->sessionstable} AS s INNER JOIN {$this->usertable} AS u ON s.member_id = u.id WHERE s.id = '$session_id'";
 
-                $result = cpg_db_query($sql, $this->link_id);
+                $result = $this->query($sql);
 
-                if (mysql_num_rows($result)) {
-                    $row = mysql_fetch_row($result);
+                if (cpg_db_num_rows($result)) {
+                    $row =cpg_db_fetch_row($result);
+                    $result->free();
                     return $row;
                 }
             } else {
@@ -160,3 +160,4 @@ if (isset($bridge_lookup)) {
     // and go !
     $cpg_udb = new cpg_udb;
 }
+//EOF

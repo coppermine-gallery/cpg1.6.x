@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -12,7 +12,6 @@
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
-  $Revision$
   ********************************************
   This theme has had redundant CORE items removed
 **********************************************/
@@ -512,7 +511,7 @@ function theme_main_menu($which)
             if (USER_ID) {
                 $query = "SELECT null FROM {$CONFIG['TABLE_ALBUMS']} WHERE category='" . (FIRST_USER_CAT + USER_ID) . "' AND aid = '$album'";
                 $user_albums = cpg_db_query($query);
-                if (mysql_num_rows($user_albums)) {
+                if ($user_albums->numRows()) {
                     $upload_allowed = true;
                 } else {
                     $upload_allowed = false;
@@ -523,7 +522,7 @@ function theme_main_menu($which)
                 $query = "SELECT null FROM {$CONFIG['TABLE_ALBUMS']} WHERE category < " . FIRST_USER_CAT . " AND uploads='YES' AND (visibility = '0' OR visibility IN ".USER_GROUP_SET.") AND aid = '$album'";
                 $public_albums = cpg_db_query($query);
 
-                if (mysql_num_rows($public_albums)) {
+                if ($public_albums->numRows()) {
                     $upload_allowed = true;
                 } else {
                     $upload_allowed = false;
@@ -717,5 +716,4 @@ function theme_main_menu($which)
 /******************************************************************************
 ** Section <<<theme_main_menu>>> - END
 ******************************************************************************/
-
-?>
+//EOF

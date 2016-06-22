@@ -14,7 +14,6 @@
 
   Coppermine version: 1.6.01
   $HeadURL$
-  $Revision$
 -->
 <link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
 <link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
@@ -232,7 +231,7 @@ $lang_meta_album_names['datebrowse'] = 'Browse by date'; //cpg1.5</pre></li>
 				<li>Edit the meta description (<tt class="">&lt;meta name="description" content="..."&gt;</tt>) as well to come up with a short summary what the page is about (in your language).</li>
 				<li>Leave the file names alone: do not translate the files names!</li>
 				<li>Leave the anchor names alone: don't edit anchor names (like <tt class="code">&lt;a name="copyright"&gt;&lt;/a&gt;</tt>), even if the word "copyright" in this example doesn't mean the same thing (or anything at all) in your language.<br />This is meant to make sure that supporters and users can easily refer to doc sections they don't even understand.</li>
-				<li>Leave the JavaScript-sections alone: they are used to provide the navigation later - don't touch them. Especially the line <tt class="code">dateRevision(' $LastChangedDate$ ', ' $Revision$ ');</tt> or similar is <strong>not</strong> meant to be edited by you: it will be updated when your contribution is being added to the package.</li>
+				<li>Leave the JavaScript-sections alone: they are used to provide the navigation later - don't touch them. Especially the line <tt class="code">dateRevision();</tt> or similar is <strong>not</strong> meant to be edited by you: it will be updated when your contribution is being added to the package.</li>
 				<li>Do <strong>not</strong> edit the SVN version info section at the top of the page (commented out) - it will be used for internal purposes (again: <a href="dev_subversion.htm">subversion repository</a>) later.</li>
 				<li>Don't improve your localized version/translation only: you might find that the English part of the documentation is lacking some explanations or that it is inacurate or missing important bits, so you might be tempted to add sections to your translation of the docs that don't exist in the original, English section of the docs. However, we don't think that this is a good idea: if you have suggestions to make how to improve the docs, we'd love to see your suggestion for the benefit of all users. This being said: please don't just add sections to your local copy of the translation - post your suggestion publicly instead in order to see your proposed improvement go into both the English version of the docs as well as your version.</li>
 				<li>Translate examples if applicable: you are welcome to translate examples into your language as well: the English sample user name "John Doe" can of course be changed into the typical German sample user "Max Mustermann" for example. The sample URL <tt class="code">http://yoursite.tld/your_coppermine_folder/</tt> can of course be translated into <tt class="code">http://deine-seite.tld/dein_coppermine_verzeichnis/</tt> in a German localization of the docs.</li>
@@ -269,7 +268,6 @@ $lang_meta_album_names['datebrowse'] = 'Browse by date'; //cpg1.5</pre></li>
 <div id="doc_footer">
 	<div class="doc_info_wrapper">
 		<span id="doc_last_changed">$LastChangedDate$</span>
-		<span id="doc_revision">$Revision$</span>
 	</div>
 </div>
 </body>

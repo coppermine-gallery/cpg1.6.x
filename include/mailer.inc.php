@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2015 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -12,7 +12,6 @@
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
-  $Revision$
 **********************************************/
 
 // Custom mail function
@@ -33,11 +32,12 @@ function cpg_mail($to, $subject, $msg_body = '', $type = 'text/plain', $sender_n
         if (UDB_INTEGRATION == 'coppermine') {
             $to = array($CONFIG['gallery_admin_email']);
             $result = cpg_db_query("SELECT user_email FROM {$CONFIG['TABLE_USERS']} WHERE user_group = 1");
-            while ($row = mysql_fetch_assoc($result)) {
+            while ($row = $result->fetchAssoc()) {
                 if (!empty($row['user_email'])) {
                     $to[] = $row['user_email'];
                 }
             }
+            $result->free();
             $to = array_unique($to);
         } else {
             $to = array($CONFIG['gallery_admin_email']);
@@ -1806,7 +1806,7 @@ class cpg_PHPMailer {
           $directory = dirname($url);
           ($directory == '.')?$directory='':'';
           $cid = 'cid:' . md5($filename);
-          $fileParts = split("\.", $filename);
+          $fileParts = explode("\.", $filename);
           $ext = $fileParts[1];
           $mimeType = $this->_mime_types($ext);
           if ( strlen($basedir) > 1 && substr($basedir,-1) != '/') { $basedir .= '/'; }
@@ -3051,4 +3051,4 @@ class cpg_SMTP
 
 }
 
-?>
+//EOF

@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -12,7 +12,6 @@
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
-  $Revision$
 **********************************************/
 
 define('IN_COPPERMINE', true);
@@ -40,9 +39,9 @@ if ($superCage->post->KeyExists('email') && $superCage->post->testEmail('email')
     $sql = "SELECT user_id, user_group, user_active, user_name, user_email, user_actkey FROM {$CONFIG['TABLE_USERS']} WHERE user_email = '$emailaddress' AND user_active = 'NO'";
     $results = cpg_db_query($sql);
 
-    if (mysql_num_rows($results)) { // something has been found start
+    if ($results->numRows()) { // something has been found start
 
-        $USER_DATA = mysql_fetch_assoc($results);
+        $USER_DATA = $results->fetchAssoc();
 
         $act_link = rtrim($CONFIG['site_url'], '/') . '/register.php?activate=' . $USER_DATA['user_actkey'];
 
@@ -73,6 +72,7 @@ if ($superCage->post->KeyExists('email') && $superCage->post->testEmail('email')
 
 EOT;
     }
+    $results->free();
 }
 
 pageheader($lang_send_activation_php['resend_act_link']);
@@ -81,7 +81,7 @@ echo '<form action="send_activation.php" method="post" name="activationlink" id=
 
 starttable(-1, $lang_send_activation_php['resend_act_link'], 2);
 
-echo <<< EOT
+echo <<<EOT
             $lookup_failed
                  <tr>
                      <td class="tableb" width="40%">{$lang_send_activation_php['enter_email']}</td>
@@ -104,4 +104,4 @@ echo '</form>';
 
 pagefooter();
 
-?>
+//EOF

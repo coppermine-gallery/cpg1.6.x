@@ -1,5 +1,6 @@
 albums/userpics/1*/
 include/config.inc.php
+include/updates.inc.php
 php_mail.log
 
 logs/*
@@ -8,3 +9,8 @@ logs/*
 albums/edit/*
 !albums/edit/index.php
 !albums/edit/no_FTP-uploads_into_this_folder!.txt
+
+sv_*
+.git*
+.htaccess
+php.ini

@@ -1,7 +1,7 @@
 ##  ********************************************
 ##  Coppermine Photo Gallery
 ##  ************************
-##  Copyright (c) 2003-2014 Coppermine Dev Team
+##  Copyright (c) 2003-2016 Coppermine Dev Team
 ##  v1.0 originally written by Gregory Demar
 ##
 ##  This program is free software; you can redistribute it and/or modify
@@ -11,8 +11,7 @@
 ##  ********************************************
 ##  Coppermine version: 1.6.01
 ##  $HeadURL$
-##  $Revision$
-##  ********************************************
+####  ********************************************
 
 # The following line has to be removed when the moderator group feature will be re-enabled!
 UPDATE CPG_albums SET moderator_group = 0;
@@ -38,3 +37,8 @@ INSERT INTO CPG_config VALUES ('batch_add_hide_existing_files', '0');
 INSERT INTO CPG_config VALUES ('only_empty_albums', '0');
 INSERT INTO CPG_config VALUES ('user_manager_hide_file_stats', '0');
 INSERT INTO CPG_config VALUES ('album_uploads_default', 'NO');
+
+# Add field to plugin table to signify enabled/disabled
+ALTER TABLE CPG_plugins ADD `enabled` TINYINT(1) NOT NULL DEFAULT '1' AFTER `name`;
+
+INSERT INTO CPG_config VALUES ('last_updates_check', '1');

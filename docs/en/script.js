@@ -1,7 +1,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -11,7 +11,6 @@
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
-  $Revision$
 **********************************************/
 
 var linebreak = '\n';
@@ -772,7 +771,7 @@ doc_toc += '          <li><a href="admin-tools.htm#admin_tools_options">Availabl
 doc_toc += '            <ul>\n';
 doc_toc += '              <li><a href="admin-tools.htm#admin_tools_options_rebuild">Update thumbs and/or resized photos</a></li>\n';
 doc_toc += '              <li><a href="admin-tools.htm#admin_tools_options_filename_filetitle">Filename &rarr; File title</a></li>\n';
-doc_toc += '              <li><a href="admin-tools.htm#admin_tools_options_delete_titles">Delete file titles</a></li>\n';
+doc_toc += '              <li><a href="admin-tools.htm#admin_tools_options_change_values">Change values for (or clear) title, description and keywords</a></li>\n';
 doc_toc += '              <li><a href="admin-tools.htm#admin_tools_options_delete_original">Delete original size photos</a></li>\n';
 doc_toc += '              <li><a href="admin-tools.htm#admin_tools_options_intermediate">Delete intermediate pictures</a></li>\n';
 doc_toc += '              <li><a href="admin-tools.htm#admin_tools_options_delete_older_files">Delete files that are older than a set number of days</a></li>\n';
@@ -901,15 +900,6 @@ doc_toc += '                </ul>\n';
 doc_toc += '              </li>\n';
 doc_toc += '            </ul>\n';
 doc_toc += '          </li>\n';
-doc_toc += '        </ul>\n';
-doc_toc += '      </li>\n';
-doc_toc += '      <li><a href="uploading_xp-publisher.htm#xp">Windows XP Web Publishing Wizard</a>\n';
-doc_toc += '        <ul>\n';
-doc_toc += '          <li><a href="uploading_xp-publisher.htm#xp_publish_requirements">Requirements</a></li>\n';
-doc_toc += '          <li><a href="uploading_xp-publisher.htm#xp_publish_setup">Setup</a></li>\n';
-doc_toc += '          <li><a href="uploading_xp-publisher.htm#xp_publish_upload">Uploading pictures</a></li>\n';
-doc_toc += '          <li><a href="uploading_xp-publisher.htm#xp_publish_upload">File structure</a></li>\n';
-doc_toc += '          <li><a href="uploading_xp-publisher.htm#xp_publish_remove">Removal/Uninstall</a></li>\n';
 doc_toc += '        </ul>\n';
 doc_toc += '      </li>\n';
 doc_toc += '      <li><a href="upload_troubleshooting.htm#upload_trouble">Upload troubleshooting</a>\n';
@@ -1561,12 +1551,6 @@ function dateRevision() {
   var lastChangeDate = lastChangeDate.replace('LastChangedDate: ', '');
   var lastChangeDate = lastChangeDate.replace(/Date: /g, '');
   $('#doc_last_changed').text('About this document: ' + 'last changed on ' + lastChangeDate);
-
-  var revisionNumber = $('#doc_revision').text();
-  var revisionNumber = revisionNumber.replace('$', '');
-  var revisionNumber = revisionNumber.replace('$', '');
-  var revisionNumber = revisionNumber.replace(/Revision: /g, '');
-  $('#doc_revision').text(', SVN revision ' + revisionNumber);
 }
 
 function getUrlParameters(name)

@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -12,7 +12,6 @@
   ********************************************
   Coppermine version: 1.6.01
   $HeadURL$
-  $Revision$
 **********************************************/
 
 /**********************************************
@@ -288,11 +287,6 @@ $config_data = array(
       'help_link'       => 'f=configuration.htm&amp;as=admin_theme_display_redirection_page&amp;ae=admin_theme_display_redirection_page_end',
       'options'         => array($lang_common['no'], $lang_common['yes']),
       'end_description' => '('.$lang_admin_php['recommended'].': '.$lang_common['no'].')',
-    ),
-    'display_xp_publish_link' => array(
-      'type'          => 'checkbox',
-      'default_value' => '0',
-      'help_link'     => 'f=configuration.htm&amp;as=admin_theme_display_xp_publish_link&amp;ae=admin_theme_display_xp_publish_link_end',
     ),
   ),
   'album_list_view' => array(
@@ -1081,6 +1075,7 @@ $config_data = array(
       'default_value' => 'gd2',
       'help_link'     => 'f=configuration.htm&amp;as=admin_picture_thumb_advanced_resize_method&amp;ae=admin_picture_thumb_advanced_resize_method_end',
       'options'       => array(
+							'imx' => 'Imagick Extension',
                            'im' => 'ImageMagick',
                            'gd2' => 'GD version 2.x',
                          ),
@@ -1308,11 +1303,11 @@ $config_data = array(
     ),
     'upload_mechanism' => array(
       'type'          => 'select',
-      'default_value' => 'swfupload',
+      'default_value' => 'upload_h5a',
       'help_link'     => 'f=configuration.htm&amp;as=admin_upload_mechanism&amp;ae=admin_upload_mechanism_end',
       'options'       => array(
-                           'swfupload' => $lang_admin_php['upload_swf'],
-                           'html_single' => $lang_admin_php['upload_single'],
+                           //'swfupload' => $lang_admin_php['upload_swf'],
+                           //'html_single' => $lang_admin_php['upload_single'],
                          ),
     ),
     'allow_user_upload_choice' => array(
@@ -1511,7 +1506,7 @@ $config_data = array(
   'cookie_settings' => array(
     'cookie_name' => array(
       'type'          => 'textfield',
-      'default_value' => 'cpg15x',
+      'default_value' => 'cpg16x',
       'help_link'     => 'f=configuration.htm&amp;as=admin_cookie_name&amp;ae=admin_cookie_name_end',
       'regex'         => '^([a-z0-9_-]){1,}$',
       'regex_not'     => '\.',
@@ -1644,5 +1639,4 @@ $config_data = array(
   ),
 );
 
-
-?>
+//EOF
