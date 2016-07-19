@@ -423,7 +423,7 @@ switch($step) {
 		$db_type = $config['db_type'];
 		list($dext, $dsub) = explode(':', $db_type.':');
 		require_once 'include/database/'.$dext.'/install.php';
-		$page_title = $language['title_'.$db_type.'_pop'];
+		$page_title = $language['title_dbase_pop'];
 		// save the db data from previous step
 		if ($superCage->post->keyExists('db_name') && !isset($config['db_populated'])) {
 			setTmpConfig('db_name', $superCage->post->getRaw('db_name'));
