@@ -6802,6 +6802,8 @@ function cpg_album_sort_order($table_alias = '') {
         'dd' => "{$table_alias}aid DESC",
         'pa' => "{$table_alias}pos ASC, {$table_alias}aid ASC",
         'pd' => "{$table_alias}pos DESC, {$table_alias}aid DESC",
+        'va' => "{$table_alias}alb_hits ASC, {$table_alias}aid ASC",
+        'vd' => "{$table_alias}alb_hits DESC, {$table_alias}aid DESC",
     );
 
     // TODO: add user defined sort order for albums

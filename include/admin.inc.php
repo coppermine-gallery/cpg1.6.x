@@ -402,6 +402,8 @@ $config_data = array(
                            'dd' => $lang_admin_php['date_d'],
                            'pa' => $lang_admin_php['pos_a'],
                            'pd' => $lang_admin_php['pos_d'],
+                           'va' => $lang_admin_php['view_a'],
+                           'vd' => $lang_admin_php['view_d'],
                          ),
     ),
     'link_pic_count' => array(
