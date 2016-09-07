@@ -3202,17 +3202,17 @@ function cpg_get_system_thumb_list($search_folder = 'images/')
  * @return array
  **/
 
-function& cpg_get_system_thumb($filename, $user = 10001)
+function& cpg_get_system_thumb($filename, $user = FIRST_USER_CAT)
 {
     global $CONFIG;
 
     // Correct user_id
-    if ($user < 10000) {
-        $user += 10000;
+    if ($user < FIRST_USER_CAT) {
+        $user += FIRST_USER_CAT;
     }
 
-    if ($user == 10000) {
-        $user = 10001;
+    if ($user == FIRST_USER_CAT) {
+        $user = FIRST_USER_CAT + 1;
     }
 
     // Get image data for thumb

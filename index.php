@@ -939,7 +939,7 @@ function list_cat_albums($cat, $catdata)
         return '';
     }
 
-    $cat_owner_id = ($cat > 10000)?(10000 - $cat):(10001);
+    $cat_owner_id = ($cat > FIRST_USER_CAT)?(FIRST_USER_CAT - $cat):(FIRST_USER_CAT + 1);
     $cpg_nopic_data = cpg_get_system_thumb('nopic.jpg', $cat_owner_id);
     $cpg_privatepic_data = cpg_get_system_thumb('private.jpg', $cat_owner_id);
 

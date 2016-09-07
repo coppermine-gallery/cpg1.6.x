@@ -530,7 +530,7 @@ class core_udb
 			// This is the way we collect the data without a direct join to the forum's user table
 			// This query determines which users we need to collect usernames of - ie just those which have albums with pics
 			// and are on the page we are looking at
-			$sql  = "SELECT category - 10000 AS user_id "
+			$sql  = "SELECT category - ".FIRST_USER_CAT." AS user_id "
 					. "FROM {$CONFIG['TABLE_ALBUMS']} AS a "
 						. "INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.aid = a.aid "
 					. "WHERE ((ISNULL(approved) OR approved='YES') "

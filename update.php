@@ -484,6 +484,7 @@ function update_tables()
     $sql_query = fread(fopen($db_update, 'r'), filesize($db_update));
     // Update table prefix
     $sql_query = preg_replace('/CPG_/', $CONFIG['TABLE_PREFIX'], $sql_query);
+    //$sql_query = str_replace('{FIRST_USER_CAT}', FIRST_USER_CAT, $sql_query);
 
     $sql_query = remove_remarks($sql_query);
     $sql_query = split_sql_file($sql_query, ';');

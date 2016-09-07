@@ -609,7 +609,7 @@ case 'createcat':
 
     $description = $superCage->post->getEscaped('description');
 
-    cpg_db_query("INSERT INTO {$CONFIG['TABLE_CATEGORIES']} (pos, parent, name, description) VALUES (10000, $parent, '$name', '$description')");
+    cpg_db_query("INSERT INTO {$CONFIG['TABLE_CATEGORIES']} (pos, parent, name, description) VALUES (".FIRST_USER_CAT.", $parent, '$name', '$description')");
 
     //insert in categorymap
     $cid = cpg_db_last_insert_id();

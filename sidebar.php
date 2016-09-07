@@ -315,7 +315,7 @@ function get_tree_album_data($category,$dtree_parent) {
                 $pic_filter = ' '.str_replace('p.',$CONFIG['TABLE_PICTURES'].'.',$FORBIDDEN_SET);
         }
         if ($category == USER_GAL_CAT) {
-                $sql = "SELECT DISTINCT user_id, user_name FROM {$CONFIG['TABLE_USERS']}, {$CONFIG['TABLE_ALBUMS']} WHERE  10000 + {$CONFIG['TABLE_USERS']}.user_id = {$CONFIG['TABLE_ALBUMS']}.category ORDER BY user_name ASC";
+                $sql = "SELECT DISTINCT user_id, user_name FROM {$CONFIG['TABLE_USERS']}, {$CONFIG['TABLE_ALBUMS']} WHERE  ".FIRST_USER_CAT." + {$CONFIG['TABLE_USERS']}.user_id = {$CONFIG['TABLE_ALBUMS']}.category ORDER BY user_name ASC";
                 $result = cpg_db_query($sql);
                 if (($cat_count = $result->numRows()) > 0) {
                         $rowset = cpg_db_fetch_rowset($result);
