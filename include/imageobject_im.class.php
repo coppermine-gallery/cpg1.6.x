@@ -100,7 +100,7 @@ class imageObject extends ImageTool {
         $output = array();
 
         /*
-        * Hack for working with ImageMagick on WIndows even if IM is installed in C:\Program Files.
+        * Hack for working with ImageMagick on Windows even if IM is installed in C:\Program Files.
         * Also the options for -crop should not have space in between them.
         * By Aditya Mooley <aditya@sanisoft.com>
         */
@@ -108,10 +108,10 @@ class imageObject extends ImageTool {
         if ($superCage->env->getMatched('OS', '/win/i')) {
             $imgFile = str_replace("'","\"" , $imgFile);
             $cmd = "\"".str_replace("\\","/", $CONFIG['impath'])."convert\" -quality {$this->quality} {$CONFIG['im_options']} -crop {$new_w}x{$new_h}+{$clip_left}+{$clip_top} ".str_replace("\\","/" ,$imgFile )." ".str_replace("\\","/" ,$imgFile );
-            exec ("\"$cmd\"", $output, $retval);
+            exec(escapeshellcmd("\"$cmd\""), $output, $retval);
         } else {
             $cmd = "{$CONFIG['impath']}convert -quality {$this->quality} {$CONFIG['im_options']} -crop {$new_w}x{$new_h}+{$clip_left}+{$clip_top} $imgFile $imgFile";
-            exec($cmd, $output, $retval);
+            exec(escapeshellcmd($cmd), $output, $retval);
         }
 
         // TODO: check for errors in execution etc
