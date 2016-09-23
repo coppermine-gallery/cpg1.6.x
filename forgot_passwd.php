@@ -33,12 +33,12 @@ if ($superCage->post->keyExists('email') && $superCage->post->testEmail('email')
     $CLEAN['email'] = $superCage->post->testEmail('email');
 }
 
-if ($superCage->get->keyExists('key')) {
-    $CLEAN['key'] = $superCage->get->getEscaped('key');
+if ($matched = $superCage->get->getMatched('key', "/^[a-f0-9]{32}$/i")) {
+    $CLEAN['key'] = $matched[0];
 }
 
 if ($superCage->get->keyExists('id')) {
-    $CLEAN['id'] = $superCage->get->getEscaped('id');
+    $CLEAN['id'] = $superCage->get->getInt('id');
 }
 
 //END CLEANUP
@@ -117,7 +117,7 @@ EOT;
 
     $result->free();
 
-    $sql = "SELECT {$cpg_udb->field['username']}, {$cpg_udb->field['email']} FROM {$cpg_udb->usertable} WHERE {$cpg_udb->field['user_id']} = {$CLEAN['id']}";
+    $sql = "SELECT {$cpg_udb->field['username']}, {$cpg_udb->field['email']} FROM {$cpg_udb->usertable} WHERE {$cpg_udb->field['user_id']} = '{$CLEAN['id']}'";
 
     $result = cpg_db_query($sql);
 

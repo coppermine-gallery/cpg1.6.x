@@ -241,7 +241,8 @@ if ($superCage->post->keyExists('cid_array')) {
     $cid_array = $superCage->post->getEscaped('cid_array');
     $cid_set = '';
     foreach ($cid_array as $cid) {
-        $cid_set .= ($cid_set == '') ? '(' . $cid : ', ' . $cid;
+        $cid_quoted = "'".$cid."'";
+        $cid_set .= ($cid_set == '') ? '(' . $cid_quoted : ', ' . $cid_quoted;
         if ($superCage->post->getAlpha('with_selected') == 'approve' && $superCage->post->getInt('spam'.$cid) == 'YES') {
             $akismet_ham_array[] = $cid;
         }
