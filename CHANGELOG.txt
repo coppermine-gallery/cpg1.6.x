@@ -22,6 +22,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2016-10-24 [B,C] HTML5 video - fix autoplay, improve layout render {ron4mac}
 2016-09-23 [S] Fixed possible arbitrary shell command execution {eenemeenemuu}
 2016-09-23 [S] Fixed possible SQL injection vulnerabilities {eenemeenemuu}
 2016-09-06 [O] Replaced hard-coded number "10000" with constant "FIRST_USER_CAT" (thread ID 78848) {eenemeenemuu}

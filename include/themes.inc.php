@@ -3349,11 +3349,12 @@ function theme_html_picture()
         $pic_html = CPGPluginAPI::filter('html_document', $pic_html);
     } else {
         $autostart = ($CONFIG['media_autostart']) ? ('true'):('false');
+        $autoplay = '" autostart="'.$autostart.'" autoplay="'.$autostart.'" ';
 
         if ($mime_content['player'] == 'HTMLA') {
-            $pic_html  = '<audio controls="true" src="' . $picture_url . '" autostart="' . $autostart . '"></audio>';
+            $pic_html  = '<audio controls="true" src="' . $picture_url . $autoplay . '></audio>';
         } elseif ($mime_content['player'] == 'HTMLV') {
-            $pic_html  = '<video controls="true" src="' . $picture_url . '" autostart="' . $autostart . '"' . $image_size['whole'] . '></video>';
+            $pic_html  = '<div class="video"><video controls="true" src="' . $picture_url . $autoplay . 'style="max-width:98%"></video></div>';
         } else {
 
             $players['WMP'] = array('id' => 'MediaPlayer',
