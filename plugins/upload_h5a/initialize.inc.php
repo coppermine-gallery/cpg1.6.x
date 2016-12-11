@@ -54,7 +54,8 @@ class H5aUpload {
 	{
 		$val = trim($val);
 		$last = strtolower($val[strlen($val)-1]);
-		switch($last) {
+		$val = (int) $val;
+		switch ($last) {
 			case 'g': $val *= 1024;
 			case 'm': $val *= 1024;
 			case 'k': $val *= 1024;

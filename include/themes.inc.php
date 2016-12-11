@@ -3354,7 +3354,7 @@ function theme_html_picture()
         if ($mime_content['player'] == 'HTMLA') {
             $pic_html  = '<audio controls="true" src="' . $picture_url . $autoplay . '></audio>';
         } elseif ($mime_content['player'] == 'HTMLV') {
-            $pic_html  = '<div class="video"><video controls="true" src="' . $picture_url . $autoplay . 'style="max-width:98%"></video></div>';
+            $pic_html  = '<div class="video"><video controls="true" src="' . $picture_url . $autoplay . 'style="max-width:100%"></video></div>';
         } else {
 
             $players['WMP'] = array('id' => 'MediaPlayer',
@@ -3998,7 +3998,7 @@ function theme_slideshow($start_img,$title)
     global $cat, $date, $THEME_DIR;
 
     pageheader($lang_display_image_php['slideshow']);
-    template_extract_block($template_display_media, 'img_desc', $start_slideshow);
+    template_extract_block($template_display_media, 'img_desc');
 
     /** set styles to slideshow background */
     $setDimentionW= $CONFIG['picture_width'] + 100;
