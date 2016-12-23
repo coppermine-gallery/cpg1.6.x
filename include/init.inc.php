@@ -301,6 +301,9 @@ if (isset($USER['theme']) && !strstr($USER['theme'], '/') && is_dir('themes/' . 
 } else {
     unset($USER['theme']);
 }
+// If no URL/user override, give plugins the chance to specify a theme
+if ($CONFIG['theme'] === $CONFIG['theme_config'])
+	$CONFIG['theme'] = CPGPluginAPI::filter('theme_name', $CONFIG['theme']);
 if (!file_exists('themes/'.$CONFIG['theme'].'/theme.php')) {
     $CONFIG['theme'] = 'curve';
 }

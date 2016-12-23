@@ -765,6 +765,13 @@ $template_image_comments = CPGPluginAPI::filter('theme_edit_comment', $template_
     <td valign="top"><textarea class="samplecode" style="width:100%">$params = CPGPluginAPI::filter('theme_display_thumbnails_params', $params);</textarea></td>
   </tr>
   <tr>
+    <td valign="top">include/init.inc.php</td>
+    <td valign="top"><a name="plugin_hooks_theme_name"></a><strong>theme_name</strong><a href="#plugin_hooks_theme_name" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
+    <td valign="top">Filter</td>
+    <td valign="top">filters $CONFIG['theme'] which allows you dynamically set the theme to be used.</td>
+    <td valign="top"><textarea class="samplecode" style="width:100%">$theme = CPGPluginAPI::filter('theme_name', $theme);</textarea></td>
+  </tr>
+  <tr>
     <td valign="top">include/themes.inc.php<br />themes/xxx/theme.php</td>
     <td valign="top"><a name="plugin_hooks_filename_theme_thumbnails_wrapper_start"></a><strong>theme_thumbnails_wrapper_start</strong><a href="#plugin_hooks_filename_theme_thumbnails_wrapper_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></td>
     <td valign="top">Action</td>
@@ -1021,6 +1028,7 @@ $template_image_comments = CPGPluginAPI::filter('theme_edit_comment', $template_
                 <li class="floatleft"><a href="#plugin_hooks_theme_album_params">theme_album_params</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_filename_thumbnail_params">theme_display_thumbnails_params</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_theme_add_comment">theme_edit_comment</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_theme_name">theme_name</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_filename_theme_pageheader_params">theme_pageheader_params</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_theme_thumbnails_album_types">theme_thumbnails_album_types</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_filename_theme_thumbnails_footer">theme_thumbnails_footer</a></li>
