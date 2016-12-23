@@ -295,14 +295,15 @@ $CONFIG['theme_config'] = DEFAULT_THEME;        // Save the gallery-configured s
 
 if ($matches = $superCage->get->getMatched('theme', '/^[A-Za-z0-9_-]+$/')) {
     $USER['theme'] = $matches[0];
+    $hasURLtheme = true;
 }
 if (isset($USER['theme']) && !strstr($USER['theme'], '/') && is_dir('themes/' . $USER['theme'])) {
     $CONFIG['theme'] = strtr($USER['theme'], '$/\\:*?"\'<>|`', '____________');
 } else {
     unset($USER['theme']);
 }
-// If no URL/user override, give plugins the chance to specify a theme
-if ($CONFIG['theme'] === $CONFIG['theme_config'])
+// If no URL override, give plugins the chance to specify a theme
+if (empty($hasURLtheme))
 	$CONFIG['theme'] = CPGPluginAPI::filter('theme_name', $CONFIG['theme']);
 if (!file_exists('themes/'.$CONFIG['theme'].'/theme.php')) {
     $CONFIG['theme'] = 'curve';
