@@ -54,7 +54,7 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
 				$ort = $exif['Orientation'];
 				if ($ort !== 1) {
 					getImageTool();
-					$imgObj = new imageObject($image);
+					$imgObj = new imageObject(dirname($image).'/', basename($image));
 					$imgObj->orientImage($ort);
 				}
 			}
