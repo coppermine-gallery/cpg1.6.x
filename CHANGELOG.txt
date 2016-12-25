@@ -22,8 +22,8 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
-2016-12-22 [B] Fixed invocation of graphics tool during auto-orientation of image
-2016-12-22 [A] Added plugin filter hook "theme_name" to allow plugins to set theme dynamically
+2016-12-22 [B] Fixed invocation of graphics tool during auto-orientation of image {ron4mac}
+2016-12-22 [A] Added plugin filter hook "theme_name" to allow plugins to set theme dynamically {ron4mac}
 2016-10-24 [B,C] HTML5 video - fix autoplay, improve layout render {ron4mac}
 2016-09-23 [S] Fixed possible arbitrary shell command execution {eenemeenemuu}
 2016-09-23 [S] Fixed possible SQL injection vulnerabilities {eenemeenemuu}
