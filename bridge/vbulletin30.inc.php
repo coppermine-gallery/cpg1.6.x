@@ -58,9 +58,10 @@ if (isset($bridge_lookup)) {
             if (isset($config['Database']['dbname']))
             {
               // Running on vBulletin 3.5.x
+				$port = $config['MasterServer']['port'] ?: 3306;
                 $this->db = array(
                     'name' => $config['Database']['dbname'],
-                    'host' => $config['MasterServer']['servername'] ? $config['MasterServer']['servername'] : 'localhost',
+                    'host' => ($config['MasterServer']['servername'] ?: 'localhost') . ':' . $port,
                     'user' => $config['MasterServer']['username'],
                     'password' => $config['MasterServer']['password'],
                     'prefix' => $config['Database']['tableprefix']
