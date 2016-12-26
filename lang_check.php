@@ -67,9 +67,8 @@ class Lang
 {
 	public $vars;
 
-	public function __construct ($lang)
+	public function __construct ($lang='english.php')
 	{
-		if (!$lang) $lang = 'english.php';
 		require "lang/{$lang}";
 		$this->vars = get_defined_vars();
 	}
