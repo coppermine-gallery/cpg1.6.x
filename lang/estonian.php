@@ -1785,7 +1785,7 @@ $lang_rate_pic_php['fav_removed'] = 'Pilt on eemaldatud meeldivate hulgast'; // 
 // File register.php & profile.php
 // ------------------------------------------------------------------------- //
 if (defined('REGISTER_PHP') || defined('PROFILE_PHP')) {
-$lang_register_php['disclamer'] = <<< EOT
+$lang_register_php['disclaimer'] = <<< EOT
 Kuigi {SITE_NAME} haldajad püüavad ebasobiva materjali võimalikult kiiresti eemaldada või seda toimetada, on siiski võimatu igat postitust kontrollida. Seega oled teadlik, et kõik postitused sellel saidil väljendavad nende autorite vaateid ja seisukohti, mitte aga saidi administraatorite või veebimeistri omi (v.a nende endi postituste korral), seega ei peeta neid vastutavaks.<br />
 <br />
 Sa lubad, et ei postita materjali, mis on kuritahtlik, rõve, vulgaarne, laimav, vaenuõhutav, ähvardav, seksuaalse suunitlusega või kehtivate seadustega vastuolus. Sa oled nõus, et saidi {SITE_NAME} veebimeistril, administraatoril ja moderaatoritel on õigus igal ajal oma parema äranägemise järgi sisu eemaldada või muuta. Kasutajana oled nõus, et ülalsisestatud infot hoitakse andmebaasis. Ehkki seda ei avaldata ilma sinu nõusolekuta kolmandatele osapooltele, ei saa veebimeistrit ega administraatorit pidada vastutavaks, kui võimaliku rünnaku käigus info lekkima peaks.<br />
@@ -2469,7 +2469,7 @@ $lang_util_php['filename_us'] = 'asenda 2003_11_23_13_20_20.jpg kujuga 11/23/200
 $lang_util_php['filename_time'] = 'asenda 2003_11_23_13_20_20.jpg kujuga 13:20';
 $lang_util_php['notitle'] = 'Rakenda ainult ilma pealkirjata failide puhul';
 //$lang_util_php['delete_title'] = 'Kustuta failide pealkirjad';
-$//lang_util_php['delete_title_explanation'] = 'Eemaldab määratud albumis kõikidelt failidelt pealkirjad.';
+//$lang_util_php['delete_title_explanation'] = 'Eemaldab määratud albumis kõikidelt failidelt pealkirjad.';
 $lang_util_php['change_values_title'] = 'Muuda väärtusi (või tühjenda) pealkirjale, iseloomustusele ja võtmesõnadele.';
 $lang_util_php['change_values_how'] = 'Määra uued automaatsed väärtused või tühjenda need.';
 $lang_util_php['change_values_title_label'] = 'Pealkiri:';
