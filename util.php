@@ -685,7 +685,7 @@ function del_orig()
             } elseif (!$renamed) {
                 printf($lang_util_php['error_rename'], $normal, $image);
             } else {
-                printf($lang_util_php['error_deleting'], $image);
+                printf($lang_util_php['del_error'], $image);
             }
 
         } else {
@@ -980,7 +980,7 @@ function refresh_db()
 
                 if ($dimensions[0] <> $db_pwidth || $dimensions[1] <> $db_pheight) {
 
-                    $prob .= "{$lang_util_php['incorect_dimension']}<br />{$lang_util_php['database']}{$db_pwidth}x{$db_pheight}<br />{$lang_util_php['actual']}{$dimensions[0]}x{$dimensions[1]}<br />";
+                    $prob .= "{$lang_util_php['incorrect_dimension']}<br />{$lang_util_php['database']}{$db_pwidth}x{$db_pheight}<br />{$lang_util_php['actual']}{$dimensions[0]}x{$dimensions[1]}<br />";
                     cpg_db_query("UPDATE {$CONFIG['TABLE_PICTURES']} SET pwidth = '{$dimensions[0]}', pheight = '{$dimensions[1]}' WHERE pid = '$db_pid' LIMIT 1");
                     $outcome = $lang_util_php['updated'];
                 }

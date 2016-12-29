@@ -228,7 +228,7 @@ if ($superCage->post->keyExists('submit')) {
     $email_address = '';
     $subject =  '';
     $message =  '';
-    $captcha_remark = $lang_contact_php['captcha_field_mandatory'];
+    $captcha_remark = '';
 }
 
 pageheader($lang_contact_php['title']);

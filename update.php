@@ -293,7 +293,7 @@ function html_auth_box($method)
 
 EOT;
     if ($method == 'MySQL') {
-        echo $lang_update_php['could_not_authenticate']. '. '.$lang_update_php['provide_admin_account_mysql'].'. <a href="update.php">' . $lang_update_php['try_again'] . '</a>.';
+        echo $lang_update_php['could_not_authenticate']. '. '.sprintf($lang_update_php['provide_admin_account_dbase'], $CONFIG['dbname']).'. <a href="update.php">' . $lang_update_php['try_again'] . '</a>.';
     } else {
         echo $lang_update_php['provide_admin_account_cpg'].'.';
     }
