@@ -27,8 +27,8 @@ $template_sys_menu_spacer = '|';
 // HTML template for template sub_menu
 if ($CONFIG['browse_by_date'] != 0) {
     $browsebydatebutton = <<< EOT
-                                        <td><img src="themes/eyeball/images/top_menu_spacer.gif" border="0" alt="" /><br /></td>
-                                        <td style="background-image:url(themes/eyeball/images/top_menu_button.gif);">
+                                        <td><img src="{$THEME_DIR}images/top_menu_spacer.gif" border="0" alt="" /><br /></td>
+                                        <td style="background-image:url({$THEME_DIR}images/top_menu_button.gif);">
                                                 <a href="{BROWSEBYDATE_TGT}" onmouseover="MM_showHideLayers('Menu1','','hide')" title="{BROWSEBYDATE_LNK}" rel="nofollow" class="greybox">{BROWSEBYDATE_LNK}</a>
                                         </td>
 EOT;
@@ -38,46 +38,46 @@ EOT;
 $template_sub_menu = <<< EOT
                         <table cellpadding="0" cellspacing="0" border="0" class="top_menu_bttn">
                                 <tr>
-                                        <td><img src="themes/eyeball/images/top_menu_left.gif" border="0" alt="" /><br /></td>
+                                        <td><img src="{$THEME_DIR}images/top_menu_left.gif" border="0" alt="" /><br /></td>
                                         <!-- BEGIN custom_link -->
-                                                                                <td style="background-image:url(themes/eyeball/images/top_menu_button.gif);">
+                                                                                <td style="background-image:url({$THEME_DIR}images/top_menu_button.gif);">
                                                 <a href="{CUSTOM_LNK_TGT}" title="{CUSTOM_LNK_TITLE}">{CUSTOM_LNK_LNK}</a>
                                         </td>
-                                        <td><img src="themes/eyeball/images/top_menu_spacer.gif" border="0" alt="" /><br /></td>
+                                        <td><img src="{$THEME_DIR}images/top_menu_spacer.gif" border="0" alt="" /><br /></td>
                                         <!-- END custom_link -->
-                                        <td style="background-image:url(themes/eyeball/images/top_menu_button.gif);">
-                                                <a href="index.php" onmouseover="MM_showHideLayers('Menu1','','show')"><img src="themes/eyeball/images/home.gif" border="0" alt="" /><br /></a>
+                                        <td style="background-image:url({$THEME_DIR}images/top_menu_button.gif);">
+                                                <a href="index.php" onmouseover="MM_showHideLayers('Menu1','','show')"><img src="{$THEME_DIR}images/home.gif" border="0" alt="" /><br /></a>
                                         </td>
-                                        <td><img src="themes/eyeball/images/top_menu_spacer.gif" border="0" alt="" /><br /></td>
-                                        <td style="background-image:url(themes/eyeball/images/top_menu_button.gif);">
+                                        <td><img src="{$THEME_DIR}images/top_menu_spacer.gif" border="0" alt="" /><br /></td>
+                                        <td style="background-image:url({$THEME_DIR}images/top_menu_button.gif);">
                                                 <a href="{ALB_LIST_TGT}" title="{ALB_LIST_TITLE}">{ALB_LIST_LNK}</a>
                                         </td>
-                                        <td><img src="themes/eyeball/images/top_menu_spacer.gif" border="0" alt="" /><br /></td>
-                                        <td style="background-image:url(themes/eyeball/images/top_menu_button.gif);">
+                                        <td><img src="{$THEME_DIR}images/top_menu_spacer.gif" border="0" alt="" /><br /></td>
+                                        <td style="background-image:url({$THEME_DIR}images/top_menu_button.gif);">
                                                 <a href="{LASTUP_TGT}" onmouseover="MM_showHideLayers('Menu1','','hide')" title="{LASTUP_LNK}" rel="nofollow">{LASTUP_LNK}</a>
                                         </td>
-                                        <td><img src="themes/eyeball/images/top_menu_spacer.gif" border="0" alt="" /><br /></td>
-                                        <td style="background-image:url(themes/eyeball/images/top_menu_button.gif);">
+                                        <td><img src="{$THEME_DIR}images/top_menu_spacer.gif" border="0" alt="" /><br /></td>
+                                        <td style="background-image:url({$THEME_DIR}images/top_menu_button.gif);">
                                                 <a href="{LASTCOM_TGT}" onmouseover="MM_showHideLayers('Menu1','','hide')" title="{LASTCOM_LNK}" rel="nofollow">{LASTCOM_LNK}</a>
                                         </td>
-                                        <td><img src="themes/eyeball/images/top_menu_spacer.gif" border="0" alt="" /><br /></td>
-                                        <td style="background-image:url(themes/eyeball/images/top_menu_button.gif);">
+                                        <td><img src="{$THEME_DIR}images/top_menu_spacer.gif" border="0" alt="" /><br /></td>
+                                        <td style="background-image:url({$THEME_DIR}images/top_menu_button.gif);">
                                                 <a href="{TOPN_TGT}" onmouseover="MM_showHideLayers('Menu1','','hide')" title="{TOPN_LNK}" rel="nofollow">{TOPN_LNK}</a>
                                         </td>
-                                        <td><img src="themes/eyeball/images/top_menu_spacer.gif" border="0" alt="" /><br /></td>
-                                        <td style="background-image:url(themes/eyeball/images/top_menu_button.gif);">
+                                        <td><img src="{$THEME_DIR}images/top_menu_spacer.gif" border="0" alt="" /><br /></td>
+                                        <td style="background-image:url({$THEME_DIR}images/top_menu_button.gif);">
                                                 <a href="{TOPRATED_TGT}" onmouseover="MM_showHideLayers('Menu1','','hide')" title="{TOPRATED_LNK}" rel="nofollow">{TOPRATED_LNK}</a>
                                         </td>
-                                        <td><img src="themes/eyeball/images/top_menu_spacer.gif" border="0" alt="" /><br /></td>
-                                        <td style="background-image:url(themes/eyeball/images/top_menu_button.gif);">
+                                        <td><img src="{$THEME_DIR}images/top_menu_spacer.gif" border="0" alt="" /><br /></td>
+                                        <td style="background-image:url({$THEME_DIR}images/top_menu_button.gif);">
                                         <a href="{FAV_TGT}" onmouseover="MM_showHideLayers('Menu1','','hide')" title="{FAV_LNK}" rel="nofollow">{FAV_LNK}</a>
                                         </td>
                                         $browsebydatebutton
-                                        <td><img src="themes/eyeball/images/top_menu_spacer.gif" border="0" alt="" /><br /></td>
-                                         <td style="background-image:url(themes/eyeball/images/top_menu_button.gif);">
+                                        <td><img src="{$THEME_DIR}images/top_menu_spacer.gif" border="0" alt="" /><br /></td>
+                                         <td style="background-image:url({$THEME_DIR}images/top_menu_button.gif);">
                                                 <a href="{SEARCH_TGT}" onmouseover="MM_showHideLayers('Menu1','','hide')" title="{SEARCH_LNK}">{SEARCH_LNK}</a>
                                         </td>
-                                        <td><img src="themes/eyeball/images/top_menu_right.gif" border="0" alt="" /><br /></td>
+                                        <td><img src="{$THEME_DIR}images/top_menu_right.gif" border="0" alt="" /><br /></td>
 
                                 </tr>
                         </table>
@@ -146,7 +146,7 @@ EOT;
 // Function to start a 'standard' table
 function starttable($width = '-1', $title = '', $title_colspan = '1', $zebra_class = '', $return = false)
 {
-    global $CONFIG;
+    global $CONFIG, $THEME_DIR;
 
     if ($width == '-1') $width = $CONFIG['picture_table_width'];
     if ($width == '100%') $width = $CONFIG['main_table_width'];
@@ -164,9 +164,9 @@ EOT;
                 <td>
                         <table width="100%" cellspacing="0" cellpadding="0" class="tableh1a">
                                 <tr>
-                                        <td class="tableh1a"><img src="themes/eyeball/images/tableh1a_bg_left.gif" alt="" /></td>
+                                        <td class="tableh1a"><img src="{$THEME_DIR}images/tableh1a_bg_left.gif" alt="" /></td>
                                         <td class="tableh1a" width="100%">$title</td>
-                                        <td class="tableh1a"><img src="themes/eyeball/images/tableh1a_bg_right.gif" alt="" /></td>
+                                        <td class="tableh1a"><img src="{$THEME_DIR}images/tableh1a_bg_right.gif" alt="" /></td>
                                 </tr>
                         </table>
                 </td>
@@ -184,15 +184,15 @@ EOT;
 
 function theme_display_image($nav_menu, $picture, $votes, $pic_info, $comments, $film_strip)
 {
-    global $CONFIG, $LINEBREAK;
+    global $CONFIG, $LINEBREAK, $THEME_DIR;
 
     $superCage = Inspekt::makeSuperCage();
 
     $spacer = <<<EOT
         <tr>
-                <td><img src="themes/eyeball/images/hline_left.gif" alt="" /><br /></td>
-                <td width="100%" style="background-image:url(themes/eyeball/images/hline_bg.gif);" align="center"><img src="themes/eyeball/images/hline_blue_ball.gif" alt="" /><br /></td>
-                <td><img src="themes/eyeball/images/hline_right.gif" alt="" /><br /></td>
+                <td><img src="{$THEME_DIR}images/hline_left.gif" alt="" /><br /></td>
+                <td width="100%" style="background-image:url({$THEME_DIR}images/hline_bg.gif);" align="center"><img src="{$THEME_DIR}images/hline_blue_ball.gif" alt="" /><br /></td>
+                <td><img src="{$THEME_DIR}images/hline_right.gif" alt="" /><br /></td>
         </tr>
 
 EOT;

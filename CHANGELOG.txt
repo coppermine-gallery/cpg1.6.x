@@ -22,7 +22,8 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
-2016-12-22 [B] Corrected a few language issues found by lang_check.php {ron4mac}
+2016-12-29 [O] Removed hard-coded theme directory name from themes; provides user more convenient theme copy {ron4mac}
+2016-12-29 [B] Corrected a few language issues found by lang_check.php {ron4mac}
 2016-12-22 [B] Added code for vBulletin alternate dbase port (Github issue #7) {ron4mac}
 2016-12-22 [B] Fixed invocation of graphics tool during auto-orientation of image {ron4mac}
 2016-12-22 [A] Added plugin filter hook "theme_name" to allow plugins to set theme dynamically {ron4mac}
