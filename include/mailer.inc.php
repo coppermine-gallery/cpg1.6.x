@@ -15,12 +15,12 @@
 **********************************************/
 
 // Custom mail function
-function cpg_mail($to, $subject, $msg_body = '', $type = 'text/plain', $sender_name = '', $sender_email = '', $msg_body_plaintext = '')
+function cpg_mail ($to, $subject, $msg_body = '', $type = 'text/plain', $sender_name = '', $sender_email = '', $msg_body_plaintext = '')
 {
 	global $CONFIG, $lang_charset, $HTML_SUBST;
 
 	// makeshift plaintext if not set
-	if (!$msg_body_plaintext){
+	if (!$msg_body_plaintext) {
 		$msg_body_plaintext = strip_tags($msg_body);
 	}
 
@@ -43,7 +43,7 @@ function cpg_mail($to, $subject, $msg_body = '', $type = 'text/plain', $sender_n
 			$to = array($CONFIG['gallery_admin_email']);
 		}
 	} else {
-			$to = array($to);
+		$to = array($to);
 	}
 	$to = CPGPluginAPI::filter('cpg_mail_to_email', $to);
 
@@ -1574,7 +1574,7 @@ class cpg_PHPMailer
 	public function getSMTPInstance()
 	{
 		if (!is_object($this->smtp)) {
-			$this->smtp = new SMTP;
+			$this->smtp = new cpg_SMTP;
 		}
 		return $this->smtp;
 	}
@@ -1817,8 +1817,8 @@ class cpg_PHPMailer
 			'variable_set' => 'Cannot set or reset variable: ',
 			'extension_missing' => 'Extension missing: '
 		);
-		$this->language = $PHPMAILER_LANG;
-		return (boolean)$foundlang; // Returns false if language not found
+	//	$this->language = $PHPMAILER_LANG;
+	//	return (boolean)$foundlang; // Returns false if language not found
 	}
 
 	/**
