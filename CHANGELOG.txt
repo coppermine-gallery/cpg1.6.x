@@ -22,6 +22,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2017-01-05 [S] Fixed possible shell execution issue due to outdated PHPMailer {ron4mac}
 2016-12-31 [M] Updated doc plugin tutorials (removed simplest) {ron4mac}
 2016-12-29 [O] Removed hard-coded theme directory name from themes; provides user more convenient theme copy {ron4mac}
 2016-12-29 [B] Corrected a few language issues found by lang_check.php {ron4mac}

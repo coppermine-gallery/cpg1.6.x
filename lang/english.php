@@ -358,19 +358,25 @@ $lang_alb_select_box['all_albums'] = 'Show all albums';
 // ------------------------------------------------------------------------- //
 // File include/mailer.inc.php
 // ------------------------------------------------------------------------- //
-$lang_mailer['provide_address'] = 'You must provide at least one ';
-$lang_mailer['mailer_not_supported'] = ' mailer is not supported.';
-$lang_mailer['execute'] = 'Could not execute: ';
-$lang_mailer['instantiate'] = 'Could not instantiate mail function.';
 $lang_mailer['authenticate'] = 'SMTP Error: Could not authenticate.';
-$lang_mailer['from_failed'] = 'The following From address failed: ';
-$lang_mailer['recipients_failed'] = 'SMTP Error: The following ';
-$lang_mailer['data_not_accepted'] = 'SMTP Error: Data not accepted.';
 $lang_mailer['connect_host'] = 'SMTP Error: Could not connect to SMTP host.';
+$lang_mailer['data_not_accepted'] = 'SMTP Error: data not accepted.';
+$lang_mailer['empty_message'] = 'Message body empty';
+$lang_mailer['encoding'] = 'Unknown encoding: ';
+$lang_mailer['execute'] = 'Could not execute: ';
 $lang_mailer['file_access'] = 'Could not access file: ';
 $lang_mailer['file_open'] = 'File Error: Could not open file: ';
-$lang_mailer['encoding'] = 'Unknown encoding: ';
+$lang_mailer['from_failed'] = 'The following From address failed: ';
+$lang_mailer['instantiate'] = 'Could not instantiate mail function.';
+$lang_mailer['invalid_address'] = 'Invalid address: ';
+$lang_mailer['mailer_not_supported'] = ' mailer is not supported.';
+$lang_mailer['provide_address'] = 'You must provide at least one recipient email address.';
+$lang_mailer['recipients_failed'] = 'SMTP Error: The following recipients failed: ';
 $lang_mailer['signing'] = 'Signing Error: ';
+$lang_mailer['smtp_connect_failed'] = 'SMTP connect() failed.';
+$lang_mailer['smtp_error'] = 'SMTP server error: ';
+$lang_mailer['variable_set'] = 'Cannot set or reset variable: ';
+$lang_mailer['extension_missing'] = 'Extension missing: ';
 
 // ------------------------------------------------------------------------- //
 // File include/plugin_api.inc.php
