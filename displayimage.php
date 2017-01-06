@@ -34,7 +34,7 @@ if (!USER_ID && ($CONFIG['allow_unlogged_access'] <= 1)) {
 }
 
 if (USER_ID && (USER_ACCESS_LEVEL <= 1)) {
-    cpg_die(ERROR, ((USER_ACCESS_LEVEL == 1) ? $lang_errors['access_thumbnail_only'] : $lang_errors['access_none']));
+    cpg_die(ERROR, ((USER_ACCESS_LEVEL == 1) ? $lang_errors['access_thumbnail_only'] : $lang_errors['access_none']), __FILE__, __LINE__);
 }
 
 if (!$superCage->get->keyExists('slideshow')) {

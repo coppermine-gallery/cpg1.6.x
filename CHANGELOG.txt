@@ -22,6 +22,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2017-01-06 [B] Keep cpg_die() from failing under PHP7 {ron4mac}
 2017-01-05 [S] Fixed possible shell execution issue due to outdated PHPMailer {ron4mac}
 2016-12-31 [M] Updated doc plugin tutorials (removed simplest) {ron4mac}
 2016-12-29 [O] Removed hard-coded theme directory name from themes; provides user more convenient theme copy {ron4mac}

@@ -463,7 +463,7 @@ function cpgSanitizeUserTextInput($string)
  * @return
  **/
 
-function cpg_die($msg_code, $msg_text,  $error_file, $error_line, $output_buffer = false)
+function cpg_die($msg_code, $msg_text,  $error_file = '?file?', $error_line = '?line?', $output_buffer = false)
 {
     global $lang_common, $lang_errors, $CONFIG, $USER_DATA, $hdr_ip;
 

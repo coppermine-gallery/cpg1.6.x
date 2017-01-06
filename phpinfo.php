@@ -22,7 +22,7 @@ require('include/init.inc.php');
 $CONFIG['debug_mode']=0;
 
 if (!GALLERY_ADMIN_MODE) {
-    cpg_die(ERROR, $lang_errors['access_denied']);
+    cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
 }
 
 pageheader($lang_cpg_debug_output['phpinfo']);
