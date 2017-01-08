@@ -1,17 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
 <title>Variables &amp; Constants - Coppermine Photo Gallery - Documentation &amp; Manual</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="language" content="en" />
 <meta name="copyright" content="Coppermine dev team" />
 <meta name="description" content="tutorial for the Coppermine plugin API" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
-<meta name="MSSmartTagsPreventParsing" content="true" />
-<meta http-equiv="imagetoolbar" content="no" />
 <!--
-  SVN version info:
-
   Coppermine version: 1.6.01
   $HeadURL$
 -->
@@ -29,32 +24,32 @@
 <a href="toc.htm">Table of Contents</a>
 </div>
 
-<a name="vars_constants"></a><h1>Variables &amp; Constants<a href="#vars_constants" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<a id="vars_constants"></a><h1>Variables &amp; Constants<a href="#vars_constants" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h1>
 
-<a name="vars_constants_system"></a>
-<h3>System Global Variables<a href="#vars_constants_system" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<a id="vars_constants_system"></a>
+<h3>System Global Variables<a href="#vars_constants_system" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h3>
 <p>Global <a href="http://www.php.net/manual/en/language.variables.php" rel="external" class="phpnet">variables</a> are being populated once, but can be change during runtime. You can use the global variables from within your plugins, but don't forget to <a href="http://www.php.net/manual/en/language.variables.scope.php" rel="external" class="phpnet">make them global</a> when using from within functions or classes.</p>
-<table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra" width="100%">
+<table class="cpg_zebra">
     <tr>
-        <th class="tableh1" align="left">
+        <th class="tableh1">
             Variable name
         </th>
-        <th class="tableh1" align="left">
+        <th class="tableh1">
             Defined in
         </th>
-        <th class="tableh1" align="left">
+        <th class="tableh1">
             Type
         </th>
-        <th class="tableh1" align="left">
+        <th class="tableh1">
             Description
         </th>
     </tr>
     <tr>
         <td>
-            <tt class="code">$superCage</tt>
+            <span class="code">$superCage</span>
         </td>
         <td>
-            <tt class="code">include/init.inc.php</tt>
+            <span class="code">include/init.inc.php</span>
         </td>
         <td>
         </td>
@@ -64,10 +59,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">$CONFIG</tt>
+            <span class="code">$CONFIG</span>
         </td>
         <td>
-            <tt class="code">include/init.inc.php</tt>
+            <span class="code">include/init.inc.php</span>
         </td>
         <td>
             Associative <a href="http://www.php.net/manual/en/language.types.array.php" rel="external" class="phpnet">array</a>
@@ -78,10 +73,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">$CPG_PHP_SELF</tt>
+            <span class="code">$CPG_PHP_SELF</span>
         </td>
         <td>
-            <tt class="code">include/init.inc.php</tt>
+            <span class="code">include/init.inc.php</span>
         </td>
         <td>
             <a href="http://www.php.net/manual/en/language.types.string.php" rel="external" class="phpnet">String</a>
@@ -92,10 +87,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">$REFERER</tt> / <tt class="code">$CPG_REFERER</tt>
+            <span class="code">$REFERER</span> / <span class="code">$CPG_REFERER</span>
         </td>
         <td>
-            <tt class="code">include/init.inc.php</tt>
+            <span class="code">include/init.inc.php</span>
         </td>
         <td>
             <a href="http://www.php.net/manual/en/language.types.string.php" rel="external" class="phpnet">String</a>
@@ -106,10 +101,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">$LINEBREAK</tt>
+            <span class="code">$LINEBREAK</span>
         </td>
         <td>
-            <tt class="code">include/init.inc.php</tt>
+            <span class="code">include/init.inc.php</span>
         </td>
         <td>
             <a href="http://www.php.net/manual/en/language.types.string.php" rel="external" class="phpnet">String</a>
@@ -120,13 +115,13 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">$BRIDGE</tt>
+            <span class="code">$BRIDGE</span>
         </td>
         <td>
-            <tt class="code">include/init.inc.php</tt> / bridge file
+            <span class="code">include/init.inc.php</span> / bridge file
         </td>
         <td>
-            Associative <a href="http://www.php.net/manual/en/language.types.array.php" rel="external" class="phpnet">array
+            Associative <a href="http://www.php.net/manual/en/language.types.array.php" rel="external" class="phpnet">array</a>
         </td>
         <td>
             Bridging variable - contains all bridge settings.
@@ -134,27 +129,13 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">$USER</tt>
+            <span class="code">$USER</span>
         </td>
         <td>
-            <tt class="code"></tt>
+            <span class="code"></span>
         </td>
         <td>
-            Associative <a href="http://www.php.net/manual/en/language.types.array.php" rel="external" class="phpnet">array
-        </td>
-        <td>
-            
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <tt class="code">$USER_DATA</tt>
-        </td>
-        <td>
-            <tt class="code"></tt>
-        </td>
-        <td>
-            Associative <a href="http://www.php.net/manual/en/language.types.array.php" rel="external" class="phpnet">array
+            Associative <a href="http://www.php.net/manual/en/language.types.array.php" rel="external" class="phpnet">array</a>
         </td>
         <td>
             
@@ -162,10 +143,24 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">$THEME_DIR</tt>
+            <span class="code">$USER_DATA</span>
         </td>
         <td>
-            <tt class="code">include/init.inc.php</tt>
+            <span class="code"></span>
+        </td>
+        <td>
+            Associative <a href="http://www.php.net/manual/en/language.types.array.php" rel="external" class="phpnet">array</a>
+        </td>
+        <td>
+            
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span class="code">$THEME_DIR</span>
+        </td>
+        <td>
+            <span class="code">include/init.inc.php</span>
         </td>
         <td>
             <a href="http://www.php.net/manual/en/language.types.string.php" rel="external" class="phpnet">String</a>
@@ -176,10 +171,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">$ICON_DIR</tt>
+            <span class="code">$ICON_DIR</span>
         </td>
         <td>
-            <tt class="code">include/init.inc.php</tt>
+            <span class="code">include/init.inc.php</span>
         </td>
         <td>
             <a href="http://www.php.net/manual/en/language.types.string.php" rel="external" class="phpnet">String</a>
@@ -190,13 +185,13 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">$FAVPICS</tt>
+            <span class="code">$FAVPICS</span>
         </td>
         <td>
-            <tt class="code">include/init.inc.php</tt>
+            <span class="code">include/init.inc.php</span>
         </td>
         <td>
-            Indexed <a href="http://www.php.net/manual/en/language.types.array.php" rel="external" class="phpnet">array
+            Indexed <a href="http://www.php.net/manual/en/language.types.array.php" rel="external" class="phpnet">array</a>
         </td>
         <td>
             The favorites of the current visitor.
@@ -204,10 +199,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">$RESTRICTEDWHERE</tt>
+            <span class="code">$RESTRICTEDWHERE</span>
         </td>
         <td>
-            <tt class="code">include/functions.inc.php</tt>
+            <span class="code">include/functions.inc.php</span>
         </td>
         <td>
         </td>
@@ -217,13 +212,13 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">$FORBIDDEN_SET_DATA</tt>
+            <span class="code">$FORBIDDEN_SET_DATA</span>
         </td>
         <td>
-            <tt class="code">include/functions.inc.php</tt>
+            <span class="code">include/functions.inc.php</span>
         </td>
         <td>
-            Indexed <a href="http://www.php.net/manual/en/language.types.array.php" rel="external" class="phpnet">array
+            Indexed <a href="http://www.php.net/manual/en/language.types.array.php" rel="external" class="phpnet">array</a>
         </td>
         <td>
             List of albums that the current visitor is <strong>not</strong> allowed to access.
@@ -231,23 +226,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">$CURRENT_ALBUM_KEYWORD</tt>
+            <span class="code">$CURRENT_ALBUM_KEYWORD</span>
         </td>
         <td>
-            <tt class="code">include/functions.inc.php</tt>
-        </td>
-        <td>
-        </td>
-        <td>
-            
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <tt class="code">$CURRENT_CAT_DEPTH</tt>
-        </td>
-        <td>
-            <tt class="code">include/functions.inc.php</tt>
+            <span class="code">include/functions.inc.php</span>
         </td>
         <td>
         </td>
@@ -257,23 +239,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">$FORBIDDEN_SET</tt>
+            <span class="code">$CURRENT_CAT_DEPTH</span>
         </td>
         <td>
-            <tt class="code">include/functions.inc.php</tt>
-        </td>
-        <td>
-        </td>
-        <td>
-            
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <tt class="code">$CURRENT_CAT_NAME</tt>
-        </td>
-        <td>
-            <tt class="code">include/functions.inc.php</tt>
+            <span class="code">include/functions.inc.php</span>
         </td>
         <td>
         </td>
@@ -283,13 +252,39 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">$CPG_PLUGINS</tt>
+            <span class="code">$FORBIDDEN_SET</span>
         </td>
         <td>
-            <tt class="code"></tt>
+            <span class="code">include/functions.inc.php</span>
         </td>
         <td>
-            Multi-dimensional <a href="http://www.php.net/manual/en/language.types.array.php" rel="external" class="phpnet">array
+        </td>
+        <td>
+            
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span class="code">$CURRENT_CAT_NAME</span>
+        </td>
+        <td>
+            <span class="code">include/functions.inc.php</span>
+        </td>
+        <td>
+        </td>
+        <td>
+            
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span class="code">$CPG_PLUGINS</span>
+        </td>
+        <td>
+            <span class="code"></span>
+        </td>
+        <td>
+            Multi-dimensional <a href="http://www.php.net/manual/en/language.types.array.php" rel="external" class="phpnet">array</a>
         </td>
         <td>
             First level contains an indexed array where each index corresponds to the unique ID of an installed plugin inside the plugins table.<br />
@@ -298,19 +293,19 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">$JS</tt>
+            <span class="code">$JS</span>
         </td>
         <td>
-            <tt class="code"></tt>
+            <span class="code"></span>
         </td>
         <td>
-            Associative <a href="http://www.php.net/manual/en/language.types.array.php" rel="external" class="phpnet">array
+            Associative <a href="http://www.php.net/manual/en/language.types.array.php" rel="external" class="phpnet">array</a>
         </td>
         <td>
             Multidimensional array that contains
             <ul>
                 <li>An array of variables handed over to the external JavaScript files, e.g. translation strings. Some variables are always populated, like the site_url, the icon_dir, the translation for the word "close" (lang_close) and the corresponding icon (icon_close_path)</li>
-                <li>An indexed array of includes: in this list, all JavaScript files that get included are present. Usually, this list at least contains <tt class="code">js/jquery-1.4.2.js</tt>, <tt class="code">js/scripts.js</tt>, <tt class="code">js/jquery.greybox.js</tt> (if the help feature is enabled in config) and <tt class="code">js/jquery.elastic.js</tt>. The items in this are processed in the order they are indexed except for the jquery file itself - it always get's included first no matter what to make sure all subsequent calls work as expected.</li>
+                <li>An indexed array of includes: in this list, all JavaScript files that get included are present. Usually, this list at least contains <span class="code">js/jquery-1.4.2.js</span>, <span class="code">js/scripts.js</span>, <span class="code">js/jquery.greybox.js</span> (if the help feature is enabled in config) and <span class="code">js/jquery.elastic.js</span>. The items in this are processed in the order they are indexed except for the jquery file itself - it always get's included first no matter what to make sure all subsequent calls work as expected.</li>
             </ul>
         </td>
     </tr>
@@ -319,27 +314,27 @@
 <abbr title="to be continued">tbc</abbr> (list is incomplete). All devs please contribute and populate the list.
 <p><a class="back" href="#top">Back to top</a></p><hr />
 
-<a name="vars_constants_constants"></a>
-<h3>Coppermine Constants<a href="#vars_constants_constants" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<a id="vars_constants_constants"></a>
+<h3>Coppermine Constants<a href="#vars_constants_constants" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h3>
 <p><a href="http://www.php.net/manual/en/language.constants.php" rel="external" class="phpnet">Constants</a> are being populated once. They can not be changed during runtime. You can use the coppermine constants from within your plugins.</p>
-<table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra" width="100%">
+<table class="cpg_zebra">
     <tr>
-        <th class="tableh1" align="left">
+        <th class="tableh1">
             Constant name
         </th>
-        <th class="tableh1" align="left">
+        <th class="tableh1">
             Defined in
         </th>
-        <th class="tableh1" align="left">
+        <th class="tableh1">
             Description
         </th>
     </tr>
     <tr>
         <td>
-            <tt class="code">COPPERMINE_VERSION</tt>
+            <span class="code">COPPERMINE_VERSION</span>
         </td>
         <td>
-            <tt class="code">include/init.inc.php</tt>
+            <span class="code">include/init.inc.php</span>
         </td>
         <td>
             The version of coppermine
@@ -347,10 +342,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">COPPERMINE_VERSION_STATUS</tt>
+            <span class="code">COPPERMINE_VERSION_STATUS</span>
         </td>
         <td>
-            <tt class="code">include/init.inc.php</tt>
+            <span class="code">include/init.inc.php</span>
         </td>
         <td>
             The status of your coppermine version (alpha, beta or stable)
@@ -358,10 +353,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">IN_COPPERMINE</tt>
+            <span class="code">IN_COPPERMINE</span>
         </td>
         <td>
-            <tt class="code">Coppermine core files that are meant to be run directly in the browser</tt>
+            <span class="code">Coppermine core files that are meant to be run directly in the browser</span>
         </td>
         <td>
             The constant makes sure that include files are not being run directly: the files that are meant to be run contain the constant definition and after that the include command. The include files don't contain the constant definition, but a conditional die. To make sure that your plugin files aren't being run directly, add the following line at the top:
@@ -372,21 +367,21 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">DEFAULT_LANGUAGE</tt>
+            <span class="code">DEFAULT_LANGUAGE</span>
         </td>
         <td>
-            <tt class="code">include/init.inc.php</tt>
+            <span class="code">include/init.inc.php</span>
         </td>
         <td>
-            Default language (set up by the admin) in config (may differ from <tt class="code">$CONFIG['lang']</tt> during runtime, as that may have been overridden.
+            Default language (set up by the admin) in config (may differ from <span class="code">$CONFIG['lang']</span> during runtime, as that may have been overridden.
         </td>
     </tr>
     <tr>
         <td>
-            <tt class="code">UDB_INTEGRATION</tt>
+            <span class="code">UDB_INTEGRATION</span>
         </td>
         <td>
-            <tt class="code">include/init.inc.php</tt>
+            <span class="code">include/init.inc.php</span>
         </td>
         <td>
             Name of the bridge file.
@@ -394,10 +389,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">GALLERY_ADMIN_MODE</tt>
+            <span class="code">GALLERY_ADMIN_MODE</span>
         </td>
         <td>
-            <tt class="code">include/init.inc.php</tt>
+            <span class="code">include/init.inc.php</span>
         </td>
         <td>
             If populated, the user is an admin and <a href="admin_menu.htm#admin_user_mode">admin-menu</a> hasn't been turned off. It's recommended to use this constant to check if the admin is logged in. Use code like this:
@@ -408,10 +403,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">USER_IS_ADMIN</tt>
+            <span class="code">USER_IS_ADMIN</span>
         </td>
         <td>
-            <tt class="code">bridge/your_bridge_file.inc.php</tt> (by default: <tt class="code">bridge/udb_base.inc.php</tt>)
+            <span class="code">bridge/your_bridge_file.inc.php</span> (by default: <span class="code">bridge/udb_base.inc.php</span>)
         </td>
         <td>
             If populated, the user is an admin.
@@ -419,10 +414,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">USER_ADMIN_MODE</tt>
+            <span class="code">USER_ADMIN_MODE</span>
         </td>
         <td>
-            <tt class="code">include/init.inc.php</tt>
+            <span class="code">include/init.inc.php</span>
         </td>
         <td>
             The &quot;user admin mode&quot; hardly is used any longer - it's a relict from cpg1.3.x and might be dropped in future versions. The definition is
@@ -432,10 +427,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">USER_ID</tt>
+            <span class="code">USER_ID</span>
         </td>
         <td>
-            <tt class="code">bridge/your_bridge_file.inc.php</tt> (by default: <tt class="code">bridge/udb_base.inc.php</tt>)
+            <span class="code">bridge/your_bridge_file.inc.php</span> (by default: <span class="code">bridge/udb_base.inc.php</span>)
         </td>
         <td>
             The user ID of the logged in user - helpfull to send the user to his profile.
@@ -443,10 +438,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">USER_CAN_CREATE_ALBUMS</tt>
+            <span class="code">USER_CAN_CREATE_ALBUMS</span>
         </td>
         <td>
-            <tt class="code">bridge/your_bridge_file.inc.php</tt> (by default: <tt class="code">bridge/udb_base.inc.php</tt>)
+            <span class="code">bridge/your_bridge_file.inc.php</span> (by default: <span class="code">bridge/udb_base.inc.php</span>)
         </td>
         <td>
             The name of this constant may be a bit misleading: actually, it doesn't show if the user has got permission to create albums in public categories. Instead, it just shows if the user is allowed to have personal galleries.
@@ -454,10 +449,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">USER_GROUP_SET</tt>
+            <span class="code">USER_GROUP_SET</span>
         </td>
         <td>
-            <tt class="code">bridge/your_bridge_file.inc.php</tt> (by default: <tt class="code">bridge/udb_base.inc.php</tt>)
+            <span class="code">bridge/your_bridge_file.inc.php</span> (by default: <span class="code">bridge/udb_base.inc.php</span>)
         </td>
         <td>
             Contains the groups the user is a member of (as a coma-separated list).
@@ -465,10 +460,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">THEME_HAS_MENU_ICONS</tt>
+            <span class="code">THEME_HAS_MENU_ICONS</span>
         </td>
         <td>
-            <tt class="code">themes/yourtheme/theme.php</tt>
+            <span class="code">themes/yourtheme/theme.php</span>
         </td>
         <td>
             For details, refer to <a href="theme.htm">Themes</a> &rarr; <a href="theme_theme_php.htm">Editing theme.php</a> &rarr; <a href="theme_theme_php.htm#theme_php_list">list of items in theme.php</a> &rarr; <a href="theme_theme_php.htm#theme_create_theme_menu_icon">THEME_HAS_MENU_ICONS</a>
@@ -476,10 +471,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">THEME_HAS_RATING_GRAPHICS</tt>
+            <span class="code">THEME_HAS_RATING_GRAPHICS</span>
         </td>
         <td>
-            <tt class="code">themes/yourtheme/theme.php</tt>
+            <span class="code">themes/yourtheme/theme.php</span>
         </td>
         <td>
             For details, refer to <a href="theme.htm">Themes</a> &rarr; <a href="theme_theme_php.htm">Editing theme.php</a> &rarr; <a href="theme_theme_php.htm#theme_php_list">list of items in theme.php</a> &rarr; <a href="theme_theme_php.htm#theme_create_theme_rating_graphic">THEME_HAS_RATING_GRAPHICS</a>
@@ -487,10 +482,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">THEME_HAS_COMMENT_GRAPHICS</tt>
+            <span class="code">THEME_HAS_COMMENT_GRAPHICS</span>
         </td>
         <td>
-            <tt class="code">themes/yourtheme/theme.php</tt>
+            <span class="code">themes/yourtheme/theme.php</span>
         </td>
         <td>
             For details, refer to <a href="theme.htm">Themes</a> &rarr; <a href="theme_theme_php.htm">Editing theme.php</a> &rarr; <a href="theme_theme_php.htm#theme_php_list">list of items in theme.php</a> &rarr; <a href="theme_theme_php.htm#theme_create_theme_comment_graphic">THEME_HAS_COMMENT_GRAPHICS</a>
@@ -498,10 +493,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">THEME_HAS_NAVBAR_GRAPHICS</tt>
+            <span class="code">THEME_HAS_NAVBAR_GRAPHICS</span>
         </td>
         <td>
-            <tt class="code">themes/yourtheme/theme.php</tt>
+            <span class="code">themes/yourtheme/theme.php</span>
         </td>
         <td>
             For details, refer to <a href="theme.htm">Themes</a> &rarr; <a href="theme_theme_php.htm">Editing theme.php</a> &rarr; <a href="theme_theme_php.htm#theme_php_list">list of items in theme.php</a> &rarr; <a href="theme_theme_php.htm#theme_create_theme_navbar_graphic">THEME_HAS_NAVBAR_GRAPHICS</a>
@@ -509,10 +504,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">THEME_HAS_FILM_STRIP_GRAPHIC</tt>
+            <span class="code">THEME_HAS_FILM_STRIP_GRAPHIC</span>
         </td>
         <td>
-            <tt class="code">themes/yourtheme/theme.php</tt>
+            <span class="code">themes/yourtheme/theme.php</span>
         </td>
         <td>
             If set, the top and bottom graphic tile for the theme will use the file themes/yourtheme/images/tile.gif<br />
@@ -521,10 +516,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">THEME_HAS_FILM_STRIP_GRAPHICS</tt>
+            <span class="code">THEME_HAS_FILM_STRIP_GRAPHICS</span>
         </td>
         <td>
-            <tt class="code">themes/yourtheme/theme.php</tt>
+            <span class="code">themes/yourtheme/theme.php</span>
         </td>
         <td>
             If set, the top graphic tile for the theme will use the file themes/yourtheme/images/tile1.gif and the bottom graphic tile for the theme will use the file themes/yourtheme/images/tile2.gif
@@ -533,10 +528,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">THEME_HAS_NO_SYS_MENU_BUTTONS</tt>
+            <span class="code">THEME_HAS_NO_SYS_MENU_BUTTONS</span>
         </td>
         <td>
-            <tt class="code">themes/yourtheme/theme.php</tt>
+            <span class="code">themes/yourtheme/theme.php</span>
         </td>
         <td>
             For details, refer to <a href="theme.htm">Themes</a> &rarr; <a href="theme_theme_php.htm">Editing theme.php</a> &rarr; <a href="theme_theme_php.htm#theme_php_list">list of items in theme.php</a> &rarr; <a href="theme_theme_php.htm#theme_create_theme_no_sysmenu">THEME_HAS_NO_SYS_MENU_BUTTONS</a>
@@ -544,10 +539,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">THEME_HAS_NO_SUB_MENU_BUTTONS</tt>
+            <span class="code">THEME_HAS_NO_SUB_MENU_BUTTONS</span>
         </td>
         <td>
-            <tt class="code">themes/yourtheme/theme.php</tt>
+            <span class="code">themes/yourtheme/theme.php</span>
         </td>
         <td>
             For details, refer to <a href="theme.htm">Themes</a> &rarr; <a href="theme_theme_php.htm">Editing theme.php</a> &rarr; <a href="theme_theme_php.htm#theme_php_list">list of items in theme.php</a> &rarr; <a href="theme_theme_php.htm#theme_create_theme_no_submenu">THEME_HAS_NO_SUB_MENU_BUTTONS</a>
@@ -555,10 +550,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">THEME_HAS_PROGRESS_GRAPHICS</tt>
+            <span class="code">THEME_HAS_PROGRESS_GRAPHICS</span>
         </td>
         <td>
-            <tt class="code">themes/yourtheme/theme.php</tt>
+            <span class="code">themes/yourtheme/theme.php</span>
         </td>
         <td>
             For details, refer to <a href="theme.htm">Themes</a> &rarr; <a href="theme_theme_php.htm">Editing theme.php</a> &rarr; <a href="theme_theme_php.htm#theme_php_list">list of items in theme.php</a> &rarr; <a href="theme_theme_php.htm#theme_create_theme_progress">THEME_HAS_PROGRESS_GRAPHICS</a>
@@ -566,10 +561,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">USER_GAL_CAT</tt>
+            <span class="code">USER_GAL_CAT</span>
         </td>
         <td>
-            <tt class="code">include/init.inc.php</tt>
+            <span class="code">include/init.inc.php</span>
         </td>
         <td>
             Category ID that contains the user galleries. Always is set to 1.
@@ -577,10 +572,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">FIRST_USER_CAT</tt>
+            <span class="code">FIRST_USER_CAT</span>
         </td>
         <td>
-            <tt class="code">include/init.inc.php</tt>
+            <span class="code">include/init.inc.php</span>
         </td>
         <td>
             Value for the first ID of the user gallery category - this is where the numbering scheme starts. By default is set to 10000, which should give all admins plenty of room for admin-defined categories (possible IDs 2 to 9999).
@@ -588,21 +583,21 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">TEMPLATE_FILE</tt>
+            <span class="code">TEMPLATE_FILE</span>
         </td>
         <td>
-            <tt class="code">include/init.inc.php</tt>
+            <span class="code">include/init.inc.php</span>
         </td>
         <td>
-            Default is <tt class="code">template.html</tt>. Don't change unless you really know what you're doing.
+            Default is <span class="code">template.html</span>. Don't change unless you really know what you're doing.
         </td>
     </tr>
     <tr>
         <td>
-            <tt class="code">INFORMATION</tt>
+            <span class="code">INFORMATION</span>
         </td>
         <td>
-            <tt class="code">include/init.inc.php</tt>
+            <span class="code">include/init.inc.php</span>
         </td>
         <td>
             Constant used by the cpg_die function to hard-code the caption of a die message
@@ -610,10 +605,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">ERROR</tt>
+            <span class="code">ERROR</span>
         </td>
         <td>
-            <tt class="code">include/init.inc.php</tt>
+            <span class="code">include/init.inc.php</span>
         </td>
         <td>
             Constant used by the cpg_die function to hard-code the caption of a die message
@@ -621,10 +616,10 @@
     </tr>
     <tr>
         <td>
-            <tt class="code">CRITICAL_ERROR</tt>
+            <span class="code">CRITICAL_ERROR</span>
         </td>
         <td>
-            <tt class="code">include/init.inc.php</tt>
+            <span class="code">include/init.inc.php</span>
         </td>
         <td>
             Constant used by the cpg_die function to hard-code the caption of a die message

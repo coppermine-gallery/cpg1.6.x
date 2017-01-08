@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-<title>Coppermine Photo Gallery - Documentation &amp; Manual</title>
+<title>Database useage - Coppermine Photo Gallery - Documentation &amp; Manual</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="language" content="en" />
 <meta name="copyright" content="Coppermine dev team" />
-<meta name="description" content="" />
+<meta name="description" content="Database useage: This part of documentation describes how to use the database by executing queries and getting results. This part of the documentation is not meant for end users of Coppermine, but only for developers. There is no support for this section, it comes as-is." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" />
 <!--
   Coppermine version: 1.6.01
   $HeadURL$
@@ -23,6 +26,11 @@
 <div id="toc">
 <a href="toc.htm">Table of Contents</a>
 </div>
+
+<a name="db_useage"></a><h1>Database useage<a href="#db_useage" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<p>CPG 1.6.x has been written to use <i>database abstraction</i>. This means that all calls to the database must be made via Coppermine's routines and direct (mysql) calls will not work.</p>
+<p>The following is a list of helper functions and object methods available to access the CPG database.</p>
+
 
 <div id="doc_footer">
 	<div class="doc_info_wrapper">

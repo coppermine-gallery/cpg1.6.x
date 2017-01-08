@@ -1,17 +1,12 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
 <title>Tools recommended by the devs - Coppermine Photo Gallery - Documentation &amp; Manual</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="language" content="en" />
 <meta name="copyright" content="Coppermine dev team" />
 <meta name="description" content="This part of the documentation is not meant for end users of Coppermine, but only for developers. There is no support for this section, it comes as-is." />
-<meta http-equiv="Content-Style-Type" content="text/css" />
-<meta name="MSSmartTagsPreventParsing" content="true" />
-<meta http-equiv="imagetoolbar" content="no" />
 <!--
-  SVN version info:
-
   Coppermine version: 1.6.01
   $HeadURL$
 -->
@@ -29,18 +24,18 @@
 <a href="toc.htm">Table of Contents</a>
 </div>
 
-<a name="dev_tools"></a><h1>Tools recommended by the devs<a href="#dev_tools" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<a id="dev_tools"></a><h1>Tools recommended by the devs<a href="#dev_tools" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h1>
 
-<a name="dev_tools_target_audience"></a><h2>Target audience<a href="#dev_tools_target_audience" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<a id="dev_tools_target_audience"></a><h2>Target audience<a href="#dev_tools_target_audience" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h2>
 <p>This part of the documentation is meant for end users of Coppermine as well as for developers. There is no support for this section though, it comes as-is.</p>
 
-<a name="dev_tools_disclaimer"></a><h2>Disclaimer<a href="#dev_tools_disclaimer" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<a id="dev_tools_disclaimer"></a><h2>Disclaimer<a href="#dev_tools_disclaimer" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h2>
 <p>The Coppermine dev team is not affiliated with any of the sites / projects mentioned below, nor do we provide support for those apps. We're just convinced that those tools are usefull when running a gallery script like Coppermine.</p>
 <p>Please do <em>not</em> ask support questions related to the apps mentioned below on the Coppermine support board. From our perspective, those apps come from a third party - support for them can be found elsewhere on the web.<br />
 The best place to get support for those apps are their homepages and the documentation that usually comes with those apps. You might find other usefull resources using Google.</p>
 <p>This page is meant as a service to end users and developers - please don't make us regret having put together this link list.</p>
 
-<a name="dev_tools_list"></a><h2>List of tools<a href="#dev_tools_list" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+<a id="dev_tools_list"></a><h2>List of tools<a href="#dev_tools_list" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h2>
 <p>The tools fall into different categories, depending on what you want to accomplish:</p>
 <ul>
 	<li><a href="#dev_tools_database">Database manipulation</a></li>
@@ -50,32 +45,32 @@ The best place to get support for those apps are their homepages and the documen
     <li><a href="#dev_tools_picture_editors">Picture Editors</a></li>
 </ul>
 
-<a name="dev_tools_database"></a><h3>Database manipulation<a href="#dev_tools_database" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<a id="dev_tools_database"></a><h3>Database manipulation<a href="#dev_tools_database" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h3>
 <p>If you manually want to edit the database behind Coppermine or need to <a href="export.htm#backup">backup</a> or restore your database, you will need these tools.</p>
 
-<table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra">
+<table class="cpg_zebra">
   <tr>
-    <th valign="top" align="left">App name</th>
-    <th valign="top" align="left">Purpose</th>
-    <th valign="top" align="left">Type</th>
-    <th valign="top" align="left"><acronym title="Operating System">OS</acronym></th>
-    <th valign="top" align="left">License</th>
-    <th valign="top" align="left"><acronym title="Internationalization">i18n</acronym></th>
-    <th valign="top" align="left">Homepage</th>
+    <th>App name</th>
+    <th>Purpose</th>
+    <th>Type</th>
+    <th><abbr title="Operating System">OS</abbr></th>
+    <th>License</th>
+    <th><abbr title="Internationalization">i18n</abbr></th>
+    <th>Homepage</th>
   </tr>
   <tr>
-    <td valign="top"><a name="dev_tools_phpmyadmin"></a><h4 style="padding:0px;margin:0px">phpMyAdmin<a href="#dev_tools_phpmyadmin" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
-    <td valign="top">Database management</td>
-    <td valign="top"><img src="../images/web.png" border="0" width="16" height="16" alt="" title="Web app" /></td>
-    <td valign="top"><acronym title="not applicable">n/a</acronym></td>
-    <td valign="top"><img src="../images/license/gnu.png" border="0" width="16" height="16" alt="" title="GNU GPL" /></td>
-    <td valign="top">
+    <td><a id="dev_tools_phpmyadmin"></a><h4 style="padding:0px;margin:0px">phpMyAdmin<a href="#dev_tools_phpmyadmin" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h4></td>
+    <td>Database management</td>
+    <td><img src="../images/web.png" width="16" height="16" alt="" title="Web app" /></td>
+    <td><abbr title="not applicable">n/a</abbr></td>
+    <td><img src="../images/license/gnu.png" width="16" height="16" alt="" title="GNU GPL" /></td>
+    <td>
     	50+ languages
     </td>
-    <td valign="top"><a href="http://www.phpmyadmin.net/" rel="external" class="external">www.phpmyadmin.net</a></td>
+    <td><a href="http://www.phpmyadmin.net/" rel="external" class="external">www.phpmyadmin.net</a></td>
   </tr>
   <tr>
-    <td valign="top" colspan="7">
+    <td colspan="7">
 	    <strong>Description</strong>: Open-source web application that can be downloaded (for free) and installed on your webserver (easy installation). It comes with multiple language support. Your webhost may even provide this tool.<br />
 	    <strong>Features:</strong> MySql database management tool that allows manipulating your database and running queries directly against your database.<br />
 	    <strong>Benefits for the use with Coppermine:</strong>
@@ -87,22 +82,22 @@ The best place to get support for those apps are their homepages and the documen
 	</td>
   </tr>
   <tr>
-    <td valign="top"><a name="dev_tools_mysqldumper"></a><h4 style="padding:0px;margin:0px">mySqlDumper<a href="#dev_tools_mysqldumper" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
-    <td valign="top">Database backup/restore</td>
-    <td valign="top"><img src="../images/web.png" border="0" width="16" height="16" alt="" title="Web app" /></td>
-    <td valign="top"><acronym title="not applicable">n/a</acronym></td>
-    <td valign="top"><img src="../images/license/gnu.png" border="0" width="16" height="16" alt="" title="GNU GPL" /></td>
-    <td valign="top">
+    <td><a id="dev_tools_mysqldumper"></a><h4 style="padding:0px;margin:0px">mySqlDumper<a href="#dev_tools_mysqldumper" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h4></td>
+    <td>Database backup/restore</td>
+    <td><img src="../images/web.png" width="16" height="16" alt="" title="Web app" /></td>
+    <td><abbr title="not applicable">n/a</abbr></td>
+    <td><img src="../images/license/gnu.png" width="16" height="16" alt="" title="GNU GPL" /></td>
+    <td>
 		<span class="detail_head_collapsed">2 languages</span>
     	<div class="detail_body">
-    		<img src="../../images/flags/us.png" border="0" width="16" height="11" alt="" title="English" />
-    		<img src="../../images/flags/de.png" border="0" width="16" height="11" alt="" title="German" />
+    		<img src="../../images/flags/us.png" width="16" height="11" alt="" title="English" />
+    		<img src="../../images/flags/de.png" width="16" height="11" alt="" title="German" />
     	</div>
     </td>
-    <td valign="top"><a href="http://mysqldumper.de/en/index.php" rel="external" class="external">mysqldumper.de/en/</a></td>
+    <td><a href="http://mysqldumper.de/en/index.php" rel="external" class="external">mysqldumper.de/en/</a></td>
   </tr>
   <tr>
-    <td valign="top" colspan="7">
+    <td colspan="7">
 	    <strong>Description</strong>: MySqlDumper is a web app that can be downloaded and installed on your webserver. It is meant to be used to create backups of your mysql databse (and eventually restore those backups). Particularly helpful if you don't have shell access to your webserver and regular mySQL backups fail due to time-outs.<br />
 	    <strong>Features:</strong> A PHP-Script has a maximum of execution time; anything after above the limit (Usually sets to 30 seconds) will result in losing data.
 Such behavior renders large database backup impossible.
@@ -113,31 +108,31 @@ It only reads and saves a certain amount of commands and then calls itself via J
   </tr>
 </table>
 
-<a name="dev_tools_ftp_client"></a><h3>FTP clients<a href="#dev_tools_ftp_client" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<a id="dev_tools_ftp_client"></a><h3>FTP clients<a href="#dev_tools_ftp_client" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h3>
 <p>Upload/download files to/from your webserver using the File Transfer Protocol (FTP). Needed to <a href="install.htm#how">install</a> Coppermine in the first place, but as well for means of <a href="uploading_batch-add.htm#batch_add_pics">FTP-upload plus batch-add</a>, <a href="theme_create.htm#theme_create">theme customization</a>, file backup, <a href="upgrading.htm#upgrade">updates</a>.<br />Having an FTP app is a (nearly) pre-requisite for being able to install and maintain Coppermine (or any web-driven app) in the first place, at least if you're being webhosted. Only in the rare cases of having other ways of transfering files to/from your webserver (e.g. if you're on an intranet) you could get away without an application that is capable of transfering files using FTP. On 99% of all shared webhosting, FTP is the only supported (and recommended) method to transfer files. Therefore, having a good FTP-client is a must.</p>
-<p>The Coppermine dev team is strongly advising <strong>not</strong> to use the FTP-clients built into <acronym title="What You See Is What You Get">WYSIWYG</acronym>-editors like MS Frontpage, as those built-in clients have been designed to work with files created by that editor, but they have not been designed with pre-made scripts like Coppermine in mind.<br />Don't use so called "web-FTP" interfaces neither, as they are restricted by design to the limitations built into browsers.</p>
+<p>The Coppermine dev team is strongly advising <strong>not</strong> to use the FTP-clients built into <abbr title="What You See Is What You Get">WYSIWYG</abbr>-editors like MS Frontpage, as those built-in clients have been designed to work with files created by that editor, but they have not been designed with pre-made scripts like Coppermine in mind.<br />Don't use so called "web-FTP" interfaces neither, as they are restricted by design to the limitations built into browsers.</p>
 
-<table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra">
+<table class="cpg_zebra">
   <tr>
-    <th valign="top" align="left">App name</th>
-    <th valign="top" align="left">Purpose</th>
-    <th valign="top" align="left">Type</th>
-    <th valign="top" align="left"><acronym title="Operating System">OS</acronym></th>
-    <th valign="top" align="left">License</th>
-    <th valign="top" align="left"><acronym title="Internationalization">i18n</acronym></th>
-    <th valign="top" align="left">Homepage</th>
+    <th>App name</th>
+    <th>Purpose</th>
+    <th>Type</th>
+    <th><abbr title="Operating System">OS</abbr></th>
+    <th>License</th>
+    <th><abbr title="Internationalization">i18n</abbr></th>
+    <th>Homepage</th>
   </tr>
   <tr>
-    <td valign="top"><a name="dev_tools_filezilla"></a><h4 style="padding:0px;margin:0px">FileZilla<a href="#dev_tools_filezilla" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
-    <td valign="top">FTP client</td>
-    <td valign="top"><img src="../images/client.png" border="0" width="16" height="16" alt="" title="Client" /></td>
-    <td valign="top"><img src="../../images/os/win.png" border="0" width="16" height="16" alt="" title="Windows" />&nbsp;<img src="../../images/os/linux.png" border="0" width="16" height="16" alt="" title="Linux" /></td>
-    <td valign="top"><img src="../images/license/gnu.png" border="0" width="16" height="16" alt="" title="GNU GPL" /></td>
-    <td valign="top">multi (18+ languages)</td>
-    <td valign="top"><a href="http://filezilla-project.org/" rel="external" class="external">filezilla-project.org</a></td>
+    <td><a id="dev_tools_filezilla"></a><h4 style="padding:0px;margin:0px">FileZilla<a href="#dev_tools_filezilla" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h4></td>
+    <td>FTP client</td>
+    <td><img src="../images/client.png" width="16" height="16" alt="" title="Client" /></td>
+    <td><img src="../../images/os/win.png" width="16" height="16" alt="" title="Windows" />&nbsp;<img src="../../images/os/linux.png" width="16" height="16" alt="" title="Linux" /></td>
+    <td><img src="../images/license/gnu.png" width="16" height="16" alt="" title="GNU GPL" /></td>
+    <td>multi (18+ languages)</td>
+    <td><a href="http://filezilla-project.org/" rel="external" class="external">filezilla-project.org</a></td>
   </tr>
   <tr>
-    <td valign="top" colspan="7">
+    <td colspan="7">
 	    <strong>Description</strong>: FileZilla is a free FTP client that is available as open-source app (free of charge).<br />
 	    <span class="detail_head_collapsed"><strong>Features:</strong></span>
 	    <ul class="detail_body">
@@ -158,16 +153,16 @@ It only reads and saves a certain amount of commands and then calls itself via J
 	</td>
   </tr>
   <tr>
-    <td valign="top"><a name="dev_tools_smartftp"></a><h4 style="padding:0px;margin:0px">SmartFTP<a href="#dev_tools_smartftp" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
-    <td valign="top">FTP client</td>
-    <td valign="top"><img src="../images/client.png" border="0" width="16" height="16" alt="" title="Web app" /></td>
-    <td valign="top"><img src="../../images/os/win.png" border="0" width="16" height="16" alt="" title="Windows" /></td>
-    <td valign="top">Free for non-commercial use</td>
-    <td valign="top">multi (20+ languages)</td>
-    <td valign="top"><a href="http://www.smartftp.com/" rel="external" class="external">www.smartftp.com</a></td>
+    <td><a id="dev_tools_smartftp"></a><h4 style="padding:0px;margin:0px">SmartFTP<a href="#dev_tools_smartftp" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h4></td>
+    <td>FTP client</td>
+    <td><img src="../images/client.png" width="16" height="16" alt="" title="Web app" /></td>
+    <td><img src="../../images/os/win.png" width="16" height="16" alt="" title="Windows" /></td>
+    <td>Free for non-commercial use</td>
+    <td>multi (20+ languages)</td>
+    <td><a href="http://www.smartftp.com/" rel="external" class="external">www.smartftp.com</a></td>
   </tr>
   <tr>
-    <td valign="top" colspan="7">
+    <td colspan="7">
 	    <strong>Description</strong>: SmartFTP is a fully-featured FTP client for Windows.<br />
 	    <strong>Features:</strong> Available for Windows 98, ME, 2000, XP, 2003, XP x64, and 2003 x64.  Multiple connections, auto-reconnect and resume broken transfers, global and local transfer queues with scheduling, FXP, custom commands, CHMOD, backup tool, drag &amp; drop.<br />
 	    <strong>Benefits for the use with Coppermine</strong>: Transferring Coppermine to your server for initial installation, transferring photos to your /albums folder, settings permissions appropriately, applying mods, plugins, themes.<br />
@@ -176,58 +171,58 @@ It only reads and saves a certain amount of commands and then calls itself via J
   </tr>
 </table>
 
-<a name="dev_tools_web_development"></a><h3>Web development<a href="#dev_tools_web_development" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<a id="dev_tools_web_development"></a><h3>Web development<a href="#dev_tools_web_development" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h3>
 <p>The web development tools are usually integrated into the browser as a plugin, so they interact with the page you're viewing in your browser. They are particularly helpful to figure out CSS issues, as one of their features often is to let you see which section of the output is controlled by which stylesheet class. Another key aspect that makes them usefull with Coppermine is their ability to monitor cookies and forms, which helps in figuring out issues with logging in.</p>
 
-<table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra">
+<table class="cpg_zebra">
   <tr>
-    <th valign="top" align="left">App name</th>
-    <th valign="top" align="left">Purpose</th>
-    <th valign="top" align="left">Type</th>
-    <th valign="top" align="left"><acronym title="Operating System">OS</acronym></th>
-    <th valign="top" align="left">License</th>
-    <th valign="top" align="left"><acronym title="Internationalization">i18n</acronym></th>
-    <th valign="top" align="left">Homepage</th>
+    <th>App name</th>
+    <th>Purpose</th>
+    <th>Type</th>
+    <th><abbr title="Operating System">OS</abbr></th>
+    <th>License</th>
+    <th><abbr title="Internationalization">i18n</abbr></th>
+    <th>Homepage</th>
   </tr>
   <tr>
-    <td valign="top"><a name="dev_tools_web_developer"></a><h4 style="padding:0px;margin:0px">Web Developer<a href="#dev_tools_web_developer" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
-    <td valign="top">Web development tool</td>
-    <td valign="top"><img src="../images/browser.png" border="0" width="16" height="16" alt="" title="Browser plugin" /></td>
-    <td valign="top"><acronym title="not applicable">n/a</acronym></td>
-    <td valign="top"><img src="../images/license/gnu.png" border="0" width="16" height="16" alt="" title="GNU GPL" /></td>
-    <td valign="top">
+    <td><a id="dev_tools_web_developer"></a><h4 style="padding:0px;margin:0px">Web Developer<a href="#dev_tools_web_developer" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h4></td>
+    <td>Web development tool</td>
+    <td><img src="../images/browser.png" width="16" height="16" alt="" title="Browser plugin" /></td>
+    <td><abbr title="not applicable">n/a</abbr></td>
+    <td><img src="../images/license/gnu.png" width="16" height="16" alt="" title="GNU GPL" /></td>
+    <td>
     	<span class="detail_head_collapsed">19 languages</span>
     	<div class="detail_body">
-	        <img src="../../images/flags/br.png" border="0" width="16" height="11" alt="" title="Brazilian Portuguese" />
-	        <img src="../../images/flags/cn.png" border="0" width="16" height="11" alt="" title="Chinese (simplified)" />
-	        <img src="../../images/flags/tw.png" border="0" width="16" height="11" alt="" title="Chinese (traditional)" />
-	        <img src="../../images/flags/cz.png" border="0" width="16" height="11" alt="" title="Czech" />
-	        <img src="../../images/flags/nl.png" border="0" width="16" height="11" alt="" title="Dutch" />
-	        <img src="../../images/flags/dk.png" border="0" width="16" height="11" alt="" title="Danish" />
-	        <img src="../../images/flags/us.png" border="0" width="16" height="11" alt="" title="English" />
-	        <img src="../../images/flags/fi.png" border="0" width="16" height="11" alt="" title="Finnish" />
-	        <img src="../../images/flags/fr.png" border="0" width="16" height="11" alt="" title="French" />
-	        <img src="../../images/flags/de.png" border="0" width="16" height="11" alt="" title="German" />
-	        <img src="../../images/flags/gr.png" border="0" width="16" height="11" alt="" title="Greek" />
-	        <img src="../../images/flags/hu.png" border="0" width="16" height="11" alt="" title="Hungarian" />
-	        <img src="../../images/flags/it.png" border="0" width="16" height="11" alt="" title="Italian" />
-	        <img src="../../images/flags/jp.png" border="0" width="16" height="11" alt="" title="Japanese" />
-	        <img src="../../images/flags/kr.png" border="0" width="16" height="11" alt="" title="Korean" />
-	        <img src="../../images/flags/mk.png" border="0" width="16" height="11" alt="" title="Macedonian" />
-	        <img src="../../images/flags/pl.png" border="0" width="16" height="11" alt="" title="Polish" />
-	        <img src="../../images/flags/pt.png" border="0" width="16" height="11" alt="" title="Portuguese" />
-	        <img src="../../images/flags/ru.png" border="0" width="16" height="11" alt="" title="Russian" />
-	        <img src="../../images/flags/sk.png" border="0" width="16" height="11" alt="" title="Slovak" />
-	        <img src="../../images/flags/es.png" border="0" width="16" height="11" alt="" title="Spanish" />
-	        <img src="../../images/flags/th.png" border="0" width="16" height="11" alt="" title="Thai" />
-	        <img src="../../images/flags/tr.png" border="0" width="16" height="11" alt="" title="Turkish" />
+	        <img src="../../images/flags/br.png" width="16" height="11" alt="" title="Brazilian Portuguese" />
+	        <img src="../../images/flags/cn.png" width="16" height="11" alt="" title="Chinese (simplified)" />
+	        <img src="../../images/flags/tw.png" width="16" height="11" alt="" title="Chinese (traditional)" />
+	        <img src="../../images/flags/cz.png" width="16" height="11" alt="" title="Czech" />
+	        <img src="../../images/flags/nl.png" width="16" height="11" alt="" title="Dutch" />
+	        <img src="../../images/flags/dk.png" width="16" height="11" alt="" title="Danish" />
+	        <img src="../../images/flags/us.png" width="16" height="11" alt="" title="English" />
+	        <img src="../../images/flags/fi.png" width="16" height="11" alt="" title="Finnish" />
+	        <img src="../../images/flags/fr.png" width="16" height="11" alt="" title="French" />
+	        <img src="../../images/flags/de.png" width="16" height="11" alt="" title="German" />
+	        <img src="../../images/flags/gr.png" width="16" height="11" alt="" title="Greek" />
+	        <img src="../../images/flags/hu.png" width="16" height="11" alt="" title="Hungarian" />
+	        <img src="../../images/flags/it.png" width="16" height="11" alt="" title="Italian" />
+	        <img src="../../images/flags/jp.png" width="16" height="11" alt="" title="Japanese" />
+	        <img src="../../images/flags/kr.png" width="16" height="11" alt="" title="Korean" />
+	        <img src="../../images/flags/mk.png" width="16" height="11" alt="" title="Macedonian" />
+	        <img src="../../images/flags/pl.png" width="16" height="11" alt="" title="Polish" />
+	        <img src="../../images/flags/pt.png" width="16" height="11" alt="" title="Portuguese" />
+	        <img src="../../images/flags/ru.png" width="16" height="11" alt="" title="Russian" />
+	        <img src="../../images/flags/sk.png" width="16" height="11" alt="" title="Slovak" />
+	        <img src="../../images/flags/es.png" width="16" height="11" alt="" title="Spanish" />
+	        <img src="../../images/flags/th.png" width="16" height="11" alt="" title="Thai" />
+	        <img src="../../images/flags/tr.png" width="16" height="11" alt="" title="Turkish" />
         </div>
 
     </td>
-    <td valign="top"><a href="http://chrispederick.com/work/web-developer/" rel="external" class="external">chrispederick.com/work/web-developer/</a></td>
+    <td><a href="http://chrispederick.com/work/web-developer/" rel="external" class="external">chrispederick.com/work/web-developer/</a></td>
   </tr>
   <tr>
-    <td valign="top" colspan="7">
+    <td colspan="7">
 	    <strong>Description</strong>: "Web Developer Extension" is a plugin for the Mozilla/Firefox browser that adds a toolbar to your browser window. Using this toolbar, you can view cookie information, view and manipulate stylesheets, form data, images. It is particularly helpful for web designers (or after all everybody who runs and maintains a website of his own).<br />
 	    <strong class="detail_head_collapsed">Features:</strong>
 	    <ul class="detail_body">
@@ -247,18 +242,18 @@ It only reads and saves a certain amount of commands and then calls itself via J
 	</td>
   </tr>
   <tr>
-    <td valign="top"><a name="dev_tools_web_accessibility_toolbar"></a><h4 style="padding:0px;margin:0px">Web Accessibility Toolbar<a href="#dev_tools_web_accessibility_toolbar" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
-    <td valign="top">Web development tool</td>
-    <td valign="top"><img src="../images/browser.png" border="0" width="16" height="16" alt="" title="Browser plugin" /></td>
-    <td valign="top"><img src="../../images/os/win.png" border="0" width="16" height="16" alt="" title="Windows" /></td>
-    <td valign="top"><img src="../images/license/cc.png" border="0" width="16" height="16" alt="" title="Creative commons" /></td>
-    <td valign="top">
-	    <img src="../../images/flags/us.png" border="0" width="16" height="11" alt="" title="English" />
+    <td><a id="dev_tools_web_accessibility_toolbar"></a><h4 style="padding:0px;margin:0px">Web Accessibility Toolbar<a href="#dev_tools_web_accessibility_toolbar" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h4></td>
+    <td>Web development tool</td>
+    <td><img src="../images/browser.png" width="16" height="16" alt="" title="Browser plugin" /></td>
+    <td><img src="../../images/os/win.png" width="16" height="16" alt="" title="Windows" /></td>
+    <td><img src="../images/license/cc.png" width="16" height="16" alt="" title="Creative commons" /></td>
+    <td>
+	    <img src="../../images/flags/us.png" width="16" height="11" alt="" title="English" />
     </td>
-    <td valign="top"><a href="http://www.visionaustralia.org.au/ais/toolbar/" rel="external" class="external">www.visionaustralia.org.au/ais/toolbar/</a></td>
+    <td><a href="http://www.visionaustralia.org.au/ais/toolbar/" rel="external" class="external">www.visionaustralia.org.au/ais/toolbar/</a></td>
   </tr>
   <tr>
-    <td valign="top" colspan="7">
+    <td colspan="7">
 	    <strong>Description</strong>: The "Web Accessibility Toolbar" has been developed to aid manual examination of web pages for a variety of aspects of accessibility. It consists of a range of functions that:<br />
 	    <span class="detail_head_collapsed">Details</span>
 	    <ul class="detail_body">
@@ -273,18 +268,18 @@ It only reads and saves a certain amount of commands and then calls itself via J
 	</td>
   </tr>
   <tr>
-    <td valign="top"><a name="dev_tools_ie_developer_toolbar"></a><h4 style="padding:0px;margin:0px">IE Developer Toolbar<a href="#dev_tools_ie_developer_toolbar" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
-    <td valign="top">Web development tool</td>
-    <td valign="top"><img src="../images/browser.png" border="0" width="16" height="16" alt="" title="Browser plugin" /></td>
-    <td valign="top"><img src="../../images/os/win.png" border="0" width="16" height="16" alt="" title="Windows" /></td>
-    <td valign="top">?</td>
-    <td valign="top">
-	    <img src="../../images/flags/us.png" border="0" width="16" height="11" alt="" title="English" />
+    <td><a id="dev_tools_ie_developer_toolbar"></a><h4 style="padding:0px;margin:0px">IE Developer Toolbar<a href="#dev_tools_ie_developer_toolbar" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h4></td>
+    <td>Web development tool</td>
+    <td><img src="../images/browser.png" width="16" height="16" alt="" title="Browser plugin" /></td>
+    <td><img src="../../images/os/win.png" width="16" height="16" alt="" title="Windows" /></td>
+    <td>?</td>
+    <td>
+	    <img src="../../images/flags/us.png" width="16" height="11" alt="" title="English" />
     </td>
-    <td valign="top"><a href="http://www.microsoft.com/downloads/details.aspx?familyid=e59c3964-672d-4511-bb3e-2d5e1db91038&displaylang=en" rel="external" class="external">microsoft.com [...]</a></td>
+    <td><a href="http://www.microsoft.com/downloads/details.aspx?familyid=e59c3964-672d-4511-bb3e-2d5e1db91038&displaylang=en" rel="external" class="external">microsoft.com [...]</a></td>
   </tr>
   <tr>
-    <td valign="top" colspan="7">
+    <td colspan="7">
 	    <strong>Description</strong>: Microsoft has released a toolbar as well that has similar capabilities as the above mentioned toolbars. It can be used with IE6 or better (IE7 is supported as well) and can be used with Windows 2000 or better.<br />
 	    <strong class="detail_head_collapsed">Features:</strong>
 	    <ul class="detail_body">
@@ -304,18 +299,18 @@ It only reads and saves a certain amount of commands and then calls itself via J
 	</td>
   </tr>
   <tr>
-    <td valign="top"><a name="dev_tools_firebug"></a><h4 style="padding:0px;margin:0px">Firebug<a href="#dev_tools_firebug" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
-    <td valign="top">Web development tool</td>
-    <td valign="top"><img src="../images/browser.png" border="0" width="16" height="16" alt="" title="Browser plugin" /></td>
-    <td valign="top"><acronym title="not applicable">n/a</acronym></td>
-    <td valign="top"><acronym title="Mozilla Public License">MPL</td>
-    <td valign="top">
-    	<img src="../../images/flags/us.png" border="0" width="16" height="11" alt="" title="English" />
+    <td><a id="dev_tools_firebug"></a><h4 style="padding:0px;margin:0px">Firebug<a href="#dev_tools_firebug" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h4></td>
+    <td>Web development tool</td>
+    <td><img src="../images/browser.png" width="16" height="16" alt="" title="Browser plugin" /></td>
+    <td><abbr title="not applicable">n/a</abbr></td>
+    <td><abbr title="Mozilla Public License">MPL</abbr></td>
+    <td>
+    	<img src="../../images/flags/us.png" width="16" height="11" alt="" title="English" />
     </td>
-    <td valign="top"><a href="http://getfirebug.com/" rel="external" class="external">getfirebug.com</a></td>
+    <td><a href="http://getfirebug.com/" rel="external" class="external">getfirebug.com</a></td>
   </tr>
   <tr>
-    <td valign="top" colspan="7">
+    <td colspan="7">
 	    <strong>Description</strong>: Firebug integrates with Firefox as a browser plugin to put a wealth of development tools at your fingertips while you browse. You can edit, debug, and monitor CSS, HTML, and JavaScript live in any web page.
 	    <strong>Alternative platforms</strong>: there's a Firebug Lite version that can be used with IE, Opera and Safari<br />
 	    <strong>License</strong>: Mozilla Public License (Freeware)
@@ -323,32 +318,32 @@ It only reads and saves a certain amount of commands and then calls itself via J
   </tr>
 </table>
 
-<a name="dev_tools_editor"></a><h3>Text editors<a href="#dev_tools_editor" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
-<p>To modify the core code of coppermine or come up with a custom theme you will need a plain-text editor. You can't use <acronym title="What You See Is What You Get">WYSIWYG</acronym>-editors like MS Frontpage, but you really need to use a plain-text editor. While the editor that comes with your operating system (usually notepad.exe on Windows) is fine, you may want an editor with advanced features like syntax-highlighting, project management</p>
+<a id="dev_tools_editor"></a><h3>Text editors<a href="#dev_tools_editor" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h3>
+<p>To modify the core code of coppermine or come up with a custom theme you will need a plain-text editor. You can't use <abbr title="What You See Is What You Get">WYSIWYG</abbr>-editors like MS Frontpage, but you really need to use a plain-text editor. While the editor that comes with your operating system (usually notepad.exe on Windows) is fine, you may want an editor with advanced features like syntax-highlighting, project management</p>
 
-<table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra">
+<table class="cpg_zebra">
   <tr>
-    <th valign="top" align="left">App name</th>
-    <th valign="top" align="left">Purpose</th>
-    <th valign="top" align="left">Type</th>
-    <th valign="top" align="left"><acronym title="Operating System">OS</acronym></th>
-    <th valign="top" align="left">License</th>
-    <th valign="top" align="left"><acronym title="Internationalization">i18n</acronym></th>
-    <th valign="top" align="left">Homepage</th>
+    <th>App name</th>
+    <th>Purpose</th>
+    <th>Type</th>
+    <th><abbr title="Operating System">OS</abbr></th>
+    <th>License</th>
+    <th><abbr title="Internationalization">i18n</abbr></th>
+    <th>Homepage</th>
   </tr>
   <tr>
-    <td valign="top"><a name="dev_tools_editor_crimson"></a><h4 style="padding:0px;margin:0px">Crimson Editor<a href="#dev_tools_editor_crimson" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
-    <td valign="top">Plain text editor</td>
-    <td valign="top"><img src="../images/client.png" border="0" width="16" height="16" alt="" title="Client app" /></td>
-    <td valign="top"><img src="../../images/os/win.png" border="0" width="16" height="16" alt="" title="Windows" /></td>
-    <td valign="top"><img src="../images/license/freeware.png" border="0" width="16" height="16" alt="" title="Freeware" /></td>
-    <td valign="top">
-	    <img src="../../images/flags/us.png" border="0" width="16" height="11" alt="" title="English" />
+    <td><a id="dev_tools_editor_crimson"></a><h4 style="padding:0px;margin:0px">Crimson Editor<a href="#dev_tools_editor_crimson" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h4></td>
+    <td>Plain text editor</td>
+    <td><img src="../images/client.png" width="16" height="16" alt="" title="Client app" /></td>
+    <td><img src="../../images/os/win.png" width="16" height="16" alt="" title="Windows" /></td>
+    <td><img src="../images/license/freeware.png" width="16" height="16" alt="" title="Freeware" /></td>
+    <td>
+	    <img src="../../images/flags/us.png" width="16" height="11" alt="" title="English" />
     </td>
-    <td valign="top"><a href="http://www.crimsoneditor.com/" rel="external" class="external">www.crimsoneditor.com</a></td>
+    <td><a href="http://www.crimsoneditor.com/" rel="external" class="external">www.crimsoneditor.com</a></td>
   </tr>
   <tr>
-    <td valign="top" colspan="7">
+    <td colspan="7">
 	    <strong>Description</strong>: Open-source client application that can be downloaded (for free) and installed on your Windows-PC.<br />
 	    <strong>Features:</strong> Crimson Editor is a source code editor. This program is not only fast in loading time, but also small in size. While it can serve as a good replacement for Notepad, it also offers many powerful features for programming languages such as HTML, C/C++, Perl and Java:<br />
 	    <span class="detail_head_collapsed">Details</span>
@@ -370,37 +365,37 @@ It only reads and saves a certain amount of commands and then calls itself via J
 	</td>
   </tr>
   <tr>
-    <td valign="top"><a name="dev_tools_editor_bluefish"></a><h4 style="padding:0px;margin:0px">Bluefish<a href="#dev_tools_editor_bluefish" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
-    <td valign="top">Plain text editor</td>
-    <td valign="top"><img src="../images/client.png" border="0" width="16" height="16" alt="" title="Client app" /></td>
-    <td valign="top"><img src="../../images/os/linux.png" border="0" width="16" height="16" alt="" title="Linux" />&nbsp;<img src="../../images/os/freebsd.png" border="0" width="16" height="16" alt="" title="FreeBSD" />&nbsp;<img src="../../images/os/macosx.png" border="0" width="16" height="16" alt="" title="Mac OS-X" />&nbsp;<img src="../../images/os/openbsd2.png" border="0" width="16" height="16" alt="" title="OpenBSD" />&nbsp;<img src="../../images/os/sunos.png" border="0" width="16" height="16" alt="" title="Solaris" /></td>
-    <td valign="top"><img src="../images/license/gnu.png" border="0" width="16" height="16" alt="" title="GNU GPL" /></td>
-    <td valign="top">
+    <td><a id="dev_tools_editor_bluefish"></a><h4 style="padding:0px;margin:0px">Bluefish<a href="#dev_tools_editor_bluefish" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h4></td>
+    <td>Plain text editor</td>
+    <td><img src="../images/client.png" width="16" height="16" alt="" title="Client app" /></td>
+    <td><img src="../../images/os/linux.png" width="16" height="16" alt="" title="Linux" />&nbsp;<img src="../../images/os/freebsd.png" width="16" height="16" alt="" title="FreeBSD" />&nbsp;<img src="../../images/os/macosx.png" width="16" height="16" alt="" title="Mac OS-X" />&nbsp;<img src="../../images/os/openbsd2.png" width="16" height="16" alt="" title="OpenBSD" />&nbsp;<img src="../../images/os/sunos.png" width="16" height="16" alt="" title="Solaris" /></td>
+    <td><img src="../images/license/gnu.png" width="16" height="16" alt="" title="GNU GPL" /></td>
+    <td>
     	<span class="detail_head_collapsed">17 languages</span>
     	<div class="detail_body">
-	        <img src="../../images/flags/br.png" border="0" width="16" height="11" alt="" title="Brazilian Portuguese" />
-	        <img src="../../images/flags/bg.png" border="0" width="16" height="11" alt="" title="Bulgarian" />
-	        <img src="../../images/flags/cn.png" border="0" width="16" height="11" alt="" title="Chinese" />
-	        <img src="../../images/flags/dk.png" border="0" width="16" height="11" alt="" title="Danish" />
-	        <img src="../../images/flags/us.png" border="0" width="16" height="11" alt="" title="English" />
-	        <img src="../../images/flags/fi.png" border="0" width="16" height="11" alt="" title="Finnish" />
-	        <img src="../../images/flags/fr.png" border="0" width="16" height="11" alt="" title="French" />
-	        <img src="../../images/flags/de.png" border="0" width="16" height="11" alt="" title="German" />
-	        <img src="../../images/flags/hu.png" border="0" width="16" height="11" alt="" title="Hungarian" />
-	        <img src="../../images/flags/it.png" border="0" width="16" height="11" alt="" title="Italian" />
-	        <img src="../../images/flags/no.png" border="0" width="16" height="11" alt="" title="Norwegian" />
-	        <img src="../../images/flags/pl.png" border="0" width="16" height="11" alt="" title="Polish" />
-	        <img src="../../images/flags/pt.png" border="0" width="16" height="11" alt="" title="Portuguese" />
-	        <img src="../../images/flags/ru.png" border="0" width="16" height="11" alt="" title="Russian" />
-	        <img src="../../images/flags/es.png" border="0" width="16" height="11" alt="" title="Spanish" />
-	        <img src="../../images/flags/se.png" border="0" width="16" height="11" alt="" title="Swedish" />
-	        <img src="../../images/flags/lk.png" border="0" width="16" height="11" alt="" title="Tamil" />
+	        <img src="../../images/flags/br.png" width="16" height="11" alt="" title="Brazilian Portuguese" />
+	        <img src="../../images/flags/bg.png" width="16" height="11" alt="" title="Bulgarian" />
+	        <img src="../../images/flags/cn.png" width="16" height="11" alt="" title="Chinese" />
+	        <img src="../../images/flags/dk.png" width="16" height="11" alt="" title="Danish" />
+	        <img src="../../images/flags/us.png" width="16" height="11" alt="" title="English" />
+	        <img src="../../images/flags/fi.png" width="16" height="11" alt="" title="Finnish" />
+	        <img src="../../images/flags/fr.png" width="16" height="11" alt="" title="French" />
+	        <img src="../../images/flags/de.png" width="16" height="11" alt="" title="German" />
+	        <img src="../../images/flags/hu.png" width="16" height="11" alt="" title="Hungarian" />
+	        <img src="../../images/flags/it.png" width="16" height="11" alt="" title="Italian" />
+	        <img src="../../images/flags/no.png" width="16" height="11" alt="" title="Norwegian" />
+	        <img src="../../images/flags/pl.png" width="16" height="11" alt="" title="Polish" />
+	        <img src="../../images/flags/pt.png" width="16" height="11" alt="" title="Portuguese" />
+	        <img src="../../images/flags/ru.png" width="16" height="11" alt="" title="Russian" />
+	        <img src="../../images/flags/es.png" width="16" height="11" alt="" title="Spanish" />
+	        <img src="../../images/flags/se.png" width="16" height="11" alt="" title="Swedish" />
+	        <img src="../../images/flags/lk.png" width="16" height="11" alt="" title="Tamil" />
         </div>
     </td>
-    <td valign="top"><a href="http://bluefish.openoffice.nl/" rel="external" class="external">bluefish.openoffice.nl</a></td>
+    <td><a href="http://bluefish.openoffice.nl/" rel="external" class="external">bluefish.openoffice.nl</a></td>
   </tr>
   <tr>
-    <td valign="top" colspan="7">
+    <td colspan="7">
 	    <strong>Description</strong>: Bluefish is a powerful editor targeted towards programmers and webdesigners, with many options to write websites, scripts and programming code. Bluefish supports many programming and markup languages, and it focuses on editing dynamic and interactive websites.<br />
 	    <strong class="detail_head_collapsed">Features:</strong>
         <ul class="detail_body">
@@ -428,64 +423,64 @@ It only reads and saves a certain amount of commands and then calls itself via J
 	</td>
   </tr>
   <tr>
-    <td valign="top"><a name="dev_tools_editor_notepad_plus_plus"></a><h4 style="padding:0px;margin:0px">Notepad++<a href="#dev_tools_editor_notepad_plus_plus" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
-    <td valign="top">Plain text editor</td>
-    <td valign="top"><img src="../images/client.png" border="0" width="16" height="16" alt="" title="Client app" /></td>
-    <td valign="top"><img src="../../images/os/win.png" border="0" width="16" height="16" alt="" title="Windows" /></td>
-    <td valign="top"><img src="../images/license/gnu.png" border="0" width="16" height="16" alt="" title="Freeware" /></td>
-    <td valign="top">
+    <td><a id="dev_tools_editor_notepad_plus_plus"></a><h4 style="padding:0px;margin:0px">Notepad++<a href="#dev_tools_editor_notepad_plus_plus" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h4></td>
+    <td>Plain text editor</td>
+    <td><img src="../images/client.png" width="16" height="16" alt="" title="Client app" /></td>
+    <td><img src="../../images/os/win.png" width="16" height="16" alt="" title="Windows" /></td>
+    <td><img src="../images/license/gnu.png" width="16" height="16" alt="" title="Freeware" /></td>
+    <td>
     	<span class="detail_head_collapsed">43 languages</span>
     	<div class="detail_body">
-	        <img src="../../images/flags/al.png" border="0" width="16" height="11" alt="" title="Albanian" />
-	        <img src="../../images/flags/sa.png" border="0" width="16" height="11" alt="" title="Arabic" />
-	        <img src="../../images/flags/ar.png" border="0" width="16" height="11" alt="" title="Argentinian Spanish" />
-	        <img src="../../images/flags/basque.png" border="0" width="16" height="11" alt="" title="Basque" />
-	        <img src="../../images/flags/br.png" border="0" width="16" height="11" alt="" title="Brazilian Portuguese" />
-	        <img src="../../images/flags/bg.png" border="0" width="16" height="11" alt="" title="Bulgarian" />
-	        <img src="../../images/flags/by.png" border="0" width="16" height="11" alt="" title="Byelorussian" />
-	        <img src="../../images/flags/catalonia.png" border="0" width="16" height="11" alt="" title="Catalan" />
-	        <img src="../../images/flags/cn.png" border="0" width="16" height="11" alt="" title="Chinese (simplified)" />
-	        <img src="../../images/flags/tw.png" border="0" width="16" height="11" alt="" title="Chinese (traditional)" />
-	        <img src="../../images/flags/hr.png" border="0" width="16" height="11" alt="" title="Croatian" />
-	        <img src="../../images/flags/cz.png" border="0" width="16" height="11" alt="" title="Czech" />
-	        <img src="../../images/flags/nl.png" border="0" width="16" height="11" alt="" title="Dutch" />
-	        <img src="../../images/flags/dk.png" border="0" width="16" height="11" alt="" title="Danish" />
-	        <img src="../../images/flags/us.png" border="0" width="16" height="11" alt="" title="English" />
-	        <img src="../../images/flags/extremaduran.png" border="0" width="16" height="11" alt="" title="Extremaduran" />
-	        <img src="../../images/flags/fi.png" border="0" width="16" height="11" alt="" title="Finnish" />
-	        <img src="../../images/flags/fr.png" border="0" width="16" height="11" alt="" title="French" />
-	        <img src="../../images/flags/galician.png" border="0" width="16" height="11" alt="" title="Galician" />
-	        <img src="../../images/flags/ge.png" border="0" width="16" height="11" alt="" title="Georgian" />
-	        <img src="../../images/flags/de.png" border="0" width="16" height="11" alt="" title="German" />
-	        <img src="../../images/flags/gr.png" border="0" width="16" height="11" alt="" title="Greek" />
-	        <img src="../../images/flags/hu.png" border="0" width="16" height="11" alt="" title="Hungarian" />
-	        <img src="../../images/flags/il.png" border="0" width="16" height="11" alt="" title="Hebrew" />
-	        <img src="../../images/flags/id.png" border="0" width="16" height="11" alt="" title="Indonesian" />
-	        <img src="../../images/flags/it.png" border="0" width="16" height="11" alt="" title="Italian" />
-	        <img src="../../images/flags/jp.png" border="0" width="16" height="11" alt="" title="Japanese" />
-	        <img src="../../images/flags/kr.png" border="0" width="16" height="11" alt="" title="Korean" />
-	        <img src="../../images/flags/lv.png" border="0" width="16" height="11" alt="" title="Latvian" />
-	        <img src="../../images/flags/lt.png" border="0" width="16" height="11" alt="" title="Lithuanian" />
-	        <img src="../../images/flags/no.png" border="0" width="16" height="11" alt="" title="Norwegian" />
-	        <img src="../../images/flags/ir.png" border="0" width="16" height="11" alt="" title="Persian" />
-	        <img src="../../images/flags/pl.png" border="0" width="16" height="11" alt="" title="Polish" />
-	        <img src="../../images/flags/pt.png" border="0" width="16" height="11" alt="" title="Portuguese" />
-	        <img src="../../images/flags/ro.png" border="0" width="16" height="11" alt="" title="Romanian" />
-	        <img src="../../images/flags/ru.png" border="0" width="16" height="11" alt="" title="Russian" />
-	        <img src="../../images/flags/rs.png" border="0" width="16" height="11" alt="" title="Serbian" />
-	        <img src="../../images/flags/sk.png" border="0" width="16" height="11" alt="" title="Slovak" />
-	        <img src="../../images/flags/si.png" border="0" width="16" height="11" alt="" title="Slovenian" />
-	        <img src="../../images/flags/es.png" border="0" width="16" height="11" alt="" title="Spanish" />
-	        <img src="../../images/flags/se.png" border="0" width="16" height="11" alt="" title="Swedish" />
-	        <img src="../../images/flags/th.png" border="0" width="16" height="11" alt="" title="Thai" />
-	        <img src="../../images/flags/tr.png" border="0" width="16" height="11" alt="" title="Turkish" />
-	        <img src="../../images/flags/ua.png" border="0" width="16" height="11" alt="" title="Ukranian" />
+	        <img src="../../images/flags/al.png" width="16" height="11" alt="" title="Albanian" />
+	        <img src="../../images/flags/sa.png" width="16" height="11" alt="" title="Arabic" />
+	        <img src="../../images/flags/ar.png" width="16" height="11" alt="" title="Argentinian Spanish" />
+	        <img src="../../images/flags/basque.png" width="16" height="11" alt="" title="Basque" />
+	        <img src="../../images/flags/br.png" width="16" height="11" alt="" title="Brazilian Portuguese" />
+	        <img src="../../images/flags/bg.png" width="16" height="11" alt="" title="Bulgarian" />
+	        <img src="../../images/flags/by.png" width="16" height="11" alt="" title="Byelorussian" />
+	        <img src="../../images/flags/catalonia.png" width="16" height="11" alt="" title="Catalan" />
+	        <img src="../../images/flags/cn.png" width="16" height="11" alt="" title="Chinese (simplified)" />
+	        <img src="../../images/flags/tw.png" width="16" height="11" alt="" title="Chinese (traditional)" />
+	        <img src="../../images/flags/hr.png" width="16" height="11" alt="" title="Croatian" />
+	        <img src="../../images/flags/cz.png" width="16" height="11" alt="" title="Czech" />
+	        <img src="../../images/flags/nl.png" width="16" height="11" alt="" title="Dutch" />
+	        <img src="../../images/flags/dk.png" width="16" height="11" alt="" title="Danish" />
+	        <img src="../../images/flags/us.png" width="16" height="11" alt="" title="English" />
+	        <img src="../../images/flags/extremaduran.png" width="16" height="11" alt="" title="Extremaduran" />
+	        <img src="../../images/flags/fi.png" width="16" height="11" alt="" title="Finnish" />
+	        <img src="../../images/flags/fr.png" width="16" height="11" alt="" title="French" />
+	        <img src="../../images/flags/galician.png" width="16" height="11" alt="" title="Galician" />
+	        <img src="../../images/flags/ge.png" width="16" height="11" alt="" title="Georgian" />
+	        <img src="../../images/flags/de.png" width="16" height="11" alt="" title="German" />
+	        <img src="../../images/flags/gr.png" width="16" height="11" alt="" title="Greek" />
+	        <img src="../../images/flags/hu.png" width="16" height="11" alt="" title="Hungarian" />
+	        <img src="../../images/flags/il.png" width="16" height="11" alt="" title="Hebrew" />
+	        <img src="../../images/flags/id.png" width="16" height="11" alt="" title="Indonesian" />
+	        <img src="../../images/flags/it.png" width="16" height="11" alt="" title="Italian" />
+	        <img src="../../images/flags/jp.png" width="16" height="11" alt="" title="Japanese" />
+	        <img src="../../images/flags/kr.png" width="16" height="11" alt="" title="Korean" />
+	        <img src="../../images/flags/lv.png" width="16" height="11" alt="" title="Latvian" />
+	        <img src="../../images/flags/lt.png" width="16" height="11" alt="" title="Lithuanian" />
+	        <img src="../../images/flags/no.png" width="16" height="11" alt="" title="Norwegian" />
+	        <img src="../../images/flags/ir.png" width="16" height="11" alt="" title="Persian" />
+	        <img src="../../images/flags/pl.png" width="16" height="11" alt="" title="Polish" />
+	        <img src="../../images/flags/pt.png" width="16" height="11" alt="" title="Portuguese" />
+	        <img src="../../images/flags/ro.png" width="16" height="11" alt="" title="Romanian" />
+	        <img src="../../images/flags/ru.png" width="16" height="11" alt="" title="Russian" />
+	        <img src="../../images/flags/rs.png" width="16" height="11" alt="" title="Serbian" />
+	        <img src="../../images/flags/sk.png" width="16" height="11" alt="" title="Slovak" />
+	        <img src="../../images/flags/si.png" width="16" height="11" alt="" title="Slovenian" />
+	        <img src="../../images/flags/es.png" width="16" height="11" alt="" title="Spanish" />
+	        <img src="../../images/flags/se.png" width="16" height="11" alt="" title="Swedish" />
+	        <img src="../../images/flags/th.png" width="16" height="11" alt="" title="Thai" />
+	        <img src="../../images/flags/tr.png" width="16" height="11" alt="" title="Turkish" />
+	        <img src="../../images/flags/ua.png" width="16" height="11" alt="" title="Ukranian" />
         </div>
     </td>
-    <td valign="top"><a href="http://notepad-plus.sourceforge.net/" rel="external" class="external">notepad-plus.sourceforge.net</a></td>
+    <td><a href="http://notepad-plus.sourceforge.net/" rel="external" class="external">notepad-plus.sourceforge.net</a></td>
   </tr>
   <tr>
-    <td valign="top" colspan="7">
+    <td colspan="7">
 	    <strong>Description</strong>: Open-source client application that can be downloaded (for free) and installed on your Windows-PC.<br />
 	    <strong class="detail_head_collapsed">Features:</strong>
         <ul class="detail_body">
@@ -513,28 +508,28 @@ It only reads and saves a certain amount of commands and then calls itself via J
 	</td>
   </tr>
   <tr>
-    <td valign="top"><a name="dev_tools_editor_pspad"></a><h4 style="padding:0px;margin:0px">PsPad<a href="#dev_tools_editor_pspad" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
-    <td valign="top">Plain text editor</td>
-    <td valign="top"><img src="../images/client.png" border="0" width="16" height="16" alt="" title="Client app" /></td>
-    <td valign="top"><img src="../../images/os/win.png" border="0" width="16" height="16" alt="" title="Windows" /></td>
-    <td valign="top"><img src="../images/license/freeware.png" border="0" width="16" height="16" alt="" title="Freeware" /></td>
-    <td valign="top">
+    <td><a id="dev_tools_editor_pspad"></a><h4 style="padding:0px;margin:0px">PsPad<a href="#dev_tools_editor_pspad" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h4></td>
+    <td>Plain text editor</td>
+    <td><img src="../images/client.png" width="16" height="16" alt="" title="Client app" /></td>
+    <td><img src="../../images/os/win.png" width="16" height="16" alt="" title="Windows" /></td>
+    <td><img src="../images/license/freeware.png" width="16" height="16" alt="" title="Freeware" /></td>
+    <td>
     	<span class="detail_head_collapsed">8 languages</span>
     	<div class="detail_body">
-	        <img src="../../images/flags/cz.png" border="0" width="16" height="11" alt="" title="Czech" />
-	        <img src="../../images/flags/us.png" border="0" width="16" height="11" alt="" title="English" />
-	        <img src="../../images/flags/fr.png" border="0" width="16" height="11" alt="" title="French" />
-	        <img src="../../images/flags/de.png" border="0" width="16" height="11" alt="" title="German" />
-	        <img src="../../images/flags/it.png" border="0" width="16" height="11" alt="" title="Italian" />
-	        <img src="../../images/flags/ru.png" border="0" width="16" height="11" alt="" title="Russian" />
-	        <img src="../../images/flags/si.png" border="0" width="16" height="11" alt="" title="Slovenian" />
-	        <img src="../../images/flags/es.png" border="0" width="16" height="11" alt="" title="Spanish" />
+	        <img src="../../images/flags/cz.png" width="16" height="11" alt="" title="Czech" />
+	        <img src="../../images/flags/us.png" width="16" height="11" alt="" title="English" />
+	        <img src="../../images/flags/fr.png" width="16" height="11" alt="" title="French" />
+	        <img src="../../images/flags/de.png" width="16" height="11" alt="" title="German" />
+	        <img src="../../images/flags/it.png" width="16" height="11" alt="" title="Italian" />
+	        <img src="../../images/flags/ru.png" width="16" height="11" alt="" title="Russian" />
+	        <img src="../../images/flags/si.png" width="16" height="11" alt="" title="Slovenian" />
+	        <img src="../../images/flags/es.png" width="16" height="11" alt="" title="Spanish" />
         </div>
     </td>
-    <td valign="top"><a href="http://www.pspad.com/" rel="external" class="external">www.pspad.com</a></td>
+    <td><a href="http://www.pspad.com/" rel="external" class="external">www.pspad.com</a></td>
   </tr>
   <tr>
-    <td valign="top" colspan="7">
+    <td colspan="7">
 	    <strong>Description</strong>: PSPad  is a freeware programmer's editor for Microsoft Windows operating systems, useful for people who:<br />
 	    <span class="detail_head_collapsed">Details</span>
         <ul class="detail_body">
@@ -581,7 +576,7 @@ It only reads and saves a certain amount of commands and then calls itself via J
   </tr>
 </table>
 
-<a name="dev_tools_picture_editors"></a><h3>Picture Editors<a href="#dev_tools_picture_editors" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+<a id="dev_tools_picture_editors"></a><h3>Picture Editors<a href="#dev_tools_picture_editors" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h3>
 <p>Before uploading images to your webserver, you might want to edit them on your client. There's a number of reasons why you should do that:</p>
 <ul>
 	<li>Resizing the images on the client will give you better results, is faster (as you save both processing time on the server as well as upload time) and avoids issues with server-sided restrictions on resouces consumption</li>
@@ -590,57 +585,57 @@ It only reads and saves a certain amount of commands and then calls itself via J
 </ul>
 <p>On www forums you can often read the recommendation to use Adobe's Photoshop application to perform such tasks, but it's a bit overkill to use such a powerfull, expensive application for such basic purposes. There are many applications available free of charge that can accomplish the same thing.</p>
 
-<table border="0" cellspacing="0" cellpadding="0" class="cpg_zebra">
+<table class="cpg_zebra">
   <tr>
-    <th valign="top" align="left">App name</th>
-    <th valign="top" align="left">Purpose</th>
-    <th valign="top" align="left">Type</th>
-    <th valign="top" align="left"><acronym title="Operating System">OS</acronym></th>
-    <th valign="top" align="left">License</th>
-    <th valign="top" align="left"><acronym title="Internationalization">i18n</acronym></th>
-    <th valign="top" align="left">Homepage</th>
+    <th>App name</th>
+    <th>Purpose</th>
+    <th>Type</th>
+    <th><abbr title="Operating System">OS</abbr></th>
+    <th>License</th>
+    <th><abbr title="Internationalization">i18n</abbr></th>
+    <th>Homepage</th>
   </tr>
   <tr>
-    <td valign="top"><a name="dev_tools_picture_editors_irfan"></a><h4 style="padding:0px;margin:0px">Irfan View<a href="#dev_tools_picture_editors_irfan" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
-    <td valign="top">Image viewer with basic editing capabilities</td>
-    <td valign="top"><img src="../images/client.png" border="0" width="16" height="16" alt="" title="Client app" /></td>
-    <td valign="top"><img src="../../images/os/win.png" border="0" width="16" height="16" alt="" title="Windows" /></td>
-    <td valign="top"><img src="../images/license/freeware.png" border="0" width="16" height="16" alt="" title="Freeware" /></td>
-    <td valign="top">
+    <td><a id="dev_tools_picture_editors_irfan"></a><h4 style="padding:0px;margin:0px">Irfan View<a href="#dev_tools_picture_editors_irfan" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h4></td>
+    <td>Image viewer with basic editing capabilities</td>
+    <td><img src="../images/client.png" width="16" height="16" alt="" title="Client app" /></td>
+    <td><img src="../../images/os/win.png" width="16" height="16" alt="" title="Windows" /></td>
+    <td><img src="../images/license/freeware.png" width="16" height="16" alt="" title="Freeware" /></td>
+    <td>
     	<span class="detail_head_collapsed">25 languages</span>
     	<div class="detail_body">
-	        <img src="../../images/flags/sa.png" border="0" width="16" height="11" alt="" title="Arabic" />
-	        <img src="../../images/flags/br.png" border="0" width="16" height="11" alt="" title="Brazilian Portuguese" />
-	        <img src="../../images/flags/cn.png" border="0" width="16" height="11" alt="" title="Chinese" />
-	        <img src="../../images/flags/hr.png" border="0" width="16" height="11" alt="" title="Croatian" />
-	        <img src="../../images/flags/cz.png" border="0" width="16" height="11" alt="" title="Czech" />
-	        <img src="../../images/flags/nl.png" border="0" width="16" height="11" alt="" title="Dutch" />
-	        <img src="../../images/flags/dk.png" border="0" width="16" height="11" alt="" title="Danish" />
-	        <img src="../../images/flags/us.png" border="0" width="16" height="11" alt="" title="English" />
-	        <img src="../../images/flags/ee.png" border="0" width="16" height="11" alt="" title="Estonian" />
-	        <img src="../../images/flags/esperanto.png" border="0" width="16" height="11" alt="" title="Esperanto" />
-	        <img src="../../images/flags/fi.png" border="0" width="16" height="11" alt="" title="Finnish" />
-	        <img src="../../images/flags/de.png" border="0" width="16" height="11" alt="" title="German" />
-	        <img src="../../images/flags/il.png" border="0" width="16" height="11" alt="" title="Hebrew" />
-	        <img src="../../images/flags/it.png" border="0" width="16" height="11" alt="" title="Italian" />
-	        <img src="../../images/flags/jp.png" border="0" width="16" height="11" alt="" title="Japanese" />
-	        <img src="../../images/flags/kr.png" border="0" width="16" height="11" alt="" title="Korean" />
-	        <img src="../../images/flags/ir.png" border="0" width="16" height="11" alt="" title="Persian" />
-	        <img src="../../images/flags/pl.png" border="0" width="16" height="11" alt="" title="Polish" />
-	        <img src="../../images/flags/ro.png" border="0" width="16" height="11" alt="" title="Romanian" />
-	        <img src="../../images/flags/ru.png" border="0" width="16" height="11" alt="" title="Russian" />
-	        <img src="../../images/flags/sk.png" border="0" width="16" height="11" alt="" title="Slovak" />
-	        <img src="../../images/flags/si.png" border="0" width="16" height="11" alt="" title="Slovenian" />
-	        <img src="../../images/flags/es.png" border="0" width="16" height="11" alt="" title="Spanish" />
-	        <img src="../../images/flags/se.png" border="0" width="16" height="11" alt="" title="Swedish" />
-	        <img src="../../images/flags/tr.png" border="0" width="16" height="11" alt="" title="Turkish" />
-	        <img src="../../images/flags/uz.png" border="0" width="16" height="11" alt="" title="Uzbek" />
+	        <img src="../../images/flags/sa.png" width="16" height="11" alt="" title="Arabic" />
+	        <img src="../../images/flags/br.png" width="16" height="11" alt="" title="Brazilian Portuguese" />
+	        <img src="../../images/flags/cn.png" width="16" height="11" alt="" title="Chinese" />
+	        <img src="../../images/flags/hr.png" width="16" height="11" alt="" title="Croatian" />
+	        <img src="../../images/flags/cz.png" width="16" height="11" alt="" title="Czech" />
+	        <img src="../../images/flags/nl.png" width="16" height="11" alt="" title="Dutch" />
+	        <img src="../../images/flags/dk.png" width="16" height="11" alt="" title="Danish" />
+	        <img src="../../images/flags/us.png" width="16" height="11" alt="" title="English" />
+	        <img src="../../images/flags/ee.png" width="16" height="11" alt="" title="Estonian" />
+	        <img src="../../images/flags/esperanto.png" width="16" height="11" alt="" title="Esperanto" />
+	        <img src="../../images/flags/fi.png" width="16" height="11" alt="" title="Finnish" />
+	        <img src="../../images/flags/de.png" width="16" height="11" alt="" title="German" />
+	        <img src="../../images/flags/il.png" width="16" height="11" alt="" title="Hebrew" />
+	        <img src="../../images/flags/it.png" width="16" height="11" alt="" title="Italian" />
+	        <img src="../../images/flags/jp.png" width="16" height="11" alt="" title="Japanese" />
+	        <img src="../../images/flags/kr.png" width="16" height="11" alt="" title="Korean" />
+	        <img src="../../images/flags/ir.png" width="16" height="11" alt="" title="Persian" />
+	        <img src="../../images/flags/pl.png" width="16" height="11" alt="" title="Polish" />
+	        <img src="../../images/flags/ro.png" width="16" height="11" alt="" title="Romanian" />
+	        <img src="../../images/flags/ru.png" width="16" height="11" alt="" title="Russian" />
+	        <img src="../../images/flags/sk.png" width="16" height="11" alt="" title="Slovak" />
+	        <img src="../../images/flags/si.png" width="16" height="11" alt="" title="Slovenian" />
+	        <img src="../../images/flags/es.png" width="16" height="11" alt="" title="Spanish" />
+	        <img src="../../images/flags/se.png" width="16" height="11" alt="" title="Swedish" />
+	        <img src="../../images/flags/tr.png" width="16" height="11" alt="" title="Turkish" />
+	        <img src="../../images/flags/uz.png" width="16" height="11" alt="" title="Uzbek" />
         </div>
     </td>
-    <td valign="top"><a href="http://irfanview.com/" rel="external" class="external">irfanview.com</a></td>
+    <td><a href="http://irfanview.com/" rel="external" class="external">irfanview.com</a></td>
   </tr>
   <tr>
-    <td valign="top" colspan="7">
+    <td colspan="7">
 	    <strong>Description</strong>: Free for personal and educational use. Small license fee for commercial use.<br />
 	    <strong class="detail_head_collapsed">Features:</strong>
         <ul class="detail_body">
@@ -665,18 +660,18 @@ It only reads and saves a certain amount of commands and then calls itself via J
 	</td>
   </tr>
   <tr>
-    <td valign="top"><a name="dev_tools_picture_editors_gimp"></a><h4 style="padding:0px;margin:0px">The Gimp<a href="#dev_tools_picture_editors_gimp" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4></td>
-    <td valign="top">Image manipulation program for photo retouching, image composition and image authoring.</td>
-    <td valign="top"><img src="../images/client.png" border="0" width="16" height="16" alt="" title="Client app" /></td>
-    <td valign="top"><img src="../../images/os/win.png" border="0" width="16" height="16" alt="" title="Windows" />&nbsp;<img src="../../images/os/linux.png" border="0" width="16" height="16" alt="" title="Linux" />&nbsp;<img src="../../images/os/macosx.png" border="0" width="16" height="16" alt="" title="Mac OS-X" />&nbsp;<img src="../../images/os/freebsd.png" border="0" width="16" height="16" alt="" title="FreeBSD" />&nbsp;<img src="../../images/os/sunos.png" border="0" width="16" height="16" alt="" title="Solaris" /></td>
-    <td valign="top"><img src="../images/license/gnu.png" border="0" width="16" height="16" alt="" title="GNU GPL" /></td>
-    <td valign="top">
+    <td><a id="dev_tools_picture_editors_gimp"></a><h4 style="padding:0px;margin:0px">The Gimp<a href="#dev_tools_picture_editors_gimp" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h4></td>
+    <td>Image manipulation program for photo retouching, image composition and image authoring.</td>
+    <td><img src="../images/client.png" width="16" height="16" alt="" title="Client app" /></td>
+    <td><img src="../../images/os/win.png" width="16" height="16" alt="" title="Windows" />&nbsp;<img src="../../images/os/linux.png" width="16" height="16" alt="" title="Linux" />&nbsp;<img src="../../images/os/macosx.png" width="16" height="16" alt="" title="Mac OS-X" />&nbsp;<img src="../../images/os/freebsd.png" width="16" height="16" alt="" title="FreeBSD" />&nbsp;<img src="../../images/os/sunos.png" width="16" height="16" alt="" title="Solaris" /></td>
+    <td><img src="../images/license/gnu.png" width="16" height="16" alt="" title="GNU GPL" /></td>
+    <td>
     	GIMP has been translated into many, many languages. Yours is surely among them.
     </td>
-    <td valign="top"><a href="http://www.gimp.org/" rel="external" class="external">www.gimp.org</a></td>
+    <td><a href="http://www.gimp.org/" rel="external" class="external">www.gimp.org</a></td>
   </tr>
   <tr>
-    <td valign="top" colspan="7">
+    <td colspan="7">
 	    <strong>Description</strong>:  GIMP is an acronym for GNU Image Manipulation Program. It is a freely distributed program for such tasks as photo retouching, image composition and image authoring.
 	    It has many capabilities. It can be used as a simple paint program, an expert quality photo retouching program, an online batch processing system, a mass production image renderer, an image format converter, etc.<br />
 	    GIMP is expandable and extensible. It is designed to be augmented with plug-ins and extensions to do just about anything. The advanced scripting interface allows everything from the simplest task to the most complex image manipulation procedures to be easily scripted.<br />
@@ -685,7 +680,8 @@ It only reads and saves a certain amount of commands and then calls itself via J
   </tr>
 </table>
 
-<br clear="all" />
+<br class="clrb" />
+
 <div id="doc_footer">
 	<div class="doc_info_wrapper">
 		<span id="doc_last_changed">$LastChangedDate$</span>

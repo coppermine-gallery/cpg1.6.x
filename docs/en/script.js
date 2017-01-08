@@ -1085,29 +1085,29 @@ doc_toc += '      </li>\n';
 doc_toc += '      <li><a href="dev_database.htm">Database schema</a>\n';
 doc_toc += '          <ul>\n';
 doc_toc += '              <li><a href="dev_database.htm#db_config_file">Configuration file</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_reference within_code">Database reference within coppermine code</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_albums">cpg15x_albums</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_banned">cpg15x_banned</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_bridge">cpg15x_bridge</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_categories">cpg15x_categories</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_categorymap">cpg15x_categorymap</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_comments">cpg15x_comments</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_config">cpg15x_config</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_dict">cpg15x_dict</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_ecards">cpg15x_ecards</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_exif">cpg15x_exif</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_favpics">cpg15x_favpics</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_filetypes">cpg15x_filetypes</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_hit_stats">cpg15x_hit_stats</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_languages">cpg15x_languages</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_pictures">cpg15x_pictures</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_plugins">cpg15x_plugins</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_sessions">cpg15x_sessions</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_temp_messages">cpg15x_temp_messages</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_usergroups">cpg15x_usergroups</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_users">cpg15x_users</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_votes">cpg15x_votes</a></li>\n';
-doc_toc += '              <li><a href="dev_database.htm#db_vote_stats">cpg15x_vote_stats</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_reference_within_code">Database reference within coppermine code</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_albums">cpg16x_albums</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_banned">cpg16x_banned</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_bridge">cpg16x_bridge</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_categories">cpg16x_categories</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_categorymap">cpg16x_categorymap</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_comments">cpg16x_comments</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_config">cpg16x_config</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_dict">cpg16x_dict</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_ecards">cpg16x_ecards</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_exif">cpg16x_exif</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_favpics">cpg16x_favpics</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_filetypes">cpg16x_filetypes</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_hit_stats">cpg16x_hit_stats</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_languages">cpg16x_languages</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_pictures">cpg16x_pictures</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_plugins">cpg16x_plugins</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_sessions">cpg16x_sessions</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_temp_messages">cpg16x_temp_messages</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_usergroups">cpg16x_usergroups</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_users">cpg16x_users</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_votes">cpg16x_votes</a></li>\n';
+doc_toc += '              <li><a href="dev_database.htm#db_vote_stats">cpg16x_vote_stats</a></li>\n';
 doc_toc += '          </ul>\n';
 doc_toc += '      </li>\n';
 doc_toc += '      <li><a href="dev_documentation.htm">Editing the documentation</a>\n';
@@ -1628,17 +1628,21 @@ $(document).ready(function()
     $("a.nolink").click(function(){
       return false;
     });
+    var tocTmr;
     // Fade the toc in if it is needed
     $("#toc").bind("mouseenter",function(){
+    	clearTimeout(tocTmr);
         $("#toc_collapsed").hide();
         $("#toc_expanded").fadeIn('slow');
         $("#doc_search").show();
     });
     // Fade the toc out if it isn't used
     $("#toc").bind("mouseleave",function(){
-        $("#toc_expanded").fadeOut('slow');
-        $("#toc_collapsed").show();
-        $("#doc_search").hide();
+    	tocTmr = setTimeout(function(){
+        	$("#doc_search").hide();
+        	$("#toc_expanded").fadeOut('slow');
+        	$("#toc_collapsed").show();
+        }, 3000);
     });
     
 });

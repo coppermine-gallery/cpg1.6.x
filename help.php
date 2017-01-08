@@ -205,7 +205,7 @@ $string = str_replace('</html>', '', $string);
 // manipulate the string according to settings
 
 if ($anchor_start != '') {
-    $pattern = '<a name="' . $anchor_start . '"></a>';
+    $pattern = '<a id="' . $anchor_start . '"></a>';
     $string = strstr($string, $pattern);
     //remove the start anchor
     $pattern = "'".$pattern."'si";
@@ -213,7 +213,7 @@ if ($anchor_start != '') {
 }
 
 if ($anchor_end != '') {
-    $pattern = '<a name="' . $anchor_end . '"></a>';
+    $pattern = '<a id="' . $anchor_end . '"></a>';
     $string2 = strstr($string, $pattern);
     //remove the start anchor
     $pattern = "'".$pattern."'si";

@@ -1,17 +1,12 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
 <title>Coppermine Photo Gallery - Documentation &amp; Manual</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="language" content="en" />
 <meta name="copyright" content="Coppermine dev team" />
 <meta name="description" content="Coppermine Photo Gallery is an advanced, user-friendly, picture gallery script with built-in support for other multi-media/data files.  The gallery can be private, accessible to registered users only, and/or open to all visitors to your site. Users, if permitted, can upload pictures with their web browser (thumbnail and intermediate sized images are created on the fly), rate pictures, add comments and even send e-cards." />
-<meta http-equiv="Content-Style-Type" content="text/css" />
-<meta name="MSSmartTagsPreventParsing" content="true" />
-<meta http-equiv="imagetoolbar" content="no" />
 <!--
-  SVN version info:
-
   Coppermine version: 1.6.01
   $HeadURL$
 -->
@@ -29,25 +24,25 @@
 <a href="toc.htm">Table of Contents</a>
 </div>
 
-<a name="about"></a><h1>About Coppermine<a href="#about" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h1>
+<a id="about"></a><h1>About Coppermine<a href="#about" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h1>
 
-<p><img src="../images/php-med-trans.png" border="0" alt="" width="95" height="51" title="PHP" align="left" style="padding-right:20px" /><img src="../images/mysql.png" border="0" alt="" width="125" height="64" title="mySQL" align="right" style="padding-left:20px" /><strong>C</strong>oppermine <strong>P</strong>hoto <strong>G</strong>allery (CPG) is an advanced, user-friendly, picture gallery script with built-in support for other multi-media/data files.  The gallery can be private, accessible to registered users only, and/or open to all visitors to your site. Users, if permitted, can upload pictures with their web browser (thumbnail and intermediate sized images are created on the fly during the upload stage), rate pictures, add comments and even send e-cards. The site administrator determines which of the features listed above are accessible by registered and non-registered users. The site administrator can also manage galleries and batch process large numbers of pictures that have been uploaded onto the server by <abbr title="File Transfer Protocol">FTP</abbr>.</p>
-<p><img src="../images/jquery.png" border="0" alt="" width="200" height="50" title="jQuery" align="left" style="padding-right:20px" /><img src="../images/imagemagick.png" border="0" alt="" width="130" height="54" title="ImageMagick" align="right" style="padding-left:20px" />Image files are stored in albums and albums can be grouped into categories, which in turn, can be further grouped under parent categories. The script supports multiple users and provides the administrator of the website with tools to manage which user groups can or cannot have personal albums, send ecards, or add comments. Users may also upload to public albums if the website administrator permits it. Permissions to create albums, upload and delete files are all determined by the website administrator.</p>
-<p><img src="../images/license/gpl.png" border="0" alt="" width="127" height="51" title="GNU GPL" align="left" style="padding-right:20px" /><img src="../images/license/osi.png" border="0" alt="" width="100" height="137" title="OSI approved" align="right" style="padding-left:20px" />Coppermine has an optional user selectable theme system with a number of themes pre-installed. It also supports the use of multiple languages and contains it's own language library. These language files provide users of your gallery to access the gallery in their preferred languages. Coppermine uses PHP (version 7 compatible), a MySQLi, PDO(mysql) or MySQL database, and either the GD library (version 2.x), ImageMagick or IMagick Extension as image libraries to generate and keep records and file information of all thumbnails, intermediate, and full-sized images. Coppermine generates the html code necessary to display its various categories, sub-categories, albums, intermediate, and full-sized image displays dynamically. This drastically cuts down on the number of files and space your gallery would require using standard HTML. The install script (install.php) makes it quick and easy to get started.</p>
+<p><img class="imgl" src="../images/php-med-trans.png" alt="" width="95" height="51" title="PHP" /><img class="imgr" src="../images/mysql.png" alt="" width="125" height="64" title="mySQL" /><strong>C</strong>oppermine <strong>P</strong>hoto <strong>G</strong>allery (CPG) is an advanced, user-friendly, picture gallery script with built-in support for other multi-media/data files.  The gallery can be private, accessible to registered users only, and/or open to all visitors to your site. Users, if permitted, can upload pictures with their web browser (thumbnail and intermediate sized images are created on the fly during the upload stage), rate pictures, add comments and even send e-cards. The site administrator determines which of the features listed above are accessible by registered and non-registered users. The site administrator can also manage galleries and batch process large numbers of pictures that have been uploaded onto the server by <abbr title="File Transfer Protocol">FTP</abbr>.</p>
+<p><img class="imgl" src="../images/jquery.png" alt="" width="200" height="50" title="jQuery" /><img class="imgr" src="../images/imagemagick.png" alt="" width="130" height="54" title="ImageMagick" />Image files are stored in albums and albums can be grouped into categories, which in turn, can be further grouped under parent categories. The script supports multiple users and provides the administrator of the website with tools to manage which user groups can or cannot have personal albums, send ecards, or add comments. Users may also upload to public albums if the website administrator permits it. Permissions to create albums, upload and delete files are all determined by the website administrator.</p>
+<p><img class="imgl" src="../images/license/gpl.png" alt="" width="127" height="51" title="GNU GPL" /><img class="imgr" src="../images/license/osi.png" alt="" width="100" height="137" title="OSI approved" />Coppermine has an optional user selectable theme system with a number of themes pre-installed. It also supports the use of multiple languages and contains it's own language library. These language files provide users of your gallery to access the gallery in their preferred languages. Coppermine uses PHP (version 7 compatible), a MySQLi, PDO(mysql) or MySQL database, and either the GD library (version 2.x), ImageMagick or IMagick Extension as image libraries to generate and keep records and file information of all thumbnails, intermediate, and full-sized images. Coppermine generates the html code necessary to display its various categories, sub-categories, albums, intermediate, and full-sized image displays dynamically. This drastically cuts down on the number of files and space your gallery would require using standard HTML. The install script (install.php) makes it quick and easy to get started.</p>
 <p>Coppermine uses the jquery JavaScript/Ajax-library for a rich user experience and easy customization.</p>
 <p>Coppermine is free, open source software and can be used both for personal sites as well as for commercial use. It is being released und the GNU GPL <a href="copyrights.htm#copyright_license">license</a>, version 3, which has been approved by the <abbr title="Open Source Initiative">OSI</abbr>.</p>
-<a name="about_end"></a>
+<a id="about_end"></a>
 
 <div class="indent">
-    <a name="about_documentation"></a><h2>About the documentation<a href="#about_documentation" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
-    <p><img src="../images/gd.png" border="0" alt="" width="148" height="93" title="GD" align="right" style="padding-left:20px" />Use the menu at the top left of this screen to browse through the Coppermine documentation. The menu is available throughout the documentation. The menu is JavaScript-driven - if you have JavaScript turned off or can't use it for whatever reason, use the link at the top that will lead you to the table of contents and from there on to the section of the docs that you want to read.</p>
+    <a id="about_documentation"></a><h2>About the documentation<a href="#about_documentation" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h2>
+    <p><img class="imgr" src="../images/gd.png" alt="" width="148" height="93" title="GD" />Use the menu at the top left of this screen to browse through the Coppermine documentation. The menu is available throughout the documentation. The menu is JavaScript-driven - if you have JavaScript turned off or can't use it for whatever reason, use the link at the top that will lead you to the table of contents and from there on to the section of the docs that you want to read.</p>
     <p>The Coppermine dev team strongly recommends enabling JavaScript and using a modern browser (with CSS and JavaScript according to the <abbr title="Document Object Modell">DOM</abbr> standards) to read the documentation for a richer experience.</p>
 
     <div class="indent">
-        <a name="about_documentation_conventions"></a><h3>Documentation Conventions<a href="#about_documentation_conventions" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h3>
+        <a id="about_documentation_conventions"></a><h3>Documentation Conventions<a href="#about_documentation_conventions" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h3>
         Throughout the documentation the follwing conventions have been applied:
         <div class="indent">
-            <a name="about_documentation_conventions_boxes"></a><h4>Text boxes<a href="#about_documentation_conventions_boxes" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+            <a id="about_documentation_conventions_boxes"></a><h4>Text boxes<a href="#about_documentation_conventions_boxes" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h4>
             <p>There are text boxes in this documentation that have special meanings:</p>
             <p class="cpg_example"><strong>Examples</strong> that are meant to illustrate the instructions given are displayed like this!</p>
             <p class="cpg_message_info">Additional <strong>information</strong> that should not be overlooked is being displayed like this.</p>
@@ -57,30 +52,30 @@
             <p class="cpg_message_error">Actual <strong>errors</strong> or issues that can have a huge impact are being displayed like this. This is the most serious kind of boxes - their content is very important to read.</p>
             <p class="cpg_code">Longer sections of <strong>code examples</strong> (can be PHP, HTML, CSS or JavaScript) are displayed using the typewriter icon in front of them.</p>
 
-            <a name="about_documentation_conventions_links"></a><h4>Links<a href="#about_documentation_conventions_links" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h4>
+            <a id="about_documentation_conventions_links"></a><h4>Links<a href="#about_documentation_conventions_links" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h4>
             <p>All &quot;regular&quot; links (that don't have a special icon displayed next to them) are internal links, i.e. they refer to a section of this documentation and therefore allow you to navigate this documentation. The exception to this rule are the following links:</p>
             <ul>
                 <li>
-                    <a name="about_documentation_conventions_links_expandable"></a><h5>Expandable / collapsible sections<a href="#about_documentation_conventions_links_expandable" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
-                    There are some sections that can be expanded and collapsed (if JavaScript is enabled in your browser) for easier reading. Usually, the expandable sections contain details about the paragraph in front of them. Expandable sections are being tagged with a little plus box (<img src="../../images/tree/plus.gif" border="0" width="9" height="9" alt="" />) in front of them if in collapsed state and a minus box (<img src="../../images/tree/minus.gif" border="0" width="9" height="9" alt="" />) if in expanded state. If JavaScript is turned off in your browser, all expandable boxes will be displayed expanded - clicking the icons won't do anything then.
+                    <a id="about_documentation_conventions_links_expandable"></a><h5>Expandable / collapsible sections<a href="#about_documentation_conventions_links_expandable" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h5>
+                    There are some sections that can be expanded and collapsed (if JavaScript is enabled in your browser) for easier reading. Usually, the expandable sections contain details about the paragraph in front of them. Expandable sections are being tagged with a little plus box (<img src="../../images/tree/plus.gif" width="9" height="9" alt="" />) in front of them if in collapsed state and a minus box (<img src="../../images/tree/minus.gif" width="9" height="9" alt="" />) if in expanded state. If JavaScript is turned off in your browser, all expandable boxes will be displayed expanded - clicking the icons won't do anything then.
                 </li>
                 <li>
-                    <a name="about_documentation_conventions_links_external"></a><h5>External links<a href="#about_documentation_conventions_links_external" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
-                    External links that lead to a page outside of this documentation are being followed by a little icon that represents a window with an arrow in it: <img src="../images/link.gif" border="0" width="7" height="8" alt="" />.
+                    <a id="about_documentation_conventions_links_external"></a><h5>External links<a href="#about_documentation_conventions_links_external" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h5>
+                    External links that lead to a page outside of this documentation are being followed by a little icon that represents a window with an arrow in it: <img src="../images/link.gif" width="7" height="8" alt="" />.
                 </li>
                 <li>
-                    <a name="about_documentation_conventions_links_php"></a><h5>PHP documentation<a href="#about_documentation_conventions_links_php" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
-                    As Coppermine is a PHP-driven app, there are a number of references within it's documentation that relate to technical terms of the programming language PHP. The links that are tagged with a little PHP icon (<img src="../images/php.png" border="0" width="16" height="10" alt="" />) therefore lead to sections within the official PHP documentation on php.net that contain further information or definitions of the term used within the coppermine docs.
+                    <a id="about_documentation_conventions_links_php"></a><h5>PHP documentation<a href="#about_documentation_conventions_links_php" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h5>
+                    As Coppermine is a PHP-driven app, there are a number of references within it's documentation that relate to technical terms of the programming language PHP. The links that are tagged with a little PHP icon (<img src="../images/php.png" width="16" height="10" alt="" />) therefore lead to sections within the official PHP documentation on php.net that contain further information or definitions of the term used within the coppermine docs.
                 </li>
                 <li>
-                    <a name="about_documentation_conventions_links_anchor"></a><h5>Anchors<a href="#about_documentation_conventions_links_anchor" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h5>
-                    On every page within the Coppermine documentation you will find anchor icons (<img src="images/anchor.gif" width="15" height="9" border="0" alt="" />) next to many paragraph headings. They are clickable and will point exactly to the paragraph in front of them. Their purpose mainly is for easier support: if a supporter wants to refer to a particular section of the docs from within his/her posting, he/she can easily perform a right-click, "copy URL" within the documentation on the official coppermine home page  and paste that copied link into his posting. For you as an end user, the anchors can be helpfull if you want to bookmark particular section of the docs.
+                    <a id="about_documentation_conventions_links_anchor"></a><h5>Anchors<a href="#about_documentation_conventions_links_anchor" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h5>
+                    On every page within the Coppermine documentation you will find anchor icons (<img src="images/anchor.gif" width="15" height="9" alt="" />) next to many paragraph headings. They are clickable and will point exactly to the paragraph in front of them. Their purpose mainly is for easier support: if a supporter wants to refer to a particular section of the docs from within his/her posting, he/she can easily perform a right-click, "copy URL" within the documentation on the official coppermine home page  and paste that copied link into his posting. For you as an end user, the anchors can be helpfull if you want to bookmark particular section of the docs.
                 </li>
             </ul>
         </div>
     </div>
 
-    <a name="features"></a><h2>Features<a href="?expand_all=1#features" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+    <a id="features"></a><h2>Features<a href="?expand_all=1#features" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h2>
     <p>Coppermine comes with many features. Below you'll find an <em>incomplete</em> list. Features that are new in cpg1.6.x (compared to cpg1.5.x) are marked accordingly.</p>
     <span class="detail_head_collapsed">Details</span>
     <div class="detail_body border1">
@@ -275,7 +270,7 @@
     	</ul>
     </div>
 
-    <a name="about_next"></a><h2>What's next?<a href="#about_next" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" border="0" alt="" /></a></h2>
+    <a id="about_next"></a><h2>What's next?<a href="#about_next" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h2>
     <p>There's a number of pages within this documentation that beginners should start with:</p>
     <ul>
     	<li><a href="requirements.htm">Minimum requirements</a></li>

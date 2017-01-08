@@ -14,14 +14,7 @@
   $Date$
 **********************************************/
 
-.fullsize-icon {
-	position: absolute;
-	margin: 0;
-	padding: 0;
-	width: 30px;
-	height: 30px;
-	background: transparent url(fullsize-icon.png) no-repeat left top;
-	z-index: 950;
+.thumb_right, .thumb_left, .thump {
 	cursor: url(fullsize.cur), auto;
 }
 
@@ -46,6 +39,9 @@
 
 .fullsize-image {
 	display: block;
+	-webkit-box-shadow:0 2px 16px #000;
+	-moz-box-shadow:0 2px 16px #000;
+	box-shadow:0 2px 16px #000;
 }
 
 .fullsize-title {
@@ -80,7 +76,7 @@ a.fullsize-close {
 }
 
 /* Safari 3.0 and Chrome rules here */
-@media screen and (-webkit-min-device-pixel-ratio:0) {	
+@media screen and (-webkit-min-device-pixel-ratio:0) {
 	a.fullsize-close {
 		margin-top: -14px;
 	}
@@ -91,76 +87,5 @@ a.fullsize-close:hover {
 }
 
 .fullsize-close {
-	cursor: pointer;	
-}
-
-/* Shadows */
-
-.fullsize-sh-wrap {
-	position: absolute;
-	z-index: 980;
-}
-
-.fullsize-sh-top, .fullsize-sh-body, .fullsize-sh-bottom {
-	width: 100%;
-}
-
-.fullsize-sh-top-l, .fullsize-sh-top-m, .fullsize-sh-top-r, .fullsize-sh-bottom-l, .fullsize-sh-bottom-m, .fullsize-sh-bottom-r {
-	background-position: left top;
-	background-repeat: none;
-	background-color: transparent;
-	height: 20px;
-}
-
-.fullsize-sh-top-l {
-	float: left;
-	width: 22px;
-	background-image: url(fullsize-sh-top-l.png);
-}
-
-.fullsize-sh-top-m {
-	margin: 0 22px;
-	background-image: url(fullsize-sh-top-m.png);
-	background-repeat: repeat-x;
-}
-
-.fullsize-sh-top-r {
-	float: right;
-	width: 22px;
-	background-image: url(fullsize-sh-top-r.png);
-}
-
-.fullsize-sh-bottom-l {
-	float: left;
-	width: 22px;
-	height: 24px;
-	background-image: url(fullsize-sh-bottom-l.png);
-}
-
-.fullsize-sh-bottom-m {
-	margin: 0 22px;
-	height: 24px;
-	background-image: url(fullsize-sh-bottom-m.png);
-	background-repeat: repeat-x;
-	background-position: left bottom;
-}
-
-.fullsize-sh-bottom-r {
-	float: right;
-	width: 22px;
-	height: 24px;
-	background-image: url(fullsize-sh-bottom-r.png);
-}
-
-.fullsize-sh-body {
-	background-image: url(fullsize-sh-body-l.png);
-	background-repeat: repeat-y;
-}
-
-.fullsize-sh-body-r {
-	float: right;
-	height: 100%;
-	width: 11px;
-	background-image: url(fullsize-sh-body-r.png);
-	background-repeat: repeat-y;
+	cursor: pointer;
 }

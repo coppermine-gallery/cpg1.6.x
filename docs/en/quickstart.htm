@@ -1,20 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
 <title>Quick-Start Guide - Coppermine Photo Gallery - Documentation &amp; Manual</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="language" content="en" />
 <meta name="copyright" content="Coppermine dev team" />
 <meta name="description" content="Quick-Start Guide" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
-<meta name="MSSmartTagsPreventParsing" content="true" />
-<meta http-equiv="imagetoolbar" content="no" />
 <!--
-  SVN version info:
-
   Coppermine version: 1.6.01
   $HeadURL$
-
 -->
 <link rel="stylesheet" type="text/css" href="../style/style.css" media="all" />
 <link rel="stylesheet" type="text/css" href="../style/screen.css" media="screen" />
@@ -31,9 +25,9 @@
 </div>
 
 <h1>CPG - Coppermine Photo Gallery Quick-Start Guide</h1>
-<p>Congratulations on downloading the most recent, most powerful, and feature rich version of Coppermine, ever.  You've already made the right decision in selecting Coppermine as your photo gallery script and just about now, you're probably wondering how to get started and you want to install <acronym title="Coppermine Photo Gallery">CPG</acronym> <acronym title="as soon as possible">A.S.A.P.</acronym> Right?  Before that, however, make another "right" decision and take some time out to <strong>r</strong>ead <strong>t</strong>he '<strong>f</strong>ascinating' <strong>m</strong>anuals (RTFM) that come with Coppermine.</p>
+<p>Congratulations on downloading the most recent, most powerful, and feature rich version of Coppermine, ever.  You've already made the right decision in selecting Coppermine as your photo gallery script and just about now, you're probably wondering how to get started and you want to install <abbr title="Coppermine Photo Gallery">CPG</abbr> <abbr title="as soon as possible">A.S.A.P.</abbr> Right?  Before that, however, make another "right" decision and take some time out to <strong>r</strong>ead <strong>t</strong>he '<strong>f</strong>ascinating' <strong>m</strong>anuals (RTFM) that come with Coppermine.</p>
 
-<p>Look in the folder that you just extracted your Coppermine files into.  In it, you'll find a folder called 'docs'. All the documentation for <a href="install.htm">installation</a>, <acronym title="Frequently Asked Questions">FAQ</acronym>s, <a href="administration.htm">administration</a>, troubleshooting, modifying <a href="theme.htm">themes</a>, and more is there.  Familiarize yourself with the contents of the various docs to enhance your <acronym titel="Coppermine Photo Gallery">CPG</acronym> experience and create the gallery that you've always dreamed about, in the least amount of time, and with the least amount of set-backs and frustration.  Read it and in no time at all, your friends and relatives will be praising you and gawking at your incredible photo-gallery.</p>
+<p>Look in the folder that you just extracted your Coppermine files into.  In it, you'll find a folder called 'docs'. All the documentation for <a href="install.htm">installation</a>, <abbr title="Frequently Asked Questions">FAQ</abbr>s, <a href="administration.htm">administration</a>, troubleshooting, modifying <a href="theme.htm">themes</a>, and more is there.  Familiarize yourself with the contents of the various docs to enhance your <abbr title="Coppermine Photo Gallery">CPG</abbr> experience and create the gallery that you've always dreamed about, in the least amount of time, and with the least amount of set-backs and frustration.  Read it and in no time at all, your friends and relatives will be praising you and gawking at your incredible photo-gallery.</p>
 
 <p>Even if you are installing this as an upgrade from an older version of Coppermine, you'll still need to read the docs for directions and to understand some of the major changes between CPG 1.5.x and all previous versions. You'll need to know what can and cannot be ported from your previous installation to this new version.  It is important to note that <strong>upgrade</strong> installations are considerably different from <strong>update</strong> installations. For example, in version 1.3.5 (an 'update' to 1.3.4) the Classic theme's theme.php script was a whopping 1487 lines long. In 1.4.x, an upgrade, it's a mere 24. Nope, this is <strong>not</strong> a miss-type. So where did all that code go? Read the docs. Your custom themes from previous versions will undoubtedly need some changes made to it before you can use them in this new version. So, just how do you go about doing that?  <a href="index.htm">RTFM!</a></p>
 
@@ -63,7 +57,7 @@ tool like phpMyAdmin, create a MySQL database.  Write down the database name, th
 <a href="http://coppermine-gallery.net/">coppermine-gallery.net</a> and review the support boards.  Spend a little time looking around and search for your problem. Thousands have gone before you, so a solution for your installation issues have probably been posted, already. (HINT: search using the exact error message you see on your screen.)</p>
 
 <p><strong>Question:</strong>  Ha! Ha! Got You!  It's installed and working!  Now what?<br />
-<strong>Answer:</strong>  1) Wipe that smile off your face. 2) Read the docs, anyway -- twice. 3) You'll need to look at the configuration of Coppermine to make sure it's set up the way you want it.  Log in as the admin, if you aren't already logged in. Click on the Config button.  These are a few of the things you should pay close attention to:<br />
+<strong>Answer:</strong>  1) Wipe that smile off your face. 2) Read the docs, anyway -- twice. 3) You'll need to look at the configuration of Coppermine to make sure it's set up the way you want it.  Log in as the admin, if you aren't already logged in. Click on the Config button.  These are a few of the things you should pay close attention to:</p>
 <ul><li><strong>General Settings:</strong> You should put in your site name and email address, and set your GMT time zone offset.</li>
 <li><strong>Language, Themes &amp; Charset settings:</strong>  Choose your default language.</li>
 <li><strong>Files and thumbnails settings:</strong>  Set the max size for uploaded files to whatever size you prefer in kilobytes .  The default setting is 1024kb.  Make sure that this maximum file size is within the maximum allowed by your webhost. While you are at it, you should also set the "max width or height for uploaded pictures/videos (pixels)" - this will prevent your users from uploading images that are larger than what is desireable.  If you would like Coppermine to automatically resize images that are larger than what you've designated in the Config settings, set "auto resize images that are larger than max width or height" to either:  "Yes:Everyone" or "Yes:User only".  "Everyone" means everybody, including when the administrator(you) batch-adds pictures, and User means just your gallery members when they upload pictures.</li>
@@ -75,7 +69,7 @@ the binaries (make sure it ends with a trailing slash "/").  Do you want to allo
 groups by default: administrators, registered users, anonymous users.
 This is where you control permissions to send e-cards, upload files, etc.  This is also
 where you can set the maximum allowed disk space for each group (disk quota).  It's set to
-1024kb by default.</li></ul></p>
+1024kb by default.</li></ul>
 
 <p><strong>Question:</strong>  I think everything is set correctly.  Can I upload pictures yet?<br />
 <strong>Answer:</strong>  No.  First you need to create an album to put them in.  In the same row as the Config link or button, you'll see a link called Albums.  Click on it and you are taken to a screen that allows you to create an album.  Click "New Album", then rename it to whatever you'd like.  Click "Apply changes" and presto!  You now have an album.</p>
