@@ -16,25 +16,26 @@
 var linebreak = '\n';
 
 $(function() {
-    $("#toc_overall").treeview({
-        collapsed: true,
-        animated: "medium",
-        control:"#sidetreecontrol"
-    });
-    $(".cpg_zebra tr:even").addClass("tableb");
-    $(".cpg_zebra tr:odd").addClass("tableb_alternate");
+	$("#toc_overall").treeview({
+		collapsed: true,
+		animated: "medium",
+		control:"#sidetreecontrol"
+	});
+	$(".cpg_zebra tr:even").addClass("tableb");
+	$(".cpg_zebra tr:odd").addClass("tableb_alternate");
 });
 
 function cpgDocToc() {
-  if (getUrlParameters('hide_nav') == 1) {
-    $('#toc').replaceWith('');
-    return;
-  }
+	if (getUrlParameters('hide_nav') == 1) {
+	$('#toc').replaceWith('');
+	return;
+}
+
 var doc_toc = '';
 doc_toc += '<div id="toc_collapsed">\n';
 doc_toc += '<h6><a href="toc.htm">Table of contents</a></h6>\n';
 doc_toc += 'Move your mouse here to expand\n';
-doc_toc += '<div align="center"><img src="../../images/icons/downdown.png" border="0" width="10" height="10" alt="" /></div>\n';
+doc_toc += '<div class="tdcen"><img src="../../images/icons/downdown.png" width="10" height="10" alt="" /></div>\n';
 doc_toc += '</div>\n';
 doc_toc += '<div id="toc_expanded" style="display:none;">\n';
 doc_toc += '<h6>Table of contents (<a href="../index.htm">documentation language selection</a>)</h6>\n';
@@ -1504,145 +1505,134 @@ $('#toc').replaceWith('<div id="toc">' + doc_toc + '</div>');
 }
 
 
-
 function cpgDocHeader() {
-    // Only display the header if the docs are not included
-    if (getUrlParameters('hide_nav') == 1) {
-        return;
-    }
-    $('#docheader').text('Coppermine Photo Gallery v1.6.01: Documentation and Manual');
-    $('#docheader').after('<br clear="all" />\n<a name="top"></a>');
-    $('#docheader').before('<img src="../images/coppermine-logo.png" alt="Coppermine Photo Gallery - Your Online Photo Gallery" align="left" />\n');
+	// Only display the header if the docs are not included
+	if (getUrlParameters('hide_nav') == 1) {
+		return;
+	}
+	$('#docheader').text('Coppermine Photo Gallery v1.6.01: Documentation and Manual');
+	$('#docheader').after('<br class="clrb" />\n<a id="top"></a>');
+	$('#docheader').before('<img style="float:left;height:70px" src="../images/coppermine-logo.png" alt="Coppermine Photo Gallery - Your Online Photo Gallery" />\n');
 }
 
 function cpgDocSearch() {
-    // Only display the header if the docs are not included
-    if (getUrlParameters('hide_nav') == 1) {
-        return;
-    }
-    var doc_search = '';
-    doc_search += '  <div id="doc_search" style="display:none;">\n';
-    doc_search += '    <form action="http://www.google.com/cse" id="cse-search-box">\n';
-    doc_search += '      <input type="hidden" name="cx" value="009353514429642786404:keefjtiy3lo" />\n';
-    doc_search += '      <input type="text" name="q" size="25" />\n';
-    doc_search += '      <input type="submit" name="sa" value="search docs" style="font-size:9px;" />\n';
-    doc_search += '    </form>\n';
-    doc_search += '    <script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>\n';
-    doc_search += '  </div>\n';
-    $('#toc').append(doc_search);
+	// Only display the header if the docs are not included
+	if (getUrlParameters('hide_nav') == 1) {
+		return;
+	}
+	var doc_search = '';
+	doc_search += '  <div id="doc_search" style="display:none;">\n';
+	doc_search += '    <form action="http://www.google.com/cse" id="cse-search-box">\n';
+	doc_search += '      <input type="hidden" name="cx" value="009353514429642786404:keefjtiy3lo" />\n';
+	doc_search += '      <input type="text" name="q" size="25" />\n';
+	doc_search += '      <input type="submit" name="sa" value="search docs" style="font-size:9px;" />\n';
+	doc_search += '    </form>\n';
+	doc_search += '    <script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>\n';
+	doc_search += '  </div>\n';
+	$('#toc').append(doc_search);
 }
 
 function cpgDocFooter() {
-  var overall_doc_footer = '';
-  overall_doc_footer += '</div>';
-  overall_doc_footer += '<div class="backtotop">';
-  overall_doc_footer += '<a href="#top">Back to Top</a>';
-  overall_doc_footer += '</div>';
-  $('#doc_footer').append(overall_doc_footer);
+	var overall_doc_footer = '';
+	overall_doc_footer += '</div>';
+	overall_doc_footer += '<div class="backtotop">';
+	overall_doc_footer += '<a href="#top">Back to Top</a>';
+	overall_doc_footer += '</div>';
+	$('#doc_footer').append(overall_doc_footer);
 }
 
-
-
 function dateRevision() {
-  // strip the unneeded data from last_changed and revision fields
-  var lastChangeDate = $('#doc_last_changed').text();
-  var lastChangeDate = lastChangeDate.replace('$', '');
-  var lastChangeDate = lastChangeDate.replace('$', '');
-  var lastChangeDate = lastChangeDate.replace('LastChangedDate: ', '');
-  var lastChangeDate = lastChangeDate.replace(/Date: /g, '');
-  $('#doc_last_changed').text('About this document: ' + 'last changed on ' + lastChangeDate);
+	// strip the unneeded data from last_changed and revision fields
+	var lastChangeDate = $('#doc_last_changed').text();
+	lastChangeDate = lastChangeDate.replace('$', '');
+	lastChangeDate = lastChangeDate.replace('$', '');
+	lastChangeDate = lastChangeDate.replace('LastChangedDate: ', '');
+	lastChangeDate = lastChangeDate.replace(/Date: /g, '');
+	$('#doc_last_changed').text('About this document: ' + 'last changed on ' + lastChangeDate);
 }
 
 function getUrlParameters(name)
 {
-  // Taken from http://www.netlobo.com/url_query_string_javascript.html
-  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-  var regexS = "[\\?&]"+name+"=([^&#]*)";
-  var regex = new RegExp(regexS);
-  var results = regex.exec(window.location.href);
-  if(results == null) {
-    return '';
-  } else {
-    return results[1];
-  }
+	// Taken from http://www.netlobo.com/url_query_string_javascript.html
+	name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+	var regexS = "[\\?&]"+name+"=([^&#]*)";
+	var regex = new RegExp(regexS);
+	var results = regex.exec(window.location.href);
+	if (results === null) {
+		return '';
+	} else {
+		return results[1];
+	}
 }
 
 function cpgDocTranslationWarning() {
-  $('#doc_en_only').replaceWith('<div class="cpg_message_validation"><h1>Not translated yet</h1><p>This page has not been translated yet and therefore appears in English.</p><p>Translators wanted: take a look at this page - doesn\'t look too complicated, does it? If you\'re convinced that you could translate this page, please check the official Coppermine site; we\'re looking forward to your contribution.</div>');
-  $('#doc_en_partial').replaceWith('<div class="cpg_message_warning"><h1>Partial translation</h1><p>This page hasn\'t been fully translated so far and therefore partially shows in your language and partially in English.</p><p>Translators wanted: take a look at this page - doesn\'t look too complicated, does it? If you\'re convinced that you could translate this page, please check the official Coppermine site; we\'re looking forward to your contribution.</div>');
+	$('#doc_en_only').replaceWith('<div class="cpg_message_validation"><h1>Not translated yet</h1><p>This page has not been translated yet and therefore appears in English.</p><p>Translators wanted: take a look at this page - doesn\'t look too complicated, does it? If you\'re convinced that you could translate this page, please check the official Coppermine site; we\'re looking forward to your contribution.</div>');
+	$('#doc_en_partial').replaceWith('<div class="cpg_message_warning"><h1>Partial translation</h1><p>This page hasn\'t been fully translated so far and therefore partially shows in your language and partially in English.</p><p>Translators wanted: take a look at this page - doesn\'t look too complicated, does it? If you\'re convinced that you could translate this page, please check the official Coppermine site; we\'re looking forward to your contribution.</div>');
 }
 
-$(document).ready(function()
-{
-    var $_GET = {};
-    document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
-        function decode(s) {
-            return decodeURIComponent(s).replace(/\+/g, " ");
-        }
-        $_GET[decode(arguments[1])] = decode(arguments[2]);
-    });
-    //hide all elements with class detail_body
-    $(".detail_body").hide();
-    if ($_GET["expand_all"] == 1) { // Show all details and get rid of the details toggle if the GET parameter expand_all is set
-        $('.detail_body').show();
-        //$('.detail_head_collapsed').replaceWith('');
-    }
-    //toggle the component with class detail_body
-    $(".detail_head_collapsed").click(function()
-    {
-        $(this).toggleClass("detail_head_expanded").next(".detail_body").slideToggle(600);
-    });
-    $(".detail_expand_all").click(function()
-    {
-        $(".detail_body").slideDown(1200);
-        $(".detail_head_collapsed").toggleClass("detail_head_expanded");
-        $(".detail_expand_all").hide();
-        $(".detail_collapse_all").show();
-
-    });
-    $(".detail_collapse_all").click(function()
-    {
-        $(".detail_body").slideUp(1200);
-        $(".detail_head_collapsed").toggleClass("detail_head_expanded");
-        $(".detail_expand_all").show();
-        $(".detail_collapse_all").hide();
-
-    });
-    $(".detail_toggle_all").click(function()
-    {
-        $(".detail_body").slideToggle(600);
-        $(".detail_head_collapsed").toggleClass("detail_head_expanded");
-    });
-    cpgDocHeader();
-    cpgDocTranslationWarning();
-    cpgDocToc();
-    $("#tree").treeview({
-        collapsed: true,
-        unique: true,
-        animated: "slow",
-        persist: "location"
-    });
-    cpgDocSearch();
-    cpgDocFooter();
-    dateRevision();
-    $("a.nolink").click(function(){
-      return false;
-    });
-    var tocTmr;
-    // Fade the toc in if it is needed
-    $("#toc").bind("mouseenter",function(){
-    	clearTimeout(tocTmr);
-        $("#toc_collapsed").hide();
-        $("#toc_expanded").fadeIn('slow');
-        $("#doc_search").show();
-    });
-    // Fade the toc out if it isn't used
-    $("#toc").bind("mouseleave",function(){
-    	tocTmr = setTimeout(function(){
-        	$("#doc_search").hide();
-        	$("#toc_expanded").fadeOut('slow');
-        	$("#toc_collapsed").show();
-        }, 3000);
-    });
-    
+$(document).ready(function() {
+	var $_GET = {};
+	document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
+		function decode(s) {
+			return decodeURIComponent(s).replace(/\+/g, " ");
+		}
+		$_GET[decode(arguments[1])] = decode(arguments[2]);
+	});
+	//hide all elements with class detail_body
+	$(".detail_body").hide();
+	if ($_GET["expand_all"] == 1) { // Show all details and get rid of the details toggle if the GET parameter expand_all is set
+		$('.detail_body').show();
+		//$('.detail_head_collapsed').replaceWith('');
+	}
+	//toggle the component with class detail_body
+	$(".detail_head_collapsed").click(function() {
+		$(this).toggleClass("detail_head_expanded").next(".detail_body").slideToggle(600);
+	});
+	$(".detail_expand_all").click(function() {
+		$(".detail_body").slideDown(1200);
+		$(".detail_head_collapsed").toggleClass("detail_head_expanded");
+		$(".detail_expand_all").hide();
+		$(".detail_collapse_all").show();
+	});
+	$(".detail_collapse_all").click(function() {
+		$(".detail_body").slideUp(1200);
+		$(".detail_head_collapsed").toggleClass("detail_head_expanded");
+		$(".detail_expand_all").show();
+		$(".detail_collapse_all").hide();
+	});
+	$(".detail_toggle_all").click(function() {
+		$(".detail_body").slideToggle(600);
+		$(".detail_head_collapsed").toggleClass("detail_head_expanded");
+	});
+	cpgDocHeader();
+	cpgDocTranslationWarning();
+	cpgDocToc();
+	$("#tree").treeview({
+		collapsed: true,
+		unique: true,
+		animated: "slow",
+		persist: "location"
+	});
+	cpgDocSearch();
+	cpgDocFooter();
+	dateRevision();
+	$("a.nolink").click(function() {
+		return false;
+	});
+	var tocTmr;
+	// Fade the toc in if it is needed
+	$("#toc").bind("mouseenter",function() {
+		clearTimeout(tocTmr);
+		$("#toc_collapsed").hide();
+		$("#toc_expanded").fadeIn('slow');
+		$("#doc_search").show();
+	});
+	// Fade the toc out if it isn't used
+	$("#toc").bind("mouseleave",function() {
+		tocTmr = setTimeout(function(){
+			$("#doc_search").hide();
+			$("#toc_expanded").fadeOut('slow');
+			$("#toc_collapsed").show();
+		}, 2000);
+	});
 });
