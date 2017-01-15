@@ -16,6 +16,9 @@
 
 .thumb_right, .thumb_left, .thump {
 	cursor: url(fullsize.cur), auto;
+	cursor: zoom-in;
+	cursor: -webkit-zoom-in;
+	cursor: -moz-zoom-in;
 }
 
 .fullsize-loading, .fullsize-wrapper {
@@ -39,9 +42,9 @@
 
 .fullsize-image {
 	display: block;
-	-webkit-box-shadow:0 2px 16px #000;
-	-moz-box-shadow:0 2px 16px #000;
-	box-shadow:0 2px 16px #000;
+	-webkit-box-shadow:0 0 16px #AAA;
+	-moz-box-shadow:0 0 16px #AAA;
+	box-shadow:0 0 16px #AAA;
 }
 
 .fullsize-title {
