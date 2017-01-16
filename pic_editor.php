@@ -244,8 +244,8 @@ $json_script = "<script type=\"text/javascript\">var js_vars = eval('($json_vars
     echo $json_script;
     ?>
     <script type="text/javascript" src="js/pic_editor.js"></script>
-    <script src="js/<?php echo CPG_JQUERY_VERSION; ?>" type="text/javascript"></script>
-    <script src="js/scripts.js" type="text/javascript"></script>
+    <script type="text/javascript" src="<?php echo CPG_JQUERY_VERSION; ?>"></script>
+    <script type="text/javascript" src="js/scripts.js"></script>
 <?php }?>
     <style type="text/css">
     #lefttopdiv{
