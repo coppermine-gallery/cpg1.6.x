@@ -1427,7 +1427,7 @@ $config_data = array(
     'purge_expired_bans' => array(
       'type'          => 'checkbox',
       'default_value' => '0',
-      'help_link'     => ' f=configuration.htm&amp;as=admin_user_purge_expired_bans&amp;ae=admin_user_purge_expired_bans_end',
+      'help_link'     => 'f=configuration.htm&amp;as=admin_user_purge_expired_bans&amp;ae=admin_user_purge_expired_bans_end',
     ),
     'report_post' => array(
       'type'          => 'checkbox',
