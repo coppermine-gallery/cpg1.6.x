@@ -1689,9 +1689,9 @@ EOT;
     if (!empty($JS['includes'])) {
         // Bring the jquery core library to the very top of the list
         if (in_array(CPG_JQUERY_VERSION, $JS['includes']) == TRUE) {
-            $key = array_search(GPG_JQUERY_VERSION, $JS['includes']);
+            $key = array_search(CPG_JQUERY_VERSION, $JS['includes']);
             unset($JS['includes'][$key]);
-            array_unshift($JS['includes'], GPG_JQUERY_VERSION);
+            array_unshift($JS['includes'], CPG_JQUERY_VERSION);
         }
         $JS['includes'] = CPGPluginAPI::filter('javascript_includes',$JS['includes']);
         // Include all the files which were set using js_include() function
@@ -4119,7 +4119,7 @@ function theme_display_fullsize_pic()
     }
 
     $charset = ($CONFIG['charset'] == 'language file' ? $lang_charset : $CONFIG['charset']);
-    $jquery_path = GPG_JQUERY_VERSION;
+    $jquery_path = CPG_JQUERY_VERSION;
     $fullsize_html = <<<EOT
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -4327,7 +4327,7 @@ function theme_page_title($section)
 ** Section <<<$template_sidebar>>> - START
 ******************************************************************************/
 // HTML template for sidebar
-$jquery_path = GPG_JQUERY_VERSION;
+$jquery_path = CPG_JQUERY_VERSION;
 $template_sidebar = <<<EOT
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="{LANG_DIR}">
