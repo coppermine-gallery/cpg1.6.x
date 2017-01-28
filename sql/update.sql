@@ -21,10 +21,6 @@ UPDATE CPG_users SET `user_lastvisit`='1000-01-01 00:00:00' WHERE `user_lastvisi
 UPDATE CPG_users SET `user_regdate`='1000-01-01 00:00:00' WHERE `user_regdate`='0000-00-00 00:00:00';
 UPDATE CPG_comments SET `msg_date`='1000-01-01 00:00:00' WHERE `msg_date`='0000-00-00 00:00:00';
 UPDATE CPG_pictures SET `mtime`='1000-01-01 00:00:00' WHERE `mtime`='0000-00-00 00:00:00';
-# And for good measure, the datetime defaults
-ALTER TABLE CPG_users CHANGE `user_lastvisit` `user_lastvisit` DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00', CHANGE `user_regdate` `user_regdate` DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00';
-ALTER TABLE CPG_comments CHANGE `msg_date` `msg_date` DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00';
-ALTER TABLE CPG_pictures CHANGE `mtime` `mtime` DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00';
 
 INSERT INTO CPG_config VALUES ('upload_create_album_directory', '1');
 INSERT INTO CPG_config VALUES ('ecard_captcha', '1');
