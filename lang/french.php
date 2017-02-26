@@ -390,7 +390,7 @@ $lang_smilies_inc_php['Cool'] = 'Cool';
 $lang_smilies_inc_php['Laughing'] = 'Rire';
 $lang_smilies_inc_php['Mad'] = 'Fou';
 $lang_smilies_inc_php['Razz'] = 'Razz';
-$lang_smilies_inc_php['Embarassed'] = 'Embarrassé';
+$lang_smilies_inc_php['Embarrassed'] = 'Embarrassé';
 $lang_smilies_inc_php['Crying or Very sad'] = 'Pleure ou très triste';
 $lang_smilies_inc_php['Evil or Very Mad'] = 'Diabolique ou très en colère';
 $lang_smilies_inc_php['Twisted Evil'] = 'Sadique';
@@ -1059,7 +1059,7 @@ if (defined('DISPLAYIMAGE_PHP')){
  $lang_display_image_php['set_player'] = 'Changer le lecteur';
 
  $lang_picinfo['title'] ='Informations sur l\'image';
- $lang_picinfo['album name'] = 'Nom de l\'album';
+ $lang_picinfo['Album name'] = 'Nom de l\'album';
  $lang_picinfo['Rating'] = 'Note (%s votes)';
  $lang_picinfo['Date Added'] = 'Date d\'ajout';
  $lang_picinfo['Dimensions'] = 'Dimensions';
@@ -1296,7 +1296,7 @@ if (defined('EDITPICS_PHP')) {
  $lang_editpics_php['note_approve_public'] = 'Les fichier déplacés vers un album publique doivent être approuvés par un administrateur.';
  $lang_editpics_php['note_approve_private'] = 'Les fichiers déplacés vers un album privé doivent être approuvés par un administrateur.' ;
  $lang_editpics_php['note_edit_control'] = 'Les fichiers déplacés vers un album public ne peuvent plus être modifiés.';
- $lang_editpics_php['confirm_move_control'] = 'Vous n\'êtes pas autorisé à modifier les fichiers dans les albums publics.\\nEtes-vous sôr de vouloir déplacer ce fichier vers un album public ?';
+ $lang_editpics_php['confirm_move'] = 'Vous n\'êtes pas autorisé à modifier les fichiers dans les albums publics.\\nEtes-vous sôr de vouloir déplacer ce fichier vers un album public ?';
  $lang_editpics_php['success_changes'] = 'Modifications sauvegardées avec succès';
 }
 
@@ -1615,7 +1615,7 @@ if (defined('LOGIN_PHP')) {
 if (defined('LOGOUT_PHP')) {
  $lang_logout_php['logout'] = 'Déconnexion';
  $lang_logout_php['bye'] = 'Au revoir %s';
- $lang_logout_php['err_not_loged_in'] = 'Vous n\'êtes pas identifié (e)';
+ $lang_logout_php['err_not_logged_in'] = 'Vous n\'êtes pas identifié (e)';
 }
 
 // ----------------------- //
@@ -2329,7 +2329,7 @@ if (defined('UTIL_PHP')) {
  $lang_util_php['title_set_to'] = 'titre changé en';
  $lang_util_php['submit_form'] = 'soumettre';
  $lang_util_php['titles_updated'] = '%s Titres mis à jour.';
- $lang_util_php['updated_succesfully'] = 'mise à jour effectuée avec succès';
+ $lang_util_php['updated_successfully'] = 'mise à jour effectuée avec succès';
  $lang_util_php['error_create'] = 'Erreur lors de la création';
  $lang_util_php['continue'] = 'Traiter d\'autres images';
  $lang_util_php['main_success'] = 'Le fichier %s est maintenant utilisé comme image principale';
@@ -2356,8 +2356,8 @@ if (defined('UTIL_PHP')) {
  $lang_util_php['filename_us'] = 'Changer 2003_11_23_13_20_20.jpg en 11/23/2003 13:20';
  $lang_util_php['filename_time'] = 'Changer 2003_11_23_13_20_20.jpg en 13:20';
  $lang_util_php['notitle'] = 'Appliquer uniquement aux fichiers sans titres';
- $lang_util_php['delete_title'] = 'Supprimer le titre des photos';
- $lang_util_php['delete_title_explanation'] = 'Cela va supprimer l\'ensemble des titres des photos de l\'album sélectionné.';
+ //$lang_util_php['delete_title'] = 'Supprimer le titre des photos';
+ //$lang_util_php['delete_title_explanation'] = 'Cela va supprimer l\'ensemble des titres des photos de l\'album sélectionné.';
  $lang_util_php['delete_original'] = 'Supprimer les photos dans leur taille d\'origine';
  $lang_util_php['delete_original_explanation'] = 'Cela va supprimer les photos à la taille d\'origine';
  $lang_util_php['delete_intermediate'] = 'Supprimer les images intermédiaires';
@@ -2415,7 +2415,6 @@ if (defined('UTIL_PHP')) {
  $lang_util_php['fullpic_error'] = 'Le fichier %s n\'existe pas';
  $lang_util_php['no_prob_detect'] = 'Pas de problèmes détectés';
  $lang_util_php['no_prob_found'] = 'Pas de problèmes trouvés.';
- $lang_util_php['no_category'] = 'Pas de catégorie';
 $lang_util_php['keyword_convert'] = 'Convertir le séparateur de mots-clés';
 $lang_util_php['keyword_from_to'] = 'Convertir le séparateur de mots-clés %s en %s';
 $lang_util_php['keyword_set'] = 'Paramétrer le séparateur de mots-clés à la nouvelle valeur';
