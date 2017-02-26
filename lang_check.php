@@ -88,6 +88,7 @@ echo <<<EOT
 		padding:6px;
 		border:1px solid #CCC;
 		background-color:#FFE;
+		overflow-x: scroll;
 	}
 	h2 {
 		margin-top:4px;
