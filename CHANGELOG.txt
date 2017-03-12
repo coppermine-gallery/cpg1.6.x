@@ -22,6 +22,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2017-03-12 [B] Correct use of default database when bridged (Github issue #11) {ron4mac}
 2017-02-15 [S] Fixed possible directory traversal vulnerability (thread ID 78978) {eenemeenemuu}
 2017-01-28 [B] Correct 'zero' datetime values in database during update so ALTER TABLE does not fail {ron4mac}
 2017-01-16 [O] Use one-time declared define for jQuery version path {ron4mac}

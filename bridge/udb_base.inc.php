@@ -27,7 +27,7 @@ class core_udb
 
 	protected function connect ($obj = null)
 	{
-		global $CONFIG;
+		global $CONFIG, $CPGDB;
 
 		// Define whether we can join tables or not in SQL queries (same host & same db or user or positive check)
 		$this->can_join_tables = ($this->db['host'] == $CONFIG['dbserver'] && ($this->db['name'] == $CONFIG['dbname'] || $this->db['user'] == $CONFIG['dbuser'] || $this->query("SELECT NULL FROM ".$this->usertable." LIMIT 1")));
@@ -47,7 +47,8 @@ class core_udb
 					die("<strong>Coppermine critical error</strong>:<br />Unable to connect to UDB database !<br /><br />Error: <strong>" . $this->dbObj->getError() . "</strong>");
 				}
 			} else {
-				$this->dbObj = null;
+				// Use default database
+				$this->dbObj = $CPGDB;
 			}
 		}
 	}
