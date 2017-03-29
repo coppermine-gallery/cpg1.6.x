@@ -63,6 +63,8 @@ class CPG_Dbase
 
 	public function getError ()
 	{
+		if (!$this->errnum) $this->errnum = mysqli_errno($this->linkid);
+		if (!$this->error) $this->error = mysqli_error($this->linkid);
 		return $this->errnum . ' : ' . $this->error;
 	}
 

@@ -6069,9 +6069,9 @@ function album_selection_options($selected = 0)
     if (GALLERY_ADMIN_MODE) {
         $result = cpg_db_query("SELECT cid, rgt, name FROM {$CONFIG['TABLE_CATEGORIES']} ORDER BY lft");
     } elseif (USER_ID) {
-        $result = cpg_db_query("SELECT DISTINCT c.cid, c.rgt, c.name FROM {$CONFIG['TABLE_ALBUMS']} AS a RIGHT JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON a.category = c.cid WHERE c.cid = " . USER_GAL_CAT . " OR a.owner = " . USER_ID . " $uploads_yes ORDER BY lft");
+        $result = cpg_db_query("SELECT DISTINCT c.cid, c.lft, c.rgt, c.name FROM {$CONFIG['TABLE_ALBUMS']} AS a RIGHT JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON a.category = c.cid WHERE c.cid = " . USER_GAL_CAT . " OR a.owner = " . USER_ID . " $uploads_yes ORDER BY lft");
     } else {
-        $result = cpg_db_query("SELECT DISTINCT c.cid, c.rgt, c.name FROM {$CONFIG['TABLE_ALBUMS']} AS a RIGHT JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON a.category = c.cid WHERE 0 $uploads_yes ORDER BY lft");
+        $result = cpg_db_query("SELECT DISTINCT c.cid, c.lft, c.rgt, c.name FROM {$CONFIG['TABLE_ALBUMS']} AS a RIGHT JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON a.category = c.cid WHERE 0 $uploads_yes ORDER BY lft");
     }
 
     $cats = array();
