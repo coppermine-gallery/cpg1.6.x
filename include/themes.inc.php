@@ -2840,7 +2840,7 @@ function theme_display_thumbnails(&$thumb_list, $nbThumb, $album_name, $aid, $ca
     }
 
     $thumbcols = $CONFIG['thumbcols'];
-    $cell_width = ceil(100 / $CONFIG['thumbcols']) . '%';
+    $cell_width = floor((100 / $CONFIG['thumbcols']) * 100) / 100 . '%';
 
     $tabs_html = $display_tabs ? create_tabs($nbThumb, $page, $total_pages, $theme_thumb_tab_tmpl) : '';
 
