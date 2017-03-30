@@ -61,6 +61,9 @@ class CPG_Dbase
 
 	public function getError ()
 	{
+		$einf = $this->_instance->errorInfo();
+		$this->errnum = $einf[1];
+		$this->error = $einf[2];
 		return $this->errnum . ' : ' . $this->error;
 	}
 
@@ -120,17 +123,16 @@ class CPG_DbaseResult
 
 	public function result ($row=0, $fld=0, $free=false)
 	{
-		$row = $this->qresult->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_ABS, $row);
+		$r = $this->qresult->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_ABS, $row);
 		if ($free) $this->free();
 		return $r ? $r[$fld] : false;
 	}
 
 	public function numRows ($free=false)
 	{
-		$i = 0;
-		if ($this->qresult) while ($this->qresult->fetch(PDO::FETCH_NUM)) { $i++; }
+		$n = $this->qresult->rowCount();
 		if ($free) $this->free();
-		return $i;
+		return $n;
 	}
 
 	public function free ()

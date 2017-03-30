@@ -23,7 +23,7 @@ Changelog
 *********************************************
 
 2017-03-29 [B] Correction for strict SQL DISTINCT use (thread ID 78952 msg 383016) {ron4mac}
-2017-03-29 [M] Improve mysqli error reporting {ron4mac}
+2017-03-29 [M] Improve mysqli & pdo:mysql error reporting {ron4mac}
 2017-03-12 [B] Correct use of default database when bridged (Github issue #11) {ron4mac}
 2017-02-15 [S] Fixed possible directory traversal vulnerability (thread ID 78978) {eenemeenemuu}
 2017-01-28 [B] Correct 'zero' datetime values in database during update so ALTER TABLE does not fail {ron4mac}
