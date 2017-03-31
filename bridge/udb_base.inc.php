@@ -518,7 +518,7 @@ class core_udb
 					. "FROM {$CONFIG['TABLE_ALBUMS']} AS a "
 						. "INNER JOIN {$this->usertable} AS u ON u.{$f['user_id']} = a.category - " . FIRST_USER_CAT . " "
 						. "INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.aid = a.aid "
-					. "WHERE ((ISNULL(approved) OR approved='YES') AND category > " . FIRST_USER_CAT . ") $FORBIDDEN_SET GROUP BY user_id "
+					. "WHERE ((ISNULL(approved) OR approved='YES') AND category > " . FIRST_USER_CAT . ") $FORBIDDEN_SET GROUP BY category, user_id "
 					. "ORDER BY category "
 					. "LIMIT $lower_limit, $users_per_page ";
 			$result = cpg_db_query($sql);
