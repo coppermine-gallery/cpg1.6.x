@@ -1081,7 +1081,7 @@ function get_private_album_set($aid_str="")
 
     if ($result->numRows()) {
 
-        while ( ($album = $result->fetchAssoc(true)) ) {
+        while ( ($album = $result->fetchAssoc()) ) {
             $FORBIDDEN_SET_DATA[] = $album['aid'];
         } // while
 
