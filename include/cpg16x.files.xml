@@ -1633,10 +1633,7 @@
   </element>
   <element>
     <fullpath>docs/js/fullsize/jquery.fullsize.minified.js</fullpath>
-    <version>1.6.01</version>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>ced2807d65f03e916a3889999b23fbae</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>docs/js/help.js</fullpath>
@@ -1720,21 +1717,15 @@
   </element>
   <element>
     <fullpath>docs/tutorial/cpg1.5.x_plugin_template_v1.1.zip</fullpath>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>44b38fc0d796149d3890690710877616</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>docs/tutorial/cpg1.5_plugin_hello-world_v2.1.zip</fullpath>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>8b28c9585ec0c09af08209f1007ae27c</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>docs/tutorial/cpg1.5_plugin_hello-world_v2.2.1.zip</fullpath>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>1449599403aaa36a3b031109d83b7a39</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>docs/tutorial/matching_theme.htm</fullpath>
