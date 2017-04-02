@@ -1559,9 +1559,7 @@
   </element>
   <element>
     <fullpath>docs/js/fullsize/fullsize-icon.png</fullpath>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>4c690bd1c7f82bfd42429eaed55b2c7b</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>docs/js/fullsize/fullsize-loading-bg.png</fullpath>
@@ -1577,51 +1575,35 @@
   </element>
   <element>
     <fullpath>docs/js/fullsize/fullsize-sh-body-l.png</fullpath>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>e5e9e8ca81d3cb83f18a952e5aa3b9fb</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>docs/js/fullsize/fullsize-sh-body-r.png</fullpath>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>d3423c178e62f7dadf6c21a22c9c45bc</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>docs/js/fullsize/fullsize-sh-bottom-l.png</fullpath>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>5745675e3141d1ad5c597f3d2a28720f</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>docs/js/fullsize/fullsize-sh-bottom-m.png</fullpath>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>0c2e6bf13b78b9a3c299c8231c362c7c</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>docs/js/fullsize/fullsize-sh-bottom-r.png</fullpath>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>7796b85a3b6f449610762d2e462c3445</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>docs/js/fullsize/fullsize-sh-top-l.png</fullpath>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>8946a66bd49275fe88031916b595b4ed</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>docs/js/fullsize/fullsize-sh-top-m.png</fullpath>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>b374033e790ef738b8bdd9a408c02a57</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>docs/js/fullsize/fullsize-sh-top-r.png</fullpath>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>66491c6d1054e06c790c80287cb2406e</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>docs/js/fullsize/fullsize-title-bg.png</fullpath>
@@ -1652,7 +1634,7 @@
   <element>
     <fullpath>docs/js/fullsize/jquery.fullsize.minified.js</fullpath>
     <version>1.6.01</version>
-    <status>mandatory</status>
+    <status>optional</status>
     <permission>read</permission>
     <hash>ced2807d65f03e916a3889999b23fbae</hash>
   </element>
@@ -1738,7 +1720,7 @@
   </element>
   <element>
     <fullpath>docs/tutorial/cpg1.5.x_plugin_template_v1.1.zip</fullpath>
-    <status>mandatory</status>
+    <status>optional</status>
     <permission>read</permission>
     <hash>44b38fc0d796149d3890690710877616</hash>
   </element>
