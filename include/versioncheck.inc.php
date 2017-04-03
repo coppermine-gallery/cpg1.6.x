@@ -10,7 +10,7 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
 **********************************************/
 
@@ -734,8 +734,8 @@ function cpgVersioncheckConnectRepository() {
     // Perform the repository lookup and xml creation --- start
     //$displayOption_array['do_not_connect_to_online_repository'] = 1;
     $xmlFN = str_replace('.', '', $majorVersion) . '.files.xml';
-	//$remoteURL = 'https://github.com:443/coppermine-gallery/cpg1.6.x/raw/v' . COPPERMINE_VERSION . '/include/' . $xmlFN;
-	$remoteURL = 'https://github.com:443/coppermine-gallery/cpg1.6.x/raw/master/include/' . $xmlFN;
+	$remoteURL = 'https://github.com:443/coppermine-gallery/cpg1.6.x/raw/v' . COPPERMINE_VERSION . '/include/' . $xmlFN;
+	//$remoteURL = 'https://github.com:443/coppermine-gallery/cpg1.6.x/raw/master/include/' . $xmlFN;
     $altRemoteURL = 'http://coppermine-gallery.net/' . $xmlFN;
     $localFile = 'include/' . $xmlFN;
     $remoteConnectionFailed = '';
