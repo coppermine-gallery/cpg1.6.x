@@ -14,7 +14,7 @@
   $HeadURL$
 **********************************************/
 
-define('COPPERMINE_VERSION', '1.6.01');
+define('COPPERMINE_VERSION', '1.6.03');
 define('COPPERMINE_VERSION_STATUS', 'stable');
 // Define path to jQuery for this version of Coppermine
 define('CPG_JQUERY_VERSION', 'js/jquery-1.4.2.js');

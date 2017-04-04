@@ -1506,11 +1506,11 @@ $('#toc').replaceWith('<div id="toc">' + doc_toc + '</div>');
 
 
 function cpgDocHeader() {
+	$('#docheader').text('Coppermine Photo Gallery v1.6.03: Documentation and Manual');
 	// Only display the header if the docs are not included
 	if (getUrlParameters('hide_nav') == 1) {
 		return;
 	}
-	$('#docheader').text('Coppermine Photo Gallery v1.6.01: Documentation and Manual');
 	$('#docheader').after('<br class="clrb" />\n<a id="top"></a>');
 	$('#docheader').before('<img style="float:left;height:70px" src="../images/coppermine-logo.png" alt="Coppermine Photo Gallery - Your Online Photo Gallery" />\n');
 }
