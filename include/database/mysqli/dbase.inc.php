@@ -124,7 +124,7 @@ class CPG_DbaseResult
 	{
 		$return = null;
 		if (mysqli_data_seek($this->qresult, $row)) {
-			$row = $this->qresult->fetch_row();
+			$row = $this->qresult->fetch_array();
 			$return = $row[$fld];
 		}
 		if ($free) $this->free();
