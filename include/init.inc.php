@@ -170,7 +170,7 @@ $CONFIG['TABLE_DICT']          = $CONFIG['TABLE_PREFIX'].'dict';
 
 // Connect to database
 list($db_ext, $db_sub) = explode(':', $CONFIG['dbtype'].':');
-$db_ext = $db_ext ?: 'mysql';
+$db_ext = $db_ext ?: 'mysqli';
 require 'include/database/'.$db_ext.'/dbase.inc.php';
 $CPGDB = new CPG_Dbase($CONFIG);
 
