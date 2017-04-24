@@ -53,6 +53,8 @@ if (!USER_ID) { // visitor is guest
     }
 }
 
+$expand_array = array();
+
 // do the stuff here when the form has been submit
 if ($superCage->post->keyExists('submit')) {
     //Check if the form token is valid
@@ -70,8 +72,6 @@ if ($superCage->post->keyExists('submit')) {
 
     // sanitize user-input
     $html_message = str_replace('<', '&lt;', $message);
-
-    $expand_array = array();
 
     // check captcha
     if ((!USER_ID && $CONFIG['contact_form_guest_enable'] == 1) || (USER_ID && $CONFIG['contact_form_registered_enable'] == 1)) {

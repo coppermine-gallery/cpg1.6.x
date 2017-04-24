@@ -988,7 +988,7 @@ function list_cat_albums($cat, $catdata)
                 }
             }
         }
-        if ($catdata['subalbums'][$aid]['last_pid']) {
+        if (!empty($catdata['subalbums'][$aid]['last_pid'])) {
             $last_pids[] = $catdata['subalbums'][$aid]['last_pid'];
         }
         if ($album['thumb'] > 0) {

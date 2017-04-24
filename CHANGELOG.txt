@@ -22,7 +22,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
-2017-04-21 [B] When dbtype not set, default to mysqli for initial connect (PH7 happy) {ron4mac}
+2017-04-21 [B] When dbtype not set, default to mysqli for initial connect (PHP7 happy) {ron4mac}
 2017-04-21 [M] With SQL update, modify CPG_users/user_password to varchar(255) {ron4mac}
 2017-03-30 [C] Generate decimal % widths in thumbnail view (Github issue #12) {ron4mac}
 2017-03-29 [B] Correction for strict SQL DISTINCT use (thread ID 78952 msg 383016) {ron4mac}
