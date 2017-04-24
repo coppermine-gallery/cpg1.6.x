@@ -80,7 +80,7 @@ if (!function_exists('cpg_display_help')) {
 // if a different dbase method is selected, we have to change the config and reload
 // the page to get to the correct dbase class
 if ($superCage->post->keyExists('action') && $superCage->post->getAlpha('action') == 'dbselect') {
-	set_config_dbtype($superCage->post->getAlpha('db_type'));
+	set_config_dbtype($superCage->post->getRaw('db_type'));
 	if ($errors) {
 		html_error($errors);
 	} else {
