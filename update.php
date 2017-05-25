@@ -756,6 +756,8 @@ function delete_files()
         'js/swfupload',
         'docs/en/uploading_xp-publisher.htm',
         'xp_publish.php',
+        'install_classic.php',
+        'include/cpg15x.files.xml'
     );
 
     // Check if the file exists in the first place

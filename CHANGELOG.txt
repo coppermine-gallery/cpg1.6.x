@@ -22,6 +22,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2017-05-25 [B] Correct bridge query test failure (thread ID 79053) {ron4mac}
 2017-04-24 [B] Correct error getting dbtype as pdo:mysql when updating {ron4mac}
 2017-04-21 [B] When dbtype not set, default to mysqli for initial connect (PHP7 happy) {ron4mac}
 2017-04-21 [M] With SQL update, modify CPG_users/user_password to varchar(255) {ron4mac}
