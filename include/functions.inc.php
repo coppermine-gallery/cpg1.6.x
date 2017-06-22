@@ -361,7 +361,8 @@ function cpg_db_result($result, $row=0, $field=0, $free=false)
 
 function cpg_db_free_result($result)
 {
-    $result->free();
+	if (is_object($result))
+    	$result->free();
 }
 
 
