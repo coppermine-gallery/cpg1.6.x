@@ -59,7 +59,12 @@ function makethumbnail($src_file, $newSize)
 
 	// Get the appropriate tool and send the image
 	getImageTool();
-	$imgObj = new imageObject($src_file);
+	$imgObj = new imageObject(dirname($src_file).DIRECTORY_SEPARATOR, basename($src_file));
+	if (!$imgObj) {
+        header("Content-type: image/png");
+        readfile(READ_ERROR_ICON);
+        exit;
+	}
 	$imgObj->send($newSize);
 }
 

@@ -22,6 +22,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2017-06-23 [B] Correct showthumb.php failure on PHP7.1 {ron4mac}
 2017-06-22 [B] Keep from failing when asked to free a db result that is not a result {ron4mac}
 2017-06-18 [M] Use 'random_bytes' in password hash generation instead of deprecated mcrypt {ron4mac}
 2017-05-25 [B] Correct bridge query test failure (thread ID 79053) {ron4mac}
