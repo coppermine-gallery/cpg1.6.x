@@ -372,7 +372,7 @@ function H5up_done(errcnt) {
 					}
 				},
 			fail: function(e) {
-					$.pBar.msg($.xhr.statusText, true);
+					$.pBar.msg($.xhr.responseText, true);
 					//console.log(e,this);
 				}
 			};

@@ -32,10 +32,19 @@ function upldLog ($msg)
 }
 upldLog('enter uniload');
 
+function uni_exception ($e)
+{
+	global $superCage;
+	$base = $superCage->server->getRaw('DOCUMENT_ROOT') . dirname($superCage->server->getRaw('SCRIPT_NAME'));
+	$file = str_replace($base,'',$e->getFile());
+	$msg = $e->getMessage() .'<br>'.$file.' line:'.$e->getLine();
+	errorOut($lang_upload_php['failure'] . $msg, 0, __FILE__, __LINE__);
+}
+
 // return an error when failing to complete
 function errorOut ($msg, $code=0, $_file=0, $_line=0)
 {
-	global $CONFIG, $h5u_debug;
+	global $CONFIG, $h5u_debug, $upload_form;
 
 	if ($h5u_debug) {
 		$msg .= " #{$code} {$_file} @{$_line}";
@@ -43,7 +52,13 @@ function errorOut ($msg, $code=0, $_file=0, $_line=0)
 		log_write($upload_log, H5U_LOG);
 	}
 
-	header("HTTP/1.0 403 {$msg}");
+	if ($upload_form == 'upload_swf') {
+		$msg = 'error|'.str_replace('<br>',"\n",$msg).'|0';
+		die($msg);
+	}
+
+	header("HTTP/1.0 430 \"{$msg}\"");
+	echo $msg;
 	exit();
 }
 
@@ -64,6 +79,8 @@ function uni_exit ()
 }
 
 //chdir(dirname(dirname(dirname(__FILE__))));
+
+set_exception_handler('uni_exception');
 
 // Call basic functions, etc.
 require('include/init.inc.php');
