@@ -116,8 +116,8 @@ For details, read the <a href="install_permissions.htm#permissions">permission s
 <a id="installFTP_mode"></a>
 <h2>What <strong>FTP mode</strong> should I use?</h2>
 <p>File Transfer Protocol (FTP) is used to exchange and manipulate files over a computer network. An FTP client may connect to an FTP server to manipulate files on that server.</p>
-<p>There are two different transfer modes in <abbr title="File Transfer Protocol">FTP</abbr>.</p>
-<p>All images (.jpg, .gif, .png etc) should be uploaded as binary, all files that contain text (php, htm, css, js etc.) in ASCII mode. Most FTP clients have an "auto" mode that will use the proper mode for each file; if your FTP client has "Auto", use it. This mode is particularly usefull then installing Coppermine as the package contains a mixture of file type. If your client does not have an "Auto" mode then switch to "Binary". For more information consult the manual for your <a href="dev_tools.htm#dev_tools_ftp_client">FTP client</a> or read up <a href="http://en.wikipedia.org/wiki/File_Transfer_Protocol" rel="external" class="external">the Wikipedia article on FTP</a>.</p>
+<p>There are two different transfer modes in <abbr title="File Transfer Protocol">FTP</abbr>. Please use binary mode for all files, as using ASCII or auto mode may result in unexpected behavior when using the <a href="upgrading.htm#versioncheck">versioncheck</a>.</p>
+<p>For more information consult the manual for your <a href="dev_tools.htm#dev_tools_ftp_client">FTP client</a> or read up <a href="http://en.wikipedia.org/wiki/File_Transfer_Protocol" rel="external" class="external">the Wikipedia article on FTP</a>.</p>
 
 
 <div id="doc_footer">

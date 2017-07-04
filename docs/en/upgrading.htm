@@ -288,6 +288,9 @@
             <li>I get an error message<br />
             Error messages like <span class="code">Fatal error: Maximum execution time of 60 seconds exceeded in /path/to/webroot/coppermine_folder/include/versioncheck.inc.php on line 276</span> are an indicator for the script consuming too many resources on your server. Try disabling some output options. If this doesn't help, you simply can not run the versioncheck script on your server.
             </li>
+            <li>Versioncheck says a lot of files are modified, but I haven't modified them<br />
+            This usually happens when you upload the Coppermine files with your FTP client in ASCII or auto mode. Please set your FTP client to use binary mode for all files and <a href="upgrading.htm#upgrade_any">perform an upgrade as described above</a>.
+            </li>
         </ul>
         <p>Versioncheck is being provided as a courtesy to end users. As there are several factors that have an impact on it, it may or may not work on your server setup. If the versioncheck tool does nothing at all, this is probably the case for you - you don't have to be alarmed in this case: just make sure to keep your coppermine install up-to-date, preferably by enabling the config option "<a href="configuration.htm#admin_general_coppermine_news">Display news from Coppermine-gallery.net</a>". Only if individual issues are being reported by the version check tool (i.e. only if <em>some</em> lines contain a remark in the comments column), you should be alarmed and take a closer look.</p>
         <a id="versioncheck_problems_end"></a>
