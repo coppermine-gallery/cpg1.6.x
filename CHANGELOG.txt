@@ -22,6 +22,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2017-07-26 [O] Use mysqli OO methods in mysqli driver {ron4mac}
 2017-07-04 [D] Added some explanation about FTP transfer modes and versioncheck {eenemeenemuu}
 2017-06-26 [O] Improve uploading error handling/response {ron4mac}
 2017-06-23 [B] Correct showthumb.php failure on PHP7.1 {ron4mac}
