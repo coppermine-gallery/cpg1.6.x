@@ -401,7 +401,7 @@ if (!$superCage->post->keyExists('process') && !$superCage->post->keyExists('plu
                 . ($key == $upload_form ? ' selected="selected"' : '')
                 . '>' . $label . '</option>';
         }
-        $upload_select .= '</select>' . '&nbsp'
+        $upload_select .= '</select>' . '&nbsp;'
             . cpg_display_help('f=configuration.htm&amp;as=admin_upload_mechanism&amp;ae=admin_upload_mechanism_end', '450', '300');
     }
 
