@@ -858,10 +858,10 @@ $lang_admin_php['thumbnail_intermediate_full'] = 'thumbnail, intermediate, and f
 $lang_admin_php['thumbnail_intermediate'] = 'thumbnail and intermediate image';
 $lang_admin_php['thumbnail_only'] = 'thumbnail only';
 $lang_admin_php['upload_mechanism'] = 'Default upload method';
-$lang_admin_php['upload_swf'] = 'advanced - multiple files, Flash-driven (recommended)';
+$lang_admin_php['upload_swf'] = 'multiple files, Flash-driven';
 $lang_admin_php['upload_single'] = 'simple - one file at a time';
 $lang_admin_php['allow_user_upload_choice'] = 'Allow users to choose the upload method';
-$lang_admin_php['editpics_ignore_newer_than'] = 'Show previously uploaded files at edit files form after flash upload';
+$lang_admin_php['editpics_ignore_newer_than'] = 'Show previously uploaded files at edit files form after HTML5/flash upload';
 $lang_admin_php['allow_duplicate_emails_addr'] = 'Allow two users to have the same email address';
 $lang_admin_php['upl_notify_admin_email'] = 'Notify admin of user upload awaiting approval';
 $lang_admin_php['user_manager_hide_file_stats'] = 'Hide file count and disk space usage in user manager'; // cpg1.6
@@ -2145,7 +2145,7 @@ if (defined('UPLOAD_PHP')) {
 $lang_upload_php['title'] = 'Upload file';
 $lang_upload_php['restrictions'] = 'Restrictions';
 $lang_upload_php['choose_method'] = 'Choose upload method';
-$lang_upload_php['upload_swf'] = 'Multiple files - Flash-driven (recommended)';
+$lang_upload_php['upload_swf'] = 'Multiple files - Flash-driven';
 $lang_upload_php['upload_single'] = 'simple - one file at a time';
 $lang_upload_php['up_instr_1'] = 'Select an album from the album dropdown list';
 $lang_upload_php['up_instr_2'] = 'Click the "Browse" button below and navigate to the file you want to upload. You can select multiple files in a single go using Ctrl+Click.';
@@ -2188,7 +2188,7 @@ $lang_upload_php['please_wait'] = 'Please wait while the script is uploading - t
 $lang_upload_php['alternative_upload'] = 'Alternative upload method';
 $lang_upload_php['err_js_disabled'] = 'Flash upload interface could not load. You must have JavaScript enabled to enjoy the flash upload interface.';
 $lang_upload_php['err_flash_disabled'] = 'Upload interface is taking a long time to load or the load has failed. Please make sure that the Flash Plugin is enabled and that a working version of the Flash Player is installed.';
-$lang_upload_php['err_alternate_method'] = 'Alternately you can use the <a href="upload.php?single=1">single</a> file upload interface.';
+$lang_upload_php['err_alternate_method'] = 'Alternately you can use the <a href="upload.php?html5=1">HTML5</a> file upload interface.';
 $lang_upload_php['err_flash_version'] = 'Upload interface could not load. You may need to install or upgrade Flash Player. Visit the <a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">Adobe website</a> to get the Flash Player.';
 $lang_upload_php['flash_loading'] = 'Upload interface is loading. Please wait a moment...';
 $lang_upload_php['err_no_method'] = 'There must be at least one upload plugin enabled';

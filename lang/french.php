@@ -837,7 +837,7 @@ $lang_admin_php['thumbnail_intermediate_full'] = 'vignette, image intermédiaire
 $lang_admin_php['thumbnail_intermediate'] = 'vignette et image intermédiaire image';
 $lang_admin_php['thumbnail_only'] = 'vignette uniquement';
 $lang_admin_php['upload_mechanism'] = 'Méthode de téléchargement par défaut';
-$lang_admin_php['upload_swf'] = 'Fichiers multiples, géré par Flash (recommandé)';
+$lang_admin_php['upload_swf'] = 'Fichiers multiples, géré par Flash';
 $lang_admin_php['upload_single'] = 'Simple (un seul fichier à la fois)';
 $lang_admin_php['allow_user_upload_choice'] = 'Autoriser les utilisateurs à choisir leur méthode de téléchargement';
 $lang_admin_php['allow_duplicate_emails_addr'] = 'Autoriser deux utilisateurs à avoir la même adresse courriel';
@@ -2110,7 +2110,7 @@ if (defined('UPLOAD_PHP')) {
 $lang_upload_php['title'] = 'Télécharger un fichier';
 $lang_upload_php['restrictions'] = 'Restrictions';
 $lang_upload_php['choose_method'] = 'Choisissez la méthode de téléchargement';
-$lang_upload_php['upload_swf'] = 'Fichiers multiples - Interface Flash (recommandé)';
+$lang_upload_php['upload_swf'] = 'Fichiers multiples - Interface Flash';
 $lang_upload_php['upload_single'] = 'Simple - Un seul fichier à la fois';
 $lang_upload_php['up_instr_1'] = 'Sélectionnez un albums dans la liste déroulante';
 $lang_upload_php['up_instr_2'] = 'Cliquez sur le bouton &quot;Parcourir&quot; ci-dessous et naviguez vers le fichier que vous voullez télécharger';
@@ -2153,7 +2153,7 @@ $lang_upload_php['please_wait'] = 'Merci de patienter pendant que le script tél
 $lang_upload_php['alternative_upload'] = 'Méthode de téléchargement alternative';
 $lang_upload_php['err_js_disabled'] = 'L\'interface de téléchargement Flash n\'a pas pu être chargé. Vous devez avoir JavaScript activé pour pouvoir profiter de l\'interface de téléchargement Flash.';
 $lang_upload_php['err_flash_disabled'] = 'L\'interface de téléchargement prends beaucoup de temps pour charger ou le chargement a échoué. Vérifiez que le plugin Flash est activé et qu\'une version fonctionnelle d\'Adobe Flash Player est installée.';
-$lang_upload_php['err_alternate_method'] = 'A la place, vous pouvez utiliser l\'interface de téléchargement <a href="upload.php?single=1">fichier unique</a>.';
+$lang_upload_php['err_alternate_method'] = 'A la place, vous pouvez utiliser l\'interface de téléchargement <a href="upload.php?html5=1">HTML5</a>.';
 $lang_upload_php['err_flash_version'] = 'L\'interface de téléchargement ne peut pas être chargé. Vous devriez installer ou mettre à jour Flash Player. Visitez le <a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">site Adobe</a> pour vous procurer Flash Player.';
 $lang_upload_php['flash_loading'] = 'L\'interface de téléchargement est en train de se charger. Veuillez patienter...';
 

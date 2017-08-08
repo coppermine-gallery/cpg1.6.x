@@ -859,7 +859,7 @@ $lang_admin_php['thumbnail_intermediate_full'] = 'Thumbnail, Bild in Zwischengr�
 $lang_admin_php['thumbnail_intermediate'] = 'Thumbnail und Bild in Zwischengröße';
 $lang_admin_php['thumbnail_only'] = 'Nur Thumbnail';
 $lang_admin_php['upload_mechanism'] = 'Standard-Methode zum Hochladen';
-$lang_admin_php['upload_swf'] = 'Mehrere Dateien, Flash-unterstützt (empfohlen)';
+$lang_admin_php['upload_swf'] = 'Mehrere Dateien, Flash-unterstützt';
 $lang_admin_php['upload_single'] = 'Einfach - Eine Datei pro Durchgang';
 $lang_admin_php['allow_user_upload_choice'] = 'Benutzern erlauben, die Methode zum Hochladen selbst auszuwählen';
 $lang_admin_php['allow_duplicate_emails_addr'] = 'Zulassen, dass mehrere Benutzer die gleiche eMail-Adresse haben';
@@ -2135,7 +2135,7 @@ $lang_stat_details_php['not_implemented'] = 'noch nicht implementiert';
 if (defined('UPLOAD_PHP')) {
 $lang_upload_php['title'] = 'Datei hochladen';
 $lang_upload_php['choose_method'] = 'Wähle Methode zum Hochladen';
-$lang_upload_php['upload_swf']    = 'Mehrere Dateien - mit Flash-Unterstützung (empfohlen)';
+$lang_upload_php['upload_swf']    = 'Mehrere Dateien - mit Flash-Unterstützung';
 $lang_upload_php['upload_single'] = 'Einfach - eine Datei pro Durchgang';
 $lang_upload_php['up_instr_1'] = 'Wähle zuerst ein Album aus der Auswahlliste';
 $lang_upload_php['up_instr_2'] = 'Benutze dann die "Browse"-Schaltfläche, um zu der Datei auf Deinem Rechner zu navigieren, die Du hochladen willst.';
@@ -2179,7 +2179,7 @@ $lang_upload_php['please_wait'] = 'Bitte warten, während die Datei hochgeladen 
 $lang_upload_php['alternative_upload'] = 'Alternative Upload-Methode';
 $lang_upload_php['err_js_disabled'] = 'Die Flash-basierte Benutzerschnittstelle zum Hochladen von Bildern konnte nicht geladen werden. JavaScript muss im Browser aktiviert sein, um die Flash-basierte Schnittstelle benutzen zu können.';
 $lang_upload_php['err_flash_disabled'] = 'Die Benutzerschnittstelle zum Hochladen braucht sehr lange, um zu laden, oder der Ladevorgang ist fehlgeschlagen. Bitte stelle sicher, dass das Flash-Plugin des Browsers aktiviert ist und dass eine funktionierende Version von Flash installiert ist.';
-$lang_upload_php['err_alternate_method'] = 'Alternativ kann die <a href="upload.php?single=1">einfache</a> Benutzer-Schnittstelle zum Hochladen verwendet werden.';
+$lang_upload_php['err_alternate_method'] = 'Alternativ kann die <a href="upload.php?html5=1">HTML5</a> Benutzer-Schnittstelle zum Hochladen verwendet werden.';
 $lang_upload_php['err_flash_version'] = 'Benutzer-Schnittstelle zum Hochladen konnte nicht geladen werden. Möglicherweise muss der Flash_player installiert oder aktualisiert werden. Besuche die Webseite von <a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">Adobe </a>, um einen Flash-Player herunter zu laden.';
 $lang_upload_php['flash_loading'] = 'Die Benutzerschnittstelle zum Hochladen wird gerade geladen. Einen Moment bitte...';
 $lang_upload_swf_php['browse'] = 'Durchsuchen...';

@@ -2359,22 +2359,23 @@
     <br class="clrb" />
     <a id="admin_upload_mechanism"></a><h3>Default upload method<a href="#admin_upload_mechanism" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h3>
     <div class="cpg_summary">
-        Default value: <input type="text" size="40" maxlength="40" class="textinput" value="advanced - multiple files, Flash-driven" /><br />
-        Recommended value: <input type="text" size="40" maxlength="40" class="textinput" value="advanced - multiple files, Flash-driven" /><br />
+        Default value: <input type="text" size="40" maxlength="40" class="textinput" value="advanced - multiple files, HTML5-driven" /><br />
+        Recommended value: <input type="text" size="40" maxlength="40" class="textinput" value="advanced - multiple files, HTML5-driven" /><br />
         Database record name: <span class="code">upload_mechanism</span><br />
         <img src="../images/icons/config.png" width="12" height="12"  alt="" class="icon" title="Configuration" />: User settings &rarr; Default upload method
     </div>
     <p>Select which type of form users will use to upload files:</p>
     <ul>
-      <li><strong>advanced - multiple files, Flash-driven (recommended)</strong><br />
+      <li><strong>advanced - multiple files, HTML5-driven (recommended)</strong><br />
+      Users can queue multiple files and a HTML5/javascript interface will, concurrently, upload all the files automatically. Files may be dragged and dropped on the interface.</li>
+      <li><strong>multiple files, Flash-driven</strong><br />
       Users can queue multiple files and a Flash-driven form will upload all the files automatically.</li>
       <li><strong>Simple - one file at a time</strong><br />
       Users can only select one file at a time to upload to an album.</li>
     </ul>
     <p>There might be other choices you can choose.  If so, these come from plugins you have installed.  The basic Coppermine options are the two listed above.  For assistance on any other upload methods, please check your plugins and their documentation.</p>
-    <p>You are encouraged to use the advanced upload form unless you have problems with it.  This form uses <a href="http://www.swfupload.org/" class="external" rel="external">SWFUpload</a>, which has some <a href="http://demo.swfupload.org/Documentation/#knownissues" class="external" rel="external">known issues</a>.</p>
+    <p>You are encouraged to use the advanced upload form unless you have problems with it.</p>
     <p>Since it is your users who will run into these problems, you may want to allow your users to choose the upload method themselves.  See the configuration setting "<a href="#admin_allow_user_upload_choice">Allow users to choose the upload method</a>".</p>
-    <p>The flash-driven interface is the most elegant solution for most, but of course it has got several drawbacks as well, with the most serious drawback being that those who don't have flash support won't be able to upload at all. Don't take for granted that everybody will have flash: users on a corporate PC where the admin has disallowed flash won't be able to use it, nor do all mobile gadgets (like PDAs, smart phones, game consoles etc.) have flash support.</p>
 
 
     <a id="admin_upload_mechanism_end"></a>
@@ -2391,14 +2392,14 @@
 
     <a id="admin_allow_user_upload_choice_end"></a>
     <br class="clrb" />
-    <a id="admin_editpics_ignore_newer_than_start"></a><h3>Show previously uploaded files at edit files form after flash upload<a href="#admin_editpics_ignore_newer_than_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h3>
+    <a id="admin_editpics_ignore_newer_than_start"></a><h3>Show previously uploaded files at edit files form after HTML5/flash upload<a href="#admin_editpics_ignore_newer_than_start" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
         Recommended value: <input type="checkbox" disabled="disabled" class="checkbox" /><br />
         Database record name: <span class="code">editpics_ignore_newer_than</span><br />
-        <img src="../images/icons/config.png" width="12" height="12"  alt="" class="icon" title="Configuration" />: User settings &rarr; Show previously uploaded files at edit files form after flash upload
+        <img src="../images/icons/config.png" width="12" height="12"  alt="" class="icon" title="Configuration" />: User settings &rarr; Show previously uploaded files at edit files form after HTML5/flash upload
     </div>
-    <p>When enabled, users will see all uploaded files at the edit files form instead of just the recently uploaded files. Users will always be redirected to that form after they hit the &quot;Continue&quot; button at the flash-driven uploader.</p>
+    <p>When enabled, users will see all uploaded files at the edit files form instead of just the recently uploaded files. Users will always be redirected to that form after they hit the &quot;Continue&quot; button at the HTML5 or flash-driven uploaders.</p>
 
 
     <a id="admin_editpics_ignore_newer_than_end"></a>

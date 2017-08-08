@@ -850,7 +850,7 @@ $lang_admin_php['thumbnail_intermediate_full'] = 'kõik pildiformaadid';
 $lang_admin_php['thumbnail_intermediate'] = 'pisipilt ja vahepealne pilt';
 $lang_admin_php['thumbnail_only'] = 'ainult pisipilt';
 $lang_admin_php['upload_mechanism'] = 'Vaikimisi üleslaadimise viis';
-$lang_admin_php['upload_swf'] = 'mitu faili korraga, Flash-i põhine (soovitatav)';
+$lang_admin_php['upload_swf'] = 'mitu faili korraga, Flash-i põhine';
 $lang_admin_php['upload_single'] = 'üks fail korraga';
 $lang_admin_php['allow_user_upload_choice'] = 'Luba neil valida üleslaadimise viisi';
 $lang_admin_php['editpics_ignore_newer_than'] = 'Näita eelnevalt üles laetud faile ja failide redigeerimisvormi peale flash üleslaadimist';
@@ -2137,7 +2137,7 @@ if (defined('UPLOAD_PHP')) {
 $lang_upload_php['title'] = 'Faili üleslaadimine';
 $lang_upload_php['restrictions'] = 'Piirangud';
 $lang_upload_php['choose_method'] = 'Vali üleslaadimise meetod';
-$lang_upload_php['upload_swf'] = 'Mitu faili korraga - Flashi-põhine (soovitav)';
+$lang_upload_php['upload_swf'] = 'Mitu faili korraga - Flashi-põhine';
 $lang_upload_php['upload_single'] = 'lihtne - üks fail korraga';
 $lang_upload_php['up_instr_1'] = 'Vali rippmenüüst album';
 $lang_upload_php['up_instr_2'] = 'Klõpsa allolevat "Lehitse" nuppu ja liigu failini, mida soovid üles laadida. Sa võid valida ka mitu faili hoides all Ctrl klahvi.';
@@ -2180,7 +2180,7 @@ $lang_upload_php['please_wait'] = 'Palun oota kuni skript laeb - sellega läheb 
 $lang_upload_php['alternative_upload'] = 'Alternatiivne üleslaadimise meetod';
 $lang_upload_php['err_js_disabled'] = 'Flashi üleslaadimisliidest ei saa laadida. Sul peab olema JavaScript lubatud, et Flashi-põhist üleslaadimist nautida.';
 $lang_upload_php['err_flash_disabled'] = 'Üleslaadimisliidesel võtab toiming kaua aega või laadimine on ebaõnnestunud. Palun kontrolli, kas Flashi plugin on lubatud ja kas Flashi esitaja töötav versioon on paigaldatud.';
-$lang_upload_php['err_alternate_method'] = 'Alternatiivselt võid kasutada <a href="upload.php?single=1">üksiku</a> faili üleslaadimisliidest.';
+$lang_upload_php['err_alternate_method'] = 'Alternatiivselt võid kasutada <a href="upload.php?html5=1">HTML5</a> faili üleslaadimisliidest.';
 $lang_upload_php['err_flash_version'] = 'Üleslaadimisliides ei saa laadida. Võimalik, et sul on vaja paigaldada või uuendada Flashi esitaja. Külasta esitaja saamiseks lehekülge: <a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">Adobe Shockwave Flash</a>.';
 $lang_upload_php['flash_loading'] = 'Laetakse üleslaadimisliidest. Palun oota hetk...';
 $lang_upload_php['err_no_method'] = 'Vähemalt üks üleslaadimisplugin peab olema lubatud';

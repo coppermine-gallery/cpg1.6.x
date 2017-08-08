@@ -56,9 +56,11 @@ $icon_array['cancel'] = cpg_fetch_icon('cancel', 2);
 $icon_array['upload'] = cpg_fetch_icon('upload', 2);
 $icon_array['info'] = cpg_fetch_icon('info', 2);
 
-// If we have "single" key in GET then we will force the upload form mechanism to single file upload
-// This acts as a fallback if js or flash is disabled
-if ($superCage->get->keyExists('single')) {
+if ($superCage->get->keyExists('html5')) {
+    $upload_form = 'upload_h5a';
+} elseif ($superCage->get->keyExists('single')) {
+	// If we have "single" key in GET then we will force the upload form mechanism to single file upload
+	// This acts as a fallback if js or flash is disabled
     $upload_form = 'upload_sgl';
 } elseif ($CONFIG['allow_user_upload_choice'] && $superCage->get->keyExists('method')) {
     // pull in upload method from GET parameter 'method'
