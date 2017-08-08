@@ -3819,7 +3819,7 @@ function cpg_debug_output()
     $debug_underline   = '&#0010;------------------&#0010;';
     $debug_separate    = '&#0010;==========================&#0010;';
     $debug_toggle_link = $lang_cpg_debug_output['debug_output'] . ': <span class="detail_head_collapsed">'. $lang_cpg_debug_output['show_hide'].'</span>';
-    $debug_help = '&nbsp;'. cpg_display_help('f=empty.htm&amp;h=lang_cpg_debug_output[debug_output_explain]&amp;t=lang_cpg_debug_output[copy_and_paste_instructions]', 470, 245);
+    $debug_help = '&nbsp;'. cpg_display_help('f=empty.htm&amp;h=lang_cpg_debug_output%5Bdebug_output_explain%5D&amp;t=lang_cpg_debug_output%5Bcopy_and_paste_instructions%5D', 470, 245);
     $debug_phpinfo_link = GALLERY_ADMIN_MODE ? '<a href="phpinfo.php" class="admin_menu">' . cpg_fetch_icon('phpinfo', 1) . $lang_cpg_debug_output['phpinfo'] . '</a> ' : '';
 
     echo <<< EOT

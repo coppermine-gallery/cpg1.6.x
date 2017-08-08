@@ -160,22 +160,20 @@ EOT;
 	<tr>
 		<td colspan="2" class="tableb tableb_alternate">
 			<div id="upload_form">
-				<div>
-					<span id="browse_button_place_holder"></span>
-					<input type="checkbox" id="autorient" value="1" checked />
-					<label for="autorient">{$lang_upload_php['auto_orient']}</label>
-					<button id="button_cancel" onclick="swfu.cancelQueue();" disabled="disabled" class="button">
-						{$icon_array['cancel']}
-						{$lang_upload_swf_php['cancel_all']}
-					</button>
-				</div>
+				<span id="browse_button_place_holder"></span>
+				<input type="checkbox" id="autorient" value="1" checked="checked" />
+				<label for="autorient">{$lang_upload_php['auto_orient']}</label>
+				<button id="button_cancel" onclick="swfu.cancelQueue();" disabled="disabled" class="button">
+					{$icon_array['cancel']}
+					{$lang_upload_swf_php['cancel_all']}
+				</button>
+			</div>
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2" class="tableb">
-				<div class="fieldset flash" id="upload_progress">
-					<span class="legend">{$lang_upload_swf_php['upload_queue']}</span>
-				</div>
+			<div class="fieldset flash" id="upload_progress">
+				<span class="legend">{$lang_upload_swf_php['upload_queue']}</span>
 			</div>
 		</td>
 	</tr>

@@ -45,8 +45,8 @@ class H5aUpload {
 	public function help_button ($guid)
 	{
 		global $CONFIG;
-		return '&nbsp;<a class="greybox" href="plugins/upload_h5a/help.php?t=' . $CONFIG['theme'] . '&l='.$CONFIG['lang']
-			. '&g='.$guid.'" title="Help"><img src="images/help.gif" width="13" height="11" border="0" alt=""></a>';
+		return '&nbsp;<a class="greybox" href="plugins/upload_h5a/help.php?t=' . $CONFIG['theme'] . '&amp;l='.$CONFIG['lang']
+			. '&amp;g='.$guid.'" title="Help"><img src="images/help.gif" width="13" height="11" border="0" alt="" /></a>';
 	}
 
 	// convert string in form n(K|M|G) to an integer value

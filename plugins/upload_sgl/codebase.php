@@ -51,13 +51,7 @@ function sgl_display_upload_form($upload_settings)
 	set_js_var('sel_album', $lang_plugin_upload['albmSelMsg']);
 	js_include($plugpath.'js/single.js');
 
-	echo <<<EOT
-	<style>
-		.textinput {width:90%}
-	</style>
-EOT;
-
-	pageheader($lang_plugin_upload_sgl['title']);
+	pageheader($lang_plugin_upload_sgl['title'], '<style type="text/css">.textinput {width:100%;box-sizing:border-box}</style>');
 
 	echo '<form name="cpgform" id="cpgform" method="post" action="uniload.php" enctype="multipart/form-data" onsubmit="return sgl_form_check(this)">';
 
@@ -95,8 +89,8 @@ EOT;
 		{$lang_upload_php['picture']}
 	</td>
 	<td width="70%" class="tableb" valign="top">
-		<input type="file" name="Filedata" size="60" class="listbox">
-		<input type="checkbox" name="autorient" value="1" checked />
+		<input type="file" name="Filedata" size="60" class="listbox" />
+		<input type="checkbox" name="autorient" id="autorient" value="1" checked="checked" />
 		<label for="autorient">{$lang_upload_php['auto_orient']}</label>
 	</td>
 </tr>
@@ -109,7 +103,7 @@ EOT;
 		{$lang_upload_php['pic_title']}
 	</td>
 	<td class="tableb" valign="top">
-		<input type="text" name="title" maxlength="255" value="" class="textinput" id="title">
+		<input type="text" name="title" maxlength="255" value="" class="textinput" id="title" />
 	</td>
 </tr>
 <tr>
@@ -125,7 +119,7 @@ EOT;
 		{$keywordLabel}
 	</td>
 	<td class="tableb" valign="top">
-		<input type="text" name="keywords" maxlength="255" value="" class="textinput upld-elem" id="keywords">
+		<input type="text" name="keywords" maxlength="255" value="" class="textinput upld-elem" id="keywords" />
 	</td>
 </tr>
 EOT;
@@ -137,7 +131,7 @@ EOT;
 		{$CONFIG['user_field1_name']}
 	</td>
 	<td class="tableb" valign="top">
-		<input type="text" name="user1" maxlength="255" value="" class="textinput" id="user1">
+		<input type="text" name="user1" maxlength="255" value="" class="textinput" id="user1" />
 	</td>
 </tr>
 EOT;
@@ -149,7 +143,7 @@ EOT;
 		{$CONFIG['user_field2_name']}
 	</td>
 	<td class="tableb" valign="top">
-		<input type="text" name="user2" maxlength="255" value="" class="textinput" id="user2">
+		<input type="text" name="user2" maxlength="255" value="" class="textinput" id="user2" />
 	</td>
 </tr>
 EOT;
@@ -161,7 +155,7 @@ EOT;
 		{$CONFIG['user_field3_name']}
 	</td>
 	<td class="tableb" valign="top">
-		<input type="text" name="user3" maxlength="255" value="" class="textinput" id="user3">
+		<input type="text" name="user3" maxlength="255" value="" class="textinput" id="user3" />
 	</td>
 </tr>
 EOT;
@@ -173,7 +167,7 @@ EOT;
 		{$CONFIG['user_field4_name']}
 	</td>
 	<td class="tableb" valign="top">
-		<input type="text" name="user4" maxlength="255" value="" class="textinput" id="user4">
+		<input type="text" name="user4" maxlength="255" value="" class="textinput" id="user4" />
 	</td>
 </tr>
 EOT;
@@ -183,14 +177,14 @@ EOT;
 	echo <<<EOT
 <tr>
 	<td colspan="2">
-		<input type="hidden" name="method" value="upload_sgl">
-		<input type="hidden" name="form_token" value="{$form_token}">
-		<input type="hidden" name="timestamp" value="{$timestamp}">
+		<input type="hidden" name="method" value="upload_sgl" />
+		<input type="hidden" name="form_token" value="{$form_token}" />
+		<input type="hidden" name="timestamp" value="{$timestamp}" />
 	</td>
 </tr>
 EOT;
 
-	close_form($lang_upload_php['title'],1, 'ok');
+	close_form($lang_upload_php['title'], 1, 'ok');
 
 	endtable();
 	echo '</form>';
