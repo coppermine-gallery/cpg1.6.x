@@ -75,9 +75,10 @@ function write_to_db($step) {
     // do some checking according to the step we're currently in
     switch ($step) {
     case "choose_bbs":
-    if ($posted_var['short_name'] == '') {
+    if (empty($posted_var['short_name'])) {
         $return['short_name'] = $lang_bridgemgr_php['error_specify_bbs'];
         $error++;
+        break;
     }
     if ($posted_var['short_name'] == 'custom_selector') {
         $posted_var['short_name'] = $posted_var['custom_filename'];
@@ -120,14 +121,14 @@ function write_to_db($step) {
             //print '<br />';
         }
     }
-    $value = $posted_var['bridge_enable'];
+    $value = isset($posted_var['bridge_enable']) ? $posted_var['bridge_enable'] : 'x';
     if ($value != '0' && $value != '1') {
         $value = $CONFIG['bridge_enable'];
     }
 
     cpg_config_set('bridge_enable', $value);
 
-    if ($posted_var['clear_unused_db_fields'] == 1) {
+    if (!empty($posted_var['clear_unused_db_fields'])) {
         // clear all database entries that aren't actually used with the current bridge file
         // not implemented yet (not sure if necessary after all)
     }

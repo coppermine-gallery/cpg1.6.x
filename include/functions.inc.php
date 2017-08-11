@@ -3440,7 +3440,7 @@ function display_film_strip($album, $cat, $pos,$ajax_call)
  * @param integer $cat
  * @param integer $pos
  **/
-function& display_slideshow($pos, $ajax_show = 0)
+function display_slideshow($pos, $ajax_show = 0)
 {
     global $CONFIG, $album, $pid, $slideshow, $USER;
 

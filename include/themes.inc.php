@@ -1626,11 +1626,11 @@ function pagefooter()
     $template_vars = array(
         '{GAL_NAME}' => $CONFIG['gallery_name'],
         '{GAL_DESCRIPTION}' => $CONFIG['gallery_description'],
-        '{SYS_MENU}' => theme_main_menu('sys_menu'),
-        '{SUB_MENU}' => theme_main_menu('sub_menu'),
-        '{ADMIN_MENU}' => theme_admin_mode_menu(),
-        '{CUSTOM_HEADER}' => $custom_header,
-        '{JAVASCRIPT}' => theme_javascript_head(),
+//        '{SYS_MENU}' => theme_main_menu('sys_menu'),
+//        '{SUB_MENU}' => theme_main_menu('sub_menu'),
+//        '{ADMIN_MENU}' => theme_admin_mode_menu(),
+//        '{CUSTOM_HEADER}' => $custom_header,
+//        '{JAVASCRIPT}' => theme_javascript_head(),
         '{CUSTOM_FOOTER}' => $custom_footer,
         '{VANITY}' => theme_vanity(),
         '{CREDITS}' => theme_credits(),
@@ -4210,7 +4210,7 @@ function theme_vanity()
 {
     global $template_vanity ;
 
-    return template_eval($template_vanity, $params);
+    return template_eval($template_vanity, array());
 }
 /******************************************************************************
 ** Section <<<theme_vanity>>> - END

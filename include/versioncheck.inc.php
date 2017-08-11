@@ -365,7 +365,7 @@ function cpg_versioncheckPopulateArray($file_data_array) {
                     // Is the option "no_modification_check" not populated --- start
                     if(function_exists('md5_file')) { // the MD5-function may not exist
                         // Do we have an md5-hash that we could compare against? -- start
-                        if ($file_data_array[$file_data_key]['hash'] != '') {
+                        if (!empty($file_data_array[$file_data_key]['hash'])) {
                             // only perform the md5-check if the versions match anyway - we'd be comparing apples with bananas if we checked the hashes otherwise -- start
                             if ($file_data_array[$file_data_key]['version'] == $file_data_array[$file_data_key]['local_version']) {
                                 $file_data_array[$file_data_key]['local_hash'] = md5_file($file_data_values['fullpath']);

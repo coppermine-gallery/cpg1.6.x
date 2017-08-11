@@ -162,10 +162,6 @@ if (strrpos($file, '.') != FALSE) {
 $file = preg_replace('/[^0-9a-zA-Z_-]/', '', $file);
 $file = $file . '.htm';
 
-if ($close != 1) {
-    //$close_link = '<br />&nbsp;<br /><div align="center"><a href="#" class="admin_menu" onclick="window.close();">'.$lang_common['close'].'</a><br />&nbsp;</div>';
-}
-
 // Determine the language of the user and display the help file in his language if available.
 // Fall back to English if the file is not available in his/her language.
 // This should be done at a later stage in an i18n table. For now, let's do a straightforward if/then.
@@ -263,7 +259,6 @@ echo <<< EOT
         <div id="cpg_main_block">
             $string
             $content
-            $close_link
         </div>
     </body>
 </html>

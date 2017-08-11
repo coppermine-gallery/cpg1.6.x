@@ -779,7 +779,7 @@ if (!$result->numRows()) {
             </div>
             <br />
 EOT;
-            msg_box($lang_cpg_die[INFORMATION], $text_output, '', "index.php");
+            msg_box('', $text_output, '', "index.php");
             pagefooter();
             exit;
         } else {

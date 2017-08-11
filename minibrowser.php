@@ -165,6 +165,7 @@ $base_folder = '';
 $dir = opendir($base_folder . $folder);
 
 // read the folder/file structure we're currently in and put it into an array
+$filename = $foldername = null;
 $dirCounter = 0;
 while($file = readdir($dir)){
     if(is_dir($base_folder.$folder.$file)) {

@@ -47,7 +47,7 @@ if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
       var $sBackgroundImage;
       var $sCode;
 
-      function PhpCaptcha(
+      function __construct(
          $aFonts, // array of TypeType fonts to use - specify full path
          $iWidth = 200, // width of image
          $iHeight = 50, // height of image
@@ -213,7 +213,7 @@ if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
       }
 
       // call this method statically
-      function Validate($sUserCode) {
+      static function Validate($sUserCode) {
          if (md5(strtoupper($sUserCode)) == $_SESSION['php_captcha']) {
             // clear to prevent re-use
             $_SESSION['php_captcha'] = '';

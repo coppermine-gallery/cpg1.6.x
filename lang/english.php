@@ -517,6 +517,7 @@ $lang_bridgemgr_php['bridge_enable_yes'] = 'enable';
 $lang_bridgemgr_php['bridge_enable_no'] = 'disable';
 $lang_bridgemgr_php['error_must_not_be_empty'] = 'must not be empty';
 $lang_bridgemgr_php['error_either_be'] = 'must either be %s or %s';
+$lang_bridgemgr_php['error_bridge_file_not_exist'] = 'Bridge file does not exist: %s';
 $lang_bridgemgr_php['error_folder_not_exist'] = '%s doesn\'t exist. Correct the value you entered for %s';
 $lang_bridgemgr_php['error_cookie_not_readible'] = 'Coppermine can\'t read a cookie named %s. Correct the value you entered for %s, or go to your bridge app administration panel and make sure that the cookie path is readable for Coppermine.';
 $lang_bridgemgr_php['error_mandatory_field_empty'] = 'You cannot leave the field %s blank - fill in the proper value.';
