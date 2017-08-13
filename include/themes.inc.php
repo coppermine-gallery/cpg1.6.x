@@ -1626,9 +1626,9 @@ function pagefooter()
     $template_vars = array(
         '{GAL_NAME}' => $CONFIG['gallery_name'],
         '{GAL_DESCRIPTION}' => $CONFIG['gallery_description'],
-//        '{SYS_MENU}' => theme_main_menu('sys_menu'),
-//        '{SUB_MENU}' => theme_main_menu('sub_menu'),
-//        '{ADMIN_MENU}' => theme_admin_mode_menu(),
+        '{SYS_MENU}' => theme_main_menu('sys_menu'),
+        '{SUB_MENU}' => theme_main_menu('sub_menu'),
+        '{ADMIN_MENU}' => theme_admin_mode_menu(),
 //        '{CUSTOM_HEADER}' => $custom_header,
 //        '{JAVASCRIPT}' => theme_javascript_head(),
         '{CUSTOM_FOOTER}' => $custom_footer,
@@ -4146,7 +4146,7 @@ function theme_display_fullsize_pic()
     <body style="margin:0px; padding:0px; background-color: gray;">
 
 EOT;
-    if ($pic_html) {
+    if (isset($pic_html)) {
         $fullsize_html .= $pic_html;
     } else {
         if ($CONFIG['transparent_overlay'] == 1) {
@@ -4157,7 +4157,7 @@ EOT;
 EOT;
             $fullsize_html .=  '<td align="center" valign="middle" background="' . htmlspecialchars($imagedata['path']) . '" ' . $imagedata['geometry'] . ' class="image">';
             $fullsize_html .=  '<div id="content">';
-            $fullsize_html .=  '<a href="javascript: window.close()" style="border:none"><img src="images/image.gif?id='
+            $fullsize_html .=  '<a href="javascript:window.close()" style="border:none"><img src="images/image.gif?id='
                     . floor(rand()*1000+rand())
                     . '&amp;fullsize=yes" '
                     . $imagedata['geometry']
@@ -4176,7 +4176,7 @@ EOT;
 EOT;
         } else {
             $fullsize_html .=  '        <div id="content">'.$LINEBREAK;
-            $fullsize_html .=  '<a href="javascript: window.close()"><img src="'
+            $fullsize_html .=  '<a href="javascript:window.close()"><img src="'
             . htmlspecialchars($imagedata['path']) . '" '
             . $imagedata['geometry']
             . ' id="fullsize_image" alt="'
