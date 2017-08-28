@@ -5853,9 +5853,7 @@
   </element>
   <element>
     <fullpath>images/spinbtn_updn.gif</fullpath>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>d33776a7d6445a04d4d218ef10d0bd76</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>images/stamp.gif</fullpath>
@@ -8437,10 +8435,7 @@
   </element>
   <element>
     <fullpath>js/jquery.spinbutton.js</fullpath>
-    <version>1.6.03</version>
-    <status>mandatory</status>
-    <permission>read</permission>
-    <hash>831ea9a744130dd2829e108b5c3128a9</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>js/jquery.treeview.min.js</fullpath>

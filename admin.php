@@ -31,7 +31,6 @@ set_js_var('display_reset_boxes', $CONFIG['display_reset_boxes_in_config']);
 
 
 // Include the JS for admin.php
-js_include('js/jquery.spinbutton.js');
 js_include('js/admin.js');
 
 $admin_data_array  = $CONFIG;
@@ -358,7 +357,7 @@ EOT;
 				$labelWrapperEnd   = '';
 			}
 			if (!empty($value['warning'])) { // set warning text
-				$warningText  = $value['warning'];
+				$warningText  = $lang_admin_php[$value['warning']];
 				$warningPopUp = cpg_display_help('f=empty.htm&amp;h=lang_admin_php['.$key.']&amp;t='.$value['warning'], 500, 250, '*');
 			} else {
 				$warningText  = '';
@@ -394,7 +393,7 @@ EOT;
 				$readonly_radio   = '';
 			}
 			if (!empty($value['width'])) { // set width if option is set in array
-				$widthOption = ' style="width:'.$value['width'].'"';
+				$widthOption = ' style="width:'.$value['width'].'px"';
 			} else {
 				$widthOption = ' style="width:90%"';
 			}
@@ -413,31 +412,30 @@ EOT;
 			} else {
 				$highlightFieldCSS = '';
 			}
-			if (isset($value['min']) && ($value['min'] != '' || $value['max'] != '')) { // apply class spinbutton if applicable
-				$spinbuttonOption = ' spin-button';
-				$javascriptOutput .= '  $("#'.$key.'").spinbox({';
+			if (isset($value['min']) && ($value['min'] != '' || $value['max'] != '')) { // coerse field to HTML5 number field
+				$value['type'] = 'number';
+				$numminmax = '';
 				if ($value['min'] != '') {
-					$javascriptOutput .= 'min: '.$value['min'];
-					if ($value['max'] != '') {
-						$javascriptOutput .= ',';
-					}
+					$numminmax .= ' min="'.$value['min'].'"';
 				}
 				if ($value['max'] != '') {
-					$javascriptOutput .= 'max: '.$value['max'];
+					$numminmax .= ' max="'.$value['max'].'"';
 				}
 				if (isset($value['step']) && $value['step'] != '') {
-					$javascriptOutput .= ', step: '.$value['step'];
+					$numminmax .= ' step="'.$value['step'].'"';
 				}
-				$javascriptOutput .= '});' . $LINEBREAK;
-			} else {
-				$spinbuttonOption = '';
 			}
 
 			// Different types of fields --- start
 			if ($value['type'] == 'textfield') { // TEXTFIELD
 				$js_default_values['textfield'][] = array('key' => $key, 'warning' => $warningText);
 				
-				$admin_page .= '<span id="'.$key.'_wrapper" class="'.$highlightFieldCSS.'"><input type="text" class="textinput'.$spinbuttonOption.'"'.$widthOption.$sizeOption.$maxlengthOption.'  name="'.$key.'" id="'.$key.'" value="'.$admin_data_array[$key].'"'.$readonly_text.' tabindex="'.$tabindexCounter.'" title="'.str_replace("'", "\'", htmlspecialchars($warningText)).'" />'.$readonly_message.'</span>';
+				$admin_page .= '<span id="'.$key.'_wrapper" class="'.$highlightFieldCSS.'"><input type="text" class="textinput"'.$widthOption.$sizeOption.$maxlengthOption.'  name="'.$key.'" id="'.$key.'" value="'.$admin_data_array[$key].'"'.$readonly_text.' tabindex="'.$tabindexCounter.'" title="'.str_replace("'", "\'", htmlspecialchars($warningText)).'" />'.$readonly_message.'</span>';
+
+			} elseif ($value['type'] == 'number') { // NUMBER
+				$js_default_values['textfield'][] = array('key' => $key, 'warning' => $warningText);
+				
+				$admin_page .= '<span id="'.$key.'_wrapper" class="'.$highlightFieldCSS.'"><input type="number" class="textinput"'.$numminmax.$widthOption.$sizeOption.$maxlengthOption.'  name="'.$key.'" id="'.$key.'" value="'.$admin_data_array[$key].'"'.$readonly_text.' tabindex="'.$tabindexCounter.'" title="'.str_replace("'", "\'", htmlspecialchars($warningText)).'" />'.$readonly_message.'</span>';
 
 			} elseif ($value['type'] == 'password') { // PASSWORD
 				$js_default_values['password'][] = array('key' => $key, 'warning' => $warningText);
