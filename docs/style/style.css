@@ -30,6 +30,10 @@ p {
     font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
+a:not([href]) {
+	display:block;	/* prevent bad display of link landings in FF */
+}
+
 .small {
     font-size: 9px;
     text-align:right;

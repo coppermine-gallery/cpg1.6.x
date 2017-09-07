@@ -30,7 +30,7 @@ INSERT INTO CPG_config VALUES ('allow_duplicate_emails_addr', '0');
 INSERT INTO CPG_config VALUES ('allow_guests_enter_file_details', '0');
 INSERT INTO CPG_config VALUES ('allowed_doc_types', 'doc/txt/rtf/pdf/xls/pps/ppt/zip/gz/mdb');
 INSERT INTO CPG_config VALUES ('allowed_img_types', 'jpeg/jpg/png/gif');
-INSERT INTO CPG_config VALUES ('allowed_mov_types', 'asf/asx/mpg/mpeg/wmv/swf/avi/mov');
+INSERT INTO CPG_config VALUES ('allowed_mov_types', 'asf/asx/mpg/mpeg/wmv/swf/avi/mov/m4v');
 INSERT INTO CPG_config VALUES ('allowed_snd_types', 'mp3/midi/mid/wma/wav/ogg');
 INSERT INTO CPG_config VALUES ('allow_email_change', '0');
 INSERT INTO CPG_config VALUES ('allow_memberlist', '0');

@@ -616,7 +616,7 @@ function deletebackup_img()
 
     $i = 0;
 
-    while ($row = $result->fetchAssoc(true)) {
+    while ($row = $result->fetchAssoc()) {
 
         $back = $CONFIG['fullpath'] . $row['filepath'] . $CONFIG['orig_pfx'] . $row['filename'];
 
