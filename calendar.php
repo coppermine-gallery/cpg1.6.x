@@ -98,7 +98,7 @@ pagefooter_mini();
 class Calendar
 {
     /* Constructor for the Calendar class */
-    function Calendar() {
+    function __construct() {
     }
 
 
