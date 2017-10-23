@@ -56,7 +56,7 @@ class core_udb
 
 	public function query ($sql)
 	{
-		return $this->dbObj->query($sql);
+		return cpg_db_query($sql, $this->dbObj);
 	}
 
 

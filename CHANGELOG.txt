@@ -22,6 +22,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2017-10-23 [B] Remove (at least one) cause of blank screen when database access error {ron4mac}
 2017-08-28 [B,M] Remove spinbutton js for config screen; make number fields HTML5 elements {ron4mac}
 2017-07-26 [O] Use mysqli OO methods in mysqli driver {ron4mac}
 2017-07-04 [D] Added some explanation about FTP transfer modes and versioncheck {eenemeenemuu}
