@@ -478,6 +478,7 @@ function update_tables()
 
     $loopCounter = 0;
     $cellStyle = '';
+    $okerrs = array(1060,1061,1062);
     $superCage = Inspekt::makeSuperCage();
 
     $db_update = 'sql/update.sql';
@@ -523,6 +524,13 @@ EOT;
             $result->free();
 
             $result = @cpg_db_query($q);
+            if (!$result) {
+            	$errno = $CPGDB->getError(true);
+            	if (!in_array($errno, $okerrs)) {
+            		table_complain($cellStyle);
+            		continue;
+            	}
+            }
             $affected = $CPGDB->affectedRows();
             $warnings = cpg_db_query('SHOW WARNINGS');
 
@@ -541,6 +549,13 @@ EOT;
 
         } else {
             $result = @cpg_db_query($q);
+            if (!$result) {
+            	$errno = $CPGDB->getError(true);
+            	if (!in_array($errno, $okerrs)) {
+            		table_complain($cellStyle);
+            		continue;
+            	}
+            }
             $affected = $CPGDB->affectedRows();
             $warnings = cpg_db_query('SHOW WARNINGS;');
         }
@@ -712,20 +727,27 @@ EOT;
 			$cfgn = 'upload_h5a' . substr($cfg['name'], 18);
 			$cfgv = cpg_db_escape_string($cfg['value']);
 			cpg_db_query("INSERT INTO {$CONFIG['TABLE_PREFIX']}config VALUES ('{$cfgn}', '{$cfgv}')");
-			}
 		}
-		// if there were no html5upload configs, set a default one
-		if (!isset($cfgs) || !$cfgs) {
-			cpg_db_query("INSERT INTO {$CONFIG['TABLE_PREFIX']}config VALUES ('upload_h5a', 'a:11:{s:10:\"concurrent\";i:3;s:8:\"upldsize\";i:0;s:8:\"autoedit\";i:1;s:8:\"acptmime\";s:7:\"image/*\";s:8:\"enabtitl\";i:0;s:8:\"enabdesc\";i:0;s:8:\"enabkeys\";i:1;s:8:\"enabusr1\";i:0;s:8:\"enabusr2\";i:0;s:8:\"enabusr3\";i:0;s:8:\"enabusr4\";i:0;}')");
-		}
+	}
 
-        echo <<< EOT
-                <td class="{$cellStyle} updatesOK">
-                    {$ok_icon}{$lang_common['ok']}
-                </td>
-            </tr>
+	// if there were no html5upload configs, set a default one
+	if (!isset($cfgs) || !$cfgs) {
+		cpg_db_query("INSERT INTO {$CONFIG['TABLE_PREFIX']}config VALUES ('upload_h5a', 'a:11:{s:10:\"concurrent\";i:3;s:8:\"upldsize\";i:0;s:8:\"autoedit\";i:1;s:8:\"acptmime\";s:7:\"image/*\";s:8:\"enabtitl\";i:0;s:8:\"enabdesc\";i:0;s:8:\"enabkeys\";i:1;s:8:\"enabusr1\";i:0;s:8:\"enabusr2\";i:0;s:8:\"enabusr3\";i:0;s:8:\"enabusr4\";i:0;}')");
+	}
+
+	echo <<< EOT
+			<td class="{$cellStyle} updatesOK">
+				{$ok_icon}{$lang_common['ok']}
+			</td>
+		</tr>
 
 EOT;
+}
+
+function table_complain ($cs)
+{
+	global $errors, $CONFIG, $CPGDB, $lang_update_php, $lang_common, $LINEBREAK, $help;
+	echo '<br /><p style="color:red">', $CPGDB->getError(), '</p></td><td class="'.$cs.'"></td></tr>', $LINEBREAK;
 }
 
 function update_files()

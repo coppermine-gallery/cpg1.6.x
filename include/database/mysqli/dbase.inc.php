@@ -62,11 +62,17 @@ class CPG_Dbase
 		return $this->connected;
 	}
 
-	public function getError ()
+	public function getError ($code=false, $last=false)
 	{
-		if (!$this->errnum) $this->errnum = $this->dbobj->errno;
-		if (!$this->error) $this->error = $this->dbobj->error;
-		return $this->errnum . ' : ' . $this->error;
+		if (!$last) {
+			$this->errnum = $this->dbobj->errno;
+			$this->error = $this->dbobj->error;
+		}
+		if ($code) {
+			return $this->errnum;
+		} else {
+			return $this->errnum . ' : ' . $this->error;
+		}
 	}
 
 	public function escapeStr ($str)

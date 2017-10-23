@@ -59,12 +59,18 @@ class CPG_Dbase
 		return $this->connected;
 	}
 
-	public function getError ()
+	public function getError ($code=false, $last=false)
 	{
-		$einf = $this->_instance->errorInfo();
-		$this->errnum = $einf[1];
-		$this->error = $einf[2];
-		return $this->errnum . ' : ' . $this->error;
+		if (!$last) {
+			$einf = $this->_instance->errorInfo();
+			$this->errnum = $einf[1];
+			$this->error = $einf[2];
+		}
+		if ($code) {
+			return $this->errnum;
+		} else {
+			return $this->errnum . ' : ' . $this->error;
+		}
 	}
 
 	public function escapeStr ($str)
