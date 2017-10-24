@@ -500,6 +500,9 @@ function update_tables()
 
 EOT;
 
+	// Have to relax the sql modes for mysql 5.7 so it won't fail with zero dates, etc.
+	cpg_db_query("SET SESSION sql_mode = ''");
+
     foreach ($sql_query as $q) {
 
         $cellStyle = ($loopCounter / 2 == floor($loopCounter / 2)) ? 'tableb' : 'tableb tableb_alternate';

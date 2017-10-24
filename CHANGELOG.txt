@@ -22,6 +22,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2017-10-23 [B] Relax sql modes for successful database update on mysql 5.7 {ron4mac}
 2017-10-23 [B] Filter database errors during update so 'real' errors are reported {ron4mac}
 2017-10-23 [B] Remove (at least one) cause of blank screen when database access error {ron4mac}
 2017-08-28 [B,M] Remove spinbutton js for config screen; make number fields HTML5 elements {ron4mac}
