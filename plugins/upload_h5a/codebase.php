@@ -121,7 +121,7 @@ EOT;
 		if ($cfg['enabdesc']) {
 			$desclabl = $lang_upload_php['description'];
 			if ($CONFIG['show_bbcode_help']) {
-				$desclabl .= '&nbsp;'. cpg_display_help('f=empty.htm&amp;base=64&amp;h='.urlencode(base64_encode(serialize($lang_bbcode_help_title))).'&amp;t='.urlencode(base64_encode(serialize($lang_bbcode_help))),470,245);
+				$desclabl .= '&nbsp;'. cpg_display_help('f=empty.htm&amp;h=lang_bbcode_help_title&amp;t=lang_bbcode_help',470,245);
 			}
 			echo '<tr><td class="tableb">'.$desclabl.'</td><td class="tableb"><textarea name="caption" rows="2" id="caption" class="textinput" /></textarea></td></tr>';
 		}
