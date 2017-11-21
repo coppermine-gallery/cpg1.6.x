@@ -1158,7 +1158,7 @@ doc_toc += '      </li>\n';
 doc_toc += '      <li><a href="dev_package.htm#packaging">Packaging a new release</a>\n';
 doc_toc += '        <ul>\n';
 doc_toc += '          <li><a href="dev_package.htm#packaging_target_audience">Target audience</a></li>\n';
-doc_toc += '          <li><a href="dev_package.htm#packaging_subversion">Subversion repository</a></li>\n';
+doc_toc += '          <li><a href="dev_package.htm#packaging_git">Git repository</a></li>\n';
 doc_toc += '          <li><a href="dev_package.htm#packaging_steps">Steps</a>\n';
 doc_toc += '            <ul>\n';
 doc_toc += '              <li><a href="dev_package.htm#packaging_steps_checkout">Check out</a></li>\n';

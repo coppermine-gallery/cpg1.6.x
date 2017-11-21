@@ -539,11 +539,15 @@
     <hash>919ded2e0e819a9bda6c42215e9babfa</hash>
   </element>
   <element>
-    <fullpath>docs/en/dev_subversion.htm</fullpath>
+    <fullpath>docs/en/dev_git.htm</fullpath>
     <version>1.6.03</version>
     <status>mandatory</status>
     <permission>read</permission>
     <hash>d95477a408515023af6ca683d6b66306</hash>
+  </element>
+  <element>
+    <fullpath>docs/en/dev_subversion.htm</fullpath>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>docs/en/dev_superglobals.htm</fullpath>
