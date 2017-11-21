@@ -1417,7 +1417,7 @@ doc_toc += '          <li><a href="dev_git.htm#dev_git_caveat">Caveats</a></li>\
 doc_toc += '          <li><a href="dev_git.htm#dev_git_definition">What is Git?</a></li>\n';
 doc_toc += '          <li><a href="dev_git.htm#dev_git_hosting">Where is the Git repository hosted?</a></li>\n';
 doc_toc += '          <li><a href="dev_git.htm#dev_git_software">Recommended software</a></li>\n';
-doc_toc += '          <li><a href="dev_git.htm#dev_git_websvn">Alternative access using Web SVN</a></li>\n';
+doc_toc += '          <li><a href="dev_git.htm#dev_git_github">Alternative access using GitHub</a></li>\n';
 doc_toc += '          <li><a href="dev_git.htm#dev_git_repository_structure">Repository structure</a>\n';
 doc_toc += '            <ul>\n';
 doc_toc += '              <li><a href="dev_git.htm#dev_git_repository_structure_trunk">Coppermine core files</a></li>\n';
