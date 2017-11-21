@@ -48,7 +48,7 @@
                 <td>cpg1.6.01</td>
                 <td>
                   <ul>
-                    <li>This version was never released as a package - the version number 1.6.01 was just reserved for the initial development stage of the cpg1.6.x series before the feature freeze stage started. There is no package available, nor has there ever been one - only <a href="dev_subversion.htm#subversion">Subversion</a> checkouts have been possible.</li>
+                    <li>This version was never released as a package - the version number 1.6.01 was just reserved for the initial development stage of the cpg1.6.x series before the feature freeze stage started. There is no package available, nor has there ever been one - only <a href="dev_git.htm#git">Git</a> checkouts have been possible.</li>
                   </ul>
                 </td>
                 <td>Never</td>
@@ -231,7 +231,7 @@
             </li>
             <li><a id="versioncheck_options_no_connect_online_repository"></a><h4>Do not connect to the online repository<a href="#versioncheck_options_no_connect_online_repository" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h4>
             If you check this option, the versioncheck script will not attempt to connect to the online repository and use the local XML file instead. Only use this option if connecting to the online repository doesn't work for you (e.g. if you're on an intranet and your server doesn't have internet access). The main drawback of not connecting to the online repository is the fact that you won't know about possible updates and most recent releases, so you better find the cause for your inability to connect to the online repository.<br />
-            During the development stage (between releases), the online repository usually is not being updated frequently, so only if you're using <a href="dev_subversion.htm#subversion">SVN checkouts</a> (i.e. if you're a developer), you should tick this option.
+            During the development stage (between releases), the online repository usually is not being updated frequently, so only if you're using <a href="dev_git.htm#git">Git checkouts</a> (i.e. if you're a developer), you should tick this option.
             <a id="versioncheck_options_no_connect_online_repository_end"></a>
             </li>
         </ul>
@@ -258,9 +258,9 @@
             Note: folders don't have version numbers, nor do binary files (like graphics) have one, that's why the column &quot;Version&quot; displays &quot;<abbr title="not applicable">n/a</abbr>&quot; for folders and binary files. Only files that contain textual content can have a version number, so don't be alarmed by the many &quot;n/a (OK)&quot;-messages.</li>
             <li><a id="versioncheck_comparison_revision"></a><h4>Revision<a href="#versioncheck_comparison_revision" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h4>
             The revision of the file on your server. If it is identical to the revision indicated in the XML repository, you should see an &quot;OK&quot;. If you're running an oudated revision on your server you should get a fresh package and perform an upgrade.<br />
-            Revisions are related to the versions - usually, if your version is OK, your revision should be OK as well. Only if you perform checkouts from the <a href="dev_subversion.htm#subversion">subversion repository</a>, the revisions may &quot;act up&quot;.<br />
+            Revisions are related to the versions - usually, if your version is OK, your revision should be OK as well. Only if you perform checkouts from the <a href="dev_git.htm#git">Git repository</a>, the revisions may &quot;act up&quot;.<br />
             The same thing that applies to version numbers applies to revisions as well: only textual files can have revision numbers - folders and binary files don't have a revision number.<br />
-            Confused? You don't have to: usually, you can safely ignore revisions - if you want to find out about what revisions are being used for, read the <a href="dev_subversion.htm#dev_subversion_revision">details on the subversion</a> page.</li>
+            Confused? You don't have to: usually, you can safely ignore revisions - if you want to find out about what revisions are being used for, read the <a href="dev_git.htm#dev_git_revision">details on the Git</a> page.</li>
             <li><a id="versioncheck_comparison_modified"></a><h4>Modified<a href="#versioncheck_comparison_modified" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h4>
             If a file is accessible and the version and revision numbers match, the versioncheck script attempts to perform a check wether the file has been modified, compared to the original that comes with the Coppermine package. This check is being performed by taking into account the MD5-hashes of the original file and your copy.<br />When performing a fresh install or upgrade, there should be no modified files. If they are being displayed as modified, there are several possible reasons:
             <ul>
@@ -274,7 +274,7 @@
             <li><a id="versioncheck_comparison_comment"></a><h4>Comment<a href="#versioncheck_comparison_comment" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h4>
             The comment-column contains a short recommendation about what is supposedly wrong and what you should do to fix this. No comments usually means that everything is OK.</li>
             <li><a id="versioncheck_comparison_repository_link"></a><h4>Repository link<a href="#versioncheck_comparison_repository_link" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h4>
-            The link to the SVN repository (web SVN) is meant as an additional feature for power-users and developers. Read the <a href="dev_subversion.htm#subversion">subversion repository</a> instructions to find out more. If everything is fine, you don't have to worry about the link anyway.</li>
+            The link to the SVN repository (web SVN) is meant as an additional feature for power-users and developers. Read the <a href="dev_git.htm#git">Git repository</a> instructions to find out more. If everything is fine, you don't have to worry about the link anyway.</li>
         </ul>
         <a id="versioncheck_comparison_end"></a>
 
@@ -320,7 +320,7 @@
             <ul>
                 <li>If you can log in to your Coppermine gallery using your admin account, go to the config panel of Coppermine: the exact version will be displayed in the table header</li>
                 <li>Take a look at the output of any Coppermine-driven page using your regular browser (usually by right-clicking on a blank section and choosing "Show source-code" or similar from the context menu). Scroll down to the bottom of the output (right before the closing body tag) - you should see a comment line there that will display the exact Coppermine version</li>
-                <li>Use a plain text editor to open a local copy of any PHP core file of Coppermine - in the file header you should see both an exact Coppermine version as well as the subversion revision number. This is the case as well for several other files that come with Coppermine.</li>
+                <li>Use a plain text editor to open a local copy of any PHP core file of Coppermine - in the file header you should see both an exact Coppermine version. This is the case as well for several other files that come with Coppermine.</li>
             </ul>
         </li>
     </ul>

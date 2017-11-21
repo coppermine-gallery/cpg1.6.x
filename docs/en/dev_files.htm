@@ -38,7 +38,7 @@
 <a id="dev_files_adding"></a><h2>Adding files<a href="#dev_files_adding" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h2>
 <p>If a developer needs to add a new file to Coppermine's core, here's a list of things that needs to be done:</p>
 <ul>
-	<li>Create the file locally on your client (within the working copy of your Subversion checkout), respecting the <a href="dev_coding.htm#dev_coding_naming_conventions">naming conventions</a></li>
+	<li>Create the file locally on your client (within the working copy of your Git repository), respecting the <a href="dev_coding.htm#dev_coding_naming_conventions">naming conventions</a></li>
 	<li>If it is a non-binary (i.e. a text file), add the file header that will show that your file is part of the coppermine package. Currently, the file header for PHP files looks like this:<pre class="code">/*************************
   Coppermine Photo Gallery
   ************************
@@ -105,10 +105,10 @@
             </ul>
         </li>
         <li>Make sure that there is a flag image inside the folder <span class="code">images/flags/</span> that represents the new language. If there is no flag available, create one if you have the skills to do so and add that file. Alternatively, assign a blank image as a flag as a temporary workaround.</li>
-        <li>Add the new language file in your SVN client to the repository. You will need <a href="dev_subversion.htm#dev_subversion_write_access">write access to the subversion repository</a> in order to accomplish this.</li>
+        <li>Add the new language file in your SVN client to the repository. You will need <a href="dev_git.htm#dev_git_write_access">write access to the Git repository</a> in order to accomplish this.</li>
         <li>Add a line to the change log that corresponds to the new language file.</li>
         <li>Test the language file as thoroughly as you can on your local testbed: browse the gallery as guest, registered user and admin, try to upload a file, take a look at the main views (index, thumbnail page, intermediate image).</li>
-        <li>Commit your changes to the subversion repository using your subversion client.</li>
+        <li>Push your changes to the Git repository using your Git client.</li>
         <li>Finally reply to the thread where the user has contributed the language file, posting that you have done what you did. It might help to add a reference to the web SVN and post the revision of your commit.</li>
         <li>If you have admin privileges on the Coppermine forum, change the language file contributor's group membership; make him member of the translator group.</li>
         <li>If you have access to the Coppermine internet site, edit the credits file there as well to reflect the newly added translator.</li>
@@ -116,7 +116,7 @@
 </div>
 
 <a id="dev_files_renaming"></a><h2>Renaming files<a href="#dev_files_renaming" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h2>
-<p>If a file name can not be kept (e.g. because of collision with naming conventions), it should be renamed instead of deleting the old one and creating a new one. The benfit of renaming is the fact that the version history will be kept in the Subversion repository.</p>
+<p>If a file name can not be kept (e.g. because of collision with naming conventions), it should be renamed instead of deleting the old one and creating a new one. The benfit of renaming is the fact that the version history will be kept in the Git repository.</p>
 <p>Once a file has been renamed in SVN, you will have to make additional edits:</p>
 <ul>
 	<li>Add an entry for your the new file name in <span class="code">includes/cpg16x.files.xml</span>. Details can be found in the section <a href="dev_versioncheck.htm#dev_versioncheck_xml">Versioncheck : XML structure</a></li>
