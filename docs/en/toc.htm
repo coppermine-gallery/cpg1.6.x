@@ -1134,42 +1134,26 @@
       <li><a href="dev_package.htm#packaging">Packaging a new release</a>
         <ul>
           <li><a href="dev_package.htm#packaging_target_audience">Target audience</a></li>
-          <li><a href="dev_package.htm#packaging_subversion">Subversion repository</a></li>
+          <li><a href="dev_package.htm#packaging_git">Git repository</a></li>
           <li><a href="dev_package.htm#packaging_steps">Steps</a>
             <ul>
-              <li><a href="dev_package.htm#packaging_steps_checkout">Check out</a></li>
-              <li><a href="dev_package.htm#packaging_steps_loop_through_files"></a></li>
-              <li><a href="dev_package.htm#">Replace version number in all files</a>
+              <li><a href="dev_package.htm#packaging_steps_git_pull">Pull</a></li>
+              <li><a href="dev_package.htm#packaging_steps_version_number">Edit the version number</a></li>
+              <li><a href="dev_package.htm#packaging_steps_loop_through_files">Replace version number in all files</a>
                 <ul>
                   <li><a href="dev_package.htm#packaging_steps_loop_through_files_linux">Linux</a></li>
                   <li><a href="dev_package.htm#packaging_steps_loop_through_files_windows">Windows</a></li>
                 </ul>
               </li>
               <li><a href="dev_package.htm#packaging_steps_bom">Remove Byte Order Marks</a></li>
-              <li><a href="dev_package.htm#">Prepare an announcement thread</a></li>
-              <li><a href="dev_package.htm#packaging_steps_write_announcement_thread"></a></li>
+              <li><a href="dev_package.htm#packaging_steps_write_announcement_thread">Prepare an announcement thread</a></li>
               <li><a href="dev_package.htm#packaging_steps_docs_upgrade">Edit the upgrade section of the docs</a></li>
               <li><a href="dev_package.htm#packaging_steps_changelog">Edit the changelog</a></li>
-              <li><a href="dev_package.htm#packaging_steps_version_number">Edit the version number</a></li>
-              <li><a href="dev_package.htm#packaging_steps_svn_commit">Commit your changes</a></li>
-              <li><a href="dev_package.htm#packaging_steps_versioncheck">Update the versioncheck data</a>
-                <ul>
-                  <li><a href="dev_package.htm#packaging_steps_versioncheck_complete">Completeness</a></li>
-                  <li><a href="dev_package.htm#packaging_steps_versioncheck_update">Update revision numbers and hashes</a></li>
-                </ul>
-              </li>
-              <li><a href="dev_package.htm#packaging_steps_create_tag">Create a tag in subversion</a>
-                <ul>
-                  <li><a href="dev_package.htm#packaging_steps_create_tag_rapidsvn">RapidSVN</a></li>
-                  <li><a href="dev_package.htm#packaging_steps_create_tag_tortoisesvn">Tortoise SVN</a></li>
-                </ul>
-              </li>
-              <li><a href="dev_package.htm#packaging_steps_svn_export">Export from subversion</a>
-                <ul>
-                  <li><a href="dev_package.htm#packaging_steps_rapidsvn">RapidSVN</a></li>
-                  <li><a href="dev_package.htm#packaging_steps_tortoisesvn">Tortoise SVN</a></li>
-                </ul>
-              </li>
+              <li><a href="dev_package.htm#packaging_steps_versioncheck">Update the versioncheck data</a></li>
+              <li><a href="dev_package.htm#packaging_steps_git_push">Push your changes</a></li>
+              <li><a href="dev_package.htm#packaging_steps_git_merge">Merge branches</a></li>
+              <li><a href="dev_package.htm#packaging_steps_create_release">Create a release at GitHub.com</a></li>
+              <li><a href="dev_package.htm#packaging_steps_git_clone">Clone master to fresh local directory</a></li>
               <li><a href="dev_package.htm#packaging_steps_create_zip">Create the archive</a></li>
               <li><a href="dev_package.htm#packaging_steps_upload_zip">Upload the archive</a></li>
               <li><a href="dev_package.htm#packaging_steps_move_announcement">Publish announcement thread</a></li>
@@ -1368,49 +1352,49 @@
           <li><a href="dev_superglobals.htm#superglobals_sanitization_links">Links</a></li>
         </ul>
       </li>
-      <li><a href="dev_subversion.htm">Subversion</a>
+      <li><a href="dev_git.htm">Git</a>
         <ul>
-          <li><a href="dev_subversion.htm#dev_subversion_target_audience">Target audience</a></li>
-          <li><a href="dev_subversion.htm#dev_subversion_caveat">Caveats</a></li>
-          <li><a href="dev_subversion.htm#dev_subversion_definition">What is subversion?</a></li>
-          <li><a href="dev_subversion.htm#dev_subversion_hosting">Where is the subversion repository hosted?</a></li>
-          <li><a href="dev_subversion.htm#dev_subversion_software">Recommended software</a></li>
-          <li><a href="dev_subversion.htm#dev_subversion_websvn">Alternative access using Web SVN</a></li>
-          <li><a href="dev_subversion.htm#dev_subversion_repository_structure">Repository structure</a>
+          <li><a href="dev_git.htm#dev_git_target_audience">Target audience</a></li>
+          <li><a href="dev_git.htm#dev_git_caveat">Caveats</a></li>
+          <li><a href="dev_git.htm#dev_git_definition">What is Git?</a></li>
+          <li><a href="dev_git.htm#dev_git_hosting">Where is the Git repository hosted?</a></li>
+          <li><a href="dev_git.htm#dev_git_software">Recommended software</a></li>
+          <li><a href="dev_git.htm#dev_git_github">Alternative access using GitHub</a></li>
+          <li><a href="dev_git.htm#dev_git_repository_structure">Repository structure</a>
             <ul>
-              <li><a href="dev_subversion.htm#dev_subversion_repository_structure_trunk">Coppermine core files</a></li>
-              <li><a href="dev_subversion.htm#dev_subversion_repository_structure_plugins">Plugins</a></li>
+              <li><a href="dev_git.htm#dev_git_repository_structure_trunk">Coppermine core files</a></li>
+              <li><a href="dev_git.htm#dev_git_repository_structure_plugins">Plugins</a></li>
             </ul>
           </li>
-          <li><a href="dev_subversion.htm#dev_subversion_checking_out">Checking out</a>
+          <li><a href="dev_git.htm#dev_git_checking_out">Checking out</a>
             <ul>
-              <li><a href="dev_subversion.htm#dev_subversion_checking_out_entire">Checking out the entire repository</a></li>
-              <li><a href="dev_subversion.htm#dev_subversion_checking_out_particular_package">Checking out a particular Package</a></li>
-              <li><a href="dev_subversion.htm#dev_subversion_checking_out_particular_file">Checking out a particular file</a></li>
-              <li><a href="dev_subversion.htm#dev_subversion_checking_out_refering">Refering to files downloaded from the subversion repository</a></li>
+              <li><a href="dev_git.htm#dev_git_checking_out_entire">Checking out the entire repository</a></li>
+              <li><a href="dev_git.htm#dev_git_checking_out_particular_package">Checking out a particular Package</a></li>
+              <li><a href="dev_git.htm#dev_git_checking_out_particular_file">Checking out a particular file</a></li>
+              <li><a href="dev_git.htm#dev_git_checking_out_refering">Refering to files downloaded from the Git repository</a></li>
             </ul>
           </li>
-          <li><a href="dev_subversion.htm#dev_subversion_download">Is there no single package that I could download instead?</a>
+          <li><a href="dev_git.htm#dev_git_download">Is there no single package that I could download instead?</a>
             <ul>
-              <li><a href="dev_subversion.htm#dev_subversion_download_tarball">Download Tarball archives</a></li>
+              <li><a href="dev_git.htm#dev_git_download_tarball">Download Tarball archives</a></li>
             </ul>
           </li>
-          <li><a href="dev_subversion.htm#dev_subversion_dev-only">Developers-only</a>
+          <li><a href="dev_git.htm#dev_git_dev-only">Developers-only</a>
             <ul>
-              <li><a href="dev_subversion.htm#dev_subversion_checkout_checkin">Check out before checking in</a></li>
-              <li><a href="dev_subversion.htm#dev_subversion_commit">Committing your code</a></li>
-              <li><a href="dev_subversion.htm#dev_subversion_changelog">Changelog</a></li>
-              <li><a href="dev_subversion.htm#dev_subversion_write_access">Obtaining write access</a></li>
+              <li><a href="dev_git.htm#dev_git_checkout_checkin">Check out before checking in</a></li>
+              <li><a href="dev_git.htm#dev_git_commit">Committing your code</a></li>
+              <li><a href="dev_git.htm#dev_git_changelog">Changelog</a></li>
+              <li><a href="dev_git.htm#dev_git_write_access">Obtaining write access</a></li>
             </ul>
           </li>
-          <li><a href="dev_subversion.htm#dev_subversion_step-by-step">Step by step</a>
+          <li><a href="dev_git.htm#dev_git_step-by-step">Step by step</a>
             <ul>
-              <li><a href="dev_subversion.htm#dev_subversion_client-download">Download the client application</a></li>
-              <li><a href="dev_subversion.htm#dev_subversion_initial_checkout">Initial checkout</a></li>
+              <li><a href="dev_git.htm#dev_git_client-download">Download the client application</a></li>
+              <li><a href="dev_git.htm#dev_git_initial_checkout">Initial checkout</a></li>
             </ul>
           </li>
-          <li><a href="dev_subversion.htm#dev_subversion_revision">Revisions</a></li>
-          <li><a href="dev_subversion.htm#dev_subversion_fileheaders">Subversion file headers</a></li>
+          <li><a href="dev_git.htm#dev_git_revision">Revisions</a></li>
+          <li><a href="dev_git.htm#dev_git_fileheaders">Git file headers</a></li>
         </ul>
       </li>
       <li><a href="dev_tools.htm">Tools recommended by the devs</a>

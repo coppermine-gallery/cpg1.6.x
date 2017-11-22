@@ -22,6 +22,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2017-11-21 [D] Updating documentation to reflect switch from Subversion on sourceforge.net to Git at github.com {eenemeenemuu}
 2017-10-23 [B] Relax sql modes for successful database update on mysql 5.7 {ron4mac}
 2017-10-23 [B] Filter database errors during update so 'real' errors are reported {ron4mac}
 2017-10-23 [B] Remove (at least one) cause of blank screen when database access error {ron4mac}
