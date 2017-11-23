@@ -849,6 +849,23 @@ function is_link_local($url)
     return($is_local);
 }
 
+/**
+* is_url()
+*
+* Determines if a string is in the form of a URL
+*
+* @param string $url
+*
+* @return boolean $is_url
+*/
+function is_url($url)
+{
+	$regx = '|^(http(s)?:)?//[-a-z0-9_.]+/|i';
+	$is_url = preg_match($regx, $url);
+	return $is_url;
+}
+
+
 /**************************************************************************
    Template functions
  **************************************************************************/
@@ -5392,8 +5409,8 @@ function js_include($filename, $inline = false)
 {
     global $JS;
 
-    // Proceed with inclusion only if the file exists
-    if (!file_exists($filename)) {
+    // Proceed with inclusion only if the local file exists or it is in the form of a URL
+    if (!(file_exists($filename) || is_url($filename))) {
         return;
     }
 

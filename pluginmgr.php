@@ -527,13 +527,15 @@ switch ($op) {
 		if (isset($xa['css'])) {
 			if (!is_array($xa['css'])) $xa['css'] = array($xa['css']);
 			foreach ($xa['css'] as $css) {
-				$meta[] = '<link rel="stylesheet" href="plugins/'.$actonplugin->path.'/'.$css.'" type="text/css" />';
+				$csrc = is_url($css) ? $css : ('plugins/'.$actonplugin->path.'/'.$css);
+				$meta[] = '<link rel="stylesheet" href="'.$csrc.'" type="text/css" />';
 			}
 		}
 		if (isset($xa['js'])) {
 			if (!is_array($xa['js'])) $xa['js'] = array($xa['js']);
 			foreach ($xa['js'] as $js) {
-				js_include('plugins/'.$actonplugin->path.'/'.$js);
+				$jsrc = is_url($js) ? $js : ('plugins/'.$actonplugin->path.'/'.$js);
+				js_include($jsrc);
 			}
 		}
 
