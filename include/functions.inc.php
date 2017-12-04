@@ -6850,4 +6850,41 @@ function cpg_load_plugin_language_file($path) {
     }
 }
 
+
+/**
+ * cpg_get_user_data
+ *
+ * Check user login credentials. Returns array of user data or FALSE.
+ */
+function cpg_get_user_data($sql_user_email, $password) {
+    global $cpg_udb;
+
+    $sql = "SELECT user_password, user_password_salt, user_password_hash_algorithm, user_password_iterations FROM {$cpg_udb->usertable} WHERE $sql_user_email AND user_active = 'YES' LIMIT 1";
+    $result = $cpg_udb->query($sql);
+
+    if (!$result->numRows()) {
+        return false;
+    }
+
+    require 'include/passwordhash.inc.php';
+    $password_params = $result->fetchAssoc(true);
+
+    // Check for user in users table
+    $sql = "SELECT user_id, user_name, user_password FROM {$cpg_udb->usertable} WHERE $sql_user_email ";
+    if (!$password_params['user_password_salt']) {
+        $sql .= "AND BINARY user_password = '".md5($password)."'";
+    } elseif (!cpg_password_validate($password, $password_params)) {
+        return false;
+    }
+    $sql .= " AND user_active = 'YES' LIMIT 1";
+
+    $result = $cpg_udb->query($sql);
+
+    if (!$result->numRows()) {
+        return false;
+    }
+
+    return $result->fetchAssoc(true);
+}
+
 //EOF

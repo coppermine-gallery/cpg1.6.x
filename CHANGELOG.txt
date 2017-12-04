@@ -22,6 +22,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2017-12-04 [B] Fixed bridge emergency recovery {eenemeenemuu}
 2017-11-23 [A] Allow for plugin authors to include remote .js and .css files {ron4mac}
 2017-11-23 [A] Rewrite js_include() to allow remote URLs {ron4mac}
 2017-11-23 [A] Added utility function to determine if a string is in the form or a URL {ron4mac}

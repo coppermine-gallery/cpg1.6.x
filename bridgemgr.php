@@ -754,7 +754,7 @@ pagefooter();
 } // gallery admin mode --- end
 else { // not in gallery admin mode --- start
     if ($CONFIG['bridge_enable'] != 1) {
-    cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
+        cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
     }
 
     // initialize vars
@@ -790,14 +790,9 @@ else { // not in gallery admin mode --- start
             $posted_var['password'] = $superCage->post->getEscaped('password');
         }
 
-        $encpassword = md5(addslashes($posted_var['password']));
+        $retrieved_data = cpg_get_user_data("user_name = '".$posted_var['username']."'", $posted_var['password']);
 
-
-        $results = cpg_db_query("SELECT user_id, user_name, user_password FROM $temp_user_table WHERE user_name = '" . addslashes($posted_var['username']) . "' AND BINARY user_password = '" . $encpassword . "' AND user_active = 'YES' AND user_group = '1'");
-        if ($results->numRows()) {
-            $retrieved_data = $results->fetchArray(true);
-        }
-        if ($retrieved_data['user_name'] == $posted_var['username'] && $retrieved_data['user_password'] == $encpassword && $retrieved_data['user_name'] != '' ) {
+        if ($retrieved_data['user_name'] == $posted_var['username'] && $retrieved_data['user_name'] != '') {
             // authentication successful
 
             cpg_config_set('bridge_enable', '0');
