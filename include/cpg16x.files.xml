@@ -9067,7 +9067,7 @@
   </element>
   <element>
     <fullpath>plugins/upload_h5a/js/upload.min.js</fullpath>
-    <version>n/a</version>
+    <version>1.6.03</version>
     <status>mandatory</status>
     <permission>read</permission>
     <hash>dc5861c712362a52afbc0622814c91e6</hash>
