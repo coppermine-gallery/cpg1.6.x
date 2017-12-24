@@ -75,6 +75,7 @@ if ($search_string && isset($search_params['params'])) {
                 if ($superCage->get->keyExists('album_title') || $superCage->get->keyExists('category_title')) $albcat_terms[] = " REGEXP '$search_string'";
                 foreach ($search_params['params'] as $param => $value) {
                         if (in_array($param, $allowed)) $fields[] = "$param REGEXP '$search_string'";
+                        else list($fields) = CPGPluginAPI::filter('custom_search_param', array($fields, $param, "REGEXP '$search_string'", 'REGEXP'));
                 }
                 $sql .= count($fields) ? ('((' . implode(' OR ', $fields) . '))') : '';
          } else {
@@ -87,6 +88,7 @@ if ($search_string && isset($search_params['params'])) {
                                 if ($superCage->get->keyExists('album_title') || $superCage->get->keyExists('category_title')) $albcat_terms[] = " LIKE '%$string%'";
                                 foreach ($search_params['params'] as $param => $value) {
                                         if (in_array($param, $allowed)) $fields[] = "$param LIKE '%$string%'";
+                                        else list($fields) = CPGPluginAPI::filter('custom_search_param', array($fields, $param, "LIKE '%$string%'", trim($type)));
                                 }
                                 $sections[] = count($fields) ? '(' . implode(' OR ', $fields) . ')' : '';
                         } elseif (strlen($string)) {
@@ -98,6 +100,7 @@ if ($search_string && isset($search_params['params'])) {
                                                 if ($superCage->get->keyExists('album_title') || $superCage->get->keyExists('category_title')) $albcat_terms[] = " LIKE '%$word%'";
                                                 foreach ($search_params['params'] as $param => $value) {
                                                         if (in_array($param, $allowed)) $fields[] = ($param == 'title' ? 'p.title' : $param)." LIKE '%$word%'";
+                                                        else list($fields) = CPGPluginAPI::filter('custom_search_param', array($fields, $param, "LIKE '%$word%'", trim($type)));
                                                 }
                                                 $sections[] = count($fields) ? '(' . implode(' OR ', $fields) . ')' : '';
                                         }
@@ -106,6 +109,14 @@ if ($search_string && isset($search_params['params'])) {
                 }
 
                 $sql .= count($sections) ? '(' . implode($type, $sections) . ')' : '0';
+        }
+
+        // Add to allowed array after initial processing, to allow for custom processing
+        $allowed = CPGPluginAPI::filter('custom_search_params_allowed', $allowed);
+
+        $join_addl_tables = '';
+        if ($cpg_udb->can_join_tables) {
+            $join_addl_tables = CPGPluginAPI::filter('custom_search_query_join', $join_addl_tables);
         }
 
         $sql .= Inspekt::isInt($USER['search']['params']['newer_than']) ? ' AND ( ctime > '.time().' - '.( $USER['search']['params']['newer_than'] * 60*60*24).')' : '';
@@ -247,6 +258,7 @@ if ($search_string && isset($search_params['params'])) {
 
             $query = "SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} AS p
                 $join_user_table
+                $join_addl_tables
                 WHERE $sql
                 AND ($sort_order)";
 
@@ -258,6 +270,7 @@ if ($search_string && isset($search_params['params'])) {
 
             $query = "SELECT p.*{$user_column} FROM {$CONFIG['TABLE_PICTURES']} AS p
             $join_user_table
+            $join_addl_tables
             WHERE " . $sql;
 
             $temp = str_replace("SELECT p.*{$user_column}", 'SELECT COUNT(*)', $query);
