@@ -254,9 +254,9 @@ if ($search_string && isset($search_params['params'])) {
                 $direction = "";
             }
 
-            $sort_order = "$criteria $direction '$criteria_pid' OR $criteria = '$criteria_pid' AND pid < $pid";
+            $sort_order = "$criteria $direction '$criteria_pid' OR $criteria = '$criteria_pid' AND p.pid < $pid";
 
-            $query = "SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} AS p
+            $query = "SELECT COUNT(DISTINCT p.pid) FROM {$CONFIG['TABLE_PICTURES']} AS p
                 $join_user_table
                 $join_addl_tables
                 WHERE $sql
@@ -268,12 +268,12 @@ if ($search_string && isset($search_params['params'])) {
 
         } else {
 
-            $query = "SELECT p.*{$user_column} FROM {$CONFIG['TABLE_PICTURES']} AS p
+            $query = "SELECT DISTINCT p.*{$user_column} FROM {$CONFIG['TABLE_PICTURES']} AS p
             $join_user_table
             $join_addl_tables
             WHERE " . $sql;
 
-            $temp = str_replace("SELECT p.*{$user_column}", 'SELECT COUNT(*)', $query);
+            $temp = str_replace("SELECT DISTINCT p.*{$user_column}", 'SELECT COUNT(DISTINCT p.pid)', $query);
             $result = cpg_db_query($temp);
             $row = $result->fetchRow(true);
             $count = $row[0];
