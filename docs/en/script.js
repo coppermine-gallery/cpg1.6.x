@@ -1590,7 +1590,7 @@ $(document).ready(function() {
 		$(".detail_body").slideToggle(600);
 		$(".detail_head_collapsed").toggleClass("detail_head_expanded");
 	});
-	cpgDocHeader();
+//	cpgDocHeader();
 	cpgDocTranslationWarning();
 	cpgDocToc();
 	$("#tree").treeview({

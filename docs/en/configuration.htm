@@ -1752,10 +1752,10 @@
     <br class="clrb" />
     <a id="admin_picture_thumbnail_max_upload_size"></a><h3>Max size for uploaded files (KB)<a href="#admin_picture_thumbnail_max_upload_size" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h3>
     <div class="cpg_summary">
-        Default value: <input type="text" size="7" maxlength="7" class="numberinput" value="1024" /><br />
-        Recommended value: <input type="text" size="7" maxlength="7" class="numberinput" value="2048" /><br />
-        Minimum: <input type="text" size="7" maxlength="7" class="numberinput" value="1" /><br />
-        Maximum: <input type="text" size="7" maxlength="7" class="numberinput" value="9999999" /><br />
+        Default value: <input type="text" size="8" maxlength="8" class="numberinput" value="1024" /><br />
+        Recommended value: <input type="text" size="8" maxlength="8" class="numberinput" value="2048" /><br />
+        Minimum: <input type="text" size="8" maxlength="8" class="numberinput" value="8" /><br />
+        Maximum: <input type="text" size="8" maxlength="8" class="numberinput" value="10000000" /><br />
         Database record name: <span class="code">max_upl_size</span><br />
         <img src="../images/icons/config.png" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings &rarr; Max size for uploaded files
     </div>
@@ -1847,8 +1847,8 @@
     <br class="clrb" />
     <a id="admin_thumbs_advanced_movie"></a><h3>Allowed movie types<a href="#admin_thumbs_advanced_movie" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h3>
     <div class="cpg_summary">
-        Default value: <input type="text" size="32" maxlength="32" class="textinput" value="asf/asx/mpg/mpeg/wmv/swf/avi/mov" /><br />
-        Recommended value: <input type="text" size="32" maxlength="32" class="textinput" value="asf/asx/mpg/mpeg/wmv/swf/avi/mov" /><br />
+        Default value: <input type="text" size="44" maxlength="44" class="textinput" value="asf/asx/mpg/mpeg/wmv/swf/avi/mov/m4v" /><br />
+        Recommended value: <input type="text" size="44" maxlength="44" class="textinput" value="asf/asx/mpg/mpeg/wmv/swf/avi/mov/m4v" /><br />
         Database record name: <span class="code">allowed_mov_types</span><br />
         <img src="../images/icons/config.png" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings &rarr; Allowed movie types
     </div>
@@ -1873,8 +1873,8 @@
     <br class="clrb" />
     <a id="admin_picture_thumb_advanced_audio_extensions"></a><h3>Allowed audio types<a href="#admin_picture_thumb_advanced_audio_extensions" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h3>
     <div class="cpg_summary">
-        Default value: <input type="text" size="24" maxlength="24" class="textinput" value="mp3/midi/mid/wma/wav/ogg" /><br />
-        Recommended value: <input type="text" size="24" maxlength="24" class="textinput" value="mp3/midi/mid/wma/wav/ogg" /><br />
+        Default value: <input type="text" size="32" maxlength="32" class="textinput" value="mp3/midi/mid/wma/wav/ogg" /><br />
+        Recommended value: <input type="text" size="32" maxlength="32" class="textinput" value="mp3/midi/mid/wma/wav/ogg" /><br />
         Database record name: <span class="code">allowed_snd_types</span><br />
         <img src="../images/icons/config.png" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings &rarr; Allowed audio types
     </div>
@@ -1889,8 +1889,8 @@
     <br class="clrb" />
     <a id="admin_picture_thumb_advanced_doc_extensions"></a><h3>Allowed document types<a href="#admin_picture_thumb_advanced_doc_extensions" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h3>
     <div class="cpg_summary">
-        Default value: <input type="text" size="38" maxlength="38" class="textinput" value="doc/txt/rtf/pdf/xls/pps/ppt/zip/gz/mdb" /><br />
-        Recommended value: <input type="text" size="38" maxlength="38" class="textinput" value="txt/pdf/zip/" /><br />
+        Default value: <input type="text" size="42" maxlength="42" class="textinput" value="doc/txt/rtf/pdf/xls/pps/ppt/zip/gz/mdb" /><br />
+        Recommended value: <input type="text" size="42" maxlength="42" class="textinput" value="txt/pdf/zip/" /><br />
         Database record name: <span class="code">allowed_doc_types</span><br />
         <img src="../images/icons/config.png" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings &rarr; Allowed document types
     </div>
@@ -2004,7 +2004,7 @@
     <a id="admin_picture_thumb_advanced_userpics_dir"></a><h3>The directory for user files<a href="#admin_picture_thumb_advanced_userpics_dir" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h3>
     <div class="cpg_summary">
         Default value: <input type="text" size="9" maxlength="9" class="textinput" value="userpics/" /><br />
-        Recommended value: <input type="text" size="7" maxlength="7" class="textinput" value="albums/" /><br />
+        Recommended value: <input type="text" size="9" maxlength="9" class="textinput" value="userpics/" /><br />
         Database record name: <span class="code">userpics</span><br />
         <img src="../images/icons/config.png" width="12" height="12"  alt="" class="icon" title="Configuration" />: File settings &rarr; The directory for user files
     </div>
@@ -2151,7 +2151,7 @@
     <br class="clrb" />
     <a id="admin_watermarking_filepath"></a><h3>Which file to use for watermark<a href="#admin_watermarking_filepath" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h3>
     <div class="cpg_summary">
-        Default value: <input type="text" size="20" maxlength="20" class="textinput" value="images/watermark.png" /><br />
+        Default value: <input type="text" size="24" maxlength="24" class="textinput" value="images/watermark.png" /><br />
         Recommended value: <abbr title="not applicable">n/a</abbr><br />
         Database record name: <span class="code">watermark_file</span><br />
         <img src="../images/icons/config.png" width="12" height="12"  alt="" class="icon" title="Configuration" />: Image watermarking &rarr; Which file to use for watermark
@@ -2373,7 +2373,7 @@
       <li><strong>Simple - one file at a time</strong><br />
       Users can only select one file at a time to upload to an album.</li>
     </ul>
-    <p>There might be other choices you can choose.  If so, these come from plugins you have installed.  The basic Coppermine options are the two listed above.  For assistance on any other upload methods, please check your plugins and their documentation.</p>
+    <p>There might be other choices you can choose.  If so, these come from plugins you have installed.  The basic Coppermine options are the three listed above.  For assistance on any other upload methods, please check your plugins and their documentation.</p>
     <p>You are encouraged to use the advanced upload form unless you have problems with it.</p>
     <p>Since it is your users who will run into these problems, you may want to allow your users to choose the upload method themselves.  See the configuration setting "<a href="#admin_allow_user_upload_choice">Allow users to choose the upload method</a>".</p>
 
@@ -2680,12 +2680,12 @@ into the field number 6.
 <div class="indent">
     <a id="admin_cookie_name"></a><h3>Name of the cookie used by Coppermine<a href="#admin_cookie_name" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></h3>
     <div class="cpg_summary">
-        Default value: <input type="text" size="6" maxlength="6" class="textinput" value="cpg15x" /><br />
-        Recommended value: <input type="text" size="6" maxlength="6" class="textinput" value="cpg15x" /><br />
+        Default value: <input type="text" size="6" maxlength="6" class="textinput" value="cpg16x" /><br />
+        Recommended value: <input type="text" size="6" maxlength="6" class="textinput" value="cpg16x" /><br />
         Database record name: <span class="code">cookie_settings</span><br />
         <img src="../images/icons/config.png" width="12" height="12"  alt="" class="icon" title="Configuration" />: Cookie settings &rarr; Name of the cookie used by Coppermine
     </div>
-    <p>Default value is something like &quot;cpg15x&quot;. Even if you have multiple instances of the script running on the same server you can keep the default value.</p>
+    <p>Default value is something like &quot;cpg16x&quot;. Even if you have multiple instances of the script running on the same server you can keep the default value.</p>
     <p class="cpg_message_warning">When using <a href="bridging.htm">bridging</a>, make sure it <strong>differs</strong> from the bridge app's cookie name.</p>
     <p>This has to be a valid cookie name (no special chars, particularly no dots!) - this setting should best be left alone unless you really know your way around. After all, the cookie name doesn't matter and doesn't mean anything to the end user anyway. Let me repeat: there are many users who blindly change the cookie name to something that just doesn't make sense at all and then complain on the Coppermine support board that things are not working as expected. Do <strong>not</strong> use special chars in the cookie name! In fact, don't change it at all unless you must.</p>
 
