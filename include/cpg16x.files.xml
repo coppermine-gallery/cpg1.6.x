@@ -124,17 +124,11 @@
   </element>
   <element>
     <fullpath>bridge/invisionboard20.inc.php</fullpath>
-    <version>1.6.03</version>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>fb1f3f00275fd158b0dad45cd20aa5ca</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>bridge/mambo.inc.php</fullpath>
-    <version>1.6.03</version>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>d3e7d8a3a7633673b4dc87acf462f15a</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>bridge/mybb.inc.php</fullpath>
@@ -152,17 +146,12 @@
   </element>
   <element>
     <fullpath>bridge/phpbb.inc.php</fullpath>
-    <version>1.6.03</version>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>350a93fa2d769fac7586f76656f793eb</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>bridge/phpbb2018.inc.php</fullpath>
     <version>1.6.03</version>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>b5e6b8d73817213309eb0602b18bfca5</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>bridge/phpbb22.inc.php</fullpath>
@@ -177,24 +166,15 @@
   </element>
   <element>
     <fullpath>bridge/punbb115.inc.php</fullpath>
-    <version>1.6.03</version>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>6112bc4b3e2857eb2413f15b64c1705d</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>bridge/punbb12.inc.php</fullpath>
-    <version>1.6.03</version>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>a932945f9234c072a0417a4c35151ef4</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>bridge/smf10.inc.php</fullpath>
-    <version>1.6.03</version>
-    <status>optional</status>
-    <permission>read</permission>
-    <hash>d1551a01a67e6dda8696310f3317d93f</hash>
+    <status>remove</status>
   </element>
   <element>
     <fullpath>bridge/smf20.inc.php</fullpath>
