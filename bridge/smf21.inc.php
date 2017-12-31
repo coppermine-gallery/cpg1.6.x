@@ -18,8 +18,8 @@ if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
 if (isset($bridge_lookup)) {
     $default_bridge_data[$bridge_lookup] = array(
-        'full_name' => 'Simple Machines (SMF) 2.0.x',
-        'short_name' => 'smf20',
+        'full_name' => 'Simple Machines (SMF) 2.1.x',
+        'short_name' => 'smf21',
         'support_url' => 'http://www.simplemachines.org/',
         'relative_path_to_config_file_default' => '../board/',
         'relative_path_to_config_file_used' => 'lookfor,Settings.php',
@@ -83,7 +83,7 @@ if (isset($bridge_lookup)) {
             $this->field = array(
                 'username' => 'real_name', // name of 'username' field in users table
                 'user_id' => 'id_member', // name of 'id' field in users table
-                'password' => 'SHA1(CONCAT(passwd, password_salt))', // name of the password field in the users table
+                'password' => 'SHA2(CONCAT(passwd, password_salt), 512)', // name of the password field in the users table
                 'email' => 'email_address', // name of 'email' field in users table
                 'regdate' => 'date_registered', // name of 'registered' field in users table
                 'lastvisit' => 'last_login', // last time user logged in
@@ -119,13 +119,15 @@ if (isset($bridge_lookup)) {
 
             if ($superCage->cookie->keyExists($this->cookie_name)) {
 
-                $data = unserialize($superCage->cookie->getRaw($this->cookie_name));
+                $data = json_decode($superCage->cookie->getRaw($this->cookie_name));
 
-                if (is_numeric($data[0]) && preg_match('/^[A-F0-9]{40}$/i', $data[1])) {
+                if (is_numeric($data[0]) && preg_match('/^[A-F0-9]{128}$/i', $data[1])) {
                     return $data;
                 } else {
                     return false;
                 }
+            } else {
+                return false;
             }
         }
 
