@@ -327,6 +327,13 @@
   </tr>
   <tr>
     <td>thumbnails.php</td>
+    <td><a id="plugin_hooks_thumbnails_custom_search_params_allowed"></a><strong>custom_search_params_allowed</strong><a href="#plugin_hooks_thumbnails_custom_search_params_allowed" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></td>
+    <td>Filter</td>
+    <td>Adds an additional field to the allowed array for custom search parameters.</td>
+    <td><textarea class="samplecode" style="width:100%">$allowed = CPGPluginAPI::filter('custom_search_params_allowed', $allowed);</textarea></td>
+  </tr>
+  <tr>
+    <td>thumbnails.php</td>
     <td><a id="plugin_hooks_thumbnails_post_breadcrumb"></a><strong>post_breadcrumb</strong><a href="#plugin_hooks_thumbnails_post_breadcrumb" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></td>
     <td>Action</td>
     <td>only on thumbnails.php and displayimage.php</td>
@@ -642,6 +649,27 @@ ob_start('cpg_filter_page_html');</textarea></td>
     <td>Filter</td>
     <td>when shutdown</td>
     <td><textarea class="samplecode" style="width:100%">register_shutdown_function(array('CPGPluginAPI','sleep'));</textarea></td>
+  </tr>
+  <tr>
+    <td>include/search.inc.php</td>
+    <td><a id="plugin_hooks_search_custom_search_param"></a><strong>custom_search_param</strong><a href="#plugin_hooks_search_custom_search_param" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></td>
+    <td>Filter</td>
+    <td>Process a custom search parameter.</td>
+    <td><textarea class="samplecode" style="width:100%">list($fields) = CPGPluginAPI::filter('custom_search_param', array($fields, $param, $search, $type));</textarea></td>
+  </tr>
+  <tr>
+    <td>include/search.inc.php</td>
+    <td><a id="plugin_hooks_search_custom_search_params_allowed"></a><strong>custom_search_params_allowed</strong><a href="#plugin_hooks_search_custom_search_params_allowed" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></td>
+    <td>Filter</td>
+    <td>Adds an additional field to the allowed array for custom search parameters.</td>
+    <td><textarea class="samplecode" style="width:100%">$allowed = CPGPluginAPI::filter('custom_search_params_allowed', $allowed);</textarea></td>
+  </tr>
+  <tr>
+    <td>include/search.inc.php</td>
+    <td><a id="plugin_hooks_search_custom_search_query_join"></a><strong>custom_search_query_join</strong><a href="#plugin_hooks_search_custom_search_query_join" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></td>
+    <td>Filter</td>
+    <td>Process table joins for custom searches.</td>
+    <td><textarea class="samplecode" style="width:100%">$join_addl_tables = CPGPluginAPI::filter('custom_search_query_join', $join_addl_tables);</textarea></td>
   </tr>
   <tr>
     <td>include/smilies.inc.php</td>
