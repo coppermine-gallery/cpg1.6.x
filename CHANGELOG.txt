@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2025-08-05 [A] Added custom search filters to allow modification of search queries {dpaulat}
 2025-07-19 [M] Align all coding to the new .com CPG website {ron4mac}
 2024-06-12 [M,B] Change DB IP storage fields to accommodate IPv6 addresses {ron4mac}
 2023-11-27 [B] Correct IPTC supplimental category parsing {ron4mac}
