@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2023-12-15 [A] Added custom search filters to allow modification of search queries {dpaulat}
 2023-04-21 [M] Prevent HTML5 upload initialization failure caused by cloudflare rocket-loader {ron4mac}
 2023-04-13 [B] Correction for HTML5 upload admin notification {ron4mac}
 2023-04-10 [B] Correct SMF2.1 bridge; correct install with PHP 8.1+ when using GD2 {ron4mac}
@@ -103,7 +104,6 @@ Changelog
 2018-01-26 [B] Fixed typo causing phpBB3 bridge fail when using bridge app custom groups (thread ID 79302) {eenemeenemuu}
 2018-01-16 [B] Fixed white screens with low privileged users clicking into open albums when using theme "curve" (thread ID 79283) {eenemeenemuu}
 2018-01-14 [B] Prevent install failure with PDO on PHP 7.1+ {ron4mac}
-2018-01-09 [A] Added plugin hooks to filter image sort parameters {ron4mac}
 2017-12-31 [A] Added bridge file for SMF 2.1 {dpaulat}
 2017-12-30 [M] Removed extraneous bridge files {ron4mac}
 2017-12-06 [B] Don't require php EXIF extension during upload {ron4mac}
