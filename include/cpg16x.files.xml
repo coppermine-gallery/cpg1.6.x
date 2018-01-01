@@ -184,6 +184,12 @@
     <hash>5d86958b178ca48d663a3e47a83db82b</hash>
   </element>
   <element>
+    <fullpath>bridge/smf21.inc.php</fullpath>
+    <version>1.6.03</version>
+    <status>optional</status>
+    <permission>read</permission>
+  </element>
+  <element>
     <fullpath>bridge/udb_base.inc.php</fullpath>
     <version>1.6.03</version>
     <status>mandatory</status>
