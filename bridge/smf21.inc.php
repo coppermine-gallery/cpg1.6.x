@@ -280,7 +280,7 @@ if (isset($bridge_lookup)) {
         {
         }
 
-        function view_profile()
+        function view_profile($uid)
         {
         }
     }
