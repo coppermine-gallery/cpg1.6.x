@@ -435,7 +435,7 @@
     <td><a id="plugin_hooks_pic_pos_sort_array"></a><strong>pic_pos_sort_array</strong><a href="#plugin_hooks_pic_pos_sort_array" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></td>
     <td>Filter</td>
     <td>provides method to modify/add sorting parameters for pic position lookup</td>
-    <td><textarea class="samplecode" style="width:100%">$sort_array = CPGPluginAPI::filter('pic_pos_sort_array', array($sort_array, $pid));</textarea></td>
+    <td><textarea class="samplecode" style="width:100%">list($sort_array) = CPGPluginAPI::filter('pic_pos_sort_array', array($sort_array, $pid));</textarea></td>
   </tr>
   <tr>
     <td>include/functions.inc.php</td>

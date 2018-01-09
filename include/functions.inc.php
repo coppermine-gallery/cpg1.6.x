@@ -2174,7 +2174,7 @@ function get_pic_pos($album, $pid)
             'pa' => "(position < {$pic['position']} OR position = {$pic['position']} AND pid < {$pic['pid']})",
             'pd' => "(position > {$pic['position']} OR position = {$pic['position']} AND pid > {$pic['pid']})",
         );
-        $sort_array = CPGPluginAPI::filter('pic_pos_sort_array', array($sort_array, $pid));
+        list($sort_array) = CPGPluginAPI::filter('pic_pos_sort_array', array($sort_array, $pid));
 
         $sort_code  = isset($USER['sort']) && $CONFIG['custom_sortorder_thumbs'] ? $USER['sort'] : $CONFIG['default_sort_order'];
         $sort_order = isset($sort_array[$sort_code]) ? $sort_array[$sort_code] : $sort_array[$CONFIG['default_sort_order']];
