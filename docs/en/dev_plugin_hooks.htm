@@ -425,6 +425,20 @@
   </tr>
   <tr>
     <td>include/functions.inc.php</td>
+    <td><a id="plugin_hooks_pic_data_sort_array"></a><strong>pic_data_sort_array</strong><a href="#plugin_hooks_pic_data_sort_array" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></td>
+    <td>Filter</td>
+    <td>provides method to modify/add sorting parameters for pic_data lookup</td>
+    <td><textarea class="samplecode" style="width:100%">$sort_array = CPGPluginAPI::filter('pic_data_sort_array', $sort_array);</textarea></td>
+  </tr>
+  <tr>
+    <td>include/functions.inc.php</td>
+    <td><a id="plugin_hooks_pic_pos_sort_array"></a><strong>pic_pos_sort_array</strong><a href="#plugin_hooks_pic_pos_sort_array" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></td>
+    <td>Filter</td>
+    <td>provides method to modify/add sorting parameters for pic position lookup</td>
+    <td><textarea class="samplecode" style="width:100%">$sort_array = CPGPluginAPI::filter('pic_pos_sort_array', array($sort_array, $pid));</textarea></td>
+  </tr>
+  <tr>
+    <td>include/functions.inc.php</td>
     <td><a id="plugin_hooks_filename_thumb_caption"></a><strong>thumb_caption</strong><a href="#plugin_hooks_filename_thumb_caption" title="Link to this section"><img src="images/anchor.gif" width="15" height="9" alt="" /></a></td>
     <td>Filter</td>
     <td>executed before the more specific "thumb_caption_*" plugins</td>
@@ -969,6 +983,8 @@ $template_image_comments = CPGPluginAPI::filter('theme_edit_comment', $template_
                 <li class="floatleft"><a href="#plugin_hooks_filename_page_html">page_html</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_filename_page_meta">page_meta</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_filename_page_start">page_start</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_pic_data_sort_array">pic_data_sort_array</a></li>
+                <li class="floatleft"><a href="#plugin_hooks_pic_pos_sort_array">pic_pos_sort_array</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_filename_picture_url">picture_url</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_filename_plugin_block">plugin_block</a></li>
                 <li class="floatleft"><a href="#plugin_hooks_filename_plugin_cleanup">plugin_cleanup</a></li>
