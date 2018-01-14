@@ -22,6 +22,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2018-01-14 [B] Prevent install failure with PDO on PHP 7.1+ {ron4mac}
 2018-01-09 [A] Added plugin hooks to filter image sort parameters {ron4mac}
 2017-12-31 [A] Added bridge file for SMF 2.1 {dpaulat}
 2017-12-30 [M] Removed extraneous bridge files {ron4mac}

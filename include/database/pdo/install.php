@@ -27,7 +27,7 @@ global $pdo_connection;          // (PDO_connection) connection to the db
 global $pdo_connected;
 global $dbase_connected;
 $pdo_connected = false;   // (bool) connected to the db?
-function checkPdoConnection ($sub)
+function checkPdoConnection ($sub=null)
 {
     global $config, $language, $error;
     $sub = $sub ?: 'mysql';
