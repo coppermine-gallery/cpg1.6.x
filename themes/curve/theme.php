@@ -511,7 +511,7 @@ function theme_main_menu($which)
             if (USER_ID) {
                 $query = "SELECT null FROM {$CONFIG['TABLE_ALBUMS']} WHERE category='" . (FIRST_USER_CAT + USER_ID) . "' AND aid = '$album'";
                 $user_albums = cpg_db_query($query);
-                if ($user_albums->numRows()) {
+                if ($user_albums->numRows() > 0) {
                     $upload_allowed = true;
                 } else {
                     $upload_allowed = false;
@@ -522,7 +522,7 @@ function theme_main_menu($which)
                 $query = "SELECT null FROM {$CONFIG['TABLE_ALBUMS']} WHERE category < " . FIRST_USER_CAT . " AND uploads='YES' AND (visibility = '0' OR visibility IN ".USER_GROUP_SET.") AND aid = '$album'";
                 $public_albums = cpg_db_query($query);
 
-                if ($public_albums->numRows()) {
+                if ($public_albums->numRows() > 0) {
                     $upload_allowed = true;
                 } else {
                     $upload_allowed = false;
