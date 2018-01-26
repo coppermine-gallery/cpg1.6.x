@@ -22,6 +22,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2018-01-26 [B] Fixed typo causing phpBB3 bridge fail when using bridge app custom groups (thread ID 79302) {eenemeenemuu}
 2018-01-16 [B] Fixed white screens with low privileged users clicking into open albums when using theme "curve" (thread ID 79283) {eenemeenemuu}
 2018-01-14 [B] Prevent install failure with PDO on PHP 7.1+ {ron4mac}
 2018-01-09 [A] Added plugin hooks to filter image sort parameters {ron4mac}

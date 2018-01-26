@@ -164,7 +164,7 @@ if (isset($bridge_lookup)) {
     		    $sql = "SELECT group_id FROM {$this->usergroupstable} WHERE user_id = {$row['id']}";
     		    $result = $this->query($sql);
     		
-    		    while ($group = cpg_db__fetch_assoc($result)) {
+    		    while ($group = cpg_db_fetch_assoc($result)) {
         		    $data[] = $group['group_id'] + 100;
     		    }
     		    $result->free();
