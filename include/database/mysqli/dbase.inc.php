@@ -33,7 +33,7 @@ class CPG_Dbase
 			if (!mysqli_connect_error()) {
 				$this->connected = true;
 				if (!empty($cfg['dbcharset'])) {
-					$obj->real_query($link, "SET NAMES '{$cfg['dbcharset']}'");
+					$obj->real_query("SET NAMES '{$cfg['dbcharset']}'");
 				}
 			}
 		}
