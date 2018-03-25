@@ -28,13 +28,16 @@ function $ae(elem, evnt, func) {
 }
 
 /* action to be taken when all files are uploaded */
-function H5up_done(errcnt) {
+function H5up_done(okcount, errcnt) {
 	var albact = '.php?album=' + h5u_albSel.value;
 	if (js_vars.user_id > 0 || js_vars.guest_edit == 1) {
 		redirURL = js_vars.site_url + '/editpics' + albact + '&newer_than=' + js_vars.timestamp;
 	} else {
 		redirURL = js_vars.site_url + '/thumbnails' + albact;
 	}
+
+	if (okcount) $.post('notifyupload.php', { album: h5u_albSel.value });
+
 	if ((js_vars.autoedit=='1') && (errcnt===0)) {
 		window.location = redirURL;
 		return;
@@ -58,6 +61,7 @@ function H5up_done(errcnt) {
 		total2do = 0,
 		totalDone = 0,
 		allDone = 0,
+		okCount = 0,
 		errCount = 0,
 		e_st, e_gc,
 		s_hd = 'none',
@@ -136,12 +140,14 @@ function H5up_done(errcnt) {
 	function _endUp() {
 		if (!qStopt) {
 			allDone = 1;
-			if (typeof(H5up_done == 'function')) H5up_done(errCount);
+			if (typeof(H5up_done == 'function')) H5up_done(okCount, errCount);
+			errCount = okCount = 0;
 		}
 	}
 
 	function NextInQueue(decr,tag) {
 		if (decr) {
+			if (tag == 'ufo') okCount++;
 			if (! --inPrg) { _endUp(); }
 		}
 		if (!qStopt && upQueue.length && (!maxXfer || inPrg < maxXfer)) {
