@@ -882,7 +882,7 @@ function is_url($url)
 
 function load_template()
 {
-    global $THEME_DIR, $template_header, $template_footer, $LINEBREAK;
+    global $THEME_DIR, $CONFIG, $template_header, $template_footer, $theme_lang, $LINEBREAK;
 
     $template = file_get_contents($THEME_DIR . TEMPLATE_FILE);
 
@@ -892,26 +892,37 @@ function load_template()
 
     $template = CPGPluginAPI::filter('template_html', $template);
 
-    $gallery_pos = strpos($template, '{LANGUAGE_SELECT_FLAGS}');
-
-    if ($gallery_pos) {
-        $template    = str_replace('{LANGUAGE_SELECT_FLAGS}', languageSelect('flags'), $template);
+    if (strpos($template, '{LANGUAGE_SELECT_FLAGS}')) {
+        $template = str_replace('{LANGUAGE_SELECT_FLAGS}', languageSelect('flags'), $template);
     }
 
-    $gallery_pos = strpos($template, '{LANGUAGE_SELECT_LIST}');
-
-    if ($gallery_pos) {
-        $template    = str_replace('{LANGUAGE_SELECT_LIST}', languageSelect('list'), $template);
+    if (strpos($template, '{LANGUAGE_SELECT_LIST}')) {
+        $template = str_replace('{LANGUAGE_SELECT_LIST}', languageSelect('list'), $template);
     }
 
-    $gallery_pos = strpos($template, '{THEME_DIR}');
-    $template    = str_replace('{THEME_DIR}', $THEME_DIR, $template);
-
-    $gallery_pos = strpos($template, '{THEME_SELECT_LIST}');
-
-    if ($gallery_pos) {
-        $template    = str_replace('{THEME_SELECT_LIST}', themeSelect('list'), $template);
+    if (strpos($template, '{THEME_DIR}')) {
+    	$template = str_replace('{THEME_DIR}', $THEME_DIR, $template);
     }
+
+    if (strpos($template, '{THEME_SELECT_LIST}')) {
+        $template = str_replace('{THEME_SELECT_LIST}', themeSelect('list'), $template);
+    }
+
+	// apply any language files
+	$theme_lang_path = $THEME_DIR . 'lang';
+	if (is_dir($theme_lang_path)) {
+		include $theme_lang_path . '/english.php';
+		if ($CONFIG['lang'] != 'english' && file_exists($theme_lang_path."/{$CONFIG['lang']}.php")) {
+			include $theme_lang_path."/{$CONFIG['lang']}.php";
+		}
+		while (preg_match('#\{THEME_LANG_([^}]+)\}#', $template, $match)) {
+			if (isset($theme_lang[$match[1]])) {
+				$template = str_replace('{THEME_LANG_'.$match[1].'}', $theme_lang[$match[1]], $template);
+			} else {
+				$template = str_replace('{THEME_LANG_'.$match[1].'}', $match[1], $template);
+			}
+		}
+	}
 
     // Failsafe-option if JAVASCRIPT-token is missing from custom theme
     if (strpos($template, '{JAVASCRIPT}') === FALSE) {
