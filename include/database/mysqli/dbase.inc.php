@@ -26,7 +26,12 @@ class CPG_Dbase
 
 	public function __construct ($cfg)
 	{
-		$obj = new mysqli($cfg['dbserver'], $cfg['dbuser'], $cfg['dbpass'], $cfg['dbname']);
+		//parse server and resolve any connection port
+		$sp = explode(':', $cfg['dbserver']);
+		if (empty($sp[1])) $sp[1] = null;
+		if (isset($cfg['dbport'])) $sp[1] = $cfg['dbport'];
+
+		$obj = new mysqli($sp[0], $cfg['dbuser'], $cfg['dbpass'], $cfg['dbname'], $sp[1]);
 
 		if ($obj) {
 			$this->dbobj = $obj;

@@ -33,7 +33,7 @@ class core_udb
 		$this->dbObj = $CPGDB;
 
 		// Define whether we can join tables or not in SQL queries (same host & same db or user or positive check)
-		$this->can_join_tables = ($this->db['host'] == $CONFIG['dbserver'] && ($this->db['name'] == $CONFIG['dbname'] || $this->db['user'] == $CONFIG['dbuser'] || $this->query("SELECT NULL FROM ".$this->usertable." LIMIT 1")));
+		$this->can_join_tables = ($this->db['host'] == $CONFIG['dbserver'] && ($this->db['name'] == $CONFIG['dbname'] || $this->db['user'] == $CONFIG['dbuser'] || $CPGDB->query("SELECT NULL FROM ".$this->usertable." LIMIT 1")));
 
 		if ($obj){
 			$this->dbObj = $obj;
@@ -41,13 +41,14 @@ class core_udb
 			// Connect to udb database if necessary
 			if (!$this->can_join_tables) {
 				$this->dbObj = new CPG_Dbase( array(
+						'dbtype'	=> $CONFIG['dbtype'],
 						'dbserver'	=> $this->db['host'],
 						'dbuser'	=> $this->db['user'],
 						'dbpass'	=> $this->db['password'],
 						'dbname'	=> $this->db['name']
 						));
 				if (!$this->dbObj->isConnected()) {
-					die("<strong>Coppermine critical error</strong>:<br />Unable to connect to UDB database !<br /><br />Error: <strong>" . $this->dbObj->getError() . "</strong>");
+					die("<strong>Coppermine critical error</strong>:<br />Unable to connect to UDB database !<br /><br />Error: <strong>" . $this->dbObj->getError(false, true) . "</strong>");
 				}
 			}
 		}

@@ -27,9 +27,15 @@ class CPG_Dbase
 
 	public function __construct ($cfg)
 	{
+		//parse server and resolve any connection port
+		$sp = explode(':', $cfg['dbserver']);
+		if (empty($sp[1])) $sp[1] = null;
+		if (isset($cfg['dbport'])) $sp[1] = $cfg['dbport'];
+
 		list($db_ext, $db_sub) = explode(':', $cfg['dbtype']);
 		try {
-			$dsn = "{$db_sub}:host=" . $cfg['dbserver'] . ';dbname='.$cfg['dbname'];
+			$dsn = "{$db_sub}:host=" . $sp[0] . ';dbname='.$cfg['dbname'];
+			if ($sp[1]) $dsn .= ';port='.$sp[1];
 			$db = new PDO($dsn, $cfg['dbuser'], $cfg['dbpass']);
 			$this->_instance = $db;
 			$this->connected = true;
