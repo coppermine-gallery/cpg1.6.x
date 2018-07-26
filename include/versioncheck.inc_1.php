@@ -305,10 +305,9 @@ function cpg_versioncheckPopulateArray($file_data_array) {
                     } else {
                         // File is readable -- start
                         $blob = '';
-                        $blob = @fread($handle, 500); //filesize($file_data_array[$file_data_key]['fullpath']));
+                        $blob = @fread($handle, filesize($file_data_array[$file_data_key]['fullpath']));
                         @fclose($handle);
-                        if (strpos($blob, '@since ') !== false) $cpg_version_determination = '@since ';
-                        else $cpg_version_determination = 'Coppermine' . ' ' . 'version:';
+                        $cpg_version_determination = 'Coppermine' . ' ' . 'version:';
                         $blob = str_replace('<?php','',$blob);
                         // Determine the cpg version -- start
                         $file_data_array[$file_data_key]['local_version'] = substr($blob,strpos($blob, $cpg_version_determination)); // chop off the first bit up to the string $cpg_version_determination
@@ -319,9 +318,7 @@ function cpg_versioncheckPopulateArray($file_data_array) {
                         $file_data_array[$file_data_key]['local_version'] = trim(str_replace($cpg_version_determination, '', $file_data_array[$file_data_key]['local_version']));
                         $file_data_array[$file_data_key]['local_version'] = trim(str_replace('#', '', $file_data_array[$file_data_key]['local_version']));
                         $file_data_array[$file_data_key]['local_version'] = trim(substr($file_data_array[$file_data_key]['local_version'], 0, strpos($file_data_array[$file_data_key]['local_version'], '$')));
-                        $file_data_array[$file_data_key]['local_version'] = trim(substr($file_data_array[$file_data_key]['local_version'], 0, strpos($file_data_array[$file_data_key]['local_version'], "\n")));
                         if (strlen($file_data_array[$file_data_key]['local_version']) > 6) { // Version numbers larger than 6 are not likely at all
-                          echo'<pre>';var_dump($file_data_array[$file_data_key]['local_version']);echo'</pre>';
                             $file_data_array[$file_data_key]['local_version'] = $lang_versioncheck_php['not_applicable'];
                         }
                         if ($file_data_array[$file_data_key]['version'] != '' && $file_data_array[$file_data_key]['exists'] == 1 && $file_data_array[$file_data_key]['local_version'] != '') {
@@ -330,9 +327,6 @@ function cpg_versioncheckPopulateArray($file_data_array) {
                             if ($versionCompare == 0) {
                                 $file_data_array[$file_data_key]['txt_version'] .= $lang_common['ok'];
                             } elseif($versionCompare == -1) {
-
-                              echo'<pre>';var_dump($cpg_version_determination,$file_data_array[$file_data_key]['local_version'],$file_data_array[$file_data_key]['version']);echo'</pre>';
-
                                 $file_data_array[$file_data_key]['txt_version'] .= sprintf($lang_versioncheck_php['outdated'],$file_data_array[$file_data_key]['version']);
                                 $file_data_array[$file_data_key]['comment'] .= $lang_versioncheck_php['review_version'].'. ';
                             } else {

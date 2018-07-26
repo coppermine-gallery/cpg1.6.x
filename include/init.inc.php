@@ -1,23 +1,20 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * include/init.inc.php
+ * @since  1.6.04
+ */
 
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
-
-define('COPPERMINE_VERSION', '1.6.03');
+define('COPPERMINE_VERSION', '1.6.04');
 define('COPPERMINE_VERSION_STATUS', 'stable');
 // Define path to jQuery for this version of Coppermine
-define('CPG_JQUERY_VERSION', 'js/jquery-1.4.2.js');
+define('CPG_JQUERY_VERSION', 'js/jquery-1.7.2.js');
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 

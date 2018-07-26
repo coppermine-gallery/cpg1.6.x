@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * include/themes.inc.php
+ * @since  1.6.04
+ */
 
 /////////////////////////////////////////////////////////////////
 //                                                             //
@@ -2285,8 +2282,6 @@ function theme_admin_mode_menu()
                  template_extract_block($template_gallery_admin_menu, 'admin_approval');
             }
 
-            // Determine the documentation target
-            $available_doc_folders_array = form_get_foldercontent('docs/', 'folder', '', array('images', 'js', 'style', '.svn'));
             // Query the languages table
             $help_lang = '';
             $results = cpg_db_query("SELECT lang_id, abbr FROM {$CONFIG['TABLE_LANGUAGE']} WHERE available='YES' AND enabled='YES'");
@@ -2302,10 +2297,10 @@ function theme_admin_mode_menu()
             }
 
             // do the docs exist on the webserver?
-            if (file_exists('docs/'.$help_lang.'/index.htm') == true) {
+            if ((file_exists('docs/README.md') == true) && (file_exists('docs/'.$help_lang.'/index.htm') == true)) {
                 $documentation_href = 'docs/'.$help_lang.'/index.htm';
             } else {
-                $documentation_href = 'http://documentation.coppermine-gallery.net/';
+                $documentation_href = 'http://coppermine-gallery.net/docs';
             }
 
             if (!$CONFIG['enable_plugins']) {
@@ -3304,7 +3299,7 @@ function theme_html_picture()
                 } elseif (USER_ID && USER_ACCESS_LEVEL <= 2) {
                     $pic_html .= '<a href="javascript:;" onclick="alert(\''.sprintf($lang_errors['access_intermediate_only'],'','','','').'\');">';
                 } else {
-                    $pic_html .= "<a href=\"javascript:;\" onclick=\"MM_openBrWindow('displayimage.php?pid=$pid&amp;fullsize=1','" . uniqid(rand()) . "','scrollbars=yes,toolbar=no,status=no,resizable=yes,width=$winsizeX,height=$winsizeY')\">";
+                    $pic_html .= "<a href=\"javascript:;\" onclick=\"MM_openBrWindow('displayimage.php?pid=$pid&amp;fullsize=1','" . uniqid(rand()) . "','scrollbars=no,toolbar=no,status=no,resizable=yes,width=$winsizeX,height=$winsizeY')\">";
                 }
                 $pic_title = $lang_display_image_php['view_fs'] . $LINEBREAK . '==============' . $LINEBREAK . $pic_title;
                 $pic_html .= "<img src=\"images/image.gif?id=".floor(rand()*1000+rand())."\" width=\"{$image_size['width']}\" height=\"{$image_size['height']}\"  border=\"0\" alt=\"{$lang_display_image_php['view_fs']}\" /><br />";
@@ -3322,7 +3317,7 @@ function theme_html_picture()
                 } elseif (USER_ID && USER_ACCESS_LEVEL <= 2) {
                     $pic_html = '<a href="javascript:;" onclick="alert(\''.sprintf($lang_errors['access_intermediate_only'],'','','','').'\');">';
                 } else {
-                    $pic_html = "<a href=\"javascript:;\" onclick=\"MM_openBrWindow('displayimage.php?pid=$pid&amp;fullsize=1','" . uniqid(rand()) . "','scrollbars=yes,toolbar=no,status=no,resizable=yes,width=$winsizeX,height=$winsizeY')\">";
+                    $pic_html = "<a href=\"javascript:;\" onclick=\"MM_openBrWindow('displayimage.php?pid=$pid&amp;fullsize=1','" . uniqid(rand()) . "','scrollbars=no,toolbar=no,status=no,resizable=yes,width=$winsizeX,height=$winsizeY')\">";
                 }
                 $pic_title = $lang_display_image_php['view_fs'] . $LINEBREAK . '==============' . $LINEBREAK . $pic_title;
                 $pic_html .= "<img src=\"" . $picture_url . "\" {$image_size['geom']} class=\"image\" border=\"0\" alt=\"{$lang_display_image_php['view_fs']}\" /><br />";
@@ -4146,7 +4141,7 @@ function theme_display_fullsize_pic()
     <body style="margin:0px; padding:0px; background-color: gray;">
 
 EOT;
-    if (isset($pic_html)) {
+    if ($pic_html) {
         $fullsize_html .= $pic_html;
     } else {
         if ($CONFIG['transparent_overlay'] == 1) {
@@ -4157,7 +4152,7 @@ EOT;
 EOT;
             $fullsize_html .=  '<td align="center" valign="middle" background="' . htmlspecialchars($imagedata['path']) . '" ' . $imagedata['geometry'] . ' class="image">';
             $fullsize_html .=  '<div id="content">';
-            $fullsize_html .=  '<a href="javascript:window.close()" style="border:none"><img src="images/image.gif?id='
+            $fullsize_html .=  '<a href="javascript: window.close()" style="border:none"><img src="images/image.gif?id='
                     . floor(rand()*1000+rand())
                     . '&amp;fullsize=yes" '
                     . $imagedata['geometry']
@@ -4176,7 +4171,7 @@ EOT;
 EOT;
         } else {
             $fullsize_html .=  '        <div id="content">'.$LINEBREAK;
-            $fullsize_html .=  '<a href="javascript:window.close()"><img src="'
+            $fullsize_html .=  '<a href="javascript: window.close()"><img src="'
             . htmlspecialchars($imagedata['path']) . '" '
             . $imagedata['geometry']
             . ' id="fullsize_image" alt="'

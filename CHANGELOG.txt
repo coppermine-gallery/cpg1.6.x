@@ -1,16 +1,14 @@
-************************
-Coppermine Photo Gallery
-************************
-Copyright (c) 2003-2016 Coppermine Dev Team
-v1.0 originally written by Gregory Demar
-
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License version 3
-as published by the Free Software Foundation.
-********************************************
-Coppermine version: 1.6.03
-$HeadURL$
-*********************************************
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * CHANGELOG.txt
+ * @since  1.6.04
+ */
 Changelog
 =========
 [A] = Added new feature
@@ -22,6 +20,9 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2018-07-25 [M] Replaced headers in files changed since 1.6.03 for use in '@since' versioning {ron4mac}
+2018-07-25 [A] Removed documentation from distribution; online (coppermine-gallery.net) access to docs with option for local copy {ron4mac}
+2018-07-25 [M] Advance supplied jQuery version from 1.4.2(1.4.4) to 1.7.2 {ron4mac}
 2018-06-22 [B] Corrections for database connection ports and bridging errors {ron4mac}
 2018-06-20 [A] Provide method for themes to have/use language files {ron4mac}
 2018-03-25 [B] Correct condition where some uploads did not generate email to admin, even though configured to do so {ron4mac}
