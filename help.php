@@ -34,7 +34,8 @@ if ($haslocal) {
     $rURL = 'docs/';
 } else {
     // probe remote for URL
-    $rURL = file_get_contents('https://coppermine-gallery.net/docs/?c=1&v='.str_replace('.','',COPPERMINE_VERSION));
+    $http = empty($_SERVER['https']) ? 'http' : 'https';
+    $rURL = file_get_contents($http.'://coppermine-gallery.net/docs/?c=1&v='.str_replace('.','',COPPERMINE_VERSION));
 }
 
 // set charset
