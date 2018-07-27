@@ -34,7 +34,7 @@ if ($haslocal) {
     $rURL = 'docs/';
 } else {
     // probe remote for URL
-    $http = empty($_SERVER['https']) ? 'http' : 'https';
+    $http = empty($superCage->server->_source['HTTPS']) ? 'http' : 'https';
     $rURL = file_get_contents($http.'://coppermine-gallery.net/docs/?c=1&v='.str_replace('.','',COPPERMINE_VERSION));
 }
 
