@@ -8,7 +8,7 @@
     <hash>d511209eb6018c040b334a37a29e0f44</hash>
   </element>
   <element>
-    <fullpath>COPYING.txt</fullpath>
+    <fullpath>LICENSE.txt</fullpath>
     <status>optional</status>
     <permission>read</permission>
     <hash>b633b800b87a649b17011178253542f8</hash>
@@ -6886,7 +6886,7 @@
   </element>
   <element>
     <fullpath>install.php</fullpath>
-    <version>1.6.03</version>
+    <version>1.6.04</version>
     <status>mandatory</status>
     <permission>read</permission>
     <hash>cc995f0bb7bae17ca460c521271bd478</hash>
