@@ -33,6 +33,9 @@ class CPG_Dbase
 		try {
 			$dsn = "{$db_sub}:host=" . $sp[0] . ';dbname='.$cfg['dbname'];
 			if ($sp[1]) $dsn .= ';port='.$sp[1];
+			if (!empty($cfg['dbcharset'])) {
+				$dsn .= ';charset='.$cfg['dbcharset'];
+			}
 			$db = new PDO($dsn, $cfg['dbuser'], $cfg['dbpass']);
 			$this->_instance = $db;
 			$this->connected = true;
