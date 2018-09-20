@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2018-09-20 [B] Provide english fallback for remote help (thanks tbsmark86) {ron4mac}
 2018-08-25 [B] Added charset support for PDO driver {chipviled}
 2018-07-25 [M] Replaced headers in files changed since 1.6.03 for use in '@since' versioning {ron4mac}
 2018-07-25 [A] Removed documentation from distribution; online (coppermine-gallery.net) access to docs with option for local copy {ron4mac}
