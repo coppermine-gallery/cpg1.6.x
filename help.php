@@ -214,6 +214,11 @@ if ($haslocal) {
     ob_end_clean();
 } else {
     $string = file_get_contents($rURL.$help_lang.'/'.$file);
+    // provide fallback to english
+    if (!$string && $help_lang !== 'en') {
+    	$help_lang = 'en';
+    	$string = file_get_contents($rURL.$help_lang.'/'.$file);
+    }
 }
 
 $string = strstr($string, '<body>'); // Get rid of the head, as we use a head of our own
