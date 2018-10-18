@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * bridge/smf21.inc.php
- * @since  1.6.04
+ * @since  1.6.05
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -116,7 +116,7 @@ if (isset($bridge_lookup)) {
 
             if ($superCage->cookie->keyExists($this->cookie_name)) {
 
-                $data = json_decode($superCage->cookie->getRaw($this->cookie_name));
+                $data = json_decode($superCage->cookie->getRaw($this->cookie_name), true);
 
                 if (is_numeric($data[0]) && preg_match('/^[A-F0-9]{128}$/i', $data[1])) {
                     return $data;
