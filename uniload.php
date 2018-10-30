@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * uniload.php
- * @since  1.6.04
+ * @since  1.6.05
  */
 
 // Confirm we are in Coppermine and set the language blocks.
