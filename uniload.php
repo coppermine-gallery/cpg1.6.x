@@ -478,12 +478,16 @@ if ($file_placement == 'yes') {
 			include_once('include/mailer.inc.php');
 			cpg_mail('admin', sprintf($lang_db_input_php['notify_admin_email_subject'], $CONFIG['gallery_name']), make_clickable(sprintf($lang_db_input_php['notify_admin_email_body'], USER_NAME, $CONFIG['ecards_more_pic_target'].(substr($CONFIG["ecards_more_pic_target"], -1) == '/' ? '' : '/') .'editpics.php?mode=upload_approval')));
 		}
-		if (cpg_pw_protected_album_access($CURRENT_PIC_DATA['aid']) === 1) {
+		if ($PIC_NEED_APPROVAL || cpg_pw_protected_album_access($CURRENT_PIC_DATA['aid']) === 1) {
 			$redirect = "thumbnails.php?album=" . $CURRENT_PIC_DATA['aid'];
 		} else {
 			$redirect = "displayimage.php?pid=" . $CURRENT_PIC_DATA['pid'];
 		}
-		cpgRedirectPage($redirect, $lang_db_input_php['info'], $lang_db_input_php['upload_success'], 1);
+        if ($PIC_NEED_APPROVAL) {
+            cpgRedirectPage($redirect, $lang_db_input_php['info'], $lang_db_input_php['upload_success'], 1);
+        } else {
+            cpgRedirectPage($redirect);
+        }
 	}
 } else {
 	// The previous image placement failed.

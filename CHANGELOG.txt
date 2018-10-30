@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2018-10-30 [B] Fixed misleading approval message if approval is not needed when using single upload form {eenemeenemuu}
 2018-10-17 [B] Correction to bridge file for SMF 2.1 (thanks maximus23) {ron4mac}
 2018-10-17 [B] Correct error when extracting EXIF from some Canon images (thanks jsh) {ron4mac}
 2018-09-20 [B] Provide english fallback for remote help (thanks tbsmark86) {ron4mac}
