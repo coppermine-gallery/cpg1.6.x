@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * plugins/upload_h5a/codebase.php
- * @since  1.6.04
+ * @since  1.6.05
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -149,7 +149,7 @@ EOT;
 		<td class="tableb" style="padding:1em">
 			<div style="width:480px">
 				<input type="file" name="userpictures" id="upload_field" multiple="multiple" {$acptmime}/>
-				<input type="checkbox" id="autorient" value="1" checked="checked" />
+				<input type="checkbox" name="autorient" id="autorient" value="1" checked="checked" />
 				<label for="autorient">{$lang_upload_php['auto_orient']}</label>
 				&nbsp;<br />
 				<div id="dropArea">{$lang_plugin_upload_h5a['drop_files']}</div>
