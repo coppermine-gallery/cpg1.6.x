@@ -1,17 +1,15 @@
 ##  ********************************************
 ##  Coppermine Photo Gallery
 ##  ************************
-##  Copyright (c) 2003-2016 Coppermine Dev Team
 ##  v1.0 originally written by Gregory Demar
 ##
-##  This program is free software; you can redistribute it and/or modify
-##  it under the terms of the GNU General Public License version 3
-##  as published by the Free Software Foundation.
+##  @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+##  @license    GNU General Public License version 3 or later; see LICENSE
 ##
 ##  ********************************************
-##  Coppermine version: 1.6.03
-##  $HeadURL$
-####  ********************************************
+##  sql/update.sql
+##  @since  1.6.05
+##  ********************************************
 
 # The following line has to be removed when the moderator group feature will be re-enabled!
 UPDATE CPG_albums SET moderator_group = 0;
@@ -49,3 +47,4 @@ INSERT INTO CPG_config VALUES ('album_uploads_default', 'NO');
 ALTER TABLE CPG_plugins ADD `enabled` TINYINT(1) NOT NULL DEFAULT '1' AFTER `name`;
 
 INSERT INTO CPG_config VALUES ('last_updates_check', '1');
+INSERT INTO CPG_config VALUES ('auto_orient_checked', '1');

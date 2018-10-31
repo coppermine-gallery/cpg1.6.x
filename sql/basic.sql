@@ -1,17 +1,15 @@
 ##  ********************************************
 ##  Coppermine Photo Gallery
 ##  ************************
-##  Copyright (c) 2003-2016 Coppermine Dev Team
 ##  v1.0 originally written by Gregory Demar
 ##
-##  This program is free software; you can redistribute it and/or modify
-##  it under the terms of the GNU General Public License version 3
-##  as published by the Free Software Foundation.
+##  @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+##  @license    GNU General Public License version 3 or later; see LICENSE
 ##
 ##  ********************************************
-##  Coppermine version: 1.6.03
-##  $HeadURL$
-####  ********************************************
+##  sql/basic.sql
+##  @since  1.6.05
+##  ********************************************
 
 START TRANSACTION;
 
@@ -42,6 +40,7 @@ INSERT INTO CPG_config VALUES ('allow_user_edit_after_cat_close', '0');
 INSERT INTO CPG_config VALUES ('allow_user_move_album', '0');
 INSERT INTO CPG_config VALUES ('allow_user_registration', '0');
 INSERT INTO CPG_config VALUES ('allow_user_upload_choice', '1');
+INSERT INTO CPG_config VALUES ('auto_orient_checked', '1');
 INSERT INTO CPG_config VALUES ('auto_resize', '1');
 INSERT INTO CPG_config VALUES ('batch_add_hide_existing_files', '0');
 INSERT INTO CPG_config VALUES ('batch_proc_limit', '2');

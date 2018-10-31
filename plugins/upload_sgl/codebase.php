@@ -80,6 +80,7 @@ EOT;
 
 	form_alb_list_box($lang_common['album'], 'album');
 
+	$auto_orient_checked = $CONFIG['auto_orient_checked'] ? 'value="1" checked="checked"' : '';
 	echo <<<EOT
 <tr>
 	<td width="30%" class="tableb">
@@ -87,7 +88,7 @@ EOT;
 	</td>
 	<td width="70%" class="tableb" valign="top">
 		<input type="file" name="Filedata" size="60" class="listbox" />
-		<input type="checkbox" name="autorient" id="autorient" value="1" checked="checked" />
+		<input type="checkbox" name="autorient" id="autorient" $auto_orient_checked />
 		<label for="autorient">{$lang_upload_php['auto_orient']}</label>
 	</td>
 </tr>

@@ -143,13 +143,14 @@ EOT;
 
 	$acptmime = $cfg['acptmime'] ? ("accept=\"{$cfg['acptmime']}\" ") : '';
 
+	$auto_orient_checked = $CONFIG['auto_orient_checked'] ? 'value="1" checked="checked"' : '';
 	echo <<<EOT
 	<tr id="h5upldrow">
 		<td class="tableb">{$lang_plugin_upload_h5a['files']}</td>
 		<td class="tableb" style="padding:1em">
 			<div style="width:480px">
 				<input type="file" name="userpictures" id="upload_field" multiple="multiple" {$acptmime}/>
-				<input type="checkbox" name="autorient" id="autorient" value="1" checked="checked" />
+				<input type="checkbox" name="autorient" id="autorient" $auto_orient_checked />
 				<label for="autorient">{$lang_upload_php['auto_orient']}</label>
 				&nbsp;<br />
 				<div id="dropArea">{$lang_plugin_upload_h5a['drop_files']}</div>
