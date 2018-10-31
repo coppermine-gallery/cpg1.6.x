@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -235,7 +234,7 @@ function individualStatsByOS($pid='',$type='hits', $tableWidth='100%') {
                 }
                 // Now this is a very crude way to query the database which is bound to overload larger galleries. Should be reviewed!
                 $result = cpg_db_query($query);
-                $row = mysql_fetch_array($result);
+                $row = $result->fetchArray(true);
                 if ($row[0] != 0) {
                     $osResultArray[$key] = $row[0];
                 }
@@ -305,7 +304,7 @@ function individualStatsByBrowser($pid='',$type='hits', $tableWidth='100%') {
                 }
                 // Now this is a very crude way to query the database which is bound to overload larger galleries. Should be reviewed!
                 $result = cpg_db_query($query);
-                $row = mysql_fetch_array($result);
+                $row = $result->fetchArray(true);
                 if ($row[0] != 0) {
                     $browserResultArray[$key] = $row[0];
                 }
@@ -362,4 +361,4 @@ EOT;
  * function defintions end
  */
 
-?>
+//EOF

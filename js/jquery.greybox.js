@@ -1,7 +1,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory DEMAR
 
   This program is free software; you can redistribute it and/or modify
@@ -9,9 +9,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 /* Greybox Redux
@@ -31,7 +30,7 @@ function GB_show(caption, url, height, width) {
   if(!GB_DONE) {
     $(document.body)
       .append("<div id=\"GB_overlay\"></div><div id=\"GB_window\"><div id=\"GB_caption\" class=\"tableh1\"></div>"
-        + "<img src=\""+js_vars.icon_close_path+"\" alt=\"\" title=\""+js_vars.lang_close+"\"/></div>");
+        + "<img src=\""+js_vars.icon_close_path+"\" alt=\"\" title=\""+js_vars.lang_close+"\"/><img id=\"GBloading\" src=\"images/loader.gif\" style=\"top:36px;left:20px\" /></div>");
     $("#GB_window img").click(GB_hide);
     $("#GB_overlay").click(GB_hide);
     $(window).resize(GB_position);
@@ -40,7 +39,8 @@ function GB_show(caption, url, height, width) {
   }
 
   $("#GB_frame").remove();
-  $("#GB_window").append("<iframe id=\"GB_frame\" src=\""+url+"\"></iframe>");
+	$('#GBloading').show();
+  $("#GB_window").append("<iframe id=\"GB_frame\" src=\""+url+"\" onload=\"$('#GBloading').hide();\"></iframe>");
 
   $("#GB_caption").html(caption);
   $("#GB_overlay").show();

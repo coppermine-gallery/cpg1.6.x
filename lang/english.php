@@ -1,19 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
-  $Revision$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * lang/english.php
+ * @since  1.6.04
+ */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -337,6 +333,9 @@ $lang_version_alert['gallery_offline'] = 'The gallery is currently offline and w
 $lang_version_alert['coppermine_news'] = 'News from coppermine-gallery.net';
 $lang_version_alert['no_iframe'] = 'Your browser cannot display inline frames';
 $lang_version_alert['hide'] = 'hide';
+// for version update checks
+$lang_version_alert['updates_available'] = 'There is a newer version of CPG available.';
+$lang_version_alert['view_updates'] = 'View Updates';
 
 $lang_create_tabs['previous'] = 'Previous';
 $lang_create_tabs['next'] = 'Next';
@@ -356,19 +355,25 @@ $lang_alb_select_box['all_albums'] = 'Show all albums';
 // ------------------------------------------------------------------------- //
 // File include/mailer.inc.php
 // ------------------------------------------------------------------------- //
-$lang_mailer['provide_address'] = 'You must provide at least one ';
-$lang_mailer['mailer_not_supported'] = ' mailer is not supported.';
-$lang_mailer['execute'] = 'Could not execute: ';
-$lang_mailer['instantiate'] = 'Could not instantiate mail function.';
 $lang_mailer['authenticate'] = 'SMTP Error: Could not authenticate.';
-$lang_mailer['from_failed'] = 'The following From address failed: ';
-$lang_mailer['recipients_failed'] = 'SMTP Error: The following ';
-$lang_mailer['data_not_accepted'] = 'SMTP Error: Data not accepted.';
 $lang_mailer['connect_host'] = 'SMTP Error: Could not connect to SMTP host.';
+$lang_mailer['data_not_accepted'] = 'SMTP Error: data not accepted.';
+$lang_mailer['empty_message'] = 'Message body empty';
+$lang_mailer['encoding'] = 'Unknown encoding: ';
+$lang_mailer['execute'] = 'Could not execute: ';
 $lang_mailer['file_access'] = 'Could not access file: ';
 $lang_mailer['file_open'] = 'File Error: Could not open file: ';
-$lang_mailer['encoding'] = 'Unknown encoding: ';
+$lang_mailer['from_failed'] = 'The following From address failed: ';
+$lang_mailer['instantiate'] = 'Could not instantiate mail function.';
+$lang_mailer['invalid_address'] = 'Invalid address: ';
+$lang_mailer['mailer_not_supported'] = ' mailer is not supported.';
+$lang_mailer['provide_address'] = 'You must provide at least one recipient email address.';
+$lang_mailer['recipients_failed'] = 'SMTP Error: The following recipients failed: ';
 $lang_mailer['signing'] = 'Signing Error: ';
+$lang_mailer['smtp_connect_failed'] = 'SMTP connect() failed.';
+$lang_mailer['smtp_error'] = 'SMTP server error: ';
+$lang_mailer['variable_set'] = 'Cannot set or reset variable: ';
+$lang_mailer['extension_missing'] = 'Extension missing: ';
 
 // ------------------------------------------------------------------------- //
 // File include/plugin_api.inc.php
@@ -509,6 +514,7 @@ $lang_bridgemgr_php['bridge_enable_yes'] = 'enable';
 $lang_bridgemgr_php['bridge_enable_no'] = 'disable';
 $lang_bridgemgr_php['error_must_not_be_empty'] = 'must not be empty';
 $lang_bridgemgr_php['error_either_be'] = 'must either be %s or %s';
+$lang_bridgemgr_php['error_bridge_file_not_exist'] = 'Bridge file does not exist: %s';
 $lang_bridgemgr_php['error_folder_not_exist'] = '%s doesn\'t exist. Correct the value you entered for %s';
 $lang_bridgemgr_php['error_cookie_not_readible'] = 'Coppermine can\'t read a cookie named %s. Correct the value you entered for %s, or go to your bridge app administration panel and make sure that the cookie path is readable for Coppermine.';
 $lang_bridgemgr_php['error_mandatory_field_empty'] = 'You cannot leave the field %s blank - fill in the proper value.';
@@ -527,7 +533,7 @@ $lang_bridgemgr_php['goto_login'] = 'Go to login page';
 $lang_bridgemgr_php['goto_bridgemgr'] = 'Go to bridge manager';
 $lang_bridgemgr_php['recovery_failure_title'] = 'Authorization failed';
 $lang_bridgemgr_php['recovery_failure_content'] = 'You supplied the wrong credentials. You will have to supply the admin account data of the standalone version (usually the account you set up during Coppermine install).';
-$lang_bridgemgr_php['try_again'] = 'try again';
+$lang_bridgemgr_php['try_again'] = 'Try again';
 $lang_bridgemgr_php['recovery_wait_title'] = 'Wait time has not elapsed';
 $lang_bridgemgr_php['recovery_wait_content'] = 'For security reasons this script does not allow failed logons in short succession, so you will have to wait a bit until you\'re allowed to try to authenticate.';
 $lang_bridgemgr_php['wait'] = 'wait';
@@ -632,6 +638,8 @@ $lang_admin_php['date_a'] = 'Date ascending';
 $lang_admin_php['date_d'] = 'Date descending';
 $lang_admin_php['pos_a'] = 'Position ascending';
 $lang_admin_php['pos_d'] = 'Position descending';
+$lang_admin_php['view_a'] = 'Views ascending'; // cpg1.6
+$lang_admin_php['view_d'] = 'Views descending'; // cpg1.6
 $lang_admin_php['th_any'] = 'Max Aspect';
 $lang_admin_php['th_ht'] = 'Height';
 $lang_admin_php['th_wd'] = 'Width';
@@ -704,7 +712,6 @@ $lang_admin_php['custom_header_path'] = 'Path to custom header include';
 $lang_admin_php['custom_footer_path'] = 'Path to custom footer include';
 $lang_admin_php['browse_by_date'] = 'Enable browsing by date';
 $lang_admin_php['display_redirection_page'] = 'Display redirection pages';
-$lang_admin_php['display_xp_publish_link'] = 'Promote usage of XP Publisher by displaying a corresponding link on upload page';
 $lang_admin_php['main_table_width'] = 'Width of the main table';
 $lang_admin_php['pixels_or_percent'] = 'pixels or %';
 $lang_admin_php['subcat_level'] = 'Number of levels of categories to display';
@@ -849,10 +856,10 @@ $lang_admin_php['thumbnail_intermediate_full'] = 'thumbnail, intermediate, and f
 $lang_admin_php['thumbnail_intermediate'] = 'thumbnail and intermediate image';
 $lang_admin_php['thumbnail_only'] = 'thumbnail only';
 $lang_admin_php['upload_mechanism'] = 'Default upload method';
-$lang_admin_php['upload_swf'] = 'advanced - multiple files, Flash-driven (recommended)';
+$lang_admin_php['upload_swf'] = 'multiple files, Flash-driven';
 $lang_admin_php['upload_single'] = 'simple - one file at a time';
 $lang_admin_php['allow_user_upload_choice'] = 'Allow users to choose the upload method';
-$lang_admin_php['editpics_ignore_newer_than'] = 'Show previously uploaded files at edit files form after flash upload';
+$lang_admin_php['editpics_ignore_newer_than'] = 'Show previously uploaded files at edit files form after HTML5/flash upload';
 $lang_admin_php['allow_duplicate_emails_addr'] = 'Allow two users to have the same email address';
 $lang_admin_php['upl_notify_admin_email'] = 'Notify admin of user upload awaiting approval';
 $lang_admin_php['user_manager_hide_file_stats'] = 'Hide file count and disk space usage in user manager'; // cpg1.6
@@ -1379,7 +1386,7 @@ $lang_groupmgr_php['del_groups'] = 'Delete selected group(s)';
 $lang_groupmgr_php['confirm_del'] = 'Warning, when you delete a group, users that belong to this group will be transferred to the \'Registered\' group!\n\nDo you want to proceed?'; // js-alert
 $lang_groupmgr_php['title'] = 'Manage user groups';
 $lang_groupmgr_php['reset_to_default'] = 'Reset to default name (%s) - recommended!';
-$lang_groupmgr_php['error_group_empty'] = 'Group table was empty!<br />Default groups created, please reload this page';
+$lang_groupmgr_php['error_group_empty'] = 'Database group table was empty!<br />Default groups created, please reload this page';
 $lang_groupmgr_php['explain_greyed_out_title'] = 'Why is this row grayed out?';
 $lang_groupmgr_php['explain_guests_greyed_out_text'] = 'You cannot change the properties of this group because the access level of this group is NONE. All unlogged users (members of the group %s) can\'t do anything but login; therefore group settings don\'t apply for them. Change the access level here or on the Gallery Configuration page under "User Settings", "Allow unlogged users access".';
 $lang_groupmgr_php['group_assigned_album'] = 'assigned album(s)';
@@ -1462,27 +1469,27 @@ $lang_install['installer_locked'] = 'The installer is locked';
 $lang_install['installer_selected'] = 'The installer selected';
 $lang_install['inv_im_path'] = 'The installer cannot find the \'%s\' directory you have specified for ImageMagick or it does not have permission to access it. Check that your typing is correct and that you have access to the specified directory.';
 $lang_install['lets_go'] = 'Let\'s Go!';
-$lang_install['mysql_create_btn'] = 'Create';
-$lang_install['mysql_create_db'] = 'Create new MySQL database';
-$lang_install['mysql_db_name'] = 'MySQL database name';
-$lang_install['mysql_error'] = 'MySQL error: ';
-$lang_install['mysql_host'] = 'MySQL host<br />(localhost is usually OK)';
-$lang_install['mysql_username'] = 'MySQL username';
-$lang_install['mysql_password'] = 'MySQL password';
-$lang_install['mysql_no_create_db'] = 'Could not create MySQL database.';
-$lang_install['mysql_no_sel_dbs'] = 'Could not retrieve available MySQL databases';
-$lang_install['mysql_succ'] = 'Successful connection with database';
-$lang_install['mysql_tbl_pref'] = 'MySQL table prefix';
-$lang_install['mysql_test_connection'] = 'Test connection';
-$lang_install['mysql_wrong_db'] = 'MySQL could not locate a database called \'%s\' please check the value entered for this';
+$lang_install['dbase_create_btn'] = 'Create';
+$lang_install['dbase_create_db'] = 'Create new database';
+$lang_install['dbase_db_name'] = 'Database name';
+$lang_install['dbase_error'] = 'Database error: ';
+$lang_install['dbase_host'] = 'Database host<br />(localhost is usually OK)';
+$lang_install['dbase_username'] = 'Database username';
+$lang_install['dbase_password'] = 'Database password';
+$lang_install['dbase_no_create_db'] = 'Could not create database.';
+$lang_install['dbase_no_sel_dbs'] = 'Could not retrieve available databases';
+$lang_install['dbase_succ'] = 'Successful connection with database';
+$lang_install['dbase_tbl_pref'] = 'Table prefix';
+$lang_install['dbase_test_connection'] = 'Test connection';
+$lang_install['dbase_wrong_db'] = 'Could not locate a database called \'%s\' please check the value entered for this';
 $lang_install['n_a'] = 'N/A';
 $lang_install['no_admin_email'] = 'You have to enter an admin email address';
 $lang_install['no_admin_password'] = 'You have to enter an admin password';
 $lang_install['no_admin_username'] = 'You have to enter an admin username';
 $lang_install['no_dir'] = 'Directory not available';
 $lang_install['no_gd'] = 'Your installation of PHP does not seem to include the \'GD\' graphic library extension and you have not indicated that you want to use ImageMagick. Coppermine has been configured to use GD2 because the automatic GD detection sometimes fails. If GD is installed on your system, the script should work else you will need to install ImageMagick.';
-$lang_install['no_mysql_conn'] = 'Could not create a MySQL connection, please check the MySQL details entered';
-$lang_install['no_mysql_support'] = 'PHP does not have MySQL support enabled.';
+$lang_install['no_dbase_conn'] = 'Could not create a %s connection, please check the %s details entered';
+$lang_install['no_dbase_support'] = 'PHP does not have %s support enabled.';
 $lang_install['no_thumb_method'] = 'You have to choose an image manipulation application (GD/IM)';
 $lang_install['nok'] = 'Not OK';
 $lang_install['not_here_yet'] = 'Nothing here yet, please click %shere%s to go back.';
@@ -1499,8 +1506,8 @@ $lang_install['please_go_back'] = 'Please %sclick here%s to go back and fix this
 $lang_install['populate_db'] = 'Populate database';
 $lang_install['ready_to_roll'] = '<a href="index.php">Coppermine</a> is now properly configured and ready to use.<br /><a href="login.php">Login</a> using the information you provided for your admin account.';
 $lang_install['sect_create_adm'] = 'This section requires information to create your Coppermine administration account. Use only alphanumeric characters. Enter the data carefully!';
-$lang_install['sect_mysql_info'] = 'This section requires information on how to access your MySQL database.<br />If you don\'t know how to fill them, check with your webhost support.';
-$lang_install['sect_mysql_sel_db'] = 'Here you have to choose which database you want to use for Coppermine.<br />If your MySQL account has the needed privileges, you can create a new database from within the installer or you can use an existing database. If you don\'t like both options, you will have to create a database first outside the Coppermine installer, then return here then select the new database from the dropdown box below. You can also change the table prefix (don\'t use dots though), but keeping the default prefix is recommended.';
+$lang_install['sect_dbase_info'] = 'This section requires information on how to access your database.<br />If you don\'t know how to fill them, check with your webhost support.';
+$lang_install['sect_dbase_sel_db'] = 'Here you have to choose which database you want to use for Coppermine.<br />If your database account has the needed privileges, you can create a new database from within the installer or you can use an existing database. If you don\'t like both options, you will have to create a database first outside the Coppermine installer, then return here then select the new database from the dropdown box below. You can also change the table prefix (don\'t use dots though), but keeping the default prefix is recommended.';
 $lang_install['select_lang'] = 'Select default language: ';
 $lang_install['sql_file_not_found'] = 'The file \'%s\' could not be found. Check that you have uploaded all Coppermine files to your server.';
 $lang_install['status'] = 'Status';
@@ -1511,9 +1518,10 @@ $lang_install['title_file_check'] = 'Checking installation files';
 $lang_install['title_finished'] = 'Installation completed';
 $lang_install['title_imp'] = 'Image package selection';
 $lang_install['title_imp_test'] = 'Testing image library';
-$lang_install['title_mysql_db_sel'] = 'MySQL database selection';
-$lang_install['title_mysql_pop'] = 'Creating database structure';
-$lang_install['title_mysql_user'] = 'MySQL user authentication';
+$lang_install['title_dbase_type'] = 'Select Database Engine to use';
+$lang_install['title_dbase_db_sel'] = '%s database selection';
+$lang_install['title_dbase_pop'] = 'Creating database structure';
+$lang_install['title_dbase_user'] = 'Database user authentication';
 $lang_install['title_welcome'] = 'Welcome to Coppermine installation';
 $lang_install['tmp_conf_error'] = 'Unable to write the temporary config file - make sure the \'include\' folder is writable for the script.';
 $lang_install['tmp_conf_ser_err'] = 'A serious error occurred in the installer, try reloading your page or start over by removing the \'include/config.tmp\' file.';
@@ -1546,8 +1554,9 @@ $lang_install['imp_test_error'] = 'There was an error in one or more of the test
 $lang_install['writable'] = 'Writable';
 $lang_install['not_writable'] = 'Not writable';
 $lang_install['not_exist'] = 'Does not exist';
-$lang_install['old_install'] = 'This is the new install wizard. Click %shere%s for the classic install screen.';
-
+// 1.6 dbabstract
+$lang_install['not_available'] = 'not available';
+$lang_install['version_too_old'] = 'version too old';
 }
 
 // ------------------------------------------------------------------------- //
@@ -1760,6 +1769,11 @@ $lang_pluginmgr_php['uninstall'] = 'uninstall';
 $lang_pluginmgr_php['minimum_requirements_not_met'] = 'Minimum requirements not met';
 $lang_pluginmgr_php['confirm_version'] = 'Could not determine the version requirements for this plugin. This is usually an indicator that the plugin was not designed for your version of Coppermine and might therefore crash your gallery. Continue anyway (not recommended)?'; // js-alert
 $lang_pluginmgr_php['announcement_thread'] = 'Announcement thread'; // cpg1.6
+
+$lang_pluginmgr_php['plugin_action'] = 'Action';	// cpg1.6
+$lang_pluginmgr_php['saved_config'] = 'The configuration for &laquo;%s&raquo; has been saved.';	// cpg1.6
+$lang_pluginmgr_php['enable'] = 'Enable';	// cpg1.6
+$lang_pluginmgr_php['disable'] = 'Disable';	// cpg1.6
 }
 
 // ------------------------------------------------------------------------- //
@@ -2129,7 +2143,7 @@ if (defined('UPLOAD_PHP')) {
 $lang_upload_php['title'] = 'Upload file';
 $lang_upload_php['restrictions'] = 'Restrictions';
 $lang_upload_php['choose_method'] = 'Choose upload method';
-$lang_upload_php['upload_swf'] = 'Multiple files - Flash-driven (recommended)';
+$lang_upload_php['upload_swf'] = 'Multiple files - Flash-driven';
 $lang_upload_php['upload_single'] = 'simple - one file at a time';
 $lang_upload_php['up_instr_1'] = 'Select an album from the album dropdown list';
 $lang_upload_php['up_instr_2'] = 'Click the "Browse" button below and navigate to the file you want to upload. You can select multiple files in a single go using Ctrl+Click.';
@@ -2170,12 +2184,13 @@ $lang_upload_php['allowed_doc_types'] = 'Document extensions: %s';
 $lang_upload_php['allowed_snd_types'] = 'Audio extensions: %s';
 $lang_upload_php['please_wait'] = 'Please wait while the script is uploading - this might take a while';
 $lang_upload_php['alternative_upload'] = 'Alternative upload method';
-$lang_upload_php['xp_publish_promote'] = 'If you are running Windows XP/Vista, you can use the Windows XP Uploading Wizard as well to upload files, providing an easier user interface directly on the client.';
 $lang_upload_php['err_js_disabled'] = 'Flash upload interface could not load. You must have JavaScript enabled to enjoy the flash upload interface.';
 $lang_upload_php['err_flash_disabled'] = 'Upload interface is taking a long time to load or the load has failed. Please make sure that the Flash Plugin is enabled and that a working version of the Flash Player is installed.';
-$lang_upload_php['err_alternate_method'] = 'Alternately you can use the <a href="upload.php?single=1">single</a> file upload interface.';
+$lang_upload_php['err_alternate_method'] = 'Alternately you can use the <a href="upload.php?html5=1">HTML5</a> file upload interface.';
 $lang_upload_php['err_flash_version'] = 'Upload interface could not load. You may need to install or upgrade Flash Player. Visit the <a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">Adobe website</a> to get the Flash Player.';
 $lang_upload_php['flash_loading'] = 'Upload interface is loading. Please wait a moment...';
+$lang_upload_php['err_no_method'] = 'There must be at least one upload plugin enabled';
+$lang_upload_php['auto_orient'] = 'Auto-orient image(s)';
 
 $lang_upload_swf_php['browse'] = 'Browse...';
 $lang_upload_swf_php['cancel_all'] = 'Cancel all uploads';
@@ -2200,6 +2215,65 @@ $lang_upload_swf_php['status_validation_failed'] = 'Failed Validation. Upload sk
 $lang_upload_swf_php['queue_limit'] = 'You have attempted to queue too many files.';
 $lang_upload_swf_php['upload_limit_1'] = 'You have reached the upload limit.';
 $lang_upload_swf_php['upload_limit_2'] = 'You may select up to %s file(s)';
+}
+// ------------------------------------------------------------------------- //
+// Upload plugin(s)
+// ------------------------------------------------------------------------- //
+if (defined('PLUGINMGR_PHP') || defined('UPLOAD_PHP') || defined('ADMIN_PHP') || defined('UPLOAD_H5A')) {
+$lang_plugin_upload['js_require'] = 'JAVASCRIPT IS REQUIRED FOR THIS METHOD TO FUNCTION.';
+$lang_plugin_upload['albmSelMsg'] = 'Please select an album first.';
+$lang_plugin_upload['size_err'] = 'File is larger than max size allowed.';
+
+// HTML5
+$lang_plugin_upload_h5a['plug_desc'] = 'Adds HTML5 concurrent, multi-file upload capabilities, including drag-and-drop';
+$lang_plugin_upload_h5a['plug_info'] = 'This plugin provides a method for concurrent, multi-file uploads using HTML5 and javascript within capable browsers.';
+$lang_plugin_upload_h5a['html5_method'] = 'Multiple files - HTML5 (recommended)';
+$lang_plugin_upload_h5a['html5upload'] = 'CoreH5A Upload';
+$lang_plugin_upload_h5a['title'] = 'HTML5 Upload';
+
+$lang_plugin_upload_h5a['upldfiles'] = 'Upload files';
+$lang_plugin_upload_h5a['files'] = 'Files';
+$lang_plugin_upload_h5a['flistitl'] = 'Use file name as title';
+$lang_plugin_upload_h5a['drop_files'] = 'Or drop files here';
+$lang_plugin_upload_h5a['files_left'] = 'Files queued: ';
+$lang_plugin_upload_h5a['continue'] = 'Continue:';
+$lang_plugin_upload_h5a['gotoedit'] = 'Edit uploaded files';
+
+$lang_plugin_upload_h5a['maxUplSiz'] = 'Maximum upload file size';	//v1.3
+$lang_plugin_upload_h5a['select'] = 'Number of concurrent uploads';
+$lang_plugin_upload_h5a['acptmime'] = 'Mime type filters for browser file select';
+$lang_plugin_upload_h5a['autoedit'] = 'Automatically go to edit after error-free upload completes';
+$lang_plugin_upload_h5a['incflds'] = 'Include fields:';
+$lang_plugin_upload_h5a['saved'] = 'Your settings have been saved.';
+$lang_plugin_upload_h5a['revert'] = 'Revert to default';	//v1.3
+
+$lang_plugin_upload_h5a['notavail'] = 'NOT AVAILABLE WITH THIS WEB BROWSER';
+$lang_plugin_upload_h5a['aborted'] = 'aborted';
+$lang_plugin_upload_h5a['type_err'] = 'Cannot upload a file of this type. (extension)';
+$lang_plugin_upload_h5a['extallow'] = 'Only files with the following extensions are allowed: ';
+
+$lang_plugin_upload_h5a['q_stop'] = 'stop queue';
+$lang_plugin_upload_h5a['q_resume'] = 'resume queue';
+$lang_plugin_upload_h5a['q_cancel'] = 'cancel queue';
+//v1.3.2 chunked
+$lang_plugin_upload_h5a['muf_err'] = 'Error saving chunk #%d for file %s ( %s %s )';
+$lang_plugin_upload_h5a['miss_chnk'] = 'Missing file chunks';
+$lang_plugin_upload_h5a['dest_fail'] = 'Cannot create the destination file: %s';
+
+// swf
+$lang_plugin_upload_swf['plug_desc'] = 'Adds Flash multi-file upload capabilities';
+$lang_plugin_upload_swf['plug_info'] = 'This plugin provides a method for multi-file uploads using Flash and javascript.';
+$lang_plugin_upload_swf['swf_method'] = 'Multiple files - Flash';
+$lang_plugin_upload_swf['swfupload'] = 'CoreSWF Upload';
+$lang_plugin_upload_swf['title'] = 'Flash Upload';
+
+// single
+$lang_plugin_upload_sgl['plug_desc'] = 'Adds single file upload method';
+$lang_plugin_upload_sgl['plug_info'] = 'This plugin provides a method for single file uploads.';
+$lang_plugin_upload_sgl['sgl_method'] = 'Simple - one file at a time';
+$lang_plugin_upload_sgl['sglupload'] = 'CoreSGL Upload';
+$lang_plugin_upload_sgl['title'] = 'Single File Upload';
+$lang_plugin_upload_sgl['choose_file'] = 'Please choose a file.';
 }
 // ------------------------------------------------------------------------- //
 // File usermgr.php
@@ -2314,12 +2388,12 @@ $lang_update_php['title'] = 'Updater';
 $lang_update_php['welcome_updater'] = 'Welcome to Coppermine update';
 $lang_update_php['could_not_authenticate'] = 'Could not authenticate you';
 $lang_update_php['provide_admin_account_cpg'] = 'Please provide your Coppermine admin account data'; // cpg1.6
-$lang_update_php['provide_admin_account_mysql'] = 'Please provide your MySQL account data'; // cpg1.6
+$lang_update_php['provide_admin_account_dbase'] = 'Please provide your %s account data'; // cpg1.6
 $lang_update_php['try_again'] = 'Try again';
-$lang_update_php['mysql_connect_error'] = 'Could not create a MySQL connection';
-$lang_update_php['mysql_database_error'] = 'MySQL could not locate a database called %s';
-$lang_update_php['mysql_said'] = 'MySQL said';
-$lang_update_php['check_config_file'] = 'Please check the MySQL details in %s';
+$lang_update_php['dbase_connect_error'] = 'Could not create a %s connection';
+$lang_update_php['dbase_database_error'] = 'Could not connect to database: %s';
+$lang_update_php['dbase_said'] = '%s said';
+$lang_update_php['check_config_file'] = 'Please check the %s details in %s';
 $lang_update_php['performing_database_updates'] = 'Performing Database Updates';
 $lang_update_php['performing_file_updates'] = 'Performing File Updates';
 $lang_update_php['already_done'] = 'Already Done';
@@ -2337,6 +2411,29 @@ $lang_update_php['delete_file'] = 'Delete %s';
 $lang_update_php['could_not_delete'] = 'Could not delete due to missing permissions. Delete the file manually!';
 $lang_update_php['rename_file'] = 'Rename %s to %s';
 $lang_update_php['could_not_rename'] = 'Could not rename due to missing permissions. Rename the file manually!';
+// 1.6 dbabstract
+$lang_update_php['newDbMethod'] = 'Your Coppermine Gallery installation is using a database connection method (mysql) that is deprecated and should be changed. Please choose an alternate connection method below.';
+$lang_update_php['not_available'] = 'not available';
+$lang_update_php['version_too_old'] = 'version too old';
+$lang_update_php['recommended'] = ' (recommended)';
+$lang_update_php['current_nr'] = ' (current, not recommended)';
+$lang_update_php['unable_write_config'] = 'Unable to write config file';
+// 1.6 core upload plugins
+$lang_update_php['core_upload_plugs'] = 'Enable core upload plugins';
+// for scripted upgrade/update mechanism
+$lang_update_php['no_zip_extn'] = 'The extension providing ZipArchive is not available';
+$lang_update_php['files_placed_title'] = 'Update files placed';
+$lang_update_php['files_placed_msg'] = 'All update files were successfully placed. Click below to complete the update.';
+$lang_update_php['complete_update'] = 'Complete Update';
+$lang_update_php['select_update'] = 'Please select the update to perform.';
+$lang_update_php['not_writeable'] = '<b>Updating can not be performed</b><br />The following directories are not writeable: ';
+$lang_update_php['available_updates'] = 'Available Updates';
+$lang_update_php['perform_update'] = 'Perform Selected Update';
+$lang_update_php['no_updates_title'] = 'No update available';
+$lang_update_php['no_updates_msg'] = 'No updates are available for your version';
+$lang_update_php['not_found'] = 'Releases of CPG not found at Github';
+$lang_update_php['save_error'] = 'Could not save new update. Operation aborted.';
+$lang_update_php['pre_warning'] = '<span style="color:red">WARNING: This is a pre-release version!</span>';
 }
 
 // ------------------------------------------------------------------------- //
@@ -2377,8 +2474,16 @@ $lang_util_php['filename_euro'] = 'Change 2003_11_23_13_20_20.jpg to 23/11/2003 
 $lang_util_php['filename_us'] = 'Change 2003_11_23_13_20_20.jpg to 11/23/2003 13:20';
 $lang_util_php['filename_time'] = 'Change 2003_11_23_13_20_20.jpg to 13:20';
 $lang_util_php['notitle'] = 'Apply only for files with empty titles';
-$lang_util_php['delete_title'] = 'Delete file titles';
-$lang_util_php['delete_title_explanation'] = 'This will remove all titles on files in the album you specify.';
+//$lang_util_php['delete_title'] = 'Delete file titles';
+//$lang_util_php['delete_title_explanation'] = 'This will remove all titles on files in the album you specify.';
+$lang_util_php['change_values_title'] = 'Change values for (or clear) title, description and keywords.';
+$lang_util_php['change_values_how'] = 'Set new bulk values for items, or clear them.';
+$lang_util_php['change_values_title_label'] = 'Title:';
+$lang_util_php['change_values_desc_label'] = 'Description:';
+$lang_util_php['change_values_tags_label'] = 'Keywords (use semicolon):';
+$lang_util_php['change_values_msg_nothing'] = 'Nothing to do.';
+$lang_util_php['change_values_msg_changed'] = 'Changes were made to %d items.';
+$lang_util_php['change_values_msg_error'] = 'Failed to make changes.';
 $lang_util_php['delete_original'] = 'Delete original size photos';
 $lang_util_php['delete_original_explanation'] = 'This will remove the full sized pictures.';
 $lang_util_php['delete_intermediate'] = 'Delete intermediate pictures';
@@ -2478,7 +2583,7 @@ $lang_versioncheck_php['modified'] = 'Modified';
 $lang_versioncheck_php['comment'] = 'Comment';
 $lang_versioncheck_php['help'] = 'Help';
 $lang_versioncheck_php['repository_link'] = 'Repository link';
-$lang_versioncheck_php['browse_corresponding_page_subversion'] = 'Browse page corresponding to this file in the project\'s subversion repository';
+$lang_versioncheck_php['browse_corresponding_page_subversion'] = 'Browse page corresponding to this file in the project\'s repository';
 $lang_versioncheck_php['mandatory'] = 'mandatory';
 $lang_versioncheck_php['mandatory_missing'] = 'Mandatory file is missing';
 $lang_versioncheck_php['optional'] = 'optional';
@@ -2499,6 +2604,8 @@ $lang_versioncheck_php['read'] = 'Read';
 $lang_versioncheck_php['write'] = 'Write';
 $lang_versioncheck_php['warning'] = 'Warning';
 $lang_versioncheck_php['not_applicable'] = 'n/a';
+$lang_versioncheck_php['no_repo_title'] = 'No Repository Data';
+$lang_versioncheck_php['no_repo_message'] = 'Could not get version check information from the repository.';
 }
 
 // ------------------------------------------------------------------------- //
@@ -2512,48 +2619,4 @@ $lang_viewlog_php['no_logs'] = 'No logs created.';
 $lang_viewlog_php['last_updated'] = 'last update';
 }
 
-// ------------------------------------------------------------------------- //
-// File xp_publish.php
-// ------------------------------------------------------------------------- //
-if (defined('XP_PUBLISH_PHP')) {
-$lang_xp_publish_php['title'] = 'XP Web Publishing Wizard';
-$lang_xp_publish_php['client_header'] = 'XP Web Publishing Wizard Client';
-$lang_xp_publish_php['requirements'] = 'Requirements';
-$lang_xp_publish_php['windows_xp'] = 'Windows XP / Vista';
-$lang_xp_publish_php['no_windows_xp'] = 'You appear to be running another, unsupported operating system';
-$lang_xp_publish_php['no_os_detect'] = 'Could not detect your operating system';
-$lang_xp_publish_php['requirement_http_upload'] = 'A working installation of Coppermine on which the http upload function works properly';
-$lang_xp_publish_php['requirement_ie'] = 'Microsoft Internet Explorer';
-$lang_xp_publish_php['requirement_permissions'] = 'The administrator of the gallery must have granted you permission to upload';
-$lang_xp_publish_php['requirement_login'] = 'You need to be logged in to upload';
-$lang_xp_publish_php['no_ie'] = 'You appear to be using another, unsupported browser';
-$lang_xp_publish_php['no_browser_detect'] = 'Could not detect your browser';
-$lang_xp_publish_php['no_gallery_name'] = 'You need to specify a gallery name in config';
-$lang_xp_publish_php['no_gallery_description'] = 'You need to specify a gallery description in config';
-$lang_xp_publish_php['howto_install'] = 'How to install';
-$lang_xp_publish_php['install_right_click'] = 'Right click on %sthis link%s and select &quot;save target as...&quot;'; // translator note: don't replace the %s - that placeholder token needs to go untranslated
-$lang_xp_publish_php['install_save'] = 'Save the file on your client. When saving the file, make sure that the proposed file name is <tt>cpg_###.reg</tt> (the ### represents a numerical timestamp). Change it to that name if necessary (leave the numbers)';
-$lang_xp_publish_php['install_execute'] = 'After the download has finished, execute the file by double clicking on it in order to register your server with the web publishing wizard';
-$lang_xp_publish_php['usage'] = 'Usage';
-$lang_xp_publish_php['select_files'] = 'In Windows Explorer, select the files you want to upload';
-$lang_xp_publish_php['display_tasks'] = 'Make sure that the folders are not being displayed in left bar of the Explorer';
-$lang_xp_publish_php['publish_on_the_web'] = 'click on &quot;Publish xxx on the web&quot; in the left pane';
-$lang_xp_publish_php['confirm_selection'] = 'Confirm your file selection';
-$lang_xp_publish_php['select_service'] = 'In the list of services that appear, select the one for your photo gallery (it has the name of your gallery)';
-$lang_xp_publish_php['enter_login'] = 'Enter your login information if required';
-$lang_xp_publish_php['select_album'] = 'Select the target album for your pictures or create a new one';
-$lang_xp_publish_php['next'] = 'Click on &quot;next&quot;';
-$lang_xp_publish_php['upload_starts'] = 'The upload of your pictures should start';
-$lang_xp_publish_php['upload_completed'] = 'When it is completed, check your gallery to see if pictures have been properly added';
-$lang_xp_publish_php['welcome'] = 'Welcome <strong>%s</strong>,';
-$lang_xp_publish_php['need_login'] = 'You need to login to the gallery using Internet Explorer before you can use this wizard.<p/><p>When you login don\'t forget to select the &quot;remember me&quot; option if it is present.';
-$lang_xp_publish_php['no_alb'] = 'Sorry but there is no album where you are allowed to upload pictures with this wizard.';
-$lang_xp_publish_php['upload'] = 'Upload your pictures into an existing album';
-$lang_xp_publish_php['create_new'] = 'Create a new album for your pictures';
-$lang_xp_publish_php['category'] = 'Category';
-$lang_xp_publish_php['new_alb_created'] = 'Your new album &quot;<strong>%s</strong>&quot; was created.';
-$lang_xp_publish_php['continue'] = 'Press &quot;Next&quot; to start to upload your pictures';
-$lang_xp_publish_php['link'] = '';
-}
-
-?>
+//EOF

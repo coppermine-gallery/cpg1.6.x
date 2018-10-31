@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -720,7 +719,6 @@ $lang_admin_php['custom_header_path'] = 'Pfad zu benutzerdefiniertem header-incl
 $lang_admin_php['custom_footer_path'] = 'Pfad zu benutzerdefiniertem footer-include';
 $lang_admin_php['browse_by_date'] = 'Aktiviere Betrachtung nach Datum';
 $lang_admin_php['display_redirection_page'] = 'Umleitungs-Seiten anzeigen';
-$lang_admin_php['display_xp_publish_link'] = 'XP Publisher bewerben durch Anzeige von Link auf Upload-Seite';
 $lang_admin_php['main_table_width'] = 'Breite der Haupttabelle';
 $lang_admin_php['pixels_or_percent'] = 'in Pixel oder %';
 $lang_admin_php['subcat_level'] = 'Anzahl angezeigter Kategorie-Ebenen';
@@ -861,7 +859,7 @@ $lang_admin_php['thumbnail_intermediate_full'] = 'Thumbnail, Bild in Zwischengr�
 $lang_admin_php['thumbnail_intermediate'] = 'Thumbnail und Bild in Zwischengröße';
 $lang_admin_php['thumbnail_only'] = 'Nur Thumbnail';
 $lang_admin_php['upload_mechanism'] = 'Standard-Methode zum Hochladen';
-$lang_admin_php['upload_swf'] = 'Mehrere Dateien, Flash-unterstützt (empfohlen)';
+$lang_admin_php['upload_swf'] = 'Mehrere Dateien, Flash-unterstützt';
 $lang_admin_php['upload_single'] = 'Einfach - Eine Datei pro Durchgang';
 $lang_admin_php['allow_user_upload_choice'] = 'Benutzern erlauben, die Methode zum Hochladen selbst auszuwählen';
 $lang_admin_php['allow_duplicate_emails_addr'] = 'Zulassen, dass mehrere Benutzer die gleiche eMail-Adresse haben';
@@ -1471,27 +1469,31 @@ $lang_install['installer_locked'] = 'The installer is locked';
 $lang_install['installer_selected'] = 'The installer selected';
 $lang_install['inv_im_path'] = 'The installer cannot find the \'%s\' directory you have specified for ImageMagick or it does not have permission to access it. Check that your typing is correct and that you have access to the specified directory.';
 $lang_install['lets_go'] = 'Let\'s Go!';
-$lang_install['mysql_create_btn'] = 'Create';
-$lang_install['mysql_create_db'] = 'Create new MySQL Database';
-$lang_install['mysql_db_name'] = 'MySQL Database Name';
-$lang_install['mysql_error'] = 'MySQL error: ';
-$lang_install['mysql_host'] = 'MySQL Host<br />(localhost is usually OK)';
-$lang_install['mysql_username'] = 'MySQL Username';
-$lang_install['mysql_password'] = 'MySQL Password';
-$lang_install['mysql_no_create_db'] = 'Could not create MySQL database.';
-$lang_install['mysql_no_sel_dbs'] = 'Could not retrieve available MySQL databases';
-$lang_install['mysql_succ'] = 'Successful connection with database';
-$lang_install['mysql_tbl_pref'] = 'MySQL table prefix';
-$lang_install['mysql_test_connection'] = 'Test connection';
-$lang_install['mysql_wrong_db'] = 'MySQL could not locate a database called \'%s\' please check the value entered for this';
+$lang_install['dbase_create_btn'] = 'Create';
+$lang_install['dbase_create_db'] = 'Create new MySQL Database';
+$lang_install['dbase_db_name'] = 'MySQL Database Name';
+$lang_install['dbase_error'] = 'MySQL error: ';
+$lang_install['dbase_host'] = 'MySQL Host<br />(localhost is usually OK)';
+$lang_install['dbase_username'] = 'MySQL Username';
+$lang_install['dbase_password'] = 'MySQL Password';
+$lang_install['dbase_no_create_db'] = 'Could not create MySQL database.';
+$lang_install['dbase_no_sel_dbs'] = 'Could not retrieve available MySQL databases';
+$lang_install['dbase_succ'] = 'Successful connection with database';
+$lang_install['dbase_tbl_pref'] = 'MySQL table prefix';
+$lang_install['dbase_test_connection'] = 'Test connection';
+$lang_install['dbase_wrong_db'] = 'MySQL could not locate a database called \'%s\' please check the value entered for this';
+$lang_install['not_available'] = 'not available';
+$lang_install['version_too_old'] = 'version too old';
 $lang_install['n_a'] = 'N/A';
 $lang_install['no_admin_email'] = 'You have to enter an admin email address';
 $lang_install['no_admin_password'] = 'You have to enter an admin password';
 $lang_install['no_admin_username'] = 'You have to enter an admin username';
 $lang_install['no_dir'] = 'Directory not available';
+$lang_install['not_available'] = 'not available';
+$lang_install['version_too_old'] = 'version too old';
 $lang_install['no_gd'] = 'Your installation of PHP does not seem to include the \'GD\' graphic library extension and you have not indicated that you want to use ImageMagick. Coppermine has been configured to use GD2 because the automatic GD detection sometimes fails. If GD is installed on your system, the script should work else you will need to install ImageMagick.';
-$lang_install['no_mysql_conn'] = 'Could not create a MySQL connection, please check the SQL values entered';
-$lang_install['no_mysql_support'] = 'PHP does not have MySQL support enabled.';
+$lang_install['no_dbase_conn'] = 'Could not create a MySQL connection, please check the SQL values entered';
+$lang_install['no_dbase_support'] = 'PHP does not have MySQL support enabled.';
 $lang_install['no_thumb_method'] = 'You have choose an image manipulation application (GD/IM)';
 $lang_install['nok'] = 'Not OK';
 $lang_install['not_here_yet'] = 'Nothing here yet, please click %shere%s to go back.';
@@ -1508,8 +1510,8 @@ $lang_install['please_go_back'] = 'Please %sclick here%s to go back and fix this
 $lang_install['populate_db'] = 'Populate Database';
 $lang_install['ready_to_roll'] = '<a href="index.php">Coppermine</a> is now properly configured and ready to roll.<br /><a href="login.php">Login</a> using the information you provided for your admin account.';
 $lang_install['sect_create_adm'] = 'This section requires information to create your Coppermine administration account. Use only alphanumeric characters. Enter the data carefully!';
-$lang_install['sect_mysql_info'] = 'This section requires information on how to access your MySQL database.<br />If you don\'t know how to fill them, check with your webhost support.';
-$lang_install['sect_mysql_sel_db'] = 'Here you have to choose which database you want to use for Coppermine.<br />If your Mysql account has the needed privileges, you can create a new database from within the installer or you can use an existing database. If you don\'t like both options, you will have to create a database first outside the Coppermine installer, then return here then select the new database from the dropdown box below. You can also change the table prefix (Don\'t use dots though), but keeping the default prefix is recommended.';
+$lang_install['sect_dbase_info'] = 'This section requires information on how to access your MySQL database.<br />If you don\'t know how to fill them, check with your webhost support.';
+$lang_install['sect_dbase_sel_db'] = 'Here you have to choose which database you want to use for Coppermine.<br />If your Mysql account has the needed privileges, you can create a new database from within the installer or you can use an existing database. If you don\'t like both options, you will have to create a database first outside the Coppermine installer, then return here then select the new database from the dropdown box below. You can also change the table prefix (Don\'t use dots though), but keeping the default prefix is recommended.';
 $lang_install['select_lang'] = 'Select default language: ';
 $lang_install['sql_file_not_found'] = 'The file \'%s\' could not be found. Check that you have uploaded all Coppermine files to your server.';
 $lang_install['status'] = 'Status';
@@ -1520,9 +1522,9 @@ $lang_install['title_file_check'] = 'Checking Installation Files';
 $lang_install['title_finished'] = 'Installation Completed';
 $lang_install['title_imp'] = 'Image Package Selection';
 $lang_install['title_imp_test'] = 'Testing Image Package';
-$lang_install['title_mysql_db_sel'] = 'MySQL Database Selection';
-$lang_install['title_mysql_pop'] = 'Creating Database Structure';
-$lang_install['title_mysql_user'] = 'MySQL User Authentication';
+$lang_install['title_dbase_db_sel'] = 'MySQL Database Selection';
+$lang_install['title_dbase_pop'] = 'Creating Database Structure';
+$lang_install['title_dbase_user'] = 'MySQL User Authentication';
 $lang_install['title_welcome'] = 'Welcome to Coppermine installation';
 $lang_install['tmp_conf_error'] = 'Unable to write the temporary config file - make sure the \'include\' folder is writable for the script.';
 $lang_install['tmp_conf_ser_err'] = 'A serious error occurred in the installer, try reloading your page or start over by removing the \'include/config.tmp\' file.';
@@ -1555,7 +1557,6 @@ $lang_install['imp_test_error'] = 'There was an error in one or more of the test
 $lang_install['writable'] = 'Writable';
 $lang_install['not_writable'] = 'Not writable';
 $lang_install['not_exist'] = 'Does not exist';
-$lang_install['old_install'] = 'This is the new install wizard. Click %shere%s for the classic install screen.';
 }
 
 // ------------------------------------------------------------------------- //
@@ -2134,7 +2135,7 @@ $lang_stat_details_php['not_implemented'] = 'noch nicht implementiert';
 if (defined('UPLOAD_PHP')) {
 $lang_upload_php['title'] = 'Datei hochladen';
 $lang_upload_php['choose_method'] = 'Wähle Methode zum Hochladen';
-$lang_upload_php['upload_swf']    = 'Mehrere Dateien - mit Flash-Unterstützung (empfohlen)';
+$lang_upload_php['upload_swf']    = 'Mehrere Dateien - mit Flash-Unterstützung';
 $lang_upload_php['upload_single'] = 'Einfach - eine Datei pro Durchgang';
 $lang_upload_php['up_instr_1'] = 'Wähle zuerst ein Album aus der Auswahlliste';
 $lang_upload_php['up_instr_2'] = 'Benutze dann die "Browse"-Schaltfläche, um zu der Datei auf Deinem Rechner zu navigieren, die Du hochladen willst.';
@@ -2176,10 +2177,9 @@ $lang_upload_php['allowed_doc_types'] = 'Dokumente: %s';
 $lang_upload_php['allowed_snd_types'] = 'Audio: %s';
 $lang_upload_php['please_wait'] = 'Bitte warten, während die Datei hochgeladen wird - das kann einen Moment dauern';
 $lang_upload_php['alternative_upload'] = 'Alternative Upload-Methode';
-$lang_upload_php['xp_publish_promote'] = 'Wenn Du Windows XP/Vista benutzt kannst Du auch den Windows XP Uploading Wizard benutzen um Dateien hochzuladen, der eine einfachere Benutzerschnittstelle bietet.';
 $lang_upload_php['err_js_disabled'] = 'Die Flash-basierte Benutzerschnittstelle zum Hochladen von Bildern konnte nicht geladen werden. JavaScript muss im Browser aktiviert sein, um die Flash-basierte Schnittstelle benutzen zu können.';
 $lang_upload_php['err_flash_disabled'] = 'Die Benutzerschnittstelle zum Hochladen braucht sehr lange, um zu laden, oder der Ladevorgang ist fehlgeschlagen. Bitte stelle sicher, dass das Flash-Plugin des Browsers aktiviert ist und dass eine funktionierende Version von Flash installiert ist.';
-$lang_upload_php['err_alternate_method'] = 'Alternativ kann die <a href="upload.php?single=1">einfache</a> Benutzer-Schnittstelle zum Hochladen verwendet werden.';
+$lang_upload_php['err_alternate_method'] = 'Alternativ kann die <a href="upload.php?html5=1">HTML5</a> Benutzer-Schnittstelle zum Hochladen verwendet werden.';
 $lang_upload_php['err_flash_version'] = 'Benutzer-Schnittstelle zum Hochladen konnte nicht geladen werden. Möglicherweise muss der Flash_player installiert oder aktualisiert werden. Besuche die Webseite von <a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">Adobe </a>, um einen Flash-Player herunter zu laden.';
 $lang_upload_php['flash_loading'] = 'Die Benutzerschnittstelle zum Hochladen wird gerade geladen. Einen Moment bitte...';
 $lang_upload_swf_php['browse'] = 'Durchsuchen...';
@@ -2322,9 +2322,9 @@ $lang_update_php['welcome_updater'] = 'Willkommen beim Coppermine-Update';
 $lang_update_php['could_not_authenticate'] = 'Konnte Dich nicht autentifizieren';
 $lang_update_php['provide_admin_account'] = 'Bitte ein Coppermine-Admin-Konto eingeben oder die mySQL-Zugangsdaten';
 $lang_update_php['try_again'] = 'Versuche es nochmal';
-$lang_update_php['mysql_connect_error'] = 'Konnte keine MySQL-Verbindung aufbauen';
-$lang_update_php['mysql_database_error'] = 'MySQL konnte die Datenbank namens %s nicht finden';
-$lang_update_php['mysql_said'] = 'MySQL sagte';
+$lang_update_php['dbase_connect_error'] = 'Konnte keine MySQL-Verbindung aufbauen';
+$lang_update_php['dbase_database_error'] = 'MySQL konnte die Datenbank namens %s nicht finden';
+$lang_update_php['dbase_said'] = 'MySQL sagte';
 $lang_update_php['check_config_file'] = 'Bitte überprüfe die SQL-Werte in %s';
 $lang_update_php['performing_database_updates'] = 'Führe Datenbank-Updates durch';
 $lang_update_php['performing_file_updates'] = 'Führe Datei-Updates durch';
@@ -2482,7 +2482,7 @@ $lang_versioncheck_php['modified'] = 'Geändert';
 $lang_versioncheck_php['comment'] = 'Kommentar';
 $lang_versioncheck_php['help'] = 'Hilfe';
 $lang_versioncheck_php['repository_link'] = 'SVN Repository';
-$lang_versioncheck_php['browse_corresponding_page_subversion'] = 'Zu dieser Datei passende Seite des Subversion Repository anzeigen';
+$lang_versioncheck_php['browse_corresponding_page_subversion'] = 'Zu dieser Datei passende Seite des Repository anzeigen';
 $lang_versioncheck_php['mandatory'] = 'benötigt';
 $lang_versioncheck_php['mandatory_missing'] = 'Benötigte Datei fehlt';
 $lang_versioncheck_php['optional'] = 'optional';
@@ -2515,50 +2515,4 @@ $lang_viewlog_php['view_logs'] = 'Logs anzeigen';
 $lang_viewlog_php['no_logs'] = 'Keine Logs vorhanden';
 }
 
-
-// ------------------------------------------------------------------------- //
-// File xp_publish.php
-// ------------------------------------------------------------------------- //
-
-if (defined('XP_PUBLISH_PHP')) {
-$lang_xp_publish_php['title'] = 'XP Web Publishing Assistent';
-$lang_xp_publish_php['client_header'] = 'XP Web Publishing Assistent Client';
-$lang_xp_publish_php['requirements'] = 'Anforderungen';
-$lang_xp_publish_php['windows_xp'] = 'Windows XP / Vista';
-$lang_xp_publish_php['no_windows_xp'] = 'Du scheinst ein anderes, nicht unterstütztes Betriebssystem zu benutzen';
-$lang_xp_publish_php['no_os_detect'] = 'Konnte Dein Betriebssystem nicht detektieren';
-$lang_xp_publish_php['requirement_http_upload'] = 'Eine funktionierende Coppermine-Installation mit funktionierenden http-Uploads';
-$lang_xp_publish_php['requirement_ie'] = 'Microsoft Internet Explorer';
-$lang_xp_publish_php['requirement_permissions'] = 'Der Galerie-Admin muss Dir die Berechtigung eingeräumt haben, Dateien hochzuladen';
-$lang_xp_publish_php['requirement_login'] = 'Du musst angemeldet sein, um Dateien hochladen zu können';
-$lang_xp_publish_php['no_ie'] = 'Du scheinst einen anderen, nicht unterstützten Browser zu benutzen';
-$lang_xp_publish_php['no_browser_detect'] = 'Konnte Deinen Browser nicht detektieren';
-$lang_xp_publish_php['no_gallery_name'] = 'Du musst einen Galerie-Namen in den Einstellungen angeben';
-$lang_xp_publish_php['no_gallery_description'] = 'Du musst eine Galerie-Beschreibung in den Einstellungen angeben';
-$lang_xp_publish_php['howto_install'] = 'Installation';
-$lang_xp_publish_php['install_right_click'] = 'Rechts-Klicke auf %sdiesen Link%s und wähle &quot;Ziel speichern unter...&quot;'; // translator note: don't replace the %s - that placeholder token needs to go untranslated
-$lang_xp_publish_php['install_save'] = 'Speichere die Datei auf Deinem Rechner. Stelle beim Speichern sicher, dass der vorgeschlagene Dateiname <tt>cpg_###.reg</tt> lautet (die Rauten repräsentieren einen numerischen Zeitstempel). Ändere die Erweiterung falls nötig auf .reg (lasse die Zahlen unverändert)';
-$lang_xp_publish_php['install_execute'] = 'Nach der Beendigung des Downloads führe die Datei aus durch Doppelklicken, um den Dienst in Deinem Web-Veröffentlichungs-Dienst zu registrieren';
-$lang_xp_publish_php['usage'] = 'Benutzung';
-$lang_xp_publish_php['select_files'] = 'Markiere im Windows Explorer die Dateien, die Du hochladen willst';
-$lang_xp_publish_php['display_tasks'] = 'Stelle sicher, dass die Verzeichnis-Struktur im linken Teil des Explorer-Fensters NICHT angezeigt wird';
-$lang_xp_publish_php['publish_on_the_web'] = 'Klicke auf &quot;Im Web veröffentlichen&quot; im linken Explorer-Fenster';
-$lang_xp_publish_php['confirm_selection'] = 'Bestätige die Datei-Auswahl';
-$lang_xp_publish_php['select_service'] = 'Wähle aus der Liste der zur Verfügung stehenden Dienste den Deiner Galerie aus (er trägt den Namen der Galerie).';
-$lang_xp_publish_php['enter_login'] = 'Gib Deine Anmelde-Daten ein, falls Du dazu aufgefordert wirst';
-$lang_xp_publish_php['select_album'] = 'Wähle des Ziel-Album oder erzeuge ein neues Album';
-$lang_xp_publish_php['next'] = 'Klicke auf &quot;weiter&quot;';
-$lang_xp_publish_php['upload_starts'] = 'Der Hochlade-Vorgang Deiner gewählten Bilder sollte starten';
-$lang_xp_publish_php['upload_completed'] = 'Überprüfe nach erfolgtem Upload, ob der Vorgang erfolgreich war';
-$lang_xp_publish_php['welcome'] = 'Hallo <strong>%s</strong>,';
-$lang_xp_publish_php['need_login'] = 'Du musst Dich per Internet Explorer erst anmelden, bevor Du diesen Assistenten benutzen kannst.<p/><p>Vergiss nicht, die Option "merken" zu aktivieren, wenn verfügbar.';
-$lang_xp_publish_php['no_alb'] = 'Leider gibt es kein Album, in das Du mit diesem Assistenten Bilder hochladen darfst.';
-$lang_xp_publish_php['upload'] = 'Bilder in ein bestehendes Album hochladen';
-$lang_xp_publish_php['create_new'] = 'Neues Album für die Bilder erzeugen';
-$lang_xp_publish_php['category'] = 'Kategorie';
-$lang_xp_publish_php['new_alb_created'] = 'Dein neues Album &quot;<strong>%s</strong>&quot; wurde erzeugt.';
-$lang_xp_publish_php['continue'] = 'Drücke &quot;weiter&quot;, um mit dem Hochladen zu beginnen';
-$lang_xp_publish_php['link'] = '';
-}
-
-?>
+//EOF

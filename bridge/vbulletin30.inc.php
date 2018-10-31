@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -38,7 +37,7 @@ if (isset($bridge_lookup)) {
 
     class cpg_udb extends core_udb {
 
-        function cpg_udb()
+        function __construct ()
         {
             global $BRIDGE;
 
@@ -59,9 +58,10 @@ if (isset($bridge_lookup)) {
             if (isset($config['Database']['dbname']))
             {
               // Running on vBulletin 3.5.x
+				$port = $config['MasterServer']['port'] ?: 3306;
                 $this->db = array(
                     'name' => $config['Database']['dbname'],
-                    'host' => $config['MasterServer']['servername'] ? $config['MasterServer']['servername'] : 'localhost',
+                    'host' => ($config['MasterServer']['servername'] ?: 'localhost') . ':' . $port,
                     'user' => $config['MasterServer']['username'],
                     'password' => $config['MasterServer']['password'],
                     'prefix' => $config['Database']['tableprefix']
@@ -143,10 +143,11 @@ if (isset($bridge_lookup)) {
 
             $sql = "SELECT u.{$this->field['user_id']}, u.{$this->field['password']}, u.{$this->field['grouptbl_group_id']}+100 AS usergroupid FROM {$this->usertable} AS u, {$this->sessionstable} AS s WHERE s.{$this->field['user_id']}=u.{$this->field['user_id']} AND s.sessionhash='$session_id'";
 
-            $result = cpg_db_query($sql, $this->link_id);
+            $result = $this->query($sql);
 
-            if (mysql_num_rows($result)){
-                $row = mysql_fetch_array($result);
+            if (cpg_db_num_rows($result)){
+                $row = cpg_db_fetch_array($result);
+                $result->free();
                 return $row;
             } else {
                 return false;
@@ -161,9 +162,10 @@ if (isset($bridge_lookup)) {
             if ($this->use_post_based_groups){
                 $sql = "SELECT g.{$this->field['usertbl_group_id']}+100 AS group_id, u.* FROM {$this->usertable} AS u, {$this->groupstable} as g WHERE g.{$this->field['grouptbl_group_id']} = u.{$this->field['usertbl_group_id']} AND u.{$this->field['user_id']} = '{$row['id']}'";
 
-                $result = cpg_db_query($sql, $this->link_id);
+                $result = $this->query($sql);
 
-                $row = mysql_fetch_array($result);
+                $row = cpg_db_fetch_array($result);
+                $result->free();
 
                 $data[0] = $row['group_id'];
 
@@ -204,4 +206,4 @@ if (isset($bridge_lookup)) {
     // and go !
     $cpg_udb = new cpg_udb;
 }
-?>
+//EOF

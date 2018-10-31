@@ -1,7 +1,7 @@
 ##  ********************************************
 ##  Coppermine Photo Gallery
 ##  ************************
-##  Copyright (c) 2003-2014 Coppermine Dev Team
+##  Copyright (c) 2003-2016 Coppermine Dev Team
 ##  v1.0 originally written by Gregory Demar
 ##
 ##  This program is free software; you can redistribute it and/or modify
@@ -9,10 +9,9 @@
 ##  as published by the Free Software Foundation.
 ##
 ##  ********************************************
-##  Coppermine version: 1.6.01
+##  Coppermine version: 1.6.03
 ##  $HeadURL$
-##  $Revision$
-##  ********************************************
+####  ********************************************
 
 START TRANSACTION;
 
@@ -31,7 +30,7 @@ INSERT INTO CPG_config VALUES ('allow_duplicate_emails_addr', '0');
 INSERT INTO CPG_config VALUES ('allow_guests_enter_file_details', '0');
 INSERT INTO CPG_config VALUES ('allowed_doc_types', 'doc/txt/rtf/pdf/xls/pps/ppt/zip/gz/mdb');
 INSERT INTO CPG_config VALUES ('allowed_img_types', 'jpeg/jpg/png/gif');
-INSERT INTO CPG_config VALUES ('allowed_mov_types', 'asf/asx/mpg/mpeg/wmv/swf/avi/mov');
+INSERT INTO CPG_config VALUES ('allowed_mov_types', 'asf/asx/mpg/mpeg/wmv/swf/avi/mov/m4v');
 INSERT INTO CPG_config VALUES ('allowed_snd_types', 'mp3/midi/mid/wma/wav/ogg');
 INSERT INTO CPG_config VALUES ('allow_email_change', '0');
 INSERT INTO CPG_config VALUES ('allow_memberlist', '0');
@@ -73,7 +72,7 @@ INSERT INTO CPG_config VALUES ('contact_form_registered_enable', '1');
 INSERT INTO CPG_config VALUES ('contact_form_sender_email', '1');
 INSERT INTO CPG_config VALUES ('contact_form_subject_content', 'Coppermine gallery contact form');
 INSERT INTO CPG_config VALUES ('contact_form_subject_field', '0');
-INSERT INTO CPG_config VALUES ('cookie_name', 'cpg15x');
+INSERT INTO CPG_config VALUES ('cookie_name', 'cpg16x');
 INSERT INTO CPG_config VALUES ('cookie_path', '/');
 INSERT INTO CPG_config VALUES ('cookies_need_consent', '0');
 INSERT INTO CPG_config VALUES ('count_admin_hits', '0');
@@ -105,7 +104,6 @@ INSERT INTO CPG_config VALUES ('display_stats_on_index', '1');
 INSERT INTO CPG_config VALUES ('display_thumbnail_rating', '0');
 INSERT INTO CPG_config VALUES ('display_thumbs_batch_add', '1');
 INSERT INTO CPG_config VALUES ('display_uploader', '0');
-INSERT INTO CPG_config VALUES ('display_xp_publish_link', '0');
 INSERT INTO CPG_config VALUES ('ecard_captcha', '1');
 INSERT INTO CPG_config VALUES ('ecard_flash', '0');
 INSERT INTO CPG_config VALUES ('ecards_more_pic_target', 'http://yoursite.tld/your_coppermine_folder/');
@@ -140,6 +138,7 @@ INSERT INTO CPG_config VALUES ('keep_votes_time', '30');
 INSERT INTO CPG_config VALUES ('keyword_separator', ';');
 INSERT INTO CPG_config VALUES ('lang', 'english');
 INSERT INTO CPG_config VALUES ('language_autodetect', '1');
+INSERT INTO CPG_config VALUES ('last_updates_check', '1');
 INSERT INTO CPG_config VALUES ('link_pic_count', '1');
 INSERT INTO CPG_config VALUES ('link_last_upload', '0');
 INSERT INTO CPG_config VALUES ('log_ecards', '0');
@@ -216,7 +215,7 @@ INSERT INTO CPG_config VALUES ('unsharp_radius', '0.5');
 INSERT INTO CPG_config VALUES ('unsharp_threshold', '3');
 INSERT INTO CPG_config VALUES ('upl_notify_admin_email', '0');
 INSERT INTO CPG_config VALUES ('upload_create_album_directory', '1');
-INSERT INTO CPG_config VALUES ('upload_mechanism', 'swfupload');
+INSERT INTO CPG_config VALUES ('upload_mechanism', 'upload_h5a');
 INSERT INTO CPG_config VALUES ('user_field1_name', '');
 INSERT INTO CPG_config VALUES ('user_field2_name', '');
 INSERT INTO CPG_config VALUES ('user_field3_name', '');
@@ -239,6 +238,14 @@ INSERT INTO CPG_config VALUES ('watermark_transparency_featherx', '0');
 INSERT INTO CPG_config VALUES ('watermark_transparency_feathery', '0');
 INSERT INTO CPG_config VALUES ('where_put_watermark', 'southeast');
 INSERT INTO CPG_config VALUES ('which_files_to_watermark', 'both');
+# file upload plugins
+INSERT INTO CPG_config VALUES ('upload_h5a', 'a:11:{s:10:"concurrent";i:3;s:8:"upldsize";i:0;s:8:"autoedit";i:1;s:8:"acptmime";s:7:"image/*";s:8:"enabtitl";i:0;s:8:"enabdesc";i:0;s:8:"enabkeys";i:1;s:8:"enabusr1";i:0;s:8:"enabusr2";i:0;s:8:"enabusr3";i:0;s:8:"enabusr4";i:0;}');
+
+#
+# Dumping data for table `CPG_plugins`
+#
+
+INSERT INTO CPG_plugins (name, path, priority) VALUES ('HTML5 Upload', 'upload_h5a', 0), ('Flash Upload', 'upload_swf', 1), ('Single File Upload', 'upload_sgl', 2);
 
 
 #
@@ -267,6 +274,8 @@ INSERT INTO CPG_filetypes VALUES ('wmv', 'video/x-ms-wmv', 'movie', 'WMP');
 INSERT INTO CPG_filetypes VALUES ('swf', 'application/x-shockwave-flash', 'movie', 'SWF');
 INSERT INTO CPG_filetypes VALUES ('avi', 'video/avi', 'movie', 'WMP');
 INSERT INTO CPG_filetypes VALUES ('mov', 'video/quicktime', 'movie', 'QT');
+INSERT INTO CPG_filetypes VALUES ('mp4', 'video/mp4', 'movie', 'HTMLV');
+INSERT INTO CPG_filetypes VALUES ('m4v', 'video/x-m4v', 'movie', 'HTMLV');
 
 INSERT INTO CPG_filetypes VALUES ('mp3', 'audio/mpeg3', 'audio', 'WMP');
 INSERT INTO CPG_filetypes VALUES ('midi', 'audio/midi', 'audio', 'WMP');

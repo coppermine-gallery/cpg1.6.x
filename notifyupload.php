@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 define('IN_COPPERMINE', true);
@@ -32,16 +31,14 @@ if ($CONFIG['upl_notify_admin_email'] && $superCage->post->keyExists('album') &&
 
     if (!GALLERY_ADMIN_MODE) {
         $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid='$album' and (uploads = 'YES' OR category = '" . (USER_ID + FIRST_USER_CAT) . "' OR owner = '" . USER_ID . "')");
-        if (mysql_num_rows($result)) {
-            $row = mysql_fetch_array($result);
-            mysql_free_result($result);
+        if ($result->numRows()) {
+            $row = $result->fetchArray(true);
             $category = $row['category'];
         }
     } else {
         $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid='$album'");
-        if (mysql_num_rows($result)) {
-            $row = mysql_fetch_array($result);
-            mysql_free_result($result);
+        if ($result->numRows()) {
+            $row = $result->fetchArray(true);
             $category = $row['category'];
         }
     }
@@ -65,4 +62,4 @@ if ($CONFIG['upl_notify_admin_email'] && $superCage->post->keyExists('album') &&
         }
     }
 }
-?>
+//EOF

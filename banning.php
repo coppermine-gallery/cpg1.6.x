@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 define('IN_COPPERMINE', true);
@@ -100,8 +99,7 @@ if ($superCage->get->keyExists('sort')) {
 
 $result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_BANNED']} WHERE brute_force = 0");
 
-list($totalBanCount) = mysql_fetch_row($result);
-mysql_free_result($result);
+list($totalBanCount) = $result->fetchRow(true);
 
 $total_pages = ceil($totalBanCount / $items_per_page);
 
@@ -163,7 +161,7 @@ function create_banlist()
 
     $result = cpg_db_query("SELECT *, UNIX_TIMESTAMP(expiry) AS expiry FROM {$CONFIG['TABLE_BANNED']} WHERE brute_force = 0 ORDER BY $sort $limit");
 
-    $count = mysql_num_rows($result);
+    $count = $result->numRows();
 
     echo <<< EOT
         <tr>
@@ -205,7 +203,7 @@ EOT;
 
         $row_counter  = 0;
 
-        while ( ($row = mysql_fetch_assoc($result)) ) {
+        while ( ($row = $result->fetchAssoc()) ) {
             if ($row['user_id']) {
                 $username     = get_username($row['user_id']);
                 $view_profile = '<a href="profile.php?uid=' . $row['user_id'] . '">' . cpg_fetch_icon('my_profile', 0, $lang_usermgr_php['view_profile']) . '</a>';
@@ -259,7 +257,7 @@ EOT;
             $row_counter++;
         }
     }
-    mysql_free_result($result);
+    $result->free();
 }
 
 // Processing of form data --- start
@@ -270,18 +268,18 @@ if ($superCage->post->keyExists('submit')) {
     }
     $result = cpg_db_query("SELECT *, UNIX_TIMESTAMP(expiry) AS expiry FROM {$CONFIG['TABLE_BANNED']} WHERE brute_force = 0 ORDER BY $sort $limit");
 
-    $count = mysql_num_rows($result);
+    $count = $result->numRows();
 
     $action_output = '';
 
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $result->fetchAssoc()) {
         $ban_database[$row['ban_id']]['user_id']   = $row['user_id'];
         $ban_database[$row['ban_id']]['user_name'] = addslashes($row['user_name']);
         $ban_database[$row['ban_id']]['email']     = $row['email'];
         $ban_database[$row['ban_id']]['ip_addr']   = $row['ip_addr'];
         $ban_database[$row['ban_id']]['expiry']    = $row['expiry'];
     }
-    mysql_free_result($result);
+    $result->free();
 
     $posted_ban_id_array = $superCage->post->getAlnum('ban_id');
 
@@ -332,12 +330,12 @@ if ($superCage->post->keyExists('submit')) {
             $delete_ban_record_array = array();
 
             $result = cpg_db_query("SELECT null FROM {$CONFIG['TABLE_BANNED']} WHERE ban_id = '$posted_ban_id' LIMIT 1");
-            if (mysql_num_rows($result)) {
+            if ($result->numRows()) {
                 // Delete the actual ban record
                 cpg_db_query("DELETE FROM {$CONFIG['TABLE_BANNED']} WHERE ban_id = $posted_ban_id");
                 $action_output .= '<li style="list-style-image:url(images/icons/ok.png)">' . sprintf($lang_banning_php['ban_record_x_deleted'], $posted_ban_id) . '</li>';
             }
-            mysql_free_result($result);
+            $result->free();
         } // Delete the record --- end
         // Write the changes into the database --- start
         // Determine wether there has actually been a change --- start
@@ -429,19 +427,19 @@ if ($superCage->post->keyExists('submit')) {
     // Plausibility control - make sure that some fool doesn't ban himself --- end
     // Double record control - make sure that the record doesn't already exist in the database --- start
     if ($post_user_name != '') {
-        if (mysql_num_rows(cpg_db_query("SELECT user_name FROM {$CONFIG['TABLE_BANNED']} WHERE user_name = '{$post_user_name}' AND brute_force = 0 LIMIT 1"))) {
+        if (cpg_db_query("SELECT user_name FROM {$CONFIG['TABLE_BANNED']} WHERE user_name = '{$post_user_name}' AND brute_force = 0 LIMIT 1")->numRows()) {
             $action_output .= '<li style="list-style-image:url(images/icons/stop.png)">' . sprintf($lang_banning_php['ban_record_x_already_exists'], $post_user_name) . ' ' . $lang_banning_php['skipping'] . '</li>';
             $post_user_name = '';
         }
     }
     if ($post_email != '') {
-        if (mysql_num_rows(cpg_db_query("SELECT email FROM {$CONFIG['TABLE_BANNED']} WHERE email = '{$post_email}' AND brute_force = 0 LIMIT 1"))) {
+        if (cpg_db_query("SELECT email FROM {$CONFIG['TABLE_BANNED']} WHERE email = '{$post_email}' AND brute_force = 0 LIMIT 1")->numRows()) {
             $action_output .= '<li style="list-style-image:url(images/icons/stop.png)">' . sprintf($lang_banning_php['ban_record_x_already_exists'], $post_email) . ' ' . $lang_banning_php['skipping'] . '</li>';
             $post_email     = '';
         }
     }
     if ($post_ip != '') {
-        if (mysql_num_rows(cpg_db_query("SELECT ip_addr FROM {$CONFIG['TABLE_BANNED']} WHERE ip_addr = '{$post_ip}' AND brute_force = 0 LIMIT 1"))) {
+        if (cpg_db_query("SELECT ip_addr FROM {$CONFIG['TABLE_BANNED']} WHERE ip_addr = '{$post_ip}' AND brute_force = 0 LIMIT 1")->numRows()) {
             $action_output .= '<li style="list-style-image:url(images/icons/stop.png)">' . sprintf($lang_banning_php['ban_record_x_already_exists'], $post_ip) . ' ' . $lang_banning_php['skipping'] . '</li>';
             $post_ip        = '';
         }
@@ -470,13 +468,13 @@ if ($superCage->post->keyExists('submit')) {
                 $comm_id = $superCage->post->getInt('comment_id');
 
                 cpg_db_query("DELETE FROM {$CONFIG['TABLE_COMMENTS']} WHERE msg_id = $comm_id");
-                $nb_com_del = mysql_affected_rows();
+                $nb_com_del = cpg_db_affected_rows();
 
                 $action_output .= '<li style="list-style-image:url(images/icons/ok.png)">' . sprintf($lang_banning_php['comment_deleted'], $nb_com_del, $post_user_name) . '.</li>';
             } elseif ($delete_what == 2) { //delete all comments by this author
 
                 cpg_db_query("DELETE FROM {$CONFIG['TABLE_COMMENTS']} WHERE author_id = $post_user_id");
-                $nb_com_del = mysql_affected_rows();
+                $nb_com_del = cpg_db_affected_rows();
 
                 if ($nb_com_del != 0 && $post_user_name != '') {
                     $action_output .= '<li style="list-style-image:url(images/icons/ok.png)">' . sprintf($lang_banning_php['comment_deleted'], $nb_com_del, $post_user_name) . '.</li>';
@@ -505,16 +503,16 @@ if ($superCage->get->keyExists('ban_user') && $superCage->get->getInt('ban_user'
     $sql = "SELECT user_name FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '$new_ban_user_id' LIMIT 1";
 
     $result = cpg_db_query($sql);
-    if (!mysql_num_rows($result)) {
+    if (!$result->numRows()) {
         $comm_info['msg_author'] = '';
     } else {
-        $user_data = mysql_fetch_assoc($result);
+        $user_data = $result->fetchAssoc();
 
         $comm_info['msg_author'] = $user_data['user_name'];
 
         unset($user_data);
     }
-    mysql_free_result($result);
+    $result->free();
 } else {
     $comm_info = array(
         'msg_id' => 0,
@@ -528,7 +526,7 @@ if ($superCage->get->keyExists('delete_comment_id') && $superCage->get->getInt('
     //get info on user
     $comm_id = $superCage->get->getInt('delete_comment_id');
     //check if there is a comment who's creator we have to ban
-    $comm_info = mysql_fetch_assoc(cpg_db_query("SELECT msg_author, msg_hdr_ip, msg_raw_ip FROM {$CONFIG['TABLE_COMMENTS']} WHERE msg_id = $comm_id"));
+    $comm_info = cpg_db_query("SELECT msg_author, msg_hdr_ip, msg_raw_ip FROM {$CONFIG['TABLE_COMMENTS']} WHERE msg_id = $comm_id")->fetchAssoc(true);
 
     $comm_info['msg_ip'] = ($comm_info['msg_hdr_ip'] == '') ? $comm_info['msg_hdr_ip'] : $comm_info['msg_raw_ip'];
 
@@ -662,4 +660,4 @@ print '</form>' . $LINEBREAK;
 
 pagefooter();
 
-?>
+//EOF

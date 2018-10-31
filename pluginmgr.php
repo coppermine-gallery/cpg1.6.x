@@ -1,19 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
-  $Revision$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * pluginmgr.php
+ * @since  1.6.04
+ */
 
 // ------------------------------------------------------------------------- //
 //  Open Plugin API (OpenPAPI) for Coppermine Photo Gallery                  //
@@ -58,7 +54,7 @@ function display_plugin_list() {
     $no_selected = !$CONFIG['enable_plugins'] ? 'checked="checked"' : '';
     print '<form name="pluginenableconfig" id="cpgform2" action="'.$CPG_PHP_SELF.'" method="post" style="margin:0px;padding:0px">';
     starttable('-1', cpg_fetch_icon('plugin_mgr', 2) . $lang_pluginmgr_php['pmgr'].$help,3);
-echo <<< EOT
+echo <<<EOT
         <tr>
                 <td class="tableh2" colspan="3">
                     {$lang_pluginmgr_php['explanation']}
@@ -83,7 +79,7 @@ echo <<< EOT
 EOT;
     endtable();
     print '</form>';
-echo <<< EOT
+echo <<<EOT
         <br />
 EOT;
 
@@ -106,6 +102,7 @@ EOT;
         $installed_plugins[$loop_counter] = array(
           'index' => $thisplugin->index,
           'plugin_id' => $thisplugin->plugin_id,
+          'enabled' => $thisplugin->enabled,
           'path' => $thisplugin->path,
           'priority' => $thisplugin->priority,
           'error' => $thisplugin->error,
@@ -117,16 +114,18 @@ EOT;
       $query = 'SELECT * FROM '.$CONFIG['TABLE_PLUGINS'].' ORDER BY priority ASC;';
       $result = cpg_db_query($query);
       $loop_counter = 0;
-      while ($installed_plugin = mysql_fetch_assoc($result)) {
+      while ($installed_plugin = $result->fetchAssoc()) {
         $installed_plugins[$loop_counter] = array(
           'index' => $loop_counter,
           'plugin_id' => $installed_plugin['plugin_id'],
+          'enabled' => $installed_plugin['enabled'],
           'path' => $installed_plugin['path'],
           'priority' => $installed_plugin['priority'],
           'error' => array(),
         );
         $loop_counter++;
       }
+      $result->free();
     }
 
     $installed_count = 0;
@@ -143,6 +142,7 @@ EOT;
 
             unset($extra_info);
             unset($install_info);
+			unset($config_action);	//@RJC
             include('./plugins/'.$thisplugin['path'].'/configuration.php');
             $pluginPath = $thisplugin['path'];
 
@@ -170,37 +170,67 @@ EOT;
                 $loop_counter = 0;
             }
 
+			$enabstyle = $thisplugin['enabled'] ? '' : ' style="opacity:0.5"';
+
             echo <<<EOT
         <tr>
-            <td width="90%" class="{$row_style_class}">
+            <td width="90%" class="{$row_style_class}"{$enabstyle}>
                 <a name="{$pluginPath}"></a>
                 <table border="0" width="100%" cellspacing="0" cellpadding="0" class="maintable">
                     <tr>
                         <td colspan="2" class="tableh1">{$name} ({$pluginPath}): {$lang_pluginmgr_php['vers']}$version</td>
                     </tr>
                     <tr>
-                        <td class="tableb" valign="top">{$lang_pluginmgr_php['author']}:</td>
+                        <td class="tableb" width="20%" valign="top">{$lang_pluginmgr_php['author']}:</td>
                         <td class="tableb" valign="top">$author</td>
                     </tr>
                     <tr>
-                        <td class="tableb tableb_alternate" valign="top">{$lang_pluginmgr_php['desc']}</td>
+                        <td class="tableb tableb_alternate" valign="top">{$lang_pluginmgr_php['desc']}:</td>
                         <td class="tableb tableb_alternate" valign="top">$description</td>
                     </tr>
 EOT;
             if ($extra != '') {
               echo <<<EOT
                     <tr>
-                        <td class="tableb" width="20%" valign="top">{$lang_pluginmgr_php['extra']}:</td>
+                        <td class="tableb" valign="top">{$lang_pluginmgr_php['extra']}:</td>
                         <td class="tableb" valign="top">{$extra}</td>
                     </tr>
 EOT;
             }
+//@RJC\
+			if (isset($config_action) and $config_action) {
+				if (is_array($config_action)) {
+					$action = $config_action['action'];
+					$xa = '&amp;xa=' . urlencode(base64_encode(serialize($config_action)));
+				} else {
+					$action = $config_action;
+					$xa = '&amp;xa=' . urlencode(base64_encode(serialize(array('action'=>$config_action))));
+				}
+				$btn_icon = cpg_fetch_icon('config', 1);
+				echo <<<EOT
+					<tr>
+						<td class="tableb tableb_alternate" valign="top">{$lang_pluginmgr_php['plugin_action']}:</td>
+						<!-- <td class="tableb tableb_alternate" valign="top"><a href="pluginmgr.php?op=admin&amp;p={$thisplugin['plugin_id']}&amp;c={$action}{$xa}" class="admin_menu">{$btn_icon}{$lang_pluginmgr_php['configure_plugin']}</a></td> -->
+						<td class="tableb tableb_alternate" valign="top"><a href="pluginmgr.php?op=admin&amp;p={$thisplugin['plugin_id']}{$xa}" class="admin_menu">{$btn_icon}{$lang_pluginmgr_php['configure_plugin']}</a></td>
+					</tr>
+EOT;
+			}
+//@RJC/
             echo <<<EOT
                 </table>
             </td>
             <td class="{$row_style_class}" valign="top">
             <table border="0" width="100%" cellspacing="0" cellpadding="0">
             <tr>
+EOT;
+            $plgable = cpg_fetch_icon($thisplugin['enabled'] ? 'plugin_enabled' : 'plugin_disabled', 0);
+            $act = $thisplugin['enabled'] ? 'disable' : 'enable';
+			echo <<<EOT
+            <td width="3%" align="center" valign="middle">
+                <a href="pluginmgr.php?op={$act}&amp;p={$thisplugin['plugin_id']}&amp;form_token={$form_token}&amp;timestamp={$timestamp}" title="{$lang_pluginmgr_php[$act]}">
+                    {$plgable}
+                </a>
+            </td>
 EOT;
             if (($thisplugin['index'] > 0) && ($plugins_count > 1)) {
                 $up = cpg_fetch_icon('up', 0);
@@ -252,7 +282,7 @@ EOT;
     $help_upload = '&nbsp;'.cpg_display_help('f=plugins.htm&amp;as=plugin_manager_upload&amp;ae=plugin_manager_upload_end&amp;top=1', '640', '480');
     $help_install = '&nbsp;'.cpg_display_help('f=plugins.htm&amp;as=plugin_manager_install&amp;ae=plugin_manager_install_end&amp;top=1', '640', '480');
     starttable('100%');
-echo <<<EOT
+	echo <<<EOT
         <tr>
                 <td class="tableh1" width="90%">
                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -260,6 +290,8 @@ echo <<<EOT
                             <td align="left">
                                 <strong><span class="statlink">{$lang_pluginmgr_php['n_plugins']}</span></strong>{$help_install}
                             </td>
+EOT;
+	if (extension_loaded('zlib')) echo <<<EOT
                             <td align="right">
                                     <input type="file" size="40" name="plugin" class="textinput" />
                                     <input type="hidden" name="form_token" value="{$form_token}" />
@@ -267,6 +299,8 @@ echo <<<EOT
                                     <input type="submit" class="button" value="{$lang_pluginmgr_php['upload']}" />
                                     {$help_upload}
                             </td>
+EOT;
+	echo <<<EOT
                         </tr>
                     </table>
                 </td>
@@ -331,7 +365,7 @@ EOT;
             if ($extra != '') {
               echo <<<EOT
                     <tr>
-                        <td class="tableb tableb_alternate" width="20%" valign="top">{$lang_pluginmgr_php['install_info']}:</td>
+                        <td class="tableb tableb_alternate" valign="top">{$lang_pluginmgr_php['install_info']}:</td>
                         <td class="tableb tableb_alternate" valign="top">{$extra}</td>
                     </tr>
 EOT;
@@ -371,6 +405,8 @@ EOT;
             }
             unset($plugin_cpg_version);
             $delete = cpg_fetch_icon('delete', 0);
+            $enable = cpg_fetch_icon('enable', 0);
+            $disable = cpg_fetch_icon('disable', 0);
             echo <<<EOT
                 </table>
             </td>
@@ -403,6 +439,13 @@ EOT;
  * Main code
  */
 
+function able_plugin ($plgid, $val)
+{
+	global $CONFIG;
+
+	$sql = 'UPDATE '.$CONFIG['TABLE_PLUGINS'].' SET enabled='.$val.' WHERE plugin_id='.$plgid.';';
+	$result = cpg_db_query($sql);
+}
 
 /**
  * Plugin manager events
@@ -428,7 +471,7 @@ switch ($op) {
         } else {
           $query = 'SELECT * FROM '.$CONFIG['TABLE_PLUGINS'].' WHERE plugin_id='.$plugin_id.' LIMIT 1;';
           $result = cpg_db_query($query);
-          $installed_plugin = mysql_fetch_assoc($result);
+          $installed_plugin = $result->fetchAssoc(true);
           if ($installed_plugin) {
             $priority = $installed_plugin['priority'];
             $name = $installed_plugin['name'];
@@ -454,6 +497,66 @@ switch ($op) {
           cpgRedirectPage('pluginmgr.php',$lang_pluginmgr_php['pmgr'],$lang_pluginmgr_php['plugin_disabled_note']);
         }
         break;
+    case 'enable':
+    case 'disable':
+        if (!checkFormToken()) {
+            cpg_die(ERROR, $lang_errors['invalid_form_token'], __FILE__, __LINE__);
+        }
+        able_plugin($p, $op=='enable'?1:0);
+        break;
+//@RJC\
+	case 'admin':
+		$plugin_id = $p;
+		$actonplugin = @$CPG_PLUGINS[$plugin_id];
+		// Display admin plugin configuration
+
+		// Fail if there is a post and no valid form token
+		if ($superCage->post->_source && !checkFormToken()) {
+			cpg_die(ERROR, $lang_errors['invalid_form_token'], __FILE__, __LINE__);
+		}
+
+		$ap = @$superCage->get->getEscaped('xa');
+		$xa = unserialize(base64_decode(urldecode($ap)));
+
+		$cfg_file = $xa['action'];
+
+		$meta = array();
+		if (isset($xa['css'])) {
+			if (!is_array($xa['css'])) $xa['css'] = array($xa['css']);
+			foreach ($xa['css'] as $css) {
+				$csrc = is_url($css) ? $css : ('plugins/'.$actonplugin->path.'/'.$css);
+				$meta[] = '<link rel="stylesheet" href="'.$csrc.'" type="text/css" />';
+			}
+		}
+		if (isset($xa['js'])) {
+			if (!is_array($xa['js'])) $xa['js'] = array($xa['js']);
+			foreach ($xa['js'] as $js) {
+				$jsrc = is_url($js) ? $js : ('plugins/'.$actonplugin->path.'/'.$js);
+				js_include($jsrc);
+			}
+		}
+
+		pageheader($lang_pluginmgr_php['pmgr'], implode("\n",$meta));
+
+		echo <<<EOT
+		<form id="cfgForm" action="pluginmgr.php?op=admin&amp;p={$p}&amp;xa={$ap}" method="post">
+EOT;
+
+		// Invoke the plugin's config action
+		include('./plugins/'.$actonplugin->path.'/'.$cfg_file.'.php');
+
+		list($timestamp, $form_token) = getFormToken();
+		echo <<<EOT
+		<input type="hidden" name="form_token" value="{$form_token}" />
+		<input type="hidden" name="timestamp" value="{$timestamp}" />
+		</form>
+EOT;
+		echo '<br />' . $LINEBREAK;
+
+		pagefooter();
+		exit();
+		break;
+//@RJC/
     case 'delete':
         if (!checkFormToken()) {
             cpg_die(ERROR, $lang_errors['invalid_form_token'], __FILE__, __LINE__);
@@ -481,7 +584,7 @@ switch ($op) {
         } else {
           $query = 'SELECT * FROM '.$CONFIG['TABLE_PLUGINS'].' WHERE plugin_id='.$plugin_id.' LIMIT 1;';
           $result = cpg_db_query($query);
-          $installed_plugin = mysql_fetch_assoc($result);
+          $installed_plugin = $result->fetchAssoc(true);
           if ($installed_plugin) {
             $priority = $installed_plugin['priority'];
           }
@@ -497,7 +600,7 @@ switch ($op) {
           if ($CONFIG['log_mode']) {
               $query = 'SELECT * FROM '.$CONFIG['TABLE_PLUGINS'].' WHERE plugin_id='.$plugin_id.' LIMIT 1;';
               $result = cpg_db_query($query);
-              $installed_plugin = mysql_fetch_assoc($result);
+              $installed_plugin = $result->fetchAssoc(true);
               log_write("Plugin '".$installed_plugin['name']."' moved up in plugin list", CPG_GLOBAL_LOG);
           }
         }
@@ -518,13 +621,13 @@ switch ($op) {
         } else {
           $query = 'SELECT * FROM '.$CONFIG['TABLE_PLUGINS'].' WHERE plugin_id='.$plugin_id.' LIMIT 1;';
           $result = cpg_db_query($query);
-          $installed_plugin = mysql_fetch_assoc($result);
+          $installed_plugin = $result->fetchAssoc(true);
           if ($installed_plugin) {
             $priority = $installed_plugin['priority'];
           }
           $query = 'SELECT * FROM '.$CONFIG['TABLE_PLUGINS'].' ORDER BY priority ASC;';
           $result = cpg_db_query($query);
-          $installed_plugins = mysql_fetch_assoc($result);
+          $installed_plugins = $result->fetchAssoc(true);
           $installed_count = count($installed_plugins);
         }
         if ($installed_plugin && ($priority < ($installed_count-1))) {
@@ -538,7 +641,7 @@ switch ($op) {
             if ($CONFIG['log_mode']) {
               $query = 'SELECT * FROM '.$CONFIG['TABLE_PLUGINS'].' WHERE plugin_id='.$plugin_id.' LIMIT 1;';
               $result = cpg_db_query($query);
-              $installed_plugin = mysql_fetch_assoc($result);
+              $installed_plugin = $result->fetchAssoc(true);
               log_write("Plugin '".$installed_plugin['name']."' moved down in plugin list", CPG_GLOBAL_LOG);
             }
         }
@@ -613,7 +716,7 @@ EOT;
  */
 
 // Plugin isn't being configured; Display the plugin list
-if (($CONFIG['enable_plugins'] != 1) || (($op != 'install') && ($op != 'uninstall')) || (is_bool($installed) && $installed) || (is_bool($uninstalled) && $uninstalled)) {
+if (($CONFIG['enable_plugins'] != 1) || (($op != 'install') && ($op != 'uninstall') && ($op != 'admin')) || (is_bool($installed) && $installed) || (is_bool($uninstalled) && $uninstalled)) {	//@RJC
 
     // Refresh the page; An operation was just performed
     if  ($superCage->get->keyExists('op')) {
@@ -630,14 +733,14 @@ if (($CONFIG['enable_plugins'] != 1) || (($op != 'install') && ($op != 'uninstal
     // Display configure page table header
     starttable('100%',$lang_pluginmgr_php['configure_plugin'] . ': ' . $CPG_PLUGINS['new']->name);
 
-    echo <<< EOT
+    echo <<<EOT
     <tr>
         <td class="tableb" valign="top" width="100%">
 EOT;
 
         // Execute 'plugin_configure' action on the new plugin
         CPGPluginAPI::action('plugin_configure',$installed,CPG_EXEC_NEW);
-    echo <<< EOT
+    echo <<<EOT
         </td>
     </tr>
 EOT;
@@ -649,14 +752,14 @@ EOT;
     // Display cleanup page table header
     starttable('100%',$lang_pluginmgr_php['cleanup_plugin'] . ': ' . $CPG_PLUGINS[$plugin_id]->name);
 
-    echo <<< EOT
+    echo <<<EOT
     <tr>
         <td class="tableb" valign="top" width="100%">
 EOT;
 
         // Execute 'plugin_cleanup' action on the plugin
         CPGPluginAPI::action('plugin_cleanup',$uninstalled,$plugin_id);
-    echo <<< EOT
+    echo <<<EOT
         </td>
     </tr>
 EOT;
@@ -669,4 +772,4 @@ EOT;
 echo '<br />' . $LINEBREAK;
 
 pagefooter();
-?>
+//EOF

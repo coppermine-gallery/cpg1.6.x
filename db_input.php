@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 define('IN_COPPERMINE', true);
@@ -124,15 +123,14 @@ case 'comment_update':
 
     $result = cpg_db_query("SELECT pid FROM {$CONFIG['TABLE_COMMENTS']} WHERE msg_id = '$msg_id'");
 
-    if (!mysql_num_rows($result)) {
-        mysql_free_result($result);
+    if (!$result->numRows()) {
         cpgRedirectPage('index.php', $lang_common['information'], $lang_db_input_php['com_updated'], 1);
     } else {
-        $comment_data = mysql_fetch_assoc($result);
-        mysql_free_result($result);
+        $comment_data = $result->fetchAssoc();
         $redirect = "displayimage.php?pid=" . $comment_data['pid'];
         cpgRedirectPage($redirect, $lang_common['information'], $lang_db_input_php['com_updated'], 1);
     }
+    $result->free();
 
     break;
 
@@ -176,12 +174,11 @@ case 'comment':
 
     $result = cpg_db_query("SELECT comments FROM {$CONFIG['TABLE_PICTURES']} AS p INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS a ON a.aid = p.aid WHERE pid = $pid");
 
-    if (!mysql_num_rows($result)) {
+    if (!$result->numRows()) {
         cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
     }
 
-    $album_data = mysql_fetch_assoc($result);
-    mysql_free_result($result);
+    $album_data = $result->fetchAssoc(true);
 
     if ($album_data['comments'] != 'YES') {
         cpg_die(ERROR, $lang_errors['perm_denied'], __FILE__, __LINE__);
@@ -189,16 +186,16 @@ case 'comment':
 
     if (!$CONFIG['disable_comment_flood_protect']) {
         $result = cpg_db_query("SELECT author_md5_id, author_id FROM {$CONFIG['TABLE_COMMENTS']} WHERE pid = $pid ORDER BY msg_id DESC LIMIT 1");
-        if (mysql_num_rows($result)) {
-            $last_com_data = mysql_fetch_assoc($result);
+        if ($result->numRows()) {
+            $last_com_data = $result->fetchAssoc();
             if ((USER_ID && $last_com_data['author_id'] == USER_ID) || (!USER_ID && $last_com_data['author_md5_id'] == $USER['ID'])) {
-        if ($CONFIG['log_mode'] != 0) {
-                log_write('Attempt to comment-flood (PID: '.$pid.') denied for user '.$USER_DATA['user_name'].' at ' . $hdr_ip, CPG_GLOBAL_LOG);
+        		if ($CONFIG['log_mode'] != 0) {
+                	log_write('Attempt to comment-flood (PID: '.$pid.') denied for user '.$USER_DATA['user_name'].' at ' . $hdr_ip, CPG_GLOBAL_LOG);
                 }
                 cpg_die(ERROR, $lang_db_input_php['no_flood'], __FILE__, __LINE__);
             }
         }
-        mysql_free_result($result);
+        $result->free();
     }
 
     $akismet_approval_needed = 0;
@@ -386,8 +383,7 @@ case 'album_update':
 
     // Get the old alb_password before update
     $result = cpg_db_query("SELECT alb_password FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid = $aid");
-    $row = mysql_fetch_assoc($result);
-    mysql_free_result($result);
+    $row = $result->fetchAssoc(true);
 
     // If there is some value in alb_password then it means album was previously password protected
     if ($row['alb_password']) {
@@ -435,7 +431,7 @@ case 'album_update':
 
     cpg_db_query($query);
 
-    if (!mysql_affected_rows($CONFIG['LINK_ID'])) {
+    if (!cpg_db_affected_rows()) {
         cpgRedirectPage('modifyalb.php?album=' . $aid, $lang_db_input_php['info'], $lang_db_input_php['no_udp_needed'], 0);
     } else {
         cpgRedirectPage('modifyalb.php?album=' . $aid, $lang_db_input_php['info'], $lang_db_input_php['alb_updated'], 0);
@@ -464,7 +460,7 @@ case 'album_reset':
 
         cpg_db_query("UPDATE {$CONFIG['TABLE_PICTURES']} SET hits = 0 WHERE aid = $aid");
 
-        if (mysql_affected_rows($CONFIG['LINK_ID'])) {
+        if (cpg_db_affected_rows()) {
             $counter_affected_rows++;
         }
 
@@ -476,7 +472,7 @@ case 'album_reset':
 
         cpg_db_query("UPDATE {$CONFIG['TABLE_PICTURES']} SET pic_rating = 0, votes = 0 WHERE aid = $aid");
 
-        if (mysql_affected_rows($CONFIG['LINK_ID'])) {
+        if (cpg_db_affected_rows()) {
             $counter_affected_rows++;
         }
 
@@ -490,7 +486,7 @@ case 'album_reset':
 
         cpg_db_query("DELETE FROM c USING {$CONFIG['TABLE_COMMENTS']} AS c INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.pid = c.pid WHERE p.aid = $aid");
 
-        if (mysql_affected_rows($CONFIG['LINK_ID'])) {
+        if (cpg_db_affected_rows()) {
             $counter_affected_rows++;
         }
 
@@ -500,7 +496,7 @@ case 'album_reset':
 
         cpg_db_query("DELETE FROM {$CONFIG['TABLE_PICTURES']} WHERE aid = $aid");
 
-        if (mysql_affected_rows($CONFIG['LINK_ID'])) {
+        if (cpg_db_affected_rows()) {
             $counter_affected_rows++;
         }
 
@@ -540,12 +536,11 @@ case 'picture':
 
         $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid = $album AND (owner = " . USER_ID . " OR category = " . (USER_ID + FIRST_USER_CAT) . (USER_CAN_UPLOAD_PICTURES  ? ' OR uploads = "YES"' : '') . ")");
 
-        if (mysql_num_rows($result) == 0) {
+        if ($result->numRows() == 0) {
             cpg_die(ERROR, $lang_db_input_php['unknown_album'], __FILE__, __LINE__);
         }
 
-        $row = mysql_fetch_assoc($result);
-        mysql_free_result($result);
+        $row = $result->fetchAssoc(true);
 
         $category = $row['category'];
 
@@ -553,12 +548,11 @@ case 'picture':
 
         $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid = $album");
 
-        if (mysql_num_rows($result) == 0) {
+        if ($result->numRows() == 0) {
             cpg_die(ERROR, $lang_db_input_php['unknown_album'], __FILE__, __LINE__);
         }
 
-        $row = mysql_fetch_assoc($result);
-        mysql_free_result($result);
+        $row = $result->fetchAssoc(true);
 
         $category = $row['category'];
     }
@@ -730,4 +724,4 @@ default:
     cpg_die(CRITICAL_ERROR, $lang_errors['param_missing'], __FILE__, __LINE__);
 }
 
-?>
+//EOF

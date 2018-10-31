@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 // todo: search option.
@@ -120,7 +119,7 @@ if ($get_data_rejected==0) { // individual approval start
                         AND {$CONFIG['TABLE_COMMENTS']}.msg_id = {$single_approval_array['msg_id']}
                         LIMIT 1
                         ");
-    while ($row = mysql_fetch_array($result)) {
+    while ($row = $result->fetchArray()) {
         if ($row['pid'] != abs($single_approval_array['pos'])) {
             $get_data_rejected++;
         }
@@ -144,6 +143,7 @@ if ($get_data_rejected==0) { // individual approval start
         }
         $msg_author = $row['msg_author'];
     }
+    $result->free();
 
     // if all verifications have passed, execute the change and output the result; else, display an error message
     if ($get_data_rejected == 0) {
@@ -225,11 +225,11 @@ if ($superCage->post->keyExists('total_message_id_collector')) {
     $nb_com_no = 0;
     if ($approved_yes_set != '') {
         cpg_db_query("UPDATE {$CONFIG['TABLE_COMMENTS']} SET `approval` = 'YES' WHERE msg_id IN ($approved_yes_set)");
-        $nb_com_yes = mysql_affected_rows();
+        $nb_com_yes = cpg_db_affected_rows();
     }
     if ($approved_no_set != '') {
         cpg_db_query("UPDATE {$CONFIG['TABLE_COMMENTS']} SET `approval` = 'NO' WHERE msg_id IN ($approved_no_set)");
-        $nb_com_no = mysql_affected_rows();
+        $nb_com_no = cpg_db_affected_rows();
     }
 
     CPGPluginAPI::action('comment_approve', array('approved_yes_set' => $approved_yes_set, 'approved_no_set' => $approved_no_set));
@@ -241,7 +241,8 @@ if ($superCage->post->keyExists('cid_array')) {
     $cid_array = $superCage->post->getEscaped('cid_array');
     $cid_set = '';
     foreach ($cid_array as $cid) {
-        $cid_set .= ($cid_set == '') ? '(' . $cid : ', ' . $cid;
+        $cid_quoted = "'".$cid."'";
+        $cid_set .= ($cid_set == '') ? '(' . $cid_quoted : ', ' . $cid_quoted;
         if ($superCage->post->getAlpha('with_selected') == 'approve' && $superCage->post->getInt('spam'.$cid) == 'YES') {
             $akismet_ham_array[] = $cid;
         }
@@ -255,13 +256,13 @@ if ($superCage->post->keyExists('cid_array')) {
     if($superCage->post->getAlpha('with_selected') == 'delete') {
         // Delete selected comments if form is posted
         cpg_db_query("DELETE FROM {$CONFIG['TABLE_COMMENTS']} WHERE msg_id IN $cid_set");
-        $nb_com_del = mysql_affected_rows();
+        $nb_com_del = cpg_db_affected_rows();
     } elseif ($superCage->post->getAlpha('with_selected') == 'approve') {
         cpg_db_query("UPDATE {$CONFIG['TABLE_COMMENTS']} SET `approval` = 'YES' WHERE msg_id IN $cid_set");
-        $nb_com_yes = mysql_affected_rows();
+        $nb_com_yes = cpg_db_affected_rows();
     } elseif ($superCage->post->getAlpha('with_selected') == 'disapprove') {
         cpg_db_query("UPDATE {$CONFIG['TABLE_COMMENTS']} SET `approval` = 'NO' WHERE msg_id IN $cid_set");
-        $nb_com_no = mysql_affected_rows();
+        $nb_com_no = cpg_db_affected_rows();
     }
 }
 
@@ -269,13 +270,13 @@ if ($superCage->post->keyExists('cid_array')) {
 if ($CONFIG['comment_akismet_api_key'] != '' && $CONFIG['comment_akismet_enable'] == 0) {
     foreach ($akismet_ham_array as $key) {
         $result = cpg_db_query("SELECT pid, msg_author, msg_body, msg_hdr_ip FROM {$CONFIG['TABLE_COMMENTS']} WHERE msg_id='$key' LIMIT 1");
-        $comment_data = mysql_fetch_array($result);
+        $comment_data = $result->fetchArray(true);
         $akismet_result = cpg_akismet_submit_data($comment_evaluation_array, 'ham');
     }
 }
 
 $result = cpg_db_query("SELECT count(*) FROM {$CONFIG['TABLE_COMMENTS']} WHERE 1");
-$nbEnr = mysql_fetch_array($result);
+$nbEnr = $result->fetchArray(true);
 $comment_count = $nbEnr[0];
 
 if (!$comment_count) {
@@ -521,7 +522,7 @@ $rowcounter = 0;
 $totalMessageIdCollector = '';
 $loopCounter = 0;
 
-while ($row = mysql_fetch_array($result)) {
+while ($row = $result->fetchArray()) {
     $loopCounter++;
     $thumb_url =  get_pic_url($row, 'thumb');
     if (!is_image($row['filename'])) {
@@ -622,7 +623,7 @@ while ($row = mysql_fetch_array($result)) {
 EOT;
 }
 
-mysql_free_result($result);
+$result->free();
 
 
 
@@ -724,4 +725,4 @@ EOT;
 
 pagefooter();
 } // mass approval end
-?>
+//EOF

@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2015 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 /**
@@ -991,7 +990,7 @@ abstract class Inspekt
     }
 
     /**
-     * Returns the value escaped with mysql_real_escape_string.
+     * Returns the value escaped using database method.
      *
      * @param mixed $value
      * @return string
@@ -1005,13 +1004,13 @@ abstract class Inspekt
         } elseif (!empty($value)) {
             global $CONFIG;
             if (isset($CONFIG['LINK_ID']) && $CONFIG['LINK_ID']) {
-                return mysql_real_escape_string(htmlspecialchars($value, ENT_QUOTES), $CONFIG['LINK_ID']);
+                return cpg_db_escape_string(htmlspecialchars($value, ENT_QUOTES), $CONFIG['LINK_ID']);
             } else {
-                return mysql_real_escape_string(htmlspecialchars($value, ENT_QUOTES));
+                return cpg_db_escape_string(htmlspecialchars($value, ENT_QUOTES));
             }
         } else {
             return $value;
         }
     }
 }
-
+//EOF

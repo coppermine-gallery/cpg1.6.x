@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 define('IN_COPPERMINE', true);
@@ -30,7 +29,7 @@ $icon_array['search'] = cpg_fetch_icon('search', 2);
 
 pageheader($lang_search_php['title']);
 $text = '';
-$text .= <<< EOT
+$text .= <<<EOT
 
 <form method="get" action="thumbnails.php" name="searchcpg" id="cpgform3">
 EOT;
@@ -69,7 +68,7 @@ foreach (range(1, 4) as $i) {
         continue;
     }
 
-    $customs .= <<< EOT
+    $customs .= <<<EOT
                                         <tr>
                                                 <td>
                                                     <input type="checkbox" name="user$i" id="user$i" class="checkbox" /><label for="user$i" class="clickable_option">$value</label>
@@ -79,7 +78,7 @@ foreach (range(1, 4) as $i) {
 EOT;
 }
 
-$text .= <<< EOT
+$text .= <<<EOT
         <tr>
             <td class="tableb" align="center">
                 <input type="text" style="width: 80%" name="search" maxlength="255" value="" class="textinput" />
@@ -153,7 +152,7 @@ if ($CONFIG['clickable_keyword_search'] != 0) {
     include('include/keyword.inc.php');
 }
 
-echo <<< EOT
+echo <<<EOT
       <script language="javascript" type="text/javascript">
       <!--
       document.searchcpg.search.focus();
@@ -163,4 +162,4 @@ EOT;
 
 pagefooter();
 
-?>
+//EOF

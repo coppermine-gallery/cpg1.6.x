@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,14 +10,14 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 define('IN_COPPERMINE', true);
 define('SEARCHNEW_PHP', true);
 define('DB_INPUT_PHP', true);
+define('UPLOAD_PHP', true);
 
 require('include/init.inc.php');
 
@@ -50,7 +50,7 @@ $icon_array['batch_add'] = cpg_fetch_icon('searchnew', 2);
 
 function albumselect($id = "album")
 {
-    global $lang_common;
+    global $lang_common, $lang_upload_php;
 
     $options = album_selection_options();
     $only_empty_albums = only_empty_albums_button();
@@ -61,6 +61,8 @@ function albumselect($id = "album")
             $options
         </select>
         $only_empty_albums
+		<input type="checkbox" name="autorient" id="autorient" value="1" checked />
+		<label for="autorient">{$lang_upload_php['auto_orient']}</label>
 EOT;
 }
 
@@ -340,11 +342,11 @@ function getallpicindb(&$pic_array, $startdir)
 
     $sql = "SELECT filepath, filename " . "FROM {$CONFIG['TABLE_PICTURES']} " . "WHERE filepath LIKE '$startdir%'";
     $result = cpg_db_query($sql);
-    while ($row = mysql_fetch_array($result)) {
+    while ($row = $result->fetchArray()) {
         $pic_file = $row['filepath'] . replace_forbidden($row['filename']);
         $pic_array[$pic_file] = 1;
     }
-    mysql_free_result($result);
+    $result->free();
 }
 
 /**
@@ -363,10 +365,10 @@ function getallalbumsindb(&$album_array)
     $sql = "SELECT aid, title " . "FROM {$CONFIG['TABLE_ALBUMS']} " . "WHERE 1";
     $result = cpg_db_query($sql);
 
-    while ($row = mysql_fetch_array($result)) {
+    while ($row = $result->fetchArray()) {
         $album_array[$row['aid']] = $row['title'];
     }
-    mysql_free_result($result);
+    $result->free();
 }
 
 /**
@@ -687,4 +689,4 @@ EOT;
     pagefooter();
 }
 
-?>
+//EOF

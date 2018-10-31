@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 // Todo list (stuff the hasn't been implemented yet):
@@ -270,11 +269,12 @@ if ($type == 'vote' && $pid != '') { // type == vote start
 
     $totalVotesSum = 0;
 
-    while ($row = mysql_fetch_array($result)) {
+    while ($row = $result->fetchArray()) {
           $voteArr[$row['rating']] = $row['totalVotes'];
           $totalVotesSum = $totalVotesSum + $row['totalVotes'];
           $loopCounter = 0;
     }
+    $result->free();
 
     if (defined('THEME_HAS_RATING_GRAPHICS')) {
         $prefix = $THEME_DIR;
@@ -386,9 +386,8 @@ EOT;
       }
       $query = "SELECT COUNT(pid) FROM $queryTable $countWhere";
       $result = cpg_db_query($query);
-      $nbEnr = mysql_fetch_array($result);
+      $nbEnr = $result->fetchArray(true);
       $count = $nbEnr[0];
-      mysql_free_result($result);
 
       // Calculation for pagination tabs and query limit
       $numPages = max(1, ceil($count/$amount));
@@ -451,9 +450,9 @@ EOT;
       }
       print '  </tr>' . $LINEBREAK;
       // display the table header - end
-      if (mysql_num_rows($result) > 0) {
+      if ($result->numRows() > 0) {
           $loop_counter = 0;
-          while ($row = mysql_fetch_array($result)) {
+          while ($row = $result->fetchArray()) {
               if ($loop_counter == 0) {
                   $row_style_class = 'tableb';
               } else {
@@ -525,6 +524,8 @@ EOT;
               } // check internals end
           }
       }
+      $result->free();
+
   // Display pagination
   $record_selector = '&nbsp;&nbsp;-&nbsp;&nbsp;<select name="amount" size="1" onchange="sendForm();" class="listbox">';
   foreach ($amount_allowed as $key) {
@@ -761,4 +762,4 @@ EOT;
 EOT;
     }
 // output the footer depending on the mode (fullscreen vs embedded) - end
-?>
+//EOF

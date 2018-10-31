@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 if (!defined('E_STRICT')) {
@@ -36,7 +35,7 @@ class cpg_debugger {
     var $error_level;
     var $basepath_len;
 
-    function cpg_debugger($log = 'debug.log') {
+    function __construct($log = 'debug.log') {
         $this->logfile = $log;
         $this->basepath_len = strlen(dirname(dirname(__FILE__)));
     }
@@ -131,3 +130,4 @@ define('CAN_MOD_INI', strpos(ini_get('disable_functions'), 'ini_set') === FALSE)
 error_reporting(E_ALL);
 $cpgdebugger = new cpg_debugger();
 $cpgdebugger->start();
+//EOF

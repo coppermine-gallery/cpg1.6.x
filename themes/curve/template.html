@@ -7,12 +7,12 @@
 <title>{TITLE}</title>
 {META}
 <link rel="stylesheet" href="css/coppermine.css" type="text/css" />
-<link rel="stylesheet" href="themes/curve/style.css" type="text/css" />
+<link rel="stylesheet" href="{THEME_DIR}style.css" type="text/css" />
 <link rel="shortcut icon" href="favicon.ico" />
 <!-- Begin IE6 support -->
 <!--[if lt IE 7]>
 <style>
-body {behavior: url(themes/curve/csshover3.htc );}
+body {behavior: url({THEME_DIR}csshover3.htc );}
 .dropmenu li {width: 1px;} .dropmenu li a.firstlevel span.firstlevel {white-space: nowrap;} .main_menu {overflow: auto;}
 </style>
 <![endif]-->
@@ -20,9 +20,8 @@ body {behavior: url(themes/curve/csshover3.htc );}
 {JAVASCRIPT}
 <!--
   SVN version info:
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 -->
 </head>
 <body>
@@ -31,7 +30,7 @@ body {behavior: url(themes/curve/csshover3.htc );}
         <div class="cpg_logo_block_inner">
             <div id="cpg_logo_block_logo">
                 <a href="index.php">
-                    <img src="themes/curve/images/coppermine-logo.png" border="0" width="260" height="60" alt="" />
+                    <img src="{THEME_DIR}images/coppermine-logo.png" border="0" width="260" height="60" alt="" />
                 </a>
             </div>
             <div id="cpg_logo_block_name">

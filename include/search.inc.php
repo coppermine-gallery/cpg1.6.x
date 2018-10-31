@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2015 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -119,16 +118,16 @@ if ($search_string && isset($search_params['params'])) {
                 $album_query = "SELECT aid, title, description FROM `{$CONFIG['TABLE_ALBUMS']}` AS p"
                         ." WHERE (`title` " . implode(" $type `title` ",$albcat_terms) . ") $FORBIDDEN_SET";
                 $result = cpg_db_query($album_query);
-                if (mysql_num_rows($result) > 0) {
+                if ($result->numRows() > 0) {
                         starttable('100%', $lang_meta_album_names['album_search'],2);
-                        while ($alb = mysql_fetch_assoc($result)) {
+                        while ($alb = $result->fetchAssoc()) {
                                 $thumb_query = "SELECT filepath, filename, url_prefix, pwidth, pheight "
                                         ." FROM `{$CONFIG['TABLE_PICTURES']}` "
                                         ." WHERE (`aid` = '{$alb['aid']}') "
                                         ." AND approved = 'YES' "
                                         ." ORDER BY `pid` DESC";
                                 $thumb_result = cpg_db_query($thumb_query);
-                                $thumb = mysql_fetch_assoc($thumb_result);
+                                $thumb = $thumb_result->fetchAssoc(true);
                                 // TODO: query above only pulls in last_pid in each album, not correct album thumb as set by user
 
                                 $thumb_url = get_pic_url($thumb, 'thumb');
@@ -150,7 +149,7 @@ if ($search_string && isset($search_params['params'])) {
                                         <img src="<?php echo $thumb_url?>"  class="image" <?php echo $thumb_size['geom'] ?> border="0" alt="<?php echo $thumb['filename'] ?>">
                                     </a>
                                   </td>
-                                  <td width=100% valign=top>
+                                  <td width="100%" valign=top>
                                     <?php if ($alb['description'] == "") { echo '&nbsp;'; } else { echo $alb['description']; } ?>
                                   </td>
                                 </tr>
@@ -159,17 +158,18 @@ if ($search_string && isset($search_params['params'])) {
                         endtable();
                         echo '<br/>';
                 }
+                $result->free();
         }
 
         if ($superCage->get->keyExists('category_title')) {
                 $category_query = "SELECT cid, name FROM `{$CONFIG['TABLE_CATEGORIES']}` WHERE (`name` " . implode(" $type `name` ",$albcat_terms) . ')';
                 $result = cpg_db_query($category_query);
-                if (mysql_num_rows($result) > 0) {
+                if ($result->numRows() > 0) {
                         starttable('100%', $lang_meta_album_names['category_search'],2);
-                        while ($cat = mysql_fetch_array($result,MYSQL_ASSOC)) {
+                        while ($cat = $result->fetchAssoc()) {
                                 $album_q = "SELECT aid, title FROM `{$CONFIG['TABLE_ALBUMS']}` AS p WHERE (`category` = '{$cat['cid']}') $FORBIDDEN_SET ORDER BY `aid` DESC LIMIT 1";
                                 $album_r = cpg_db_query($album_q);
-                                $album = mysql_fetch_array($album_r);
+                                $album = $album_r->fetchArray(true);
 
                                 // TODO: This is weird.  It seems to pull in the largest aid's thumb for the category image?
                                 $thumb_query = "SELECT filepath, filename, url_prefix, pwidth, pheight "
@@ -178,7 +178,7 @@ if ($search_string && isset($search_params['params'])) {
                                         ." AND approved = 'YES' "
                                         ." ORDER BY `pid` DESC";
                                 $thumb_result = cpg_db_query($thumb_query);
-                                $thumb = mysql_fetch_assoc($thumb_result);
+                                $thumb = $thumb_result->fetchAssoc(true);
                                 $thumb_url = get_pic_url($thumb, 'thumb');
                                 $thumb_size = compute_img_size($thumb['pwidth'], $thumb['pheight'], $CONFIG['alb_list_thumb_size'], true, 'cat_thumb');
 
@@ -207,6 +207,7 @@ if ($search_string && isset($search_params['params'])) {
                         endtable();
                         echo '<br/>';
                 }
+                $result->free();
         }
 
         // Make sure they selected some parameter other than album/category
@@ -234,8 +235,7 @@ if ($search_string && isset($search_params['params'])) {
 
             $query = "SELECT $criteria FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = $pid";
             $result = cpg_db_query($query);
-            $criteria_pid = mysql_result($result, 0);
-            mysql_free_result($result);
+            $criteria_pid = $result->result(0, 0, true);
 
             if ($direction == "ASC") {
                 $direction = "<";
@@ -254,8 +254,7 @@ if ($search_string && isset($search_params['params'])) {
 
                 $result = cpg_db_query($query);
 
-                list($pos) = mysql_fetch_row($result);
-                mysql_free_result($result);
+                list($pos) = $result->fetchRow(true);
 
         } else {
 
@@ -265,13 +264,12 @@ if ($search_string && isset($search_params['params'])) {
 
             $temp = str_replace("SELECT p.*{$user_column}", 'SELECT COUNT(*)', $query);
             $result = cpg_db_query($temp);
-            $row = mysql_fetch_row($result);
+            $row = $result->fetchRow(true);
             $count = $row[0];
 
             $query .= " ORDER BY $sort_order $limit";
             $result = cpg_db_query($query);
-            $rowset = cpg_db_fetch_rowset($result);
-            mysql_free_result($result);
+            $rowset = cpg_db_fetch_rowset($result, true);
 
             if ($set_caption) {
                 build_caption($rowset);
@@ -280,4 +278,4 @@ if ($search_string && isset($search_params['params'])) {
         }
 
 }
-?>
+//EOF

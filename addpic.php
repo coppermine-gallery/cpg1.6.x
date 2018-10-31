@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 define('IN_COPPERMINE', true);
@@ -37,6 +36,11 @@ $pic_file  = base64_decode($matches[0]);
 $dir_name  = dirname($pic_file) . '/';
 $file_name = basename($pic_file);
 
+// Setup for auto-orient if requested
+if ($superCage->get->getInt('ao')) {
+	$CONFIG['autorient'] = 1;
+}
+
 // Replace the windows directory separator with /
 $dir_name = str_replace('\\\\', '/', $dir_name);
 $dir_name = str_replace('\\', '/', $dir_name);
@@ -53,7 +57,7 @@ $sql = "SELECT pid FROM {$CONFIG['TABLE_PICTURES']} WHERE filepath='" . addslash
 
 $result = cpg_db_query($sql);
 
-if (mysql_num_rows($result)) {
+if ($result->numRows()) {
     $status = 'DUPE';
 } elseif (($result = add_picture($aid, $dir_name, $sane_name)) === true) {
     $status = 'OK';
@@ -67,4 +71,4 @@ if (ob_get_length()) {
 
 echo $status;
 
-?>
+//EOF

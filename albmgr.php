@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2015 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 // TODO: title tags contain hardcoded English instead of lang vars.
@@ -64,7 +63,7 @@ function alb_get_subcat_data($parent, $ident = '')
 
     $result = cpg_db_query("SELECT cid, name, description FROM {$CONFIG['TABLE_CATEGORIES']} WHERE parent = '$parent' AND cid != 1 ORDER BY pos");
 
-    if (mysql_num_rows($result) > 0) {
+    if ($result->numRows() > 0) {
         $rowset = cpg_db_fetch_rowset($result);
         foreach ($rowset as $subcat) {
             if (!GALLERY_ADMIN_MODE) {
@@ -117,8 +116,7 @@ if (!GALLERY_ADMIN_MODE && USER_ADMIN_MODE) {
         } else {
             // user is only allowed to create public albums - get first category the user is allowed to create albums in
             $result = cpg_db_query("SELECT cm.cid FROM {$CONFIG['TABLE_CATMAP']} AS cm INNER JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON cm.cid = c.cid WHERE cm.group_id in (" .  implode(",", $USER_DATA['groups']). ") ORDER BY pos LIMIT 1");
-            $cat = mysql_result($result, 0);
-            mysql_free_result($result);
+            $cat = $result->result(0, 0, true);
         }
     }
     // only list the albums owned by the user
@@ -293,4 +291,4 @@ endtable();
 echo '</form>';
 pagefooter();
 
-?>
+//EOF

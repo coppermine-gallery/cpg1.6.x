@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -343,13 +342,13 @@ $lang_create_tabs['previous'] = 'précédent';
 $lang_create_tabs['next'] = 'suivant';
 $lang_create_tabs['jump_to_page'] = 'Sauter à la page ';
 
-$lang_get_remote_File_by_url['no_data_returned'] = 'Pas de données retournées avec %s';
-$lang_get_remote_File_by_url['curl'] = 'CURL';
-$lang_get_remote_File_by_url['fsockopen'] = 'Socket connection (FSOCKOPEN)';
-$lang_get_remote_File_by_url['fopen'] = 'fopen';
-$lang_get_remote_File_by_url['curl_not_available'] = 'CURL n\'est pas disponible sur votre serveur';
-$lang_get_remote_File_by_url['error_number'] = 'Erreur NÂ°: %s';
-$lang_get_remote_File_by_url['error_message'] = 'Message d\'erreur : %s';
+$lang_get_remote_file_by_url['no_data_returned'] = 'Pas de données retournées avec %s';
+$lang_get_remote_file_by_url['curl'] = 'CURL';
+$lang_get_remote_file_by_url['fsockopen'] = 'Socket connection (FSOCKOPEN)';
+$lang_get_remote_file_by_url['fopen'] = 'fopen';
+$lang_get_remote_file_by_url['curl_not_available'] = 'CURL n\'est pas disponible sur votre serveur';
+$lang_get_remote_file_by_url['error_number'] = 'Erreur NÂ°: %s';
+$lang_get_remote_file_by_url['error_message'] = 'Message d\'erreur : %s';
 
 // ------------------------------------------------------------------------- //
 // File include/mailer.inc.php
@@ -391,7 +390,7 @@ $lang_smilies_inc_php['Cool'] = 'Cool';
 $lang_smilies_inc_php['Laughing'] = 'Rire';
 $lang_smilies_inc_php['Mad'] = 'Fou';
 $lang_smilies_inc_php['Razz'] = 'Razz';
-$lang_smilies_inc_php['Embarassed'] = 'Embarrassé';
+$lang_smilies_inc_php['Embarrassed'] = 'Embarrassé';
 $lang_smilies_inc_php['Crying or Very sad'] = 'Pleure ou très triste';
 $lang_smilies_inc_php['Evil or Very Mad'] = 'Diabolique ou très en colère';
 $lang_smilies_inc_php['Twisted Evil'] = 'Sadique';
@@ -699,7 +698,6 @@ $lang_admin_php['custom_header_path'] = 'Chemin pour inclure un en-tête de page
 $lang_admin_php['custom_footer_path'] = 'Chemin pour inclure un pied de page personnalisé';
 $lang_admin_php['browse_by_date'] = 'Activer la navigation par date';
 $lang_admin_php['display_redirection_page'] = 'Afficher les pages de redirection';
-$lang_admin_php['display_xp_publish_link'] = 'Proposer l\'utilisation de XP Publisher en affichant un lien sur la page de téléchargement';
 $lang_admin_php['main_table_width'] = 'Largeur du tableau principal';
 $lang_admin_php['pixels_or_percent'] = 'Pixels ou %';
 $lang_admin_php['subcat_level'] = 'Nombre de niveaux de catégories à afficher';
@@ -839,7 +837,7 @@ $lang_admin_php['thumbnail_intermediate_full'] = 'vignette, image intermédiaire
 $lang_admin_php['thumbnail_intermediate'] = 'vignette et image intermédiaire image';
 $lang_admin_php['thumbnail_only'] = 'vignette uniquement';
 $lang_admin_php['upload_mechanism'] = 'Méthode de téléchargement par défaut';
-$lang_admin_php['upload_swf'] = 'Fichiers multiples, géré par Flash (recommandé)';
+$lang_admin_php['upload_swf'] = 'Fichiers multiples, géré par Flash';
 $lang_admin_php['upload_single'] = 'Simple (un seul fichier à la fois)';
 $lang_admin_php['allow_user_upload_choice'] = 'Autoriser les utilisateurs à choisir leur méthode de téléchargement';
 $lang_admin_php['allow_duplicate_emails_addr'] = 'Autoriser deux utilisateurs à avoir la même adresse courriel';
@@ -1061,7 +1059,7 @@ if (defined('DISPLAYIMAGE_PHP')){
  $lang_display_image_php['set_player'] = 'Changer le lecteur';
 
  $lang_picinfo['title'] ='Informations sur l\'image';
- $lang_picinfo['album name'] = 'Nom de l\'album';
+ $lang_picinfo['Album name'] = 'Nom de l\'album';
  $lang_picinfo['Rating'] = 'Note (%s votes)';
  $lang_picinfo['Date Added'] = 'Date d\'ajout';
  $lang_picinfo['Dimensions'] = 'Dimensions';
@@ -1298,7 +1296,7 @@ if (defined('EDITPICS_PHP')) {
  $lang_editpics_php['note_approve_public'] = 'Les fichier déplacés vers un album publique doivent être approuvés par un administrateur.';
  $lang_editpics_php['note_approve_private'] = 'Les fichiers déplacés vers un album privé doivent être approuvés par un administrateur.' ;
  $lang_editpics_php['note_edit_control'] = 'Les fichiers déplacés vers un album public ne peuvent plus être modifiés.';
- $lang_editpics_php['confirm_move_control'] = 'Vous n\'êtes pas autorisé à modifier les fichiers dans les albums publics.\\nEtes-vous sôr de vouloir déplacer ce fichier vers un album public ?';
+ $lang_editpics_php['confirm_move'] = 'Vous n\'êtes pas autorisé à modifier les fichiers dans les albums publics.\\nEtes-vous sôr de vouloir déplacer ce fichier vers un album public ?';
  $lang_editpics_php['success_changes'] = 'Modifications sauvegardées avec succès';
 }
 
@@ -1449,27 +1447,31 @@ if (defined('INSTALL_PHP')) {
  $lang_install['installer_selected'] = 'L\'installeur est sélectionné';
  $lang_install['inv_im_path'] = 'L\'installeur ne peut pas trouver le répertoire \'%s\' que vous avez donné pour ImageMagick ou n\'a pas la permission d\'y accéder. Vérifiez que vous avez correctement entré le chemin et que vous avez accès au répertoire spécifié.';
  $lang_install['lets_go'] = 'En avant ';
- $lang_install['mysql_create_btn'] = 'Créer';
- $lang_install['mysql_create_db'] = 'Créer une nouvelle base de donnée MySQL';
- $lang_install['mysql_db_name'] = 'Nom de la base de données MySQL';
- $lang_install['mysql_error'] = 'erreur MySQL : ';
- $lang_install['mysql_host'] = 'Hôte MySQL <br />(localhost est généralement OK)';
- $lang_install['mysql_username'] = 'Nom d\'utilisateur MySQL';
- $lang_install['mysql_password'] = 'Mot de passe MySQL';
- $lang_install['mysql_no_create_db'] = 'La base de donnée MySql ne peut pas être créer.';
- $lang_install['mysql_no_sel_dbs'] = 'Impossible de récupérer les bases de données MySQL disponible';
- $lang_install['mysql_succ'] = 'Succès de la connexion avec la base de données';
- $lang_install['mysql_tbl_pref'] = 'Préfixe des tables MySQL';
- $lang_install['mysql_test_connection'] = 'Test de connexion';
- $lang_install['mysql_wrong_db'] = 'MySQL ne trouve pas la base de donnée nommée \'%s\'. Vérifiez le nom que vous avez entré pour cela';
+ $lang_install['dbase_create_btn'] = 'Créer';
+ $lang_install['dbase_create_db'] = 'Créer une nouvelle base de donnée MySQL';
+ $lang_install['dbase_db_name'] = 'Nom de la base de données MySQL';
+ $lang_install['dbase_error'] = 'erreur MySQL : ';
+ $lang_install['dbase_host'] = 'Hôte MySQL <br />(localhost est généralement OK)';
+ $lang_install['dbase_username'] = 'Nom d\'utilisateur MySQL';
+ $lang_install['dbase_password'] = 'Mot de passe MySQL';
+ $lang_install['dbase_no_create_db'] = 'La base de donnée MySql ne peut pas être créer.';
+ $lang_install['dbase_no_sel_dbs'] = 'Impossible de récupérer les bases de données MySQL disponible';
+ $lang_install['dbase_succ'] = 'Succès de la connexion avec la base de données';
+ $lang_install['dbase_tbl_pref'] = 'Préfixe des tables MySQL';
+ $lang_install['dbase_test_connection'] = 'Test de connexion';
+ $lang_install['dbase_wrong_db'] = 'MySQL ne trouve pas la base de donnée nommée \'%s\'. Vérifiez le nom que vous avez entré pour cela';
+ $lang_install['not_available'] = 'not available';
+ $lang_install['version_too_old'] = 'version too old';
  $lang_install['n_a'] = 'N/A';
  $lang_install['no_admin_email'] = 'Vous devez entrer une adresse courriel pour l\'administration';
  $lang_install['no_admin_password'] = 'Vous devez entrer un mot de passe administrateur';
  $lang_install['no_admin_username'] = 'Vous devez entrer un nom d\'utilisateur pour l\'administrateur';
  $lang_install['no_dir'] = 'Répertoire non disponible';
+ $lang_install['not_available'] = 'not available';
+ $lang_install['version_too_old'] = 'version too old';
  $lang_install['no_gd'] = 'Votre installation de PHP ne semble pas inclure l\'extension pour la bibliothèque graphique \'GD\' et vous n\'avez pas indiqué vouloir utiliser ImageMagick. Coppermine a été configuré pour utiliser GD2, la détection automatique de GD posant parfois des problèmes. Si GD est installé sur votre système, le script pourra fonctionner, sinon, vous devrez installer ImageMagik.';
- $lang_install['no_mysql_conn'] = 'Impossible de créer une connexion MySQL, vérifiez les données entrées pour la connection';
- $lang_install['no_mysql_support'] = 'PHP n\'a pas de support MySQL actif.';
+ $lang_install['no_dbase_conn'] = 'Impossible de créer une connexion MySQL, vérifiez les données entrées pour la connection';
+ $lang_install['no_dbase_support'] = 'PHP n\'a pas de support MySQL actif.';
  $lang_install['no_thumb_method'] = 'Vous avez choisi un système de manipulation d\'images (GD/IM)';
  $lang_install['nok'] = 'INCORRECT';
  $lang_install['not_here_yet'] = 'Rien de particulier ici pour l\'instant, merci de cliquer %sici%s pour revenir.';
@@ -1486,8 +1488,8 @@ if (defined('INSTALL_PHP')) {
  $lang_install['populate_db'] = 'Complétez la base de données';
  $lang_install['ready_to_roll'] = '<a href="index.php">Coppermine</a> est maintenant correctement configuré et prêt à fonctionner.<br /><a href="login.php">Identiez-vous</a> en utilisant les informations que vous avez données pour votre compte administrateur.';
  $lang_install['sect_create_adm'] = 'Cette partie requière des informations pour créer votre compte administrateur Coppermine. N\'utilisez que des caractères alphanumériques. Entrez et vérifiez ces données attentivement';
- $lang_install['sect_mysql_info'] = 'Cette section demande les informations pour savoir comment se connecter à votre base de données MySQL.<br />Si vous ne savez pas comment les remplir, demandez de l\'aide à votre hébergeur.';
- $lang_install['sect_mysql_sel_db'] = 'Ici vous devez choisir quelle base de données vous voulez Utilisez pour Coppermine.<br />Si votre compte MySQL a les privilèges requis, vous pouvez créer une nouvelle base de données depuis l\'installeur ou Utilisez une base de données existante. Si vous ne voulez d\'aucune de ces deux options, vous devrez créer une base de données hors de l\'installeur Coppermine, puis revenir ici et sélectionner la nouvelle base de donnée depuis la liste déroulante. Vous pouvez aussi changer le préfixe des tables (n\'utilisez pas de point), mais il est recommandé de laisser le préfixe par défaut tel quel.';
+ $lang_install['sect_dbase_info'] = 'Cette section demande les informations pour savoir comment se connecter à votre base de données MySQL.<br />Si vous ne savez pas comment les remplir, demandez de l\'aide à votre hébergeur.';
+ $lang_install['sect_dbase_sel_db'] = 'Ici vous devez choisir quelle base de données vous voulez Utilisez pour Coppermine.<br />Si votre compte MySQL a les privilèges requis, vous pouvez créer une nouvelle base de données depuis l\'installeur ou Utilisez une base de données existante. Si vous ne voulez d\'aucune de ces deux options, vous devrez créer une base de données hors de l\'installeur Coppermine, puis revenir ici et sélectionner la nouvelle base de donnée depuis la liste déroulante. Vous pouvez aussi changer le préfixe des tables (n\'utilisez pas de point), mais il est recommandé de laisser le préfixe par défaut tel quel.';
  $lang_install['select_lang'] = 'Sélectionner la langue par défaut : ';
  $lang_install['sql_file_not_found'] = 'Le fichier \'%s\' n\'a pas pu être trouvé. Vérifiez que vous avez téléchargé tous les fichiers Coppermine sur votre serveur.';
  $lang_install['status'] = 'Statut';
@@ -1498,9 +1500,9 @@ if (defined('INSTALL_PHP')) {
  $lang_install['title_finished'] = 'Installation complète';
  $lang_install['title_imp'] = 'Sélection de la librairie graphique';
  $lang_install['title_imp_test'] = 'Test de la librairie graphique';
- $lang_install['title_mysql_db_sel'] = 'Sélection de la base de données MySQL';
- $lang_install['title_mysql_pop'] = 'Création de la structure de la base de données';
- $lang_install['title_mysql_user'] = 'Authentification de l\'utilisateur de MySQL';
+ $lang_install['title_dbase_db_sel'] = 'Sélection de la base de données MySQL';
+ $lang_install['title_dbase_pop'] = 'Création de la structure de la base de données';
+ $lang_install['title_dbase_user'] = 'Authentification de l\'utilisateur de MySQL';
  $lang_install['title_welcome'] = 'Bienvenue dans l\'installation de Coppermine';
  $lang_install['tmp_conf_error'] = 'Impossible d\'écrire dans le fichier temporaire de configuration, <br />assurez vous que le répertoire \'include\' à les permissions en écriture (777)';
  $lang_install['tmp_conf_ser_err'] = 'Une erreur sérieuse est intervenue dans l\'installeur, essayez de recharger votre page (F5) ou recommencez en effaçant le fichier \'include/config.tmp\'.';
@@ -1533,8 +1535,6 @@ if (defined('INSTALL_PHP')) {
  $lang_install['writable'] = 'Inscriptible';
  $lang_install['not_writable'] = 'Non inscriptible';
  $lang_install['not_exist'] = 'N\'existe pas';
- $lang_install['old_install'] = 'Vous êtes dans le nouvel assistant d\'installation. Cliquez %sici%s pour accéder à l\'ancien écran d\'installation.';
-
 }
 
 // ----------------------- //
@@ -1615,7 +1615,7 @@ if (defined('LOGIN_PHP')) {
 if (defined('LOGOUT_PHP')) {
  $lang_logout_php['logout'] = 'Déconnexion';
  $lang_logout_php['bye'] = 'Au revoir %s';
- $lang_logout_php['err_not_loged_in'] = 'Vous n\'êtes pas identifié (e)';
+ $lang_logout_php['err_not_logged_in'] = 'Vous n\'êtes pas identifié (e)';
 }
 
 // ----------------------- //
@@ -2110,7 +2110,7 @@ if (defined('UPLOAD_PHP')) {
 $lang_upload_php['title'] = 'Télécharger un fichier';
 $lang_upload_php['restrictions'] = 'Restrictions';
 $lang_upload_php['choose_method'] = 'Choisissez la méthode de téléchargement';
-$lang_upload_php['upload_swf'] = 'Fichiers multiples - Interface Flash (recommandé)';
+$lang_upload_php['upload_swf'] = 'Fichiers multiples - Interface Flash';
 $lang_upload_php['upload_single'] = 'Simple - Un seul fichier à la fois';
 $lang_upload_php['up_instr_1'] = 'Sélectionnez un albums dans la liste déroulante';
 $lang_upload_php['up_instr_2'] = 'Cliquez sur le bouton &quot;Parcourir&quot; ci-dessous et naviguez vers le fichier que vous voullez télécharger';
@@ -2151,10 +2151,9 @@ $lang_upload_php['allowed_doc_types'] = 'Extension de Document : %s';
 $lang_upload_php['allowed_snd_types'] = 'Extensions Audio : %s';
 $lang_upload_php['please_wait'] = 'Merci de patienter pendant que le script télécharge - cela peut prendre plusieurs minutes';
 $lang_upload_php['alternative_upload'] = 'Méthode de téléchargement alternative';
-$lang_upload_php['xp_publish_promote'] = 'Si vous utilisez Windows XP ou Vista, vous pouvez utilisez l\'assistant de publication Web de Windows XP pour télécharger des fichiers, apportant ainsi une interface utilisateur plus simple.';
 $lang_upload_php['err_js_disabled'] = 'L\'interface de téléchargement Flash n\'a pas pu être chargé. Vous devez avoir JavaScript activé pour pouvoir profiter de l\'interface de téléchargement Flash.';
 $lang_upload_php['err_flash_disabled'] = 'L\'interface de téléchargement prends beaucoup de temps pour charger ou le chargement a échoué. Vérifiez que le plugin Flash est activé et qu\'une version fonctionnelle d\'Adobe Flash Player est installée.';
-$lang_upload_php['err_alternate_method'] = 'A la place, vous pouvez utiliser l\'interface de téléchargement <a href="upload.php?single=1">fichier unique</a>.';
+$lang_upload_php['err_alternate_method'] = 'A la place, vous pouvez utiliser l\'interface de téléchargement <a href="upload.php?html5=1">HTML5</a>.';
 $lang_upload_php['err_flash_version'] = 'L\'interface de téléchargement ne peut pas être chargé. Vous devriez installer ou mettre à jour Flash Player. Visitez le <a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">site Adobe</a> pour vous procurer Flash Player.';
 $lang_upload_php['flash_loading'] = 'L\'interface de téléchargement est en train de se charger. Veuillez patienter...';
 
@@ -2296,9 +2295,9 @@ if (defined('UPDATE_PHP')) {
  $lang_update_php['could_not_authenticate'] = 'Impossible de vous identifier';
  $lang_update_php['provide_admin_account'] = 'Merci de saisir vos informations pour votre compte administrateur ou pour la connexion à la base de données MySQL';
  $lang_update_php['try_again'] = 'Essayez encore';
- $lang_update_php['mysql_connect_error'] = 'Impossible de créer une connexion MySQL';
- $lang_update_php['mysql_database_error'] = 'MySQL ne peut pas trouver la base de données %s';
- $lang_update_php['mysql_said'] = 'MySQL dit';
+ $lang_update_php['dbase_connect_error'] = 'Impossible de créer une connexion MySQL';
+ $lang_update_php['dbase_database_error'] = 'MySQL ne peut pas trouver la base de données %s';
+ $lang_update_php['dbase_said'] = 'MySQL dit';
  $lang_update_php['check_config_file'] = 'Merci de vérifier les données SQL dans %s';
  $lang_update_php['performing_database_updates'] = 'Mise à jour de la base de données';
  $lang_update_php['performing_file_updates'] = 'Mise à jour des fichiers';
@@ -2330,7 +2329,7 @@ if (defined('UTIL_PHP')) {
  $lang_util_php['title_set_to'] = 'titre changé en';
  $lang_util_php['submit_form'] = 'soumettre';
  $lang_util_php['titles_updated'] = '%s Titres mis à jour.';
- $lang_util_php['updated_succesfully'] = 'mise à jour effectuée avec succès';
+ $lang_util_php['updated_successfully'] = 'mise à jour effectuée avec succès';
  $lang_util_php['error_create'] = 'Erreur lors de la création';
  $lang_util_php['continue'] = 'Traiter d\'autres images';
  $lang_util_php['main_success'] = 'Le fichier %s est maintenant utilisé comme image principale';
@@ -2357,8 +2356,8 @@ if (defined('UTIL_PHP')) {
  $lang_util_php['filename_us'] = 'Changer 2003_11_23_13_20_20.jpg en 11/23/2003 13:20';
  $lang_util_php['filename_time'] = 'Changer 2003_11_23_13_20_20.jpg en 13:20';
  $lang_util_php['notitle'] = 'Appliquer uniquement aux fichiers sans titres';
- $lang_util_php['delete_title'] = 'Supprimer le titre des photos';
- $lang_util_php['delete_title_explanation'] = 'Cela va supprimer l\'ensemble des titres des photos de l\'album sélectionné.';
+ //$lang_util_php['delete_title'] = 'Supprimer le titre des photos';
+ //$lang_util_php['delete_title_explanation'] = 'Cela va supprimer l\'ensemble des titres des photos de l\'album sélectionné.';
  $lang_util_php['delete_original'] = 'Supprimer les photos dans leur taille d\'origine';
  $lang_util_php['delete_original_explanation'] = 'Cela va supprimer les photos à la taille d\'origine';
  $lang_util_php['delete_intermediate'] = 'Supprimer les images intermédiaires';
@@ -2416,7 +2415,6 @@ if (defined('UTIL_PHP')) {
  $lang_util_php['fullpic_error'] = 'Le fichier %s n\'existe pas';
  $lang_util_php['no_prob_detect'] = 'Pas de problèmes détectés';
  $lang_util_php['no_prob_found'] = 'Pas de problèmes trouvés.';
- $lang_util_php['no_category'] = 'Pas de catégorie';
 $lang_util_php['keyword_convert'] = 'Convertir le séparateur de mots-clés';
 $lang_util_php['keyword_from_to'] = 'Convertir le séparateur de mots-clés %s en %s';
 $lang_util_php['keyword_set'] = 'Paramétrer le séparateur de mots-clés à la nouvelle valeur';
@@ -2458,7 +2456,7 @@ if (defined('VERSIONCHECK_PHP')) {
  $lang_versioncheck_php['comment'] = 'Commentaire';
  $lang_versioncheck_php['help'] = 'Aide';
  $lang_versioncheck_php['repository_link'] = 'Lien vers le référentiel';
- $lang_versioncheck_php['browse_corresponding_page_subversion'] = 'Naviguer vers la page correspondant à ce fichier dans le référenciel SVN du projet';
+ $lang_versioncheck_php['browse_corresponding_page_subversion'] = 'Naviguer vers la page correspondant à ce fichier dans le projet référenciel';
  $lang_versioncheck_php['mandatory'] = 'obligatoire';
  $lang_versioncheck_php['mandatory_missing'] = 'Fichier obligatoire manquant';
  $lang_versioncheck_php['optional'] = 'optionnel';
@@ -2492,48 +2490,4 @@ if (defined('VIEWLOG_PHP')) {
  $lang_viewlog_php['last_updated'] = 'dernière mise à jour';
 }
 
-// ----------------------- //
-// File xp_publish.php
-// ----------------------- //
-if (defined('XP_PUBLISH_PHP')) {
- $lang_xp_publish_php['title'] = 'Coppermine - Assistant de Publication Web XP';
- $lang_xp_publish_php['client_header'] = 'Assistant de publication Web XP';
- $lang_xp_publish_php['requirements'] = 'Requis';
- $lang_xp_publish_php['windows_xp'] = 'Windows XP / Vista';
- $lang_xp_publish_php['no_windows_xp'] = 'Vous semblez utiliser un autre système d\'exploitation non supporté';
- $lang_xp_publish_php['no_os_detect'] = 'Impossible de définir votre système d\'exploitation';
- $lang_xp_publish_php['requirement_http_upload'] = 'Une installation de Coppermine qui fonctionne et dans laquelle la fonction de téléchargement par http fonctionne';
- $lang_xp_publish_php['requirement_ie'] = 'Microsoft Internet Explorer';
- $lang_xp_publish_php['requirement_permissions'] = 'L\'administrateur de la galerie doit voir avoir donné les permissions de téléchargement';
- $lang_xp_publish_php['requirement_login'] = 'Vous devez être identifié pour télécharger';
- $lang_xp_publish_php['no_ie'] = 'Vous semblez utiliser un autre navigateur non supporté';
- $lang_xp_publish_php['no_browser_detect'] = 'Impossible de détecter votre navigateur';
- $lang_xp_publish_php['no_gallery_name'] = 'Vous devez spécifier un nom de galerie dans la configuration';
- $lang_xp_publish_php['no_gallery_description'] = 'Vous devez spécifier une description pour la galerie dans la configutation';
- $lang_xp_publish_php['howto_install'] = 'Comment installer';
- $lang_xp_publish_php['install_right_click'] = 'Faites un click droit sur %sce lien%s et sélectionnez &quot;enregistre la cible sous...&quot;';
- $lang_xp_publish_php['install_save'] = 'Sauvegardez ce fichier sur votre client. Lors de la sauvegarde du fichier, assurez-vous que le nom proposé est <tt>cpg_###.reg</tt> ( ### représente un horodatage numérique). Modifiez de cette manière si nécessaire (laissez les chiffres)';
- $lang_xp_publish_php['install_execute'] = 'Une fois le téléchargement terminé, lancez le fichier en double-cliquant dessus afin d\'Enregistrez votre serveur avec l\'assistant de publication web';
- $lang_xp_publish_php['usage'] = 'Utilisation';
- $lang_xp_publish_php['select_files'] = 'Dans l\'explorateur Windows, sélectionnez les fichiers que vous voulez télécharger';
- $lang_xp_publish_php['display_tasks'] = 'Assurez-vous que les répertoires ne sont pas affichés dans le panneau latéral de l\'explorateur';
- $lang_xp_publish_php['publish_on_the_web'] = 'cliquez sur &quot;Publier xxx sur le web&quot; dans le panneau de gauche';
- $lang_xp_publish_php['confirm_selection'] = 'Confirmez votre sélection de fichiers';
- $lang_xp_publish_php['select_service'] = 'Dans la liste des options qui apparaissent, sélectionnez celle pour votre galerie photo (elle a le nom de votre galerie)';
- $lang_xp_publish_php['enter_login'] = 'Entrez vos informations d\'identification si demandées';
- $lang_xp_publish_php['select_album'] = 'Sélectionnez l\'album cible pour vos images ou créez un nouvel album';
- $lang_xp_publish_php['next'] = 'Cliquez sur &quot;suivant&quot;';
- $lang_xp_publish_php['upload_starts'] = 'Le téléchargement de vos fichiers devrait démarrer';
- $lang_xp_publish_php['upload_completed'] = 'Lorsqu\'il est terminé, vérifiez dans votre galerie si les fichiers ont bien été ajoutés correctement';
- $lang_xp_publish_php['welcome'] = 'Bienvenue <strong>%s</strong>,';
- $lang_xp_publish_php['need_login'] = 'Vous devez vous identifier en utilisant Internet Explorer avant de pouvoir utiliser cet assistant.<p/><p>Lors de votre identification, n\'oubliez pas de sélectionner l\'option &quot;se souvenir de moi&quot; si elle est présente.';
- $lang_xp_publish_php['no_alb'] = 'Désolé, mais il n\'y a pas d\'albums où vous êtes autorisé à télécharger des images avec cet assistant.';
- $lang_xp_publish_php['upload'] = 'Télécharger vos images dans un album existant';
- $lang_xp_publish_php['create_new'] = 'Créer un nouvel album pour vos images';
- $lang_xp_publish_php['category'] = 'Catégorie';
- $lang_xp_publish_php['new_alb_created'] = 'Votre nouvel album &quot;<strong>%s</strong>&quot; a été crée.';
- $lang_xp_publish_php['continue'] = 'Cliquer sur &quot;Suivant&quot; pour commencer le téléchargement de vos images';
- $lang_xp_publish_php['link'] = '';
-}
-
-?>
+//EOF

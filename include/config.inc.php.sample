@@ -1,13 +1,13 @@
 <?php
 // Coppermine configuration file
 
-// MySQL configuration
-$CONFIG['dbserver'] =                         'localhost';        // Your databaseserver
-$CONFIG['dbuser'] =                         'root';        // Your mysql username
-$CONFIG['dbpass'] =                         '';                // Your mysql password
-$CONFIG['dbname'] =                         'coppermine';        // Your mysql database name
+// Database configuration
+$CONFIG['dbtype'] =					'mysqli';		// Your database type
+$CONFIG['dbserver'] =				'localhost';		// Your database server
+$CONFIG['dbuser'] =					'root';		// Your database username
+$CONFIG['dbpass'] =					'';		// Your database password
+$CONFIG['dbname'] =					'coppermine';		// Your database name
 
 
-// MySQL TABLE NAMES PREFIX
-$CONFIG['TABLE_PREFIX'] =                'cpg15x_';
-?>
+// DATABASE TABLE NAMES PREFIX
+$CONFIG['TABLE_PREFIX'] =			'cpg16x_';

@@ -1,19 +1,18 @@
 <?php
-/*************************
+/**************************
   Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+ **************************
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 3
   as published by the Free Software Foundation.
 
-  ********************************************
-  Coppermine version: 1.6.01
+ ************************************
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
-**********************************************/
+ ************************************/
 
 // Confirm we are in Coppermine and set the language blocks.
 define('IN_COPPERMINE', true);
@@ -35,11 +34,16 @@ global $CONFIG, $USER, $lang_upload_php, $upload_form, $max_file_size;
 
 // Set up an array of choices for the upload method
 $upload_choices = array(
-    'swfupload'   => $lang_upload_php['upload_swf'],
-    'html_single' => $lang_upload_php['upload_single'],
+//    'swfupload'   => $lang_upload_php['upload_swf'],
+//    'html_single' => $lang_upload_php['upload_single'],
 );
 // Filter upload choices to allow plugins to add upload methods
-$upload_choices = CPGPluginAPI::filter('upload_options',$upload_choices);
+$upload_choices = CPGPluginAPI::filter('upload_options', $upload_choices);
+
+// Complain if there is no upload method
+if (!$upload_choices) {
+    cpg_die(ERROR, $lang_upload_php['err_no_method'], __FILE__, __LINE__);
+}
 
 // Default upload method set by the gallery administrator
 $upload_form = $CONFIG['upload_mechanism'];
@@ -52,10 +56,12 @@ $icon_array['cancel'] = cpg_fetch_icon('cancel', 2);
 $icon_array['upload'] = cpg_fetch_icon('upload', 2);
 $icon_array['info'] = cpg_fetch_icon('info', 2);
 
-// If we have "single" key in GET then we will force the upload form mechanism to single file upload
-// This acts as a fallback if js or flash is disabled
-if ($superCage->get->keyExists('single')) {
-    $upload_form = 'html_single';
+if ($superCage->get->keyExists('html5')) {
+    $upload_form = 'upload_h5a';
+} elseif ($superCage->get->keyExists('single')) {
+	// If we have "single" key in GET then we will force the upload form mechanism to single file upload
+	// This acts as a fallback if js or flash is disabled
+    $upload_form = 'upload_sgl';
 } elseif ($CONFIG['allow_user_upload_choice'] && $superCage->get->keyExists('method')) {
     // pull in upload method from GET parameter 'method'
     $matches = $superCage->get->getMatched('method','/^[0-9A-Za-z_]+$/');
@@ -74,30 +80,11 @@ if (!in_array($upload_form, array_keys($upload_choices))) {
     // Try gallery default upload method
     $upload_form = $CONFIG['upload_mechanism'];
     if (!in_array($upload_form, array_keys($upload_choices))) {
-        $upload_form = 'html_single';
+        $upload_form = 'upload_h5a';
     }
     unset($USER['upload_method']);
 }
 
-// If upload method is swf then only include the JS files and other code for it
-if ('swfupload' == $upload_form) {
-    js_include('js/swfupload/swfupload.js');
-    js_include('js/swfupload/swfupload.swfobject.js');
-    js_include('js/swfupload/swfupload.queue.js');
-    js_include('js/swfupload/fileprogress.js');
-    js_include('js/swfupload/handlers.js');
-    js_include('js/setup_swf_upload.js');
-
-    // Set the lang_upload_swf_php language array for use in js
-    set_js_var('lang_upload_swf_php', $lang_upload_swf_php);
-
-    set_js_var('notify_admin', $CONFIG['upl_notify_admin_email']);
-    set_js_var('max_upl_size', $CONFIG['max_upl_size']);
-
-    list($timestamp, $form_token) = getFormToken();
-    set_js_var('timestamp', $timestamp);
-    set_js_var('form_token', $form_token);
-}
 js_include('js/upload.js');
 
 //___________________________________Function Block_______________________________________
@@ -235,161 +222,18 @@ function form_alb_list_box($text, $name)
 
     echo <<<EOT
     <tr>
-        <td class="tableb tableb_alternate" width="50">
-            $text
-        </td>
-        <td class="tableb tableb_alternate" valign="top">
-            <select name="$name" class="listbox">
-            <option value="">{$lang_common['select_album']}</option>
-            $options
-            </select>
-            $only_empty_albums
-        </td>
+      <td class="tableb tableb_alternate" width="50">
+        {$text}
+      </td>
+      <td class="tableb tableb_alternate" valign="top">
+        <select name="{$name}" class="listbox">
+          <option value="">{$lang_common['select_album']}</option>
+          {$options}
+        </select>
+        {$only_empty_albums}
+      </td>
     </tr>
 
-EOT;
-}
-
-
-function form_instructions()
-{
-    global $lang_upload_php, $max_file_size;
-
-    $max_fsize = sprintf($lang_upload_php['max_fsize'], cpg_format_bytes($max_file_size));
-
-    echo <<< EOT
-    <tr>
-        <td colspan="2" class="tableh2">
-            <noscript>
-                    <div class="cpg_message_error">{$lang_upload_php['err_js_disabled']}<br />
-                    {$lang_upload_php['err_alternate_method']}</div>
-            </noscript>
-            <div id="divLoadingContent" class="cpg_message_info" style="display: none;">{$lang_upload_php['flash_loading']}</div>
-            <div id="divLongLoading" class="cpg_message_warning" style="display: none;">{$lang_upload_php['err_flash_disabled']}<br />{$lang_upload_php['err_alternate_method']}</div>
-            <div id="divAlternateContent" class="cpg_message_error" style="display: none;">{$lang_upload_php['err_flash_version']}<br />{$lang_upload_php['err_alternate_method']}</div>
-            <div id="divMaxFilesize" style="display: none;"><strong>{$max_fsize}</strong></div>
-           </td>
-       </tr>
-EOT;
-}
-
-
-// The create form function for simple uploading, one file at a time.
-// Takes the $data array as its object.
-// Type:
-// 0 => text box input
-// 1 => file input
-// 2 => album list
-// 3 => text area input
-// 4 => hidden input
-function create_form_simple(&$data)
-{
-
-    global $CONFIG, $lang_upload_php;
-
-    // Cycle through the elements in the data array.
-    foreach($data as $element) {
-
-        // If the element is another array, parse the definition contained within the array.
-        if ((is_array($element))) {
-            $element[2] = (isset($element[2])) ? $element[2] : '';
-            $element[3] = (isset($element[3])) ? $element[3] : '';
-            $element[4] = (isset($element[4])) ? $element[4] : '';
-
-            // Based on the type declared in the data array's third position, create a different form input.
-            switch ($element[2]) {
-
-                // If the type is a text box input
-                case 0 :
-
-                    //Call the form input function.
-                    text_box_input($element[0], $element[1], $element[3], $element[4], (isset($element[5])) ? $element[5] : '');
-                    break;
-
-                // If the type is a file input.
-                case 1 :
-
-                    // Call the file input function.
-                    file_input($element[0], $element[1], $element[3]);
-                    break;
-
-                // If the type is an album list dropdown.
-                case 2 :
-
-                    // Call the album list function.
-                    form_alb_list_box($element[0], $element[1]);
-                    break;
-
-                // If the type is a text area
-                case 3 :
-
-                    // Call the text area function.
-                    text_area_input($element[0], $element[1], $element[3], (isset($element[4])) ? $element[4] : '');
-                    break;
-
-                // If the type is a hidden form
-                case 4 :
-
-                    // Call the hidden input funtion.
-                    hidden_input($element[0], $element[1]);
-                    break;
-
-                // If the type is not present, kill the script.
-                default:
-                    cpg_die(ERROR, $lang_upload_php['reg_instr_1'], __FILE__, __LINE__);
-            } // switch
-        } else {
-
-            // If the element is not an array, it is a label, so call the label function.
-            form_label($element);
-        }
-    }
-}
-
-
-// Function to create the swfupload form
-function create_form_swfupload()
-{
-    global $lang_common, $lang_upload_swf_php, $icon_array;
-    form_alb_list_box($lang_common['album'], 'album');
-
-    echo <<<EOT
-    <tr>
-        <td colspan="2" class="tableb tableb_alternate">
-            <div id="upload_form">
-                <div>
-                    <span id="browse_button_place_holder"></span>
-                    <button id="button_cancel" onclick="swfu.cancelQueue();" disabled="disabled" class="button">
-                        {$icon_array['cancel']}
-                        {$lang_upload_swf_php['cancel_all']}
-                    </button>
-                </div>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2" class="tableb">
-                <div class="fieldset flash" id="upload_progress">
-                    <span class="legend">{$lang_upload_swf_php['upload_queue']}</span>
-                </div>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2" class="tableb tableb_alternate">
-            <button id="button_continue" class="button" onclick="return continue_upload();" style="display: none; margin-top: 5px;">
-                {$icon_array['continue']}
-                {$lang_common['continue']}
-            </button>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2" class="tableh2">
-            <div id="upload_status">
-                <span id="upload_count">0</span> {$lang_upload_swf_php['files_uploaded']}:
-            </div>
-            <div id="uploadedThumbnails"></div>
-        </td>
-    </tr>
 EOT;
 }
 
@@ -418,16 +262,16 @@ EOT;
 
 
 // The close form function creates the submit button and the closing tags.
-function close_form($button_value,$progress=0,$icon='ok')
+function close_form($button_value, $progress=0, $icon='ok')
 {
     // Pull the language array into the function.
     global $lang_upload_php, $THEME_DIR, $icon_array;
 
     // Create the submit button and close the form.
-    print <<<EOT
-        <tr>
-                <td colspan="2" align="center" class="tablef">
-                    <span id="cpg_progress_bar" style="display:none">
+    echo <<<EOT
+      <tr>
+        <td colspan="2" align="center" class="tablef">
+          <span id="cpg_progress_bar" style="display:none">
 EOT;
     if ($progress == 1) {
         if (defined('THEME_HAS_PROGRESS_GRAPHICS')) {
@@ -435,17 +279,15 @@ EOT;
         } else {
             $prefix = '';
         }
-        print '                         <img src="' . $prefix . 'images/loader.gif" border="0" alt="" title="' . $lang_upload_php['please_wait'] . '" />';
+        echo '            <img src="' . $prefix . 'images/loader.gif" border="0" alt="" title="' . $lang_upload_php['please_wait'] . '" />';
     }
-    print '                        </span>';
-    print '                        <span id="cpg_upload_button" style="display:block">';
-    print '                            <button type="submit" value="'.$button_value.'" class="button" />'.$icon_array[$icon] . $button_value.'</button>';
-    print '                        </span>';
-    print <<<EOT
-                </td>
-
-        </tr>
-
+    echo <<<EOT
+          </span>
+          <span id="cpg_upload_button" style="display:block">
+            <button type="submit" value="{$button_value}" class="button">{$icon_array[$icon]}{$button_value}</button>
+          </span>
+        </td>
+      </tr>
 EOT;
 }
 
@@ -504,14 +346,14 @@ if (GALLERY_ADMIN_MODE) {
 }
 
 
-if (mysql_num_rows($public_albums)) {
+if ($public_albums->numRows()) {
     $public_albums_list = cpg_db_fetch_rowset($public_albums);
 } else {
     $public_albums_list = array();
 }
 
 //do the same for non-categorized albums
-if (mysql_num_rows($public_albums_no_cat)) {
+if ($public_albums_no_cat->numRows()) {
     $public_albums_list_no_cat = cpg_db_fetch_rowset($public_albums_no_cat);
 } else {
     $public_albums_list_no_cat = array();
@@ -523,7 +365,7 @@ $public_albums_list = array_merge($public_albums_list, $public_albums_list_no_ca
 
 if (USER_ID) {
     $user_albums = cpg_db_query("SELECT aid, title FROM {$CONFIG['TABLE_ALBUMS']} WHERE category='" . (FIRST_USER_CAT + USER_ID) . "' ORDER BY title");
-    if (mysql_num_rows($user_albums)) {
+    if ($user_albums->numRows()) {
         $user_albums_list = cpg_db_fetch_rowset($user_albums);
     } else {
         $user_albums_list = array();
@@ -559,42 +401,25 @@ if (!$superCage->post->keyExists('process') && !$superCage->post->keyExists('plu
                 . ($key == $upload_form ? ' selected="selected"' : '')
                 . '>' . $label . '</option>';
         }
-        $upload_select .= '</select>' . '&nbsp'
+        $upload_select .= '</select>' . '&nbsp;'
             . cpg_display_help('f=configuration.htm&amp;as=admin_upload_mechanism&amp;ae=admin_upload_mechanism_end', '450', '300');
     }
 
     // Call active plugins for alternate upload forms
     CPGPluginAPI::action('upload_form',array($upload_form,$upload_select));
 
-    if ($upload_form == 'swfupload') {
-        // Get the user password hash
-        $user_pass = $cpg_udb->get_user_pass(USER_ID);
-        // Serialize and base64 encode the password
-        set_js_var('user', base64_encode(serialize($user_pass)));
-        set_js_var('user_id', USER_ID);
-        set_js_var('allow_guests_enter_file_details', $CONFIG['allow_guests_enter_file_details']);
-    }
     // Do some cleanup in the edit directory.
     spring_cleaning('./'.$CONFIG['fullpath'].'edit',CPG_HOUR);
 
-    // Create upload form headers.
-    pageheader($lang_upload_php['title']);
+	if ($USER_DATA['pub_upl_need_approval'] == 1 || $USER_DATA['priv_upl_need_approval'] == 1) {
+		echo '<div id="admin_approval" style="display: none;">';
+		msg_box($lang_common['information'], $lang_db_input_php['upload_success']);
+		echo '</div>';
+	}
 
-    if ($upload_form == 'html_single') {
-        // For single upload form, send the request to db_input.php
-        open_form('db_input.php');
-        $upload_help = cpg_display_help('f=uploading_http.htm&amp;as=upload_http_interface_html&amp;ae=upload_http_interface_html_end', '450', '300');
-    } else {
-        if ($USER_DATA['pub_upl_need_approval'] == 1 || $USER_DATA['priv_upl_need_approval'] == 1) {
-            echo '<div id="admin_approval" style="display: none;">';
-            msg_box($lang_common['information'], $lang_db_input_php['upload_success']);
-            echo '</div>';
-        }
+	$upload_help = cpg_display_help('f=empty.htm&amp;h=lang_upload_php[title]&amp;t=lang_tmp_upload',470,245);
 
-        $upload_help = cpg_display_help('f=empty.htm&amp;h=lang_upload_php[title]&amp;t=lang_tmp_upload',470,245);
-    }
-
-    $upload_table_header = <<< EOT
+    $upload_table_header = <<<EOT
     <table border="0" cellspacing="0" cellpadding="0" width="100%">
         <tr>
             <td>
@@ -609,360 +434,14 @@ if (!$superCage->post->keyExists('process') && !$superCage->post->keyExists('plu
     </table>
 EOT;
 
-    // Open the form table.
-    starttable('100%', $upload_table_header, 2);
-
-    if ($upload_form == 'html_single') {
-        // Declare an array containing the various upload form box definitions.
-        $captionLabel = $lang_upload_php['description'];
-        $keywordLabel = sprintf($lang_common['keywords_insert1'],$lang_common['keyword_separators'][$CONFIG['keyword_separator']])
-            . '<br /><a href="keyword_select.php" class="greybox">' . $lang_common['keywords_insert2'] .'</a>';
-        if ($CONFIG['show_bbcode_help']) {$captionLabel .= '&nbsp;'. cpg_display_help('f=empty.htm&amp;h=lang_bbcode_help_title&amp;t=lang_bbcode_help',470,245);}
-        $form_array = array(
-            sprintf($lang_upload_php['max_fsize'], cpg_format_bytes($max_file_size)),
-            array($lang_common['album'], 'album', 2),
-            //array('MAX_FILE_SIZE', $max_file_size, 4), // removed to avoid misleading error message (thread ID 61711)
-            array($lang_upload_php['picture'], 'userpicture', 1, 1)
-        );
-        if (USER_ID > 0 || $CONFIG['allow_guests_enter_file_details'] == 1) {
-            $form_array[] = array($lang_upload_php['pic_title'], 'title', 0, 255, 1);
-            $form_array[] = array($captionLabel, 'caption', 3, $CONFIG['max_img_desc_length']);
-            $form_array[] = array($keywordLabel, 'keywords', 0, 255, 1);
-            if(!empty($CONFIG['user_field1_name'])) {
-                $form_array[] = array($CONFIG['user_field1_name'], 'user1', 0, 255, 1);
-            }
-            if(!empty($CONFIG['user_field2_name'])) {
-                $form_array[] = array($CONFIG['user_field2_name'], 'user2', 0, 255, 1);
-            }
-            if(!empty($CONFIG['user_field3_name'])) {
-                $form_array[] = array($CONFIG['user_field3_name'], 'user3', 0, 255, 1);
-            }
-            if(!empty($CONFIG['user_field4_name'])) {
-                $form_array[] = array($CONFIG['user_field4_name'], 'user4', 0, 255, 1);
-            }
-        }
-        $form_array[] = array('event', 'picture', 4);
-        // Create the upload form
-        create_form_simple($form_array);
-        // Close the form with an submit button
-        close_form($lang_upload_php['title'],1, 'ok');
-        list($timestamp, $form_token) = getFormToken();
-        echo <<< EOT
-        <input type="hidden" name="form_token" value="{$form_token}" />
-        <input type="hidden" name="timestamp" value="{$timestamp}" />
-EOT;
-        // Close the table.
-        endtable();
-        echo <<< EOT
-    </form>
-EOT;
-
-    } elseif ($upload_form == 'swfupload') {
-        // Show form instructions
-        form_instructions();
-        // Create the upload form
-        create_form_swfupload();
-        // Close the table.
-        endtable();
-    }
-
-    if ($CONFIG['display_xp_publish_link'] == 1) {
-        print '<br />';
-        starttable('100%', $icon_array['info'] . $lang_upload_php['alternative_upload'],1);
-        print <<< EOT
-        <tr>
-            <td class="tableb">
-                {$lang_upload_php['xp_publish_promote']}<br />
-                [<a href="xp_publish.php">{$lang_common['more']}</a>]
-            </td>
-        </tr>
-EOT;
-        endtable();
-        echo '<br />';
-    }
     pagefooter();
 
-    // The form has been displayed, so exit the script.
-    exit;
 
 // Process a plugin's form submission
 } elseif ($superCage->post->keyExists('plugin_process')) {
 
     // Call active plugins for alternate upload forms
     CPGPluginAPI::action('upload_process',$upload_form);
-
-// Process the SWF upload form submission
-} elseif ($superCage->post->keyExists('process')) {
-
-    // Make sure there is no output yet
-    ob_clean();
-
-    header("Content-Type: text/plain");
-
-    if (!checkFormToken()) {
-        echo "error|{$lang_errors['invalid_form_token']}|1";
-        exit;
-    }
-
-    $error_code = $superCage->files->getInt("/Filedata/error");
-
-    // Check for upload errors
-    if (!($error_code == '0')) {
-        // PHP has detected a file upload error.
-        if ($error_code == '1') {
-            $error_message = $lang_upload_php['exc_php_ini'];
-        } elseif ($error_code == '2') {
-            $error_message = $lang_upload_php['exc_file_size'];
-        } elseif ($error_code == '3') {
-            $error_message = $lang_upload_php['partial_upload'];
-        } elseif ($error_code == '4') {
-            $error_message = $lang_upload_php['no_upload'];
-        } else {
-            $error_message = $lang_upload_php['unknown_code'];
-        }
-
-        //Make a note in the error array.
-        echo "error|$error_message|0";
-
-        // There is no need for further tests or action, so skip the remainder of the iteration.
-        exit;
-    }
-
-    if (!$superCage->files->getRaw('/Filedata/name')) {
-        echo "error|{$lang_upload_php['no_name']}|0";
-        exit;
-    }
-
-    if (!$superCage->files->getRaw('/Filedata/tmp_name')) {
-        echo "error|{$lang_upload_php['no_tmp_name']}|0";
-        exit;
-    }
-
-    // Check to make sure the file was uploaded via POST.
-    if (!is_uploaded_file($superCage->files->getRaw("/Filedata/tmp_name"))) {
-        // We reject the file, and return the error.
-        echo "error|{$lang_upload_php['no_post']}|0";
-        exit;
-    }
-
-    // Check the size of the file if $max_file_size is set to greater than 0
-    if ($max_file_size && filesize($superCage->files->getRaw('/Filedata/tmp_name')) > $max_file_size) {
-        // We reject this files as file size exceeds the value set in config
-        echo "error|{$lang_upload_php['exc_file_size']}|0";
-        exit;
-    }
-
-    // Check filename and extension:
-    // Check that the file uploaded has a valid name and extension, and replace forbidden chars with underscores.
-    // Initialise the $matches array.
-    $matches = array();
-    // If magic quotes is on, remove the slashes it added to the file name.
-    if (get_magic_quotes_gpc()) {
-        //Using getRaw() as we have custom sanitization code below
-        $picture_name = stripslashes($superCage->files->getRaw("/Filedata/name"));
-    } else {
-        $picture_name = $superCage->files->getRaw("/Filedata/name");
-    }
-
-    $picture_name = CPGPluginAPI::filter('upload_file_name', $picture_name);
-
-    // Create the holder $picture_name by translating the file name. Translate any forbidden character into an underscore.
-    $picture_name = replace_forbidden($picture_name);
-
-    // Analyze the file extension using regular expressions.
-    if (!preg_match("/(.+)\.(.*?)\Z/", $picture_name, $matches)) {
-
-        // The file name is invalid.
-        $matches[1] = 'invalid_fname';
-
-        // Make a bogus file extension to trigger Coppermine's defenses.
-        $matches[2] = 'xxx';
-    }
-
-    // If there is no extension, or if the extension is unknown/not permitted by Coppermine, zap the intruder.
-    if ($matches[2] == '' || !is_known_filetype($matches)) {
-
-        // We reject the file, and make a note of the error.
-        echo 'error|' . $lang_db_input_php['err_invalid_fext'] . ' ' .  $CONFIG['allowed_file_extensions'] . '|0';
-        exit;
-    }
-
-    // Now we need to move the file into the /edit directory.
-    // We need specify the path for the transitory file.
-    // Create a prefix for easier human recognition.
-    $prefix = "mHTTP_temp_";
-
-    //Set the correct file extension.
-    $suffix = $matches[2];
-
-    // Generate the unique name. Keep generating new names until one that is not in use is found.
-    do {
-
-        // Create a random seed by taking the first 8 characters of an MD5 hash of a concatenation of the current UNIX epoch time and the current server process ID.
-        $seed = substr(md5(uniqid("")), 0, 8);
-
-        // Assemble the file path.
-        $path_to_image = './'.$CONFIG['fullpath'].'edit/'. $prefix . $seed . '.' . $suffix;
-
-    } while (file_exists($path_to_image));
-
-    // Create a holder called $tempname.
-    $tempname = $prefix . $seed . '.' . $suffix;
-
-    //Now we upload the file.
-    if (!(move_uploaded_file($superCage->files->getRaw("/Filedata/tmp_name"), $path_to_image))) {
-        // The file upload has failed.
-        echo "error|{$lang_upload_php['impossible']}|0";
-        // There is no need for further tests or action, so skip the remainder of the iteration.
-        exit;
-    }
-
-    // Change file permission
-    @chmod($path_to_image, octdec($CONFIG['default_file_mode'])); //silence the output in case chmod is disabled
-
-    // Create a testing alias.
-    $picture_alias = $matches[1].".".$matches[2];
-
-
-
-    // Check if user selected an album to upload picture to. If not, die with error.
-    // added by frogfoot
-    $album = $superCage->post->getInt('album');
-
-    // If no album was select then give an error
-    if (!$album) {
-        echo "error|{$lang_db_input_php['album_not_selected']}|0";
-        exit;
-    }
-
-    // Check if the album id provided is valid
-    if (!GALLERY_ADMIN_MODE) {
-        $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid = $album AND (owner = " . USER_ID . " OR category = " . (USER_ID + FIRST_USER_CAT) . (USER_CAN_UPLOAD_PICTURES  ? ' OR uploads = "YES"' : '') . ")");
-        if (mysql_num_rows($result) == 0) {
-            echo "error|{$lang_db_input_php['unknown_album']}|1";
-            exit;
-        }
-        $row = mysql_fetch_array($result);
-        mysql_free_result($result);
-        $category = $row['category'];
-    } else {
-        $result = cpg_db_query("SELECT category FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid='$album'");
-        if (mysql_num_rows($result) == 0) {
-            echo "error|{$lang_db_input_php['unknown_album']}|1";
-            exit;
-        }
-        $row = mysql_fetch_array($result);
-        mysql_free_result($result);
-        $category = $row['category'];
-    }
-
-    // Pictures are moved in a directory named 10000 + USER_ID
-    if (USER_ID && $CONFIG['silly_safe_mode'] != 1) {
-        $filepath = $CONFIG['userpics'] . (USER_ID + FIRST_USER_CAT);
-        $dest_dir = $CONFIG['fullpath'] . $filepath;
-        if (!is_dir($dest_dir)) {
-            mkdir($dest_dir, octdec($CONFIG['default_dir_mode']));
-            if (!is_dir($dest_dir)) {
-                echo sprintf('error|'.$lang_db_input_php['err_mkdir'].'|1', $dest_dir);
-                exit;
-            }
-            @chmod($dest_dir, octdec($CONFIG['default_dir_mode'])); //silence the output in case chmod is disabled
-            $fp = fopen($dest_dir . '/index.php', 'w');
-            fwrite($fp, ' ');
-            fclose($fp);
-        }
-        // Upload pictures in a sub-directory named according to the album ID
-        if ($CONFIG['upload_create_album_directory']) {
-            $filepath .= '/'.$album;
-            $dest_dir .= '/'.$album;
-            if (!is_dir($dest_dir)) {
-                mkdir($dest_dir, octdec($CONFIG['default_dir_mode']));
-                if (!is_dir($dest_dir)) {
-                    echo sprintf('error|'.$lang_db_input_php['err_mkdir'].'|1', $dest_dir);
-                    exit;
-                }
-                @chmod($dest_dir, octdec($CONFIG['default_dir_mode'])); //silence the output in case chmod is disabled
-                $fp = fopen($dest_dir . '/index.php', 'w');
-                fwrite($fp, ' ');
-                fclose($fp);
-            }
-        }
-        $dest_dir .= '/';
-        $filepath .= '/';
-    } else {
-        $filepath = $CONFIG['userpics'];
-        $dest_dir = $CONFIG['fullpath'] . $filepath;
-    }
-
-    // Check that target dir is writable
-    if (!is_writable($dest_dir)) {
-        echo sprintf('error|'.$lang_db_input_php['dest_dir_ro'].'|1', $dest_dir);
-        exit;
-    }
-
-    //Add the Perl regex to break the actual name.
-    preg_match("/(.+)\.(.*?)\Z/", $picture_alias, $matches);
-
-    // Create a unique name for the uploaded file
-    $nr = 0;
-    $picture_name = $matches[1] . '.' . $matches[2];
-    while (file_exists($dest_dir . $picture_name)) {
-        $picture_name = $matches[1] . '~' . $nr++ . '.' . $matches[2];
-    }
-
-    // Create path for final location.
-    $uploaded_pic = $dest_dir . $picture_name;
-
-    // Form path to temporary image.
-    $path_to_image = './'.$CONFIG['fullpath'].'edit/'.$tempname;
-
-    // prevent moving the edit directory...
-    if (is_dir($path_to_image)) {
-        echo 'error|'.$lang_upload_php['failure'] . " - '$path_to_image'|0";
-        exit;
-    }
-
-    CPGPluginAPI::action('upload_swf_pre_move', $path_to_image);
-
-    // Move the picture into its final location
-    if (rename($path_to_image, $uploaded_pic)) {
-
-        // Change file permission
-        @chmod($uploaded_pic, octdec($CONFIG['default_file_mode'])); //silence the output in case chmod is disabled
-        $CURRENT_PIC_DATA = array();
-        // Create thumbnail and intermediate image and add the image into the DB
-        $result = add_picture($album, $filepath, $picture_name, 0, '', '', '', '', '', '', '', $category);
-
-        if ($result !== true) {
-            // The file could not be placed.
-            $file_placement = 'no';
-        } else {
-            $CURRENT_PIC_DATA['url_prefix'] = 0;
-            // The file was placed successfully.
-            $file_placement = 'yes';
-            $thumb_url = get_pic_url($CURRENT_PIC_DATA, 'thumb');
-        }
-    } else {
-        // The file was not placed successfully.
-        $file_placement = 'no';
-    }
-
-    if ($file_placement == 'yes') {
-        // The previous picture was placed successfully.
-        echo "success". ($PIC_NEED_APPROVAL ? '1' : '0') . "|" . $thumb_url;
-    } else {
-        // The previous image placement failed.
-        if (isset($result['error'])) {
-            if (isset($result['halt_upload'])) {
-                echo "error|{$result['error']}|{$result['halt_upload']}";
-            } else {
-                echo "error|{$result['error']}|0";
-            }
-        } else {
-            echo "error|{$lang_upload_php['no_place']}|0";
-        }
-    }
-
-    exit;
 }
-?>
+
+//EOF

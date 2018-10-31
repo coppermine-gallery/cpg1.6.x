@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 define('IN_COPPERMINE', true);
@@ -33,7 +32,7 @@ if (!$superCage->get->keyExists('data')) {
 $tmpData['data'] = @unserialize(@base64_decode($superCage->get->getRaw('data')));
 
 if (!is_array($tmpData['data'])) {
-    $CLEAN['data'] = mysql_real_escape_string($tmpData['data']);
+    $CLEAN['data'] = cpg_db_escape_string($tmpData['data']);
 } else {
     // Remove HTML tags as we can't trust what we receive
     foreach ($tmpData['data'] as $key => $value) {
@@ -51,12 +50,12 @@ if ((!is_array($CLEAN['data'])) && $CONFIG['log_ecards'] && (strlen($CLEAN['data
 
     $result = cpg_db_query("SELECT link FROM {$CONFIG['TABLE_ECARDS']} WHERE link LIKE '{$CLEAN['data']}%'");
 
-    if (mysql_num_rows($result) === 1) {
-        $row = mysql_fetch_assoc($result);
+    if ($result->numRows() === 1) {
+        $row = $result->fetchAssoc();
         $CLEAN['data']= @unserialize(@base64_decode($row['link']));
     }
+    $result->free();
 
-    mysql_free_result($result);
 }
 
 if (is_array($CLEAN['data'])) {
@@ -67,12 +66,11 @@ if (is_array($CLEAN['data'])) {
     // get the dimensions
     $result = cpg_db_query("SELECT pwidth, pheight FROM {$CONFIG['TABLE_PICTURES']} WHERE pid = '{$CLEAN['data']['pid']}'");
 
-    if (!mysql_num_rows($result)) {
+    if (!$result->numRows()) {
         cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
     }
 
-    $row = mysql_fetch_assoc($result);
-    mysql_free_result($result);
+    $row = $result->fetchAssoc(true);
 
     if ($row['pwidth'] != 0 && $row['pheight'] != 0) {
         $image_size = compute_img_size($row['pwidth'], $row['pheight'], $CONFIG['picture_width'], 'normal');
@@ -122,4 +120,4 @@ EOT;
     cpg_die(CRITICAL_ERROR, $lang_db_ecard_php['invalid_data'], __FILE__, __LINE__);
 }
 
-?>
+//EOF

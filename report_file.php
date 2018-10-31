@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 define('IN_COPPERMINE', true);
@@ -73,20 +72,20 @@ $form_action="$CPG_PHP_SELF?pid=$pid";
 
 // Get picture thumbnail url
 $result = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_PICTURES']} p WHERE pid='$pid' $FORBIDDEN_SET");
-if (!mysql_num_rows($result)) {
+if (!$result->numRows()) {
     cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
 }
 
-$row = mysql_fetch_array($result);
+$row = $result->fetchArray(true);
 $thumb_pic_url = get_pic_url($row, 'thumb');
 
 if ($what == 'comment') {
     $result = cpg_db_query("SELECT msg_id, msg_author, msg_body, UNIX_TIMESTAMP(msg_date) AS msg_date, author_id, author_md5_id, msg_raw_ip, msg_hdr_ip, approval FROM {$CONFIG['TABLE_COMMENTS']} WHERE msg_id='$cid' AND approval = 'YES' AND pid='$pid'");
-    if (!mysql_num_rows($result)) {
+    if (!$result->numRows()) {
         cpg_die(ERROR, $lang_errors['non_exist_comment'], __FILE__, __LINE__);
     }
 
-    $row = mysql_fetch_array($result);
+    $row = $result->fetchArray(true);
     $comment = bb_decode($row['msg_body']);
     if ($CONFIG['enable_smilies']) {
         $comment = process_smilies($comment);
@@ -198,7 +197,7 @@ if ($superCage->post->keyExists('subject') && $valid_sender_email) {
 
     if ($result) {
         pageheader($lang_report_php['title'], "<meta http-equiv=\"refresh\" content=\"3;url=displayimage.php?pid={$pid}\" />");
-        msg_box($lang_cpg_die[INFORMATION], $lang_report_php['send_success'], $lang_common['continue'], "displayimage.php?pid={$pid}");
+        msg_box('' , $lang_report_php['send_success'], $lang_common['continue'], "displayimage.php?pid={$pid}");
         pagefooter();
         exit;
     } else {
@@ -356,4 +355,4 @@ EOT;
 
 pagefooter();
 
-?>
+//EOF

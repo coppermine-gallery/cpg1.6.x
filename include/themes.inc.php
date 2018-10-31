@@ -1,19 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
-  $Revision$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * include/themes.inc.php
+ * @since  1.6.04
+ */
 
 /////////////////////////////////////////////////////////////////
 //                                                             //
@@ -1630,8 +1626,8 @@ function pagefooter()
         '{SYS_MENU}' => theme_main_menu('sys_menu'),
         '{SUB_MENU}' => theme_main_menu('sub_menu'),
         '{ADMIN_MENU}' => theme_admin_mode_menu(),
-        '{CUSTOM_HEADER}' => $custom_header,
-        '{JAVASCRIPT}' => theme_javascript_head(),
+//        '{CUSTOM_HEADER}' => $custom_header,
+//        '{JAVASCRIPT}' => theme_javascript_head(),
         '{CUSTOM_FOOTER}' => $custom_footer,
         '{VANITY}' => theme_vanity(),
         '{CREDITS}' => theme_credits(),
@@ -1691,10 +1687,10 @@ EOT;
     // Check if we have any js includes
     if (!empty($JS['includes'])) {
         // Bring the jquery core library to the very top of the list
-        if (in_array('js/jquery-1.4.2.js', $JS['includes']) == TRUE) {
-            $key = array_search('js/jquery-1.4.2.js', $JS['includes']);
+        if (in_array(CPG_JQUERY_VERSION, $JS['includes']) == TRUE) {
+            $key = array_search(CPG_JQUERY_VERSION, $JS['includes']);
             unset($JS['includes'][$key]);
-            array_unshift($JS['includes'], 'js/jquery-1.4.2.js');
+            array_unshift($JS['includes'], CPG_JQUERY_VERSION);
         }
         $JS['includes'] = CPGPluginAPI::filter('javascript_includes',$JS['includes']);
         // Include all the files which were set using js_include() function
@@ -1836,17 +1832,18 @@ function theme_create_tabs($items, $curr_page, $total_pages, $template)
     if ($CONFIG['tabs_dropdown']) {
         // Dropdown list for all pages
         preg_match('/cat=([\d]+)/', $template['page_link'], $matches);
+        $catn = isset($matches[1]) ? $matches[1] : '';
         $tabs_dropdown_js = <<< EOT
-            <span id="tabs_dropdown_span{$matches[1]}"></span>
+            <span id="tabs_dropdown_span{$catn}"></span>
             <script type="text/javascript"><!--
-                $('#tabs_dropdown_span{$matches[1]}').html('{$lang_create_tabs['jump_to_page']} <select id="tabs_dropdown_select{$matches[1]}" onchange="if (this.options[this.selectedIndex].value != -1) { window.location.href = this.options[this.selectedIndex].value; }"><\/select>');
+                $('#tabs_dropdown_span{$catn}').html('{$lang_create_tabs['jump_to_page']} <select id="tabs_dropdown_select{$catn}" onchange="if (this.options[this.selectedIndex].value != -1) { window.location.href = this.options[this.selectedIndex].value; }"><\/select>');
                 for (page = 1; page <= $total_pages; page++) {
                     var page_link = '{$template['page_link']}';
                     var selected = '';
                     if (page == $curr_page) {
                         selected = ' selected="selected"';
                     }
-                    $('#tabs_dropdown_select{$matches[1]}').append('<option value="' + page_link.replace( /%d/, page ) + '"' + selected + '>' + page + '<\/option>');
+                    $('#tabs_dropdown_select{$catn}').append('<option value="' + page_link.replace( /%d/, page ) + '"' + selected + '>' + page + '<\/option>');
                 }
          --></script>
 EOT;
@@ -2050,7 +2047,7 @@ function theme_main_menu($which)
             if (USER_ID) {
                 $query = "SELECT null FROM {$CONFIG['TABLE_ALBUMS']} WHERE category='" . (FIRST_USER_CAT + USER_ID) . "' AND aid = '$album'";
                 $user_albums = cpg_db_query($query);
-                if (mysql_num_rows($user_albums)) {
+                if ($user_albums->numRows()) {
                     $upload_allowed = true;
                 } else {
                     $upload_allowed = false;
@@ -2061,7 +2058,7 @@ function theme_main_menu($which)
                 $query = "SELECT null FROM {$CONFIG['TABLE_ALBUMS']} WHERE category < " . FIRST_USER_CAT . " AND uploads='YES' AND (visibility = '0' OR visibility IN ".USER_GROUP_SET.") AND aid = '$album'";
                 $public_albums = cpg_db_query($query);
 
-                if (mysql_num_rows($public_albums)) {
+                if ($public_albums->numRows()) {
                     $upload_allowed = true;
                 } else {
                     $upload_allowed = false;
@@ -2285,27 +2282,25 @@ function theme_admin_mode_menu()
                  template_extract_block($template_gallery_admin_menu, 'admin_approval');
             }
 
-            // Determine the documentation target
-            $available_doc_folders_array = form_get_foldercontent('docs/', 'folder', '', array('images', 'js', 'style', '.svn'));
             // Query the languages table
             $help_lang = '';
             $results = cpg_db_query("SELECT lang_id, abbr FROM {$CONFIG['TABLE_LANGUAGE']} WHERE available='YES' AND enabled='YES'");
-            while ($row = mysql_fetch_array($results)) {
+            while ($row = $results->fetchArray()) {
                 if ($CONFIG['lang'] == $row['lang_id']) {
                     $help_lang = $row['abbr'];
                 }
             } // while
-            mysql_free_result($results);
+            $results->free();
             unset($row);
             if ($help_lang == '') {
                 $help_lang = 'en';
             }
 
             // do the docs exist on the webserver?
-            if (file_exists('docs/'.$help_lang.'/index.htm') == true) {
+            if ((file_exists('docs/README.md') == true) && (file_exists('docs/'.$help_lang.'/index.htm') == true)) {
                 $documentation_href = 'docs/'.$help_lang.'/index.htm';
             } else {
-                $documentation_href = 'http://documentation.coppermine-gallery.net/';
+                $documentation_href = 'http://coppermine-gallery.net/docs';
             }
 
             if (!$CONFIG['enable_plugins']) {
@@ -2841,7 +2836,7 @@ function theme_display_thumbnails(&$thumb_list, $nbThumb, $album_name, $aid, $ca
     }
 
     $thumbcols = $CONFIG['thumbcols'];
-    $cell_width = ceil(100 / $CONFIG['thumbcols']) . '%';
+    $cell_width = floor((100 / $CONFIG['thumbcols']) * 100) / 100 . '%';
 
     $tabs_html = $display_tabs ? create_tabs($nbThumb, $page, $total_pages, $theme_thumb_tab_tmpl) : '';
 
@@ -3304,7 +3299,7 @@ function theme_html_picture()
                 } elseif (USER_ID && USER_ACCESS_LEVEL <= 2) {
                     $pic_html .= '<a href="javascript:;" onclick="alert(\''.sprintf($lang_errors['access_intermediate_only'],'','','','').'\');">';
                 } else {
-                    $pic_html .= "<a href=\"javascript:;\" onclick=\"MM_openBrWindow('displayimage.php?pid=$pid&amp;fullsize=1','" . uniqid(rand()) . "','scrollbars=yes,toolbar=no,status=no,resizable=yes,width=$winsizeX,height=$winsizeY')\">";
+                    $pic_html .= "<a href=\"javascript:;\" onclick=\"MM_openBrWindow('displayimage.php?pid=$pid&amp;fullsize=1','" . uniqid(rand()) . "','scrollbars=no,toolbar=no,status=no,resizable=yes,width=$winsizeX,height=$winsizeY')\">";
                 }
                 $pic_title = $lang_display_image_php['view_fs'] . $LINEBREAK . '==============' . $LINEBREAK . $pic_title;
                 $pic_html .= "<img src=\"images/image.gif?id=".floor(rand()*1000+rand())."\" width=\"{$image_size['width']}\" height=\"{$image_size['height']}\"  border=\"0\" alt=\"{$lang_display_image_php['view_fs']}\" /><br />";
@@ -3322,7 +3317,7 @@ function theme_html_picture()
                 } elseif (USER_ID && USER_ACCESS_LEVEL <= 2) {
                     $pic_html = '<a href="javascript:;" onclick="alert(\''.sprintf($lang_errors['access_intermediate_only'],'','','','').'\');">';
                 } else {
-                    $pic_html = "<a href=\"javascript:;\" onclick=\"MM_openBrWindow('displayimage.php?pid=$pid&amp;fullsize=1','" . uniqid(rand()) . "','scrollbars=yes,toolbar=no,status=no,resizable=yes,width=$winsizeX,height=$winsizeY')\">";
+                    $pic_html = "<a href=\"javascript:;\" onclick=\"MM_openBrWindow('displayimage.php?pid=$pid&amp;fullsize=1','" . uniqid(rand()) . "','scrollbars=no,toolbar=no,status=no,resizable=yes,width=$winsizeX,height=$winsizeY')\">";
                 }
                 $pic_title = $lang_display_image_php['view_fs'] . $LINEBREAK . '==============' . $LINEBREAK . $pic_title;
                 $pic_html .= "<img src=\"" . $picture_url . "\" {$image_size['geom']} class=\"image\" border=\"0\" alt=\"{$lang_display_image_php['view_fs']}\" /><br />";
@@ -3350,11 +3345,12 @@ function theme_html_picture()
         $pic_html = CPGPluginAPI::filter('html_document', $pic_html);
     } else {
         $autostart = ($CONFIG['media_autostart']) ? ('true'):('false');
+        $autoplay = '" autostart="'.$autostart.'" autoplay="'.$autostart.'" ';
 
         if ($mime_content['player'] == 'HTMLA') {
-            $pic_html  = '<audio controls="true" src="' . $picture_url . '" autostart="' . $autostart . '"></audio>';
+            $pic_html  = '<audio controls="true" src="' . $picture_url . $autoplay . '></audio>';
         } elseif ($mime_content['player'] == 'HTMLV') {
-            $pic_html  = '<video controls="true" src="' . $picture_url . '" autostart="' . $autostart . '"' . $image_size['whole'] . '></video>';
+            $pic_html  = '<div class="video"><video controls="true" src="' . $picture_url . $autoplay . 'style="max-width:100%"></video></div>';
         } else {
 
             $players['WMP'] = array('id' => 'MediaPlayer',
@@ -3625,7 +3621,7 @@ function theme_html_rating_box()
         if ($CURRENT_PIC_DATA['owner_id'] == $USER_DATA['user_id'] && $USER_DATA['user_id'] != 0 && ($CONFIG['rate_own_files'] == 0 || $CONFIG['rate_own_files'] == 2 && !USER_IS_ADMIN)) {
             // user is owner
             $rate_title = $lang_rate_pic['forbidden'];
-        } elseif (!mysql_num_rows($result_votes) && !mysql_num_rows($result_vote_stats)) {
+        } elseif (!$result_votes->numRows() && !$result_vote_stats->numRows()) {
             // user hasn't voted yet, show voting things
             $rate_title = $lang_rate_pic['rate_this_pic'];
             $user_can_vote = 'true';
@@ -3633,8 +3629,8 @@ function theme_html_rating_box()
             //user has voted
             $rate_title = $lang_rate_pic['already_voted'];
         }
-        mysql_free_result($result_votes);
-        mysql_free_result($result_vote_stats);
+        $result_votes->free();
+        $result_vote_stats->free();
 
         $rating_stars_amount = ($CONFIG['old_style_rating']) ? 5 : $CONFIG['rating_stars_amount'];
         $votes = $CURRENT_PIC_DATA['votes'] ? sprintf($lang_rate_pic['rating'], round(($CURRENT_PIC_DATA['pic_rating'] / 2000) / (5/$rating_stars_amount), 1), $rating_stars_amount, $CURRENT_PIC_DATA['votes']) : $lang_rate_pic['no_votes'];
@@ -3752,7 +3748,7 @@ function theme_html_comments($pid)
     }
 
     $result = cpg_db_query("SELECT COUNT(msg_id) FROM {$CONFIG['TABLE_COMMENTS']} WHERE pid='$pid'");
-    list($num) = mysql_fetch_row($result);
+    list($num) = $result->fetchRow(true);
 
     if ($num) {
 
@@ -3797,7 +3793,7 @@ function theme_html_comments($pid)
 
         $result = cpg_db_query("SELECT msg_id, msg_author, msg_body, UNIX_TIMESTAMP(msg_date) AS msg_date, author_id, author_md5_id, msg_raw_ip, msg_hdr_ip, pid, approval FROM {$CONFIG['TABLE_COMMENTS']} WHERE pid='$pid' ORDER BY msg_id $comment_sort_order LIMIT $start, $limit");
 
-        while ($row = mysql_fetch_assoc($result)) { // while-loop start
+        while ($row = $result->fetchAssoc()) { // while-loop start
             $user_can_edit = (GALLERY_ADMIN_MODE) || (USER_ID && USER_ID == $row['author_id'] && USER_CAN_POST_COMMENTS) || (!USER_ID && USER_CAN_POST_COMMENTS && ($USER['ID'] == $row['author_md5_id']));
             if (($user_can_edit != '' && $CONFIG['comment_user_edit'] != 0) || (GALLERY_ADMIN_MODE)) {
                 $comment_buttons = $tmpl_comments_buttons;
@@ -3898,6 +3894,7 @@ function theme_html_comments($pid)
                 $html .= template_eval($template, $params);
             }
         } // while-loop end
+        $result->free();
 
         $html .= $tabs;
     }
@@ -3997,7 +3994,7 @@ function theme_slideshow($start_img,$title)
     global $cat, $date, $THEME_DIR;
 
     pageheader($lang_display_image_php['slideshow']);
-    template_extract_block($template_display_media, 'img_desc', $start_slideshow);
+    template_extract_block($template_display_media, 'img_desc');
 
     /** set styles to slideshow background */
     $setDimentionW= $CONFIG['picture_width'] + 100;
@@ -4088,10 +4085,10 @@ function theme_display_fullsize_pic()
     } elseif ($pid) {
         $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight FROM {$CONFIG['TABLE_PICTURES']} AS p " . "WHERE pid='$pid' $FORBIDDEN_SET";
         $result = cpg_db_query($sql);
-        if (!mysql_num_rows($result)) {
+        if (!$result->numRows()) {
             cpg_die(ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
         }
-        $row = mysql_fetch_assoc($result);
+        $row = $result->fetchAssoc(true);
         if (is_image($row['filename'])) {
             $pic_url = get_pic_url($row, 'fullsize');
             $geom = 'width="' . $row['pwidth'] . '" height="' . $row['pheight'] . '"';
@@ -4122,6 +4119,7 @@ function theme_display_fullsize_pic()
     }
 
     $charset = ($CONFIG['charset'] == 'language file' ? $lang_charset : $CONFIG['charset']);
+    $jquery_path = CPG_JQUERY_VERSION;
     $fullsize_html = <<<EOT
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -4136,7 +4134,7 @@ function theme_display_fullsize_pic()
             td { vertical-align: middle; text-align:center; }
         </style>
 
-        <script type="text/javascript" src="js/jquery-1.4.2.js"></script>
+        <script type="text/javascript" src="{$jquery_path}"></script>
         <script type="text/javascript" src="js/jquery.dimensions.pack.js"></script>
         <script type="text/javascript" src="js/displayimage.fullsize.js"></script>
     </head>
@@ -4207,7 +4205,7 @@ function theme_vanity()
 {
     global $template_vanity ;
 
-    return template_eval($template_vanity, $params);
+    return template_eval($template_vanity, array());
 }
 /******************************************************************************
 ** Section <<<theme_vanity>>> - END
@@ -4329,13 +4327,14 @@ if (!isset($template_sidebar)) { //{THEMES}
 ** Section <<<$template_sidebar>>> - START
 ******************************************************************************/
 // HTML template for sidebar
+$jquery_path = CPG_JQUERY_VERSION;
 $template_sidebar = <<<EOT
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="{LANG_DIR}">
 <head>
 <meta http-equiv="content-type" content="text/html; charset={CHARSET}" />
 <title>{TITLE}</title>
-<script src="js/jquery-1.4.2.js" type="text/javascript"></script>
+<script src="{$jquery_path}" type="text/javascript"></script>
 <script src="js/jquery.treeview.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(function() {
@@ -4416,4 +4415,4 @@ function theme_album_info($pic_count, $link_pic_count, $last_upload_date)
 ** Section <<<theme_album_info>>> - END
 ******************************************************************************/
 } //{THEMES}
-?>
+//EOF

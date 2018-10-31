@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -38,7 +37,7 @@ if (isset($bridge_lookup)) {
 
     class cpg_udb extends core_udb {
 
-        function cpg_udb()
+        function __construct ()
         {
             global $BRIDGE;
 
@@ -114,15 +113,16 @@ if (isset($bridge_lookup)) {
         {
             $sql = "SELECT * FROM {$this->groupstable}";
 
-            $result = cpg_db_query($sql, $this->link_id);
+            $result = $this->query($sql);
 
             // XMB has no guest group in groups table, so adding one here
             $udb_groups = array(3=>'Guests');
 
-            while ($row = mysql_fetch_assoc($result))
+            while ($row = cpg_db_fetch_assoc($result))
             {
                 $udb_groups[$row['id']+100] = utf_ucfirst(utf_strtolower($row[$this->field['grouptbl_group_name']]));
             }
+            $result->free();
             return $udb_groups;
         }
 
@@ -132,10 +132,10 @@ if (isset($bridge_lookup)) {
 
             $sql = "SELECT id FROM {$this->groupstable}, {$this->usertable} WHERE {$this->field['usertbl_group_id']} = {$this->field['grouptbl_group_id']} AND {$this->field['user_id']}='$id'";
 
-            $result = cpg_db_query($sql, $this->link_id);
+            $result = $this->query($sql);
 
-            if (mysql_num_rows($result)){
-                $row = mysql_fetch_row($result);
+            if (cpg_db_num_rows($result)){
+                $row = cpg_db_fetch_row($result);
                 if ($this->use_post_based_groups){
                     $row = array($row[0] + 100);
                 } else {
@@ -145,13 +145,14 @@ if (isset($bridge_lookup)) {
                         $row = array(2);
                     }
                 }
+                $result->free();
                 return $row;
             } else {
                 return false;
             }
         }
 
-            function get_users($options = array())
+        function get_users($options = array())
         {
             global $CONFIG;
 
@@ -205,9 +206,10 @@ if (isset($bridge_lookup)) {
             }
 
             // Extract user list to an array
-            while ($user = mysql_fetch_assoc($result)) {
+            while ($user = cpg_db_fetch_assoc($result)) {
                 $userlist[] = $user;
             }
+            $result->free();
 
             return $userlist;
         }
@@ -268,4 +270,4 @@ if (isset($bridge_lookup)) {
     // and go !
     $cpg_udb = new cpg_udb;
 }
-?>
+//EOF

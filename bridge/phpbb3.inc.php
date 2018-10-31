@@ -1,19 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
-  $Revision$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * bridge/phpbb3.inc.php
+ * @since  1.6.04
+ */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -40,7 +36,7 @@ if (isset($bridge_lookup)) {
 
     class cpg_udb extends core_udb {
 
-        function cpg_udb()
+        function __construct()
         {
             global $BRIDGE;
 
@@ -128,15 +124,16 @@ if (isset($bridge_lookup)) {
 
                 $sql = "SELECT user_id, user_password, group_id FROM {$this->sessionstable} INNER JOIN {$this->usertable} ON session_user_id = user_id WHERE session_id = '{$this->session_id}'";
 
-                $result = cpg_db_query($sql, $this->link_id);
+                $result = $this->query($sql);
 
-                if (mysql_num_rows($result)){
-                    $row = mysql_fetch_array($result);
+                if (cpg_db_num_rows($result)){
+                    $row = cpg_db_fetch_array($result);
                     $this->primary_group = array_pop($row);
                     return $row['user_id'] == 1 ? false : $row;
                 } else {
                     return false;
                 }
+                $result->free();
             }
         }
 
@@ -162,11 +159,12 @@ if (isset($bridge_lookup)) {
     		    $data[] = $this->primary_group + 100;
     		
     		    $sql = "SELECT group_id FROM {$this->usergroupstable} WHERE user_id = {$row['id']}";
-    		    $result = cpg_db_query($sql, $this->link_id);
+    		    $result = $this->query($sql);
     		
-    		    while ($group = mysql_fetch_assoc($result)) {
+    		    while ($group = cpg_db_fetch_assoc($result)) {
         		    $data[] = $group['group_id'] + 100;
     		    }
+    		    $result->free();
 
                 $data = array_unique($data);
 
@@ -210,4 +208,4 @@ if (isset($bridge_lookup)) {
     // and go !
     $cpg_udb = new cpg_udb;
 }
-?>
+//EOF

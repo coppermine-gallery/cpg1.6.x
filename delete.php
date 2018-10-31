@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 define('IN_COPPERMINE', true);
@@ -67,29 +66,27 @@ function delete_picture($pid, $tablecellstyle = 'tableb')
         $query = "SELECT pid, aid, filepath, filename FROM {$CONFIG['TABLE_PICTURES']} WHERE pid='$pid'";
         $result = cpg_db_query($query);
 
-        if (!mysql_num_rows($result)) {
+        if (!$result->numRows()) {
             cpg_die(CRITICAL_ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
         }
 
-        $pic = mysql_fetch_assoc($result);
+        $pic = $result->fetchAssoc(true);
 
     } else {
 
         $query = "SELECT pid, p.aid, category, filepath, filename, owner_id FROM {$CONFIG['TABLE_PICTURES']} AS p INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS a ON a.aid = p.aid WHERE pid='$pid'";
         $result = cpg_db_query($query);
 
-        if (!mysql_num_rows($result)) {
+        if (!$result->numRows()) {
             cpg_die(CRITICAL_ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
         }
 
-        $pic = mysql_fetch_assoc($result);
+        $pic = $result->fetchAssoc(true);
 
         if (!($pic['category'] == FIRST_USER_CAT + USER_ID || ($CONFIG['users_can_edit_pics'] && $pic['owner_id'] == USER_ID)) || !USER_ID) {
             cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
         }
     }
-
-    mysql_free_result($result);
 
     $aid = $pic['aid'];
     $dir = $CONFIG['fullpath'] . $pic['filepath'];
@@ -115,7 +112,7 @@ function delete_picture($pid, $tablecellstyle = 'tableb')
         foreach (array('.gif','.png','.jpg') as $thumb_extension) {
             if (file_exists($dir . $CONFIG['thumb_pfx'] . $file_base_name . $thumb_extension)) {
                 // Thumbnail found, check if it's the only file using that thumbnail
-                $count = mysql_result(cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} WHERE filepath = '{$pic['filepath']}' AND filename LIKE '{$file_base_name}.%'"), 0);
+                $count = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} WHERE filepath = '{$pic['filepath']}' AND filename LIKE '{$file_base_name}.%'")->result(0);
                 if ($count == 1) {
                     unset($files[count($files)-1]);
                     $files[] = $dir . $CONFIG['thumb_pfx'] . $file_base_name . $thumb_extension;
@@ -147,7 +144,7 @@ function delete_picture($pid, $tablecellstyle = 'tableb')
 
     echo "<td class=\"".$tablecellstyle."\" align=\"center\">";
 
-    if (mysql_affected_rows($CONFIG['LINK_ID']) > 0) {
+    if (cpg_db_affected_rows() > 0) {
         echo $green;
     } else {
         echo "&nbsp;";
@@ -163,7 +160,7 @@ function delete_picture($pid, $tablecellstyle = 'tableb')
 
     echo "<td class=\"".$tablecellstyle."\" align=\"center\">";
 
-    if (mysql_affected_rows($CONFIG['LINK_ID']) > 0) {
+    if (cpg_db_affected_rows() > 0) {
         echo $green;
     } else {
         echo $red;
@@ -190,13 +187,11 @@ function delete_album($aid)
     $query = "SELECT title, category, owner FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid ='$aid'";
     $result = cpg_db_query($query);
 
-    if (!mysql_num_rows($result)) {
+    if (!$result->numRows()) {
         cpg_die(CRITICAL_ERROR, $lang_errors['non_exist_ap'], __FILE__, __LINE__);
     }
 
-    $album_data = mysql_fetch_assoc($result);
-
-    mysql_free_result($result);
+    $album_data = $result->fetchAssoc(true);
 
     if (!GALLERY_ADMIN_MODE) {
         if ($album_data['category'] != FIRST_USER_CAT + USER_ID && $album_data['owner'] != USER_ID) {
@@ -210,7 +205,7 @@ function delete_album($aid)
     // Delete all files
     $loopCounter = 0;
 
-    while ($pic = mysql_fetch_assoc($result)) {
+    while ($pic = $result->fetchAssoc()) {
 
         if ($loopCounter / 2 == floor($loopCounter / 2)) {
             $tablecellstyle = 'tableb';
@@ -225,13 +220,13 @@ function delete_album($aid)
         ob_end_clean();
     }
 
-    mysql_free_result($result);
+    $result->free();
 
     // Delete album
     $query = "DELETE FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid='$aid'";
     cpg_db_query($query);
 
-    if (mysql_affected_rows($CONFIG['LINK_ID']) > 0) {
+    if (cpg_db_affected_rows() > 0) {
         $return .= "<tr><td colspan=\"6\" class=\"tableb\">" . sprintf($lang_delete_php['alb_del_success'], $album_data['title']) . '</td></tr>' . $LINEBREAK;
     }
 
@@ -248,25 +243,25 @@ function delete_user($key) {
 
     print '<tr>';
 
-    if (!mysql_num_rows($result)) {
+    if (!$result->numRows()) {
         print '<td class="tableb">'.$lang_delete_php['err_unknown_user'].'</td>';
     } else {
 
-        $user_data = mysql_fetch_assoc($result);
+        $user_data = $result->fetchAssoc();
 
         print '<td class="tableb">';
         // First delete the albums
         $result2 = cpg_db_query("SELECT aid FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = '" . (FIRST_USER_CAT + $key) . "'");
         $user_alb_counter = 0;
 
-        while ($album = mysql_fetch_assoc($result2)) {
+        while ($album = $result2->fetchAssoc()) {
             starttable('100%');
             print delete_album($album['aid']);
             endtable();
             $user_alb_counter++;
         } // while
 
-        mysql_free_result($result2);
+        $result2->free();
 
         starttable('100%');
 
@@ -274,8 +269,7 @@ function delete_user($key) {
 
         // Then anonymize comments posted by the user
         $comment_result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_COMMENTS']} WHERE author_id = '$key'");
-        $comment_counter = mysql_fetch_row($comment_result);
-        mysql_free_result($comment_result);
+        $comment_counter = $comment_result->fetchRow(true);
 
         print '<td class="tableb" width="25%">';
 
@@ -310,8 +304,7 @@ function delete_user($key) {
 
         // Do the same for pictures uploaded in public albums
         $publ_upload_result = cpg_db_query("SELECT COUNT(*) FROM {$CONFIG['TABLE_PICTURES']} WHERE owner_id = '$key'");
-        $publ_upload_counter = mysql_fetch_row($publ_upload_result);
-        mysql_free_result($publ_upload_result);
+        $publ_upload_counter = $publ_upload_result->fetchRow(true);
 
         print '<td class="tableb" width="25%">';
 
@@ -363,7 +356,7 @@ function delete_user($key) {
         endtable();
         print '</td>';
     }
-    mysql_free_result($result);
+    $result->free();
     print '</tr>';
 }
 
@@ -477,8 +470,7 @@ case 'albmgr':
 
         $group_id = $USER_DATA['group_id'];
         $result = cpg_db_query("SELECT DISTINCT cid FROM {$CONFIG['TABLE_CATMAP']} WHERE group_id = $group_id");
-        $rowset = cpg_db_fetch_rowset($result);
-        mysql_free_result($result);
+        $rowset = cpg_db_fetch_rowset($result, true);
 
         //add allowed categories to the restriction
         if (USER_CAN_CREATE_PRIVATE_ALBUMS) {
@@ -504,7 +496,7 @@ case 'albmgr':
     $orig_sort_order = parse_pic_list($sort_list_matched[0]);
     foreach ($orig_sort_order as $album) {
         $alb = parse_pic_orig_sort_order($album);
-        $sort_array[$i] = $alb['aid'];
+//        $sort_array[$i] = $alb['aid'];
         if (count($alb) == 2) {
             $query = "UPDATE {$CONFIG['TABLE_ALBUMS']} SET pos = '{$alb['pos']}' WHERE aid = '{$alb['pid']}' $restrict LIMIT 1";
             cpg_db_query($query);
@@ -540,7 +532,7 @@ case 'albmgr':
             cpg_db_query($query);
 
             //get the aid of added the albums
-            $getAid = mysql_insert_id($CONFIG['LINK_ID']);
+            $getAid = cpg_db_last_insert_id();
 
             $dataArray = array(
                 'message' => 'true',
@@ -603,7 +595,7 @@ case 'albmgr':
             $returnOutput .= delete_album($deleted_id);
 
             $result = cpg_db_query("SELECT aid FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = '{$category}' ORDER BY pos ASC");
-            $rowset = cpg_db_fetch_rowset($result);
+            $rowset = cpg_db_fetch_rowset($result, true);
 
             $i = 100;
 
@@ -626,7 +618,7 @@ case 'albmgr':
         $category = $superCage->post->getInt('category');
 
         $result = cpg_db_query("SELECT aid, pos, title FROM {$CONFIG['TABLE_ALBUMS']} WHERE category = '{$category}' ORDER BY pos ASC");
-        $rowset = cpg_db_fetch_rowset($result);
+        $rowset = cpg_db_fetch_rowset($result, true);
 
         if ($superCage->post->keyExists('album_order')) {
             //Check if the form token is valid
@@ -678,7 +670,7 @@ case 'picmgr':
     $orig_sort_order = parse_pic_list($sort_list_matched[0]);
     foreach ($orig_sort_order as $picture) {
         $pic = parse_pic_orig_sort_order($picture);
-        $sort_array[$i] = $pic['aid'];
+//        $sort_array[$i] = $pic['aid'];
         if (count($pic) == 2) {
             $query = "UPDATE {$CONFIG['TABLE_PICTURES']} SET position = '{$pic['pos']}' WHERE pid = '{$pic['pid']}' $restrict LIMIT 1";
             cpg_db_query($query);
@@ -689,8 +681,7 @@ case 'picmgr':
 
     $album_id = $superCage->post->getInt('album_id');
     $result = cpg_db_query("SELECT aid, pid, filename, title, position FROM {$CONFIG['TABLE_PICTURES']} WHERE aid = '$album_id' ORDER BY position ASC, pid");
-    $rowset = cpg_db_fetch_rowset($result);
-    mysql_free_result($result);
+    $rowset = cpg_db_fetch_rowset($result, true);
 
     if ($superCage->post->keyExists('picture_order')) {
         //Check if the form token is valid
@@ -742,13 +733,12 @@ case 'comment':
 
     $result = cpg_db_query("SELECT pid FROM {$CONFIG['TABLE_COMMENTS']} WHERE msg_id = '$msg_id'");
 
-    if (!mysql_num_rows($result)) {
+    if (!$result->numRows()) {
         cpg_die(CRITICAL_ERROR, $lang_errors['non_exist_comment'], __FILE__, __LINE__);
     } else {
-        $comment_data = mysql_fetch_assoc($result);
+        $comment_data = $result->fetchAssoc();
     }
-
-    mysql_free_result($result);
+    $result->free();
 
     if (GALLERY_ADMIN_MODE) {
         $query = "DELETE FROM {$CONFIG['TABLE_COMMENTS']} WHERE msg_id = '$msg_id'";
@@ -882,11 +872,11 @@ case 'user':
 
                 $result = cpg_db_query("SELECT user_name, user_active, user_email, user_actkey FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '$key'");
 
-                if (!mysql_num_rows($result)) {
+                if (!$result->numRows()) {
                     print '<tr><td class="tableb" colspan="2">'.$lang_delete_php['err_unknown_user'].'</td>';
                 } else {
 
-                    $user_data = mysql_fetch_assoc($result);
+                    $user_data = $result->fetchAssoc();
 
                     print '<tr>';
                     print '<td class="tableb"><strong>';
@@ -918,7 +908,7 @@ case 'user':
 
                     print '</strong></td>';
                 }
-                mysql_free_result($result);
+                $result->free();
 
             } // foreach --- end
 
@@ -946,11 +936,11 @@ case 'user':
 
                 $result = cpg_db_query("SELECT user_name, user_active FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '$key'");
 
-                if (!mysql_num_rows($result)) {
+                if (!$result->numRows()) {
                     print '<tr><td class="tableb" colspan="2">'.$lang_delete_php['err_unknown_user'].'</td>';
                 } else {
 
-                    $user_data = mysql_fetch_assoc($result);
+                    $user_data = $result->fetchAssoc();
 
                     print '<tr>';
                     print '<td class="tableb"><strong>';
@@ -969,8 +959,7 @@ case 'user':
 
                     print '</strong></td>';
                 }
-
-                mysql_free_result($result);
+				$result->free();
             } // foreach --- end
 
             echo '<tr><td colspan="2" class="tablef" align="center">' . $LINEBREAK;
@@ -996,11 +985,11 @@ case 'user':
 
                 $result = cpg_db_query("SELECT user_name FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '$key'");
 
-                if (!mysql_num_rows($result)) {
+                if (!$result->numRows()) {
                     print '<tr><td class="tableb" colspan="2">'.$lang_delete_php['err_unknown_user'].'</td>';
                 } else {
 
-                    $user_data = mysql_fetch_assoc($result);
+                    $user_data = $result->fetchAssoc();
 
                     print '<tr>';
                     print '<td class="tableb"><strong>';
@@ -1016,8 +1005,7 @@ case 'user':
                     printf($lang_delete_php['password_reset'], '&laquo;'.$superCage->get->getEscaped('new_password').'&raquo;');
                     print '</strong></td>';
                 }
-
-                mysql_free_result($result);
+				$result->free();
             } // foreach --- end
 
             echo '<tr><td colspan="2" class="tablef" align="center">' . $LINEBREAK;
@@ -1042,23 +1030,24 @@ case 'user':
 
             $result_group = cpg_db_query("SELECT group_id, group_name FROM {$CONFIG['TABLE_USERGROUPS']}");
 
-            if (!mysql_num_rows($result_group)) {
+            if (!$result_group->numRows()) {
                 cpg_die(CRITICAL_ERROR, $lang_delete_php['err_empty_groups'], __FILE__, __LINE__);
             }
 
-            while ($row = mysql_fetch_assoc($result_group)) {
+            while ($row = $result_group->fetchAssoc()) {
                 $group_label[$row['group_id']] = $row['group_name'];
             } // while
+            $result_group->free();
 
             foreach ($users_scheduled_for_action as $key) {
 
                 $result = cpg_db_query("SELECT user_name, user_group FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '$key'");
 
-                if (!mysql_num_rows($result)) {
+                if (!$result->numRows()) {
                     print '<tr><td class="tableb" colspan="2">'.$lang_delete_php['err_unknown_user'].'</td>';
                 } else {
 
-                    $user_data = mysql_fetch_assoc($result);
+                    $user_data = $result->fetchAssoc();
 
                     print '<tr>';
                     print '<td class="tableb"><strong>';
@@ -1074,8 +1063,7 @@ case 'user':
                     printf($lang_delete_php['change_group_to_group'], '&laquo;'.$group_label[$user_data['user_group']].'&raquo;', '&laquo;'.$group_label[$group].'&raquo;');
                     print '</strong></td>';
                 }
-
-                mysql_free_result($result);
+				$result->free();
             } // foreach --- end
 
             echo '<tr><td colspan="2" class="tablef" align="center">' . $LINEBREAK;
@@ -1100,23 +1088,24 @@ case 'user':
 
             $result_group = cpg_db_query("SELECT group_id, group_name FROM {$CONFIG['TABLE_USERGROUPS']}");
 
-            if (!mysql_num_rows($result_group)) {
+            if (!$result_group->numRows()) {
                 cpg_die(CRITICAL_ERROR, $lang_delete_php['err_empty_groups'], __FILE__, __LINE__);
             }
 
-            while ($row = mysql_fetch_assoc($result_group)) {
+            while ($row = $result_group->fetchAssoc()) {
                 $group_label[$row['group_id']] = $row['group_name'];
             } // while
+            $result_group->free();
 
             foreach ($users_scheduled_for_action as $key) {
 
                 $result = cpg_db_query("SELECT user_name, user_group FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '$key'");
 
-                if (!mysql_num_rows($result)) {
+                if (!$result->numRows()) {
                     print '<tr><td class="tableb" colspan="2">'.$lang_delete_php['err_unknown_user'].'</td>';
                 } else {
 
-                    $user_data = mysql_fetch_assoc($result);
+                    $user_data = $result->fetchAssoc();
 
                     print '<tr>';
                     print '<td class="tableb"><strong>';
@@ -1128,13 +1117,12 @@ case 'user':
                     $sql = "SELECT user_group_list FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '$key'";
                     $result_user = cpg_db_query($sql);
 
-                    if (!mysql_num_rows($result_user)) {
+                    if (!$result_user->numRows()) {
                         print $lang_delete_php['err_unknown_user'];
                         continue;
                     }
 
-                    $user_group_data = mysql_fetch_assoc($result_user);
-                    mysql_free_result($result_user);
+                    $user_group_data = $result_user->fetchAssoc(true);
 
                     $user_group = explode(',', $user_group_data['user_group_list']);
 
@@ -1163,8 +1151,7 @@ case 'user':
                     printf($lang_delete_php['add_group_to_group'], '&laquo;'.$user_data['user_name'].'&raquo;', '&laquo;'.$group_label[$new_group].'&raquo;', '&laquo;'.$group_label[$user_data['user_group']].'&raquo;', $group_output);
                     print '</strong></td>';
                 }
-
-                mysql_free_result($result);
+				$result->free();
             } // foreach --- end
 
             echo '<tr><td colspan="2" class="tablef" align="center">' . $LINEBREAK;
@@ -1233,4 +1220,4 @@ default:
     cpg_die(CRITICAL_ERROR, $lang_errors['param_missing'], __FILE__, __LINE__);
 }
 
-?>
+//EOF

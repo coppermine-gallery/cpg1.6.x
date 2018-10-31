@@ -1,19 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
-  $Revision$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * include/picmgmt.php
+ * @since  1.6.04
+ */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -39,8 +35,6 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
         return array('error' => $lang_db_input_php['err_invalid_fext'] . ' ' . $CONFIG['allowed_file_extensions'], 'halt_upload' => 0);
     } elseif (is_image($filename)) {
 
-        $imagesize = cpg_getimagesize($image);
-
         if ($CONFIG['read_iptc_data']) {
             // read IPTC data
             $iptc = get_IPTC($image);
@@ -51,11 +45,29 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
             }
         }
 
+		if (isset($CONFIG['autorient']) && $CONFIG['autorient'] == 1) {
+			if (function_exists('exif_read_data')) {	// try for the EXIF php extension
+				$exif = @exif_read_data(realpath($image));
+				$ort = $exif ? $exif['Orientation'] : 0;
+			} else {	// otherwise use Exifer
+				include 'exif.php';
+				$exif = read_exif_data_raw(realpath($image),0);
+				$ort = isset($exif['IFD0']['Orientation']) ? (int)$exif['IFD0']['Orientation'] : 0;
+			}
+			if ($ort > 1) {
+				getImageTool();
+				$imgObj = new imageObject(dirname($image).'/', basename($image));
+				$imgObj->orientImage($ort);
+			}
+		}
+
+        $imagesize = cpg_getimagesize($image);
+
         // resize picture if it's bigger than the max width or height for uploaded pictures
         if (max($imagesize[0], $imagesize[1]) > $CONFIG['max_upl_width_height']) {
             if ((USER_IS_ADMIN && $CONFIG['auto_resize'] == 1) || (!USER_IS_ADMIN && $CONFIG['auto_resize'] > 0)) {
                 $resize_method = $CONFIG['picture_use'] == "thumb" ? ($CONFIG['thumb_use'] == "ex" ? "any" : $CONFIG['thumb_use']) : $CONFIG['picture_use'];
-                resize_image($image, $image, $CONFIG['max_upl_width_height'], $CONFIG['thumb_method'], $resize_method, 'false');
+                resize_image($image, $image, $CONFIG['max_upl_width_height'], $resize_method, 'false');
                 $imagesize = cpg_getimagesize($image);
             } elseif (USER_IS_ADMIN) {
                 // skip resizing for admin
@@ -78,7 +90,7 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
 
         if (!file_exists($thumb)) {
             // create thumbnail
-            if (($result = resize_image($work_image, $thumb, $CONFIG['thumb_width'], $CONFIG['thumb_method'], $CONFIG['thumb_use'], "false", 1)) !== true) {
+            if (($result = resize_image($work_image, $thumb, $CONFIG['thumb_width'], $CONFIG['thumb_use'], "false", 1)) !== true) {
                 return $result;
             }
         }
@@ -87,7 +99,7 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
             // create intermediate sized picture
             $resize_method = $CONFIG['picture_use'] == "thumb" ? ($CONFIG['thumb_use'] == "ex" ? "any" : $CONFIG['thumb_use']) : $CONFIG['picture_use'];
             $watermark = ($CONFIG['enable_watermark'] == '1' && ($CONFIG['which_files_to_watermark'] == 'both' || $CONFIG['which_files_to_watermark'] == 'resized')) ? 'true' : 'false';
-            if (($result = resize_image($work_image, $normal, $CONFIG['picture_width'], $CONFIG['thumb_method'], $resize_method, $watermark)) !== true) {
+            if (($result = resize_image($work_image, $normal, $CONFIG['picture_width'], $resize_method, $watermark)) !== true) {
                 return $result;
             }
         }
@@ -95,7 +107,7 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
         // watermark full sized picture
         if ($CONFIG['enable_watermark'] == '1' && ($CONFIG['which_files_to_watermark'] == 'both' || $CONFIG['which_files_to_watermark'] == 'original')) {
             $wm_max_upl_width_height = $picture_original_size ? max($imagesize[0], $imagesize[1]) : $CONFIG['max_upl_width_height']; // use max aspect of original image if it hasn't been resized earlier
-            if (($result = resize_image($work_image, $image, $wm_max_upl_width_height, $CONFIG['thumb_method'], 'any', 'true')) !== true) {
+            if (($result = resize_image($work_image, $image, $wm_max_upl_width_height, 'any', 'true')) !== true) {
                 return $result;
             }
         }
@@ -113,9 +125,8 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
     // Test if disk quota exceeded
     if (!GALLERY_ADMIN_MODE && $USER_DATA['group_quota'] && $category == FIRST_USER_CAT + USER_ID) {
         $result = cpg_db_query("SELECT sum(total_filesize) FROM {$CONFIG['TABLE_PICTURES']}, {$CONFIG['TABLE_ALBUMS']} WHERE  {$CONFIG['TABLE_PICTURES']}.aid = {$CONFIG['TABLE_ALBUMS']}.aid AND category = '" . (FIRST_USER_CAT + USER_ID) . "'");
-        $record = mysql_fetch_array($result);
+        $record = $result->fetchArray(true);
         $total_space_used = $record[0];
-        mysql_free_result($result);
 
         if ((($total_space_used + $total_filesize)>>10) > $USER_DATA['group_quota'] ) {
             @unlink($image);
@@ -173,7 +184,7 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
     $result = cpg_db_query($query);
 
     // Put the pid in current_pic_data and call the plugin filter for file data success
-    $CURRENT_PIC_DATA['pid'] = mysql_insert_id($CONFIG['LINK_ID']);
+    $CURRENT_PIC_DATA['pid'] = cpg_db_last_insert_id();
     CPGPluginAPI::action('add_file_data_success', $CURRENT_PIC_DATA);
 
     //return $result;
@@ -204,327 +215,15 @@ if (!is_dir($CONFIG['fullpath'].'edit')) {
 * @param  $method the method used for image resizing
 * @return 'true' in case of success
 */
-function resize_image($src_file, $dest_file, $new_size, $method, $thumb_use, $watermark="false", $sharpen=0, $media_type="false")
+function resize_image($src_file, $dest_file, $new_size, $thumb_use, $watermark="false", $sharpen=0, $media_type="false")
 {
-    global $CONFIG, $ERROR;
-    global $lang_errors;
-
-    list($sharpen) = CPGPluginAPI::filter('image_sharpen', array($sharpen, $new_size));
-
-    //Make Cage
-    $superCage = Inspekt::makeSuperCage();
-
-    $imginfo = cpg_getimagesize($src_file);
-    if ($imginfo == null) {
-        return false;
-    }
-    // GD can only handle JPG & PNG images
-    if ($imginfo[2] != GIS_JPG && $imginfo[2] != GIS_PNG && $CONFIG['GIF_support'] == 0) {
-        $ERROR = $lang_errors['gd_file_type_err'];
-        //return false;
-        return array('error' => $ERROR);
-    }
-    // height/width
-    $srcWidth = $imginfo[0];
-    $srcHeight = $imginfo[1];
-
-    $crop = 0; // initialize
-    // if cropping is enabled calculate cropping parameters
-    if ($thumb_use == 'ex') {
-        $thb_width = $CONFIG['thumb_width'];
-        $thb_height = $CONFIG['thumb_height'];
-
-
-        if ($new_size==$thb_width) {
-            $crop = 1;
-            switch ($CONFIG['thumb_method']) {
-                //cropping parameters for ImageMagick
-                case "im" :
-                    $resize_commands="";
-                    if ($srcWidth/$srcHeight > $thb_width/$thb_height) {
-                        $resize_commands .= "-resize x".$thb_height;
-                        $resized_w = ($thb_height/$srcHeight) * $srcWidth;
-                        $resize_commands .= " -crop ".$thb_width."x".$thb_height."+".round(($resized_w - $thb_width)/2)."+0";
-                    } else {
-                        $resize_commands .= "-resize ".$thb_width;
-                        $resized_h = ($thb_width/$srcWidth) * $srcHeight;
-                        $resize_commands .= " -crop ".$thb_width."x".$thb_height."+0+".round(($resized_h - $thb_height)/2);
-                    }
-                    break;
-
-                // cropping parameters for GD2
-                default :
-                    if($srcHeight < $srcWidth) {
-                        $ratio = (double)($srcHeight / $thb_height);
-                        $cpyWidth = round($thb_width * $ratio);
-                        if ($cpyWidth > $srcWidth) {
-                            $ratio = (double)($srcWidth / $thb_width);
-                            $cpyWidth = $srcWidth;
-                            $cpyHeight = round($thb_height * $ratio);
-                            $xOffset = 0;
-                            $yOffset = round(($srcHeight - $cpyHeight) / 2);
-                        } else {
-                            $cpyHeight = $srcHeight;
-                            $xOffset = round(($srcWidth - $cpyWidth) / 2);
-                            $yOffset = 0;
-                        }
-
-                    } else {
-                        $ratio = (double)($srcWidth / $thb_width);
-                        $cpyHeight = round($thb_height * $ratio);
-                        if ($cpyHeight > $srcHeight) {
-                            $ratio = (double)($srcHeight / $thb_height);
-                            $cpyHeight = $srcHeight;
-                            $cpyWidth = round($thb_width * $ratio);
-                            $xOffset = round(($srcWidth - $cpyWidth) / 2);
-                            $yOffset = 0;
-                        } else {
-                            $cpyWidth = $srcWidth;
-                            $xOffset = 0;
-                            $yOffset = round(($srcHeight - $cpyHeight) / 2);
-                        }
-                    }
-
-                    $destWidth = $thb_width;
-                    $destHeight = $thb_height;
-                    $srcWidth = $cpyWidth;
-                    $srcHeight = $cpyHeight;
-                    break;
-            }
-        } else {
-            $ratio = max($srcWidth, $srcHeight) / $new_size;
-        }
-
-    } elseif ($thumb_use == 'wd') {
-        // resize method width
-        $ratio = $srcWidth / $new_size;
-    } elseif ($thumb_use == 'ht') {
-        // resize method height
-        $ratio = $srcHeight / $new_size;
-    } else { // resize method any
-        $ratio = max($srcWidth, $srcHeight) / $new_size;
-    }
-    $ratio = max($ratio, 1.0);
-    if ($thumb_use == 'orig') {
-        $ratio = 1.0;
-    }
-    if ($crop != 1) {
-        $destWidth = (int)($srcWidth / $ratio);
-        $destHeight = (int)($srcHeight / $ratio);
-        $resize_commands = "-geometry ".$destWidth."x".$destHeight;
-        $xOffset = 0;
-        $yOffset = 0;
-    }
-    // Method for thumbnails creation
-    switch ($method) {
-        case "im" :
-            if (preg_match("#[A-Z]:|\\\\#Ai", __FILE__)) {
-                // get the basedir, remove '/include'
-                $cur_dir = substr(dirname(__FILE__), 0, -8);
-                $src_file = '"' . $cur_dir . '\\' . strtr($src_file, '/', '\\') . '"';
-                $im_dest_file = str_replace('%', '%%', ('"' . $cur_dir . '\\' . strtr($dest_file, '/', '\\') . '"'));
-            } else {
-                $src_file = escapeshellarg($src_file);
-                $im_dest_file = str_replace('%', '%%', escapeshellarg($dest_file));
-            }
-
-            $output = array();
-            /*
-             * Hack for working with ImageMagick on Windows even if IM is installed in C:\Program Files.
-             * By Aditya Mooley <aditya@sanisoft.com>
-             */
-            if ($sharpen==1 && $CONFIG['enable_unsharp']==1) {
-                $unsharp_mask = " -unsharp ".$CONFIG['unsharp_radius']."x".sqrt($CONFIG['unsharp_radius'])."+".($CONFIG['unsharp_amount']/100)."+".($CONFIG['unsharp_threshold']/100)." ";
-            } else {
-                $unsharp_mask = "";
-            }
-
-            if ($superCage->env->getMatched('OS', '/win/i')) {
-                $cmd = "\"".str_replace("\\","/", $CONFIG['impath'])."convert\" -quality {$CONFIG['jpeg_qual']} {$CONFIG['im_options']} ".$resize_commands." ".$unsharp_mask." ".str_replace("\\","/" ,$src_file )." ".str_replace("\\","/" ,$im_dest_file );
-                exec ("\"$cmd\"", $output, $retval);
-            } else {
-                $cmd = "{$CONFIG['impath']}convert -quality {$CONFIG['jpeg_qual']} {$CONFIG['im_options']} ".$resize_commands." ".$unsharp_mask." $src_file $im_dest_file";
-                exec ($cmd, $output, $retval);
-            }
-
-            if ($media_type != "false") {
-                //if a manual thumb gets generated we watermark the thumb with the media type
-                //we now need to get the absolute path to the thumb watermark files
-                $path_parts = pathinfo($CONFIG['watermark_file']);
-                $CONFIG['watermark_file'] = $path_parts["dirname"]."/wm_".$media_type.".png";
-            }
-
-            if ($watermark == "true" || $media_type != "false") {
-
-                //do we need to resize the watermark to fit onto the intermediate?
-                $wm_normal = (int)$CONFIG['reduce_watermark'];
-                if ($wm_normal > $destWidth ) {
-                    $wm_resize = (int)(($destWidth / $wm_normal) * 100);
-                    //we have to create a temporary, downsized watermark file in the edit folder
-                    //temp path for small wm
-                    $path_to_tmp_wm = './'.$CONFIG['fullpath'].'edit/temp_wm.png';
-
-                    if ($superCage->env->getMatched('OS', '/win/i')) {
-                        $cmd = "\"".str_replace("\\","/", $CONFIG['impath'])."convert\" -resize ".$wm_resize."% ".str_replace("\\","/" ,$CONFIG['watermark_file'] )." ".str_replace("\\","/" ,$path_to_tmp_wm );
-                        exec ("\"$cmd\"", $output, $retval);
-                    } else {
-                        $cmd = "{$CONFIG['impath']}convert -resize $wm_resize% {$CONFIG['watermark_file']} $path_to_tmp_wm";
-                        exec ($cmd, $output, $retval);
-                    }
-                    $wm_file = $path_to_tmp_wm; //set the path to the wm file to the temp one
-                } else {
-                    $wm_file = $CONFIG['watermark_file']; //if no downsize... we take the orig watermark
-                }
-
-                // now we apply the watermark
-                if ($superCage->env->getMatched('OS', '/win/i')) {
-                    $cmd = "\"".str_replace("\\","/", $CONFIG['impath'])."composite\" -dissolve {$CONFIG['watermark_transparency']} -gravity {$CONFIG['where_put_watermark']} \"$wm_file\" ".str_replace("\\","/" ,$im_dest_file )." ".str_replace("\\","/" ,$im_dest_file );
-                    exec ("\"$cmd\"", $output, $retval);
-                } else {
-                    $cmd = "{$CONFIG['impath']}composite -dissolve {$CONFIG['watermark_transparency']} -gravity {$CONFIG['where_put_watermark']} $wm_file $im_dest_file $im_dest_file";
-                    exec ($cmd, $output, $retval);
-                }
-            }
-
-            if ($retval) {
-                $ERROR = "Error executing ImageMagick - Return value: $retval";
-                if ($CONFIG['debug_mode']) {
-                    // Re-execute the command with the backtick operator in order to get all outputs
-                    // will not work is safe mode is enabled
-                    $output = `$cmd 2>&1`;
-                    $ERROR .= "<br /><br /><div align=\"left\">Cmd line : <br /><span style=\"font-size:120%\">" . nl2br(htmlspecialchars($cmd)) . "</span></div>";
-                    $ERROR .= "<br /><br /><div align=\"left\">The convert program said:<br /><span style=\"font-size:120%\">";
-                    $ERROR .= nl2br(htmlspecialchars($output));
-                    $ERROR .= "</span></div>";
-                }
-                @unlink($dest_file);
-                return array('error' => $ERROR);
-            }
-            break;
-
-        case "gd2" :
-            if (!function_exists('imagecreatefromjpeg')) {
-                return array('error' => 'PHP running on your server does not support the GD image library, check with your webhost if ImageMagick is installed', 'halt_upload' => 1);
-            }
-            if (!function_exists('imagecreatetruecolor')) {
-                return array('error' => 'PHP running on your server does not support GD version 2.x', 'halt_upload' => 1);
-            }
-            if ($imginfo[2] == GIS_GIF && $CONFIG['GIF_support'] == 1)
-                $src_img = imagecreatefromgif($src_file);
-            elseif ($imginfo[2] == GIS_JPG)
-                $src_img = imagecreatefromjpeg($src_file);
-            else
-                $src_img = imagecreatefrompng($src_file);
-            if (!$src_img) {
-                $ERROR = $lang_errors['invalid_image'];
-                //return false;
-                return array('error' => $ERROR);
-            }
-            if ($imginfo[2] == GIS_GIF) {
-                $dst_img = imagecreate($destWidth, $destHeight);
-            } else {
-                $dst_img = imagecreatetruecolor($destWidth, $destHeight);
-                if ($imginfo[2] == GIS_PNG) {
-                    imagealphablending($dst_img, false);
-                }
-            }
-            imagecopyresampled($dst_img, $src_img, 0, 0, $xOffset, $yOffset, (int)$destWidth, (int)$destHeight, $srcWidth, $srcHeight);
-            touch($dest_file);
-            $fh=fopen($dest_file,'w');
-            fclose($fh);
-
-            //sharpen the thumb
-            if ($sharpen==1 && $CONFIG['enable_unsharp']==1) {
-                UnsharpMask($dst_img, $CONFIG['unsharp_amount'], $CONFIG['unsharp_radius'], $CONFIG['unsharp_threshold']);
-            }
-
-            if ($media_type != "false") {
-                //if a manual thumb gets generated we watermark the thumb with the media type
-                //we now need to get the absolute path to the thumb watermark files
-                $path_parts = pathinfo($CONFIG['watermark_file']);
-                $CONFIG['watermark_file'] = $path_parts["dirname"]."/wm_".$media_type.".png";
-            }
-
-            if ($watermark == "true" || $media_type != "false") {
-                //shrink watermark on intermediate images -> If I had known that this is that �%&# with the transparency preserve... grrr
-                $wm_normal = (int)$CONFIG['reduce_watermark'];
-                if ($wm_normal > $destWidth ) {
-                    $wm_resize = $destWidth / $wm_normal;
-                    //load the original, huge sized logo (the one we want to size down)
-                    $temp_logoImage = ImageCreateFromPNG($CONFIG['watermark_file']);
-                    //get it's size
-                    $temp_logoW = ImageSX($temp_logoImage);
-                    $temp_logoH = ImageSY($temp_logoImage);
-
-                    //calculate new size
-                    $logoW = (int)($temp_logoW * $wm_resize);
-                    $logoH = (int)($temp_logoH * $wm_resize);
-                    //we create a new, resized logo
-                    $logoImage = imagecreatetruecolor($logoW, $logoH);
-
-                    //just to be sure that transparency gets preserved
-                    imagealphablending($logoImage, FALSE);
-                    imagealphablending($temp_logoImage, TRUE);
-
-                    //now copy and resize the big one into the temp resized img
-                    imagecopyresampled($logoImage, $temp_logoImage, 0, 0, 0, 0, (int)$logoW, (int)$logoH, $temp_logoW, $temp_logoH);
-
-                    //we do not need the temp (huge) watermark anymore
-                    imagedestroy($temp_logoImage);
-
-                } else { // shrink not enabled or no intermediate...
-                    $logoImage = ImageCreateFromPNG($CONFIG['watermark_file']);
-                    $logoW = ImageSX($logoImage);
-                    $logoH = ImageSY($logoImage);
-                }
-
-                //where is the watermark displayed...
-                $pos = $CONFIG['where_put_watermark'];
-                if ($pos == "northwest") {
-                    $src_x = 5;
-                    $src_y = 5;
-                } else if ($pos == "northeast") {
-                    $src_x = $destWidth - ($logoW + 5);
-                    $src_y = 5;
-                } else if ($pos == "southwest") {
-                    $src_x = 5;
-                    $src_y = $destHeight - ($logoH + 5);
-                } else if ($pos == "southeast") {
-                    $src_x = $destWidth - ($logoW + 5);
-                    $src_y = $destHeight - ($logoH + 5);
-                } else if ($pos == "center") {
-                    $src_x = ($destWidth/2) - ($logoW/2);
-                    $src_y = ($destHeight/2) - ($logoH/2);
-                }
-
-                imagealphablending($dst_img, TRUE);
-                imagecolortransparent($logoImage, imagecolorat($logoImage, $CONFIG['watermark_transparency_featherx'], $CONFIG['watermark_transparency_feathery']));
-                ImageCopy($dst_img,$logoImage,$src_x,$src_y,0,0,$logoW,$logoH);
-            }
-
-            if ($imginfo[2] == GIS_PNG) {
-                imagesavealpha($dst_img, true);
-                imagepng($dst_img, $dest_file, round((100 - $CONFIG['jpeg_qual']) / 10));
-            } else {
-                imagejpeg($dst_img, $dest_file, $CONFIG['jpeg_qual']);
-            }
-            imagedestroy($src_img);
-            imagedestroy($dst_img);
-            break;
-    }
-    // Set mode of uploaded picture
-    @chmod($dest_file, octdec($CONFIG['default_file_mode'])); //silence the output in case chmod is disabled
-    // We check that the image is valid
-    $imginfo = cpg_getimagesize($dest_file);
-    if ($imginfo == null) {
-        $ERROR = $lang_errors['resize_failed'];
-        @unlink($dest_file);
-        //return false;
-        return array('error' => $ERROR);
-    } else {
-        return true;
-    }
+	$dirn = dirname($src_file) . '/';
+	$filn = basename($src_file);
+	getImageTool();
+	$imgObj = new imageObject($dirn, $filn);
+	return $imgObj->resize_added_image($dest_file, $new_size, $thumb_use, $watermark, $sharpen, $media_type);
 }
+
 
 //function to sharpen images using GD2
 function UnsharpMask($img, $amount, $radius, $threshold)        {
@@ -545,7 +244,8 @@ function UnsharpMask($img, $amount, $radius, $threshold)        {
 
         $radius = abs(round($radius));         // Only integers make sense.
         if ($radius == 0) {
-                return $img; imagedestroy($img); break;                }
+            return $img;
+        }
         $w = imagesx($img); $h = imagesy($img);
         $imgCanvas = imagecreatetruecolor($w, $h);
         $imgCanvas2 = imagecreatetruecolor($w, $h);
@@ -620,4 +320,4 @@ function UnsharpMask($img, $amount, $radius, $threshold)        {
         return $img;
         }
 
-?>
+//EOF

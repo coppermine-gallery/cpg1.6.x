@@ -1,7 +1,7 @@
 ##  ********************************************
 ##  Coppermine Photo Gallery
 ##  ************************
-##  Copyright (c) 2003-2014 Coppermine Dev Team
+##  Copyright (c) 2003-2016 Coppermine Dev Team
 ##  v1.0 originally written by Gregory Demar
 ##
 ##  This program is free software; you can redistribute it and/or modify
@@ -9,10 +9,9 @@
 ##  as published by the Free Software Foundation.
 ##
 ##  ********************************************
-##  Coppermine version: 1.6.01
+##  Coppermine version: 1.6.03
 ##  $HeadURL$
-##  $Revision$
-##  ********************************************
+####  ********************************************
 
 #
 # Table structure for table CPG_albums
@@ -273,6 +272,7 @@ CREATE TABLE CPG_pictures (
 CREATE TABLE CPG_plugins (
   plugin_id int(10) unsigned NOT NULL auto_increment,
   name varchar(64) NOT NULL default '',
+  enabled tinyint(1) NOT NULL DEFAULT '1',
   path varchar(128) NOT NULL default '',
   priority int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (plugin_id),

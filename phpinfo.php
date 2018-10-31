@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 error_reporting (E_ALL ^ E_NOTICE);
@@ -23,7 +22,7 @@ require('include/init.inc.php');
 $CONFIG['debug_mode']=0;
 
 if (!GALLERY_ADMIN_MODE) {
-    cpg_die(ERROR, $lang_errors['access_denied']);
+    cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
 }
 
 pageheader($lang_cpg_debug_output['phpinfo']);
@@ -58,5 +57,4 @@ print $string;
 print '</div>' . $LINEBREAK;
 
 pagefooter();
-
-?>
+//EOF

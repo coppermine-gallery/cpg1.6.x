@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 define('IN_COPPERMINE', true);
@@ -76,8 +75,7 @@ EOT;
 
         // get IP address of the person who tried to log in, look it up on the banning table and increase the brute force counter. If the brute force counter has reached a critical limit, set a regular banning record
         $result = cpg_db_query("SELECT ban_id, brute_force FROM {$CONFIG['TABLE_BANNED']} WHERE ip_addr = '$raw_ip' OR ip_addr = '$hdr_ip' LIMIT 1");
-        $failed_logon_counter = mysql_fetch_assoc($result);
-        mysql_free_result($result);
+        $failed_logon_counter = $result->fetchAssoc(true);
 
         $expiry_date = date("Y-m-d H:i:s", mktime(date('H'), date('i') + $CONFIG['login_expiry'], date('s'), date('m'), date('d'), date('Y')));
 
@@ -135,7 +133,7 @@ starttable(-1, cpg_fetch_icon('login', 2) . $lang_login_php['enter_login_pswd'],
 //see how users are allowed to login, can be username, email address or both
 $login_method = $lang_login_php[$CONFIG['login_method']];
 
-echo <<< EOT
+echo <<<EOT
                   $login_failed
                   $cookie_warning
                   <tr>
@@ -164,7 +162,7 @@ EOT;
 
 endtable();
 
-echo <<< EOT
+echo <<<EOT
 
 </form>
 <script language="javascript" type="text/javascript">
@@ -176,4 +174,4 @@ EOT;
 
 pagefooter();
 
-?>
+//EOF

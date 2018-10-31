@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 /*
     MBFS - MultiByte Functions Simulator
@@ -163,3 +162,4 @@ $mb_lowercase = array(
     'ⴀ','ⴁ','ⴂ','ⴃ','ⴄ','ⴅ','ⴆ','ⴇ','ⴈ','ⴉ','ⴊ','ⴋ','ⴌ','ⴍ','ⴎ','ⴏ','ⴐ','ⴑ','ⴒ','ⴓ','ⴔ','ⴕ','ⴖ','ⴗ','ⴘ','ⴙ','ⴚ','ⴛ','ⴜ','ⴝ','ⴞ','ⴟ','ⴠ','ⴡ','ⴢ','ⴣ','ⴤ','ⴥ',
     'ａ','ｂ','ｃ','ｄ','ｅ','ｆ','ｇ','ｈ','ｉ','ｊ','ｋ','ｌ','ｍ','ｎ','ｏ','ｐ','ｑ','ｒ','ｓ','ｔ','ｕ','ｖ','ｗ','ｘ','ｙ','ｚ',
 );
+//EOF

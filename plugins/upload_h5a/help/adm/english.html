@@ -1,0 +1,30 @@
+<br />
+<h2>HTML5Upload Plugin Help</h2>
+<p>
+The configuration settings for the HTML5Upload Plugin can be different for each Coppermine user group. The default configuration will be applied to any group that does not have specific settings overrides. For any group that has overrides, you will have the option of reverting its settings to the default.
+</p>
+<br />
+<h3><u>Number of concurrent uploads</u></h3>
+<p>
+The number of files that will be uploaded simultaneously can be set between 1 and 4. The default is 2, and more than 3 at once is not likely to produce any significant total time savings.
+</p>
+<br />
+<h3><u>Maximum upload file size</u></h3>
+<p>
+The effective maximum file size, as restricted by PHP and Coppermine, is shown in parentheses. The setting here will be used to further reduce the allowed file size or to increase the allowed file size beyond the Coppermine Global and PHP settings. Uploading files larger than what the PHP settings will allow is accomplished with a "chunked" upload technique. Progress bars for a "chunked" upload will be differentiated by color.
+</p>
+<br />
+<h3><u>Mime type filters</u></h3>
+<p>
+Enter here a comma separated list of mime types. This feature is browser specific, but most modern browsers will apply this filter. Example: "image/*,video/*,application/pdf" will allow all image types, all video types and PDF files.
+</p>
+<br />
+<h3><u>Automatically go to edit</u></h3>
+<p>
+If this is selected, when all files have been successfully uploaded, the user will automatically be taken to a screen with the uploaded files available to have their attributes edited. If there were any errors during upload the user will instead be presented with a "continue" button for them to use to proceed when ready. If this option is not selected, the user will always be presented with the "continue" button.
+</p>
+<br />
+<h3><u>Include fields</u></h3>
+<p>
+Select here any fields that are to be made available to the user for bulk setting of all uploaded files.
+</p>

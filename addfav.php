@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 define('IN_COPPERMINE', true);
@@ -62,11 +61,11 @@ if (!empty($CPG_REFERER) && strpos($CPG_REFERER, 'album=favpics')) {
             ORDER BY pid DESC";
         $result = cpg_db_query($query);
 
-        if (mysql_num_rows($result) == 1) {
+        if ($result->numRows() == 1) {
             // No favorites (as we added the already removed $pid to the query), redirect to empty thumbnail page
             $ref = $CONFIG['site_url'] . "thumbnails.php?album=favpics";
         } else {
-            while ($row = mysql_fetch_assoc($result)) {
+            while ($row = $result->fetchAssoc()) {
                 if ($row['pid'] == $pid && $new_pid) {
                     break;
                 }
@@ -77,7 +76,7 @@ if (!empty($CPG_REFERER) && strpos($CPG_REFERER, 'album=favpics')) {
             }
             $ref = str_replace("pid={$pid}", "pid={$new_pid}", $ref);
         }
-        mysql_free_result($result);
+        $result->free();
     }
 }
 
@@ -93,7 +92,7 @@ if (USER_ID > 0) {
     cpg_db_query($sql);
 
     // User never stored a fav... so insert new row
-    if (!mysql_affected_rows($CONFIG['LINK_ID'])) {
+    if (!cpg_db_affected_rows()) {
         $sql = "INSERT INTO {$CONFIG['TABLE_FAVPICS']} (user_id, user_favpics) VALUES (" . USER_ID . ", '$data')";
         cpg_db_query($sql);
     }
@@ -116,4 +115,4 @@ pageheader($lang_common['information'], "<meta http-equiv=\"refresh\" content=\"
 msg_box($lang_common['information'], $lang_rate_pic_php['rate_ok'], $lang_common['continue'], $ref);
 pagefooter();
 
-?>
+//EOF

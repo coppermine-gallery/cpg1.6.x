@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 define('IN_COPPERMINE', true);
@@ -166,6 +165,7 @@ $base_folder = '';
 $dir = opendir($base_folder . $folder);
 
 // read the folder/file structure we're currently in and put it into an array
+$filename = $foldername = null;
 $dirCounter = 0;
 while($file = readdir($dir)){
     if(is_dir($base_folder.$folder.$file)) {
@@ -197,7 +197,7 @@ if ($radio != 0) {
 }
 echo '</td>' . $newline;
 echo '<td class="tableh2">' . $newline;
-$folder_array = split(rtrim($CONFIG['fullpath'],'/'),ltrim($folder, $folder_sep));
+$folder_array = explode(rtrim($CONFIG['fullpath'],'/'),ltrim($folder, $folder_sep));
 $folder_display = rtrim($CONFIG['fullpath'],'/') . $folder_array[1];
 echo '<input type="text" name="cf2" size="50" value="' . $folder_display . '" disabled="disabled" class="tableh2" />&nbsp;' . $newline;
 if ($linktarget != '') {
@@ -205,10 +205,10 @@ if ($linktarget != '') {
     // get the allowed extensions
     $filetypes = array();
     $result = cpg_db_query("SELECT extension FROM {$CONFIG['TABLE_FILETYPES']}");
-    while($row = mysql_fetch_row($result)) {
+    while($row = $result->fetchRow()) {
         $filetypes[] = $row[0];
     }
-    mysql_free_result($result);
+    $result->free();
     $filetypes = array_unique($filetypes);
     // loop through the $filename array, get the extensions and check if at least one allowed ending is there
     $allowed_file_counter = 0;
@@ -305,4 +305,4 @@ echo <<< EOT
 </html>
 
 EOT;
-?>
+//EOF

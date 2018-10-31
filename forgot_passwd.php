@@ -2,7 +2,7 @@
 /*************************
   Coppermine Photo Gallery
   ************************
-  Copyright (c) 2003-2014 Coppermine Dev Team
+  Copyright (c) 2003-2016 Coppermine Dev Team
   v1.0 originally written by Gregory Demar
 
   This program is free software; you can redistribute it and/or modify
@@ -10,9 +10,8 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
-  $Revision$
 **********************************************/
 
 define('IN_COPPERMINE', true);
@@ -34,12 +33,12 @@ if ($superCage->post->keyExists('email') && $superCage->post->testEmail('email')
     $CLEAN['email'] = $superCage->post->testEmail('email');
 }
 
-if ($superCage->get->keyExists('key')) {
-    $CLEAN['key'] = $superCage->get->getEscaped('key');
+if ($matched = $superCage->get->getMatched('key', "/^[a-f0-9]{32}$/i")) {
+    $CLEAN['key'] = $matched[0];
 }
 
 if ($superCage->get->keyExists('id')) {
-    $CLEAN['id'] = $superCage->get->getEscaped('id');
+    $CLEAN['id'] = $superCage->get->getInt('id');
 }
 
 //END CLEANUP
@@ -51,9 +50,9 @@ if (isset($CLEAN['email'])) {
 
     $results = cpg_db_query($sql);
 
-    if (mysql_num_rows($results)) { // something has been found start
+    if ($results->numRows()) { // something has been found start
 
-        $USER_DATA = mysql_fetch_assoc($results);
+        $USER_DATA = $results->fetchAssoc(true);
 
         // check if we have an admin account (with empty email address)
         if ($USER_DATA['user_email'] == '') {
@@ -112,22 +111,21 @@ EOT;
 
     $result = cpg_db_query($sql);
 
-    if (!mysql_num_rows($result)) {
-        cpg_die($lang_forgot_passwd_php['forgot_passwd'], $lang_forgot_passwd_php['illegal_session']);
+    if (!$result->numRows()) {
+        cpg_die($lang_forgot_passwd_php['forgot_passwd'], $lang_forgot_passwd_php['illegal_session'], __FILE__, __LINE__);
     }
 
-    mysql_free_result($result);
+    $result->free();
 
-    $sql = "SELECT {$cpg_udb->field['username']}, {$cpg_udb->field['email']} FROM {$cpg_udb->usertable} WHERE {$cpg_udb->field['user_id']} = {$CLEAN['id']}";
+    $sql = "SELECT {$cpg_udb->field['username']}, {$cpg_udb->field['email']} FROM {$cpg_udb->usertable} WHERE {$cpg_udb->field['user_id']} = '{$CLEAN['id']}'";
 
     $result = cpg_db_query($sql);
 
-    if (!mysql_num_rows($result)) {
-        cpg_die($lang_forgot_passwd_php['forgot_passwd'], $lang_forgot_passwd_php['err_unk_user']);
+    if (!$result->numRows()) {
+        cpg_die($lang_forgot_passwd_php['forgot_passwd'], $lang_forgot_passwd_php['err_unk_user'], __FILE__, __LINE__);
     }
 
-    $row = mysql_fetch_assoc($result);
-    mysql_free_result($sql);
+    $row = $result->fetchAssoc(true);
 
     // Reset Password
     $new_password = $cpg_udb->make_password();
@@ -196,4 +194,4 @@ echo '</form>';
 
 pagefooter();
 
-?>
+//EOF
