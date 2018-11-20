@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * include/admin.inc.php
+ * @since  1.6.05
+ */
 
 /**********************************************
   Defines the scope of configuration variables
@@ -995,17 +992,17 @@ $config_data = array(
       'end_description' => $lang_admin_php['pixels'],
     ),
     'max_upl_size' => array(
-      'type'            => 'textfield',
+      'type'            => 'KMG',
       'min'             => '8',
-      'max'             => '10000000',
-      'step'             => '8',
+      'max'             => '1073741824',
+//      'step'             => '0.1',
       'default_value'   => '1024',
       'help_link'       => 'f=configuration.htm&amp;as=admin_picture_thumbnail_max_upload_size&amp;ae=admin_picture_thumbnail_max_upload_size_end',
       'regex'           => '^[0-9]{1,7}$',
       'size'            => '7',
-      'width'           => '100',
+      'width'           => '50',
       'maxlength'       => '7',
-      'end_description' => $lang_admin_php['kilobytes'],
+      'end_description' => '',
     ),
     'max_upl_width_height' => array(
       'type'            => 'textfield',

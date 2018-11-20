@@ -20,6 +20,8 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2018-11-20 [O] Replace config max upload filesize with combo UI element(s) {ron4mac}
+2018-11-20 [B] Correct failure to report range error during config submission {ron4mac}
 2018-10-31 [A] Added hidden config option to choose if auto-orient is checked by default in upload forms {eenemeenemuu}
 2018-10-30 [B] Fixed misleading approval message if approval is not needed when using single upload form {eenemeenemuu}
 2018-10-17 [B] Correction to bridge file for SMF 2.1 (thanks maximus23) {ron4mac}

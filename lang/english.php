@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * lang/english.php
- * @since  1.6.04
+ * @since  1.6.05
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -911,6 +911,7 @@ $lang_admin_php['offline'] = 'Gallery is offline';
 $lang_admin_php['display_coppermine_news'] = 'Display news from coppermine-gallery.net';
 $lang_admin_php['display_coppermine_detail'] = 'will only be displayed for the admin';
 $lang_admin_php['config_setting_invalid'] = 'The value you have set for &laquo;%s&raquo; is invalid, please review it.';
+$lang_admin_php['config_setting_rangerr'] = 'The value you have set for &laquo;%s&raquo; is out of allowed range, please review it.';
 $lang_admin_php['config_setting_ok'] = 'Your setting for &laquo;%s&raquo; has been saved.';
 $lang_admin_php['contact_form_settings'] = 'Contact form settings';
 $lang_admin_php['contact_form_guest_enable'] = 'Display contact form to anonymous visitors (guests)';

@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * admin.php
+ * @since  1.6.05
+ */
 
 define('IN_COPPERMINE', true);
 define('ADMIN_PHP', true);
@@ -21,6 +18,28 @@ require_once('include/init.inc.php');
 
 if (!GALLERY_ADMIN_MODE) {
     cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
+}
+
+function kmgVals ($k)
+{
+	if ($k >= 1048576) {
+		$m = 1048576;
+	} else if ($k >= 1024) {
+		$m = 1024;
+	} else {
+		$m = 1;
+	}
+	return array(round($k/$m, 1), $m);
+}
+
+function kmgOpts ($m)
+{
+	global $lang_byte_units;
+	$sa = ' selected="selected"';
+	$html = '<option value="1"'.($m==1?$sa:'').'>'.$lang_byte_units[1].'</option>';
+	$html .= '<option value="1024"'.($m==1024?$sa:'').'>'.$lang_byte_units[2].'</option>';
+	$html .= '<option value="1048576"'.($m==1048576?$sa:'').'>'.$lang_byte_units[3].'</option>';
+	return $html;
 }
 
 // define some vars that need to exist in JS
@@ -134,9 +153,11 @@ foreach ($config_data as $config_section_key => $config_section_value) { // Loop
         if ( (isset($adminDataValue['min']) || isset($adminDataValue['min']) ) && $regexValidation == '1') { // Only perform the additional validation if the regex is green so far
             if (isset($adminDataValue['min']) && $evaluate_value < $adminDataValue['min'] ) {
                 $regexValidation = '0';
+                $userMessage .= '<li style="list-style-image:url(images/icons/stop.png)">'.sprintf($lang_admin_php['config_setting_rangerr'], '<a class="direct_config_link" href="#'.$adminDataKey.'">'.$lang_admin_php[$adminDataKey].'</a>').'</li>'.$LINEBREAK;
             }
             if (isset($adminDataValue['max']) && $evaluate_value > $adminDataValue['max'] ) {
                 $regexValidation = '0';
+                $userMessage .= '<li style="list-style-image:url(images/icons/stop.png)">'.sprintf($lang_admin_php['config_setting_rangerr'], '<a class="direct_config_link" href="#'.$adminDataKey.'">'.$lang_admin_php[$adminDataKey].'</a>').'</li>'.$LINEBREAK;
             }
         }
         // If validation failed, set things right
@@ -412,7 +433,7 @@ EOT;
 			} else {
 				$highlightFieldCSS = '';
 			}
-			if (isset($value['min']) && ($value['min'] != '' || $value['max'] != '')) { // coerse field to HTML5 number field
+			if (isset($value['min']) && ($value['min'] != '' || $value['max'] != '') && $value['type'] != 'KMG') { // coerse field to HTML5 number field
 				$value['type'] = 'number';
 				$numminmax = '';
 				if ($value['min'] != '') {
@@ -431,6 +452,16 @@ EOT;
 				$js_default_values['textfield'][] = array('key' => $key, 'warning' => $warningText);
 				
 				$admin_page .= '<span id="'.$key.'_wrapper" class="'.$highlightFieldCSS.'"><input type="text" class="textinput"'.$widthOption.$sizeOption.$maxlengthOption.'  name="'.$key.'" id="'.$key.'" value="'.$admin_data_array[$key].'"'.$readonly_text.' tabindex="'.$tabindexCounter.'" title="'.str_replace("'", "\'", htmlspecialchars($warningText)).'" />'.$readonly_message.'</span>';
+
+			} elseif ($value['type'] == 'KMG') { // KMG COMBO
+				$kmgVals = kmgVals($admin_data_array[$key]);
+				$js_default_values['textfield'][] = array('key' => $key, 'warning' => $warningText);
+				
+				$admin_page .= '<span id="'.$key.'_wrapper" class="'.$highlightFieldCSS.'">'
+					.'<input type="number" class="textinput" min="1" step="0.1" '.$widthOption.$sizeOption.$maxlengthOption.' id="'.$key.'_n" value="'.$kmgVals[0].'"'.$readonly_text.' tabindex="'.$tabindexCounter.'" title="'.str_replace("'", "\'", htmlspecialchars($warningText)).'" onchange="mfuCalc(\''.$key.'\')" />'
+					.' <select id="'.$key.'_m" onchange="mfuCalc(\''.$key.'\')">'.kmgOpts($kmgVals[1]).'</select>'
+					.'<input type="hidden" name="'.$key.'" id="'.$key.'" value="'.$admin_data_array[$key].'" />'
+					.$readonly_message.'</span>';
 
 			} elseif ($value['type'] == 'number') { // NUMBER
 				$js_default_values['textfield'][] = array('key' => $key, 'warning' => $warningText);
