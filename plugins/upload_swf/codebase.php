@@ -153,13 +153,13 @@ EOT;
 
 	form_alb_list_box($lang_common['album'], 'swf_album');
 
-	$auto_orient_checked = $CONFIG['auto_orient_checked'] ? 'value="1" checked="checked"' : '';
+	$auto_orient_checked = (isset($CONFIG['auto_orient_checked']) && !$CONFIG['auto_orient_checked']) ? '' : ' checked="checked"';
 	echo <<<EOT
 	<tr>
 		<td colspan="2" class="tableb tableb_alternate">
 			<div id="upload_form">
 				<span id="browse_button_place_holder"></span>
-				<input type="checkbox" name="autorient" id="autorient" $auto_orient_checked />
+				<input type="checkbox" name="autorient" id="autorient" value="1"{$auto_orient_checked} />
 				<label for="autorient">{$lang_upload_php['auto_orient']}</label>
 				<button id="button_cancel" onclick="swfu.cancelQueue();" disabled="disabled" class="button">
 					{$icon_array['cancel']}
