@@ -7,7 +7,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * plugins/upload_h5a/js/upload.js
- * @since  1.6.04
+ * @since  1.6.05
  */
 
 var redirURL = '',
@@ -367,10 +367,14 @@ function H5up_done(okcount, errcnt) {
 							endup();
 						}
 					} else if (this.status === 200) {
-						if ($.doChnk) {
-							cstate();
+						if (this.responseText.length) {
+							$.pBar.msg(this.responseText, true);
 						} else {
-							state();
+							if ($.doChnk) {
+								cstate();
+							} else {
+								state();
+							}
 						}
 					}
 				},
