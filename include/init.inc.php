@@ -8,10 +8,10 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/init.inc.php
- * @since  1.6.04
+ * @since  1.6.05
  */
 
-define('COPPERMINE_VERSION', '1.6.04');
+define('COPPERMINE_VERSION', '1.6.05');
 define('COPPERMINE_VERSION_STATUS', 'stable');
 // Define path to jQuery for this version of Coppermine
 define('CPG_JQUERY_VERSION', 'js/jquery-1.7.2.js');
