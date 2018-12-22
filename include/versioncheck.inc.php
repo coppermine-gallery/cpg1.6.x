@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/versioncheck.inc.php
- * @since  1.6.04
+ * @since  1.6.06
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -184,6 +184,36 @@ EOT;
   print '<br />';
 }
 
+
+// check an array for the existence of an index
+// return the index or blank if not
+function _aryVal (&$ary, $ix)
+{
+	if (isset($ary[$ix])) return $ary[$ix];
+	else return '';
+}
+
+
+function extractCpgVersion ($fpath)
+{
+	if (!file_exists($fpath)) return false;
+	$h = @fopen($fpath, 'r');
+	if ($h === false) return false;
+	$b = @fread($h, 1024);
+	@fclose($h);
+	if ($b === false) return false;
+	if (strpos($b, '@since ') !== false) $pfx = '@since ';
+	else $pfx = 'Coppermine version: ';
+	// get the start of the version declaration
+	$ver = substr($b, strpos($b, $pfx));
+	// remove the prefix
+	$ver = trim(str_replace($pfx, '', $ver));
+	$ver = trim(substr($ver, 0, 7));
+	if (preg_match('#^\d\.\d\.\d\d?$#', $ver)) return $ver;
+	return '';
+}
+
+
 function cpg_versioncheckPopulateArray($file_data_array) {
     global $displayOption_array, $textFileExtensions_array, $imageFileExtensions_array, $CONFIG, $maxLength_array, $lang_versioncheck_php, $lang_common;
     $extensionMatrix_array = array(
@@ -264,7 +294,7 @@ function cpg_versioncheckPopulateArray($file_data_array) {
               $file_data_array[$file_data_key]['txt_version'] = $lang_versioncheck_php['not_applicable'];
             } elseif ($file_data_array[$file_data_key]['status'] == 'remove') {
               $file_data_array[$file_data_key]['txt_missing'] = $lang_versioncheck_php['removed'].' ('.$lang_common['ok'].')';
-              $file_data_array[$file_data_key]['txt_version'] = $lang_versioncheck_php['not_applicable'].' ('.$lang_common['ok'].')';
+              $file_data_array[$file_data_key]['txt_version'] = '';				//$lang_versioncheck_php['not_applicable'].' ('.$lang_common['ok'].')';
             } else {
               $file_data_array[$file_data_key]['txt_missing'] = $lang_versioncheck_php['optional'];
               $file_data_array[$file_data_key]['txt_version'] = $lang_versioncheck_php['not_applicable'];
@@ -296,16 +326,21 @@ function cpg_versioncheckPopulateArray($file_data_array) {
                 $file_data_array[$file_data_key]['txt_folderfile'] = $lang_versioncheck_php['file'];
                 if (in_array($file_data_array[$file_data_key]['extension'],$textFileExtensions_array) == TRUE) {
                     // the file is not binary, i.e. it's a text file --- start
+/*
                     $handle = @fopen($file_data_array[$file_data_key]['fullpath'], 'r');
                     if ($handle == FALSE) {
+*/
+					$file_data_array[$file_data_key]['local_version'] = extractCpgVersion($file_data_array[$file_data_key]['fullpath']);
+//					var_dump($file_data_array[$file_data_key]['local_version']);
+					if ($file_data_array[$file_data_key]['local_version'] === false) {
                         // We haven't been able to even fopen the file, so the information retrieved by is_readable/is_writable returned nonsense. Let's reset the information accordingly.
                         $file_data_array[$file_data_key]['local_readwrite'] = '--';
                         $file_data_array[$file_data_key]['comment'] .= $lang_versioncheck_php['inaccessible'].'. '.$lang_versioncheck_php['review_permissions'].'. ';
                         //$file_data_array[$file_data_key]['comment'] .= '|'.$file_data_values['fullpath'];
                     } else {
                         // File is readable -- start
-                        $blob = '';
-                        $blob = @fread($handle, 500); //filesize($file_data_array[$file_data_key]['fullpath']));
+/*                        $blob = '';
+                        $blob = @fread($handle, 1024); //filesize($file_data_array[$file_data_key]['fullpath']));
                         @fclose($handle);
                         if (strpos($blob, '@since ') !== false) $cpg_version_determination = '@since ';
                         else $cpg_version_determination = 'Coppermine' . ' ' . 'version:';
@@ -318,12 +353,14 @@ function cpg_versioncheckPopulateArray($file_data_array) {
                         }
                         $file_data_array[$file_data_key]['local_version'] = trim(str_replace($cpg_version_determination, '', $file_data_array[$file_data_key]['local_version']));
                         $file_data_array[$file_data_key]['local_version'] = trim(str_replace('#', '', $file_data_array[$file_data_key]['local_version']));
-                        $file_data_array[$file_data_key]['local_version'] = trim(substr($file_data_array[$file_data_key]['local_version'], 0, strpos($file_data_array[$file_data_key]['local_version'], '$')));
-                        $file_data_array[$file_data_key]['local_version'] = trim(substr($file_data_array[$file_data_key]['local_version'], 0, strpos($file_data_array[$file_data_key]['local_version'], "\n")));
+                        $file_data_array[$file_data_key]['local_version'] = trim(substr($file_data_array[$file_data_key]['local_version'], 0, 7));
+//                        $file_data_array[$file_data_key]['local_version'] = trim(substr($file_data_array[$file_data_key]['local_version'], 0, strpos($file_data_array[$file_data_key]['local_version'], '$')));
+//                        $file_data_array[$file_data_key]['local_version'] = trim(substr($file_data_array[$file_data_key]['local_version'], 0, strpos($file_data_array[$file_data_key]['local_version'], "\n")));
                         if (strlen($file_data_array[$file_data_key]['local_version']) > 6) { // Version numbers larger than 6 are not likely at all
-                          echo'<pre>';var_dump($file_data_array[$file_data_key]['local_version']);echo'</pre>';
+                          echo'<pre>g6_';var_dump($file_data_array[$file_data_key]['fullpath'],$file_data_array[$file_data_key]['local_version']);echo'</pre>';
                             $file_data_array[$file_data_key]['local_version'] = $lang_versioncheck_php['not_applicable'];
                         }
+*/
                         if ($file_data_array[$file_data_key]['version'] != '' && $file_data_array[$file_data_key]['exists'] == 1 && $file_data_array[$file_data_key]['local_version'] != '') {
                             $file_data_array[$file_data_key]['txt_version'] = ' (';
                             $versionCompare = version_compare($file_data_array[$file_data_key]['local_version'],$file_data_array[$file_data_key]['version']);
@@ -331,7 +368,7 @@ function cpg_versioncheckPopulateArray($file_data_array) {
                                 $file_data_array[$file_data_key]['txt_version'] .= $lang_common['ok'];
                             } elseif($versionCompare == -1) {
 
-                              echo'<pre>';var_dump($cpg_version_determination,$file_data_array[$file_data_key]['local_version'],$file_data_array[$file_data_key]['version']);echo'</pre>';
+                              echo'<pre>lt_';var_dump($file_data_array[$file_data_key]['fullpath'],$cpg_version_determination,$file_data_array[$file_data_key]['local_version'],$file_data_array[$file_data_key]['version']);echo'</pre>';
 
                                 $file_data_array[$file_data_key]['txt_version'] .= sprintf($lang_versioncheck_php['outdated'],$file_data_array[$file_data_key]['version']);
                                 $file_data_array[$file_data_key]['comment'] .= $lang_versioncheck_php['review_version'].'. ';
@@ -382,6 +419,7 @@ function cpg_versioncheckPopulateArray($file_data_array) {
                                 }
                             } else {
                                 $file_data_array[$file_data_key]['txt_modified'] = $lang_versioncheck_php['not_applicable'];
+                                $file_data_array[$file_data_key]['txt_modified'] .= 'xv_'.$file_data_array[$file_data_key]['version'].'lv_'.$file_data_array[$file_data_key]['local_version'];
                             }
                             // only perform the md5-check if the versions match anyway - we'd be comparing apples with bananas if we checked the hashes otherwise -- end
                         }
@@ -393,7 +431,7 @@ function cpg_versioncheckPopulateArray($file_data_array) {
                 if ($file_data_array[$file_data_key]['status'] == 'remove') {
                     // should the file have been removed ? --- start
                         $file_data_array[$file_data_key]['txt_missing'] = $lang_versioncheck_php['existing'];
-                        $file_data_array[$file_data_key]['txt_version'] = $lang_versioncheck_php['not_applicable'];
+//                        $file_data_array[$file_data_key]['txt_version'] = $lang_versioncheck_php['not_applicable'];
                         if ($displayOption_array['no_modification_check'] != 1) {
                             $file_data_array[$file_data_key]['txt_modified'] = $lang_versioncheck_php['not_applicable'];
                         } else {
@@ -461,6 +499,8 @@ EOT;
     print "    <fullpath>".$file_data_values['fullpath']."</fullpath>".$LINEBREAK;
     $loopCounter++;
     if (in_array($file_data_array[$file_data_key]['extension'],$textFileExtensions_array) == TRUE) { // the file is not binary --- start
+    	$file_data_array[$file_data_key]['version'] = extractCpgVersion($file_data_values['fullpath']);
+/*
       $handle = @fopen($file_data_values['fullpath'], 'r');
       $blob = '';
       $blob = @fread($handle, filesize($file_data_values['fullpath']));
@@ -479,6 +519,7 @@ EOT;
       if (strlen($file_data_array[$file_data_key]['version']) > 6) {
         $file_data_array[$file_data_key]['version']= $lang_versioncheck_php['not_applicable'];
       }
+*/
     } else { // the file is not binary --- end
         $file_data_array[$file_data_key]['version'] = '';
     }
@@ -493,7 +534,7 @@ EOT;
     }
     print "    <status>".$status."</status>".$LINEBREAK;
     $loopCounter++;
-    if ($file_data_array[$file_data_key]['permission'] != '') {
+    if (_aryVal($file_data_array[$file_data_key],'permission') != '') {
       $permission = $file_data_array[$file_data_key]['permission'];
     } else {
       $permission = 'read';
@@ -570,24 +611,24 @@ EOT;
   $underline .= $LINEBREAK;
   // loop through all the elements in $file_data_array (which equals looping thorugh all folders and files) once more and create the textual output
   foreach ($file_data_array as $file_data_values) {
-    if (($displayOption_array['errors_only'] == 0) || ($displayOption_array['errors_only'] == 1 && $file_data_values['comment'] != '')) { // only display if corrsponding option is not disabled --- start
-        if ($displayOption_array['hide_images'] && in_array($file_data_values['extension'],$imageFileExtensions_array) == TRUE) {// Only display image if corresponding option is not enabled --- start
+    if (($displayOption_array['errors_only'] == 0) || ($displayOption_array['errors_only'] == 1 && _aryVal($file_data_values,'comment') != '')) { // only display if corrsponding option is not disabled --- start
+        if ($displayOption_array['hide_images'] && in_array(_aryVal($file_data_values,'extension'),$imageFileExtensions_array) == TRUE) {// Only display image if corresponding option is not enabled --- start
             // Do nothing
         } else {
             $output .= cpg_fillArrayFieldWithSpaces(ltrim($loopCounter), $maxLength_array['counter'],'left');
             $output .= $textSeparator;
-            $output .= cpg_fillArrayFieldWithSpaces($file_data_values['txt_folderfile'], $maxLength_array['folderfile']);
+            $output .= cpg_fillArrayFieldWithSpaces(_aryVal($file_data_values,'txt_folderfile'), $maxLength_array['folderfile']);
             $output .= $textSeparator;
-            $output .= cpg_fillArrayFieldWithSpaces($file_data_values['fullpath'], $maxLength_array['fullpath']);
+            $output .= cpg_fillArrayFieldWithSpaces(_aryVal($file_data_values,'fullpath'), $maxLength_array['fullpath']);
             $output .= $textSeparator;
-            $output .= cpg_fillArrayFieldWithSpaces($file_data_values['txt_missing'], $maxLength_array['exist']);
+            $output .= cpg_fillArrayFieldWithSpaces(_aryVal($file_data_values,'txt_missing'), $maxLength_array['exist']);
             $output .= $textSeparator;
-            $output .= cpg_fillArrayFieldWithSpaces($file_data_values['local_readwrite'].$file_data_values['txt_readwrite'], $maxLength_array['readwrite']);
+            $output .= cpg_fillArrayFieldWithSpaces(_aryVal($file_data_values,'local_readwrite')._aryVal($file_data_values,'txt_readwrite'), $maxLength_array['readwrite']);
             $output .= $textSeparator;
-            $output .= cpg_fillArrayFieldWithSpaces($file_data_values['local_version'].$file_data_values['txt_version'], $maxLength_array['version']);
+            $output .= cpg_fillArrayFieldWithSpaces(_aryVal($file_data_values,'local_version')._aryVal($file_data_values,'txt_version'), $maxLength_array['version']);
             $output .= $textSeparator;
             if ($displayOption_array['no_modification_check'] != 1) {
-                $output .= cpg_fillArrayFieldWithSpaces($file_data_values['txt_modified'], $maxLength_array['modified']);
+                $output .= cpg_fillArrayFieldWithSpaces(_aryVal($file_data_values,'txt_modified'), $maxLength_array['modified']);
                 $output .= $textSeparator;
             }
             if ($file_data_values['comment'] != '') {
@@ -653,7 +694,7 @@ EOT;
   </tr>
 EOT;
   foreach ($file_data_array as $file_data_values) {
-    if (isset($displayOption_array['hide_images']) && $displayOption_array['hide_images'] && isset($file_data_values['extension']) && in_array($file_data_values['extension'],$imageFileExtensions_array) == TRUE) {// Only display image if corresponding option is not enabled --- start
+    if (isset($displayOption_array['hide_images']) && $displayOption_array['hide_images'] && isset($file_data_values['extension']) && in_array($file_data_values['extension'], $imageFileExtensions_array) == TRUE) {// Only display image if corresponding option is not enabled --- start
         // Do nothing
     } else {
         if (($loopCounter_array['display']/2) == floor($loopCounter_array['display']/2)) {
