@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $Revision: 8862 $
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * lang/estonian.php
+ * @since  1.6.06
+ */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -2498,7 +2495,7 @@ $lang_util_php['update_full_normal'] = 'Nii muudetud suurusega, kui täismõõdu
 $lang_util_php['update_full'] = 'Ainult täismõõdus (kui koopia originaalist on olemas)';
 $lang_util_php['delete_back'] = 'Kustuta vesimärgistatud originaalkujutiste tagavarakoopia';
 $lang_util_php['delete_back_explanation'] = 'Kustutab tagavarakoopia. Sellega hoiab kokku natuke ketta mahtu aga vesimärki ei ole võimalik enam tagasi võtta!!! Pärast seda on vesimärk alaline.';
-$lang_util_php['finished'] = '<br />Pisipiltide/kujutiste uuendamine lõpetatud!<br />';
+$lang_util_php['finished'] = 'Pisipiltide/kujutiste uuendamine lõpetatud!';
 $lang_util_php['autorefresh'] = 'Automaatselt värskenda (ei pea enam klõpsama jätkamise nuppu)';
 $lang_util_php['refresh_db'] = 'Lae uuesti faili mõõtude ja mahu info';
 $lang_util_php['refresh_db_explanation'] = 'See laeb uuesti faili mahu ja mõõdud. Kasuta seda, kui kettalimiit on ebakorrektne või kui faile on käsitsi muudetud.';

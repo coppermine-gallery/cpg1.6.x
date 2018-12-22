@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * lang/french.php
+ * @since  1.6.06
+ */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -2378,7 +2375,7 @@ if (defined('UTIL_PHP')) {
  $lang_util_php['update_full'] = 'Uniquement les images de taille originale (si une copie de l\'originale est disponible)';
  $lang_util_php['delete_back'] = 'Effacer la copie de l\'image originale (Mod filigrane)';
  $lang_util_php['delete_back_explanation'] = 'Cela va supprimer la copie de l\'image originale. <br>Vous gagnerez ainsi de la place sur votre serveur mais ne pourrez pas annuler le filigrane de votre image par la suite <br>Le filigrane sera permanent après cette opération';
- $lang_util_php['finished'] = '<br />Terminer la mise à jour des vignettes/images<br />';
+ $lang_util_php['finished'] = 'Terminer la mise à jour des vignettes/images';
  $lang_util_php['autorefresh'] = 'Réactualisation automatique de la page (inutile de cliquer sur le bouton CONTINUEZ)<br />';
  $lang_util_php['refresh_db'] = 'Recharger les informations de poids et de taille';
  $lang_util_php['refresh_db_explanation'] = 'Cela va recharger les informations de poids et de taille. Utilisez cette fonction si les quotas sont incorrects ou si vous avez changé manuellement ces données.';

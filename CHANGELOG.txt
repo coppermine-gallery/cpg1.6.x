@@ -7,7 +7,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * CHANGELOG.txt
- * @since  1.6.05
+ * @since  1.6.06
  */
 Changelog
 =========
@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2018-12-22 [O,A] Changed Admin Tools to drop-in widgets {ron4mac}
 2018-12-21 [S] Fixed XSS issue {eenemeenemuu}
 2018-12-20 [B] Catch system resource errors during HTML5 upload {ron4mac}
 2018-11-20 [O] Replace config max upload filesize with combo UI element(s) {ron4mac}

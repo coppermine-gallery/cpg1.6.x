@@ -7,7 +7,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * js/admin.js
- * @since  1.6.05
+ * @since  1.6.06
  */
 
 function resetToDefault(theFieldId, fieldType, numberOfItems) 
@@ -170,9 +170,9 @@ function adminPageLoaded(){
 }
 
 function mfuCalc (id) {
-	var n = $('#'+id+'_n').val();
-	var m = $('#'+id+'_m').val();
-	$('#'+id).val(n*m);
+	var n = $(id+'_n').val();
+	var m = $(id+'_m').val();
+	$(id).val(n*m);
 }
 
 addonload('adminPageLoaded()');

@@ -1,20 +1,16 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
-
-if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * include/logger.inc.php
+ * @since  1.6.06
+ */
+defined('IN_COPPERMINE') or die('Not in Coppermine...');
 
 // Initiate defines
 define('CPG_SECURITY_LOG', 'security');
@@ -103,7 +99,7 @@ function& getloglist($folder)
 
     $dir = opendir($folder);
     while (($file = readdir($dir)) !== FALSE) {
-        if (is_file($folder . $file) && $file != 'log_header.inc.php') {
+        if (is_file($folder . $file) && $file != 'index.html') {
             $file_array[$file] = array(
                 'filename' => $file,
                 'logname'  => str_replace('.log.php', '', $file),

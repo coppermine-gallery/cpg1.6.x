@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * admin.php
- * @since  1.6.05
+ * @since  1.6.06
  */
 
 define('IN_COPPERMINE', true);
@@ -458,8 +458,8 @@ EOT;
 				$js_default_values['textfield'][] = array('key' => $key, 'warning' => $warningText);
 				
 				$admin_page .= '<span id="'.$key.'_wrapper" class="'.$highlightFieldCSS.'">'
-					.'<input type="number" class="textinput" min="1" step="0.1" '.$widthOption.$sizeOption.$maxlengthOption.' id="'.$key.'_n" value="'.$kmgVals[0].'"'.$readonly_text.' tabindex="'.$tabindexCounter.'" title="'.str_replace("'", "\'", htmlspecialchars($warningText)).'" onchange="mfuCalc(\''.$key.'\')" />'
-					.' <select id="'.$key.'_m" onchange="mfuCalc(\''.$key.'\')">'.kmgOpts($kmgVals[1]).'</select>'
+					.'<input type="number" class="textinput" min="1" step="0.1" '.$widthOption.$sizeOption.$maxlengthOption.' id="'.$key.'_n" value="'.$kmgVals[0].'"'.$readonly_text.' tabindex="'.$tabindexCounter.'" title="'.str_replace("'", "\'", htmlspecialchars($warningText)).'" onchange="mfuCalc(\'#'.$key.'\')" />'
+					.' <select id="'.$key.'_m" onchange="mfuCalc(\'#'.$key.'\')">'.kmgOpts($kmgVals[1]).'</select>'
 					.'<input type="hidden" name="'.$key.'" id="'.$key.'" value="'.$admin_data_array[$key].'" />'
 					.$readonly_message.'</span>';
 

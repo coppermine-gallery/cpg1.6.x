@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * lang/german.php
+ * @since  1.6.06
+ */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -2403,7 +2400,7 @@ $lang_util_php['update_full_normal'] = 'Sowohl Bild in Zwischengrösse als auch 
 $lang_util_php['update_full'] = 'Nur das Original-Bild (wenn eine Kopie des Originals verfügbar ist)';
 $lang_util_php['delete_back'] = 'Sicherheitskopie des Original-Bildes löschen (Wasserzeichen-Mod)';
 $lang_util_php['delete_back_explanation'] = 'Diese Operation wird die Sicherheitskopie löschen. Dadurch wird etwas Speicherplatz freigegeben, aber als Nachteil wird das Wasserzeichen nicht mehr rückgängig zu machen und dadurch permanent sein!';
-$lang_util_php['finished'] = '<br />Aktualisierung der Bilder / Thumbnails abgeschlossen<br />';
+$lang_util_php['finished'] = 'Aktualisierung der Bilder / Thumbnails abgeschlossen';
 $lang_util_php['autorefresh'] = 'Automatische Aktualisierung (kein Klick auf "weiter" mehr notwendig)';
 $lang_util_php['refresh_db'] = 'Informationen über Dateigrößen und -abmessungen erneuern.';
 $lang_util_php['refresh_db_explanation'] = 'Diese Option liest die Dateigrößen und -abmessungen erneut ein. Benutze sie, wenn die Speicherplatz-Anzeige unkorrekt erscheint oder wenn Du die Dateien manuell verändert hast..';

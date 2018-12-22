@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * lang/english.php
- * @since  1.6.05
+ * @since  1.6.06
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -2505,7 +2505,7 @@ $lang_util_php['update_full_normal'] = 'Both resized and full sized (if an origi
 $lang_util_php['update_full'] = 'Just full sized (if an original copy is available)';
 $lang_util_php['delete_back'] = 'Delete original image backup for watermarked images';
 $lang_util_php['delete_back_explanation'] = 'This will delete the backup image. You will save some disk space but not be able anymore to undo the watermark!!! After that the watermark will be permanent.';
-$lang_util_php['finished'] = '<br />Finished updating thumbs/images!<br />';
+$lang_util_php['finished'] = 'Finished updating thumbs/images!';
 $lang_util_php['autorefresh'] = 'Auto refresh (no need to click continue button anymore)';
 $lang_util_php['refresh_db'] = 'Reload file dimensions and size information.';
 $lang_util_php['refresh_db_explanation'] = 'This will re-read file sizes and dimensions. Use this if quota\'s are incorrect or you have changed the files manually.';
@@ -2550,6 +2550,9 @@ $lang_util_php['keyword_replace_after'] = 'After conversion, replace %s with %s'
 $lang_util_php['keyword_replace_values'] = array('_'=>'underscore', '-'=>'hyphen', '~'=>'tilde');
 $lang_util_php['keyword_explanation'] = 'This will convert the keyword separator for all your files from one value to another value. See the help documentation for details.';
 $lang_util_php['nothing_deleted'] = 'There was nothing to delete.'; // cpg1.6
+$lang_util_php['warnings'] = 'Warnings'; // cpg1.6
+$lang_util_php['errors'] = 'Errors'; // cpg1.6
+$lang_util_php['complete'] = 'Action Complete'; // cpg1.6
 }
 
 // ------------------------------------------------------------------------- //
