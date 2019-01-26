@@ -7668,7 +7668,7 @@
   </element>
   <element>
     <fullpath>plugins/upload_h5a/initialize.inc.php</fullpath>
-    <version>1.6.03</version>
+    <version>1.6.06</version>
     <status>mandatory</status>
     <permission>read</permission>
     <hash>5e0648205432625aeb403b080be41b35</hash>
