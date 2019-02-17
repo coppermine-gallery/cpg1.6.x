@@ -6865,7 +6865,7 @@
   </element>
   <element>
     <fullpath>include/upgrader.inc.php</fullpath>
-    <version>1.6.03</version>
+    <version>1.6.06</version>
     <status>mandatory</status>
     <permission>read</permission>
     <hash>dd0cc89ff7981c003b0d296d0f061003</hash>
@@ -9264,7 +9264,7 @@
   </element>
   <element>
     <fullpath>upgrader.php</fullpath>
-    <version>1.6.03</version>
+    <version>1.6.06</version>
     <status>optional</status>
     <permission>read</permission>
     <hash>e092128067a5a7cf0e1c0062973860ce</hash>
