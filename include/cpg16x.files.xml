@@ -6886,7 +6886,7 @@
   </element>
   <element>
     <fullpath>index.php</fullpath>
-    <version>1.6.03</version>
+    <version>1.6.06</version>
     <status>mandatory</status>
     <permission>read</permission>
     <hash>132746dc491c0642b37486308203514b</hash>
