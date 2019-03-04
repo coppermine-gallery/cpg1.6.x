@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2019-03-04 [M] Fail when CONFIG table cannot be read from DB {ron4mac}
 2019-01-26 [B] Correct upload issue by removing memory_limit from HTML5 max upload size calculation {ron4mac}
 2018-12-22 [O,M] Updated version check to a functioning condition {ron4mac}
 2018-12-22 [O,A] Changed Admin Tools to drop-in widgets {ron4mac}

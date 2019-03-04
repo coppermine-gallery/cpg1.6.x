@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/init.inc.php
- * @since  1.6.05
+ * @since  1.6.06
  */
 
 define('COPPERMINE_VERSION', '1.6.05');
@@ -178,6 +178,7 @@ if (!$CPGDB->isConnected()) {
 
 // Retrieve DB stored configuration
 $result = cpg_db_query("SELECT name, value FROM {$CONFIG['TABLE_CONFIG']}");
+if (!$result) cpg_db_error('When read CONFIG from database ');
 while ( ($row = $result->fetchAssoc()) ) {
     $CONFIG[$row['name']] = $row['value'];
 } // while

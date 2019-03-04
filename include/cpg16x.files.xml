@@ -5366,7 +5366,7 @@
   </element>
   <element>
     <fullpath>include/init.inc.php</fullpath>
-    <version>1.6.05</version>
+    <version>1.6.06</version>
     <status>mandatory</status>
     <permission>read</permission>
     <hash>962c29d1b70518345fa9404efb1daa4c</hash>
