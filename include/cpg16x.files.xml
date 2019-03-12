@@ -319,7 +319,7 @@
   </element>
   <element>
     <fullpath>displayimage.php</fullpath>
-    <version>1.6.03</version>
+    <version>1.6.06</version>
     <status>mandatory</status>
     <permission>read</permission>
     <hash>2126bf30a0b6bb62c95ef6a26de32310</hash>
