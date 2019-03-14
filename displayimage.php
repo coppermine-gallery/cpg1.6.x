@@ -386,6 +386,8 @@ if (!$superCage->get->keyExists('fullsize') && !$superCage->get->keyExists('ajax
 set_js_var('position', $pos);
 set_js_var('album', $album);
 set_js_var('cat', $cat);
+set_js_var('count', $pic_count);
+
 if ($superCage->get->keyExists('msg_id')) {
     set_js_var('msg_id', $superCage->get->getInt('msg_id'));
     set_js_var('page', $superCage->get->getInt('page'));
