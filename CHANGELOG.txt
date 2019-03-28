@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2019-03-28 [B] Correct regex for valid file name in showthumb.php {ron4mac}
 2019-03-12 [M] Only build filmstrip if it will be displayed {ron4mac}
 2019-03-11 [B] Remove unwarranted urldecode() in theme_html_picture() {ron4mac}
 2019-03-04 [M] Fail when CONFIG table cannot be read from DB {ron4mac}
