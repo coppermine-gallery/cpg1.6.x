@@ -7,7 +7,7 @@
  * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
- * uniload.php
+ * tools/reset_views/reset_views.php
  * @since  1.6.06
  */
 

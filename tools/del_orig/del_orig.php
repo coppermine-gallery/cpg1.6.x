@@ -7,7 +7,7 @@
  * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
- * uniload.php
+ * tools/del_orig/del_orig.php
  * @since  1.6.06
  */
 
