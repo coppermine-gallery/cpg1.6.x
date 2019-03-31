@@ -5369,7 +5369,7 @@
 		<version>1.6.06</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>95fd7b92e8d2033c75825c9aadd9091c</hash>
+		<hash>86586d77cac2e0fdc6cb5f3ad2a3f521</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
