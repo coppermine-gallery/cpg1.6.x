@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2019-04-17 [C] Added title to intermediate-sized image, changed alt attritube (thread ID 79654) {eenemeenemuu}
 2019-03-28 [B] Correct regex for valid file name in showthumb.php {ron4mac}
 2019-03-12 [M] Only build filmstrip if it will be displayed {ron4mac}
 2019-03-11 [B] Remove unwarranted urldecode() in theme_html_picture() {ron4mac}

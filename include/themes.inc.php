@@ -3249,7 +3249,9 @@ function theme_html_picture()
         $picture_url = get_pic_url($CURRENT_PIC_DATA, 'fullsize');
     }
 
-    $pic_title = '';
+    if (!$pic_title) {
+        $pic_title = $CURRENT_PIC_DATA['filename'];
+    }
     $mime_content = cpg_get_type($CURRENT_PIC_DATA['filename']);
 
     if ($mime_content['content']=='movie' || $mime_content['content']=='audio') {
@@ -3301,8 +3303,8 @@ function theme_html_picture()
                 } else {
                     $pic_html .= "<a href=\"javascript:;\" onclick=\"MM_openBrWindow('displayimage.php?pid=$pid&amp;fullsize=1','" . uniqid(rand()) . "','scrollbars=no,toolbar=no,status=no,resizable=yes,width=$winsizeX,height=$winsizeY')\">";
                 }
-                $pic_title = $lang_display_image_php['view_fs'] . $LINEBREAK . '==============' . $LINEBREAK . $pic_title;
-                $pic_html .= "<img src=\"images/image.gif?id=".floor(rand()*1000+rand())."\" width=\"{$image_size['width']}\" height=\"{$image_size['height']}\"  border=\"0\" alt=\"{$lang_display_image_php['view_fs']}\" /><br />";
+                $pic_title_fs = $lang_display_image_php['view_fs'] . $LINEBREAK . '==============' . $LINEBREAK . $pic_title;
+                $pic_html .= "<img src=\"images/image.gif?id=".floor(rand()*1000+rand())."\" width=\"{$image_size['width']}\" height=\"{$image_size['height']}\"  border=\"0\" alt=\"{$pic_title}\" title=\"{$pic_title_fs}\" /><br />";
                 $pic_html .= $pic_html_href_close . '</td></tr></table>';
                 //PLUGIN FILTER
                 $pic_html = CPGPluginAPI::filter('html_image_reduced_overlay', $pic_html);
@@ -3319,8 +3321,8 @@ function theme_html_picture()
                 } else {
                     $pic_html = "<a href=\"javascript:;\" onclick=\"MM_openBrWindow('displayimage.php?pid=$pid&amp;fullsize=1','" . uniqid(rand()) . "','scrollbars=no,toolbar=no,status=no,resizable=yes,width=$winsizeX,height=$winsizeY')\">";
                 }
-                $pic_title = $lang_display_image_php['view_fs'] . $LINEBREAK . '==============' . $LINEBREAK . $pic_title;
-                $pic_html .= "<img src=\"" . $picture_url . "\" {$image_size['geom']} class=\"image\" border=\"0\" alt=\"{$lang_display_image_php['view_fs']}\" /><br />";
+                $pic_title_fs = $lang_display_image_php['view_fs'] . $LINEBREAK . '==============' . $LINEBREAK . $pic_title;
+                $pic_html .= "<img src=\"" . $picture_url . "\" {$image_size['geom']} class=\"image\" border=\"0\" alt=\"{$pic_title}\" title=\"{$pic_title_fs}\" /><br />";
                 $pic_html .= $pic_html_href_close;
                 //PLUGIN FILTER
                 $pic_html = CPGPluginAPI::filter('html_image_reduced', $pic_html);
@@ -3328,12 +3330,12 @@ function theme_html_picture()
         } else {
             if ($CONFIG['transparent_overlay'] == 1) {
                 $pic_html = "<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td background=\"" . $picture_url . "\" width=\"{$CURRENT_PIC_DATA['pwidth']}\" height=\"{$CURRENT_PIC_DATA['pheight']}\" class=\"image\">";
-                $pic_html .= "<img src=\"images/image.gif?id=".floor(rand()*1000+rand())."\" width={$CURRENT_PIC_DATA['pwidth']} height={$CURRENT_PIC_DATA['pheight']} border=\"0\" alt=\"\" /><br />" . $LINEBREAK;
+                $pic_html .= "<img src=\"images/image.gif?id=".floor(rand()*1000+rand())."\" width={$CURRENT_PIC_DATA['pwidth']} height={$CURRENT_PIC_DATA['pheight']} border=\"0\" alt=\"{$pic_title}\" title=\"{$pic_title}\" /><br />" . $LINEBREAK;
                 $pic_html .= "</td></tr></table>";
                 //PLUGIN FILTER
                 $pic_html = CPGPluginAPI::filter('html_image_overlay', $pic_html);
             } else {
-                $pic_html = "<img src=\"" . $picture_url . "\" {$image_size['geom']} class=\"image\" border=\"0\" alt=\"\" /><br />" . $LINEBREAK;
+                $pic_html = "<img src=\"" . $picture_url . "\" {$image_size['geom']} class=\"image\" border=\"0\" alt=\"{$pic_title}\" title=\"{$pic_title}\" /><br />" . $LINEBREAK;
                 //PLUGIN FILTER
                 $pic_html = CPGPluginAPI::filter('html_image', $pic_html);
             }
