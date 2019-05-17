@@ -5316,7 +5316,7 @@
 	</element>
 	<element>
 		<fullpath>include/functions.inc.php</fullpath>
-		<version>1.6.04</version>
+		<version>1.6.07</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>33c1ec3f656f03b7f25c92c111c26c62</hash>
