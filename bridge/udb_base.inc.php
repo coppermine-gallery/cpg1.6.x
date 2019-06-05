@@ -1,18 +1,15 @@
 <?php
-/*************************
- Coppermine Photo Gallery
- *************************
- Copyright (c) 2003-2016 Coppermine Dev Team
- v1.0 originally written by Gregory Demar
-
- This program is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License version 3
- as published by the Free Software Foundation.
-
- ********************************************
- Coppermine version: 1.6.01
- $HeadURL$
- ********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * bridge/udb_base.inc.php
+ * @since  1.6.04
+ */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -27,10 +24,13 @@ class core_udb
 
 	protected function connect ($obj = null)
 	{
-		global $CONFIG;
+		global $CONFIG, $CPGDB;
+
+		// Start with default database
+		$this->dbObj = $CPGDB;
 
 		// Define whether we can join tables or not in SQL queries (same host & same db or user or positive check)
-		$this->can_join_tables = ($this->db['host'] == $CONFIG['dbserver'] && ($this->db['name'] == $CONFIG['dbname'] || $this->db['user'] == $CONFIG['dbuser'] || $this->query("SELECT NULL FROM ".$this->usertable." LIMIT 1")));
+		$this->can_join_tables = ($this->db['host'] == $CONFIG['dbserver'] && ($this->db['name'] == $CONFIG['dbname'] || $this->db['user'] == $CONFIG['dbuser'] || $CPGDB->query("SELECT NULL FROM ".$this->usertable." LIMIT 1")));
 
 		if ($obj){
 			$this->dbObj = $obj;
@@ -38,26 +38,25 @@ class core_udb
 			// Connect to udb database if necessary
 			if (!$this->can_join_tables) {
 				$this->dbObj = new CPG_Dbase( array(
+						'dbtype'	=> $CONFIG['dbtype'],
 						'dbserver'	=> $this->db['host'],
 						'dbuser'	=> $this->db['user'],
 						'dbpass'	=> $this->db['password'],
 						'dbname'	=> $this->db['name']
 						));
 				if (!$this->dbObj->isConnected()) {
-					die("<strong>Coppermine critical error</strong>:<br />Unable to connect to UDB database !<br /><br />Error: <strong>" . $this->dbObj->getError() . "</strong>");
+					die("<strong>Coppermine critical error</strong>:<br />Unable to connect to UDB database !<br /><br />Error: <strong>" . $this->dbObj->getError(false, true) . "</strong>");
 				}
-			} else {
-				$this->dbObj = null;
 			}
 		}
 	}
-	// end function connect
 
 
 	public function query ($sql)
 	{
-		return $this->dbObj->query($sql);
+		return cpg_db_query($sql, $this->dbObj);
 	}
+
 
 	public function authenticate ()
 	{
@@ -517,7 +516,7 @@ class core_udb
 					. "FROM {$CONFIG['TABLE_ALBUMS']} AS a "
 						. "INNER JOIN {$this->usertable} AS u ON u.{$f['user_id']} = a.category - " . FIRST_USER_CAT . " "
 						. "INNER JOIN {$CONFIG['TABLE_PICTURES']} AS p ON p.aid = a.aid "
-					. "WHERE ((ISNULL(approved) OR approved='YES') AND category > " . FIRST_USER_CAT . ") $FORBIDDEN_SET GROUP BY user_id "
+					. "WHERE ((ISNULL(approved) OR approved='YES') AND category > " . FIRST_USER_CAT . ") $FORBIDDEN_SET GROUP BY category, user_id "
 					. "ORDER BY category "
 					. "LIMIT $lower_limit, $users_per_page ";
 			$result = cpg_db_query($sql);

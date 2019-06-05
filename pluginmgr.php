@@ -1,18 +1,15 @@
 <?php
-/**************************
-  Coppermine Photo Gallery
- **************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
- ************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
- ************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * pluginmgr.php
+ * @since  1.6.04
+ */
 
 // ------------------------------------------------------------------------- //
 //  Open Plugin API (OpenPAPI) for Coppermine Photo Gallery                  //
@@ -527,13 +524,15 @@ switch ($op) {
 		if (isset($xa['css'])) {
 			if (!is_array($xa['css'])) $xa['css'] = array($xa['css']);
 			foreach ($xa['css'] as $css) {
-				$meta[] = '<link rel="stylesheet" href="plugins/'.$actonplugin->path.'/'.$css.'" type="text/css" />';
+				$csrc = is_url($css) ? $css : ('plugins/'.$actonplugin->path.'/'.$css);
+				$meta[] = '<link rel="stylesheet" href="'.$csrc.'" type="text/css" />';
 			}
 		}
 		if (isset($xa['js'])) {
 			if (!is_array($xa['js'])) $xa['js'] = array($xa['js']);
 			foreach ($xa['js'] as $js) {
-				js_include('plugins/'.$actonplugin->path.'/'.$js);
+				$jsrc = is_url($js) ? $js : ('plugins/'.$actonplugin->path.'/'.$js);
+				js_include($jsrc);
 			}
 		}
 

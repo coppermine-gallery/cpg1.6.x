@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * displayimage.php
+ * @since  1.6.06
+ */
 
 define('IN_COPPERMINE', true);
 define('DISPLAYIMAGE_PHP', true);
@@ -34,7 +31,7 @@ if (!USER_ID && ($CONFIG['allow_unlogged_access'] <= 1)) {
 }
 
 if (USER_ID && (USER_ACCESS_LEVEL <= 1)) {
-    cpg_die(ERROR, ((USER_ACCESS_LEVEL == 1) ? $lang_errors['access_thumbnail_only'] : $lang_errors['access_none']));
+    cpg_die(ERROR, ((USER_ACCESS_LEVEL == 1) ? $lang_errors['access_thumbnail_only'] : $lang_errors['access_none']), __FILE__, __LINE__);
 }
 
 if (!$superCage->get->keyExists('slideshow')) {
@@ -389,6 +386,8 @@ if (!$superCage->get->keyExists('fullsize') && !$superCage->get->keyExists('ajax
 set_js_var('position', $pos);
 set_js_var('album', $album);
 set_js_var('cat', $cat);
+set_js_var('count', $pic_count);
+
 if ($superCage->get->keyExists('msg_id')) {
     set_js_var('msg_id', $superCage->get->getInt('msg_id'));
     set_js_var('page', $superCage->get->getInt('page'));
@@ -475,10 +474,10 @@ if ($superCage->get->keyExists('fullsize')) {
 
     $meta_keywords .= $meta_nav;
 
-    // Display Filmstrip if the album is not search -- commented out due to thread ID 64312
-    //if ($album != 'search') {
-        $film_strip = display_film_strip($album, (isset($cat) ? $cat : 0), $pos, true);
-    //}
+	$film_strip = '';
+	if ($CONFIG['display_film_strip'] == 1) {
+		$film_strip = display_film_strip($album, (isset($cat) ? $cat : 0), $pos, true);
+	}
 
     // Set the picture id for use in js
     set_js_var('picture_id', $CURRENT_PIC_DATA['pid']);

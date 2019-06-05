@@ -10,7 +10,7 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
 **********************************************/
 
@@ -49,7 +49,7 @@ if (isset($bridge_lookup)) {
 
     class cpg_udb extends core_udb {
 
-        function cpg_udb()
+        function __construct ()
         {
             global $BRIDGE, $CONFIG, $PHORUM;
 

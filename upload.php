@@ -10,7 +10,7 @@
   as published by the Free Software Foundation.
 
  ************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
  ************************************/
 
@@ -56,9 +56,11 @@ $icon_array['cancel'] = cpg_fetch_icon('cancel', 2);
 $icon_array['upload'] = cpg_fetch_icon('upload', 2);
 $icon_array['info'] = cpg_fetch_icon('info', 2);
 
-// If we have "single" key in GET then we will force the upload form mechanism to single file upload
-// This acts as a fallback if js or flash is disabled
-if ($superCage->get->keyExists('single')) {
+if ($superCage->get->keyExists('html5')) {
+    $upload_form = 'upload_h5a';
+} elseif ($superCage->get->keyExists('single')) {
+	// If we have "single" key in GET then we will force the upload form mechanism to single file upload
+	// This acts as a fallback if js or flash is disabled
     $upload_form = 'upload_sgl';
 } elseif ($CONFIG['allow_user_upload_choice'] && $superCage->get->keyExists('method')) {
     // pull in upload method from GET parameter 'method'
@@ -220,16 +222,16 @@ function form_alb_list_box($text, $name)
 
     echo <<<EOT
     <tr>
-        <td class="tableb tableb_alternate" width="50">
-            $text
-        </td>
-        <td class="tableb tableb_alternate" valign="top">
-            <select name="$name" class="listbox">
-            <option value="">{$lang_common['select_album']}</option>
-            $options
-            </select>
-            $only_empty_albums
-        </td>
+      <td class="tableb tableb_alternate" width="50">
+        {$text}
+      </td>
+      <td class="tableb tableb_alternate" valign="top">
+        <select name="{$name}" class="listbox">
+          <option value="">{$lang_common['select_album']}</option>
+          {$options}
+        </select>
+        {$only_empty_albums}
+      </td>
     </tr>
 
 EOT;
@@ -260,16 +262,16 @@ EOT;
 
 
 // The close form function creates the submit button and the closing tags.
-function close_form($button_value,$progress=0,$icon='ok')
+function close_form($button_value, $progress=0, $icon='ok')
 {
     // Pull the language array into the function.
     global $lang_upload_php, $THEME_DIR, $icon_array;
 
     // Create the submit button and close the form.
-    print <<<EOT
-        <tr>
-                <td colspan="2" align="center" class="tablef">
-                    <span id="cpg_progress_bar" style="display:none">
+    echo <<<EOT
+      <tr>
+        <td colspan="2" align="center" class="tablef">
+          <span id="cpg_progress_bar" style="display:none">
 EOT;
     if ($progress == 1) {
         if (defined('THEME_HAS_PROGRESS_GRAPHICS')) {
@@ -277,17 +279,15 @@ EOT;
         } else {
             $prefix = '';
         }
-        print '                         <img src="' . $prefix . 'images/loader.gif" border="0" alt="" title="' . $lang_upload_php['please_wait'] . '" />';
+        echo '            <img src="' . $prefix . 'images/loader.gif" border="0" alt="" title="' . $lang_upload_php['please_wait'] . '" />';
     }
-    print '                        </span>';
-    print '                        <span id="cpg_upload_button" style="display:block">';
-    print '                            <button type="submit" value="'.$button_value.'" class="button" />'.$icon_array[$icon] . $button_value.'</button>';
-    print '                        </span>';
-    print <<<EOT
-                </td>
-
-        </tr>
-
+    echo <<<EOT
+          </span>
+          <span id="cpg_upload_button" style="display:block">
+            <button type="submit" value="{$button_value}" class="button">{$icon_array[$icon]}{$button_value}</button>
+          </span>
+        </td>
+      </tr>
 EOT;
 }
 
@@ -401,7 +401,7 @@ if (!$superCage->post->keyExists('process') && !$superCage->post->keyExists('plu
                 . ($key == $upload_form ? ' selected="selected"' : '')
                 . '>' . $label . '</option>';
         }
-        $upload_select .= '</select>' . '&nbsp'
+        $upload_select .= '</select>' . '&nbsp;'
             . cpg_display_help('f=configuration.htm&amp;as=admin_upload_mechanism&amp;ae=admin_upload_mechanism_end', '450', '300');
     }
 

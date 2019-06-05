@@ -10,7 +10,7 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
 **********************************************/
 
@@ -66,9 +66,17 @@ class CPG_Dbase
 		return $this->connected;
 	}
 
-	public function getError ()
+	public function getError ($code=false, $last=false)
 	{
-		return $this->errnum . ' : ' . $this->error;
+		if (!$last) {
+			$this->errnum = mysql_errno();
+			$this->error = mysql_error();
+		}
+		if ($code) {
+			return $this->errnum;
+		} else {
+			return $this->errnum . ' : ' . $this->error;
+		}
 	}
 
 	public function escapeStr ($str)

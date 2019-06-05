@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * lang/french.php
+ * @since  1.6.06
+ */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -390,7 +387,7 @@ $lang_smilies_inc_php['Cool'] = 'Cool';
 $lang_smilies_inc_php['Laughing'] = 'Rire';
 $lang_smilies_inc_php['Mad'] = 'Fou';
 $lang_smilies_inc_php['Razz'] = 'Razz';
-$lang_smilies_inc_php['Embarassed'] = 'Embarrassé';
+$lang_smilies_inc_php['Embarrassed'] = 'Embarrassé';
 $lang_smilies_inc_php['Crying or Very sad'] = 'Pleure ou très triste';
 $lang_smilies_inc_php['Evil or Very Mad'] = 'Diabolique ou très en colère';
 $lang_smilies_inc_php['Twisted Evil'] = 'Sadique';
@@ -837,7 +834,7 @@ $lang_admin_php['thumbnail_intermediate_full'] = 'vignette, image intermédiaire
 $lang_admin_php['thumbnail_intermediate'] = 'vignette et image intermédiaire image';
 $lang_admin_php['thumbnail_only'] = 'vignette uniquement';
 $lang_admin_php['upload_mechanism'] = 'Méthode de téléchargement par défaut';
-$lang_admin_php['upload_swf'] = 'Fichiers multiples, géré par Flash (recommandé)';
+$lang_admin_php['upload_swf'] = 'Fichiers multiples, géré par Flash';
 $lang_admin_php['upload_single'] = 'Simple (un seul fichier à la fois)';
 $lang_admin_php['allow_user_upload_choice'] = 'Autoriser les utilisateurs à choisir leur méthode de téléchargement';
 $lang_admin_php['allow_duplicate_emails_addr'] = 'Autoriser deux utilisateurs à avoir la même adresse courriel';
@@ -1059,7 +1056,7 @@ if (defined('DISPLAYIMAGE_PHP')){
  $lang_display_image_php['set_player'] = 'Changer le lecteur';
 
  $lang_picinfo['title'] ='Informations sur l\'image';
- $lang_picinfo['album name'] = 'Nom de l\'album';
+ $lang_picinfo['Album name'] = 'Nom de l\'album';
  $lang_picinfo['Rating'] = 'Note (%s votes)';
  $lang_picinfo['Date Added'] = 'Date d\'ajout';
  $lang_picinfo['Dimensions'] = 'Dimensions';
@@ -1296,7 +1293,7 @@ if (defined('EDITPICS_PHP')) {
  $lang_editpics_php['note_approve_public'] = 'Les fichier déplacés vers un album publique doivent être approuvés par un administrateur.';
  $lang_editpics_php['note_approve_private'] = 'Les fichiers déplacés vers un album privé doivent être approuvés par un administrateur.' ;
  $lang_editpics_php['note_edit_control'] = 'Les fichiers déplacés vers un album public ne peuvent plus être modifiés.';
- $lang_editpics_php['confirm_move_control'] = 'Vous n\'êtes pas autorisé à modifier les fichiers dans les albums publics.\\nEtes-vous sôr de vouloir déplacer ce fichier vers un album public ?';
+ $lang_editpics_php['confirm_move'] = 'Vous n\'êtes pas autorisé à modifier les fichiers dans les albums publics.\\nEtes-vous sôr de vouloir déplacer ce fichier vers un album public ?';
  $lang_editpics_php['success_changes'] = 'Modifications sauvegardées avec succès';
 }
 
@@ -1615,7 +1612,7 @@ if (defined('LOGIN_PHP')) {
 if (defined('LOGOUT_PHP')) {
  $lang_logout_php['logout'] = 'Déconnexion';
  $lang_logout_php['bye'] = 'Au revoir %s';
- $lang_logout_php['err_not_loged_in'] = 'Vous n\'êtes pas identifié (e)';
+ $lang_logout_php['err_not_logged_in'] = 'Vous n\'êtes pas identifié (e)';
 }
 
 // ----------------------- //
@@ -2110,7 +2107,7 @@ if (defined('UPLOAD_PHP')) {
 $lang_upload_php['title'] = 'Télécharger un fichier';
 $lang_upload_php['restrictions'] = 'Restrictions';
 $lang_upload_php['choose_method'] = 'Choisissez la méthode de téléchargement';
-$lang_upload_php['upload_swf'] = 'Fichiers multiples - Interface Flash (recommandé)';
+$lang_upload_php['upload_swf'] = 'Fichiers multiples - Interface Flash';
 $lang_upload_php['upload_single'] = 'Simple - Un seul fichier à la fois';
 $lang_upload_php['up_instr_1'] = 'Sélectionnez un albums dans la liste déroulante';
 $lang_upload_php['up_instr_2'] = 'Cliquez sur le bouton &quot;Parcourir&quot; ci-dessous et naviguez vers le fichier que vous voullez télécharger';
@@ -2153,7 +2150,7 @@ $lang_upload_php['please_wait'] = 'Merci de patienter pendant que le script tél
 $lang_upload_php['alternative_upload'] = 'Méthode de téléchargement alternative';
 $lang_upload_php['err_js_disabled'] = 'L\'interface de téléchargement Flash n\'a pas pu être chargé. Vous devez avoir JavaScript activé pour pouvoir profiter de l\'interface de téléchargement Flash.';
 $lang_upload_php['err_flash_disabled'] = 'L\'interface de téléchargement prends beaucoup de temps pour charger ou le chargement a échoué. Vérifiez que le plugin Flash est activé et qu\'une version fonctionnelle d\'Adobe Flash Player est installée.';
-$lang_upload_php['err_alternate_method'] = 'A la place, vous pouvez utiliser l\'interface de téléchargement <a href="upload.php?single=1">fichier unique</a>.';
+$lang_upload_php['err_alternate_method'] = 'A la place, vous pouvez utiliser l\'interface de téléchargement <a href="upload.php?html5=1">HTML5</a>.';
 $lang_upload_php['err_flash_version'] = 'L\'interface de téléchargement ne peut pas être chargé. Vous devriez installer ou mettre à jour Flash Player. Visitez le <a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">site Adobe</a> pour vous procurer Flash Player.';
 $lang_upload_php['flash_loading'] = 'L\'interface de téléchargement est en train de se charger. Veuillez patienter...';
 
@@ -2329,7 +2326,7 @@ if (defined('UTIL_PHP')) {
  $lang_util_php['title_set_to'] = 'titre changé en';
  $lang_util_php['submit_form'] = 'soumettre';
  $lang_util_php['titles_updated'] = '%s Titres mis à jour.';
- $lang_util_php['updated_succesfully'] = 'mise à jour effectuée avec succès';
+ $lang_util_php['updated_successfully'] = 'mise à jour effectuée avec succès';
  $lang_util_php['error_create'] = 'Erreur lors de la création';
  $lang_util_php['continue'] = 'Traiter d\'autres images';
  $lang_util_php['main_success'] = 'Le fichier %s est maintenant utilisé comme image principale';
@@ -2356,8 +2353,8 @@ if (defined('UTIL_PHP')) {
  $lang_util_php['filename_us'] = 'Changer 2003_11_23_13_20_20.jpg en 11/23/2003 13:20';
  $lang_util_php['filename_time'] = 'Changer 2003_11_23_13_20_20.jpg en 13:20';
  $lang_util_php['notitle'] = 'Appliquer uniquement aux fichiers sans titres';
- $lang_util_php['delete_title'] = 'Supprimer le titre des photos';
- $lang_util_php['delete_title_explanation'] = 'Cela va supprimer l\'ensemble des titres des photos de l\'album sélectionné.';
+ //$lang_util_php['delete_title'] = 'Supprimer le titre des photos';
+ //$lang_util_php['delete_title_explanation'] = 'Cela va supprimer l\'ensemble des titres des photos de l\'album sélectionné.';
  $lang_util_php['delete_original'] = 'Supprimer les photos dans leur taille d\'origine';
  $lang_util_php['delete_original_explanation'] = 'Cela va supprimer les photos à la taille d\'origine';
  $lang_util_php['delete_intermediate'] = 'Supprimer les images intermédiaires';
@@ -2378,7 +2375,7 @@ if (defined('UTIL_PHP')) {
  $lang_util_php['update_full'] = 'Uniquement les images de taille originale (si une copie de l\'originale est disponible)';
  $lang_util_php['delete_back'] = 'Effacer la copie de l\'image originale (Mod filigrane)';
  $lang_util_php['delete_back_explanation'] = 'Cela va supprimer la copie de l\'image originale. <br>Vous gagnerez ainsi de la place sur votre serveur mais ne pourrez pas annuler le filigrane de votre image par la suite <br>Le filigrane sera permanent après cette opération';
- $lang_util_php['finished'] = '<br />Terminer la mise à jour des vignettes/images<br />';
+ $lang_util_php['finished'] = 'Terminer la mise à jour des vignettes/images';
  $lang_util_php['autorefresh'] = 'Réactualisation automatique de la page (inutile de cliquer sur le bouton CONTINUEZ)<br />';
  $lang_util_php['refresh_db'] = 'Recharger les informations de poids et de taille';
  $lang_util_php['refresh_db_explanation'] = 'Cela va recharger les informations de poids et de taille. Utilisez cette fonction si les quotas sont incorrects ou si vous avez changé manuellement ces données.';
@@ -2415,7 +2412,6 @@ if (defined('UTIL_PHP')) {
  $lang_util_php['fullpic_error'] = 'Le fichier %s n\'existe pas';
  $lang_util_php['no_prob_detect'] = 'Pas de problèmes détectés';
  $lang_util_php['no_prob_found'] = 'Pas de problèmes trouvés.';
- $lang_util_php['no_category'] = 'Pas de catégorie';
 $lang_util_php['keyword_convert'] = 'Convertir le séparateur de mots-clés';
 $lang_util_php['keyword_from_to'] = 'Convertir le séparateur de mots-clés %s en %s';
 $lang_util_php['keyword_set'] = 'Paramétrer le séparateur de mots-clés à la nouvelle valeur';

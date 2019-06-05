@@ -1,34 +1,62 @@
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory DEMAR
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * js/util.js
+ * @since  1.6.06
+ */
 
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
-**********************************************/
-
-function init_utils(){
-	jQuery.each($("div[id$='_wrapper']"), function(){
-		$(this).css('display', 'none');
-	});
+function init_utils () {
 	jQuery.each($("input[type='radio'][name='action']"), function(){
 		$(this).change(function(){
 			jQuery.each($("input[type='radio'][name='action']"), function(){
-				$('#' + this.getAttribute('id') + '_wrapper').css('display', (this.checked) ? 'block' : 'none');
+				var ttool = this.getAttribute('id');
+				var twrap = '#'+ttool+'_wrapper';
+				if (this.checked) {
+					$(twrap).load('util.ajax.php', {'_tool':ttool}, function(){$(twrap).css({'display': 'block'});});
+				} else {
+					$(twrap).css({'display': 'none'});
+					$(twrap).html('');
+				}
 			});
 		});
 	});
-	jQuery.each($("input[type='checkbox'][class='clr-val']"), function(){
-		$(this).change(function(){
-			$(this).next().next().css('display', (this.checked) ? 'none' : 'inline-block');
-		});
-	});
 }
+
+function showProgress (done, totl) {
+	var pb = document.getElementById("toolprog");
+	var p = Math.floor(100 * done / totl);
+	pb.style.width = p + '%';
+}
+
+var _toolAbort = false;
+
+var processTool = function (totl, formd) {
+	$.post('util.ajax.php', formd, function (data) {
+			if (_toolAbort) {
+				$('#toolmsgs').append('@ ABORTED @<br>');
+				$('#backtool').show();
+			} else if (data.nxi > 0) {
+				showProgress(data.nxi, totl);
+				formd.startpic = data.nxi;
+				formd.skps = data.skps;
+				formd.wrns = data.wrns;
+				formd.errs = data.errs;
+				processTool(totl, formd);
+			} else if (data.err) {
+				$('#backtool').show();
+			} else {
+				showProgress(1,1);
+				$('#backtool').show();
+			}
+			if (data.msg) {
+				$('#toolmsgs').append(data.msg);
+			}
+		}, 'json');
+	};
 
 addonload('init_utils()');

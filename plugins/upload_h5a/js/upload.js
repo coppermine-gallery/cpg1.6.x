@@ -1,17 +1,14 @@
-/**************************
-  Coppermine Photo Gallery
- **************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
- ************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
- ************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * plugins/upload_h5a/js/upload.js
+ * @since  1.6.05
+ */
 
 var redirURL = '',
 	h5u_albSel = null,
@@ -28,13 +25,16 @@ function $ae(elem, evnt, func) {
 }
 
 /* action to be taken when all files are uploaded */
-function H5up_done(errcnt) {
+function H5up_done(okcount, errcnt) {
 	var albact = '.php?album=' + h5u_albSel.value;
 	if (js_vars.user_id > 0 || js_vars.guest_edit == 1) {
 		redirURL = js_vars.site_url + '/editpics' + albact + '&newer_than=' + js_vars.timestamp;
 	} else {
 		redirURL = js_vars.site_url + '/thumbnails' + albact;
 	}
+
+	if (okcount) $.post('notifyupload.php', { album: h5u_albSel.value });
+
 	if ((js_vars.autoedit=='1') && (errcnt===0)) {
 		window.location = redirURL;
 		return;
@@ -58,6 +58,7 @@ function H5up_done(errcnt) {
 		total2do = 0,
 		totalDone = 0,
 		allDone = 0,
+		okCount = 0,
 		errCount = 0,
 		e_st, e_gc,
 		s_hd = 'none',
@@ -136,12 +137,14 @@ function H5up_done(errcnt) {
 	function _endUp() {
 		if (!qStopt) {
 			allDone = 1;
-			if (typeof(H5up_done == 'function')) H5up_done(errCount);
+			if (typeof(H5up_done == 'function')) H5up_done(okCount, errCount);
+			errCount = okCount = 0;
 		}
 	}
 
 	function NextInQueue(decr,tag) {
 		if (decr) {
+			if (tag == 'ufo') okCount++;
 			if (! --inPrg) { _endUp(); }
 		}
 		if (!qStopt && upQueue.length && (!maxXfer || inPrg < maxXfer)) {
@@ -364,15 +367,19 @@ function H5up_done(errcnt) {
 							endup();
 						}
 					} else if (this.status === 200) {
-						if ($.doChnk) {
-							cstate();
+						if (this.responseText.length) {
+							$.pBar.msg(this.responseText, true);
 						} else {
-							state();
+							if ($.doChnk) {
+								cstate();
+							} else {
+								state();
+							}
 						}
 					}
 				},
 			fail: function(e) {
-					$.pBar.msg($.xhr.statusText, true);
+					$.pBar.msg($.xhr.responseText, true);
 					//console.log(e,this);
 				}
 			};

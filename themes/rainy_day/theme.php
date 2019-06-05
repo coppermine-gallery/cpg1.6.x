@@ -10,7 +10,7 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
 **********************************************/
 
@@ -36,11 +36,11 @@ EOT;
 $template_sys_menu_button = <<<EOT
 <!-- BEGIN {BLOCK_ID} -->
   <td><img src="images/spacer.gif" width="5" height="25" border="0" alt="" /></td>
-  <td><img src="themes/rainy_day/images/button1_r1_c1.gif" width="5" height="25" border="0" alt="" /></td>
-  <td style="background-image:url(themes/rainy_day/images/button1_r1_c2.gif)">
+  <td><img src="{$THEME_DIR}images/button1_r1_c1.gif" width="5" height="25" border="0" alt="" /></td>
+  <td style="background-image:url({$THEME_DIR}images/button1_r1_c2.gif)">
           <a href="{HREF_TGT}" title="{HREF_TITLE}">{HREF_LNK}</a>
   </td>
-  <td><img src="themes/rainy_day/images/button1_r1_c3.gif" width="5" height="25" border="0" alt="" /></td>
+  <td><img src="{$THEME_DIR}images/button1_r1_c3.gif" width="5" height="25" border="0" alt="" /></td>
 <!-- END {BLOCK_ID} -->
 EOT;
 

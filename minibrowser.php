@@ -10,7 +10,7 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
 **********************************************/
 
@@ -165,6 +165,7 @@ $base_folder = '';
 $dir = opendir($base_folder . $folder);
 
 // read the folder/file structure we're currently in and put it into an array
+$filename = $foldername = null;
 $dirCounter = 0;
 while($file = readdir($dir)){
     if(is_dir($base_folder.$folder.$file)) {

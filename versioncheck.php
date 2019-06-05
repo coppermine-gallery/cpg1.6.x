@@ -10,7 +10,7 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
 **********************************************/
 
@@ -32,7 +32,7 @@ if (!GALLERY_ADMIN_MODE) {
 
 // Sanitize the GET vars and populate the optionsArray --- start
 // possible values: screen, textarea, create, options
-$optionDisplayOutput_array = array();
+$optionDisplayOutput_array = array('screen'=>'','textarea'=>'','errors_only'=>'','hide_images'=>'','no_modification_check'=>'','do_not_connect_to_online_repository'=>'');
 $actionGet = $superCage->get->getMatched('output','/^[a-z]+$/');
 if (in_array ($actionGet[0], array('screen', 'textarea', 'create', 'options')) == TRUE) {
   $action = $actionGet[0];

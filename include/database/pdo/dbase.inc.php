@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * include/database/pdo/dbase.inc.php
+ * @since  1.6.04
+ */
 
 /** PDO database implementation **/
 
@@ -27,9 +24,18 @@ class CPG_Dbase
 
 	public function __construct ($cfg)
 	{
+		//parse server and resolve any connection port
+		$sp = explode(':', $cfg['dbserver']);
+		if (empty($sp[1])) $sp[1] = null;
+		if (isset($cfg['dbport'])) $sp[1] = $cfg['dbport'];
+
 		list($db_ext, $db_sub) = explode(':', $cfg['dbtype']);
 		try {
-			$dsn = "{$db_sub}:host=" . $cfg['dbserver'] . ';dbname='.$cfg['dbname'];
+			$dsn = "{$db_sub}:host=" . $sp[0] . ';dbname='.$cfg['dbname'];
+			if ($sp[1]) $dsn .= ';port='.$sp[1];
+			if (!empty($cfg['dbcharset'])) {
+				$dsn .= ';charset='.$cfg['dbcharset'];
+			}
 			$db = new PDO($dsn, $cfg['dbuser'], $cfg['dbpass']);
 			$this->_instance = $db;
 			$this->connected = true;
@@ -59,9 +65,18 @@ class CPG_Dbase
 		return $this->connected;
 	}
 
-	public function getError ()
+	public function getError ($code=false, $last=false)
 	{
-		return $this->errnum . ' : ' . $this->error;
+		if (!$last) {
+			$einf = $this->_instance->errorInfo();
+			$this->errnum = $einf[1];
+			$this->error = $einf[2];
+		}
+		if ($code) {
+			return $this->errnum;
+		} else {
+			return $this->errnum . ' : ' . $this->error;
+		}
 	}
 
 	public function escapeStr ($str)
@@ -120,17 +135,16 @@ class CPG_DbaseResult
 
 	public function result ($row=0, $fld=0, $free=false)
 	{
-		$row = $this->qresult->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_ABS, $row);
+		$r = $this->qresult->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_ABS, $row);
 		if ($free) $this->free();
 		return $r ? $r[$fld] : false;
 	}
 
 	public function numRows ($free=false)
 	{
-		$i = 0;
-		if ($this->qresult) while ($this->qresult->fetch(PDO::FETCH_NUM)) { $i++; }
+		$n = $this->qresult->rowCount();
 		if ($free) $this->free();
-		return $i;
+		return $n;
 	}
 
 	public function free ()

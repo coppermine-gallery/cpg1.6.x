@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * bridge/coppermine.inc.php
+ * @since  1.6.04
+ */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -125,32 +122,10 @@ if (isset($bridge_lookup)) {
 					break;
 			}
 
-			$sql = "SELECT user_password, user_password_salt, user_password_hash_algorithm, user_password_iterations FROM {$this->usertable} WHERE $sql_user_email AND user_active = 'YES' LIMIT 1";
-			$result = $this->query($sql);
-
-			if (!$result->numRows()) {
+			$USER_DATA = cpg_get_user_data($sql_user_email, $password);
+			if ($USER_DATA === false) {
 				return false;
 			}
-
-			require 'include/passwordhash.inc.php';
-			$password_params = $result->fetchAssoc(true);
-
-			// Check for user in users table
-			$sql = "SELECT user_id, user_name, user_password FROM {$this->usertable} WHERE $sql_user_email ";
-			if (!$password_params['user_password_salt']) {
-				$sql .= "AND BINARY user_password = '".md5($password)."'";
-			} elseif (!cpg_password_validate($password, $password_params)) {
-				return false;
-			}
-			$sql .= " AND user_active = 'YES' LIMIT 1";
-
-			$result = $this->query($sql);
-
-			if (!$result->numRows()) {
-				return false;
-			}
-
-			$USER_DATA = $result->fetchAssoc(true);
 
 			// Update lastvisit value and salt password if needed
 			$salt_password = !$password_params['user_password_salt'] ? ', '.cpg_password_create_update_string($password) : '';

@@ -10,7 +10,7 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
   ********************************************
   Code below has been taken from lib.xml.php and slightly modified for use with coppermine

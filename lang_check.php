@@ -10,7 +10,7 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
 **********************************************/
 
@@ -67,20 +67,16 @@ class Lang
 {
 	public $vars;
 
-	public function __construct ($lang)
+	public function __construct ($lang='english.php')
 	{
-		if (!$lang) $lang = 'english.php';
 		require "lang/{$lang}";
 		$this->vars = get_defined_vars();
 	}
 }
 
-$langs = array();
-foreach(scandir('lang') as $f) {
-	if ($f[0] === '.') continue;
-	if (substr($f, 0, 7) === 'english') continue;
-	$langs[] = $f;
-}
+$action = !empty($_GET['act']) ? $_GET['act'] : null;
+$opt_chk = $action=='chk' ? ' selected' : '';
+$opt_scn = $action=='scn' ? ' selected' : '';
 
 echo <<<EOT
 <!DOCTYPE html>
@@ -92,51 +88,101 @@ echo <<<EOT
 		padding:6px;
 		border:1px solid #CCC;
 		background-color:#FFE;
+		overflow-x: scroll;
 	}
 	h2 {
 		margin-top:4px;
 	}
 	h3 {
 		margin-bottom:0;
+		text-decoration:underline;
 	}
-	xmp {
-		white-space: pre-wrap;
+	code {
+		white-space:nowrap;
+	}
+	.lvl1 {
+		margin-left:2em;
+	}
+	.lvl2 {
+		margin-left:4em;
+	}
+	div.aform {
+		background-color:#EEF;
+		padding-top:.7em;
+		padding-bottom:.7em;
 	}
 </style>
 </head>
 <body>
+<div class="aform">
+	<form action="">
+		<select name="act">
+			<option value="chk"{$opt_chk}>Check other languages against English</option>
+			<option value="scn"{$opt_scn}>Scan PHP files for language useage</option>
+		</select>
+		<button type="submit" name="doit" value="1">Perform Action</button>
+	</form>
+</div><br />
 EOT;
 
-$en = new Lang();
+if ($action) $en = new Lang();
 
-foreach ($langs as $lang) {
-	$lobj = new Lang($lang);
-	echo '<div><h2>Language file: '.$lang.'</h2>';
-	$misses = array_diff_key_recursive($en->vars, $lobj->vars);
-	if ($misses) {
-		echo "<h3>Missing translations.</h3>";
-		echo'<xmp>';
-		splay($misses);
-		echo'</xmp>';
+if ($action == 'scn') {
+	$eno = new Lang();
+	$enMissing = array();
+	scanForUsage($en, '.');
+	if ($enMissing) {
+		echo '<div><h3>Language references that are not in english.php</h3><br />';
+		foreach ($enMissing as $l=>$fr) {
+			echo '<b>File:</b>  '.$fr[0].'<br />';
+			echo '<b>Ref:</b>  '.$l.' [ '.$fr[1].' ]<br /><br />';
+		}
+		echo '</div><br />';
 	}
-	$misses = array_diff_key_recursive($lobj->vars, $en->vars);
-	if ($misses) {
-		echo "<h3>Translations that could (possibly) be removed.</h3>";
-		echo'<xmp>';
-		splay($misses);
-		echo'</xmp>';
+	echo '<div><h3>Language string definitions (in english.php) that were not directly referenced in any PHP file</h3><br />';
+	splay($en->vars);
+	echo'</div>';
+} elseif ($action == 'chk') {
+	$langs = array();
+	foreach (scandir('lang') as $f) {
+		if ($f[0] === '.') continue;
+		if (substr($f, 0, 7) === 'english') continue;
+		$langs[] = $f;
 	}
-	echo '</div><br /><br />';
+	foreach ($langs as $lang) {
+		$lobj = new Lang($lang);
+		echo '<div><h2>Language file: '.$lang.'</h2>';
+		$misses = array_diff_key_recursive($en->vars, $lobj->vars);
+		if ($misses) {
+			echo "<h3>Missing translations.</h3><br />";
+			splay($misses);
+		}
+		$misses = array_diff_key_recursive($lobj->vars, $en->vars);
+		if ($misses) {
+			echo "<h3>Translations that could (possibly) be removed.</h3><br />";
+			splay($misses);
+		}
+		echo '</div><br /><br />';
+	}
 }
 
 function splay ($nodes, $ind=0)
 {
-	foreach ($nodes as $k => $node) {
-		if (is_array($node)) {
-			echo $k . " >>\n";
-			splay($node, $id+1);
-		} else {
-			echo str_repeat("\t", $ind) . "['{$k}']" . ' = \'' . $node . "';\n";
+	foreach ($nodes as $k=>$var) {
+		if ($var) {
+			if ($ind) {
+				echo '<span class="lvl'.$ind.'">["'.$k.'"]</span>';
+				echo is_array($var) ? '<br />' : '&nbsp;=&gt;&nbsp';
+			} else {
+				echo '<b>Group:</b>  '.$k.'<br />';
+			}
+			if (is_array($var)) {
+				splay($var, $ind+1);
+			} else {
+				$sc = $ind ? '' : 'lvl1';
+				echo '<span class="'.$sc.'">"<code>'.htmlentities($var).'</code>"</span><br />';
+			}
+		if (!$ind) echo '<br />';
 		}
 	}
 }
@@ -156,6 +202,29 @@ function array_diff_key_recursive (array $arr1, array $arr2)
 	}
 
 	return $diff;
+}
+
+function scanForUsage (&$en, $dir)
+{
+	global $eno, $enMissing;
+
+	foreach (scandir($dir) as $f) {
+		if ($f[0] === '.') continue;
+		$fpath = ($dir=='.'?'':($dir.'/')).$f;
+		if (is_dir($fpath)) {
+			if ($fpath!='lang') scanForUsage($en, $fpath);
+		} else {
+			if (substr($f, -4) != '.php') continue;
+			preg_match_all('|\$lang_([^\s\[]+)\[[\'"](\w+)[\'"]\]|', file_get_contents($fpath), $mtchs, PREG_SET_ORDER);
+			foreach ($mtchs as $mtch) {
+				if (isset($eno->vars['lang_'.$mtch[1]][$mtch[2]])) {
+					unset($en->vars['lang_'.$mtch[1]][$mtch[2]]);
+				} else {
+					if (substr($mtch[1],0,7) != 'plugin_') $enMissing['lang_'.$mtch[1]] = array($fpath,$mtch[2]);
+				}
+			}
+		}
+	}
 }
 
 ?>

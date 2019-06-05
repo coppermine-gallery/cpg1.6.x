@@ -10,7 +10,7 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
 **********************************************/
 
@@ -1688,10 +1688,10 @@ EOT;
     // Check if we have any js includes
     if (!empty($JS['includes'])) {
         // Bring the jquery core library to the very top of the list
-        if (in_array('js/jquery-1.4.2.js', $JS['includes']) == TRUE) {
-            $key = array_search('js/jquery-1.4.2.js', $JS['includes']);
+        if (in_array(CPG_JQUERY_VERSION, $JS['includes']) == TRUE) {
+            $key = array_search(CPG_JQUERY_VERSION, $JS['includes']);
             unset($JS['includes'][$key]);
-            array_unshift($JS['includes'], 'js/jquery-1.4.2.js');
+            array_unshift($JS['includes'], CPG_JQUERY_VERSION);
         }
         $JS['includes'] = CPGPluginAPI::filter('javascript_includes',$JS['includes']);
         // Include all the files which were set using js_include() function
@@ -4119,6 +4119,7 @@ function theme_display_fullsize_pic()
     }
 
     $charset = ($CONFIG['charset'] == 'language file' ? $lang_charset : $CONFIG['charset']);
+    $jquery_path = CPG_JQUERY_VERSION;
     $fullsize_html = <<<EOT
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -4133,7 +4134,7 @@ function theme_display_fullsize_pic()
             td { vertical-align: middle; text-align:center; }
         </style>
 
-        <script type="text/javascript" src="js/jquery-1.4.2.js"></script>
+        <script type="text/javascript" src="{$jquery_path}"></script>
         <script type="text/javascript" src="js/jquery.dimensions.pack.js"></script>
         <script type="text/javascript" src="js/displayimage.fullsize.js"></script>
     </head>
@@ -4326,13 +4327,14 @@ function theme_page_title($section)
 ** Section <<<$template_sidebar>>> - START
 ******************************************************************************/
 // HTML template for sidebar
+$jquery_path = CPG_JQUERY_VERSION;
 $template_sidebar = <<<EOT
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="{LANG_DIR}">
 <head>
 <meta http-equiv="content-type" content="text/html; charset={CHARSET}" />
 <title>{TITLE}</title>
-<script src="js/jquery-1.4.2.js" type="text/javascript"></script>
+<script src="{$jquery_path}" type="text/javascript"></script>
 <script src="js/jquery.treeview.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(function() {

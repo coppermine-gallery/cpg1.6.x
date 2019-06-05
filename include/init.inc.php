@@ -1,21 +1,20 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * include/init.inc.php
+ * @since  1.6.06
+ */
 
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
-**********************************************/
-
-define('COPPERMINE_VERSION', '1.6.01');
+define('COPPERMINE_VERSION', '1.6.06');
 define('COPPERMINE_VERSION_STATUS', 'stable');
+// Define path to jQuery for this version of Coppermine
+define('CPG_JQUERY_VERSION', 'js/jquery-1.7.2.js');
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -168,7 +167,7 @@ $CONFIG['TABLE_DICT']          = $CONFIG['TABLE_PREFIX'].'dict';
 
 // Connect to database
 list($db_ext, $db_sub) = explode(':', $CONFIG['dbtype'].':');
-$db_ext = $db_ext ?: 'mysql';
+$db_ext = $db_ext ?: 'mysqli';
 require 'include/database/'.$db_ext.'/dbase.inc.php';
 $CPGDB = new CPG_Dbase($CONFIG);
 
@@ -179,6 +178,7 @@ if (!$CPGDB->isConnected()) {
 
 // Retrieve DB stored configuration
 $result = cpg_db_query("SELECT name, value FROM {$CONFIG['TABLE_CONFIG']}");
+if (!$result) cpg_db_error('When read CONFIG from database ');
 while ( ($row = $result->fetchAssoc()) ) {
     $CONFIG[$row['name']] = $row['value'];
 } // while
@@ -295,12 +295,16 @@ $CONFIG['theme_config'] = DEFAULT_THEME;        // Save the gallery-configured s
 
 if ($matches = $superCage->get->getMatched('theme', '/^[A-Za-z0-9_-]+$/')) {
     $USER['theme'] = $matches[0];
+    $hasURLtheme = true;
 }
 if (isset($USER['theme']) && !strstr($USER['theme'], '/') && is_dir('themes/' . $USER['theme'])) {
     $CONFIG['theme'] = strtr($USER['theme'], '$/\\:*?"\'<>|`', '____________');
 } else {
     unset($USER['theme']);
 }
+// If no URL override, give plugins the chance to specify a theme
+if (empty($hasURLtheme))
+	$CONFIG['theme'] = CPGPluginAPI::filter('theme_name', $CONFIG['theme']);
 if (!file_exists('themes/'.$CONFIG['theme'].'/theme.php')) {
     $CONFIG['theme'] = 'curve';
 }
@@ -399,7 +403,7 @@ if (USER_ID > 0) {
 }
 
 // Include the jquery javascript library. Jquery will be included on all pages.
-js_include('js/jquery-1.4.2.js');
+js_include(CPG_JQUERY_VERSION);
 
 // Include the scripts.js javascript library that contains coppermine-specific
 // JavaScript that is being used on all pages.

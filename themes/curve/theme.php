@@ -1,20 +1,17 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * themes/curve/theme.php
+ * @since  1.6.04
+ */
 
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
-  ********************************************
-  This theme has had redundant CORE items removed
-**********************************************/
+/**  This theme has had redundant CORE items removed **/
 
 define('THEME_HAS_PROGRESS_GRAPHICS', 1);
 define('THEME_HAS_FILM_STRIP_GRAPHICS', 1);
@@ -511,7 +508,7 @@ function theme_main_menu($which)
             if (USER_ID) {
                 $query = "SELECT null FROM {$CONFIG['TABLE_ALBUMS']} WHERE category='" . (FIRST_USER_CAT + USER_ID) . "' AND aid = '$album'";
                 $user_albums = cpg_db_query($query);
-                if ($user_albums->numRows()) {
+                if ($user_albums->numRows() > 0) {
                     $upload_allowed = true;
                 } else {
                     $upload_allowed = false;
@@ -522,7 +519,7 @@ function theme_main_menu($which)
                 $query = "SELECT null FROM {$CONFIG['TABLE_ALBUMS']} WHERE category < " . FIRST_USER_CAT . " AND uploads='YES' AND (visibility = '0' OR visibility IN ".USER_GROUP_SET.") AND aid = '$album'";
                 $public_albums = cpg_db_query($query);
 
-                if ($public_albums->numRows()) {
+                if ($public_albums->numRows() > 0) {
                     $upload_allowed = true;
                 } else {
                     $upload_allowed = false;

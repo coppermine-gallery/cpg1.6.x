@@ -10,7 +10,7 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
 **********************************************/
 
@@ -112,7 +112,7 @@ EOT;
     $result = cpg_db_query($sql);
 
     if (!$result->numRows()) {
-        cpg_die($lang_forgot_passwd_php['forgot_passwd'], $lang_forgot_passwd_php['illegal_session']);
+        cpg_die($lang_forgot_passwd_php['forgot_passwd'], $lang_forgot_passwd_php['illegal_session'], __FILE__, __LINE__);
     }
 
     $result->free();
@@ -122,7 +122,7 @@ EOT;
     $result = cpg_db_query($sql);
 
     if (!$result->numRows()) {
-        cpg_die($lang_forgot_passwd_php['forgot_passwd'], $lang_forgot_passwd_php['err_unk_user']);
+        cpg_die($lang_forgot_passwd_php['forgot_passwd'], $lang_forgot_passwd_php['err_unk_user'], __FILE__, __LINE__);
     }
 
     $row = $result->fetchAssoc(true);

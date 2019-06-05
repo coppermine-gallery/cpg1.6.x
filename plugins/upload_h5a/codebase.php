@@ -1,18 +1,15 @@
 <?php
-/**************************
-  Coppermine Photo Gallery
- **************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
- ************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
- ************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * plugins/upload_h5a/codebase.php
+ * @since  1.6.05
+ */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -116,43 +113,44 @@ EOT;
 
 	if (USER_ID > 0 || $CONFIG['allow_guests_enter_file_details'] == 1) {
 		if ($cfg['enabtitl']) {
-			echo '<tr id="titlrow"><td class="tableb">'.$lang_upload_php['pic_title'].'</td><td class="tableb"><input type="text" name="title" id="title" class="textinput" maxlength="255" style="width:90%" /></td></tr>';
+			echo '<tr id="titlrow"><td class="tableb">'.$lang_upload_php['pic_title'].'</td><td class="tableb"><input type="text" name="title" id="title" class="textinput" maxlength="255" /></td></tr>';
 		}
 		if ($cfg['enabdesc']) {
 			$desclabl = $lang_upload_php['description'];
 			if ($CONFIG['show_bbcode_help']) {
-				$desclabl .= '&nbsp;'. cpg_display_help('f=empty.htm&amp;base=64&amp;h='.urlencode(base64_encode(serialize($lang_bbcode_help_title))).'&amp;t='.urlencode(base64_encode(serialize($lang_bbcode_help))),470,245);
+				$desclabl .= '&nbsp;'. cpg_display_help('f=empty.htm&amp;h=lang_bbcode_help_title&amp;t=lang_bbcode_help',470,245);
 			}
-			echo '<tr><td class="tableb">'.$desclabl.'</td><td class="tableb"><textarea name="caption" rows="2" id="caption" class="textinput" style="width:90%" /></textarea></td></tr>';
+			echo '<tr><td class="tableb">'.$desclabl.'</td><td class="tableb"><textarea name="caption" rows="2" id="caption" class="textinput" /></textarea></td></tr>';
 		}
 		if ($cfg['enabkeys']) {
 			$keywordLabel = sprintf($lang_common['keywords_insert1'],$lang_common['keyword_separators'][$CONFIG['keyword_separator']])
 			. '<br /><a href="keyword_select.php" class="greybox">' . $lang_common['keywords_insert2'] .'</a>';
-			echo '<tr><td class="tableb">'.$keywordLabel.'</td><td class="tableb"><input type="text" name="keywords" id="keywords" class="textinput" maxlength="255" style="width:90%" /></td></tr>';
+			echo '<tr><td class="tableb">'.$keywordLabel.'</td><td class="tableb"><input type="text" name="keywords" id="keywords" class="textinput" maxlength="255" /></td></tr>';
 		}
 		if ($cfg['enabusr1'] && !empty($CONFIG['user_field1_name'])) {
-			echo '<tr><td class="tableb">'.$CONFIG['user_field1_name'].'</td><td class="tableb"><input type="text" name="user1" id="user1" class="textinput" maxlength="255" style="width:90%" /></td></tr>';
+			echo '<tr><td class="tableb">'.$CONFIG['user_field1_name'].'</td><td class="tableb"><input type="text" name="user1" id="user1" class="textinput" maxlength="255" /></td></tr>';
 		}
 		if ($cfg['enabusr2'] && !empty($CONFIG['user_field2_name'])) {
-			echo '<tr><td class="tableb">'.$CONFIG['user_field2_name'].'</td><td class="tableb"><input type="text" name="user2" id="user2" class="textinput" maxlength="255" style="width:90%" /></td></tr>';
+			echo '<tr><td class="tableb">'.$CONFIG['user_field2_name'].'</td><td class="tableb"><input type="text" name="user2" id="user2" class="textinput" maxlength="255" /></td></tr>';
 		}
 		if ($cfg['enabusr3'] && !empty($CONFIG['user_field3_name'])) {
-			echo '<tr><td class="tableb">'.$CONFIG['user_field3_name'].'</td><td class="tableb"><input type="text" name="user3" id="user3" class="textinput" maxlength="255" style="width:90%" /></td></tr>';
+			echo '<tr><td class="tableb">'.$CONFIG['user_field3_name'].'</td><td class="tableb"><input type="text" name="user3" id="user3" class="textinput" maxlength="255" /></td></tr>';
 		}
 		if ($cfg['enabusr4'] && !empty($CONFIG['user_field4_name'])) {
-			echo '<tr><td class="tableb">'.$CONFIG['user_field4_name'].'</td><td class="tableb"><input type="text" name="user4" id="user4" class="textinput" maxlength="255" style="width:90%" /></td></tr>';
+			echo '<tr><td class="tableb">'.$CONFIG['user_field4_name'].'</td><td class="tableb"><input type="text" name="user4" id="user4" class="textinput" maxlength="255" /></td></tr>';
 		}
 	}
 
-	$acptmime = $cfg['acptmime'] ? ("accept=\"{$cfg['acptmime']}\"") : '';
+	$acptmime = $cfg['acptmime'] ? ("accept=\"{$cfg['acptmime']}\" ") : '';
 
+	$auto_orient_checked = (isset($CONFIG['auto_orient_checked']) && !$CONFIG['auto_orient_checked']) ? '' : ' checked="checked"';
 	echo <<<EOT
 	<tr id="h5upldrow">
 		<td class="tableb">{$lang_plugin_upload_h5a['files']}</td>
 		<td class="tableb" style="padding:1em">
 			<div style="width:480px">
 				<input type="file" name="userpictures" id="upload_field" multiple="multiple" {$acptmime}/>
-				<input type="checkbox" id="autorient" value="1" checked />
+				<input type="checkbox" name="autorient" id="autorient" value="1"{$auto_orient_checked} />
 				<label for="autorient">{$lang_upload_php['auto_orient']}</label>
 				&nbsp;<br />
 				<div id="dropArea">{$lang_plugin_upload_h5a['drop_files']}</div>
@@ -164,7 +162,7 @@ EOT;
 						<div id="progress_report_bar" style="background-color: blue; width: 0; height: 100%;"></div>
 					</div>
 					<div>
-						{$lang_plugin_upload_h5a['files_left']}<span id="qcount">0</span><div class="acti" id="qstop"><img src="plugins/upload_h5a/css/stop.png" title="{$lang_plugin_upload_h5a['q_stop']}" onclick="H5uQctrl.stop()" /></div><div class="acti" id="qgocan"><img src="plugins/upload_h5a/css/play-green.png" title="{$lang_plugin_upload_h5a['q_resume']}" onclick="H5uQctrl.go()" /><img src="plugins/upload_h5a/css/cross.png" title="{$lang_plugin_upload_h5a['q_cancel']}" onclick="H5uQctrl.cancel()" /></div>
+						{$lang_plugin_upload_h5a['files_left']}<span id="qcount">0</span><div class="acti" id="qstop"><img src="plugins/upload_h5a/css/stop.png" title="{$lang_plugin_upload_h5a['q_stop']}" alt="" onclick="H5uQctrl.stop()" /></div><div class="acti" id="qgocan"><img src="plugins/upload_h5a/css/play-green.png" title="{$lang_plugin_upload_h5a['q_resume']}" alt="" onclick="H5uQctrl.go()" /><img src="plugins/upload_h5a/css/cross.png" title="{$lang_plugin_upload_h5a['q_cancel']}" alt="" onclick="H5uQctrl.cancel()" /></div>
 					</div>
 					<div id="fprogress"></div>
 					<div id="server_response"></div>

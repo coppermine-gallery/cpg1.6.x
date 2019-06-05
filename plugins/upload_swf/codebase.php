@@ -1,18 +1,15 @@
 <?php
-/**************************
-  Coppermine Photo Gallery
- **************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
- ************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
- ************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * plugins/upload_swf/codebase.php
+ * @since  1.6.05
+ */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -156,26 +153,25 @@ EOT;
 
 	form_alb_list_box($lang_common['album'], 'swf_album');
 
+	$auto_orient_checked = (isset($CONFIG['auto_orient_checked']) && !$CONFIG['auto_orient_checked']) ? '' : ' checked="checked"';
 	echo <<<EOT
 	<tr>
 		<td colspan="2" class="tableb tableb_alternate">
 			<div id="upload_form">
-				<div>
-					<span id="browse_button_place_holder"></span>
-					<input type="checkbox" id="autorient" value="1" checked />
-					<label for="autorient">{$lang_upload_php['auto_orient']}</label>
-					<button id="button_cancel" onclick="swfu.cancelQueue();" disabled="disabled" class="button">
-						{$icon_array['cancel']}
-						{$lang_upload_swf_php['cancel_all']}
-					</button>
-				</div>
+				<span id="browse_button_place_holder"></span>
+				<input type="checkbox" name="autorient" id="autorient" value="1"{$auto_orient_checked} />
+				<label for="autorient">{$lang_upload_php['auto_orient']}</label>
+				<button id="button_cancel" onclick="swfu.cancelQueue();" disabled="disabled" class="button">
+					{$icon_array['cancel']}
+					{$lang_upload_swf_php['cancel_all']}
+				</button>
+			</div>
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2" class="tableb">
-				<div class="fieldset flash" id="upload_progress">
-					<span class="legend">{$lang_upload_swf_php['upload_queue']}</span>
-				</div>
+			<div class="fieldset flash" id="upload_progress">
+				<span class="legend">{$lang_upload_swf_php['upload_queue']}</span>
 			</div>
 		</td>
 	</tr>

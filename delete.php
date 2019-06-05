@@ -10,7 +10,7 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
 **********************************************/
 
@@ -496,7 +496,7 @@ case 'albmgr':
     $orig_sort_order = parse_pic_list($sort_list_matched[0]);
     foreach ($orig_sort_order as $album) {
         $alb = parse_pic_orig_sort_order($album);
-        $sort_array[$i] = $alb['aid'];
+//        $sort_array[$i] = $alb['aid'];
         if (count($alb) == 2) {
             $query = "UPDATE {$CONFIG['TABLE_ALBUMS']} SET pos = '{$alb['pos']}' WHERE aid = '{$alb['pid']}' $restrict LIMIT 1";
             cpg_db_query($query);
@@ -670,7 +670,7 @@ case 'picmgr':
     $orig_sort_order = parse_pic_list($sort_list_matched[0]);
     foreach ($orig_sort_order as $picture) {
         $pic = parse_pic_orig_sort_order($picture);
-        $sort_array[$i] = $pic['aid'];
+//        $sort_array[$i] = $pic['aid'];
         if (count($pic) == 2) {
             $query = "UPDATE {$CONFIG['TABLE_PICTURES']} SET position = '{$pic['pos']}' WHERE pid = '{$pic['pid']}' $restrict LIMIT 1";
             cpg_db_query($query);

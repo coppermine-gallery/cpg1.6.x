@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * showthumb.php
+ * @since  1.6.06
+ */
 
 define('IN_COPPERMINE', true);
 define('SHOWTHUMB_PHP', true);
@@ -59,11 +56,16 @@ function makethumbnail($src_file, $newSize)
 
 	// Get the appropriate tool and send the image
 	getImageTool();
-	$imgObj = new imageObject($src_file);
+	$imgObj = new imageObject(dirname($src_file).DIRECTORY_SEPARATOR, basename($src_file));
+	if (!$imgObj) {
+        header("Content-type: image/png");
+        readfile(READ_ERROR_ICON);
+        exit;
+	}
 	$imgObj->send($newSize);
 }
 
-$matches = $superCage->get->getMatched('picfile', '/^[0-9A-Za-z~\s\/\\.-_]+$/');
+$matches = $superCage->get->getMatched('picfile', '/^[0-9A-Za-z~\s\/\\._-]+$/');
 
 makethumbnail($CONFIG['fullpath'] . $matches[0], $superCage->get->getInt('size'));
 

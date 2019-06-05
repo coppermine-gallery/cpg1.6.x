@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * lang/english.php
+ * @since  1.6.06
+ */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -358,19 +355,25 @@ $lang_alb_select_box['all_albums'] = 'Show all albums';
 // ------------------------------------------------------------------------- //
 // File include/mailer.inc.php
 // ------------------------------------------------------------------------- //
-$lang_mailer['provide_address'] = 'You must provide at least one ';
-$lang_mailer['mailer_not_supported'] = ' mailer is not supported.';
-$lang_mailer['execute'] = 'Could not execute: ';
-$lang_mailer['instantiate'] = 'Could not instantiate mail function.';
 $lang_mailer['authenticate'] = 'SMTP Error: Could not authenticate.';
-$lang_mailer['from_failed'] = 'The following From address failed: ';
-$lang_mailer['recipients_failed'] = 'SMTP Error: The following ';
-$lang_mailer['data_not_accepted'] = 'SMTP Error: Data not accepted.';
 $lang_mailer['connect_host'] = 'SMTP Error: Could not connect to SMTP host.';
+$lang_mailer['data_not_accepted'] = 'SMTP Error: data not accepted.';
+$lang_mailer['empty_message'] = 'Message body empty';
+$lang_mailer['encoding'] = 'Unknown encoding: ';
+$lang_mailer['execute'] = 'Could not execute: ';
 $lang_mailer['file_access'] = 'Could not access file: ';
 $lang_mailer['file_open'] = 'File Error: Could not open file: ';
-$lang_mailer['encoding'] = 'Unknown encoding: ';
+$lang_mailer['from_failed'] = 'The following From address failed: ';
+$lang_mailer['instantiate'] = 'Could not instantiate mail function.';
+$lang_mailer['invalid_address'] = 'Invalid address: ';
+$lang_mailer['mailer_not_supported'] = ' mailer is not supported.';
+$lang_mailer['provide_address'] = 'You must provide at least one recipient email address.';
+$lang_mailer['recipients_failed'] = 'SMTP Error: The following recipients failed: ';
 $lang_mailer['signing'] = 'Signing Error: ';
+$lang_mailer['smtp_connect_failed'] = 'SMTP connect() failed.';
+$lang_mailer['smtp_error'] = 'SMTP server error: ';
+$lang_mailer['variable_set'] = 'Cannot set or reset variable: ';
+$lang_mailer['extension_missing'] = 'Extension missing: ';
 
 // ------------------------------------------------------------------------- //
 // File include/plugin_api.inc.php
@@ -511,6 +514,7 @@ $lang_bridgemgr_php['bridge_enable_yes'] = 'enable';
 $lang_bridgemgr_php['bridge_enable_no'] = 'disable';
 $lang_bridgemgr_php['error_must_not_be_empty'] = 'must not be empty';
 $lang_bridgemgr_php['error_either_be'] = 'must either be %s or %s';
+$lang_bridgemgr_php['error_bridge_file_not_exist'] = 'Bridge file does not exist: %s';
 $lang_bridgemgr_php['error_folder_not_exist'] = '%s doesn\'t exist. Correct the value you entered for %s';
 $lang_bridgemgr_php['error_cookie_not_readible'] = 'Coppermine can\'t read a cookie named %s. Correct the value you entered for %s, or go to your bridge app administration panel and make sure that the cookie path is readable for Coppermine.';
 $lang_bridgemgr_php['error_mandatory_field_empty'] = 'You cannot leave the field %s blank - fill in the proper value.';
@@ -529,7 +533,7 @@ $lang_bridgemgr_php['goto_login'] = 'Go to login page';
 $lang_bridgemgr_php['goto_bridgemgr'] = 'Go to bridge manager';
 $lang_bridgemgr_php['recovery_failure_title'] = 'Authorization failed';
 $lang_bridgemgr_php['recovery_failure_content'] = 'You supplied the wrong credentials. You will have to supply the admin account data of the standalone version (usually the account you set up during Coppermine install).';
-$lang_bridgemgr_php['try_again'] = 'try again';
+$lang_bridgemgr_php['try_again'] = 'Try again';
 $lang_bridgemgr_php['recovery_wait_title'] = 'Wait time has not elapsed';
 $lang_bridgemgr_php['recovery_wait_content'] = 'For security reasons this script does not allow failed logons in short succession, so you will have to wait a bit until you\'re allowed to try to authenticate.';
 $lang_bridgemgr_php['wait'] = 'wait';
@@ -852,10 +856,10 @@ $lang_admin_php['thumbnail_intermediate_full'] = 'thumbnail, intermediate, and f
 $lang_admin_php['thumbnail_intermediate'] = 'thumbnail and intermediate image';
 $lang_admin_php['thumbnail_only'] = 'thumbnail only';
 $lang_admin_php['upload_mechanism'] = 'Default upload method';
-$lang_admin_php['upload_swf'] = 'advanced - multiple files, Flash-driven (recommended)';
+$lang_admin_php['upload_swf'] = 'multiple files, Flash-driven';
 $lang_admin_php['upload_single'] = 'simple - one file at a time';
 $lang_admin_php['allow_user_upload_choice'] = 'Allow users to choose the upload method';
-$lang_admin_php['editpics_ignore_newer_than'] = 'Show previously uploaded files at edit files form after flash upload';
+$lang_admin_php['editpics_ignore_newer_than'] = 'Show previously uploaded files at edit files form after HTML5/flash upload';
 $lang_admin_php['allow_duplicate_emails_addr'] = 'Allow two users to have the same email address';
 $lang_admin_php['upl_notify_admin_email'] = 'Notify admin of user upload awaiting approval';
 $lang_admin_php['user_manager_hide_file_stats'] = 'Hide file count and disk space usage in user manager'; // cpg1.6
@@ -907,6 +911,7 @@ $lang_admin_php['offline'] = 'Gallery is offline';
 $lang_admin_php['display_coppermine_news'] = 'Display news from coppermine-gallery.net';
 $lang_admin_php['display_coppermine_detail'] = 'will only be displayed for the admin';
 $lang_admin_php['config_setting_invalid'] = 'The value you have set for &laquo;%s&raquo; is invalid, please review it.';
+$lang_admin_php['config_setting_rangerr'] = 'The value you have set for &laquo;%s&raquo; is out of allowed range, please review it.';
 $lang_admin_php['config_setting_ok'] = 'Your setting for &laquo;%s&raquo; has been saved.';
 $lang_admin_php['contact_form_settings'] = 'Contact form settings';
 $lang_admin_php['contact_form_guest_enable'] = 'Display contact form to anonymous visitors (guests)';
@@ -2139,7 +2144,7 @@ if (defined('UPLOAD_PHP')) {
 $lang_upload_php['title'] = 'Upload file';
 $lang_upload_php['restrictions'] = 'Restrictions';
 $lang_upload_php['choose_method'] = 'Choose upload method';
-$lang_upload_php['upload_swf'] = 'Multiple files - Flash-driven (recommended)';
+$lang_upload_php['upload_swf'] = 'Multiple files - Flash-driven';
 $lang_upload_php['upload_single'] = 'simple - one file at a time';
 $lang_upload_php['up_instr_1'] = 'Select an album from the album dropdown list';
 $lang_upload_php['up_instr_2'] = 'Click the "Browse" button below and navigate to the file you want to upload. You can select multiple files in a single go using Ctrl+Click.';
@@ -2182,7 +2187,7 @@ $lang_upload_php['please_wait'] = 'Please wait while the script is uploading - t
 $lang_upload_php['alternative_upload'] = 'Alternative upload method';
 $lang_upload_php['err_js_disabled'] = 'Flash upload interface could not load. You must have JavaScript enabled to enjoy the flash upload interface.';
 $lang_upload_php['err_flash_disabled'] = 'Upload interface is taking a long time to load or the load has failed. Please make sure that the Flash Plugin is enabled and that a working version of the Flash Player is installed.';
-$lang_upload_php['err_alternate_method'] = 'Alternately you can use the <a href="upload.php?single=1">single</a> file upload interface.';
+$lang_upload_php['err_alternate_method'] = 'Alternately you can use the <a href="upload.php?html5=1">HTML5</a> file upload interface.';
 $lang_upload_php['err_flash_version'] = 'Upload interface could not load. You may need to install or upgrade Flash Player. Visit the <a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">Adobe website</a> to get the Flash Player.';
 $lang_upload_php['flash_loading'] = 'Upload interface is loading. Please wait a moment...';
 $lang_upload_php['err_no_method'] = 'There must be at least one upload plugin enabled';
@@ -2500,7 +2505,7 @@ $lang_util_php['update_full_normal'] = 'Both resized and full sized (if an origi
 $lang_util_php['update_full'] = 'Just full sized (if an original copy is available)';
 $lang_util_php['delete_back'] = 'Delete original image backup for watermarked images';
 $lang_util_php['delete_back_explanation'] = 'This will delete the backup image. You will save some disk space but not be able anymore to undo the watermark!!! After that the watermark will be permanent.';
-$lang_util_php['finished'] = '<br />Finished updating thumbs/images!<br />';
+$lang_util_php['finished'] = 'Finished updating thumbs/images!';
 $lang_util_php['autorefresh'] = 'Auto refresh (no need to click continue button anymore)';
 $lang_util_php['refresh_db'] = 'Reload file dimensions and size information.';
 $lang_util_php['refresh_db_explanation'] = 'This will re-read file sizes and dimensions. Use this if quota\'s are incorrect or you have changed the files manually.';
@@ -2545,6 +2550,9 @@ $lang_util_php['keyword_replace_after'] = 'After conversion, replace %s with %s'
 $lang_util_php['keyword_replace_values'] = array('_'=>'underscore', '-'=>'hyphen', '~'=>'tilde');
 $lang_util_php['keyword_explanation'] = 'This will convert the keyword separator for all your files from one value to another value. See the help documentation for details.';
 $lang_util_php['nothing_deleted'] = 'There was nothing to delete.'; // cpg1.6
+$lang_util_php['warnings'] = 'Warnings'; // cpg1.6
+$lang_util_php['errors'] = 'Errors'; // cpg1.6
+$lang_util_php['complete'] = 'Action Complete'; // cpg1.6
 }
 
 // ------------------------------------------------------------------------- //

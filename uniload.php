@@ -1,18 +1,15 @@
 <?php
-/**************************
-  Coppermine Photo Gallery
- **************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
- ************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
- ************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * uniload.php
+ * @since  1.6.05
+ */
 
 // Confirm we are in Coppermine and set the language blocks.
 define('IN_COPPERMINE', true);
@@ -32,10 +29,19 @@ function upldLog ($msg)
 }
 upldLog('enter uniload');
 
+function uni_exception ($e)
+{
+	global $superCage;
+	$base = $superCage->server->getRaw('DOCUMENT_ROOT') . dirname($superCage->server->getRaw('SCRIPT_NAME'));
+	$file = str_replace($base,'',$e->getFile());
+	$msg = $e->getMessage() .'<br>'.$file.' line:'.$e->getLine();
+	errorOut($lang_upload_php['failure'] . $msg, 0, __FILE__, __LINE__);
+}
+
 // return an error when failing to complete
 function errorOut ($msg, $code=0, $_file=0, $_line=0)
 {
-	global $CONFIG, $h5u_debug;
+	global $CONFIG, $h5u_debug, $upload_form;
 
 	if ($h5u_debug) {
 		$msg .= " #{$code} {$_file} @{$_line}";
@@ -43,7 +49,13 @@ function errorOut ($msg, $code=0, $_file=0, $_line=0)
 		log_write($upload_log, H5U_LOG);
 	}
 
-	header("HTTP/1.0 403 {$msg}");
+	if ($upload_form == 'upload_swf') {
+		$msg = 'error|'.str_replace('<br>',"\n",$msg).'|0';
+		die($msg);
+	}
+
+	header("HTTP/1.0 430 \"{$msg}\"");
+	echo $msg;
 	exit();
 }
 
@@ -64,6 +76,8 @@ function uni_exit ()
 }
 
 //chdir(dirname(dirname(dirname(__FILE__))));
+
+set_exception_handler('uni_exception');
 
 // Call basic functions, etc.
 require('include/init.inc.php');
@@ -460,12 +474,20 @@ if ($file_placement == 'yes') {
 	if ($upload_form == 'upload_swf') {
 		echo "success". ($PIC_NEED_APPROVAL ? '1' : '0') . "|" . $thumb_url;
 	} else if ($is_simple) {
-		if (cpg_pw_protected_album_access($CURRENT_PIC_DATA['aid']) === 1) {
+		if ($PIC_NEED_APPROVAL && $CONFIG['upl_notify_admin_email']) {
+			include_once('include/mailer.inc.php');
+			cpg_mail('admin', sprintf($lang_db_input_php['notify_admin_email_subject'], $CONFIG['gallery_name']), make_clickable(sprintf($lang_db_input_php['notify_admin_email_body'], USER_NAME, $CONFIG['ecards_more_pic_target'].(substr($CONFIG["ecards_more_pic_target"], -1) == '/' ? '' : '/') .'editpics.php?mode=upload_approval')));
+		}
+		if ($PIC_NEED_APPROVAL || cpg_pw_protected_album_access($CURRENT_PIC_DATA['aid']) === 1) {
 			$redirect = "thumbnails.php?album=" . $CURRENT_PIC_DATA['aid'];
 		} else {
 			$redirect = "displayimage.php?pid=" . $CURRENT_PIC_DATA['pid'];
 		}
-		cpgRedirectPage($redirect, $lang_db_input_php['info'], $lang_db_input_php['com_added'], 1);
+        if ($PIC_NEED_APPROVAL) {
+            cpgRedirectPage($redirect, $lang_db_input_php['info'], $lang_db_input_php['upload_success'], 1);
+        } else {
+            cpgRedirectPage($redirect);
+        }
 	}
 } else {
 	// The previous image placement failed.

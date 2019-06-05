@@ -1,24 +1,21 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * bridge/smf20.inc.php
+ * @since  1.6.04
+ */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
 if (isset($bridge_lookup)) {
     $default_bridge_data[$bridge_lookup] = array(
-        'full_name' => 'Simple Machines (SMF) 2.x',
+        'full_name' => 'Simple Machines (SMF) 2.0.x',
         'short_name' => 'smf20',
         'support_url' => 'http://www.simplemachines.org/',
         'relative_path_to_config_file_default' => '../board/',

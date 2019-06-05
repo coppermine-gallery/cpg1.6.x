@@ -9,7 +9,7 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
   ********************************************
   This file contains the overall, theme-independant stylesheet definitions.
@@ -82,28 +82,6 @@ form {
 .detail_body {
 }
 
-input.spin-button {
-    padding-right:20px;
-    background-repeat:no-repeat;
-    background-position:100% 0%;
-    background-image:url(../images/spinbtn_updn.gif);
-}
-input.spin-button.spinbox-up-hover.spinbox-up {
-    cursor:pointer;
-    background-position:100% -18px;
-}
-input.spin-button.spinbox-down-hover.spinbox-down {
-    cursor:pointer;
-    background-position:100% -36px;
-}
-input.spin-button.spinbox-up-hover {
-    cursor:pointer;
-    background-position:100% -54px;
-}
-input.spin-button.spinbox-down-hover {
-    cursor:pointer;
-    background-position:100% -72px;
-}
 /* Greybox used for help pop-ups */
 #GB_overlay {
   background-image: url(../images/overlay.png);

@@ -1,18 +1,15 @@
 <?php
-/**************************
-  Coppermine Photo Gallery
- **************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
- ************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
- ************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * include/functions.inc.php
+ * @since  1.6.07
+ */
 
 if (!function_exists('stripos')) {
     function stripos($str, $needle, $offset = 0)
@@ -361,7 +358,8 @@ function cpg_db_result($result, $row=0, $field=0, $free=false)
 
 function cpg_db_free_result($result)
 {
-    $result->free();
+	if (is_object($result))
+    	$result->free();
 }
 
 
@@ -463,7 +461,7 @@ function cpgSanitizeUserTextInput($string)
  * @return
  **/
 
-function cpg_die($msg_code, $msg_text,  $error_file, $error_line, $output_buffer = false)
+function cpg_die($msg_code, $msg_text,  $error_file = '?file?', $error_line = '?line?', $output_buffer = false)
 {
     global $lang_common, $lang_errors, $CONFIG, $USER_DATA, $hdr_ip;
 
@@ -848,6 +846,23 @@ function is_link_local($url)
     return($is_local);
 }
 
+/**
+* is_url()
+*
+* Determines if a string is in the form of a URL
+*
+* @param string $url
+*
+* @return boolean $is_url
+*/
+function is_url($url)
+{
+	$regx = '|^(http(s)?:)?//[-a-z0-9_.]+/|i';
+	$is_url = preg_match($regx, $url);
+	return $is_url;
+}
+
+
 /**************************************************************************
    Template functions
  **************************************************************************/
@@ -864,7 +879,7 @@ function is_link_local($url)
 
 function load_template()
 {
-    global $THEME_DIR, $template_header, $template_footer, $LINEBREAK;
+    global $THEME_DIR, $CONFIG, $template_header, $template_footer, $theme_lang, $LINEBREAK;
 
     $template = file_get_contents($THEME_DIR . TEMPLATE_FILE);
 
@@ -874,26 +889,37 @@ function load_template()
 
     $template = CPGPluginAPI::filter('template_html', $template);
 
-    $gallery_pos = strpos($template, '{LANGUAGE_SELECT_FLAGS}');
-
-    if ($gallery_pos) {
-        $template    = str_replace('{LANGUAGE_SELECT_FLAGS}', languageSelect('flags'), $template);
+    if (strpos($template, '{LANGUAGE_SELECT_FLAGS}')) {
+        $template = str_replace('{LANGUAGE_SELECT_FLAGS}', languageSelect('flags'), $template);
     }
 
-    $gallery_pos = strpos($template, '{LANGUAGE_SELECT_LIST}');
-
-    if ($gallery_pos) {
-        $template    = str_replace('{LANGUAGE_SELECT_LIST}', languageSelect('list'), $template);
+    if (strpos($template, '{LANGUAGE_SELECT_LIST}')) {
+        $template = str_replace('{LANGUAGE_SELECT_LIST}', languageSelect('list'), $template);
     }
 
-    $gallery_pos = strpos($template, '{THEME_DIR}');
-    $template    = str_replace('{THEME_DIR}', $THEME_DIR, $template);
-
-    $gallery_pos = strpos($template, '{THEME_SELECT_LIST}');
-
-    if ($gallery_pos) {
-        $template    = str_replace('{THEME_SELECT_LIST}', themeSelect('list'), $template);
+    if (strpos($template, '{THEME_DIR}')) {
+    	$template = str_replace('{THEME_DIR}', $THEME_DIR, $template);
     }
+
+    if (strpos($template, '{THEME_SELECT_LIST}')) {
+        $template = str_replace('{THEME_SELECT_LIST}', themeSelect('list'), $template);
+    }
+
+	// apply any language files
+	$theme_lang_path = $THEME_DIR . 'lang';
+	if (is_dir($theme_lang_path)) {
+		include $theme_lang_path . '/english.php';
+		if ($CONFIG['lang'] != 'english' && file_exists($theme_lang_path."/{$CONFIG['lang']}.php")) {
+			include $theme_lang_path."/{$CONFIG['lang']}.php";
+		}
+		while (preg_match('#\{THEME_LANG_([^}]+)\}#', $template, $match)) {
+			if (isset($theme_lang[$match[1]])) {
+				$template = str_replace('{THEME_LANG_'.$match[1].'}', $theme_lang[$match[1]], $template);
+			} else {
+				$template = str_replace('{THEME_LANG_'.$match[1].'}', $match[1], $template);
+			}
+		}
+	}
 
     // Failsafe-option if JAVASCRIPT-token is missing from custom theme
     if (strpos($template, '{JAVASCRIPT}') === FALSE) {
@@ -1081,7 +1107,7 @@ function get_private_album_set($aid_str="")
 
     if ($result->numRows()) {
 
-        while ( ($album = $result->fetchAssoc(true)) ) {
+        while ( ($album = $result->fetchAssoc()) ) {
             $FORBIDDEN_SET_DATA[] = $album['aid'];
         } // while
 
@@ -1394,6 +1420,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
             'pa' => "position $ASC, pid $ASC",
             'pd' => "position $DESC, pid $DESC",
         );
+        $sort_array = CPGPluginAPI::filter('pic_data_sort_array', $sort_array);
 
         $sort_code  = isset($USER['sort']) && $CONFIG['custom_sortorder_thumbs'] ? $USER['sort'] : $CONFIG['default_sort_order'];
         $sort_order = isset($sort_array[$sort_code]) ? $sort_array[$sort_code] : $sort_array[$CONFIG['default_sort_order']];
@@ -2155,6 +2182,8 @@ function get_pic_pos($album, $pid)
             'pa' => "(position < {$pic['position']} OR position = {$pic['position']} AND pid < {$pic['pid']})",
             'pd' => "(position > {$pic['position']} OR position = {$pic['position']} AND pid > {$pic['pid']})",
         );
+        list($sort_array) = CPGPluginAPI::filter('pic_pos_sort_array', array($sort_array, $pid));
+
         $sort_code  = isset($USER['sort']) && $CONFIG['custom_sortorder_thumbs'] ? $USER['sort'] : $CONFIG['default_sort_order'];
         $sort_order = isset($sort_array[$sort_code]) ? $sort_array[$sort_code] : $sort_array[$CONFIG['default_sort_order']];
 
@@ -3439,7 +3468,7 @@ function display_film_strip($album, $cat, $pos,$ajax_call)
  * @param integer $cat
  * @param integer $pos
  **/
-function& display_slideshow($pos, $ajax_show = 0)
+function display_slideshow($pos, $ajax_show = 0)
 {
     global $CONFIG, $album, $pid, $slideshow, $USER;
 
@@ -3818,7 +3847,7 @@ function cpg_debug_output()
     $debug_underline   = '&#0010;------------------&#0010;';
     $debug_separate    = '&#0010;==========================&#0010;';
     $debug_toggle_link = $lang_cpg_debug_output['debug_output'] . ': <span class="detail_head_collapsed">'. $lang_cpg_debug_output['show_hide'].'</span>';
-    $debug_help = '&nbsp;'. cpg_display_help('f=empty.htm&amp;h=lang_cpg_debug_output[debug_output_explain]&amp;t=lang_cpg_debug_output[copy_and_paste_instructions]', 470, 245);
+    $debug_help = '&nbsp;'. cpg_display_help('f=empty.htm&amp;h=lang_cpg_debug_output%5Bdebug_output_explain%5D&amp;t=lang_cpg_debug_output%5Bcopy_and_paste_instructions%5D', 470, 245);
     $debug_phpinfo_link = GALLERY_ADMIN_MODE ? '<a href="phpinfo.php" class="admin_menu">' . cpg_fetch_icon('phpinfo', 1) . $lang_cpg_debug_output['phpinfo'] . '</a> ' : '';
 
     echo <<< EOT
@@ -4422,9 +4451,9 @@ EOT;
 EOT;
         // Try to retrieve the news directly
         //$result = cpgGetRemoteFileByURL('http://coppermine-gallery.net/cpg16x_news.htm', 'GET', '', '200'); // disabled, see http://forum.coppermine-gallery.net/index.php/topic,65424.msg325573.html#msg325573
-        if (strlen($result['body']) < 200) { // retrieving the file failed - let's display it in an iframe then
+        if (empty($result) || strlen($result['body']) < 200) { // retrieving the file failed - let's display it in an iframe then
             print <<< EOT
-                      <iframe src="http://coppermine-gallery.net/cpg16x_news.htm" align="left" frameborder="0" scrolling="auto" marginheight="0" marginwidth="0" width="100%" height="100" name="coppermine_news" id="coppermine_news" class="textinput">
+                      <iframe src="//coppermine-gallery.net/cpg16x_news.htm" align="left" frameborder="0" scrolling="auto" marginheight="0" marginwidth="0" width="100%" height="100" name="coppermine_news" id="coppermine_news" class="textinput">
                         {$lang_version_alert['no_iframe']}
                       </iframe>
 EOT;
@@ -5200,6 +5229,7 @@ function cpgGetRemoteFileByURL($remoteURL, $method = "GET", $redirect = 10, $min
         curl_setopt($curl, CURLOPT_HEADER, 0);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, $timeout);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
         $body = curl_exec($curl);
         $headers = curl_getinfo($curl);
         curl_close($curl);
@@ -5391,8 +5421,8 @@ function js_include($filename, $inline = false)
 {
     global $JS;
 
-    // Proceed with inclusion only if the file exists
-    if (!file_exists($filename)) {
+    // Proceed with inclusion only if the local file exists or it is in the form of a URL
+    if (!(file_exists($filename) || is_url($filename))) {
         return;
     }
 
@@ -6069,9 +6099,9 @@ function album_selection_options($selected = 0)
     if (GALLERY_ADMIN_MODE) {
         $result = cpg_db_query("SELECT cid, rgt, name FROM {$CONFIG['TABLE_CATEGORIES']} ORDER BY lft");
     } elseif (USER_ID) {
-        $result = cpg_db_query("SELECT DISTINCT c.cid, c.rgt, c.name FROM {$CONFIG['TABLE_ALBUMS']} AS a RIGHT JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON a.category = c.cid WHERE c.cid = " . USER_GAL_CAT . " OR a.owner = " . USER_ID . " $uploads_yes ORDER BY lft");
+        $result = cpg_db_query("SELECT DISTINCT c.cid, c.lft, c.rgt, c.name FROM {$CONFIG['TABLE_ALBUMS']} AS a RIGHT JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON a.category = c.cid WHERE c.cid = " . USER_GAL_CAT . " OR a.owner = " . USER_ID . " $uploads_yes ORDER BY lft");
     } else {
-        $result = cpg_db_query("SELECT DISTINCT c.cid, c.rgt, c.name FROM {$CONFIG['TABLE_ALBUMS']} AS a RIGHT JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON a.category = c.cid WHERE 0 $uploads_yes ORDER BY lft");
+        $result = cpg_db_query("SELECT DISTINCT c.cid, c.lft, c.rgt, c.name FROM {$CONFIG['TABLE_ALBUMS']} AS a RIGHT JOIN {$CONFIG['TABLE_CATEGORIES']} AS c ON a.category = c.cid WHERE 0 $uploads_yes ORDER BY lft");
     }
 
     $cats = array();
@@ -6830,6 +6860,43 @@ function cpg_load_plugin_language_file($path) {
             include ('./plugins/'.$path.'/lang/'.$CONFIG['lang'].'.php');
         }
     }
+}
+
+
+/**
+ * cpg_get_user_data
+ *
+ * Check user login credentials. Returns array of user data or FALSE.
+ */
+function cpg_get_user_data($sql_user_email, $password) {
+    global $cpg_udb;
+
+    $sql = "SELECT user_password, user_password_salt, user_password_hash_algorithm, user_password_iterations FROM {$cpg_udb->usertable} WHERE $sql_user_email AND user_active = 'YES' LIMIT 1";
+    $result = $cpg_udb->query($sql);
+
+    if (!$result->numRows()) {
+        return false;
+    }
+
+    require 'include/passwordhash.inc.php';
+    $password_params = $result->fetchAssoc(true);
+
+    // Check for user in users table
+    $sql = "SELECT user_id, user_name, user_password FROM {$cpg_udb->usertable} WHERE $sql_user_email ";
+    if (!$password_params['user_password_salt']) {
+        $sql .= "AND BINARY user_password = '".md5($password)."'";
+    } elseif (!cpg_password_validate($password, $password_params)) {
+        return false;
+    }
+    $sql .= " AND user_active = 'YES' LIMIT 1";
+
+    $result = $cpg_udb->query($sql);
+
+    if (!$result->numRows()) {
+        return false;
+    }
+
+    return $result->fetchAssoc(true);
 }
 
 //EOF

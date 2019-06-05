@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * help.php
+ * @since  1.6.04
+ */
 
 define('IN_COPPERMINE', true);
 define('HELP_PHP', true);
@@ -21,6 +18,25 @@ define('PICMGR_PHP', true);
 define('GROUPMGR_PHP', true);
 define('UPLOAD_PHP', true);
 require('include/init.inc.php');
+
+function adjust4remote (&$html, $bURL, $help_lang='en')
+{
+	// Adjust for remote location of doc files
+	$html = str_replace('<a href="docs/', '<a target="_blank" href="'.$bURL, $html);
+	$html = str_replace('<img src="docs/', '<img src="'.$bURL, $html);
+	$html = str_replace(' src="docs/', ' src="'.$bURL, $html);
+}
+
+// see if there is a local copy of the docs
+$haslocal = file_exists('docs/README.md');
+
+if ($haslocal) {
+    $rURL = 'docs/';
+} else {
+    // probe remote for URL
+    $http = empty($superCage->server->_source['HTTPS']) ? 'http' : 'https';
+    $rURL = file_get_contents($http.'://coppermine-gallery.net/docs/?c=1&v='.str_replace('.','',COPPERMINE_VERSION));
+}
 
 // set charset
 $meta_charset = '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
@@ -52,6 +68,7 @@ if ($superCage->get->keyExists('close')) {
     $close = '0';
 }
 if ($superCage->get->keyExists('h') && preg_match('/^(lang_[a-z0-9_]+)(?:\[([a-z0-9_]+)\])?(?:\[([a-z0-9_]+)\])?$/', $superCage->get->getEscaped('h'), $matches)) {
+
     if (preg_match('/^lang_plugin_(.*)$/i', $matches[1], $match_plugin)) {
         cpg_load_plugin_language_file($match_plugin[1]);
     }
@@ -135,6 +152,9 @@ EOT;
     $text = '';
 }
 
+// Adjust for remote location of doc files if needed
+if (!$haslocal) adjust4remote($text, $rURL);
+
 if ($superCage->get->keyExists('style')) {
     if ($matched = $superCage->get->getMatched('style', "/^[a-zA-Z0-9_\-]*$/")) {
         $style = $matched[0];
@@ -162,16 +182,12 @@ if (strrpos($file, '.') != FALSE) {
 $file = preg_replace('/[^0-9a-zA-Z_-]/', '', $file);
 $file = $file . '.htm';
 
-if ($close != 1) {
-    //$close_link = '<br />&nbsp;<br /><div align="center"><a href="#" class="admin_menu" onclick="window.close();">'.$lang_common['close'].'</a><br />&nbsp;</div>';
-}
-
 // Determine the language of the user and display the help file in his language if available.
 // Fall back to English if the file is not available in his/her language.
 // This should be done at a later stage in an i18n table. For now, let's do a straightforward if/then.
 
 // Populate a list of available sub-folders of the docs folder
-$available_doc_folders_array = form_get_foldercontent('docs/', 'folder', '', array('images', 'js', 'style', '.svn'));
+//		$available_doc_folders_array = form_get_foldercontent('docs/', 'folder', '', array('images', 'js', 'style', '.svn'));
 
 // Query the languages table
 $results = cpg_db_query("SELECT lang_id, abbr FROM {$CONFIG['TABLE_LANGUAGE']} WHERE available = 'YES' AND enabled = 'YES'");
@@ -186,15 +202,24 @@ while ($row = $results->fetchAssoc()) {
 $results->free();
 unset($row);
 
-// Make sure that the chosen help file actually exists
-if (file_exists('docs/'.$help_lang.'/'.$file) != TRUE) {
-    $help_lang = 'en';
-}
+if ($haslocal) {
+    // Make sure that the chosen help file actually exists
+    if (file_exists('docs/'.$help_lang.'/'.$file) != TRUE) {
+        $help_lang = 'en';
+    }
 
-ob_start();
-@include('docs/'.$help_lang.'/'.$file);
-$string = ob_get_contents();
-ob_end_clean();
+    ob_start();
+    @include('docs/'.$help_lang.'/'.$file);
+    $string = ob_get_contents();
+    ob_end_clean();
+} else {
+    $string = file_get_contents($rURL.$help_lang.'/'.$file);
+    // provide fallback to english
+    if (!$string && $help_lang !== 'en') {
+    	$help_lang = 'en';
+    	$string = file_get_contents($rURL.$help_lang.'/'.$file);
+    }
+}
 
 $string = strstr($string, '<body>'); // Get rid of the head, as we use a head of our own
 $string = str_replace('<body>', '', $string);
@@ -205,7 +230,7 @@ $string = str_replace('</html>', '', $string);
 // manipulate the string according to settings
 
 if ($anchor_start != '') {
-    $pattern = '<a name="' . $anchor_start . '"></a>';
+    $pattern = '<a id="' . $anchor_start . '"></a>';
     $string = strstr($string, $pattern);
     //remove the start anchor
     $pattern = "'".$pattern."'si";
@@ -213,7 +238,7 @@ if ($anchor_start != '') {
 }
 
 if ($anchor_end != '') {
-    $pattern = '<a name="' . $anchor_end . '"></a>';
+    $pattern = '<a id="' . $anchor_end . '"></a>';
     $string2 = strstr($string, $pattern);
     //remove the start anchor
     $pattern = "'".$pattern."'si";
@@ -227,6 +252,7 @@ $string = str_replace('<img src="pics/', '<img src="docs/'.$help_lang.'/images/'
 $string = str_replace('<img src="../images/icons/', '<img relativeImagesIconsDir', $string);
 $string = str_replace('<img src="../images/', '<img relativeImagesDir', $string);
 $string = str_replace('images/', 'docs/'.$help_lang.'/images/', $string);
+$string = str_replace('../../docs/'.$help_lang.'/images', 'images', $string);
 $string = str_replace('<img relativeImagesIconsDir', '<img src="docs/images/icons/', $string);
 $string = str_replace('<img relativeImagesDir', '<img src="docs/images/', $string);
 $string = str_replace('<a href="http://', '<a externalLinkTempReplacement', $string); // get external links out of the way
@@ -235,6 +261,8 @@ $string = str_replace('<a href="', '<a href="docs/'.$help_lang.'/', $string);
 $string = str_replace('<a externalLinkTempReplacement', '<a href="http://', $string); // restore external links
 $string = str_replace('<a internalAnchorLinkTempReplacement', '<a href="' . 'docs/'.$help_lang.'/'.$file . '#', $string); // restore links to anchors on this page
 
+// Adjust for remote location of doc files if needed
+if (!$haslocal) adjust4remote($string, $rURL);
 
 if ($header != '') {
     if ($CONFIG['charset'] == 'language file') {
@@ -249,22 +277,20 @@ if ($header != '') {
 }
 
 echo <<< EOT
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
     <head>
         <title>{$lang_common['help']}</title>
         $meta_charset
         <link rel="stylesheet" href="css/coppermine.css" type="text/css" />
         <link rel="stylesheet" href="themes/{$CONFIG['theme']}/style.css" type="text/css" />
-        <script src="docs/js/jquery.js" type="text/javascript"></script>
-        <script src="docs/js/help.js" type="text/javascript"></script>
+        <script src="{$rURL}js/jquery.js" type="text/javascript"></script>
+        <script src="{$rURL}js/help.js" type="text/javascript"></script>
     </head>
     <body class="nobgimage">
         <div id="cpg_main_block">
             $string
             $content
-            $close_link
         </div>
     </body>
 </html>

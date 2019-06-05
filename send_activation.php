@@ -10,7 +10,7 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
 **********************************************/
 
@@ -27,7 +27,7 @@ if (USER_ID) {
 }
 
 if ($CONFIG['reg_requires_valid_email'] == 0) {
-    cpg_die(ERROR, $lang_send_activation_php['activation_not_required']);
+    cpg_die(ERROR, $lang_send_activation_php['activation_not_required'], __FILE__, __LINE__);
 }
 
 $lookup_failed = '';

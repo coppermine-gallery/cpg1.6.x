@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * bridgemgr.php
+ * @since  1.6.04
+ */
 
 define('IN_COPPERMINE', true);
 define('BRIDGEMGR_PHP', true);
@@ -75,9 +72,10 @@ function write_to_db($step) {
     // do some checking according to the step we're currently in
     switch ($step) {
     case "choose_bbs":
-    if ($posted_var['short_name'] == '') {
+    if (empty($posted_var['short_name'])) {
         $return['short_name'] = $lang_bridgemgr_php['error_specify_bbs'];
         $error++;
+        break;
     }
     if ($posted_var['short_name'] == 'custom_selector') {
         $posted_var['short_name'] = $posted_var['custom_filename'];
@@ -120,14 +118,14 @@ function write_to_db($step) {
             //print '<br />';
         }
     }
-    $value = $posted_var['bridge_enable'];
+    $value = isset($posted_var['bridge_enable']) ? $posted_var['bridge_enable'] : 'x';
     if ($value != '0' && $value != '1') {
         $value = $CONFIG['bridge_enable'];
     }
 
     cpg_config_set('bridge_enable', $value);
 
-    if ($posted_var['clear_unused_db_fields'] == 1) {
+    if (!empty($posted_var['clear_unused_db_fields'])) {
         // clear all database entries that aren't actually used with the current bridge file
         // not implemented yet (not sure if necessary after all)
     }
@@ -753,7 +751,7 @@ pagefooter();
 } // gallery admin mode --- end
 else { // not in gallery admin mode --- start
     if ($CONFIG['bridge_enable'] != 1) {
-    cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
+        cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
     }
 
     // initialize vars
@@ -789,14 +787,9 @@ else { // not in gallery admin mode --- start
             $posted_var['password'] = $superCage->post->getEscaped('password');
         }
 
-        $encpassword = md5(addslashes($posted_var['password']));
+        $retrieved_data = cpg_get_user_data("user_name = '".$posted_var['username']."'", $posted_var['password']);
 
-
-        $results = cpg_db_query("SELECT user_id, user_name, user_password FROM $temp_user_table WHERE user_name = '" . addslashes($posted_var['username']) . "' AND BINARY user_password = '" . $encpassword . "' AND user_active = 'YES' AND user_group = '1'");
-        if ($results->numRows()) {
-            $retrieved_data = $results->fetchArray(true);
-        }
-        if ($retrieved_data['user_name'] == $posted_var['username'] && $retrieved_data['user_password'] == $encpassword && $retrieved_data['user_name'] != '' ) {
+        if ($retrieved_data['user_name'] == $posted_var['username'] && $retrieved_data['user_name'] != '') {
             // authentication successful
 
             cpg_config_set('bridge_enable', '0');

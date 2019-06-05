@@ -10,7 +10,7 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
 **********************************************/
 
@@ -98,7 +98,7 @@ pagefooter_mini();
 class Calendar
 {
     /* Constructor for the Calendar class */
-    function Calendar() {
+    function __construct() {
     }
 
 

@@ -1,18 +1,15 @@
 <?php
-/**************************
-  Coppermine Photo Gallery
- **************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
- ************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
- ************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2019 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * plugins/upload_h5a/initialize.inc.php
+ * @since  1.6.06
+ */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -38,15 +35,15 @@ class H5aUpload {
 	{
 		global $CONFIG;
 
-		$this->sys_max_chnk_size = min($this->to_bytes(ini_get('upload_max_filesize')), $this->to_bytes(ini_get('post_max_size')), $this->to_bytes(ini_get('memory_limit')));
+		$this->sys_max_chnk_size = min($this->to_bytes(ini_get('upload_max_filesize')), $this->to_bytes(ini_get('post_max_size')));
 		$this->sys_max_upl_size = min($CONFIG['max_upl_size'] * 1024, $this->sys_max_chnk_size);
 	}
 
 	public function help_button ($guid)
 	{
 		global $CONFIG;
-		return '&nbsp;<a class="greybox" href="plugins/upload_h5a/help.php?t=' . $CONFIG['theme'] . '&l='.$CONFIG['lang']
-			. '&g='.$guid.'" title="Help"><img src="images/help.gif" width="13" height="11" border="0" alt=""></a>';
+		return '&nbsp;<a class="greybox" href="plugins/upload_h5a/help.php?t=' . $CONFIG['theme'] . '&amp;l='.$CONFIG['lang']
+			. '&amp;g='.$guid.'" title="Help"><img src="images/help.gif" width="13" height="11" border="0" alt="" /></a>';
 	}
 
 	// convert string in form n(K|M|G) to an integer value
@@ -54,7 +51,8 @@ class H5aUpload {
 	{
 		$val = trim($val);
 		$last = strtolower($val[strlen($val)-1]);
-		switch($last) {
+		$val = (int) $val;
+		switch ($last) {
 			case 'g': $val *= 1024;
 			case 'm': $val *= 1024;
 			case 'k': $val *= 1024;

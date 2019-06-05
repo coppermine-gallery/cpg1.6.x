@@ -10,7 +10,7 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
 **********************************************/
 
@@ -80,7 +80,7 @@ if (!function_exists('cpg_display_help')) {
 // if a different dbase method is selected, we have to change the config and reload
 // the page to get to the correct dbase class
 if ($superCage->post->keyExists('action') && $superCage->post->getAlpha('action') == 'dbselect') {
-	set_config_dbtype($superCage->post->getAlpha('db_type'));
+	set_config_dbtype($superCage->post->getRaw('db_type'));
 	if ($errors) {
 		html_error($errors);
 	} else {
@@ -293,7 +293,7 @@ function html_auth_box($method)
 
 EOT;
     if ($method == 'MySQL') {
-        echo $lang_update_php['could_not_authenticate']. '. '.$lang_update_php['provide_admin_account_mysql'].'. <a href="update.php">' . $lang_update_php['try_again'] . '</a>.';
+        echo $lang_update_php['could_not_authenticate']. '. '.sprintf($lang_update_php['provide_admin_account_dbase'], $CONFIG['dbname']).'. <a href="update.php">' . $lang_update_php['try_again'] . '</a>.';
     } else {
         echo $lang_update_php['provide_admin_account_cpg'].'.';
     }
@@ -478,6 +478,7 @@ function update_tables()
 
     $loopCounter = 0;
     $cellStyle = '';
+    $okerrs = array(1060,1061,1062);
     $superCage = Inspekt::makeSuperCage();
 
     $db_update = 'sql/update.sql';
@@ -498,6 +499,9 @@ function update_tables()
             </tr>
 
 EOT;
+
+	// Have to relax the sql modes for mysql 5.7 so it won't fail with zero dates, etc.
+	cpg_db_query("SET SESSION sql_mode = ''");
 
     foreach ($sql_query as $q) {
 
@@ -523,6 +527,13 @@ EOT;
             $result->free();
 
             $result = @cpg_db_query($q);
+            if (!$result) {
+            	$errno = $CPGDB->getError(true);
+            	if (!in_array($errno, $okerrs)) {
+            		table_complain($cellStyle);
+            		continue;
+            	}
+            }
             $affected = $CPGDB->affectedRows();
             $warnings = cpg_db_query('SHOW WARNINGS');
 
@@ -541,6 +552,13 @@ EOT;
 
         } else {
             $result = @cpg_db_query($q);
+            if (!$result) {
+            	$errno = $CPGDB->getError(true);
+            	if (!in_array($errno, $okerrs)) {
+            		table_complain($cellStyle);
+            		continue;
+            	}
+            }
             $affected = $CPGDB->affectedRows();
             $warnings = cpg_db_query('SHOW WARNINGS;');
         }
@@ -712,20 +730,27 @@ EOT;
 			$cfgn = 'upload_h5a' . substr($cfg['name'], 18);
 			$cfgv = cpg_db_escape_string($cfg['value']);
 			cpg_db_query("INSERT INTO {$CONFIG['TABLE_PREFIX']}config VALUES ('{$cfgn}', '{$cfgv}')");
-			}
 		}
-		// if there were no html5upload configs, set a default one
-		if (!isset($cfgs) || !$cfgs) {
-			cpg_db_query("INSERT INTO {$CONFIG['TABLE_PREFIX']}config VALUES ('upload_h5a', 'a:11:{s:10:\"concurrent\";i:3;s:8:\"upldsize\";i:0;s:8:\"autoedit\";i:1;s:8:\"acptmime\";s:7:\"image/*\";s:8:\"enabtitl\";i:0;s:8:\"enabdesc\";i:0;s:8:\"enabkeys\";i:1;s:8:\"enabusr1\";i:0;s:8:\"enabusr2\";i:0;s:8:\"enabusr3\";i:0;s:8:\"enabusr4\";i:0;}')");
-		}
+	}
 
-        echo <<< EOT
-                <td class="{$cellStyle} updatesOK">
-                    {$ok_icon}{$lang_common['ok']}
-                </td>
-            </tr>
+	// if there were no html5upload configs, set a default one
+	if (!isset($cfgs) || !$cfgs) {
+		cpg_db_query("INSERT INTO {$CONFIG['TABLE_PREFIX']}config VALUES ('upload_h5a', 'a:11:{s:10:\"concurrent\";i:3;s:8:\"upldsize\";i:0;s:8:\"autoedit\";i:1;s:8:\"acptmime\";s:7:\"image/*\";s:8:\"enabtitl\";i:0;s:8:\"enabdesc\";i:0;s:8:\"enabkeys\";i:1;s:8:\"enabusr1\";i:0;s:8:\"enabusr2\";i:0;s:8:\"enabusr3\";i:0;s:8:\"enabusr4\";i:0;}')");
+	}
+
+	echo <<< EOT
+			<td class="{$cellStyle} updatesOK">
+				{$ok_icon}{$lang_common['ok']}
+			</td>
+		</tr>
 
 EOT;
+}
+
+function table_complain ($cs)
+{
+	global $errors, $CONFIG, $CPGDB, $lang_update_php, $lang_common, $LINEBREAK, $help;
+	echo '<br /><p style="color:red">', $CPGDB->getError(), '</p></td><td class="'.$cs.'"></td></tr>', $LINEBREAK;
 }
 
 function update_files()
@@ -756,6 +781,8 @@ function delete_files()
         'js/swfupload',
         'docs/en/uploading_xp-publisher.htm',
         'xp_publish.php',
+        'install_classic.php',
+        'include/cpg15x.files.xml'
     );
 
     // Check if the file exists in the first place

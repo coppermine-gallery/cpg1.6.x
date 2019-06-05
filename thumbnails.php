@@ -10,7 +10,7 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
 **********************************************/
 
@@ -37,7 +37,7 @@ if (!USER_ID && ($CONFIG['allow_unlogged_access'] == 0)) {
 }
 
 if (USER_ID && (USER_ACCESS_LEVEL == 0)) {
-    cpg_die(ERROR, $lang_errors['access_none']);
+    cpg_die(ERROR, $lang_errors['access_none'], __FILE__, __LINE__);
 }
 
 if ($CONFIG['enable_smilies']) {

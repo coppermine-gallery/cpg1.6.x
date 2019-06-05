@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * install.php
+ * @since  1.6.04
+ */
 
 ########################
 ####Install Main Code###
@@ -214,7 +211,7 @@ switch($step) {
 		if (ini_get('register_globals')) {
 			//register_globals is turned on, please turn it of.
 			$error .= $language['register_globals_detected'];
-			$error .= '[<a href="docs/en/install.htm#install_server_config_register_globals">' . $language['more'] . '</a>]';
+			$error .= '[<a href="https://coppermine-gallery.net/docs/curr/en/install.htm#install_server_config_register_globals">' . $language['more'] . '</a>]';
 			$error .= '<br />';
 		}
 
@@ -722,7 +719,7 @@ function html_welcome()
 		 </tr>
 		 <tr>
 		  <td class="tableb" colspan="2">
-			<iframe src="docs/en/copyrights.htm?hide_nav=1" width="100%" height="300" name="license">
+			<iframe src="https://coppermine-gallery.net/docs/curr/en/copyrights.htm?hide_nav=1" width="100%" height="300" name="license">
 			{$language['cpg_info_frames']}</a>.
 			</iframe>
 		  </td>

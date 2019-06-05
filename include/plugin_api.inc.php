@@ -10,7 +10,7 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
 **********************************************/
 
@@ -674,7 +674,7 @@ function cpg_action_page_end() {
  * @return string HTML
  **/
 
-function& cpg_filter_page_html( &$html ) {
+function& cpg_filter_page_html($html) {
     return CPGPluginAPI::filter('page_html',$html);
 }
 

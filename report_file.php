@@ -10,7 +10,7 @@
   as published by the Free Software Foundation.
 
   ********************************************
-  Coppermine version: 1.6.01
+  Coppermine version: 1.6.03
   $HeadURL$
 **********************************************/
 
@@ -197,7 +197,7 @@ if ($superCage->post->keyExists('subject') && $valid_sender_email) {
 
     if ($result) {
         pageheader($lang_report_php['title'], "<meta http-equiv=\"refresh\" content=\"3;url=displayimage.php?pid={$pid}\" />");
-        msg_box($lang_cpg_die[INFORMATION], $lang_report_php['send_success'], $lang_common['continue'], "displayimage.php?pid={$pid}");
+        msg_box('' , $lang_report_php['send_success'], $lang_common['continue'], "displayimage.php?pid={$pid}");
         pagefooter();
         exit;
     } else {

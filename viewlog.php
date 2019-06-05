@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * viewlog.php
+ * @since  1.6.06
+ */
 
 define('IN_COPPERMINE',1);
 define('VIEWLOG_PHP',1);
@@ -97,7 +94,7 @@ EOT;
 EOT;
 }
 
-$log = $superCage->get->getAlpha('log');
+$log = $superCage->get->getAlnum('log');
 $action = $superCage->get->getAlpha('action');
 
 pageheader('Logs :: '.$log);

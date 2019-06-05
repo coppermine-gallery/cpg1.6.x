@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.01
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * include/picmgmt.php
+ * @since  1.6.04
+ */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -49,14 +46,18 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
         }
 
 		if (isset($CONFIG['autorient']) && $CONFIG['autorient'] == 1) {
-			$exif = @exif_read_data(realpath($image));
-			if ($exif) {
-				$ort = $exif['Orientation'];
-				if ($ort !== 1) {
-					getImageTool();
-					$imgObj = new imageObject($image);
-					$imgObj->orientImage($ort);
-				}
+			if (function_exists('exif_read_data')) {	// try for the EXIF php extension
+				$exif = @exif_read_data(realpath($image));
+				$ort = $exif ? $exif['Orientation'] : 0;
+			} else {	// otherwise use Exifer
+				include 'exif.php';
+				$exif = read_exif_data_raw(realpath($image),0);
+				$ort = isset($exif['IFD0']['Orientation']) ? (int)$exif['IFD0']['Orientation'] : 0;
+			}
+			if ($ort > 1) {
+				getImageTool();
+				$imgObj = new imageObject(dirname($image).'/', basename($image));
+				$imgObj->orientImage($ort);
 			}
 		}
 
