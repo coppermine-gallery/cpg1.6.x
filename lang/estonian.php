@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * lang/estonian.php
- * @since  1.6.06
+ * @since  1.6.07
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
