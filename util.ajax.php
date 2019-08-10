@@ -22,9 +22,9 @@ require 'include/tool.class.php';
 function theme_cpg_die ($msg_code, $msg_text, $msg_string, $css_class, $error_file, $error_line, $output_buffer, $ob)
 {
 	if ($msg_code == CRITICAL_ERROR) {
-		echo json_encode(array('msg'=>$msg_text.' '.$msg_string, 'err'=>1));
+		echo json_encode(array('msg'=>'<div class="cpg_message_error">'.$msg_text.' '.$msg_string.'</div>', 'err'=>1));
 	} else {
-		echo $msg_text.' '.$msg_string;
+		echo json_encode(array('msg'=>'<div class="cpg_message_warning">'.$msg_text.' '.$msg_string.'</div>'));
 	}
 	exit();
 }

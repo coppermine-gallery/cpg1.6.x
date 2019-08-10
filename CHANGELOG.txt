@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2019-08-09 [B] Capture and display admin tool critical errors {ron4mac}
 2019-07-06 [B] Show hidden invalid fields when submitting admin config form {ron4mac}
 2019-06-05 [A] Updated Estonian language file (user contribution) {eenemeenemuu}
 2019-04-17 [C] Added title to intermediate-sized image, changed alt attritube (thread ID 79654) {eenemeenemuu}

@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2019 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/tool.class.php
- * @since  1.6.06
+ * @since  1.6.07
  */
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -126,14 +126,27 @@ abstract class AdminTool extends CPG_Object
 
 abstract class CPG_Object
 {
-	protected $config,	// reference to global $CONFIG
-		$lang;			// language strings; merged into by subclasses
+	protected
+		$config,	// reference to global $CONFIG
+		$lang;		// language strings; merged into by subclasses
 
 	public function __construct ()
 	{
 		global $CONFIG, $lang_common;
 		$this->config =& $CONFIG;
 		$this->lang = $lang_common;
+		register_shutdown_function(array($this, 'check_for_fatal'));
+	}
+
+	public function check_for_fatal ()
+	{
+		if ($error = error_get_last()) {
+			if ($error['type'] == E_ERROR) {
+				cpg_die(CRITICAL_ERROR, $error['message'], $error['file'], $error['line']);
+			} else {
+				cpg_die(ERROR, $error['message'], $error['file'], $error['line']);
+			}
+		}
 	}
 
 	// Method to get language strings

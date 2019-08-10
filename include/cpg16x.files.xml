@@ -5586,7 +5586,7 @@
 	</element>
 	<element>
 		<fullpath>include/tool.class.php</fullpath>
-		<version>1.6.06</version>
+		<version>1.6.07</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>6832dafdfb64ebe79e8ea4d399a71446</hash>
@@ -7140,7 +7140,7 @@
 	</element>
 	<element>
 		<fullpath>js/util.js</fullpath>
-		<version>1.6.06</version>
+		<version>1.6.07</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>5b9c18b0efb6aa21c0ecb08fbca17520</hash>
