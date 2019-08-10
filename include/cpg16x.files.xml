@@ -9292,7 +9292,7 @@
 	</element>
 	<element>
 		<fullpath>util.ajax.php</fullpath>
-		<version>1.6.06</version>
+		<version>1.6.07</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>68b6a9d4ac6433e452b8ecf69aa6e2fb</hash>
