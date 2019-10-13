@@ -63,11 +63,11 @@ abstract class AdminTool extends CPG_Object
 	// return next index along with warning and error counts
 	public function _process ()
 	{
-		if ($this->scp->keyExists('skps')) $this->skpcnt = $this->scp->getInt('skps');
-		if ($this->scp->keyExists('wrns')) $this->wrncnt = $this->scp->getInt('wrns');
-		if ($this->scp->keyExists('errs')) $this->errcnt = $this->scp->getInt('errs');
+		$this->skpcnt = $this->scp->getInt('skps');
+		$this->wrncnt = $this->scp->getInt('wrns');
+		$this->errcnt = $this->scp->getInt('errs');
 		$nxi = $this->process();
-		return array('nxi'=>$nxi, 'skps'=>$this->skpcnt, 'wrns'=>$this->wrncnt, 'errs'=>$this->errcnt);
+		return array('nxi'=>$nxi, 'skps'=>$this->skpcnt?:0, 'wrns'=>$this->wrncnt?:0, 'errs'=>$this->errcnt?:0);
 	}
 
 	// Method to display tool completion message with status

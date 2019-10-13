@@ -30,7 +30,7 @@ function theme_cpg_die ($msg_code, $msg_text, $msg_string, $css_class, $error_fi
 }
 
 if (!GALLERY_ADMIN_MODE) {
-    cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
+	cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
 }
 
 if ($superCage->post->keyExists('_tool') && $matches = $superCage->post->getMatched('_tool', '/^[A-Za-z0-9_]+$/')) {
@@ -43,7 +43,7 @@ if ($superCage->post->keyExists('_tool') && $matches = $superCage->post->getMatc
 
 $action = '';
 if ($superCage->post->keyExists('action') && $matches = $superCage->post->getMatched('action', '/^[A-Za-z0-9_]+$/')) {
-    $action = $matches[0];
+	$action = $matches[0];
 }
 
 if (!checkFormToken()) {
