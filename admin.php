@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2019 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * admin.php
- * @since  1.6.06
+ * @since  1.6.07
  */
 
 define('IN_COPPERMINE', true);
@@ -273,6 +273,14 @@ EOT;
 
     $admin_page .= '<br />'.$LINEBREAK;
 }
+
+$admin_page .= '<style>
+#cpgform input:invalid {
+	border-color: #900;
+	background-color: #FDD;
+}
+</style>
+';
 
 $signature = 'Coppermine Photo Gallery ' . COPPERMINE_VERSION . ' ('. COPPERMINE_VERSION_STATUS . ')';
 
@@ -647,7 +655,6 @@ EOT;
 endtable();
 echo '<br />';
 
-
 list($timestamp, $form_token) = getFormToken();
 echo <<< EOT
 <input type="hidden" name="form_token" value="{$form_token}" />
@@ -666,6 +673,7 @@ if ($javascriptOutput != '') {
 </script>
 EOT;
 }
+
 pagefooter();
 
 //EOF

@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/functions.inc.php
- * @since  1.6.04
+ * @since  1.6.07
  */
 
 if (!function_exists('stripos')) {
@@ -5229,6 +5229,7 @@ function cpgGetRemoteFileByURL($remoteURL, $method = "GET", $redirect = 10, $min
         curl_setopt($curl, CURLOPT_HEADER, 0);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, $timeout);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
         $body = curl_exec($curl);
         $headers = curl_getinfo($curl);
         curl_close($curl);

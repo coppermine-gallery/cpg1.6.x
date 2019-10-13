@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2019 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * util.ajax.php
- * @since  1.6.06
+ * @since  1.6.07
  */
 
 define('IN_COPPERMINE', true);
@@ -22,15 +22,15 @@ require 'include/tool.class.php';
 function theme_cpg_die ($msg_code, $msg_text, $msg_string, $css_class, $error_file, $error_line, $output_buffer, $ob)
 {
 	if ($msg_code == CRITICAL_ERROR) {
-		echo json_encode(array('msg'=>$msg_text.' '.$msg_string, 'err'=>1));
+		echo json_encode(array('msg'=>'<div class="cpg_message_error">'.$msg_text.' '.$msg_string.'</div>', 'err'=>1));
 	} else {
-		echo $msg_text.' '.$msg_string;
+		echo json_encode(array('msg'=>'<div class="cpg_message_warning">'.$msg_text.' '.$msg_string.'</div>'));
 	}
 	exit();
 }
 
 if (!GALLERY_ADMIN_MODE) {
-    cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
+	cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
 }
 
 if ($superCage->post->keyExists('_tool') && $matches = $superCage->post->getMatched('_tool', '/^[A-Za-z0-9_]+$/')) {
@@ -43,7 +43,7 @@ if ($superCage->post->keyExists('_tool') && $matches = $superCage->post->getMatc
 
 $action = '';
 if ($superCage->post->keyExists('action') && $matches = $superCage->post->getMatched('action', '/^[A-Za-z0-9_]+$/')) {
-    $action = $matches[0];
+	$action = $matches[0];
 }
 
 if (!checkFormToken()) {

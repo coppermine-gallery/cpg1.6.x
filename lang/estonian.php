@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * lang/estonian.php
- * @since  1.6.06
+ * @since  1.6.07
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -355,19 +355,25 @@ $lang_alb_select_box['all_albums'] = 'Näita kõiki albumeid';
 // ------------------------------------------------------------------------- //
 // File include/mailer.inc.php
 // ------------------------------------------------------------------------- //
-$lang_mailer['provide_address'] = 'Sa pead kirjutama vähemalt ühe ';
-$lang_mailer['mailer_not_supported'] = ' meiliprogramm ei ole toetatud.';
-$lang_mailer['execute'] = 'Ei suuda käivitada: ';
-$lang_mailer['instantiate'] = 'Ei suuda meilimise funktsiooni rakendada.';
 $lang_mailer['authenticate'] = 'SMTP viga: ei ole autenditud.';
-$lang_mailer['from_failed'] = 'Järgnev From (Kellelt) aadress ebaõnnestus: ';
-$lang_mailer['recipients_failed'] = 'SMTP viga: järgnev ';
-$lang_mailer['data_not_accepted'] = 'SMTP viga: andmeid ei aktsepteeritud.';
 $lang_mailer['connect_host'] = 'SMTP viga: ei suuda ühenduda SMTP hostijaga.';
+$lang_mailer['data_not_accepted'] = 'SMTP viga: andmeid ei aktsepteeritud.';
+$lang_mailer['empty_message'] = 'Kirja sisu on tühi';
+$lang_mailer['encoding'] = 'Tundmatu kodeering: ';
+$lang_mailer['execute'] = 'Ei suuda käivitada: ';
 $lang_mailer['file_access'] = 'Faili juurdepääs puudub: ';
 $lang_mailer['file_open'] = 'Faili viga: ei suuda avada fail: ';
-$lang_mailer['encoding'] = 'Tundmatu kodeering: ';
+$lang_mailer['from_failed'] = 'Järgnev From (Kellelt) aadress ebaõnnestus: ';
+$lang_mailer['instantiate'] = 'Ei suuda meilimise funktsiooni rakendada.';
+$lang_mailer['invalid_address'] = 'Invalid address: ';
+$lang_mailer['mailer_not_supported'] = ' meiliprogramm ei ole toetatud.';
+$lang_mailer['provide_address'] = 'Sa pead kirjutama vähemalt ühe ';
+$lang_mailer['recipients_failed'] = 'SMTP viga: järgnev ';
 $lang_mailer['signing'] = 'Signeerimise viga: ';
+$lang_mailer['smtp_connect_failed'] = 'SMTP connect() ebaõnnestus.';
+$lang_mailer['smtp_error'] = 'SMTP serveri viga: ';
+$lang_mailer['variable_set'] = 'Ei suutnud määrata või uuendada muutujat: ';
+$lang_mailer['extension_missing'] = 'Lisamoodul puudub: ';
 
 // ------------------------------------------------------------------------- //
 // File include/plugin_api.inc.php
@@ -474,7 +480,7 @@ $lang_banning_php['email_field_invalid'] = 'Sisesta õige e-posti aadress';
 $lang_banning_php['ip_address_field_invalid'] = 'Sisesta õige IP aadress (kujul: x.x.x.x)';
 $lang_banning_php['expiry_field_invalid'] = 'Sisesta õige aegumiskuupäev (AAAA-KK-PP)';
 $lang_banning_php['form_not_submit'] = 'Vormi ei võetud vastu - seal esinevad vead tuleb esmalt parandada!';
-};
+}
 
 // ------------------------------------------------------------------------- //
 // File bridgemgr.php
@@ -508,6 +514,7 @@ $lang_bridgemgr_php['bridge_enable_yes'] = 'lülita sisse';
 $lang_bridgemgr_php['bridge_enable_no'] = 'lülita välja';
 $lang_bridgemgr_php['error_must_not_be_empty'] = 'ei tohi olla tühi';
 $lang_bridgemgr_php['error_either_be'] = 'peab olema kas %s või %s';
+$lang_bridgemgr_php['error_bridge_file_not_exist'] = 'Silla faili ei eksisteeri: %s';
 $lang_bridgemgr_php['error_folder_not_exist'] = '%s ei eksisteeri. Paranda %s jaoks sisestatud väärtus';
 $lang_bridgemgr_php['error_cookie_not_readible'] = 'Coppermine ei suuda lugeda cookie\'t nimega %s. Paranda %s jaoks sisestatud väärtus või mine oma sildamisrakenduse admini paneelile ja hoolitse, et cookie rada oleks loetav Coppermine jaoks.';
 $lang_bridgemgr_php['error_mandatory_field_empty'] = 'Välja %s ei saa tühjaks jätta - sisesta sobiv väärtus.';
@@ -631,6 +638,8 @@ $lang_admin_php['date_a'] = 'Kuupäev kasvavalt';
 $lang_admin_php['date_d'] = 'Kuupäev kahanevalt';
 $lang_admin_php['pos_a'] = 'Asukoht kasvavalt';
 $lang_admin_php['pos_d'] = 'Asukoht kahanevalt';
+$lang_admin_php['view_a'] = 'Vaated kasvavalt'; // cpg1.6
+$lang_admin_php['view_d'] = 'Vaated kahanevalt'; // cpg1.6
 $lang_admin_php['th_any'] = 'Suurim kuvasuhe';
 $lang_admin_php['th_ht'] = 'Kõrgus';
 $lang_admin_php['th_wd'] = 'Laius';
@@ -902,6 +911,7 @@ $lang_admin_php['offline'] = 'Galerii on hetkel maas';
 $lang_admin_php['display_coppermine_news'] = 'Näita coppermine-gallery.net uudiseid';
 $lang_admin_php['display_coppermine_detail'] = 'näidatakse ainult adminile';
 $lang_admin_php['config_setting_invalid'] = '&laquo;%s&raquo; väärtused on väärad, palun vaata need üle.';
+$lang_admin_php['config_setting_rangerr'] = 'Väärtus mis sa sisestasid &laquo;%s&raquo; on väljaspool lubatud piire, palun vaata üle.';
 $lang_admin_php['config_setting_ok'] = 'Sinu &laquo;%s&raquo; seaded on salvestatud.';
 $lang_admin_php['contact_form_settings'] = 'Kontaktivormi seaded';
 $lang_admin_php['contact_form_guest_enable'] = 'Näita anonüümsetele külalistele kontaktivormi';
@@ -1460,27 +1470,27 @@ $lang_install['installer_locked'] = 'Installer on lukustatud';
 $lang_install['installer_selected'] = 'Installer on valitud';
 $lang_install['inv_im_path'] = 'Installer ei leia \'%s\' kataloogi, mille sa määratlesid ImageMagick\'u jaoks või ei ole õigusi sellele juurdepääsuks. Kontrolli õigekirja ja et sul oleks määratletud katalooogile juurdepääs.';
 $lang_install['lets_go'] = 'Minek!';
-$lang_install['mysql_create_btn'] = 'Loo';
-$lang_install['mysql_create_db'] = 'Loo uus MySQL andmebaas';
-$lang_install['mysql_db_name'] = 'MySQL andmebaasi nimi';
-$lang_install['mysql_error'] = 'MySQL viga: ';
-$lang_install['mysql_host'] = 'MySQL host<br />(localhost on tavaliselt OK)';
-$lang_install['mysql_username'] = 'MySQL kasutajanimi';
-$lang_install['mysql_password'] = 'MySQL salasõna';
-$lang_install['mysql_no_create_db'] = 'Ei suuda luua MySQL andmebaasi.';
-$lang_install['mysql_no_sel_dbs'] = 'Ei suuda leida olemasolevaid MySQL\'i andmebaase';
-$lang_install['mysql_succ'] = 'Edukas ühendumine andmebaasiga';
-$lang_install['mysql_tbl_pref'] = 'MySQL tabeli eesliide';
-$lang_install['mysql_test_connection'] = 'Testi ühendust';
-$lang_install['mysql_wrong_db'] = 'MySQL ei suuda leida andmebaasi nimega \'%s\', palun kontrolli sisestatud väärtust.';
+$lang_install['dbase_create_btn'] = 'Loo';
+$lang_install['dbase_create_db'] = 'Loo uus MySQL andmebaas';
+$lang_install['dbase_db_name'] = 'MySQL andmebaasi nimi';
+$lang_install['dbase_error'] = 'MySQL viga: ';
+$lang_install['dbase_host'] = 'MySQL host<br />(localhost on tavaliselt OK)';
+$lang_install['dbase_username'] = 'MySQL kasutajanimi';
+$lang_install['dbase_password'] = 'MySQL salasõna';
+$lang_install['dbase_no_create_db'] = 'Ei suuda luua MySQL andmebaasi.';
+$lang_install['dbase_no_sel_dbs'] = 'Ei suuda leida olemasolevaid MySQL\'i andmebaase';
+$lang_install['dbase_succ'] = 'Edukas ühendumine andmebaasiga';
+$lang_install['dbase_tbl_pref'] = 'MySQL tabeli eesliide';
+$lang_install['dbase_test_connection'] = 'Testi ühendust';
+$lang_install['dbase_wrong_db'] = 'MySQL ei suuda leida andmebaasi nimega \'%s\', palun kontrolli sisestatud väärtust.';
 $lang_install['n_a'] = 'Pole saadaval';
 $lang_install['no_admin_email'] = 'Sisesta admini e-posti aadress';
 $lang_install['no_admin_password'] = 'Sisesta admini salasõna';
 $lang_install['no_admin_username'] = 'Sisesta admini kasutajanimi';
 $lang_install['no_dir'] = 'Kataloog pole saadaval';
 $lang_install['no_gd'] = 'Näib, et sinu PHP install ei sisalda \'GD\' graafikateeki ja sa ei märkinud, et soovid kasutada ImageMagick\'ut. Coppermine on häälestatud kasutama GD2\'e kuna automaatne GD tuvastamine vahetevahel ebaõnnestub. Kui GD on installitud sinu süsteemi, siis skript peaks töötama, vastasel juhul pead installima ImageMagick\'u.';
-$lang_install['no_mysql_conn'] = 'Ei suuda luua MySQL ühendust, palun kontrollige sisestatud MySQL\'i üksikasju';
-$lang_install['no_mysql_support'] = 'PHP\'l ei ole MySQL tuge.';
+$lang_install['no_dbase_conn'] = 'Ei suuda luua MySQL ühendust, palun kontrollige sisestatud MySQL\'i üksikasju';
+$lang_install['no_dbase_support'] = 'PHP\'l ei ole MySQL tuge.';
 $lang_install['no_thumb_method'] = 'Sa pead valima pilditöötlusrakenduse (GD/IM)';
 $lang_install['nok'] = 'Ei sobi';
 $lang_install['not_here_yet'] = 'Praegu ei ole siin midagi, palun klõpsa %ssiia%s tagasi pöördumiseks.';
@@ -2540,6 +2550,9 @@ $lang_util_php['keyword_replace_after'] = 'Pärast konverteerimist asenda %s %s-
 $lang_util_php['keyword_replace_values'] = array('_'=>'alakriips', '-'=>'sidekriips', '~'=>'tilde');
 $lang_util_php['keyword_explanation'] = 'See konverteerib kõikide failide võtmesõnade eraldaja ühest väärtusest teiseks. Vaata üksikasju abidokumentatsioonist.';
 $lang_util_php['nothing_deleted'] = 'Pole midagi kustutada.'; // cpg1.6
+$lang_util_php['warnings'] = 'Hoiatust'; // cpg1.6
+$lang_util_php['errors'] = 'Viga'; // cpg1.6
+$lang_util_php['complete'] = 'Toiming lõpetatud'; // cpg1.6
 }
 
 // ------------------------------------------------------------------------- //
