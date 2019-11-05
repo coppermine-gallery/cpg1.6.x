@@ -7622,7 +7622,7 @@
 	</element>
 	<element>
 		<fullpath>plugins/upload_h5a/help.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>ca2c67c1657b9124f542cc28822de8e8</hash>
