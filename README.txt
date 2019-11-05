@@ -1,17 +1,14 @@
-/************************
- Coppermine Photo Gallery
- ************************
- Copyright (c) 2003-2016 Coppermine Dev Team
- v1.0 originally written by Gregory DEMAR
-
- This program is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License version 3
- as published by the Free Software Foundation.
-
- *************************************
- Coppermine version: 1.6.03
- $HeadURL$
- *************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2019 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * README.txt
+ * @since  1.6.07
+ */
 
 CPG - Coppermine Photo Gallery Quick-Start Guide
 ================================================
@@ -27,7 +24,7 @@ Ok, okay, so you don't want to read the documentation. At least, "not just yet,"
 Let's Start!
 
 Question: Does my webserver support Coppermine?
-Answer: You need to have a webserver or webhost that provides the following: PHP 5.0 or newer (PHP 7 is supported), and MySQL(i) 4.1 or newer. Your database can be accessed via any of the mysql, mysqli or PDO(mysql) interfaces. You also need either GD 2.xx or ImageMagick installed. GD normally comes bundled with PHP; ImageMagick must be installed by your webhost.
+Answer: You need to have a webserver or webhost that provides the following: PHP 5.3 or newer (PHP 7 is supported), and MySQL(i) 4.1 or newer. Your database can be accessed via any of the mysql, mysqli or PDO(mysql) interfaces. You also need either GD 2.xx or ImageMagick installed. GD normally comes bundled with PHP; ImageMagick must be installed by your webhost.
 
 Question: Where can I find out that stuff?
 Answer: Ask your webhost, they should be able to tell you. You can also create a file called phpinfo.php, upload it to your website and enter www.yoursite.com/phpinfo.php in your browser, run it and see what versions of the above requirements you have. Only your host, however, can tell you the exact location of ImageMagick's convert utility, if it's available, at all. If the Imagick PHP extension is available, there will be no need to know that location.
