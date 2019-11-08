@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2019 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * install.php
- * @since  1.6.04
+ * @since  1.6.08
  */
 
 ########################
@@ -38,7 +38,7 @@ define('STEP_FINALISE', 10);
 $LINEBREAK = "\r\n"; // For compatibility both on Windows as well as *nix
 
 // Set required versions
-$required_php_version = '5.0.0';
+$required_php_version = '5.3.0';
 
 // Set the parameters that normally get populated by the option form
 $displayOption_array = array(
@@ -215,31 +215,42 @@ switch($step) {
 			$error .= '<br />';
 		}
 
+		//XML PARSER CHECK
+		if (function_exists('simplexml_load_string') || function_exists('xml_parser_create')) {
+			$has_XML = true;
+		} else {
+			$has_XML = false;
+			$error = $language['no_xml_parser'] . '<br />';
+		}
+
 		$page_title = $language['title_file_check'];
 		html_header();
 		if ($error != '') {
 			html_error(false /*false to not include a button*/);
 		}
 
-		//use versioncheck to check file versions
-		$lang_versioncheck_php = $language['versioncheck'];
-		require_once('include/versioncheck.inc.php');
+		if ($has_XML) {
+			//use versioncheck to check file versions
+			$lang_versioncheck_php = $language['versioncheck'];
+			require_once 'include/versioncheck.inc.php';
+	
+			// TODO: need to deal with connection failing and skip this step (and maybe allow a retry)
+	
+			// Connect to the repository and populate the array with data from the XML file
+			$file_data_array = cpgVersioncheckConnectRepository($displayOption_array);
+	
+			$file_data_array = cpg_versioncheckPopulateArray($file_data_array);
+			//$file_data_array = cpg_versioncheckPopulateArray($file_data_array, $displayOption_array, $textFileExtensions_array, $imageFileExtensions_array, $CONFIG, $maxLength_array, $lang_versioncheck_php);
+			$file_data_count = count($file_data_array);
+			// Print the results
+			$outputResult = cpg_versioncheckCreateHTMLOutput($file_data_array, $textFileExtensions_array, $lang_versioncheck_php, $majorVersion, $displayOption_array);
+			$versioncheck_output = sprintf($lang_versioncheck_php['files_folder_processed'], $outputResult['display'], $outputResult['total'], $outputResult['error']);
+	
+			// TODO: end
+	
+			html_content($versioncheck_output);
+		}
 
-		// TODO: need to deal with connection failing and skip this step (and maybe allow a retry)
-
-		// Connect to the repository and populate the array with data from the XML file
-		$file_data_array = cpgVersioncheckConnectRepository($displayOption_array);
-
-		$file_data_array = cpg_versioncheckPopulateArray($file_data_array);
-		//$file_data_array = cpg_versioncheckPopulateArray($file_data_array, $displayOption_array, $textFileExtensions_array, $imageFileExtensions_array, $CONFIG, $maxLength_array, $lang_versioncheck_php);
-		$file_data_count = count($file_data_array);
-		// Print the results
-		$outputResult = cpg_versioncheckCreateHTMLOutput($file_data_array, $textFileExtensions_array, $lang_versioncheck_php, $majorVersion, $displayOption_array);
-		$versioncheck_output = sprintf($lang_versioncheck_php['files_folder_processed'], $outputResult['display'], $outputResult['total'], $outputResult['error']);
-
-		// TODO: end
-
-		html_content($versioncheck_output);
 		html_footer();
 		setTmpConfig('step', STEP_FOLDER_PERMISSIONS);
 		break;

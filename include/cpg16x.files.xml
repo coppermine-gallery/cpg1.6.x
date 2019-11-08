@@ -2,7 +2,7 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.07</version>
+		<version>1.6.08</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>4c6dce80a1293635d90e72c250cbdc94</hash>
@@ -6893,7 +6893,7 @@
 	</element>
 	<element>
 		<fullpath>install.php</fullpath>
-		<version>1.6.04</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>dfdc47afe5cbe6058a24a36ae4d17a81</hash>
@@ -7180,7 +7180,7 @@
 	</element>
 	<element>
 		<fullpath>lang/english.php</fullpath>
-		<version>1.6.06</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>fe0d3daf16cbd558d09027ead4e0f40c</hash>

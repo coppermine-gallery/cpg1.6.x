@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * lang/english.php
- * @since  1.6.06
+ * @since  1.6.08
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -1558,6 +1558,8 @@ $lang_install['not_exist'] = 'Does not exist';
 // 1.6 dbabstract
 $lang_install['not_available'] = 'not available';
 $lang_install['version_too_old'] = 'version too old';
+// 1.6.08 XML check
+$lang_install['no_xml_parser'] = 'PHP must be enabled for XML parsing';
 }
 
 // ------------------------------------------------------------------------- //
