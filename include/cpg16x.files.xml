@@ -15,7 +15,7 @@
 	</element>
 	<element>
 		<fullpath>README.txt</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.07</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>dff5f53d339f1d7b8c1e84ea96b41156</hash>
@@ -5190,7 +5190,7 @@
 	</element>
 	<element>
 		<fullpath>include/archive.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>a203bad9c55804308a443ee23f115901</hash>
@@ -7817,7 +7817,7 @@
 	</element>
 	<element>
 		<fullpath>plugins/visiblehookpoints/codebase.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.08</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>1959a05e3caad1cf1ede5a25a2bf11a5</hash>
