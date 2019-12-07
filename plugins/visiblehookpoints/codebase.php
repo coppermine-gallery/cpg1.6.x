@@ -323,7 +323,7 @@ if (!class_exists('dBug')) {
             var $arrType=array("array","object","resource","boolean");
 
             //constructor
-            function dBug($var,$forceType="") {
+            function __construct($var,$forceType="") {
                     $arrAccept=array("array","object","xml"); //array of variable types that can be "forced"
                     if(in_array($forceType,$arrAccept))
                             $this->{"varIs".ucfirst($forceType)}($var);

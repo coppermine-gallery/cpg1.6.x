@@ -29,7 +29,7 @@
 
 class archive
 {
-  function archive($name)
+  function __construct($name)
   {
     $this->options = array (
       'basedir' => ".",
@@ -338,7 +338,7 @@ class archive
 
 class tar_file extends archive
 {
-  function tar_file($name)
+  function __construct($name)
   {
     $this->archive($name);
     $this->options['type'] = "tar";
@@ -496,7 +496,7 @@ class tar_file extends archive
 
 class gzip_file extends tar_file
 {
-  function gzip_file($name)
+  function __construct($name)
   {
     $this->tar_file($name);
     $this->options['type'] = "gzip";
@@ -537,7 +537,7 @@ class gzip_file extends tar_file
 
 class bzip_file extends tar_file
 {
-  function bzip_file($name)
+  function __construct($name)
   {
     $this->tar_file($name);
     $this->options['type'] = "bzip";
@@ -578,7 +578,7 @@ class bzip_file extends tar_file
 
 class zip_file extends archive
 {
-  function zip_file($name)
+  function __construct($name)
   {
     $this->archive($name);
     $this->options['type'] = "zip";
