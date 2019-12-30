@@ -177,7 +177,7 @@
 	</element>
 	<element>
 		<fullpath>bridge/smf20.inc.php</fullpath>
-		<version>1.6.04</version>
+		<version>1.6.08</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>b0bd40495bea8d0f14338687f2e71264</hash>
