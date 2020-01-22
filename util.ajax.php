@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * util.ajax.php
- * @since  1.6.07
+ * @since  1.6.08
  */
 
 define('IN_COPPERMINE', true);
@@ -57,5 +57,9 @@ if ($tobj) {
 	$rslt = $tobj->_process();
 	$pmsg = ob_get_clean();
 	$rslt['msg'] = $pmsg;
+	// refresh the form token if it has been running for a long time
+	if ((time() - $superCage->post->getInt('timestamp')) > $CONFIG['form_token_lifetime']>>1) {
+		$rslt['tkn'] = getFormToken();
+	}
 	echo json_encode($rslt);
 }

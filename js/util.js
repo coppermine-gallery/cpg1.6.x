@@ -7,7 +7,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * js/util.js
- * @since  1.6.07
+ * @since  1.6.08
  */
 
 function init_utils () {
@@ -46,6 +46,12 @@ var processTool = function (totl, formd) {
 				formd.skps = data.skps;
 				formd.wrns = data.wrns;
 				formd.errs = data.errs;
+				// refresh the form token if requested
+				if (data.tkn) {
+					formd.timestamp = data.tkn[0];
+					formd.form_token = data.tkn[1];
+				}
+				// continue processing
 				processTool(totl, formd);
 			} else if (data.err) {
 				$('#toolpdsp').hide();

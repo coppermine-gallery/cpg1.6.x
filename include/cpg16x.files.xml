@@ -7140,7 +7140,7 @@
 	</element>
 	<element>
 		<fullpath>js/util.js</fullpath>
-		<version>1.6.07</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>6214490d86174b99a7d58403de182f04</hash>
@@ -9292,7 +9292,7 @@
 	</element>
 	<element>
 		<fullpath>util.ajax.php</fullpath>
-		<version>1.6.07</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>0d8e1cbbbd0450ac3b1ea9633e019533</hash>
