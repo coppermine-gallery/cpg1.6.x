@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2020-02-05 [B] Change javascript 'zebra' code to apply to table cells instead of rows {ron4mac}
 2020-01-22 [B] Refresh form token when admin tools process for extra long times {ron4mac}
 2019-12-29 [A] Add bridge compatibility for SMF2.0.x versions greater than 2.0.15 {ron4mac}
 2019-12-07 [M] Update remaining old class constructors to new style {Dukecz}

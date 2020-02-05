@@ -1,17 +1,14 @@
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory DEMAR
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * js/scripts.js
+ * @since  1.6.08
+ */
 
 // Object to hold javascript keyCodes for various keys
 var KEY_CODES = {
@@ -22,8 +19,8 @@ var KEY_CODES = {
 var GB_ANIMATION = true;
 
 $(function() {
-    $(".cpg_zebra tr:even").addClass("tableb");
-    $(".cpg_zebra tr:odd").addClass("tableb tableb_alternate");
+    $(".cpg_zebra tr:even td:not(.tableh1)").addClass("tableb");
+    $(".cpg_zebra tr:odd td:not(.tableh1)").addClass("tableb tableb_alternate");
 });
 
 function MM_openBrWindow(theURL,winName,features) { //v2.0
@@ -103,7 +100,7 @@ function HighlightAll(theField) {
     tempval.select();
 }
 
-var onloads = new Array();
+var onloads = [];
 
 function addonload(func){
     onloads.push(func);
@@ -347,7 +344,7 @@ if (!Array.prototype.indexOf)
 // end function prototype array.indexOf
 
 $(document).ready(function() {
-    for (func in onloads) {
+    for (var func in onloads) {
         eval(onloads[func]);
     }
 
