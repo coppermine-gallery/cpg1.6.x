@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/functions.inc.php
- * @since  1.6.07
+ * @since  1.6.08
  */
 
 if (!function_exists('stripos')) {
@@ -5685,12 +5685,24 @@ function rebuild_tree($parent = 0, $left = 0, $depth = 0, $pos = 0)
 function cpg_fetch_icon($icon_name, $config_level = 0, $title = '', $check = '', $extension = 'png', $type = 0)
 {
     global $CONFIG, $ICON_DIR;
+    static $fonticons;
 
     if ($CONFIG['enable_menu_icons'] < $config_level) {
         return;
     }
 
     $return = '';
+
+	// provide themes with a way to use font icons
+	if (defined('THEME_USES_ICON_FONT')) {
+		if (empty($fonticons)) include_once $ICON_DIR . 'icons.php';
+		if (!empty($fonticons[$icon_name])) {
+			if (!empty($fonticons['_beg'])) $return .= $fonticons['_beg'];
+			$return .= $fonticons[$icon_name];
+			if (!empty($fonticons['_end'])) $return .= $fonticons['_end'];
+			return $return;
+		}
+	}
 
     // sanitize extension
     if ($extension != 'jpg' && $extension != 'gif') {
@@ -5705,6 +5717,11 @@ function cpg_fetch_icon($icon_name, $config_level = 0, $title = '', $check = '',
             return;
         }
     }
+
+	// fall back to distribution icons for missing theme icons
+	if ($ICON_DIR != 'images/icons/' && !file_exists($relative_path)) {
+		$relative_path = 'images/icons/' . $icon_name . '.' . $extension;
+	}
 
     $return .= '<img src="';
     $return .= $relative_path;

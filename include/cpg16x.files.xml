@@ -356,7 +356,7 @@
 	</element>
 	<element>
 		<fullpath>editpics.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>ae34506f8c715f50886c7d27d7071e20</hash>
@@ -3380,6 +3380,12 @@
 		<hash>1ea97d0c80db189295bddbeaabdc6ede</hash>
 	</element>
 	<element>
+		<fullpath>images/icons/rating.png</fullpath>
+		<status>mandatory</status>
+		<permission>read</permission>
+		<hash>325e7f5076c8c44c719fc37c48b5155b</hash>
+	</element>
+	<element>
 		<fullpath>images/icons/random.png</fullpath>
 		<status>mandatory</status>
 		<permission>read</permission>
@@ -5316,7 +5322,7 @@
 	</element>
 	<element>
 		<fullpath>include/functions.inc.php</fullpath>
-		<version>1.6.07</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>7aea935507c2715f4835ed13727a788f</hash>
