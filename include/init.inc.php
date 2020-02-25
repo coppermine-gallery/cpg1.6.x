@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2019 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/init.inc.php
- * @since  1.6.07
+ * @since  1.6.08
  */
 
 define('COPPERMINE_VERSION', '1.6.07');
@@ -57,10 +57,6 @@ $HTML_SUBST = array('&' => '&amp;', '"' => '&quot;', '<' => '&lt;', '>' => '&gt;
 
 // Store all reported errors in the $cpgdebugger
 require_once('include/debugger.inc.php');
-
-if (get_magic_quotes_runtime()) {
-    set_magic_quotes_runtime(0);
-}
 
 // used for timing purposes
 $query_stats = array();

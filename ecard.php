@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * ecard.php
- * @since  1.6.05
+ * @since  1.6.08
  */
 
 define('IN_COPPERMINE', true);
@@ -32,7 +32,7 @@ function get_post_var($name, $default = '')
     $superCage = Inspekt::makeSuperCage();
 
     if ($superCage->post->keyExists($name)) {
-        return get_magic_quotes_gpc() ? stripslashes($superCage->post->noTags($name)) : $superCage->post->getEscaped($name);
+        return $superCage->post->getEscaped($name);
     } else {
         return $default;
     }

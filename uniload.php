@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * uniload.php
- * @since  1.6.05
+ * @since  1.6.08
  */
 
 // Confirm we are in Coppermine and set the language blocks.
@@ -288,13 +288,8 @@ $user4 = $superCage->post->getEscaped('user4');
 $matches = array();
 
 if (!$is_a_chunk) {
-	// If magic quotes is on, remove the slashes it added to the file name.
-	if (get_magic_quotes_gpc()) {
-		//Using getRaw() as we have custom sanitization code below
-		$picture_name = stripslashes($superCage->files->getRaw('/Filedata/name'));
-	} else {
-		$picture_name = $superCage->files->getRaw('/Filedata/name');
-	}
+	//Using getRaw() as we have custom sanitization code below
+	$picture_name = $superCage->files->getRaw('/Filedata/name');
 }
 
 $picture_name = CPGPluginAPI::filter('upload_file_name', $picture_name);

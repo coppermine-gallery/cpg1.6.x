@@ -191,7 +191,7 @@
 	</element>
 	<element>
 		<fullpath>bridge/udb_base.inc.php</fullpath>
-		<version>1.6.04</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>ddef1084f6008746e4efcbe825fe0b0f</hash>
@@ -298,7 +298,7 @@
 	</element>
 	<element>
 		<fullpath>db_input.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>1b641104a924d2569f2d45d4e3394887</hash>
@@ -338,7 +338,7 @@
 	</element>
 	<element>
 		<fullpath>ecard.php</fullpath>
-		<version>1.6.05</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>1a6d6fa3654c12cbad9f4cfe4243a485</hash>
@@ -5372,7 +5372,7 @@
 	</element>
 	<element>
 		<fullpath>include/init.inc.php</fullpath>
-		<version>1.6.07</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>1314e297928f547b3e93f98ad1cccff3</hash>
@@ -5391,7 +5391,7 @@
 	</element>
 	<element>
 		<fullpath>include/inspekt/cage.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>561d888b060dda8de6ee68aef0c7ef74</hash>
@@ -5461,7 +5461,7 @@
 	</element>
 	<element>
 		<fullpath>include/mailer.inc.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>aa0619f03bfeb9fcae305fcbe6035260</hash>
@@ -7251,7 +7251,7 @@
 	</element>
 	<element>
 		<fullpath>minibrowser.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>1d419a6c077d3abc1bbee0fc78769b94</hash>
@@ -7905,7 +7905,7 @@
 	</element>
 	<element>
 		<fullpath>report_file.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>ace0a6186d1bffae4942740e7279dc52</hash>
@@ -9242,7 +9242,7 @@
 	</element>
 	<element>
 		<fullpath>uniload.php</fullpath>
-		<version>1.6.05</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>fe162d42013f048344c5dba56366ea26</hash>
@@ -9256,7 +9256,7 @@
 	</element>
 	<element>
 		<fullpath>update.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>0474ea8a8711d3ffcfc0d219f505507c</hash>

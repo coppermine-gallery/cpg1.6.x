@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * db_input.php
+ * @since  1.6.08
+ */
 
 define('IN_COPPERMINE', true);
 define('DB_INPUT_PHP', true);
@@ -618,12 +615,7 @@ case 'picture':
         cpg_die(CRITICAL_ERROR, sprintf($lang_db_input_php['dest_dir_ro'], $dest_dir), __FILE__, __LINE__, true);
     }
 
-    if (get_magic_quotes_gpc()) {
-        //Using getRaw() as we have custom sanitization code below
-        $picture_name = stripslashes($superCage->files->getRaw("/userpicture/name"));
-    } else {
-        $picture_name = $superCage->files->getRaw("/userpicture/name");
-    }
+    $picture_name = $superCage->files->getRaw("/userpicture/name");
 
     $picture_name = CPGPluginAPI::filter('upload_file_name', $picture_name);
 

@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * include/inspekt/cage.php
+ * @since  1.6.08
+ */
 
 /**
  * Inspekt Cage - main source file
@@ -732,8 +729,6 @@ class Inspekt_Cage
             $key = trim($key, ISPK_ARRAY_PATH_SEPARATOR);
             $keys = explode(ISPK_ARRAY_PATH_SEPARATOR, $key);
             return $this->_getValueRecursive($keys, $this->_source);
-        } elseif (get_magic_quotes_gpc()) {
-            return stripslashes_deep($this->_source[$key]);
         } else {
             return $this->_source[$key];
         }

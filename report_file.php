@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * report_file.php
+ * @since  1.6.08
+ */
 
 define('IN_COPPERMINE', true);
 define('REPORT_FILE_PHP', true);
@@ -35,7 +32,7 @@ function get_post_var($name, $default = '')
 {
     $superCage = Inspekt::makeSuperCage();
     if ($superCage->post->keyExists($name)) {
-        return get_magic_quotes_gpc() ? stripslashes_deep($superCage->post->noTags($name)) : $superCage->post->noTags($name);
+        return $superCage->post->noTags($name);
     } else {
         return $default;
     }

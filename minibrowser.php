@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * minibrowser.php
+ * @since  1.6.08
+ */
 
 define('IN_COPPERMINE', true);
 define('MINIBROWSER_PHP', true);
@@ -36,12 +33,10 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
     $folder_regex = '/^[0-9A-Za-z\\.\\/_\\-,&\' ]+$/';
 }
 
-$mq = get_magic_quotes_gpc();
-
 if ($superCage->get->keyExists('folder') && ($matches = $superCage->get->getMatched('folder', $folder_regex))) {
-    $folder = rawurldecode($mq ? stripslashes($matches[0]) : $matches[0]);
+    $folder = rawurldecode($matches[0]);
 } elseif ($superCage->post->keyExists('folder') && ($matches = $superCage->post->getMatched('folder', $folder_regex))) {
-    $folder = rawurldecode($mq ? stripslashes($matches[0]) : $matches[0]);
+    $folder = rawurldecode($matches[0]);
 } else {
     $folder = '';
 }
@@ -51,10 +46,10 @@ if (strpos(cpg_normalize_path($folder), rtrim($CONFIG['fullpath'], '/')) !== 0) 
 }
 
 if ($superCage->get->keyExists('hidefolders') && ($matches = $superCage->get->getMatched('hidefolders', $folder_regex))) {
-    $hidefolders = rawurldecode($mq ? stripslashes($matches[0]) : $matches[0]);
+    $hidefolders = rawurldecode($matches[0]);
     $hiddenfolders = explode(',', $hidefolders);
 } elseif ($superCage->post->keyExists('hidefolders') && ($matches = $superCage->post->getMatched('hidefolders', $folder_regex))) {
-    $hidefolders = rawurldecode($mq ? stripslashes($matches[0]) : $matches[0]);
+    $hidefolders = rawurldecode($matches[0]);
     $hiddenfolders = explode(',', $hidefolders);
 } else {
     $hidefolders = '';
@@ -62,9 +57,9 @@ if ($superCage->get->keyExists('hidefolders') && ($matches = $superCage->get->ge
 }
 
 if ($superCage->get->keyExists('limitfolder') && $matches = $superCage->get->getMatched('limitfolder', $folder_regex)) {
-    $limitfolder = rawurldecode($mq ? stripslashes($matches[0]) : $matches[0]);
+    $limitfolder = rawurldecode($matches[0]);
 } elseif ($superCage->post->keyExists('limitfolder') && $matches = $superCage->post->getMatched('limitfolder', $folder_regex)) {
-    $limitfolder = rawurldecode($mq ? stripslashes($matches[0]) : $matches[0]);
+    $limitfolder = rawurldecode($matches[0]);
 } else {
     $limitfolder = '';
 }
@@ -74,9 +69,9 @@ if (strpos(cpg_normalize_path($limitfolder), rtrim($CONFIG['fullpath'], '/')) !=
 }
 
 if ($superCage->get->keyExists('linktarget') && ($matches = $superCage->get->getMatched('linktarget', $folder_regex))) {
-    $linktarget = rawurldecode($mq ? stripslashes($matches[0]) : $matches[0]);
+    $linktarget = rawurldecode($matches[0]);
 } elseif ($superCage->post->keyExists('linktarget') && ($matches = $superCage->post->getMatched('linktarget', $folder_regex))) {
-    $linktarget = rawurldecode($mq ? stripslashes($matches[0]) : $matches[0]);
+    $linktarget = rawurldecode($matches[0]);
 } else {
     $linktarget = '';
 }

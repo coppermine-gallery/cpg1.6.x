@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * update.php
+ * @since  1.6.08
+ */
 
 // define('SKIP_AUTHENTICATION', true);
 // If you don't remember the admin account data you're prompted for when running this file in your browser, umcomment the line above by removing the two slashes in front of it, upload that file to your webserver, run it in your browser. After successfully having run it, remember to restore the two slashes you removed and replace the "unsecure" version on your webserver with the "secure" version (the one that contains the double slashes).
@@ -29,10 +26,6 @@ if (!defined('SKIP_AUTHENTICATION')) { // try to include init.inc.php to get the
     //echo $output; // For troubleshooting purposes, echo $output
 }
 session_start();
-
-if (get_magic_quotes_runtime()) {
-    set_magic_quotes_runtime(0);
-}
 
 if (!function_exists('cpgGetMicroTime')) {
 function cpgGetMicroTime()
