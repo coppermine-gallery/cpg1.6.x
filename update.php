@@ -20,7 +20,7 @@ define('UPDATE_PHP', true);
 if (!defined('SKIP_AUTHENTICATION')) { // try to include init.inc.php to get the "regular" coppermine user interface
     $error_reporting = error_reporting(E_ERROR); // silence all error reports but fatal ones
     ob_start(); // turn output buffering on - if including the regular coppermine files breaks, we can make sure that the output doesn't break the subsequent code
-    include_once('include/init.inc.php');
+    include_once 'include/init.inc.php';
     $output = ob_get_clean();
     error_reporting($error_reporting); // set error reporting level back to how it used to be
     //echo $output; // For troubleshooting purposes, echo $output
@@ -37,10 +37,10 @@ function cpgGetMicroTime()
 
 set_include_path(get_include_path().PATH_SEPARATOR.dirname(__FILE__).PATH_SEPARATOR.dirname(__FILE__).DIRECTORY_SEPARATOR.'include');
 
-require_once('include/inspekt.php');
-require_once('include/sql_parse.php');
-require_once('include/config.inc.php');
-require_once('include/functions.inc.php');
+require_once 'include/inspekt.php';
+require_once 'include/sql_parse.php';
+require_once 'include/config.inc.php';
+require_once 'include/functions.inc.php';
 
 // The default values
 $errors = '';
@@ -770,6 +770,7 @@ function delete_files()
     $delete_file_array = array(
         'js/jquery-1.3.2.js',
         'logs/log_header.inc.php',
+        'include/log_header.inc.php',
         'js/setup_swf_upload.js',
         'js/swfupload',
         'docs/en/uploading_xp-publisher.htm',

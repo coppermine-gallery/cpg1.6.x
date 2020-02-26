@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/logger.inc.php
- * @since  1.6.06
+ * @since  1.6.08
  */
 defined('IN_COPPERMINE') or die('Not in Coppermine...');
 
@@ -45,7 +45,7 @@ function log_write($text, $log = null)
     $log = 'logs/' . $log . '.log.php';
 
     if (!file_exists($log)) {
-        $log_header = implode('', file('include/log_header.inc.php'));
+        $log_header = '<?php '.'defined(\'IN_COPPERMINE\') or die(\'Not in Coppermine...\');'." ?>\n";
     } else {
         $log_header = '';
     }
@@ -72,7 +72,7 @@ function log_read($log = null) {
 
     $contents = file_get_contents($log);
 
-    return substr($contents, strpos($contents, '?>') + 2);
+    return trim(substr($contents, strpos($contents, '?>') + 2));
 }
 
 

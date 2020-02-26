@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * viewlog.php
- * @since  1.6.06
+ * @since  1.6.08
  */
 
 define('IN_COPPERMINE',1);
@@ -68,7 +68,7 @@ function display_log($logname)
             </tr>
             <tr>
                     <td class="tableb">
-                            <ul>
+                            <ul class="log-display">
 EOT;
 
     $log_array = explode('---' , log_read($logname));
