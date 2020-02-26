@@ -1,26 +1,23 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * thumbnails.php
+ * @since  1.6.08
+ */
 
 /**
  *
  * @ignore
  */
 define('IN_COPPERMINE', true);
-
 define('THUMBNAILS_PHP', true);
+define('SMILIES_PHP', true);
 
 /**
  *
@@ -28,7 +25,7 @@ define('THUMBNAILS_PHP', true);
  */
 define('INDEX_PHP', true);
 
-require_once ('include/init.inc.php');
+require_once 'include/init.inc.php';
 
 if (!USER_ID && ($CONFIG['allow_unlogged_access'] == 0)) {
     $redirect = 'login.php';
@@ -41,7 +38,7 @@ if (USER_ID && (USER_ACCESS_LEVEL == 0)) {
 }
 
 if ($CONFIG['enable_smilies']) {
-    include("include/smilies.inc.php");
+    include 'include/smilies.inc.php';
 }
 
 /**

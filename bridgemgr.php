@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * bridgemgr.php
- * @since  1.6.04
+ * @since  1.6.08
  */
 
 define('IN_COPPERMINE', true);
@@ -184,7 +184,7 @@ function cpg_submit_button($step, $back = 'true', $columns = '3', $next = 'true'
     global $lang_bridgemgr_php,$LINEBREAK, $posted_var;
     $checked = '';
 
-    if ($posted_var['hide_unused_fields'] != 1) {
+    if (empty($posted_var['hide_unused_fields'])) {
         $checked = 'checked="checked"';
     }
     $return = '    <tr>'.$LINEBREAK;

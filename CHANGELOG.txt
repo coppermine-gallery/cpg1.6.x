@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2020-02-26 [M] Clean up code involved in PHP warnings {ron4mac}
 2020-02-25 [M] Remove use of deprecated *magic_quotes* functions {ron4mac}
 2020-02-07 [A] Provide themes with a method to use font icons {ron4mac}
 2020-02-07 [M] Clean up rating icon in pics edit {ron4mac}

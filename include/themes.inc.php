@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2019 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/themes.inc.php
- * @since  1.6.07
+ * @since  1.6.08
  */
 
 /////////////////////////////////////////////////////////////////
@@ -4143,7 +4143,7 @@ function theme_display_fullsize_pic()
     <body style="margin:0px; padding:0px; background-color: gray;">
 
 EOT;
-    if ($pic_html) {
+    if (!empty($pic_html)) {
         $fullsize_html .= $pic_html;
     } else {
         if ($CONFIG['transparent_overlay'] == 1) {

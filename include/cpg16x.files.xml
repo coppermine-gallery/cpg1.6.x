@@ -117,7 +117,7 @@
 	</element>
 	<element>
 		<fullpath>bridge/coppermine.inc.php</fullpath>
-		<version>1.6.04</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>aa3d814f8a6295a870553a2afc3bb270</hash>
@@ -219,7 +219,7 @@
 	</element>
 	<element>
 		<fullpath>bridgemgr.php</fullpath>
-		<version>1.6.04</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>941cba59824bd1242ba203401e2aa4c8</hash>
@@ -319,7 +319,7 @@
 	</element>
 	<element>
 		<fullpath>displayimage.php</fullpath>
-		<version>1.6.06</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>7b83ecb48caad9985906581bdb457e50</hash>
@@ -5585,7 +5585,7 @@
 	</element>
 	<element>
 		<fullpath>include/themes.inc.php</fullpath>
-		<version>1.6.07</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>22308e0882f9cfbeb2db65980c7166de</hash>
@@ -7880,7 +7880,7 @@
 	</element>
 	<element>
 		<fullpath>profile.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>bca9c9d4496033b16749345cc56cee4c</hash>
@@ -7912,7 +7912,7 @@
 	</element>
 	<element>
 		<fullpath>reviewcom.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>44bf65d96db35e63d2cac2c096924157</hash>
@@ -9098,7 +9098,7 @@
 	</element>
 	<element>
 		<fullpath>thumbnails.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>2fd5319ae4cb1b3948b766caee50e4a6</hash>
@@ -9305,7 +9305,7 @@
 	</element>
 	<element>
 		<fullpath>versioncheck.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>af5b3347c83566300f2bc4672e3f3248</hash>

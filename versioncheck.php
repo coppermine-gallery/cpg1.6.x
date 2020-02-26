@@ -1,30 +1,27 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * versioncheck.php
+ * @since  1.6.08
+ */
 
 define('IN_COPPERMINE', true);
 define('VERSIONCHECK_PHP', true);
 
-require_once('include/init.inc.php');
+require_once 'include/init.inc.php';
 
 // define some vars that need to exist in JS
 
 // Include the JS for versioncheck.php
 js_include('js/versioncheck.js');
 
-require_once('include/versioncheck.inc.php');
+require_once 'include/versioncheck.inc.php';
 
 if (!GALLERY_ADMIN_MODE) {
     cpg_die($lang_common['error'], $lang_errors['access_denied'], __FILE__, __LINE__);
@@ -34,7 +31,7 @@ if (!GALLERY_ADMIN_MODE) {
 // possible values: screen, textarea, create, options
 $optionDisplayOutput_array = array('screen'=>'','textarea'=>'','errors_only'=>'','hide_images'=>'','no_modification_check'=>'','do_not_connect_to_online_repository'=>'');
 $actionGet = $superCage->get->getMatched('output','/^[a-z]+$/');
-if (in_array ($actionGet[0], array('screen', 'textarea', 'create', 'options')) == TRUE) {
+if ($actionGet && in_array($actionGet[0], array('screen', 'textarea', 'create', 'options'))) {
   $action = $actionGet[0];
 } else {
   $action = 'options';
