@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * bridge/udb_base.inc.php
- * @since  1.6.08
+ * @since  1.6.09
  */
 
 defined('IN_COPPERMINE') or die('Not in Coppermine...');
@@ -37,13 +37,15 @@ class core_udb
 		} else {
 			// Connect to udb database if necessary
 			if (!$this->can_join_tables) {
-				$this->dbObj = new CPG_Dbase( array(
-						'dbtype'	=> $CONFIG['dbtype'],
-						'dbserver'	=> $this->db['host'],
-						'dbuser'	=> $this->db['user'],
-						'dbpass'	=> $this->db['password'],
-						'dbname'	=> $this->db['name']
-						));
+				$dbparms = array(
+					'dbtype'	=> $CONFIG['dbtype'],
+					'dbserver'	=> $this->db['host'],
+					'dbuser'	=> $this->db['user'],
+					'dbpass'	=> $this->db['password'],
+					'dbname'	=> $this->db['name']
+					);
+				if (!empty($CONFIG['dbcharset'])) $dbparms['dbcharset'] = $CONFIG['dbcharset'];
+				$this->dbObj = new CPG_Dbase($dbparms);
 				if (!$this->dbObj->isConnected()) {
 					die("<strong>Coppermine critical error</strong>:<br />Unable to connect to UDB database !<br /><br />Error: <strong>" . $this->dbObj->getError(false, true) . "</strong>");
 				}

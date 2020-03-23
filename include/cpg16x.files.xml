@@ -191,7 +191,7 @@
 	</element>
 	<element>
 		<fullpath>bridge/udb_base.inc.php</fullpath>
-		<version>1.6.08</version>
+		<version>1.6.09</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>cabcb4cb1a5e7c9e79ba2ed7c65d8031</hash>
@@ -9288,7 +9288,7 @@
 	</element>
 	<element>
 		<fullpath>util.php</fullpath>
-		<version>1.6.06</version>
+		<version>1.6.09</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>3341bdb51f1549034a95fc919cd5fd87</hash>

@@ -7,7 +7,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * CHANGELOG.txt
- * @since  1.6.08
+ * @since  1.6.09
  */
 Changelog
 =========
@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2020-03-23 [B] Use 'dbcharset' parameter when opening bridged database {ron4mac}
 2020-02-26 [O,M] Simlify log creation and display {ron4mac}
 2020-02-26 [M] Clean up code involved in PHP warnings {ron4mac}
 2020-02-25 [M] Remove use of deprecated *magic_quotes* functions {ron4mac}
