@@ -5196,7 +5196,7 @@
 	</element>
 	<element>
 		<fullpath>include/archive.php</fullpath>
-		<version>1.6.08</version>
+		<version>1.6.09</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>bf73308de67206540f89d1ffcac002a7</hash>
