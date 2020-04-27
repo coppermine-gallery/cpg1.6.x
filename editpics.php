@@ -36,7 +36,7 @@ $icon_array = array(
     'exif'               => cpg_fetch_icon('exif_mgr', 2),
     'reset_views'        => cpg_fetch_icon('stats_delete', 0),
     'reset_views_all'    => cpg_fetch_icon('stats_delete', 0, $lang_editpics_php['reset_all_view_count']),
-    'reset_votes'        => cpg_fetch_icon('rating', 2),
+    'reset_votes'        => cpg_fetch_icon('rating', 0),
     'ok'                 => cpg_fetch_icon('ok', 2),
     'category'           => cpg_fetch_icon('category', 2),
     'delete'             => cpg_fetch_icon('delete', 0, $lang_editpics_php['del_pic']),
@@ -430,7 +430,7 @@ function form_pic_info($text)
     $approve_html = '';
     if (GALLERY_ADMIN_MODE || MODERATOR_MODE) {
         $approve_html = <<<EOT
-                          <td class="{$row_style_class}" width="40" valign="top">
+                          <td class="{$row_style_class}" width="40">
                                   <input type="checkbox" name="approved{$CURRENT_PIC['pid']}" id="approve{$CURRENT_PIC['pid']}" value="YES" {$pic_approval_checked} class="checkbox" title="{$lang_editpics_php['approve_pic']}" /><label for="approve{$CURRENT_PIC['pid']}" class="clickable_option">{$icon_array['file_approve']}</label>
                           </td>
 EOT;
@@ -461,7 +461,7 @@ EOT;
                 </tr>
                 <tr>
                     <td class="{$row_style_class}">&nbsp;</td>
-                    <td class="{$row_style_class}" width="40" valign="top">
+                    <td class="{$row_style_class}" width="40">
                     <input type="checkbox" name="delete{$CURRENT_PIC['pid']}" id="delete{$CURRENT_PIC['pid']}" value="1" class="checkbox" title="{$lang_editpics_php['del_pic']}" /><label for="delete{$CURRENT_PIC['pid']}" class="clickable_option">{$icon_array['delete']}</label>
                     </td>
                     $approve_html
