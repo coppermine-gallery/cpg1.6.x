@@ -2,7 +2,7 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.08</version>
+		<version>1.6.09</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>b28934b25eff97006134655021274601</hash>
@@ -251,7 +251,7 @@
 	</element>
 	<element>
 		<fullpath>contact.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.09</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>060c6e69fc554be65925db157df6af6d</hash>
@@ -356,7 +356,7 @@
 	</element>
 	<element>
 		<fullpath>editpics.php</fullpath>
-		<version>1.6.08</version>
+		<version>1.6.09</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>ee436c074b29a4965b6c5aa23fd70bb8</hash>

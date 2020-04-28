@@ -1,24 +1,21 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * contact.php
+ * @since  1.6.09
+ */
 
 define('IN_COPPERMINE', true);
 define('CONTACT_PHP', true);
 
-require_once('include/init.inc.php');
-require_once('include/mailer.inc.php');
+require_once 'include/init.inc.php';
+require_once 'include/mailer.inc.php';
 
 if (USER_ID) {
     $USER_DATA = array_merge($USER_DATA, $cpg_udb->get_user_infos(USER_ID));
@@ -45,11 +42,11 @@ js_include('js/contact.js');
 // determine if the visitor is allowed to access
 if (!USER_ID) { // visitor is guest
     if ($CONFIG['contact_form_guest_enable'] == 0) {
-        cpg_die($lang_common['error'], $lang_errors['access_denied'], __FILE__, __LINE__); //guests are not allowed
+        cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__); //guests are not allowed
     }
 } else { // visitor is a registered user
     if ($CONFIG['contact_form_registered_enable'] == 0 && !GALLERY_ADMIN_MODE) {
-        cpg_die($lang_common['error'], $lang_errors['access_denied'], __FILE__, __LINE__); //registered users are not allowed
+        cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__); //registered users are not allowed
     }
 }
 
