@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/themes.inc.php
- * @since  1.6.08
+ * @since  1.6.09
  */
 
 /////////////////////////////////////////////////////////////////
@@ -1521,7 +1521,7 @@ if (!function_exists('pageheader')) {  //{THEMES}
 ******************************************************************************/
 function pageheader($section, $meta = '')
 {
-    global $CONFIG, $THEME_DIR;
+    global $CONFIG, $THEME_DIR, $CPG_PHP_SELF;
     global $template_header, $lang_charset, $lang_text_dir;
 
     $custom_header = cpg_get_custom_include($CONFIG['custom_header_path']);
@@ -1546,6 +1546,10 @@ function pageheader($section, $meta = '')
         '{JAVASCRIPT}' => theme_javascript_head(),
         '{MESSAGE_BLOCK}' => theme_display_message_block(),
     );
+
+	if (defined('THEME_WANTS_BODY_CLASS')) {
+		$template_vars['{BODY_CLASS}'] = 'BC-'.basename($CPG_PHP_SELF,'.php');
+	}
 
     $template_vars = CPGPluginAPI::filter('theme_pageheader_params', $template_vars);
     echo template_eval($template_header, $template_vars);

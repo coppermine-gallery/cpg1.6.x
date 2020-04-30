@@ -5582,7 +5582,7 @@
 	</element>
 	<element>
 		<fullpath>include/themes.inc.php</fullpath>
-		<version>1.6.08</version>
+		<version>1.6.09</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>767bb7c3f0278eae12eac1151ebb105c</hash>
