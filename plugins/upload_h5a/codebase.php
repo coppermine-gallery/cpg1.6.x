@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * plugins/upload_h5a/codebase.php
- * @since  1.6.05
+ * @since  1.6.09
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -189,7 +189,7 @@ $thisplugin->add_action('plugin_install', 'upload_h5a_install');
 function upload_h5a_install () {
 	global $CONFIG, $h5a_upload;
 	$scfg = cpg_db_escape_string(serialize($h5a_upload->h5u_config_default));
-	cpg_db_query("INSERT INTO {$CONFIG['TABLE_CONFIG']} (name, value) VALUES ('upload_h5a', '{$scfg}')");
+	cpg_db_query("INSERT IGNORE INTO {$CONFIG['TABLE_CONFIG']} (name, value) VALUES ('upload_h5a', '{$scfg}')");
 	return true;
 }
 

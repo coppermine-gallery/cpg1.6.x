@@ -7538,7 +7538,7 @@
 	</element>
 	<element>
 		<fullpath>plugins/upload_h5a/codebase.php</fullpath>
-		<version>1.6.05</version>
+		<version>1.6.09</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>72549f61879e73b117d01a09ed050df2</hash>

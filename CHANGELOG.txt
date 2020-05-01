@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2020-05-01 [B] Upload plugin upload_h5a fails to install if DB already has configuration {ron4mac}
 2020-04-30 [A] Provide themes with a method to request a body tag class based on current page {ron4mac}
 2020-04-28 [M] Cosmetic changes/corrections to admin tools, edit pics and contact {heismauri}
 2020-03-27 [B] Failure in include/archive.php due to __construct() changes {ron4mac}
