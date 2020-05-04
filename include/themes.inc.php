@@ -2854,13 +2854,13 @@ function theme_display_thumbnails(&$thumb_list, $nbThumb, $album_name, $aid, $ca
                 '{ALBUM_ID}'   => $aid,
                 '{CAT_ID}'     => ($cat > 0 ? $cat : $CURRENT_ALBUM_DATA['category']),
                 '{MODIFY_LNK}'     => $lang_common['album_properties'],
-                '{MODIFY_ICO}'     => cpg_fetch_icon('modifyalb', 1),
+                '{MODIFY_ICO}'     => cpg_fetch_icon('modifyalb', 0),
                 '{PARENT_CAT_LNK}' => $lang_common['parent_category'],
-                '{PARENT_CAT_ICO}' => cpg_fetch_icon('category', 1),
+                '{PARENT_CAT_ICO}' => cpg_fetch_icon('category', 0),
                 '{EDIT_PICS_LNK}'  => $lang_common['edit_files'],
-                '{EDIT_PICS_ICO}'  => cpg_fetch_icon('edit', 1),
+                '{EDIT_PICS_ICO}'  => cpg_fetch_icon('edit', 0),
                 '{ALBUM_MGR_LNK}'  => $lang_common['album_manager'],
-                '{ALBUM_MGR_ICO}'  => cpg_fetch_icon('alb_mgr', 1),
+                '{ALBUM_MGR_ICO}'  => cpg_fetch_icon('alb_mgr', 0),
             );
         } else {
             $param = array();
