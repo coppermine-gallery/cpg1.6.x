@@ -1,19 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
-
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * lang_check.php
+ * @since  1.6.09
+ */
 define('IN_COPPERMINE', true);
 
 define('SMILIES_PHP', true);
@@ -61,7 +57,6 @@ define('UPDATE_PHP', true);
 define('UTIL_PHP', true);
 define('VERSIONCHECK_PHP', true);
 define('VIEWLOG_PHP', true);
-//define('XP_PUBLISH_PHP', true);
 
 class Lang
 {
@@ -74,9 +69,24 @@ class Lang
 	}
 }
 
+$lngSel = $_GET['lang'];
+
+$lray = array_fill_keys(array_diff(scandir('lang'), ['.','..']), 1);
+unset($lray['english.php']);
+$lopts = '';
+foreach ($lray as $k => $v) {
+	$lopts .= '<option value="'.$k.'"'.($k==$lngSel ? ' selected' : '').'>'.ucfirst(substr($k,0,-4)).'</option>';
+}
+
 $action = !empty($_GET['act']) ? $_GET['act'] : null;
+$opt_cks = $action=='cks' ? ' selected' : '';
 $opt_chk = $action=='chk' ? ' selected' : '';
 $opt_scn = $action=='scn' ? ' selected' : '';
+if ($action) {
+	$dsp_lsel = $action=='cks' ? 'inline-block' : 'none';
+} else {
+	$dsl_lsel = 'inline-block';
+}
 
 echo <<<EOT
 <!DOCTYPE html>
@@ -111,14 +121,29 @@ echo <<<EOT
 		padding-top:.7em;
 		padding-bottom:.7em;
 	}
+	#lsel { display:{$dsp_lsel}; }
 </style>
+<script>
+	function actSel (elem) {
+		let lnge = document.getElementById('lsel');
+		if (elem.value == 'cks') {
+			lnge.style.display = 'inline-block';
+		} else {
+			lnge.style.display = 'none';
+		}
+	}
+</script>
 </head>
 <body>
 <div class="aform">
 	<form action="">
-		<select name="act">
-			<option value="chk"{$opt_chk}>Check other languages against English</option>
+		<select name="act" onchange="actSel(this);">
+			<option value="cks"{$opt_cks}>Check selected language against English</option>
+			<option value="chk"{$opt_chk}>Check all languages against English</option>
 			<option value="scn"{$opt_scn}>Scan PHP files for language useage</option>
+		</select>
+		<select name="lang" id="lsel">
+			{$lopts}
 		</select>
 		<button type="submit" name="doit" value="1">Perform Action</button>
 	</form>
@@ -126,6 +151,11 @@ echo <<<EOT
 EOT;
 
 if ($action) $en = new Lang();
+
+if ($action == 'cks') {
+	$action = 'chk';
+	$lray = [$lngSel => 1];
+}
 
 if ($action == 'scn') {
 	$eno = new Lang();
@@ -143,13 +173,7 @@ if ($action == 'scn') {
 	splay($en->vars);
 	echo'</div>';
 } elseif ($action == 'chk') {
-	$langs = array();
-	foreach (scandir('lang') as $f) {
-		if ($f[0] === '.') continue;
-		if (substr($f, 0, 7) === 'english') continue;
-		$langs[] = $f;
-	}
-	foreach ($langs as $lang) {
+	foreach ($lray as $lang => $v) {
 		$lobj = new Lang($lang);
 		echo '<div><h2>Language file: '.$lang.'</h2>';
 		$misses = array_diff_key_recursive($en->vars, $lobj->vars);

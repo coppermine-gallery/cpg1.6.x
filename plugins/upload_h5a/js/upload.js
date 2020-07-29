@@ -3,11 +3,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * plugins/upload_h5a/js/upload.js
- * @since  1.6.05
+ * @since  1.6.09
  */
 
 var redirURL = '',
@@ -145,7 +145,7 @@ function H5up_done(okcount, errcnt) {
 	function NextInQueue(decr,tag) {
 		if (decr) {
 			if (tag == 'ufo') okCount++;
-			if (! --inPrg) { _endUp(); }
+			if ((! --inPrg) && (!upQueue.length)) { _endUp(); }
 		}
 		if (!qStopt && upQueue.length && (!maxXfer || inPrg < maxXfer)) {
 			var nxf = upQueue.shift();

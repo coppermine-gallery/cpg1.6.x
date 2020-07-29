@@ -7191,14 +7191,14 @@
 	<element>
 		<fullpath>lang/estonian.php</fullpath>
 		<version>1.6.07</version>
-		<status>mandatory</status>
+		<status>optional</status>
 		<permission>read</permission>
 		<hash>fe11cbd5b3f07af3e7c0ae2d4772b3c7</hash>
 	</element>
 	<element>
 		<fullpath>lang/french.php</fullpath>
 		<version>1.6.06</version>
-		<status>mandatory</status>
+		<status>optional</status>
 		<permission>read</permission>
 		<hash>b225a037f1a18f9b096bd9fd1f858f87</hash>
 	</element>
@@ -7211,7 +7211,7 @@
 	</element>
 	<element>
 		<fullpath>lang_check.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.09</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>a9d1d4c8c3157fbbe2eb5ba22ad211a3</hash>
@@ -7683,14 +7683,14 @@
 	</element>
 	<element>
 		<fullpath>plugins/upload_h5a/js/upload.js</fullpath>
-		<version>1.6.05</version>
+		<version>1.6.09</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>1594e96b4616f01c2021e5431530f20d</hash>
 	</element>
 	<element>
 		<fullpath>plugins/upload_h5a/js/upload.min.js</fullpath>
-		<version>1.6.05</version>
+		<version>1.6.09</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>00568ba9a102b96357b4e3396cd4fac9</hash>
