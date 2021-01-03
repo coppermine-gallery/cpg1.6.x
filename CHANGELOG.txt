@@ -3,7 +3,7 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * CHANGELOG.txt
@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2021-01-03 [B] Guard against array_keys failure (PHP8) caused by theme {ron4mac}
 2020-10-03 [B] Correct no plugin uninstall action for disabled plugins {ron4mac}
 2020-09-07 [M] Release of version 1.6.09 {ron4mac}
 2020-07-29 [B] Upload plugin upload_h5a fails to complete queue when uploading one at a time {ron4mac}

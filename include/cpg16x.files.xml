@@ -2,7 +2,7 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.09</version>
+		<version>1.6.10</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>c693ab3c72bcaba5880cf0bd9a91dd90</hash>
@@ -15,7 +15,7 @@
 	</element>
 	<element>
 		<fullpath>README.txt</fullpath>
-		<version>1.6.07</version>
+		<version>1.6.10</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>5afc922db8b3573964594559dcd50fa9</hash>
@@ -5322,7 +5322,7 @@
 	</element>
 	<element>
 		<fullpath>include/functions.inc.php</fullpath>
-		<version>1.6.08</version>
+		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>3c282d702df8c668ccf1a277705ba4e0</hash>
@@ -5540,7 +5540,7 @@
 	</element>
 	<element>
 		<fullpath>include/plugin_api.inc.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>1667c93a664f760de6590ce1069b249d</hash>

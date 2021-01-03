@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/functions.inc.php
- * @since  1.6.08
+ * @since  1.6.10
  */
 
 if (!function_exists('stripos')) {
@@ -965,6 +965,7 @@ function load_template()
 
 function template_eval($template, $vars)
 {
+	if (!is_array($vars)) return $template;
     return str_replace(array_keys($vars), array_values($vars), $template);
 }
 
