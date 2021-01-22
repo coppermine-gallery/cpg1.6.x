@@ -2380,7 +2380,7 @@ function get_pic_pos($album, $pid)
         }
 
         $get_pic_pos = true;
-        include('include/search.inc.php');
+        include 'include/search.inc.php';
 
         return $pos;
         break;
@@ -3768,8 +3768,8 @@ function& cpg_get_default_lang_var($language_var_name, $override_language = null
         $language = $override_language;
     }
 
-    include('lang/english.php');
-    include('lang/'.$language.'.php');
+    include 'lang/english.php';
+    include 'lang/'.$language.'.php';
 
     return $$language_var_name;
 } // function cpg_get_default_lang_var
@@ -3793,7 +3793,7 @@ function& cpg_lang_var($varname, $index = null)
 
     if (isset($lang_var)) {
         if (!is_null($index) && !isset($lang_var[$index])) {
-            include('lang/english.php');
+            include 'lang/english.php';
             return $lang_var[$index];
         } elseif (is_null($index)) {
             return $lang_var;
@@ -3801,7 +3801,7 @@ function& cpg_lang_var($varname, $index = null)
             return $lang_var[$index];
         }
     } else {
-        include('lang/english.php');
+        include 'lang/english.php';
         return $lang_var;
     }
 } // function cpg_lang_var
@@ -4746,7 +4746,7 @@ function cpg_get_custom_include($path = '')
     }
 
     ob_start();
-    include($path);
+    include $path;
     $return = ob_get_contents();
     ob_end_clean();
 
@@ -4876,7 +4876,7 @@ function replace_forbidden($str)
      * Transliteration
      */
     if ($condition['transliteration']) {
-        require_once('include/transliteration.inc.php');
+        require_once 'include/transliteration.inc.php';
         $return = transliteration_process($return, '_');
     }
 
@@ -5767,7 +5767,7 @@ function cpg_float2decimal($float)
     // initialize some vars start
     $return = '';
     $fit    = 3; // how many digits to use
-    $fill   = "0"; // what to fill
+    $fill   = '0'; // what to fill
     // initialize some vars end
 
     $remainder = floor($value);
@@ -5781,7 +5781,7 @@ function cpg_float2decimal($float)
 
     $return = $remainder . $return;
 
-    if ($decimal_page != 0) {
+    if ($decimal_page) {
         $return .= $lang_decimal_separator[1] . $decimal_page;
     }
 
@@ -6873,9 +6873,9 @@ function cpg_load_plugin_language_file($path) {
     if (file_exists('./plugins/'.$path.'/lang/english.php')) {
         $lg = 'lang_plugin_'.$path;
         global $$lg;
-        include ('./plugins/'.$path.'/lang/english.php');
+        include './plugins/'.$path.'/lang/english.php';
         if ($CONFIG['lang'] != 'english' && file_exists('./plugins/'.$path.'/lang/'.$CONFIG['lang'].'.php')) {
-            include ('./plugins/'.$path.'/lang/'.$CONFIG['lang'].'.php');
+            include './plugins/'.$path.'/lang/'.$CONFIG['lang'].'.php';
         }
     }
 }
@@ -6900,7 +6900,7 @@ function cpg_get_user_data($sql_user_email, $password) {
     $password_params = $result->fetchAssoc(true);
 
     // Check for user in users table
-    $sql = "SELECT user_id, user_name, user_password FROM {$cpg_udb->usertable} WHERE $sql_user_email ";
+    $sql = "SELECT user_id, user_name, user_password, user_password_salt FROM {$cpg_udb->usertable} WHERE $sql_user_email ";
     if (!$password_params['user_password_salt']) {
         $sql .= "AND BINARY user_password = '".md5($password)."'";
     } elseif (!cpg_password_validate($password, $password_params)) {

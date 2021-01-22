@@ -117,7 +117,7 @@
 	</element>
 	<element>
 		<fullpath>bridge/coppermine.inc.php</fullpath>
-		<version>1.6.08</version>
+		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>07e7e5061c268858a54b668388411f7c</hash>
@@ -191,7 +191,7 @@
 	</element>
 	<element>
 		<fullpath>bridge/udb_base.inc.php</fullpath>
-		<version>1.6.09</version>
+		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>88ee26b8adef2ab773ffc00eee7e37e9</hash>
@@ -240,7 +240,7 @@
 	</element>
 	<element>
 		<fullpath>catmgr.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>0e8f87390625595512a3619052414f6e</hash>
@@ -305,7 +305,7 @@
 	</element>
 	<element>
 		<fullpath>delete.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>ed44ce412ed21b8125d50ef1223f52b6</hash>
@@ -5533,7 +5533,7 @@
 	</element>
 	<element>
 		<fullpath>include/picmgmt.inc.php</fullpath>
-		<version>1.6.04</version>
+		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>bff467591fdb4b317bd794e4b9704b12</hash>
@@ -5547,7 +5547,7 @@
 	</element>
 	<element>
 		<fullpath>include/search.inc.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>b2a8eadf2d5453056546ffc0d3fe35f1</hash>
@@ -5582,7 +5582,7 @@
 	</element>
 	<element>
 		<fullpath>include/themes.inc.php</fullpath>
-		<version>1.6.09</version>
+		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>1ce419686358c60177e6346f09aab23d</hash>
@@ -6889,14 +6889,14 @@
 	</element>
 	<element>
 		<fullpath>index.php</fullpath>
-		<version>1.6.06</version>
+		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>c9223e8e6dc9505ec6623a413f9d35c0</hash>
 	</element>
 	<element>
 		<fullpath>install.php</fullpath>
-		<version>1.6.08</version>
+		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>981e0bf1e43b80007307f87d925e40d5</hash>
@@ -7157,14 +7157,14 @@
 	</element>
 	<element>
 		<fullpath>keyword_create_dict.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>8a45e2a97d863ae33b834bf88b5440b6</hash>
 	</element>
 	<element>
 		<fullpath>keyword_select.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>57d2e317d637fc78aec52928982045d0</hash>
@@ -7183,7 +7183,7 @@
 	</element>
 	<element>
 		<fullpath>lang/english.php</fullpath>
-		<version>1.6.08</version>
+		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>6b00c57c8c1a4952dbec8e0a0cb6d36b</hash>
@@ -7225,7 +7225,7 @@
 	</element>
 	<element>
 		<fullpath>login.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>bc072952ee931ec5195494f79b4e1e94</hash>
@@ -7877,7 +7877,7 @@
 	</element>
 	<element>
 		<fullpath>profile.php</fullpath>
-		<version>1.6.08</version>
+		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>33aee1130696f589b33e6ecef4b62ddb</hash>
@@ -9009,7 +9009,7 @@
 	</element>
 	<element>
 		<fullpath>themes/sample/theme.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.10</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>223e8154a337912889941a9816d1d525</hash>
@@ -9253,7 +9253,7 @@
 	</element>
 	<element>
 		<fullpath>update.php</fullpath>
-		<version>1.6.08</version>
+		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>de6e2bf352b853eeb3ef4227dc320647</hash>
@@ -9281,7 +9281,7 @@
 	</element>
 	<element>
 		<fullpath>usermgr.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>df886dcd69724abd93baf70ca74d2720</hash>

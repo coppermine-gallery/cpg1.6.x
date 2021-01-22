@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * bridge/udb_base.inc.php
- * @since  1.6.09
+ * @since  1.6.10
  */
 
 defined('IN_COPPERMINE') or die('Not in Coppermine...');
@@ -116,19 +116,21 @@ class core_udb
 		// For error checking
 		$CONFIG['TABLE_USERS'] = '**ERROR**';
 
-		define('USER_ID', $USER_DATA['user_id']);
-		define('USER_NAME', addslashes($USER_DATA['user_name']));
-		define('USER_GROUP', $USER_DATA['group_name']);
-		define('USER_GROUP_SET', $user_group_set);
-		define('USER_IS_ADMIN', $USER_DATA['has_admin_access']);
-		define('USER_CAN_SEND_ECARDS', (int)$USER_DATA['can_send_ecards']);
-		define('USER_CAN_RATE_PICTURES', (int)$USER_DATA['can_rate_pictures']);
-		define('USER_CAN_POST_COMMENTS', (int)$USER_DATA['can_post_comments']);
-		define('USER_CAN_UPLOAD_PICTURES', (int)$USER_DATA['can_upload_pictures']);
-		define('USER_CAN_CREATE_ALBUMS', ((int)$USER_DATA['can_create_albums'] || (int)$USER_DATA['can_create_public_albums']));
-		define('USER_CAN_CREATE_PRIVATE_ALBUMS', (int)$USER_DATA['can_create_albums']);
-		define('USER_CAN_CREATE_PUBLIC_ALBUMS', (int)$USER_DATA['can_create_public_albums']);
-		define('USER_ACCESS_LEVEL', (int)$USER_DATA['access_level']);
+		if (!defined('USER_ID')) {
+			define('USER_ID', $USER_DATA['user_id']);
+			define('USER_NAME', addslashes($USER_DATA['user_name']));
+			define('USER_GROUP', $USER_DATA['group_name']);
+			define('USER_GROUP_SET', $user_group_set);
+			define('USER_IS_ADMIN', $USER_DATA['has_admin_access']);
+			define('USER_CAN_SEND_ECARDS', (int)$USER_DATA['can_send_ecards']);
+			define('USER_CAN_RATE_PICTURES', (int)$USER_DATA['can_rate_pictures']);
+			define('USER_CAN_POST_COMMENTS', (int)$USER_DATA['can_post_comments']);
+			define('USER_CAN_UPLOAD_PICTURES', (int)$USER_DATA['can_upload_pictures']);
+			define('USER_CAN_CREATE_ALBUMS', ((int)$USER_DATA['can_create_albums'] || (int)$USER_DATA['can_create_public_albums']));
+			define('USER_CAN_CREATE_PRIVATE_ALBUMS', (int)$USER_DATA['can_create_albums']);
+			define('USER_CAN_CREATE_PUBLIC_ALBUMS', (int)$USER_DATA['can_create_public_albums']);
+			define('USER_ACCESS_LEVEL', (int)$USER_DATA['access_level']);
+		}
 
 		$this->session_update();
 	}

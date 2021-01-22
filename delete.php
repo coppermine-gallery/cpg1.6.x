@@ -1,25 +1,22 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * delete.php
+ * @since  1.6.10
+ */
 
 define('IN_COPPERMINE', true);
 define('DELETE_PHP', true);
 define('ALBMGR_PHP', true);
 define('PROFILE_PHP', true);
 
-require('include/init.inc.php');
+require 'include/init.inc.php';
 
 /**
  * Local functions definition
@@ -493,7 +490,7 @@ case 'albmgr':
     $returnOutput .= '<table border="0" cellspacing="0" cellpadding="0" width="100%">';
 
     $sort_list_matched = $superCage->post->getMatched('sort_order', '/^[0-9@,]+$/');
-    $orig_sort_order = parse_pic_list($sort_list_matched[0]);
+    $orig_sort_order = parse_pic_list(is_array($sort_list_matched) ? $sort_list_matched[0] : '');
     foreach ($orig_sort_order as $album) {
         $alb = parse_pic_orig_sort_order($album);
 //        $sort_array[$i] = $alb['aid'];
@@ -667,7 +664,7 @@ case 'picmgr':
     $returnOutput = '<table border="0" cellspacing="0" cellpadding="0" width="100%">';
 
     $sort_list_matched = $superCage->post->getMatched('sort_order', '/^[0-9@,]+$/');
-    $orig_sort_order = parse_pic_list($sort_list_matched[0]);
+    $orig_sort_order = parse_pic_list(is_array($sort_list_matched) ? $sort_list_matched[0] : '');
     foreach ($orig_sort_order as $picture) {
         $pic = parse_pic_orig_sort_order($picture);
 //        $sort_array[$i] = $pic['aid'];
@@ -894,7 +891,7 @@ case 'user':
 
                         if ($user_data['user_actkey']) {
                             // send activation confirmation email (only once)
-                            require_once('include/mailer.inc.php');
+                            require_once 'include/mailer.inc.php';
 
                             $template_vars = array(
                                 '{SITE_LINK}' => $CONFIG['site_url'],

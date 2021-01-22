@@ -1,23 +1,20 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * login.php
+ * @since  1.6.10
+ */
 
 define('IN_COPPERMINE', true);
 define('LOGIN_PHP', true);
 
-require('include/init.inc.php');
+require 'include/init.inc.php';
 
 if (USER_ID) {
     cpg_die(ERROR, $lang_login_php['err_already_logged_in'], __FILE__, __LINE__);
@@ -79,7 +76,7 @@ EOT;
 
         $expiry_date = date("Y-m-d H:i:s", mktime(date('H'), date('i') + $CONFIG['login_expiry'], date('s'), date('m'), date('d'), date('Y')));
 
-        if ($failed_logon_counter['brute_force']) {
+        if ($failed_logon_counter && $failed_logon_counter['brute_force']) {
             $failed_logon_counter['brute_force'] = $failed_logon_counter['brute_force'] - 1;
             $query_string = "UPDATE {$CONFIG['TABLE_BANNED']} SET brute_force = {$failed_logon_counter['brute_force']}, expiry = '$expiry_date' WHERE ban_id = {$failed_logon_counter['ban_id']}";
         } else {

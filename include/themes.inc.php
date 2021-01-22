@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/themes.inc.php
- * @since  1.6.09
+ * @since  1.6.10
  */
 
 /////////////////////////////////////////////////////////////////
@@ -35,7 +35,7 @@
       ***********************************/
 // ----------------------------------------------------------------------------- //
 
-if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');         //{THEMES}//
+defined('IN_COPPERMINE') or die('Not in Coppermine...');         //{THEMES}//
 
 if (!function_exists('assemble_template_buttons')) {  //{THEMES}
 /******************************************************************************
@@ -1716,7 +1716,7 @@ if (!function_exists('theme_cpg_die')) {  //{THEMES}
 ** Section <<<theme_cpg_die>>> - START
 ******************************************************************************/
 // Function for showing error messages
-function theme_cpg_die($msg_code, $msg_text, $msg_string, $css_class = 'cpg_message_info', $error_file, $error_line, $output_buffer, $ob)
+function theme_cpg_die($msg_code, $msg_text, $msg_string, $css_class, $error_file, $error_line, $output_buffer, $ob)
 {
     global $CONFIG, $lang_cpg_die, $template_cpg_die;
 
@@ -1779,7 +1779,7 @@ if (!function_exists('theme_msg_box')) {  //{THEMES}
 ** Section <<<theme_msg_box>>> - START
 ******************************************************************************/
 // Function for displaying a message-box-like table
-function theme_msg_box($title, $msg_text, $css_class = 'cpg_message_info', $button_text, $button_link)
+function theme_msg_box($title, $msg_text, $css_class, $button_text, $button_link)
 {
     global $template_msg_box;
 
@@ -2986,7 +2986,7 @@ if (!function_exists('theme_display_film_strip')) {  //{THEMES}
 ** Section <<<theme_display_film_strip>>> - START
 ******************************************************************************/
 // Function to display the film strip
-function theme_display_film_strip(&$thumb_list, $nbThumb, $album_name, $aid, $cat, $pos, $sort_options, $mode = 'thumb', $date='', $filmstrip_prev_pos, $filmstrip_next_pos,$max_block_items,$thumb_width)
+function theme_display_film_strip(&$thumb_list, $nbThumb, $album_name, $aid, $cat, $pos, $sort_options, $mode, $date, $filmstrip_prev_pos, $filmstrip_next_pos, $max_block_items, $thumb_width)
 {
     global $CONFIG, $THEME_DIR;
     global $template_film_strip, $lang_film_strip, $lang_common, $pic_count,$mar_pic;
@@ -3530,6 +3530,7 @@ function theme_html_img_nav_menu() {
         $ecard_title = $lang_img_nav_bar['ecard_title'];
     } else {
         template_extract_block($template_img_navbar, 'ecard_button'); // added to remove button if cannot send ecard
+        $ecard_tgt = $ecard_title = '';
         /*
         $ecard_tgt = "javascript:alert('" . addslashes($lang_img_nav_bar['ecard_disabled_msg']) . "');";
         $ecard_title = $lang_img_nav_bar['ecard_disabled'];

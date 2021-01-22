@@ -1816,7 +1816,7 @@ EOT;
  $lang_register_php['you'] = 'vous';
  $lang_register_php['last_comments_detail'] = 'Cliquer pour voir tous les commentaires de %s';
  $lang_register_php['notify_admin_email_body'] = 'Un nouvel utilisateur s\'est inscrit dans votre galerie, sous le nom &quot;%s&quot;';
- $lang_register_php['pic_count'] = 'fichiers téléchargés';
+ $lang_register_php['pic_count'] = 'Fichiers téléchargés';
  $lang_register_php['notify_admin_request_email_subject'] = '%s - Demande d\'enregistrement';
  $lang_register_php['thank_you_admin_activation'] = 'Merci.<br />Votre requête d\'activation du compte a été envoyé à l\'administrateur. Vous recevrez un courriel si votre inscription est approuvée.';
  $lang_register_php['acct_active_admin_activation'] = 'Le compte est maintenant actif et un courriel a été envoyé à l\'utilisateur.';

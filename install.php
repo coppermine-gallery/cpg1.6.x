@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * install.php
- * @since  1.6.08
+ * @since  1.6.10
  */
 
 ########################
@@ -38,7 +38,7 @@ define('STEP_FINALISE', 10);
 $LINEBREAK = "\r\n"; // For compatibility both on Windows as well as *nix
 
 // Set required versions
-$required_php_version = '5.3.0';
+$required_php_version = '5.4.0';
 
 // Set the parameters that normally get populated by the option form
 $displayOption_array = array(
@@ -85,7 +85,7 @@ if (!defined('COPPERMINE_VERSION')) { // we need to define the constant COPPERMI
 // include Inspekt for sanitization
 $incp = get_include_path().PATH_SEPARATOR.dirname(__FILE__).PATH_SEPARATOR.dirname(__FILE__).DIRECTORY_SEPARATOR.'include';
 set_include_path($incp);
-require_once "include/inspekt.php";
+require_once 'include/inspekt.php';
 $superCage = Inspekt::makeSuperCage();
 
 //load language
@@ -232,6 +232,7 @@ switch($step) {
 		if ($has_XML) {
 			//use versioncheck to check file versions
 			$lang_versioncheck_php = $language['versioncheck'];
+			$lang_common = $language['lang_common'];
 			require_once 'include/versioncheck.inc.php';
 	
 			// TODO: need to deal with connection failing and skip this step (and maybe allow a retry)
@@ -1056,7 +1057,7 @@ function loadTempConfig($rp=0)
 	} else {
 		// read the temporary file
 		if (file_exists($config_file['temporary'])) {
-			include($config_file['temporary']);
+			include $config_file['temporary'];
 			$GLOBALS['config'] = $install_config;
 		} else {
 			$GLOBALS['config'] = array();
@@ -1170,7 +1171,7 @@ function getLanguage()
 
 	// try to find the users language if we don't have one defined yet
 	if (!isset($config['lang'])) {
-		include_once('include/select_lang.inc.php');
+		include_once 'include/select_lang.inc.php';
 		setTmpConfig('lang', $USER['lang']);
 		loadTempConfig();
 	}
@@ -1181,16 +1182,17 @@ function getLanguage()
 		loadTempConfig();
 	}
 	if ($language == '') {
-		include('lang/english.php');
+		include 'lang/english.php';
 		$lang_en = $lang_install;
 		$lang_en_versioncheck = $lang_versioncheck_php;
 		if (isset($config['lang']) && file_exists('lang/' . $config['lang'] . '.php')) {
 			// include this lang
-			include('lang/' . $config['lang'] . '.php');
+			include 'lang/' . $config['lang'] . '.php';
 		}
 		// provide fallback
 		$language = array_merge($lang_en, $lang_install);
 		$language['versioncheck'] = isset($lang_versioncheck_php) ? $lang_versioncheck_php : $lang_en_versioncheck;
+		$language['lang_common'] = $lang_common;
 	}
 	return $language;
 }
@@ -1537,7 +1539,7 @@ function populateDatabase()
 	}
 	// Create our fantastic cage object
 	$superCage = Inspekt::makeSuperCage();
-	require_once('include/sql_parse.php');
+	require_once 'include/sql_parse.php';
 	// Get gallery directory
 	$possibilities = array('REDIRECT_URL', 'PHP_SELF', 'SCRIPT_URL', 'SCRIPT_NAME','SCRIPT_FILENAME');
 	foreach ($possibilities as $test) {
@@ -1643,7 +1645,7 @@ function createAdmin()
 	// Update table prefix
 	$sql_query = preg_replace('/CPG_/', $config['db_prefix'], $sql_query);
 
-	require_once('include/sql_parse.php');
+	require_once 'include/sql_parse.php';
 	$sql_query = remove_remarks($sql_query);
 	$sql_query = split_sql_file($sql_query, ';');
 	// Get a connection with the db.

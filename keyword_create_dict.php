@@ -1,23 +1,20 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * keyword_create_dict.php
+ * @since  1.6.10
+ */
 
 define('IN_COPPERMINE', true);
 define('EDITPICS_PHP', true);
 
-require('include/init.inc.php');
+require 'include/init.inc.php';
 
 if (!GALLERY_ADMIN_MODE) {
     cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
@@ -35,7 +32,7 @@ if ($result->numRows()) {
 
     cpg_db_query("TRUNCATE TABLE {$CONFIG['TABLE_DICT']}");
     while ($row = $result->fetchAssoc()) {
-        $keyArr = explode($CONFIG['keyword_separator'], $row['keywords']);
+        $keyArr = explode($CONFIG['keyword_separator'], html_entity_decode($row['keywords']));
         foreach ($keyArr as $keyword) {
             $keyword = trim($keyword);
             if (empty($keyword)) {

@@ -1,24 +1,21 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * usermgr.php
+ * @since  1.6.10
+ */
 
 define('IN_COPPERMINE', true);
 define('USERMGR_PHP', true);
 define('PROFILE_PHP', true);
 
-require('include/init.inc.php');
+require 'include/init.inc.php';
 
 $cpg_udb->view_users();
 
@@ -762,7 +759,7 @@ function edit_user($user_id)
     //$form_data = CPGPluginAPI::filter('usermgr_form_list', array(0 => $form_data, 1 => $user_id);
     list($timestamp, $form_token) = getFormToken();
 
-    if ($user_id != 'new_user') {
+    if ($user_id) {
         $sql = "SELECT * FROM {$CONFIG['TABLE_USERS']} WHERE user_id = '$user_id'";
         $result = cpg_db_query($sql);
         if (!$result->numRows()) {
@@ -1002,7 +999,7 @@ function update_user($user_id)
     $user_group = $superCage->post->getInt('user_group');
     $group_list = $superCage->post->keyExists('group_list') ? $superCage->post->getInt('group_list') : '';
 
-    if ($user_id == 'new_user') {
+    if ($user_id == 0) {
         cpg_db_query("INSERT INTO {$CONFIG['TABLE_USERS']} (user_regdate, user_profile6) VALUES (NOW(), '')");
         $user_id = cpg_db_last_insert_id();
         log_write('New user "'.$user_name.'" created', CPG_ACCESS_LOG);
@@ -1064,7 +1061,7 @@ function update_user($user_id)
 
     // If send login data checkbox is checked then send the username and password to the user in an email
     if ($superCage->post->keyExists('send_login_data') && trim($user_email)) {
-        require('include/mailer.inc.php');
+        require 'include/mailer.inc.php';
         $template_vars = array(
                               '{SITE_NAME}' => $CONFIG['gallery_name'],
                               '{SITE_LINK}' => $CONFIG['site_url'],
@@ -1077,7 +1074,7 @@ function update_user($user_id)
         }
     } elseif ($user_data['user_actkey'] && $user_data['user_active'] == 'NO' && $user_active == 'YES') {
         // send activation confirmation email (only once)
-        require('include/mailer.inc.php');
+        require 'include/mailer.inc.php';
 
         $template_vars = array(
             '{SITE_LINK}' => $CONFIG['site_url'],
@@ -1123,7 +1120,7 @@ switch ($op) {
 
     case 'new_user' :
         pageheader($lang_usermgr_php['title']);
-        edit_user('new_user');
+        edit_user(0);
         pagefooter();
         break;
 

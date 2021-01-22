@@ -4,17 +4,17 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/picmgmt.php
- * @since  1.6.04
+ * @since  1.6.10
  */
 
-if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
+defined('IN_COPPERMINE') or die('Not in Coppermine...');
 
-if($CONFIG['read_iptc_data'] ){
-    include("include/iptc.inc.php");
+if ($CONFIG['read_iptc_data'] ){
+    include 'include/iptc.inc.php';
 }
 
 // Add a picture to an album
@@ -48,7 +48,7 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
 		if (isset($CONFIG['autorient']) && $CONFIG['autorient'] == 1) {
 			if (function_exists('exif_read_data')) {	// try for the EXIF php extension
 				$exif = @exif_read_data(realpath($image));
-				$ort = $exif ? $exif['Orientation'] : 0;
+				$ort = $exif && isset($exif['Orientation']) ? $exif['Orientation'] : 0;
 			} else {	// otherwise use Exifer
 				include 'exif.php';
 				$exif = read_exif_data_raw(realpath($image),0);

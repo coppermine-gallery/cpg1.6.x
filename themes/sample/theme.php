@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * themes/sample/theme.php
+ * @since  1.6.10
+ */
 
 // ------------------------------------------------------------------------- //
 // This theme has all CORE items that are available.                         //
@@ -1522,7 +1519,7 @@ EOT;
 ******************************************************************************/
 function pageheader($section, $meta = '')
 {
-    global $CONFIG, $THEME_DIR;
+    global $CONFIG, $THEME_DIR, $CPG_PHP_SELF;;
     global $template_header, $lang_charset, $lang_text_dir;
 
     $custom_header = cpg_get_custom_include($CONFIG['custom_header_path']);
@@ -1547,6 +1544,10 @@ function pageheader($section, $meta = '')
         '{JAVASCRIPT}' => theme_javascript_head(),
         '{MESSAGE_BLOCK}' => theme_display_message_block(),
     );
+
+	if (defined('THEME_WANTS_BODY_CLASS')) {
+		$template_vars['{BODY_CLASS}'] = 'BC-'.basename($CPG_PHP_SELF,'.php');
+	}
 
     $template_vars = CPGPluginAPI::filter('theme_pageheader_params', $template_vars);
     echo template_eval($template_header, $template_vars);
@@ -1627,8 +1628,8 @@ function pagefooter()
         '{SYS_MENU}' => theme_main_menu('sys_menu'),
         '{SUB_MENU}' => theme_main_menu('sub_menu'),
         '{ADMIN_MENU}' => theme_admin_mode_menu(),
-        '{CUSTOM_HEADER}' => $custom_header,
-        '{JAVASCRIPT}' => theme_javascript_head(),
+//        '{CUSTOM_HEADER}' => $custom_header,
+//        '{JAVASCRIPT}' => theme_javascript_head(),
         '{CUSTOM_FOOTER}' => $custom_footer,
         '{VANITY}' => theme_vanity(),
         '{CREDITS}' => theme_credits(),
@@ -1713,7 +1714,7 @@ EOT;
 ** Section <<<theme_cpg_die>>> - START
 ******************************************************************************/
 // Function for showing error messages
-function theme_cpg_die($msg_code, $msg_text, $msg_string, $css_class = 'cpg_message_info', $error_file, $error_line, $output_buffer, $ob)
+function theme_cpg_die($msg_code, $msg_text, $msg_string, $css_class, $error_file, $error_line, $output_buffer, $ob)
 {
     global $CONFIG, $lang_cpg_die, $template_cpg_die;
 
@@ -1776,7 +1777,7 @@ function theme_breadcrumb($breadcrumb_links, $BREADCRUMB_TEXTS, &$breadcrumb, &$
 ** Section <<<theme_msg_box>>> - START
 ******************************************************************************/
 // Function for displaying a message-box-like table
-function theme_msg_box($title, $msg_text, $css_class = 'cpg_message_info', $button_text, $button_link)
+function theme_msg_box($title, $msg_text, $css_class, $button_text, $button_link)
 {
     global $template_msg_box;
 
@@ -1833,17 +1834,18 @@ function theme_create_tabs($items, $curr_page, $total_pages, $template)
     if ($CONFIG['tabs_dropdown']) {
         // Dropdown list for all pages
         preg_match('/cat=([\d]+)/', $template['page_link'], $matches);
+        $catn = isset($matches[1]) ? $matches[1] : '';
         $tabs_dropdown_js = <<< EOT
-            <span id="tabs_dropdown_span{$matches[1]}"></span>
+            <span id="tabs_dropdown_span{$catn}"></span>
             <script type="text/javascript"><!--
-                $('#tabs_dropdown_span{$matches[1]}').html('{$lang_create_tabs['jump_to_page']} <select id="tabs_dropdown_select{$matches[1]}" onchange="if (this.options[this.selectedIndex].value != -1) { window.location.href = this.options[this.selectedIndex].value; }"><\/select>');
+                $('#tabs_dropdown_span{$catn}').html('{$lang_create_tabs['jump_to_page']} <select id="tabs_dropdown_select{$catn}" onchange="if (this.options[this.selectedIndex].value != -1) { window.location.href = this.options[this.selectedIndex].value; }"><\/select>');
                 for (page = 1; page <= $total_pages; page++) {
                     var page_link = '{$template['page_link']}';
                     var selected = '';
                     if (page == $curr_page) {
                         selected = ' selected="selected"';
                     }
-                    $('#tabs_dropdown_select{$matches[1]}').append('<option value="' + page_link.replace( /%d/, page ) + '"' + selected + '>' + page + '<\/option>');
+                    $('#tabs_dropdown_select{$catn}').append('<option value="' + page_link.replace( /%d/, page ) + '"' + selected + '>' + page + '<\/option>');
                 }
          --></script>
 EOT;
@@ -2281,8 +2283,6 @@ function theme_admin_mode_menu()
                  template_extract_block($template_gallery_admin_menu, 'admin_approval');
             }
 
-            // Determine the documentation target
-            $available_doc_folders_array = form_get_foldercontent('docs/', 'folder', '', array('images', 'js', 'style', '.svn'));
             // Query the languages table
             $help_lang = '';
             $results = cpg_db_query("SELECT lang_id, abbr FROM {$CONFIG['TABLE_LANGUAGE']} WHERE available='YES' AND enabled='YES'");
@@ -2298,10 +2298,10 @@ function theme_admin_mode_menu()
             }
 
             // do the docs exist on the webserver?
-            if (file_exists('docs/'.$help_lang.'/index.htm') == true) {
+            if (file_exists('docs/README.md') == true && (file_exists('docs/'.$help_lang.'/index.htm') == true)) {
                 $documentation_href = 'docs/'.$help_lang.'/index.htm';
             } else {
-                $documentation_href = 'http://documentation.coppermine-gallery.net/';
+                $documentation_href = 'http://coppermine-gallery.net/docs';
             }
 
             if (!$CONFIG['enable_plugins']) {
@@ -2837,7 +2837,7 @@ function theme_display_thumbnails(&$thumb_list, $nbThumb, $album_name, $aid, $ca
     }
 
     $thumbcols = $CONFIG['thumbcols'];
-    $cell_width = ceil(100 / $CONFIG['thumbcols']) . '%';
+    $cell_width = floor((100 / $CONFIG['thumbcols']) * 100) / 100 . '%';
 
     $tabs_html = $display_tabs ? create_tabs($nbThumb, $page, $total_pages, $theme_thumb_tab_tmpl) : '';
 
@@ -2851,13 +2851,13 @@ function theme_display_thumbnails(&$thumb_list, $nbThumb, $album_name, $aid, $ca
                 '{ALBUM_ID}'   => $aid,
                 '{CAT_ID}'     => ($cat > 0 ? $cat : $CURRENT_ALBUM_DATA['category']),
                 '{MODIFY_LNK}'     => $lang_common['album_properties'],
-                '{MODIFY_ICO}'     => cpg_fetch_icon('modifyalb', 1),
+                '{MODIFY_ICO}'     => cpg_fetch_icon('modifyalb', 0),
                 '{PARENT_CAT_LNK}' => $lang_common['parent_category'],
-                '{PARENT_CAT_ICO}' => cpg_fetch_icon('category', 1),
+                '{PARENT_CAT_ICO}' => cpg_fetch_icon('category', 0),
                 '{EDIT_PICS_LNK}'  => $lang_common['edit_files'],
-                '{EDIT_PICS_ICO}'  => cpg_fetch_icon('edit', 1),
+                '{EDIT_PICS_ICO}'  => cpg_fetch_icon('edit', 0),
                 '{ALBUM_MGR_LNK}'  => $lang_common['album_manager'],
-                '{ALBUM_MGR_ICO}'  => cpg_fetch_icon('alb_mgr', 1),
+                '{ALBUM_MGR_ICO}'  => cpg_fetch_icon('alb_mgr', 0),
             );
         } else {
             $param = array();
@@ -2983,7 +2983,7 @@ function theme_display_thumbnails(&$thumb_list, $nbThumb, $album_name, $aid, $ca
 ** Section <<<theme_display_film_strip>>> - START
 ******************************************************************************/
 // Function to display the film strip
-function theme_display_film_strip(&$thumb_list, $nbThumb, $album_name, $aid, $cat, $pos, $sort_options, $mode = 'thumb', $date='', $filmstrip_prev_pos, $filmstrip_next_pos,$max_block_items,$thumb_width)
+function theme_display_film_strip(&$thumb_list, $nbThumb, $album_name, $aid, $cat, $pos, $sort_options, $mode, $date, $filmstrip_prev_pos, $filmstrip_next_pos,$max_block_items,$thumb_width)
 {
     global $CONFIG, $THEME_DIR;
     global $template_film_strip, $lang_film_strip, $lang_common, $pic_count,$mar_pic;
@@ -3250,7 +3250,10 @@ function theme_html_picture()
         $picture_url = get_pic_url($CURRENT_PIC_DATA, 'fullsize');
     }
 
-    $pic_title = '';
+    if (!$pic_title) {
+		$pic_title = $CURRENT_PIC_DATA['filename'];
+    }
+
     $mime_content = cpg_get_type($CURRENT_PIC_DATA['filename']);
 
     if ($mime_content['content']=='movie' || $mime_content['content']=='audio') {
@@ -3283,7 +3286,7 @@ function theme_html_picture()
     }
 
     if ($mime_content['content']=='image') {
-        list($image_size['width'], $image_size['height'], , $image_size['geom']) = cpg_getimagesize(urldecode($picture_url));
+        list($image_size['width'], $image_size['height'], ,$image_size['geom']) = cpg_getimagesize($picture_url);
 
         if ($CURRENT_PIC_DATA['mode'] != 'fullsize') {
             $winsizeX = $CURRENT_PIC_DATA['pwidth'] + $CONFIG['fullsize_padding_x'];  //the +'s are the mysterious FF and IE paddings
@@ -3302,7 +3305,7 @@ function theme_html_picture()
                 } else {
                     $pic_html .= "<a href=\"javascript:;\" onclick=\"MM_openBrWindow('displayimage.php?pid=$pid&amp;fullsize=1','" . uniqid(rand()) . "','scrollbars=yes,toolbar=no,status=no,resizable=yes,width=$winsizeX,height=$winsizeY')\">";
                 }
-                $pic_title = $lang_display_image_php['view_fs'] . $LINEBREAK . '==============' . $LINEBREAK . $pic_title;
+                $pic_title = $pic_title_fs = $lang_display_image_php['view_fs'] . $LINEBREAK . '==============' . $LINEBREAK . $pic_title;
                 $pic_html .= "<img src=\"images/image.gif?id=".floor(rand()*1000+rand())."\" width=\"{$image_size['width']}\" height=\"{$image_size['height']}\"  border=\"0\" alt=\"{$lang_display_image_php['view_fs']}\" /><br />";
                 $pic_html .= $pic_html_href_close . '</td></tr></table>';
                 //PLUGIN FILTER
@@ -3318,9 +3321,9 @@ function theme_html_picture()
                 } elseif (USER_ID && USER_ACCESS_LEVEL <= 2) {
                     $pic_html = '<a href="javascript:;" onclick="alert(\''.sprintf($lang_errors['access_intermediate_only'],'','','','').'\');">';
                 } else {
-                    $pic_html = "<a href=\"javascript:;\" onclick=\"MM_openBrWindow('displayimage.php?pid=$pid&amp;fullsize=1','" . uniqid(rand()) . "','scrollbars=yes,toolbar=no,status=no,resizable=yes,width=$winsizeX,height=$winsizeY')\">";
+                    $pic_html = "<a href=\"javascript:;\" onclick=\"MM_openBrWindow('displayimage.php?pid=$pid&amp;fullsize=1','" . uniqid(rand()) . "','scrollbars=no,toolbar=no,status=no,resizable=yes,width=$winsizeX,height=$winsizeY')\">";
                 }
-                $pic_title = $lang_display_image_php['view_fs'] . $LINEBREAK . '==============' . $LINEBREAK . $pic_title;
+                $pic_title = $pic_title_fs = $lang_display_image_php['view_fs'] . $LINEBREAK . '==============' . $LINEBREAK . $pic_title;
                 $pic_html .= "<img src=\"" . $picture_url . "\" {$image_size['geom']} class=\"image\" border=\"0\" alt=\"{$lang_display_image_php['view_fs']}\" /><br />";
                 $pic_html .= $pic_html_href_close;
                 //PLUGIN FILTER
@@ -3329,12 +3332,12 @@ function theme_html_picture()
         } else {
             if ($CONFIG['transparent_overlay'] == 1) {
                 $pic_html = "<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td background=\"" . $picture_url . "\" width=\"{$CURRENT_PIC_DATA['pwidth']}\" height=\"{$CURRENT_PIC_DATA['pheight']}\" class=\"image\">";
-                $pic_html .= "<img src=\"images/image.gif?id=".floor(rand()*1000+rand())."\" width={$CURRENT_PIC_DATA['pwidth']} height={$CURRENT_PIC_DATA['pheight']} border=\"0\" alt=\"\" /><br />" . $LINEBREAK;
+                $pic_html .= "<img src=\"images/image.gif?id=".floor(rand()*1000+rand())."\" width={$CURRENT_PIC_DATA['pwidth']} height={$CURRENT_PIC_DATA['pheight']} border=\"0\" alt=\"{$pic_title}\" title=\"{$pic_title}\" /><br />" . $LINEBREAK;
                 $pic_html .= "</td></tr></table>";
                 //PLUGIN FILTER
                 $pic_html = CPGPluginAPI::filter('html_image_overlay', $pic_html);
             } else {
-                $pic_html = "<img src=\"" . $picture_url . "\" {$image_size['geom']} class=\"image\" border=\"0\" alt=\"\" /><br />" . $LINEBREAK;
+                $pic_html = "<img src=\"" . $picture_url . "\" {$image_size['geom']} class=\"image\" border=\"0\" alt=\"{$pic_title}\" title=\"{$pic_title}\" /><br />" . $LINEBREAK;
                 //PLUGIN FILTER
                 $pic_html = CPGPluginAPI::filter('html_image', $pic_html);
             }
@@ -3346,11 +3349,12 @@ function theme_html_picture()
         $pic_html = CPGPluginAPI::filter('html_document', $pic_html);
     } else {
         $autostart = ($CONFIG['media_autostart']) ? ('true'):('false');
+        $autoplay = '" autostart="'.$autostart.'" autoplay="'.$autostart.'" ';
 
         if ($mime_content['player'] == 'HTMLA') {
-            $pic_html  = '<audio controls="true" src="' . $picture_url . '" autostart="' . $autostart . '"></audio>';
+            $pic_html  = '<audio controls="true" src="' . $picture_url . $autoplay . '></audio>';
         } elseif ($mime_content['player'] == 'HTMLV') {
-            $pic_html  = '<video controls="true" src="' . $picture_url . '" autostart="' . $autostart . '"' . $image_size['whole'] . '></video>';
+            $pic_html  = '<div class="video"><video controls="true" src="' . $picture_url . $autoplay . 'style="max-width:100%"></video></div>';
         } else {
 
             $players['WMP'] = array('id' => 'MediaPlayer',
@@ -3523,6 +3527,7 @@ function theme_html_img_nav_menu() {
         $ecard_tgt = "ecard.php?album=$album$cat_link$date_link&amp;pid=$pid&amp;pos=$pos";
         $ecard_title = $lang_img_nav_bar['ecard_title'];
     } else {
+    	$ecard_tgt = $ecard_title = '';
         template_extract_block($template_img_navbar, 'ecard_button'); // added to remove button if cannot send ecard
         /*
         $ecard_tgt = "javascript:alert('" . addslashes($lang_img_nav_bar['ecard_disabled_msg']) . "');";
@@ -3994,7 +3999,7 @@ function theme_slideshow($start_img,$title)
     global $cat, $date, $THEME_DIR;
 
     pageheader($lang_display_image_php['slideshow']);
-    template_extract_block($template_display_media, 'img_desc', $start_slideshow);
+    template_extract_block($template_display_media, 'img_desc');
 
     /** set styles to slideshow background */
     $setDimentionW= $CONFIG['picture_width'] + 100;
@@ -4141,7 +4146,7 @@ function theme_display_fullsize_pic()
     <body style="margin:0px; padding:0px; background-color: gray;">
 
 EOT;
-    if ($pic_html) {
+    if (!empty($pic_html)) {
         $fullsize_html .= $pic_html;
     } else {
         if ($CONFIG['transparent_overlay'] == 1) {
@@ -4205,7 +4210,7 @@ function theme_vanity()
 {
     global $template_vanity ;
 
-    return template_eval($template_vanity, $params);
+    return template_eval($template_vanity, array());
 }
 /******************************************************************************
 ** Section <<<theme_vanity>>> - END

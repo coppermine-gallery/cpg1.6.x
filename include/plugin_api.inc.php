@@ -20,7 +20,7 @@ define('CPG_EXEC_ALL','all');           // Define CPG_EXEC_ALL
 define('CPG_EXEC_FIRST', 'first');      // Define CPG_EXEC_FIRST
 define('CPG_EXEC_NEW', 'new');          // Define CPG_EXEC_NEW
 
-if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
+defined('IN_COPPERMINE') or die('Not in Coppermine...');
 
 // Store the table name in CONFIG
 $CONFIG['TABLE_PLUGINS']                = $CONFIG['TABLE_PREFIX'].'plugins';
@@ -76,7 +76,7 @@ abstract class CPGPluginAPI {
             $thisplugin =& $CPG_PLUGINS[$plugin['plugin_id']];
 
 			if ($thisplugin->enabled) {
-	            include ('./plugins/'.$thisplugin->path.'/codebase.php');
+	            include './plugins/'.$thisplugin->path.'/codebase.php';
 	
 	            // Load language files
 	            cpg_load_plugin_language_file($thisplugin->path);
@@ -356,7 +356,7 @@ abstract class CPGPluginAPI {
 
 
         // Include the plugin's code into Coppermine
-        include ('./plugins/'.$thisplugin->path.'/codebase.php');
+        include './plugins/'.$thisplugin->path.'/codebase.php';
 
         return;
     }
@@ -428,7 +428,7 @@ abstract class CPGPluginAPI {
         $priority = (is_null($data['priority'])) ? (0) : ($data['priority']+1);
 
         // Grab the plugin's credits
-        include_once ('./plugins/'.$path.'/configuration.php');
+        include_once './plugins/'.$path.'/configuration.php';
 
         // Create a generic plugin object
         $thisplugin = new CPGPlugin(
@@ -443,7 +443,7 @@ abstract class CPGPluginAPI {
         $thisplugin->awake = true;
 
         // Grab plugin's code
-        include_once ('./plugins/'.$path.'/codebase.php');
+        include_once './plugins/'.$path.'/codebase.php';
 
         // Copy it to the global scope
         $CPG_PLUGINS['new'] = $thisplugin;
@@ -495,7 +495,7 @@ abstract class CPGPluginAPI {
         $thisplugin =& $CPG_PLUGINS[$plugin_id];
 
 		// If the plugin is not enabled, load the codebase here so any uninstall action will be available
-		if (!$thisplugin->enabled) include ('./plugins/'.$thisplugin->path.'/codebase.php');
+		if (!$thisplugin->enabled) include './plugins/'.$thisplugin->path.'/codebase.php';
 
         // Grab the priority level, so you can shift the ones in the database
         $priority = $thisplugin->priority;

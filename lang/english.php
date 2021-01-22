@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * lang/english.php
- * @since  1.6.08
+ * @since  1.6.10
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -1854,7 +1854,7 @@ $lang_register_php['last_comments'] = 'Last comment';
 $lang_register_php['you'] = 'you';
 $lang_register_php['last_comments_detail'] = 'Click to see all comments made by %s';
 $lang_register_php['notify_admin_email_body'] = 'A new user with the username "%s" has registered in your gallery';
-$lang_register_php['pic_count'] = 'files uploaded';
+$lang_register_php['pic_count'] = 'Files uploaded';
 $lang_register_php['notify_admin_request_email_subject'] = '%s - Registration request';
 $lang_register_php['thank_you_admin_activation'] = 'Thank you.<br />Your request for account activation was sent to the admin. You will receive an email if approved.';
 $lang_register_php['acct_active_admin_activation'] = 'The account is now active and an email has been sent to the user.';

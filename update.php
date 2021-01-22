@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * update.php
- * @since  1.6.08
+ * @since  1.6.10
  */
 
 // define('SKIP_AUTHENTICATION', true);
@@ -426,7 +426,7 @@ function cpg_get_config_value($config_name)
     $result = cpg_db_query("SELECT value FROM ".$CONFIG['TABLE_PREFIX']."config WHERE name='".$config_name."' LIMIT 1");
     $row = $result->fetchRow(true);
 
-    return $row[0];
+    return is_array($row) ? $row[0] : null;
 }
 
 // ----------------------------- TEST FUNCTIONS ---------------------------- //

@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * index.php
- * @since  1.6.06
+ * @since  1.6.10
  */
 
 /**
@@ -19,7 +19,7 @@ define('IN_COPPERMINE', true);
 define('INDEX_PHP', true);
 define('RESTRICTED_PRIV', true);
 
-require('include/init.inc.php');
+require 'include/init.inc.php';
 
 // garbage collection: when the admin is logged in, old messages that failed to display for whatever reason are being removed to keep the temp_messages table clean
 if (GALLERY_ADMIN_MODE) {
@@ -72,7 +72,7 @@ if ($file) {
         foreach($CPG_PLUGINS as $key => $value) {
             if ($value->fullpath == './plugins/'.$path_parts['dirname']) {
                 // Include the code from the plugin
-                include_once($path);
+                include_once $path;
                 $file = true;
                 break;
             }
@@ -98,7 +98,7 @@ if (!$file) {
     }
 
     if ($CONFIG['enable_smilies']) {
-        include("include/smilies.inc.php");
+        include 'include/smilies.inc.php';
     }
 }
 
@@ -254,7 +254,7 @@ function get_subcat_data(&$cat_data)
     global $CONFIG, $HIDE_USER_CAT, $cpg_show_private_album;
     global $lft, $rgt, $RESTRICTEDWHERE, $CURRENT_CAT_DEPTH, $FORBIDDEN_SET, $FORBIDDEN_SET_DATA, $PAGE;
 
-    $indent = "</td><td><img src=\"images/spacer.gif\" width=\"20\" height=\"1\" border=\"0\" alt=\"\" /></td><td>";
+    $indent = '</td><td><img src="images/spacer.gif" width="20" height="1" border="0" alt="" /></td><td>';
 
     // TODO: support private album icon data
     // just ignore the restriction and let the display code handle things
@@ -282,8 +282,8 @@ function get_subcat_data(&$cat_data)
     }
 
     $categories    = array();
-    $forbidden_set = (!$CONFIG['show_private'] && $FORBIDDEN_SET_DATA) ? "AND r.aid NOT IN (" . implode(', ', $FORBIDDEN_SET_DATA) . ")" : "";
-    $lft_rgt       = $rgt ? "AND lft BETWEEN $lft AND $rgt" : "";
+    $forbidden_set = (!$CONFIG['show_private'] && $FORBIDDEN_SET_DATA) ? 'AND r.aid NOT IN (' . implode(', ', $FORBIDDEN_SET_DATA) . ')' : '';
+    $lft_rgt       = $rgt ? "AND lft BETWEEN $lft AND $rgt" : '';
 
     //TODO: optimize this for when first level album thumbs are disabled
     // all we need then is a count
@@ -417,12 +417,12 @@ function get_subcat_data(&$cat_data)
                 }
                 $image_size = compute_img_size($picture['pwidth'], $picture['pheight'], $CONFIG['alb_list_thumb_size']);
                 $user_thumb = "<img src=\"" . $pic_url . "\" class=\"image thumbnail\" {$image_size['geom']} border=\"0\" alt=\"\" />";
-                $user_thumb = "<a href=\"index.php?cat={$cid}\">" . $user_thumb . "</a>";
+                $user_thumb = "<a href=\"index.php?cat={$cid}\">" . $user_thumb . '</a>';
             } else {
-                $user_thumb = "";
+                $user_thumb = '';
             }
         } else {
-            $user_thumb = "";
+            $user_thumb = '';
         }
 
         $link = "<a href=\"index.php?cat={$cid}\">{$cat['details']['name']}</a>";
@@ -676,7 +676,7 @@ function list_albums()
     }
     $lower_limit = ($PAGE-1) * $alb_per_page;
     $upper_limit = min($nbAlb, $PAGE * $alb_per_page);
-    $limit = "LIMIT " . $lower_limit . "," . ($upper_limit - $lower_limit);
+    $limit = 'LIMIT ' . $lower_limit . ',' . ($upper_limit - $lower_limit);
 
     if (USER_ADMIN_MODE && $cat == (USER_ID + FIRST_USER_CAT)) {
         $sql = 'SELECT a.aid, a.title, a.description, a.thumb, a.keyword, category, visibility, filepath, filename, url_prefix, pwidth, pheight, a.owner FROM ' . $CONFIG['TABLE_ALBUMS'] . ' AS a LEFT JOIN ' . $CONFIG['TABLE_PICTURES'] . ' AS p ON a.thumb=p.pid WHERE a.owner=' . $USER_DATA['user_id'] . $album_filter . ' ORDER BY a.category DESC , a.pos ' . $limit;
@@ -893,7 +893,7 @@ function album_adm_menu($aid, $cat, $owner)
                     if ($CONFIG['users_can_edit_pics'] && in_array($aid, $public_album_uploads)) {
                         return html_albummenu2($aid);
                     } else {
-                        return "<strong>" . $lang_album_admin_menu['cat_locked'] . "</strong>";
+                        return '<strong>' . $lang_album_admin_menu['cat_locked'] . '</strong>';
                     }
                 }
             }
@@ -905,7 +905,7 @@ function album_adm_menu($aid, $cat, $owner)
         }
     }
 
-    if (MODERATOR_MODE && in_array($aid, $USER_DATA['allowed_albums'])) {
+    if (defined('MODERATOR_MODE') && MODERATOR_MODE && in_array($aid, $USER_DATA['allowed_albums'])) {
         return html_albummenu2($aid);
     }
 
@@ -1013,9 +1013,9 @@ function list_cat_albums($cat, $catdata)
                 if (!empty($last_pid_data[$album['thumb']]['filename'])) {
                     $picture = $last_pid_data[$album['thumb']];
                 } elseif ($album['thumb'] < 0) {
-                    $sql = "SELECT filepath, filename, url_prefix, pwidth, pheight "
+                    $sql = 'SELECT filepath, filename, url_prefix, pwidth, pheight '
                         . "FROM {$CONFIG['TABLE_PICTURES']} WHERE ((aid = '$aid' $forbidden_set_string) $keyword) $approved "
-                        . "ORDER BY RAND() LIMIT 0,1";
+                        . 'ORDER BY RAND() LIMIT 0,1';
                     $result = cpg_db_query($sql);
                     $picture = $result->fetchAssoc(true);
                 } else {
@@ -1117,7 +1117,7 @@ if (!$file) {
      * set in the config
      */
     foreach ($elements as $element) {
-        if (preg_match("/(\w+),*(\d+)*/", $element, $matches)) {
+        if (preg_match('/(\w+),*(\d+)*/', $element, $matches)) {
             if (!isset($matches[2])) { // added to fix notice about undefined index
                 $matches[2] = 0;
             }
@@ -1152,7 +1152,7 @@ if (!$file) {
                         /**
                          * Any php code or HTML can be put in this file and will be displayed
                          */
-                        include('anycontent.php');
+                        include 'anycontent.php';
                         $anycontent = CPGPluginAPI::filter('anycontent', ob_get_contents());
                         ob_end_clean();
                         echo $anycontent;
