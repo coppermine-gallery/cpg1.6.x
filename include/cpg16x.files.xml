@@ -5,7 +5,7 @@
 		<version>1.6.10</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>c693ab3c72bcaba5880cf0bd9a91dd90</hash>
+		<hash>1ae32aa804f0cee167fb1f191d8c6a6c</hash>
 	</element>
 	<element>
 		<fullpath>LICENSE.txt</fullpath>
@@ -18,7 +18,7 @@
 		<version>1.6.10</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>5afc922db8b3573964594559dcd50fa9</hash>
+		<hash>1f333f0086d092b93e314117aa4b6174</hash>
 	</element>
 	<element>
 		<fullpath>addfav.php</fullpath>
@@ -120,7 +120,7 @@
 		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>07e7e5061c268858a54b668388411f7c</hash>
+		<hash>abe663cb7e7874102607cff4f7fcb8b7</hash>
 	</element>
 	<element>
 		<fullpath>bridge/invisionboard20.inc.php</fullpath>
@@ -194,7 +194,7 @@
 		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>88ee26b8adef2ab773ffc00eee7e37e9</hash>
+		<hash>314248622d2a2dba2c34f97144e54852</hash>
 	</element>
 	<element>
 		<fullpath>bridge/vbulletin30.inc.php</fullpath>
@@ -243,7 +243,7 @@
 		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>0e8f87390625595512a3619052414f6e</hash>
+		<hash>1e7504e7304f68b6ac8c5b97faf10d99</hash>
 	</element>
 	<element>
 		<fullpath>config.php</fullpath>
@@ -308,7 +308,7 @@
 		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>ed44ce412ed21b8125d50ef1223f52b6</hash>
+		<hash>bf58324c0814bb769c9aca65cf3c47ae</hash>
 	</element>
 	<element>
 		<fullpath>displayecard.php</fullpath>
@@ -5325,7 +5325,7 @@
 		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>3c282d702df8c668ccf1a277705ba4e0</hash>
+		<hash>526a3835f9adbfe8ad936175bca73eb5</hash>
 	</element>
 	<element>
 		<fullpath>include/imageObjectGD.class.php</fullpath>
@@ -5365,17 +5365,16 @@
 	</element>
 	<element>
 		<fullpath>include/index.php</fullpath>
-		<version>1.6.03</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>7351cb4f6294a4edb94ce6312a4625e7</hash>
+		<hash>8fb19aca98b7903561daa2ba8b09cfc9</hash>
 	</element>
 	<element>
 		<fullpath>include/init.inc.php</fullpath>
-		<version>1.6.09</version>
+		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>ef8a0c83cde68f7be2b1b7cfdc5f2a5f</hash>
+		<hash>81fa0d9976cd0647bdd7f5af31b104c6</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
@@ -5536,21 +5535,21 @@
 		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>bff467591fdb4b317bd794e4b9704b12</hash>
+		<hash>490ce62b74f7ca7515f4ae290e07e9a6</hash>
 	</element>
 	<element>
 		<fullpath>include/plugin_api.inc.php</fullpath>
 		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>1667c93a664f760de6590ce1069b249d</hash>
+		<hash>200507f5e804e7c64f56fc45bb8c14a1</hash>
 	</element>
 	<element>
 		<fullpath>include/search.inc.php</fullpath>
 		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>b2a8eadf2d5453056546ffc0d3fe35f1</hash>
+		<hash>1956cbb935e8a5ae893cd8f7b292aeb9</hash>
 	</element>
 	<element>
 		<fullpath>include/select_lang.inc.php</fullpath>
@@ -5585,7 +5584,7 @@
 		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>1ce419686358c60177e6346f09aab23d</hash>
+		<hash>f7a3b825d8ad2a0e26a0aec5e9e6d355</hash>
 	</element>
 	<element>
 		<fullpath>include/tool.class.php</fullpath>
@@ -6892,14 +6891,14 @@
 		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>c9223e8e6dc9505ec6623a413f9d35c0</hash>
+		<hash>6ddb5830066ec62074042f88da9c2aeb</hash>
 	</element>
 	<element>
 		<fullpath>install.php</fullpath>
 		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>981e0bf1e43b80007307f87d925e40d5</hash>
+		<hash>b6282642fcf00a070c5ccaa8d1ddc71e</hash>
 	</element>
 	<element>
 		<fullpath>js/</fullpath>
@@ -7160,14 +7159,14 @@
 		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>8a45e2a97d863ae33b834bf88b5440b6</hash>
+		<hash>b42c2db4ea62149040b27631bed44c2e</hash>
 	</element>
 	<element>
 		<fullpath>keyword_select.php</fullpath>
 		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>57d2e317d637fc78aec52928982045d0</hash>
+		<hash>7496353947c5980fcbdf2143c62660f7</hash>
 	</element>
 	<element>
 		<fullpath>keywordmgr.php</fullpath>
@@ -7186,21 +7185,21 @@
 		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>6b00c57c8c1a4952dbec8e0a0cb6d36b</hash>
+		<hash>569142ad5d7d51446418c54c2a2fff3d</hash>
 	</element>
 	<element>
 		<fullpath>lang/estonian.php</fullpath>
 		<version>1.6.07</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>fe11cbd5b3f07af3e7c0ae2d4772b3c7</hash>
+		<hash>2ce7f4ec91554d049d98472fcce3e6db</hash>
 	</element>
 	<element>
 		<fullpath>lang/french.php</fullpath>
 		<version>1.6.06</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>b225a037f1a18f9b096bd9fd1f858f87</hash>
+		<hash>69eae632c5121e8ae1b0080cca595622</hash>
 	</element>
 	<element>
 		<fullpath>lang/german.php</fullpath>
@@ -7228,7 +7227,7 @@
 		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>bc072952ee931ec5195494f79b4e1e94</hash>
+		<hash>c05bc1db68e7af8b5643e7b6e5d3e0a2</hash>
 	</element>
 	<element>
 		<fullpath>logout.php</fullpath>
@@ -7880,7 +7879,7 @@
 		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>33aee1130696f589b33e6ecef4b62ddb</hash>
+		<hash>821e9b28abb8f75866f639bae77721cf</hash>
 	</element>
 	<element>
 		<fullpath>ratepic.php</fullpath>
@@ -8076,10 +8075,9 @@
 	</element>
 	<element>
 		<fullpath>themes/curve/template.html</fullpath>
-		<version>1.6.03</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>e0020c1065013b4c2a9392beb4d00658</hash>
+		<hash>a073fc91387a5597a6645fbba881950b</hash>
 	</element>
 	<element>
 		<fullpath>themes/curve/theme.php</fullpath>
@@ -8370,10 +8368,9 @@
 	</element>
 	<element>
 		<fullpath>themes/eyeball/template.html</fullpath>
-		<version>1.6.03</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>5043b61a097d20b6deced9084852fa52</hash>
+		<hash>d52ff4c047819dbc7f6392c7b394294a</hash>
 	</element>
 	<element>
 		<fullpath>themes/eyeball/theme.php</fullpath>
@@ -8688,10 +8685,9 @@
 	</element>
 	<element>
 		<fullpath>themes/hardwired/template.html</fullpath>
-		<version>1.6.03</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>9f48b854c6500ecab17a11a5e98beefb</hash>
+		<hash>c1e4d31f8c826f350f46d10a5c4d3a91</hash>
 	</element>
 	<element>
 		<fullpath>themes/hardwired/theme.php</fullpath>
@@ -8935,10 +8931,9 @@
 	</element>
 	<element>
 		<fullpath>themes/rainy_day/template.html</fullpath>
-		<version>1.6.03</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>d4100e14b67f07efeb5a20249bc0fdfc</hash>
+		<hash>067c810f63b3d5cc966f97fb69168adc</hash>
 	</element>
 	<element>
 		<fullpath>themes/rainy_day/theme.php</fullpath>
@@ -9002,17 +8997,16 @@
 	</element>
 	<element>
 		<fullpath>themes/sample/template.html</fullpath>
-		<version>1.6.03</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>8d84bf8c67a1dc389ac9875a3780c6ae</hash>
+		<hash>ea4ac637b2581df03696853f5176b721</hash>
 	</element>
 	<element>
 		<fullpath>themes/sample/theme.php</fullpath>
 		<version>1.6.10</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>223e8154a337912889941a9816d1d525</hash>
+		<hash>eb2492f6286dc876007596bf20c10ebe</hash>
 	</element>
 	<element>
 		<fullpath>themes/water_drop/</fullpath>
@@ -9081,10 +9075,9 @@
 	</element>
 	<element>
 		<fullpath>themes/water_drop/template.html</fullpath>
-		<version>1.6.03</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>8d84bf8c67a1dc389ac9875a3780c6ae</hash>
+		<hash>ea4ac637b2581df03696853f5176b721</hash>
 	</element>
 	<element>
 		<fullpath>themes/water_drop/theme.php</fullpath>
@@ -9256,7 +9249,7 @@
 		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>de6e2bf352b853eeb3ef4227dc320647</hash>
+		<hash>da3f9238d5295dc84da0ffd717da5b5c</hash>
 	</element>
 	<element>
 		<fullpath>updater.php</fullpath>
@@ -9284,7 +9277,7 @@
 		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>df886dcd69724abd93baf70ca74d2720</hash>
+		<hash>829bf19a8d7dcd17c5d7ae0217f7fd53</hash>
 	</element>
 	<element>
 		<fullpath>util.php</fullpath>
