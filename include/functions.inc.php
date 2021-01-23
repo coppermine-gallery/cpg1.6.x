@@ -3090,7 +3090,7 @@ function display_thumbnails($album, $cat, $page, $thumbcols, $thumbrows, $displa
 
     $i = 0;
 
-    if (count($pic_data) > 0) {
+    if (is_array($pic_data) && $pic_data) {
 
         foreach ($pic_data as $key => $row) {
 

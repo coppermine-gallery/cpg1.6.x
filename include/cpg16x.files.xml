@@ -5325,7 +5325,7 @@
 		<version>1.6.10</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>526a3835f9adbfe8ad936175bca73eb5</hash>
+		<hash>b3fb5cdc7cc31952d4b123fe1fe71152</hash>
 	</element>
 	<element>
 		<fullpath>include/imageObjectGD.class.php</fullpath>
