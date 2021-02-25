@@ -7,7 +7,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * CHANGELOG.txt
- * @since  1.6.10
+ * @since  1.6.11
  */
 Changelog
 =========
@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2021-02-23 [B] Correct javascript Array.find polyfill for conflict issues {ron4mac}
 2021-01-22 [M] Various code adjustments made for compatibility with PHP 8(.01) {ron4mac}
 2021-01-03 [B] Guard against array_keys failure (PHP8) caused by theme {ron4mac}
 2020-10-03 [B] Correct no plugin uninstall action for disabled plugins {ron4mac}

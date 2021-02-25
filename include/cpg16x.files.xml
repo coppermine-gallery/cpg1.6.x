@@ -7114,7 +7114,7 @@
 	</element>
 	<element>
 		<fullpath>js/scripts.js</fullpath>
-		<version>1.6.08</version>
+		<version>1.6.11</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>5ac6def32f4ff3038995de076ece6b06</hash>
