@@ -126,7 +126,7 @@ if (isset($bridge_lookup)) {
 			if ($USER_DATA === false) {
 				return false;
 			}
-			if (CPGPluginAPI::action('authorize_user', $USER_DATA) !== true) {
+			if (CPGPluginAPI::action('authorize_user', $USER_DATA) === false) {
 				return false;
 			}
 
