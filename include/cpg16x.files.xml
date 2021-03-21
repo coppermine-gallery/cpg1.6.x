@@ -117,7 +117,7 @@
 	</element>
 	<element>
 		<fullpath>bridge/coppermine.inc.php</fullpath>
-		<version>1.6.10</version>
+		<version>1.6.11</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>abe663cb7e7874102607cff4f7fcb8b7</hash>
@@ -5371,7 +5371,7 @@
 	</element>
 	<element>
 		<fullpath>include/init.inc.php</fullpath>
-		<version>1.6.10</version>
+		<version>1.6.11</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>81fa0d9976cd0647bdd7f5af31b104c6</hash>

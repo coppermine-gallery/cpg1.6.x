@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * bridge/coppermine.inc.php
- * @since  1.6.10
+ * @since  1.6.11
  */
 
 defined('IN_COPPERMINE') or die('Not in Coppermine...');
@@ -124,6 +124,9 @@ if (isset($bridge_lookup)) {
 
 			$USER_DATA = cpg_get_user_data($sql_user_email, $password);
 			if ($USER_DATA === false) {
+				return false;
+			}
+			if (CPGPluginAPI::action('authorize_user', $USER_DATA) !== true) {
 				return false;
 			}
 
