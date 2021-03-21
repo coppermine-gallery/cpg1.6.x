@@ -2,10 +2,10 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.10</version>
+		<version>1.6.11</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>1ae32aa804f0cee167fb1f191d8c6a6c</hash>
+		<hash>aa2d40507e058714a0129240b598e532</hash>
 	</element>
 	<element>
 		<fullpath>LICENSE.txt</fullpath>
@@ -120,7 +120,7 @@
 		<version>1.6.11</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>abe663cb7e7874102607cff4f7fcb8b7</hash>
+		<hash>8062de7d29ac6e79ec4b131f27b009cd</hash>
 	</element>
 	<element>
 		<fullpath>bridge/invisionboard20.inc.php</fullpath>
@@ -5374,7 +5374,7 @@
 		<version>1.6.11</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>81fa0d9976cd0647bdd7f5af31b104c6</hash>
+		<hash>0313c356dec5beafd5f450d85b6c5fae</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
@@ -7117,7 +7117,7 @@
 		<version>1.6.11</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>5ac6def32f4ff3038995de076ece6b06</hash>
+		<hash>69fd0a16a8b46ed0f6fc533598e0e74c</hash>
 	</element>
 	<element>
 		<fullpath>js/searchnew.js</fullpath>
