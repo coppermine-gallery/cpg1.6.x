@@ -8,13 +8,14 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/init.inc.php
- * @since  1.6.11
+ * @since  1.6.12
  */
 
-define('COPPERMINE_VERSION', '1.6.11');
+define('COPPERMINE_VERSION', '1.6.12');
 define('COPPERMINE_VERSION_STATUS', 'stable');
 // Define path to jQuery for this version of Coppermine
-define('CPG_JQUERY_VERSION', 'js/jquery-1.7.2.js');
+define('CPG_JQUERY_VERSION', 'js/jquery-1.12.4.js');
+define('CPG_JQUERY_MIGRATE', 'js/jquery-migrate-1.4.1.js');
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -400,6 +401,7 @@ if (USER_ID > 0) {
 
 // Include the jquery javascript library. Jquery will be included on all pages.
 js_include(CPG_JQUERY_VERSION);
+js_include(CPG_JQUERY_MIGRATE);
 
 // Include the scripts.js javascript library that contains coppermine-specific
 // JavaScript that is being used on all pages.

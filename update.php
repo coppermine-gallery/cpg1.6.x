@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * update.php
- * @since  1.6.10
+ * @since  1.6.12
  */
 
 // define('SKIP_AUTHENTICATION', true);
@@ -769,6 +769,7 @@ function delete_files()
     // Attempt to delete outdated files
     $delete_file_array = array(
         'js/jquery-1.3.2.js',
+        'js/jquery-1.4.2.js',
         'logs/log_header.inc.php',
         'include/log_header.inc.php',
         'js/setup_swf_upload.js',

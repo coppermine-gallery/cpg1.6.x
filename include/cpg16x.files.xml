@@ -2,7 +2,7 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.11</version>
+		<version>1.6.12</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>aa2d40507e058714a0129240b598e532</hash>
@@ -5371,7 +5371,7 @@
 	</element>
 	<element>
 		<fullpath>include/init.inc.php</fullpath>
-		<version>1.6.11</version>
+		<version>1.6.12</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>0313c356dec5beafd5f450d85b6c5fae</hash>
@@ -6991,14 +6991,25 @@
 	</element>
 	<element>
 		<fullpath>js/jquery-1.4.2.js</fullpath>
-		<version>1.6.03</version>
-		<status>optional</status>
-		<permission>read</permission>
-		<hash>b3b10b3ac550a8d20c02e655b829ff2c</hash>
+		<status>remove</status>
 	</element>
 	<element>
 		<fullpath>js/jquery-1.7.2.js</fullpath>
 		<version>1.6.04</version>
+		<status>optional</status>
+		<permission>read</permission>
+		<hash>da931777075dfa9ffc4a200497947d2e</hash>
+	</element>
+	<element>
+		<fullpath>js/jquery-1.12.4.js</fullpath>
+		<version>1.6.12</version>
+		<status>mandatory</status>
+		<permission>read</permission>
+		<hash>da931777075dfa9ffc4a200497947d2e</hash>
+	</element>
+	<element>
+		<fullpath>js/jquery-migrate-1.4.1.js</fullpath>
+		<version>1.6.12</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>da931777075dfa9ffc4a200497947d2e</hash>
@@ -9246,7 +9257,7 @@
 	</element>
 	<element>
 		<fullpath>update.php</fullpath>
-		<version>1.6.10</version>
+		<version>1.6.12</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>da3f9238d5295dc84da0ffd717da5b5c</hash>

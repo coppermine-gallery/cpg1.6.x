@@ -7,7 +7,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * CHANGELOG.txt
- * @since  1.6.11
+ * @since  1.6.12
  */
 Changelog
 =========
@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2021-04-22 [M] Upgraded jQuery version to 1.12.4 and included migration script (1.4.1) {ron4mac}
 2021-03-21 [A] Added user login authorization hook for plugins {ron4mac}
 2021-02-23 [B] Correct javascript Array.find polyfill for conflict issues {ron4mac}
 2021-01-22 [M] Various code adjustments made for compatibility with PHP 8(.01) {ron4mac}
