@@ -5,7 +5,7 @@
 		<version>1.6.12</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>aa2d40507e058714a0129240b598e532</hash>
+		<hash>7f09f34ee80a60c7f6aefcf7023c811d</hash>
 	</element>
 	<element>
 		<fullpath>LICENSE.txt</fullpath>
@@ -5374,7 +5374,7 @@
 		<version>1.6.12</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>0313c356dec5beafd5f450d85b6c5fae</hash>
+		<hash>0d961ece78b25a031dcd27886ae2deb5</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
@@ -7005,14 +7005,14 @@
 		<version>1.6.12</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>da931777075dfa9ffc4a200497947d2e</hash>
+		<hash>c7792eb07388a4b987a81e8ad4c63448</hash>
 	</element>
 	<element>
 		<fullpath>js/jquery-migrate-1.4.1.js</fullpath>
 		<version>1.6.12</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>da931777075dfa9ffc4a200497947d2e</hash>
+		<hash>694bd1d14174b3331b51c9891b014a00</hash>
 	</element>
 	<element>
 		<fullpath>js/jquery.cluetip.js</fullpath>
@@ -9260,7 +9260,7 @@
 		<version>1.6.12</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>da3f9238d5295dc84da0ffd717da5b5c</hash>
+		<hash>e8e9df8c5fa212fe1e414f8935e036b6</hash>
 	</element>
 	<element>
 		<fullpath>updater.php</fullpath>
