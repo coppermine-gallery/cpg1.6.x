@@ -7,7 +7,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * CHANGELOG.txt
- * @since  1.6.12
+ * @since  1.6.13
  */
 Changelog
 =========
@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2021-06-26 [B] Remove unnecessary, server objectionable parameters from batch upload iframe url (thread ID 80407) {ron4mac}
 2021-04-22 [M] Upgraded jQuery version to 1.12.4 and included migration script (1.4.1) {ron4mac}
 2021-03-21 [A] Added user login authorization hook for plugins {ron4mac}
 2021-02-23 [B] Correct javascript Array.find polyfill for conflict issues {ron4mac}

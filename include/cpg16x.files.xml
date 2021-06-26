@@ -7937,7 +7937,7 @@
 	</element>
 	<element>
 		<fullpath>searchnew.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.13</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>5600b10e2a9a0ece977e8bebec1f57ad</hash>

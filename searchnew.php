@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * searchnew.php
+ * @since  1.6.13
+ */
 
 define('IN_COPPERMINE', true);
 define('SEARCHNEW_PHP', true);
@@ -629,13 +626,11 @@ EOT;
         $folder_sep = '/';
     }
 
-    $iframe_startfolder = str_replace('searchnew.php', '', __FILE__) . rtrim($CONFIG['fullpath'],'/') . $folder_sep;
-
     echo '    <tr>'.$LINEBREAK;
     echo '        <td class="tableb" align="center">'.$LINEBREAK;
 
     if ($CONFIG['browse_batch_add'] == 1) {
-        echo '            <iframe src="minibrowser.php?startfolder='.$iframe_startfolder.'&amp;parentform=choosefolder&amp;formelementname=startdir&amp;no_popup=1&amp;limitfolder='.$iframe_startfolder.'&amp;linktarget='.$CPG_PHP_SELF.'&amp;searchnew_php=1&amp;radio=0" width="95%" height="400" name="popup_in_a_box"></iframe>'.$LINEBREAK;
+        echo '            <iframe src="minibrowser.php?parentform=choosefolder&amp;formelementname=startdir&amp;no_popup=1&amp;linktarget='.$CPG_PHP_SELF.'&amp;searchnew_php=1&amp;radio=0" width="95%" height="400" name="popup_in_a_box"></iframe>'.$LINEBREAK;
     } else {
         echo '<table width="100%">';
         display_dir_tree('', '');
