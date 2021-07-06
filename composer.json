@@ -1,0 +1,23 @@
+{
+    "name": "coppermine-gallery/cpg1.6.x",
+    "description": "Coppermine Photo Gallery",
+    "require": {
+        "php": "^5.4 || 7.*",
+        "ext-zlib": "*",
+        "ext-gd": "*",
+        "ext-xml": "*",
+        "ext-ctype": "*",
+        "ext-bz2": "*",
+        "ext-imagick": "*",
+        "ext-mbstring": "*",
+        "ext-intl": "*",
+        "ext-openssl": "*",
+        "ext-json": "*",
+        "ext-zip": "*"
+    },
+    "suggest": {
+        "php-curl": "",
+        "php-mysqli": "",
+        "php-mcrypt": "",
+    }
+}
