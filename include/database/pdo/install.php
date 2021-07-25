@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/database/pdo/install.php
- * @since  1.6.04
+ * @since  1.6.13
  */
 
 function dbcheck_pdo ($sub=null)
@@ -40,7 +40,7 @@ function checkPdoConnection ($sub=null)
 			$error = $e->getMessage();
 		}
     }
-    return true;
+    return $error ? false : true;
 }
 
 function html_pdo_select_db ($sub=null)
@@ -129,6 +129,42 @@ function getPdoMysqlDbs()
     }
 }
 
+/*
+* createPdoDb()
+*
+* Tries to create CPG database.
+* If users doesn't have permission, it returns false.
+*
+* @return bool
+*/
+function createPdoDb($db_name)
+{
+    global $language;
+    // Get a connection with the db
+    if (!checkPdoConnection()) {
+        return false;
+    }
+    $query = 'CREATE DATABASE ' . $db_name;
+    // try to create new db
+
+	$err = '';
+    try {
+        $GLOBALS['pdo_connection']->exec($query)
+        or $err = print_r($GLOBALS['pdo_connection']->errorInfo(), true);
+    }
+    catch (PDOException $e) {
+        $err = "DB ERROR: " . $e->getMessage();
+    }
+
+    if ($err) {
+        $GLOBALS['error'] = $language['dbase_no_create_db'] . '<br />'
+            . $language['dbase_error'] . '<br />' . $err;
+        return false;
+    } else {
+        setTmpConfig('db_name', $db_name);
+    }
+    return true;
+}
 
 if (!function_exists('cpg_db_escape_string')) {
 

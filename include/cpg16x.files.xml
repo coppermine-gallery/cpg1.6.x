@@ -5287,7 +5287,7 @@
 	</element>
 	<element>
 		<fullpath>include/database/pdo/install.php</fullpath>
-		<version>1.6.04</version>
+		<version>1.6.13</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>0d69523789a9bd47071fb3c81e6029b5</hash>
@@ -6895,7 +6895,7 @@
 	</element>
 	<element>
 		<fullpath>install.php</fullpath>
-		<version>1.6.10</version>
+		<version>1.6.13</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>b6282642fcf00a070c5ccaa8d1ddc71e</hash>

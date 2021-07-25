@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * install.php
- * @since  1.6.10
+ * @since  1.6.13
  */
 
 ########################
@@ -393,7 +393,7 @@ switch($step) {
 
 	case STEP_DB_SELECT:	 // Ask the user if he wants to use an existing db or if he wants the installer to create a new database. Try to perform the selected choice. Ask for the table prefix
 		$db_type = $config['db_type'];
-		list($dext, $dsub) = explode(':', $db_type.':');
+		list($dext, $dsub) = array_pad(explode(':', $db_type), 2, '');
 		require_once 'include/database/'.$dext.'/install.php';
 		$page_title = sprintf($language['title_dbase_db_sel'], strtoupper($db_type));
 		// save the db data from previous step
@@ -410,7 +410,7 @@ switch($step) {
 				&& trim($superCage->post->getRaw('new_db_name')) != '')
 		{
 			// try to create a new database.
-			$createDb = 'create'.ucfirst($db_type).'Db';
+			$createDb = 'create'.ucfirst($dext).'Db';
 			$createDb(trim($superCage->post->getRaw('new_db_name'))); // no /\:*?"<>|.
 			// save table prefix
 			setTmpConfig('db_prefix', $superCage->post->getRaw('db_prefix')); // no /\:*?"<>|.
@@ -589,8 +589,9 @@ function html_header()
 {
 	global $language;
 
+	header('Cache-Control: no-cache');
 	echo <<<EOT
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
