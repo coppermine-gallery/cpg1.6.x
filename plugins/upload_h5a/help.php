@@ -4,16 +4,16 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2019 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * plugins/upload_h5a/help.php
- * @since  1.6.08
+ * @since  1.6.13
  */
 
-$styles = '../../themes/'.$_GET['t'].'/style.css';
-$hpath = 'help/'.$_GET['g'].'/';
-$lang = $_GET['l'];
+$styles = '../../themes/'.htmlentities($_GET['t']).'/style.css';
+$hpath = 'help/'.htmlentities($_GET['g']).'/';
+$lang = htmlentities($_GET['l']);
 $hfile = file_exists($hpath.$lang.'.html') ? $lang.'.html' : 'english.html';
 ?>
 <!DOCTYPE html>

@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2021-08-18 [S] Remove possibility of XSS injection in upload_h5a plugin {ron4mac}
 2021-07-25 [B] Correct missing method for database creation when using PDO:mysql {ron4mac}
 2021-06-26 [B] Remove unnecessary, server objectionable parameters from batch upload iframe url (thread ID 80407) {ron4mac}
 2021-04-22 [M] Upgraded jQuery version to 1.12.4 and included migration script (1.4.1) {ron4mac}

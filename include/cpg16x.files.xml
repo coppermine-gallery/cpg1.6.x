@@ -2,10 +2,10 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.12</version>
+		<version>1.6.13</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>7f09f34ee80a60c7f6aefcf7023c811d</hash>
+		<hash>8663d97f13cf31d0f9d34bbd224657e2</hash>
 	</element>
 	<element>
 		<fullpath>LICENSE.txt</fullpath>
@@ -5290,7 +5290,7 @@
 		<version>1.6.13</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>0d69523789a9bd47071fb3c81e6029b5</hash>
+		<hash>02a517b46a025ba3e551ec3017ecb136</hash>
 	</element>
 	<element>
 		<fullpath>include/dbselect.inc.php</fullpath>
@@ -5371,10 +5371,10 @@
 	</element>
 	<element>
 		<fullpath>include/init.inc.php</fullpath>
-		<version>1.6.12</version>
+		<version>1.6.13</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>0d961ece78b25a031dcd27886ae2deb5</hash>
+		<hash>cbd1315fabcf94d7a6403ed4a9de6369</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
@@ -6898,7 +6898,7 @@
 		<version>1.6.13</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>b6282642fcf00a070c5ccaa8d1ddc71e</hash>
+		<hash>32016fe7ef8f57b92ed9846c9561d1d4</hash>
 	</element>
 	<element>
 		<fullpath>js/</fullpath>
@@ -7635,10 +7635,10 @@
 	</element>
 	<element>
 		<fullpath>plugins/upload_h5a/help.php</fullpath>
-		<version>1.6.08</version>
+		<version>1.6.13</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>a3b7f77c7826d1066a1bf3842e419d31</hash>
+		<hash>39cf4cdfeccb1c1480dcdabe5e5df417</hash>
 	</element>
 	<element>
 		<fullpath>plugins/upload_h5a/help/</fullpath>
@@ -7940,7 +7940,7 @@
 		<version>1.6.13</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>5600b10e2a9a0ece977e8bebec1f57ad</hash>
+		<hash>253d270e9079bdeccb881bd372eb438b</hash>
 	</element>
 	<element>
 		<fullpath>send_activation.php</fullpath>
