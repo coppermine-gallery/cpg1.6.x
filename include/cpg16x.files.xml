@@ -9264,7 +9264,7 @@
 	</element>
 	<element>
 		<fullpath>updater.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.14</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>be4bdd7ed2c8b5037aa92350c6fda8d0</hash>
