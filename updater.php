@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * updater.php
+ * @since  1.6.14
+ */
 
 define('IN_COPPERMINE', true);
 define('UPDATE_PHP', true);
@@ -38,7 +35,7 @@ span.admin_menu a:link { color:#FFF; }
 span.admin_menu a:visited { color:#FFF; }
 </style>
 EOT;
-include 'include/updates.inc.php';
+
 $updater = new CPG_Updater(false, isset($pre_release) ? !$pre_release : true);
 if ($superCage->post->keyExists('doupd')) {
 	if (!checkFormToken()) {
