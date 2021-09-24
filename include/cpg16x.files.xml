@@ -2,7 +2,7 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.13</version>
+		<version>1.6.14</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>8663d97f13cf31d0f9d34bbd224657e2</hash>
@@ -9204,6 +9204,18 @@
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>4873c460c4f6808be07fd9b219ad3954</hash>
+	</element>
+	<element>
+		<fullpath>tools/re_key/</fullpath>
+		<status>optional</status>
+		<permission>read</permission>
+	</element>
+	<element>
+		<fullpath>tools/re_key/re_key.php</fullpath>
+		<version>1.6.14</version>
+		<status>optional</status>
+		<permission>read</permission>
+		<hash>180e7d766d8ee2b2d905340945a2ed25</hash>
 	</element>
 	<element>
 		<fullpath>tools/refresh/</fullpath>
