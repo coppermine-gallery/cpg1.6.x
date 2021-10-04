@@ -5,7 +5,7 @@
 		<version>1.6.14</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>8663d97f13cf31d0f9d34bbd224657e2</hash>
+		<hash>5c0283aec629ace6fce09029802df16d</hash>
 	</element>
 	<element>
 		<fullpath>LICENSE.txt</fullpath>
@@ -5325,7 +5325,7 @@
 		<version>1.6.14</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>b3fb5cdc7cc31952d4b123fe1fe71152</hash>
+		<hash>5a115d5aadc473300a46cba32daf11e5</hash>
 	</element>
 	<element>
 		<fullpath>include/imageObjectGD.class.php</fullpath>
@@ -5577,7 +5577,7 @@
 		<version>1.6.14</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>1c60d3b33a66a587127c73c7f87e88c7</hash>
+		<hash>e123e5cec194ce58fbe585ea33f9ce12</hash>
 	</element>
 	<element>
 		<fullpath>include/themes.inc.php</fullpath>
@@ -7994,7 +7994,7 @@
 		<version>1.6.14</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>9c2f1c0b27eeffbf4cf9a359bca307de</hash>
+		<hash>d4c1b1b77a8fc60bf407daafb791bd06</hash>
 	</element>
 	<element>
 		<fullpath>themes/</fullpath>
@@ -9215,7 +9215,7 @@
 		<version>1.6.14</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>180e7d766d8ee2b2d905340945a2ed25</hash>
+		<hash>182cc22f17d6c5f1075d0af3cf706c24</hash>
 	</element>
 	<element>
 		<fullpath>tools/refresh/</fullpath>
@@ -9279,7 +9279,7 @@
 		<version>1.6.14</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>be4bdd7ed2c8b5037aa92350c6fda8d0</hash>
+		<hash>6891695adf5886da2e312593802e645b</hash>
 	</element>
 	<element>
 		<fullpath>upgrader.php</fullpath>
