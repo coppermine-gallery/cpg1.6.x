@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2021-09-24 [B] Correct conditions causing failures under PHP 8 {ron4mac}
 2021-09-24 [A] Added re_key admin tool to distribution {ron4mac}
 2021-08-18 [S] Remove possibility of XSS injection in upload_h5a plugin {ron4mac}
 2021-07-25 [B] Correct missing method for database creation when using PDO:mysql {ron4mac}

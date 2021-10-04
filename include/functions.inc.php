@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/functions.inc.php
- * @since  1.6.10
+ * @since  1.6.14
  */
 
 if (!function_exists('stripos')) {
@@ -5868,7 +5868,7 @@ if (!function_exists('cpg_get_available_languages')) {
         $results->free();
 
         unset($row);
-        if (count($language_array) == 0) {
+        if (empty($language_array)) {
             unset($language_array);
             $language_array = form_get_foldercontent('lang/', 'file', 'php');
         }

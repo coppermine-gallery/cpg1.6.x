@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * stat_details.php
+ * @since  1.6.14
+ */
 
 // Todo list (stuff the hasn't been implemented yet):
 // * overall stats taking AID into account
@@ -21,7 +18,7 @@
 
 define('IN_COPPERMINE', true);
 define('STAT_DETAILS_PHP', true);
-require_once('include/init.inc.php');
+require_once 'include/init.inc.php';
 
 // initialize the vars - start
 $charset = $CONFIG['charset'] == 'language file' ? $lang_charset : $CONFIG['charset'];
@@ -374,6 +371,7 @@ EOT;
       if ($pid != '') {
           $queryWhere = 'pid='.$pid;
           $countWhere = 'WHERE pid='.$pid;
+          $querySelect = $queryFrom = '';
       } else {
           $queryWhere = $queryTable . '.pid = ' . $CONFIG['TABLE_PICTURES'] . '.pid';
           $countWhere = '';

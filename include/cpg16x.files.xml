@@ -5322,7 +5322,7 @@
 	</element>
 	<element>
 		<fullpath>include/functions.inc.php</fullpath>
-		<version>1.6.10</version>
+		<version>1.6.14</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>b3fb5cdc7cc31952d4b123fe1fe71152</hash>
@@ -5574,7 +5574,7 @@
 	</element>
 	<element>
 		<fullpath>include/stats.inc.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.14</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>1c60d3b33a66a587127c73c7f87e88c7</hash>
@@ -7991,7 +7991,7 @@
 	</element>
 	<element>
 		<fullpath>stat_details.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.14</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>9c2f1c0b27eeffbf4cf9a359bca307de</hash>
