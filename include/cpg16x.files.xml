@@ -5371,10 +5371,10 @@
 	</element>
 	<element>
 		<fullpath>include/init.inc.php</fullpath>
-		<version>1.6.13</version>
+		<version>1.6.14</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>cbd1315fabcf94d7a6403ed4a9de6369</hash>
+		<hash>beccd4df2bde57c62f36a664e94f7d06</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
