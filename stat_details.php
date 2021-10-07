@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * stat_details.php
- * @since  1.6.14
+ * @since  1.6.15
  */
 
 // Todo list (stuff the hasn't been implemented yet):
@@ -36,7 +36,7 @@ $icon_array['ok'] = cpg_fetch_icon('ok',2);
     if ($superCage->get->keyExists('pid')){
         $pid = $superCage->get->getInt('pid');
     } else {
-        $pid = 0;
+        $pid = '';
     }
     $type_allowed = array('vote','hits','total','blank','users');
     $amount_allowed = array(20,50,100,200);

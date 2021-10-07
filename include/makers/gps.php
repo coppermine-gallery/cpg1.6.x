@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * include/makers/gps.php
+ * @since  1.6.15
+ */
 //================================================================================================
 //================================================================================================
 //================================================================================================
@@ -94,7 +91,7 @@ function formatGPSData($type,$tag,$intel,$data) {
 
 	if($type=="ASCII") {
 		if($tag=="0001" || $tag=="0003"){ // Latitude Reference, Longitude Reference
-			$data = ($data{1} == $data{2} && $data{1} == $data{3}) ? $data{0} : $data;
+			$data = ($data[1] == $data[2] && $data[1] == $data[3]) ? $data[0] : $data;
 		}
 
 	} else if($type=="URATIONAL" || $type=="SRATIONAL") {

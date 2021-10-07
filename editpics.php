@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * editpics.php
- * @since  1.6.09
+ * @since  1.6.15
  */
 
 define('IN_COPPERMINE', true);
@@ -420,10 +420,18 @@ function form_pic_info($text)
         $loop_counter = 0;
     }
 
+    $thumb_block = <<<EOT
+        <a href="$thumb_link" target="_blank"><img src="$thumb_url" class="image" border="0" alt="" /></a><br />
+        <span{$isgalleryicon_disabled}><input type="radio" name="galleryicon" id="galleryicon{$CURRENT_PIC['pid']}" value="{$CURRENT_PIC['pid']}" {$isgalleryicon_selected}class="checkbox" /><label for="galleryicon{$CURRENT_PIC['pid']}" class="clickable_option">{$lang_editpics_php['gallery_icon']}</label></span>
+EOT;
+
     if ($CURRENT_PIC['approved'] == 'YES') {
         $pic_approval_checked = 'checked="checked"';
     } else {
         $pic_approval_checked = '';
+        if (!GALLERY_ADMIN_MODE && !MODERATOR_MODE) {
+        	$thumb_block = '<img src="'.$thumb_url.'" class="image" border="0" alt="" /><br /><span style="color:red;background-color:white">'.$lang_editpics_php['unapproved'].'</span>';
+        }
     }
 
     // The approve checkbox is shown only if the user is admin or moderator.
@@ -487,8 +495,7 @@ EOT;
                 $pic_info
         </td>
            <td class="{$row_style_class}" align="center" rowspan="$THUMB_ROWSPAN">
-                <a href="$thumb_link" target="_blank"><img src="$thumb_url" class="image" border="0" alt="" /></a><br />
-                <span{$isgalleryicon_disabled}><input type="radio" name="galleryicon" id="galleryicon{$CURRENT_PIC['pid']}" value="{$CURRENT_PIC['pid']}" {$isgalleryicon_selected}class="checkbox" /><label for="galleryicon{$CURRENT_PIC['pid']}" class="clickable_option">{$lang_editpics_php['gallery_icon']}</label></span>
+        		$thumb_block
         </td>
     </tr>
 

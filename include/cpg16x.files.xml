@@ -2,10 +2,10 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.14</version>
+		<version>1.6.15</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>5c0283aec629ace6fce09029802df16d</hash>
+		<hash>2697c05ca639cc8f152380f2736d571f</hash>
 	</element>
 	<element>
 		<fullpath>LICENSE.txt</fullpath>
@@ -319,10 +319,10 @@
 	</element>
 	<element>
 		<fullpath>displayimage.php</fullpath>
-		<version>1.6.08</version>
+		<version>1.6.15</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>39cfdfc6ad5d3d392fd27158527e7d64</hash>
+		<hash>b90fe2ec8e7dd4890af2b725f1d932f4</hash>
 	</element>
 	<element>
 		<fullpath>displayreport.php</fullpath>
@@ -356,10 +356,10 @@
 	</element>
 	<element>
 		<fullpath>editpics.php</fullpath>
-		<version>1.6.09</version>
+		<version>1.6.15</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>873c007e00fe55f964ba973cbb87d86f</hash>
+		<hash>0b12fa0e5d4248b54aaa811f50c6f49d</hash>
 	</element>
 	<element>
 		<fullpath>exifmgr.php</fullpath>
@@ -5371,10 +5371,10 @@
 	</element>
 	<element>
 		<fullpath>include/init.inc.php</fullpath>
-		<version>1.6.14</version>
+		<version>1.6.15</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>beccd4df2bde57c62f36a664e94f7d06</hash>
+		<hash>001a5050e4e76bdf2702958d806af081</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
@@ -5483,10 +5483,10 @@
 	</element>
 	<element>
 		<fullpath>include/makers/gps.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.15</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>f1bf13b8226bb2d5194e4e703d6e283b</hash>
+		<hash>9816af87f6c9f60f4c62cc6138a8c450</hash>
 	</element>
 	<element>
 		<fullpath>include/makers/nikon.php</fullpath>
@@ -7991,10 +7991,10 @@
 	</element>
 	<element>
 		<fullpath>stat_details.php</fullpath>
-		<version>1.6.14</version>
+		<version>1.6.15</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>d4c1b1b77a8fc60bf407daafb791bd06</hash>
+		<hash>6813e9822aaa296ae2c0cd8cc0552def</hash>
 	</element>
 	<element>
 		<fullpath>themes/</fullpath>
