@@ -349,10 +349,10 @@
 	</element>
 	<element>
 		<fullpath>edit_one_pic.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.15</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>62a4b1dbc432c1f63984a936a61e31f8</hash>
+		<hash>69d8fb626b7a80d181004e506d066a7d</hash>
 	</element>
 	<element>
 		<fullpath>editpics.php</fullpath>

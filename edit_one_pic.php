@@ -1,22 +1,19 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * edit_one_pic.php
+ * @since  1.6.15
+ */
 
 define('IN_COPPERMINE', true);
 define('EDITPICS_PHP', true);
-require('include/init.inc.php');
+require 'include/init.inc.php';
 
 js_include('js/edit_one_pic.js');
 
@@ -96,7 +93,7 @@ function process_post_data()
     }
     $pic = $result->fetchAssoc(true);
 
-    if (!GALLERY_ADMIN_MODE && !MODERATOR_MODE && !USER_ADMIN_MODE && !user_is_allowed() && !$CONFIG['users_can_edit_pics'] ) {
+    if (!GALLERY_ADMIN_MODE && (!defined('MODERATOR_MODE') || !MODERATOR_MODE) && !USER_ADMIN_MODE && !user_is_allowed() && !$CONFIG['users_can_edit_pics'] ) {
 
         if ($pic['category'] != FIRST_USER_CAT + USER_ID) {
             cpg_die(ERROR, $lang_errors['perm_denied'], __FILE__, __LINE__);
