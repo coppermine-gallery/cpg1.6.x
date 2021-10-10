@@ -2,7 +2,7 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.15</version>
+		<version>1.6.16</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>2697c05ca639cc8f152380f2736d571f</hash>
@@ -105,7 +105,7 @@
 	</element>
 	<element>
 		<fullpath>banning.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>5369490e32542a211c5574e16eee5a10</hash>
@@ -5450,7 +5450,7 @@
 	</element>
 	<element>
 		<fullpath>include/logger.inc.php</fullpath>
-		<version>1.6.08</version>
+		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>ed0c1f276eabed45769ce5094ed92ec9</hash>

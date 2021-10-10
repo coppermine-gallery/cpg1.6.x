@@ -7,7 +7,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * CHANGELOG.txt
- * @since  1.6.15
+ * @since  1.6.16
  */
 Changelog
 =========
@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2021-10-07 [B] Correct more issues when running with PHP 8 (thanks to user altenae) {ron4mac}
 2021-10-07 [B] Correct some additional issues when running with PHP 8 {ron4mac}
 2021-09-24 [B] Correct conditions causing failures under PHP 8 {ron4mac}
 2021-09-24 [A] Added re_key admin tool to distribution {ron4mac}

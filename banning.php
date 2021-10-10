@@ -1,26 +1,23 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * banning.php
+ * @since  1.6.16
+ */
 
 define('IN_COPPERMINE', true);
 define('BANNING_PHP', true);
 define('CALENDAR_PHP', true);
 define('USERMGR_PHP', true);
 
-require('include/init.inc.php');
-require('include/sql_parse.php');
+require 'include/init.inc.php';
+require 'include/sql_parse.php';
 
 if (!GALLERY_ADMIN_MODE) {
     cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
@@ -204,6 +201,7 @@ EOT;
         $row_counter  = 0;
 
         while ( ($row = $result->fetchAssoc()) ) {
+        	$row_style_class = ($row_counter % 2 == 0) ? 'tableb' : 'tableb_alternate';
             if ($row['user_id']) {
                 $username     = get_username($row['user_id']);
                 $view_profile = '<a href="profile.php?uid=' . $row['user_id'] . '">' . cpg_fetch_icon('my_profile', 0, $lang_usermgr_php['view_profile']) . '</a>';
@@ -263,7 +261,7 @@ EOT;
 // Processing of form data --- start
 if ($superCage->post->keyExists('submit')) {
     //Check if the form token is valid
-    if(!checkFormToken()){
+    if (!checkFormToken()) {
         cpg_die(ERROR, $lang_errors['invalid_form_token'], __FILE__, __LINE__);
     }
     $result = cpg_db_query("SELECT *, UNIX_TIMESTAMP(expiry) AS expiry FROM {$CONFIG['TABLE_BANNED']} WHERE brute_force = 0 ORDER BY $sort $limit");
@@ -281,19 +279,19 @@ if ($superCage->post->keyExists('submit')) {
     }
     $result->free();
 
-    $posted_ban_id_array = $superCage->post->getAlnum('ban_id');
+    $posted_ban_id_array = $superCage->post->getAlnum('ban_id') ?: [];
 
     foreach ($posted_ban_id_array as $posted_ban_id) {
 
         // Sanitize the data --- start
         $post_user_name  = $superCage->post->getEscaped('user_name_'.$posted_ban_id);
-        $post_temp_array = $superCage->post->getMatched('email_'.$posted_ban_id, '/^([a-zA-Z0-9]((\.|\-|\_){0,1}[a-zA-Z0-9]){0,})@([a-zA-Z]((\.|\-){0,1}[a-zA-Z0-9]){0,})\.([a-zA-Z]{2,4})$/');
+        $post_temp_array = $superCage->post->getMatched('email_'.$posted_ban_id, '/^([a-zA-Z0-9]((\.|\-|\_){0,1}[a-zA-Z0-9]){0,})@([a-zA-Z]((\.|\-){0,1}[a-zA-Z0-9]){0,})\.([a-zA-Z]{2,4})$/') ?: [null];
         $post_email      = $post_temp_array[0];
-        $post_temp_array = $superCage->post->getMatched('ip_addr_'.$posted_ban_id, '/^\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b$/');
+        $post_temp_array = $superCage->post->getMatched('ip_addr_'.$posted_ban_id, '/^\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b$/') ?: [null];
         $post_ip         = $post_temp_array[0];
         $post_temp_array = $superCage->post->getMatched('expiration_'.$posted_ban_id, '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/');
 
-        list($year, $month, $day) = explode('-', $post_temp_array[0]);
+        list($year, $month, $day) = empty($post_temp_array[0]) ? [1000,0,0] : explode('-', $post_temp_array[0]);
 
         if (checkdate($month, $day, $year)) {
             $post_date      = $post_temp_array[0];
@@ -367,7 +365,7 @@ if ($superCage->post->keyExists('submit')) {
             // There has been an actual change of the database record - let's write it back --- start
             // Look up if the given user name matches a user id --- start
             $post_user_id = get_userid($post_user_name);
-            if ($post_user_id == 0) {
+            if (empty($post_user_id)) {
                 $post_user_id = 'NULL';
             }
             // Look up if the given user name matches a user id --- end
@@ -386,13 +384,13 @@ if ($superCage->post->keyExists('submit')) {
     // Now let's take care of new ban records
     // Sanitize the new record data --- start
     $post_user_name  = $superCage->post->getEscaped('add_user_name');
-    $post_temp_array = $superCage->post->getMatched('add_email', '/^([a-zA-Z0-9]((\.|\-|\_){0,1}[a-zA-Z0-9]){0,})@([a-zA-Z]((\.|\-){0,1}[a-zA-Z0-9]){0,})\.([a-zA-Z]{2,4})$/');
+    $post_temp_array = $superCage->post->getMatched('add_email', '/^([a-zA-Z0-9]((\.|\-|\_){0,1}[a-zA-Z0-9]){0,})@([a-zA-Z]((\.|\-){0,1}[a-zA-Z0-9]){0,})\.([a-zA-Z]{2,4})$/') ?: [null];
     $post_email      = $post_temp_array[0];
-    $post_temp_array = $superCage->post->getMatched('add_ip', '/^\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b$/');
+    $post_temp_array = $superCage->post->getMatched('add_ip', '/^\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b$/') ?: [null];
     $post_ip         = $post_temp_array[0];
     $post_temp_array = $superCage->post->getMatched('add_expires', '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/');
-
-    list($year, $month, $day) = explode('-', $post_temp_array[0]);
+//var_dump($post_temp_array);
+    list($year, $month, $day) = empty($post_temp_array[0]) ? [1000,0,0] : explode('-', $post_temp_array[0]);
 
     if (checkdate($month, $day, $year)) {
         $post_date      = $post_temp_array[0];
@@ -451,7 +449,7 @@ if ($superCage->post->keyExists('submit')) {
         // Form fields for a new database record have been submit - let's create a new record --- start
         // Look up if the given user name matches a user id --- start
         $post_user_id = get_userid($post_user_name);
-        if ($post_user_id == 0) {
+        if (empty($post_user_id)) {
             $post_user_id = 'NULL';
         }
         // Look up if the given user name matches a user id --- end

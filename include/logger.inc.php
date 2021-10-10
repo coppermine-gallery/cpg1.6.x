@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/logger.inc.php
- * @since  1.6.08
+ * @since  1.6.16
  */
 defined('IN_COPPERMINE') or die('Not in Coppermine...');
 
@@ -28,6 +28,7 @@ define('CPG_NO_LOGGING',0);
 define('CPG_WEEK',604800);
 define('CPG_DAY',86400);
 define('CPG_HOUR',3600);
+define('CPG_MINUTE',60);
 
 // Writes log text to the log file
 function log_write($text, $log = null)
