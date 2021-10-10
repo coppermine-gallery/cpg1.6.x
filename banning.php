@@ -198,10 +198,7 @@ function create_banlist()
 EOT;
     if ($count > 0) {
 
-        $row_counter  = 0;
-
         while ( ($row = $result->fetchAssoc()) ) {
-        	$row_style_class = ($row_counter % 2 == 0) ? 'tableb' : 'tableb_alternate';
             if ($row['user_id']) {
                 $username     = get_username($row['user_id']);
                 $view_profile = '<a href="profile.php?uid=' . $row['user_id'] . '">' . cpg_fetch_icon('my_profile', 0, $lang_usermgr_php['view_profile']) . '</a>';
@@ -225,34 +222,33 @@ EOT;
             }
             echo <<< EOT
                 <tr>
-                    <td class="{$row_style_class}" align="center" valign="top">
+                    <td align="center" valign="top">
                         <input type="hidden" name="ban_id[]" id="ban_id_{$row['ban_id']}" value="{$row['ban_id']}" />
                         {$row['ban_id']}
                     </td>
-                    <td class="{$row_style_class}" align="right" valign="top">
+                    <td align="right" valign="top">
                         {$expired}
                         <input type="checkbox" class="checkbox" name="select_{$row['ban_id']}" id="select_{$row['ban_id']}" value="1" />
                     </td>
-                    <td class="{$row_style_class}" valign="top">
+                    <td valign="top">
                         <input type="text" class="textinput" style="width: 100%" name="user_name_{$row['ban_id']}" id="user_name_{$row['ban_id']}" value="{$username}" />
                         {$view_profile}
                         <input type="hidden" name="user_id_{$row['ban_id']}" id="user_id_{$row['ban_id']}" value="{$row['user_id']}" />
                     </td>
-                    <td class="{$row_style_class}" valign="top">
+                    <td valign="top">
                         <input type="text" class="textinput email_field" style="width: 100%" name="email_{$row['ban_id']}" id="email_{$row['ban_id']}" value="{$row['email']}" />
                         <div id="email_{$row['ban_id']}_warning" class="cpg_message_validation formFieldWarning" style="display:none;">{$lang_banning_php['email_field_invalid']}</div>
                     </td>
-                    <td class="{$row_style_class}" valign="top">
+                    <td valign="top">
                         <input type="text" class="textinput ip_field" style="width: 80%" size="15" maxlength="15" name="ip_addr_{$row['ban_id']}" id="ip_addr_{$row['ban_id']}" value="{$row['ip_addr']}" />{$row['ip_detail']}
                         <div id="ip_addr_{$row['ban_id']}_warning" class="cpg_message_validation formFieldWarning" style="display:none;">{$lang_banning_php['ip_address_field_invalid']}</div>
                     </td>
-                    <td class="{$row_style_class}" valign="top">
+                    <td valign="top">
                         <input type="text" class="textinput date-pick" style="width:80%" size="10" maxlength="10" name="expiration_{$row['ban_id']}" id="expiration_{$row['ban_id']}" value="{$expiry}"  title="{$lang_banning_php['select_date']}" />
                         <div id="expiration_{$row['ban_id']}_warning" class="cpg_message_validation formFieldWarning" style="display:none;">{$lang_banning_php['expiry_field_invalid']}</div>
                     </td>
                 </tr>
 EOT;
-            $row_counter++;
         }
     }
     $result->free();
