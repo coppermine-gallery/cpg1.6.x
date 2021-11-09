@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * install.php
- * @since  1.6.13
+ * @since  1.6.16
  */
 
 ########################
@@ -1106,7 +1106,7 @@ function createTempConfig()
 	if ($handle = @fopen($config_file['temporary'], 'w')) {
 		//$config = serialize($config);
 		//create php array in config
-		$fconfig = '<?php' . $LINEBREAK . arrayToString($config, '$install_config') . $LINEBREAK . '?>';
+		$fconfig = '<?php' . $LINEBREAK . arrayToString($config, '$install_config') . $LINEBREAK;
 		fwrite($handle, $fconfig);
 		fclose($handle);
 		return true;
@@ -1115,6 +1115,20 @@ function createTempConfig()
 		$GLOBALS['error'] = sprintf($language['cant_write_tmp_conf'], $config_file['temporary']) . ' ' . $language['review_permissions'];
 		return false;
 	}
+}
+
+/*
+* sqEsc()
+*
+* escape single quotes in string
+*
+* @param string $str
+*
+* @return string
+*/
+function sqEsc($str)
+{
+	return str_replace("'", "\'", $str);
 }
 
 /*
@@ -1142,6 +1156,7 @@ function arrayToString($array, $array_name, $indent = '')
 			if (is_array($value)) {
 				$array_string .= arrayToString($value, $key, $indent . '	 ');
 			} else {
+				$value = sqEsc($value);
 				$array_string .= $indent . "		'$key' => '$value'," . $LINEBREAK;
 			}
 		}
@@ -1695,6 +1710,10 @@ function checkSillySafeMode()
 function writeConfig()
 {
 	global $config, $language;
+
+	foreach (['db_type'.'db_host'.'db_user'.'db_password'.'db_name'.'db_prefix'] as $ix) {
+		$config[$ix] = sqEsc($config[$ix]);
+	}
 
 	$config = <<<EOT
 <?php

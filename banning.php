@@ -385,7 +385,7 @@ if ($superCage->post->keyExists('submit')) {
     $post_temp_array = $superCage->post->getMatched('add_ip', '/^\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b$/') ?: [null];
     $post_ip         = $post_temp_array[0];
     $post_temp_array = $superCage->post->getMatched('add_expires', '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/');
-//var_dump($post_temp_array);
+
     list($year, $month, $day) = empty($post_temp_array[0]) ? [1000,0,0] : explode('-', $post_temp_array[0]);
 
     if (checkdate($month, $day, $year)) {

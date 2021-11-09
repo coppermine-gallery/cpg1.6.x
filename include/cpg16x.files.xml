@@ -6895,7 +6895,7 @@
 	</element>
 	<element>
 		<fullpath>install.php</fullpath>
-		<version>1.6.13</version>
+		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>32016fe7ef8f57b92ed9846c9561d1d4</hash>
