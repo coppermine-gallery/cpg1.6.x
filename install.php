@@ -1711,7 +1711,7 @@ function writeConfig()
 {
 	global $config, $language;
 
-	foreach (['db_type'.'db_host'.'db_user'.'db_password'.'db_name'.'db_prefix'] as $ix) {
+	foreach (['db_type','db_host','db_user','db_password','db_name','db_prefix'] as $ix) {
 		$config[$ix] = sqEsc($config[$ix]);
 	}
 
