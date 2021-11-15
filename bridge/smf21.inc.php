@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * bridge/smf21.inc.php
- * @since  1.6.05
+ * @since  1.6.16
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -48,6 +48,7 @@ if (isset($bridge_lookup)) {
             $this->multigroups = 1;
             $this->group_overrride = 1;
             $this->cookie_name = $cookiename;
+            $this->secret = $auth_secret;
 
             // Board table names
             $this->table = array(
@@ -80,7 +81,7 @@ if (isset($bridge_lookup)) {
             $this->field = array(
                 'username' => 'real_name', // name of 'username' field in users table
                 'user_id' => 'id_member', // name of 'id' field in users table
-                'password' => 'SHA2(CONCAT(passwd, password_salt), 512)', // name of the password field in the users table
+                'password' => 'CONCAT_WS(",",passwd,password_salt)', // password and salt
                 'email' => 'email_address', // name of 'email' field in users table
                 'regdate' => 'date_registered', // name of 'registered' field in users table
                 'lastvisit' => 'last_login', // last time user logged in
@@ -109,35 +110,32 @@ if (isset($bridge_lookup)) {
             $this->connect();
         }
 
-        // definition of how to extract id, name, group from a session cookie
+        // definition of how to extract id, name, group using a PHP session cookie
         function session_extraction()
         {
-            $superCage = Inspekt::makeSuperCage();
-
-            if ($superCage->cookie->keyExists($this->cookie_name)) {
-
-                $data = json_decode($superCage->cookie->getRaw($this->cookie_name), true);
-
-                if (is_numeric($data[0]) && preg_match('/^[A-F0-9]{128}$/i', $data[1])) {
-                    return $data;
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
+        	return false;
         }
 
         // definition of how to extract an id and password hash from a cookie
         function cookie_extraction()
         {
+            $superCage = Inspekt::makeSuperCage();
+
+            if ($superCage->cookie->keyExists($this->cookie_name)) {
+                $data = json_decode($superCage->cookie->getRaw($this->cookie_name), true);
+                if (is_numeric($data[0]) && preg_match('/^[A-F0-9]{128}$/i', $data[1])) {
+                    return $data;
+                }
+            }
+
             return false;
         }
 
         // definition of actions required to convert a password from user database form to cookie form
         function udb_hash_db($password)
         {
-            return $password; // unused
+        	list($pass, $salt) = explode(',', $password);
+        	return hash_hmac('sha512', $pass, $this->secret.$salt);
         }
 
         // Get groups of which user is member

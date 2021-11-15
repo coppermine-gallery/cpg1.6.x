@@ -184,7 +184,7 @@
 	</element>
 	<element>
 		<fullpath>bridge/smf21.inc.php</fullpath>
-		<version>1.6.05</version>
+		<version>1.6.16</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>a87c69ddce3a35fbab93645164acd131</hash>
