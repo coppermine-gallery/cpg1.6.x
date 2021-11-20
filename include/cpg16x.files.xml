@@ -5308,7 +5308,7 @@
 	</element>
 	<element>
 		<fullpath>include/exif.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>710c31d7006fd55c5a73829f234d3e98</hash>
@@ -5469,49 +5469,49 @@
 	</element>
 	<element>
 		<fullpath>include/makers/canon.php</fullpath>
-		<version>1.6.05</version>
+		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>80adb95e35428154a69ffa0ba70d3880</hash>
 	</element>
 	<element>
 		<fullpath>include/makers/fujifilm.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>392acd3c7c430d6593a7e61852bc1d4f</hash>
 	</element>
 	<element>
 		<fullpath>include/makers/gps.php</fullpath>
-		<version>1.6.15</version>
+		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>9816af87f6c9f60f4c62cc6138a8c450</hash>
 	</element>
 	<element>
 		<fullpath>include/makers/nikon.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>aff32f09a1920f48cc89ea1ffac6a5e4</hash>
 	</element>
 	<element>
 		<fullpath>include/makers/olympus.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>ba2c7b04288ddec9d3ff1e39f12f3d4f</hash>
 	</element>
 	<element>
 		<fullpath>include/makers/panasonic.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>9bcf9b02489ba6bef50271e171e82edc</hash>
 	</element>
 	<element>
 		<fullpath>include/makers/sanyo.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>66cae709e338759942b7f4cba69c60f6</hash>
