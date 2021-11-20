@@ -5,7 +5,7 @@
 		<version>1.6.16</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>2697c05ca639cc8f152380f2736d571f</hash>
+		<hash>5e0e634d953531ceb89ae1ecf2b51496</hash>
 	</element>
 	<element>
 		<fullpath>LICENSE.txt</fullpath>
@@ -108,7 +108,7 @@
 		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>5369490e32542a211c5574e16eee5a10</hash>
+		<hash>6545094b00fbb8d5941f4e53e90f4d99</hash>
 	</element>
 	<element>
 		<fullpath>bridge/</fullpath>
@@ -187,7 +187,7 @@
 		<version>1.6.16</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>a87c69ddce3a35fbab93645164acd131</hash>
+		<hash>70eed1c7a08fcb71d02e14633bd46dd4</hash>
 	</element>
 	<element>
 		<fullpath>bridge/udb_base.inc.php</fullpath>
@@ -5311,7 +5311,7 @@
 		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>710c31d7006fd55c5a73829f234d3e98</hash>
+		<hash>c5c5c065a5ca636ac2fd543a487369da</hash>
 	</element>
 	<element>
 		<fullpath>include/exif_php.inc.php</fullpath>
@@ -5371,10 +5371,10 @@
 	</element>
 	<element>
 		<fullpath>include/init.inc.php</fullpath>
-		<version>1.6.15</version>
+		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>001a5050e4e76bdf2702958d806af081</hash>
+		<hash>ed2b149b010894cf575247f714b07936</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
@@ -5453,7 +5453,7 @@
 		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>ed0c1f276eabed45769ce5094ed92ec9</hash>
+		<hash>46159918122f637fa0b43cfbd5964e76</hash>
 	</element>
 	<element>
 		<fullpath>include/mailer.inc.php</fullpath>
@@ -5472,49 +5472,49 @@
 		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>80adb95e35428154a69ffa0ba70d3880</hash>
+		<hash>5a014615cecff5a1d161216363535143</hash>
 	</element>
 	<element>
 		<fullpath>include/makers/fujifilm.php</fullpath>
 		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>392acd3c7c430d6593a7e61852bc1d4f</hash>
+		<hash>65845ae8c26a88ba7560a115c98e8b07</hash>
 	</element>
 	<element>
 		<fullpath>include/makers/gps.php</fullpath>
 		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>9816af87f6c9f60f4c62cc6138a8c450</hash>
+		<hash>fb39e386968068028b86dcac3c373d1b</hash>
 	</element>
 	<element>
 		<fullpath>include/makers/nikon.php</fullpath>
 		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>aff32f09a1920f48cc89ea1ffac6a5e4</hash>
+		<hash>f1c63fbdb7c5c1e645fa3496ec28bd5e</hash>
 	</element>
 	<element>
 		<fullpath>include/makers/olympus.php</fullpath>
 		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>ba2c7b04288ddec9d3ff1e39f12f3d4f</hash>
+		<hash>253c57553d478b5a2c2227d6fe7062b3</hash>
 	</element>
 	<element>
 		<fullpath>include/makers/panasonic.php</fullpath>
 		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>9bcf9b02489ba6bef50271e171e82edc</hash>
+		<hash>480ea57b1b9447c85d845e2db943290a</hash>
 	</element>
 	<element>
 		<fullpath>include/makers/sanyo.php</fullpath>
 		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>66cae709e338759942b7f4cba69c60f6</hash>
+		<hash>fc930b5a708f73ca18eaad3028a09b22</hash>
 	</element>
 	<element>
 		<fullpath>include/mb.inc.php</fullpath>
@@ -6898,7 +6898,7 @@
 		<version>1.6.16</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>32016fe7ef8f57b92ed9846c9561d1d4</hash>
+		<hash>ae21f930d7b4f3efc079e3a3082245a2</hash>
 	</element>
 	<element>
 		<fullpath>js/</fullpath>
