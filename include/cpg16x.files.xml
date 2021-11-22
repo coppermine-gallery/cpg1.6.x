@@ -5581,7 +5581,7 @@
 	</element>
 	<element>
 		<fullpath>include/themes.inc.php</fullpath>
-		<version>1.6.10</version>
+		<version>1.6.17</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>f7a3b825d8ad2a0e26a0aec5e9e6d355</hash>
@@ -7894,7 +7894,7 @@
 	</element>
 	<element>
 		<fullpath>ratepic.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.17</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>ef2b10b0ba399e6316884c877ef35187</hash>

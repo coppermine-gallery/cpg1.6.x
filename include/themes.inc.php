@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/themes.inc.php
- * @since  1.6.10
+ * @since  1.6.17
  */
 
 /////////////////////////////////////////////////////////////////
@@ -3628,7 +3628,7 @@ function theme_html_rating_box()
         if ($CURRENT_PIC_DATA['owner_id'] == $USER_DATA['user_id'] && $USER_DATA['user_id'] != 0 && ($CONFIG['rate_own_files'] == 0 || $CONFIG['rate_own_files'] == 2 && !USER_IS_ADMIN)) {
             // user is owner
             $rate_title = $lang_rate_pic['forbidden'];
-        } elseif (!$result_votes->numRows() && !$result_vote_stats->numRows()) {
+        } elseif ((USER_ID && !$result_votes->numRows()) || !$result_vote_stats->numRows()) {
             // user hasn't voted yet, show voting things
             $rate_title = $lang_rate_pic['rate_this_pic'];
             $user_can_vote = 'true';

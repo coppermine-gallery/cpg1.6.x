@@ -7,7 +7,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * CHANGELOG.txt
- * @since  1.6.16
+ * @since  1.6.17
  */
 Changelog
 =========
@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2021-11-22 [B] Allow ratings from different logged in users regardless of IP address {ron4mac}
 2021-11-20 [M] Update third party (ZenPhoto maintained) exif reader {ron4mac}
 2021-11-15 [M] Change bridge file for SMF 2.1 to function with latest SMF version {ron4mac}
 2021-11-09 [B] Correct install failure when single quote (') is used in db config {ron4mac}

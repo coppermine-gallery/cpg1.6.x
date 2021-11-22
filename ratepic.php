@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * ratepic.php
+ * @since  1.6.17
+ */
 
 define('IN_COPPERMINE', true);
 define('RATEPIC_PHP', true);
@@ -106,17 +103,19 @@ if ($result->numRows(true)) {
     exit;
 }
 
-// Check if user already rated this picture - vote stats table
-$sql = "SELECT null FROM {$CONFIG['TABLE_VOTE_STATS']} WHERE pid = $pic AND ip = '$raw_ip'";
-$result = cpg_db_query($sql);
-if ($result->numRows(true)) {
-    $send_back = array(
-        'status' => 'error',
-        'msg'    => $lang_rate_pic_php['already_rated'],
-        'a'      => $USER,
-    );
-    echo json_encode($send_back);
-    exit;
+// If no logged in user, check if IP already rated this picture - vote stats table
+if (!USER_ID) {
+	$sql = "SELECT null FROM {$CONFIG['TABLE_VOTE_STATS']} WHERE pid = $pic AND ip = '$raw_ip'";
+	$result = cpg_db_query($sql);
+	if ($result->numRows(true)) {
+	    $send_back = array(
+	        'status' => 'error',
+	        'msg'    => $lang_rate_pic_php['already_rated'],
+	        'a'      => $USER,
+	    );
+	    echo json_encode($send_back);
+	    exit;
+	}
 }
 
 //Test for Self-Rating
