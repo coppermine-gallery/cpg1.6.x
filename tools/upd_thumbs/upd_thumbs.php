@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2022 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * tools/upd_thumbs/upd_thumbs.php
- * @since  1.6.06
+ * @since  1.6.17
  */
 
 /* declare each item separately - not as an entire array() */
@@ -104,6 +104,11 @@ class CPG_ToolUpd_thumbs extends AdminTool
 				}
 
 				$imagesize = cpg_getimagesize($work_image);
+				if (!$imagesize[0] || !$imagesize[1]) {
+					echo $this->_('filesize_error') . ' <tt>' . $work_image .'</tt><br>';
+					$this->errcnt++;
+					continue;
+				}
 
 				if ($updatetype == 3 || $updatetype == 4 || $updatetype == 5) {
 					// resize full-sized picture without watermark (will be applied later) if it's bigger than the max width or height for uploaded pictures

@@ -2,7 +2,7 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.16</version>
+		<version>1.6.17</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>5e0e634d953531ceb89ae1ecf2b51496</hash>
@@ -9248,7 +9248,7 @@
 	</element>
 	<element>
 		<fullpath>tools/upd_thumbs/upd_thumbs.php</fullpath>
-		<version>1.6.06</version>
+		<version>1.6.17</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>7a53f53f2db7377dad051f2c5babd7d4</hash>
