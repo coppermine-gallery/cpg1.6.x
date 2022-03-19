@@ -5,7 +5,7 @@
 		<version>1.6.17</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>5e0e634d953531ceb89ae1ecf2b51496</hash>
+		<hash>8d101e6a987a5b8f02c4fea0b7bd1e15</hash>
 	</element>
 	<element>
 		<fullpath>LICENSE.txt</fullpath>
@@ -5371,10 +5371,10 @@
 	</element>
 	<element>
 		<fullpath>include/init.inc.php</fullpath>
-		<version>1.6.16</version>
+		<version>1.6.17</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>ed2b149b010894cf575247f714b07936</hash>
+		<hash>84b13a816343e59c45cc2e5f471b2dcf</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
@@ -5584,7 +5584,7 @@
 		<version>1.6.17</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>f7a3b825d8ad2a0e26a0aec5e9e6d355</hash>
+		<hash>11adc91d8ba1079a463099ae562d2984</hash>
 	</element>
 	<element>
 		<fullpath>include/tool.class.php</fullpath>
@@ -7897,7 +7897,7 @@
 		<version>1.6.17</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>ef2b10b0ba399e6316884c877ef35187</hash>
+		<hash>be57cf6b146852e4c748a3a98bc9e2fb</hash>
 	</element>
 	<element>
 		<fullpath>register.php</fullpath>
@@ -9251,7 +9251,7 @@
 		<version>1.6.17</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>7a53f53f2db7377dad051f2c5babd7d4</hash>
+		<hash>9f6b03ff2ef2c190898f01909d0f5d80</hash>
 	</element>
 	<element>
 		<fullpath>uniload.php</fullpath>
