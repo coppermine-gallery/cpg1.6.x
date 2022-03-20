@@ -15,13 +15,13 @@
 * Unless this is true most things wont work - protection against direct execution of inc files
 */
 define('IN_COPPERMINE', true);
-
 define('INDEX_PHP', true);
 define('RESTRICTED_PRIV', true);
 
 require 'include/init.inc.php';
 
-// garbage collection: when the admin is logged in, old messages that failed to display for whatever reason are being removed to keep the temp_messages table clean
+// garbage collection: when the admin is logged in, old messages that failed to display for whatever reason are being removed
+//to keep the temp_messages table clean
 if (GALLERY_ADMIN_MODE) {
     cpgCleanTempMessage();
 }
@@ -29,6 +29,7 @@ if (GALLERY_ADMIN_MODE) {
 /**
  * Clean up GPC and other Globals here
  */
+$superCage = null;
 if ($superCage->get->keyExists('page')) {
     $page = $superCage->get->getInt('page');
 }
@@ -39,17 +40,16 @@ if ($superCage->get->testInt('cat')) {
 
 $tmpFile = ''; // initialize
 
+/**
+ * There can be only alphanumerals in a plugin's folder name. There mustn't be any dots or other special
+ * chars in it.
+ * The only exception is the hypen (-) and underscore (_)
+ * Examples for folder names: "myplugin" = OK, "my_plugin" = OK, "my plugin" = BAD, "m&uuml;_plugin" = BAD
+ * Files the plugin is meant to include can only contain one single dot that separates the actual filename
+ * from the php-extension
+ * Same restrictions apply as for the folder name (only alphanumerals, hyphen and underscore)
+ */
 if ($superCage->get->keyExists('file')) {
-    /**
-     * There can be only alphanumerals in a plugin's folder name. There mustn't be any dots or other special
-     * chars in it.
-     * The only exception is the hypen (-) and underscore (_)
-     * Examples for folder names: "myplugin" = OK, "my_plugin" = OK, "my plugin" = BAD, "m&uuml;_plugin" = BAD
-     * Files the plugin is meant to include can only contain one single dot that separates the actual filename
-     * from the php-extension
-     * Same restrictions apply as for the folder name (only alphanumerals, hyphen and underscore)
-     */
-
     if ($matched = $superCage->get->getMatched('file', "/^([a-zA-Z0-9_\-]+)(\/{0,1}?)([a-zA-Z0-9_\-]+)$/")) {
         $tmpFile = $matched[0];
     }
@@ -67,10 +67,13 @@ if ($file) {
 
     // Don't include the codebase and credits files
     if (file_exists($path)) {
+
         // Check if the plugin is installed
+        // @todo: Investigate const
         $path_parts = pathinfo($tmpFile);
-        foreach($CPG_PLUGINS as $key => $value) {
+        foreach(CPG_PLUGINS as $key => $value) {
             if ($value->fullpath == './plugins/'.$path_parts['dirname']) {
+
                 // Include the code from the plugin
                 include_once $path;
                 $file = true;
@@ -79,25 +82,26 @@ if ($file) {
         }
     }
 } else {
-    $file = false;
+    return $file = false;
 }
 
 if (!$file) {
+    if (!USER_ID && $_COOKIE['allow_unlogged_access'] == 0) {
 
-    if (!USER_ID && $CONFIG['allow_unlogged_access'] == 0) {
         // Anonymous access to site is not allowed, so need to redirect to login page
         // First try to set cookie so login page doesn't show 'cookie_warning' even when no problem
-        $data = base64_encode(serialize($USER));
+        $data = base64_encode(serialize($_SERVER['PHP_AUTH_USER']));
         if (CPG_COOKIES_ALLOWED) {
-            setcookie($CONFIG['cookie_name'].'_data', $data, time() + (CPG_DAY*30), $CONFIG['cookie_path']);
+            setcookie($_COOKIE['cookie_name'].'_data', $data, time() + (CPG_DAY*30), $_COOKIE['cookie_path']);
         }
+
         // Now redirect to login page
         $redirect = 'login.php';
         header("Location: $redirect");
         exit();
     }
 
-    if ($CONFIG['enable_smilies']) {
+    if ($_ENV['enable_smilies']) {
         include 'include/smilies.inc.php';
     }
 }
@@ -247,7 +251,7 @@ EOT;
  *
  * @param integer $parent Parent Category
  * @param array $cat_data
- * @return void
+ * @return TYPE_NAME
  **/
 function get_subcat_data(&$cat_data)
 {
@@ -290,13 +294,15 @@ function get_subcat_data(&$cat_data)
 
     // collect info about all normal categories
     // restrict to 'subcat_level' categories deeper than current depth
+    // @todo: Inspect
+    /** @var TYPE_NAME $sql */
     $sql = "SELECT cid, lft, rgt, name, description, thumb, depth AS level, '0' AS alb_count, '0' AS subalb_count
         FROM {$CONFIG['TABLE_CATEGORIES']}
         WHERE depth BETWEEN $CURRENT_CAT_DEPTH + 1 AND $CURRENT_CAT_DEPTH + {$CONFIG['subcat_level']}
         $lft_rgt
         ORDER BY lft";
-
     $result = cpg_db_query($sql);
+    return $sql;
 
     while ($row = $result->fetchAssoc()) {
         $categories[$row['cid']]['details'] = $row;
