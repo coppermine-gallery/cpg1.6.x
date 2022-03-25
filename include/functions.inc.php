@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2022 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/functions.inc.php
- * @since  1.6.14
+ * @since  1.6.18
  */
 
 if (!function_exists('stripos')) {
@@ -542,10 +542,13 @@ function localised_date($timestamp, $datefmt)
 
     $timestamp = localised_timestamp($timestamp);
 
-    $date = str_replace(array('%a', '%A'), $lang_day_of_week[(int)strftime('%w', $timestamp)], $datefmt);
-    $date = str_replace(array('%b', '%B'), $lang_month[(int)strftime('%m', $timestamp)-1], $date);
+	$dow = '\\' . implode('\\', str_split($lang_day_of_week[(int)date('w', $timestamp)]));
+    $frmt = str_replace(['l','D'], '+', $datefmt);
+    $mon = '\\' . implode('\\', str_split($lang_month[(int)date('m', $timestamp)-1]));
+    $frmt = str_replace(['M','F'], '=', $frmt);
+    $frmt = str_replace(['+','='], [$dow,$mon], $frmt);
 
-    return strftime($date, $timestamp);
+    return date($frmt, $timestamp);
 }
 
 /**
@@ -1382,7 +1385,7 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
         }
 
         $album_name    = $album_name_keyword['title'];
-        $album_keyword = addslashes($album_name_keyword['keyword']);
+        $album_keyword = $album_name_keyword['keyword'] ? addslashes($album_name_keyword['keyword']) : '';
 
         if (!empty($album_keyword)) {
             $keyword = "OR (keywords like '%$album_keyword%' $forbidden_set_string )";
@@ -2157,8 +2160,8 @@ function get_pic_pos($album, $pid)
         }
 
         $album_name_keyword = get_album_name($album);
-        //$album_name         = $album_name_keyword['title'];
-        $album_keyword      = addslashes($album_name_keyword['keyword']);
+        //$album_name = $album_name_keyword['title'];
+        $album_keyword = $album_name_keyword['keyword'] ? addslashes($album_name_keyword['keyword']) : '';
 
         if (!empty($album_keyword)) {
             $keyword = "OR (keywords like '%$album_keyword%' $forbidden_set_string )";

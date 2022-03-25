@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2022 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * include/debugger.inc.php
+ * @since  1.6.18
+ */
 
 if (!defined('E_STRICT')) {
     define('E_STRICT', 2048); // PHP 5
@@ -42,7 +39,7 @@ class cpg_debugger {
 
     function start() {
         if (!$this->active) {
-            $this->report = false;
+            $this->report = [];
             if (CAN_MOD_INI) {
                 $this->old_display_level = ini_set('display_errors', 1);
                 $this->old_error_logging = ini_set('log_errors', 0);
@@ -75,7 +72,7 @@ class cpg_debugger {
 //                ini_set('error_log', $this->old_error_log);
             }
             $this->active = false;
-            return $this->report;
+            return $this->report ?: false;
         }
     }
 

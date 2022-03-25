@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2022 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * db_ecard.php
+ * @since  1.6.18
+ */
 
 define('IN_COPPERMINE', true);
 define('DB_ECARD_PHP', true);
@@ -333,7 +330,7 @@ $result = cpg_db_query("SELECT eid, sender_name, sender_email, recipient_name, r
 
 while ($line = $result->fetchAssoc()) {
 
-    $date = strftime($lang_date['lastcom'], $line['date']);
+    $date = date($lang_date['lastcom'], $line['date']);
     list($line['ip_detail']) = CPGPluginAPI::filter('ip_information', array('', $line['sender_ip']));
 
     echo <<< EOT

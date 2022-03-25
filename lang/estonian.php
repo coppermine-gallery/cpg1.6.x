@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2022 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * lang/estonian.php
- * @since  1.6.07
+ * @since  1.6.18
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -34,15 +34,15 @@ $lang_day_of_week = array('P', 'E', 'T', 'K', 'N', 'R', 'L');
 $lang_month = array('jaan', 'veebr', 'märts', 'apr', 'mai', 'juuni', 'juuli', 'aug', 'sept', 'okt', 'nov', 'dets');
 
 // The various date formats
-// See http://www.php.net/manual/en/function.strftime.php to define the variable below
-$lang_date['album'] = '%B %d, %Y';
-$lang_date['lastcom'] = '%m/%d/%y kell %H:%M';
-$lang_date['lastup'] = '%B %d, %Y';
-$lang_date['register'] = '%B %d, %Y';
-$lang_date['lasthit'] = '%B %d, %Y kell %I:%M %p';
-$lang_date['comment'] = '%B %d, %Y kell %I:%M %p';
-$lang_date['log'] = '%B %d, %Y kell %I:%M %p';
-$lang_date['scientific'] = '%Y-%m-%d %H:%M:%S';
+// See https://www.php.net/manual/en/datetime.format.php to define the date format strings below
+$lang_date['album'] = 'F d, Y';
+$lang_date['lastcom'] = 'm/d/y \k\e\l\l H:i';
+$lang_date['lastup'] = 'F d, Y';
+$lang_date['register'] = 'F d, Y';
+$lang_date['lasthit'] = 'F d, Y \k\e\l\l h:i A';
+$lang_date['comment'] = 'F d, Y \k\e\l\l h:i A';
+$lang_date['log'] = 'F d, Y \k\e\l\l h:i A';
+$lang_date['scientific'] = 'Y-m-d H:i:s';
 
 // For the word censor
 $lang_bad_words = array('*fuck*', 'asshole', 'assramer', 'assrammer', 'bitch*', 'c0ck', 'clits', 'Cock', 'cum', 'cunt*', 'dago', 'daygo', 'dego', 'dick*', 'dildo', 'fanculo', 'feces', 'foreskin', 'Fu\(*', 'fuk*', 'honkey', 'hore', 'injun', 'kike', 'lesbo', 'masturbat*', 'motherfucker', 'nazis', 'nigger*', 'nutsack','penis', 'phuck', 'poop', 'pussy', 'scrotum', 'shit', 'slut', 'titties', 'titty', 'twaty', 'wank*', 'whore', 'wop*');

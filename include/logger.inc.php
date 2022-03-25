@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2022 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/logger.inc.php
- * @since  1.6.16
+ * @since  1.6.18
  */
 defined('IN_COPPERMINE') or die('Not in Coppermine...');
 
@@ -52,7 +52,7 @@ function log_write($text, $log = null)
     }
 
     if (!isset($lang_date['log'])) {
-        $lang_date['log'] = '%Y-%m-%d %H:%M:%S';
+        $lang_date['log'] = 'Y-m-d H:i:s';
     }
 
     $fp = fopen($log, 'a');

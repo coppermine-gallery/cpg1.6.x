@@ -4,14 +4,14 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2022 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/init.inc.php
- * @since  1.6.17
+ * @since  1.6.18
  */
 
-define('COPPERMINE_VERSION', '1.6.17');
+define('COPPERMINE_VERSION', '1.6.18');
 define('COPPERMINE_VERSION_STATUS', 'stable');
 // Define path to jQuery for this version of Coppermine
 define('CPG_JQUERY_VERSION', 'js/jquery-1.12.4.js');

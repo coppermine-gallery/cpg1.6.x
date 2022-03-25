@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2022 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * stat_details.php
- * @since  1.6.15
+ * @since  1.6.18
  */
 
 // Todo list (stuff the hasn't been implemented yet):
@@ -117,14 +117,14 @@ $icon_array['ok'] = cpg_fetch_icon('ok',2);
             $date_display_fmt = $lang_date['log'];
         } elseif($get_date_display == 3) {
             $date_display = 3;
-            $date_display_fmt = '%Y-%m-%d %H:%M:%S';
+            $date_display_fmt = 'Y-m-d H:i:s';
         } else {
             $date_display = 4;
-            $date_display_fmt = '%Y-%m-%d';
+            $date_display_fmt = 'Y-m-d';
         }
     } else {
         $date_display = 4;
-        $date_display_fmt = '%Y-%m-%d';
+        $date_display_fmt = 'Y-m-d';
     }
 
     //if ($_GET['mode'] == 'fullscreen') {
@@ -460,7 +460,7 @@ EOT;
               if ($loop_counter > 1) {
                   $loop_counter = 0;
               }
-              $row['sdate'] = strftime($date_display_fmt,localised_timestamp($row['sdate']));
+              $row['sdate'] = date($date_display_fmt,localised_timestamp($row['sdate']));
               $is_internal = '';
               $row['referer'] = rawurldecode($row['referer']);
               // is it an internal reference (most should be)?
@@ -558,11 +558,11 @@ EOT;
   $date_display_2_selected = ($date_display == '2') ? 'selected="selected"' : '';
   $date_display_3_selected = ($date_display == '3') ? 'selected="selected"' : '';
   $date_display_4_selected = ($date_display == '4') ? 'selected="selected"' : '';
-  $localized_time[0] = strftime($lang_date['album'],localised_timestamp(time()));
-  $localized_time[1] = strftime($lang_date['lastcom'],localised_timestamp(time()));
-  $localized_time[2] = strftime($lang_date['log'],localised_timestamp(time()));
-  $localized_time[3] = strftime('%Y-%m-%d %H:%M:%S',localised_timestamp(time()));
-  $localized_time[4] = strftime('%Y-%m-%d',localised_timestamp(time()));
+  $localized_time[0] = date($lang_date['album'],localised_timestamp(time()));
+  $localized_time[1] = date($lang_date['lastcom'],localised_timestamp(time()));
+  $localized_time[2] = date($lang_date['log'],localised_timestamp(time()));
+  $localized_time[3] = date('Y-m-d H:i:s',localised_timestamp(time()));
+  $localized_time[4] = date('Y-m-d',localised_timestamp(time()));
   foreach ($amount_allowed as $key) {
   }
   print <<< EOT
