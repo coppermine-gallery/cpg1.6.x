@@ -5261,7 +5261,7 @@
 	</element>
 	<element>
 		<fullpath>include/database/mysqli/dbase.inc.php</fullpath>
-		<version>1.6.04</version>
+		<version>1.6.19</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>84ed66a5836cb7312f9e65854683add0</hash>

@@ -11,7 +11,7 @@
  * @since  1.6.18
  */
 
-define('COPPERMINE_VERSION', '1.6.18');
+define('COPPERMINE_VERSION', '1.6.19');
 define('COPPERMINE_VERSION_STATUS', 'stable');
 // Define path to jQuery for this version of Coppermine
 define('CPG_JQUERY_VERSION', 'js/jquery-1.12.4.js');

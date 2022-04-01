@@ -7,7 +7,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * CHANGELOG.txt
- * @since  1.6.18
+ * @since  1.6.19
  */
 Changelog
 =========
@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2022-04-01 [B] Reset failure report mode in mysqli for PHP 8.1 {ron4mac}
 2022-03-25 [M] Updates for PHP 8.1.x; remove use of strftime() {ron4mac}
 2022-02-02 [B] Handle failure to get image dimensions in thumb updater tool {ron4mac}
 2021-11-22 [B] Allow ratings from different logged in users regardless of IP address {ron4mac}

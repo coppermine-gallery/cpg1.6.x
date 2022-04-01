@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2022 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/database/mysqli/dbase.inc.php
- * @since  1.6.04
+ * @since  1.6.19
  */
 
 /** MySQLi database implementation **/
@@ -27,6 +27,9 @@ class CPG_Dbase
 		$sp = explode(':', $cfg['dbserver']);
 		if (empty($sp[1])) $sp[1] = null;
 		if (isset($cfg['dbport'])) $sp[1] = $cfg['dbport'];
+
+		// needed for PHP 8.1 and later
+		mysqli_report(MYSQLI_REPORT_OFF);
 
 		$obj = new mysqli($sp[0], $cfg['dbuser'], $cfg['dbpass'], $cfg['dbname'], $sp[1]);
 
