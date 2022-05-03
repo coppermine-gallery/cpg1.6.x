@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2022 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * bridgemgr.php
- * @since  1.6.08
+ * @since  1.6.19
  */
 
 define('IN_COPPERMINE', true);
@@ -21,11 +21,13 @@ require('include/init.inc.php');
 function write_to_db($step) {
     global $BRIDGE,$CONFIG,$default_bridge_data,$lang_bridgemgr_php, $posted_var, $LINEBREAK;
     $error = 0;
+    $return = [];
     // do the check for plausibility of posted data
     foreach($posted_var as $key => $value) { // loop through the posted data -- start
         // filter the post data that doesn't get written
         if (array_key_exists($key, $BRIDGE)) { // post data exists as db key -- start
             // do the lookups
+            if (empty($default_bridge_data[$BRIDGE['short_name']][$key.'_used'])) continue;
             $options = explode(',', $default_bridge_data[$BRIDGE['short_name']][$key.'_used']);
             foreach($options as $key2) {
                 $options[$key2] = trim($options[$key2], ','); // get rid of the delimiters
@@ -110,7 +112,7 @@ function write_to_db($step) {
                 print $key . '|' . $value;
                 print '<br /></span>';
             }
-            if ($return[$key] != '') {
+            if (!empty($return[$key])) {
                 //print '|Error in this key';
             } else {
                 cpg_db_query("UPDATE {$CONFIG['TABLE_BRIDGE']} SET value = '$value' WHERE name = '$key'");
@@ -131,7 +133,7 @@ function write_to_db($step) {
     }
 
     // ouput error messages, if any
-    if (is_array($return)) {
+    if (!empty($return)) {
         starttable(-1, $lang_bridgemgr_php['error_title']);
         print '<tr><td class="tableb" align="left"><ul>';
         foreach($return as $key) {
@@ -147,7 +149,7 @@ function write_to_db($step) {
         $error = 1;
     }
     print '<br />';
-    if ($error != '') {return 'error';}
+    if ($error) {return 'error';}
 }
 
 function cpg_check_allowed_emergency_logon($timestamp,$failures = '') {
@@ -431,7 +433,7 @@ case "settings_path":
         foreach($loop_array as $key) {
             $prefill = cpg_bridge_prefill($BRIDGE['short_name'],$key);
             if ($key == 'relative_path_of_forum_from_webroot') {
-                $minibrowser = '<a href="javascript:;" onclick="MM_openBrWindow(\'minibrowser.php?startfolder='.rawurlencode($prefill).'&amp;parentform='.rawurlencode($step).'&amp;formelementname='.rawurlencode($key).'\',\''.uniqid(rand()) .'\',\'scrollbars=yes,toolbar=no,status=no,locationbar=no,resizable=yes,width=600,height=400\')">' . $folder_icon . '</a>';
+                $minibrowser = '<a href="javascript:;" onclick="MM_openBrWindow(\'minibrowser.php?startfolder='.rawurlencode($prefill?:'').'&amp;parentform='.rawurlencode($step).'&amp;formelementname='.rawurlencode($key).'\',\''.uniqid(rand()) .'\',\'scrollbars=yes,toolbar=no,status=no,locationbar=no,resizable=yes,width=600,height=400\')">' . $folder_icon . '</a>';
             } else {
                 $minibrowser = '';
             }

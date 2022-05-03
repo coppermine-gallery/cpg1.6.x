@@ -2,10 +2,10 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.18</version>
+		<version>1.6.19</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>faa52db17c8783811659c0ca8324b8ce</hash>
+		<hash>fd5a3a5685f1e17019743da38c67c778</hash>
 	</element>
 	<element>
 		<fullpath>LICENSE.txt</fullpath>
@@ -219,10 +219,10 @@
 	</element>
 	<element>
 		<fullpath>bridgemgr.php</fullpath>
-		<version>1.6.08</version>
+		<version>1.6.19</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>1520f0836c9660180b2dcad4feb35321</hash>
+		<hash>1244443af7b96f50c20d479986a07165</hash>
 	</element>
 	<element>
 		<fullpath>calendar.php</fullpath>
@@ -5264,7 +5264,7 @@
 		<version>1.6.19</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>84ed66a5836cb7312f9e65854683add0</hash>
+		<hash>01d04e3cf797275751cd53a6686817aa</hash>
 	</element>
 	<element>
 		<fullpath>include/database/mysqli/install.php</fullpath>
@@ -5371,10 +5371,10 @@
 	</element>
 	<element>
 		<fullpath>include/init.inc.php</fullpath>
-		<version>1.6.18</version>
+		<version>1.6.19</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>bdfef470fcf63d0f51f8943c00a70eb7</hash>
+		<hash>a6ba285bea4b5221f1b5425e6bf198a7</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>

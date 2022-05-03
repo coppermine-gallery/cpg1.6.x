@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/init.inc.php
- * @since  1.6.18
+ * @since  1.6.19
  */
 
 define('COPPERMINE_VERSION', '1.6.19');
