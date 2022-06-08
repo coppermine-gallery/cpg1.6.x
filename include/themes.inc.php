@@ -3283,6 +3283,9 @@ function theme_html_picture()
         $ctrl_offset['swf']=0;
         $ctrl_offset['rm']=0;
         $ctrl_offset_default=45;
+        if ($mime_content['player'] == 'HTMLV' || $mime_content['player'] == 'HTMLA') {
+            $ctrl_offset[$mime_content['extension']] = 0;
+        }
         $ctrl_height = (isset($ctrl_offset[$mime_content['extension']]))?($ctrl_offset[$mime_content['extension']]):$ctrl_offset_default;
         $image_size['whole']='width="'.$CURRENT_PIC_DATA['pwidth'].'" height="'.($CURRENT_PIC_DATA['pheight']+$ctrl_height).'"';
     }
@@ -3350,13 +3353,10 @@ function theme_html_picture()
         //PLUGIN FILTER
         $pic_html = CPGPluginAPI::filter('html_document', $pic_html);
     } else {
-        $autostart = ($CONFIG['media_autostart']) ? ('true'):('false');
-        $autoplay = '" autostart="'.$autostart.'" autoplay="'.$autostart.'" ';
-
         if ($mime_content['player'] == 'HTMLA') {
-            $pic_html  = '<audio controls="true" src="' . $picture_url . $autoplay . '></audio>';
+            $pic_html = '<audio controls ' . ($CONFIG['media_autostart'] ? 'autoplay ' : '') . 'src="' . $picture_url . '"></audio>';
         } elseif ($mime_content['player'] == 'HTMLV') {
-            $pic_html  = '<div class="video"><video controls="true" src="' . $picture_url . $autoplay . 'style="max-width:100%"></video></div>';
+            $pic_html = '<div class="video"><video controls ' . ($CONFIG['media_autostart'] ? 'autoplay ' : '') . 'src="' . $picture_url . '" style="max-width:100%"></video></div>';
         } else {
 
             $players['WMP'] = array('id' => 'MediaPlayer',
@@ -3400,7 +3400,7 @@ function theme_html_picture()
             }
 
             $pic_html  = '<object id="'.$player['id'].'" '.$player['data'].$player['clsid'].$player['codebase'].$player['mime'].$image_size['whole'].'>';
-            $pic_html .= "<param name=\"autostart\" value=\"$autostart\" /><param name=\"src\" value=\"". $picture_url . "\" />";
+            $pic_html .= "<param name=\"autostart\" value=\"".($CONFIG['media_autostart'] ? 'true' : 'false')."\" /><param name=\"src\" value=\"". $picture_url . "\" />";
             $pic_html .= '</object><br />' . $LINEBREAK;
         }
 
