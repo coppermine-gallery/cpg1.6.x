@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/themes.inc.php
- * @since  1.6.17
+ * @since  1.6.20
  */
 
 /////////////////////////////////////////////////////////////////

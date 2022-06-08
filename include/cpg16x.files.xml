@@ -2,7 +2,7 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.19</version>
+		<version>1.6.20</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>fd5a3a5685f1e17019743da38c67c778</hash>
@@ -5581,7 +5581,7 @@
 	</element>
 	<element>
 		<fullpath>include/themes.inc.php</fullpath>
-		<version>1.6.17</version>
+		<version>1.6.20</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>11adc91d8ba1079a463099ae562d2984</hash>
