@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2022-06-08 [M] More updates for PHP 8.1.x deprecations {ron4mac}
 2022-06-08 [O,C] HTML5 audio/video player: removed "autostart" parameter; set control offset to "0" {eenemeenemuu}
 2022-05-03 [B] Correct failure in bridgemgr for PHP 8 {ron4mac}
 2022-04-01 [B] Reset failure report mode in mysqli for PHP 8.1 {ron4mac}

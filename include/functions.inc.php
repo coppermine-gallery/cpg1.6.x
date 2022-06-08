@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/functions.inc.php
- * @since  1.6.18
+ * @since  1.6.20
  */
 
 if (!function_exists('stripos')) {
@@ -4257,6 +4257,7 @@ function languageSelect($parameter)
     }
     $results->free();
 
+	$lang_language_data = [];
     // get list of available languages
     $results = cpg_db_query("SELECT * FROM {$CONFIG['TABLE_LANGUAGE']}");
     while ( ($row = $results->fetchArray()) ) {

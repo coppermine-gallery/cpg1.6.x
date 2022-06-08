@@ -1,19 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
-
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2022 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * langmgr.php
+ * @since  1.6.20
+ */
 define('IN_COPPERMINE', true);
 define('ADMIN_PHP', true);
 define('LANGMGR_PHP', true);
@@ -240,7 +236,7 @@ print <<< EOT
     </tr>
 EOT;
 $loopCounter = 0;
-$cpg_version_determination = 'Coppermine' . ' ' . 'version:';
+$cpg_version_determination = ' * @since ';
 foreach ($lang_language_data as $language) {
     $availability_output = '';
     $file_lookup_errors = 0;
@@ -267,8 +263,8 @@ foreach ($lang_language_data as $language) {
                 $language['version'] = substr($language['version'],0,$double_slash_position);
             }
             $language['version'] = trim(str_replace($cpg_version_determination, '', $language['version']));
-            $language['version'] = trim(str_replace('#', '', $language['version']));
-            $language['version'] = trim(substr($language['version'], 0, strpos($language['version'], '$')));
+            //$language['version'] = trim(str_replace('#', '', $language['version']));
+            $language['version'] = trim(substr($language['version'], 0, strpos($language['version'], "\n")));
             if (strlen($language['version']) > 6) { // Version numbers larger than 6 are not likely at all
                 $language['version'] = 0;
             }

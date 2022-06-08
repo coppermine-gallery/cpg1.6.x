@@ -5322,7 +5322,7 @@
 	</element>
 	<element>
 		<fullpath>include/functions.inc.php</fullpath>
-		<version>1.6.18</version>
+		<version>1.6.20</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>ed590c45811e32ab24bdf8058b7115c0</hash>
@@ -5439,7 +5439,7 @@
 	</element>
 	<element>
 		<fullpath>include/lib.xml.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.20</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>d9879d6785ed9082e5466a8e2c74ac94</hash>
@@ -7228,7 +7228,7 @@
 	</element>
 	<element>
 		<fullpath>langmgr.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.20</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>df6f01df48a0d520fb85bea79129be69</hash>
@@ -7901,7 +7901,7 @@
 	</element>
 	<element>
 		<fullpath>register.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.20</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>2b6df08114f5797399a8ccd5d7133e81</hash>

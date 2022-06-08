@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * register.php
+ * @since  1.6.20
+ */
 
 define('IN_COPPERMINE', true);
 define('REGISTER_PHP', true);
@@ -486,7 +483,7 @@ function check_user_info(&$error)
     $sql = "SELECT null FROM {$CONFIG['TABLE_USERS']} WHERE user_name = '$user_name'";
     $result = cpg_db_query($sql);
 
-    if ($result->numRows(free)) {
+    if ($result->numRows(true)) {
         $error = '<li style="list-style-image:url(images/icons/stop.png)">' . $lang_register_php['err_user_exists'] . '</li>';
         return false;
     }
