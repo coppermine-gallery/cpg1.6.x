@@ -5425,7 +5425,7 @@
 	</element>
 	<element>
 		<fullpath>include/iptc.inc.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.20</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>c0e68c82e0ebc6949385fc6947e8c5f2</hash>
