@@ -5,7 +5,7 @@
 		<version>1.6.20</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>fd5a3a5685f1e17019743da38c67c778</hash>
+		<hash>a7b35bb795ecd5ecf167ad42c4ac5bbd</hash>
 	</element>
 	<element>
 		<fullpath>LICENSE.txt</fullpath>
@@ -5325,7 +5325,7 @@
 		<version>1.6.20</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>ed590c45811e32ab24bdf8058b7115c0</hash>
+		<hash>f8690a2e0a43eb97881286df62d943e1</hash>
 	</element>
 	<element>
 		<fullpath>include/imageObjectGD.class.php</fullpath>
@@ -5371,10 +5371,10 @@
 	</element>
 	<element>
 		<fullpath>include/init.inc.php</fullpath>
-		<version>1.6.19</version>
+		<version>1.6.20</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>a6ba285bea4b5221f1b5425e6bf198a7</hash>
+		<hash>8eb3102e7e215fa808a4861aca8fb8f5</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
@@ -5428,7 +5428,7 @@
 		<version>1.6.20</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>c0e68c82e0ebc6949385fc6947e8c5f2</hash>
+		<hash>35cc5fb8bb6938627e8b2dbef1f7eb72</hash>
 	</element>
 	<element>
 		<fullpath>include/keyword.inc.php</fullpath>
@@ -5442,7 +5442,7 @@
 		<version>1.6.20</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>d9879d6785ed9082e5466a8e2c74ac94</hash>
+		<hash>ac7ba7d9512f4dc5963bcbc11d96b3a4</hash>
 	</element>
 	<element>
 		<fullpath>include/log_header.inc.php</fullpath>
@@ -5584,7 +5584,7 @@
 		<version>1.6.20</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>11adc91d8ba1079a463099ae562d2984</hash>
+		<hash>22537202215f220e80e9c69e1d3e1c20</hash>
 	</element>
 	<element>
 		<fullpath>include/tool.class.php</fullpath>
@@ -7196,7 +7196,7 @@
 		<version>1.6.20</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>89a6ef29d3fb138b47632d2acb8d28b0</hash>
+		<hash>7c892499b6e6071402f7e5f36bb8b0c6</hash>
 	</element>
 	<element>
 		<fullpath>lang/estonian.php</fullpath>
@@ -7210,7 +7210,7 @@
 		<version>1.6.20</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>66748b5d2d27cc8f2d52cdfd8fa198ea</hash>
+		<hash>d9802a3d1cae50e182ce142b9e104a45</hash>
 	</element>
 	<element>
 		<fullpath>lang/german.php</fullpath>
@@ -7224,7 +7224,7 @@
 		<version>1.6.20</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>0445d0e2cad89d65cd8bab24c755559c</hash>
+		<hash>e5f3fa2f7d035c8411efacb3bcdd31c5</hash>
 	</element>
 	<element>
 		<fullpath>lang_check.php</fullpath>
@@ -7238,7 +7238,7 @@
 		<version>1.6.20</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>df6f01df48a0d520fb85bea79129be69</hash>
+		<hash>34a18735f5faf68ad00a886ebf27ef93</hash>
 	</element>
 	<element>
 		<fullpath>login.php</fullpath>
@@ -7911,7 +7911,7 @@
 		<version>1.6.20</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>2b6df08114f5797399a8ccd5d7133e81</hash>
+		<hash>3eb26be5c338666c8273951a2e8bab7e</hash>
 	</element>
 	<element>
 		<fullpath>relocate_server.php</fullpath>
