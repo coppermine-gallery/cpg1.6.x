@@ -7193,7 +7193,7 @@
 	</element>
 	<element>
 		<fullpath>lang/english.php</fullpath>
-		<version>1.6.18</version>
+		<version>1.6.20</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>89a6ef29d3fb138b47632d2acb8d28b0</hash>
@@ -7207,7 +7207,7 @@
 	</element>
 	<element>
 		<fullpath>lang/french.php</fullpath>
-		<version>1.6.18</version>
+		<version>1.6.20</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>66748b5d2d27cc8f2d52cdfd8fa198ea</hash>
@@ -7215,6 +7215,13 @@
 	<element>
 		<fullpath>lang/german.php</fullpath>
 		<version>1.6.18</version>
+		<status>optional</status>
+		<permission>read</permission>
+		<hash>0445d0e2cad89d65cd8bab24c755559c</hash>
+	</element>
+	<element>
+		<fullpath>lang/spanish.php</fullpath>
+		<version>1.6.20</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>0445d0e2cad89d65cd8bab24c755559c</hash>

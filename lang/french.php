@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * lang/french.php
- * @since  1.6.18
+ * @since  1.6.20
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -41,7 +41,7 @@ $lang_date['lastup'] = 'd F Y';
 $lang_date['register'] = 'd F Y';
 $lang_date['lasthit'] = 'D d F Y \à H:i';
 $lang_date['comment'] = 'D d F Y \à H:i';
-$lang_date['log'] = 'F d, Y \a\t h:i A';
+$lang_date['log'] = 'F d, Y \à h:i A';
 $lang_date['scientific'] = 'd-m-Y H:i:s';
 
 // For the word censor

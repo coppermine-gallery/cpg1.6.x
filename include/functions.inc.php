@@ -541,6 +541,8 @@ function localised_date($timestamp, $datefmt)
     global $lang_month, $lang_day_of_week;
 
     $timestamp = localised_timestamp($timestamp);
+    // early use (logging) may not yet have language
+	if (empty($lang_day_of_week)) return date(DATE_RFC822, $timestamp);
 
 	$dow = '\\' . implode('\\', str_split($lang_day_of_week[(int)date('w', $timestamp)]));
     $frmt = str_replace(['l','D'], '+', $datefmt);

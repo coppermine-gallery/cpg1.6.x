@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * lang/english.php
- * @since  1.6.18
+ * @since  1.6.20
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -36,12 +36,12 @@ $lang_month = array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep
 // The various date formats
 // See https://www.php.net/manual/en/datetime.format.php to define the date format strings below
 $lang_date['album'] = 'F d, Y';
-$lang_date['lastcom'] = 'm/d/y at H:i';
+$lang_date['lastcom'] = 'm/d/y \a\t H:i';
 $lang_date['lastup'] = 'F d, Y';
 $lang_date['register'] = 'F d, Y';
-$lang_date['lasthit'] = 'F d, Y at h:i A';
-$lang_date['comment'] = 'F d, Y at h:i A';
-$lang_date['log'] = 'F d, Y at h:i A';
+$lang_date['lasthit'] = 'F d, Y \a\t h:i A';
+$lang_date['comment'] = 'F d, Y \a\t h:i A';
+$lang_date['log'] = 'F d, Y \a\t h:i A';
 $lang_date['scientific'] = 'Y-m-d H:i:s';
 
 // For the word censor
