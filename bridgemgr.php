@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * bridgemgr.php
- * @since  1.6.19
+ * @since  1.6.21
  */
 
 define('IN_COPPERMINE', true);
@@ -651,7 +651,7 @@ EOT;
                         $mandatory_fields_missing++;
                     }
                     $explode = explode(',', $default_bridge_data[$BRIDGE['short_name']][$key.'_used']);
-                    if ($explode[0] == radio && ($value != $explode[1] && $value != $explode[2])) {
+                    if ($explode[0] == 'radio' && ($value != $explode[1] && $value != $explode[2])) {
                         printf(' ('.$lang_bridgemgr_php['error_either_be'].')',$explode[1],$explode[2]);
                         $mandatory_fields_missing++;
                     }

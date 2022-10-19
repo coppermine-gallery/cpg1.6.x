@@ -2,7 +2,7 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.20</version>
+		<version>1.6.21</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>a7b35bb795ecd5ecf167ad42c4ac5bbd</hash>
@@ -219,7 +219,7 @@
 	</element>
 	<element>
 		<fullpath>bridgemgr.php</fullpath>
-		<version>1.6.19</version>
+		<version>1.6.21</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>1244443af7b96f50c20d479986a07165</hash>
