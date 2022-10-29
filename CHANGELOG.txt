@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2022-10-28 [M] Fail more gracefully from database connection error {ron4mac}
 2022-10-18 [B] Correct typo in bridgemgr.php (thanks {bembi64}) {ron4mac}
 2022-08-01 [M,B] Correct PHP8 error with IPTC processing {ron4mac}
 2022-06-08 [M] More updates for PHP 8.1.x deprecations {ron4mac}

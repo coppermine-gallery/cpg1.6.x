@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/init.inc.php
- * @since  1.6.20
+ * @since  1.6.21
  */
 
 define('COPPERMINE_VERSION', '1.6.20');
@@ -169,8 +169,8 @@ require 'include/database/'.$db_ext.'/dbase.inc.php';
 $CPGDB = new CPG_Dbase($CONFIG);
 
 if (!$CPGDB->isConnected()) {
-    log_write("Unable to connect to database: " . $CPGDB->getError(), CPG_DATABASE_LOG);
-    die('<strong>Coppermine critical error</strong>:<br />Unable to connect to database !<br /><br />'.$CPGDB->db_type.' said: <strong>' . $CPGDB->getError() . '</strong>');
+    log_write("Unable to connect to database: " . $CPGDB->getError(false,true), CPG_DATABASE_LOG);
+    die('<strong>Coppermine critical error</strong>:<br />Unable to connect to database !<br /><br />'.$CPGDB->db_type.' said: <strong>' . $CPGDB->getError(false,true) . '</strong>');
 }
 
 // Retrieve DB stored configuration
