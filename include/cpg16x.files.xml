@@ -5,7 +5,7 @@
 		<version>1.6.21</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>a7b35bb795ecd5ecf167ad42c4ac5bbd</hash>
+		<hash>237b2b66a7931c1bb35d82ffa0601112</hash>
 	</element>
 	<element>
 		<fullpath>LICENSE.txt</fullpath>
@@ -222,7 +222,7 @@
 		<version>1.6.21</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>1244443af7b96f50c20d479986a07165</hash>
+		<hash>7d6af7c319d8ceddf5b64b64340dc817</hash>
 	</element>
 	<element>
 		<fullpath>calendar.php</fullpath>
@@ -5374,7 +5374,7 @@
 		<version>1.6.21</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>8eb3102e7e215fa808a4861aca8fb8f5</hash>
+		<hash>98f52add7107d333613418e946cd1483</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
@@ -7224,7 +7224,7 @@
 		<version>1.6.20</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>e5f3fa2f7d035c8411efacb3bcdd31c5</hash>
+		<hash>eb4133d22e5414cbb8cc766e912e94e0</hash>
 	</element>
 	<element>
 		<fullpath>lang_check.php</fullpath>
