@@ -2,7 +2,7 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.21</version>
+		<version>1.6.22</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>237b2b66a7931c1bb35d82ffa0601112</hash>
@@ -7700,14 +7700,14 @@
 	</element>
 	<element>
 		<fullpath>plugins/upload_h5a/js/upload.js</fullpath>
-		<version>1.6.09</version>
+		<version>1.6.22</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>fa4a31159cb12f9d94f523e8cd34011d</hash>
 	</element>
 	<element>
 		<fullpath>plugins/upload_h5a/js/upload.min.js</fullpath>
-		<version>1.6.09</version>
+		<version>1.6.22</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>4acf51bbdd69d65fc9ac4edd8edd8046</hash>
