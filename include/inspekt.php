@@ -738,7 +738,12 @@ abstract class Inspekt
      */
     public static function isIp($value)
     {
-        return (bool) ip2long($value);
+		    if ((bool) ip2long($value))
+		    	return true;
+		    if ((bool) inet_pton($value))
+		    	return true;
+		    else
+		    	return false;
     }
 
     /**
