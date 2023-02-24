@@ -280,12 +280,15 @@ if ($superCage->post->keyExists('submit')) {
     foreach ($posted_ban_id_array as $posted_ban_id) {
 
         // Sanitize the data --- start
+        // Sanitize the data --- start
         $post_user_name  = $superCage->post->getEscaped('user_name_'.$posted_ban_id);
         $post_temp_array = $superCage->post->getMatched('email_'.$posted_ban_id, '/^([a-zA-Z0-9]((\.|\-|\_){0,1}[a-zA-Z0-9]){0,})@([a-zA-Z]((\.|\-){0,1}[a-zA-Z0-9]){0,})\.([a-zA-Z]{2,4})$/') ?: [null];
         $post_email      = $post_temp_array[0];
         $post_temp_array = $superCage->post->getMatched('ip_addr_'.$posted_ban_id, '/^\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b$/') ?: [null];
         $post_ip         = $post_temp_array[0];
-        $post_temp_array = $superCage->post->getMatched('expiration_'.$posted_ban_id, '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/');
+		$post_temp_array = $superCage->post->getMatched('ip_addr_'.$posted_ban_id, '/^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/') ?: [null];
+		$post_ipv6		 = $post_temp_array[0];
+		$post_ip         = $_POST['post_ip'] ?? $_POST['post_ip6'];
 
         list($year, $month, $day) = empty($post_temp_array[0]) ? [1000,0,0] : explode('-', $post_temp_array[0]);
 
