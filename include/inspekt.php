@@ -664,7 +664,12 @@ abstract class Inspekt
         }
 
         // determine whether the input is formed as an IP address
-        $status = self::isIp($value);
+	if ( self::isIp($value) or self::isIpv6($value) ) {
+		$status = true;
+	}
+	else {
+	$status = false;
+	}
 
         // if the input looks like an IP address
         if ($status) {
