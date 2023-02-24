@@ -522,7 +522,7 @@ class Inspekt_Cage
         if (!$this->keyExists($key)) {
             return false;
         }
-        if (Inspekt::isIp($this->_getValue($key))) {
+        if (Inspekt::isIp($this->_getValue($key)) or Inspekt::isIpv6($this->_getValue($key)))
             return $this->_getValue($key);
         }
 
