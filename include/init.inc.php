@@ -194,7 +194,7 @@ if ($CONFIG['log_mode']) {
 }
 
 // Record User's IP address
-$raw_ip = $superCage->server->testIp('REMOTE_ADDR') ? $superCage->server->getEscaped('REMOTE_ADDR') : '0.0.0.0';
+$raw_ip = $superCage->server->testIp('REMOTE_ADDR') ? $superCage->server->getEscaped('REMOTE_ADDR') : '255.255.255.255';
 
 if ($superCage->server->testIp('HTTP_CLIENT_IP')) {
     $hdr_ip = $superCage->server->getEscaped('HTTP_CLIENT_IP');
