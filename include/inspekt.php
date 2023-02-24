@@ -743,7 +743,7 @@ abstract class Inspekt
      */
     public static function isIp($value)
     {
-	    return (bool) ip2long($value);
+        return (bool) ip2long($value);
     }
 	
     /**
@@ -757,8 +757,7 @@ abstract class Inspekt
      */
  public static function isIpv6($value)
     {
-	    return (bool) inet_pton($value);
-
+        return (bool) inet_pton($value);
     }
 	
 
