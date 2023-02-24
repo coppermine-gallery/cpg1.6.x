@@ -287,7 +287,7 @@ if ($superCage->post->keyExists('submit')) {
         $post_ip         = $post_temp_array[0];
 	$post_temp_array = $superCage->post->getMatched('ip_addr_'.$posted_ban_id, '/^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/') ?: [null];
 	$post_ipv6		 = $post_temp_array[0];
-	$post_ip         = $_POST['post_ip'] ?? $_POST['post_ip6'] ?: [null];
+	$post_ip         = $post_ip ?? $post_ip6 ?: [null];
 	
 	$post_temp_array = $superCage->post->getMatched('expiration_'.$posted_ban_id, '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/');    
         list($year, $month, $day) = empty($post_temp_array[0]) ? [1000,0,0] : explode('-', $post_temp_array[0]);
