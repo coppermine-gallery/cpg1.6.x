@@ -728,7 +728,7 @@ abstract class Inspekt
     }
 
     /**
-     * Returns TRUE if value is a valid IP format, FALSE otherwise.
+     * Returns TRUE if value is a valid IPv4 format, FALSE otherwise.
      *
      * @param mixed $value
      * @return boolean
@@ -738,13 +738,30 @@ abstract class Inspekt
      */
     public static function isIp($value)
     {
-		    if ((bool) ip2long($value))
+	    return (bool) ip2long($value);
+		    if ()
 		    	return true;
 		    if ((bool) inet_pton($value))
 		    	return true;
 		    else
 		    	return false;
     }
+	
+    /**
+     * Returns TRUE if value is a valid IPv6 format, FALSE otherwise.
+     *
+     * @param mixed $value
+     * @return boolean
+     *
+     * @tag validator
+     * @static
+     */
+ public static function isIpv6($value)
+    {
+	    return (bool) inet_pton($value);
+
+    }
+	
 
     /**
      * Returns TRUE if value is less than $max, FALSE otherwise.
