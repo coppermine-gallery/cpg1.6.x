@@ -280,7 +280,6 @@ if ($superCage->post->keyExists('submit')) {
     foreach ($posted_ban_id_array as $posted_ban_id) {
 
         // Sanitize the data --- start
-        // Sanitize the data --- start
         $post_user_name  = $superCage->post->getEscaped('user_name_'.$posted_ban_id);
         $post_temp_array = $superCage->post->getMatched('email_'.$posted_ban_id, '/^([a-zA-Z0-9]((\.|\-|\_){0,1}[a-zA-Z0-9]){0,})@([a-zA-Z]((\.|\-){0,1}[a-zA-Z0-9]){0,})\.([a-zA-Z]{2,4})$/') ?: [null];
         $post_email      = $post_temp_array[0];
