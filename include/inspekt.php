@@ -1,18 +1,15 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * include/inspekt.php
+ * @since  1.6.22
+ */
 
 /**
  * Inspekt - main source file
@@ -738,7 +735,18 @@ abstract class Inspekt
      */
     public static function isIp($value)
     {
-        return (bool) ip2long($value);
+    	if (ip2long($value)) return true;
+    	// check ipv6 compatibility mode
+    	if (strpos($value, '::') === 0) {
+    		if (ip2long(substr($value, strrpos($value, ':')+1))) return true;
+    	}
+    	// check for ipv6
+    	$hexs = explode(':', $value);
+    	if (count($hexs) < 3) return false;
+    	foreach ($hexs as $hex) {
+    		if ($hex && !preg_match('#^[0-9a-fA-F]{1,4}$#', $hex)) return false;
+    	}
+        return true;
     }
 
     /**

@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * banning.php
- * @since  1.6.16
+ * @since  1.6.22
  */
 
 define('IN_COPPERMINE', true);
@@ -240,7 +240,7 @@ EOT;
                         <div id="email_{$row['ban_id']}_warning" class="cpg_message_validation formFieldWarning" style="display:none;">{$lang_banning_php['email_field_invalid']}</div>
                     </td>
                     <td valign="top">
-                        <input type="text" class="textinput ip_field" style="width: 80%" size="15" maxlength="15" name="ip_addr_{$row['ban_id']}" id="ip_addr_{$row['ban_id']}" value="{$row['ip_addr']}" />{$row['ip_detail']}
+                        <input type="text" class="textinput ip_field" style="width: 80%" size="15" maxlength="39" name="ip_addr_{$row['ban_id']}" id="ip_addr_{$row['ban_id']}" value="{$row['ip_addr']}" />{$row['ip_detail']}
                         <div id="ip_addr_{$row['ban_id']}_warning" class="cpg_message_validation formFieldWarning" style="display:none;">{$lang_banning_php['ip_address_field_invalid']}</div>
                     </td>
                     <td valign="top">
@@ -283,8 +283,8 @@ if ($superCage->post->keyExists('submit')) {
         $post_user_name  = $superCage->post->getEscaped('user_name_'.$posted_ban_id);
         $post_temp_array = $superCage->post->getMatched('email_'.$posted_ban_id, '/^([a-zA-Z0-9]((\.|\-|\_){0,1}[a-zA-Z0-9]){0,})@([a-zA-Z]((\.|\-){0,1}[a-zA-Z0-9]){0,})\.([a-zA-Z]{2,4})$/') ?: [null];
         $post_email      = $post_temp_array[0];
-        $post_temp_array = $superCage->post->getMatched('ip_addr_'.$posted_ban_id, '/^\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b$/') ?: [null];
-        $post_ip         = $post_temp_array[0];
+        $tmp_ip = trim($superCage->post->getEscaped('ip_addr_'.$posted_ban_id));
+        $post_ip = Inspekt::isIp($tmp_ip) ? $tmp_ip : null;
         $post_temp_array = $superCage->post->getMatched('expiration_'.$posted_ban_id, '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/');
 
         list($year, $month, $day) = empty($post_temp_array[0]) ? [1000,0,0] : explode('-', $post_temp_array[0]);
@@ -382,8 +382,8 @@ if ($superCage->post->keyExists('submit')) {
     $post_user_name  = $superCage->post->getEscaped('add_user_name');
     $post_temp_array = $superCage->post->getMatched('add_email', '/^([a-zA-Z0-9]((\.|\-|\_){0,1}[a-zA-Z0-9]){0,})@([a-zA-Z]((\.|\-){0,1}[a-zA-Z0-9]){0,})\.([a-zA-Z]{2,4})$/') ?: [null];
     $post_email      = $post_temp_array[0];
-    $post_temp_array = $superCage->post->getMatched('add_ip', '/^\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b$/') ?: [null];
-    $post_ip         = $post_temp_array[0];
+    $tmp_ip = trim($superCage->post->getEscaped('add_ip'));
+    $post_ip = Inspekt::isIp($tmp_ip) ? $tmp_ip : null;
     $post_temp_array = $superCage->post->getMatched('add_expires', '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/');
 
     list($year, $month, $day) = empty($post_temp_array[0]) ? [1000,0,0] : explode('-', $post_temp_array[0]);
@@ -592,7 +592,7 @@ echo <<<EOT
             <div id="add_email_warning" class="cpg_message_validation formFieldWarning" style="display:none;">{$lang_banning_php['email_field_invalid']}</div>
         </td>
         <td class="tablef" valign="top">
-            <input type="text" class="textinput ip_field" style="width: 100%" name="add_ip" id="add_ip" value="{$comm_info['msg_ip']}" size="15" maxlength="15" title="{$lang_banning_php['ip_address']}" />
+            <input type="text" class="textinput ip_field" style="width: 100%" name="add_ip" id="add_ip" value="{$comm_info['msg_ip']}" size="15" maxlength="39" title="{$lang_banning_php['ip_address']}" />
             <div id="add_ip_warning" class="cpg_message_validation formFieldWarning" style="display:none;">{$lang_banning_php['ip_address_field_invalid']}</div>
         </td>
         <td class="tablef" valign="top">
@@ -642,7 +642,7 @@ print <<< EOT
             <strong>{$lang_banning_php['lookup_ip']}</strong>{$help_array['ip_lookup']}
         </td>
         <td class="tableb">
-            <input type="text" class="textinput" size="20" name="ip_lookup" value="{$comm_info['msg_ip']}" maxlength="15" />
+            <input type="text" class="textinput" size="20" name="ip_lookup" value="{$comm_info['msg_ip']}" maxlength="39" />
         </td>
         <td class="tableb">
             <button type="submit" class="button" name="submit" id="submit_lookup" value="{$lang_common['ok']}" style="display:block">{$icon_array['go']}{$lang_common['ok']}</button>

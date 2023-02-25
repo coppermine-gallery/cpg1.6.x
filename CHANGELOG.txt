@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2023-02-25 [M] Add IPv6 compatibility to banning {ron4mac}
 2023-01-16 [B] Provide more error info for some HTML5 upload errors {ron4mac}
 2022-10-28 [M] Fail more gracefully from database connection error {ron4mac}
 2022-10-18 [B] Correct typo in bridgemgr.php (thanks {bembi64}) {ron4mac}

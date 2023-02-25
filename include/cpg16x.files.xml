@@ -105,7 +105,7 @@
 	</element>
 	<element>
 		<fullpath>banning.php</fullpath>
-		<version>1.6.16</version>
+		<version>1.6.22</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>6545094b00fbb8d5941f4e53e90f4d99</hash>
@@ -5378,7 +5378,7 @@
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.22</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>b923732e169d4f7fa70013f2e1f17e78</hash>
@@ -6921,7 +6921,7 @@
 	</element>
 	<element>
 		<fullpath>js/banning.js</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.22</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>297647067d5e63c20889fa625e03fb8a</hash>
