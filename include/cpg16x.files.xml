@@ -5,7 +5,7 @@
 		<version>1.6.22</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>237b2b66a7931c1bb35d82ffa0601112</hash>
+		<hash>1d68f6e058a758d2d9bfda3539540269</hash>
 	</element>
 	<element>
 		<fullpath>LICENSE.txt</fullpath>
@@ -108,7 +108,7 @@
 		<version>1.6.22</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>6545094b00fbb8d5941f4e53e90f4d99</hash>
+		<hash>e37e5c52710078f4bdf409433dfed951</hash>
 	</element>
 	<element>
 		<fullpath>bridge/</fullpath>
@@ -5371,17 +5371,17 @@
 	</element>
 	<element>
 		<fullpath>include/init.inc.php</fullpath>
-		<version>1.6.21</version>
+		<version>1.6.22</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>98f52add7107d333613418e946cd1483</hash>
+		<hash>8abc50700ab0c1d324c9afb83bba1c72</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
 		<version>1.6.22</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>b923732e169d4f7fa70013f2e1f17e78</hash>
+		<hash>41f2f2230f75b606f4f2c120d22bd86a</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt/</fullpath>
@@ -6924,7 +6924,7 @@
 		<version>1.6.22</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>297647067d5e63c20889fa625e03fb8a</hash>
+		<hash>772cda622207a6b09f2d100633db4cff</hash>
 	</element>
 	<element>
 		<fullpath>js/calendar.js</fullpath>
@@ -7703,14 +7703,14 @@
 		<version>1.6.22</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>fa4a31159cb12f9d94f523e8cd34011d</hash>
+		<hash>fa3f485548fa770655020cb4bf78135a</hash>
 	</element>
 	<element>
 		<fullpath>plugins/upload_h5a/js/upload.min.js</fullpath>
 		<version>1.6.22</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>4acf51bbdd69d65fc9ac4edd8edd8046</hash>
+		<hash>b927f22a6ce144ebcec8324b6006c161</hash>
 	</element>
 	<element>
 		<fullpath>plugins/upload_sgl/</fullpath>
