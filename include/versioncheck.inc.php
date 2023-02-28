@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/versioncheck.inc.php
- * @since  1.6.06
+ * @since  1.6.23
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -341,9 +341,6 @@ function cpg_versioncheckPopulateArray($file_data_array) {
                             if ($versionCompare == 0) {
                                 $file_data_array[$file_data_key]['txt_version'] .= $lang_common['ok'];
                             } elseif($versionCompare == -1) {
-
-                              echo'<pre>lt_';var_dump($file_data_array[$file_data_key]['fullpath'],$cpg_version_determination,$file_data_array[$file_data_key]['local_version'],$file_data_array[$file_data_key]['version']);echo'</pre>';
-
                                 $file_data_array[$file_data_key]['txt_version'] .= sprintf($lang_versioncheck_php['outdated'],$file_data_array[$file_data_key]['version']);
                                 $file_data_array[$file_data_key]['comment'] .= $lang_versioncheck_php['review_version'].'. ';
                             } else {
