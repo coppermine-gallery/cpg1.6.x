@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/exif.php
- * @since  1.6.16
+ * @since  1.6.23
  */
 
 /**
@@ -557,7 +557,7 @@ function unRational($data, $type, $intel) {
 	} else if ($top == 0) {
 		$data = 0;
 	} else {
-		$data = $top . '/' . $bottom;
+		$data = $top;	// . '/' . $bottom;
 	}
 	return $data;
 }

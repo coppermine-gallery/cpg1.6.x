@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2023-03-02 [B] Correct for PHP8+ round error in exif parse {ron4mac}
 2023-03-01 [B] Catch PDO query exceptions {ron4mac}
 2023-02-25 [M] Add IPv6 compatibility to banning {ron4mac}
 2023-01-16 [B] Provide more error info for some HTML5 upload errors {ron4mac}
