@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/database/pdo/dbase.inc.php
- * @since  1.6.04
+ * @since  1.6.23
  */
 
 /** PDO database implementation **/
@@ -46,7 +46,13 @@ class CPG_Dbase
 
 	public function query ($sql)
 	{
-		$this->stmt = $this->_instance->query($sql);
+		try {
+			$this->stmt = $this->_instance->query($sql);
+		} catch (PDOException $e) {
+			$this->errnum = $e->getCode();
+			$this->error = $e->getMessage();
+			return false;
+		}
 		if ($this->stmt === true) return true;
 		if ($this->stmt) {
 			return new CPG_DbaseResult($this->stmt);

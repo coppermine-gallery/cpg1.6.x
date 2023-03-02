@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/upgrader.inc.php
- * @since  1.6.06
+ * @since  1.6.23
  */
 defined('IN_COPPERMINE') or die('Not in Coppermine...');
 
@@ -36,7 +36,7 @@ class CPG_Updater
 						'pre' => $r->prerelease,
 						'ball' => $r->zipball_url,
 						'name' => $r->name,
-						'body' => nl2br($r->body)
+						'body' => $this->markd(nl2br(isset($r->body) ? $r->body : ''))
 						);
 				}
 			}
@@ -151,6 +151,15 @@ class CPG_Updater
 			if (preg_match("/^{$p}/", $file)) return true;
 		}
 		return false;
+	}
+
+	private function markd ($txt)
+	{
+		// emplasized
+		$txt = preg_replace('#\*\*(.*)\*\*#','<span class="boldt">$1</span>',$txt);
+		// link
+		$txt = preg_replace('#\[(.*)\]\((.*)\)#','<a href="$2" target="_blank">$1</a>',$txt);
+		return $txt;
 	}
 
 	private function logIt ($msg)

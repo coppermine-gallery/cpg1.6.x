@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * updater.php
- * @since  1.6.14
+ * @since  1.6.23
  */
 
 define('IN_COPPERMINE', true);
@@ -33,6 +33,8 @@ echo <<<EOT
 span.admin_menu { padding:1px; }
 span.admin_menu a:link { color:#FFF; }
 span.admin_menu a:visited { color:#FFF; }
+tr.updt2v td { padding: .5rem; }
+.boldt {color: coral; }
 </style>
 EOT;
 
@@ -74,7 +76,7 @@ EOT;
 			$xmsg = '';
 			if ($updt['pre']) { $xmsg .= '<br />'.$lang_update_php['pre_warning']; }
 			echo <<<EOT
-		<tr>
+		<tr class="updt2v">
 			<td class="{$tclass}"><input type="radio" name="updid" value="{$updt['id']}" /></td>
 			<td class="{$tclass}"><b>{$updt['name']}</b>{$xmsg}<br />{$updt['body']}</td>
 		</tr>
