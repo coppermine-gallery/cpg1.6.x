@@ -5532,7 +5532,7 @@
 	</element>
 	<element>
 		<fullpath>include/picmgmt.inc.php</fullpath>
-		<version>1.6.10</version>
+		<version>1.6.23</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>490ce62b74f7ca7515f4ae290e07e9a6</hash>

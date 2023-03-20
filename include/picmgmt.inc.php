@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/picmgmt.php
- * @since  1.6.10
+ * @since  1.6.23
  */
 
 defined('IN_COPPERMINE') or die('Not in Coppermine...');
@@ -21,7 +21,7 @@ if ($CONFIG['read_iptc_data'] ){
 function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $caption = '', $keywords = '', $user1 = '', $user2 = '', $user3 = '', $user4 = '', $category = 0, $raw_ip = '', $hdr_ip = '', $iwidth = 0, $iheight = 0)
 {
     global $CONFIG, $USER_DATA, $PIC_NEED_APPROVAL, $CURRENT_PIC_DATA;
-    global $lang_errors, $lang_db_input_php;
+    global $lang_errors, $lang_db_input_php, $uploaded_pic;
 
     $image = $CONFIG['fullpath'] . $filepath . $filename;
     $normal = $CONFIG['fullpath'] . $filepath . $CONFIG['normal_pfx'] . $filename;
