@@ -7700,14 +7700,14 @@
 	</element>
 	<element>
 		<fullpath>plugins/upload_h5a/js/upload.js</fullpath>
-		<version>1.6.22</version>
+		<version>1.6.23</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>fa3f485548fa770655020cb4bf78135a</hash>
 	</element>
 	<element>
 		<fullpath>plugins/upload_h5a/js/upload.min.js</fullpath>
-		<version>1.6.22</version>
+		<version>1.6.23</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>b927f22a6ce144ebcec8324b6006c161</hash>

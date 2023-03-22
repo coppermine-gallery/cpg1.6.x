@@ -7,12 +7,11 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * plugins/upload_h5a/js/upload.js
- * @since  1.6.22
+ * @since  1.6.23
  */
-
+"use strict";
 var redirURL = '',
-	h5u_albSel = null,
-	stagger = false;
+	h5u_albSel = null;
 
 /* a couple of utility functions to avoid using jquery and assist in minification */
 // getElementById
@@ -33,12 +32,16 @@ function H5up_done(okcount, errcnt) {
 		redirURL = js_vars.site_url + '/thumbnails' + albact;
 	}
 
-	if (okcount) $.post('notifyupload.php', { album: h5u_albSel.value });
+	if (okcount) fetch('notifyupload.php', {method: 'POST', body: JSON.stringify({ album: h5u_albSel.value })})
+		.then((resp) => resp.text())
+		.then((data) => {
+			console.log("Success:", data);
+			if ((js_vars.autoedit=='1') && (errcnt===0)) window.location = redirURL;
+		})
+		.catch((error) => {
+			console.error("Error:", error);
+		});
 
-	if ((js_vars.autoedit=='1') && (errcnt===0)) {
-		window.location = redirURL;
-		return;
-	}
 	$id('gotoedit').style.display = 'table-row';
 }
 
@@ -53,7 +56,6 @@ function H5up_done(okcount, errcnt) {
 		upQueue = [],
 		maxXfer = js_vars.concurrent,
 		qStopt = false,
-		stagthld = 0,
 		inPrg = 0,
 		total2do = 0,
 		totalDone = 0,
@@ -73,8 +75,7 @@ function H5up_done(okcount, errcnt) {
 				qStopt = false;
 				e_st.style.display = s_vu;
 				e_gc.style.display = s_hd;
-				if (stagger) {NextInQueue(false,'go');}
-				else { while (upQueue.length && (inPrg < maxXfer)) NextInQueue(false,'go'); }
+				while (upQueue.length && (inPrg < maxXfer)) NextInQueue(false,'go');
 				},
 			cancel: function () {
 				upQueue.length = 0;
@@ -128,9 +129,8 @@ function H5up_done(okcount, errcnt) {
 			total2do += f.size;
 			upQueue.push(f);
 			qCountSpan.innerHTML = upQueue.length;
-			if (!stagger) NextInQueue(false,'fsel');
+			NextInQueue(false,'fsel');
 		}
-		if (stagger) NextInQueue(false,'fsel');
 		if (upQueue.length > maxXfer) e_st.style.display = s_vu;
 	}
 
@@ -440,9 +440,6 @@ function H5up_done(okcount, errcnt) {
 			e_st = $id('qstop');
 			e_gc = $id('qgocan');
 
-			// set stagger threshold
-			stagthld = 1 / js_vars.concurrent;
-
 			// file select
 			if (fileselect) {
 				$ae(fileselect, 'click', chkAlbmSel);
@@ -472,8 +469,9 @@ function H5up_done(okcount, errcnt) {
 		}
 	}
 
-	w.H5uSetup = _setup;
 	w.H5uQctrl = _qCtrl;
+
+	$ae(w, "DOMContentLoaded", function(){_setup()});
 
 })(window,'uniload.php',['autorient','flistitl','title','caption','keywords','user1','user2','user3','user4']);
 
@@ -487,7 +485,3 @@ function shide_titlrow(elem) {
 	elem.checked ? targ.style.display = 'none' : targ.style.display = 'table-row';
 }
 
-/* initialize the upload engine (only use of jquery here) */
-$(document).ready(function() {
-	H5uSetup();
-});
