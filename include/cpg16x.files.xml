@@ -2,10 +2,10 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.22</version>
+		<version>1.6.23</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>1d68f6e058a758d2d9bfda3539540269</hash>
+		<hash>71abac4c7f020f7cf9785e202e75b133</hash>
 	</element>
 	<element>
 		<fullpath>LICENSE.txt</fullpath>
@@ -5280,10 +5280,10 @@
 	</element>
 	<element>
 		<fullpath>include/database/pdo/dbase.inc.php</fullpath>
-		<version>1.6.04</version>
+		<version>1.6.23</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>813e4bd1878a0ac1c4744c03a8ab238a</hash>
+		<hash>ae9730369f2bf6d9080ca8f990d3a94b</hash>
 	</element>
 	<element>
 		<fullpath>include/database/pdo/install.php</fullpath>
@@ -5308,10 +5308,10 @@
 	</element>
 	<element>
 		<fullpath>include/exif.php</fullpath>
-		<version>1.6.16</version>
+		<version>1.6.23</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>c5c5c065a5ca636ac2fd543a487369da</hash>
+		<hash>c5e0b9c2c7e4463b1ddc8dd43585accb</hash>
 	</element>
 	<element>
 		<fullpath>include/exif_php.inc.php</fullpath>
@@ -5371,10 +5371,10 @@
 	</element>
 	<element>
 		<fullpath>include/init.inc.php</fullpath>
-		<version>1.6.22</version>
+		<version>1.6.23</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>8abc50700ab0c1d324c9afb83bba1c72</hash>
+		<hash>f2cc530e2aa25a6224596aa23804a5cd</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
@@ -5535,7 +5535,7 @@
 		<version>1.6.23</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>490ce62b74f7ca7515f4ae290e07e9a6</hash>
+		<hash>923416ee5dc8a846296e2b9fd8774912</hash>
 	</element>
 	<element>
 		<fullpath>include/plugin_api.inc.php</fullpath>
@@ -6867,17 +6867,17 @@
 	</element>
 	<element>
 		<fullpath>include/upgrader.inc.php</fullpath>
-		<version>1.6.06</version>
+		<version>1.6.23</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>88695730d35557c1f85190c2d79f3aa3</hash>
+		<hash>d670dc841ce5945a71aca863e70fe6e6</hash>
 	</element>
 	<element>
 		<fullpath>include/versioncheck.inc.php</fullpath>
-		<version>1.6.06</version>
+		<version>1.6.23</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>288c241bd6532f3a1d11a552b9c688dc</hash>
+		<hash>d4016522a64ef8d0c667eeed15558e61</hash>
 	</element>
 	<element>
 		<fullpath>include/zip.lib.php</fullpath>
@@ -7703,14 +7703,14 @@
 		<version>1.6.23</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>fa3f485548fa770655020cb4bf78135a</hash>
+		<hash>9bd6b843e45bb892dc83b48163cba600</hash>
 	</element>
 	<element>
 		<fullpath>plugins/upload_h5a/js/upload.min.js</fullpath>
 		<version>1.6.23</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>b927f22a6ce144ebcec8324b6006c161</hash>
+		<hash>c4faed5a82d11667b3f4f565e8a528ab</hash>
 	</element>
 	<element>
 		<fullpath>plugins/upload_sgl/</fullpath>
@@ -9283,10 +9283,10 @@
 	</element>
 	<element>
 		<fullpath>updater.php</fullpath>
-		<version>1.6.14</version>
+		<version>1.6.23</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>6891695adf5886da2e312593802e645b</hash>
+		<hash>2af6d95bc86bded383ca6c0f6820af8e</hash>
 	</element>
 	<element>
 		<fullpath>upgrader.php</fullpath>
