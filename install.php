@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * install.php
- * @since  1.6.16
+ * @since  1.6.24
  */
 
 ########################
@@ -2051,7 +2051,7 @@ class GDtest
 				'error'		=> 'write_error',
 			);
 		}
-		@imagedestroy($source_a);
+		@imagedestroy($source);
 
 		return $results;
 	}

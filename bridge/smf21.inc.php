@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * bridge/smf21.inc.php
- * @since  1.6.16
+ * @since  1.6.24
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -86,7 +86,7 @@ if (isset($bridge_lookup)) {
                 'regdate' => 'date_registered', // name of 'registered' field in users table
                 'lastvisit' => 'last_login', // last time user logged in
                 'active' => 'is_activated', // is user account active?
-                'location' => 'location', // name of 'location' field in users table
+                'location' => '\'\'', // name of 'location' field in users table
                 'website' => 'website_url', // name of 'website' field in users table
                 'usertbl_group_id' => 'id_post_group', // name of 'group id' field in users table
                 'grouptbl_group_id' => 'id_group', // name of 'group id' field in groups table

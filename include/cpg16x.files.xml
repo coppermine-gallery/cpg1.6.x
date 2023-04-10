@@ -2,10 +2,10 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.23</version>
+		<version>1.6.24</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>71abac4c7f020f7cf9785e202e75b133</hash>
+		<hash>1f08f51e740702be15d9dfb94b8bb7fe</hash>
 	</element>
 	<element>
 		<fullpath>LICENSE.txt</fullpath>
@@ -184,10 +184,10 @@
 	</element>
 	<element>
 		<fullpath>bridge/smf21.inc.php</fullpath>
-		<version>1.6.16</version>
+		<version>1.6.24</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>70eed1c7a08fcb71d02e14633bd46dd4</hash>
+		<hash>685eca0ad68dc055a16d0150f5551c8b</hash>
 	</element>
 	<element>
 		<fullpath>bridge/udb_base.inc.php</fullpath>
@@ -5371,10 +5371,10 @@
 	</element>
 	<element>
 		<fullpath>include/init.inc.php</fullpath>
-		<version>1.6.23</version>
+		<version>1.6.24</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>f2cc530e2aa25a6224596aa23804a5cd</hash>
+		<hash>37baae5e922e11dac70dd78b0344b7db</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
@@ -6895,10 +6895,10 @@
 	</element>
 	<element>
 		<fullpath>install.php</fullpath>
-		<version>1.6.16</version>
+		<version>1.6.24</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>ae21f930d7b4f3efc079e3a3082245a2</hash>
+		<hash>e69a28674be86627598eb8ba8daaad02</hash>
 	</element>
 	<element>
 		<fullpath>js/</fullpath>
