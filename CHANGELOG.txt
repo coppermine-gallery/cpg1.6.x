@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2023-04-13 [B] Correction for HTML5 upload admin notification {ron4mac}
 2023-04-10 [B] Correct SMF2.1 bridge; correct install with PHP 8.1+ when using GD2 {ron4mac}
 2023-03-22 [M] Reduce possibility of race condition at completion of uploads {ron4mac}
 2023-03-20 [B] Correct failure to remove file upload with dimension restriction {ron4mac}

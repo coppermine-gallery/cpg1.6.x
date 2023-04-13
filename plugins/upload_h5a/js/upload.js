@@ -7,7 +7,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * plugins/upload_h5a/js/upload.js
- * @since  1.6.23
+ * @since  1.6.24
  */
 "use strict";
 var redirURL = '',
@@ -32,7 +32,10 @@ function H5up_done(okcount, errcnt) {
 		redirURL = js_vars.site_url + '/thumbnails' + albact;
 	}
 
-	if (okcount) fetch('notifyupload.php', {method: 'POST', body: JSON.stringify({ album: h5u_albSel.value })})
+	if (okcount) {
+		let pdat = new FormData();
+		pdat.append('album', h5u_albSel.value);
+		fetch('notifyupload.php', {method: 'POST', body: pdat})
 		.then((resp) => resp.text())
 		.then((data) => {
 			console.log("Success:", data);
@@ -41,6 +44,7 @@ function H5up_done(okcount, errcnt) {
 		.catch((error) => {
 			console.error("Error:", error);
 		});
+	}
 
 	$id('gotoedit').style.display = 'table-row';
 }
