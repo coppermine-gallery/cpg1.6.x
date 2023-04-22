@@ -2,10 +2,10 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.24</version>
+		<version>1.6.25</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>1f08f51e740702be15d9dfb94b8bb7fe</hash>
+		<hash>866687453c865c9c2fae4e4144b129f7</hash>
 	</element>
 	<element>
 		<fullpath>LICENSE.txt</fullpath>
@@ -5371,10 +5371,10 @@
 	</element>
 	<element>
 		<fullpath>include/init.inc.php</fullpath>
-		<version>1.6.24</version>
+		<version>1.6.25</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>37baae5e922e11dac70dd78b0344b7db</hash>
+		<hash>3cb6e66a5a4d5b33078d58fb7c46b48c</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
@@ -7700,17 +7700,17 @@
 	</element>
 	<element>
 		<fullpath>plugins/upload_h5a/js/upload.js</fullpath>
-		<version>1.6.23</version>
+		<version>1.6.25</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>9bd6b843e45bb892dc83b48163cba600</hash>
+		<hash>b479e0514ed9c0cda3ac15303bbd1c6f</hash>
 	</element>
 	<element>
 		<fullpath>plugins/upload_h5a/js/upload.min.js</fullpath>
-		<version>1.6.23</version>
+		<version>1.6.25</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>c4faed5a82d11667b3f4f565e8a528ab</hash>
+		<hash>a80143714b0483b96a15fd75385cbe0a</hash>
 	</element>
 	<element>
 		<fullpath>plugins/upload_sgl/</fullpath>

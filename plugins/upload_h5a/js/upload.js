@@ -7,7 +7,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * plugins/upload_h5a/js/upload.js
- * @since  1.6.24
+ * @since  1.6.25
  */
 "use strict";
 var redirURL = '',
@@ -475,7 +475,13 @@ function H5up_done(okcount, errcnt) {
 
 	w.H5uQctrl = _qCtrl;
 
-	$ae(w, "DOMContentLoaded", function(){_setup()});
+	//$ae(w, "DOMContentLoaded", function(){_setup()});
+	// get around cloudfare highjack of DOMContentLoaded
+	$ae(document, 'readystatechange', (e) => {
+		if (e.target.readyState === 'interactive') {
+			_setup();
+		} 
+	});
 
 })(window,'uniload.php',['autorient','flistitl','title','caption','keywords','user1','user2','user3','user4']);
 
