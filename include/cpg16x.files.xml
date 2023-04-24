@@ -7235,7 +7235,7 @@
 	</element>
 	<element>
 		<fullpath>langmgr.php</fullpath>
-		<version>1.6.20</version>
+		<version>1.6.26</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>34a18735f5faf68ad00a886ebf27ef93</hash>
@@ -9304,7 +9304,7 @@
 	</element>
 	<element>
 		<fullpath>usermgr.php</fullpath>
-		<version>1.6.10</version>
+		<version>1.6.26</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>829bf19a8d7dcd17c5d7ae0217f7fd53</hash>

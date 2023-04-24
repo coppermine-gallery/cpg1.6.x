@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2022 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * langmgr.php
- * @since  1.6.20
+ * @since  1.6.26
  */
 define('IN_COPPERMINE', true);
 define('ADMIN_PHP', true);
@@ -18,8 +18,8 @@ define('LANGMGR_PHP', true);
 TODO: make sure that the default language is not disabled
 */
 
-require_once('include/init.inc.php');
-require_once('include/sql_parse.php');
+require_once 'include/init.inc.php';
+require_once 'include/sql_parse.php';
 
 js_include('js/langmgr.js');
 
@@ -310,8 +310,8 @@ foreach ($lang_language_data as $language) {
             if ($language['file_flag'] == '') {
                 $file_lookup_errors++;
             }
+        	@fclose($handle);
         }
-        @fclose($handle);
         $language['file_size'] = filesize('lang/'. $language['lang_id'] . '.php');
         // Alternating colors
         if ($loopCounter/2 == floor($loopCounter/2)) {

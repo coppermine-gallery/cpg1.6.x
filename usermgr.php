@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * usermgr.php
- * @since  1.6.10
+ * @since  1.6.26
  */
 
 define('IN_COPPERMINE', true);
@@ -32,7 +32,6 @@ if (USER_ID !='') {
  elseif ($CONFIG['allow_memberlist']) {
   $lim_user = 1;
   $number_of_columns = 9;
-  show_memberlist;
  }
  else {
     $lim_user = 2;
@@ -42,14 +41,6 @@ if (USER_ID !='') {
 else {
     $lim_user = 3;
     cpg_die(ERROR, $lang_errors['access_denied'], __FILE__, __LINE__);
-}
-
-function show_memberlist()
-{
-        cpg_db_query("DELETE FROM {$CONFIG['TABLE_USERS']} WHERE user_name = '' LIMIT 1");
-        pageheader($lang_usermgr_php['title']);
-        list_users();
-        pagefooter();
 }
 
 function list_group_alb_access($group_id) {  //shows a list of albums a specific group can see. Categories are listed with albums for clarity
