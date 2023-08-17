@@ -1,22 +1,19 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * include/exif_php.inc.php
+ * @since  1.6.26
+ */
 
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
+defined('IN_COPPERMINE') or die('Not in Coppermine...');
 
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
-
-if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
-
-require("include/exif.php");
+require 'include/exif.php';
 
 function exif_parse_file($filename, $pid)
 {
@@ -43,7 +40,7 @@ function exif_parse_file($filename, $pid)
         $exif = unserialize($row['exifData']);
 
         // Convert old EXIF data style to new one
-        if (array_key_exists('Errors', $exif)) {
+        if (is_array($exif) && array_key_exists('Errors', $exif)) {
             $exif = cpg_exif_strip_data($exif, $exif_names);
             cpg_db_query("UPDATE {$CONFIG['TABLE_EXIF']} SET exifData = '".addslashes(serialize($exif))."' WHERE pid = '$pid'");
         }
