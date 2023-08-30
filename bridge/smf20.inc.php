@@ -4,14 +4,14 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * bridge/smf20.inc.php
- * @since  1.6.08
+ * @since  1.6.26
  */
 
-if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
+defined('IN_COPPERMINE') or die('Not in Coppermine...');
 
 if (isset($bridge_lookup)) {
     $default_bridge_data[$bridge_lookup] = array(
@@ -280,7 +280,7 @@ if (isset($bridge_lookup)) {
         {
         }
 
-        function view_profile()
+        function view_profile($uid)
         {
         }
     }
