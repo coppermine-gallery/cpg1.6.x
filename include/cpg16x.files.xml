@@ -2,10 +2,10 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.25</version>
+		<version>1.6.26</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>866687453c865c9c2fae4e4144b129f7</hash>
+		<hash>7e02a2954dbe0a56b7e12a58288efae4</hash>
 	</element>
 	<element>
 		<fullpath>LICENSE.txt</fullpath>
@@ -117,10 +117,10 @@
 	</element>
 	<element>
 		<fullpath>bridge/coppermine.inc.php</fullpath>
-		<version>1.6.11</version>
+		<version>1.6.26</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>8062de7d29ac6e79ec4b131f27b009cd</hash>
+		<hash>ee4fafb39ffd89f2f4569facb1d10eac</hash>
 	</element>
 	<element>
 		<fullpath>bridge/invisionboard20.inc.php</fullpath>
@@ -177,10 +177,10 @@
 	</element>
 	<element>
 		<fullpath>bridge/smf20.inc.php</fullpath>
-		<version>1.6.08</version>
+		<version>1.6.26</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>6b9b264caf80696299d39c8829bc9332</hash>
+		<hash>5cd8281ab0904758d691353dc2610c7a</hash>
 	</element>
 	<element>
 		<fullpath>bridge/smf21.inc.php</fullpath>
@@ -5315,17 +5315,17 @@
 	</element>
 	<element>
 		<fullpath>include/exif_php.inc.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.26</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>59a9db04da277c1fcbebc06af17f301e</hash>
+		<hash>d6f4f475628b06bca754f5c68cdd4fd2</hash>
 	</element>
 	<element>
 		<fullpath>include/functions.inc.php</fullpath>
-		<version>1.6.20</version>
+		<version>1.6.26</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>f8690a2e0a43eb97881286df62d943e1</hash>
+		<hash>afa6b42659eb601f8026f32befdde304</hash>
 	</element>
 	<element>
 		<fullpath>include/imageObjectGD.class.php</fullpath>
@@ -5425,10 +5425,10 @@
 	</element>
 	<element>
 		<fullpath>include/iptc.inc.php</fullpath>
-		<version>1.6.20</version>
+		<version>1.6.26</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>35cc5fb8bb6938627e8b2dbef1f7eb72</hash>
+		<hash>178770529785c65a4ad276851331a21e</hash>
 	</element>
 	<element>
 		<fullpath>include/keyword.inc.php</fullpath>
@@ -5490,10 +5490,10 @@
 	</element>
 	<element>
 		<fullpath>include/makers/nikon.php</fullpath>
-		<version>1.6.16</version>
+		<version>1.6.26</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>f1c63fbdb7c5c1e645fa3496ec28bd5e</hash>
+		<hash>e316071ca57b5f1d972777583f83b003</hash>
 	</element>
 	<element>
 		<fullpath>include/makers/olympus.php</fullpath>
@@ -5539,10 +5539,10 @@
 	</element>
 	<element>
 		<fullpath>include/plugin_api.inc.php</fullpath>
-		<version>1.6.10</version>
+		<version>1.6.26</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>200507f5e804e7c64f56fc45bb8c14a1</hash>
+		<hash>f3b7d666ea46c25b8e220b18a8a75100</hash>
 	</element>
 	<element>
 		<fullpath>include/search.inc.php</fullpath>
@@ -7238,7 +7238,7 @@
 		<version>1.6.26</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>34a18735f5faf68ad00a886ebf27ef93</hash>
+		<hash>86b5d07f8e49df176d08f95a62c21a93</hash>
 	</element>
 	<element>
 		<fullpath>login.php</fullpath>
@@ -9307,7 +9307,7 @@
 		<version>1.6.26</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>829bf19a8d7dcd17c5d7ae0217f7fd53</hash>
+		<hash>a6de86bcde9844abd9b2c7d36c497431</hash>
 	</element>
 	<element>
 		<fullpath>util.php</fullpath>

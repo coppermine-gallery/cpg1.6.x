@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2022 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2024 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/functions.inc.php
- * @since  1.6.20
+ * @since  1.6.26
  */
 
 if (!function_exists('stripos')) {
@@ -120,8 +120,8 @@ function user_get_profile()
 
     if (!isset($USER['ID']) || strlen($USER['ID']) != 32) {
         list($usec, $sec) = explode(' ', microtime());
-        $seed             = (float) $sec + ((float) $usec * 100000);
-        srand($seed);
+        $seed = (int) $sec + ((float) $usec * 100000);
+        srand((int)$seed);
         $USER = array('ID' => md5(uniqid(rand(), 1)));
     } else {
         $USER['ID'] = addslashes($USER['ID']);

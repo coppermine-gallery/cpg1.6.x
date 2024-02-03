@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2022 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/iptc.inc.php
- * @since  1.6.20
+ * @since  1.6.26
  */
 
 function strip_IPTC ($data)
@@ -42,7 +42,7 @@ function get_IPTC ($filename)
 				'Title' => val_IPTC($iptc,'2#005'), 	# Max 65 octets, non-repeatable, alphanumeric
 				'Urgency' => val_IPTC($iptc,'2#010'),	# Max 1 octet, non-repeatable, numeric, 1 - High, 8 - Low
 				'Category' => val_IPTC($iptc,'2#015'),	# Max 3 octets, non-repeatable, alpha
-				'SubCategories' => val_IPTC($iptc,'2#020'),	# Max 32 octets, repeatable, alphanumeric
+				'SubCategories' => val_IPTC($iptc,'2#020', false),	# Max 32 octets, repeatable, alphanumeric
 				'Keywords' => val_IPTC($iptc,'2#025', false),	# Max 64 octets, repeatable, alphanumeric
 				'Instructions' => val_IPTC($iptc,'2#040'),	# Max 256 octets, non-repeatable, alphanumeric
 				'CreationDate' => val_IPTC($iptc,'2#055'),	# Max 8 octets, non-repeatable, numeric, YYYYMMDD

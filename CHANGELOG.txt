@@ -7,7 +7,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * CHANGELOG.txt
- * @since  1.6.25
+ * @since  1.6.26
  */
 Changelog
 =========
@@ -20,6 +20,8 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2023-11-27 [B] Correct IPTC supplimental category parsing {ron4mac}
+2023-11-11 [B] Correct design/coding error in user manager {ron4mac}
 2023-04-21 [M] Prevent HTML5 upload initialization failure caused by cloudflare rocket-loader {ron4mac}
 2023-04-13 [B] Correction for HTML5 upload admin notification {ron4mac}
 2023-04-10 [B] Correct SMF2.1 bridge; correct install with PHP 8.1+ when using GD2 {ron4mac}

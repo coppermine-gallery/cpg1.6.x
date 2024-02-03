@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * bridge/coppermine.inc.php
- * @since  1.6.11
+ * @since  1.6.26
  */
 
 defined('IN_COPPERMINE') or die('Not in Coppermine...');
@@ -25,6 +25,22 @@ if (isset($bridge_lookup)) {
 
 	class coppermine_udb extends core_udb
 	{
+		var $boardurl,
+			$use_post_based_groups,
+			$client_id,
+			$multigroups,
+			$group_override,
+			$db,
+			$table,
+			$usertable,
+			$groupstable,
+			$sessionstable,
+			$field,
+			$page,
+			$admingroups,
+			$guestgroup,
+			$sessiontime,
+			$session_id;
 
 		public function __construct ()
 		{
@@ -45,7 +61,7 @@ if (isset($bridge_lookup)) {
 
 			$this->multigroups = 1;
 
-			$this->group_overrride = !$this->use_post_based_groups;
+			$this->group_override = !$this->use_post_based_groups;
 
 			// Database connection settings
 			$this->db = array(

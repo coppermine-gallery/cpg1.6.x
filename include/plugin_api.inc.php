@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/plugin_api.inc.php
- * @since  1.6.10
+ * @since  1.6.26
  */
 
 global $thisplugin;                     // Stores the current plugin being processed
@@ -540,10 +540,18 @@ abstract class CPGPluginAPI {
  **/
 
 class CPGPlugin {
-    var $actions = array();
-    var $filters = array();
-    var $awake = false;
-    var $error = array();
+	var $plugin_id,
+		$name,
+		$enabled,
+		$path,
+		$fullpath,
+		$priority,
+		$index,
+    	$actions = array(),
+    	$filters = array(),
+    	$awake = false,
+    	$error = array();
+
 
     /**
      * CPGPlugin()
