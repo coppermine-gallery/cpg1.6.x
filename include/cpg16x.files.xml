@@ -5374,7 +5374,7 @@
 		<version>1.6.26</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>3cb6e66a5a4d5b33078d58fb7c46b48c</hash>
+		<hash>521d42c772634747b266921e89c37472</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
