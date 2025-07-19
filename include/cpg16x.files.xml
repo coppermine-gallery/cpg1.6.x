@@ -15,7 +15,7 @@
 	</element>
 	<element>
 		<fullpath>README.txt</fullpath>
-		<version>1.6.10</version>
+		<version>1.6.27</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>1f333f0086d092b93e314117aa4b6174</hash>
@@ -5301,7 +5301,7 @@
 	</element>
 	<element>
 		<fullpath>include/debugger.inc.php</fullpath>
-		<version>1.6.18</version>
+		<version>1.6.27</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>081915a5b2bdae03108ae94565b367eb</hash>

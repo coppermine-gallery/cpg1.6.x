@@ -3,11 +3,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2025 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * README.txt
- * @since  1.6.10
+ * @since  1.6.27
  */
 
 CPG - Coppermine Photo Gallery Quick-Start Guide
@@ -48,7 +48,7 @@ Question: My files are in place, permissions are set, and I have my database inf
 Answer: Read the... (Oops, sorry.)  Now you have to run the Coppermine install. Launch your web browser and enter http://www.yousite.com/coppermine/install.php and fill in the information that is requested. If you have never used ImageMagick before, leave that line blank during the install process. You can always add that information after you have Coppermine up and running.
 
 Question: Screen went blank! Suddenly there are error messages popping up all over the place! My webhost, crashed! What do I do?
-Answer: Read the documentation! If you haven't done so already, you're not going anywhere, anyway, so here's the perfect opportunity. We can wait. Chances are, you'll find the answers you need, there. All we can say at this point is that if your server crashed, it probably wasn't your install and it wasn't our fault. It was just a coincidence. Wait till it's up and running again and try the installation again. If, however, you really can't find the answers you need in the documents, go to http://coppermine-gallery.net/forum/ and review the support boards. Spend a little time looking around and search for your problem. Thousands have gone before you, so a solution for your installation issues have probably been posted, already. (HINT: search using the exact error message you see on your screen.)
+Answer: Read the documentation! If you haven't done so already, you're not going anywhere, anyway, so here's the perfect opportunity. We can wait. Chances are, you'll find the answers you need, there. All we can say at this point is that if your server crashed, it probably wasn't your install and it wasn't our fault. It was just a coincidence. Wait till it's up and running again and try the installation again. If, however, you really can't find the answers you need in the documents, go to https://coppermine-gallery.com/forum/ and review the support boards. Spend a little time looking around and search for your problem. Thousands have gone before you, so a solution for your installation issues have probably been posted, already. (HINT: search using the exact error message you see on your screen.)
 
 Question: Ha! Ha! Got You! It's installed and working! Now what?
 Answer: 1) Wipe that smile off your face. 2) Read the docs, anyway -- twice. 3) You'll need to look at the configuration of Coppermine to make sure it's set up the way you want it. Log in as the admin, if you aren't already logged in. Enable admin controls - (if the 'Hide admin controls' menu link isn't visible, you are already logged in). Click on the Config button. These are a few of the things you should pay close attention to:
@@ -78,4 +78,4 @@ Experiment with it with just a few pictures, categories, and albums at first. Se
 
 
 The Coppermine Dev Team
-http://coppermine-gallery.net
+https://coppermine-gallery.com
