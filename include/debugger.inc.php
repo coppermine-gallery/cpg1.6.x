@@ -4,20 +4,12 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2022 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2025 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/debugger.inc.php
- * @since  1.6.18
+ * @since  1.6.27
  */
-
-if (!defined('E_STRICT')) {
-    define('E_STRICT', 2048); // PHP 5
-}
-
-if (!defined('E_DEPRECATED')) {
-    define('E_DEPRECATED', 8192); // PHP 5.3
-}
 
 class cpg_debugger {
     // Define variables that store the old error reporting and logging states
@@ -92,7 +84,7 @@ class cpg_debugger {
             E_USER_ERROR      => 'CPG Error',
             E_USER_WARNING    => 'CPG Warning',
             E_USER_NOTICE     => 'CPG Notice',
-            E_STRICT          => 'Runtime Notice',
+            2048        	=> 'Runtime Notice',
             E_DEPRECATED      => 'Deprecated',
         );
         // NOTE: E_ERROR, E_PARSE, E_CORE_ERROR, E_CORE_WARNING, E_COMPILE_ERROR and E_COMPILE_WARNING
