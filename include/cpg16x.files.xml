@@ -6898,7 +6898,7 @@
 		<version>1.6.27</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>6bb1103ce10d0f755c1152e01426df34</hash>
+		<hash>96023b31edf52c17731aaa528fcf210e</hash>
 	</element>
 	<element>
 		<fullpath>js/</fullpath>

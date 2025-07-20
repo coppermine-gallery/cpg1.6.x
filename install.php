@@ -17,6 +17,7 @@
 define('IN_COPPERMINE', true);
 define('INSTALL_PHP', true);
 define('VERSIONCHECK_PHP', true);
+define('COPPERMINE_URL','https://coppermine-gallery.com/');
 
 define('INFORMATION', 1);
 define('ERROR', 2);
