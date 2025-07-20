@@ -3,7 +3,7 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2025 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * CHANGELOG.txt
@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2025-07-19 [M] Align all coding to the new .com CPG website {ron4mac}
 2024-06-12 [M,B] Change DB IP storage fields to accommodate IPv6 addresses {ron4mac}
 2023-11-27 [B] Correct IPTC supplimental category parsing {ron4mac}
 2023-11-11 [B] Correct design/coding error in user manager {ron4mac}

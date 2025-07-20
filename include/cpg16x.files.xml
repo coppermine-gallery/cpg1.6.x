@@ -2,10 +2,10 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.26</version>
+		<version>1.6.27</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>7e02a2954dbe0a56b7e12a58288efae4</hash>
+		<hash>54f4dbe95d6bad4d14f6e5d897de86e3</hash>
 	</element>
 	<element>
 		<fullpath>LICENSE.txt</fullpath>
@@ -18,7 +18,7 @@
 		<version>1.6.27</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>1f333f0086d092b93e314117aa4b6174</hash>
+		<hash>48e13a57572723616fd9a80df33c2baf</hash>
 	</element>
 	<element>
 		<fullpath>addfav.php</fullpath>
@@ -404,7 +404,7 @@
 		<version>1.6.27</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>3ccad46d456d849d5ab5ea03131600cd</hash>
+		<hash>28976f20804aa5d5de800e90e5407e19</hash>
 	</element>
 	<element>
 		<fullpath>image_processor.php</fullpath>
@@ -5206,7 +5206,7 @@
 		<version>1.6.27</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>cf624c8ecc48d4da189f7c0f267d07dd</hash>
+		<hash>417aa37f4fdc6a9f0e262c5c5d8b565a</hash>
 	</element>
 	<element>
 		<fullpath>include/config.inc.php.sample</fullpath>
@@ -5304,7 +5304,7 @@
 		<version>1.6.27</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>081915a5b2bdae03108ae94565b367eb</hash>
+		<hash>aca2eef3ae84db7772fb344d233fa76f</hash>
 	</element>
 	<element>
 		<fullpath>include/exif.php</fullpath>
@@ -5325,7 +5325,7 @@
 		<version>1.6.27</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>afa6b42659eb601f8026f32befdde304</hash>
+		<hash>d0b167c8e3146d7fe3b2dc7b5288f27b</hash>
 	</element>
 	<element>
 		<fullpath>include/imageObjectGD.class.php</fullpath>
@@ -5374,7 +5374,7 @@
 		<version>1.6.27</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>521d42c772634747b266921e89c37472</hash>
+		<hash>e9f531dccb6ecf77e85fcebf10577102</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
@@ -5584,7 +5584,7 @@
 		<version>1.6.27</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>22537202215f220e80e9c69e1d3e1c20</hash>
+		<hash>1a7999fed578662133353944e500a23d</hash>
 	</element>
 	<element>
 		<fullpath>include/tool.class.php</fullpath>
@@ -6877,7 +6877,7 @@
 		<version>1.6.27</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>d4016522a64ef8d0c667eeed15558e61</hash>
+		<hash>4d3f1aa3578870bb598a61abd8ec220a</hash>
 	</element>
 	<element>
 		<fullpath>include/zip.lib.php</fullpath>
@@ -6895,10 +6895,10 @@
 	</element>
 	<element>
 		<fullpath>install.php</fullpath>
-		<version>1.6.24</version>
+		<version>1.6.27</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>e69a28674be86627598eb8ba8daaad02</hash>
+		<hash>6bb1103ce10d0f755c1152e01426df34</hash>
 	</element>
 	<element>
 		<fullpath>js/</fullpath>
@@ -7987,14 +7987,14 @@
 		<version>1.6.27</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>55f6cb6847c6a5cf04dd16ee74719083</hash>
+		<hash>41be8d4c5ef3faea843ba20174310417</hash>
 	</element>
 	<element>
 		<fullpath>sql/update.sql</fullpath>
 		<version>1.6.27</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>958b31ca2d39f50c2c73fdddf577a3cb</hash>
+		<hash>b28af782fa745a726b4e67b37501dd69</hash>
 	</element>
 	<element>
 		<fullpath>stat_details.php</fullpath>
