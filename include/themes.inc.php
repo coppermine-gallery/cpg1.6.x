@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2025 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/themes.inc.php
- * @since  1.6.20
+ * @since  1.6.27
  */
 
 /////////////////////////////////////////////////////////////////
@@ -1959,9 +1959,10 @@ We're convinced that you should give credit where credit is due. So please think
 twice before you decide to remove the tag.
 ******************************************************************************/
 function theme_credits() {
+	$cpgurl = COPPERMINE_URL;
     $return = <<< EOT
 
-<div class="footer" align="center" style="padding:10px;display:block;visibility:visible; font-family: Verdana,Arial,sans-serif;">Powered by <a href="http://coppermine-gallery.net/" title="Coppermine Photo Gallery" rel="external">Coppermine Photo Gallery</a></div>
+<div class="footer" align="center" style="padding:10px;display:block;visibility:visible; font-family: Verdana,Arial,sans-serif;">Powered by <a href="{$cpgurl}" title="Coppermine Photo Gallery" rel="external">Coppermine Photo Gallery</a></div>
 EOT;
     return $return;
 }
@@ -2304,7 +2305,7 @@ function theme_admin_mode_menu()
             if ((file_exists('docs/README.md') == true) && (file_exists('docs/'.$help_lang.'/index.htm') == true)) {
                 $documentation_href = 'docs/'.$help_lang.'/index.htm';
             } else {
-                $documentation_href = 'http://coppermine-gallery.net/docs';
+                $documentation_href = COPPERMINE_URL_DOCS;
             }
 
             if (!$CONFIG['enable_plugins']) {

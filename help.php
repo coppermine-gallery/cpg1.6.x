@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2025 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * help.php
- * @since  1.6.04
+ * @since  1.6.27
  */
 
 define('IN_COPPERMINE', true);
@@ -34,8 +34,9 @@ if ($haslocal) {
     $rURL = 'docs/';
 } else {
     // probe remote for URL
-    $http = empty($superCage->server->_source['HTTPS']) ? 'http' : 'https';
-    $rURL = file_get_contents($http.'://coppermine-gallery.net/docs/?c=1&v='.str_replace('.','',COPPERMINE_VERSION));
+    //$http = empty($superCage->server->_source['HTTPS']) ? 'http' : 'https';
+    //$rURL = file_get_contents($http.'://coppermine-gallery.com/docs/?c=1&v='.str_replace('.','',COPPERMINE_VERSION));
+    $rURL = file_get_contents(COPPERMINE_URL_DOCS.'?c=1&v='.str_replace('.','',COPPERMINE_VERSION));
 }
 
 // set charset

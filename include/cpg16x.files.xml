@@ -401,7 +401,7 @@
 	</element>
 	<element>
 		<fullpath>help.php</fullpath>
-		<version>1.6.04</version>
+		<version>1.6.27</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>3ccad46d456d849d5ab5ea03131600cd</hash>
@@ -5322,7 +5322,7 @@
 	</element>
 	<element>
 		<fullpath>include/functions.inc.php</fullpath>
-		<version>1.6.26</version>
+		<version>1.6.27</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>afa6b42659eb601f8026f32befdde304</hash>
@@ -5371,7 +5371,7 @@
 	</element>
 	<element>
 		<fullpath>include/init.inc.php</fullpath>
-		<version>1.6.26</version>
+		<version>1.6.27</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>521d42c772634747b266921e89c37472</hash>
@@ -5581,7 +5581,7 @@
 	</element>
 	<element>
 		<fullpath>include/themes.inc.php</fullpath>
-		<version>1.6.20</version>
+		<version>1.6.27</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>22537202215f220e80e9c69e1d3e1c20</hash>
@@ -6874,7 +6874,7 @@
 	</element>
 	<element>
 		<fullpath>include/versioncheck.inc.php</fullpath>
-		<version>1.6.23</version>
+		<version>1.6.27</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>d4016522a64ef8d0c667eeed15558e61</hash>

@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2025 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * install.php
- * @since  1.6.24
+ * @since  1.6.27
  */
 
 ########################
@@ -211,7 +211,7 @@ switch($step) {
 		if (ini_get('register_globals')) {
 			//register_globals is turned on, please turn it of.
 			$error .= $language['register_globals_detected'];
-			$error .= '[<a href="https://coppermine-gallery.net/docs/curr/en/install.htm#install_server_config_register_globals">' . $language['more'] . '</a>]';
+			$error .= '[<a href="https://coppermine-gallery.com/docs/curr/en/install.htm#install_server_config_register_globals">' . $language['more'] . '</a>]';
 			$error .= '<br />';
 		}
 
@@ -732,7 +732,7 @@ function html_welcome()
 		 </tr>
 		 <tr>
 		  <td class="tableb" colspan="2">
-			<iframe src="https://coppermine-gallery.net/docs/curr/en/copyrights.htm?hide_nav=1" width="100%" height="300" name="license">
+			<iframe src="https://coppermine-gallery.com/docs/curr/en/copyrights.htm?hide_nav=1" width="100%" height="300" name="license">
 			{$language['cpg_info_frames']}</a>.
 			</iframe>
 		  </td>

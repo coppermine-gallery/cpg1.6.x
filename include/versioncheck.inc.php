@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2025 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/versioncheck.inc.php
- * @since  1.6.23
+ * @since  1.6.27
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -731,7 +731,7 @@ function cpgVersioncheckConnectRepository() {
     $xmlFN = str_replace('.', '', $majorVersion) . '.files.xml';
 	$remoteURL = 'https://github.com:443/coppermine-gallery/cpg1.6.x/raw/v' . COPPERMINE_VERSION . '/include/' . $xmlFN;
 	//$remoteURL = 'https://github.com:443/coppermine-gallery/cpg1.6.x/raw/master/include/' . $xmlFN;
-    $altRemoteURL = 'http://coppermine-gallery.net/' . $xmlFN;
+    $altRemoteURL = COPPERMINE_URL . $xmlFN;
     $localFile = 'include/' . $xmlFN;
     $remoteConnectionFailed = '';
     if ($displayOption_array['do_not_connect_to_online_repository'] == 0) { // connect to the online repository --- start

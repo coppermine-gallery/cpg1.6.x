@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2024 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2025 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/functions.inc.php
- * @since  1.6.26
+ * @since  1.6.27
  */
 
 if (!function_exists('stripos')) {
@@ -4459,8 +4459,9 @@ EOT;
         // Try to retrieve the news directly
         //$result = cpgGetRemoteFileByURL('http://coppermine-gallery.net/cpg16x_news.htm', 'GET', '', '200'); // disabled, see http://forum.coppermine-gallery.net/index.php/topic,65424.msg325573.html#msg325573
         if (empty($result) || strlen($result['body']) < 200) { // retrieving the file failed - let's display it in an iframe then
+        	$cpgurl = COPPERMINE_URL;
             print <<< EOT
-                      <iframe src="//coppermine-gallery.net/cpg16x_news.htm" align="left" frameborder="0" scrolling="auto" marginheight="0" marginwidth="0" width="100%" height="100" name="coppermine_news" id="coppermine_news" class="textinput">
+                      <iframe src="{$cpgurl}cpg16x_news.htm" align="left" frameborder="0" scrolling="auto" marginheight="0" marginwidth="0" width="100%" height="100" name="coppermine_news" id="coppermine_news" class="textinput">
                         {$lang_version_alert['no_iframe']}
                       </iframe>
 EOT;
