@@ -5203,7 +5203,7 @@
 	</element>
 	<element>
 		<fullpath>include/captcha.inc.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.27</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>cf624c8ecc48d4da189f7c0f267d07dd</hash>
