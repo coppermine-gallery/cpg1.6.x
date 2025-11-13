@@ -36,7 +36,9 @@ class CPG_Dbase
 			if (!empty($cfg['dbcharset'])) {
 				$dsn .= ';charset='.$cfg['dbcharset'];
 			}
-			$db = new PDO($dsn, $cfg['dbuser'], $cfg['dbpass']);
+			$db = new PDO($dsn, $cfg['dbuser'], $cfg['dbpass'], [
+				PDO::ATTR_PERSISTENT => !empty($cfg['dbpersist']),
+			]);
 			$this->_instance = $db;
 			$this->connected = true;
 		} catch (PDOException $e) {

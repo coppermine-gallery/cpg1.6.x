@@ -27,6 +27,7 @@ class CPG_Dbase
 		$sp = explode(':', $cfg['dbserver']);
 		if (empty($sp[1])) $sp[1] = null;
 		if (isset($cfg['dbport'])) $sp[1] = $cfg['dbport'];
+		if (!empty($cfg['dbpersist'])) $sp[0] = 'p:'.$sp[0];
 
 		// needed for PHP 8.1 and later
 		mysqli_report(MYSQLI_REPORT_OFF);

@@ -26,7 +26,11 @@ class CPG_Dbase
 
 	public function __construct ($cfg)
 	{
-		$link = @mysql_connect($cfg['dbserver'], $cfg['dbuser'], $cfg['dbpass']);
+		if (!empty($cfg['dbpersist'])) {
+			$link = @mysql_pconnect($cfg['dbserver'], $cfg['dbuser'], $cfg['dbpass']);
+		} else {
+			$link = @mysql_connect($cfg['dbserver'], $cfg['dbuser'], $cfg['dbpass']);
+		}
 
 		if ($link) {
 			$this->linkid = $link;
