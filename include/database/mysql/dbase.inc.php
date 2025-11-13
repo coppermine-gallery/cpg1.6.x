@@ -98,6 +98,12 @@ class CPG_Dbase
 		return mysql_affected_rows($this->linkid);
 	}
 
+	public function __destruct()
+	{
+		if ($this->linkid) {
+			mysql_close($this->linkid);
+		}
+	}
 }
 
 class CPG_DbaseResult

@@ -104,6 +104,10 @@ class CPG_Dbase
 		return $this->stmt->rowCount();
 	}
 
+	public function __destruct()
+	{
+		$this->_instance = null;
+	}
 }
 
 class CPG_DbaseResult

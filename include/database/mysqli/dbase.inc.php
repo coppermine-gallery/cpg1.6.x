@@ -96,6 +96,12 @@ class CPG_Dbase
 		return $this->dbobj->affected_rows;
 	}
 
+	public function __destruct()
+	{
+		if ($this->dbobj && $this->connected) {
+			$this->dbobj->close();
+		}
+	}
 }
 
 class CPG_DbaseResult
