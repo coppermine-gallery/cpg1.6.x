@@ -8,6 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/picmgmt.php
+ * Updated by KF June 2024 to fix problem where, when images aren't resized automatically, the size of uploaded images is not checked correctly 
  * @since  1.6.23
  */
 
@@ -21,7 +22,7 @@ if ($CONFIG['read_iptc_data'] ){
 function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $caption = '', $keywords = '', $user1 = '', $user2 = '', $user3 = '', $user4 = '', $category = 0, $raw_ip = '', $hdr_ip = '', $iwidth = 0, $iheight = 0)
 {
     global $CONFIG, $USER_DATA, $PIC_NEED_APPROVAL, $CURRENT_PIC_DATA;
-    global $lang_errors, $lang_db_input_php, $uploaded_pic;
+    global $lang_errors, $lang_db_input_php, $uploaded_pic, $lang_admin_php;
 
     $image = $CONFIG['fullpath'] . $filepath . $filename;
     $normal = $CONFIG['fullpath'] . $filepath . $CONFIG['normal_pfx'] . $filename;
@@ -63,8 +64,52 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
 
         $imagesize = cpg_getimagesize($image);
 
-        // resize picture if it's bigger than the max width or height for uploaded pictures
-        if (max($imagesize[0], $imagesize[1]) > $CONFIG['max_upl_width_height']) {
+        // Check the size of the uploaded picture. If resizing required and too big: resize picture. If resizing not wanted and too big: return error
+        // First examine the sizing criteria 
+        if ($CONFIG['picture_use']  == 'thumb') {   // If criteria are using the thumbnail criteria pick those up
+            if ($CONFIG['thumb_use']   == 'ex') {   //... except the Exact criteria which has no meaning for full-size images so just set it to Max dimension
+               $selector = 'any';
+            } else {
+                $selector = $CONFIG['thumb_use'];
+            }
+        } else {
+            $selector = $CONFIG['picture_use'];     // Using the criteria set in the same section of the config
+        }
+        switch ($selector) {  // Check the image size based on the criteria in the config
+            case 'any':         // Max dimension
+            	$too_big = max($imagesize[0], $imagesize[1]) > $CONFIG['max_upl_width_height'];
+                break;
+            case 'ht':          // Height
+                $too_big = $imagesize[1] > $CONFIG['max_upl_width_height'];
+                break;
+            case 'wd':          // Width
+                $too_big = $imagesize[0] > $CONFIG['max_upl_width_height'];
+                break;
+            default:            // Should never get here. Just set a value to keep the code happy
+                $too_big = true;
+        }
+        if (($CONFIG['auto_resize'] == 0) && $too_big) {   // If not resizing and the image is too large, build up the error message
+            @unlink($uploaded_pic);
+            switch ($selector) {
+        	    case 'any':	
+                    $msgpart1 = $CONFIG['max_upl_width_height']; 
+                    $msgpart2 = ' x ' . $CONFIG['max_upl_width_height'];
+                    break;
+        	    case 'ht':	
+                    $msgpart1 = $lang_admin_php['th_ht'] ; 
+                    $msgpart2 = $CONFIG['max_upl_width_height'];
+                    break;
+        	    case 'wd':	
+                    $msgpart1 = $lang_admin_php['th_wd']; 
+                    $msgpart2 =  $CONFIG['max_upl_width_height'];
+                    break;
+        	    default:       // Should never get here
+                    $msgpart1 = '*' ; 
+                    $msgpart2 = '*';
+            }
+            $msg = sprintf($lang_db_input_php['err_fsize_too_large'], $msgpart1 ,$msgpart2);
+            return array('error' => $msg, 'halt_upload' => 1);
+        } else {   // Resizing is set in the config
             if ((USER_IS_ADMIN && $CONFIG['auto_resize'] == 1) || (!USER_IS_ADMIN && $CONFIG['auto_resize'] > 0)) {
                 $resize_method = $CONFIG['picture_use'] == "thumb" ? ($CONFIG['thumb_use'] == "ex" ? "any" : $CONFIG['thumb_use']) : $CONFIG['picture_use'];
                 resize_image($image, $image, $CONFIG['max_upl_width_height'], $resize_method, 'false');
@@ -72,10 +117,6 @@ function add_picture($aid, $filepath, $filename, $position = 0, $title = '', $ca
             } elseif (USER_IS_ADMIN) {
                 // skip resizing for admin
                 $picture_original_size = true;
-            } else {
-                @unlink($uploaded_pic);
-                $msg = sprintf($lang_db_input_php['err_fsize_too_large'], $CONFIG['max_upl_width_height'], $CONFIG['max_upl_width_height']);
-                return array('error' => $msg, 'halt_upload' => 1);
             }
         }
 
