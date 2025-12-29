@@ -8,6 +8,8 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * plugins/upload_sgl/codebase.php
+ * 
+ * Updated by KF 17 June 2024 to fix comment length bug - truncation to 512 chars 
  * @since  1.6.05
  */
 
@@ -109,7 +111,7 @@ EOT;
 		{$captionLabel}
 	</td>
 	<td class="tableb" valign="top">
-		<textarea name="caption" rows="5" cols="40" class="textinput" onkeydown="textCounter(this, 512);" onkeyup="textCounter(this, 512);"></textarea>
+		<textarea name="caption" rows="5" cols="40" class="textinput" onkeydown="textCounter(this, {$CONFIG['max_com_size']});" onkeyup="textCounter(this, {$CONFIG['max_com_size']});"></textarea>
 	</td>
 </tr>
 <tr>
