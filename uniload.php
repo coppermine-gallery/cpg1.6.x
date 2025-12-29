@@ -6,7 +6,7 @@
  *
  * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
- *
+ *              KF June 2024. Add more user-friendly error message for single file upload when image is too large 
  * uniload.php
  * @since  1.6.08
  */
@@ -41,7 +41,7 @@ function uni_exception ($e)
 // return an error when failing to complete
 function errorOut ($msg, $code=0, $_file=0, $_line=0)
 {
-	global $CONFIG, $h5u_debug, $upload_form;
+	global $CONFIG, $h5u_debug, $upload_form, $upload_log, $superCage;
 
 	if ($h5u_debug) {
 		$msg .= " #{$code} {$_file} @{$_line}";
@@ -53,6 +53,12 @@ function errorOut ($msg, $code=0, $_file=0, $_line=0)
 		$msg = 'error|'.str_replace('<br>',"\n",$msg).'|0';
 		die($msg);
 	}
+    
+    if ($upload_form == 'upload_sgl') {
+        $redirect = $superCage->server->_source['HTTP_REFERER'];   // Want to redisplay the original screen 
+        cpgRedirectPage($redirect, $lang_db_input_php['error'], $msg, 1, 'error');   // Display with error message
+        exit;
+    }
 
 	header("HTTP/1.0 430 \"{$msg}\"");
 	echo $msg;
