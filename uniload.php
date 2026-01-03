@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2026 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * uniload.php
- * @since  1.6.08
+ * @since  1.6.28
  */
 
 // Confirm we are in Coppermine and set the language blocks.
@@ -41,12 +41,18 @@ function uni_exception ($e)
 // return an error when failing to complete
 function errorOut ($msg, $code=0, $_file=0, $_line=0)
 {
-	global $CONFIG, $h5u_debug, $upload_form;
+	global $CONFIG, $h5u_debug, $upload_form, $upload_log, $superCage, $lang_upload_php;
 
 	if ($h5u_debug) {
 		$msg .= " #{$code} {$_file} @{$_line}";
 		upldLog('FAIL = '.$msg);
 		log_write($upload_log, H5U_LOG);
+	}
+
+	if ($upload_form == 'upload_sgl') {
+		$redirect = $superCage->server->_source['HTTP_REFERER'];   // Want to redisplay the original screen 
+		cpgRedirectPage($redirect, $lang_upload_php['failure'], $msg, 1, 'error');   // Display with error message
+		exit;
 	}
 
 	if ($upload_form == 'upload_swf') {

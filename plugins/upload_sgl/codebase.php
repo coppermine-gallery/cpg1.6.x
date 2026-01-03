@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2026 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * plugins/upload_sgl/codebase.php
- * @since  1.6.05
+ * @since  1.6.28
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -109,7 +109,7 @@ EOT;
 		{$captionLabel}
 	</td>
 	<td class="tableb" valign="top">
-		<textarea name="caption" rows="5" cols="40" class="textinput" onkeydown="textCounter(this, 512);" onkeyup="textCounter(this, 512);"></textarea>
+		<textarea name="caption" rows="5" cols="40" class="textinput" onkeydown="textCounter(this, {$CONFIG['max_img_desc_length']});" onkeyup="textCounter(this, {$CONFIG['max_img_desc_length']});"></textarea>
 	</td>
 </tr>
 <tr>

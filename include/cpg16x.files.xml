@@ -2,7 +2,7 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.27</version>
+		<version>1.6.28</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>54f4dbe95d6bad4d14f6e5d897de86e3</hash>
@@ -5322,7 +5322,7 @@
 	</element>
 	<element>
 		<fullpath>include/functions.inc.php</fullpath>
-		<version>1.6.27</version>
+		<version>1.6.28</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>d0b167c8e3146d7fe3b2dc7b5288f27b</hash>
@@ -5344,21 +5344,21 @@
 	</element>
 	<element>
 		<fullpath>include/imageobject_gd.class.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.28</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>9b99c63080f5c1a1d42f6ab711d1bcd6</hash>
 	</element>
 	<element>
 		<fullpath>include/imageobject_im.class.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.28</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>6e8dace83df816325db97bcb0a5ed799</hash>
 	</element>
 	<element>
 		<fullpath>include/imageobject_imx.class.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.28</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>03a8fc812b61a895515af6ac6fe06fd1</hash>
@@ -7719,7 +7719,7 @@
 	</element>
 	<element>
 		<fullpath>plugins/upload_sgl/codebase.php</fullpath>
-		<version>1.6.05</version>
+		<version>1.6.28</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>06634fb0c8fd978bc6a809ed70fd8278</hash>
@@ -9262,7 +9262,7 @@
 	</element>
 	<element>
 		<fullpath>uniload.php</fullpath>
-		<version>1.6.08</version>
+		<version>1.6.28</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>831297282380c96b4eef2bfa470f349f</hash>

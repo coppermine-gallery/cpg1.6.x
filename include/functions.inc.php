@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2025 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2026 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/functions.inc.php
- * @since  1.6.27
+ * @since  1.6.28
  */
 
 if (!function_exists('stripos')) {
@@ -683,6 +683,8 @@ function make_clickable($text)
 
 function bb_decode($text)
 {
+	if (empty($text)) return'';
+
     $text = nl2br($text);
 
     static $bbcode_tpl   = array();
