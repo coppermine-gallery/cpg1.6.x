@@ -1,3 +1,4 @@
+```
 /**
  * Coppermine Photo Gallery
  *
@@ -9,6 +10,7 @@
  * README.txt
  * @since  1.6.27
  */
+```
 
 CPG - Coppermine Photo Gallery Quick-Start Guide
 ================================================
@@ -23,35 +25,39 @@ Ok, okay, so you don't want to read the documentation. At least, "not just yet,"
 
 Let's Start!
 
-Question: Does my webserver support Coppermine?
-Answer: You need to have a webserver or webhost that provides the following: PHP 5.4 or newer (PHP 7 is supported), and MySQL(i) 4.1 or newer. Your database can be accessed via any of the mysql, mysqli or PDO(mysql) interfaces. You also need either GD 2.xx or ImageMagick installed. GD normally comes bundled with PHP; ImageMagick must be installed by your webhost.
+**Question**: Does my webserver support Coppermine?  
+**Answer**: You need to have a webserver or webhost that provides the following: PHP 5.4 or newer (PHP 7 is supported), and MySQL(i) 4.1 or newer. Your database can be accessed via any of the mysql, mysqli or PDO(mysql) interfaces. You also need either GD 2.xx or ImageMagick installed. GD normally comes bundled with PHP; ImageMagick must be installed by your webhost.
 
-Question: Where can I find out that stuff?
-Answer: Ask your webhost, they should be able to tell you. You can also create a file called phpinfo.php, upload it to your website and enter www.yoursite.com/phpinfo.php in your browser, run it and see what versions of the above requirements you have. Only your host, however, can tell you the exact location of ImageMagick's convert utility, if it's available, at all. If the Imagick PHP extension is available, there will be no need to know that location.
+**Question**: Where can I find out that stuff?  
+**Answer**: Ask your webhost, they should be able to tell you. You can also create a file called phpinfo.php, upload it to your website and enter www.yoursite.com/phpinfo.php in your browser, run it and see what versions of the above requirements you have. Only your host, however, can tell you the exact location of ImageMagick's convert utility, if it's available, at all. If the Imagick PHP extension is available, there will be no need to know that location.
 
 To create your phpinfo file, copy the following into a text file and save the file as phpinfo.php.
 
-    <?php
+```php
+<?php
     phpinfo();
-    ?>
+```
 
-Question: Where do I put all these files?
-Answer: You could put them in your root directory (not recommended) or upload the coppermine directory to your website. If you are uncertain about where exactly to upload it,ask your webhost into what folder you need to upload your html and other script files. We recommend uploading the directory cpg16x (and all the files contained within) directly to your webhost's recommended folder and renaming to your liking after the upload is complete. Compare your uploaded files with your coppermine package. Make sure all the files were successfully uploaded.
+**Question**: Where do I put all these files?  
+**Answer**: You could put them in your root directory (not recommended) or upload the coppermine directory to your website. If you are uncertain about where exactly to upload it,ask your webhost into what folder you need to upload your html and other script files. We recommend uploading the directory cpg16x (and all the files contained within) directly to your webhost's recommended folder and renaming to your liking after the upload is complete. Compare your uploaded files with your coppermine package. Make sure all the files were successfully uploaded.
 
-Question: Ok, I uploaded everything to www.yoursite.com/cpg16x. Now what?
-Answer: You need to change permissions on a few directories before you can do anything else. Using your FTP program or website Control Panel, change permissions on the: "include", "albums", "albums/userpics", and "albums/edit" directories to 777. You should also create a new directory in albums that you will FTP your images/files into (name it "uploads" or any thing that catches your fancy -just no spaces or funny diacritical symbols, please.) and set it's permissions to '777' also. Some server set-ups will not work with chmod '777'. In which case, you should use '755'. (Confused? Don't know what CHMODE is? You've been warned, need we say more?)
+**Question**: Ok, I uploaded everything to www.yoursite.com/cpg16x. Now what?  
+**Answer**: You need to change permissions on a few directories before you can do anything else. Using your FTP program or website Control Panel, change permissions on the: "include", "albums", "albums/userpics", and "albums/edit" directories to 777. You should also create a new directory in albums that you will FTP your images/files into (name it "uploads" or any thing that catches your fancy -just no spaces or funny diacritical symbols, please.) and set it's permissions to '777' also. Some server set-ups will not work with chmod '777'. In which case, you should use '755'. (Confused? Don't know what CHMODE is? You've been warned, need we say more?)
 
-Question: I changed the permissions. What's next?
-Answer: You need to create a MySQL(i) database. Using your website Control Panel or a tool like phpMyAdmin, create a MySQL(i) database. Write down the database name, the username and password – you'll need it to successfully install Coppermine. If you already have a database you're using for a BBS or something else, that'll work just as well. You can use that database for Coppermine, too. If you have a BBS and plan to connect it to Coppermine install, you'll need to share the database anyway.
+**Question**: I changed the permissions. What's next?  
+**Answer**: You need to create a MySQL(i) database. Using your website Control Panel or a tool like phpMyAdmin, create a MySQL(i) database. Write down the database name, the username and password – you'll need it to successfully install Coppermine. If you already have a database you're using for a BBS or something else, that'll work just as well. You can use that database for Coppermine, too. If you have a BBS and plan to connect it to Coppermine install, you'll need to share the database anyway.
 
-Question: My files are in place, permissions are set, and I have my database information. What's the next step?
-Answer: Read the... (Oops, sorry.)  Now you have to run the Coppermine install. Launch your web browser and enter http://www.yousite.com/coppermine/install.php and fill in the information that is requested. If you have never used ImageMagick before, leave that line blank during the install process. You can always add that information after you have Coppermine up and running.
+**Question**: My files are in place, permissions are set, and I have my database information. What's the next step?  
+**Answer**: Read the... (Oops, sorry.)  Now you have to run the Coppermine install. Launch your web browser and enter http://www.yousite.com/coppermine/install.php and fill in the information that is requested. If you have never used ImageMagick before, leave that line blank during the install process. You can always add that information after you have Coppermine up and running.
 
-Question: Screen went blank! Suddenly there are error messages popping up all over the place! My webhost, crashed! What do I do?
-Answer: Read the documentation! If you haven't done so already, you're not going anywhere, anyway, so here's the perfect opportunity. We can wait. Chances are, you'll find the answers you need, there. All we can say at this point is that if your server crashed, it probably wasn't your install and it wasn't our fault. It was just a coincidence. Wait till it's up and running again and try the installation again. If, however, you really can't find the answers you need in the documents, go to https://coppermine-gallery.com/forum/ and review the support boards. Spend a little time looking around and search for your problem. Thousands have gone before you, so a solution for your installation issues have probably been posted, already. (HINT: search using the exact error message you see on your screen.)
+**Question**: Screen went blank! Suddenly there are error messages popping up all over the place! My webhost, crashed! What do I do?  
+**Answer**: Read the documentation! If you haven't done so already, you're not going anywhere, anyway, so here's the perfect opportunity. We can wait. Chances are, you'll find the answers you need, there. All we can say at this point is that if your server crashed, it probably wasn't your install and it wasn't our fault. It was just a coincidence. Wait till it's up and running again and try the installation again. If, however, you really can't find the answers you need in the documents, go to https://coppermine-gallery.com/forum/ and review the support boards. Spend a little time looking around and search for your problem. Thousands have gone before you, so a solution for your installation issues have probably been posted, already. (HINT: search using the exact error message you see on your screen.)
 
-Question: Ha! Ha! Got You! It's installed and working! Now what?
-Answer: 1) Wipe that smile off your face. 2) Read the docs, anyway -- twice. 3) You'll need to look at the configuration of Coppermine to make sure it's set up the way you want it. Log in as the admin, if you aren't already logged in. Enable admin controls - (if the 'Hide admin controls' menu link isn't visible, you are already logged in). Click on the Config button. These are a few of the things you should pay close attention to:
+**Question**: Ha! Ha! Got You! It's installed and working! Now what?  
+**Answer**: 
+1. Wipe that smile off your face.
+2. Read the docs, anyway -- twice.
+3. You'll need to look at the configuration of Coppermine to make sure it's set up the way you want it. Log in as the admin, if you aren't already logged in. Enable admin controls - (if the 'Hide admin controls' menu link isn't visible, you are already logged in). Click on the Config button. These are a few of the things you should pay close attention to:
 
 * General Settings: You should put in your site name and email address, and set your GMT time zone offset.
 * Language, Themes & Charset settings: Choose your default language.
@@ -60,17 +66,17 @@ Answer: 1) Wipe that smile off your face. 2) Read the docs, anyway -- twice. 3) 
 * User settings: If you plan to let people register and upload pictures, make certain that you set "Allow new user registrations" to 'Yes'.
 * You also want to take a peek at the groups settings. Coppermine comes with four groups by default: administrators, registered users, anonymous users, and banned users. This is where you control permissions to send e-cards, upload files, etc. This is also where you can set the maximum allowed disk space for each group (disk quota). It's set to 1024kb by default.
 
-Question: I think everything is set correctly. Can I upload pictures yet?
-Answer: No. First you need to create an album to put them in. In the same row as the Config link or button, you'll see a link called Albums. Click on it and you are taken to a screen that allows you to create an album. Click "New Album", then rename it to whatever you'd like. Click "Apply changes" and presto! You now have an album.
+**Question**: I think everything is set correctly. Can I upload pictures yet?  
+**Answer**: No. First you need to create an album to put them in. In the same row as the Config link or button, you'll see a link called Albums. Click on it and you are taken to a screen that allows you to create an album. Click "New Album", then rename it to whatever you'd like. Click "Apply changes" and presto! You now have an album.
 
-Question: I made an album, so now can I upload pictures?
-Answer: Yes. There are three main methods to upload pictures. The "Multiple files - HTML5" method is most versatile. As the admin, you could also use an FTP program to upload your pictures to your website, then do a batch-add to put them into your Coppermine database. Back at the beginning of this guide I told you to create a directory in albums for just this purpose. Let's say you made one called "uploads". FTP your images to your albums/uploads folder. When that's done, click on batch-add. Select uploads as the directory. You are now presented with a list of all the pictures you just uploaded. By default Coppermine selects all of the images. Select the album (uploads) to put them into, then click Go. You now have an online gallery with pictures to look at! Aren't you amazing!
+**Question**: I made an album, so now can I upload pictures?  
+**Answer**: Yes. There are three main methods to upload pictures. The "Multiple files - HTML5" method is most versatile. As the admin, you could also use an FTP program to upload your pictures to your website, then do a batch-add to put them into your Coppermine database. Back at the beginning of this guide I told you to create a directory in albums for just this purpose. Let's say you made one called "uploads". FTP your images to your albums/uploads folder. When that's done, click on batch-add. Select uploads as the directory. You are now presented with a list of all the pictures you just uploaded. By default Coppermine selects all of the images. Select the album (uploads) to put them into, then click Go. You now have an online gallery with pictures to look at! Aren't you amazing!
 
-Question: Now, can I add a title to a picture?
-Answer: Yes you can. On the main Coppermine screen, when you are logged in as an admin, you'll see a number of options listed next to the album. If you click on "edit files" you will be able to add all sorts of information to each picture.
+**Question**: Now, can I add a title to a picture?  
+**Answer**: Yes you can. On the main Coppermine screen, when you are logged in as an admin, you'll see a number of options listed next to the album. If you click on "edit files" you will be able to add all sorts of information to each picture.
 
-Question: I FTP'd pictures to my webserver and did a batch-add. I can delete the original pictures at the webserver now, right? After all, they are in the database, right?
-Answer: Wrong! Coppermine doesn't actually put the pictures into the database. It just uses the database to remember where the pictures are stored on the webserver, what album and category they belong to, and other information related to the pictures. If you delete the original picture, it will cause a bunch of errors. If you want to delete the original, read the documentation on what the Admin Tools are for and can do for you. You should never delete anything using your webhost tools or ftp program that can be handled internally with coppermine. Doing so can lead to a host of database errors.
+**Question**: I FTP'd pictures to my webserver and did a batch-add. I can delete the original pictures at the webserver now, right? After all, they are in the database, right?  
+**Answer**: Wrong! Coppermine doesn't actually put the pictures into the database. It just uses the database to remember where the pictures are stored on the webserver, what album and category they belong to, and other information related to the pictures. If you delete the original picture, it will cause a bunch of errors. If you want to delete the original, read the documentation on what the Admin Tools are for and can do for you. You should never delete anything using your webhost tools or ftp program that can be handled internally with coppermine. Doing so can lead to a host of database errors.
 
 You are now successfully running Coppermine on your website! Now take a few minutes to read the documentation so you'll know how to administer your gallery. Coppermine is very powerful and can do a lot more than what you probably thought was possible.
 
