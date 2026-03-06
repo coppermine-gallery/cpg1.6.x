@@ -4,17 +4,17 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2025 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2026 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/init.inc.php
- * @since  1.6.27
+ * @since  1.6.28
  */
 
 define('COPPERMINE_URL','https://coppermine-gallery.com/');
 define('COPPERMINE_URL_DOCS',COPPERMINE_URL.'docs/');
 define('COPPERMINE_URL_FORUM',COPPERMINE_URL.'forum/');
-define('COPPERMINE_VERSION', '1.6.27');
+define('COPPERMINE_VERSION', '1.6.28');
 define('COPPERMINE_VERSION_STATUS', 'stable');
 // Define path to jQuery for this version of Coppermine
 define('CPG_JQUERY_VERSION', 'js/jquery-1.12.4.js');

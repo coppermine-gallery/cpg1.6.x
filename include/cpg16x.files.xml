@@ -5,7 +5,7 @@
 		<version>1.6.28</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>54f4dbe95d6bad4d14f6e5d897de86e3</hash>
+		<hash>37549df28a2387415d84cbed0a281a5c</hash>
 	</element>
 	<element>
 		<fullpath>LICENSE.txt</fullpath>
@@ -229,7 +229,7 @@
 		<version>1.6.28</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>0714ffb190e5d5c56ea1e0d5ca063eb7</hash>
+		<hash>03f41c720004a42f9f979604d2882d64</hash>
 	</element>
 	<element>
 		<fullpath>captcha.php</fullpath>
@@ -5325,7 +5325,7 @@
 		<version>1.6.28</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>d0b167c8e3146d7fe3b2dc7b5288f27b</hash>
+		<hash>5c7a1ae0e50b4fb35084c01ccc0f2198</hash>
 	</element>
 	<element>
 		<fullpath>include/imageObjectGD.class.php</fullpath>
@@ -5347,21 +5347,21 @@
 		<version>1.6.28</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>9b99c63080f5c1a1d42f6ab711d1bcd6</hash>
+		<hash>8dab0a7d184e55ef01ae263a1ee3b886</hash>
 	</element>
 	<element>
 		<fullpath>include/imageobject_im.class.php</fullpath>
 		<version>1.6.28</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>6e8dace83df816325db97bcb0a5ed799</hash>
+		<hash>c68f8012d9412f33a5f1fc0841f7a2a1</hash>
 	</element>
 	<element>
 		<fullpath>include/imageobject_imx.class.php</fullpath>
 		<version>1.6.28</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>03a8fc812b61a895515af6ac6fe06fd1</hash>
+		<hash>1f334130c1905c84d47235d32a2a2a2e</hash>
 	</element>
 	<element>
 		<fullpath>include/index.php</fullpath>
@@ -5371,10 +5371,10 @@
 	</element>
 	<element>
 		<fullpath>include/init.inc.php</fullpath>
-		<version>1.6.27</version>
+		<version>1.6.28</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>e9f531dccb6ecf77e85fcebf10577102</hash>
+		<hash>80ebd3845c6bdf9c43855bf5ac6e23b7</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
@@ -7231,7 +7231,7 @@
 		<version>1.6.28</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>4e59098e69eb1dbf3da5a85a0a7aa59f</hash>
+		<hash>a9bbbc53422fa65902cf1d86795730a4</hash>
 	</element>
 	<element>
 		<fullpath>langmgr.php</fullpath>
@@ -7722,7 +7722,7 @@
 		<version>1.6.28</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>06634fb0c8fd978bc6a809ed70fd8278</hash>
+		<hash>3a443179f1c7ed486f737c46aa233690</hash>
 	</element>
 	<element>
 		<fullpath>plugins/upload_sgl/configuration.php</fullpath>
@@ -7840,7 +7840,7 @@
 		<version>1.6.28</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>fb6786f7356e82aad0fa4c4498d61d33</hash>
+		<hash>8dcf1d17aa3091fc15516094e6d6e901</hash>
 	</element>
 	<element>
 		<fullpath>plugins/visiblehookpoints/configuration.php</fullpath>
@@ -9265,7 +9265,7 @@
 		<version>1.6.28</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>831297282380c96b4eef2bfa470f349f</hash>
+		<hash>50db7f53dcb13603bc6c45716050fa8e</hash>
 	</element>
 	<element>
 		<fullpath>upchunk.php</fullpath>
