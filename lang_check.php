@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2026 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * lang_check.php
- * @since  1.6.09
+ * @since  1.6.28
  */
 define('IN_COPPERMINE', true);
 
@@ -69,7 +69,7 @@ class Lang
 	}
 }
 
-$lngSel = $_GET['lang'];
+$lngSel = empty($_GET['lang']) ? '' : basename($_GET['lang']);
 
 $lray = array_fill_keys(array_diff(scandir('lang'), ['.','..']), 1);
 unset($lray['english.php']);
@@ -85,7 +85,7 @@ $opt_scn = $action=='scn' ? ' selected' : '';
 if ($action) {
 	$dsp_lsel = $action=='cks' ? 'inline-block' : 'none';
 } else {
-	$dsl_lsel = 'inline-block';
+	$dsp_lsel = 'inline-block';
 }
 
 echo <<<EOT

@@ -1,23 +1,20 @@
 <?php
-/*************************
-  Coppermine Photo Gallery
-  ************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
-  ********************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
-**********************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2026 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * calendar.php
+ * @since  1.6.28
+ */
 
 define('IN_COPPERMINE', true);
 define('CALENDAR_PHP', true);
 
-require('include/init.inc.php');
+require 'include/init.inc.php';
 
 // function definitions
 
@@ -230,7 +227,7 @@ class Calendar
 
 
     /* Generate the HTML for a given month */
-    function getMonthHTML($m, $y, $showYear = 1, $only_future_dates) {
+    function getMonthHTML($m, $y, $showYear = 1, $only_future_dates = false) {
         global $LINEBREAK;
         $s = "";
 

@@ -226,7 +226,7 @@
 	</element>
 	<element>
 		<fullpath>calendar.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.28</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>0714ffb190e5d5c56ea1e0d5ca063eb7</hash>
@@ -7228,7 +7228,7 @@
 	</element>
 	<element>
 		<fullpath>lang_check.php</fullpath>
-		<version>1.6.09</version>
+		<version>1.6.28</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>4e59098e69eb1dbf3da5a85a0a7aa59f</hash>
@@ -7837,7 +7837,7 @@
 	</element>
 	<element>
 		<fullpath>plugins/visiblehookpoints/codebase.php</fullpath>
-		<version>1.6.08</version>
+		<version>1.6.28</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>fb6786f7356e82aad0fa4c4498d61d33</hash>

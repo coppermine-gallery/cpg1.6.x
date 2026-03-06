@@ -20,6 +20,8 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2026-03-06 [B] Another update for PHP 8.1.x deprecation {nukeworker}
+2026-03-06 [S] Remove security issue with language check helper {ron4mac}
 2026-01-02 [M] Cause single file upload to display in a more user-friendly way when failing {406man}
 2026-01-02 [M] Use configured description size for single file upload instead of hard coded {406man}
 2025-12-30 [M] Clear up a few PHP deprecations {ron4mac}
