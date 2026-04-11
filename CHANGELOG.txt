@@ -7,7 +7,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * CHANGELOG.txt
- * @since  1.6.28
+ * @since  1.6.29
  */
 Changelog
 =========
@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2026-04-09 [M] During HTML5 upload, keep pseudo blank code 200 messages from triggering error condition {ron4mac}
 2026-03-06 [B] Another update for PHP 8.1.x deprecation {nukeworker}
 2026-03-06 [S] Remove security issue with language check helper {ron4mac}
 2026-01-02 [M] Cause single file upload to display in a more user-friendly way when failing {406man}

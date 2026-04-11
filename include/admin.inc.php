@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2018 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2026 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/admin.inc.php
- * @since  1.6.05
+ * @since  1.6.29
  */
 
 /**********************************************
@@ -76,8 +76,9 @@ $config_data = array(
     ),
     'time_offset' => array(
       'type'            => 'textfield',
-      'min'    => '-24',
-      'max'    => '24',
+      'min'             => '-24',
+      'max'             => '24',
+      'step'            => '0.25',
       'default_value'   => '0',
       'help_link'       => 'f=configuration.htm&amp;as=admin_general_time-offset&amp;ae=admin_general_time-offset_end&amp;top=1',
       'regex'           => '^[+-]?([0-9]{1,2})*\.?[0-9]+$',

@@ -3,11 +3,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2026 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * plugins/upload_h5a/js/upload.js
- * @since  1.6.25
+ * @since  1.6.29
  */
 "use strict";
 var redirURL = '',
@@ -371,7 +371,7 @@ function H5up_done(okcount, errcnt) {
 							endup();
 						}
 					} else if (this.status === 200) {
-						if (this.responseText.length) {
+						if (this.responseText.replace(/[ \r\n]/g, '') != '') {
 							$.pBar.msg(this.responseText, true);
 						} else {
 							if ($.doChnk) {

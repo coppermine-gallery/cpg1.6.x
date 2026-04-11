@@ -5182,7 +5182,7 @@
 	</element>
 	<element>
 		<fullpath>include/admin.inc.php</fullpath>
-		<version>1.6.05</version>
+		<version>1.6.29</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>fdc16b5a5640ec28dbc69bf1798b832a</hash>
@@ -7700,14 +7700,14 @@
 	</element>
 	<element>
 		<fullpath>plugins/upload_h5a/js/upload.js</fullpath>
-		<version>1.6.25</version>
+		<version>1.6.29</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>b479e0514ed9c0cda3ac15303bbd1c6f</hash>
 	</element>
 	<element>
 		<fullpath>plugins/upload_h5a/js/upload.min.js</fullpath>
-		<version>1.6.25</version>
+		<version>1.6.29</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>a80143714b0483b96a15fd75385cbe0a</hash>
@@ -7726,7 +7726,7 @@
 	</element>
 	<element>
 		<fullpath>plugins/upload_sgl/configuration.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.29</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>2ccc02931fae21d529492219df54b72a</hash>
