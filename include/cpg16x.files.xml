@@ -7220,6 +7220,13 @@
 		<hash>0445d0e2cad89d65cd8bab24c755559c</hash>
 	</element>
 	<element>
+		<fullpath>lang/russian.php</fullpath>
+		<version>1.6.29</version>
+		<status>optional</status>
+		<permission>read</permission>
+		<hash>eb4133d22e5414cbb8cc766e912e94e0</hash>
+	</element>
+	<element>
 		<fullpath>lang/spanish.php</fullpath>
 		<version>1.6.20</version>
 		<status>optional</status>
