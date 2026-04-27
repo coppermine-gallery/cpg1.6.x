@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2026 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * editpics.php
- * @since  1.6.15
+ * @since  1.6.29
  */
 
 define('IN_COPPERMINE', true);
@@ -190,6 +190,10 @@ function process_post_data()
     //Check if the form token is valid
     if(!checkFormToken()){
         cpg_die(ERROR, $lang_errors['invalid_form_token'], __FILE__, __LINE__);
+    }
+    // make sure user is allowed
+    if ((!user_is_allowed() && !GALLERY_ADMIN_MODE && !MODERATOR_EDIT_MODE)) {
+        cpg_die(ERROR, $lang_errors['perm_denied'], __FILE__, __LINE__);
     }
 
     $user_album_set = array();

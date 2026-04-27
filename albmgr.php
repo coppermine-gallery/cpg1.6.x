@@ -24,19 +24,19 @@ if (!(GALLERY_ADMIN_MODE || USER_ADMIN_MODE)) {
 }
 
 $icon_array = [
-	'ok' => cpg_fetch_icon('ok', 0),
-	'cancel' => cpg_fetch_icon('cancel', 0),
+	'ok' => cpg_fetch_icon('ok', 1),
+	'cancel' => cpg_fetch_icon('cancel', 1),
 	'up' => cpg_fetch_icon('up', 0),
 	'upup' => cpg_fetch_icon('upup', 0),
 	'down' => cpg_fetch_icon('down', 0),
 	'downdown' => cpg_fetch_icon('downdown', 0),
-	'new' => cpg_fetch_icon('add', 0),
+	'new' => cpg_fetch_icon('add', 1),
 	'delete' => cpg_fetch_icon('delete', 0),
 	'edit' => cpg_fetch_icon('edit', 0),
-	'modifyalb' => cpg_fetch_icon('modifyalb', 0),
-	'edit_files' => cpg_fetch_icon('edit', 0),
-	'thumbnail' => cpg_fetch_icon('thumbnails', 0),
-	'blank' => cpg_fetch_icon('blank', 0),
+	'modifyalb' => cpg_fetch_icon('modifyalb', 1),
+	'edit_files' => cpg_fetch_icon('edit', 1),
+	'thumbnail' => cpg_fetch_icon('thumbnails', 1),
+	'blank' => cpg_fetch_icon('blank', 1),
 	'upload' => cpg_fetch_icon('upload', 0, $lang_albmgr_php['upload_files'])
 ];
 

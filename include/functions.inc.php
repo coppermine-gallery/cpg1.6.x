@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/functions.inc.php
- * @since  1.6.28
+ * @since  1.6.29
  */
 
 if (!function_exists('stripos')) {
@@ -800,6 +800,9 @@ function check_link_type_and_replace ($pattern, $replacement, $text, $stage)
         case 1:
         case 3:
             $url = $url[1] . $url[2];
+            // disallow insecure protocols
+            $parsed = parse_url($url);
+            if (!empty($parsed['scheme']) && !in_array(strtolower($parsed['scheme']), ['http','https'])) return '-?-?-?-';
             break;
 
         case 2:

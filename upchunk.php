@@ -1,18 +1,15 @@
 <?php
-/**************************
-  Coppermine Photo Gallery
- **************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
- ************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
- ************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2026 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * upchunk.php
+ * @since  1.6.29
+ */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -28,8 +25,8 @@ class UpChunkObj
 	{
 		global $CONFIG;
 
-		$this->ckid = $p->getEscaped('identifier');
-		$this->filename = $p->getEscaped('filename');
+		$this->ckid = basename($p->getEscaped('identifier'));
+		$this->filename = basename($p->getEscaped('filename'));
 		$this->totalchunks = $p->getInt('totalChunks');
 		$this->dstpath = $CONFIG['fullpath'] . $CONFIG['userpics'] . (USER_ID + FIRST_USER_CAT) . '/';
 		$this->ckpath = $this->dstpath . $this->ckid;

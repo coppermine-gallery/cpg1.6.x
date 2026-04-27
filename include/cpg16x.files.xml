@@ -2,10 +2,10 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.28</version>
+		<version>1.6.29</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>37549df28a2387415d84cbed0a281a5c</hash>
+		<hash>59ae23fb25265d42964639c02804feee</hash>
 	</element>
 	<element>
 		<fullpath>LICENSE.txt</fullpath>
@@ -43,10 +43,10 @@
 	</element>
 	<element>
 		<fullpath>albmgr.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.29</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>ad35d3a9e7326be076e9cfc1b6aad931</hash>
+		<hash>b32cc25fcdf7eb514f6ec4cc09364224</hash>
 	</element>
 	<element>
 		<fullpath>albums/</fullpath>
@@ -356,10 +356,10 @@
 	</element>
 	<element>
 		<fullpath>editpics.php</fullpath>
-		<version>1.6.15</version>
+		<version>1.6.29</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>0b12fa0e5d4248b54aaa811f50c6f49d</hash>
+		<hash>7368db0f6f8928c2ae408a89f3ed61b8</hash>
 	</element>
 	<element>
 		<fullpath>exifmgr.php</fullpath>
@@ -5185,7 +5185,7 @@
 		<version>1.6.29</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>fdc16b5a5640ec28dbc69bf1798b832a</hash>
+		<hash>ee821d86c81a65a71e30012780b13384</hash>
 	</element>
 	<element>
 		<fullpath>include/akismet.inc.php</fullpath>
@@ -5322,10 +5322,10 @@
 	</element>
 	<element>
 		<fullpath>include/functions.inc.php</fullpath>
-		<version>1.6.28</version>
+		<version>1.6.29</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>5c7a1ae0e50b4fb35084c01ccc0f2198</hash>
+		<hash>89989ea7d035b3e6e37ab4cc989d7324</hash>
 	</element>
 	<element>
 		<fullpath>include/imageObjectGD.class.php</fullpath>
@@ -5371,10 +5371,10 @@
 	</element>
 	<element>
 		<fullpath>include/init.inc.php</fullpath>
-		<version>1.6.28</version>
+		<version>1.6.29</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>80ebd3845c6bdf9c43855bf5ac6e23b7</hash>
+		<hash>35e7510a81fad393447c9c3726537533</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
@@ -6914,10 +6914,10 @@
 	</element>
 	<element>
 		<fullpath>js/albmgr.js</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.29</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>5e783ae8a93348c9087966cf6faec7d8</hash>
+		<hash>40a8ac7cfdcec33fbc6e54cf9df503a1</hash>
 	</element>
 	<element>
 		<fullpath>js/banning.js</fullpath>
@@ -7224,7 +7224,7 @@
 		<version>1.6.29</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>eb4133d22e5414cbb8cc766e912e94e0</hash>
+		<hash>388831c6c062b4b7bdf4ac3f29a16394</hash>
 	</element>
 	<element>
 		<fullpath>lang/spanish.php</fullpath>
@@ -7576,10 +7576,10 @@
 	</element>
 	<element>
 		<fullpath>plugins/upload_h5a/configuration.php</fullpath>
-		<version>1.6.04</version>
+		<version>1.6.29</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>903c6e0d3accd2fcd6fea4d443c4700a</hash>
+		<hash>614e1358c2f3dc35fee690c7d7eb48b6</hash>
 	</element>
 	<element>
 		<fullpath>plugins/upload_h5a/css/</fullpath>
@@ -7649,10 +7649,10 @@
 	</element>
 	<element>
 		<fullpath>plugins/upload_h5a/help.php</fullpath>
-		<version>1.6.13</version>
+		<version>1.6.29</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>39cf4cdfeccb1c1480dcdabe5e5df417</hash>
+		<hash>f4134e5033b7f0e0f9809916c9f9cc62</hash>
 	</element>
 	<element>
 		<fullpath>plugins/upload_h5a/help/</fullpath>
@@ -7710,14 +7710,14 @@
 		<version>1.6.29</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>b479e0514ed9c0cda3ac15303bbd1c6f</hash>
+		<hash>318780d1b6de038f47faf9650923ec62</hash>
 	</element>
 	<element>
 		<fullpath>plugins/upload_h5a/js/upload.min.js</fullpath>
 		<version>1.6.29</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>a80143714b0483b96a15fd75385cbe0a</hash>
+		<hash>8324c3f32ddf0d9ec4da103fcd0d2fcf</hash>
 	</element>
 	<element>
 		<fullpath>plugins/upload_sgl/</fullpath>
@@ -7736,7 +7736,7 @@
 		<version>1.6.29</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>2ccc02931fae21d529492219df54b72a</hash>
+		<hash>1905788180eaed9e8b53ff61c3afc8b2</hash>
 	</element>
 	<element>
 		<fullpath>plugins/upload_sgl/js/</fullpath>
@@ -9276,10 +9276,10 @@
 	</element>
 	<element>
 		<fullpath>upchunk.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.29</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>1ea7b61a32815dddef7121d27c5c2672</hash>
+		<hash>663781f8ada2708b9171646ceab0111e</hash>
 	</element>
 	<element>
 		<fullpath>update.php</fullpath>
