@@ -1306,6 +1306,17 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
     global $lang_common, $lang_meta_album_names, $lang_errors;
     global $RESTRICTEDWHERE;
 
+ // if we're viewing an specific album, the variable "$alb_id" will contain its Identificator; otherwise it will contain -1 and we do not apply any restriction
+	$alb_id = is_numeric($album) ? $album : ($cat < 0 ? -$cat : -1);
+	if ($alb_id > 0 && !GALLERY_ADMIN_MODE) {
+    	$result = cpg_db_query("SELECT visibility FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid = {$alb_id}");
+    	list($visibility) = $result->fetchRow(true);       	
+        if ((($visibility > FIRST_USER_CAT) && ($visibility - FIRST_USER_CAT != USER_ID)) OR
+            (($visibility < FIRST_USER_CAT) && !in_array($visibility, $USER_DATA['groups']))) {
+            cpg_die(ERROR, $lang_errors['perm_denied'], __FILE__, __LINE__);
+        }    
+	}
+	
     static $album_name_keyword = '', $pic_count = null;
 
     $superCage = Inspekt::makeSuperCage();
