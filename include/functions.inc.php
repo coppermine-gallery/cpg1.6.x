@@ -1310,9 +1310,9 @@ function get_pic_data($album, &$count, &$album_name, $limit1=-1, $limit2=-1, $se
 	$alb_id = is_numeric($album) ? $album : ($cat < 0 ? -$cat : -1);
 	if ($alb_id > 0 && !GALLERY_ADMIN_MODE) {
     	$result = cpg_db_query("SELECT visibility FROM {$CONFIG['TABLE_ALBUMS']} WHERE aid = {$alb_id}");
-    	list($visibility) = $result->fetchRow(true);       	
-        if ((($visibility > FIRST_USER_CAT) && ($visibility - FIRST_USER_CAT != USER_ID)) OR
-            (($visibility < FIRST_USER_CAT) && !in_array($visibility, $USER_DATA['groups']))) {
+    	list($visibility) = $result->fetchRow(true);   	
+        if ($visibility != 0 && (($visibility > FIRST_USER_CAT && $visibility - FIRST_USER_CAT != USER_ID) OR
+            ($visibility < FIRST_USER_CAT && !in_array($visibility, $USER_DATA['groups'])))) {
             cpg_die(ERROR, $lang_errors['perm_denied'], __FILE__, __LINE__);
         }    
 	}
