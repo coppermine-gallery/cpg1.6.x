@@ -46,7 +46,9 @@ class imageObject extends ImageTool {
         $this->directory = $directory;
         $this->filename  = $filename;
         $this->previous  = $previous;
-        $this->imgRes    = $previous->imgRes;
+        // Null-safe: $previous is null on the normal new imageObject($dir,$file)
+        // path, where the bare property read warns under PHP 8.
+        $this->imgRes    = $previous ? $previous->imgRes : null;
 
         if (file_exists($directory . $filename)) {
 
@@ -57,7 +59,12 @@ class imageObject extends ImageTool {
                 $this->imginfo = cpg_getimagesize($directory . $filename);
 
                 if ($this->imginfo && !$this->imgRes) {
-                    $this->imgRes = $this->getimgRes($directory . $filename, $this->imginfo[2]);
+                    // Skip the full-image decode when even a single copy would
+                    // exhaust memory_limit; leaves imgRes null so callers fall
+                    // back gracefully instead of fataling inside getimgRes().
+                    if (self::gd_fits_in_memory($this->imginfo[0], $this->imginfo[1], 0, 0, 1)) {
+                        $this->imgRes = $this->getimgRes($directory . $filename, $this->imginfo[2]);
+                    }
                 }
 
                 if (function_exists('imagecreatetruecolor')) {
@@ -69,6 +76,76 @@ class imageObject extends ImageTool {
                 $this->string = $this->imginfo[3];
             }
         }
+    }
+
+
+    /**
+     * Estimate whether decoding a source image of the given pixel dimensions
+     * (and, optionally, building a destination bitmap) will fit inside PHP's
+     * memory_limit. Returns true when it is safe to proceed.
+     *
+     * Deliberately dimension-based rather than memory_get_usage()-based: GD's
+     * image buffers are not counted against memory_limit on every PHP build
+     * (e.g. when GD uses the system allocator), so a usage-based check can
+     * silently pass and then fatal. Reasoning from width * height * bytesPerPixel
+     * vs. the configured limit works regardless of how GD allocates.
+     *
+     * @param  int $srcWidth   source pixel width
+     * @param  int $srcHeight  source pixel height
+     * @param  int $destWidth  destination pixel width  (0 if not yet known)
+     * @param  int $destHeight destination pixel height (0 if not yet known)
+     * @param  int $srcCopies  number of full source bitmaps held at once
+     * @return bool true to proceed, false to skip the image
+     */
+    public static function gd_fits_in_memory ($srcWidth, $srcHeight, $destWidth = 0, $destHeight = 0, $srcCopies = 1)
+    {
+        $srcPixels  = max(0, (int)$srcWidth)  * max(0, (int)$srcHeight);
+        $destPixels = max(0, (int)$destWidth) * max(0, (int)$destHeight);
+
+        // Absolute hard ceiling so an unlimited memory_limit still cannot
+        // attempt an absurd raster (80 MP is ~320 MB as a 4 bytes/px bitmap).
+        if ($srcPixels > 80000000) {
+            return false;
+        }
+
+        // A GD true-color bitmap is 4 bytes/px; the 1.5x factor on the source
+        // covers libjpeg/libpng decode buffers and struct overhead. The
+        // destination is copied a few times (unsharp mask, watermark), so it is
+        // budgeted at 4x its own size. Plus a small fixed base for the rest.
+        $estimate = ($srcPixels * 4 * 1.5 * max(1, (int)$srcCopies))
+                  + ($destPixels * 4 * 4)
+                  + (2 * 1024 * 1024);
+
+        $limitBytes = self::php_size_to_bytes(ini_get('memory_limit'));
+        if ($limitBytes <= 0) {
+            // Unlimited / unparseable: only the absolute ceiling above applies.
+            return true;
+        }
+
+        // Reserve headroom for the rest of the request.
+        $reserve = max(32 * 1024 * 1024, (int)($limitBytes * 0.15));
+        return ($estimate <= ($limitBytes - $reserve));
+    }
+
+
+    /**
+     * Convert a PHP shorthand byte value (e.g. "256M", "1G") to bytes.
+     * Returns 0 for unlimited ("-1") or anything unparseable.
+     */
+    private static function php_size_to_bytes ($val)
+    {
+        $val = trim((string)$val);
+        if ($val === '' || $val === '-1') {
+            return 0;
+        }
+        $unit = strtolower($val[strlen($val) - 1]);
+        $num  = (float)$val;
+        switch ($unit) {
+            case 'g': $num *= 1024;
+            case 'm': $num *= 1024;
+            case 'k': $num *= 1024;
+        }
+        return (int)$num;
     }
 
 
@@ -218,6 +295,12 @@ class imageObject extends ImageTool {
 	{
 		$dest = $this->directory . $this->filename;
 
+		// imgRes is null when the decode failed or was skipped (oversized);
+		// bail out rather than fataling in imagerotate()/imagejpeg() on null.
+		if (!isset($this->imgRes) || !$this->imgRes) {
+			return false;
+		}
+
 		$oAct = $this->orientAction[$from];
 		if ($oAct[0] !==  0) $this->imgRes = imagerotate($this->imgRes, $oAct[0], 0); 
 		if ($oAct[1]) $this->imgRes = $this->_mirrorImage($this->imgRes);
@@ -259,6 +342,14 @@ class imageObject extends ImageTool {
 			$ratio = max($ratio, 1.0);
 			$destWidth = (int)($srcWidth / $ratio);
 			$destHeight = (int)($srcHeight / $ratio);
+
+			// If resizing this source would exhaust memory_limit, serve the
+			// original file untouched rather than fataling in GD.
+			if (!self::gd_fits_in_memory($srcWidth, $srcHeight, $destWidth, $destHeight, 2)) {
+				header('Content-type: image/' . $imageType);
+				readfile($src_file);
+				return;
+			}
 
 			if ($this->imginfo[2] == GIS_GIF && $CONFIG['GIF_support'] == 1) {
 				$src_img = imagecreatefromgif($src_file);
@@ -304,6 +395,16 @@ class imageObject extends ImageTool {
 		global $lang_errors;
 
 		$src_file = $this->directory . $this->filename;
+
+		// The constructor already decoded the full source into $this->imgRes,
+		// but this method decodes its own copy below and never uses imgRes.
+		// Free it so only one full-size bitmap is held during the resize: this
+		// halves peak memory and roughly doubles the largest image that can be
+		// processed before hitting memory_limit.
+		if (isset($this->imgRes) && $this->imgRes) {
+			imagedestroy($this->imgRes);
+			$this->imgRes = null;
+		}
 
 		list($sharpen) = CPGPluginAPI::filter('image_sharpen', array($sharpen, $new_size));
 
@@ -390,6 +491,14 @@ class imageObject extends ImageTool {
 			$yOffset = 0;
 		}
 
+		// Bail out gracefully before the decode below would exhaust memory_limit.
+		// imagecreatefrom*() decodes the whole source ($imginfo[0]x$imginfo[1])
+		// regardless of any crop region.
+		if (!self::gd_fits_in_memory($imginfo[0], $imginfo[1], $destWidth, $destHeight, 1)) {
+			return array('error' => 'The image is too large to process ('
+				. (int)$imginfo[0] . 'x' . (int)$imginfo[1] . ' pixels).');
+		}
+
 		if (!function_exists('imagecreatefromjpeg')) {
 			return array('error' => 'PHP running on your server does not support the GD image library, check with your webhost if ImageMagick is installed', 'halt_upload' => 1);
 		}
@@ -433,7 +542,7 @@ class imageObject extends ImageTool {
 		}
 
 		if ($watermark == "true" || $media_type != "false") {
-			//shrink watermark on intermediate images -> If I had known that this is that �%&# with the transparency preserve... grrr
+			//shrink watermark on intermediate images -> If I had known that this is that  %&# with the transparency preserve... grrr
 			$wm_normal = (int)$CONFIG['reduce_watermark'];
 			if ($wm_normal > $destWidth ) {
 				$wm_resize = $destWidth / $wm_normal;
