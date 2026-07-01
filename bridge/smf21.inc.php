@@ -96,7 +96,7 @@ if (isset($bridge_lookup)) {
 
             // Pages to redirect to
             $this->page = array(
-                'register' => '/index.php?action=register',
+                'register' => '/index.php?action=signup',
                 'editusers' => '/index.php?action=mlist',
                 'edituserprofile' => '/index.php?action=profile;u='
             );
