@@ -7,7 +7,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * CHANGELOG.txt
- * @since  1.6.29
+ * @since  1.6.30
  */
 Changelog
 =========
@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2026-09-28 [B] Correct session handling for SMF 2.0/2.1 bridge
 2026-04-26 [S] Mitigated a few minor vulnerabilities - thank you Leousum {ron4mac}
 2026-04-16 [M] Added Russian language file contributed by Siava {ron4mac}
 2026-04-09 [M] During HTML5 upload, keep pseudo blank code 200 messages from triggering error condition {ron4mac}

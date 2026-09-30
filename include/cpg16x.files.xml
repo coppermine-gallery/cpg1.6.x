@@ -2,7 +2,7 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.29</version>
+		<version>1.6.30</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>59ae23fb25265d42964639c02804feee</hash>
@@ -177,14 +177,14 @@
 	</element>
 	<element>
 		<fullpath>bridge/smf20.inc.php</fullpath>
-		<version>1.6.26</version>
+		<version>1.6.30</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>5cd8281ab0904758d691353dc2610c7a</hash>
 	</element>
 	<element>
 		<fullpath>bridge/smf21.inc.php</fullpath>
-		<version>1.6.24</version>
+		<version>1.6.30</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>685eca0ad68dc055a16d0150f5551c8b</hash>
