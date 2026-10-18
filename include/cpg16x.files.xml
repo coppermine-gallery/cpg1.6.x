@@ -5,7 +5,7 @@
 		<version>1.6.30</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>59ae23fb25265d42964639c02804feee</hash>
+		<hash>b076e3419de67d825d3fef9d9bcfa12e</hash>
 	</element>
 	<element>
 		<fullpath>LICENSE.txt</fullpath>
@@ -180,14 +180,14 @@
 		<version>1.6.30</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>5cd8281ab0904758d691353dc2610c7a</hash>
+		<hash>34d47bbb6e171e048771bb06df2816cf</hash>
 	</element>
 	<element>
 		<fullpath>bridge/smf21.inc.php</fullpath>
 		<version>1.6.30</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>685eca0ad68dc055a16d0150f5551c8b</hash>
+		<hash>caf0b453b3cb48261c31d518fe9a387e</hash>
 	</element>
 	<element>
 		<fullpath>bridge/udb_base.inc.php</fullpath>
@@ -5371,10 +5371,10 @@
 	</element>
 	<element>
 		<fullpath>include/init.inc.php</fullpath>
-		<version>1.6.29</version>
+		<version>1.6.30</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>35e7510a81fad393447c9c3726537533</hash>
+		<hash>352b6a4c602cf8249b9f41a1b7a95ea3</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
@@ -9286,7 +9286,7 @@
 		<version>1.6.30</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>e8e9df8c5fa212fe1e414f8935e036b6</hash>
+		<hash>974fa9dafa8a674a0c0b3718fcea9a4d</hash>
 	</element>
 	<element>
 		<fullpath>updater.php</fullpath>
