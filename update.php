@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * update.php
- * @since  1.6.12
+ * @since  1.6.30
  */
 
 // define('SKIP_AUTHENTICATION', true);
@@ -73,7 +73,11 @@ if (!function_exists('cpg_display_help')) {
 // if a different dbase method is selected, we have to change the config and reload
 // the page to get to the correct dbase class
 if ($superCage->post->keyExists('action') && $superCage->post->getAlpha('action') == 'dbselect') {
-	set_config_dbtype($superCage->post->getRaw('db_type'));
+	if ($match = $superCage->post->getMatched('db_type','^(?!.*:.*:)[A-Za-z:]+$')) {
+		set_config_dbtype($match[0]);
+	} else {
+		$errors .= $lang_update_php['not_available'].'<br>';
+	}
 	if ($errors) {
 		html_error($errors);
 	} else {

@@ -9283,7 +9283,7 @@
 	</element>
 	<element>
 		<fullpath>update.php</fullpath>
-		<version>1.6.12</version>
+		<version>1.6.30</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>e8e9df8c5fa212fe1e414f8935e036b6</hash>
