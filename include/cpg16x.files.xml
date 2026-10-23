@@ -2,10 +2,10 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.30</version>
+		<version>1.6.31</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>b076e3419de67d825d3fef9d9bcfa12e</hash>
+		<hash>fb859f01f6a5625c0da5fd810d5ca42e</hash>
 	</element>
 	<element>
 		<fullpath>LICENSE.txt</fullpath>
@@ -301,7 +301,7 @@
 		<version>1.6.08</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>02b69a4d53c4fc3ff5a50af63a02c4c9</hash>
+		<hash>533de59319f3aa3a39667a6c951b2f5e</hash>
 	</element>
 	<element>
 		<fullpath>delete.php</fullpath>
@@ -5322,10 +5322,10 @@
 	</element>
 	<element>
 		<fullpath>include/functions.inc.php</fullpath>
-		<version>1.6.29</version>
+		<version>1.6.31</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>89989ea7d035b3e6e37ab4cc989d7324</hash>
+		<hash>156d2e6aa3103abe5e2b62c1c2686487</hash>
 	</element>
 	<element>
 		<fullpath>include/imageObjectGD.class.php</fullpath>
@@ -5371,10 +5371,10 @@
 	</element>
 	<element>
 		<fullpath>include/init.inc.php</fullpath>
-		<version>1.6.30</version>
+		<version>1.6.31</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>352b6a4c602cf8249b9f41a1b7a95ea3</hash>
+		<hash>4729ae5cdcec6c234204e28f779c7048</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
@@ -5584,7 +5584,7 @@
 		<version>1.6.27</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>1a7999fed578662133353944e500a23d</hash>
+		<hash>2a97b1d72704159fc655407c482a5df6</hash>
 	</element>
 	<element>
 		<fullpath>include/tool.class.php</fullpath>
@@ -6867,10 +6867,10 @@
 	</element>
 	<element>
 		<fullpath>include/upgrader.inc.php</fullpath>
-		<version>1.6.23</version>
+		<version>1.6.31</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>d670dc841ce5945a71aca863e70fe6e6</hash>
+		<hash>78f72a6aaca5e6649a91ec59d5f15077</hash>
 	</element>
 	<element>
 		<fullpath>include/versioncheck.inc.php</fullpath>
@@ -7193,45 +7193,45 @@
 	</element>
 	<element>
 		<fullpath>lang/english.php</fullpath>
-		<version>1.6.20</version>
+		<version>1.6.31</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>7c892499b6e6071402f7e5f36bb8b0c6</hash>
+		<hash>e9f83b38bd38212dd8113b43235c764b</hash>
 	</element>
 	<element>
 		<fullpath>lang/estonian.php</fullpath>
-		<version>1.6.18</version>
+		<version>1.6.31</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>c9fd32b00700e1429b0e8a6d87e1fcd7</hash>
+		<hash>73139a36cb1d2669372bec638c5d5f40</hash>
 	</element>
 	<element>
 		<fullpath>lang/french.php</fullpath>
-		<version>1.6.20</version>
+		<version>1.6.31</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>d9802a3d1cae50e182ce142b9e104a45</hash>
+		<hash>7317cc95ac1a941cac354951f0b2fc57</hash>
 	</element>
 	<element>
 		<fullpath>lang/german.php</fullpath>
-		<version>1.6.18</version>
+		<version>1.6.31</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>0445d0e2cad89d65cd8bab24c755559c</hash>
+		<hash>500e7763056a3a481cf15d39288fefc3</hash>
 	</element>
 	<element>
 		<fullpath>lang/russian.php</fullpath>
-		<version>1.6.29</version>
+		<version>1.6.31</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>388831c6c062b4b7bdf4ac3f29a16394</hash>
+		<hash>1d2ac5ba3a140e8dac81a090fcf71de5</hash>
 	</element>
 	<element>
 		<fullpath>lang/spanish.php</fullpath>
-		<version>1.6.20</version>
+		<version>1.6.31</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>eb4133d22e5414cbb8cc766e912e94e0</hash>
+		<hash>45bd2070217c64429cdf92da0acdc5db</hash>
 	</element>
 	<element>
 		<fullpath>lang_check.php</fullpath>
@@ -7289,7 +7289,7 @@
 		<version>1.6.03</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>f3d05821bf8d94579d0dff52ff81f7e9</hash>
+		<hash>e328b40ec9cc608e7eb539c2921c6c34</hash>
 	</element>
 	<element>
 		<fullpath>notifyupload.php</fullpath>
@@ -7356,10 +7356,10 @@
 	</element>
 	<element>
 		<fullpath>plugins/sample/configuration.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.31</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>9455a857cc6ef4f777658c4f0d2152de</hash>
+		<hash>a0e465ef483feca729500ed3eb8a04fd</hash>
 	</element>
 	<element>
 		<fullpath>plugins/sample/lang/</fullpath>
@@ -7851,10 +7851,10 @@
 	</element>
 	<element>
 		<fullpath>plugins/visiblehookpoints/configuration.php</fullpath>
-		<version>1.6.03</version>
+		<version>1.6.31</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>717c48cffb091b6eda723ac76a3b27cf</hash>
+		<hash>2f20bcb13edf6c14d7f6192563305a3a</hash>
 	</element>
 	<element>
 		<fullpath>plugins/visiblehookpoints/css/</fullpath>
@@ -9028,10 +9028,10 @@
 	</element>
 	<element>
 		<fullpath>themes/sample/theme.php</fullpath>
-		<version>1.6.10</version>
+		<version>1.6.31</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>eb2492f6286dc876007596bf20c10ebe</hash>
+		<hash>8a774a1a8ab58de807c4545a78a9084b</hash>
 	</element>
 	<element>
 		<fullpath>themes/water_drop/</fullpath>
@@ -9283,10 +9283,10 @@
 	</element>
 	<element>
 		<fullpath>update.php</fullpath>
-		<version>1.6.30</version>
+		<version>1.6.31</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>974fa9dafa8a674a0c0b3718fcea9a4d</hash>
+		<hash>d1beee87a9d92116793c242a3cf69fb5</hash>
 	</element>
 	<element>
 		<fullpath>updater.php</fullpath>

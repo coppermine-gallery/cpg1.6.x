@@ -100,7 +100,7 @@ $data = array($lang_modifyalb_php['general_settings'],
     array($icon_array['rate'].$lang_modifyalb_php['can_rate'].$notice1.$help['can_rate'], 'votes', 1),
 );
 
-/* TODO: re-enable and test feature when it's clear how it should work (see http://forum.coppermine-gallery.net/index.php/topic,64408.0.html)
+/* TODO: re-enable and test feature when it's clear how it should work (see https://coppermine-gallery.com/forum/index.php/topic,64408.0.html)
 if (GALLERY_ADMIN_MODE) {
     $data[] = array($lang_modifyalb_php['can_moderate'].$help['can_moderate'], 'moderator_group', 8);
 }

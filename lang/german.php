@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2022 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2026 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * lang/german.php
- * @since  1.6.18
+ * @since  1.6.31
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -99,7 +99,7 @@ $lang_errors['register_globals_title'] = 'Register Globals sind aktiviert!';
 $lang_errors['register_globals_warning'] = 'Die PHP-Einstellung register_globals ist auf Deinem Server aktiviert. Dies ist bezüglich der Sicherheit keine gute Idee. Es wird dringend empfohlen diese Einstellung zu deaktivieren.';
 
 $lang_bbcode_help_title = 'BBCode-Hilfe';
-$lang_bbcode_help = 'Du kannst klickbare Links und Formatierung in diesem Feld anwenden durch die Verwendung folgender BBCode-Befehle: <li>[b]Fett[/b] =&gt; <strong>Fett</strong></li><li>[i]Kursiv[/i] =&gt; <i>Kursiv</i></li><li>[url=http://deineseite.com/]Url Text[/url] =&gt; <a href="http://deineseite.com">UrlText</a></li><li>[email]benutzer@domain.com[/email] =&gt; <a href="mailto:benutzer@domain.com">benutzer@domain.com</a></li><li>[color=red]Beispieltext[/color] =&gt; <span style="color:red">Beispieltext</span></li><li>[img]http://documentation.coppermine-gallery.net/images/browser.png[/img] => <img src="docs/images/browser.png" border="0" alt="" width="19" height="18" /></li>';
+$lang_bbcode_help = 'Du kannst klickbare Links und Formatierung in diesem Feld anwenden durch die Verwendung folgender BBCode-Befehle: <li>[b]Fett[/b] =&gt; <strong>Fett</strong></li><li>[i]Kursiv[/i] =&gt; <i>Kursiv</i></li><li>[url=http://deineseite.com/]Url Text[/url] =&gt; <a href="http://deineseite.com">UrlText</a></li><li>[email]benutzer@domain.com[/email] =&gt; <a href="mailto:benutzer@domain.com">benutzer@domain.com</a></li><li>[color=red]Beispieltext[/color] =&gt; <span style="color:red">Beispieltext</span></li><li>[img]https://coppermine-gallery.com/docs/curr/images/browser.png[/img] => <img src="docs/images/browser.png" border="0" alt="" width="19" height="18" /></li>';
 
 $lang_common['yes'] = 'Ja';
 $lang_common['no'] = 'Nein';
@@ -248,7 +248,7 @@ $lang_gallery_admin_menu['keywordmgr_title'] = 'Verwalte Schlagworte (falls die 
 $lang_gallery_admin_menu['exifmgr_lnk'] = 'EXIF';
 $lang_gallery_admin_menu['exifmgr_title'] = 'EXIF-Anzeige verwalten (falls die entsprechende Option in den Einstellungen aktiviert wurde).';
 $lang_gallery_admin_menu['shownews_lnk'] = 'News anzeigen';
-$lang_gallery_admin_menu['shownews_title'] = 'Zeige neueste Nachrichten von coppermine-gallery.net';
+$lang_gallery_admin_menu['shownews_title'] = 'Zeige neueste Nachrichten von coppermine-gallery.com';
 $lang_gallery_admin_menu['admin_menu'] = 'Admin-Menü';
 
 $lang_user_admin_menu['albmgr_title'] = 'Meine Alben erzeugen/anordnen';
@@ -349,7 +349,7 @@ $lang_theme_selection['choose_theme'] = 'Wähle Design';
 $lang_version_alert['version_alert'] = 'Nicht unterstützte Version!';
 $lang_version_alert['no_stable_version'] = 'Du betreibst Coppermine version %s (%s), das nur für erfahrene Benutzer gedacht ist - für diese Version gibt es keinen Support oder Funktions-Garantien. Benutze sie auf eigenes Risiko oder downgrade auf die aktuellste stabile Version, wenn Du Support brauchst!';
 $lang_version_alert['gallery_offline'] = 'Die Galerie ist zur Zeit im Wartungs-Modus und ist nur für Dich als Admin zugänglich. Vergiss nicht, sie wieder aus dem Wartungs-Modus in den "normalen" Modus zurück zu schalten, wenn Deine Wartungsarbeiten beendet sind.';
-$lang_version_alert['coppermine_news'] = 'News von coppermine-gallery.net';
+$lang_version_alert['coppermine_news'] = 'News von coppermine-gallery.com';
 $lang_version_alert['no_iframe'] = 'Dein Browser kann keine eingebetteten Frames darstellen';
 $lang_version_alert['hide'] = 'verbergen';
 
@@ -905,7 +905,7 @@ $lang_admin_php['count_admin_hits'] = 'Admin-Hits zählen';
 $lang_admin_php['debug_mode'] = 'Debug-Modus ein';
 $lang_admin_php['debug_notice'] = 'PHP-notices in Debug-Modus anzeigen (empfohlen: aus)';
 $lang_admin_php['offline'] = 'Galerie ist im Wartungsmodus';
-$lang_admin_php['display_coppermine_news'] = 'News von coppermine-gallery.net anzeigen';
+$lang_admin_php['display_coppermine_news'] = 'News von coppermine-gallery.com anzeigen';
 $lang_admin_php['display_coppermine_detail'] = 'werden nur für den Administrator angezeigt';
 $lang_admin_php['config_setting_invalid'] = 'Der Wert, den Du für &laquo;%s&raquo; eingegeben hast ist ungültig, bitte überprüfen.';
 $lang_admin_php['config_setting_ok'] = 'Deine Änderung für &laquo;%s&raquo; wurde gespeichert.';

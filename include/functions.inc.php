@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/functions.inc.php
- * @since  1.6.29
+ * @since  1.6.31
  */
 
 if (!function_exists('stripos')) {
@@ -4439,7 +4439,7 @@ EOT;
         $return .= '</div>';
     }
 
-    // display news from coppermine-gallery.net
+    // display news from coppermine-gallery.com
     if ($CONFIG['display_coppermine_news'] == 1 && GALLERY_ADMIN_MODE) {
         $help_news      = '&nbsp;' . cpg_display_help('f=configuration.htm&amp;as=admin_general_coppermine_news&amp;ae=admin_general_coppermine_news_end&amp;top=1', '600', '300');
         $news_icon      = cpg_fetch_icon('news_show', 2);
@@ -4462,11 +4462,11 @@ EOT;
                     <td class="tableb" colspan="2">
 EOT;
         // Try to retrieve the news directly
-        //$result = cpgGetRemoteFileByURL('http://coppermine-gallery.net/cpg16x_news.htm', 'GET', '', '200'); // disabled, see http://forum.coppermine-gallery.net/index.php/topic,65424.msg325573.html#msg325573
+        //$result = cpgGetRemoteFileByURL('https://coppermine-gallery.com/cpg16x_news.php', 'GET', '', '200'); // disabled, see https://coppermine-gallery.com/forum/index.php/topic,65424.msg325573.html#msg325573
         if (empty($result) || strlen($result['body']) < 200) { // retrieving the file failed - let's display it in an iframe then
         	$cpgurl = COPPERMINE_URL;
             print <<< EOT
-                      <iframe src="{$cpgurl}cpg16x_news.htm" align="left" frameborder="0" scrolling="auto" marginheight="0" marginwidth="0" width="100%" height="100" name="coppermine_news" id="coppermine_news" class="textinput">
+                      <iframe src="{$cpgurl}cpg16x_news.php" align="left" frameborder="0" scrolling="auto" marginheight="0" marginwidth="0" width="100%" height="100" name="coppermine_news" id="coppermine_news" class="textinput">
                         {$lang_version_alert['no_iframe']}
                       </iframe>
 EOT;
@@ -4851,7 +4851,7 @@ function utf_ucfirst($str)
 /*
   This function replaces special UTF characters to their ANSI equivelant for
   correct processing by MySQL, keywords, search, etc. since a bug has been
-  found:  http://coppermine-gallery.net/forum/index.php?topic=17366.0
+  found:  https://coppermine-gallery.com/forum/index.php?topic=17366.0
 */
 function utf_replace($str)
 {

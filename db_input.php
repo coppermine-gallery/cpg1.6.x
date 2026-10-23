@@ -418,7 +418,7 @@ case 'album_update':
 
     $query = "UPDATE {$CONFIG['TABLE_ALBUMS']} SET title = '$title', description = '$description', category = $category, thumb = $thumb, comments = '$comments', votes = '$votes', visibility = $visibility, alb_password = '$password', alb_password_hint = '$password_hint', keyword = '$keyword'";
     if (GALLERY_ADMIN_MODE) {
-        /* TODO: re-enable and test feature when it's clear how it should work (see http://forum.coppermine-gallery.net/index.php/topic,64408.0.html)
+        /* TODO: re-enable and test feature when it's clear how it should work (see http://coppermine-gallery.com/forum/index.php/topic,64408.0.html)
         $moderator_group = $superCage->post->getInt('moderator_group');
         $query .= ", moderator_group = '$moderator_group'";
         */

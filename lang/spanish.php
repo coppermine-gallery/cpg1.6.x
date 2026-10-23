@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2022 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2026 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * lang/spanish.php
- * @since  1.6.20
+ * @since  1.6.31
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -19,7 +19,7 @@ $lang_translation_info['lang_name_native'] = 'Español';
 $lang_translation_info['lang_country_code'] = 'es';
 $lang_translation_info['trans_name'] = '{KchoPrro}';
 $lang_translation_info['trans_email'] = '';
-$lang_translation_info['trans_website'] = 'http://coppermine-gallery.net/';
+$lang_translation_info['trans_website'] = 'https://coppermine-gallery.com/';
 $lang_translation_info['trans_date'] = '2022-08-19';
 
 $lang_charset = 'utf-8';
@@ -91,7 +91,7 @@ $lang_errors['register_globals_title'] = 'Existe la variable register_globals';/
 $lang_errors['register_globals_warning'] = 'La configuración de PHP register_globals está habilitada en su servidor, que es una mala idea en términos de seguridad. Es muy recomendable que lo deshabilites.'; //cpg1.5
 
 $lang_bbcode_help_title = 'Ayuda de BBCode';
-$lang_bbcode_help = 'Los siguientes códigos te pueden ser de utilidad: : <li>[b]Negrita[/b] =&gt; <strong>Negrita</strong></li><li>[i]Itálica[/i] =&gt; <i>Itálica</i></li><li>[url=http://sitioweb.com/]Texto de la Url[/url] =&gt; <a href="http://sitioweb.com">Texto de la Url</a></li><li>[email]usuario@dominio.com[/email] =&gt; <a href="mailto:usuario@dominio.com">usuario@dominio.com</a></li><li>[color=red]Algun texto[/color] =&gt; <span style="color:red">Algun Texto</span></li><li>[img]http://documentation.coppermine-gallery.net/images/browser.png[/img] =&gt; <img src="docs/images/browser.png" border="0" alt="" /></li>';
+$lang_bbcode_help = 'Los siguientes códigos te pueden ser de utilidad: : <li>[b]Negrita[/b] =&gt; <strong>Negrita</strong></li><li>[i]Itálica[/i] =&gt; <i>Itálica</i></li><li>[url=http://sitioweb.com/]Texto de la Url[/url] =&gt; <a href="http://sitioweb.com">Texto de la Url</a></li><li>[email]usuario@dominio.com[/email] =&gt; <a href="mailto:usuario@dominio.com">usuario@dominio.com</a></li><li>[color=red]Algun texto[/color] =&gt; <span style="color:red">Algun Texto</span></li><li>[img]https://coppermine-gallery.com/docs/curr/images/browser.png[/img] =&gt; <img src="docs/images/browser.png" border="0" alt="" /></li>';
 
 $lang_common['yes'] = 'Sí'; // cpg1.5
 $lang_common['no'] = 'No'; // cpg1.5
@@ -232,7 +232,7 @@ $lang_gallery_admin_menu['keywordmgr_title'] = 'Administrar las palabras clave (
 $lang_gallery_admin_menu['exifmgr_lnk'] = 'Administrador de datos EXIF'; // cpg1.5
 $lang_gallery_admin_menu['exifmgr_title'] = 'Administrar los datos EXIF (si está habilitada la configuración correspondiente).'; // cpg1.5
 $lang_gallery_admin_menu['shownews_lnk'] = 'Mostrar novedades'; // cpg1.5
-$lang_gallery_admin_menu['shownews_title'] = 'Mostrar las novedades desde coppermine-gallery.net'; // cpg1.5
+$lang_gallery_admin_menu['shownews_title'] = 'Mostrar las novedades desde coppermine-gallery.com'; // cpg1.5
 
 $lang_user_admin_menu['albmgr_title'] = 'Crear y ordenar mis álbumes';
 $lang_user_admin_menu['albmgr_lnk'] = 'Crear/ordenar álbumes';
@@ -331,7 +331,7 @@ $lang_theme_selection['choose_theme'] = 'Elige un tema';
 $lang_version_alert['version_alert'] = '¡Versión no soportada!';
 $lang_version_alert['no_stable_version'] = 'Estás ejecutando %s (%s), preparada sólo para usuarios muy experimentados - no tiene soporte, y no se garantiza el funcionamiento. ¡Úsala bajo tu responsabilidad, o baja de versión a la última estable si necesitas soporte!';
 $lang_version_alert['gallery_offline'] = 'La galería está actualmente desactivada, y solo será visible para tí como administrador. No olvides activarla de nuevo después de terminar el mantenimiento.';
-$lang_version_alert['coppermine_news'] = 'Noticias de coppermine-gallery.net'; // cpg1.5
+$lang_version_alert['coppermine_news'] = 'Noticias de coppermine-gallery.com'; // cpg1.5
 $lang_version_alert['no_iframe'] = 'Tu navegador no puede mostrar frames (marcos)'; // cpg1.5
 $lang_version_alert['hide'] = 'Ocultar'; // cpg1.5
 
@@ -910,7 +910,7 @@ $lang_admin_php['count_admin_hits'] = 'Contar las visitas del administrador'; //
 $lang_admin_php['debug_mode'] = 'Habilitar depuración'; // cpg1.5
 $lang_admin_php['debug_notice'] = 'Mostrar notas en el modo de depuración'; // cpg1.5
 $lang_admin_php['offline'] = 'Desactivar la galería (no olvides activarla después de terminar)'; // cpg1.5
-$lang_admin_php['display_coppermine_news'] = 'Mostrar noticias de coppermine-gallery.net'; // cpg1.5
+$lang_admin_php['display_coppermine_news'] = 'Mostrar noticias de coppermine-gallery.com'; // cpg1.5
 $lang_admin_php['display_coppermine_detail'] = 'Sólo se mostrarán al administrador'; // cpg1.5
 $lang_admin_php['config_setting_invalid'] = 'El valor establecido en &laquo;%s&raquo; no es válido, revísalo por favor.'; // cpg1.5
 $lang_admin_php['config_setting_rangerr'] = 'El valor que ha establecido para &laquo;%s&raquo; está fuera del rango permitido, revíselo.';

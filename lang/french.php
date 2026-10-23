@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2022 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2026 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * lang/french.php
- * @since  1.6.20
+ * @since  1.6.31
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -19,7 +19,7 @@ $lang_translation_info['lang_name_native'] = 'Français';
 $lang_translation_info['lang_country_code'] = 'fr';
 $lang_translation_info['trans_name'] = 'François Keller';
 $lang_translation_info['trans_email'] = 'francois.cpgtest@free.fr';
-$lang_translation_info['trans_website'] = 'http://coppermine-gallery.net/forum/index.php?board=38.0';
+$lang_translation_info['trans_website'] = 'https://coppermine-gallery.com/forum/index.php?board=38.0';
 $lang_translation_info['trans_date'] = '2010-06-25';
 
 $lang_charset = 'utf-8';
@@ -92,7 +92,7 @@ $lang_errors['register_globals_title'] = 'Register globals on';
 $lang_errors['register_globals_warning'] = 'Le paramétre PHP &quot;register_globals&quot; est activé (sur on) sur votre serveur, ce qui est une mauvaise idée en terme de sécurité. Il esr fortement recommandé de désactiver ce paramètre (mettre sur off).';
 
 $lang_bbcode_help_title = 'Aide BBcode';
-$lang_bbcode_help = 'Vous pouvez ajouter des liens cliquables et formater le texte de ce champ en utilisant les balises BBcode: <li>[b]Gras[/b] =&gt; <b>Gras</b></li><li>[i]Italique[/i] =&gt; <i>Italique</i></li><li>[url=http://votresite.com/]Texte du lien[/url] =&gt; <a href="http://votresite.com">Url Text</a></li><li>[email]Utilisateur@domaine.com[/email] =&gt; <a href="mailto:Utilisateur@domaine.com">Utilisateur@domaine.com</a></li><li>[color=red]Votre texte[/color] =&gt; <span style="color:red">Votre texte</span></li><li>[img]http://documentation.coppermine-gallery.net/images/browser.png[/img]] = <img src="docs/images/browser.png" border="0" alt="" /></li>';
+$lang_bbcode_help = 'Vous pouvez ajouter des liens cliquables et formater le texte de ce champ en utilisant les balises BBcode: <li>[b]Gras[/b] =&gt; <b>Gras</b></li><li>[i]Italique[/i] =&gt; <i>Italique</i></li><li>[url=http://votresite.com/]Texte du lien[/url] =&gt; <a href="http://votresite.com">Url Text</a></li><li>[email]Utilisateur@domaine.com[/email] =&gt; <a href="mailto:Utilisateur@domaine.com">Utilisateur@domaine.com</a></li><li>[color=red]Votre texte[/color] =&gt; <span style="color:red">Votre texte</span></li><li>[img]https://coppermine-gallery.com/docs/curr/images/browser.png[/img]] = <img src="docs/images/browser.png" border="0" alt="" /></li>';
 
 $lang_common['yes'] = 'Oui';
 $lang_common['no'] = 'Non';
@@ -233,7 +233,7 @@ $lang_gallery_admin_menu['keywordmgr_title'] = 'Gérer les mots-clés (si l\'opt
 $lang_gallery_admin_menu['exifmgr_lnk'] = 'Gestion EXIF';
 $lang_gallery_admin_menu['exifmgr_title'] = 'Gérer l\'affichage des données EXIF (si l\'option correspondante est cochée dans la configuration).';
 $lang_gallery_admin_menu['shownews_lnk'] = 'Montrer les news';
-$lang_gallery_admin_menu['shownews_title'] = 'Afficher le news de coppermine-gallery.net';
+$lang_gallery_admin_menu['shownews_title'] = 'Afficher le news de coppermine-gallery.com';
 
 $lang_user_admin_menu['albmgr_title'] = 'Créer et classer mes albums';
 $lang_user_admin_menu['albmgr_lnk'] = 'Créer/Classer mes albums';
@@ -331,7 +331,7 @@ $lang_theme_selection['choose_theme'] = 'Choisissez votre thème';
 $lang_version_alert['version_alert'] = 'Version sans support d\'aide';
 $lang_version_alert['no_stable_version'] = 'Vous utilisez Coppermine %s (%s) qui s\'adresse aux utilisateurs très expérimentés. Cette version n\'offre aucun support d\'aide. Vous pouvez l\'utilisez, mais à vos risques et périls. Si vous êtes un nouvel utilisateur, téléchargez la dernière version stable alors vous aurez accès au Support Coppermine, si vous avez besoin d\'aide';
 $lang_version_alert['gallery_offline'] = 'La galerie est actuellement hors-ligne et n\'est visible que par un administrateur. N\'oubliez pas de la remettre en ligne une fois les travaux de maintenance terminés.';
-$lang_version_alert['coppermine_news'] = 'Nouvelles de coppermine-gallery.net';
+$lang_version_alert['coppermine_news'] = 'Nouvelles de coppermine-gallery.com';
 $lang_version_alert['no_iframe'] = 'Votre navigateur ne peut pas afficher les cadres incorporés (iframes)';
 $lang_version_alert['hide'] = 'cacher';
 
@@ -883,7 +883,7 @@ $lang_admin_php['count_admin_hits'] = 'Compter les visualisations par l\'adminis
 $lang_admin_php['debug_mode'] = 'Activer le mode débogage';
 $lang_admin_php['debug_notice'] = 'Afficher les avertissements dans le mode débogage';
 $lang_admin_php['offline'] = 'La galerie est hors-ligne (sauf pour l\'administrateur)';
-$lang_admin_php['display_coppermine_news'] = 'Afficher les news de coppermine-gallery.net';
+$lang_admin_php['display_coppermine_news'] = 'Afficher les news de coppermine-gallery.com';
 $lang_admin_php['display_coppermine_detail'] = 'sera uniquement affiché pour l\'administrateur';
 $lang_admin_php['config_setting_invalid'] = 'La valeur que vous avez entrée pour &laquo;%s&raquo; n\'est pas valide ; vérifiez-la.';
 $lang_admin_php['config_setting_ok'] = 'Vos paramètres pour &laquo;%s&raquo; ont été sauvegardés.';

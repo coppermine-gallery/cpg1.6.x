@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2022 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2026 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * lang/english.php
- * @since  1.6.20
+ * @since  1.6.31
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -19,7 +19,7 @@ $lang_translation_info['lang_name_native'] = 'English (US)';
 $lang_translation_info['lang_country_code'] = 'us';
 $lang_translation_info['trans_name'] = 'Coppermine dev team';
 $lang_translation_info['trans_email'] = '';
-$lang_translation_info['trans_website'] = 'http://coppermine-gallery.net/';
+$lang_translation_info['trans_website'] = 'https://coppermine-gallery.com/';
 $lang_translation_info['trans_date'] = '2009-01-09';
 
 $lang_charset = 'utf-8';
@@ -91,7 +91,7 @@ $lang_errors['register_globals_title'] = 'Register Globals on!';
 $lang_errors['register_globals_warning'] = 'The PHP setting register_globals is enabled on your server, which is a bad idea in terms of security. It\'s strongly recommended to turn it off.';
 
 $lang_bbcode_help_title = 'BBCode help';
-$lang_bbcode_help = 'You can add clickable links and some formatting to this field by using BBCode tags: <li>[b]Bold[/b] =&gt; <strong>Bold</strong></li><li>[i]Italic[/i] =&gt; <i>Italic</i></li><li>[url=http://yoursite.com/]Url Text[/url] =&gt; <a href="http://yoursite.com">Url Text</a></li><li>[email]user@domain.com[/email] =&gt; <a href="mailto:user@domain.com">user@domain.com</a></li><li>[color=red]some text[/color] =&gt; <span style="color:red">some text</span></li><li>[img]http://documentation.coppermine-gallery.net/images/browser.png[/img] =&gt; <img src="docs/images/browser.png" border="0" alt="" /></li>';
+$lang_bbcode_help = 'You can add clickable links and some formatting to this field by using BBCode tags: <li>[b]Bold[/b] =&gt; <strong>Bold</strong></li><li>[i]Italic[/i] =&gt; <i>Italic</i></li><li>[url=http://yoursite.com/]Url Text[/url] =&gt; <a href="http://yoursite.com">Url Text</a></li><li>[email]user@domain.com[/email] =&gt; <a href="mailto:user@domain.com">user@domain.com</a></li><li>[color=red]some text[/color] =&gt; <span style="color:red">some text</span></li><li>[img]https://coppermine-gallery.com/docs/curr/images/browser.png[/img] =&gt; <img src="docs/images/browser.png" border="0" alt="" /></li>';
 
 $lang_common['yes'] = 'Yes';
 $lang_common['no'] = 'No';
@@ -232,7 +232,7 @@ $lang_gallery_admin_menu['keywordmgr_title'] = 'Manage keywords (if correspondin
 $lang_gallery_admin_menu['exifmgr_lnk'] = 'EXIF manager';
 $lang_gallery_admin_menu['exifmgr_title'] = 'Manage EXIF display (if corresponding option is turned on in config).';
 $lang_gallery_admin_menu['shownews_lnk'] = 'Show News';
-$lang_gallery_admin_menu['shownews_title'] = 'Display the news from coppermine-gallery.net';
+$lang_gallery_admin_menu['shownews_title'] = 'Display the news from coppermine-gallery.com';
 
 $lang_user_admin_menu['albmgr_title'] = 'Create and order my albums';
 $lang_user_admin_menu['albmgr_lnk'] = 'Create / order my albums';
@@ -330,7 +330,7 @@ $lang_theme_selection['choose_theme'] = 'Choose a theme';
 $lang_version_alert['version_alert'] = 'Unsupported version!';
 $lang_version_alert['no_stable_version'] = 'You are running Coppermine %s (%s) which is only meant for very experienced users - this version comes without support nor any warranties. Use it at your own risk or downgrade to the latest stable version if you need support!';
 $lang_version_alert['gallery_offline'] = 'The gallery is currently offline and will be only visible for you as admin. Don\'t forget to switch it back online after finishing maintenance.';
-$lang_version_alert['coppermine_news'] = 'News from coppermine-gallery.net';
+$lang_version_alert['coppermine_news'] = 'News from coppermine-gallery.com';
 $lang_version_alert['no_iframe'] = 'Your browser cannot display inline frames';
 $lang_version_alert['hide'] = 'hide';
 // for version update checks
@@ -908,7 +908,7 @@ $lang_admin_php['count_admin_hits'] = 'Count admin views';
 $lang_admin_php['debug_mode'] = 'Enable debug mode';
 $lang_admin_php['debug_notice'] = 'Display notices in debug mode';
 $lang_admin_php['offline'] = 'Gallery is offline';
-$lang_admin_php['display_coppermine_news'] = 'Display news from coppermine-gallery.net';
+$lang_admin_php['display_coppermine_news'] = 'Display news from coppermine-gallery.com';
 $lang_admin_php['display_coppermine_detail'] = 'will only be displayed for the admin';
 $lang_admin_php['config_setting_invalid'] = 'The value you have set for &laquo;%s&raquo; is invalid, please review it.';
 $lang_admin_php['config_setting_rangerr'] = 'The value you have set for &laquo;%s&raquo; is out of allowed range, please review it.';

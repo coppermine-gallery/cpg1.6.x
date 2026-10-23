@@ -8,7 +8,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * lang/russian.php
- * @since  1.6.29
+ * @since  1.6.31
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -92,7 +92,7 @@ $lang_errors['register_globals_title'] = 'Register Globals включена!';
 $lang_errors['register_globals_warning'] = 'На Вашем сервере включена опция PHP register_globals, что является плохой идеей с точки зрения безопасности. Настоятельно рекомендуется её выключить.';
 
 $lang_bbcode_help_title = 'Помощь по BBCode';
-$lang_bbcode_help = 'Вы можете добавлять ссылки и форматирование в этом поле, используя тэги BBCode: <li>[b]Жирный[/b] =&gt; <strong>Жирный</strong></li><li>[i]Курсив[/i] =&gt; <i>Курсив</i></li><li>[url=http://вашсайт.ru/]Описание ссылки[/url] =&gt; <a href="http://вашсайт.ru">Описание ссылки</a></li><li>[email]пользователь@сайт.ru[/email] =&gt; <a href="mailto:пользователь@сайт.ru">пользователь@сайт.ru</a></li><li>[color=red]любой текст[/color] =&gt; <span style="color:red">любой текст</span></li><li>[img]http://documentation.coppermine-gallery.net/images/browser.png[/img] => <img src="docs/images/browser.png" border="0" alt="" /></li>';
+$lang_bbcode_help = 'Вы можете добавлять ссылки и форматирование в этом поле, используя тэги BBCode: <li>[b]Жирный[/b] =&gt; <strong>Жирный</strong></li><li>[i]Курсив[/i] =&gt; <i>Курсив</i></li><li>[url=http://вашсайт.ru/]Описание ссылки[/url] =&gt; <a href="http://вашсайт.ru">Описание ссылки</a></li><li>[email]пользователь@сайт.ru[/email] =&gt; <a href="mailto:пользователь@сайт.ru">пользователь@сайт.ru</a></li><li>[color=red]любой текст[/color] =&gt; <span style="color:red">любой текст</span></li><li>[img]https://coppermine-gallery.com/docs/curr/images/browser.png[/img] => <img src="docs/images/browser.png" border="0" alt="" /></li>';
 
 $lang_common['yes'] = 'Да';
 $lang_common['no'] = 'Нет';
@@ -233,7 +233,7 @@ $lang_gallery_admin_menu['keywordmgr_title'] = 'Управление ключе�
 $lang_gallery_admin_menu['exifmgr_lnk'] = 'Менеджер EXIF';
 $lang_gallery_admin_menu['exifmgr_title'] = 'Управление отображением EXIF (если соответствующая опция включена в конфигурации галереи).';
 $lang_gallery_admin_menu['shownews_lnk'] = 'Показать новости';
-$lang_gallery_admin_menu['shownews_title'] = 'Отображать новости с coppermine-gallery.net';
+$lang_gallery_admin_menu['shownews_title'] = 'Отображать новости с coppermine-gallery.com';
 
 $lang_user_admin_menu['albmgr_title'] = 'Создать и упорядочить мои альбомы';
 $lang_user_admin_menu['albmgr_lnk'] = 'Создать и упорядочить мои альбомы';
@@ -331,7 +331,7 @@ $lang_theme_selection['choose_theme'] = 'Выберите тему';
 $lang_version_alert['version_alert'] = 'Неподдерживаемая версия!';
 $lang_version_alert['no_stable_version'] = 'Вы используете версию Coppermine %s (%s), которая предназначена только для продвинутых пользователей - данная версия предоставляется без поддержки и каких-либо гарантий со стороны разработчиков. Используйте её на Ваш страх и риск или установите последнюю стабильную версию, чтобы получить поддержку!';
 $lang_version_alert['gallery_offline'] = 'Галерея в данный момент отключена и будет доступна только Вам в качестве администратора. Не забудьте включить галерею обратно после завершения всех запланированных работ.';
-$lang_version_alert['coppermine_news'] = 'Новости от coppermine-gallery.net';
+$lang_version_alert['coppermine_news'] = 'Новости от coppermine-gallery.com';
 $lang_version_alert['no_iframe'] = 'Ваш браузер не может отображать встроенные фреймы';
 $lang_version_alert['hide'] = 'спрятать';
 // for version update checks
@@ -909,7 +909,7 @@ $lang_admin_php['count_admin_hits'] = 'Подсчитывать количест
 $lang_admin_php['debug_mode'] = 'Включить режим отладки';
 $lang_admin_php['debug_notice'] = 'Отображать сообщения в режиме отладки';
 $lang_admin_php['offline'] = 'Галерея отключена';
-$lang_admin_php['display_coppermine_news'] = 'Показывать новости с coppermine-gallery.net';
+$lang_admin_php['display_coppermine_news'] = 'Показывать новости с coppermine-gallery.com';
 $lang_admin_php['display_coppermine_detail'] = 'будет отображаться только для администратора';
 $lang_admin_php['config_setting_invalid'] = 'Значение, которое Вы установили для &laquo;%s&raquo;, неправильное, пожалуйста, проверьте его.';
 $lang_admin_php['config_setting_rangerr'] = 'Значение, которое вы установили для &laquo;%s&raquo; вне допустимого диапазона, пожалуйста, проверьте его.';

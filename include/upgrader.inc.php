@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2023 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2026 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/upgrader.inc.php
- * @since  1.6.23
+ * @since  1.6.31
  */
 defined('IN_COPPERMINE') or die('Not in Coppermine...');
 
@@ -63,7 +63,9 @@ class CPG_Updater
 
 		unlink(UPDATER_LOG);
 		$this->logIt("UPDATING TO: {$updt['tag']}");
-		$tmpf = (sys_get_temp_dir() ?: 'albums/edit').'/cpg_upd_'.time().'.zip';
+		$tmpd = sys_get_temp_dir();
+		if (!$tmpd || !is_writeable($tmpd)) $tmpd = 'albums/edit';
+		$tmpf = $tmpd.'/cpg_upd_'.time().'.zip';
 		$newUpdate = $this->getUrlData($updt['ball']);
 		$dlHandler = fopen($tmpf, 'w');
 		if (!fwrite($dlHandler, $newUpdate)) { cpg_die(ERROR, $lang_update_php['save_error'], __FILE__, __LINE__); }

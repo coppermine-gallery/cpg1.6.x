@@ -7,7 +7,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * CHANGELOG.txt
- * @since  1.6.30
+ * @since  1.6.31
  */
 Changelog
 =========
@@ -20,8 +20,10 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
-2026-10-18 [S] Remove security issue with gallery update process
-2026-09-28 [B] Correct session handling for SMF 2.0/2.1 bridge
+2026-10-23 [M] Clean remaing references to CPG.net {ron4mac}
+2026-10-20 [M] Pull CPG news directly from the SMF news entries {ron4mac}
+2026-10-18 [S] Remove security issue with gallery update process {ron4mac}
+2026-09-28 [B] Correct session handling for SMF 2.0/2.1 bridge {ron4mac}
 2026-04-26 [S] Mitigated a few minor vulnerabilities - thank you Leousum {ron4mac}
 2026-04-16 [M] Added Russian language file contributed by Siava {ron4mac}
 2026-04-09 [M] During HTML5 upload, keep pseudo blank code 200 messages from triggering error condition {ron4mac}

@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2022 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2026 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * lang/estonian.php
- * @since  1.6.18
+ * @since  1.6.31
  */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
@@ -19,7 +19,7 @@ $lang_translation_info['lang_name_native'] = 'Eesti';
 $lang_translation_info['lang_country_code'] = 'ee';
 $lang_translation_info['trans_name'] = 'Craig Tislar'; // Tänud eelmise tõlke eest Mihkel Tõnnovile :)
 $lang_translation_info['trans_email'] = 'kelle@email.ee';
-$lang_translation_info['trans_website'] = 'http://forum.coppermine-gallery.net/index.php?action=profile;u=87590';
+$lang_translation_info['trans_website'] = 'https://coppermine-gallery.com/forum/index.php?action=profile;u=87590';
 $lang_translation_info['trans_date'] = '2016-07-01';
 
 $lang_charset = 'utf-8';
@@ -91,7 +91,7 @@ $lang_errors['register_globals_title'] = 'Register Globals on sisse lülitatud!'
 $lang_errors['register_globals_warning'] = 'PHP seade register_globals on sinu serveris sisse lülitatud, mis on turvalisuse seisukohalt halb mõte. Tungivalt soovitav on see välja lülitada.'; //cpg1.5
 
 $lang_bbcode_help_title = 'BBCode abi';
-$lang_bbcode_help = 'Sa võid lisada klikitavaid linke ja mõningast kujundust sellele väljale kasutades BBCode tag\'e: <li>[b]Bold[/b] =&gt; <strong>Rasvane</strong></li><li>[i]Italic[/i] =&gt; <i>Kursiiv</i></li><li>[url=http://yoursite.com/]Url Text[/url] =&gt; <a href="http://yoursite.com">URL</a></li><li>[email]user@domain.com[/email] =&gt; <a href="mailto:user@domain.com">user@domain.com</a></li><li>[color=red]some text[/color] =&gt; <span style="color:red">mingi tekst</span></li><li>[img]http://documentation.coppermine-gallery.net/images/browser.png[/img] =&gt; <img src="docs/images/browser.png" border="0" alt="" /></li>';
+$lang_bbcode_help = 'Sa võid lisada klikitavaid linke ja mõningast kujundust sellele väljale kasutades BBCode tag\'e: <li>[b]Bold[/b] =&gt; <strong>Rasvane</strong></li><li>[i]Italic[/i] =&gt; <i>Kursiiv</i></li><li>[url=http://yoursite.com/]Url Text[/url] =&gt; <a href="http://yoursite.com">URL</a></li><li>[email]user@domain.com[/email] =&gt; <a href="mailto:user@domain.com">user@domain.com</a></li><li>[color=red]some text[/color] =&gt; <span style="color:red">mingi tekst</span></li><li>[img]https://coppermine-gallery.com/docs/curr/images/browser.png[/img] =&gt; <img src="docs/images/browser.png" border="0" alt="" /></li>';
 
 $lang_common['yes'] = 'Jah';
 $lang_common['no'] = 'Ei';
@@ -232,7 +232,7 @@ $lang_gallery_admin_menu['keywordmgr_title'] = 'Halda võtmesõnu (juhul, kui va
 $lang_gallery_admin_menu['exifmgr_lnk'] = 'EXIF Haldur';
 $lang_gallery_admin_menu['exifmgr_title'] = 'Halda EXIF infot (juhul, kui vastav seade on sisse lülitatud)';
 $lang_gallery_admin_menu['shownews_lnk'] = 'Näita uudiseid';
-$lang_gallery_admin_menu['shownews_title'] = 'Näita coppermine-gallery.net uudiseid';
+$lang_gallery_admin_menu['shownews_title'] = 'Näita coppermine-gallery.com uudiseid';
 
 $lang_user_admin_menu['albmgr_title'] = 'Loo ja telli minu albumeid';
 $lang_user_admin_menu['albmgr_lnk'] = 'Minu albumite loomine / tellimine';
@@ -330,7 +330,7 @@ $lang_theme_selection['choose_theme'] = 'Vali kujundus';
 $lang_version_alert['version_alert'] = 'Toetamata versioon!';
 $lang_version_alert['no_stable_version'] = 'Sa kasutad Coppermine %s (%s), mis on mõeldud ainult väga kogenud kasutajatele - sellel versioonil puudub igasugune garantii ja tootetugi. Kasuta seda omal riisikol või kasuta viimast stabiilset versiooni, kui tootetuge vajad!';
 $lang_version_alert['gallery_offline'] = 'Galerii on hetkel kättesaamatu ja on nähtav ainult sulle, kui administraatorile. Ära unusta pärast hooldustööde lõpetamist seda jälle kättesaadavaks teha.';
-$lang_version_alert['coppermine_news'] = 'coppermine-gallery.net uudised';
+$lang_version_alert['coppermine_news'] = 'coppermine-gallery.com uudised';
 $lang_version_alert['no_iframe'] = 'Sinu brauser ei kuva sisemisi raame';
 $lang_version_alert['hide'] = 'peida';
 // for version update checks
@@ -908,7 +908,7 @@ $lang_admin_php['count_admin_hits'] = 'Loenda admini vaatamisi';
 $lang_admin_php['debug_mode'] = 'Luba silumisrežiim';
 $lang_admin_php['debug_notice'] = 'Näita silumisrežiimis märkusi';
 $lang_admin_php['offline'] = 'Galerii on hetkel maas';
-$lang_admin_php['display_coppermine_news'] = 'Näita coppermine-gallery.net uudiseid';
+$lang_admin_php['display_coppermine_news'] = 'Näita coppermine-gallery.com uudiseid';
 $lang_admin_php['display_coppermine_detail'] = 'näidatakse ainult adminile';
 $lang_admin_php['config_setting_invalid'] = '&laquo;%s&raquo; väärtused on väärad, palun vaata need üle.';
 $lang_admin_php['config_setting_rangerr'] = 'Väärtus mis sa sisestasid &laquo;%s&raquo; on väljaspool lubatud piire, palun vaata üle.';

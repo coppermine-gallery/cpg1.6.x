@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2026 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * update.php
- * @since  1.6.30
+ * @since  1.6.31
  */
 
 // define('SKIP_AUTHENTICATION', true);
@@ -73,8 +73,9 @@ if (!function_exists('cpg_display_help')) {
 // if a different dbase method is selected, we have to change the config and reload
 // the page to get to the correct dbase class
 if ($superCage->post->keyExists('action') && $superCage->post->getAlpha('action') == 'dbselect') {
-	if ($match = $superCage->post->getMatched('db_type','^(?!.*:.*:)[A-Za-z:]+$')) {
-		set_config_dbtype($match[0]);
+	$dbtype = $superCage->post->getRaw('db_type');
+	if (in_array($dbtype, ['mysqli','pdo:mysql'])) {
+		set_config_dbtype($dbtype);
 	} else {
 		$errors .= $lang_update_php['not_available'].'<br>';
 	}
@@ -438,7 +439,7 @@ function check_db_type ()
 {
 	global $CONFIG;
 
-	if (!isset($CONFIG['dbtype']) || $CONFIG['dbtype'] == 'mysql') {
+	if (!isset($CONFIG['dbtype']) || in_array($CONFIG['dbtype'],['mysql'])) {
 		html_dbase_select();
 		return false;
 	}

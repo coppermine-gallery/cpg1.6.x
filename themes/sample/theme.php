@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2026 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * themes/sample/theme.php
- * @since  1.6.10
+ * @since  1.6.31
  */
 
 // ------------------------------------------------------------------------- //
@@ -1958,7 +1958,7 @@ twice before you decide to remove the tag.
 function theme_credits() {
     $return = <<< EOT
 
-<div class="footer" align="center" style="padding:10px;display:block;visibility:visible; font-family: Verdana,Arial,sans-serif;">Powered by <a href="http://coppermine-gallery.net/" title="Coppermine Photo Gallery" rel="external">Coppermine Photo Gallery</a></div>
+<div class="footer" align="center" style="padding:10px;display:block;visibility:visible; font-family: Verdana,Arial,sans-serif;">Powered by <a href="https://coppermine-gallery.com/" title="Coppermine Photo Gallery" rel="external">Coppermine Photo Gallery</a></div>
 EOT;
     return $return;
 }
@@ -2301,7 +2301,7 @@ function theme_admin_mode_menu()
             if (file_exists('docs/README.md') == true && (file_exists('docs/'.$help_lang.'/index.htm') == true)) {
                 $documentation_href = 'docs/'.$help_lang.'/index.htm';
             } else {
-                $documentation_href = 'http://coppermine-gallery.net/docs';
+                $documentation_href = 'https://coppermine-gallery.com/docs';
             }
 
             if (!$CONFIG['enable_plugins']) {
@@ -2494,7 +2494,7 @@ EOT;
     }
     if (GALLERY_ADMIN_MODE) {
         $return .= cpg_alert_dev_version();
-        // $return .= cpg_display_rss(); //add RSS feed from coppermine-gallery.net later
+        // $return .= cpg_display_rss(); //add RSS feed from coppermine-gallery.com later
     } else { // not in admin mode
         //$return = '';
     }

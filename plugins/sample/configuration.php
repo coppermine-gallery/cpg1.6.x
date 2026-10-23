@@ -1,18 +1,15 @@
 <?php
-/**************************
-  Coppermine Photo Gallery
- **************************
-  Copyright (c) 2003-2016 Coppermine Dev Team
-  v1.0 originally written by Gregory Demar
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License version 3
-  as published by the Free Software Foundation.
-
- ************************************
-  Coppermine version: 1.6.03
-  $HeadURL$
- ************************************/
+/**
+ * Coppermine Photo Gallery
+ *
+ * v1.0 originally written by Gregory Demar
+ *
+ * @copyright  Copyright (c) 2003-2026 Coppermine Dev Team
+ * @license    GNU General Public License version 3 or later; see LICENSE
+ *
+ * plugins/sample/configuration.php
+ * @since  1.6.31
+ */
 
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
@@ -41,7 +38,7 @@ EOT;
 $install_info = <<<EOT
     <table border="0" cellspacing="0" cellpadding="0">
     <tr>
-        <td><a href="http://coppermine-gallery.net/forum/index.php?board=97.0" title="{$lang_plugin_sample['plugin_support']}" class="admin_menu">{$lang_plugin_sample['plugin_support']}</a></td>
+        <td><a href="https://coppermine-gallery.com/forum/index.php?board=97.0" title="{$lang_plugin_sample['plugin_support']}" class="admin_menu">{$lang_plugin_sample['plugin_support']}</a></td>
     </tr>
     </table>
 EOT;

@@ -2498,7 +2498,7 @@ EOT;
     }
     if (GALLERY_ADMIN_MODE) {
         $return .= cpg_alert_dev_version();
-        // $return .= cpg_display_rss(); //add RSS feed from coppermine-gallery.net later
+        // $return .= cpg_display_rss(); //add RSS feed from coppermine-gallery.com later
     } else { // not in admin mode
         //$return = '';
     }
