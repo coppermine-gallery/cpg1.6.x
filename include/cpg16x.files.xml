@@ -2,7 +2,7 @@
 <file_data>
 	<element>
 		<fullpath>CHANGELOG.txt</fullpath>
-		<version>1.6.31</version>
+		<version>1.6.32</version>
 		<status>optional</status>
 		<permission>read</permission>
 		<hash>fb859f01f6a5625c0da5fd810d5ca42e</hash>
@@ -5574,7 +5574,7 @@
 	</element>
 	<element>
 		<fullpath>include/stats.inc.php</fullpath>
-		<version>1.6.14</version>
+		<version>1.6.32</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>e123e5cec194ce58fbe585ea33f9ce12</hash>
@@ -8005,7 +8005,7 @@
 	</element>
 	<element>
 		<fullpath>stat_details.php</fullpath>
-		<version>1.6.18</version>
+		<version>1.6.32</version>
 		<status>mandatory</status>
 		<permission>read</permission>
 		<hash>e64b89cd4db2c2e9add0a0cde42e7f15</hash>

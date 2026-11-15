@@ -7,7 +7,7 @@
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * CHANGELOG.txt
- * @since  1.6.31
+ * @since  1.6.32
  */
 Changelog
 =========
@@ -20,6 +20,7 @@ Changelog
 [S] = Security fix (issues that are related to security)
 *********************************************
 
+2026-11-12 [B] Correct issue with statistics not displaying correctly {ron4mac}
 2026-10-23 [M] Clean remaing references to CPG.net {ron4mac}
 2026-10-20 [M] Pull CPG news directly from the SMF news entries {ron4mac}
 2026-10-18 [S] Remove security issue with gallery update process {ron4mac}

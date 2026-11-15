@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2026 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * include/stats.inc.php
- * @since  1.6.14
+ * @since  1.6.32
  */
 
 defined('IN_COPPERMINE') or die('Not in Coppermine...');
@@ -214,7 +214,7 @@ $osArray = array(
 /**
  * function defintions start
  */
-function individualStatsByOS($pid='',$type='hits', $tableWidth='100%') {
+function individualStatsByOS($pid=0,$type='hits', $tableWidth='100%') {
       global $osArray, $CONFIG, $lang_stat_details_php, $icon_array;
 		$maxBarWidth = 200;
 		$osResultArray = [];
@@ -227,7 +227,7 @@ function individualStatsByOS($pid='',$type='hits', $tableWidth='100%') {
                     $query .= $CONFIG['TABLE_HIT_STATS'];
                 }
                 $query .= " WHERE os = '$key'";
-                if ($pid!='') {
+                if ($pid) {
                     $query .= " AND pid='$pid'";
                 }
                 // Now this is a very crude way to query the database which is bound to overload larger galleries. Should be reviewed!
@@ -285,7 +285,7 @@ EOT;
     }
 }
 
-function individualStatsByBrowser($pid='',$type='hits', $tableWidth='100%') {
+function individualStatsByBrowser($pid=0,$type='hits', $tableWidth='100%') {
       global $browserArray, $CONFIG, $lang_stat_details_php, $icon_array;
       $maxBarWidth = 200;
       $browserResultArray = [];
@@ -298,7 +298,7 @@ function individualStatsByBrowser($pid='',$type='hits', $tableWidth='100%') {
                     $query .= $CONFIG['TABLE_HIT_STATS'];
                 }
                 $query .= " WHERE browser = '$key'";
-                if ($pid!='') {
+                if ($pid) {
                     $query .= " AND pid='$pid'";
                 }
                 // Now this is a very crude way to query the database which is bound to overload larger galleries. Should be reviewed!
