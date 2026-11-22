@@ -4143,7 +4143,6 @@ function theme_display_fullsize_pic()
         </style>
 
         <script type="text/javascript" src="{$jquery_path}"></script>
-        <script type="text/javascript" src="js/jquery.dimensions.pack.js"></script>
         <script type="text/javascript" src="js/displayimage.fullsize.js"></script>
     </head>
     <body style="margin:0px; padding:0px; background-color: gray;">
