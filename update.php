@@ -775,6 +775,10 @@ function delete_files()
     $delete_file_array = array(
         'js/jquery-1.3.2.js',
         'js/jquery-1.4.2.js',
+        'js/jquery-1.7.2.js',
+        'js/jquery-1.12.4.js',
+        'js/jquery-migrate-1.4.1.js',
+        'js/jquery.dimensions.pack.js',
         'logs/log_header.inc.php',
         'include/log_header.inc.php',
         'js/setup_swf_upload.js',
