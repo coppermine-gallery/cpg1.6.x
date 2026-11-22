@@ -15,16 +15,16 @@
 
 function check(state){
     jQuery.each($("input[name='eid[]']"), function(){
-        $(this).attr('checked', state);
+        $(this).prop('checked', state);
     });
 }
 
 function agreesubmit(){
-    $("input[type='submit'][name='delete']").attr('disabled', ($('#agreecheck').attr('checked')) ? false : true);
+    $("input[type='submit'][name='delete']").prop('disabled', !$('#agreecheck').prop('checked'));
 }
 
 function defaultagree(){
-    if ($('#agreecheck').attr('checked'))
+    if ($('#agreecheck').prop('checked'))
         return true;
     else{
         alert(js_vars.ecards_delete_confirm);

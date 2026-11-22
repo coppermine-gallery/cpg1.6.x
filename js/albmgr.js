@@ -35,7 +35,7 @@ var Sort = {
 		var form_token = js_vars.form_token;
 		var timestamp = js_vars.timestamp;
 		// get the name of the edited album value
-		var editedName = $.trim($("#edit-name").val());
+		var editedName = ($("#edit-name").val() || '').trim();
 		// check whether null and event to edit the album
 		if (editedName.length > 0){
 			$("input#edit-name").hide();
@@ -80,7 +80,7 @@ var Sort = {
 
 	},
 	addAlbum: function(cat){
-		var addedName = $.trim($("#add-name").val());
+		var addedName = ($("#add-name").val() || '').trim();
 		var form_token = js_vars.form_token;
 		var timestamp = js_vars.timestamp;
 		var albumCount = 0;
@@ -117,7 +117,7 @@ var Sort = {
 
 				if (data.message == 'true'){
 					//check if we have a table already
-					if ($.trim($('div#sort').html()) == ''){
+					if (($('div#sort').html() || '').trim() == ''){
 						//create the table
 						$('div#sort').html('<table id="album_sort" cellspacing="0" cellpadding="0" border="0"></table>');
 					}
@@ -202,7 +202,7 @@ jQuery(document).ready(function(){
 	});
 
 	//highlight the album onclick event
-	$("#pic_sort tr").livequery('mousedown click', function() {
+	$(document).on('mousedown click', '#pic_sort tr', function() {
 		// assign the last color to TR object and remove the selected class having selected last object
 		$(photoSelectedObject).css("background-color", photoselectedColor);
 		$(photoSelectedObject).removeClass("selected");
@@ -258,7 +258,7 @@ jQuery(document).ready(function(){
 	$("#cpgformPic").submit(function () {
 
 		$("#picture_order").val(getSerializePic());
-		var a = $("input[name='picture_order']").attr("value");
+		var a = $("input[name='picture_order']").val();
 
 		if (a.length > 0){
 			if (confirm(confirm_modifs)) {
@@ -324,11 +324,11 @@ jQuery(document).ready(function() {
 	});
 
 	// make visible the edit link when user edits the album name
-	$("#album_sort tr").livequery('mouseover', function () {
+	$(document).on('mouseover', '#album_sort tr', function () {
 		$(this).find("span:last").show();
-	}).livequery('mouseout', function(){
+	}).on('mouseout', '#album_sort tr', function(){
 		$(this).find("span:last").hide();
-	}).livequery('mousedown click', function() {
+	}).on('mousedown click', '#album_sort tr', function() {
 		// addRowColors();
 		// assign the last color to TR object and remove the selected class having the selected last object
 		$(albumObjectSelectedTr).css("background-color", selectedColor);
@@ -346,7 +346,7 @@ jQuery(document).ready(function() {
 
 
 	// now user can edit the album name contain list
-	$(".editAlbum").livequery("click", function(){
+	$(document).on("click", ".editAlbum", function(){
 		// selected item's text put into the input field
 		object_edit	 = $(this).prev().prev().text();
 		albumSelectedTr = $(this).parents("tr").attr("id");
@@ -378,7 +378,7 @@ jQuery(document).ready(function() {
 	});
 
 	// Now add a album to the list
-	$("#addEvent").livequery('click', function(){
+	$(document).on('click', '#addEvent', function(){
 		if (!isNaN(category)){
 			Sort.addAlbum(category);
 		}
@@ -401,7 +401,7 @@ jQuery(document).ready(function() {
 	});
 
 	// delete the selected TR object item
-	$("button#delete_album").livequery('click', function(){
+	$(document).on('click', 'button#delete_album', function(){
 		// if there isn't a TR object selected, then can't delete
 		if (!albumObjectSelectedTr){
 			alert(dontDelete);
@@ -424,7 +424,7 @@ jQuery(document).ready(function() {
 	});
 
 	// album links: album properties, edit files, thumbnail view
-	$('button#modify_album, button#editfiles_album, button#thumbnail_album').livequery('click', function(){
+	$(document).on('click', 'button#modify_album, button#editfiles_album, button#thumbnail_album', function(){
 		// if there isn't a TR object selected, then nothing to do
 		if (!albumObjectSelectedTr){
 			return false;
@@ -480,7 +480,7 @@ jQuery(document).ready(function() {
 
 	// load the form when click the submit button
 	$("#cpg_form_album").submit( "click", function () {
-		var a = $("input[name='album_order']").attr("value");
+		var a = $("input[name='album_order']").val();
 		if (a.length > 0){
 			if (confirm(confirm_modifs)) {
 				return true;

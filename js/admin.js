@@ -16,15 +16,15 @@ function resetToDefault(theFieldId, fieldType, numberOfItems)
 	var default_input = $('#reset_default_' + theFieldId);
 
 	if(fieldType == 'textfield' || fieldType == 'password') {
-		user_input.attr('value', default_input.attr('value'));
+		user_input.val(default_input.val());
 	}else if(fieldType == 'checkbox') {
-		user_input.attr('checked', (default_input.attr('value') == 1) ? true : false);
+		user_input.prop('checked', (default_input.val() == 1) ? true : false);
 	}else if(fieldType == 'radio') {
-		$('#' + theFieldId + default_input.attr('value')).attr('checked', true);
+		$('#' + theFieldId + default_input.val()).prop('checked', true);
 	}else if(fieldType == 'select') {
-		user_input.attr('value', default_input.attr('value'));
+		user_input.val(default_input.val());
 	}
-	default_input.attr('checked', true);
+	default_input.prop('checked', true);
 	default_input.css('display', 'none');
 }
 
@@ -41,24 +41,24 @@ function checkDefaultBox(theFieldId, fieldType, numberOfItems, warning)
 	var default_input = $('#reset_default_' + theFieldId);
 	var show = false;
 
-	if((fieldType == 'textfield' || fieldType == 'password' || fieldType == 'select') && (user_input.attr('value') != default_input.attr('value'))) {
+	if((fieldType == 'textfield' || fieldType == 'password' || fieldType == 'select') && (user_input.val() != default_input.val())) {
 		show = true;
-	}else if(fieldType == 'checkbox' && (user_input.attr('checked') != default_input.attr('value'))) {
+	}else if(fieldType == 'checkbox' && ((user_input.prop('checked') ? '1' : '0') != default_input.val())) {
 		show = true;
 	}else if(fieldType == 'radio') {
 		//for radio buttons we have to create a new default as it is a special one
 		default_input = $('#reset_default_' + theFieldId.substring(0, (theFieldId.length - 1)));
-		if (user_input.attr('value') != default_input.attr('value')) {
+		if (user_input.val() != default_input.val()) {
 			show = true;
 		}
 	}
 
 	if(show){
 		default_input.css('display', 'inline');
-		default_input.attr({checked: false, title: js_vars.lang_reset_to_default});
+		default_input.prop('checked', false).attr('title', js_vars.lang_reset_to_default);
 	}else{
 		default_input.css('display', 'none');
-		default_input.attr({checked: true, title: js_vars.lang_reset_to_default + ': ' + js_vars.lang_no_change_needed + ' (' + default_input.attr('value') + ')'});
+		default_input.prop('checked', true).attr('title', js_vars.lang_reset_to_default + ': ' + js_vars.lang_no_change_needed + ' (' + default_input.val() + ')');
 	}
 }
 
