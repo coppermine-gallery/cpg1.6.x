@@ -5374,7 +5374,7 @@
 		<version>1.6.31</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>4729ae5cdcec6c234204e28f779c7048</hash>
+		<hash>f38c480fd06a4dbbd57ff9a10280c51f</hash>
 	</element>
 	<element>
 		<fullpath>include/inspekt.php</fullpath>
@@ -5584,7 +5584,7 @@
 		<version>1.6.27</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>2a97b1d72704159fc655407c482a5df6</hash>
+		<hash>5622c55223a14257bb8adfe0f9261664</hash>
 	</element>
 	<element>
 		<fullpath>include/tool.class.php</fullpath>
@@ -6910,14 +6910,14 @@
 		<version>1.6.07</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>c1c08af20610183baa4fe3c47fd83b7b</hash>
+		<hash>6421d5c58ddbb6c2d3888bad94ae304f</hash>
 	</element>
 	<element>
 		<fullpath>js/albmgr.js</fullpath>
 		<version>1.6.29</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>40a8ac7cfdcec33fbc6e54cf9df503a1</hash>
+		<hash>ac162e53ae712dbc2872e0279d98a91c</hash>
 	</element>
 	<element>
 		<fullpath>js/banning.js</fullpath>
@@ -6959,7 +6959,7 @@
 		<version>1.6.03</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>ee4f3b89971598b9c386664f56d17c05</hash>
+		<hash>075ba58baef65d6540eddae8a4e62a68</hash>
 	</element>
 	<element>
 		<fullpath>js/displayimage.fullsize.js</fullpath>
@@ -6995,24 +6995,29 @@
 	</element>
 	<element>
 		<fullpath>js/jquery-1.7.2.js</fullpath>
-		<version>1.6.04</version>
-		<status>optional</status>
-		<permission>read</permission>
-		<hash>da931777075dfa9ffc4a200497947d2e</hash>
+		<status>remove</status>
 	</element>
 	<element>
 		<fullpath>js/jquery-1.12.4.js</fullpath>
-		<version>1.6.12</version>
-		<status>mandatory</status>
-		<permission>read</permission>
-		<hash>c7792eb07388a4b987a81e8ad4c63448</hash>
+		<status>remove</status>
 	</element>
 	<element>
 		<fullpath>js/jquery-migrate-1.4.1.js</fullpath>
-		<version>1.6.12</version>
+		<status>remove</status>
+	</element>
+	<element>
+		<fullpath>js/jquery-4.0.0.js</fullpath>
+		<version>1.6.31</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>694bd1d14174b3331b51c9891b014a00</hash>
+		<hash>41b07a55381880d21ad1a986b57e5f10</hash>
+	</element>
+	<element>
+		<fullpath>js/jquery-migrate-4.0.2.js</fullpath>
+		<version>1.6.31</version>
+		<status>mandatory</status>
+		<permission>read</permission>
+		<hash>769890ff5e7a910ab6e87ff6605d475d</hash>
 	</element>
 	<element>
 		<fullpath>js/jquery.cluetip.js</fullpath>
@@ -7030,17 +7035,14 @@
 	</element>
 	<element>
 		<fullpath>js/jquery.dimensions.pack.js</fullpath>
-		<version>1.6.03</version>
-		<status>mandatory</status>
-		<permission>read</permission>
-		<hash>0464c12c61c69e2c9acf92e956f63c09</hash>
+		<status>remove</status>
 	</element>
 	<element>
 		<fullpath>js/jquery.elastic.js</fullpath>
 		<version>1.6.03</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>3ede8fc08a5b9a9ed94dcce5e41ba51d</hash>
+		<hash>8968d6e6e80cfede01635c1f3f54b6e4</hash>
 	</element>
 	<element>
 		<fullpath>js/jquery.greybox.js</fullpath>
@@ -7061,7 +7063,7 @@
 		<version>1.6.03</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>7dd33a4b8477cbf4e4ea8bccc5fc4e8d</hash>
+		<hash>6b499d69d14123fa7546e58794590660</hash>
 	</element>
 	<element>
 		<fullpath>js/jquery.spinbutton.js</fullpath>
@@ -7072,7 +7074,7 @@
 		<version>1.6.03</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>816a91e34318fb155c1fa3cb877c282e</hash>
+		<hash>74e4e1ca1cee43bd84ee92dcbe47a088</hash>
 	</element>
 	<element>
 		<fullpath>js/langmgr.js</fullpath>
@@ -9031,7 +9033,7 @@
 		<version>1.6.31</version>
 		<status>optional</status>
 		<permission>read</permission>
-		<hash>8a774a1a8ab58de807c4545a78a9084b</hash>
+		<hash>a622ce41b2e52d214a3fe1ee812c7c13</hash>
 	</element>
 	<element>
 		<fullpath>themes/water_drop/</fullpath>
@@ -9286,7 +9288,7 @@
 		<version>1.6.31</version>
 		<status>mandatory</status>
 		<permission>read</permission>
-		<hash>d1beee87a9d92116793c242a3cf69fb5</hash>
+		<hash>e34e4e9f6598c17897fb708d6186328d</hash>
 	</element>
 	<element>
 		<fullpath>updater.php</fullpath>
